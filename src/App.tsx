@@ -1,0 +1,118 @@
+import { lazy, Suspense } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { MotionConfig } from 'motion/react';
+import Layout from './components/Layout';
+import PageTransition, { routeKey } from './effects/PageTransition';
+import ChunkErrorBoundary from './components/wahhf/ChunkErrorBoundary';
+// L'accueil reste dans le fichier principal (page d'entrée la plus fréquente : pas d'aller-retour réseau).
+import Home from './pages/Home';
+
+// Toutes les autres pages sont chargées à la demande.
+const MobilityHub = lazy(() => import('./pages/MobilityHub'));
+const LanguageAcademy = lazy(() => import('./pages/LanguageAcademy'));
+const EuropeSupport = lazy(() => import('./pages/EuropeSupport'));
+const ApplyPage = lazy(() => import('./pages/ApplyPage'));
+const DonatePage = lazy(() => import('./pages/DonatePage'));
+const transversal = () => import('./pages/TransversalPages');
+const QuiSommesNousPage = lazy(() => transversal().then((m) => ({ default: m.QuiSommesNousPage })));
+const PartenairesPage = lazy(() => transversal().then((m) => ({ default: m.PartenairesPage })));
+const NosActionsPage = lazy(() => transversal().then((m) => ({ default: m.NosActionsPage })));
+const NotreImpactPage = lazy(() => transversal().then((m) => ({ default: m.NotreImpactPage })));
+const ActualitesPage = lazy(() => transversal().then((m) => ({ default: m.ActualitesPage })));
+const AgirPage = lazy(() => transversal().then((m) => ({ default: m.AgirPage })));
+const LegalTransparencyPage = lazy(() =>
+  transversal().then((m) => ({ default: m.LegalTransparencyPage }))
+);
+
+// Pages existantes conservées intégralement (Règle générale : ne rien supprimer)
+const About = lazy(() => import('./pages/About'));
+const Structure = lazy(() => import('./pages/Structure'));
+const Catalogue = lazy(() => import('./pages/Catalogue'));
+const Tarifs = lazy(() => import('./pages/Tarifs'));
+const Realisation = lazy(() => import('./pages/Realisation'));
+const Founders = lazy(() => import('./pages/Founders'));
+const Contact = lazy(() => import('./pages/Contact'));
+const GalleryPage = lazy(() => import('./pages/GalleryPage'));
+const VkiBusiness = lazy(() => import('./pages/VkiBusiness'));
+
+/** Espace réservé pendant le chargement d'une page : garde la hauteur, aucun saut de mise en page. */
+function PageFallback() {
+  return <div className="min-h-screen" aria-busy="true" />;
+}
+
+/**
+ * Routes enveloppées dans la transition de page. La location est figée par élément :
+ * pendant le fondu de sortie, l'ancienne page continue d'afficher son propre contenu.
+ */
+function AppRoutes() {
+  const location = useLocation();
+  return (
+    <PageTransition transitionKey={routeKey(location.pathname)}>
+      {/* Filet : une page qui ne se télécharge pas affiche « Réessayer » au lieu d'une page blanche */}
+      <ChunkErrorBoundary key={routeKey(location.pathname)} variant="page">
+      <Suspense fallback={<PageFallback />}>
+      <Routes location={location}>
+        {/* =================================================================
+            ROUTES PRINCIPALES WAHHF FOUNDATION (PROMPT 1 & PROMPT 2)
+           ================================================================= */}
+        <Route path="/" element={<Home />} />
+        <Route path="/qui-sommes-nous" element={<QuiSommesNousPage />} />
+        <Route path="/nos-actions" element={<NosActionsPage />} />
+        <Route path="/notre-impact" element={<NotreImpactPage />} />
+        <Route path="/galerie" element={<GalleryPage />} />
+        <Route path="/actualites" element={<ActualitesPage />} />
+        <Route path="/actualites/:slug" element={<ActualitesPage />} />
+        <Route path="/partenaires" element={<PartenairesPage />} />
+        <Route path="/agir" element={<AgirPage />} />
+        <Route path="/faire-un-don" element={<DonatePage />} />
+
+        {/* DOMAINE 06 : MOBILITÉ & LANGUES (ACADÉMIE D'ALLEMAND A1–C1 & EUROPE) */}
+        <Route path="/mobilite-langues" element={<MobilityHub />} />
+        <Route path="/mobilite-langues/academie" element={<LanguageAcademy />} />
+        <Route path="/academie/:level" element={<LanguageAcademy />} />
+        <Route path="/mobilite-langues/accompagnement" element={<EuropeSupport />} />
+        <Route path="/accompagnement/pays/:countrySlug" element={<EuropeSupport />} />
+        <Route path="/accompagnement/:topicSlug" element={<EuropeSupport />} />
+        <Route path="/candidater" element={<ApplyPage />} />
+
+        {/* PAGES TRANSVERSALES & RGPD */}
+        <Route path="/mentions-legales" element={<LegalTransparencyPage type="mentions" />} />
+        <Route path="/confidentialite" element={<LegalTransparencyPage type="confidentialite" />} />
+        <Route path="/transparence" element={<LegalTransparencyPage type="transparence" />} />
+
+        {/* =================================================================
+            ROUTES HISTORIQUES CONSERVÉES (RÈGLE : NE RIEN SUPPRIMER)
+           ================================================================= */}
+        <Route path="/le-groupe" element={<About />} />
+        <Route path="/structure" element={<Structure />} />
+        <Route path="/poles" element={<Catalogue />} />
+        <Route path="/tarifs" element={<Tarifs />} />
+        <Route path="/methode" element={<Realisation />} />
+        <Route path="/fondateurs" element={<Founders />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/a-propos" element={<Navigate to="/qui-sommes-nous" replace />} />
+        <Route path="/catalogue" element={<Navigate to="/nos-actions" replace />} />
+        <Route path="/realisations" element={<Navigate to="/notre-impact" replace />} />
+        <Route path="/vkibusiness" element={<VkiBusiness />} />
+
+        {/* Fallback */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+      </Suspense>
+      </ChunkErrorBoundary>
+    </PageTransition>
+  );
+}
+
+export default function App() {
+  return (
+    // « Réduire les animations » : Motion supprime les déplacements et ne garde que les fondus.
+    <MotionConfig reducedMotion="user">
+      <Router>
+        <Layout>
+          <AppRoutes />
+        </Layout>
+      </Router>
+    </MotionConfig>
+  );
+}

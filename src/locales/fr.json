@@ -1,0 +1,150 @@
+{
+  "brand": {
+    "name": "WAHHF Foundation",
+    "fullName": "We Are Here Help Foundation",
+    "branch": "Branche sociale du groupe IROKO",
+    "tagline": "Fondation camerouno-allemande à but non lucratif"
+  },
+  "nav": {
+    "about": "Qui sommes-nous",
+    "actions": "Nos actions",
+    "impact": "Notre impact",
+    "news": "Actualités",
+    "act": "Agir",
+    "donate": "Faire un don",
+    "apply": "Candidater",
+    "partners": "Partenaires",
+    "searchPlaceholder": "Rechercher un programme, un cours d'allemand, un pays...",
+    "themeLight": "Mode clair",
+    "themeDark": "Mode sombre",
+    "domains": {
+      "education": "Éducation",
+      "health": "Santé",
+      "entrepreneurship": "Entrepreneuriat des jeunes",
+      "environment": "Environnement",
+      "rights": "Droits et inclusion",
+      "mobility": "Mobilité & Langues"
+    }
+  },
+  "disclaimer": {
+    "title": "Engagement d'intégrité & gratuité",
+    "text": "WAHHF vous accompagne gratuitement. Nous ne vendons ni visa ni emploi et ne garantissons aucun résultat. Nous ne vous demandons jamais d'argent. Les décisions appartiennent aux autorités et aux établissements concernés. Vérifiez toujours les informations sur les sites officiels."
+  },
+  "hero": {
+    "kicker": "FONDATION CAMEROUNO-ALLEMANDE · BRANCHE SOCIALE DU GROUPE IROKO",
+    "title": "Autonomiser la jeunesse, transformer les communautés",
+    "subtitle": "Nous agissons au Cameroun et accompagnons la jeunesse africaine avec dignité, transparence et solidarité : éducation, santé, entrepreneuriat, écologie et mobilité linguistique 100 % gratuite.",
+    "ctaPrimary": "Soutenir nos actions",
+    "ctaSecondary": "Découvrir nos programmes",
+    "scrollHint": "Défiler pour découvrir",
+    "videoPause": "Mettre la vidéo en pause",
+    "videoPlay": "Lire la vidéo"
+  },
+  "home": {
+    "mission": {
+      "kicker": "Qui sommes-nous",
+      "title": "Une passerelle humaine entre le Cameroun et l'Allemagne",
+      "p1": "Née d'une double culture camerounaise et allemande, WAHHF Foundation (We Are Here Help Foundation) est la branche sociale et philanthropique du groupe IROKO.",
+      "p2": "Convaincus que la dignité passe par le savoir, la santé et l'autonomie, nous développons des programmes de terrain durables et un dispositif gratuit d'apprentissage de l'allemand et d'orientation vers l'Europe.",
+      "link": "En savoir plus sur notre histoire et notre gouvernance"
+    },
+    "stats": {
+      "kicker": "Notre impact en chiffres",
+      "title": "Des actions concrètes et mesurables",
+      "subtitle": "Chaque programme est suivi avec rigueur et transparence financière. (Chiffres à confirmer — TODO)",
+      "s1Label": "Jeunes et familles accompagnés (TODO : confirmer)",
+      "s2Label": "Domaines d'intervention complémentaires",
+      "s3Label": "Régions du Cameroun couvertes",
+      "s4Label": "Pays européens d'orientation documentés"
+    },
+    "domains": {
+      "kicker": "Nos 6 domaines d'action",
+      "title": "Six piliers pour bâtir l'autonomie",
+      "subtitle": "De l'accès à l'école primaire jusqu'à la mobilité académique et linguistique internationale."
+    },
+    "mobilitySpot": {
+      "kicker": "Domaine 06 · Programme Phare",
+      "title": "Apprendre l'allemand, s'orienter vers l'Europe — gratuitement",
+      "subtitle": "100 % gratuit, financé par IROKO et nos donateurs. Aucun frais d'inscription, aucun intermédiaire commercial.",
+      "card1Title": "Académie de langues A1 à C1",
+      "card1Desc": "Accompagnement des cours de langue allemande structuré du niveau débutant A1 au niveau avancé C1, avec test d'orientation gratuit.",
+      "card2Title": "Accompagnement vers l'Europe",
+      "card2Desc": "Information claire et vérifiée en 4 étapes : compréhension des parcours d'études, de formation ou de travail, et préparation de dossier.",
+      "card3Title": "10 pays accompagnés",
+      "card3Desc": "Luxembourg, Allemagne, Slovénie, Italie, Grèce, Portugal, Espagne, Danemark, Pologne et Albanie.",
+      "cta": "Découvrir le programme"
+    },
+    "video": {
+      "kicker": "Au cœur du terrain",
+      "title": "Voir nos actions et notre vision en images",
+      "subtitle": "Découvrez en vidéo l'engagement de la fondation et l'écosystème du groupe IROKO qui soutient la gratuité de nos actions.",
+      "playLabel": "Regarder le film de présentation"
+    },
+    "approach": {
+      "kicker": "Notre approche",
+      "title": "Cinq principes qui guident chaque projet",
+      "subtitle": "Une méthode humble, rigoureuse et ancrée dans les réalités locales."
+    },
+    "timeline": {
+      "kicker": "Notre parcours",
+      "title": "Les grandes étapes de WAHHF Foundation",
+      "subtitle": "Une construction progressive au service des communautés. (Dates et jalons à confirmer — TODO)"
+    },
+    "presence": {
+      "kicker": "Présence & rayonnement",
+      "title": "10 régions au Cameroun, 10 pays d'accompagnement en Europe",
+      "subtitle": "Un ancrage local dans les dix régions camerounaises et des passerelles documentées vers dix pays européens."
+    },
+    "testimonials": {
+      "kicker": "Témoignages",
+      "title": "Paroles de bénéficiaires et de bénévoles",
+      "subtitle": "Extraits d'expériences vécues au sein de nos programmes (Témoignages d'exemple marqués TODO à valider)."
+    },
+    "news": {
+      "kicker": "Actualités & terrain",
+      "title": "Nos dernières actions et publications",
+      "subtitle": "Suivez la vie de la fondation, les nouvelles sessions linguistiques et les campagnes solidaires.",
+      "allLink": "Toutes les actualités"
+    },
+    "gallery": {
+      "kicker": "En images",
+      "title": "La fondation sur le terrain",
+      "subtitle": "Retour en photos sur le First Open Day & Boot Camp, le 25 avril 2026 à Yaoundé.",
+      "link": "Voir toute la galerie"
+    },
+    "partners": {
+      "kicker": "Partenaires et financeurs",
+      "title": "Soutenus par IROKO Group et un réseau engagé",
+      "subtitle": "La gratuité de nos programmes repose sur l'engagement structurel du groupe IROKO et la générosité de nos donateurs.",
+      "link": "Découvrir tous nos partenaires"
+    },
+    "act": {
+      "kicker": "Agir avec nous",
+      "title": "Chaque geste renforce un parcours de vie",
+      "subtitle": "Trois manières concrètes de contribuer à la mission de WAHHF Foundation."
+    },
+    "newsletter": {
+      "kicker": "Restons en lien",
+      "title": "Recevoir nos actualités et les dates des prochaines sessions",
+      "subtitle": "Une lettre d'information sobre, envoyée une fois par mois. Désinscription en un clic.",
+      "placeholder": "Votre adresse e-mail",
+      "button": "S'inscrire",
+      "donateBannerTitle": "Soutenez la gratuité de nos programmes éducatifs et sociaux",
+      "donateBannerSub": "100 % des dons financent directement les cours de langue, l'accompagnement des jeunes et les actions de terrain.",
+      "donateBannerBtn": "Faire un don"
+    }
+  },
+  "footer": {
+    "description": "Fondation camerouno-allemande à but non lucratif œuvrant pour l'éducation, la santé, l'autonomie des jeunes et la mobilité solidaire.",
+    "irokoBadge": "Branche sociale du groupe IROKO",
+    "colAbout": "Qui sommes-nous",
+    "colActions": "Nos actions",
+    "colAct": "Agir et Faire un don",
+    "colContact": "Contact et adresse",
+    "legal": "Mentions légales",
+    "privacy": "Politique de confidentialité",
+    "transparency": "Transparence financière",
+    "backToTop": "Retour en haut",
+    "rights": "Tous droits réservés."
+  }
+}

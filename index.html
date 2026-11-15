@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Thème appliqué AVANT le premier rendu (aucun flash clair pour les visiteurs en thème sombre).
+         Même logique que Navbar : choix enregistré, sinon préférence système à la première visite. -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('wahhf_theme');
+          var visited = localStorage.getItem('wahhf_visited_theme');
+          var dark = saved === 'dark' ||
+            (!saved && !visited && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          if (dark) document.documentElement.classList.add('dark');
+        } catch (e) {}
+      })();
+    </script>
+    <title>WAHHF Foundation — Autonomiser la jeunesse, transformer les communautés</title>
+    <meta
+      name="description"
+      content="WAHHF Foundation est une fondation camerouno-allemande à but non lucratif, branche sociale du groupe IROKO : éducation, santé, entrepreneuriat, environnement et mobilité & langues 100 % gratuite."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="WAHHF Foundation" />
+    <meta property="og:title" content="WAHHF Foundation — Branche Sociale du Groupe IROKO" />
+    <meta
+      property="og:description"
+      content="Fondation camerouno-allemande à but non lucratif : programmes éducatifs, sanitaires, sociaux et académie d'allemand & accompagnement vers l'Europe 100 % gratuits."
+    />
+    <meta property="og:image" content="/assets/aistudio/LogoWAHHF.c09000774835c3abb59a__1__a1f28366.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="WAHHF Foundation — Autonomiser la jeunesse, transformer les communautés" />
+    <meta
+      name="twitter:description"
+      content="Fondation camerouno-allemande à but non lucratif, branche sociale du groupe IROKO. Cours d'allemand A1–C1 et orientation vers l'Europe 100 % gratuits."
+    />
+    <meta name="theme-color" content="#0F3D2E" />
+    <link rel="icon" type="image/png" href="/assets/aistudio/LogoWAHHF.c09000774835c3abb59a__1__a1f28366.png" />
+    <!-- Polices auto-hébergées (voir src/index.css) : préchargement des deux fichiers latin utilisés au premier écran -->
+    <link rel="preload" href="/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <!-- Accueil seulement : image d'attente du hero préchargée (mêmes srcset/sizes que l'image, voir src/config/heroVideo.ts).
+         Aucune connexion à YouTube ici : la vidéo n'est chargée qu'après la page, si elle est autorisée. -->
+    <script>
+      if (location.pathname === '/') {
+        var heroPoster = document.createElement('link');
+        heroPoster.rel = 'preload';
+        heroPoster.as = 'image';
+        heroPoster.setAttribute('imagesrcset', '/hero/hero-video-poster-960.webp 960w, /hero/hero-video-poster-1280.webp 1280w');
+        heroPoster.setAttribute('imagesizes', '100vw');
+        heroPoster.setAttribute('fetchpriority', 'high');
+        document.head.appendChild(heroPoster);
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "NGO",
+        "name": "WAHHF Foundation",
+        "alternateName": "We Are Here Help Foundation",
+        "description": "Fondation camerouno-allemande à but non lucratif, branche sociale du groupe IROKO.",
+        "logo": "/assets/aistudio/LogoWAHHF.c09000774835c3abb59a__1__a1f28366.png",
+        "parentOrganization": {
+          "@type": "Organization",
+          "name": "IROKO Group"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

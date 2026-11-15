@@ -1,0 +1,290 @@
+@import "tailwindcss";
+/* Les skills de .claude/ contiennent des exemples de classes : Tailwind ne doit pas les analyser. */
+@source not "../.claude";
+@custom-variant dark (&:where(.dark, .dark *));
+/* Survols réservés aux appareils à souris : remplace la variante hover: de Tailwind (et donc group-hover:) */
+@custom-variant hover {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      @slot;
+    }
+  }
+}
+/* Mode « galerie épinglée » : MÊME condition que MQ.desktopPin dans src/lib/gsap.ts (gsap.matchMedia) */
+@custom-variant pin (@media (min-width: 1024px) and (min-height: 760px) and (pointer: fine) and (prefers-reduced-motion: no-preference));
+
+/* Polices auto-hébergées (fichiers OFL dans public/fonts, styles droits uniquement :
+   aucune requête vers Google, préchargement possible). Axes variables : graisse + taille optique. */
+/* DM Sans — latin-ext */
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('/fonts/dm-sans-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* DM Sans — latin */
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('/fonts/dm-sans-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* Fraunces — latin-ext */
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 300 600;
+  font-display: swap;
+  src: url('/fonts/fraunces-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* Fraunces — latin */
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 300 600;
+  font-display: swap;
+  src: url('/fonts/fraunces-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@theme {
+  --font-serif: "Fraunces", Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-cursive: "Fraunces", Georgia, serif;
+
+  /* WAHHF Official Brand Palette */
+  --color-wahhf-green: #0F3D2E;
+  --color-wahhf-green-light: #165B44;
+  --color-wahhf-green-dark: #09261C;
+  --color-wahhf-gold: #E8A317;
+  --color-wahhf-gold-dark: #C4860C;
+  --color-wahhf-red: #C8102E;
+  --color-wahhf-red-hover: #A50C25;
+  --color-wahhf-cream: #F5F1E8;
+  --color-wahhf-cream-card: #FFFFFF;
+  --color-wahhf-ink: #1B1B18;
+  --color-wahhf-muted: #57554E;
+
+  /* Semantic Theme Aliases for Preserved Components */
+  --color-primary: #0F3D2E;
+  --color-primary-light: #165B44;
+  --color-primary-hover: #09261C;
+  --color-secondary: #E8A317;
+  --color-secondary-hover: #C4860C;
+  --color-ink: #1B1B18;
+  --color-page-bg: #F5F1E8;
+  --color-footer-bg: #0F3D2E;
+  --color-card-bg: #FFFFFF;
+  --color-card-surface: #EFE9DC;
+  --color-search-bg: #EBE4D5;
+  --color-badge-green: #0F3D2E;
+
+  /* Legacy tokens mapped to WAHHF palette (zero violet/orange) */
+  --color-ktv-red: #0F3D2E;
+  --color-ktv-orange: #E8A317;
+  --color-accent-orange: #E8A317;
+  --color-ktv-blue: #0F3D2E;
+  --color-ktv-black: #09261C;
+}
+
+/* Or lisible pour le TEXTE (AA ≥ 4,5:1). L'or #E8A317 reste réservé aux décors, filets,
+   fonds de boutons (texte foncé) et aux textes posés sur le vert profond #0F3D2E. */
+@theme inline {
+  --color-gold-text: var(--gold-text);
+  --color-gold-on-green: var(--gold-text-on-green);
+}
+
+:root {
+  --header-offset: 6rem;
+  /* Texte or sur fond clair (crème, blanc) : 5,3:1 sur crème, 5,9:1 sur blanc */
+  --gold-text: #8A5A00;
+  /* Petit texte or sur vert moyen #14523E ou badge teinté or : 5,0:1 */
+  --gold-text-on-green: #F2B544;
+  --wahhf-bg: #F5F1E8;
+  --wahhf-surface: #FFFFFF;
+  --wahhf-surface-alt: #ECE6D8;
+  --wahhf-text: #1B1B18;
+  --wahhf-text-muted: #57554E;
+  --wahhf-border: rgba(27, 27, 24, 0.1);
+  --wahhf-green: #0F3D2E;
+  --wahhf-gold: #E8A317;
+  --wahhf-red: #C8102E;
+}
+
+.dark {
+  --wahhf-bg: #081C15;
+  --wahhf-surface: #0F3D2E;
+  --wahhf-surface-alt: #133126;
+  --wahhf-text: #F5F1E8;
+  --wahhf-text-muted: #C2BDB0;
+  --wahhf-border: rgba(245, 241, 232, 0.12);
+}
+
+@layer base {
+  /* Pas de scroll-behavior: smooth (incompatible avec Lenis). Le header fixe occupe ~80 px :
+     la marge de défilement s'applique aux ancres, au focus clavier et à scrollIntoView. */
+  html {
+    scroll-padding-top: var(--header-offset);
+  }
+
+  body {
+    background-color: var(--wahhf-bg);
+    color: var(--wahhf-text);
+    font-family: var(--font-sans);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  h1, h2, h3, .font-serif-title {
+    font-family: var(--font-serif);
+  }
+}
+
+/* Bascule de thème (src/effects/themeTransition.ts) : fondu enchaîné de 0,5 s de toute la page,
+   courbe douce recommandée par le skill color-motion pour les « washes » plein écran. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.5s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Pendant la bascule : aucune transition CSS de couleur (sinon double fondu / photo à mi-chemin) */
+.theme-switching,
+.theme-switching *,
+.theme-switching *::before,
+.theme-switching *::after {
+  transition: none !important;
+}
+
+/* Hero : zoom très lent de la photo (1,05 → 1,1, plafonné pour une image de 1376 px).
+   Keyframe CSS : tourne sur le compositeur, sans charger le fil principal pendant le chargement.
+   « Réduire les animations » : le bloc reduced-motion ci-dessous l'arrête aussitôt sur l'état final. */
+@keyframes hero-zoom {
+  from { transform: scale(1.05); }
+  to { transform: scale(1.1); }
+}
+.hero-zoom {
+  animation: hero-zoom 14s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/*
+ * Vidéo YouTube du hero (HeroVideoBackground) : l'iframe n'accepte pas object-fit,
+ * on calcule donc un « cover » avec les unités de conteneur (cqw/cqh) : la vidéo remplit
+ * exactement l'espace, sans bandes noires ni déformation, quel que soit le format d'écran.
+ * --video-render-scale < 1 : l'iframe est rendue plus petite puis agrandie (qualité YouTube plus légère).
+ * Seule l'opacité du conteneur est animée (aucun effet sur l'iframe elle-même).
+ */
+.hero-video {
+  --video-ratio: 1.7778;
+  --video-zoom: 1.08;
+  --video-render-scale: 1;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  container-type: size;
+  pointer-events: none;
+  opacity: 0;
+  transition-property: opacity;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+.hero-video[data-visible='true'] {
+  opacity: 1;
+}
+.hero-video iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 0;
+  pointer-events: none;
+  width: calc(max(100cqw, 100cqh * var(--video-ratio)) * var(--video-render-scale));
+  height: calc(max(100cqh, 100cqw / var(--video-ratio)) * var(--video-render-scale));
+  transform: translate(-50%, -50%) scale(calc(var(--video-zoom) / var(--video-render-scale)));
+}
+/*
+ * Voile du hero (au-dessus de la vidéo ou de l'image d'attente) : vert profond ~60 % sur les bords,
+ * 74-76 % dans la bande du texte (15-85 % de la hauteur, où se trouve tout le texte de 390 à 1440 px),
+ * 88 % en bas. Calcul pire cas (image entièrement blanche) : titre crème 4,9:1, sur-titre or (pastille
+ * verte) 4,8:1, phrase d'appui (crème 95 %) 4,7:1, lien de défilement (crème 85 %) 5,6:1.
+ */
+.hero-veil {
+  background: linear-gradient(
+    to bottom,
+    rgb(15 61 46 / 0.6) 0%,
+    rgb(15 61 46 / 0.74) 15%,
+    rgb(15 61 46 / 0.76) 50%,
+    rgb(15 61 46 / 0.74) 85%,
+    rgb(15 61 46 / 0.88) 100%
+  );
+}
+/* Repli sans unités de conteneur : le hero occupe l'écran (100svh) */
+@supports not (width: 1cqw) {
+  .hero-video iframe {
+    width: calc(max(100vw, 100vh * var(--video-ratio)) * var(--video-render-scale));
+    height: calc(max(100vh, 100vw / var(--video-ratio)) * var(--video-render-scale));
+  }
+}
+
+/* Reusable WAHHF Gradient & Accent Utilities */
+.bg-wahhf-gradient-rule {
+  background: linear-gradient(90deg, #0F3D2E 0%, #E8A317 100%);
+}
+
+.dark .bg-wahhf-gradient-rule {
+  background: linear-gradient(90deg, #E8A317 0%, #34D399 100%);
+}
+
+.bg-gradient-blend {
+  background: linear-gradient(135deg, #0F3D2E 0%, #E8A317 100%);
+}
+
+.text-gradient-blend,
+.text-gradient-violet-orange {
+  background: linear-gradient(90deg, #0F3D2E 0%, #E8A317 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Carte du Cameroun : le chef-lieu sélectionné pulse doucement 3 fois (4,8 s < 5 s, WCAG 2.2.2), puis s'arrête */
+@keyframes map-pulse {
+  from {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  to {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+}
+
+.map-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: map-pulse 1.6s cubic-bezier(0.22, 1, 0.36, 1) 3 both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

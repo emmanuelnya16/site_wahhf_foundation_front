@@ -1,0 +1,82 @@
+{
+  "communaute-masque": {
+    "w": 1021,
+    "h": 1208
+  },
+  "communaute-rencontre": {
+    "w": 1051,
+    "h": 810
+  },
+  "open-day-interview": {
+    "w": 1044,
+    "h": 628
+  },
+  "open-day-rassemblement": {
+    "w": 1024,
+    "h": 419
+  },
+  "open-day-marche": {
+    "w": 986,
+    "h": 628
+  },
+  "open-day-jeunes": {
+    "w": 1050,
+    "h": 628
+  },
+  "open-day-marche-slogan": {
+    "w": 1020,
+    "h": 628
+  },
+  "open-day-visioconference": {
+    "w": 1027,
+    "h": 628
+  },
+  "open-day-prise-de-parole": {
+    "w": 1030,
+    "h": 1282
+  },
+  "open-day-accompagnement": {
+    "w": 1030,
+    "h": 628
+  },
+  "open-day-trophee": {
+    "w": 1040,
+    "h": 628
+  },
+  "open-day-groupe": {
+    "w": 1025,
+    "h": 628
+  },
+  "open-day-slogan": {
+    "w": 1001,
+    "h": 628
+  },
+  "open-day-accueil": {
+    "w": 953,
+    "h": 628
+  },
+  "open-day-chorale": {
+    "w": 1039,
+    "h": 628
+  },
+  "video-chorale": {
+    "w": 572,
+    "h": 324,
+    "duration": 18
+  },
+  "video-car": {
+    "w": 576,
+    "h": 310,
+    "duration": 15
+  },
+  "video-bananeraie": {
+    "w": 572,
+    "h": 306,
+    "duration": 12
+  },
+  "video-pepiniere": {
+    "w": 576,
+    "h": 296,
+    "duration": 17
+  }
+}
