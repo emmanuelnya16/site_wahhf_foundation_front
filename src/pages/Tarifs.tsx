@@ -2,8 +2,10 @@ import { motion } from 'motion/react';
 import { Check, ArrowRight, Sparkles, HelpCircle, ShieldCheck, Clock, Layers } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useNoIndex } from '@/src/lib/useNoIndex';
 
 export default function Tarifs() {
+  useNoIndex();
   const { t } = useTranslation();
 
   const packs = [

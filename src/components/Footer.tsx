@@ -111,11 +111,6 @@ export default function Footer() {
                   Actualités & Terrain
                 </Link>
               </li>
-              <li>
-                <Link to="/le-groupe" className="hover:text-[#E8A317] transition-colors text-xs opacity-75">
-                  Archives Groupe IROKO
-                </Link>
-              </li>
             </ul>
           </div>
 

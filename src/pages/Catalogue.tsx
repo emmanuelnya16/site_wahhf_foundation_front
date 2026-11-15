@@ -4,8 +4,10 @@ import { Search, Sparkles, Building, Briefcase, CheckCircle2, ArrowRight, X, Lay
 import { Link } from 'react-router-dom';
 import { cn } from '@/src/lib/utils';
 import { useTranslation } from 'react-i18next';
+import { useNoIndex } from '@/src/lib/useNoIndex';
 
 export default function Catalogue() {
+  useNoIndex();
   const { t } = useTranslation();
   const [search, setSearch] = useState('');
   const [activeFamily, setActiveFamily] = useState<'all' | 'fam1' | 'fam2' | 'fam3'>('all');
