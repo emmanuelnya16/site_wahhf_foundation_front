@@ -276,50 +276,47 @@ Principe de page (1 440 px)
 
 Il apparaît à **trois endroits précis**, ceux de votre brief, et nulle part ailleurs. Il est décoratif (`aria-hidden`) : son sens est toujours écrit en texte à côté.
 
-**1. Hero de l'accueil** : sous la phrase d'appui, de « Cameroun » à « Europe ». C'est le seul moment fort du site : il se dessine une fois, au chargement (§10).
+**1. Hero de l'accueil** : sous le titre, de « Cameroun » à « Europe ». C'est le seul moment fort du site : il se dessine une fois, au chargement, en 1,2 s (CSS seul, §10). Posé sur le voile nuit de la vidéo, il prend **soleil** (et non `--feuille`) pour rester lisible ; **absent en mouvement réduit** (votre décision du 16 novembre 2026).
+
+> **Décision du 16 novembre 2026 (la vôtre) : le hero garde la vidéo en fond.** Elle remplace la photo cadrée validée plus tôt (ajustement n° 1 du §13). Le reste du contrat ne change pas.
 
 ```
-Hero, 1 440 px : texte à gauche, photo cadrée à droite (environ la moitié du container)
-  Des cours d'allemand gratuits               ┌──────────────────────────┐
-  pour préparer l'Europe en confiance.        │ vraie photo, Open Day,   │
-  (display, 2 lignes au plus)                 │ Yaoundé : cadre 16/10,   │
-                                              │ 493 × 308 px au plus     │
-  Niveaux A1 à C1, test en ligne, orientation └──────────────────────────┘
-  vers 10 pays, sans intermédiaire payant.    Open Day, Yaoundé, 25 avril 2026
+Hero, 1 440 px : vidéo WAHHF en fond plein cadre, 85 à 90 svh ; texte aligné à gauche, sur la moitié gauche du container
+┌──────────────────────────────────────────────────────────────────────────────┐
+│▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░                  │
+│▓ Titre display, 600, brume      ▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░    la vidéo reste   │
+│▓ (2 à 3 lignes)                 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░    nettement        │
+│▓ Cameroun ●───────────● Europe  (fil soleil, se dessine une fois)  visible  │
+│▓ Phrase concrète qui nomme le lien Cameroun–Allemagne                         │
+│▓ ( Passer le test d'allemand gratuit )  ( ♥ Faire un don )                   │
+│▓ Regarder le film avec le son (1 min)                          ( ❚❚ Pause )  │
+└──────────────────────────────────────────────────────────────────────────────┘
+  voile : dégradé horizontal nuit, ~85 % derrière le texte → ~20 % à droite
 
-  Cameroun ●─────────────────────────────────────────● Europe
-
-  ( Passer le test d'allemand gratuit )   ( ♥ Faire un don )
-
-Hero, 390 px : une colonne, la photo sous le titre
-  Des cours d'allemand gratuits
-  pour préparer l'Europe
-  en confiance.
-  ┌──────────────────────────────┐
-  │ vraie photo, Open Day,       │
-  │ Yaoundé : cadre 16/10, toute │
-  │ la largeur du container      │
-  │ (350 × 219 px à 390 px)      │
-  └──────────────────────────────┘
-  Open Day, Yaoundé, 25 avril 2026
-
-  Niveaux A1 à C1, test en ligne,
-  orientation vers 10 pays, sans
-  intermédiaire payant.
-
-  Cameroun ●────────────────● Europe
-
-  ( Passer le test d'allemand gratuit )
-  ( ♥ Faire un don )
+Hero, 390 px (téléphone, tactile, réseau lent, mouvement réduit) : image fixe portrait, jamais de vidéo
+┌──────────────────────────────┐
+│ photo portrait (<picture>)   │
+│                              │
+│░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░│  voile : dégradé nuit du bas vers le haut, dense sous le texte
+│▒ Titre display               │
+│▓ Cameroun ●─────────● Europe │
+│▓ Phrase concrète             │
+│▓ ( Passer le test d'allemand │
+│▓   gratuit )                 │
+│▓ ( ♥ Faire un don )          │
+│▓ Regarder le film avec le son│
+└──────────────────────────────┘
 ```
 
-**La photo du hero** (votre décision du 16 novembre 2026). La source recommandée, `open-day-marche`, fait 986 × 628 px. Tant que les originaux HD ne sont pas fournis :
-- **pas de photo en fond plein écran** ;
-- la photo est **cadrée** en 16/10 (rayon 20) : à côté du titre sur ordinateur, sur environ la moitié du container ; sous le titre sur téléphone, sur toute la largeur du container ;
-- elle n'est **jamais affichée plus grande que sa taille réelle en densité 2** : 493 px de large au plus (986 / 2), soit 493 × 308 px dans le cadre 16/10. Sur ordinateur, elle s'arrête à 493 px même si sa colonne est plus large ; sur tablette, quand les colonnes s'empilent, elle reste à 493 px, alignée à gauche ;
-- à 390 px, elle fait 350 × 219 px : la source couvre la densité 2 ; sur un écran de densité 3, l'agrandissement reste faible (×1,06).
-
-Le cadre 16/10 suit le format paysage de la source : un cadre 4/5 n'en garderait que la moitié.
+**La vidéo du hero** (votre décision du 16 novembre 2026) :
+- **Source** : la vidéo WAHHF sur YouTube (`e-zT1lNANC0`), muette, en boucle, sans contrôles, coupée à 64 s, avant le générique (ACC-13). Le code est prêt pour une **boucle hébergée sur le site** (MP4 H.264 et WebM, 1 280 px, 8 à 15 s, sans son, 2 à 3 Mo), qui remplacera YouTube dès que le fichier sera fourni.
+- **Ingénierie gardée** : chargement après le premier affichage, une seule iframe, pause hors écran et onglet caché, bouton Pause visible et mémorisé, repli sur l'image fixe si le lecteur ne démarre pas en 6 s.
+- **Jamais de vidéo** sur téléphone et écran tactile, en 2G/3G, en économie de données ni en mouvement réduit : image fixe en source portrait via `<picture>` (ACC-07), avec un dégradé nuit du bas vers le haut sous le texte.
+- **Consentement explicite** (MEL-03) : la vidéo YouTube transmet l'adresse IP des visiteurs. Sans accord, l'image fixe reste et un lien « Activer la vidéo » est proposé. La boucle hébergée sur le site, sans tiers, n'en aura pas besoin.
+- **Image d'attente** : nette (plus la miniature YouTube floue), tirée de la vidéo ou, à défaut, la photo `open-day-marche`, en WebP, préchargée, `fetchpriority="high"` : c'est l'élément LCP. Titre, phrase et boutons sont **visibles dès le premier rendu**, sans attendre la vidéo (PERF-01).
+- **Voile** : plus de voile uniforme ; un dégradé horizontal couleur nuit, dense derrière le texte (80 à 85 %), qui s'éclaircit vers la droite (15 à 25 %). **Contraste du texte et des boutons ≥ 4,5:1 sur le pire pixel** des images de la vidéo (mesure toutes les 5 s), à 1 440, 1 024 et 768 px.
+- **Contenu** : titre à l'échelle `display` en 600, couleur brume ; phrase concrète qui nomme le lien Cameroun–Allemagne ; deux portes, « Passer le test d'allemand gratuit » (bouton primaire sur fond sombre, soleil, vers `/mobilite-langues/academie#test-niveau`) et « Faire un don » (cœur plein avec liseré) ; un lien discret « Regarder le film avec le son (1 min) » ouvre le lecteur.
+- **Pas** de sur-titre, de mention d'IROKO (l'en-tête la porte déjà), de « Défiler pour découvrir » ni de rideau. Hauteur d'environ 85 à 90 svh sur ordinateur, pour laisser deviner la section suivante.
 
 **2. Frise des niveaux A1 à C1 (page Académie)** : le fil traverse les cinq niveaux comme des étapes et se termine vers l'Europe. Le niveau affiché est le seul point plein avant l'arrivée ; son nom passe en 600, et les lecteurs d'écran entendent « niveau affiché ». Chaque niveau reste un lien vers sa page. Fixe, aucune animation. Exemple sur la page du niveau B1 :
 
@@ -363,9 +360,9 @@ Aujourd'hui : 15 sections et le footer, 21 109 px de haut à 390 (environ 25 éc
 ```
 Accueil, 390 px (une colonne)       Accueil, 1 440 px
 ┌──────────────────────────────┐    ┌────────────────────────────────────────┐
-│1 HERO (brume)                │    │1 HERO : texte à gauche, photo à droite │
-│  titre display               │    │  le fil sous la phrase d'appui         │
-│  photo 16/10 + légende datée │    │  ( test gratuit )  ( ♥ don )           │
+│1 HERO (brume)                │    │1 HERO : vidéo en fond, texte à gauche  │
+│  titre display               │    │  le fil sous le titre                  │
+│  image portrait + voile bas  │    │  ( test gratuit )  ( ♥ don )           │
 │  phrase d'appui              │    ├────────────────────────────────────────┤
 │  Cameroun ●──────────● Europe│    │2 MOBILITÉ & LANGUES (sauge)            │
 │  ( Passer le test d'allemand │    │  3 voies en liste : Académie,          │
@@ -397,9 +394,9 @@ Accueil, 390 px (une colonne)       Accueil, 1 440 px
 
 | # | Section | Contenu | Matière réelle disponible |
 |---|---|---|---|
-| 1 | **Hero, deux portes** | Titre concret qui nomme l'allemand, l'Europe et la gratuité (formulation à choisir avec la fondation, ACC-02) ; phrase d'appui ; le fil ; **« Passer le test d'allemand gratuit »** (bouton primaire, vers `/mobilite-langues/academie#test-niveau`) et **« Faire un don »** (bouton de don, vers `/faire-un-don`) ; vraie photo légendée, cadrée et limitée à 493 px de large (§6), jamais en fond plein écran. | Photo de l'Open Day : `open-day-marche` recommandée (adultes, pas de mineurs en gros plan), sous réserve des autorisations (GAL-01). Pas de sur-titre IROKO (ACC-05). |
+| 1 | **Hero, deux portes** | *(Décision du 16 novembre 2026 : vidéo en fond, voir §6.)* Titre concret à l'échelle `display` ; le fil sous le titre ; phrase qui nomme le lien Cameroun–Allemagne ; **« Passer le test d'allemand gratuit »** (bouton primaire sur fond sombre, vers `/mobilite-langues/academie#test-niveau`) et **« Faire un don »** (cœur plein avec liseré, vers `/faire-un-don`) ; lien « Regarder le film avec le son (1 min) ». | Vidéo WAHHF (YouTube, 70 s, coupée à 64 s) ; image d'attente nette ; photo portrait pour le téléphone. Pas de sur-titre ni de mention d'IROKO (ACC-05). |
 | 2 | **Mobilité & Langues** | Les trois voies en liste typographique (Académie A1 à C1, accompagnement en 4 étapes, 10 pays) et le bouton « Candidater ». Un seul « gratuit », au bon endroit (T-12). | Programme réel, test réel (20 questions). |
-| 3 | **Preuves en images** | Le film WAHHF à la demande (vignette, durée, sous-titres ; ACC-04) et 5 photos de l'Open Day légendées, lien vers la galerie. | 13 photos et 1 vidéo de l'Open Day ; film YouTube WAHHF de 70 s. |
+| 3 | **Sur le terrain** | Les vraies photos de l'Open Day, légendées, et le lien vers la galerie. Le film WAHHF s'ouvre depuis le hero ; le showreel IROKO quitte l'accueil. Aucune image générée. | 13 photos et 1 vidéo de l'Open Day ; film YouTube WAHHF de 70 s. |
 | 4 | **Domaines** | Les 6 domaines en liste : titre et une phrase chacun, sans carte ni numéro ; photo seulement si elle est réelle (3 sur 6 aujourd'hui). | `DOMAINS_DATA` ; 3 images générées à retirer (T-04). |
 | 5 | **Carte de présence** | La carte des régions et la mini-carte d'Europe, sans le fil (son arc passe en forêt à 40 % d'opacité, §6). Titre qui dit ce qui est vrai : « Basée à Yaoundé et Douala » tant que les relais ne sont pas confirmés (T-11, IMP-01). | Géographie réelle ; données par région en TODO. |
 | 6 | **Chiffres réels datés** | 2 à 4 résultats, chacun avec une date et une source, en texte fixe (pas de compteur). La section reste masquée tant qu'il n'y a pas au moins deux chiffres sourcés : l'accueil compte alors 7 sections. | À fournir par la fondation (participants à l'Open Day, apprenants par cohorte…). |
@@ -478,20 +475,21 @@ Jamais de rayon de 20 px sur un petit élément. Les neuf valeurs actuelles (pil
 
 **Un seul moment fort : le fil du hero qui se dessine une fois. Ailleurs, des fondus de 0,3 s. Rien d'autre ne bouge** (votre brief).
 
-- **Le moment fort** : à l'affichage de l'accueil, le fil se trace de « Cameroun » vers « Europe » en 1,2 s, après 0,2 s, sur une courbe douce (`cubic-bezier(0.22, 1, 0.36, 1)`, token `--ease-reveal`). Le titre, le texte, les boutons et la photo sont **visibles dès le premier rendu** : rien n'attend l'animation, l'affichage du premier écran n'est pas retardé. Il se joue une fois par chargement de l'accueil, jamais en boucle. Outil : CSS seul (tracé du trait), sans JavaScript.
+- **Le moment fort** : à l'affichage de l'accueil, le fil se trace de « Cameroun » vers « Europe » en 1,2 s, après 0,2 s, sur une courbe douce (`cubic-bezier(0.22, 1, 0.36, 1)`, token `--ease-reveal`). Le titre, le texte, les boutons et l'image d'attente sont **visibles dès le premier rendu** : rien n'attend l'animation, l'affichage du premier écran n'est pas retardé. Il se joue une fois par chargement de l'accueil, jamais en boucle. Outil : CSS seul (tracé du trait), sans JavaScript.
 - **Fondus de 0,3 s** (opacité seule, sans glissement) : ouverture et fermeture du menu mobile, des fenêtres (vidéo, visionneuse, carte plein écran), des messages d'état, changement de page. Outil : Motion (bibliothèque d'animation déjà installée) pour ce qui apparaît ou disparaît de la page, CSS pour le reste.
 - **Survols** : changement de couleur en 0,3 s, sans déplacement, sans zoom, et seulement sur ce qui est cliquable. **Appui (`:active`)** : immédiat, sans déplacement.
 - Les barres de progression du test de niveau et de la candidature continuent d'avancer en 0,3 s : c'est un retour d'action, pas un décor.
 - **Ce qui ne bouge pas** : titres, sections, cartes, chiffres, cartes géographiques, frise A1 à C1, fiches pays, en-tête (il ne se masque plus au défilement), défilement (natif).
 - **Bibliothèques** : CSS et Motion suffisent. GSAP (ScrollTrigger, SplitText) et Lenis ne servent plus à rien une fois les effets retirés ; ils pourront être retirés du site (environ 53 Ko compressés de moins à télécharger, mesure isolée en annexe B, à refaire sur le site réel).
 
-**Effets retirés** (inventaire complet des 39 effets et fichiers en annexe B) : rideau de chargement, zoom lent et parallaxe de l'image du hero, vidéo YouTube en fond (elle devient le film à la demande), titre révélé ligne par ligne, glissement du sur-titre, de la phrase d'appui et des boutons du hero, paragraphe découpé (SplitText), compteurs animés, galerie horizontale épinglée, section Mobilité qui s'agrandit, vignette vidéo qui grandit au défilement, apparition en fondu-glissement des titres de section et des grilles, frise historique qui se dessine, boutons magnétiques, barre de lecture, défilement fluide (Lenis), carrousel de témoignages, soulèvement et zoom des cartes au survol, rotation de la flèche des boutons, pulsation et cascade de la carte du Cameroun, arc de la mini-carte qui se redessine au survol, rideau du menu mobile (devient un fondu), fondu de 0,5 s de la bascule de thème (devient instantané), entrée en ressort de la bulle WhatsApp, en-tête qui se masque au défilement.
+**Effets retirés** (inventaire complet des 39 effets et fichiers en annexe B) : rideau de chargement, zoom lent et parallaxe de l'image du hero, ~~vidéo YouTube en fond~~ (gardée : décision du 16 novembre 2026, §6), titre révélé ligne par ligne, glissement du sur-titre, de la phrase d'appui et des boutons du hero, paragraphe découpé (SplitText), compteurs animés, galerie horizontale épinglée, section Mobilité qui s'agrandit, vignette vidéo qui grandit au défilement, apparition en fondu-glissement des titres de section et des grilles, frise historique qui se dessine, boutons magnétiques, barre de lecture, défilement fluide (Lenis), carrousel de témoignages, soulèvement et zoom des cartes au survol, rotation de la flèche des boutons, pulsation et cascade de la carte du Cameroun, arc de la mini-carte qui se redessine au survol, rideau du menu mobile (devient un fondu), fondu de 0,5 s de la bascule de thème (devient instantané), entrée en ressort de la bulle WhatsApp, en-tête qui se masque au défilement.
 
 **Mouvement réduit** (`prefers-reduced-motion: reduce`) :
 
 | Effet | Avec animations | Mouvement réduit |
 |---|---|---|
-| Fil du hero | se dessine en 1,2 s, une fois | déjà tracé, immobile |
+| Fil du hero | se dessine en 1,2 s, une fois | absent (décision du 16 novembre 2026) |
+| Vidéo de fond du hero | muette, en boucle, bouton Pause | jamais : image fixe |
 | Fondus (menu, fenêtres, messages, pages) | 0,3 s | instantanés |
 | Survols | couleur en 0,3 s | couleur instantanée |
 | Barres de progression (test, candidature) | avancent en 0,3 s | changent d'un coup |
@@ -546,7 +544,7 @@ Les tics relevés par l'audit et ce qui les remplace :
 - Structure de tokens en deux couches (TOK-01 à TOK-07) enregistrée dans l'historique (commit `2937307`), avec ses écarts validés sur captures : menu au-dessus du bandeau cookies, barre de lecture sous le menu et les fenêtres, cases à cocher natives qui suivent le thème sombre.
 
 **Trois ajustements demandés à la validation**
-1. **Photo du hero** : pas de photo en fond plein écran tant que les originaux HD manquent ; photo cadrée, à côté du titre sur ordinateur (environ la moitié du container), sous le titre sur téléphone, jamais affichée plus grande que sa taille réelle en densité 2, soit 493 px de large au plus pour `open-day-marche` (§5, §6, §7).
+1. ~~**Photo du hero**~~ *(remplacé le 16 novembre 2026 par votre décision : le hero garde la vidéo en fond, §6)* : pas de photo en fond plein écran tant que les originaux HD manquent ; photo cadrée, à côté du titre sur ordinateur (environ la moitié du container), sous le titre sur téléphone, jamais affichée plus grande que sa taille réelle en densité 2, soit 493 px de large au plus pour `open-day-marche` (§5, §6, §7).
 2. **Palette** : toute couleur ajoutée qui ne sert pas à au moins deux endroits concrets du site est supprimée ; chaque ajout gardé dit en une ligne où il sert, en clair comme en sombre (§3.7). Résultat : 23 ajouts gardés sur 26 ; pousse, pousse pâle et menthe retirées (aucun succès affiché sur le site) ; brique pâle, ambre pâle et ciel pâle gardées au seuil exact de deux endroits (confirmé le 16 novembre 2026).
 3. **Arc de la mini-carte** : forêt à environ 40 % d'opacité, décoratif, sans exigence de contraste (§6).
 
@@ -584,6 +582,10 @@ Les tics relevés par l'audit et ce qui les remplace :
 - **Début du lot 6** : barre de lecture réservée aux articles, en forêt (plus en or) ; bandeau cookies aux couleurs du contrat.
 - **Groupes 7.1 et 7.2** : encadré « Vigilance » de Contact en alerte ambre, encadré « Message préparé » en information, boîte du test de niveau.
 - **Accueil (lot 6)** : pas de mention d'IROKO dans le hero, l'en-tête la porte déjà.
+
+**Décision du 16 novembre 2026 (la vôtre) : le hero garde la vidéo en fond.** Elle remplace la photo cadrée (ajustement n° 1 ci-dessus). Vidéo WAHHF coupée à 64 s ; consentement explicite (sans accord : image fixe et lien « Activer la vidéo ») ; jamais sur téléphone, écran tactile, réseau lent, économie de données ni en mouvement réduit (image portrait via `<picture>`) ; voile en dégradé horizontal nuit, contraste ≥ 4,5:1 sur le pire pixel ; image d'attente nette préchargée, élément LCP ; fil soleil qui se dessine une fois, absent en mouvement réduit ; code prêt pour une boucle hébergée sur le site (§6, §7, §10).
+
+**Accueil (lot 6), suite de la même décision** : Mobilité & Langues juste après le hero, avec « Candidater » bien visible ; « Sur le terrain » avec les vraies photos de l'Open Day et le lien vers la galerie (le showreel IROKO quitte l'accueil) ; domaines en liste, liens en ancre vers `/nos-actions#<domaine>` (T-10) ; carte de présence aux couleurs du contrat (« Choisissez une région », sans « Voir les actions » ni « 10 régions couvertes », T-11) ; chiffres masqués ; un seul bloc Agir avec la newsletter, sans bande de don finale ; masqués sans suppression des données : témoignages, partenaires, actualités d'exemple, carte « Identité & Lien IROKO », Approche et frise (elles iront sur `/qui-sommes-nous`).
 
 **À traiter plus tard : état de succès des formulaires.** Aujourd'hui les formulaires préparent un message et n'envoient rien, d'où l'absence de couleur de succès (§3.2). Quand ils enverront vraiment (API Symfony), il faudra un état de succès (« Candidature envoyée », « Message envoyé ») et donc une couleur de succès, avec son tableau de contrastes. À traiter à ce moment-là.
 
@@ -778,7 +780,7 @@ Inventaire relevé dans le code le 16 novembre 2026 : 39 effets. Les numéros de
 
 | # | Effet actuel | Fichiers | Outil | Sort |
 |---|---|---|---|---|
-| 17 | Vidéo YouTube en fond du hero (ordinateur, après 3 s) | `wahhf/HeroVideoBackground.tsx`, `config/heroVideo.ts` | iframe + CSS | **retirée** ; le film passe à la demande en section 3 (§7) |
+| 17 | Vidéo YouTube en fond du hero (ordinateur, après 3 s) | `wahhf/HeroVideoBackground.tsx`, `config/heroVideo.ts` | iframe + CSS | ~~retirée~~ **gardée** (décision du 16 novembre 2026, §6) : extrait 0 à 64 s, consentement explicite, image fixe sur téléphone et en mouvement réduit ; le film avec le son s'ouvre depuis le hero |
 | 18 | Zoom lent de l'image du hero (14 s) | `Home.tsx:205`, `index.css:318-327` | CSS | **retiré** |
 | 19 | Parallaxe de l'image du hero | `Home.tsx:117-122, 195` | Motion | **retirée** |
 | 20 | Titre du hero révélé ligne par ligne | `Home.tsx:214-236`, `effects/MaskedLines.tsx` | Motion | **retiré** |
