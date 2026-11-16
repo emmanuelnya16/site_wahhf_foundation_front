@@ -104,7 +104,7 @@ export default function ContactPage() {
       />
 
       <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+        <div className="container-page space-y-4">
           <h1 className="font-serif font-normal text-[clamp(2.1rem,4.5vw,3.8rem)] leading-tight">
             Écrire à WAHHF Foundation
           </h1>
@@ -115,7 +115,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+      <section className="container-page section-space">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           <div ref={formBlockRef} className="lg:col-span-7">
             <p role="status" className="sr-only">

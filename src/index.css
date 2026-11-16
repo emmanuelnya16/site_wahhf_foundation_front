@@ -137,6 +137,8 @@
   /* Une seule graisse forte sur tout le site : 600 (décision du 16/11 ; seuls 400 et 600 sont chargés).
      font-bold vaut donc 600 ; les pages historiques reprennent 700 (.legacy-fonts). */
   --font-weight-bold: 600;
+  /* Container unique (contrat §5) : 72 rem de contenu, utilitaire max-w-page et classe container-page */
+  --container-page: 72rem;
   --text-meta: 0.9375rem;   /* 15 px : légendes, dates, sources, aide des champs */
   --text-meta--line-height: 1.5;
 
@@ -362,7 +364,7 @@
   --border-input: var(--color-trait);
   --border-strong: var(--color-trait);
   /* Contour d'un contrôle posé sur nuit (pastilles, boutons-icônes, liseré du don), même en clair :
-     brume à 60 % : 5,2:1 sur nuit, 4,2:1 sur feuillage. */
+     brume à 60 % : 5,1:1 sur nuit, 4,1:1 sur feuillage. */
   --border-on-inverse: color-mix(in srgb, var(--color-brume) 60%, transparent);
   /* États */
   --danger: var(--color-brique);
@@ -385,6 +387,10 @@
   /* Fond et texte du body (le fond de page visible est celui de Layout : token surface) */
   --wahhf-bg: var(--color-brume);
   --wahhf-text: var(--color-encre);
+
+  /* Mise en page (contrat §5) : gouttière du container et respiration des sections */
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --section-space: clamp(4rem, 9vw, 7.5rem);
 
   /* Durées partagées avec Motion et GSAP (src/lib/motionTokens.ts) */
   --dur-fast: 300ms;    /* survols, retours visuels */
@@ -535,6 +541,20 @@
   :where(.dark, .surface-green) .donate-button {
     box-shadow: inset 0 0 0 1px var(--border-on-inverse);
   }
+}
+
+/* Container unique (contrat §5) : 72 rem de contenu au plus, gouttière à l'extérieur (content-box), centré.
+   Composant React : src/components/wahhf/Container.tsx. Une colonne plus étroite se pose dedans, à gauche. */
+@utility container-page {
+  box-sizing: content-box;
+  max-width: var(--container-page);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Respiration verticale d'une section (contrat §5) : 64 px à 120 px. Composant : Section.tsx. */
+@utility section-space {
+  padding-block: var(--section-space);
 }
 
 .focus-ring-double:focus-visible {

@@ -10,6 +10,7 @@ import SectionHeader from '../components/wahhf/SectionHeader';
 import { PrimaryButton, SecondaryButton, DonateButton } from '../components/wahhf/Buttons';
 import DisclaimerBanner from '../components/wahhf/DisclaimerBanner';
 import { COUNTRIES_DATA, GERMAN_LEVELS_DATA, WAHHF_IMAGES, imageSrcSet } from '../services/api';
+import Section from '../components/wahhf/Section';
 
 const MOBILITY_FAQS = [
   {
@@ -53,7 +54,7 @@ export default function MobilityHub() {
           <div className="absolute inset-0 bg-gradient-to-b from-nuit via-nuit/85 to-nuit" />
         </div>
 
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        <div className="container-page relative z-10 space-y-6">
           <h1 className="font-serif font-normal text-[clamp(2.2rem,4.8vw,4.1rem)] leading-[1.1] text-creme max-w-4xl">
             Apprendre, se préparer, s’orienter — gratuitement
           </h1>
@@ -80,12 +81,12 @@ export default function MobilityHub() {
       </section>
 
       {/* BLOC D'AVERTISSEMENT STANDARD OBLIGATOIRE */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20">
+      <section className="container-page -mt-8 relative z-20">
         <DisclaimerBanner />
       </section>
 
       {/* POURQUOI CE PROGRAMME EXISTE */}
-      <section className="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <section className="container-page section-space">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 space-y-6">
             <SectionHeader
@@ -138,8 +139,8 @@ export default function MobilityHub() {
       </section>
 
       {/* LES DEUX GRANDES PORTES D'ENTRÉE */}
-      <section className="py-20 bg-white/65 dark:bg-v1-sous-bois/40 border-y border-border-subtle">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <Section tone="sauge">
+        <div className="container-page space-y-12">
           <SectionHeader
             title="Choisissez votre porte d’entrée"
             subtitle="Vous pouvez candidater uniquement aux cours de langue allemande, uniquement à l’accompagnement documentaire, ou aux deux."
@@ -254,10 +255,10 @@ export default function MobilityHub() {
             </div>
           </div>
         </div>
-      </section>
+      </Section>
 
       {/* TÉMOIGNAGES DU PROGRAMME (TODO) */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-10">
+      <section className="container-page section-space space-y-10">
         <SectionHeader
           title="Ce que disent nos apprenants accompagnés"
           subtitle="Témoignages d’exemple marqués TODO dans l’attente des citations validées par l’équipe WAHHF."
@@ -294,8 +295,8 @@ export default function MobilityHub() {
       </section>
 
       {/* FAQ */}
-      <section className="py-16 sm:py-20 bg-white/60 dark:bg-v1-sous-bois/30 border-t border-border-subtle">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+      <Section tone="sauge">
+        <div className="container-page *:max-w-5xl space-y-10">
           <SectionHeader
             kicker="Questions fréquentes"
             title="Tout comprendre sur la gratuité et nos règles d’éthique"
@@ -318,10 +319,10 @@ export default function MobilityHub() {
             ))}
           </div>
         </div>
-      </section>
+      </Section>
 
       {/* APPEL À CANDIDATER OU À SOUTENIR LE PROGRAMME PAR UN DON */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+      <section className="container-page section-space">
         <div className="surface-green rounded-card bg-nuit text-creme p-8 sm:p-12 border border-or/40 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-7 space-y-3">
             <h2 className="font-serif font-normal text-2xl sm:text-4xl text-creme">

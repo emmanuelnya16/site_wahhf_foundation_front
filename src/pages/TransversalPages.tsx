@@ -41,7 +41,7 @@ export function QuiSommesNousPage() {
       />
 
       <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-5">
+        <div className="container-page space-y-5">
           <h1 className="font-serif font-normal text-[clamp(2.1rem,4.6vw,3.9rem)] leading-tight max-w-4xl">
             Une fondation camerouno-allemande au service de la dignité humaine
           </h1>
@@ -52,7 +52,7 @@ export function QuiSommesNousPage() {
       </section>
 
       {/* Histoire, Mission & Valeurs */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-16">
+      <section className="container-page section-space space-y-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           <div className="lg:col-span-7 space-y-5">
             <SectionHeader
@@ -179,7 +179,7 @@ export function PartenairesPage() {
       />
 
       <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+        <div className="container-page space-y-4">
           <h1 className="font-serif font-normal text-[clamp(2.1rem,4.5vw,3.8rem)] leading-tight">
             Un écosystème engagé pour garantir la gratuité de nos actions
           </h1>
@@ -189,7 +189,7 @@ export function PartenairesPage() {
         </div>
       </section>
 
-      <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-12">
+      <section className="container-page section-space space-y-12">
         {/* Partenaire Fondateur : Groupe IROKO */}
         <div className="surface-green rounded-card bg-nuit text-creme p-8 sm:p-12 border-2 border-or space-y-5">
           <span className="inline-block px-3.5 py-1 rounded-pill bg-or text-v1-encre text-xs font-bold uppercase tracking-wider">
@@ -274,7 +274,7 @@ export function NosActionsPage() {
       />
 
       <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+        <div className="container-page space-y-4">
           <h1 className="font-serif font-normal text-[clamp(2.1rem,4.5vw,3.8rem)] leading-tight">
             Agir sur tous les leviers de l’autonomie humaine
           </h1>
@@ -284,7 +284,7 @@ export function NosActionsPage() {
         </div>
       </section>
 
-      <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-16">
+      <section className="container-page section-space space-y-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {DOMAINS_DATA.map((d) => (
             <DomainCard key={d.id} domain={d} total="06" />
@@ -372,7 +372,7 @@ export function NotreImpactPage() {
       />
 
       <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+        <div className="container-page space-y-4">
           <h1 className="font-serif font-normal text-[clamp(2.1rem,4.5vw,3.8rem)] leading-tight">
             Un impact concret, mesuré avec humilité et transparence
           </h1>
@@ -382,7 +382,7 @@ export function NotreImpactPage() {
         </div>
       </section>
 
-      <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-16">
+      <section className="container-page section-space space-y-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
             { end: 1250, suffix: '+', label: 'Jeunes et familles accompagnés (TODO)' },
@@ -452,7 +452,7 @@ export function ActualitesPage() {
       <>
         <SEO title={article.title} description={article.excerpt} />
         <section className="surface-green pt-32 pb-14 bg-nuit text-creme">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+          <div className="container-page *:max-w-4xl space-y-4">
             <Link
               to="/actualites"
               className="text-xs font-semibold text-or hover:underline"
@@ -476,7 +476,7 @@ export function ActualitesPage() {
           </div>
         </section>
 
-        <section className="py-14 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto space-y-8">
+        <section className="container-page *:max-w-4xl section-space space-y-8">
           <div className="rounded-card overflow-hidden aspect-[16/9] border border-nuit/15">
             <img
               src={article.image}
@@ -511,14 +511,14 @@ export function ActualitesPage() {
         description="Suivez les dernières actualités de WAHHF Foundation : ouvertures des sessions d'allemand gratuites, campagnes de santé et reboisement."
       />
       <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+        <div className="container-page space-y-4">
           <h1 className="font-serif font-normal text-[clamp(2.1rem,4.5vw,3.8rem)] leading-tight">
             Actualités & Actions de terrain
           </h1>
         </div>
       </section>
 
-      <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+      <section className="container-page section-space grid grid-cols-1 md:grid-cols-3 gap-6">
         {NEWS_DATA.map((art) => (
           <Link
             key={art.slug}
@@ -649,14 +649,14 @@ export function AgirPage() {
       />
 
       <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+        <div className="container-page space-y-4">
           <h1 className="font-serif font-normal text-[clamp(2.1rem,4.5vw,3.8rem)] leading-tight">
             Trois manières concrètes de soutenir la jeunesse
           </h1>
         </div>
       </section>
 
-      <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-16">
+      <section className="container-page section-space space-y-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="surface-green rounded-card bg-nuit text-creme p-7 space-y-4 flex flex-col justify-between">
             <div className="space-y-2">
@@ -703,7 +703,7 @@ export function AgirPage() {
         </div>
 
         {/* Formulaire Bénévole / Partenaire */}
-        <div ref={formBlockRef} className="rounded-card bg-surface-raised border border-nuit/15 p-8 sm:p-10 max-w-3xl mx-auto">
+        <div ref={formBlockRef} className="rounded-card bg-surface-raised border border-nuit/15 p-8 sm:p-10 max-w-3xl">
           <p role="status" className="sr-only">
             {statusMessage}
           </p>
@@ -887,7 +887,7 @@ export function LegalTransparencyPage({
     <>
       <SEO title={content.title} description={content.blocks[0].p} />
       <section className="surface-green pt-32 pb-14 bg-nuit text-creme">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-3">
+        <div className="container-page *:max-w-4xl space-y-3">
           {'kicker' in content && (
             <div className="inline-flex items-center gap-2 text-meta text-text-secondary-on-inverse">
               <content.icon className="w-4 h-4" />
@@ -898,7 +898,7 @@ export function LegalTransparencyPage({
         </div>
       </section>
 
-      <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto space-y-6">
+      <section className="container-page *:max-w-4xl section-space space-y-6">
         {content.blocks.map((b) => (
           <div
             key={b.h}

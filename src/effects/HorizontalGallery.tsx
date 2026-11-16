@@ -96,7 +96,7 @@ export default function HorizontalGallery({ id, header, items, prevLabel, nextLa
       >
         <div
           ref={trackRef}
-          className="relative flex flex-col gap-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pin:flex-row pin:items-center pin:max-w-none pin:mx-0 pin:w-max pin:px-[max(2rem,calc((100vw-80rem)/2+2rem))] pin:will-change-transform"
+          className="relative flex flex-col gap-12 container-page pin:flex-row pin:items-center pin:max-w-none pin:mx-0 pin:w-max pin:px-[max(var(--gutter),calc((100vw_-_var(--container-page))_/_2))] pin:will-change-transform"
         >
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pin:flex-col pin:items-start pin:justify-center pin:w-[min(26rem,30vw)] pin:shrink-0">
             {header}

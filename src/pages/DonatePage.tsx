@@ -93,7 +93,7 @@ export default function DonatePage() {
       />
 
       <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-5">
+        <div className="container-page *:max-w-5xl space-y-5">
           <h1 className="font-serif font-normal text-[clamp(2.1rem,4.6vw,3.8rem)] leading-tight">
             Grâce à vos dons, chaque jeune est accompagné gratuitement
           </h1>
@@ -103,12 +103,12 @@ export default function DonatePage() {
         </div>
       </section>
 
-      <section ref={formSectionRef} className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+      <section ref={formSectionRef} className="container-page section-space">
         <p role="status" className="sr-only">
           {prepared ? 'Votre message est prêt : envoyez-le par WhatsApp ou par e-mail.' : ''}
         </p>
         {prepared ? (
-          <div className="max-w-3xl mx-auto">
+          <div className="max-w-3xl">
             <ContactHandoff
               title={`Dernière étape : envoyez votre intention de don (${effectiveAmount} €)`}
               draft={draft}

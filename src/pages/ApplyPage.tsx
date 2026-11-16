@@ -155,7 +155,7 @@ export default function ApplyPage() {
       />
 
       <section className="surface-green pt-32 pb-14 bg-nuit text-creme">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+        <div className="container-page *:max-w-4xl space-y-4">
           <h1 className="font-serif font-normal text-[clamp(2rem,4.5vw,3.5rem)] leading-tight">
             Candidater à un parcours d’accompagnement
           </h1>
@@ -165,11 +165,11 @@ export default function ApplyPage() {
         </div>
       </section>
 
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-20">
+      <section className="container-page *:max-w-4xl -mt-6 relative z-20">
         <DisclaimerBanner compact />
       </section>
 
-      <section ref={formSectionRef} className="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+      <section ref={formSectionRef} className="container-page *:max-w-4xl section-space">
         {/* Annonce des changements d'étape et de l'envoi (toujours présente, lue poliment) */}
         <p role="status" className="sr-only">
           {statusMessage}

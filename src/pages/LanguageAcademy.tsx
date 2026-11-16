@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
 import SectionHeader from '../components/wahhf/SectionHeader';
+import Section from '../components/wahhf/Section';
 import { PrimaryButton, SecondaryButton, DonateButton } from '../components/wahhf/Buttons';
 import DisclaimerBanner from '../components/wahhf/DisclaimerBanner';
 import CourseCard from '../components/wahhf/CourseCard';
@@ -131,7 +132,7 @@ export default function LanguageAcademy() {
 
       {/* HERO */}
       <section className="surface-green pt-32 pb-16 sm:pt-36 sm:pb-20 bg-nuit text-creme">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        <div className="container-page space-y-6">
           <div className="flex flex-wrap items-center gap-2 text-xs text-or font-semibold">
             <Link to="/mobilite-langues" className="hover:underline">
               Mobilité & Langues
@@ -172,12 +173,12 @@ export default function LanguageAcademy() {
       </section>
 
       {/* BLOC D'AVERTISSEMENT STANDARD */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-20">
+      <section className="container-page -mt-6 relative z-20">
         <DisclaimerBanner />
       </section>
 
       {/* FRISE HORIZONTALE DES 5 NIVEAUX : A1 -> A2 -> B1 -> B2 -> C1 */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-12">
+      <section className="container-page section-space space-y-12">
         <SectionHeader
           kicker="Parcours structuré CECRL"
           title="Frise des 5 niveaux d’allemand : A1, A2, B1, B2, C1"
@@ -338,7 +339,7 @@ export default function LanguageAcademy() {
         id="test-niveau"
         className="surface-green py-20 bg-nuit text-creme border-y border-or/30"
       >
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+        <div className="container-page *:max-w-4xl space-y-10">
           <SectionHeader
             title="Test de niveau d’allemand en ligne"
             subtitle="Évaluez gratuitement vos connaissances actuelles grâce à 20 questions progressives (de A1 à C1) afin de candidater au niveau le plus adapté."
@@ -473,7 +474,7 @@ export default function LanguageAcademy() {
       {/* CALENDRIER DES SESSIONS (Cartes filtrables par niveau et par format) */}
       <section
         id="calendrier-sessions"
-        className="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-12"
+        className="container-page section-space space-y-12"
       >
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
           <SectionHeader
@@ -519,8 +520,8 @@ export default function LanguageAcademy() {
       </section>
 
       {/* PRÉPARATION AUX EXAMENS OFFICIELS (Goethe, telc, TestDaF — mention indicative TODO) */}
-      <section className="py-16 bg-white/60 dark:bg-v1-sous-bois/40 border-t border-border-subtle">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Section tone="sauge">
+        <div className="container-page">
           <div className="rounded-card bg-surface-raised border border-border p-8 sm:p-10 space-y-6">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div>
@@ -539,7 +540,7 @@ export default function LanguageAcademy() {
             </p>
           </div>
         </div>
-      </section>
+      </Section>
     </>
   );
 }

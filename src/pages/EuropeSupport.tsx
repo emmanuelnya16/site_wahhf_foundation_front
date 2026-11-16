@@ -15,6 +15,7 @@ import { PrimaryButton, SecondaryButton } from '../components/wahhf/Buttons';
 import DisclaimerBanner from '../components/wahhf/DisclaimerBanner';
 import { COUNTRIES_DATA, THEMATIC_GUIDES } from '../services/api';
 import NotFoundPage, { NotFoundLinks, COUNTRY_LINKS } from './NotFoundPage';
+import Section from '../components/wahhf/Section';
 
 const FOUR_STEPS = [
   {
@@ -74,7 +75,7 @@ export default function EuropeSupport() {
         />
 
         <section className="surface-green pt-32 pb-16 sm:pt-36 sm:pb-20 bg-nuit text-creme">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+          <div className="container-page space-y-6">
             <div className="flex flex-wrap items-center gap-2 text-xs text-or font-semibold">
               <Link to="/mobilite-langues" className="hover:underline">
                 Mobilité & Langues
@@ -133,7 +134,7 @@ export default function EuropeSupport() {
         </section>
 
         {/* BLOC D'AVERTISSEMENT STANDARD OBLIGATOIRE */}
-        <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-20 space-y-4">
+        <section className="container-page -mt-6 relative z-20 space-y-4">
           <DisclaimerBanner />
 
           {/* Mention explicite obligatoire si le pays n'est pas membre de l'UE (Albanie) */}
@@ -151,7 +152,7 @@ export default function EuropeSupport() {
         </section>
 
         {/* Voies possibles : Études, Formation, Travail */}
-        <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-12">
+        <section className="container-page section-space space-y-12">
           <SectionHeader
             title="Les trois grandes voies de mobilité réglementaire"
             subtitle="Aperçu informatif et gratuit. Vérifiez systématiquement les critères à jour sur les portails officiels ci-dessous."
@@ -320,7 +321,7 @@ export default function EuropeSupport() {
             isAntiScam ? 'bg-nuit border-b-4 border-or' : 'bg-nuit'
           } text-creme`}
         >
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-5">
+          <div className="container-page *:max-w-5xl space-y-5">
             <div className="flex flex-wrap items-center gap-2 text-xs text-or font-semibold">
               <Link to="/mobilite-langues" className="hover:underline">
                 Mobilité & Langues
@@ -342,11 +343,11 @@ export default function EuropeSupport() {
           </div>
         </section>
 
-        <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-20">
+        <section className="container-page *:max-w-5xl -mt-6 relative z-20">
           <DisclaimerBanner />
         </section>
 
-        <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto space-y-8">
+        <section className="container-page *:max-w-5xl section-space space-y-8">
           {guide.sections.map((sec, idx) => (
             <article
               key={sec.heading}
@@ -429,7 +430,7 @@ export default function EuropeSupport() {
 
       {/* HERO */}
       <section className="surface-green pt-32 pb-16 sm:pt-36 sm:pb-20 bg-nuit text-creme">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        <div className="container-page space-y-6">
           <div className="flex flex-wrap items-center gap-2 text-xs text-or font-semibold">
             <Link to="/mobilite-langues" className="hover:underline">
               Mobilité & Langues
@@ -461,12 +462,12 @@ export default function EuropeSupport() {
       </section>
 
       {/* BLOC D'AVERTISSEMENT STANDARD OBLIGATOIRE */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-20">
+      <section className="container-page -mt-6 relative z-20">
         <DisclaimerBanner />
       </section>
 
       {/* PARCOURS EN 4 ÉTAPES CLAIRES (Frise verticale) */}
-      <section className="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto space-y-12">
+      <section className="container-page *:max-w-5xl section-space space-y-12">
         <SectionHeader
           title="Votre parcours d’accompagnement en 4 étapes claires"
           subtitle="Cliquez sur chaque étape pour lire le guide thématique complet correspondant."
@@ -505,8 +506,8 @@ export default function EuropeSupport() {
       </section>
 
       {/* LES 5 PAGES THÉMATIQUES D'INFORMATION */}
-      <section className="py-16 bg-white/60 dark:bg-v1-sous-bois/30 border-y border-border-subtle">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+      <Section tone="sauge">
+        <div className="container-page space-y-10">
           <SectionHeader
             title="5 dossiers thématiques pour avancer sans intermédiaire"
           />
@@ -589,10 +590,10 @@ export default function EuropeSupport() {
             })}
           </div>
         </div>
-      </section>
+      </Section>
 
       {/* LES 10 PAYS ACCOMPAGNÉS */}
-      <section id="pays" className="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-12">
+      <section id="pays" className="container-page section-space space-y-12">
         <SectionHeader
           title="Fiches d’orientation par pays"
           subtitle="Luxembourg, Allemagne, Slovénie, Italie, Grèce, Portugal, Espagne, Danemark, Pologne et Albanie (avec mention explicite du statut hors UE pour l’Albanie)."

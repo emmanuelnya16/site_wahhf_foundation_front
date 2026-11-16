@@ -24,6 +24,7 @@ import {
 } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
 import SectionHeader from '../components/wahhf/SectionHeader';
+import Section from '../components/wahhf/Section';
 import { PrimaryButton, SecondaryButton, DonateButton } from '../components/wahhf/Buttons';
 import DomainCard from '../components/wahhf/DomainCard';
 import Counter from '../components/wahhf/Counter';
@@ -213,7 +214,7 @@ export default function Home() {
         <motion.div
           initial="hidden"
           animate="show"
-          className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-7"
+          className="container-page relative z-10 text-center space-y-7"
         >
           <motion.div
             variants={heroFade(0)}
@@ -278,7 +279,7 @@ export default function Home() {
       {/* =====================================================================
           2. MISSION (« Qui sommes-nous »)
           ===================================================================== */}
-      <section id="mission" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <section id="mission" className="container-page section-space">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 space-y-6">
             <SectionHeader
@@ -358,7 +359,7 @@ export default function Home() {
           3. CHIFFRES CLÉS (4 compteurs animés)
           ===================================================================== */}
       <section id="chiffres-cles" className="surface-green py-16 sm:py-20 bg-nuit text-creme border-y border-or/25">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        <div className="container-page space-y-12">
           <SectionHeader
             title={t('home.stats.title')}
             subtitle={t('home.stats.subtitle')}
@@ -444,7 +445,7 @@ export default function Home() {
           ===================================================================== */}
       {/* Effet fort : la carte verte s'agrandit jusqu'à la pleine largeur, puis cascade du contenu */}
       <ExpandSection id="mobilite-langues" backgroundClassName="bg-nuit" className="surface-green py-20 sm:py-24 text-creme">
-        <div data-expand-content className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        <div data-expand-content className="container-page space-y-12">
           <div data-cascade className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
             <SectionHeader
               title={t('home.mobilitySpot.title')}
@@ -538,7 +539,7 @@ export default function Home() {
       {/* =====================================================================
           6. VIDÉO (Vignette qui s'agrandit en plein écran à la demande — jamais en lecture auto avec son)
           ===================================================================== */}
-      <section id="video" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-10">
+      <section id="video" className="container-page section-space space-y-10">
         <SectionHeader
           title={t('home.video.title')}
           subtitle={t('home.video.subtitle')}
@@ -650,8 +651,8 @@ export default function Home() {
       {/* =====================================================================
           7. NOTRE APPROCHE (5 vignettes avec icônes)
           ===================================================================== */}
-      <section id="approche" className="py-20 sm:py-24 bg-white/60 dark:bg-v1-sous-bois/40 border-y border-border-subtle">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <Section tone="sauge" id="approche">
+        <div className="container-page space-y-12">
           <SectionHeader
             title={t('home.approach.title')}
             subtitle={t('home.approach.subtitle')}
@@ -716,12 +717,12 @@ export default function Home() {
             })}
           </StaggerGroup>
         </div>
-      </section>
+      </Section>
 
       {/* =====================================================================
           8. FRISE « NOTRE PARCOURS » (ligne verticale qui se dessine au défilement)
           ===================================================================== */}
-      <section id="parcours" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto space-y-12">
+      <section id="parcours" className="container-page *:max-w-5xl section-space space-y-12">
         <SectionHeader
           title={t('home.timeline.title')}
           subtitle={t('home.timeline.subtitle')}
@@ -781,20 +782,20 @@ export default function Home() {
       {/* =====================================================================
           9. PRÉSENCE (Carte stylisée du Cameroun 10 régions + 10 pays européens)
           ===================================================================== */}
-      <section id="presence" className="py-20 sm:py-28 bg-white/55 dark:bg-v1-sous-bois/30 border-y border-border-subtle">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <Section tone="sauge" id="presence">
+        <div className="container-page space-y-12">
           <SectionHeader
             title={t('home.presence.title')}
             subtitle={t('home.presence.subtitle')}
           />
           <PresenceSection />
         </div>
-      </section>
+      </Section>
 
       {/* =====================================================================
           10. TÉMOIGNAGES (Carrousel de citations avec photo et prénom — marqué TODO)
           ===================================================================== */}
-      <section id="temoignages" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-12">
+      <section id="temoignages" className="container-page section-space space-y-12">
         <SectionHeader
           title={t('home.testimonials.title')}
           subtitle={t('home.testimonials.subtitle')}
@@ -887,8 +888,8 @@ export default function Home() {
       {/* =====================================================================
           11. ACTUALITÉS (3 cartes + lien « Toutes les actualités »)
           ===================================================================== */}
-      <section id="actualites" className="py-20 sm:py-28 bg-white/55 dark:bg-v1-sous-bois/30 border-t border-border-subtle">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <Section tone="sauge" id="actualites">
+        <div className="container-page space-y-12">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
             <SectionHeader
               title={t('home.news.title')}
@@ -947,12 +948,12 @@ export default function Home() {
             ))}
           </StaggerGroup>
         </div>
-      </section>
+      </Section>
 
       {/* =====================================================================
           11 bis. EN IMAGES (5 vraies photos du First Open Day ; visionneuse ; lien /galerie)
           ===================================================================== */}
-      <section id="en-images" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-12">
+      <section id="en-images" className="container-page section-space space-y-12">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
           <SectionHeader
             title={t('home.gallery.title')}
@@ -967,7 +968,7 @@ export default function Home() {
       {/* =====================================================================
           12. PARTENAIRES ET FINANCEURS (Bandeau avec IROKO en premier ; lien vers /partenaires)
           ===================================================================== */}
-      <section id="partenaires" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-10">
+      <section id="partenaires" className="container-page section-space space-y-10">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
           <SectionHeader
             title={t('home.partners.title')}
@@ -1010,8 +1011,8 @@ export default function Home() {
       {/* =====================================================================
           13. AGIR (Trois cartes : Faire un don · Devenir bénévole · Devenir partenaire)
           ===================================================================== */}
-      <section id="agir" className="py-20 sm:py-28 bg-white/70 dark:bg-v1-sous-bois/40 border-t border-border-subtle">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <Section tone="sauge" id="agir">
+        <div className="container-page space-y-12">
           <SectionHeader
             kicker={t('home.act.kicker')}
             title={t('home.act.title')}
@@ -1098,12 +1099,12 @@ export default function Home() {
             </div>
           </StaggerGroup>
         </div>
-      </section>
+      </Section>
 
       {/* =====================================================================
           14. NEWSLETTER + BANDE FINALE D'APPEL AU DON (juste avant le footer)
           ===================================================================== */}
-      <section id="newsletter" className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-10">
+      <section id="newsletter" className="container-page section-space space-y-10">
         {/* Bloc Newsletter */}
         <div className="rounded-card bg-surface-raised border border-border p-8 sm:p-12 shadow-xs grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-7 space-y-2">

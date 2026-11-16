@@ -55,7 +55,7 @@ export default function NotFoundPage({
       <SEO title="Page introuvable" description="Cette adresse ne correspond à aucune page du site WAHHF Foundation." />
 
       <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+        <div className="container-page *:max-w-4xl space-y-4">
           <span className="text-meta text-text-secondary-on-inverse">
             Page introuvable (erreur 404)
           </span>
@@ -71,7 +71,7 @@ export default function NotFoundPage({
         </div>
       </section>
 
-      <section className="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto space-y-12">
+      <section className="container-page *:max-w-4xl section-space space-y-12">
         {children ?? <NotFoundLinks heading="Les 10 pays accompagnés" links={COUNTRY_LINKS} />}
 
         <div className="space-y-4">

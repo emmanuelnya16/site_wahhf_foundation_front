@@ -33,7 +33,7 @@ export default function GalleryPage() {
       />
 
       <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+        <div className="container-page space-y-4">
           <h1 className="font-serif font-normal text-[clamp(2.1rem,4.5vw,3.8rem)] leading-tight">La fondation en images</h1>
           <p className="text-base sm:text-xl text-creme/85 max-w-3xl">
             Retour en photos et en vidéos sur nos actions : la première journée portes ouvertes et le Boot Camp de Yaoundé, nos rencontres
@@ -42,7 +42,7 @@ export default function GalleryPage() {
         </div>
       </section>
 
-      <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-14">
+      <section className="container-page section-space space-y-14">
         <div role="group" aria-label="Filtrer par album" className="flex gap-2 overflow-x-auto sm:flex-wrap pb-1 -mx-1 px-1">
           <button type="button" aria-pressed={filter === 'tout'} onClick={() => setFilter('tout')} className={chip(filter === 'tout')}>
             Tout ({GALLERY_ITEMS.length})
