@@ -673,6 +673,30 @@
   height: calc(max(100cqh, 100cqw / var(--video-ratio)) * var(--video-render-scale));
   transform: translate(-50%, -50%) scale(calc(var(--video-zoom) / var(--video-render-scale)));
 }
+/* Image du hero posée dans le HTML avant le JavaScript (index.html, accueil seulement) : même cadre que le hero
+   (sous l'en-tête, 94 svh moins l'en-tête sur téléphone, 88 svh dès 768 px), remplacée au premier rendu de React. */
+.hero-shell {
+  position: absolute;
+  inset-inline: 0;
+  top: var(--header-height);
+  height: calc(94svh - var(--header-height));
+  overflow: hidden;
+  background: var(--color-nuit);
+}
+.hero-shell img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero-shell .hero-veil {
+  position: absolute;
+  inset: 0;
+}
+@media (min-width: 48rem) {
+  .hero-shell {
+    height: calc(88svh - var(--header-height));
+  }
+}
 /* Boucle hébergée sur le site (HERO_LOOP) : la balise video accepte object-fit. */
 .hero-video video {
   position: absolute;

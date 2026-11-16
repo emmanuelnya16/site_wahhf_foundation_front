@@ -81,6 +81,18 @@
   </head>
   <body>
     <div id="root"></div>
+    <!-- Accueil seulement : l'image du hero est posée dans le HTML, sous son voile, avant le JavaScript (élément LCP,
+         PERF-01). React remplace ce contenu à son premier rendu par le même hero (mêmes fichiers, même cadre :
+         .hero-shell dans src/index.css). Décoratif, masqué aux lecteurs d'écran. -->
+    <script>
+      if (location.pathname === '/') {
+        document.getElementById('root').innerHTML =
+          '<div class="hero-shell" aria-hidden="true"><picture>' +
+          '<source media="(max-width: 47.99rem)" type="image/webp" srcset="/hero/hero-film-t49-portrait-456.webp 456w, /hero/hero-film-t49-portrait-608.webp 608w" sizes="100vw">' +
+          '<img src="/hero/hero-film-t49-1280.webp" srcset="/hero/hero-film-t49-960.webp 960w, /hero/hero-film-t49-1280.webp 1280w, /hero/hero-film-t49-1920.webp 1920w" sizes="100vw" width="1920" height="1080" alt="" fetchpriority="high">' +
+          '</picture><div class="hero-veil"></div></div>';
+      }
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
