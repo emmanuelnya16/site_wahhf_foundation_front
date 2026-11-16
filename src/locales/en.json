@@ -39,7 +39,19 @@
     "ctaSecondary": "Explore our programs",
     "scrollHint": "Scroll to explore",
     "videoPause": "Pause the video",
-    "videoPlay": "Play the video"
+    "videoPlay": "Play the video",
+    "headline": "German lessons to prepare for Europe with confidence",
+    "lead": "A Cameroonian-German foundation in Yaoundé and Douala: levels A1 to C1, an online test and guidance towards 10 European countries, with no paid intermediary.",
+    "ctaTest": "Take the free German test",
+    "filmLink": "Watch the film with sound (1 min)",
+    "filStart": "Cameroon",
+    "filEnd": "Europe",
+    "videoConsent": "Turn on the video",
+    "videoConsentNote": "It is streamed by YouTube, which then receives your IP address.",
+    "filmTitle": "WAHHF Foundation film",
+    "filmPlay": "Play the film on YouTube",
+    "filmNote": "The film is streamed by YouTube, which then receives your IP address.",
+    "filmClose": "Close the film"
   },
   "home": {
     "mission": {

@@ -39,7 +39,19 @@
     "ctaSecondary": "Découvrir nos programmes",
     "scrollHint": "Défiler pour découvrir",
     "videoPause": "Mettre la vidéo en pause",
-    "videoPlay": "Lire la vidéo"
+    "videoPlay": "Lire la vidéo",
+    "headline": "Des cours d'allemand pour préparer l'Europe en confiance",
+    "lead": "Une fondation camerouno-allemande, à Yaoundé et Douala : niveaux A1 à C1, test en ligne et orientation vers 10 pays européens, sans intermédiaire payant.",
+    "ctaTest": "Passer le test d'allemand gratuit",
+    "filmLink": "Regarder le film avec le son (1 min)",
+    "filStart": "Cameroun",
+    "filEnd": "Europe",
+    "videoConsent": "Activer la vidéo",
+    "videoConsentNote": "Elle est diffusée par YouTube, qui reçoit alors votre adresse IP.",
+    "filmTitle": "Film WAHHF Foundation",
+    "filmPlay": "Lire le film sur YouTube",
+    "filmNote": "Le film est diffusé par YouTube, qui reçoit alors votre adresse IP.",
+    "filmClose": "Fermer le film"
   },
   "home": {
     "mission": {

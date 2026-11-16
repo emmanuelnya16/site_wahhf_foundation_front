@@ -329,6 +329,10 @@
   color-scheme: light;
   /* En-tête : 72 px sur une ligne ; dès 1 280 px, deux lignes (64 + 44 px), voir plus bas. 24 px d'air dessous. */
   --header-offset: 6rem;
+  /* Hauteur réelle de l'en-tête fixe (barre + filet de 1 px) : 65 px, 73 px dès 640 px, 109 px dès 1 280 px. */
+  --header-height: 4.0625rem;
+  /* Colonne de texte du hero (contrat §6) : le voile reste dense jusqu'à sa fin. */
+  --hero-text-width: 34rem;
   --body-size: 1.0625rem; /* 17 px ; 18 px dès 768 px (plus bas) */
 
   /* Surfaces : page brume → section sauge → carte et champ papier ; bandes et footer nuit */
@@ -490,9 +494,20 @@
 }
 
 /* Dès 1 280 px, l'en-tête passe sur deux lignes (marque et actions, puis menu et outils) : 108 px + 24 px d'air. */
+@media (min-width: 40rem) {
+  :root {
+    --header-height: 4.5625rem;
+  }
+}
+@media (min-width: 64rem) {
+  :root {
+    --hero-text-width: 40rem;
+  }
+}
 @media (min-width: 80rem) {
   :root {
     --header-offset: 8.25rem;
+    --header-height: 6.8125rem;
   }
 }
 
@@ -656,21 +671,37 @@
   height: calc(max(100cqh, 100cqw / var(--video-ratio)) * var(--video-render-scale));
   transform: translate(-50%, -50%) scale(calc(var(--video-zoom) / var(--video-render-scale)));
 }
+/* Boucle hébergée sur le site (HERO_LOOP) : la balise video accepte object-fit. */
+.hero-video video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 /*
- * Voile du hero (au-dessus de la vidéo ou de l'image d'attente) : vert profond ~60 % sur les bords,
- * 74-76 % dans la bande du texte (15-85 % de la hauteur, où se trouve tout le texte de 390 à 1440 px),
- * 88 % en bas. Calcul pire cas (image entièrement blanche) : titre crème 4,9:1, sur-titre or (pastille
- * verte) 4,8:1, phrase d'appui (crème 95 %) 4,7:1, lien de défilement (crème 85 %) 5,6:1.
+ * Voile du hero (décision du 16/11, contrat §6) : couleur nuit, dense derrière le texte, léger ailleurs.
+ * - Téléphone (image fixe portrait, texte en bas) : du haut vers le bas, 25 % puis 88 % dès 10 rem, jusqu'en bas.
+ * - Dès 768 px (vidéo ou image paysage, texte à gauche) : dégradé horizontal, 88 % jusqu'à la fin de la colonne de
+ *   texte (marge du container + --hero-text-width), puis 20 % au bord droit : la vidéo reste nettement visible.
+ * Pire cas (pixel blanc sous 88 % de nuit) : brume 7,6:1, soleil (bouton) 5,2:1. Mesure réelle sur les images de la
+ * vidéo : voir le commit du hero.
  */
 .hero-veil {
+  --veil-dense: color-mix(in srgb, var(--color-nuit) 88%, transparent);
+  --veil-light: color-mix(in srgb, var(--color-nuit) 20%, transparent);
   background: linear-gradient(
     to bottom,
-    rgb(15 61 46 / 0.6) 0%,
-    rgb(15 61 46 / 0.74) 15%,
-    rgb(15 61 46 / 0.76) 50%,
-    rgb(15 61 46 / 0.74) 85%,
-    rgb(15 61 46 / 0.88) 100%
+    color-mix(in srgb, var(--color-nuit) 25%, transparent) 0,
+    var(--veil-dense) 10rem,
+    var(--veil-dense) 100%
   );
+}
+@media (min-width: 48rem) {
+  .hero-veil {
+    --hero-text-end: calc(max(var(--gutter), (100% - var(--container-page)) / 2) + var(--hero-text-width));
+    background: linear-gradient(to right, var(--veil-dense) 0, var(--veil-dense) var(--hero-text-end), var(--veil-light) 100%);
+  }
 }
 /* Repli sans unités de conteneur : le hero occupe l'écran (100svh) */
 @supports not (width: 1cqw) {

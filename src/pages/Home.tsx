@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform, Variants } from 'motion/react';
 import {
-  ArrowDown,
   ChevronLeft,
   ChevronRight,
   Play,
@@ -31,15 +30,13 @@ import { EASE_OUT, EASE_SCREEN, DURATION } from '../lib/motionTokens';
 import ContactHandoff from '../components/wahhf/ContactHandoff';
 import { buildDraft } from '../lib/contactDraft';
 import { MQ } from '../lib/gsap';
-import MaskedLines, { splitAtComma } from '../effects/MaskedLines';
 import SplitReveal from '../effects/SplitReveal';
 
 import ExpandSection from '../effects/ExpandSection';
 import { useTimelineDraw } from '../effects/useTimelineDraw';
 import StaggerGroup from '../effects/StaggerGroup';
 import GalleryGrid from '../components/wahhf/GalleryGrid';
-import { HeroVideoBackground, HeroVideoToggle, useHeroVideo } from '../components/wahhf/HeroVideoBackground';
-import { HERO_POSTER } from '../config/heroVideo';
+import HeroSection from './home/HeroSection';
 import { galleryItem, GalleryItem, HOME_GALLERY_IDS } from '../data/gallery';
 
 /** Aperçu « En images » de l'accueil (5 photos du First Open Day & Boot Camp). */
@@ -52,15 +49,6 @@ import {
   WAHHF_LOGO_URL,
   imageSrcSet,
 } from '../services/api';
-
-/**
- * Léger glissement d'un bloc du hero (0,9 s, sans rebond), décalé de `delay` secondes.
- * Pas d'opacité : sur-titre, phrase d'appui et boutons sont lisibles dès le premier rendu (élément LCP, PERF-01).
- */
-const heroFade = (delay: number): Variants => ({
-  hidden: { y: 16 },
-  show: { y: 0, transition: { duration: DURATION.reveal, delay, ease: EASE_OUT } },
-});
 
 /** Changement de témoignage : léger glissement dans le sens de navigation, sans rebond. */
 const testimonialSlide: Variants = {
@@ -109,14 +97,9 @@ export default function Home() {
   const { t, i18n } = useTranslation();
   const shouldReduceMotion = useReducedMotion();
 
-  // Hero : parallaxe sur ordinateur seulement et jamais en « réduire les animations »
-  const heroRef = useRef<HTMLElement>(null);
+  // Vignette vidéo (section « Vidéo ») : agrandissement sur ordinateur seulement, jamais en « réduire les animations »
   const isDesktop = useMediaQuery(MQ.desktop);
   const heroParallax = isDesktop && !shouldReduceMotion;
-  const { scrollYProgress: heroProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
-  const heroImageY = useTransform(heroProgress, [0, 1], [0, 20]);
-  // Vidéo YouTube d'arrière-plan (ordinateur, après chargement et inactivité ; image d'attente sinon)
-  const heroVideo = useHeroVideo(heroRef);
 
   // Modale vidéo plein écran à la demande : Échap, focus gardé puis rendu, page figée dessous
   const [videoModalOpen, setVideoModalOpen] = useState(false);
@@ -173,103 +156,8 @@ export default function Home() {
         description="WAHHF Foundation (We Are Here Help Foundation), fondation camerouno-allemande à but non lucratif et branche sociale du groupe IROKO : 6 domaines d'action et cours d'allemand gratuits."
       />
 
-      {/* =====================================================================
-          1. HERO PLEIN ÉCRAN
-          ===================================================================== */}
-      <section
-        id="accueil"
-        ref={heroRef}
-        className="surface-green relative min-h-svh w-full flex items-center justify-center overflow-hidden bg-nuit text-creme pt-28 pb-16"
-      >
-        {/* 1) Image d'attente (élément principal du chargement, préchargée dans index.html) :
-               zoom très lent et léger décalage au défilement sur ordinateur (20 px max).
-            2) Vidéo YouTube par-dessus, sans parallaxe, qui apparaît en fondu une fois la lecture lancée.
-            3) Voile vert profond : ~60 % sur les bords, ~75 % dans la bande du texte, pour garder
-               au moins 4,5:1 même sur une image entièrement blanche de la vidéo. */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          <motion.div className="absolute inset-0" style={{ y: heroParallax ? heroImageY : 0 }}>
-            <img
-              src={HERO_POSTER.src}
-              srcSet={HERO_POSTER.srcSet}
-              sizes="100vw"
-              fetchPriority="high"
-              decoding="async"
-              alt=""
-              width={HERO_POSTER.width}
-              height={HERO_POSTER.height}
-              className="w-full h-full object-cover object-center hero-zoom"
-            />
-          </motion.div>
-          <HeroVideoBackground video={heroVideo} />
-          <div className="absolute inset-0 hero-veil" />
-        </div>
-
-        {/* Séquence dès le montage : titre ligne par ligne derrière un masque ; sur-titre, phrase et boutons
-            sont déjà visibles et ne font que glisser de quelques pixels. */}
-        <motion.div
-          initial="hidden"
-          animate="show"
-          className="container-page relative z-10 text-center space-y-7"
-        >
-          <motion.div
-            variants={heroFade(0)}
-            className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-pill bg-nuit/85 border border-or/40 text-or text-xs font-semibold uppercase tracking-kicker"
-          >
-            <img
-              src={WAHHF_LOGO_URL}
-              alt=""
-              className="w-5 h-5 rounded-pill bg-white p-0.5 object-contain"
-            />
-            <span>{t('hero.kicker')}</span>
-          </motion.div>
-
-          {/* Très grand titre en graisse NORMALE, coupé en deux lignes sémantiques à la virgule */}
-          <MaskedLines
-            as="h1"
-            lines={splitAtComma(t('hero.title'))}
-            className="font-serif font-normal tracking-tight text-creme leading-[1.08] text-[clamp(2.35rem,5.4vw,4.75rem)] max-w-5xl mx-auto"
-          />
-
-          {/* Phrase d'appui */}
-          <motion.p
-            variants={heroFade(0.55)}
-            className="text-base sm:text-xl text-creme/95 max-w-3xl mx-auto font-normal leading-relaxed"
-          >
-            {t('hero.subtitle')}
-          </motion.p>
-
-          {/* Deux boutons, après le titre : « Soutenir nos actions » (principal) & « Découvrir nos programmes » */}
-          <motion.div
-            variants={heroFade(0.85)}
-            className="pt-3 flex flex-col sm:flex-row items-center justify-center gap-4"
-          >
-            <PrimaryButton
-              to="/faire-un-don"
-              onInverse
-            >
-              {t('hero.ctaPrimary')}
-            </PrimaryButton>
-            <SecondaryButton to="/nos-actions" onInverse>
-              {t('hero.ctaSecondary')}
-            </SecondaryButton>
-          </motion.div>
-        </motion.div>
-
-        {/* Indicateur de défilement (immobile : plus de rebond infini) */}
-        <a
-          href="#mission"
-          aria-label={t('hero.scrollHint')}
-          className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-xs uppercase tracking-kicker text-creme/85 hover:text-or transition-colors"
-        >
-          <span>{t('hero.scrollHint')}</span>
-          <span className="w-8 h-8 rounded-pill border border-or/40 flex items-center justify-center">
-            <ArrowDown className="w-4 h-4 text-or" />
-          </span>
-        </a>
-
-        {/* Pause / lecture de la vidéo d'arrière-plan (seulement quand elle peut bouger) */}
-        <HeroVideoToggle video={heroVideo} pauseLabel={t('hero.videoPause')} playLabel={t('hero.videoPlay')} />
-      </section>
+      {/* 1. HERO (décision du 16/11 : vidéo en fond) : src/pages/home/HeroSection.tsx */}
+      <HeroSection />
 
       {/* =====================================================================
           2. MISSION (« Qui sommes-nous »)

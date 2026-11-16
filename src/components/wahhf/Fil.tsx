@@ -33,6 +33,9 @@ interface FilProps {
   orientation?: 'horizontal' | 'vertical' | 'auto';
   drawOnce?: boolean;
   onInverse?: boolean;
+  /** Posé sur une image ou une vidéo voilée de nuit (hero de l'accueil) : trait et points soleil, libellés brume
+   *  (décision du 16/11 : le feuille du fil sur nuit ne resterait pas lisible sur la vidéo). */
+  onMedia?: boolean;
   className?: string;
 }
 
@@ -144,9 +147,13 @@ export default function Fil({
   currentLabel = 'niveau affiché',
   orientation = 'horizontal',
   drawOnce = false,
-  onInverse = false,
-  className,
+  onInverse: onInverseProp = false,
+  onMedia = false,
+  className: classNameProp,
 }: FilProps) {
+  const onInverse = onInverseProp || onMedia;
+  // Variante « média » : les utilitaires du fil sur nuit lisent --fil-on-inverse, remplacé ici par soleil.
+  const className = cn(classNameProp, onMedia && '[--fil-on-inverse:var(--color-soleil)]');
   const nodes: Node[] = [
     ...(start ? [{ ...start, filled: true, current: false }] : []),
     ...steps.map((s) => ({ ...s, filled: s.id === currentId, current: s.id === currentId })),

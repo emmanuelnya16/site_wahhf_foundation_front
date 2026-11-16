@@ -1,27 +1,31 @@
 import { CSSProperties, RefObject, useCallback, useEffect, useRef, useState } from 'react';
 import { Pause, Play } from 'lucide-react';
-import { HERO_VIDEO, YOUTUBE_ORIGIN, heroVideoUrl } from '../../config/heroVideo';
+import { HERO_LOOP, HERO_VIDEO, YOUTUBE_ORIGIN, heroVideoUrl } from '../../config/heroVideo';
 import { onReducedMotionChange, prefersReducedMotion } from '../../lib/reducedMotion';
-import { getConsent, onConsentChange } from '../../lib/consent';
+import { getVideoConsent, onVideoConsentChange, setVideoConsent } from '../../lib/consent';
+import { cn } from '../../lib/utils';
 
 /**
- * Vidéo YouTube en arrière-plan du hero.
+ * Vidéo en fond du hero (décision de la cliente du 16/11/2026, contrat §6).
  *
- * - L'image d'attente (dans Home) s'affiche d'abord ; l'iframe n'existe qu'après le chargement de la page
- *   et un moment d'inactivité, et seulement si : animations autorisées, pas d'économie de données ni de 2G/3G,
- *   écran d'au moins 768 px non tactile, cookies non essentiels non refusés.
- * - L'iframe reste invisible jusqu'à ce que le lecteur annonce la lecture (postMessage, état 1), puis fondu 0,8 s.
- *   Aucun message en 6 s, ou erreur (vidéo indisponible, intégration interdite) : iframe retirée, image seule.
- * - Pause quand le hero est quasi sorti de l'écran ou que l'onglet est caché ; bouton pause mémorisé pour la session.
- * - Une seule iframe à la fois ; tout est retiré au changement de page.
+ * - L'image d'attente (dans le hero) s'affiche d'abord ; la vidéo n'existe qu'après le chargement de la page et un
+ *   moment d'inactivité, et seulement si : animations autorisées, pas d'économie de données ni de 2G/3G, écran d'au
+ *   moins 768 px non tactile, et, pour YouTube, accord explicite du visiteur (« Activer la vidéo » : YouTube reçoit
+ *   son adresse IP, MEL-03). La boucle hébergée sur le site (HERO_LOOP), sans tiers, n'a pas besoin d'accord.
+ * - YouTube : l'iframe reste invisible jusqu'à ce que le lecteur annonce la lecture (postMessage, état 1), puis fondu
+ *   0,8 s. Aucun message en 6 s, ou erreur (vidéo indisponible, intégration interdite) : iframe retirée, image seule.
+ *   Extrait 0 à 64 s, avant le générique (ACC-13).
+ * - Pause quand le hero est quasi sorti de l'écran ou que l'onglet est caché ; bouton Pause mémorisé pour la session.
+ * - Une seule vidéo à la fois ; tout est retiré au changement de page.
  */
 
 type Phase = 'off' | 'waiting' | 'loading' | 'playing' | 'failed';
 
 const PAUSE_KEY = 'wahhf_hero_video_paused';
 const DESKTOP_QUERY = `(min-width: ${HERO_VIDEO.minWidth}px) and (hover: hover) and (pointer: fine)`;
+const IS_FILE = HERO_VIDEO.source === 'file';
 
-/** Une seule iframe vidéo de hero sur tout le site. */
+/** Une seule vidéo de hero sur tout le site. */
 let activeOwner: symbol | null = null;
 
 interface NetworkInformationLike extends EventTarget {
@@ -30,15 +34,18 @@ interface NetworkInformationLike extends EventTarget {
 }
 const connection = () => (navigator as Navigator & { connection?: NetworkInformationLike }).connection;
 
-/** Toutes les conditions de chargement de la vidéo sont-elles réunies ? */
-function videoAllowed(): boolean {
+/** L'appareil et les réglages du visiteur permettent-ils une vidéo de fond (hors consentement) ? */
+function deviceAllowsVideo(): boolean {
   if (!HERO_VIDEO.enabled || typeof window === 'undefined') return false;
   if (prefersReducedMotion()) return false;
   const c = connection();
   if (c && (c.saveData || ['slow-2g', '2g', '3g'].includes(c.effectiveType ?? ''))) return false;
-  if (!window.matchMedia(DESKTOP_QUERY).matches || navigator.maxTouchPoints > 0) return false;
-  const consent = getConsent();
-  return HERO_VIDEO.consent === 'explicit' ? consent === 'all' : consent !== 'essential';
+  return window.matchMedia(DESKTOP_QUERY).matches && navigator.maxTouchPoints === 0;
+}
+
+/** Toutes les conditions de chargement de la vidéo sont-elles réunies ? */
+function videoAllowed(): boolean {
+  return deviceAllowsVideo() && (IS_FILE || getVideoConsent());
 }
 
 const readPaused = () => {
@@ -94,15 +101,25 @@ export interface HeroVideoState {
   showToggle: boolean;
   userPaused: boolean;
   toggle: () => void;
+  /** Appareil compatible mais accord YouTube pas encore donné : le lien « Activer la vidéo » est proposé. */
+  canAskConsent: boolean;
+  /** Le visiteur active la vidéo (accord mémorisé) : chargement immédiat. */
+  grantConsent: () => void;
   iframeRef: RefObject<HTMLIFrameElement | null>;
+  mediaRef: RefObject<HTMLVideoElement | null>;
   onIframeLoad: () => void;
+  onMediaPlaying: () => void;
+  onMediaInterrupted: () => void;
+  onMediaError: () => void;
 }
 
 export function useHeroVideo(sectionRef: RefObject<HTMLElement | null>): HeroVideoState {
   const [phase, setPhase] = useState<Phase>('off');
   const [userPaused, setUserPaused] = useState(readPaused);
   const [resuming, setResuming] = useState(false);
+  const [canAskConsent, setCanAskConsent] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
+  const mediaRef = useRef<HTMLVideoElement | null>(null);
   const owner = useRef(Symbol('hero-video'));
   const inView = useRef(true);
   const pageVisible = useRef(typeof document === 'undefined' || document.visibilityState === 'visible');
@@ -111,7 +128,14 @@ export function useHeroVideo(sectionRef: RefObject<HTMLElement | null>): HeroVid
   phaseRef.current = phase;
   userPausedRef.current = userPaused;
 
-  const command = useCallback((func: string, args: unknown[] = []) => {
+  const command = useCallback((func: 'playVideo' | 'pauseVideo' | 'seekTo', args: unknown[] = []) => {
+    if (IS_FILE) {
+      const media = mediaRef.current;
+      if (!media) return;
+      if (func === 'playVideo') media.play().catch(() => undefined);
+      else if (func === 'pauseVideo') media.pause();
+      return;
+    }
     iframeRef.current?.contentWindow?.postMessage(JSON.stringify({ event: 'command', func, args, id: 1, channel: 'widget' }), YOUTUBE_ORIGIN);
   }, []);
 
@@ -119,12 +143,13 @@ export function useHeroVideo(sectionRef: RefObject<HTMLElement | null>): HeroVid
     if (activeOwner === owner.current) activeOwner = null;
   }, []);
 
-  // 1. Conditions : évaluées au montage puis à chaque changement de réglage d'animation, de consentement
-  //    ou de taille d'écran. La qualité de connexion n'est vérifiée qu'au moment de créer l'iframe :
-  //    l'estimation du navigateur fluctue pendant les chargements (sinon : iframe créée puis retirée en boucle).
+  // 1. Conditions : évaluées au montage puis à chaque changement de réglage d'animation, d'accord vidéo
+  //    ou de taille d'écran. La qualité de connexion n'est vérifiée qu'au moment de créer la vidéo :
+  //    l'estimation du navigateur fluctue pendant les chargements (sinon : vidéo créée puis retirée en boucle).
   useEffect(() => {
     const evaluate = () => {
       const ok = videoAllowed();
+      setCanAskConsent(!IS_FILE && deviceAllowsVideo() && !getVideoConsent());
       setPhase((p) => {
         if (!ok) return p === 'failed' ? p : 'off';
         return p === 'off' ? 'waiting' : p;
@@ -134,7 +159,7 @@ export function useHeroVideo(sectionRef: RefObject<HTMLElement | null>): HeroVid
     const mq = window.matchMedia(DESKTOP_QUERY);
     mq.addEventListener('change', evaluate);
     const stopReduced = onReducedMotionChange(evaluate);
-    const stopConsent = onConsentChange(evaluate);
+    const stopConsent = onVideoConsentChange(evaluate);
     return () => {
       mq.removeEventListener('change', evaluate);
       stopReduced();
@@ -142,7 +167,7 @@ export function useHeroVideo(sectionRef: RefObject<HTMLElement | null>): HeroVid
     };
   }, []);
 
-  // 2. Création de l'iframe : après le chargement et un moment d'inactivité (ou tout de suite sur clic « Lire »)
+  // 2. Création de la vidéo : après le chargement et un moment d'inactivité (ou tout de suite sur clic)
   useEffect(() => {
     if (phase !== 'waiting' || userPaused) return;
     const start = () => {
@@ -157,7 +182,7 @@ export function useHeroVideo(sectionRef: RefObject<HTMLElement | null>): HeroVid
     return afterLoadAndIdle(start);
   }, [phase, userPaused, resuming]);
 
-  // 3. Dialogue avec le lecteur (postMessage) + délais de secours + pause hors écran / onglet caché
+  // 3. Dialogue avec le lecteur + délais de secours + pause hors écran / onglet caché
   const handshake = useRef<number | undefined>(undefined);
   const readyTimer = useRef<number | undefined>(undefined);
   const playTimer = useRef<number | undefined>(undefined);
@@ -176,21 +201,26 @@ export function useHeroVideo(sectionRef: RefObject<HTMLElement | null>): HeroVid
     stableRef.current = value;
     setStable(value);
   }, []);
-  /** Lecture en cours : 1re fois, fondu immédiat ; après une interruption, fondu après RESUME_SHOW_DELAY. */
+  /** Lecture en cours : fondu après quelques secondes de lecture continue (YouTube affiche son titre et ses boutons
+   *  au démarrage et après chaque reprise) ; boucle hébergée : fondu immédiat. */
   const markPlaying = useCallback(() => {
     window.clearTimeout(hideTimer.current);
     // L'état « lecture » peut arriver plusieurs fois par seconde : le délai n'est lancé qu'une fois
     if (stableRef.current || showPending.current) return;
-    if (!shownOnce.current) {
+    if (IS_FILE) {
       shownOnce.current = true;
       setStableBoth(true);
-    } else {
-      showPending.current = true;
-      showTimer.current = window.setTimeout(() => {
+      return;
+    }
+    showPending.current = true;
+    showTimer.current = window.setTimeout(
+      () => {
         showPending.current = false;
         setStableBoth(true);
-      }, HERO_VIDEO.resumeShowDelayMs);
-    }
+      },
+      shownOnce.current ? HERO_VIDEO.resumeShowDelayMs : HERO_VIDEO.firstShowDelayMs
+    );
+    shownOnce.current = true;
   }, [setStableBoth]);
   /** Pause, chargement ou fin de boucle : retour à l'image (aussitôt si c'est nous qui mettons en pause). */
   const markInterrupted = useCallback(
@@ -218,7 +248,7 @@ export function useHeroVideo(sectionRef: RefObject<HTMLElement | null>): HeroVid
 
   /** Applique l'état voulu (lecture/pause) et arme le délai « lecture non démarrée » si besoin. */
   const apply = useCallback(() => {
-    if (!iframeRef.current || !gotMessage.current) return;
+    if (IS_FILE ? !mediaRef.current : !iframeRef.current || !gotMessage.current) return;
     window.clearTimeout(playTimer.current);
     if (shouldPlay()) {
       command('playVideo');
@@ -229,8 +259,9 @@ export function useHeroVideo(sectionRef: RefObject<HTMLElement | null>): HeroVid
     }
   }, [command, fail, markInterrupted]);
 
+  // YouTube : messages du lecteur
   useEffect(() => {
-    if (phase !== 'loading' && phase !== 'playing') return;
+    if (IS_FILE || (phase !== 'loading' && phase !== 'playing')) return;
     const onMessage = (e: MessageEvent) => {
       if (e.origin !== YOUTUBE_ORIGIN || e.source !== iframeRef.current?.contentWindow || typeof e.data !== 'string') return;
       let data: { event?: string; info?: unknown };
@@ -264,7 +295,7 @@ export function useHeroVideo(sectionRef: RefObject<HTMLElement | null>): HeroVid
     return () => window.removeEventListener('message', onMessage);
   }, [phase, apply, command, fail, markPlaying, markInterrupted]);
 
-  // Délai « aucun message » armé à l'insertion de l'iframe
+  // Délai « aucune réponse » armé à l'insertion de la vidéo
   useEffect(() => {
     if (phase !== 'loading') return;
     gotMessage.current = false;
@@ -283,6 +314,20 @@ export function useHeroVideo(sectionRef: RefObject<HTMLElement | null>): HeroVid
     hello();
     handshake.current = window.setInterval(() => (gotMessage.current ? window.clearInterval(handshake.current) : hello()), 250);
   }, []);
+
+  // Boucle hébergée : la balise video prévient elle-même (lecture, attente, erreur)
+  const onMediaPlaying = useCallback(() => {
+    if (!gotMessage.current) {
+      gotMessage.current = true;
+      window.clearTimeout(readyTimer.current);
+    }
+    window.clearTimeout(playTimer.current);
+    setResuming(false);
+    setPhase('playing');
+    if (shouldPlay()) markPlaying();
+    else command('pauseVideo');
+  }, [command, markPlaying]);
+  const onMediaInterrupted = useCallback(() => markInterrupted(false), [markInterrupted]);
 
   // Hors écran (hero visible à moins de 10 %) et onglet caché : pause ; retour : reprise
   useEffect(() => {
@@ -312,7 +357,7 @@ export function useHeroVideo(sectionRef: RefObject<HTMLElement | null>): HeroVid
     };
   }, [phase === 'loading' || phase === 'playing', sectionRef, apply]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Iframe retirée (conditions perdues, échec, démontage) : tout est débranché
+  // Vidéo retirée (conditions perdues, échec, démontage) : tout est débranché
   useEffect(() => {
     if (phase === 'loading' || phase === 'playing') return;
     window.clearInterval(handshake.current);
@@ -354,6 +399,15 @@ export function useHeroVideo(sectionRef: RefObject<HTMLElement | null>): HeroVid
     }
   }, [apply, command, markInterrupted]);
 
+  // « Activer la vidéo » : accord mémorisé, chargement sans attendre l'inactivité ; une pause mémorisée est levée
+  const grantConsent = useCallback(() => {
+    userPausedRef.current = false;
+    writePaused(false);
+    setUserPaused(false);
+    setResuming(true);
+    setVideoConsent(true);
+  }, []);
+
   const active = phase === 'loading' || phase === 'playing';
   return {
     phase,
@@ -361,8 +415,14 @@ export function useHeroVideo(sectionRef: RefObject<HTMLElement | null>): HeroVid
     showToggle: phase === 'playing' || (userPaused && phase === 'waiting') || (resuming && active),
     userPaused,
     toggle,
+    canAskConsent,
+    grantConsent,
     iframeRef,
+    mediaRef,
     onIframeLoad,
+    onMediaPlaying,
+    onMediaInterrupted,
+    onMediaError: fail,
   };
 }
 
@@ -377,35 +437,72 @@ export function HeroVideoBackground({ video }: { video: HeroVideoState }) {
     transitionDuration: `${video.visible ? HERO_VIDEO.fadeMs : 300}ms`,
   } as CSSProperties;
   return (
-    <div className="hero-video" data-visible={video.visible} style={style} aria-hidden="true" inert>
-      <iframe
-        ref={video.iframeRef}
-        src={heroVideoUrl(window.location.origin)}
-        title={HERO_VIDEO.title}
-        tabIndex={-1}
-        aria-hidden="true"
-        allow="autoplay; encrypted-media"
-        referrerPolicy="strict-origin-when-cross-origin"
-        onLoad={video.onIframeLoad}
-      />
+    <div className="hero-video" data-visible={video.visible} data-source={HERO_VIDEO.source} style={style} aria-hidden="true" inert>
+      {IS_FILE ? (
+        <video
+          ref={video.mediaRef}
+          muted
+          loop
+          playsInline
+          autoPlay
+          preload="auto"
+          tabIndex={-1}
+          onPlaying={video.onMediaPlaying}
+          onWaiting={video.onMediaInterrupted}
+          onError={video.onMediaError}
+        >
+          {HERO_LOOP.webm && <source src={HERO_LOOP.webm} type="video/webm" />}
+          {HERO_LOOP.mp4 && <source src={HERO_LOOP.mp4} type="video/mp4" />}
+        </video>
+      ) : (
+        <iframe
+          ref={video.iframeRef}
+          src={heroVideoUrl(window.location.origin)}
+          title={HERO_VIDEO.title}
+          tabIndex={-1}
+          aria-hidden="true"
+          allow="autoplay; encrypted-media"
+          referrerPolicy="strict-origin-when-cross-origin"
+          onLoad={video.onIframeLoad}
+        />
+      )}
     </div>
   );
 }
 
-/** Bouton « Mettre la vidéo en pause » / « Lire la vidéo » (mouvement automatique de plus de 5 s).
- *  Placé au-dessus de la bulle WhatsApp (fixe en bas à droite) : il ne touche ni le lien « Défiler »
- *  centré en bas, ni le bandeau de cookies (en bas à gauche). */
-export function HeroVideoToggle({ video, pauseLabel, playLabel }: { video: HeroVideoState; pauseLabel: string; playLabel: string }) {
+/** Pastille des contrôles vidéo, posée sur la partie claire du voile : fond nuit opaque à 90 %, texte brume. */
+const CHIP =
+  'inline-flex items-center gap-2 min-h-11 px-4 rounded-pill bg-surface-inverse/90 text-meta text-text-on-inverse border border-border-on-inverse';
+
+/** Bouton « Mettre la vidéo en pause » / « Lire la vidéo » (mouvement automatique de plus de 5 s, critère 2.2.2). */
+export function HeroVideoToggle({ video, pauseLabel, playLabel, className }: { video: HeroVideoState; pauseLabel: string; playLabel: string; className?: string }) {
   if (!video.showToggle) return null;
   const Icon = video.userPaused ? Play : Pause;
   return (
     <button
       type="button"
       onClick={video.toggle}
-      className="absolute bottom-24 right-6 z-20 inline-flex items-center gap-2 h-11 px-4 rounded-pill bg-nuit/85 border border-or/50 text-creme text-xs font-semibold cursor-pointer transition-colors duration-(--dur-fast) hover:bg-or hover:text-v1-encre focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-or"
+      className={cn(CHIP, 'font-bold cursor-pointer transition-colors duration-(--dur-fast) hover:bg-action-on-inverse hover:text-on-action-on-inverse hover:border-transparent', className)}
     >
       <Icon className="w-4 h-4" aria-hidden="true" fill="currentColor" />
       {video.userPaused ? playLabel : pauseLabel}
     </button>
+  );
+}
+
+/** Sans accord : l'image fixe reste ; « Activer la vidéo » dit à qui l'adresse IP sera transmise (MEL-03). */
+export function HeroVideoConsent({ video, label, note, className }: { video: HeroVideoState; label: string; note: string; className?: string }) {
+  if (!video.canAskConsent) return null;
+  return (
+    <p className={cn(CHIP, 'flex-wrap py-2 max-w-sm', className)}>
+      <button
+        type="button"
+        onClick={video.grantConsent}
+        className="font-bold text-link-on-inverse underline underline-offset-4 decoration-1 hover:decoration-2 cursor-pointer"
+      >
+        {label}
+      </button>
+      <span className="text-text-secondary-on-inverse">{note}</span>
+    </p>
   );
 }
