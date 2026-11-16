@@ -8,7 +8,7 @@ import SEO from '../components/wahhf/SEO';
 import SectionHeader from '../components/wahhf/SectionHeader';
 import PageHeader, { PageMeta, PageTitle, PageIntro, PageActions } from '../components/wahhf/PageHeader';
 import Section from '../components/wahhf/Section';
-import { PrimaryButton, SecondaryButton, DonateButton } from '../components/wahhf/Buttons';
+import { PrimaryButton, SecondaryButton } from '../components/wahhf/Buttons';
 import DisclaimerBanner from '../components/wahhf/DisclaimerBanner';
 import CourseCard from '../components/wahhf/CourseCard';
 import { ProgressBar } from '../components/wahhf/StepNumber';
@@ -461,8 +461,8 @@ export default function LanguageAcademy() {
                 <h2 className="text-section-title text-text mt-1">
                   Préparation méthodique aux examens officiels d’allemand
                 </h2>
-              </div>
-              <DonateButton to="/faire-un-don">Soutenir l’Académie</DonateButton>
+                            </div>
+              {/* Bouton « Soutenir l’Académie » retiré : pas de don sur les pages des jeunes (ARN-02) */}
             </div>
 
             <p className="text-body text-text-secondary max-w-[65ch]">

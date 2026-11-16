@@ -5,7 +5,7 @@ import {
 import SEO from '../components/wahhf/SEO';
 import SectionHeader from '../components/wahhf/SectionHeader';
 import PageHeader, { PageTitle, PageIntro, PageActions } from '../components/wahhf/PageHeader';
-import { PrimaryButton, SecondaryButton, DonateButton } from '../components/wahhf/Buttons';
+import { PrimaryButton, SecondaryButton } from '../components/wahhf/Buttons';
 import DisclaimerBanner from '../components/wahhf/DisclaimerBanner';
 import { COUNTRIES_DATA, GERMAN_LEVELS_DATA } from '../services/api';
 import Section from '../components/wahhf/Section';
@@ -267,11 +267,9 @@ export default function MobilityHub() {
               onInverse
               className="justify-center"
             >
-              Candidater gratuitement
+                            Candidater gratuitement
             </PrimaryButton>
-            <DonateButton size="lg" to="/faire-un-don">
-              Financer un parcours (Faire un don)
-            </DonateButton>
+            {/* Bouton « Financer un parcours (Faire un don) » retiré : pas de don sur les pages des jeunes (ARN-02) */}
           </div>
         </div>
       </section>
