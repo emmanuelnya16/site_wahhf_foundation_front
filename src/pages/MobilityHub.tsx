@@ -10,7 +10,7 @@ import SectionHeader from '../components/wahhf/SectionHeader';
 import PageHeader, { PageTitle, PageIntro, PageActions } from '../components/wahhf/PageHeader';
 import { PrimaryButton, SecondaryButton, DonateButton } from '../components/wahhf/Buttons';
 import DisclaimerBanner from '../components/wahhf/DisclaimerBanner';
-import { COUNTRIES_DATA, GERMAN_LEVELS_DATA, WAHHF_IMAGES, imageSrcSet } from '../services/api';
+import { COUNTRIES_DATA, GERMAN_LEVELS_DATA } from '../services/api';
 import Section from '../components/wahhf/Section';
 
 const MOBILITY_FAQS = [
@@ -41,7 +41,8 @@ export default function MobilityHub() {
       />
 
       {/* HERO */}
-      <PageHeader photoId="open-day-visioconference">
+      {/* Avertissement standard obligatoire : juste sous le titre, avant la photo sur téléphone */}
+      <PageHeader photoId="open-day-visioconference" notice={<DisclaimerBanner />}>
         <PageTitle>
           Apprendre, se préparer, s’orienter — gratuitement
         </PageTitle>
@@ -52,7 +53,7 @@ export default function MobilityHub() {
 
         <PageActions>
           <PrimaryButton
-            to="/candidater"
+            to="/candidater"
           >
             Candidater au programme
           </PrimaryButton>
@@ -64,11 +65,6 @@ export default function MobilityHub() {
           </SecondaryButton>
         </PageActions>
       </PageHeader>
-
-      {/* BLOC D'AVERTISSEMENT STANDARD OBLIGATOIRE */}
-      <section className="container-page">
-        <DisclaimerBanner />
-      </section>
 
       {/* POURQUOI CE PROGRAMME EXISTE */}
       <section className="container-page section-space">

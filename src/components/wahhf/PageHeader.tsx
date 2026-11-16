@@ -21,10 +21,16 @@ import { GALLERY_ALBUMS, galleryItem } from '../../data/gallery';
 export default function PageHeader({
   children,
   photoId,
+  notice,
   className,
 }: {
   children: ReactNode;
   photoId?: string;
+  /**
+   * Encadré à garder juste sous le titre (avertissement anti-arnaque) quand l'en-tête porte une photo : sur
+   * téléphone, il passe avant la photo ; sur ordinateur, il s'étend sous les deux colonnes.
+   */
+  notice?: ReactNode;
   className?: string;
 }) {
   const photo = photoId ? galleryItem(photoId) : undefined;
@@ -36,10 +42,11 @@ export default function PageHeader({
         className,
       )}
     >
-      <Container className={cn(photo && 'grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-12')}>
+      <Container className={cn((photo || notice) && 'grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-x-12')}>
         <div className="space-y-5">{children}</div>
+        {notice && <div className="lg:col-span-2 lg:row-start-2">{notice}</div>}
         {photo && photo.kind === 'photo' && (
-          <figure className="w-full max-w-[32rem] lg:justify-self-end">
+          <figure className="w-full max-w-[32rem] lg:col-start-2 lg:row-start-1 lg:justify-self-end">
             <img
               src={photo.src}
               srcSet={photo.srcSet}

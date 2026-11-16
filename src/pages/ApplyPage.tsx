@@ -1,11 +1,11 @@
 import { useState, useId, useRef, FormEvent } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import { ShieldCheck } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
 import { PrimaryButton, SecondaryButton } from '../components/wahhf/Buttons';
 import SectionHeader from '../components/wahhf/SectionHeader';
 import PageHeader, { PageTitle, PageIntro } from '../components/wahhf/PageHeader';
 import DisclaimerBanner from '../components/wahhf/DisclaimerBanner';
+import InfoBox from '../components/wahhf/InfoBox';
 import ChoiceTile from '../components/wahhf/ChoiceTile';
 import FormField, { FieldError, fieldErrorId } from '../components/wahhf/FormField';
 import { emailError, phoneError, requiredError, focusFirstError } from '../lib/formValidation';
@@ -180,14 +180,14 @@ export default function ApplyPage() {
             titleRef={stepTitleRef}
             onEdit={() => setPrepared(false)}
           >
-            <div className="rounded-2xl bg-nuit/8 dark:bg-nuit border border-nuit/20 dark:border-or/40 p-5 text-sm text-text">
-              <p className="font-semibold text-accent mb-1">
+            <InfoBox>
+              <p className="font-semibold text-info">
                 Délai de réponse indicatif : sous 7 à 14 jours ouvrés (TODO : délai exact à confirmer par l’équipe WAHHF).
               </p>
-              <p className="text-xs opacity-80">
+              <p>
                 Rappel : Aucun collaborateur de WAHHF ne vous demandera d’argent par téléphone, e-mail ou WhatsApp pour traiter votre dossier.
               </p>
-            </div>
+            </InfoBox>
           </ContactHandoff>
         ) : (
           <div className="rounded-card bg-surface-raised border border-border p-6 sm:p-10 shadow-sm space-y-8">
@@ -461,12 +461,11 @@ export default function ApplyPage() {
                   </div>
 
                   {/* Rappel clair obligatoire : aucun document d'identité ni paiement demandé */}
-                  <div className="rounded-2xl bg-nuit/8 dark:bg-nuit border border-nuit/20 dark:border-or/40 p-5 flex items-start gap-3.5">
-                    <ShieldCheck className="w-6 h-6 text-accent shrink-0 mt-0.5" />
-                    <p className="text-sm font-medium text-text">
+                  <InfoBox>
+                    <p>
                       « Aucun document d’identité ni aucun paiement ne vous est demandé à cette étape. »
                     </p>
-                  </div>
+                  </InfoBox>
 
                   {/* Case consentement RGPD explicite */}
                   <div>
