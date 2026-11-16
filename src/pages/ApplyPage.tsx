@@ -1,10 +1,12 @@
-import { useState, FormEvent } from 'react';
+import { useState, useId, FormEvent } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { CheckCircle2, ShieldCheck, ArrowRight, ArrowLeft } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
 import SectionHeader from '../components/wahhf/SectionHeader';
 import DisclaimerBanner from '../components/wahhf/DisclaimerBanner';
 import ChoiceTile from '../components/wahhf/ChoiceTile';
+import FormField, { FieldError, fieldErrorId } from '../components/wahhf/FormField';
+import { emailError, phoneError, requiredError, focusFirstError } from '../lib/formValidation';
 import { COUNTRIES_DATA, submitApplication } from '../services/api';
 
 /**
@@ -18,6 +20,28 @@ import { COUNTRIES_DATA, submitApplication } from '../services/api';
  * 6. Consentement RGPD + rappel clair : « Aucun document d'identité ni aucun paiement ne vous est demandé à cette étape. »
  * Confirmation chaleureuse à l'envoi avec délai de réponse indicatif (marqué TODO).
  */
+type ApplyField = 'fullName' | 'email' | 'phone' | 'residenceCountry' | 'city' | 'gdprConsent';
+const STEP1_FIELDS = ['fullName', 'email', 'phone', 'residenceCountry', 'city'] as const;
+const INPUT_CLASS =
+  'w-full px-4 py-3 rounded-xl bg-[#F5F1E8] dark:bg-[#0F3D2E] border border-[#0F3D2E]/20 dark:border-[#F5F1E8]/20 aria-invalid:border-danger text-sm';
+
+function checkField(key: ApplyField, value: string | boolean): string | undefined {
+  switch (key) {
+    case 'fullName':
+      return requiredError(String(value), 'Saisissez votre prénom et votre nom.');
+    case 'email':
+      return emailError(String(value));
+    case 'phone':
+      return phoneError(String(value));
+    case 'residenceCountry':
+      return requiredError(String(value), 'Indiquez votre pays de résidence, par exemple Cameroun.');
+    case 'city':
+      return requiredError(String(value), 'Indiquez votre ville de résidence, par exemple Douala.');
+    case 'gdprConsent':
+      return value ? undefined : 'Cochez cette case pour que nous puissions étudier votre candidature et vous recontacter.';
+  }
+}
+
 export default function ApplyPage() {
   const [searchParams] = useSearchParams();
 
@@ -50,9 +74,39 @@ export default function ApplyPage() {
   const [message, setMessage] = useState('');
   const [gdprConsent, setGdprConsent] = useState(false);
 
+  // Champs reliés à leur label par un id unique (useId) ; erreurs affichées sous chaque champ
+  const uid = useId();
+  const fieldId = (key: ApplyField) => `apply-${key}-${uid}`;
+  const [errors, setErrors] = useState<Partial<Record<ApplyField, string>>>({});
+  const values: Record<ApplyField, string | boolean> = { fullName, email, phone, residenceCountry, city, gdprConsent };
+
+  /** Vérifie les champs donnés ; en cas d'erreur, place le focus sur le premier champ fautif. */
+  const validate = (keys: readonly ApplyField[]) => {
+    const found: Partial<Record<ApplyField, string>> = {};
+    for (const key of keys) found[key] = checkField(key, values[key]);
+    setErrors((prev) => ({ ...prev, ...found }));
+    return !focusFirstError(keys, found, fieldId);
+  };
+  // Un message affiché suit la correction en direct ; un champ rempli est vérifié quand on le quitte.
+  const recheck = (key: ApplyField, value: string | boolean) => {
+    if (errors[key]) setErrors((prev) => ({ ...prev, [key]: checkField(key, value) }));
+  };
+  const checkOnBlur = (key: ApplyField, value: string) => {
+    if (value.trim()) setErrors((prev) => ({ ...prev, [key]: checkField(key, value) }));
+  };
+
+  // Chaque étape est validée à l'envoi du formulaire (bouton ou touche Entrée)
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!gdprConsent) return;
+    if (step === 1) {
+      if (validate(STEP1_FIELDS)) setStep(2);
+      return;
+    }
+    if (step === 2) {
+      setStep(3);
+      return;
+    }
+    if (!validate(['gdprConsent'])) return;
     setSubmitting(true);
     const res = await submitApplication({
       fullName,
@@ -162,7 +216,7 @@ export default function ApplyPage() {
               </div>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} noValidate className="space-y-6">
               {step === 1 && (
                 <div className="space-y-5">
                   <SectionHeader
@@ -172,102 +226,105 @@ export default function ApplyPage() {
                   />
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <div>
-                      <label
-                        htmlFor="apply-fullname"
-                        className="block text-xs font-semibold uppercase tracking-wider mb-2"
-                      >
-                        Nom complet (Prénom & Nom) *
-                      </label>
-                      <input
-                        id="apply-fullname"
-                        type="text"
-                        required
-                        value={fullName}
-                        onChange={(e) => setFullName(e.target.value)}
-                        placeholder="Ex. Marie Nguenang"
-                        className="w-full px-4 py-3 rounded-xl bg-[#F5F1E8] dark:bg-[#0F3D2E] border border-[#0F3D2E]/20 dark:border-[#F5F1E8]/20 text-sm"
-                      />
-                    </div>
+                    <FormField id={fieldId('fullName')} label="Nom complet (Prénom & Nom) *" error={errors.fullName}>
+                      {(a11y) => (
+                        <input
+                          {...a11y}
+                          type="text"
+                          required
+                          autoComplete="name"
+                          placeholder="Ex. Marie Nguenang"
+                          value={fullName}
+                          onChange={(e) => {
+                            setFullName(e.target.value);
+                            recheck('fullName', e.target.value);
+                          }}
+                          onBlur={(e) => checkOnBlur('fullName', e.target.value)}
+                          className={INPUT_CLASS}
+                        />
+                      )}
+                    </FormField>
 
-                    <div>
-                      <label
-                        htmlFor="apply-email"
-                        className="block text-xs font-semibold uppercase tracking-wider mb-2"
-                      >
-                        Adresse e-mail *
-                      </label>
-                      <input
-                        id="apply-email"
-                        type="email"
-                        required
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="exemple@domaine.com"
-                        className="w-full px-4 py-3 rounded-xl bg-[#F5F1E8] dark:bg-[#0F3D2E] border border-[#0F3D2E]/20 dark:border-[#F5F1E8]/20 text-sm"
-                      />
-                    </div>
+                    <FormField id={fieldId('email')} label="Adresse e-mail *" error={errors.email}>
+                      {(a11y) => (
+                        <input
+                          {...a11y}
+                          type="email"
+                          required
+                          autoComplete="email"
+                          placeholder="exemple@domaine.com"
+                          value={email}
+                          onChange={(e) => {
+                            setEmail(e.target.value);
+                            recheck('email', e.target.value);
+                          }}
+                          onBlur={(e) => checkOnBlur('email', e.target.value)}
+                          className={INPUT_CLASS}
+                        />
+                      )}
+                    </FormField>
 
-                    <div>
-                      <label
-                        htmlFor="apply-phone"
-                        className="block text-xs font-semibold uppercase tracking-wider mb-2"
-                      >
-                        Téléphone / WhatsApp *
-                      </label>
-                      <input
-                        id="apply-phone"
-                        type="tel"
-                        required
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        placeholder="Ex. +237 6..."
-                        className="w-full px-4 py-3 rounded-xl bg-[#F5F1E8] dark:bg-[#0F3D2E] border border-[#0F3D2E]/20 dark:border-[#F5F1E8]/20 text-sm"
-                      />
-                    </div>
+                    <FormField id={fieldId('phone')} label="Téléphone / WhatsApp *" error={errors.phone}>
+                      {(a11y) => (
+                        <input
+                          {...a11y}
+                          type="tel"
+                          required
+                          autoComplete="tel"
+                          inputMode="tel"
+                          placeholder="Ex. +237 6..."
+                          value={phone}
+                          onChange={(e) => {
+                            setPhone(e.target.value);
+                            recheck('phone', e.target.value);
+                          }}
+                          onBlur={(e) => checkOnBlur('phone', e.target.value)}
+                          className={INPUT_CLASS}
+                        />
+                      )}
+                    </FormField>
 
-                    <div>
-                      <label
-                        htmlFor="apply-country"
-                        className="block text-xs font-semibold uppercase tracking-wider mb-2"
-                      >
-                        Pays de résidence actuel *
-                      </label>
-                      <input
-                        id="apply-country"
-                        type="text"
-                        required
-                        value={residenceCountry}
-                        onChange={(e) => setResidenceCountry(e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl bg-[#F5F1E8] dark:bg-[#0F3D2E] border border-[#0F3D2E]/20 dark:border-[#F5F1E8]/20 text-sm"
-                      />
-                    </div>
+                    <FormField id={fieldId('residenceCountry')} label="Pays de résidence actuel *" error={errors.residenceCountry}>
+                      {(a11y) => (
+                        <input
+                          {...a11y}
+                          type="text"
+                          required
+                          autoComplete="country-name"
+                          value={residenceCountry}
+                          onChange={(e) => {
+                            setResidenceCountry(e.target.value);
+                            recheck('residenceCountry', e.target.value);
+                          }}
+                          onBlur={(e) => checkOnBlur('residenceCountry', e.target.value)}
+                          className={INPUT_CLASS}
+                        />
+                      )}
+                    </FormField>
 
-                    <div className="sm:col-span-2">
-                      <label
-                        htmlFor="apply-city"
-                        className="block text-xs font-semibold uppercase tracking-wider mb-2"
-                      >
-                        Ville de résidence *
-                      </label>
-                      <input
-                        id="apply-city"
-                        type="text"
-                        required
-                        value={city}
-                        onChange={(e) => setCity(e.target.value)}
-                        placeholder="Ex. Douala, Yaoundé, Bafoussam, Garoua..."
-                        className="w-full px-4 py-3 rounded-xl bg-[#F5F1E8] dark:bg-[#0F3D2E] border border-[#0F3D2E]/20 dark:border-[#F5F1E8]/20 text-sm"
-                      />
-                    </div>
+                    <FormField id={fieldId('city')} label="Ville de résidence *" error={errors.city} className="sm:col-span-2">
+                      {(a11y) => (
+                        <input
+                          {...a11y}
+                          type="text"
+                          required
+                          autoComplete="address-level2"
+                          placeholder="Ex. Douala, Yaoundé, Bafoussam, Garoua..."
+                          value={city}
+                          onChange={(e) => {
+                            setCity(e.target.value);
+                            recheck('city', e.target.value);
+                          }}
+                          onBlur={(e) => checkOnBlur('city', e.target.value)}
+                          className={INPUT_CLASS}
+                        />
+                      )}
+                    </FormField>
                   </div>
 
                   <div className="pt-4 flex justify-end">
                     <button
-                      type="button"
-                      onClick={() => {
-                        if (fullName && email && phone && city) setStep(2);
-                      }}
+                      type="submit"
                       className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-[#0F3D2E] text-[#F5F1E8] text-sm font-semibold cursor-pointer"
                     >
                       <span>Continuer vers l’étape 2</span>
@@ -393,8 +450,7 @@ export default function ApplyPage() {
                       <span>Étape précédente</span>
                     </button>
                     <button
-                      type="button"
-                      onClick={() => setStep(3)}
+                      type="submit"
                       className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-[#0F3D2E] text-[#F5F1E8] text-sm font-semibold cursor-pointer"
                     >
                       <span>Continuer vers l’étape 3</span>
@@ -438,22 +494,31 @@ export default function ApplyPage() {
                   </div>
 
                   {/* Case consentement RGPD explicite */}
-                  <label className="flex items-start gap-3 cursor-pointer text-xs sm:text-sm text-[#1B1B18]/85 dark:text-[#F5F1E8]/85">
-                    <input
-                      type="checkbox"
-                      required
-                      checked={gdprConsent}
-                      onChange={(e) => setGdprConsent(e.target.checked)}
-                      className="mt-1 w-4 h-4 accent-[#0F3D2E]"
-                    />
-                    <span>
-                      J’accepte que mes coordonnées soient traitées de manière strictement confidentielle par WAHHF Foundation dans le seul but de répondre gratuitement à ma demande d’accompagnement, conformément à la{' '}
-                      <Link to="/confidentialite" className="underline text-[#0F3D2E] dark:text-[#E8A317]">
-                        politique de confidentialité (RGPD)
-                      </Link>
-                      . *
-                    </span>
-                  </label>
+                  <div>
+                    <label className="flex items-start gap-3 cursor-pointer text-xs sm:text-sm text-[#1B1B18]/85 dark:text-[#F5F1E8]/85">
+                      <input
+                        id={fieldId('gdprConsent')}
+                        type="checkbox"
+                        required
+                        checked={gdprConsent}
+                        onChange={(e) => {
+                          setGdprConsent(e.target.checked);
+                          recheck('gdprConsent', e.target.checked);
+                        }}
+                        aria-invalid={errors.gdprConsent ? true : undefined}
+                        aria-describedby={errors.gdprConsent ? fieldErrorId(fieldId('gdprConsent')) : undefined}
+                        className="mt-1 w-4 h-4 accent-[#0F3D2E]"
+                      />
+                      <span>
+                        J’accepte que mes coordonnées soient traitées de manière strictement confidentielle par WAHHF Foundation dans le seul but de répondre gratuitement à ma demande d’accompagnement, conformément à la{' '}
+                        <Link to="/confidentialite" className="underline text-[#0F3D2E] dark:text-[#E8A317]">
+                          politique de confidentialité (RGPD)
+                        </Link>
+                        . *
+                      </span>
+                    </label>
+                    <FieldError id={fieldErrorId(fieldId('gdprConsent'))} message={errors.gdprConsent} />
+                  </div>
 
                   <div className="pt-4 flex items-center justify-between gap-4">
                     <button
@@ -467,7 +532,7 @@ export default function ApplyPage() {
 
                     <button
                       type="submit"
-                      disabled={submitting || !gdprConsent}
+                      disabled={submitting}
                       className="px-8 py-3.5 rounded-full bg-[#0F3D2E] hover:bg-[#14523E] text-[#F5F1E8] text-sm sm:text-base font-semibold disabled:opacity-50 cursor-pointer"
                     >
                       {submitting

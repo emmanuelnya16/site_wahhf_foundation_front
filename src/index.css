@@ -97,6 +97,8 @@
 @theme inline {
   --color-gold-text: var(--gold-text);
   --color-gold-on-green: var(--gold-text-on-green);
+  /* Erreurs de formulaire : couleur sémantique, distincte du rouge de marque réservé au don */
+  --color-danger: var(--danger);
 }
 
 :root {
@@ -120,6 +122,8 @@
   --focus-on-light: #0F3D2E;
   --focus-on-green: #E8A317;
   --color-focus: var(--focus-on-light);
+  /* Texte d’erreur : 6,6:1 sur blanc, 5,8:1 sur crème */
+  --danger: #B42318;
 }
 
 .dark {
@@ -129,6 +133,8 @@
   --wahhf-text: #F5F1E8;
   --wahhf-text-muted: #C2BDB0;
   --wahhf-border: rgba(245, 241, 232, 0.12);
+  /* Texte d’erreur en sombre : 7,8:1 sur #132A21 */
+  --danger: #FDA29B;
 }
 
 /* Le fond décide de la couleur de l'anneau : thème sombre et surfaces vertes → or. */

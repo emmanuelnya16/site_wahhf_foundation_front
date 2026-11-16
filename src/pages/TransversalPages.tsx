@@ -1,4 +1,4 @@
-import { useState, FormEvent } from 'react';
+import { useState, useId, FormEvent } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import {
   ShieldCheck,
@@ -18,6 +18,8 @@ import { PrimaryButton, SecondaryButton, DonateButton } from '../components/wahh
 import DomainCard from '../components/wahhf/DomainCard';
 import Counter from '../components/wahhf/Counter';
 import PresenceSection from '../components/wahhf/PresenceSection';
+import FormField, { FieldError, fieldErrorId } from '../components/wahhf/FormField';
+import { emailError, requiredError, focusFirstError } from '../lib/formValidation';
 import {
   DOMAINS_DATA,
   NEWS_DATA,
@@ -565,6 +567,27 @@ export function ActualitesPage() {
  * 6. PAGE /agir
  * Faire un don, Devenir bénévole, Devenir partenaire + formulaire d'engagement RGPD.
  */
+type AgirField = 'name' | 'email' | 'details' | 'consent';
+const AGIR_FIELDS = ['name', 'email', 'details', 'consent'] as const;
+const AGIR_INPUT_CLASS =
+  'w-full px-4 py-3 rounded-xl bg-[#F5F1E8] dark:bg-[#0F3D2E] border border-[#0F3D2E]/20 aria-invalid:border-danger text-sm';
+
+function checkAgirField(key: AgirField, value: string | boolean): string | undefined {
+  switch (key) {
+    case 'name':
+      return requiredError(String(value), 'Saisissez votre nom complet ou le nom de votre structure.');
+    case 'email':
+      return emailError(String(value));
+    case 'details':
+      return requiredError(
+        String(value),
+        'Décrivez en quelques lignes vos compétences, vos disponibilités ou votre projet de partenariat.'
+      );
+    case 'consent':
+      return value ? undefined : 'Cochez cette case pour que nous puissions étudier votre proposition et vous répondre.';
+  }
+}
+
 export function AgirPage() {
   const [roleType, setRoleType] = useState<'benevole' | 'partenaire'>('benevole');
   const [name, setName] = useState('');
@@ -573,9 +596,24 @@ export function AgirPage() {
   const [consent, setConsent] = useState(false);
   const [sent, setSent] = useState(false);
 
+  // Labels reliés aux champs (useId) ; erreurs précises sous chaque champ, focus sur la première
+  const uid = useId();
+  const fieldId = (key: AgirField) => `agir-${key}-${uid}`;
+  const [errors, setErrors] = useState<Partial<Record<AgirField, string>>>({});
+  const values: Record<AgirField, string | boolean> = { name, email, details, consent };
+  const recheck = (key: AgirField, value: string | boolean) => {
+    if (errors[key]) setErrors((prev) => ({ ...prev, [key]: checkAgirField(key, value) }));
+  };
+  const checkOnBlur = (key: AgirField, value: string) => {
+    if (value.trim()) setErrors((prev) => ({ ...prev, [key]: checkAgirField(key, value) }));
+  };
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!consent) return;
+    const found: Partial<Record<AgirField, string>> = {};
+    for (const key of AGIR_FIELDS) found[key] = checkAgirField(key, values[key]);
+    setErrors(found);
+    if (focusFirstError(AGIR_FIELDS, found, fieldId)) return;
     await submitContactOrAction({ roleType, name, email, details });
     setSent(true);
   };
@@ -663,61 +701,101 @@ export function AgirPage() {
               </p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form onSubmit={handleSubmit} noValidate className="space-y-5">
               <h3 className="font-serif text-2xl">
                 Formulaire : {roleType === 'benevole' ? 'Devenir bénévole' : 'Devenir partenaire'}
               </h3>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-semibold uppercase mb-1.5">
-                    Nom complet / Structure *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl bg-[#F5F1E8] dark:bg-[#0F3D2E] border border-[#0F3D2E]/20 text-sm"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold uppercase mb-1.5">E-mail *</label>
-                  <input
-                    type="email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl bg-[#F5F1E8] dark:bg-[#0F3D2E] border border-[#0F3D2E]/20 text-sm"
-                  />
-                </div>
+                <FormField
+                  id={fieldId('name')}
+                  label="Nom complet / Structure *"
+                  error={errors.name}
+                  labelClassName="block text-xs font-semibold uppercase mb-1.5"
+                >
+                  {(a11y) => (
+                    <input
+                      {...a11y}
+                      type="text"
+                      required
+                      autoComplete="name"
+                      value={name}
+                      onChange={(e) => {
+                        setName(e.target.value);
+                        recheck('name', e.target.value);
+                      }}
+                      onBlur={(e) => checkOnBlur('name', e.target.value)}
+                      className={AGIR_INPUT_CLASS}
+                    />
+                  )}
+                </FormField>
+                <FormField
+                  id={fieldId('email')}
+                  label="E-mail *"
+                  error={errors.email}
+                  labelClassName="block text-xs font-semibold uppercase mb-1.5"
+                >
+                  {(a11y) => (
+                    <input
+                      {...a11y}
+                      type="email"
+                      required
+                      autoComplete="email"
+                      value={email}
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                        recheck('email', e.target.value);
+                      }}
+                      onBlur={(e) => checkOnBlur('email', e.target.value)}
+                      className={AGIR_INPUT_CLASS}
+                    />
+                  )}
+                </FormField>
               </div>
+
+              <FormField
+                id={fieldId('details')}
+                label="Votre message (compétences, disponibilités ou projet de partenariat) *"
+                error={errors.details}
+                labelClassName="block text-xs font-semibold uppercase mb-1.5"
+              >
+                {(a11y) => (
+                  <textarea
+                    {...a11y}
+                    rows={4}
+                    required
+                    value={details}
+                    onChange={(e) => {
+                      setDetails(e.target.value);
+                      recheck('details', e.target.value);
+                    }}
+                    onBlur={(e) => checkOnBlur('details', e.target.value)}
+                    className={AGIR_INPUT_CLASS}
+                  />
+                )}
+              </FormField>
 
               <div>
-                <label className="block text-xs font-semibold uppercase mb-1.5">
-                  Votre message (compétences, disponibilités ou projet de partenariat) *
+                <label className="flex items-start gap-2.5 text-xs cursor-pointer">
+                  <input
+                    id={fieldId('consent')}
+                    type="checkbox"
+                    required
+                    checked={consent}
+                    onChange={(e) => {
+                      setConsent(e.target.checked);
+                      recheck('consent', e.target.checked);
+                    }}
+                    aria-invalid={errors.consent ? true : undefined}
+                    aria-describedby={errors.consent ? fieldErrorId(fieldId('consent')) : undefined}
+                    className="mt-0.5 w-4 h-4 accent-[#0F3D2E]"
+                  />
+                  <span>
+                    J’accepte que mes données soient traitées par WAHHF Foundation pour étudier ma proposition d’engagement (RGPD). *
+                  </span>
                 </label>
-                <textarea
-                  rows={4}
-                  required
-                  value={details}
-                  onChange={(e) => setDetails(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl bg-[#F5F1E8] dark:bg-[#0F3D2E] border border-[#0F3D2E]/20 text-sm"
-                />
+                <FieldError id={fieldErrorId(fieldId('consent'))} message={errors.consent} />
               </div>
-
-              <label className="flex items-start gap-2.5 text-xs cursor-pointer">
-                <input
-                  type="checkbox"
-                  required
-                  checked={consent}
-                  onChange={(e) => setConsent(e.target.checked)}
-                  className="mt-0.5 w-4 h-4 accent-[#0F3D2E]"
-                />
-                <span>
-                  J’accepte que mes données soient traitées par WAHHF Foundation pour étudier ma proposition d’engagement (RGPD). *
-                </span>
-              </label>
 
               <button
                 type="submit"
