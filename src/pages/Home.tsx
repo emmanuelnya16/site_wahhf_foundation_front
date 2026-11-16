@@ -18,7 +18,6 @@ import { LABEL_CLASS, FIELD_CLASS } from '../components/wahhf/FormField';
 import { cn } from '../lib/utils';
 import { PrimaryButton, SecondaryButton, DonateButton } from '../components/wahhf/Buttons';
 import Counter from '../components/wahhf/Counter';
-import PresenceSection from '../components/wahhf/PresenceSection';
 import { useFocusOnChange } from '../lib/useFocusOnChange';
 import { EASE_OUT, EASE_SCREEN, DURATION } from '../lib/motionTokens';
 import ContactHandoff from '../components/wahhf/ContactHandoff';
@@ -31,6 +30,7 @@ import HeroSection from './home/HeroSection';
 import MobilitySection from './home/MobilitySection';
 import FieldSection from './home/FieldSection';
 import DomainsSection from './home/DomainsSection';
+import PresenceHome from './home/PresenceHome';
 
 import {
   DOMAINS_DATA,
@@ -134,6 +134,9 @@ export default function Home() {
 
       {/* 4. DOMAINES : liste, photos réelles seulement, ancres vers /nos-actions : src/pages/home/DomainsSection.tsx */}
       <DomainsSection />
+
+      {/* 5. CARTE DE PRÉSENCE : src/pages/home/PresenceHome.tsx */}
+      <PresenceHome />
 
       {/* =====================================================================
           2. MISSION (« Qui sommes-nous »)
@@ -375,18 +378,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* =====================================================================
-          9. PRÉSENCE (Carte stylisée du Cameroun 10 régions + 10 pays européens)
-          ===================================================================== */}
-      <Section tone="sauge" id="presence">
-        <div className="container-page space-y-12">
-          <SectionHeader
-            title={t('home.presence.title')}
-            subtitle={t('home.presence.subtitle')}
-          />
-          <PresenceSection />
-        </div>
-      </Section>
 
       {/* =====================================================================
           10. TÉMOIGNAGES (Carrousel de citations avec photo et prénom — marqué TODO)

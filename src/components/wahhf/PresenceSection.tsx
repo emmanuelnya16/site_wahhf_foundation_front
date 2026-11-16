@@ -1,8 +1,7 @@
 import { lazy, Suspense, useState, useEffect, useRef } from 'react';
-import { MapPin, Compass, AlertCircle, ArrowUpRight } from 'lucide-react';
+import { AlertCircle, ArrowUpRight } from 'lucide-react';
 import { CAMEROON_REGIONS_LIST, CameroonRegionData } from '../../data/regions';
 import { prefetchPresenceGeo } from '../../lib/geoData';
-import { PrimaryButton } from './Buttons';
 import CountryList from './CountryList';
 import ChunkErrorBoundary from './ChunkErrorBoundary';
 
@@ -15,13 +14,13 @@ const EuropeMiniMap = lazy(() => import('./EuropeMiniMap'));
 const CAMEROON_BOX = 'w-full max-w-[400px] mx-auto aspect-[480/560]';
 
 const cameroonPlaceholder = (
-  <div className={`${CAMEROON_BOX} rounded-2xl bg-feuillage/40 border border-or/20 flex items-center justify-center text-xs text-creme/75`}>
+  <div role="status" aria-busy="true" className={`${CAMEROON_BOX} rounded-inner bg-surface-raised flex items-center justify-center text-meta text-text-secondary`}>
     Chargement de la carte des 10 régions du Cameroun…
   </div>
 );
 
 const europePlaceholder = (
-  <div className="absolute inset-0 rounded-2xl bg-creme border border-nuit/10 flex items-center justify-center text-xs text-v1-encre/70">
+  <div role="status" aria-busy="true" className="absolute inset-0 rounded-inner bg-surface-raised flex items-center justify-center text-meta text-text-secondary">
     Chargement de la carte Europe…
   </div>
 );
@@ -77,27 +76,21 @@ export default function PresenceSection() {
         {/* =====================================================================
             CARTE GAUCHE : « PRÉSENCE TERRAIN AU CAMEROUN » (fond vert forêt, token foret)
             ===================================================================== */}
-        <div className="surface-green lg:col-span-6 rounded-card bg-nuit text-creme p-6 sm:p-8 border border-or/30 relative overflow-hidden flex flex-col justify-between shadow-sm">
+        <div className="lg:col-span-6 rounded-card bg-surface-section text-text p-6 sm:p-8 relative overflow-hidden flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between gap-3 mb-4 flex-wrap">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-pill bg-or/15 text-gold-on-green text-xs font-medium border border-or/30">
-                <MapPin className="w-3.5 h-3.5" />
-                10 / 10 régions
-              </span>
-            </div>
 
-            <h3 className="font-serif font-normal text-2xl sm:text-3xl text-creme mb-2">
+            <h3 className="text-[1.375rem] font-semibold leading-tight text-text mb-2">
               Présence terrain au Cameroun
             </h3>
-            <p className="text-sm text-creme/80 mb-4 leading-relaxed">
-              Cliquez sur une région ou son chef-lieu pour afficher nos relais locaux (éducation, santé, agroécologie et orientation).
+            <p className="text-body text-text-secondary mb-4">
+              Choisissez une région ou son chef-lieu pour afficher nos relais locaux (éducation, santé, agroécologie et orientation).
             </p>
           </div>
 
           {/* Carte géographique réelle des 10 régions du Cameroun */}
           <div className="my-1">
             {shouldLoadMaps ? (
-              <ChunkErrorBoundary className={`${CAMEROON_BOX} text-creme`}>
+              <ChunkErrorBoundary className={`${CAMEROON_BOX} text-text`}>
                 <Suspense fallback={cameroonPlaceholder}>
                   <CameroonMap selectedRegion={selectedRegion} onSelectRegion={setSelectedRegion} />
                 </Suspense>
@@ -111,21 +104,17 @@ export default function PresenceSection() {
           <div className="space-y-4 pt-3">
             <div
               aria-live="polite"
-              className="rounded-2xl bg-feuillage border border-or/40 p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+              className="rounded-inner bg-surface-raised p-4"
             >
               <div className="space-y-1">
-                <p className="text-meta text-text-on-inverse">Région sélectionnée</p>
-                <p className="font-serif text-lg sm:text-xl text-creme">
+                <p className="text-meta text-text-secondary">Région sélectionnée</p>
+                <p className="text-body font-semibold text-text">
                   {selectedRegion.name} ({selectedRegion.capital})
                 </p>
-                <p className="text-xs text-creme/90">{selectedRegion.antennaTodo}</p>
-                <p className="text-[11px] text-creme/75">{selectedRegion.actionsTodo}</p>
+                <p className="text-meta text-text-secondary">{selectedRegion.antennaTodo}</p>
+                <p className="text-meta text-text-secondary">{selectedRegion.actionsTodo}</p>
               </div>
 
-              {/* TODO : la page /nos-actions ne filtre pas encore par région (paramètre ?region= ignoré) */}
-              <PrimaryButton to={`/nos-actions?region=${selectedRegion.id}`} onInverse size="sm" className="shrink-0">
-                Voir les actions
-              </PrimaryButton>
             </div>
 
             {/* Chips des 10 régions : défilement horizontal sur mobile, retour à la ligne sur desktop */}
@@ -143,10 +132,10 @@ export default function PresenceSection() {
                     aria-label={`Région ${reg.name}, chef-lieu ${reg.capital}`}
                     aria-pressed={isSelected}
                     onClick={() => setSelectedRegion(reg)}
-                    className={`px-3 py-1.5 rounded-pill text-xs whitespace-nowrap transition-colors duration-(--dur-fast) cursor-pointer shrink-0 focus-visible:outline-2 focus-visible:outline-or ${
+                    className={`inline-flex min-h-11 items-center px-4 rounded-pill text-meta whitespace-nowrap transition-colors duration-(--dur-fast) cursor-pointer shrink-0 ${
                       isSelected
-                        ? 'border border-or bg-or text-v1-encre font-semibold'
-                        : 'border border-border-on-inverse text-creme/90 hover:bg-creme/12'
+                        ? 'border border-transparent bg-action text-on-action font-semibold'
+                        : 'border border-border-input text-text hover:bg-surface-raised'
                     }`}
                   >
                     {reg.name}
@@ -161,19 +150,13 @@ export default function PresenceSection() {
             CARTE DROITE : « LES 10 PAYS D'ORIENTATION VERS L'EUROPE »
             (Garde son fond blanc, token blanc, même en thème sombre pour un contraste AA optimal)
             ===================================================================== */}
-        <div className="lg:col-span-6 rounded-card bg-white text-v1-encre border border-nuit/15 p-6 sm:p-8 flex flex-col shadow-sm">
+        <div className="lg:col-span-6 rounded-card bg-surface-section text-text p-6 sm:p-8 flex flex-col">
           <div>
-            <div className="flex items-center justify-between gap-3 mb-4 flex-wrap">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-pill bg-nuit/10 text-nuit text-xs font-semibold">
-                <Compass className="w-3.5 h-3.5" />
-                Orientation 100 % gratuite
-              </span>
-            </div>
 
-            <h3 className="font-serif font-normal text-2xl sm:text-3xl text-v1-encre mb-2">
+            <h3 className="text-[1.375rem] font-semibold leading-tight text-text mb-2">
               Les 10 pays d’orientation vers l’Europe
             </h3>
-            <p className="text-sm text-v1-encre/75 mb-5 leading-relaxed">
+            <p className="text-body text-text-secondary mb-5">
               Fiches d’information vérifiées sur les voies d’études, de formation professionnelle et de travail, avec liens vers les portails officiels.
             </p>
           </div>
@@ -183,7 +166,7 @@ export default function PresenceSection() {
           <div className="flex-1 flex flex-col gap-5">
             <div className="order-2 md:order-1 relative flex-1 min-h-[220px] sm:min-h-[250px]">
               {shouldLoadMaps ? (
-                <ChunkErrorBoundary className="absolute inset-0 text-v1-encre">
+                <ChunkErrorBoundary className="absolute inset-0 text-text">
                   <Suspense fallback={europePlaceholder}>
                     <EuropeMiniMap activeCountrySlug={activeCountrySlug} onHoverCountry={setActiveCountrySlug} />
                   </Suspense>
@@ -199,8 +182,8 @@ export default function PresenceSection() {
           </div>
 
           {/* Note en bas sur l'Albanie */}
-          <div className="mt-6 pt-4 border-t border-nuit/12 flex items-start gap-2.5 text-xs text-v1-encre/80">
-            <AlertCircle className="w-4 h-4 text-ocre shrink-0 mt-0.5" />
+          <div className="mt-6 pt-4 border-t border-border-subtle flex items-start gap-2.5 text-meta text-text-secondary">
+            <AlertCircle aria-hidden="true" className="w-4 h-4 text-warning shrink-0 mt-1" />
             <p>
               Note : L’Albanie est un pays européen candidat mais <strong>non membre de l’Union européenne</strong>. Consultez chaque fiche pays pour connaître le cadre réglementaire officiel.
             </p>
@@ -209,13 +192,13 @@ export default function PresenceSection() {
       </div>
 
       {/* Crédits exigés par la licence CC BY des limites régionales */}
-      <p className="text-[11px] leading-relaxed text-v1-encre/70 dark:text-creme/70 lg:text-right">
+      <p className="text-meta text-text-secondary lg:text-right">
         Fonds de carte : limites régionales{' '}
         <a
           href="https://www.geoboundaries.org"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-0.5 underline underline-offset-2 hover:text-accent"
+          className="inline-flex items-center gap-0.5 underline underline-offset-2 hover:text-link"
         >
           geoBoundaries
           <ArrowUpRight aria-hidden="true" className="w-3 h-3 shrink-0" />
@@ -226,7 +209,7 @@ export default function PresenceSection() {
           href="https://creativecommons.org/licenses/by/3.0/deed.fr"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-0.5 underline underline-offset-2 hover:text-accent"
+          className="inline-flex items-center gap-0.5 underline underline-offset-2 hover:text-link"
         >
           CC BY 3.0
           <ArrowUpRight aria-hidden="true" className="w-3 h-3 shrink-0" />

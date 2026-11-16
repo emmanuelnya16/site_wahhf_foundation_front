@@ -107,8 +107,8 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
       const y = above ? activePoint[1] - 28 : activePoint[1] + 10;
       label = (
         <g transform={`translate(${x.toFixed(1)}, ${y.toFixed(1)})`} pointerEvents="none">
-          <rect x={-lw / 2} y={0} width={lw} height={19} rx={9.5} className="fill-nuit stroke-or" strokeWidth={0.9} />
-          <text x={0} y={13} textAnchor="middle" fontSize={10} fontWeight={600} className="font-sans fill-creme">
+          <rect x={-lw / 2} y={0} width={lw} height={19} rx={9.5} className="fill-text stroke-text" strokeWidth={0.9} />
+          <text x={0} y={13} textAnchor="middle" fontSize={10} fontWeight={600} className="font-sans fill-surface-raised">
             {text}
           </text>
         </g>
@@ -128,7 +128,7 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
         <g>
           {shapes.map(({ key, d, supported }) => {
             if (!supported) {
-              return <path key={key} d={d} className="fill-sable stroke-blanc" strokeWidth={0.6} aria-hidden="true" pointerEvents="none" />;
+              return <path key={key} d={d} className="fill-surface-section stroke-surface-raised" strokeWidth={0.6} aria-hidden="true" pointerEvents="none" />;
             }
             const isActive = supported.slug === activeCountrySlug;
             return (
@@ -146,7 +146,7 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
                 onKeyDown={(e) => handleKeyDown(e, supported.slug)}
                 strokeWidth={isActive ? 1 : 0.7}
                 strokeLinejoin="round"
-                className={`cursor-pointer outline-none transition-[fill] duration-(--dur-fast) ease-out ${isActive ? 'fill-nuit stroke-nuit' : 'fill-or-pale stroke-or-sombre'}`}
+                className={`cursor-pointer outline-none transition-[fill] duration-(--dur-fast) ease-out ${isActive ? 'fill-foret stroke-foret dark:fill-feuille dark:stroke-feuille' : 'fill-border-subtle stroke-border-input'}`}
               />
             );
           })}
@@ -155,8 +155,8 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
         {/* Indicateur de focus clavier : double trait blanc + vert, au-dessus des voisins */}
         {focusShape && (
           <g pointerEvents="none">
-            <path d={focusShape.d} fill="none" className="stroke-blanc" strokeWidth={4.5} strokeLinejoin="round" />
-            <path d={focusShape.d} fill="none" className="stroke-nuit" strokeWidth={2} strokeLinejoin="round" />
+            <path d={focusShape.d} fill="none" className="stroke-surface-raised" strokeWidth={4.5} strokeLinejoin="round" />
+            <path d={focusShape.d} fill="none" className="stroke-(--focus)" strokeWidth={2} strokeLinejoin="round" />
           </g>
         )}
 
@@ -174,7 +174,7 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
                 className="cursor-pointer"
               >
                 <circle r={9} fill="transparent" />
-                <circle r={isActive ? 3.6 : 2.3} className={isActive ? 'fill-or stroke-blanc' : 'fill-nuit stroke-blanc'} strokeWidth={1} pointerEvents="none" />
+                <circle r={isActive ? 3.6 : 2.3} className={isActive ? 'fill-foret dark:fill-feuille stroke-surface-raised' : 'fill-text stroke-surface-raised'} strokeWidth={1} pointerEvents="none" />
               </Marker>
             );
           })}
@@ -188,12 +188,10 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
                 key={arcSlug}
                 d={arcPath(origin, arcEnd)}
                 fill="none"
-                className="stroke-nuit"
+                className="stroke-foret dark:stroke-feuille"
+                strokeOpacity={0.4}
                 strokeWidth={1.6}
                 strokeLinecap="round"
-                initial={reduce ? false : { pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: DURATION.reveal, ease: EASE_OUT }}
               />
               <motion.circle
                 key={`fin-${arcSlug}`}
@@ -201,18 +199,16 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
                 cy={arcEnd[1]}
                 r={5.5}
                 fill="none"
-                className="stroke-nuit"
+                className="stroke-foret dark:stroke-feuille"
+                strokeOpacity={0.4}
                 strokeWidth={1.2}
-                initial={reduce ? false : { opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.7, duration: DURATION.fast }}
               />
             </>
           )}
           <g transform={`translate(${origin[0]}, ${origin[1]})`}>
-            <circle r={4} className="fill-nuit stroke-or" strokeWidth={1.5} />
-            <rect x={9} y={-9.5} width={106} height={19} rx={9.5} className="fill-nuit" />
-            <text x={62} y={3.5} textAnchor="middle" fontSize={9.5} fontWeight={600} className="font-sans fill-creme">
+            <circle r={4} className="fill-text stroke-surface-raised" strokeWidth={1.5} />
+            <rect x={9} y={-9.5} width={106} height={19} rx={9.5} className="fill-text" />
+            <text x={62} y={3.5} textAnchor="middle" fontSize={9.5} fontWeight={600} className="font-sans fill-surface-raised">
               Depuis le Cameroun
             </text>
           </g>
@@ -224,7 +220,7 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
   }
 
   return (
-    <div ref={boxRef} className="absolute inset-0 rounded-2xl bg-creme border border-nuit/12 overflow-hidden">
+    <div ref={boxRef} className="absolute inset-0 rounded-inner bg-surface-raised overflow-hidden">
       {overlay}
     </div>
   );
