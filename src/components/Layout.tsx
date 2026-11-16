@@ -15,9 +15,13 @@ interface LayoutProps {
   children: ReactNode;
 }
 
+const LEGACY_PATHS = new Set(['/le-groupe', '/structure', '/poles', '/tarifs', '/methode', '/fondateurs', '/vkibusiness']);
+
 export default function Layout({ children }: LayoutProps) {
   const { pathname, hash } = useLocation();
   const isVkiPage = pathname === '/vkibusiness';
+  // Pages historiques IROKO : elles gardent DM Sans et Fraunces (index.css, .legacy-fonts)
+  const isLegacyPage = LEGACY_PATHS.has(pathname);
 
   // Défilement fluide (désactivé si « réduire les animations »)
   useEffect(() => startSmoothScroll(), []);
@@ -72,7 +76,7 @@ export default function Layout({ children }: LayoutProps) {
       {/* Barre de progression de lecture dorée (Motion useScroll, scaleX) */}
       {!isVkiPage && <ReadingProgress />}
       {!isVkiPage && <Navbar />}
-      <main id="contenu" tabIndex={-1} className="flex-grow focus:outline-none">
+      <main id="contenu" tabIndex={-1} className={`flex-grow focus:outline-none${isLegacyPage ? ' legacy-fonts' : ''}`}>
         {children}
       </main>
       {!isVkiPage && <Footer />}
