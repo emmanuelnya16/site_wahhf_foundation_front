@@ -47,7 +47,7 @@ export default class ChunkErrorBoundary extends Component<ChunkErrorBoundaryProp
         <button
           type="button"
           onClick={() => window.location.reload()}
-          className="px-5 py-2.5 rounded-full bg-[#0F3D2E] text-[#F5F1E8] text-sm font-semibold cursor-pointer"
+          className="px-5 py-2.5 rounded-pill bg-action text-on-action text-sm font-semibold cursor-pointer"
         >
           Réessayer
         </button>

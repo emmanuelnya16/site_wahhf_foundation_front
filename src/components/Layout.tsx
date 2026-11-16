@@ -47,9 +47,9 @@ export default function Layout({ children }: LayoutProps) {
     <div
       className={`min-h-screen flex flex-col ${
         isVkiPage
-          ? 'bg-[#f4f6fa]'
-          : 'bg-[#F5F1E8] dark:bg-[#0B1F18] text-[#1B1B18] dark:text-[#F5F1E8]'
-      } selection:bg-[#E8A317] selection:text-[#1B1B18] relative`}
+          ? 'bg-brume'
+          : 'bg-surface text-text'
+      } selection:bg-or selection:text-encre relative`}
     >
       {/* Lien d'évitement : premier arrêt clavier, visible seulement quand il reçoit le focus */}
       <a
@@ -61,7 +61,7 @@ export default function Layout({ children }: LayoutProps) {
           main.focus({ preventScroll: true });
           scrollToElement(main, { immediate: true });
         }}
-        className="focus-ring-double sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:top-4 focus-visible:left-4 focus-visible:z-[200] focus-visible:px-5 focus-visible:py-3 focus-visible:rounded-full focus-visible:bg-[#0F3D2E] focus-visible:text-[#F5F1E8] focus-visible:font-semibold"
+        className="focus-ring-double sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:top-4 focus-visible:left-4 focus-visible:z-(--z-skip) focus-visible:px-5 focus-visible:py-3 focus-visible:rounded-pill focus-visible:bg-foret focus-visible:text-creme focus-visible:font-semibold"
       >
         Aller au contenu
       </a>

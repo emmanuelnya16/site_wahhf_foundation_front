@@ -41,7 +41,7 @@ export default function GalleryGrid({
                 openerRef.current = e.currentTarget;
                 setOpenIndex(i);
               }}
-              className={`group relative block w-full overflow-hidden rounded-2xl bg-[#0F3D2E]/10 dark:bg-[#F5F1E8]/10 cursor-zoom-in focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0F3D2E] dark:focus-visible:outline-[#E8A317] ${
+              className={`group relative block w-full overflow-hidden rounded-2xl bg-foret/10 dark:bg-creme/10 cursor-zoom-in focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
                 featured ? 'col-span-2 aspect-[4/3] md:row-span-2 md:aspect-auto md:h-full' : 'aspect-[4/3]'
               }`}
             >
@@ -60,14 +60,14 @@ export default function GalleryGrid({
                 loading="lazy"
                 decoding="async"
                 style={item.focus ? { objectPosition: item.focus } : undefined}
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-(--dur-screen) ease-out group-hover:scale-105"
               />
               {item.kind === 'video' && (
-                <span aria-hidden="true" className="absolute inset-0 flex items-center justify-center bg-[#0B1F18]/25">
-                  <span className="w-12 h-12 rounded-full bg-[#E8A317] text-[#1B1B18] flex items-center justify-center shadow-lg">
+                <span aria-hidden="true" className="absolute inset-0 flex items-center justify-center bg-nuit/25">
+                  <span className="w-12 h-12 rounded-pill bg-or text-encre flex items-center justify-center shadow-lg">
                     <Play className="w-5 h-5 translate-x-px" fill="currentColor" />
                   </span>
-                  <span className="absolute bottom-2 right-2 px-2 py-0.5 rounded-full bg-[#0B1F18]/85 text-[#F5F1E8] text-[11px] font-semibold tabular-nums">
+                  <span className="absolute bottom-2 right-2 px-2 py-0.5 rounded-pill bg-nuit/85 text-creme text-[11px] font-semibold tabular-nums">
                     {formatDuration(item.duration)}
                   </span>
                 </span>

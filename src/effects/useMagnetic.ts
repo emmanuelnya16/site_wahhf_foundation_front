@@ -1,5 +1,5 @@
 import { RefObject } from 'react';
-import { gsap, useGSAP, MQ } from '../lib/gsap';
+import { gsap, useGSAP, MQ, GSAP_EASE } from '../lib/gsap';
 import { prefersReducedMotion } from '../lib/reducedMotion';
 
 /**
@@ -15,8 +15,8 @@ export function useMagnetic<T extends HTMLElement>(ref: RefObject<T | null>, ena
       const el = ref.current;
       const mm = gsap.matchMedia();
       mm.add(MQ.desktop, () => {
-        const xTo = gsap.quickTo(el, 'x', { duration: 0.4, ease: 'power3.out' });
-        const yTo = gsap.quickTo(el, 'y', { duration: 0.4, ease: 'power3.out' });
+        const xTo = gsap.quickTo(el, 'x', { duration: 0.4, ease: GSAP_EASE.follow });
+        const yTo = gsap.quickTo(el, 'y', { duration: 0.4, ease: GSAP_EASE.follow });
         let rect = el.getBoundingClientRect();
 
         const onEnter = () => {

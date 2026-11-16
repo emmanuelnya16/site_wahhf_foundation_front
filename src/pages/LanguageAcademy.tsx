@@ -132,9 +132,9 @@ export default function LanguageAcademy() {
       />
 
       {/* HERO */}
-      <section className="surface-green pt-32 pb-16 sm:pt-36 sm:pb-20 bg-[#0F3D2E] text-[#F5F1E8]">
+      <section className="surface-green pt-32 pb-16 sm:pt-36 sm:pb-20 bg-foret text-creme">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-          <div className="flex flex-wrap items-center gap-2 text-xs text-[#E8A317] font-semibold uppercase tracking-[0.18em]">
+          <div className="flex flex-wrap items-center gap-2 text-xs text-or font-semibold uppercase tracking-[0.18em]">
             <Link to="/mobilite-langues" className="hover:underline">
               Mobilité & Langues
             </Link>
@@ -148,18 +148,18 @@ export default function LanguageAcademy() {
             )}
           </div>
 
-          <h1 className="font-serif font-normal text-[clamp(2.1rem,4.6vw,3.9rem)] leading-[1.1] text-[#F5F1E8]">
+          <h1 className="font-serif font-normal text-[clamp(2.1rem,4.6vw,3.9rem)] leading-[1.1] text-creme">
             Académie de langues — Allemand A1 à C1
           </h1>
 
-          <p className="text-base sm:text-xl text-[#F5F1E8]/85 max-w-3xl leading-relaxed">
+          <p className="text-base sm:text-xl text-creme/85 max-w-3xl leading-relaxed">
             Accompagnement linguistique 100 % gratuit, financé par le groupe IROKO et nos donateurs. Progressez méthodiquement du niveau débutant A1 jusqu’à la maîtrise académique C1.
           </p>
 
           <div className="pt-2 flex flex-wrap items-center gap-4">
             <PrimaryButton
               to={`/candidater?souhait=cours_allemand&niveau=${activeCourse.level}`}
-              className="!bg-[#E8A317] !text-[#1B1B18]"
+              variant="gold"
             >
               Candidater au niveau {activeCourse.level}
             </PrimaryButton>
@@ -190,7 +190,7 @@ export default function LanguageAcademy() {
         <div className="relative">
           <div
             aria-hidden="true"
-            className="hidden md:block absolute top-1/2 left-8 right-8 h-[2px] -translate-y-1/2 bg-gradient-to-r from-[#0F3D2E] via-[#E8A317] to-[#0F3D2E] z-0"
+            className="hidden md:block absolute top-1/2 left-8 right-8 h-[2px] -translate-y-1/2 bg-gradient-to-r from-foret via-or to-foret z-0"
           />
           <div className="relative z-10 grid grid-cols-2 sm:grid-cols-5 gap-3">
             {GERMAN_LEVELS_DATA.map((lvl) => {
@@ -202,21 +202,21 @@ export default function LanguageAcademy() {
                   onClick={() => setSelectedLevel(lvl)}
                   className={`rounded-[20px] p-4 border text-left transition flex flex-col justify-between ${
                     isSelected
-                      ? 'bg-[#0F3D2E] text-[#F5F1E8] border-[#E8A317] shadow-md -translate-y-1'
-                      : 'bg-white dark:bg-[#132A21] text-[#1B1B18] dark:text-[#F5F1E8] border-[#0F3D2E]/15 dark:border-[#F5F1E8]/15 hover:border-[#E8A317]'
+                      ? 'bg-action text-on-action border-or shadow-md -translate-y-1'
+                      : 'bg-surface-raised text-text border-border hover:border-or'
                   }`}
                 >
                   <div className="flex items-center justify-between mb-2">
                     <span
                       className={`font-serif text-2xl font-normal ${
-                        isSelected ? 'text-[#E8A317]' : 'text-[#0F3D2E] dark:text-[#E8A317]'
+                        isSelected ? 'text-or' : 'text-accent'
                       }`}
                     >
                       {lvl.level}
                     </span>
                     <span
-                      className={`text-[11px] px-2 py-0.5 rounded-full bg-[#E8A317]/20 font-semibold ${
-                        isSelected ? 'text-gold-on-green' : 'text-gold-text dark:text-[#E8A317]'
+                      className={`text-[11px] px-2 py-0.5 rounded-pill bg-or/20 font-semibold ${
+                        isSelected ? 'text-gold-on-green' : 'text-accent-or'
                       }`}
                     >
                       Gratuit
@@ -231,17 +231,17 @@ export default function LanguageAcademy() {
         </div>
 
         {/* Détail complet du niveau sélectionné (page /academie/:level incluse) */}
-        <div className="rounded-[24px] bg-white dark:bg-[#132A21] border border-[#0F3D2E]/15 dark:border-[#F5F1E8]/15 p-7 sm:p-10 shadow-sm space-y-8">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-[#0F3D2E]/10 dark:border-[#F5F1E8]/10">
+        <div className="rounded-card bg-surface-raised border border-border p-7 sm:p-10 shadow-sm space-y-8">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-border-subtle">
             <div className="space-y-2">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0F3D2E] text-[#E8A317] text-xs font-semibold uppercase tracking-wider">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-pill bg-foret text-or text-xs font-semibold uppercase tracking-wider">
                 <GraduationCap className="w-4 h-4" />
                 <span>Fiche détaillée · {activeCourse.level}</span>
               </div>
-              <h2 className="font-serif font-normal text-2xl sm:text-4xl text-[#1B1B18] dark:text-[#F5F1E8]">
+              <h2 className="font-serif font-normal text-2xl sm:text-4xl text-text">
                 {activeCourse.title}
               </h2>
-              <p className="text-base text-[#1B1B18]/75 dark:text-[#F5F1E8]/75">
+              <p className="text-base text-text-tertiary">
                 {activeCourse.subtitle}
               </p>
             </div>
@@ -255,42 +255,42 @@ export default function LanguageAcademy() {
 
           {/* 4 indicateurs du niveau */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="rounded-2xl bg-[#F5F1E8] dark:bg-[#0F3D2E]/50 p-4 space-y-1">
-              <div className="flex items-center gap-2 text-xs font-semibold text-[#0F3D2E] dark:text-[#E8A317]">
+            <div className="rounded-2xl bg-creme dark:bg-foret/50 p-4 space-y-1">
+              <div className="flex items-center gap-2 text-xs font-semibold text-accent">
                 <Clock className="w-4 h-4" />
                 <span>Durée indicative</span>
               </div>
-              <p className="text-sm font-medium text-[#1B1B18] dark:text-[#F5F1E8]">
+              <p className="text-sm font-medium text-text">
                 {activeCourse.duration}
               </p>
             </div>
 
-            <div className="rounded-2xl bg-[#F5F1E8] dark:bg-[#0F3D2E]/50 p-4 space-y-1">
-              <div className="flex items-center gap-2 text-xs font-semibold text-[#0F3D2E] dark:text-[#E8A317]">
+            <div className="rounded-2xl bg-creme dark:bg-foret/50 p-4 space-y-1">
+              <div className="flex items-center gap-2 text-xs font-semibold text-accent">
                 <BookOpen className="w-4 h-4" />
                 <span>Volume horaire</span>
               </div>
-              <p className="text-sm font-medium text-[#1B1B18] dark:text-[#F5F1E8]">
+              <p className="text-sm font-medium text-text">
                 {activeCourse.hours}
               </p>
             </div>
 
-            <div className="rounded-2xl bg-[#F5F1E8] dark:bg-[#0F3D2E]/50 p-4 space-y-1">
-              <div className="flex items-center gap-2 text-xs font-semibold text-[#0F3D2E] dark:text-[#E8A317]">
+            <div className="rounded-2xl bg-creme dark:bg-foret/50 p-4 space-y-1">
+              <div className="flex items-center gap-2 text-xs font-semibold text-accent">
                 <CheckCircle2 className="w-4 h-4" />
                 <span>Prérequis</span>
               </div>
-              <p className="text-sm font-medium text-[#1B1B18] dark:text-[#F5F1E8]">
+              <p className="text-sm font-medium text-text">
                 {activeCourse.prerequisites}
               </p>
             </div>
 
-            <div className="rounded-2xl bg-[#F5F1E8] dark:bg-[#0F3D2E]/50 p-4 space-y-1">
-              <div className="flex items-center gap-2 text-xs font-semibold text-[#0F3D2E] dark:text-[#E8A317]">
+            <div className="rounded-2xl bg-creme dark:bg-foret/50 p-4 space-y-1">
+              <div className="flex items-center gap-2 text-xs font-semibold text-accent">
                 <Calendar className="w-4 h-4" />
                 <span>Prochaine session</span>
               </div>
-              <p className="text-sm font-medium text-[#1B1B18] dark:text-[#F5F1E8]">
+              <p className="text-sm font-medium text-text">
                 {activeCourse.nextSession}
               </p>
             </div>
@@ -299,13 +299,13 @@ export default function LanguageAcademy() {
           {/* Objectifs & Ce qu'on sait faire à la fin du niveau */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-4">
-              <h3 className="font-serif text-xl text-[#1B1B18] dark:text-[#F5F1E8]">
+              <h3 className="font-serif text-xl text-text">
                 Objectifs pédagogiques du niveau {activeCourse.level}
               </h3>
               <ul className="space-y-3">
                 {activeCourse.objectives.map((obj) => (
-                  <li key={obj} className="flex items-start gap-3 text-sm sm:text-base text-[#1B1B18]/80 dark:text-[#F5F1E8]/80">
-                    <CheckCircle2 className="w-5 h-5 text-[#0F3D2E] dark:text-[#E8A317] shrink-0 mt-0.5" />
+                  <li key={obj} className="flex items-start gap-3 text-sm sm:text-base text-text-secondary">
+                    <CheckCircle2 className="w-5 h-5 text-accent shrink-0 mt-0.5" />
                     <span>{obj}</span>
                   </li>
                 ))}
@@ -313,13 +313,13 @@ export default function LanguageAcademy() {
             </div>
 
             <div className="space-y-4">
-              <h3 className="font-serif text-xl text-[#1B1B18] dark:text-[#F5F1E8]">
+              <h3 className="font-serif text-xl text-text">
                 Ce que vous savez faire à la fin du niveau {activeCourse.level}
               </h3>
               <ul className="space-y-3">
                 {activeCourse.canDo.map((skill) => (
-                  <li key={skill} className="flex items-start gap-3 text-sm sm:text-base text-[#1B1B18]/80 dark:text-[#F5F1E8]/80">
-                    <Sparkles className="w-5 h-5 text-[#E8A317] shrink-0 mt-0.5" />
+                  <li key={skill} className="flex items-start gap-3 text-sm sm:text-base text-text-secondary">
+                    <Sparkles className="w-5 h-5 text-or shrink-0 mt-0.5" />
                     <span>{skill}</span>
                   </li>
                 ))}
@@ -327,12 +327,12 @@ export default function LanguageAcademy() {
             </div>
           </div>
 
-          <div className="pt-4 border-t border-[#0F3D2E]/10 dark:border-[#F5F1E8]/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-sm">
-            <div className="flex items-center gap-2 text-[#0F3D2E] dark:text-[#E8A317] font-medium">
+          <div className="pt-4 border-t border-border-subtle flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-sm">
+            <div className="flex items-center gap-2 text-accent font-medium">
               <Award className="w-5 h-5 shrink-0" />
               <span>{activeCourse.examTarget}</span>
             </div>
-            <span className="text-xs text-[#1B1B18]/65 dark:text-[#F5F1E8]/65">
+            <span className="text-xs text-text-muted">
               Modalité : En ligne & Présentiel au Cameroun (selon cohortes) · 100 % Gratuit
             </span>
           </div>
@@ -342,7 +342,7 @@ export default function LanguageAcademy() {
       {/* TEST DE NIVEAU EN LIGNE GRATUIT (20 QUESTIONS PROGRESSIVES) */}
       <section
         id="test-niveau"
-        className="surface-green py-20 bg-[#0F3D2E] text-[#F5F1E8] border-y border-[#E8A317]/30"
+        className="surface-green py-20 bg-foret text-creme border-y border-or/30"
       >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           <SectionHeader
@@ -353,20 +353,20 @@ export default function LanguageAcademy() {
             light
           />
 
-          <div ref={quizBoxRef} className="rounded-[24px] bg-[#14523E]/90 border border-[#E8A317]/35 p-6 sm:p-10 shadow-xl">
+          <div ref={quizBoxRef} className="rounded-card bg-feuillage/90 border border-or/35 p-6 sm:p-10 shadow-xl">
             <p role="status" className="sr-only">
               {quizStatus}
             </p>
             {!quizStarted ? (
               <div className="text-center space-y-6 py-4">
-                <p className="text-base sm:text-lg text-[#F5F1E8]/90 max-w-2xl mx-auto">
+                <p className="text-base sm:text-lg text-creme/90 max-w-2xl mx-auto">
                   Ce questionnaire comporte <strong>20 questions à choix multiples</strong> classées par difficulté croissante (4 questions par niveau : A1, A2, B1, B2, C1). Il dure environ 5 à 8 minutes et est entièrement gratuit.
                 </p>
                 <div className="flex flex-wrap justify-center gap-4">
                   <button
                     type="button"
                     onClick={() => setQuizStarted(true)}
-                    className="inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-[#E8A317] text-[#1B1B18] font-semibold text-sm sm:text-base hover:bg-[#f3b32b] transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-3 px-7 py-3.5 rounded-pill bg-or text-encre font-semibold text-sm sm:text-base hover:bg-or-vif transition-colors cursor-pointer"
                   >
                     <span>Commencer le test des 20 questions</span>
                     <ArrowUpRight className="w-5 h-5" />
@@ -375,32 +375,32 @@ export default function LanguageAcademy() {
               </div>
             ) : quizFinished ? (
               <div className="space-y-6 text-center py-4">
-                <span className="inline-block px-4 py-1.5 rounded-full bg-[#E8A317]/20 text-gold-on-green text-xs font-semibold uppercase tracking-widest">
+                <span className="inline-block px-4 py-1.5 rounded-pill bg-or/20 text-gold-on-green text-xs font-semibold uppercase tracking-widest">
                   Résultat indicatif de votre test
                 </span>
                 <h3
                   ref={quizFocusRef as Ref<HTMLHeadingElement>}
                   tabIndex={-1}
-                  className="font-serif font-normal text-3xl sm:text-4xl text-[#F5F1E8]"
+                  className="font-serif font-normal text-3xl sm:text-4xl text-creme"
                 >
                   Score : {score} / {PLACEMENT_QUESTIONS.length} — Niveau conseillé :{' '}
-                  <span className="text-[#E8A317]">{recommendedLevel}</span>
+                  <span className="text-or">{recommendedLevel}</span>
                 </h3>
-                <p className="text-sm sm:text-base text-[#F5F1E8]/85 max-w-2xl mx-auto leading-relaxed">
+                <p className="text-sm sm:text-base text-creme/85 max-w-2xl mx-auto leading-relaxed">
                   Ce résultat est un indicateur pédagogique pour vous orienter. Lors de l’étude de votre candidature, nos formateurs bénévoles confirmeront avec vous le groupe qui vous permettra de progresser dans les meilleures conditions.
                 </p>
 
                 <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
                   <PrimaryButton
                     to={`/candidater?souhait=cours_allemand&niveau=${recommendedLevel}`}
-                    className="!bg-[#E8A317] !text-[#1B1B18]"
+                    variant="gold"
                   >
                     Candidater au niveau {recommendedLevel}
                   </PrimaryButton>
                   <button
                     type="button"
                     onClick={resetQuiz}
-                    className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-white/30 text-sm text-[#F5F1E8] hover:bg-white/10 transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-2 px-5 py-3 rounded-pill border border-white/30 text-sm text-creme hover:bg-white/10 transition-colors cursor-pointer"
                   >
                     <RotateCcw className="w-4 h-4" />
                     Recommencer le test
@@ -411,7 +411,7 @@ export default function LanguageAcademy() {
               <div className="space-y-6">
                 {/* Barre de progression du quiz */}
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between text-xs text-[#E8A317] font-semibold">
+                  <div className="flex items-center justify-between text-xs text-or font-semibold">
                     <span>
                       Question {currentQIndex + 1} sur {PLACEMENT_QUESTIONS.length}
                     </span>
@@ -419,9 +419,9 @@ export default function LanguageAcademy() {
                       Palier testé : Niveau {PLACEMENT_QUESTIONS[currentQIndex].level}
                     </span>
                   </div>
-                  <div aria-hidden="true" className="w-full h-2 rounded-full bg-[#0F3D2E] overflow-hidden">
+                  <div aria-hidden="true" className="w-full h-2 rounded-pill bg-foret overflow-hidden">
                     <div
-                      className="h-full w-full origin-left bg-[#E8A317] transition-transform duration-300"
+                      className="h-full w-full origin-left bg-or transition-transform duration-(--dur-fast)"
                       style={{
                         transform: `scaleX(${(currentQIndex + 1) / PLACEMENT_QUESTIONS.length})`,
                       }}
@@ -434,7 +434,7 @@ export default function LanguageAcademy() {
                   <legend
                     ref={quizFocusRef as Ref<HTMLLegendElement>}
                     tabIndex={-1}
-                    className="font-serif text-xl sm:text-2xl text-[#F5F1E8] pt-2 mb-6"
+                    className="font-serif text-xl sm:text-2xl text-creme pt-2 mb-6"
                   >
                     {PLACEMENT_QUESTIONS[currentQIndex].question}
                   </legend>
@@ -452,8 +452,8 @@ export default function LanguageAcademy() {
                           showCheck
                           className={`p-4 rounded-2xl border text-left text-sm sm:text-base font-medium transition ${
                             selected
-                              ? 'bg-[#E8A317] text-[#1B1B18] border-[#E8A317] font-semibold'
-                              : 'bg-[#0F3D2E]/70 text-[#F5F1E8] border-white/15 hover:border-[#E8A317]/60'
+                              ? 'bg-or text-encre border-or font-semibold'
+                              : 'bg-foret/70 text-creme border-white/15 hover:border-or/60'
                           }`}
                         >
                           {opt}
@@ -468,7 +468,7 @@ export default function LanguageAcademy() {
                     type="button"
                     disabled={currentQIndex === 0}
                     onClick={() => setCurrentQIndex((i) => Math.max(0, i - 1))}
-                    className="text-xs sm:text-sm text-[#F5F1E8]/75 hover:text-white disabled:opacity-40 cursor-pointer"
+                    className="text-xs sm:text-sm text-creme/75 hover:text-white disabled:opacity-40 cursor-pointer"
                   >
                     ← Question précédente
                   </button>
@@ -477,7 +477,7 @@ export default function LanguageAcademy() {
                     type="button"
                     disabled={answers[PLACEMENT_QUESTIONS[currentQIndex].id] === undefined}
                     onClick={handleNextQuestion}
-                    className="px-6 py-2.5 rounded-full bg-[#E8A317] text-[#1B1B18] text-sm font-semibold disabled:opacity-40 cursor-pointer"
+                    className="px-6 py-2.5 rounded-pill bg-or text-encre text-sm font-semibold disabled:opacity-40 cursor-pointer"
                   >
                     {currentQIndex === PLACEMENT_QUESTIONS.length - 1
                       ? 'Voir mon niveau conseillé'
@@ -508,7 +508,7 @@ export default function LanguageAcademy() {
               aria-label="Filtrer par niveau"
               value={filterLevel}
               onChange={(e) => setFilterLevel(e.target.value)}
-              className="px-4 py-2.5 rounded-full bg-white dark:bg-[#132A21] border border-[#0F3D2E]/20 dark:border-[#F5F1E8]/20 text-sm text-[#1B1B18] dark:text-[#F5F1E8]"
+              className="px-4 py-2.5 rounded-pill bg-surface-raised border border-border-input text-sm text-text"
             >
               <option value="ALL">Tous les niveaux (A1–C1)</option>
               <option value="A1">Niveau A1</option>
@@ -522,7 +522,7 @@ export default function LanguageAcademy() {
               aria-label="Filtrer par format"
               value={filterFormat}
               onChange={(e) => setFilterFormat(e.target.value)}
-              className="px-4 py-2.5 rounded-full bg-white dark:bg-[#132A21] border border-[#0F3D2E]/20 dark:border-[#F5F1E8]/20 text-sm text-[#1B1B18] dark:text-[#F5F1E8]"
+              className="px-4 py-2.5 rounded-pill bg-surface-raised border border-border-input text-sm text-text"
             >
               <option value="ALL">Tous les formats</option>
               <option value="ONLINE">En ligne</option>
@@ -539,22 +539,22 @@ export default function LanguageAcademy() {
       </section>
 
       {/* PRÉPARATION AUX EXAMENS OFFICIELS (Goethe, telc, TestDaF — mention indicative TODO) */}
-      <section className="py-16 bg-white/60 dark:bg-[#132A21]/40 border-t border-[#0F3D2E]/10 dark:border-[#F5F1E8]/10">
+      <section className="py-16 bg-white/60 dark:bg-sous-bois/40 border-t border-border-subtle">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="rounded-[24px] bg-white dark:bg-[#132A21] border border-[#0F3D2E]/15 dark:border-[#F5F1E8]/15 p-8 sm:p-10 space-y-6">
+          <div className="rounded-card bg-surface-raised border border-border p-8 sm:p-10 space-y-6">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div>
-                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-text dark:text-[#E8A317]">
+                <span className="text-xs font-semibold uppercase tracking-kicker text-accent-or">
                   Certifications Internationales (Mention indicative — TODO : à vérifier)
                 </span>
-                <h2 className="font-serif font-normal text-2xl sm:text-3xl text-[#1B1B18] dark:text-[#F5F1E8] mt-1">
+                <h2 className="font-serif font-normal text-2xl sm:text-3xl text-text mt-1">
                   Préparation méthodique aux examens officiels d’allemand
                 </h2>
               </div>
               <DonateButton to="/faire-un-don">Soutenir l’Académie</DonateButton>
             </div>
 
-            <p className="text-sm sm:text-base text-[#1B1B18]/80 dark:text-[#F5F1E8]/80 leading-relaxed">
+            <p className="text-sm sm:text-base text-text-secondary leading-relaxed">
               Nos parcours d’accompagnement intègrent des entraînements blancs aux épreuves de compréhension écrite, d’écoute, d’expression écrite et d’oral selon les standards des examens reconnus : <strong>Goethe-Zertifikat, telc Deutsch et TestDaF</strong> (mention indicative — TODO : modalités exactes de partenariat ou d’inscription aux centres d’examen officiels à confirmer par WAHHF).
             </p>
           </div>

@@ -42,7 +42,7 @@ export default function MobilityHub() {
       />
 
       {/* HERO */}
-      <section className="surface-green relative pt-32 pb-20 sm:pt-36 sm:pb-24 bg-[#0F3D2E] text-[#F5F1E8] overflow-hidden">
+      <section className="surface-green relative pt-32 pb-20 sm:pt-36 sm:pb-24 bg-foret text-creme overflow-hidden">
         <div className="absolute inset-0 opacity-25">
           <img
             src={WAHHF_IMAGES.openDayVisioconference}
@@ -53,20 +53,20 @@ export default function MobilityHub() {
             height={628}
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0F3D2E] via-[#0F3D2E]/85 to-[#0F3D2E]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-foret via-foret/85 to-foret" />
         </div>
 
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E8A317]/20 border border-[#E8A317]/45 text-gold-on-green text-xs font-semibold uppercase tracking-[0.18em]">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-pill bg-or/20 border border-or/45 text-gold-on-green text-xs font-semibold uppercase tracking-[0.18em]">
             <CheckCircle2 className="w-4 h-4" />
             <span>Domaine 06 / 06 · 100 % Gratuit, financé par IROKO et nos donateurs</span>
           </div>
 
-          <h1 className="font-serif font-normal text-[clamp(2.2rem,4.8vw,4.1rem)] leading-[1.1] text-[#F5F1E8] max-w-4xl">
+          <h1 className="font-serif font-normal text-[clamp(2.2rem,4.8vw,4.1rem)] leading-[1.1] text-creme max-w-4xl">
             Apprendre, se préparer, s’orienter — gratuitement
           </h1>
 
-          <p className="text-base sm:text-xl text-[#F5F1E8]/85 max-w-3xl leading-relaxed">
+          <p className="text-base sm:text-xl text-creme/85 max-w-3xl leading-relaxed">
             Accompagnement des cours de langue allemande (A1 à C1) et information fiable sur les parcours d’études, de formation et de travail vers 10 pays européens.
           </p>
 
@@ -74,7 +74,8 @@ export default function MobilityHub() {
             <PrimaryButton
               to="/candidater"
               magnetic
-              className="!bg-[#E8A317] !text-[#1B1B18] hover:!bg-[#f3b32b]"
+              variant="gold"
+              className="hover:bg-or-vif"
             >
               Candidater au programme
             </PrimaryButton>
@@ -103,7 +104,7 @@ export default function MobilityHub() {
               subtitle="Trop de jeunes et de familles s’endettent auprès d’intermédiaires frauduleux qui vendent de fausses promesses. WAHHF Foundation répond par la gratuité, la rigueur linguistique et la transparence."
             />
 
-            <div className="space-y-4 text-base text-[#1B1B18]/80 dark:text-[#F5F1E8]/80 leading-relaxed">
+            <div className="space-y-4 text-base text-text-secondary leading-relaxed">
               <p>
                 Un projet d’études ou de formation professionnelle à l’étranger ne s’achète pas : il se construit par l’apprentissage exigeant de la langue, la conformité des diplômes et le respect strict des procédures consulaires officielles.
               </p>
@@ -130,16 +131,16 @@ export default function MobilityHub() {
             ].map((item, idx) => (
               <div
                 key={item.title}
-                className="rounded-[24px] bg-white dark:bg-[#132A21] border border-[#0F3D2E]/12 dark:border-[#F5F1E8]/12 p-6 shadow-xs flex items-start gap-4"
+                className="rounded-card bg-surface-raised border border-border-soft p-6 shadow-xs flex items-start gap-4"
               >
-                <span className="w-9 h-9 rounded-full bg-[#0F3D2E] text-[#E8A317] font-serif text-sm flex items-center justify-center shrink-0">
+                <span className="w-9 h-9 rounded-pill bg-foret text-or font-serif text-sm flex items-center justify-center shrink-0">
                   0{idx + 1}
                 </span>
                 <div>
-                  <h3 className="font-serif text-lg text-[#1B1B18] dark:text-[#F5F1E8] mb-1">
+                  <h3 className="font-serif text-lg text-text mb-1">
                     {item.title}
                   </h3>
-                  <p className="text-sm text-[#1B1B18]/75 dark:text-[#F5F1E8]/75">{item.desc}</p>
+                  <p className="text-sm text-text-tertiary">{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -148,7 +149,7 @@ export default function MobilityHub() {
       </section>
 
       {/* LES DEUX GRANDES PORTES D'ENTRÉE */}
-      <section className="py-20 bg-white/65 dark:bg-[#132A21]/40 border-y border-[#0F3D2E]/10 dark:border-[#F5F1E8]/10">
+      <section className="py-20 bg-white/65 dark:bg-sous-bois/40 border-y border-border-subtle">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <SectionHeader
             kicker="Deux volets complémentaires"
@@ -159,28 +160,28 @@ export default function MobilityHub() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Porte 1 : Académie de langues */}
-            <div className="relative rounded-[24px] bg-white dark:bg-[#132A21] border border-[#0F3D2E]/15 dark:border-[#F5F1E8]/15 p-8 sm:p-10 shadow-sm flex flex-col justify-between overflow-hidden">
+            <div className="relative rounded-card bg-surface-raised border border-border p-8 sm:p-10 shadow-sm flex flex-col justify-between overflow-hidden">
               <span
                 aria-hidden="true"
-                className="pointer-events-none select-none absolute -bottom-4 right-5 font-serif text-8xl text-[#0F3D2E]/[0.05]"
+                className="pointer-events-none select-none absolute -bottom-4 right-5 font-serif text-8xl text-foret/[0.05]"
               >
                 01
               </span>
               <div className="space-y-5 relative z-10">
                 <div className="flex items-center justify-between">
-                  <div className="w-13 h-13 rounded-2xl bg-[#0F3D2E] text-[#E8A317] flex items-center justify-center">
+                  <div className="w-13 h-13 rounded-2xl bg-foret text-or flex items-center justify-center">
                     <GraduationCap className="w-7 h-7" />
                   </div>
-                  <span className="px-3.5 py-1 rounded-full bg-[#E8A317]/20 text-[#0F3D2E] dark:text-[#E8A317] text-xs font-semibold">
+                  <span className="px-3.5 py-1 rounded-pill bg-or/20 text-accent text-xs font-semibold">
                     Gratuit · Niveaux A1 à C1
                   </span>
                 </div>
 
-                <h3 className="font-serif font-normal text-3xl text-[#1B1B18] dark:text-[#F5F1E8]">
+                <h3 className="font-serif font-normal text-3xl text-text">
                   Académie de langues (Allemand A1 à C1)
                 </h3>
 
-                <p className="text-sm sm:text-base text-[#1B1B18]/80 dark:text-[#F5F1E8]/80 leading-relaxed">
+                <p className="text-sm sm:text-base text-text-secondary leading-relaxed">
                   Accompagnement complet pour apprendre l’allemand étape par étape : compréhension, expression orale et écrite, test de niveau interactif gratuit et préparation méthodique aux certifications.
                 </p>
 
@@ -189,7 +190,7 @@ export default function MobilityHub() {
                     <Link
                       key={lvl.slug}
                       to={`/academie/${lvl.slug}`}
-                      className="px-3.5 py-1.5 rounded-full bg-[#F5F1E8] dark:bg-[#0F3D2E] text-xs font-semibold text-[#0F3D2E] dark:text-[#E8A317] hover:bg-[#E8A317] hover:text-[#1B1B18] transition-colors"
+                      className="px-3.5 py-1.5 rounded-pill bg-surface-inset text-xs font-semibold text-accent hover:bg-or hover:text-encre transition-colors"
                     >
                       Niveau {lvl.level}
                     </Link>
@@ -197,13 +198,13 @@ export default function MobilityHub() {
                 </div>
               </div>
 
-              <div className="pt-8 mt-8 border-t border-[#0F3D2E]/10 dark:border-[#F5F1E8]/10 flex flex-wrap items-center justify-between gap-4 relative z-10">
+              <div className="pt-8 mt-8 border-t border-border-subtle flex flex-wrap items-center justify-between gap-4 relative z-10">
                 <PrimaryButton to="/mobilite-langues/academie">
                   Accéder à l’Académie de langues
                 </PrimaryButton>
                 <Link
                   to="/mobilite-langues/academie#test-niveau"
-                  className="text-xs sm:text-sm font-semibold text-[#0F3D2E] dark:text-[#E8A317] underline underline-offset-4"
+                  className="text-xs sm:text-sm font-semibold text-accent underline underline-offset-4"
                 >
                   Passer le test de niveau (20 questions)
                 </Link>
@@ -211,28 +212,28 @@ export default function MobilityHub() {
             </div>
 
             {/* Porte 2 : Accompagnement vers l'Europe */}
-            <div className="surface-green relative rounded-[24px] bg-[#0F3D2E] text-[#F5F1E8] border border-[#E8A317]/35 p-8 sm:p-10 shadow-sm flex flex-col justify-between overflow-hidden">
+            <div className="surface-green relative rounded-card bg-foret text-creme border border-or/35 p-8 sm:p-10 shadow-sm flex flex-col justify-between overflow-hidden">
               <span
                 aria-hidden="true"
-                className="pointer-events-none select-none absolute -bottom-4 right-5 font-serif text-8xl text-[#F5F1E8]/[0.05]"
+                className="pointer-events-none select-none absolute -bottom-4 right-5 font-serif text-8xl text-creme/[0.05]"
               >
                 02
               </span>
               <div className="space-y-5 relative z-10">
                 <div className="flex items-center justify-between">
-                  <div className="w-13 h-13 rounded-2xl bg-[#E8A317] text-[#1B1B18] flex items-center justify-center">
+                  <div className="w-13 h-13 rounded-2xl bg-or text-encre flex items-center justify-center">
                     <Compass className="w-7 h-7" />
                   </div>
-                  <span className="px-3.5 py-1 rounded-full bg-[#E8A317]/20 text-gold-on-green text-xs font-semibold">
+                  <span className="px-3.5 py-1 rounded-pill bg-or/20 text-gold-on-green text-xs font-semibold">
                     Gratuit · 10 Pays Documentés
                   </span>
                 </div>
 
-                <h3 className="font-serif font-normal text-3xl text-[#F5F1E8]">
+                <h3 className="font-serif font-normal text-3xl text-creme">
                   Accompagnement vers l’Europe
                 </h3>
 
-                <p className="text-sm sm:text-base text-[#F5F1E8]/85 leading-relaxed">
+                <p className="text-sm sm:text-base text-creme/85 leading-relaxed">
                   Un parcours pédagogique en 4 étapes pour comprendre les voies légales (études, formation professionnelle, travail), préparer son dossier et vérifier chaque démarche sur les portails officiels.
                 </p>
 
@@ -241,7 +242,7 @@ export default function MobilityHub() {
                     <Link
                       key={c.slug}
                       to={`/accompagnement/pays/${c.slug}`}
-                      className="px-3 py-1 rounded-full bg-white/10 hover:bg-[#E8A317] hover:text-[#1B1B18] text-xs font-medium text-[#F5F1E8] transition-colors"
+                      className="px-3 py-1 rounded-pill bg-white/10 hover:bg-or hover:text-encre text-xs font-medium text-creme transition-colors"
                     >
                       {c.flag} {c.name}
                     </Link>
@@ -252,13 +253,13 @@ export default function MobilityHub() {
               <div className="pt-8 mt-8 border-t border-white/15 flex flex-wrap items-center justify-between gap-4 relative z-10">
                 <PrimaryButton
                   to="/mobilite-langues/accompagnement"
-                  className="!bg-[#E8A317] !text-[#1B1B18]"
+                  variant="gold"
                 >
                   Explorer l’accompagnement Europe
                 </PrimaryButton>
                 <Link
                   to="/accompagnement/eviter-les-arnaques"
-                  className="text-xs sm:text-sm font-semibold text-[#E8A317] underline underline-offset-4"
+                  className="text-xs sm:text-sm font-semibold text-or underline underline-offset-4"
                 >
                   Guide : Éviter les arnaques
                 </Link>
@@ -291,15 +292,15 @@ export default function MobilityHub() {
           ].map((item) => (
             <div
               key={item.name}
-              className="rounded-[24px] bg-white dark:bg-[#132A21] border border-[#0F3D2E]/12 dark:border-[#F5F1E8]/12 p-7 space-y-4 shadow-xs"
+              className="rounded-card bg-surface-raised border border-border-soft p-7 space-y-4 shadow-xs"
             >
-              <Quote className="w-8 h-8 text-[#E8A317]" />
-              <p className="font-serif text-lg text-[#1B1B18] dark:text-[#F5F1E8] leading-relaxed">
+              <Quote className="w-8 h-8 text-or" />
+              <p className="font-serif text-lg text-text leading-relaxed">
                 {item.text}
               </p>
               <div>
-                <p className="font-semibold text-sm text-[#0F3D2E] dark:text-[#E8A317]">{item.name}</p>
-                <p className="text-xs text-[#1B1B18]/65 dark:text-[#F5F1E8]/65">{item.track}</p>
+                <p className="font-semibold text-sm text-accent">{item.name}</p>
+                <p className="text-xs text-text-muted">{item.track}</p>
               </div>
             </div>
           ))}
@@ -307,7 +308,7 @@ export default function MobilityHub() {
       </section>
 
       {/* FAQ */}
-      <section className="py-16 sm:py-20 bg-white/60 dark:bg-[#132A21]/30 border-t border-[#0F3D2E]/10 dark:border-[#F5F1E8]/10">
+      <section className="py-16 sm:py-20 bg-white/60 dark:bg-sous-bois/30 border-t border-border-subtle">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           <SectionHeader
             kicker="Questions fréquentes"
@@ -319,13 +320,13 @@ export default function MobilityHub() {
             {MOBILITY_FAQS.map((faq) => (
               <div
                 key={faq.q}
-                className="rounded-[20px] bg-white dark:bg-[#132A21] border border-[#0F3D2E]/12 dark:border-[#F5F1E8]/12 p-6 space-y-2"
+                className="rounded-[20px] bg-surface-raised border border-border-soft p-6 space-y-2"
               >
-                <h3 className="font-serif text-lg sm:text-xl text-[#1B1B18] dark:text-[#F5F1E8] flex items-start gap-2.5">
-                  <HelpCircle className="w-5 h-5 text-[#E8A317] shrink-0 mt-1" />
+                <h3 className="font-serif text-lg sm:text-xl text-text flex items-start gap-2.5">
+                  <HelpCircle className="w-5 h-5 text-or shrink-0 mt-1" />
                   <span>{faq.q}</span>
                 </h3>
-                <p className="text-sm sm:text-base text-[#1B1B18]/75 dark:text-[#F5F1E8]/75 pl-7 leading-relaxed">
+                <p className="text-sm sm:text-base text-text-tertiary pl-7 leading-relaxed">
                   {faq.a}
                 </p>
               </div>
@@ -336,16 +337,16 @@ export default function MobilityHub() {
 
       {/* APPEL À CANDIDATER OU À SOUTENIR LE PROGRAMME PAR UN DON */}
       <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-        <div className="surface-green rounded-[24px] bg-[#0F3D2E] text-[#F5F1E8] p-8 sm:p-12 border border-[#E8A317]/40 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="surface-green rounded-card bg-foret text-creme p-8 sm:p-12 border border-or/40 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-7 space-y-3">
-            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#E8A317]">
+            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-kicker text-or">
               <ShieldCheck className="w-4 h-4" />
               Passez à l’action en toute confiance
             </span>
-            <h2 className="font-serif font-normal text-2xl sm:text-4xl text-[#F5F1E8]">
+            <h2 className="font-serif font-normal text-2xl sm:text-4xl text-creme">
               Candidater gratuitement ou financer le parcours d’un jeune
             </h2>
-            <p className="text-sm sm:text-base text-[#F5F1E8]/80 leading-relaxed">
+            <p className="text-sm sm:text-base text-creme/80 leading-relaxed">
               Vous souhaitez rejoindre la prochaine cohorte d’allemand ou être orienté ? Remplissez le formulaire unique. Vous souhaitez pérenniser la gratuité de cette académie ? Soutenez-nous par un don.
             </p>
           </div>
@@ -353,7 +354,8 @@ export default function MobilityHub() {
             <PrimaryButton
               to="/candidater"
               magnetic
-              className="!bg-[#E8A317] !text-[#1B1B18] justify-center"
+              variant="gold"
+              className="justify-center"
             >
               Candidater gratuitement
             </PrimaryButton>

@@ -3,9 +3,10 @@ import { AnimatePresence, motion, useReducedMotion, Variants } from 'motion/reac
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { useDialog } from '../../lib/useDialog';
 import { GALLERY_ALBUMS, GalleryItem } from '../../data/gallery';
+import { EASE_SCREEN } from '../../lib/motionTokens';
 
-/** Changement d'écran : 0,6 s, courbe [0.76, 0, 0.24, 1] (règles du mouvement du site). */
-const SCREEN = { duration: 0.6, ease: [0.76, 0, 0.24, 1] as const };
+/** Changement d'écran : 0,6 s, courbe EASE_SCREEN (src/lib/motionTokens.ts). */
+const SCREEN = { duration: 0.6, ease: EASE_SCREEN };
 
 // Passage d'une image à l'autre : léger glissement + fondu.
 // « Réduire les animations » : décalage nul (MotionConfig poserait sinon le décalage d'un coup,
@@ -76,7 +77,7 @@ export default function GalleryLightbox({ items, index, onChange, returnFocusRef
   const item = index !== null ? items[index] : null;
   const album = item ? GALLERY_ALBUMS.find((a) => a.id === item.album) : undefined;
   const navButton =
-    'absolute top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-[#0F3D2E]/85 border border-[#E8A317]/40 text-[#F5F1E8] flex items-center justify-center cursor-pointer transition-colors duration-300 hover:bg-[#E8A317] hover:text-[#1B1B18] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5F1E8]';
+    'absolute top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-pill bg-foret/85 border border-or/40 text-creme flex items-center justify-center cursor-pointer transition-colors duration-(--dur-fast) hover:bg-or hover:text-encre focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-creme';
 
   return (
     <AnimatePresence>
@@ -93,17 +94,17 @@ export default function GalleryLightbox({ items, index, onChange, returnFocusRef
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={SCREEN}
-          className="fixed inset-0 z-[120] bg-[#0B1F18]/95 text-[#F5F1E8] flex flex-col outline-none"
+          className="fixed inset-0 z-(--z-modal) bg-nuit/95 text-creme flex flex-col outline-none"
         >
           <div className="flex items-start justify-between gap-4 px-4 sm:px-8 pt-4 sm:pt-6">
             <div className="min-w-0">
               <h2 id={titleId} className="font-serif text-lg sm:text-xl leading-snug">
                 {album?.title}
               </h2>
-              <p className="text-xs text-[#F5F1E8]/75">{album?.meta}</p>
+              <p className="text-xs text-creme/75">{album?.meta}</p>
             </div>
             <div className="flex items-center gap-3 shrink-0">
-              <span aria-hidden="true" className="text-sm tabular-nums text-[#F5F1E8]/85">
+              <span aria-hidden="true" className="text-sm tabular-nums text-creme/85">
                 {index + 1} / {items.length}
               </span>
               <button
@@ -111,7 +112,7 @@ export default function GalleryLightbox({ items, index, onChange, returnFocusRef
                 type="button"
                 onClick={() => onChange(null)}
                 aria-label="Fermer la galerie"
-                className="w-11 h-11 rounded-full bg-[#E8A317] text-[#1B1B18] flex items-center justify-center cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5F1E8]"
+                className="w-11 h-11 rounded-pill bg-or text-encre flex items-center justify-center cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-creme"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -146,7 +147,7 @@ export default function GalleryLightbox({ items, index, onChange, returnFocusRef
                     width={item.w}
                     height={item.h}
                     draggable={false}
-                    className="block w-auto h-auto max-w-full max-h-[calc(100svh-11rem)] rounded-xl select-none"
+                    className="block w-auto h-auto max-w-full max-h-[calc(100svh-11rem)] rounded-inner select-none"
                   />
                 ) : (
                   <video
@@ -158,7 +159,7 @@ export default function GalleryLightbox({ items, index, onChange, returnFocusRef
                     width={item.w}
                     height={item.h}
                     aria-label={item.alt}
-                    className="block w-full max-w-[min(100%,960px)] h-auto max-h-[calc(100svh-11rem)] rounded-xl bg-black"
+                    className="block w-full max-w-[min(100%,960px)] h-auto max-h-[calc(100svh-11rem)] rounded-inner bg-black"
                   />
                 )}
               </motion.figure>
@@ -176,7 +177,7 @@ export default function GalleryLightbox({ items, index, onChange, returnFocusRef
             )}
           </div>
 
-          <p aria-live="polite" className="px-4 sm:px-8 pb-5 sm:pb-8 text-center text-sm text-[#F5F1E8]/90 min-h-[3.5rem]">
+          <p aria-live="polite" className="px-4 sm:px-8 pb-5 sm:pb-8 text-center text-sm text-creme/90 min-h-[3.5rem]">
             <span className="sr-only">
               {index + 1} sur {items.length} :{' '}
             </span>

@@ -1,5 +1,6 @@
 import { Ref } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
+import { EASE_OUT, DURATION } from '../../lib/motionTokens';
 
 interface SectionHeaderProps {
   kicker: string;
@@ -32,13 +33,13 @@ export default function SectionHeader({
       initial={animated ? { opacity: 0, y: 18 } : false}
       whileInView={animated ? { opacity: 1, y: 0 } : undefined}
       viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: DURATION.reveal, ease: EASE_OUT }}
       className={`max-w-3xl ${align === 'center' ? 'mx-auto text-center' : ''} ${className}`}
     >
       {/* 1. Sur-titre en petites capitales espacées, couleur or */}
       <p
         className={`text-xs sm:text-sm font-semibold uppercase tracking-[0.22em] mb-3 ${
-          light ? 'text-[#E8A317]' : 'text-gold-text dark:text-[#E8A317]'
+          light ? 'text-or' : 'text-accent-or'
         }`}
       >
         {kicker}
@@ -50,8 +51,8 @@ export default function SectionHeader({
         tabIndex={titleRef ? -1 : undefined}
         className={`font-serif font-normal tracking-tight leading-[1.12] text-[clamp(1.85rem,3.6vw,3.1rem)] ${
           light
-            ? 'text-[#F5F1E8]'
-            : 'text-[#1B1B18] dark:text-[#F5F1E8]'
+            ? 'text-creme'
+            : 'text-text'
         }`}
       >
         {title}
@@ -60,7 +61,7 @@ export default function SectionHeader({
       {/* 3. Petit filet en dégradé vert vers or, sous le titre */}
       <div
         aria-hidden="true"
-        className={`h-[3px] w-20 rounded-full bg-gradient-to-r from-[#0F3D2E] via-[#1b634b] to-[#E8A317] mt-5 mb-5 ${
+        className={`h-[3px] w-20 rounded-pill bg-gradient-to-r from-foret via-fougere to-or mt-5 mb-5 ${
           align === 'center' ? 'mx-auto' : ''
         }`}
       />
@@ -70,8 +71,8 @@ export default function SectionHeader({
         <p
           className={`text-base sm:text-lg font-normal leading-relaxed ${
             light
-              ? 'text-[#F5F1E8]/80'
-              : 'text-[#1B1B18]/75 dark:text-[#F5F1E8]/75'
+              ? 'text-creme/80'
+              : 'text-text-tertiary'
           }`}
         >
           {subtitle}

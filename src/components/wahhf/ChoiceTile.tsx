@@ -38,7 +38,7 @@ export default function ChoiceTile({
 }: ChoiceTileProps) {
   return (
     <label
-      className={`relative cursor-pointer has-[:focus-visible]:[outline:2px_solid_var(--color-focus)] has-[:focus-visible]:[outline-offset:2px] ${className}`}
+      className={`relative cursor-pointer has-[:focus-visible]:[outline:2px_solid_var(--focus)] has-[:focus-visible]:[outline-offset:2px] ${className}`}
     >
       <input
         id={id}

@@ -24,3 +24,5 @@ if (typeof document !== 'undefined' && document.fonts?.ready) {
 }
 
 export { gsap, ScrollTrigger, useGSAP };
+// Courbes et durées partagées avec Motion et le CSS
+export { GSAP_EASE, DURATION } from './motionTokens';

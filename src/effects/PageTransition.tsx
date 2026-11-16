@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { ScrollTrigger } from '../lib/gsap';
 import { scrollToHash, scrollToTop } from '../lib/scroll';
+import { EASE_OUT, EASE_SCREEN } from '../lib/motionTokens';
 
 /**
  * Clé de transition d'une route. Les URL servies par un même composant avec un paramètre différent
@@ -32,8 +33,8 @@ export default function PageTransition({ transitionKey, children }: { transition
       <motion.div
         key={transitionKey}
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } }}
-        exit={{ opacity: 0, transition: { duration: 0.25, ease: [0.76, 0, 0.24, 1] } }}
+        animate={{ opacity: 1, transition: { duration: 0.4, ease: EASE_OUT } }}
+        exit={{ opacity: 0, transition: { duration: 0.25, ease: EASE_SCREEN } }}
         onAnimationComplete={() => ScrollTrigger.refresh()}
       >
         {children}

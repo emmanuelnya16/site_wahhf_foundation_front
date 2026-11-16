@@ -2,6 +2,7 @@ import { ReactNode, Ref, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, Heart } from 'lucide-react';
 import { useMagnetic } from '../../effects/useMagnetic';
+import { cn } from '../../lib/utils';
 
 interface ButtonBaseProps {
   children: ReactNode;
@@ -18,6 +19,24 @@ interface ButtonBaseProps {
 }
 
 /**
+ * Variantes du bouton principal :
+ * - forest : vert forêt (token action), survol plus clair (action-hover) ;
+ * - gold : fond or et texte encre, pour les fonds verts. Pas de survol de couleur par défaut :
+ *   un survol propre se passe par className (ex. « hover:bg-or-vif »).
+ */
+const PRIMARY_VARIANTS = {
+  forest: 'bg-action hover:bg-action-hover text-on-action',
+  gold: 'bg-or text-encre',
+} as const;
+
+/** Tailles du bouton principal : la pilule et le rond fléché grandissent ensemble. md = taille historique. */
+const PRIMARY_SIZES = {
+  sm: { pill: 'gap-2.5 pl-5 pr-2 py-1.5 text-sm', ring: 'w-7 h-7', icon: 'w-3.5 h-3.5' },
+  md: { pill: 'gap-3.5 pl-6 pr-2 py-2 text-sm sm:text-base', ring: 'w-9 h-9', icon: 'w-4 h-4' },
+  lg: { pill: 'gap-4 pl-7 pr-2.5 py-2.5 text-base sm:text-lg', ring: 'w-11 h-11', icon: 'w-5 h-5' },
+} as const;
+
+/**
  * Bouton principal : forme pilule, porte à droite un segment circulaire contenant une flèche
  * qui pivote légèrement au survol (0,3 s, souris uniquement).
  */
@@ -31,16 +50,29 @@ export function PrimaryButton({
   disabled = false,
   ariaLabel,
   magnetic = false,
-}: ButtonBaseProps) {
+  variant = 'forest',
+  size = 'md',
+}: ButtonBaseProps & { variant?: keyof typeof PRIMARY_VARIANTS; size?: keyof typeof PRIMARY_SIZES }) {
   const ref = useRef<HTMLElement>(null);
   useMagnetic(ref, magnetic);
-  const baseClass = `group inline-flex items-center justify-between gap-3.5 pl-6 pr-2 py-2 rounded-full bg-[#0F3D2E] hover:bg-[#14523E] text-[#F5F1E8] font-medium text-sm sm:text-base transition-[color,background-color,border-color,box-shadow] duration-300 shadow-sm hover:shadow-md disabled:opacity-50 cursor-pointer ${className}`;
+  const s = PRIMARY_SIZES[size];
+  const baseClass = cn(
+    'group inline-flex items-center justify-between rounded-pill font-medium transition-[color,background-color,border-color,box-shadow] duration-(--dur-fast) shadow-sm hover:shadow-md disabled:opacity-50 cursor-pointer',
+    s.pill,
+    PRIMARY_VARIANTS[variant],
+    className
+  );
 
   const inner = (
     <>
       <span>{children}</span>
-      <span className="w-9 h-9 rounded-full bg-[#E8A317] text-[#1B1B18] flex items-center justify-center transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:rotate-45 shrink-0">
-        <ArrowUpRight className="w-4 h-4 stroke-[2.25]" />
+      <span
+        className={cn(
+          'rounded-pill bg-or text-encre flex items-center justify-center transition-transform duration-(--dur-fast) ease-reveal group-hover:rotate-45 shrink-0',
+          s.ring
+        )}
+      >
+        <ArrowUpRight className={cn(s.icon, 'stroke-[2.25]')} />
       </span>
     </>
   );
@@ -76,7 +108,7 @@ export function PrimaryButton({
 }
 
 /**
- * Bouton secondaire : forme pilule, contour fin.
+ * Bouton secondaire : forme pilule, contour fin. « light » : sur fond vert.
  */
 export function SecondaryButton({
   children,
@@ -91,11 +123,13 @@ export function SecondaryButton({
 }: ButtonBaseProps & { light?: boolean }) {
   const ref = useRef<HTMLElement>(null);
   useMagnetic(ref, magnetic);
-  const baseClass = `inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-full border transition-[color,background-color,border-color,box-shadow] duration-300 text-sm sm:text-base font-medium cursor-pointer ${
+  const baseClass = cn(
+    'inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-pill border transition-[color,background-color,border-color,box-shadow] duration-(--dur-fast) text-sm sm:text-base font-medium cursor-pointer',
     light
-      ? 'border-[#F5F1E8]/45 text-[#F5F1E8] hover:bg-[#F5F1E8]/12 hover:border-[#E8A317]'
-      : 'border-[#0F3D2E]/35 dark:border-[#F5F1E8]/30 text-[#0F3D2E] dark:text-[#F5F1E8] hover:border-[#E8A317] hover:bg-[#0F3D2E]/5 dark:hover:bg-[#F5F1E8]/10'
-  } ${className}`;
+      ? 'border-creme/45 text-creme hover:bg-creme/12 hover:border-or'
+      : 'border-foret/35 dark:border-creme/30 text-foret dark:text-creme hover:border-or hover:bg-foret/5 dark:hover:bg-creme/10',
+    className
+  );
 
   if (to) {
     return (
@@ -121,7 +155,7 @@ export function SecondaryButton({
 }
 
 /**
- * Bouton Don : Rouge #C8102E réservé exclusivement au bouton « Faire un don », forme pilule.
+ * Bouton Don : rouge (token rouge) réservé exclusivement au bouton « Faire un don », forme pilule.
  */
 export function DonateButton({
   children = 'Faire un don',
@@ -148,7 +182,11 @@ export function DonateButton({
       ? 'px-7 py-3.5 text-base'
       : 'px-5 py-2.5 text-sm';
 
-  const classes = `inline-flex items-center justify-center gap-2 rounded-full bg-[#C8102E] hover:bg-[#a80d26] text-white font-semibold tracking-wide transition-[color,background-color,border-color,box-shadow] duration-300 shadow-sm hover:shadow-md cursor-pointer ${sizeClasses} ${className}`;
+  const classes = cn(
+    'inline-flex items-center justify-center gap-2 rounded-pill bg-rouge hover:bg-rouge-fonce text-white font-semibold tracking-wide transition-[color,background-color,border-color,box-shadow] duration-(--dur-fast) shadow-sm hover:shadow-md cursor-pointer',
+    sizeClasses,
+    className
+  );
 
   if (onClick) {
     return (

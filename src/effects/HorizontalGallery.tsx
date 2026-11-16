@@ -1,7 +1,7 @@
 import { ReactNode, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useReducedMotion } from 'motion/react';
-import { gsap, useGSAP, MQ } from '../lib/gsap';
+import { gsap, useGSAP, MQ, GSAP_EASE } from '../lib/gsap';
 import { prefersReducedMotion } from '../lib/reducedMotion';
 import { scrollToPosition } from '../lib/scroll';
 
@@ -45,7 +45,7 @@ export default function HorizontalGallery({ id, header, items, prevLabel, nextLa
 
         const tween = gsap.to(track, {
           x: () => -distance(),
-          ease: 'none',
+          ease: GSAP_EASE.scrub,
           scrollTrigger: {
             trigger: pinEl,
             pin: true,
@@ -102,8 +102,8 @@ export default function HorizontalGallery({ id, header, items, prevLabel, nextLa
             {header}
 
             {pinHint && (
-              <p aria-hidden="true" className="hidden pin:flex items-center gap-2 text-sm text-[#1B1B18]/70 dark:text-[#F5F1E8]/70">
-                <ChevronRight className="w-4 h-4 text-[#E8A317]" />
+              <p aria-hidden="true" className="hidden pin:flex items-center gap-2 text-sm text-encre/70 dark:text-creme/70">
+                <ChevronRight className="w-4 h-4 text-or" />
                 {pinHint}
               </p>
             )}
@@ -114,7 +114,7 @@ export default function HorizontalGallery({ id, header, items, prevLabel, nextLa
                 type="button"
                 onClick={() => scrollCarousel('prev')}
                 aria-label={prevLabel}
-                className="w-11 h-11 rounded-full border border-[#0F3D2E]/25 dark:border-[#F5F1E8]/25 flex items-center justify-center text-[#0F3D2E] dark:text-[#E8A317] hover:bg-[#E8A317] hover:text-[#1B1B18] transition-colors"
+                className="w-11 h-11 rounded-pill border border-border-strong flex items-center justify-center text-accent hover:bg-or hover:text-encre transition-colors"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
@@ -122,7 +122,7 @@ export default function HorizontalGallery({ id, header, items, prevLabel, nextLa
                 type="button"
                 onClick={() => scrollCarousel('next')}
                 aria-label={nextLabel}
-                className="w-11 h-11 rounded-full border border-[#0F3D2E]/25 dark:border-[#F5F1E8]/25 flex items-center justify-center text-[#0F3D2E] dark:text-[#E8A317] hover:bg-[#E8A317] hover:text-[#1B1B18] transition-colors"
+                className="w-11 h-11 rounded-pill border border-border-strong flex items-center justify-center text-accent hover:bg-or hover:text-encre transition-colors"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>

@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import { WAHHF_LOGO_URL } from '../services/api';
 import { prefersReducedMotion } from '../lib/reducedMotion';
 import { setIntroDone } from './introState';
+import { EASE_OUT, EASE_SCREEN, DURATION } from '../lib/motionTokens';
 
 const STORAGE_KEY = 'wahhf_curtain_seen';
 
@@ -57,10 +58,10 @@ export default function LoadingCurtain() {
   return (
     <motion.div
       aria-hidden="true"
-      className="fixed inset-0 z-[150] bg-[#0F3D2E] pointer-events-none flex items-center justify-center"
+      className="fixed inset-0 z-(--z-curtain) bg-foret pointer-events-none flex items-center justify-center"
       initial={{ clipPath: 'inset(0% 0% 0% 0%)' }}
       animate={{ clipPath: phase === 'leaving' ? 'inset(0% 0% 100% 0%)' : 'inset(0% 0% 0% 0%)' }}
-      transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
+      transition={{ duration: DURATION.screen, ease: EASE_SCREEN }}
       onAnimationComplete={() => {
         if (phase === 'leaving') setPhase('done');
       }}
@@ -70,10 +71,10 @@ export default function LoadingCurtain() {
         alt=""
         width={96}
         height={96}
-        className="w-24 h-24 rounded-full bg-white p-2.5 object-contain"
+        className="w-24 h-24 rounded-pill bg-white p-2.5 object-contain"
         initial={{ opacity: 0, scale: 0.96 }}
         animate={phase === 'leaving' ? { opacity: 0, scale: 1 } : { opacity: 1, scale: 1 }}
-        transition={{ duration: phase === 'leaving' ? 0.3 : 0.5, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: phase === 'leaving' ? DURATION.fast : 0.5, ease: EASE_OUT }}
       />
     </motion.div>
   );

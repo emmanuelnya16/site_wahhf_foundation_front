@@ -24,7 +24,7 @@ type Motif = (typeof MOTIFS)[number]['id'];
 type ContactField = 'motif' | 'name' | 'email' | 'whatsapp' | 'message' | 'consent';
 const CONTACT_FIELDS = ['motif', 'name', 'email', 'whatsapp', 'message', 'consent'] as const;
 const INPUT_CLASS =
-  'w-full px-4 py-3 rounded-xl bg-[#F5F1E8] dark:bg-[#0F3D2E] border border-[#0F3D2E]/20 dark:border-[#F5F1E8]/20 aria-invalid:border-danger text-sm';
+  'w-full px-4 py-3 rounded-inner bg-surface-inset border border-border-input aria-invalid:border-danger text-sm';
 
 function checkContactField(key: ContactField, value: string | boolean): string | undefined {
   switch (key) {
@@ -102,13 +102,13 @@ export default function ContactPage() {
         description="Contacter WAHHF Foundation par WhatsApp ou par e-mail : candidature, bénévolat, partenariat, presse ou toute autre demande."
       />
 
-      <section className="surface-green pt-32 pb-16 bg-[#0F3D2E] text-[#F5F1E8]">
+      <section className="surface-green pt-32 pb-16 bg-foret text-creme">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#E8A317]">Contact</span>
+          <span className="text-xs font-semibold uppercase tracking-kicker text-or">Contact</span>
           <h1 className="font-serif font-normal text-[clamp(2.1rem,4.5vw,3.8rem)] leading-tight">
             Écrire à WAHHF Foundation
           </h1>
-          <p className="text-base sm:text-lg text-[#F5F1E8]/85 max-w-3xl leading-relaxed">
+          <p className="text-base sm:text-lg text-creme/85 max-w-3xl leading-relaxed">
             Choisissez le motif de votre message et écrivez-nous. Vous pouvez aussi nous joindre directement par
             WhatsApp ou par e-mail.
           </p>
@@ -129,7 +129,7 @@ export default function ContactPage() {
                 onEdit={() => setPrepared(false)}
               />
             ) : (
-              <div className="rounded-[24px] bg-white dark:bg-[#132A21] border border-[#0F3D2E]/15 dark:border-[#F5F1E8]/15 p-7 sm:p-10 shadow-sm space-y-8">
+              <div className="rounded-card bg-surface-raised border border-border p-7 sm:p-10 shadow-sm space-y-8">
                 <SectionHeader
                   titleRef={titleRef}
                   reveal={false}
@@ -159,8 +159,8 @@ export default function ContactPage() {
                           showCheck
                           className={`p-4 rounded-2xl border text-left text-sm font-medium transition ${
                             motif === m.id
-                              ? 'bg-[#0F3D2E] text-[#E8A317] border-[#E8A317]'
-                              : 'bg-[#F5F1E8] dark:bg-[#0F3D2E]/50 border-[#0F3D2E]/15'
+                              ? 'bg-foret text-or border-or'
+                              : 'bg-creme dark:bg-foret/50 border-foret/15'
                           }`}
                         >
                           {m.label}
@@ -248,7 +248,7 @@ export default function ContactPage() {
                   </FormField>
 
                   <div>
-                    <label className="flex items-start gap-3 cursor-pointer text-xs sm:text-sm text-[#1B1B18]/85 dark:text-[#F5F1E8]/85">
+                    <label className="flex items-start gap-3 cursor-pointer text-xs sm:text-sm text-encre/85 dark:text-creme/85">
                       <input
                         id={fieldId('consent')}
                         type="checkbox"
@@ -260,12 +260,12 @@ export default function ContactPage() {
                         }}
                         aria-invalid={errors.consent ? true : undefined}
                         aria-describedby={errors.consent ? fieldErrorId(fieldId('consent')) : undefined}
-                        className="mt-1 w-4 h-4 accent-[#0F3D2E]"
+                        className="mt-1 w-4 h-4 accent-foret"
                       />
                       <span>
                         J’accepte que mes coordonnées soient traitées par WAHHF Foundation pour répondre à mon
                         message, conformément à la{' '}
-                        <Link to="/confidentialite" className="underline text-[#0F3D2E] dark:text-[#E8A317]">
+                        <Link to="/confidentialite" className="underline text-accent">
                           politique de confidentialité (RGPD)
                         </Link>
                         . *
@@ -276,7 +276,7 @@ export default function ContactPage() {
 
                   <button
                     type="submit"
-                    className="px-8 py-3.5 rounded-full bg-[#0F3D2E] hover:bg-[#14523E] text-[#F5F1E8] text-sm sm:text-base font-semibold cursor-pointer"
+                    className="px-8 py-3.5 rounded-pill bg-action hover:bg-action-hover text-on-action text-sm sm:text-base font-semibold cursor-pointer"
                   >
                     Préparer l’envoi de mon message
                   </button>
@@ -287,53 +287,53 @@ export default function ContactPage() {
 
           {/* Coordonnées directes */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="surface-green rounded-[24px] bg-[#0F3D2E] text-[#F5F1E8] p-7 sm:p-8 border border-[#E8A317]/35 space-y-5">
-              <h2 className="font-serif font-normal text-2xl text-[#F5F1E8]">Nous joindre directement</h2>
+            <div className="surface-green rounded-card bg-foret text-creme p-7 sm:p-8 border border-or/35 space-y-5">
+              <h2 className="font-serif font-normal text-2xl text-creme">Nous joindre directement</h2>
               <a
                 href={`https://wa.me/${CONTACT.whatsappNumber}?text=${encodeURIComponent('Bonjour WAHHF Foundation, ')}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#E8A317] text-[#1B1B18] text-sm font-semibold hover:bg-[#f3b32b] transition-colors"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-pill bg-or text-encre text-sm font-semibold hover:bg-or-vif transition-colors"
               >
                 <MessageCircle aria-hidden="true" className="w-4 h-4" />
                 <span>Écrire sur WhatsApp</span>
                 <span className="sr-only">(nouvel onglet)</span>
               </a>
-              <ul className="space-y-3 text-sm text-[#F5F1E8]/85">
+              <ul className="space-y-3 text-sm text-creme/85">
                 <li className="flex items-center gap-2.5">
-                  <Phone aria-hidden="true" className="w-4 h-4 text-[#E8A317] shrink-0" />
-                  <a href={`tel:+${CONTACT.whatsappNumber}`} className="hover:text-[#E8A317] transition-colors">
+                  <Phone aria-hidden="true" className="w-4 h-4 text-or shrink-0" />
+                  <a href={`tel:+${CONTACT.whatsappNumber}`} className="hover:text-or transition-colors">
                     {CONTACT.whatsappDisplay}
                   </a>
                 </li>
                 <li className="flex items-center gap-2.5">
-                  <Mail aria-hidden="true" className="w-4 h-4 text-[#E8A317] shrink-0" />
-                  <a href={`mailto:${CONTACT.email}`} className="hover:text-[#E8A317] transition-colors break-all">
+                  <Mail aria-hidden="true" className="w-4 h-4 text-or shrink-0" />
+                  <a href={`mailto:${CONTACT.email}`} className="hover:text-or transition-colors break-all">
                     {CONTACT.email}
                   </a>
                 </li>
                 <li className="flex items-start gap-2.5">
-                  <MapPin aria-hidden="true" className="w-4 h-4 text-[#E8A317] shrink-0 mt-1" />
+                  <MapPin aria-hidden="true" className="w-4 h-4 text-or shrink-0 mt-1" />
                   <span>
                     Cameroun (Douala / Yaoundé) & Coordination Allemagne{' '}
-                    <span className="text-xs text-[#E8A317]">(TODO : adresse exacte)</span>
+                    <span className="text-xs text-or">(TODO : adresse exacte)</span>
                   </span>
                 </li>
               </ul>
             </div>
 
-            <div className="rounded-[24px] bg-white dark:bg-[#132A21] border border-[#0F3D2E]/15 dark:border-[#F5F1E8]/15 p-7 space-y-3">
-              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#0F3D2E] dark:text-[#E8A317]">
+            <div className="rounded-card bg-surface-raised border border-border p-7 space-y-3">
+              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-accent">
                 <ShieldCheck aria-hidden="true" className="w-4 h-4" />
                 <span>Vigilance</span>
               </div>
-              <p className="text-sm text-[#1B1B18]/80 dark:text-[#F5F1E8]/80 leading-relaxed">
+              <p className="text-sm text-text-secondary leading-relaxed">
                 Aucun collaborateur de WAHHF ne vous demandera d’argent par téléphone, e-mail ou WhatsApp pour traiter
                 votre dossier.
               </p>
               <Link
                 to="/accompagnement/eviter-les-arnaques"
-                className="inline-block text-sm font-semibold text-[#0F3D2E] dark:text-[#E8A317] underline underline-offset-4"
+                className="inline-block text-sm font-semibold text-accent underline underline-offset-4"
               >
                 Reconnaître une fausse offre
               </Link>

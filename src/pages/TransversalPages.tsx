@@ -44,15 +44,15 @@ export function QuiSommesNousPage() {
         description="Découvrez l'histoire, la mission, les valeurs, la gouvernance de WAHHF Foundation (We Are Here Help Foundation) et son lien avec le groupe IROKO."
       />
 
-      <section className="surface-green pt-32 pb-16 bg-[#0F3D2E] text-[#F5F1E8]">
+      <section className="surface-green pt-32 pb-16 bg-foret text-creme">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-5">
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#E8A317]">
+          <span className="text-xs font-semibold uppercase tracking-kicker text-or">
             Qui sommes-nous · We Are Here Help Foundation
           </span>
           <h1 className="font-serif font-normal text-[clamp(2.1rem,4.6vw,3.9rem)] leading-tight max-w-4xl">
             Une fondation camerouno-allemande au service de la dignité humaine
           </h1>
-          <p className="text-base sm:text-xl text-[#F5F1E8]/85 max-w-3xl leading-relaxed">
+          <p className="text-base sm:text-xl text-creme/85 max-w-3xl leading-relaxed">
             Née de la solidarité entre le Cameroun et l’Allemagne, WAHHF Foundation accompagne les jeunes et les communautés à travers 6 domaines d’action complémentaires.
           </p>
         </div>
@@ -66,10 +66,10 @@ export function QuiSommesNousPage() {
               kicker="Notre Mission"
               title="Bâtir l’autonomie par l’éducation, la santé et l’accès gratuit au savoir"
             />
-            <p className="text-base sm:text-lg text-[#1B1B18]/85 dark:text-[#F5F1E8]/85 leading-relaxed">
+            <p className="text-base sm:text-lg text-encre/85 dark:text-creme/85 leading-relaxed">
               WAHHF Foundation (We Are Here Help Foundation) part d’une conviction simple : chaque jeune mérite d’accéder à l’éducation, aux soins de prévention, à l’apprentissage des langues et à une information vérifiée, sans que le manque de ressources financières ou les réseaux de désinformation ne brisent son avenir.
             </p>
-            <p className="text-base text-[#1B1B18]/80 dark:text-[#F5F1E8]/80 leading-relaxed">
+            <p className="text-base text-text-secondary leading-relaxed">
               Nos équipes interviennent dans les 10 régions du Cameroun et coordonnent depuis l’Allemagne et le Cameroun un programme gratuit d’apprentissage de l’allemand (A1 à C1) et d’orientation vers 10 pays européens.
             </p>
           </div>
@@ -91,46 +91,46 @@ export function QuiSommesNousPage() {
             ].map((val, idx) => (
               <div
                 key={val.title}
-                className="rounded-[24px] bg-white dark:bg-[#132A21] border border-[#0F3D2E]/12 dark:border-[#F5F1E8]/12 p-6 space-y-1.5"
+                className="rounded-card bg-surface-raised border border-border-soft p-6 space-y-1.5"
               >
-                <span className="text-xs font-bold text-gold-text dark:text-[#E8A317]">VALEUR 0{idx + 1}</span>
+                <span className="text-xs font-bold text-accent-or">VALEUR 0{idx + 1}</span>
                 <h3 className="font-serif text-xl">{val.title}</h3>
-                <p className="text-sm text-[#1B1B18]/75 dark:text-[#F5F1E8]/75">{val.desc}</p>
+                <p className="text-sm text-text-tertiary">{val.desc}</p>
               </div>
             ))}
           </div>
         </div>
 
         {/* Section dédiée : WAHHF, branche sociale du groupe IROKO */}
-        <div className="surface-green rounded-[24px] bg-[#0F3D2E] text-[#F5F1E8] p-8 sm:p-12 border border-[#E8A317]/40 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="surface-green rounded-card bg-foret text-creme p-8 sm:p-12 border border-or/40 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-8 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8A317]/20 text-gold-on-green text-xs font-semibold uppercase tracking-widest">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-pill bg-or/20 text-gold-on-green text-xs font-semibold uppercase tracking-widest">
               <ShieldCheck className="w-4 h-4" />
               <span>Ancrage Institutionnel</span>
             </div>
-            <h2 className="font-serif font-normal text-2xl sm:text-4xl text-[#F5F1E8]">
+            <h2 className="font-serif font-normal text-2xl sm:text-4xl text-creme">
               WAHHF Foundation, branche sociale du groupe IROKO
             </h2>
-            <p className="text-sm sm:text-base text-[#F5F1E8]/85 leading-relaxed">
+            <p className="text-sm sm:text-base text-creme/85 leading-relaxed">
               Le groupe multisectoriel camerouno-allemand <strong>IROKO</strong> a structuré WAHHF Foundation comme sa branche sociale et philanthropique indépendante à but non lucratif. Ce soutien structurel permet de couvrir les frais opérationnels et pédagogiques afin que les cours de langue allemande et les actions de terrain demeurent 100 % gratuits pour les bénéficiaires.
             </p>
             <div className="pt-2 flex flex-wrap gap-4">
               <PrimaryButton
                 to="/partenaires"
-                className="!bg-[#E8A317] !text-[#1B1B18]"
+                variant="gold"
               >
                 Découvrir nos partenaires et financeurs
               </PrimaryButton>
             </div>
           </div>
 
-          <div className="lg:col-span-4 flex flex-col items-center justify-center text-center p-6 rounded-2xl bg-[#14523E] border border-[#E8A317]/30 space-y-3">
+          <div className="lg:col-span-4 flex flex-col items-center justify-center text-center p-6 rounded-2xl bg-feuillage border border-or/30 space-y-3">
             <img
               src={WAHHF_LOGO_URL}
               alt="Logo WAHHF Foundation"
-              className="w-20 h-20 rounded-full bg-white p-1.5 object-contain"
+              className="w-20 h-20 rounded-pill bg-white p-1.5 object-contain"
             />
-            <p className="font-serif text-xl text-[#F5F1E8]">WAHHF Foundation</p>
+            <p className="font-serif text-xl text-creme">WAHHF Foundation</p>
             <p className="text-xs text-gold-on-green font-semibold uppercase tracking-wider">
               Branche sociale du groupe IROKO
             </p>
@@ -162,11 +162,11 @@ export function QuiSommesNousPage() {
             ].map((gov, idx) => (
               <div
                 key={gov.role}
-                className="rounded-[24px] bg-white dark:bg-[#132A21] border border-[#0F3D2E]/12 dark:border-[#F5F1E8]/12 p-7 space-y-3"
+                className="rounded-card bg-surface-raised border border-border-soft p-7 space-y-3"
               >
-                <span className="text-xs font-bold text-gold-text dark:text-[#E8A317]">PÔLE 0{idx + 1}</span>
+                <span className="text-xs font-bold text-accent-or">PÔLE 0{idx + 1}</span>
                 <h3 className="font-serif text-xl">{gov.role}</h3>
-                <p className="text-sm text-[#1B1B18]/75 dark:text-[#F5F1E8]/75 leading-relaxed">
+                <p className="text-sm text-text-tertiary leading-relaxed">
                   {gov.desc}
                 </p>
               </div>
@@ -190,15 +190,15 @@ export function PartenairesPage() {
         description="Découvrez le rôle du groupe IROKO en tant que partenaire fondateur de WAHHF Foundation ainsi que nos partenaires institutionnels et associatifs."
       />
 
-      <section className="surface-green pt-32 pb-16 bg-[#0F3D2E] text-[#F5F1E8]">
+      <section className="surface-green pt-32 pb-16 bg-foret text-creme">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#E8A317]">
+          <span className="text-xs font-semibold uppercase tracking-kicker text-or">
             Partenaires & Mécènes
           </span>
           <h1 className="font-serif font-normal text-[clamp(2.1rem,4.5vw,3.8rem)] leading-tight">
             Un écosystème engagé pour garantir la gratuité de nos actions
           </h1>
-          <p className="text-base sm:text-xl text-[#F5F1E8]/85 max-w-3xl">
+          <p className="text-base sm:text-xl text-creme/85 max-w-3xl">
             En premier lieu le groupe IROKO, accompagné de nos donateurs, professionnels bénévoles et institutions partenaires.
           </p>
         </div>
@@ -206,14 +206,14 @@ export function PartenairesPage() {
 
       <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-12">
         {/* Partenaire Fondateur : Groupe IROKO */}
-        <div className="surface-green rounded-[24px] bg-[#0F3D2E] text-[#F5F1E8] p-8 sm:p-12 border-2 border-[#E8A317] space-y-5">
-          <span className="inline-block px-3.5 py-1 rounded-full bg-[#E8A317] text-[#1B1B18] text-xs font-bold uppercase tracking-wider">
+        <div className="surface-green rounded-card bg-foret text-creme p-8 sm:p-12 border-2 border-or space-y-5">
+          <span className="inline-block px-3.5 py-1 rounded-pill bg-or text-encre text-xs font-bold uppercase tracking-wider">
             01 · Partenaire Fondateur & Mécène Structurel
           </span>
-          <h2 className="font-serif font-normal text-3xl sm:text-4xl text-[#F5F1E8]">
+          <h2 className="font-serif font-normal text-3xl sm:text-4xl text-creme">
             Groupe IROKO — Holding & 10 Pôles d’Expertise
           </h2>
-          <p className="text-base text-[#F5F1E8]/85 leading-relaxed max-w-4xl">
+          <p className="text-base text-creme/85 leading-relaxed max-w-4xl">
             WAHHF Foundation est la branche sociale du groupe IROKO. Par son mécénat financier, technologique et humain, le groupe IROKO finance durablement l’Académie de langues (allemand A1 à C1), les supports d’orientation vérifiés vers l’Europe ainsi que les déploiements solidaires dans les 10 régions du Cameroun.
           </p>
           <div className="pt-2 flex flex-wrap gap-4">
@@ -248,21 +248,21 @@ export function PartenairesPage() {
             ].map((p) => (
               <div
                 key={p.title}
-                className="rounded-[24px] bg-white dark:bg-[#132A21] border border-[#0F3D2E]/12 dark:border-[#F5F1E8]/12 p-7 space-y-3"
+                className="rounded-card bg-surface-raised border border-border-soft p-7 space-y-3"
               >
-                <Handshake className="w-7 h-7 text-[#E8A317]" />
+                <Handshake className="w-7 h-7 text-or" />
                 <h3 className="font-serif text-xl">{p.title}</h3>
-                <p className="text-sm text-[#1B1B18]/75 dark:text-[#F5F1E8]/75">{p.desc}</p>
+                <p className="text-sm text-text-tertiary">{p.desc}</p>
               </div>
             ))}
           </div>
         </div>
 
         {/* Appel à devenir partenaire */}
-        <div className="rounded-[24px] bg-white dark:bg-[#132A21] border border-[#0F3D2E]/15 p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="rounded-card bg-surface-raised border border-foret/15 p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-2 max-w-xl">
             <h3 className="font-serif text-2xl">Comment devenir partenaire de WAHHF Foundation ?</h3>
-            <p className="text-sm text-[#1B1B18]/75 dark:text-[#F5F1E8]/75">
+            <p className="text-sm text-text-tertiary">
               Vous représentez une université, un centre de formation, une ONG, un établissement médical ou une entreprise engagée ? Construisons ensemble un programme à impact mesurable.
             </p>
           </div>
@@ -288,15 +288,15 @@ export function NosActionsPage() {
         description="Découvrez les 6 domaines d'intervention de WAHHF Foundation au Cameroun et vers l'Europe."
       />
 
-      <section className="surface-green pt-32 pb-16 bg-[#0F3D2E] text-[#F5F1E8]">
+      <section className="surface-green pt-32 pb-16 bg-foret text-creme">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#E8A317]">
+          <span className="text-xs font-semibold uppercase tracking-kicker text-or">
             Nos 6 domaines d’action
           </span>
           <h1 className="font-serif font-normal text-[clamp(2.1rem,4.5vw,3.8rem)] leading-tight">
             Agir sur tous les leviers de l’autonomie humaine
           </h1>
-          <p className="text-base sm:text-xl text-[#F5F1E8]/85 max-w-3xl">
+          <p className="text-base sm:text-xl text-creme/85 max-w-3xl">
             Éducation, Santé, Entrepreneuriat des jeunes, Environnement, Droits et inclusion, et Mobilité & Langues.
           </p>
         </div>
@@ -323,17 +323,17 @@ export function NosActionsPage() {
                 <div
                   key={dom.id}
                   id={dom.slug}
-                  className={`rounded-[24px] p-7 sm:p-9 border transition ${
+                  className={`rounded-card p-7 sm:p-9 border transition ${
                     isHighlighted
-                      ? 'bg-[#0F3D2E] text-[#F5F1E8] border-[#E8A317]'
-                      : 'bg-white dark:bg-[#132A21] border-[#0F3D2E]/12 dark:border-[#F5F1E8]/12'
+                      ? 'bg-foret text-creme border-or'
+                      : 'bg-surface-raised border-border-soft'
                   }`}
                 >
                   <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                     <div className="space-y-3 max-w-3xl">
                       <span
                         className={`text-xs font-bold uppercase tracking-widest ${
-                          isHighlighted ? 'text-[#E8A317]' : 'text-gold-text dark:text-[#E8A317]'
+                          isHighlighted ? 'text-or' : 'text-accent-or'
                         }`}
                       >
                         Domaine {dom.number} / 06
@@ -348,7 +348,7 @@ export function NosActionsPage() {
                             key={prog}
                             className="p-3.5 rounded-2xl bg-black/5 dark:bg-white/5 text-xs sm:text-sm flex items-start gap-2"
                           >
-                            <CheckCircle2 className="w-4 h-4 text-[#E8A317] shrink-0 mt-0.5" />
+                            <CheckCircle2 className="w-4 h-4 text-or shrink-0 mt-0.5" />
                             <span>{prog}</span>
                           </li>
                         ))}
@@ -359,7 +359,7 @@ export function NosActionsPage() {
                       {dom.slug === 'mobilite-langues' ? (
                         <PrimaryButton
                           to="/mobilite-langues"
-                          className="!bg-[#E8A317] !text-[#1B1B18]"
+                          variant="gold"
                         >
                           Accéder au hub Mobilité & Langues
                         </PrimaryButton>
@@ -390,15 +390,15 @@ export function NotreImpactPage() {
         description="Mesurez l'impact des programmes éducatifs, sanitaires et linguistiques de WAHHF Foundation au Cameroun et vers l'Europe."
       />
 
-      <section className="surface-green pt-32 pb-16 bg-[#0F3D2E] text-[#F5F1E8]">
+      <section className="surface-green pt-32 pb-16 bg-foret text-creme">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#E8A317]">
+          <span className="text-xs font-semibold uppercase tracking-kicker text-or">
             Notre Impact & Suivi
           </span>
           <h1 className="font-serif font-normal text-[clamp(2.1rem,4.5vw,3.8rem)] leading-tight">
             Un impact concret, mesuré avec humilité et transparence
           </h1>
-          <p className="text-base sm:text-xl text-[#F5F1E8]/85 max-w-3xl">
+          <p className="text-base sm:text-xl text-creme/85 max-w-3xl">
             Chiffres clés d’accompagnement (marqués TODO à consolider), couverture des 10 régions du Cameroun et passerelles vers 10 pays européens.
           </p>
         </div>
@@ -414,9 +414,9 @@ export function NotreImpactPage() {
           ].map((item, i) => (
             <div
               key={i}
-              className="rounded-[24px] bg-white dark:bg-[#132A21] border border-[#0F3D2E]/12 dark:border-[#F5F1E8]/12 p-7 space-y-2"
+              className="rounded-card bg-surface-raised border border-border-soft p-7 space-y-2"
             >
-              <p className="font-serif text-4xl sm:text-5xl text-[#0F3D2E] dark:text-[#E8A317]">
+              <p className="font-serif text-4xl sm:text-5xl text-accent">
                 <Counter end={item.end} suffix={item.suffix} />
               </p>
               <p className="text-sm font-medium">{item.label}</p>
@@ -426,18 +426,19 @@ export function NotreImpactPage() {
 
         <PresenceSection />
 
-        <div className="surface-green rounded-[24px] bg-[#0F3D2E] text-[#F5F1E8] p-8 sm:p-10 border border-[#E8A317]/35 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="surface-green rounded-card bg-foret text-creme p-8 sm:p-10 border border-or/35 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-2">
             <h2 className="font-serif text-2xl sm:text-3xl">
               Consulter nos engagements de transparence financière
             </h2>
-            <p className="text-sm text-[#F5F1E8]/80">
+            <p className="text-sm text-creme/80">
               Découvrez comment les ressources du groupe IROKO et les dons sont affectés aux missions sociales.
             </p>
           </div>
           <PrimaryButton
             to="/transparence"
-            className="!bg-[#E8A317] !text-[#1B1B18] shrink-0"
+            variant="gold"
+            className="shrink-0"
           >
             Voir la page Transparence
           </PrimaryButton>
@@ -472,16 +473,16 @@ export function ActualitesPage() {
     return (
       <>
         <SEO title={article.title} description={article.excerpt} />
-        <section className="surface-green pt-32 pb-14 bg-[#0F3D2E] text-[#F5F1E8]">
+        <section className="surface-green pt-32 pb-14 bg-foret text-creme">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
             <Link
               to="/actualites"
-              className="text-xs font-semibold uppercase tracking-widest text-[#E8A317] hover:underline"
+              className="text-xs font-semibold uppercase tracking-widest text-or hover:underline"
             >
               ← Retour à toutes les actualités
             </Link>
-            <div className="flex flex-wrap items-center gap-3 text-xs text-[#F5F1E8]/80">
-              <span className="px-3 py-1 rounded-full bg-[#E8A317] text-[#1B1B18] font-semibold">
+            <div className="flex flex-wrap items-center gap-3 text-xs text-creme/80">
+              <span className="px-3 py-1 rounded-pill bg-or text-encre font-semibold">
                 {article.category}
               </span>
               <span className="flex items-center gap-1">
@@ -498,7 +499,7 @@ export function ActualitesPage() {
         </section>
 
         <section className="py-14 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto space-y-8">
-          <div className="rounded-[24px] overflow-hidden aspect-[16/9] border border-[#0F3D2E]/15">
+          <div className="rounded-card overflow-hidden aspect-[16/9] border border-foret/15">
             <img
               src={article.image}
               srcSet={imageSrcSet(article.image)}
@@ -510,7 +511,7 @@ export function ActualitesPage() {
             />
           </div>
 
-          <div className="rounded-[24px] bg-white dark:bg-[#132A21] border border-[#0F3D2E]/12 p-7 sm:p-10 space-y-5 text-base sm:text-lg leading-relaxed">
+          <div className="rounded-card bg-surface-raised border border-foret/12 p-7 sm:p-10 space-y-5 text-base sm:text-lg leading-relaxed">
             {article.content.map((p, i) => (
               <p key={i}>{p}</p>
             ))}
@@ -531,9 +532,9 @@ export function ActualitesPage() {
         title="Actualités & Actions de terrain"
         description="Suivez les dernières actualités de WAHHF Foundation : ouvertures des sessions d'allemand gratuites, campagnes de santé et reboisement."
       />
-      <section className="surface-green pt-32 pb-16 bg-[#0F3D2E] text-[#F5F1E8]">
+      <section className="surface-green pt-32 pb-16 bg-foret text-creme">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#E8A317]">
+          <span className="text-xs font-semibold uppercase tracking-kicker text-or">
             Journal de la Fondation
           </span>
           <h1 className="font-serif font-normal text-[clamp(2.1rem,4.5vw,3.8rem)] leading-tight">
@@ -547,7 +548,7 @@ export function ActualitesPage() {
           <Link
             key={art.slug}
             to={`/actualites/${art.slug}`}
-            className="group rounded-[24px] overflow-hidden bg-white dark:bg-[#132A21] border border-[#0F3D2E]/12 flex flex-col justify-between hover:-translate-y-1 transition"
+            className="group rounded-card overflow-hidden bg-surface-raised border border-foret/12 flex flex-col justify-between hover:-translate-y-1 transition"
           >
             <div>
               <div className="aspect-[16/10] overflow-hidden">
@@ -564,12 +565,12 @@ export function ActualitesPage() {
                 />
               </div>
               <div className="p-6 space-y-3">
-                <span className="text-xs font-semibold text-gold-text dark:text-[#E8A317]">{art.category}</span>
+                <span className="text-xs font-semibold text-accent-or">{art.category}</span>
                 <h2 className="font-serif text-xl">{art.title}</h2>
-                <p className="text-sm text-[#1B1B18]/75 dark:text-[#F5F1E8]/75">{art.excerpt}</p>
+                <p className="text-sm text-text-tertiary">{art.excerpt}</p>
               </div>
             </div>
-            <div className="px-6 pb-6 text-xs font-semibold text-[#0F3D2E] dark:text-[#E8A317] flex items-center justify-between">
+            <div className="px-6 pb-6 text-xs font-semibold text-accent flex items-center justify-between">
               <span>{art.date}</span>
               <ArrowUpRight className="w-4 h-4" />
             </div>
@@ -587,7 +588,7 @@ export function ActualitesPage() {
 type AgirField = 'name' | 'email' | 'details' | 'consent';
 const AGIR_FIELDS = ['name', 'email', 'details', 'consent'] as const;
 const AGIR_INPUT_CLASS =
-  'w-full px-4 py-3 rounded-xl bg-[#F5F1E8] dark:bg-[#0F3D2E] border border-[#0F3D2E]/20 aria-invalid:border-danger text-sm';
+  'w-full px-4 py-3 rounded-inner bg-surface-inset border border-foret/20 aria-invalid:border-danger text-sm';
 
 function checkAgirField(key: AgirField, value: string | boolean): string | undefined {
   switch (key) {
@@ -673,9 +674,9 @@ export function AgirPage() {
         description="Rejoignez l'engagement de WAHHF Foundation : faire un don, devenir formateur ou bénévole, ou bâtir un partenariat institutionnel."
       />
 
-      <section className="surface-green pt-32 pb-16 bg-[#0F3D2E] text-[#F5F1E8]">
+      <section className="surface-green pt-32 pb-16 bg-foret text-creme">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#E8A317]">
+          <span className="text-xs font-semibold uppercase tracking-kicker text-or">
             Agir avec nous
           </span>
           <h1 className="font-serif font-normal text-[clamp(2.1rem,4.5vw,3.8rem)] leading-tight">
@@ -686,11 +687,11 @@ export function AgirPage() {
 
       <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="surface-green rounded-[24px] bg-[#0F3D2E] text-[#F5F1E8] p-7 space-y-4 flex flex-col justify-between">
+          <div className="surface-green rounded-card bg-foret text-creme p-7 space-y-4 flex flex-col justify-between">
             <div className="space-y-2">
-              <span className="text-xs font-semibold text-[#E8A317]">01 · Don Solidaire</span>
+              <span className="text-xs font-semibold text-or">01 · Don Solidaire</span>
               <h2 className="font-serif text-2xl">Faire un don</h2>
-              <p className="text-sm text-[#F5F1E8]/80">
+              <p className="text-sm text-creme/80">
                 Financez les cours d’allemand gratuits et les actions sociales de terrain.
               </p>
             </div>
@@ -699,19 +700,19 @@ export function AgirPage() {
 
           <div
             id="benevole"
-            className="rounded-[24px] bg-white dark:bg-[#132A21] border border-[#0F3D2E]/15 p-7 space-y-4 flex flex-col justify-between"
+            className="rounded-card bg-surface-raised border border-foret/15 p-7 space-y-4 flex flex-col justify-between"
           >
             <div className="space-y-2">
-              <Users className="w-6 h-6 text-[#E8A317]" />
+              <Users className="w-6 h-6 text-or" />
               <h2 className="font-serif text-2xl">Devenir bénévole</h2>
-              <p className="text-sm text-[#1B1B18]/75 dark:text-[#F5F1E8]/75">
+              <p className="text-sm text-text-tertiary">
                 Enseignants d’allemand, médecins, mentors ou coordinateurs locaux au Cameroun et en Europe.
               </p>
             </div>
             <button
               type="button"
               onClick={() => chooseRole('benevole')}
-              className="px-5 py-2.5 rounded-full bg-[#0F3D2E] text-[#F5F1E8] text-xs font-semibold cursor-pointer"
+              className="px-5 py-2.5 rounded-pill bg-action text-on-action text-xs font-semibold cursor-pointer"
             >
               Remplir le formulaire bénévole ↓
             </button>
@@ -719,19 +720,19 @@ export function AgirPage() {
 
           <div
             id="partenaire"
-            className="rounded-[24px] bg-white dark:bg-[#132A21] border border-[#0F3D2E]/15 p-7 space-y-4 flex flex-col justify-between"
+            className="rounded-card bg-surface-raised border border-foret/15 p-7 space-y-4 flex flex-col justify-between"
           >
             <div className="space-y-2">
-              <Handshake className="w-6 h-6 text-[#E8A317]" />
+              <Handshake className="w-6 h-6 text-or" />
               <h2 className="font-serif text-2xl">Devenir partenaire</h2>
-              <p className="text-sm text-[#1B1B18]/75 dark:text-[#F5F1E8]/75">
+              <p className="text-sm text-text-tertiary">
                 Écoles, universités, ONG et entreprises souhaitant co-financer ou appuyer un programme.
               </p>
             </div>
             <button
               type="button"
               onClick={() => chooseRole('partenaire')}
-              className="px-5 py-2.5 rounded-full bg-[#0F3D2E] text-[#F5F1E8] text-xs font-semibold cursor-pointer"
+              className="px-5 py-2.5 rounded-pill bg-action text-on-action text-xs font-semibold cursor-pointer"
             >
               Proposer un partenariat ↓
             </button>
@@ -739,7 +740,7 @@ export function AgirPage() {
         </div>
 
         {/* Formulaire Bénévole / Partenaire */}
-        <div ref={formBlockRef} className="rounded-[24px] bg-white dark:bg-[#132A21] border border-[#0F3D2E]/15 p-8 sm:p-10 max-w-3xl mx-auto">
+        <div ref={formBlockRef} className="rounded-card bg-surface-raised border border-foret/15 p-8 sm:p-10 max-w-3xl mx-auto">
           <p role="status" className="sr-only">
             {statusMessage}
           </p>
@@ -752,7 +753,7 @@ export function AgirPage() {
               titleRef={formTitleRef}
               onEdit={() => setPrepared(false)}
             >
-              <p className="text-sm text-[#1B1B18]/75 dark:text-[#F5F1E8]/75">
+              <p className="text-sm text-text-tertiary">
                 Notre équipe prendra contact avec vous sous 7 à 14 jours ouvrés (TODO : confirmer délai).
               </p>
             </ContactHandoff>
@@ -844,7 +845,7 @@ export function AgirPage() {
                     }}
                     aria-invalid={errors.consent ? true : undefined}
                     aria-describedby={errors.consent ? fieldErrorId(fieldId('consent')) : undefined}
-                    className="mt-0.5 w-4 h-4 accent-[#0F3D2E]"
+                    className="mt-0.5 w-4 h-4 accent-foret"
                   />
                   <span>
                     J’accepte que mes données soient traitées par WAHHF Foundation pour étudier ma proposition d’engagement (RGPD). *
@@ -855,7 +856,7 @@ export function AgirPage() {
 
               <button
                 type="submit"
-                className="px-7 py-3.5 rounded-full bg-[#0F3D2E] text-[#F5F1E8] text-sm font-semibold cursor-pointer"
+                className="px-7 py-3.5 rounded-pill bg-action text-on-action text-sm font-semibold cursor-pointer"
               >
                 Préparer l’envoi de ma proposition
               </button>
@@ -933,9 +934,9 @@ export function LegalTransparencyPage({
   return (
     <>
       <SEO title={content.title} description={content.blocks[0].p} />
-      <section className="surface-green pt-32 pb-14 bg-[#0F3D2E] text-[#F5F1E8]">
+      <section className="surface-green pt-32 pb-14 bg-foret text-creme">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-3">
-          <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#E8A317]">
+          <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-or">
             <Icon className="w-4 h-4" />
             <span>{content.kicker}</span>
           </div>
@@ -947,10 +948,10 @@ export function LegalTransparencyPage({
         {content.blocks.map((b) => (
           <div
             key={b.h}
-            className="rounded-[24px] bg-white dark:bg-[#132A21] border border-[#0F3D2E]/12 p-7 sm:p-9 space-y-3"
+            className="rounded-card bg-surface-raised border border-foret/12 p-7 sm:p-9 space-y-3"
           >
             <h2 className="font-serif text-2xl">{b.h}</h2>
-            <p className="text-base text-[#1B1B18]/80 dark:text-[#F5F1E8]/80 leading-relaxed">
+            <p className="text-base text-text-secondary leading-relaxed">
               {b.p}
             </p>
           </div>

@@ -21,6 +21,7 @@ import { DOMAINS_DATA, WAHHF_LOGO_URL, COUNTRIES_DATA, GERMAN_LEVELS_DATA } from
 import { DonateButton } from './wahhf/Buttons';
 import { useDialog } from '../lib/useDialog';
 import { switchTheme } from '../effects/themeTransition';
+import { EASE_OUT, EASE_SCREEN, DURATION } from '../lib/motionTokens';
 
 const DOMAIN_ICONS: Record<string, typeof GraduationCap> = {
   education: GraduationCap,
@@ -198,18 +199,18 @@ export default function Navbar() {
       <header
         ref={headerRef}
         onFocusCapture={() => setHiddenOnScroll(false)}
-        className={`fixed top-3 sm:top-4 left-0 right-0 z-50 px-3 sm:px-6 transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        className={`fixed top-3 sm:top-4 left-0 right-0 z-(--z-header) px-3 sm:px-6 transition-transform duration-[400ms] ease-reveal ${
           hiddenOnScroll ? '-translate-y-28' : 'translate-y-0'
         }`}
       >
         <div
           ref={megaRef}
-          className="max-w-7xl mx-auto rounded-full bg-white/95 dark:bg-[#132A21]/95 backdrop-blur-md border border-[#0F3D2E]/12 dark:border-[#F5F1E8]/15 shadow-[0_12px_36px_-10px_rgba(15,61,46,0.16)] px-3.5 sm:px-6 py-2.5 flex items-center justify-between gap-2"
+          className="max-w-7xl mx-auto rounded-pill bg-white/95 dark:bg-sous-bois/95 backdrop-blur-md border border-foret/12 dark:border-creme/15 shadow-overlay px-3.5 sm:px-6 py-2.5 flex items-center justify-between gap-2"
         >
           {/* Gauche : Logo WAHHF */}
           <Link
             to="/"
-            className="flex items-center gap-2.5 min-w-0 rounded-full"
+            className="flex items-center gap-2.5 min-w-0 rounded-pill"
             aria-label="WAHHF Foundation — Accueil"
           >
             <img
@@ -217,13 +218,13 @@ export default function Navbar() {
               alt="Logo WAHHF Foundation"
               width={48}
               height={48}
-              className="w-10 h-10 sm:w-11 sm:h-11 object-contain rounded-full bg-white p-0.5 shadow-xs"
+              className="w-10 h-10 sm:w-11 sm:h-11 object-contain rounded-pill bg-white p-0.5 shadow-xs"
             />
             <div className="flex flex-col min-w-0">
-              <span className="font-serif font-normal text-base sm:text-lg leading-none text-[#0F3D2E] dark:text-[#F5F1E8] tracking-tight whitespace-nowrap">
-                WAHHF <span className="hidden min-[360px]:inline text-gold-text dark:text-[#E8A317] font-sans text-xs font-semibold uppercase tracking-widest">Foundation</span>
+              <span className="font-serif font-normal text-base sm:text-lg leading-none text-foret dark:text-creme tracking-tight whitespace-nowrap">
+                WAHHF <span className="hidden min-[360px]:inline text-accent-or font-sans text-xs font-semibold uppercase tracking-widest">Foundation</span>
               </span>
-              <span className="text-[10px] text-[#1B1B18]/65 dark:text-[#F5F1E8]/65 hidden lg:inline whitespace-nowrap">
+              <span className="text-[10px] text-text-muted hidden lg:inline whitespace-nowrap">
                 {t('brand.branch')}
               </span>
             </div>
@@ -233,10 +234,10 @@ export default function Navbar() {
           <nav aria-label="Navigation principale" className="hidden xl:flex items-center gap-2">
             <Link
               to="/qui-sommes-nous"
-              className={`px-3 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
+              className={`px-3 py-2 rounded-pill text-sm font-medium whitespace-nowrap transition-colors ${
                 location.pathname === '/qui-sommes-nous'
-                  ? 'bg-[#0F3D2E]/10 dark:bg-[#F5F1E8]/15 text-[#0F3D2E] dark:text-[#E8A317]'
-                  : 'text-[#1B1B18] dark:text-[#F5F1E8] hover:text-[#0F3D2E] dark:hover:text-[#E8A317]'
+                  ? 'bg-foret/10 dark:bg-creme/15 text-accent'
+                  : 'text-text hover:text-accent'
               }`}
             >
               {t('nav.about')}
@@ -249,28 +250,28 @@ export default function Navbar() {
                 type="button"
                 onClick={() => setMegaOpen((prev) => !prev)}
                 aria-expanded={megaOpen}
-                className={`inline-flex items-center gap-1 px-3 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors cursor-pointer ${
+                className={`inline-flex items-center gap-1 px-3 py-2 rounded-pill text-sm font-medium whitespace-nowrap transition-colors cursor-pointer ${
                   location.pathname.startsWith('/nos-actions') ||
                   location.pathname.startsWith('/mobilite-langues') ||
                   location.pathname.startsWith('/academie') ||
                   location.pathname.startsWith('/accompagnement')
-                    ? 'bg-[#0F3D2E]/10 dark:bg-[#F5F1E8]/15 text-[#0F3D2E] dark:text-[#E8A317]'
-                    : 'text-[#1B1B18] dark:text-[#F5F1E8] hover:text-[#0F3D2E] dark:hover:text-[#E8A317]'
+                    ? 'bg-foret/10 dark:bg-creme/15 text-accent'
+                    : 'text-text hover:text-accent'
                 }`}
               >
                 <span>{t('nav.actions')}</span>
                 <ChevronDown
-                  className={`w-4 h-4 transition-transform duration-200 ${megaOpen ? 'rotate-180 text-[#E8A317]' : ''}`}
+                  className={`w-4 h-4 transition-transform duration-200 ${megaOpen ? 'rotate-180 text-or' : ''}`}
                 />
               </button>
             </div>
 
             <Link
               to="/notre-impact"
-              className={`px-3 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
+              className={`px-3 py-2 rounded-pill text-sm font-medium whitespace-nowrap transition-colors ${
                 location.pathname === '/notre-impact'
-                  ? 'bg-[#0F3D2E]/10 dark:bg-[#F5F1E8]/15 text-[#0F3D2E] dark:text-[#E8A317]'
-                  : 'text-[#1B1B18] dark:text-[#F5F1E8] hover:text-[#0F3D2E] dark:hover:text-[#E8A317]'
+                  ? 'bg-foret/10 dark:bg-creme/15 text-accent'
+                  : 'text-text hover:text-accent'
               }`}
             >
               {t('nav.impact')}
@@ -278,10 +279,10 @@ export default function Navbar() {
 
             <Link
               to="/actualites"
-              className={`px-3 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
+              className={`px-3 py-2 rounded-pill text-sm font-medium whitespace-nowrap transition-colors ${
                 location.pathname.startsWith('/actualites')
-                  ? 'bg-[#0F3D2E]/10 dark:bg-[#F5F1E8]/15 text-[#0F3D2E] dark:text-[#E8A317]'
-                  : 'text-[#1B1B18] dark:text-[#F5F1E8] hover:text-[#0F3D2E] dark:hover:text-[#E8A317]'
+                  ? 'bg-foret/10 dark:bg-creme/15 text-accent'
+                  : 'text-text hover:text-accent'
               }`}
             >
               {t('nav.news')}
@@ -289,10 +290,10 @@ export default function Navbar() {
 
             <Link
               to="/agir"
-              className={`px-3 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
+              className={`px-3 py-2 rounded-pill text-sm font-medium whitespace-nowrap transition-colors ${
                 location.pathname === '/agir'
-                  ? 'bg-[#0F3D2E]/10 dark:bg-[#F5F1E8]/15 text-[#0F3D2E] dark:text-[#E8A317]'
-                  : 'text-[#1B1B18] dark:text-[#F5F1E8] hover:text-[#0F3D2E] dark:hover:text-[#E8A317]'
+                  ? 'bg-foret/10 dark:bg-creme/15 text-accent'
+                  : 'text-text hover:text-accent'
               }`}
             >
               {t('nav.act')}
@@ -300,31 +301,31 @@ export default function Navbar() {
 
             <Link
               to="/contact"
-              className={`px-3 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
+              className={`px-3 py-2 rounded-pill text-sm font-medium whitespace-nowrap transition-colors ${
                 location.pathname === '/contact'
-                  ? 'bg-[#0F3D2E]/10 dark:bg-[#F5F1E8]/15 text-[#0F3D2E] dark:text-[#E8A317]'
-                  : 'text-[#1B1B18] dark:text-[#F5F1E8] hover:text-[#0F3D2E] dark:hover:text-[#E8A317]'
+                  ? 'bg-foret/10 dark:bg-creme/15 text-accent'
+                  : 'text-text hover:text-accent'
               }`}
             >
               {t('nav.contact')}
             </Link>
           </nav>
 
-          {/* Droite : Langue (FR / EN), Recherche, Thème, Bouton Faire un don (#C8102E), Burger */}
+          {/* Droite : Langue (FR / EN), Recherche, Thème, Bouton Faire un don (rouge), Burger */}
           <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             {/* Sélecteur de langue FR / EN */}
             <div
               role="group"
               aria-label="Sélecteur de langue"
-              className="hidden md:inline-flex items-center rounded-full bg-[#F5F1E8] dark:bg-[#0F3D2E] p-0.5 border border-[#0F3D2E]/10 dark:border-[#F5F1E8]/15 text-xs"
+              className="hidden md:inline-flex items-center rounded-pill bg-surface-inset p-0.5 border border-foret/10 dark:border-creme/15 text-xs"
             >
               <button
                 type="button"
                 onClick={() => switchLanguage('fr')}
-                className={`px-2.5 py-1 rounded-full font-semibold transition-colors cursor-pointer ${
+                className={`px-2.5 py-1 rounded-pill font-semibold transition-colors cursor-pointer ${
                   i18n.language.startsWith('fr')
-                    ? 'bg-[#0F3D2E] text-[#F5F1E8] dark:bg-[#E8A317] dark:text-[#1B1B18]'
-                    : 'text-[#1B1B18]/70 dark:text-[#F5F1E8]/70'
+                    ? 'bg-accent text-creme dark:text-encre'
+                    : 'text-encre/70 dark:text-creme/70'
                 }`}
               >
                 FR
@@ -332,10 +333,10 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={() => switchLanguage('en')}
-                className={`px-2.5 py-1 rounded-full font-semibold transition-colors cursor-pointer ${
+                className={`px-2.5 py-1 rounded-pill font-semibold transition-colors cursor-pointer ${
                   i18n.language.startsWith('en')
-                    ? 'bg-[#0F3D2E] text-[#F5F1E8] dark:bg-[#E8A317] dark:text-[#1B1B18]'
-                    : 'text-[#1B1B18]/70 dark:text-[#F5F1E8]/70'
+                    ? 'bg-accent text-creme dark:text-encre'
+                    : 'text-encre/70 dark:text-creme/70'
                 }`}
               >
                 EN
@@ -349,7 +350,7 @@ export default function Navbar() {
               onClick={() => setSearchOpen((prev) => !prev)}
               aria-expanded={searchOpen}
               aria-label="Rechercher sur le site"
-              className="w-9 h-9 rounded-full flex items-center justify-center text-[#1B1B18] dark:text-[#F5F1E8] hover:bg-[#0F3D2E]/10 dark:hover:bg-[#F5F1E8]/10 transition-colors cursor-pointer"
+              className="w-9 h-9 rounded-pill flex items-center justify-center text-text hover:bg-foret/10 dark:hover:bg-creme/10 transition-colors cursor-pointer"
             >
               <Search className="w-4 h-4" />
             </button>
@@ -360,12 +361,12 @@ export default function Navbar() {
               onClick={toggleTheme}
               aria-label={isDark ? t('nav.themeLight') : t('nav.themeDark')}
               title={isDark ? t('nav.themeLight') : t('nav.themeDark')}
-              className="hidden sm:flex w-9 h-9 rounded-full items-center justify-center text-[#1B1B18] dark:text-[#E8A317] hover:bg-[#0F3D2E]/10 dark:hover:bg-[#F5F1E8]/10 transition-colors cursor-pointer"
+              className="hidden sm:flex w-9 h-9 rounded-pill items-center justify-center text-encre dark:text-or hover:bg-foret/10 dark:hover:bg-creme/10 transition-colors cursor-pointer"
             >
               {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </button>
 
-            {/* 6e entrée / Bouton « Faire un don » rouge #C8102E */}
+            {/* 6e entrée / Bouton « Faire un don » (token rouge) */}
             <div className="hidden sm:block">
               <DonateButton size="sm" className="whitespace-nowrap">{t('nav.donate')}</DonateButton>
             </div>
@@ -378,7 +379,7 @@ export default function Navbar() {
               aria-label="Ouvrir le menu principal"
               aria-expanded={mobileOpen}
               aria-controls="menu-mobile"
-              className="xl:hidden w-10 h-10 shrink-0 rounded-full bg-[#0F3D2E] text-[#F5F1E8] flex items-center justify-center cursor-pointer"
+              className="xl:hidden w-10 h-10 shrink-0 rounded-pill bg-action text-on-action flex items-center justify-center cursor-pointer"
             >
               <Menu className="w-5 h-5" />
             </button>
@@ -386,16 +387,16 @@ export default function Navbar() {
 
           {/* Méga-menu « Nos actions » (6 domaines) */}
           {megaOpen && (
-            <div className="absolute top-full left-0 right-0 mt-3 rounded-[24px] bg-white dark:bg-[#132A21] border border-[#0F3D2E]/15 dark:border-[#F5F1E8]/15 shadow-2xl p-6 sm:p-8 z-50">
+            <div className="absolute top-full left-0 right-0 mt-3 rounded-card bg-surface-raised border border-border shadow-2xl p-6 sm:p-8 z-50">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 <div className="lg:col-span-8">
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-text dark:text-[#E8A317]">
+                    <span className="text-xs font-semibold uppercase tracking-kicker text-accent-or">
                       Les 6 domaines d’action de WAHHF Foundation
                     </span>
                     <Link
                       to="/nos-actions"
-                      className="text-xs font-semibold text-[#0F3D2E] dark:text-[#E8A317] hover:underline flex items-center gap-1"
+                      className="text-xs font-semibold text-accent hover:underline flex items-center gap-1"
                     >
                       Voir la vue d’ensemble <ArrowUpRight className="w-3.5 h-3.5" />
                     </Link>
@@ -408,21 +409,21 @@ export default function Navbar() {
                         <Link
                           key={dom.id}
                           to={dom.link}
-                          className="group flex items-start gap-3.5 p-3.5 rounded-2xl hover:bg-[#F5F1E8] dark:hover:bg-[#0F3D2E]/60 border border-transparent hover:border-[#E8A317]/30 transition"
+                          className="group flex items-start gap-3.5 p-3.5 rounded-2xl hover:bg-creme dark:hover:bg-foret/60 border border-transparent hover:border-or/30 transition"
                         >
-                          <div className="w-10 h-10 rounded-xl bg-[#0F3D2E] text-[#E8A317] flex items-center justify-center shrink-0 mt-0.5">
+                          <div className="w-10 h-10 rounded-inner bg-foret text-or flex items-center justify-center shrink-0 mt-0.5">
                             <Icon className="w-5 h-5" />
                           </div>
                           <div>
                             <div className="flex items-center gap-2">
-                              <span className="text-[11px] font-bold text-gold-text dark:text-[#E8A317]">
+                              <span className="text-[11px] font-bold text-accent-or">
                                 {dom.number}
                               </span>
-                              <p className="font-serif font-normal text-base text-[#1B1B18] dark:text-[#F5F1E8] group-hover:text-[#0F3D2E] dark:group-hover:text-[#E8A317]">
+                              <p className="font-serif font-normal text-base text-text group-hover:text-accent">
                                 {dom.title}
                               </p>
                             </div>
-                            <p className="text-xs text-[#1B1B18]/70 dark:text-[#F5F1E8]/70 line-clamp-2 mt-0.5">
+                            <p className="text-xs text-encre/70 dark:text-creme/70 line-clamp-2 mt-0.5">
                               {dom.shortDesc}
                             </p>
                           </div>
@@ -433,35 +434,35 @@ export default function Navbar() {
                 </div>
 
                 {/* Encart direct Mobilité & Langues */}
-                <div className="surface-green lg:col-span-4 rounded-2xl bg-[#0F3D2E] text-[#F5F1E8] p-6 flex flex-col justify-between border border-[#E8A317]/30">
+                <div className="surface-green lg:col-span-4 rounded-2xl bg-foret text-creme p-6 flex flex-col justify-between border border-or/30">
                   <div className="space-y-3">
-                    <span className="inline-block px-3 py-1 rounded-full bg-[#E8A317]/20 text-gold-on-green text-[11px] font-semibold uppercase tracking-wider">
+                    <span className="inline-block px-3 py-1 rounded-pill bg-or/20 text-gold-on-green text-[11px] font-semibold uppercase tracking-wider">
                       100 % Gratuit · Domaine 06
                     </span>
-                    <h3 className="font-serif font-normal text-xl text-[#F5F1E8]">
+                    <h3 className="font-serif font-normal text-xl text-creme">
                       Mobilité & Langues : Allemand (A1–C1) & Europe
                     </h3>
-                    <p className="text-xs text-[#F5F1E8]/80 leading-relaxed">
+                    <p className="text-xs text-creme/80 leading-relaxed">
                       Accompagnement gratuit aux cours d’allemand et orientation vérifiée vers 10 pays européens, financé par IROKO et nos donateurs.
                     </p>
                     <div className="pt-2 space-y-1.5 text-xs">
                       <Link
                         to="/mobilite-langues/academie"
-                        className="flex items-center justify-between py-1.5 px-3 rounded-xl bg-white/10 hover:bg-white/15 text-[#F5F1E8]"
+                        className="flex items-center justify-between py-1.5 px-3 rounded-inner bg-white/10 hover:bg-white/15 text-creme"
                       >
                         <span>Académie de langues (A1 à C1)</span>
-                        <ArrowUpRight className="w-3.5 h-3.5 text-[#E8A317]" />
+                        <ArrowUpRight className="w-3.5 h-3.5 text-or" />
                       </Link>
                       <Link
                         to="/mobilite-langues/accompagnement"
-                        className="flex items-center justify-between py-1.5 px-3 rounded-xl bg-white/10 hover:bg-white/15 text-[#F5F1E8]"
+                        className="flex items-center justify-between py-1.5 px-3 rounded-inner bg-white/10 hover:bg-white/15 text-creme"
                       >
                         <span>Accompagnement vers 10 pays</span>
-                        <ArrowUpRight className="w-3.5 h-3.5 text-[#E8A317]" />
+                        <ArrowUpRight className="w-3.5 h-3.5 text-or" />
                       </Link>
                       <Link
                         to="/accompagnement/eviter-les-arnaques"
-                        className="flex items-center justify-between py-1.5 px-3 rounded-xl bg-[#E8A317]/20 hover:bg-[#E8A317]/30 text-gold-on-green font-medium"
+                        className="flex items-center justify-between py-1.5 px-3 rounded-inner bg-or/20 hover:bg-or/30 text-gold-on-green font-medium"
                       >
                         <span>Vigilance : Éviter les arnaques</span>
                         <ArrowUpRight className="w-3.5 h-3.5" />
@@ -472,7 +473,7 @@ export default function Navbar() {
                   <div className="pt-4 mt-4 border-t border-white/15 flex items-center justify-between">
                     <Link
                       to="/candidater"
-                      className="text-xs font-semibold text-[#E8A317] hover:underline flex items-center gap-1"
+                      className="text-xs font-semibold text-or hover:underline flex items-center gap-1"
                     >
                       Candidater gratuitement <ArrowUpRight className="w-3.5 h-3.5" />
                     </Link>
@@ -488,10 +489,10 @@ export default function Navbar() {
           <div
             ref={searchPanelRef}
             role="search"
-            className="max-w-2xl mx-auto mt-2 rounded-3xl bg-white dark:bg-[#132A21] border border-[#0F3D2E]/15 dark:border-[#F5F1E8]/15 shadow-xl p-4"
+            className="max-w-2xl mx-auto mt-2 rounded-card bg-surface-raised border border-border shadow-xl p-4"
           >
             <div className="flex items-center gap-3">
-              <Search aria-hidden="true" className="w-5 h-5 text-[#E8A317] shrink-0" />
+              <Search aria-hidden="true" className="w-5 h-5 text-or shrink-0" />
               <input
                 ref={searchInputRef}
                 aria-label={t('nav.searchPlaceholder')}
@@ -499,20 +500,20 @@ export default function Navbar() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={t('nav.searchPlaceholder')}
-                className="w-full bg-transparent text-sm sm:text-base text-[#1B1B18] dark:text-[#F5F1E8] placeholder-[#1B1B18]/50 dark:placeholder-[#F5F1E8]/50"
+                className="w-full bg-transparent text-sm sm:text-base text-text placeholder-encre/50 dark:placeholder-creme/50"
               />
               <button
                 type="button"
                 onClick={() => setSearchOpen(false)}
                 aria-label="Fermer la recherche"
-                className="p-1.5 rounded-full hover:bg-[#0F3D2E]/10 text-[#1B1B18] dark:text-[#F5F1E8] cursor-pointer"
+                className="p-1.5 rounded-pill hover:bg-foret/10 text-text cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
             {searchResults.length > 0 && (
-              <div className="mt-3 pt-3 border-t border-[#0F3D2E]/10 dark:border-[#F5F1E8]/10 space-y-1">
+              <div className="mt-3 pt-3 border-t border-border-subtle space-y-1">
                 {searchResults.map((res) => (
                   <button
                     key={res.to}
@@ -522,10 +523,10 @@ export default function Navbar() {
                       setSearchOpen(false);
                       setSearchQuery('');
                     }}
-                    className="w-full text-left px-3 py-2 rounded-xl hover:bg-[#F5F1E8] dark:hover:bg-[#0F3D2E] text-sm text-[#1B1B18] dark:text-[#F5F1E8] flex items-center justify-between cursor-pointer"
+                    className="w-full text-left px-3 py-2 rounded-inner hover:bg-surface-inset text-sm text-text flex items-center justify-between cursor-pointer"
                   >
                     <span>{res.label}</span>
-                    <ArrowUpRight className="w-4 h-4 text-[#E8A317]" />
+                    <ArrowUpRight className="w-4 h-4 text-or" />
                   </button>
                 ))}
               </div>
@@ -546,12 +547,12 @@ export default function Navbar() {
           animate={
             reduceMotion
               ? { opacity: 1, transition: { duration: 0.2 } }
-              : { clipPath: 'inset(0% 0% 0% 0%)', transition: { duration: 0.7, ease: [0.76, 0, 0.24, 1] } }
+              : { clipPath: 'inset(0% 0% 0% 0%)', transition: { duration: DURATION.screen, ease: EASE_SCREEN } }
           }
           exit={
             reduceMotion
               ? { opacity: 0, transition: { duration: 0.15 } }
-              : { clipPath: 'inset(0% 0% 100% 0%)', transition: { duration: 0.6, ease: [0.76, 0, 0.24, 1] } }
+              : { clipPath: 'inset(0% 0% 100% 0%)', transition: { duration: 0.6, ease: EASE_SCREEN } }
           }
           role="dialog"
           aria-modal="true"
@@ -572,18 +573,18 @@ export default function Navbar() {
               }
             }
           }}
-          className="surface-green fixed inset-0 z-50 bg-[#0F3D2E] text-[#F5F1E8] flex flex-col justify-between p-6 overflow-y-auto"
+          className="surface-green fixed inset-0 z-(--z-menu) bg-foret text-creme flex flex-col justify-between p-6 overflow-y-auto"
         >
           <div className="flex items-center justify-between pb-6 border-b border-white/15">
             <Link to="/" onClick={() => setMobileOpen(false)} className="flex items-center gap-3">
               <img
                 src={WAHHF_LOGO_URL}
                 alt="Logo WAHHF Foundation"
-                className="w-11 h-11 object-contain rounded-full bg-white p-0.5"
+                className="w-11 h-11 object-contain rounded-pill bg-white p-0.5"
               />
               <div>
-                <p className="font-serif text-lg text-[#F5F1E8]">WAHHF Foundation</p>
-                <p className="text-xs text-[#E8A317]">{t('brand.branch')}</p>
+                <p className="font-serif text-lg text-creme">WAHHF Foundation</p>
+                <p className="text-xs text-or">{t('brand.branch')}</p>
               </div>
             </Link>
 
@@ -592,7 +593,7 @@ export default function Navbar() {
               type="button"
               onClick={() => setMobileOpen(false)}
               aria-label="Fermer le menu"
-              className="w-11 h-11 rounded-full bg-white/10 text-[#F5F1E8] flex items-center justify-center"
+              className="w-11 h-11 rounded-pill bg-white/10 text-creme flex items-center justify-center"
             >
               <X className="w-6 h-6" />
             </button>
@@ -602,11 +603,11 @@ export default function Navbar() {
             aria-label="Navigation principale (mobile)"
             className="py-6 space-y-4"
             initial={reduceMotion ? false : { opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.15, ease: [0.22, 1, 0.36, 1] } }}
+            animate={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.15, ease: EASE_OUT } }}
           >
             <Link
               to="/qui-sommes-nous"
-              className="block font-serif text-2xl sm:text-3xl text-[#F5F1E8] hover:text-[#E8A317] py-1"
+              className="block font-serif text-2xl sm:text-3xl text-creme hover:text-or py-1"
             >
               1. {t('nav.about')}
             </Link>
@@ -614,18 +615,18 @@ export default function Navbar() {
             <div className="space-y-2">
               <Link
                 to="/nos-actions"
-                className="block font-serif text-2xl sm:text-3xl text-[#F5F1E8] hover:text-[#E8A317] py-1"
+                className="block font-serif text-2xl sm:text-3xl text-creme hover:text-or py-1"
               >
                 2. {t('nav.actions')} (6 domaines)
               </Link>
-              <div className="pl-4 border-l-2 border-[#E8A317]/40 grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+              <div className="pl-4 border-l-2 border-or/40 grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
                 {DOMAINS_DATA.map((d) => (
                   <Link
                     key={d.id}
                     to={d.link}
-                    className="text-sm text-[#F5F1E8]/85 hover:text-[#E8A317] py-1 flex items-center gap-2"
+                    className="text-sm text-creme/85 hover:text-or py-1 flex items-center gap-2"
                   >
-                    <span className="text-[#E8A317] font-semibold">{d.number}.</span>
+                    <span className="text-or font-semibold">{d.number}.</span>
                     <span>{d.title}</span>
                   </Link>
                 ))}
@@ -634,35 +635,35 @@ export default function Navbar() {
 
             <Link
               to="/notre-impact"
-              className="block font-serif text-2xl sm:text-3xl text-[#F5F1E8] hover:text-[#E8A317] py-1"
+              className="block font-serif text-2xl sm:text-3xl text-creme hover:text-or py-1"
             >
               3. {t('nav.impact')}
             </Link>
 
             <Link
               to="/actualites"
-              className="block font-serif text-2xl sm:text-3xl text-[#F5F1E8] hover:text-[#E8A317] py-1"
+              className="block font-serif text-2xl sm:text-3xl text-creme hover:text-or py-1"
             >
               4. {t('nav.news')}
             </Link>
 
             <Link
               to="/agir"
-              className="block font-serif text-2xl sm:text-3xl text-[#F5F1E8] hover:text-[#E8A317] py-1"
+              className="block font-serif text-2xl sm:text-3xl text-creme hover:text-or py-1"
             >
               5. {t('nav.act')}
             </Link>
 
             <Link
               to="/contact"
-              className="block font-serif text-2xl sm:text-3xl text-[#F5F1E8] hover:text-[#E8A317] py-1"
+              className="block font-serif text-2xl sm:text-3xl text-creme hover:text-or py-1"
             >
               6. {t('nav.contact')}
             </Link>
 
             <Link
               to="/candidater"
-              className="block font-serif text-2xl sm:text-3xl text-[#E8A317] py-1"
+              className="block font-serif text-2xl sm:text-3xl text-or py-1"
             >
               → Candidater (Cours & Europe — Gratuit)
             </Link>
@@ -674,8 +675,8 @@ export default function Navbar() {
                 <button
                   type="button"
                   onClick={() => switchLanguage('fr')}
-                  className={`px-3 py-1.5 rounded-full text-xs font-semibold ${
-                    i18n.language.startsWith('fr') ? 'bg-[#E8A317] text-[#1B1B18]' : 'bg-white/10 text-white'
+                  className={`px-3 py-1.5 rounded-pill text-xs font-semibold ${
+                    i18n.language.startsWith('fr') ? 'bg-or text-encre' : 'bg-white/10 text-white'
                   }`}
                 >
                   Français (FR)
@@ -683,8 +684,8 @@ export default function Navbar() {
                 <button
                   type="button"
                   onClick={() => switchLanguage('en')}
-                  className={`px-3 py-1.5 rounded-full text-xs font-semibold ${
-                    i18n.language.startsWith('en') ? 'bg-[#E8A317] text-[#1B1B18]' : 'bg-white/10 text-white'
+                  className={`px-3 py-1.5 rounded-pill text-xs font-semibold ${
+                    i18n.language.startsWith('en') ? 'bg-or text-encre' : 'bg-white/10 text-white'
                   }`}
                 >
                   English (EN)
@@ -692,13 +693,13 @@ export default function Navbar() {
                 <button
                   type="button"
                   onClick={toggleTheme}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-white/10 text-white"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-pill text-xs font-semibold bg-white/10 text-white"
                 >
                   {isDark ? <Sun aria-hidden="true" className="w-3.5 h-3.5" /> : <Moon aria-hidden="true" className="w-3.5 h-3.5" />}
                   <span>{isDark ? t('nav.themeLight') : t('nav.themeDark')}</span>
                 </button>
               </div>
-              <span className="text-xs text-[#F5F1E8]/60">Glisser vers le haut pour fermer</span>
+              <span className="text-xs text-creme/60">Glisser vers le haut pour fermer</span>
             </div>
 
             <DonateButton size="lg" className="w-full">

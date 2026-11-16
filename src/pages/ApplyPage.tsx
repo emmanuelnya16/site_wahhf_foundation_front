@@ -32,7 +32,7 @@ const WISH_LABELS = {
 type ApplyField = 'fullName' | 'email' | 'phone' | 'residenceCountry' | 'city' | 'gdprConsent';
 const STEP1_FIELDS = ['fullName', 'email', 'phone', 'residenceCountry', 'city'] as const;
 const INPUT_CLASS =
-  'w-full px-4 py-3 rounded-xl bg-[#F5F1E8] dark:bg-[#0F3D2E] border border-[#0F3D2E]/20 dark:border-[#F5F1E8]/20 aria-invalid:border-danger text-sm';
+  'w-full px-4 py-3 rounded-inner bg-surface-inset border border-border-input aria-invalid:border-danger text-sm';
 
 function checkField(key: ApplyField, value: string | boolean): string | undefined {
   switch (key) {
@@ -153,16 +153,16 @@ export default function ApplyPage() {
         description="Formulaire unique et 100 % gratuit de demande d'accompagnement et d'inscription aux cours d'allemand WAHHF Foundation. Aucun document d'identité ni paiement demandé."
       />
 
-      <section className="surface-green pt-32 pb-14 bg-[#0F3D2E] text-[#F5F1E8]">
+      <section className="surface-green pt-32 pb-14 bg-foret text-creme">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8A317]/20 text-gold-on-green text-xs font-semibold uppercase tracking-widest">
+          <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-pill bg-or/20 text-gold-on-green text-xs font-semibold uppercase tracking-widest">
             <CheckCircle2 className="w-4 h-4" />
             100 % Gratuit · Financé par IROKO et nos donateurs
           </span>
           <h1 className="font-serif font-normal text-[clamp(2rem,4.5vw,3.5rem)] leading-tight">
             Candidater à un parcours d’accompagnement
           </h1>
-          <p className="text-base sm:text-lg text-[#F5F1E8]/85">
+          <p className="text-base sm:text-lg text-creme/85">
             Formulaire unique pour rejoindre l’Académie de langue allemande (A1 à C1) et/ou bénéficier d’une orientation documentée vers l’Europe.
           </p>
         </div>
@@ -184,8 +184,8 @@ export default function ApplyPage() {
             titleRef={stepTitleRef}
             onEdit={() => setPrepared(false)}
           >
-            <div className="rounded-2xl bg-[#0F3D2E]/8 dark:bg-[#0F3D2E] border border-[#0F3D2E]/20 dark:border-[#E8A317]/40 p-5 text-sm text-[#1B1B18] dark:text-[#F5F1E8]">
-              <p className="font-semibold text-[#0F3D2E] dark:text-[#E8A317] mb-1">
+            <div className="rounded-2xl bg-foret/8 dark:bg-foret border border-foret/20 dark:border-or/40 p-5 text-sm text-text">
+              <p className="font-semibold text-accent mb-1">
                 Délai de réponse indicatif : sous 7 à 14 jours ouvrés (TODO : délai exact à confirmer par l’équipe WAHHF).
               </p>
               <p className="text-xs opacity-80">
@@ -194,10 +194,10 @@ export default function ApplyPage() {
             </div>
           </ContactHandoff>
         ) : (
-          <div className="rounded-[24px] bg-white dark:bg-[#132A21] border border-[#0F3D2E]/15 dark:border-[#F5F1E8]/15 p-6 sm:p-10 shadow-sm space-y-8">
+          <div className="rounded-card bg-surface-raised border border-border p-6 sm:p-10 shadow-sm space-y-8">
             {/* Barre de progression des 3 étapes */}
             <div className="space-y-3">
-              <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-[#0F3D2E] dark:text-[#E8A317]">
+              <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-accent">
                 <span>Étape {step} sur 3</span>
                 <span>
                   {step === 1
@@ -207,9 +207,9 @@ export default function ApplyPage() {
                     : '3. Projet & Consentement RGPD'}
                 </span>
               </div>
-              <div aria-hidden="true" className="w-full h-2 rounded-full bg-[#F5F1E8] dark:bg-[#0F3D2E] overflow-hidden">
+              <div aria-hidden="true" className="w-full h-2 rounded-pill bg-surface-inset overflow-hidden">
                 <div
-                  className="h-full w-full origin-left bg-gradient-to-r from-[#0F3D2E] to-[#E8A317] transition-transform duration-300"
+                  className="h-full w-full origin-left bg-gradient-to-r from-foret to-or transition-transform duration-(--dur-fast)"
                   style={{ transform: `scaleX(${step / 3})` }}
                 />
               </div>
@@ -326,7 +326,7 @@ export default function ApplyPage() {
                   <div className="pt-4 flex justify-end">
                     <button
                       type="submit"
-                      className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-[#0F3D2E] text-[#F5F1E8] text-sm font-semibold cursor-pointer"
+                      className="inline-flex items-center gap-2 px-7 py-3 rounded-pill bg-action text-on-action text-sm font-semibold cursor-pointer"
                     >
                       <span>Continuer vers l’étape 2</span>
                       <ArrowRight className="w-4 h-4" />
@@ -364,8 +364,8 @@ export default function ApplyPage() {
                           showCheck
                           className={`p-4 rounded-2xl border text-left text-sm font-medium transition ${
                             wishType === opt.id
-                              ? 'bg-[#0F3D2E] text-[#E8A317] border-[#E8A317]'
-                              : 'bg-[#F5F1E8] dark:bg-[#0F3D2E]/50 border-[#0F3D2E]/15'
+                              ? 'bg-foret text-or border-or'
+                              : 'bg-creme dark:bg-foret/50 border-foret/15'
                           }`}
                         >
                           {opt.label}
@@ -386,7 +386,7 @@ export default function ApplyPage() {
                         id="apply-target-country"
                         value={targetCountry}
                         onChange={(e) => setTargetCountry(e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl bg-[#F5F1E8] dark:bg-[#0F3D2E] border border-[#0F3D2E]/20 dark:border-[#F5F1E8]/20 text-sm"
+                        className="w-full px-4 py-3 rounded-inner bg-surface-inset border border-border-input text-sm"
                       >
                         {COUNTRIES_DATA.map((c) => (
                           <option key={c.slug} value={c.slug}>
@@ -409,7 +409,7 @@ export default function ApplyPage() {
                         id="apply-german-level"
                         value={currentGermanLevel}
                         onChange={(e) => setCurrentGermanLevel(e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl bg-[#F5F1E8] dark:bg-[#0F3D2E] border border-[#0F3D2E]/20 dark:border-[#F5F1E8]/20 text-sm"
+                        className="w-full px-4 py-3 rounded-inner bg-surface-inset border border-border-input text-sm"
                       >
                         <option value="A1">A1 — Débutant complet</option>
                         <option value="A2">A2 — Bases élémentaires</option>
@@ -430,7 +430,7 @@ export default function ApplyPage() {
                         id="apply-format"
                         value={preferredFormat}
                         onChange={(e) => setPreferredFormat(e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl bg-[#F5F1E8] dark:bg-[#0F3D2E] border border-[#0F3D2E]/20 dark:border-[#F5F1E8]/20 text-sm"
+                        className="w-full px-4 py-3 rounded-inner bg-surface-inset border border-border-input text-sm"
                       >
                         <option value="En ligne">En ligne (accessible partout)</option>
                         <option value="Présentiel Douala (TODO)">
@@ -447,14 +447,14 @@ export default function ApplyPage() {
                     <button
                       type="button"
                       onClick={() => setStep(1)}
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#0F3D2E]/25 text-sm cursor-pointer"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-pill border border-foret/25 text-sm cursor-pointer"
                     >
                       <ArrowLeft className="w-4 h-4" />
                       <span>Étape précédente</span>
                     </button>
                     <button
                       type="submit"
-                      className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-[#0F3D2E] text-[#F5F1E8] text-sm font-semibold cursor-pointer"
+                      className="inline-flex items-center gap-2 px-7 py-3 rounded-pill bg-action text-on-action text-sm font-semibold cursor-pointer"
                     >
                       <span>Continuer vers l’étape 3</span>
                       <ArrowRight className="w-4 h-4" />
@@ -486,21 +486,21 @@ export default function ApplyPage() {
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       placeholder="Expliquez en quelques lignes votre motivation et votre projet..."
-                      className="w-full px-4 py-3 rounded-xl bg-[#F5F1E8] dark:bg-[#0F3D2E] border border-[#0F3D2E]/20 dark:border-[#F5F1E8]/20 text-sm"
+                      className="w-full px-4 py-3 rounded-inner bg-surface-inset border border-border-input text-sm"
                     />
                   </div>
 
                   {/* Rappel clair obligatoire : aucun document d'identité ni paiement demandé */}
-                  <div className="rounded-2xl bg-[#0F3D2E]/8 dark:bg-[#0F3D2E] border border-[#0F3D2E]/20 dark:border-[#E8A317]/40 p-5 flex items-start gap-3.5">
-                    <ShieldCheck className="w-6 h-6 text-[#0F3D2E] dark:text-[#E8A317] shrink-0 mt-0.5" />
-                    <p className="text-sm font-medium text-[#1B1B18] dark:text-[#F5F1E8]">
+                  <div className="rounded-2xl bg-foret/8 dark:bg-foret border border-foret/20 dark:border-or/40 p-5 flex items-start gap-3.5">
+                    <ShieldCheck className="w-6 h-6 text-accent shrink-0 mt-0.5" />
+                    <p className="text-sm font-medium text-text">
                       « Aucun document d’identité ni aucun paiement ne vous est demandé à cette étape. »
                     </p>
                   </div>
 
                   {/* Case consentement RGPD explicite */}
                   <div>
-                    <label className="flex items-start gap-3 cursor-pointer text-xs sm:text-sm text-[#1B1B18]/85 dark:text-[#F5F1E8]/85">
+                    <label className="flex items-start gap-3 cursor-pointer text-xs sm:text-sm text-encre/85 dark:text-creme/85">
                       <input
                         id={fieldId('gdprConsent')}
                         type="checkbox"
@@ -512,11 +512,11 @@ export default function ApplyPage() {
                         }}
                         aria-invalid={errors.gdprConsent ? true : undefined}
                         aria-describedby={errors.gdprConsent ? fieldErrorId(fieldId('gdprConsent')) : undefined}
-                        className="mt-1 w-4 h-4 accent-[#0F3D2E]"
+                        className="mt-1 w-4 h-4 accent-foret"
                       />
                       <span>
                         J’accepte que mes coordonnées soient traitées de manière strictement confidentielle par WAHHF Foundation dans le seul but de répondre gratuitement à ma demande d’accompagnement, conformément à la{' '}
-                        <Link to="/confidentialite" className="underline text-[#0F3D2E] dark:text-[#E8A317]">
+                        <Link to="/confidentialite" className="underline text-accent">
                           politique de confidentialité (RGPD)
                         </Link>
                         . *
@@ -529,7 +529,7 @@ export default function ApplyPage() {
                     <button
                       type="button"
                       onClick={() => setStep(2)}
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#0F3D2E]/25 text-sm cursor-pointer"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-pill border border-foret/25 text-sm cursor-pointer"
                     >
                       <ArrowLeft className="w-4 h-4" />
                       <span>Étape précédente</span>
@@ -537,7 +537,7 @@ export default function ApplyPage() {
 
                     <button
                       type="submit"
-                      className="px-8 py-3.5 rounded-full bg-[#0F3D2E] hover:bg-[#14523E] text-[#F5F1E8] text-sm sm:text-base font-semibold cursor-pointer"
+                      className="px-8 py-3.5 rounded-pill bg-action hover:bg-action-hover text-on-action text-sm sm:text-base font-semibold cursor-pointer"
                     >
                       Préparer l’envoi de ma candidature
                     </button>

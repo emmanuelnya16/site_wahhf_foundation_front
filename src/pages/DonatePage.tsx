@@ -91,16 +91,16 @@ export default function DonatePage() {
         description="Soutenez WAHHF Foundation : vos dons financent la gratuité des cours d'allemand (A1 à C1), l'accompagnement vers l'Europe et nos actions sociales au Cameroun."
       />
 
-      <section className="surface-green pt-32 pb-16 bg-[#0F3D2E] text-[#F5F1E8]">
+      <section className="surface-green pt-32 pb-16 bg-foret text-creme">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-5">
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C8102E] text-white text-xs font-semibold uppercase tracking-widest">
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-pill bg-rouge text-white text-xs font-semibold uppercase tracking-widest">
             <Heart className="w-3.5 h-3.5 fill-current" />
             Soutenir WAHHF Foundation · Financer un parcours
           </span>
           <h1 className="font-serif font-normal text-[clamp(2.1rem,4.6vw,3.8rem)] leading-tight">
             Grâce à vos dons, chaque jeune est accompagné gratuitement
           </h1>
-          <p className="text-base sm:text-xl text-[#F5F1E8]/85 max-w-3xl leading-relaxed">
+          <p className="text-base sm:text-xl text-creme/85 max-w-3xl leading-relaxed">
             Le groupe IROKO soutient notre structure afin que vos dons aillent directement aux actions de terrain : cours d’allemand A1–C1, matériel pédagogique, santé communautaire et éducation.
           </p>
         </div>
@@ -119,7 +119,7 @@ export default function DonatePage() {
               onEdit={() => setPrepared(false)}
               editLabel="Modifier mon don"
             >
-              <p className="text-xs sm:text-sm text-[#1B1B18]/70 dark:text-[#F5F1E8]/70">
+              <p className="text-xs sm:text-sm text-encre/70 dark:text-creme/70">
                 Aucun paiement n’est effectué sur ce site et aucune donnée bancaire n’y est demandée.
               </p>
             </ContactHandoff>
@@ -127,7 +127,7 @@ export default function DonatePage() {
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
             {/* Formulaire de don */}
-            <div className="lg:col-span-7 rounded-[24px] bg-white dark:bg-[#132A21] border border-[#0F3D2E]/15 dark:border-[#F5F1E8]/15 p-7 sm:p-10 shadow-sm space-y-8">
+            <div className="lg:col-span-7 rounded-card bg-surface-raised border border-border p-7 sm:p-10 shadow-sm space-y-8">
               <SectionHeader
                 titleRef={resultTitleRef}
                 kicker="Financer un parcours"
@@ -138,7 +138,7 @@ export default function DonatePage() {
                 {/* Fréquence : Ponctuel / Mensuel (boutons radio natifs) */}
                 <fieldset>
                   <legend className="sr-only">Fréquence du don</legend>
-                  <div className="grid grid-cols-2 gap-3 p-1.5 rounded-full bg-[#F5F1E8] dark:bg-[#0F3D2E]">
+                  <div className="grid grid-cols-2 gap-3 p-1.5 rounded-pill bg-surface-inset">
                     {[
                       { id: 'unique' as const, label: 'Don ponctuel' },
                       { id: 'mensuel' as const, label: 'Don mensuel régulier' },
@@ -149,10 +149,10 @@ export default function DonatePage() {
                         value={f.id}
                         checked={frequency === f.id}
                         onChange={() => setFrequency(f.id)}
-                        className={`py-2.5 rounded-full text-sm font-semibold text-center transition ${
+                        className={`py-2.5 rounded-pill text-sm font-semibold text-center transition ${
                           frequency === f.id
-                            ? 'bg-[#0F3D2E] text-[#F5F1E8] dark:bg-[#E8A317] dark:text-[#1B1B18]'
-                            : 'text-[#1B1B18]/70 dark:text-[#F5F1E8]/70'
+                            ? 'bg-accent text-creme dark:text-encre'
+                            : 'text-encre/70 dark:text-creme/70'
                         }`}
                       >
                         {f.label}
@@ -179,8 +179,8 @@ export default function DonatePage() {
                           }}
                           className={`py-4 px-3 rounded-2xl border font-serif text-2xl text-center transition ${
                             checked
-                              ? 'bg-[#C8102E] text-white border-[#C8102E] shadow-sm'
-                              : 'bg-[#F5F1E8] dark:bg-[#0F3D2E]/50 border-[#0F3D2E]/15 text-[#1B1B18] dark:text-[#F5F1E8]'
+                              ? 'bg-rouge text-white border-rouge shadow-sm'
+                              : 'bg-creme dark:bg-foret/50 border-foret/15 text-text'
                           }`}
                         >
                           {item.amount} €
@@ -205,7 +205,7 @@ export default function DonatePage() {
                     value={customAmount}
                     onChange={(e) => setCustomAmount(e.target.value)}
                     placeholder="Autre montant (ex. 75)"
-                    className="w-full px-4 py-3 rounded-xl bg-[#F5F1E8] dark:bg-[#0F3D2E] border border-[#0F3D2E]/20 text-sm"
+                    className="w-full px-4 py-3 rounded-inner bg-surface-inset border border-foret/20 text-sm"
                   />
                 </div>
 
@@ -229,7 +229,7 @@ export default function DonatePage() {
                           | 'materiel_pedagogique'
                       )
                     }
-                    className="w-full px-4 py-3 rounded-xl bg-[#F5F1E8] dark:bg-[#0F3D2E] border border-[#0F3D2E]/20 text-sm"
+                    className="w-full px-4 py-3 rounded-inner bg-surface-inset border border-foret/20 text-sm"
                   >
                     <option value="academie_langues">
                       Financer un parcours : Académie d’allemand A1–C1 & Orientation gratuite
@@ -261,7 +261,7 @@ export default function DonatePage() {
                       required
                       value={donorName}
                       onChange={(e) => setDonorName(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl bg-[#F5F1E8] dark:bg-[#0F3D2E] border border-[#0F3D2E]/20 text-sm"
+                      className="w-full px-4 py-3 rounded-inner bg-surface-inset border border-foret/20 text-sm"
                     />
                   </div>
                   <div>
@@ -277,7 +277,7 @@ export default function DonatePage() {
                       required
                       value={donorEmail}
                       onChange={(e) => setDonorEmail(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl bg-[#F5F1E8] dark:bg-[#0F3D2E] border border-[#0F3D2E]/20 text-sm"
+                      className="w-full px-4 py-3 rounded-inner bg-surface-inset border border-foret/20 text-sm"
                     />
                   </div>
                 </div>
@@ -300,10 +300,10 @@ export default function DonatePage() {
                         checked={paymentMethod === m.id}
                         onChange={() => setPaymentMethod(m.id)}
                         showCheck
-                        className={`p-3 rounded-xl border text-left font-medium ${
+                        className={`p-3 rounded-inner border text-left font-medium ${
                           paymentMethod === m.id
-                            ? 'bg-[#0F3D2E] text-[#E8A317] border-[#E8A317]'
-                            : 'bg-[#F5F1E8] dark:bg-[#0F3D2E]/40 border-[#0F3D2E]/15'
+                            ? 'bg-foret text-or border-or'
+                            : 'bg-creme dark:bg-foret/40 border-foret/15'
                         }`}
                       >
                         {m.label}
@@ -318,7 +318,7 @@ export default function DonatePage() {
                       type="checkbox"
                       checked={anonymous}
                       onChange={(e) => setAnonymous(e.target.checked)}
-                      className="w-4 h-4 accent-[#0F3D2E]"
+                      className="w-4 h-4 accent-foret"
                     />
                     <span>Je souhaite que mon don reste anonyme publiquement</span>
                   </label>
@@ -329,7 +329,7 @@ export default function DonatePage() {
                       required
                       checked={gdprConsent}
                       onChange={(e) => setGdprConsent(e.target.checked)}
-                      className="mt-1 w-4 h-4 accent-[#0F3D2E]"
+                      className="mt-1 w-4 h-4 accent-foret"
                     />
                     <span>
                       J’accepte le traitement confidentiel de mes informations pour la gestion de mon don (RGPD). Aucune donnée bancaire n’est enregistrée sur ce formulaire de démonstration. *
@@ -339,7 +339,7 @@ export default function DonatePage() {
 
                 <button
                   type="submit"
-                  className="w-full py-4 rounded-full bg-[#C8102E] hover:bg-[#a80d26] text-white font-semibold text-base shadow-md transition-colors cursor-pointer flex items-center justify-center gap-2"
+                  className="w-full py-4 rounded-pill bg-rouge hover:bg-rouge-fonce text-white font-semibold text-base shadow-md transition-colors cursor-pointer flex items-center justify-center gap-2"
                 >
                   <Heart className="w-5 h-5 fill-current" />
                   <span>
@@ -351,21 +351,21 @@ export default function DonatePage() {
 
             {/* Colonne d'impact & transparence */}
             <div className="lg:col-span-5 space-y-6">
-              <div className="surface-green rounded-[24px] bg-[#0F3D2E] text-[#F5F1E8] p-7 sm:p-8 border border-[#E8A317]/35 space-y-5">
-                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#E8A317]">
+              <div className="surface-green rounded-card bg-foret text-creme p-7 sm:p-8 border border-or/35 space-y-5">
+                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-or">
                   <Sparkles className="w-4 h-4" />
                   <span>Ce que votre don permet (Exemples — TODO)</span>
                 </div>
-                <h3 className="font-serif text-2xl text-[#F5F1E8]">
+                <h3 className="font-serif text-2xl text-creme">
                   Financer un parcours d’autonomie
                 </h3>
-                <ul className="space-y-4 text-sm text-[#F5F1E8]/85">
+                <ul className="space-y-4 text-sm text-creme/85">
                   {SUGGESTED_AMOUNTS.map((s) => (
                     <li
                       key={s.amount}
                       className="p-3.5 rounded-2xl bg-white/10 border border-white/10 flex items-start gap-3"
                     >
-                      <span className="font-serif text-xl text-[#E8A317] font-semibold shrink-0">
+                      <span className="font-serif text-xl text-or font-semibold shrink-0">
                         {s.amount} €
                       </span>
                       <span className="text-xs sm:text-sm">{s.impact}</span>
@@ -374,21 +374,21 @@ export default function DonatePage() {
                 </ul>
               </div>
 
-              <div className="rounded-[24px] bg-white dark:bg-[#132A21] border border-[#0F3D2E]/15 dark:border-[#F5F1E8]/15 p-7 space-y-4">
-                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#0F3D2E] dark:text-[#E8A317]">
+              <div className="rounded-card bg-surface-raised border border-border p-7 space-y-4">
+                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-accent">
                   <ShieldCheck className="w-4 h-4" />
                   <span>Garantie de transparence</span>
                 </div>
-                <p className="text-sm text-[#1B1B18]/80 dark:text-[#F5F1E8]/80 leading-relaxed">
+                <p className="text-sm text-text-secondary leading-relaxed">
                   En tant que branche sociale du groupe IROKO, WAHHF Foundation publie ses engagements d’allocation des ressources sur sa page dédiée.
                 </p>
-                <div className="flex items-center gap-2 text-xs text-[#1B1B18]/65 dark:text-[#F5F1E8]/65">
-                  <Lock className="w-4 h-4 text-[#E8A317]" />
+                <div className="flex items-center gap-2 text-xs text-text-muted">
+                  <Lock className="w-4 h-4 text-or" />
                   <span>Formulaire prêt pour intégration Stripe / PayPal / Mobile Money via Symfony.</span>
                 </div>
                 <Link
                   to="/transparence"
-                  className="inline-block text-xs font-semibold text-[#0F3D2E] dark:text-[#E8A317] underline underline-offset-4"
+                  className="inline-block text-xs font-semibold text-accent underline underline-offset-4"
                 >
                   Consulter notre page Transparence financière →
                 </Link>

@@ -36,17 +36,17 @@ export default function ContactHandoff({
       className={
         compact
           ? 'space-y-4'
-          : 'rounded-[24px] bg-white dark:bg-[#132A21] border-2 border-[#E8A317] p-7 sm:p-10 space-y-6 shadow-md text-left'
+          : 'rounded-card bg-surface-raised border-2 border-or p-7 sm:p-10 space-y-6 shadow-md text-left'
       }
     >
       <Heading
         ref={titleRef}
         tabIndex={-1}
-        className={`font-serif font-normal text-[#1B1B18] dark:text-[#F5F1E8] ${compact ? 'text-xl' : 'text-2xl sm:text-3xl'}`}
+        className={`font-serif font-normal text-text ${compact ? 'text-xl' : 'text-2xl sm:text-3xl'}`}
       >
         {title}
       </Heading>
-      <p className="text-sm sm:text-base text-[#1B1B18]/80 dark:text-[#F5F1E8]/80 leading-relaxed">
+      <p className="text-sm sm:text-base text-text-secondary leading-relaxed">
         Le site ne transmet pas encore les formulaires. Votre message est prêt avec vos réponses : envoyez-le
         par WhatsApp ou par e-mail. La fondation ne le reçoit qu’une fois que vous l’avez envoyé.
       </p>
@@ -56,7 +56,7 @@ export default function ContactHandoff({
           href={whatsappHref(draft)}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#0F3D2E] hover:bg-[#14523E] text-[#F5F1E8] text-sm font-semibold transition-colors"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-pill bg-action hover:bg-action-hover text-on-action text-sm font-semibold transition-colors"
         >
           <MessageCircle aria-hidden="true" className="w-4 h-4" />
           <span>Envoyer par WhatsApp</span>
@@ -64,22 +64,22 @@ export default function ContactHandoff({
         </a>
         <a
           href={mailtoHref(draft)}
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#0F3D2E]/35 dark:border-[#F5F1E8]/30 text-[#0F3D2E] dark:text-[#F5F1E8] text-sm font-semibold hover:border-[#E8A317] transition-colors"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-pill border border-foret/35 dark:border-creme/30 text-foret dark:text-creme text-sm font-semibold hover:border-or transition-colors"
         >
           <Mail aria-hidden="true" className="w-4 h-4" />
           <span>Envoyer par e-mail</span>
         </a>
       </div>
 
-      <p className="text-xs sm:text-sm text-[#1B1B18]/70 dark:text-[#F5F1E8]/70">
+      <p className="text-xs sm:text-sm text-encre/70 dark:text-creme/70">
         Si aucune application ne s’ouvre, écrivez directement à{' '}
-        <a href={`mailto:${CONTACT.email}`} className="underline underline-offset-2 text-[#0F3D2E] dark:text-[#E8A317] break-all">
+        <a href={`mailto:${CONTACT.email}`} className="underline underline-offset-2 text-accent break-all">
           {CONTACT.email}
         </a>{' '}
         ou sur WhatsApp au {CONTACT.whatsappDisplay}, en copiant le message ci-dessous.
       </p>
 
-      <details className="rounded-2xl bg-[#F5F1E8] dark:bg-[#0F3D2E] p-4 text-sm text-[#1B1B18] dark:text-[#F5F1E8]">
+      <details className="rounded-2xl bg-surface-inset p-4 text-sm text-text">
         <summary className="cursor-pointer font-semibold">Voir le message préparé</summary>
         <p className="mt-3 font-semibold">{draft.subject}</p>
         <p className="mt-2 whitespace-pre-wrap break-words text-xs sm:text-sm opacity-90">{draft.body}</p>
@@ -90,7 +90,7 @@ export default function ContactHandoff({
       <button
         type="button"
         onClick={onEdit}
-        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#0F3D2E]/25 dark:border-[#F5F1E8]/25 text-sm cursor-pointer"
+        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-pill border border-border-strong text-sm cursor-pointer"
       >
         <ArrowLeft aria-hidden="true" className="w-4 h-4" />
         <span>{editLabel}</span>

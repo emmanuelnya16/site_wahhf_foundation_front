@@ -7,9 +7,9 @@ import type { FeatureCollection } from 'geojson';
 import { EUROPE_FRAME_NE_NAMES, EUROPE_SUPPORTED_COUNTRIES, SupportedEuropeCountry } from '../../data/countries';
 import { useElementSize } from '../../lib/useElementSize';
 import { loadEuropeGeo } from './presenceGeo';
+import { EASE_OUT, DURATION } from '../../lib/motionTokens';
 
 const SUPPORTED_BY_NE_NAME = new Map<string, SupportedEuropeCountry>(EUROPE_SUPPORTED_COUNTRIES.map((c) => [c.neName, c]));
-const EASE_OUT = [0.22, 1, 0.36, 1] as const;
 /** Départ de l'arc : coin bas-gauche du cadre (« Depuis le Cameroun »), en pixels. */
 const ORIGIN_INSET = 16;
 
@@ -107,8 +107,8 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
       const y = above ? activePoint[1] - 28 : activePoint[1] + 10;
       label = (
         <g transform={`translate(${x.toFixed(1)}, ${y.toFixed(1)})`} pointerEvents="none">
-          <rect x={-lw / 2} y={0} width={lw} height={19} rx={9.5} fill="#0F3D2E" stroke="#E8A317" strokeWidth={0.9} />
-          <text x={0} y={13} textAnchor="middle" fill="#F5F1E8" fontSize={10} fontWeight={600} className="font-sans">
+          <rect x={-lw / 2} y={0} width={lw} height={19} rx={9.5} className="fill-foret stroke-or" strokeWidth={0.9} />
+          <text x={0} y={13} textAnchor="middle" fontSize={10} fontWeight={600} className="font-sans fill-creme">
             {text}
           </text>
         </g>
@@ -128,7 +128,7 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
         <g>
           {shapes.map(({ key, d, supported }) => {
             if (!supported) {
-              return <path key={key} d={d} className="fill-[#E4DFD5]" stroke="#FFFFFF" strokeWidth={0.6} aria-hidden="true" pointerEvents="none" />;
+              return <path key={key} d={d} className="fill-sable stroke-blanc" strokeWidth={0.6} aria-hidden="true" pointerEvents="none" />;
             }
             const isActive = supported.slug === activeCountrySlug;
             return (
@@ -144,10 +144,9 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
                 onFocus={(e) => handleFocus(e, supported.slug)}
                 onBlur={handleBlur}
                 onKeyDown={(e) => handleKeyDown(e, supported.slug)}
-                stroke={isActive ? '#0F3D2E' : '#C98F12'}
                 strokeWidth={isActive ? 1 : 0.7}
                 strokeLinejoin="round"
-                className={`cursor-pointer outline-none transition-[fill] duration-300 ease-out ${isActive ? 'fill-[#0F3D2E]' : 'fill-[#F2C76E]'}`}
+                className={`cursor-pointer outline-none transition-[fill] duration-(--dur-fast) ease-out ${isActive ? 'fill-foret stroke-foret' : 'fill-or-pale stroke-or-sombre'}`}
               />
             );
           })}
@@ -156,8 +155,8 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
         {/* Indicateur de focus clavier : double trait blanc + vert, au-dessus des voisins */}
         {focusShape && (
           <g pointerEvents="none">
-            <path d={focusShape.d} fill="none" stroke="#FFFFFF" strokeWidth={4.5} strokeLinejoin="round" />
-            <path d={focusShape.d} fill="none" stroke="#0F3D2E" strokeWidth={2} strokeLinejoin="round" />
+            <path d={focusShape.d} fill="none" className="stroke-blanc" strokeWidth={4.5} strokeLinejoin="round" />
+            <path d={focusShape.d} fill="none" className="stroke-foret" strokeWidth={2} strokeLinejoin="round" />
           </g>
         )}
 
@@ -175,7 +174,7 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
                 className="cursor-pointer"
               >
                 <circle r={9} fill="transparent" />
-                <circle r={isActive ? 3.6 : 2.3} fill={isActive ? '#E8A317' : '#0F3D2E'} stroke="#FFFFFF" strokeWidth={1} pointerEvents="none" />
+                <circle r={isActive ? 3.6 : 2.3} className={isActive ? 'fill-or stroke-blanc' : 'fill-foret stroke-blanc'} strokeWidth={1} pointerEvents="none" />
               </Marker>
             );
           })}
@@ -189,12 +188,12 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
                 key={arcSlug}
                 d={arcPath(origin, arcEnd)}
                 fill="none"
-                stroke="#0F3D2E"
+                className="stroke-foret"
                 strokeWidth={1.6}
                 strokeLinecap="round"
                 initial={reduce ? false : { pathLength: 0 }}
                 animate={{ pathLength: 1 }}
-                transition={{ duration: 0.9, ease: EASE_OUT }}
+                transition={{ duration: DURATION.reveal, ease: EASE_OUT }}
               />
               <motion.circle
                 key={`fin-${arcSlug}`}
@@ -202,18 +201,18 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
                 cy={arcEnd[1]}
                 r={5.5}
                 fill="none"
-                stroke="#0F3D2E"
+                className="stroke-foret"
                 strokeWidth={1.2}
                 initial={reduce ? false : { opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.7, duration: 0.3 }}
+                transition={{ delay: 0.7, duration: DURATION.fast }}
               />
             </>
           )}
           <g transform={`translate(${origin[0]}, ${origin[1]})`}>
-            <circle r={4} fill="#0F3D2E" stroke="#E8A317" strokeWidth={1.5} />
-            <rect x={9} y={-9.5} width={106} height={19} rx={9.5} fill="#0F3D2E" />
-            <text x={62} y={3.5} textAnchor="middle" fill="#F5F1E8" fontSize={9.5} fontWeight={600} className="font-sans">
+            <circle r={4} className="fill-foret stroke-or" strokeWidth={1.5} />
+            <rect x={9} y={-9.5} width={106} height={19} rx={9.5} className="fill-foret" />
+            <text x={62} y={3.5} textAnchor="middle" fontSize={9.5} fontWeight={600} className="font-sans fill-creme">
               Depuis le Cameroun
             </text>
           </g>
@@ -225,7 +224,7 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
   }
 
   return (
-    <div ref={boxRef} className="absolute inset-0 rounded-2xl bg-[#F5F1E8] border border-[#0F3D2E]/12 overflow-hidden">
+    <div ref={boxRef} className="absolute inset-0 rounded-2xl bg-creme border border-foret/12 overflow-hidden">
       {overlay}
     </div>
   );
