@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useRef, Ref } from 'react';
+import { useFocusOnChange } from '../lib/useFocusOnChange';
 import { Link, useParams } from 'react-router-dom';
 import {
   GraduationCap,
@@ -69,6 +70,16 @@ export default function LanguageAcademy() {
   };
 
   const recommendedLevel = getRecommendedLevel(score);
+
+  // Démarrage, question suivante ou précédente, résultat : focus sur l'énoncé (ou le résultat) + annonce polie
+  const quizView = !quizStarted ? 'accueil' : quizFinished ? 'resultat' : `question-${currentQIndex}`;
+  const quizBoxRef = useRef<HTMLDivElement>(null);
+  const quizFocusRef = useFocusOnChange<HTMLElement>(quizView, { scrollRef: quizBoxRef });
+  const quizStatus = !quizStarted
+    ? ''
+    : quizFinished
+    ? `Test terminé. Score : ${score} sur ${PLACEMENT_QUESTIONS.length}.`
+    : `Question ${currentQIndex + 1} sur ${PLACEMENT_QUESTIONS.length}.`;
 
   const handleSelectOption = (optionIdx: number) => {
     const currentQ = PLACEMENT_QUESTIONS[currentQIndex];
@@ -323,7 +334,10 @@ export default function LanguageAcademy() {
             light
           />
 
-          <div className="rounded-[24px] bg-[#14523E]/90 border border-[#E8A317]/35 p-6 sm:p-10 shadow-xl">
+          <div ref={quizBoxRef} className="rounded-[24px] bg-[#14523E]/90 border border-[#E8A317]/35 p-6 sm:p-10 shadow-xl">
+            <p role="status" className="sr-only">
+              {quizStatus}
+            </p>
             {!quizStarted ? (
               <div className="text-center space-y-6 py-4">
                 <p className="text-base sm:text-lg text-[#F5F1E8]/90 max-w-2xl mx-auto">
@@ -345,7 +359,11 @@ export default function LanguageAcademy() {
                 <span className="inline-block px-4 py-1.5 rounded-full bg-[#E8A317]/20 text-gold-on-green text-xs font-semibold uppercase tracking-widest">
                   Résultat indicatif de votre test
                 </span>
-                <h3 className="font-serif font-normal text-3xl sm:text-4xl text-[#F5F1E8]">
+                <h3
+                  ref={quizFocusRef as Ref<HTMLHeadingElement>}
+                  tabIndex={-1}
+                  className="font-serif font-normal text-3xl sm:text-4xl text-[#F5F1E8]"
+                >
                   Score : {score} / {PLACEMENT_QUESTIONS.length} — Niveau conseillé :{' '}
                   <span className="text-[#E8A317]">{recommendedLevel}</span>
                 </h3>
@@ -382,7 +400,7 @@ export default function LanguageAcademy() {
                       Palier testé : Niveau {PLACEMENT_QUESTIONS[currentQIndex].level}
                     </span>
                   </div>
-                  <div className="w-full h-2 rounded-full bg-[#0F3D2E] overflow-hidden">
+                  <div aria-hidden="true" className="w-full h-2 rounded-full bg-[#0F3D2E] overflow-hidden">
                     <div
                       className="h-full w-full origin-left bg-[#E8A317] transition-transform duration-300"
                       style={{
@@ -394,7 +412,11 @@ export default function LanguageAcademy() {
 
                 {/* Énoncé (légende du groupe) et réponses en boutons radio natifs */}
                 <fieldset>
-                  <legend className="font-serif text-xl sm:text-2xl text-[#F5F1E8] pt-2 mb-6">
+                  <legend
+                    ref={quizFocusRef as Ref<HTMLLegendElement>}
+                    tabIndex={-1}
+                    className="font-serif text-xl sm:text-2xl text-[#F5F1E8] pt-2 mb-6"
+                  >
                     {PLACEMENT_QUESTIONS[currentQIndex].question}
                   </legend>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">

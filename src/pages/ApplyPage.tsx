@@ -1,4 +1,4 @@
-import { useState, useId, FormEvent } from 'react';
+import { useState, useId, useRef, FormEvent } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { CheckCircle2, ShieldCheck, ArrowRight, ArrowLeft } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
@@ -7,6 +7,7 @@ import DisclaimerBanner from '../components/wahhf/DisclaimerBanner';
 import ChoiceTile from '../components/wahhf/ChoiceTile';
 import FormField, { FieldError, fieldErrorId } from '../components/wahhf/FormField';
 import { emailError, phoneError, requiredError, focusFirstError } from '../lib/formValidation';
+import { useFocusOnChange } from '../lib/useFocusOnChange';
 import { COUNTRIES_DATA, submitApplication } from '../services/api';
 
 /**
@@ -95,6 +96,14 @@ export default function ApplyPage() {
     if (value.trim()) setErrors((prev) => ({ ...prev, [key]: checkField(key, value) }));
   };
 
+  // Après chaque étape ou envoi : défilement en haut du formulaire, focus sur le titre, annonce polie
+  const formSectionRef = useRef<HTMLElement>(null);
+  const stepTitleRef = useFocusOnChange<HTMLHeadingElement>(confirmation ? 'confirmation' : step, {
+    scrollRef: formSectionRef,
+  });
+  const STEP_LABELS = { 1: 'Identité et coordonnées', 2: 'Souhait, pays et niveau d’allemand', 3: 'Projet et consentement' };
+  const statusMessage = confirmation ? 'Envoi terminé.' : `Étape ${step} sur 3 : ${STEP_LABELS[step]}.`;
+
   // Chaque étape est validée à l'envoi du formulaire (bouton ou touche Entrée)
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -151,7 +160,11 @@ export default function ApplyPage() {
         <DisclaimerBanner compact />
       </section>
 
-      <section className="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+      <section ref={formSectionRef} className="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+        {/* Annonce des changements d'étape et de l'envoi (toujours présente, lue poliment) */}
+        <p role="status" className="sr-only">
+          {statusMessage}
+        </p>
         {confirmation ? (
           <div className="rounded-[24px] bg-white dark:bg-[#132A21] border-2 border-[#E8A317] p-8 sm:p-12 text-center space-y-6 shadow-md">
             <div className="w-16 h-16 rounded-full bg-[#0F3D2E] text-[#E8A317] flex items-center justify-center mx-auto">
@@ -162,7 +175,7 @@ export default function ApplyPage() {
               Référence : {confirmation.reference}
             </span>
 
-            <h2 className="font-serif font-normal text-3xl sm:text-4xl text-[#1B1B18] dark:text-[#F5F1E8]">
+            <h2 ref={stepTitleRef} tabIndex={-1} className="font-serif font-normal text-3xl sm:text-4xl text-[#1B1B18] dark:text-[#F5F1E8]">
               Merci {fullName}, votre candidature est bien enregistrée
             </h2>
 
@@ -208,7 +221,7 @@ export default function ApplyPage() {
                     : '3. Projet & Consentement RGPD'}
                 </span>
               </div>
-              <div className="w-full h-2 rounded-full bg-[#F5F1E8] dark:bg-[#0F3D2E] overflow-hidden">
+              <div aria-hidden="true" className="w-full h-2 rounded-full bg-[#F5F1E8] dark:bg-[#0F3D2E] overflow-hidden">
                 <div
                   className="h-full w-full origin-left bg-gradient-to-r from-[#0F3D2E] to-[#E8A317] transition-transform duration-300"
                   style={{ transform: `scaleX(${step / 3})` }}
@@ -220,6 +233,8 @@ export default function ApplyPage() {
               {step === 1 && (
                 <div className="space-y-5">
                   <SectionHeader
+                    titleRef={stepTitleRef}
+                    reveal={false}
                     kicker="Étape 01 / 03"
                     title="Vos coordonnées de contact"
                     subtitle="Ces informations servent uniquement à vous recontacter gratuitement."
@@ -337,6 +352,8 @@ export default function ApplyPage() {
               {step === 2 && (
                 <div className="space-y-6">
                   <SectionHeader
+                    titleRef={stepTitleRef}
+                    reveal={false}
                     kicker="Étape 02 / 03"
                     title="Votre souhait d’accompagnement"
                     subtitle="Précisez le volet qui vous intéresse ainsi que votre niveau linguistique actuel."
@@ -463,6 +480,8 @@ export default function ApplyPage() {
               {step === 3 && (
                 <div className="space-y-6">
                   <SectionHeader
+                    titleRef={stepTitleRef}
+                    reveal={false}
                     kicker="Étape 03 / 03"
                     title="Votre motivation & validation"
                     subtitle="Présentez brièvement votre parcours et validez votre demande gratuite."

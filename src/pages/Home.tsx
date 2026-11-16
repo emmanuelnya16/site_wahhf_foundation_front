@@ -31,6 +31,7 @@ import Counter from '../components/wahhf/Counter';
 import PresenceSection from '../components/wahhf/PresenceSection';
 import { useDialog } from '../lib/useDialog';
 import { useMediaQuery } from '../lib/useMediaQuery';
+import { useFocusOnChange } from '../lib/useFocusOnChange';
 import { MQ } from '../lib/gsap';
 import MaskedLines, { splitAtComma } from '../effects/MaskedLines';
 import SplitReveal from '../effects/SplitReveal';
@@ -152,6 +153,8 @@ export default function Home() {
   // Newsletter
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [newsletterDone, setNewsletterDone] = useState(false);
+  // Après l'envoi, le formulaire disparaît : le focus passe sur le message qui le remplace
+  const newsletterResultRef = useFocusOnChange<HTMLDivElement>(newsletterDone);
 
   const handleNewsletter = async (e: FormEvent) => {
     e.preventDefault();
@@ -1132,8 +1135,15 @@ export default function Home() {
           </div>
 
           <div className="lg:col-span-5">
+            <p role="status" className="sr-only">
+              {newsletterDone ? 'Envoi terminé.' : ''}
+            </p>
             {newsletterDone ? (
-              <div className="surface-green rounded-2xl bg-[#0F3D2E] text-[#F5F1E8] p-4 flex items-center gap-3 text-sm">
+              <div
+                ref={newsletterResultRef}
+                tabIndex={-1}
+                className="surface-green rounded-2xl bg-[#0F3D2E] text-[#F5F1E8] p-4 flex items-center gap-3 text-sm"
+              >
                 <CheckCircle2 className="w-5 h-5 text-[#E8A317] shrink-0" />
                 <span>Merci ! Votre inscription à la lettre d’information WAHHF est bien enregistrée.</span>
               </div>

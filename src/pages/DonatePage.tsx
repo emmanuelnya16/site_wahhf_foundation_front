@@ -1,10 +1,11 @@
-import { useState, FormEvent } from 'react';
+import { useState, useRef, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { Heart, ShieldCheck, CheckCircle2, Sparkles, Lock } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
 import SectionHeader from '../components/wahhf/SectionHeader';
 import ChoiceTile from '../components/wahhf/ChoiceTile';
 import { submitDonation } from '../services/api';
+import { useFocusOnChange } from '../lib/useFocusOnChange';
 
 const SUGGESTED_AMOUNTS = [
   {
@@ -42,6 +43,10 @@ export default function DonatePage() {
   const [receiptRef, setReceiptRef] = useState<string | null>(null);
 
   const effectiveAmount = customAmount ? Number(customAmount) || selectedAmount : selectedAmount;
+
+  // Après l'envoi : défilement en haut du bloc, focus sur le titre de la confirmation, annonce polie
+  const formSectionRef = useRef<HTMLElement>(null);
+  const resultTitleRef = useFocusOnChange<HTMLHeadingElement>(receiptRef, { scrollRef: formSectionRef });
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -81,7 +86,10 @@ export default function DonatePage() {
         </div>
       </section>
 
-      <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+      <section ref={formSectionRef} className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <p role="status" className="sr-only">
+          {receiptRef ? 'Envoi terminé.' : ''}
+        </p>
         {receiptRef ? (
           <div className="rounded-[24px] bg-white dark:bg-[#132A21] border-2 border-[#E8A317] p-8 sm:p-12 text-center space-y-6 max-w-3xl mx-auto">
             <div className="w-16 h-16 rounded-full bg-[#C8102E] text-white flex items-center justify-center mx-auto">
@@ -90,7 +98,7 @@ export default function DonatePage() {
             <span className="inline-block px-4 py-1 rounded-full bg-[#0F3D2E]/10 dark:bg-[#E8A317]/20 text-xs font-semibold">
               Intention de don simulée · Référence : {receiptRef}
             </span>
-            <h2 className="font-serif font-normal text-3xl sm:text-4xl">
+            <h2 ref={resultTitleRef} tabIndex={-1} className="font-serif font-normal text-3xl sm:text-4xl">
               Merci infiniment pour votre générosité ({effectiveAmount} €)
             </h2>
             <p className="text-base text-[#1B1B18]/80 dark:text-[#F5F1E8]/80 max-w-xl mx-auto">

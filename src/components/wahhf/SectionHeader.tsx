@@ -1,3 +1,4 @@
+import { Ref } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 
 interface SectionHeaderProps {
@@ -9,6 +10,8 @@ interface SectionHeaderProps {
   className?: string;
   /** false : pas d'apparition propre (la section anime déjà ce bloc, évite une double apparition). */
   reveal?: boolean;
+  /** Titre qui peut recevoir le focus par script (changement d'étape d'un formulaire). */
+  titleRef?: Ref<HTMLHeadingElement>;
 }
 
 export default function SectionHeader({
@@ -19,6 +22,7 @@ export default function SectionHeader({
   light = false,
   className = '',
   reveal = true,
+  titleRef,
 }: SectionHeaderProps) {
   const shouldReduceMotion = useReducedMotion();
   const animated = reveal && !shouldReduceMotion;
@@ -42,6 +46,8 @@ export default function SectionHeader({
 
       {/* 2. Grand titre en serif élégante Fraunces, graisse NORMALE */}
       <h2
+        ref={titleRef}
+        tabIndex={titleRef ? -1 : undefined}
         className={`font-serif font-normal tracking-tight leading-[1.12] text-[clamp(1.85rem,3.6vw,3.1rem)] ${
           light
             ? 'text-[#F5F1E8]'

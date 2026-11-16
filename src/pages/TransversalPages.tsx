@@ -1,4 +1,4 @@
-import { useState, useId, FormEvent } from 'react';
+import { useState, useId, useRef, FormEvent } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import {
   ShieldCheck,
@@ -20,6 +20,7 @@ import Counter from '../components/wahhf/Counter';
 import PresenceSection from '../components/wahhf/PresenceSection';
 import FormField, { FieldError, fieldErrorId } from '../components/wahhf/FormField';
 import { emailError, requiredError, focusFirstError } from '../lib/formValidation';
+import { useFocusOnChange } from '../lib/useFocusOnChange';
 import {
   DOMAINS_DATA,
   NEWS_DATA,
@@ -608,6 +609,23 @@ export function AgirPage() {
     if (value.trim()) setErrors((prev) => ({ ...prev, [key]: checkAgirField(key, value) }));
   };
 
+  // Choix du rôle ou envoi : défilement jusqu'au formulaire, focus sur son titre, annonce polie.
+  // (Un nouveau clic sur le même rôle ramène aussi au formulaire, d'où le compteur.)
+  const formBlockRef = useRef<HTMLDivElement>(null);
+  const [roleRequest, setRoleRequest] = useState(0);
+  const formTitleRef = useFocusOnChange<HTMLHeadingElement>(sent ? 'envoye' : `${roleType}-${roleRequest}`, {
+    scrollRef: formBlockRef,
+  });
+  const chooseRole = (role: 'benevole' | 'partenaire') => {
+    setRoleType(role);
+    setRoleRequest((n) => n + 1);
+  };
+  const statusMessage = sent
+    ? 'Envoi terminé.'
+    : roleRequest > 0
+    ? `Formulaire : ${roleType === 'benevole' ? 'devenir bénévole' : 'devenir partenaire'}.`
+    : '';
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const found: Partial<Record<AgirField, string>> = {};
@@ -662,7 +680,7 @@ export function AgirPage() {
             </div>
             <button
               type="button"
-              onClick={() => setRoleType('benevole')}
+              onClick={() => chooseRole('benevole')}
               className="px-5 py-2.5 rounded-full bg-[#0F3D2E] text-[#F5F1E8] text-xs font-semibold cursor-pointer"
             >
               Remplir le formulaire bénévole ↓
@@ -682,7 +700,7 @@ export function AgirPage() {
             </div>
             <button
               type="button"
-              onClick={() => setRoleType('partenaire')}
+              onClick={() => chooseRole('partenaire')}
               className="px-5 py-2.5 rounded-full bg-[#0F3D2E] text-[#F5F1E8] text-xs font-semibold cursor-pointer"
             >
               Proposer un partenariat ↓
@@ -691,18 +709,21 @@ export function AgirPage() {
         </div>
 
         {/* Formulaire Bénévole / Partenaire */}
-        <div className="rounded-[24px] bg-white dark:bg-[#132A21] border border-[#0F3D2E]/15 p-8 sm:p-10 max-w-3xl mx-auto">
+        <div ref={formBlockRef} className="rounded-[24px] bg-white dark:bg-[#132A21] border border-[#0F3D2E]/15 p-8 sm:p-10 max-w-3xl mx-auto">
+          <p role="status" className="sr-only">
+            {statusMessage}
+          </p>
           {sent ? (
             <div className="text-center space-y-4 py-6">
               <CheckCircle2 className="w-12 h-12 text-[#0F3D2E] dark:text-[#E8A317] mx-auto" />
-              <h3 className="font-serif text-2xl">Merci pour votre proposition d’engagement</h3>
+              <h3 ref={formTitleRef} tabIndex={-1} className="font-serif text-2xl">Merci pour votre proposition d’engagement</h3>
               <p className="text-sm text-[#1B1B18]/75 dark:text-[#F5F1E8]/75">
                 Notre équipe prendra contact avec vous sous 7 à 14 jours ouvrés (TODO : confirmer délai).
               </p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} noValidate className="space-y-5">
-              <h3 className="font-serif text-2xl">
+              <h3 ref={formTitleRef} tabIndex={-1} className="font-serif text-2xl">
                 Formulaire : {roleType === 'benevole' ? 'Devenir bénévole' : 'Devenir partenaire'}
               </h3>
 
