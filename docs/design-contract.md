@@ -86,7 +86,7 @@ Séparées de la marque (T-18) : aucune couleur d'état ne reprend une couleur d
 | Alerte | `--ambre` #9C4A00 | `--ambre-pale` #FDEBDC | `--ambre-clair` #F7A35C | canopée | triangle |
 | Information | `--ciel` #245E78 | `--ciel-pale` #E3EEF3 | `--ciel-clair` #93C6DE | canopée | « i » |
 
-- **Pas de couleur de succès** : le site n'affiche aucun succès, par choix (les formulaires préparent un message, ils n'envoient rien ; `ContactHandoff.tsx`). Pousse, pousse pâle et menthe sont donc retirées (§3.7). Si un vrai succès apparaît un jour : texte encre (brume voilée en sombre) avec une coche, sans couleur dédiée.
+- **Pas de couleur de succès** : le site n'affiche aucun succès, par choix (les formulaires préparent un message, ils n'envoient rien ; `ContactHandoff.tsx`). Pousse, pousse pâle et menthe sont donc retirées (§3.7). Quand les formulaires enverront vraiment (API Symfony), un état de succès et sa couleur seront ajoutés (§13).
 - **Classement des encadrés existants** : alertes = précision juridique sur l'Albanie (fiche pays), encadré « Vigilance » de Contact, mises en garde du guide anti-arnaques ; informations = délai de réponse et rappel « aucun document ni paiement » de Candidater, note sur l'Albanie dans la liste des pays, message préparé.
 - **Une erreur posée sur nuit reste dans son encadré** (repli de la carte du Cameroun) : brique sur brique pâle 5,6:1, alors que la brique seule sur nuit tomberait à 1,8:1.
 - L'alerte n'utilise plus le miel ni le soleil : en sombre, une alerte en soleil aurait eu exactement la couleur d'un lien et de l'anneau de focus.
@@ -182,11 +182,11 @@ Règle de la validation : une couleur ajoutée à votre palette n'est gardée qu
 
 **États (clair, puis sombre)**
 - **brique / corail** : erreurs des champs (Candidater, Contact, Agir) et message d'échec de chargement des cartes.
-- **brique pâle** : fond de l'encadré d'erreur sous la carte du Cameroun et sous la mini-carte d'Europe (accueil et Notre impact) ; au seuil des deux endroits.
+- **brique pâle** : fond de l'encadré d'erreur sous la carte du Cameroun et sous la mini-carte d'Europe (accueil et Notre impact)  ; au seuil des deux endroits, gardée (votre décision du 16 novembre 2026).
 - **ambre / ambre clair** : alertes : précision sur l'Albanie (fiche pays), mises en garde du guide anti-arnaques, encadré « Vigilance » de Contact.
-- **ambre pâle** : fond des encadrés d'alerte : fiche Albanie, « Vigilance » de Contact ; au seuil des deux endroits.
+- **ambre pâle** : fond des encadrés d'alerte : fiche Albanie, « Vigilance » de Contact ; au seuil des deux endroits, gardée (même décision).
 - **ciel / ciel clair** : informations : message préparé des formulaires, encadrés de Candidater, note sur l'Albanie (liste des pays et carte « 10 pays »).
-- **ciel pâle** : fond des encadrés d'information : Candidater (délai de réponse, « aucun document ni paiement »), note sur l'Albanie de la liste des pays ; au seuil des deux endroits.
+- **ciel pâle** : fond des encadrés d'information : Candidater (délai de réponse, « aucun document ni paiement »), note sur l'Albanie de la liste des pays ; au seuil des deux endroits, gardée (même décision).
 
 **Sombre**
 - **humus** : fond de page de toutes les pages et de l'en-tête opaque.
@@ -531,7 +531,7 @@ Les tics relevés par l'audit et ce qui les remplace :
 
 **Trois ajustements demandés à la validation**
 1. **Photo du hero** : pas de photo en fond plein écran tant que les originaux HD manquent ; photo cadrée, à côté du titre sur ordinateur (environ la moitié du container), sous le titre sur téléphone, jamais affichée plus grande que sa taille réelle en densité 2, soit 493 px de large au plus pour `open-day-marche` (§5, §6, §7).
-2. **Palette** : toute couleur ajoutée qui ne sert pas à au moins deux endroits concrets du site est supprimée ; chaque ajout gardé dit en une ligne où il sert, en clair comme en sombre (§3.7). Résultat : 23 ajouts gardés sur 26 ; pousse, pousse pâle et menthe retirées (aucun succès affiché sur le site) ; brique pâle, ambre pâle et ciel pâle gardées au seuil exact de deux endroits.
+2. **Palette** : toute couleur ajoutée qui ne sert pas à au moins deux endroits concrets du site est supprimée ; chaque ajout gardé dit en une ligne où il sert, en clair comme en sombre (§3.7). Résultat : 23 ajouts gardés sur 26 ; pousse, pousse pâle et menthe retirées (aucun succès affiché sur le site) ; brique pâle, ambre pâle et ciel pâle gardées au seuil exact de deux endroits (confirmé le 16 novembre 2026).
 3. **Arc de la mini-carte** : forêt à environ 40 % d'opacité, décoratif, sans exigence de contraste (§6).
 
 **Propositions acceptées telles quelles**
@@ -540,6 +540,13 @@ Les tics relevés par l'audit et ce qui les remplace :
 - Section Chiffres masquée tant qu'elle n'a pas deux chiffres sourcés (§7).
 - Alerte en ambre (§3.2) ; soleil sur les fonds sombres (§3.3) ; tokens « on-inverse » (§3.4) ; renommage des tokens en trois temps (§3.6).
 - Tailles de l'échelle typographique (§4.3), intitulés courts de la frise A1 à C1 (§6), ce qui quitte l'accueil (§7, pour l'étape qui traitera l'accueil), retrait des effets (§10, annexe B).
+
+**Décisions prises après la validation (16 novembre 2026)**, avec la liste des textes du lot 5 (`docs/lot5-textes-a-retirer.md`)
+- **Gratuité** : une seule mention par écran ; l'avertissement dit « Nos cours et notre accompagnement sont gratuits. », sans nommer le financeur tant que la question IROKO n'est pas tranchée.
+- **Bulle WhatsApp** : à l'étape de l'accueil, vrai glyphe WhatsApp et libellé court visible (RESP-03).
+- **Menu mobile** : le geste « glisser pour fermer » reste, sa phrase d'explication est retirée.
+
+**À traiter plus tard : état de succès des formulaires.** Aujourd'hui les formulaires préparent un message et n'envoient rien, d'où l'absence de couleur de succès (§3.2). Quand ils enverront vraiment (API Symfony), il faudra un état de succès (« Candidature envoyée », « Message envoyé ») et donc une couleur de succès, avec son tableau de contrastes. À traiter à ce moment-là.
 
 **Reste à fournir par la fondation** : autorisations de diffusion des photos (GAL-01), originaux HD, chiffres datés et sourcés, date de vérification de chaque fiche pays, formulation du titre du hero (ACC-02).
 
