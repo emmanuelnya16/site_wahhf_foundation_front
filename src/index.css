@@ -327,9 +327,8 @@
  */
 :root {
   color-scheme: light;
-  /* En-tête : 72 px sur une ligne ; dès 1 280 px, deux lignes (64 + 44 px), voir plus bas. 24 px d'air dessous. */
   --header-offset: 6rem;
-  /* Hauteur réelle de l'en-tête fixe (barre + filet de 1 px) : 65 px, 73 px dès 640 px, 109 px dès 1 280 px. */
+  /* Hauteur réelle de l'en-tête fixe (barre + filet de 1 px) : 65 px, 73 px dès 640 px. */
   --header-height: 4.0625rem;
   /* Colonne de texte du hero (contrat §6) : le voile reste dense jusqu'à sa fin. */
   --hero-text-width: 34rem;
@@ -493,7 +492,6 @@
 }
 }
 
-/* Dès 1 280 px, l'en-tête passe sur deux lignes (marque et actions, puis menu et outils) : 108 px + 24 px d'air. */
 @media (min-width: 40rem) {
   :root {
     --header-height: 4.5625rem;
@@ -502,12 +500,6 @@
 @media (min-width: 64rem) {
   :root {
     --hero-text-width: 40rem;
-  }
-}
-@media (min-width: 80rem) {
-  :root {
-    --header-offset: 8.25rem;
-    --header-height: 6.8125rem;
   }
 }
 

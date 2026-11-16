@@ -446,7 +446,8 @@ Ce sont ceux de votre demande sur les composants partagés ; ils appliquent les 
   **Barre de progression** (ajout du 16 novembre 2026) : couleur pleine `action`, sans dégradé vert vers or.
 - **Footer** (ajout du 16 novembre 2026) : fond nuit ; texte `text-on-inverse` et `text-secondary-on-inverse` en 15 px ; titres de colonne en 600, sans or ; soleil réservé aux liens (`link-on-inverse`) ; contrôles cerclés de `border-on-inverse`.
 - **En-tête du site** (ajout du 16 novembre 2026) : barre opaque pleine largeur (brume, humus en sombre), fixée en haut, contenu dans le container ; sans pilule, sans verre dépoli ; ombre flottante seulement une fois la page défilée (en sombre, une bordure basse trait-nuit à la place) ; « WAHHF Foundation » dans une seule casse et une seule couleur.
-  **Décisions du 16 novembre 2026, après le lot 5 :**
+  **Rétabli à votre demande (16 novembre 2026, après le lot 6) : l'en-tête est revenu tel qu'au commit `714194d`** (une ligne, sous-titre IROKO masqué de 1 280 px, pas de bouton « Candidater », don en cœur plein, langue dès 768 px). Les décisions ci-dessous ne sont donc plus appliquées dans l'en-tête ; le bouton de don en contour reste disponible dans le code (`DonateButton variant="outline"`).
+  ~~**Décisions du 16 novembre 2026, après le lot 5 :**~~
   - **Sous-titre « Branche sociale du groupe IROKO » visible à toutes les largeurs**, sous le nom, en `meta`, `text-secondary` : sur deux lignes (largeur du nom, 120 px au moins) jusqu'à 1 023 px, sur une ligne au-delà.
   - **Deux portes** (T-09) : « Candidater » (bouton primaire forêt, soleil en sombre) à côté de « Faire un don » (bouton de don en contour), dans la barre dès 768 px ; sous 768 px, en tête du menu mobile, en pleine largeur (empilées sous 400 px). La ligne « Candidater (Cours & Europe — Gratuit) » et le bouton de don en bas du menu mobile sont remplacés par ces deux boutons.
   - **Dès 1 280 px, deux lignes** (64 + 44 px) : la marque et les deux portes, puis le menu (6 entrées, aligné sur la marge du logo) et les outils (langue, recherche, thème), séparés par un filet. Sur une seule ligne, l'en-tête demandait 1 261 px pour 1 152 disponibles. `--header-offset` passe de 6 à 8,25 rem à partir de 1 280 px (108 px + 24 px d'air).
@@ -576,6 +577,7 @@ Les tics relevés par l'audit et ce qui les remplace :
 
 **Décisions du 16 novembre 2026, après le lot 5 (validé)**
 - **Sous-titre IROKO** : la décision n° 11 de la liste du lot 5 est annulée ; « Branche sociale du groupe IROKO » reste sous le logo (Qui sommes-nous) et sous le nom dans l'en-tête, visible à toutes les largeurs (§8, En-tête du site).
+- *(En-tête rétabli tel qu'au commit `714194d` à votre demande, après le lot 6 : les deux points suivants ne s'appliquent plus à l'en-tête.)*
 - **En-tête** (T-09) : « Candidater » (forêt) à côté de « Faire un don », qui passe en contour cœur ; le cœur plein est réservé à la page Don et à la porte « Faire un don » du hero (§8, Boutons).
 - **Pages destinées aux jeunes** (Mobilité, Académie, niveaux, Candidater, Accompagnement, fiches pays, Arnaques) : aucun bouton de don dans le contenu (ARN-02) ; le footer garde son lien.
 - **Contrôle des textes provisoires** (T-01) : un script npm échoue si « TODO », « Simulé » ou « démonstration » apparaissent dans le texte affiché, un `aria-label` ou une option de liste des pages WAHHF ; lancé à la fin de chaque lot, son résultat est remis à la fondation.

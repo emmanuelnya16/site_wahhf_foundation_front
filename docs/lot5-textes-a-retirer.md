@@ -30,7 +30,7 @@ Légende de la dernière colonne : **retiré** (le texte ou le numéro disparaî
 10. **« Glisser vers le haut pour fermer » (menu mobile)** ([Navbar.tsx:702](../src/components/Navbar.tsx#L702)). Proposition : La garder : le geste reste (annexe B, ligne 5) et cette consigne est la seule à l'expliquer.
    **Décision : modifiée. Le geste de fermeture reste, la phrase « Glisser vers le haut pour fermer » est retirée.**
 11. **« BRANCHE SOCIALE DU GROUPE IROKO » sous le logo (Qui sommes-nous)** ([TransversalPages.tsx:135](../src/pages/TransversalPages.tsx#L135)). Proposition : La retirer : elle répète mot pour mot le titre placé à côté.
-   ~~**Décision : recommandation acceptée.**~~ **Décision annulée le 16 novembre 2026, après le lot 5 : le sous-titre « Branche sociale du groupe IROKO » reste sous le logo (Qui sommes-nous, rétabli en casse de phrase) et sous le nom dans l'en-tête du site, visible à toutes les largeurs (contrat §8, En-tête du site).**
+   ~~**Décision : recommandation acceptée.**~~ *(En-tête rétabli tel qu'au commit `714194d` à votre demande après le lot 6 : dans l'en-tête, le sous-titre est de nouveau masqué de 1 280 px ; il reste sous le logo de Qui sommes-nous.)* **Décision annulée le 16 novembre 2026, après le lot 5 : le sous-titre « Branche sociale du groupe IROKO » reste sous le logo (Qui sommes-nous, rétabli en casse de phrase) et sous le nom dans l'en-tête du site, visible à toutes les largeurs (contrat §8, En-tête du site).**
 
 **Notes pour plus tard**
 - **Bulle WhatsApp** (étape de l'accueil) : vrai glyphe WhatsApp et libellé court visible (RESP-03).
