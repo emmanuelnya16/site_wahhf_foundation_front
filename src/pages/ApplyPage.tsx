@@ -6,6 +6,7 @@ import SectionHeader from '../components/wahhf/SectionHeader';
 import PageHeader, { PageTitle, PageIntro } from '../components/wahhf/PageHeader';
 import DisclaimerBanner from '../components/wahhf/DisclaimerBanner';
 import InfoBox from '../components/wahhf/InfoBox';
+import StepNumber, { ProgressBar } from '../components/wahhf/StepNumber';
 import ChoiceTile from '../components/wahhf/ChoiceTile';
 import FormField, { FieldError, fieldErrorId, LABEL_CLASS, FIELD_CLASS, CHECK_LABEL_CLASS, CHECKBOX_CLASS } from '../components/wahhf/FormField';
 import { emailError, phoneError, requiredError, focusFirstError } from '../lib/formValidation';
@@ -192,33 +193,25 @@ export default function ApplyPage() {
           <div className="rounded-card bg-surface-section p-6 sm:p-10 space-y-8">
             {/* Barre de progression des 3 étapes */}
             <div className="space-y-3">
-              <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-accent">
-                <span>Étape {step} sur 3</span>
-                <span>
-                  {step === 1
-                    ? '1. Identité & Coordonnées'
-                    : step === 2
-                    ? '2. Souhait, Pays & Niveau d’allemand'
-                    : '3. Projet & Consentement RGPD'}
-                </span>
+              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 text-meta text-text-secondary">
+                <span className="font-bold text-text">Étape {step} sur 3</span>
+                {/* Intitulés en casse de phrase, sans « 1. » qui doublait « Étape 1 sur 3 » (liste §6, ApplyPage:204) */}
+                <span>{step === 3 ? 'Projet et consentement RGPD' : STEP_LABELS[step]}</span>
               </div>
-              <div aria-hidden="true" className="w-full h-2 rounded-pill bg-surface-inset overflow-hidden">
-                <div
-                  className="h-full w-full origin-left bg-gradient-to-r from-nuit to-or transition-transform duration-(--dur-fast)"
-                  style={{ transform: `scaleX(${step / 3})` }}
-                />
-              </div>
+              <ProgressBar value={step} max={3} />
             </div>
 
             <form onSubmit={handleSubmit} noValidate className="space-y-6">
               {step === 1 && (
                 <div className="space-y-5">
-                  <SectionHeader
-                    titleRef={stepTitleRef}
-                    kicker="Étape 01 / 03"
-                    title="Vos coordonnées de contact"
-                    subtitle="Ces informations servent uniquement à vous recontacter gratuitement."
-                  />
+                  <div className="flex items-start gap-4">
+                    <StepNumber n={1} decorative className="mt-1" />
+                    <SectionHeader
+                      titleRef={stepTitleRef}
+                      title="Vos coordonnées de contact"
+                      subtitle="Ces informations servent uniquement à vous recontacter gratuitement."
+                    />
+                  </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <FormField id={fieldId('fullName')} label="Nom complet (Prénom & Nom) *" error={errors.fullName}>
@@ -325,12 +318,14 @@ export default function ApplyPage() {
 
               {step === 2 && (
                 <div className="space-y-6">
-                  <SectionHeader
-                    titleRef={stepTitleRef}
-                    kicker="Étape 02 / 03"
-                    title="Votre souhait d’accompagnement"
-                    subtitle="Précisez le volet qui vous intéresse ainsi que votre niveau linguistique actuel."
-                  />
+                  <div className="flex items-start gap-4">
+                    <StepNumber n={2} decorative className="mt-1" />
+                    <SectionHeader
+                      titleRef={stepTitleRef}
+                      title="Votre souhait d’accompagnement"
+                      subtitle="Précisez le volet qui vous intéresse ainsi que votre niveau linguistique actuel."
+                    />
+                  </div>
 
                   <fieldset>
                     <legend className={LABEL_CLASS}>
@@ -435,12 +430,14 @@ export default function ApplyPage() {
 
               {step === 3 && (
                 <div className="space-y-6">
-                  <SectionHeader
-                    titleRef={stepTitleRef}
-                    kicker="Étape 03 / 03"
-                    title="Votre motivation & validation"
-                    subtitle="Présentez brièvement votre parcours et validez votre demande gratuite."
-                  />
+                  <div className="flex items-start gap-4">
+                    <StepNumber n={3} decorative className="mt-1" />
+                    <SectionHeader
+                      titleRef={stepTitleRef}
+                      title="Votre motivation & validation"
+                      subtitle="Présentez brièvement votre parcours et validez votre demande gratuite."
+                    />
+                  </div>
 
                   <div>
                     <label

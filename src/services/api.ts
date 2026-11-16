@@ -698,19 +698,17 @@ export const PLACEMENT_QUESTIONS: PlacementQuestion[] = [
 
 export const THEMATIC_GUIDES: Record<string, {
   slug: string;
-  kicker: string;
   title: string;
   subtitle: string;
   sections: { heading: string; body: string; bullets?: string[] }[];
 }> = {
   'comprendre-les-parcours': {
     slug: 'comprendre-les-parcours',
-    kicker: 'Guide Thématique 01',
     title: 'Comprendre les parcours vers l’Europe',
     subtitle: 'Distinguer clairement les études universitaires, la formation professionnelle et la mobilité liée au travail.',
     sections: [
       {
-        heading: '1. Les études supérieures (Bachelor, Master, Doctorat)',
+        heading: 'Les études supérieures (Bachelor, Master, Doctorat)',
         body: 'Le parcours académique s’adresse aux titulaires du baccalauréat ou d’un diplôme universitaire souhaitant poursuivre une formation théorique et de recherche dans une université publique ou privée accréditée.',
         bullets: [
           'Nécessite la reconnaissance officielle du diplôme de fin d’études secondaires ou supérieures',
@@ -719,7 +717,7 @@ export const THEMATIC_GUIDES: Record<string, {
         ],
       },
       {
-        heading: '2. La formation professionnelle (ex. Ausbildung en Allemagne)',
+        heading: 'La formation professionnelle (ex. Ausbildung en Allemagne)',
         body: 'La formation professionnelle en alternance combine des cours dans une école professionnelle et une pratique rémunérée en entreprise pendant 2 à 3 ans.',
         bullets: [
           'Excellente maîtrise de la langue du pays indispensable (minimum B1 solide ou B2)',
@@ -728,7 +726,7 @@ export const THEMATIC_GUIDES: Record<string, {
         ],
       },
       {
-        heading: '3. La mobilité professionnelle qualifiée',
+        heading: 'La mobilité professionnelle qualifiée',
         body: 'Destinée aux professionnels disposant déjà d’un diplôme supérieur ou technique reconnu et d’une expérience vérifiable.',
         bullets: [
           'Procédure préalable d’équivalence ou de reconnaissance des qualifications professionnelles',
@@ -739,7 +737,6 @@ export const THEMATIC_GUIDES: Record<string, {
   },
   'preparer-son-dossier': {
     slug: 'preparer-son-dossier',
-    kicker: 'Guide Thématique 02',
     title: 'Préparer son dossier avec rigueur',
     subtitle: 'Les bonnes pratiques documentaires pour constituer un dossier authentique, lisible et conforme.',
     sections: [
@@ -765,7 +762,6 @@ export const THEMATIC_GUIDES: Record<string, {
   },
   'apprendre-la-langue': {
     slug: 'apprendre-la-langue',
-    kicker: 'Guide Thématique 03',
     title: 'Apprendre la langue du pays : la clé de l’autonomie',
     subtitle: 'Pourquoi la maîtrise linguistique précède toujours les démarches administratives.',
     sections: [
@@ -782,7 +778,6 @@ export const THEMATIC_GUIDES: Record<string, {
   },
   's-installer': {
     slug: 's-installer',
-    kicker: 'Guide Thématique 04',
     title: 'Préparer son arrivée et son intégration',
     subtitle: 'Se préparer aux réalités pratiques, culturelles et administratives de la vie en Europe.',
     sections: [
@@ -799,7 +794,6 @@ export const THEMATIC_GUIDES: Record<string, {
   },
   'eviter-les-arnaques': {
     slug: 'eviter-les-arnaques',
-    kicker: 'Vigilance & Protection · Priorité Absolue',
     title: 'Éviter les arnaques et les fausses promesses',
     subtitle: 'Comment reconnaître une offre frauduleuse, protéger vos proches et vérifier chaque information.',
     sections: [

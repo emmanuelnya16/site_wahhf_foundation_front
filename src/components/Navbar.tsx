@@ -415,9 +415,6 @@ export default function Navbar() {
                           </div>
                           <div>
                             <div className="flex items-center gap-2">
-                              <span className="text-[11px] font-bold text-accent-or">
-                                {dom.number}
-                              </span>
                               <p className="font-serif font-normal text-base text-text group-hover:text-accent">
                                 {dom.title}
                               </p>
@@ -601,7 +598,7 @@ export default function Navbar() {
               to="/qui-sommes-nous"
               className="block font-serif text-2xl sm:text-3xl text-creme hover:text-or py-1"
             >
-              1. {t('nav.about')}
+              {t('nav.about')}
             </Link>
 
             <div className="space-y-2">
@@ -609,7 +606,7 @@ export default function Navbar() {
                 to="/nos-actions"
                 className="block font-serif text-2xl sm:text-3xl text-creme hover:text-or py-1"
               >
-                2. {t('nav.actions')} (6 domaines)
+                {t('nav.actions')} (6 domaines)
               </Link>
               <div className="pl-4 border-l-2 border-or/40 grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
                 {DOMAINS_DATA.map((d) => (
@@ -618,7 +615,6 @@ export default function Navbar() {
                     to={d.link}
                     className="text-sm text-creme/85 hover:text-or py-1 flex items-center gap-2"
                   >
-                    <span className="text-or font-semibold">{d.number}.</span>
                     <span>{d.title}</span>
                   </Link>
                 ))}
@@ -629,28 +625,28 @@ export default function Navbar() {
               to="/notre-impact"
               className="block font-serif text-2xl sm:text-3xl text-creme hover:text-or py-1"
             >
-              3. {t('nav.impact')}
+              {t('nav.impact')}
             </Link>
 
             <Link
               to="/actualites"
               className="block font-serif text-2xl sm:text-3xl text-creme hover:text-or py-1"
             >
-              4. {t('nav.news')}
+              {t('nav.news')}
             </Link>
 
             <Link
               to="/agir"
               className="block font-serif text-2xl sm:text-3xl text-creme hover:text-or py-1"
             >
-              5. {t('nav.act')}
+              {t('nav.act')}
             </Link>
 
             <Link
               to="/contact"
               className="block font-serif text-2xl sm:text-3xl text-creme hover:text-or py-1"
             >
-              6. {t('nav.contact')}
+              {t('nav.contact')}
             </Link>
 
             <Link
@@ -691,11 +687,10 @@ export default function Navbar() {
                   <span>{isDark ? t('nav.themeLight') : t('nav.themeDark')}</span>
                 </button>
               </div>
-              <span className="text-xs text-creme/60">Glisser vers le haut pour fermer</span>
             </div>
 
             <DonateButton size="lg" className="w-full">
-              7. {t('nav.donate')}
+              {t('nav.donate')}
             </DonateButton>
           </div>
         </motion.div>

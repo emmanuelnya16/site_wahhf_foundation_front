@@ -124,7 +124,6 @@ export default function Footer() {
               {DOMAINS_DATA.map((dom) => (
                 <li key={dom.id}>
                   <Link to={dom.link} className="hover:text-or transition-colors flex items-center gap-2">
-                    <span className="text-xs text-or font-semibold">{dom.number}.</span>
                     <span>{dom.title}</span>
                   </Link>
                 </li>

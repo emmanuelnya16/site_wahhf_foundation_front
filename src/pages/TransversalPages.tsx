@@ -174,9 +174,7 @@ export function PartenairesPage() {
       <section className="container-page section-space space-y-12">
         {/* Partenaire Fondateur : Groupe IROKO */}
         <div className="surface-green rounded-card bg-nuit text-text-on-inverse p-8 sm:p-12 space-y-5">
-          <span className="inline-block px-3.5 py-1 rounded-pill bg-or text-v1-encre text-xs font-bold uppercase tracking-wider">
-            01 · Partenaire Fondateur & Mécène Structurel
-          </span>
+          <p className="text-meta text-text-secondary-on-inverse">Partenaire fondateur et mécène structurel</p>
           <h2 className="text-section-title text-text-on-inverse">
             Groupe IROKO — Holding & 10 Pôles d’Expertise
           </h2>

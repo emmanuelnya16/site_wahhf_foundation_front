@@ -137,7 +137,7 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
                 d={d}
                 role="link"
                 tabIndex={0}
-                aria-label={`${supported.nameFr}, pays #${supported.order}${supported.isEU ? '' : ', hors Union européenne'} : ouvrir la fiche`}
+                aria-label={`${supported.nameFr}${supported.isEU ? '' : ', hors Union européenne'} : ouvrir la fiche`}
                 onClick={() => open(supported.slug)}
                 onPointerEnter={() => onHoverCountry(supported.slug)}
                 onPointerLeave={() => onHoverCountry(null)}

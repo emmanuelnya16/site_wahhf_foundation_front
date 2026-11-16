@@ -11,6 +11,7 @@ import Section from '../components/wahhf/Section';
 import { PrimaryButton, SecondaryButton, DonateButton } from '../components/wahhf/Buttons';
 import DisclaimerBanner from '../components/wahhf/DisclaimerBanner';
 import CourseCard from '../components/wahhf/CourseCard';
+import { ProgressBar } from '../components/wahhf/StepNumber';
 import ChoiceTile from '../components/wahhf/ChoiceTile';
 import NotFoundPage, { NotFoundLinks } from './NotFoundPage';
 import {
@@ -366,14 +367,7 @@ export default function LanguageAcademy() {
                       Palier testé : Niveau {PLACEMENT_QUESTIONS[currentQIndex].level}
                     </span>
                   </div>
-                  <div aria-hidden="true" className="w-full h-2 rounded-pill bg-nuit overflow-hidden">
-                    <div
-                      className="h-full w-full origin-left bg-or transition-transform duration-(--dur-fast)"
-                      style={{
-                        transform: `scaleX(${(currentQIndex + 1) / PLACEMENT_QUESTIONS.length})`,
-                      }}
-                    />
-                  </div>
+                  <ProgressBar value={currentQIndex + 1} max={PLACEMENT_QUESTIONS.length} onInverse />
                 </div>
 
                 {/* Énoncé (légende du groupe) et réponses en boutons radio natifs */}

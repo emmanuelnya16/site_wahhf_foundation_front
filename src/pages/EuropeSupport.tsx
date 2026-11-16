@@ -5,7 +5,8 @@ import {
 } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
 import SectionHeader from '../components/wahhf/SectionHeader';
-import { TextList, TextListItem, ReadingColumn } from '../components/wahhf/TextList';
+import { TextList, TextListItem, ReadingColumn, TEXT_LINK_CLASS } from '../components/wahhf/TextList';
+import StepNumber from '../components/wahhf/StepNumber';
 import { CardLink, CardBody, CardMeta, CardTitle, CardNote } from '../components/wahhf/Card';
 import PageHeader, { PageMeta, PageTitle, PageIntro, PageActions } from '../components/wahhf/PageHeader';
 import { PrimaryButton, SecondaryButton } from '../components/wahhf/Buttons';
@@ -167,17 +168,15 @@ export default function EuropeSupport() {
 
           {/* Grandes étapes & Liens officiels */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-6">
-            <div className="lg:col-span-7 rounded-card bg-surface-raised border border-border-soft p-7 sm:p-8 space-y-5">
-              <h3 className="font-serif text-2xl text-text">
+            <div className="lg:col-span-7 space-y-5">
+              <h3 className="text-body font-semibold text-text">
                 Les grandes étapes pour préparer votre projet vers : {country.name}
               </h3>
               <ol className="space-y-4">
                 {country.steps.map((st, i) => (
-                  <li key={st} className="flex items-start gap-3.5 text-sm sm:text-base">
-                    <span className="w-7 h-7 rounded-pill bg-nuit text-or text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
-                      {i + 1}
-                    </span>
-                    <span className="text-v1-encre/85 dark:text-creme/85">{st}</span>
+                  <li key={st} className="flex items-start gap-4">
+                    <StepNumber n={i + 1} />
+                    <span className="pt-1 text-body text-text">{st}</span>
                   </li>
                 ))}
               </ol>
@@ -288,7 +287,7 @@ export default function EuropeSupport() {
               Accompagnement Europe
             </Link>
             <span>/</span>
-            <span>{guide.kicker}</span>
+            <span>{guide.title}</span>
           </PageMeta>
 
           <PageTitle>
@@ -410,36 +409,22 @@ export default function EuropeSupport() {
           subtitle="Cliquez sur chaque étape pour lire le guide thématique complet correspondant."
         />
 
-        <div className="relative [--timeline-pad:1.5rem] sm:[--timeline-pad:2.5rem] pl-(--timeline-pad) border-l-2 border-or space-y-8">
-          {FOUR_STEPS.map((item) => (
-            <div
-              key={item.step}
-              className="relative rounded-card bg-surface-raised border border-border-soft p-6 sm:p-8 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-6"
-            >
-              <div
-                aria-hidden="true"
-                className="absolute -left-[calc(var(--timeline-pad)+9px)] top-8 w-4 h-4 rounded-pill bg-nuit border-2 border-or"
-              />
-              <div className="space-y-2">
-                <span className="text-xs font-bold uppercase tracking-widest text-accent-or">
-                  Étape {item.step} / 04
-                </span>
-                <h3 className="font-serif font-normal text-xl sm:text-2xl text-text">
-                  {item.title}
-                </h3>
-                <p className="text-sm sm:text-base text-text-tertiary max-w-2xl">
-                  {item.desc}
-                </p>
+        <ol>
+          {FOUR_STEPS.map((item, i) => (
+            <li key={item.step} className="border-t border-border-subtle py-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="flex items-start gap-4">
+                <StepNumber n={i + 1} />
+                <div className="space-y-2">
+                  <h3 className="text-body font-semibold text-text">{item.title}</h3>
+                  <p className="text-body text-text-secondary max-w-[65ch]">{item.desc}</p>
+                </div>
               </div>
-              <Link
-                to={`/accompagnement/${item.slug}`}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-pill border border-border-input text-accent text-xs sm:text-sm font-semibold hover:bg-or hover:text-v1-encre transition-colors shrink-0"
-              >
-                <span>Lire le guide</span>
+              <Link to={`/accompagnement/${item.slug}`} className={`${TEXT_LINK_CLASS} shrink-0 sm:ml-12`}>
+                Lire le guide
               </Link>
-            </div>
+            </li>
           ))}
-        </div>
+        </ol>
       </section>
 
       {/* LES 5 PAGES THÉMATIQUES D'INFORMATION */}

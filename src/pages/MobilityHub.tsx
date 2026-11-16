@@ -35,7 +35,7 @@ export default function MobilityHub() {
     <>
       <SEO
         title="Mobilité & Langues — Apprendre, se préparer, s'orienter gratuitement"
-        description="Domaine 06 de WAHHF Foundation : Académie de langue allemande gratuite (A1 à C1) et accompagnement transparent vers 10 pays européens, financé par IROKO et nos donateurs."
+        description="WAHHF Foundation : Académie de langue allemande gratuite (A1 à C1) et accompagnement transparent vers 10 pays européens, financé par IROKO et nos donateurs."
       />
 
       {/* HERO */}

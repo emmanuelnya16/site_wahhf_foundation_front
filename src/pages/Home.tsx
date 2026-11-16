@@ -392,12 +392,6 @@ export default function Home() {
                 key={idx}
                 className="relative rounded-card bg-feuillage/70 border border-or/30 p-7 overflow-hidden"
               >
-                <span
-                  aria-hidden="true"
-                  className="pointer-events-none select-none absolute -bottom-3 right-3 font-serif text-7xl text-creme/[0.05]"
-                >
-                  0{idx + 1}
-                </span>
                 <p className="font-serif font-normal text-4xl sm:text-5xl text-or mb-3">
                   <Counter end={stat.number} suffix={stat.suffix} />
                 </p>
@@ -916,12 +910,6 @@ export default function Home() {
           <StaggerGroup className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Carte 1 : Faire un don */}
             <div className="surface-green relative rounded-card bg-nuit text-creme p-8 border border-or/35 flex flex-col justify-between overflow-hidden">
-              <span
-                aria-hidden="true"
-                className="pointer-events-none select-none absolute -bottom-4 right-4 font-serif text-7xl text-creme/[0.05]"
-              >
-                01
-              </span>
               <div className="space-y-4">
                 <span className="inline-block px-3 py-1 rounded-pill bg-rouge text-white text-xs font-semibold">
                   Soutien Financier Direct
@@ -942,12 +930,6 @@ export default function Home() {
 
             {/* Carte 2 : Devenir bénévole */}
             <div className="relative rounded-card bg-surface-raised p-8 border border-border-soft flex flex-col justify-between overflow-hidden shadow-xs">
-              <span
-                aria-hidden="true"
-                className="pointer-events-none select-none absolute -bottom-4 right-4 font-serif text-7xl text-nuit/[0.05]"
-              >
-                02
-              </span>
               <div className="space-y-4">
                 <span className="inline-block px-3 py-1 rounded-pill bg-nuit/10 dark:bg-or/20 text-accent text-xs font-semibold">
                   Engagement Humain
@@ -968,12 +950,6 @@ export default function Home() {
 
             {/* Carte 3 : Devenir partenaire */}
             <div className="relative rounded-card bg-surface-raised p-8 border border-border-soft flex flex-col justify-between overflow-hidden shadow-xs">
-              <span
-                aria-hidden="true"
-                className="pointer-events-none select-none absolute -bottom-4 right-4 font-serif text-7xl text-nuit/[0.05]"
-              >
-                03
-              </span>
               <div className="space-y-4">
                 <span className="inline-block px-3 py-1 rounded-pill bg-or/20 text-v1-encre dark:text-or text-xs font-semibold">
                   Mécénat & Institutions
