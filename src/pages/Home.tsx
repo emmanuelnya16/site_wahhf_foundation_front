@@ -1156,7 +1156,7 @@ export default function Home() {
         </div>
 
         {/* Bande finale d'appel au don juste avant le footer */}
-        <div className="rounded-card bg-gradient-to-r from-nuit via-feuillage to-nuit text-creme p-8 sm:p-12 border border-or/40 flex flex-col lg:flex-row items-center justify-between gap-8">
+        <div className="surface-green rounded-card bg-gradient-to-r from-nuit via-feuillage to-nuit text-creme p-8 sm:p-12 border border-or/40 flex flex-col lg:flex-row items-center justify-between gap-8">
           <div className="space-y-2 text-center lg:text-left max-w-2xl">
             <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-kicker text-or">
               <Heart className="w-4 h-4 text-rouge fill-current" />

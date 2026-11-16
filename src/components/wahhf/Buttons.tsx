@@ -113,7 +113,7 @@ export function SecondaryButton({ onInverse = false, size = 'md', className = ''
 
 /**
  * Bouton de don : cœur, libellé blanc et icône cœur ; survol et appui : cœur foncé.
- * Réservé au don. Pas de liseré, même sur fond sombre (contrat §3.5).
+ * Réservé au don. Sur nuit et en thème sombre, liseré brume à 60 % (contrat §3.5, décision du 16/11).
  */
 export function DonateButton({
   children = 'Faire un don',
@@ -134,7 +134,8 @@ export function DonateButton({
   const classes = cn(
     BASE,
     SIZES[size],
-    'bg-donate text-on-donate hover:bg-donate-hover active:bg-donate-hover',
+    // donate-button : liseré brume à 60 % quand le bouton est posé sur nuit ou en thème sombre (index.css)
+    'donate-button bg-donate text-on-donate hover:bg-donate-hover active:bg-donate-hover',
     className
   );
   const inner = (

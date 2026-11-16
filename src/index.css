@@ -505,6 +505,16 @@
 
 /* Élément flottant au-dessus de fonds variables (bouton WhatsApp, lien d'évitement) :
    double anneau, 2 px blanc dans l'écart puis 2 px forêt. L'un des deux contraste toujours (clair ou vert). */
+/* Bouton de don posé sur nuit (surface-green) ou en thème sombre : liseré intérieur de 1 px, brume à 60 %,
+   pour que sa forme ne se perde pas (décision du 16/11 ; la couleur cœur ne change pas). Liseré intérieur :
+   la taille du bouton ne bouge pas. Contraste du liseré : 5,5:1 sur nuit, 8,0:1 sur humus, 6,2:1 sur canopée
+   (5,2:1 au pire au survol, sur nuit). */
+@layer components {
+  :where(.dark, .surface-green) .donate-button {
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-brume) 60%, transparent);
+  }
+}
+
 .focus-ring-double:focus-visible {
   outline: 2px solid var(--focus-on-light);
   outline-offset: 2px;
