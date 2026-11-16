@@ -408,7 +408,9 @@
   --surface-section: var(--color-sous-bois);
   --surface-raised: var(--color-canopee);
   --surface-card: var(--color-canopee);
-  --surface-inset: var(--color-canopee);
+  /* En creux (champs, sélecteurs) : un cran plus sombre que la carte qui les porte, en attendant
+     la bordure trait-nuit du composant Field (sinon champ et carte ont la même couleur). */
+  --surface-inset: var(--color-humus);
   --surface-inverse: var(--color-nuit);
   --text: var(--color-brume-voilee);
   --text-secondary: var(--color-lichen);
