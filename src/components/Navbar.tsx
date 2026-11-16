@@ -298,6 +298,16 @@ export default function Navbar() {
               {t('nav.act')}
             </Link>
 
+            <Link
+              to="/contact"
+              className={`px-3 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
+                location.pathname === '/contact'
+                  ? 'bg-[#0F3D2E]/10 dark:bg-[#F5F1E8]/15 text-[#0F3D2E] dark:text-[#E8A317]'
+                  : 'text-[#1B1B18] dark:text-[#F5F1E8] hover:text-[#0F3D2E] dark:hover:text-[#E8A317]'
+              }`}
+            >
+              {t('nav.contact')}
+            </Link>
           </nav>
 
           {/* Droite : Langue (FR / EN), Recherche, Thème, Bouton Faire un don (#C8102E), Burger */}
@@ -644,6 +654,13 @@ export default function Navbar() {
             </Link>
 
             <Link
+              to="/contact"
+              className="block font-serif text-2xl sm:text-3xl text-[#F5F1E8] hover:text-[#E8A317] py-1"
+            >
+              6. {t('nav.contact')}
+            </Link>
+
+            <Link
               to="/candidater"
               className="block font-serif text-2xl sm:text-3xl text-[#E8A317] py-1"
             >
@@ -685,7 +702,7 @@ export default function Navbar() {
             </div>
 
             <DonateButton size="lg" className="w-full">
-              6. {t('nav.donate')}
+              7. {t('nav.donate')}
             </DonateButton>
           </div>
         </motion.div>

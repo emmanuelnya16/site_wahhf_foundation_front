@@ -183,6 +183,11 @@ export default function Footer() {
               {t('footer.colContact')}
             </h3>
             <ul className="space-y-3 text-sm text-[#F5F1E8]/80">
+              <li>
+                <Link to="/contact" className="hover:text-[#E8A317] transition-colors">
+                  Formulaire de contact
+                </Link>
+              </li>
               <li className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-[#E8A317] shrink-0 mt-1" />
                 <span>

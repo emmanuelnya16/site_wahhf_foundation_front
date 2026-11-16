@@ -11,6 +11,11 @@ interface ChoiceTileProps {
   children: ReactNode;
   /** Coche visible sur l'option choisie, pour ne pas reposer sur la seule couleur. */
   showCheck?: boolean;
+  /** Pour placer le focus sur le groupe en cas d'erreur (premier bouton du groupe). */
+  id?: string;
+  /** Erreur du groupe : état invalide et message relié. */
+  invalid?: boolean;
+  describedBy?: string;
 }
 
 /**
@@ -19,12 +24,33 @@ interface ChoiceTileProps {
  * À placer dans un <fieldset> dont la <legend> nomme le groupe. L'anneau de focus clavier (--color-focus)
  * est dessiné sur la tuile quand le bouton radio a le focus.
  */
-export default function ChoiceTile({ name, value, checked, onChange, className, children, showCheck = false }: ChoiceTileProps) {
+export default function ChoiceTile({
+  name,
+  value,
+  checked,
+  onChange,
+  className,
+  children,
+  showCheck = false,
+  id,
+  invalid,
+  describedBy,
+}: ChoiceTileProps) {
   return (
     <label
       className={`relative cursor-pointer has-[:focus-visible]:[outline:2px_solid_var(--color-focus)] has-[:focus-visible]:[outline-offset:2px] ${className}`}
     >
-      <input type="radio" name={name} value={value} checked={checked} onChange={onChange} className="sr-only" />
+      <input
+        id={id}
+        type="radio"
+        name={name}
+        value={value}
+        checked={checked}
+        onChange={onChange}
+        aria-invalid={invalid ? true : undefined}
+        aria-describedby={describedBy}
+        className="sr-only"
+      />
       {showCheck ? (
         <span className="flex items-start justify-between gap-2">
           <span>{children}</span>

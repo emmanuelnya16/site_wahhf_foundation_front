@@ -31,9 +31,9 @@ const Catalogue = lazy(() => import('./pages/Catalogue'));
 const Tarifs = lazy(() => import('./pages/Tarifs'));
 const Realisation = lazy(() => import('./pages/Realisation'));
 const Founders = lazy(() => import('./pages/Founders'));
-const Contact = lazy(() => import('./pages/Contact'));
 const GalleryPage = lazy(() => import('./pages/GalleryPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
 const VkiBusiness = lazy(() => import('./pages/VkiBusiness'));
 
 /** Espace réservé pendant le chargement d'une page : garde la hauteur, aucun saut de mise en page. */
@@ -66,6 +66,7 @@ function AppRoutes() {
         <Route path="/partenaires" element={<PartenairesPage />} />
         <Route path="/agir" element={<AgirPage />} />
         <Route path="/faire-un-don" element={<DonatePage />} />
+        <Route path="/contact" element={<ContactPage />} />
 
         {/* DOMAINE 06 : MOBILITÉ & LANGUES (ACADÉMIE D'ALLEMAND A1–C1 & EUROPE) */}
         <Route path="/mobilite-langues" element={<MobilityHub />} />
@@ -90,7 +91,8 @@ function AppRoutes() {
         <Route path="/tarifs" element={<Tarifs />} />
         <Route path="/methode" element={<Realisation />} />
         <Route path="/fondateurs" element={<Founders />} />
-        <Route path="/contact" element={<Contact />} />
+        {/* /contact mène désormais à la page Contact WAHHF (ci-dessus). L'ancien formulaire de devis
+            (src/pages/Contact.tsx) est conservé tel quel, sans route. */}
         <Route path="/a-propos" element={<Navigate to="/qui-sommes-nous" replace />} />
         <Route path="/catalogue" element={<Navigate to="/nos-actions" replace />} />
         <Route path="/realisations" element={<Navigate to="/notre-impact" replace />} />
