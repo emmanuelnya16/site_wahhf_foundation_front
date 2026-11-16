@@ -18,6 +18,7 @@ import { PrimaryButton, SecondaryButton, DonateButton } from '../components/wahh
 import DisclaimerBanner from '../components/wahhf/DisclaimerBanner';
 import CourseCard from '../components/wahhf/CourseCard';
 import ChoiceTile from '../components/wahhf/ChoiceTile';
+import NotFoundPage, { NotFoundLinks } from './NotFoundPage';
 import {
   GERMAN_LEVELS_DATA,
   COURSE_SESSIONS_DATA,
@@ -100,6 +101,24 @@ export default function LanguageAcademy() {
     setQuizFinished(false);
     setQuizStarted(true);
   };
+
+  // Niveau inconnu (/academie/z9) : message dédié et liste des 5 niveaux, au lieu de la fiche A1
+  if (routeLevel && !GERMAN_LEVELS_DATA.some((l) => l.slug === routeLevel.toLowerCase())) {
+    return (
+      <NotFoundPage
+        title="Ce niveau d’allemand n’existe pas"
+        message="L’Académie de langues propose 5 niveaux, de A1 à C1. Choisissez le vôtre ci-dessous, ou faites le test de niveau gratuit."
+      >
+        <NotFoundLinks
+          heading="Les niveaux de l’Académie"
+          links={[
+            ...GERMAN_LEVELS_DATA.map((l) => ({ to: `/academie/${l.slug}`, label: `${l.level} — ${l.title}` })),
+            { to: '/mobilite-langues/academie#test-niveau', label: 'Test de niveau gratuit (20 questions)' },
+          ]}
+        />
+      </NotFoundPage>
+    );
+  }
 
   return (
     <>

@@ -33,6 +33,7 @@ const Realisation = lazy(() => import('./pages/Realisation'));
 const Founders = lazy(() => import('./pages/Founders'));
 const Contact = lazy(() => import('./pages/Contact'));
 const GalleryPage = lazy(() => import('./pages/GalleryPage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 const VkiBusiness = lazy(() => import('./pages/VkiBusiness'));
 
 /** Espace réservé pendant le chargement d'une page : garde la hauteur, aucun saut de mise en page. */
@@ -95,8 +96,8 @@ function AppRoutes() {
         <Route path="/realisations" element={<Navigate to="/notre-impact" replace />} />
         <Route path="/vkibusiness" element={<VkiBusiness />} />
 
-        {/* Fallback */}
-        <Route path="*" element={<Navigate to="/" replace />} />
+        {/* Adresse inconnue : vraie page « introuvable » (noindex), l'adresse reste visible dans la barre */}
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
       </Suspense>
       </ChunkErrorBoundary>

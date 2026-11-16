@@ -15,6 +15,7 @@ import SectionHeader from '../components/wahhf/SectionHeader';
 import { PrimaryButton, SecondaryButton } from '../components/wahhf/Buttons';
 import DisclaimerBanner from '../components/wahhf/DisclaimerBanner';
 import { COUNTRIES_DATA, THEMATIC_GUIDES } from '../services/api';
+import NotFoundPage, { NotFoundLinks, COUNTRY_LINKS } from './NotFoundPage';
 
 const FOUR_STEPS = [
   {
@@ -53,9 +54,18 @@ export default function EuropeSupport() {
   // VUE 1 : FICHE PAYS (/accompagnement/pays/:countrySlug)
   // ---------------------------------------------------------------------------
   if (countrySlug) {
-    const country =
-      COUNTRIES_DATA.find((c) => c.slug === countrySlug.toLowerCase()) ||
-      COUNTRIES_DATA[0];
+    const country = COUNTRIES_DATA.find((c) => c.slug === countrySlug.toLowerCase());
+    // Pays inconnu : on le dit, au lieu d'afficher la fiche d'un autre pays
+    if (!country) {
+      return (
+        <NotFoundPage
+          title="Ce pays ne fait pas partie des 10 pays accompagnés"
+          message="WAHHF Foundation accompagne gratuitement vers 10 pays européens. Choisissez l’un d’eux ci-dessous pour consulter sa fiche d’orientation."
+        >
+          <NotFoundLinks heading="Les 10 pays accompagnés" links={COUNTRY_LINKS} />
+        </NotFoundPage>
+      );
+    }
 
     return (
       <>
@@ -283,6 +293,21 @@ export default function EuropeSupport() {
   // ---------------------------------------------------------------------------
   // VUE 2 : PAGE THÉMATIQUE (/accompagnement/:topicSlug)
   // ---------------------------------------------------------------------------
+  // Guide inconnu : message dédié et liste des guides, au lieu de la page générale
+  if (topicSlug && !THEMATIC_GUIDES[topicSlug]) {
+    return (
+      <NotFoundPage
+        title="Ce guide d’accompagnement n’existe pas"
+        message="Le lien a peut-être été mal copié. Voici les guides disponibles pour préparer votre projet vers l’Europe."
+      >
+        <NotFoundLinks
+          heading="Les guides d’accompagnement"
+          links={Object.entries(THEMATIC_GUIDES).map(([slug, g]) => ({ to: `/accompagnement/${slug}`, label: g.title }))}
+        />
+      </NotFoundPage>
+    );
+  }
+
   if (topicSlug && THEMATIC_GUIDES[topicSlug]) {
     const guide = THEMATIC_GUIDES[topicSlug];
     const isAntiScam = topicSlug === 'eviter-les-arnaques';

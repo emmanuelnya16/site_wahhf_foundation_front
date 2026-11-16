@@ -23,6 +23,7 @@ import { emailError, requiredError, focusFirstError } from '../lib/formValidatio
 import { useFocusOnChange } from '../lib/useFocusOnChange';
 import ContactHandoff from '../components/wahhf/ContactHandoff';
 import { buildDraft } from '../lib/contactDraft';
+import NotFoundPage, { NotFoundLinks } from './NotFoundPage';
 import {
   DOMAINS_DATA,
   NEWS_DATA,
@@ -453,7 +454,21 @@ export function ActualitesPage() {
   const { slug } = useParams<{ slug?: string }>();
 
   if (slug) {
-    const article = NEWS_DATA.find((a) => a.slug === slug) || NEWS_DATA[0];
+    const article = NEWS_DATA.find((a) => a.slug === slug);
+    // Article inconnu : on le dit, au lieu d'afficher le premier article
+    if (!article) {
+      return (
+        <NotFoundPage
+          title="Cet article est introuvable"
+          message="Il a peut-être été déplacé ou retiré, ou le lien a été mal copié. Voici les actualités publiées."
+        >
+          <NotFoundLinks
+            heading="Toutes les actualités"
+            links={[{ to: '/actualites', label: 'Page Actualités' }, ...NEWS_DATA.map((a) => ({ to: `/actualites/${a.slug}`, label: a.title }))]}
+          />
+        </NotFoundPage>
+      );
+    }
     return (
       <>
         <SEO title={article.title} description={article.excerpt} />
