@@ -1,20 +1,26 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ArrowUp, Mail, MapPin, Phone, ShieldCheck } from 'lucide-react';
+import { ArrowUp, Mail, MapPin, Phone } from 'lucide-react';
 import { DOMAINS_DATA, WAHHF_LOGO_URL } from '../services/api';
 import { scrollToTop } from '../lib/scroll';
-import StaggerGroup from '../effects/StaggerGroup';
 import { DonateButton } from './wahhf/Buttons';
+import { cn } from '../lib/utils';
 
-/**
- * Footer sombre vert forêt (token foret), 5 colonnes :
- * (1) logo + une phrase + « Branche sociale du groupe IROKO » + réseaux sociaux
- * (2) Qui sommes-nous
- * (3) Nos actions (les 6 domaines)
- * (4) Agir et Faire un don
- * (5) Contact et adresse
- * Barre du bas : mentions légales, politique de confidentialité, transparence financière, © 2026, bouton rond « retour en haut ».
+/*
+ * Footer (contrat §8, ajout du 16/11) : fond nuit ; texte brume et brume douce en 15 px ; titres de colonne en 600,
+ * sans or ; soleil réservé aux liens (au survol et à l'appui) ; contrôles cerclés du contour sur nuit.
+ * Mise en page : le bloc de la marque sur sa rangée, puis 4 colonnes (Qui sommes-nous, Nos actions, Agir et faire un
+ * don, Contact et adresse) ; barre du bas : © 2026, mentions légales, confidentialité, transparence, retour en haut.
+ * `surface-green` donne l'anneau de focus soleil et le liseré du bouton de don.
  */
+const LINK =
+  'transition-colors duration-(--dur-fast) underline-offset-4 hover:text-link-on-inverse hover:underline active:text-link-on-inverse';
+const CONTROL =
+  'inline-flex items-center justify-center rounded-pill border border-border-on-inverse text-text-on-inverse transition-colors duration-(--dur-fast) hover:bg-action-on-inverse hover:text-on-action-on-inverse hover:border-action-on-inverse active:bg-action-on-inverse active:text-on-action-on-inverse active:border-action-on-inverse active:transition-none [-webkit-tap-highlight-color:transparent]';
+const HEADING = 'text-meta font-bold text-text-on-inverse';
+const LIST = 'space-y-2.5 text-meta text-text-secondary-on-inverse';
+const ICON = 'w-4 h-4 shrink-0 text-text-secondary-on-inverse';
+
 export default function Footer() {
   const { t } = useTranslation();
 
@@ -26,12 +32,11 @@ export default function Footer() {
   };
 
   return (
-    <footer className="surface-green bg-nuit text-creme border-t border-or/25">
+    <footer className="surface-green bg-surface-inverse text-text-on-inverse">
       <div className="container-page pt-16 pb-12">
-        {/* Colonnes : apparition douce et décalée, une seule fois */}
-        <StaggerGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-creme/15">
-          {/* Colonne 1 : Logo + une phrase + Branche sociale du groupe IROKO + Réseaux sociaux */}
-          <div className="lg:col-span-3 space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-border-subtle-on-inverse">
+          {/* Bloc de la marque : logo, nom, une phrase, lien au groupe, réseaux sociaux */}
+          <div className="md:col-span-2 lg:col-span-4 space-y-4 max-w-[65ch]">
             <Link to="/" className="inline-flex items-center gap-3">
               <img
                 src={WAHHF_LOGO_URL}
@@ -42,19 +47,14 @@ export default function Footer() {
                 className="w-12 h-12 object-contain rounded-pill bg-white p-1"
               />
               <div>
-                <p className="font-serif font-normal text-xl text-creme">WAHHF Foundation</p>
-                <p className="text-xs text-or font-medium">We Are Here Help Foundation</p>
+                <p className="text-body font-bold text-text-on-inverse">WAHHF Foundation</p>
+                <p className="text-meta text-text-secondary-on-inverse">We Are Here Help Foundation</p>
               </div>
             </Link>
 
-            <p className="text-sm text-creme/80 leading-relaxed">
-              {t('footer.description')}
-            </p>
+            <p className="text-meta text-text-secondary-on-inverse">{t('footer.description')}</p>
 
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-pill bg-feuillage border border-or/40 text-xs font-semibold text-gold-on-green">
-              <ShieldCheck className="w-4 h-4" />
-              <span>{t('footer.irokoBadge')}</span>
-            </div>
+            <p className="text-meta text-text-secondary-on-inverse">{t('footer.irokoBadge')}</p>
 
             {/* Réseaux sociaux (Liens officiels à confirmer — TODO) */}
             <div className="pt-2 flex flex-wrap items-center gap-2.5">
@@ -68,7 +68,7 @@ export default function Footer() {
                   key={soc.label}
                   href={soc.href}
                   aria-label={`${soc.label} WAHHF Foundation (TODO)`}
-                  className="px-3 py-1.5 rounded-pill border border-border-on-inverse hover:bg-or hover:text-v1-encre text-xs font-medium transition-colors"
+                  className={cn(CONTROL, 'min-h-11 px-4 text-meta')}
                 >
                   {soc.label}
                 </a>
@@ -76,62 +76,58 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Colonne 2 : Qui sommes-nous */}
-          <div className="lg:col-span-2 space-y-3">
-            <h3 className="text-meta font-bold text-or">
-              {t('footer.colAbout')}
-            </h3>
-            <ul className="space-y-2.5 text-sm text-creme/80">
+          {/* Qui sommes-nous */}
+          <div className="space-y-3">
+            <h3 className={HEADING}>{t('footer.colAbout')}</h3>
+            <ul className={LIST}>
               <li>
-                <Link to="/qui-sommes-nous" className="hover:text-or transition-colors">
+                <Link to="/qui-sommes-nous" className={LINK}>
                   Notre histoire & mission
                 </Link>
               </li>
               <li>
-                <Link to="/qui-sommes-nous#gouvernance" className="hover:text-or transition-colors">
+                <Link to="/qui-sommes-nous#gouvernance" className={LINK}>
                   Équipe & Gouvernance
                 </Link>
               </li>
               <li>
-                <Link to="/notre-impact" className="hover:text-or transition-colors">
+                <Link to="/notre-impact" className={LINK}>
                   Notre impact & chiffres
                 </Link>
               </li>
               <li>
-                <Link to="/galerie" className="hover:text-or transition-colors">
+                <Link to="/galerie" className={LINK}>
                   Galerie photo & vidéo
                 </Link>
               </li>
               <li>
-                <Link to="/partenaires" className="hover:text-or transition-colors">
+                <Link to="/partenaires" className={LINK}>
                   Partenaires & Groupe IROKO
                 </Link>
               </li>
               <li>
-                <Link to="/actualites" className="hover:text-or transition-colors">
+                <Link to="/actualites" className={LINK}>
                   Actualités & Terrain
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Colonne 3 : Nos actions (les 6 domaines) */}
-          <div className="lg:col-span-3 space-y-3">
-            <h3 className="text-meta font-bold text-or">
-              {t('footer.colActions')}
-            </h3>
-            <ul className="space-y-2.5 text-sm text-creme/80">
+          {/* Nos actions (les 6 domaines) */}
+          <div className="space-y-3">
+            <h3 className={HEADING}>{t('footer.colActions')}</h3>
+            <ul className={LIST}>
               {DOMAINS_DATA.map((dom) => (
                 <li key={dom.id}>
-                  <Link to={dom.link} className="hover:text-or transition-colors flex items-center gap-2">
-                    <span>{dom.title}</span>
+                  <Link to={dom.link} className={LINK}>
+                    {dom.title}
                   </Link>
                 </li>
               ))}
               <li className="pt-1">
                 <Link
                   to="/mobilite-langues/academie"
-                  className="text-xs text-or underline underline-offset-4 hover:text-white"
+                  className="text-link-on-inverse underline underline-offset-4 decoration-1 hover:decoration-2"
                 >
                   Académie d’allemand A1–C1 (Gratuit)
                 </Link>
@@ -139,83 +135,78 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Colonne 4 : Agir et Faire un don */}
-          <div className="lg:col-span-2 space-y-3">
-            <h3 className="text-meta font-bold text-or">
-              {t('footer.colAct')}
-            </h3>
-            <ul className="space-y-2.5 text-sm text-creme/80">
+          {/* Agir et faire un don */}
+          <div className="space-y-3">
+            <h3 className={HEADING}>{t('footer.colAct')}</h3>
+            <ul className={LIST}>
               <li>
                 <DonateButton size="sm" />
-
               </li>
               <li>
-                <Link to="/candidater" className="hover:text-or transition-colors">
+                <Link to="/candidater" className={LINK}>
                   Candidater à un programme
                 </Link>
               </li>
               <li>
-                <Link to="/agir#benevole" className="hover:text-or transition-colors">
+                <Link to="/agir#benevole" className={LINK}>
                   Devenir bénévole
                 </Link>
               </li>
               <li>
-                <Link to="/agir#partenaire" className="hover:text-or transition-colors">
+                <Link to="/agir#partenaire" className={LINK}>
                   Devenir partenaire
                 </Link>
               </li>
               <li>
-                <Link to="/accompagnement/eviter-les-arnaques" className="hover:text-or transition-colors">
+                <Link to="/accompagnement/eviter-les-arnaques" className={LINK}>
                   Prévention des arnaques
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Colonne 5 : Contact et adresse */}
-          <div className="lg:col-span-2 space-y-3">
-            <h3 className="text-meta font-bold text-or">
-              {t('footer.colContact')}
-            </h3>
-            <ul className="space-y-3 text-sm text-creme/80">
+          {/* Contact et adresse */}
+          <div className="space-y-3">
+            <h3 className={HEADING}>{t('footer.colContact')}</h3>
+            <ul className={cn(LIST, 'space-y-3')}>
               <li>
-                <Link to="/contact" className="hover:text-or transition-colors">
+                <Link to="/contact" className={LINK}>
                   Formulaire de contact
                 </Link>
               </li>
               <li className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-or shrink-0 mt-1" />
+                <MapPin aria-hidden="true" className={cn(ICON, 'mt-1')} />
                 <span>
-                  Cameroun (Douala / Yaoundé) & Coordination Allemagne <span className="text-xs text-or">(TODO : adresse exacte)</span>
+                  Cameroun (Douala / Yaoundé) & Coordination Allemagne <span>(TODO : adresse exacte)</span>
                 </span>
               </li>
               <li className="flex items-center gap-2.5">
-                <Phone className="w-4 h-4 text-or shrink-0" />
-                <a href="tel:+237693129205" className="hover:text-or transition-colors">
+                <Phone aria-hidden="true" className={ICON} />
+                <a href="tel:+237693129205" className={LINK}>
                   +237 693 12 92 05
                 </a>
               </li>
               <li className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-or shrink-0" />
-                <a href="mailto:contact@wahhf-foundation.org" className="hover:text-or transition-colors break-all">
+                <Mail aria-hidden="true" className={ICON} />
+                <a href="mailto:contact@wahhf-foundation.org" className={cn(LINK, 'break-all')}>
                   contact@wahhf-foundation.org
                 </a>
               </li>
             </ul>
           </div>
-        </StaggerGroup>
+        </div>
 
-        {/* Barre du bas : mentions légales, confidentialité, transparence, © 2026, bouton rond retour en haut */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-creme/70">
-          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 sm:gap-6">
+        {/* Barre du bas : © 2026, mentions légales, confidentialité, transparence, bouton rond retour en haut */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-meta text-text-secondary-on-inverse">
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-6 gap-y-2">
             <span>© 2026 WAHHF Foundation (We Are Here Help Foundation). {t('footer.rights')}</span>
-            <Link to="/mentions-legales" className="hover:text-or transition-colors">
+            <Link to="/mentions-legales" className={LINK}>
               {t('footer.legal')}
             </Link>
-            <Link to="/confidentialite" className="hover:text-or transition-colors">
+            <Link to="/confidentialite" className={LINK}>
               {t('footer.privacy')}
             </Link>
-            <Link to="/transparence" className="hover:text-or transition-colors">
+            <Link to="/transparence" className={LINK}>
               {t('footer.transparency')}
             </Link>
           </div>
@@ -225,9 +216,9 @@ export default function Footer() {
             onClick={handleBackToTop}
             aria-label={t('footer.backToTop')}
             title={t('footer.backToTop')}
-            className="w-11 h-11 rounded-pill bg-feuillage hover:bg-or text-creme hover:text-v1-encre border border-border-on-inverse flex items-center justify-center transition duration-(--dur-fast) cursor-pointer shrink-0"
+            className={cn(CONTROL, 'w-11 h-11 shrink-0 cursor-pointer')}
           >
-            <ArrowUp className="w-5 h-5" />
+            <ArrowUp aria-hidden="true" className="w-5 h-5" />
           </button>
         </div>
       </div>
