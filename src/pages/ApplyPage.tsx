@@ -4,6 +4,7 @@ import { ShieldCheck } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
 import { PrimaryButton, SecondaryButton } from '../components/wahhf/Buttons';
 import SectionHeader from '../components/wahhf/SectionHeader';
+import PageHeader, { PageTitle, PageIntro } from '../components/wahhf/PageHeader';
 import DisclaimerBanner from '../components/wahhf/DisclaimerBanner';
 import ChoiceTile from '../components/wahhf/ChoiceTile';
 import FormField, { FieldError, fieldErrorId } from '../components/wahhf/FormField';
@@ -154,18 +155,16 @@ export default function ApplyPage() {
         description="Formulaire unique et 100 % gratuit de demande d'accompagnement et d'inscription aux cours d'allemand WAHHF Foundation. Aucun document d'identité ni paiement demandé."
       />
 
-      <section className="surface-green pt-32 pb-14 bg-nuit text-creme">
-        <div className="container-page *:max-w-4xl space-y-4">
-          <h1 className="font-serif font-normal text-[clamp(2rem,4.5vw,3.5rem)] leading-tight">
-            Candidater à un parcours d’accompagnement
-          </h1>
-          <p className="text-base sm:text-lg text-creme/85">
-            Formulaire unique pour rejoindre l’Académie de langue allemande (A1 à C1) et/ou bénéficier d’une orientation documentée vers l’Europe.
-          </p>
-        </div>
-      </section>
+      <PageHeader>
+        <PageTitle>
+          Candidater à un parcours d’accompagnement
+        </PageTitle>
+        <PageIntro>
+          Formulaire unique pour rejoindre l’Académie de langue allemande (A1 à C1) et/ou bénéficier d’une orientation documentée vers l’Europe.
+        </PageIntro>
+      </PageHeader>
 
-      <section className="container-page *:max-w-4xl -mt-6 relative z-20">
+      <section className="container-page *:max-w-4xl">
         <DisclaimerBanner compact />
       </section>
 

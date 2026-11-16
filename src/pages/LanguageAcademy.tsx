@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
 import SectionHeader from '../components/wahhf/SectionHeader';
+import PageHeader, { PageMeta, PageTitle, PageIntro, PageActions } from '../components/wahhf/PageHeader';
 import Section from '../components/wahhf/Section';
 import { PrimaryButton, SecondaryButton, DonateButton } from '../components/wahhf/Buttons';
 import DisclaimerBanner from '../components/wahhf/DisclaimerBanner';
@@ -131,49 +132,46 @@ export default function LanguageAcademy() {
       />
 
       {/* HERO */}
-      <section className="surface-green pt-32 pb-16 sm:pt-36 sm:pb-20 bg-nuit text-creme">
-        <div className="container-page space-y-6">
-          <div className="flex flex-wrap items-center gap-2 text-xs text-or font-semibold">
-            <Link to="/mobilite-langues" className="hover:underline">
-              Mobilité & Langues
-            </Link>
-            <span>/</span>
-            <span>Académie de langues (A1 à C1)</span>
-            {routeLevel && (
-              <>
-                <span>/</span>
-                <span>Niveau {activeCourse.level}</span>
-              </>
-            )}
-          </div>
+      <PageHeader>
+        <PageMeta>
+          <Link to="/mobilite-langues">
+            Mobilité & Langues
+          </Link>
+          <span>/</span>
+          <span>Académie de langues (A1 à C1)</span>
+          {routeLevel && (
+            <>
+              <span>/</span>
+              <span>Niveau {activeCourse.level}</span>
+            </>
+          )}
+        </PageMeta>
 
-          <h1 className="font-serif font-normal text-[clamp(2.1rem,4.6vw,3.9rem)] leading-[1.1] text-creme">
-            Académie de langues — Allemand A1 à C1
-          </h1>
+        <PageTitle>
+          Académie de langues — Allemand A1 à C1
+        </PageTitle>
 
-          <p className="text-base sm:text-xl text-creme/85 max-w-3xl leading-relaxed">
-            Accompagnement linguistique 100 % gratuit, financé par le groupe IROKO et nos donateurs. Progressez méthodiquement du niveau débutant A1 jusqu’à la maîtrise académique C1.
-          </p>
+        <PageIntro>
+          Accompagnement linguistique 100 % gratuit, financé par le groupe IROKO et nos donateurs. Progressez méthodiquement du niveau débutant A1 jusqu’à la maîtrise académique C1.
+        </PageIntro>
 
-          <div className="pt-2 flex flex-wrap items-center gap-4">
-            <PrimaryButton
-              to={`/candidater?souhait=cours_allemand&niveau=${activeCourse.level}`}
-              onInverse
-            >
-              Candidater au niveau {activeCourse.level}
-            </PrimaryButton>
-            <SecondaryButton href="#test-niveau" onInverse>
-              Passer le test d’orientation gratuit (20 questions)
-            </SecondaryButton>
-            <SecondaryButton href="#calendrier-sessions" onInverse>
-              Voir le calendrier des sessions
-            </SecondaryButton>
-          </div>
-        </div>
-      </section>
+        <PageActions>
+          <PrimaryButton
+            to={`/candidater?souhait=cours_allemand&niveau=${activeCourse.level}`}
+          >
+            Candidater au niveau {activeCourse.level}
+          </PrimaryButton>
+          <SecondaryButton href="#test-niveau">
+            Passer le test d’orientation gratuit (20 questions)
+          </SecondaryButton>
+          <SecondaryButton href="#calendrier-sessions">
+            Voir le calendrier des sessions
+          </SecondaryButton>
+        </PageActions>
+      </PageHeader>
 
       {/* BLOC D'AVERTISSEMENT STANDARD */}
-      <section className="container-page -mt-6 relative z-20">
+      <section className="container-page">
         <DisclaimerBanner />
       </section>
 

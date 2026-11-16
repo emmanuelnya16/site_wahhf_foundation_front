@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
 import SectionHeader from '../components/wahhf/SectionHeader';
+import PageHeader, { PageTitle, PageIntro, PageActions } from '../components/wahhf/PageHeader';
 import { PrimaryButton, SecondaryButton, DonateButton } from '../components/wahhf/Buttons';
 import DisclaimerBanner from '../components/wahhf/DisclaimerBanner';
 import { COUNTRIES_DATA, GERMAN_LEVELS_DATA, WAHHF_IMAGES, imageSrcSet } from '../services/api';
@@ -40,48 +41,32 @@ export default function MobilityHub() {
       />
 
       {/* HERO */}
-      <section className="surface-green relative pt-32 pb-20 sm:pt-36 sm:pb-24 bg-nuit text-creme overflow-hidden">
-        <div className="absolute inset-0 opacity-25">
-          <img
-            src={WAHHF_IMAGES.openDayVisioconference}
-            srcSet={imageSrcSet(WAHHF_IMAGES.openDayVisioconference)}
-            sizes="100vw"
-            alt=""
-            width={1027}
-            height={628}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-nuit via-nuit/85 to-nuit" />
-        </div>
+      <PageHeader photoId="open-day-visioconference">
+        <PageTitle>
+          Apprendre, se préparer, s’orienter — gratuitement
+        </PageTitle>
 
-        <div className="container-page relative z-10 space-y-6">
-          <h1 className="font-serif font-normal text-[clamp(2.2rem,4.8vw,4.1rem)] leading-[1.1] text-creme max-w-4xl">
-            Apprendre, se préparer, s’orienter — gratuitement
-          </h1>
+        <PageIntro>
+          Accompagnement des cours de langue allemande (A1 à C1) et information fiable sur les parcours d’études, de formation et de travail vers 10 pays européens.
+        </PageIntro>
 
-          <p className="text-base sm:text-xl text-creme/85 max-w-3xl leading-relaxed">
-            Accompagnement des cours de langue allemande (A1 à C1) et information fiable sur les parcours d’études, de formation et de travail vers 10 pays européens.
-          </p>
-
-          <div className="pt-2 flex flex-wrap items-center gap-4">
-            <PrimaryButton
-              to="/candidater"
-              onInverse
-            >
-              Candidater au programme
-            </PrimaryButton>
-            <SecondaryButton to="/mobilite-langues/academie" onInverse>
-              Découvrir l’Académie d’allemand (A1–C1)
-            </SecondaryButton>
-            <SecondaryButton to="/mobilite-langues/accompagnement" onInverse>
-              Explorer les 10 pays accompagnés
-            </SecondaryButton>
-          </div>
-        </div>
-      </section>
+        <PageActions>
+          <PrimaryButton
+            to="/candidater"
+          >
+            Candidater au programme
+          </PrimaryButton>
+          <SecondaryButton to="/mobilite-langues/academie">
+            Découvrir l’Académie d’allemand (A1–C1)
+          </SecondaryButton>
+          <SecondaryButton to="/mobilite-langues/accompagnement">
+            Explorer les 10 pays accompagnés
+          </SecondaryButton>
+        </PageActions>
+      </PageHeader>
 
       {/* BLOC D'AVERTISSEMENT STANDARD OBLIGATOIRE */}
-      <section className="container-page -mt-8 relative z-20">
+      <section className="container-page">
         <DisclaimerBanner />
       </section>
 

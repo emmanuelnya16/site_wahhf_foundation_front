@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Mail, MapPin, MessageCircle, Phone, ShieldCheck } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
 import SectionHeader from '../components/wahhf/SectionHeader';
+import PageHeader, { PageTitle, PageIntro } from '../components/wahhf/PageHeader';
 import { PrimaryButton } from '../components/wahhf/Buttons';
 import ChoiceTile from '../components/wahhf/ChoiceTile';
 import FormField, { FieldError, fieldErrorId } from '../components/wahhf/FormField';
@@ -103,17 +104,15 @@ export default function ContactPage() {
         description="Contacter WAHHF Foundation par WhatsApp ou par e-mail : candidature, bénévolat, partenariat, presse ou toute autre demande."
       />
 
-      <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
-        <div className="container-page space-y-4">
-          <h1 className="font-serif font-normal text-[clamp(2.1rem,4.5vw,3.8rem)] leading-tight">
-            Écrire à WAHHF Foundation
-          </h1>
-          <p className="text-base sm:text-lg text-creme/85 max-w-3xl leading-relaxed">
-            Choisissez le motif de votre message et écrivez-nous. Vous pouvez aussi nous joindre directement par
-            WhatsApp ou par e-mail.
-          </p>
-        </div>
-      </section>
+      <PageHeader>
+        <PageTitle>
+          Écrire à WAHHF Foundation
+        </PageTitle>
+        <PageIntro>
+          Choisissez le motif de votre message et écrivez-nous. Vous pouvez aussi nous joindre directement par
+          WhatsApp ou par e-mail.
+        </PageIntro>
+      </PageHeader>
 
       <section className="container-page section-space">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">

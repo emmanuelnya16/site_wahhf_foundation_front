@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
 import SectionHeader from '../components/wahhf/SectionHeader';
+import PageHeader, { PageMeta, PageTitle, PageIntro, PageActions } from '../components/wahhf/PageHeader';
 import { PrimaryButton, SecondaryButton } from '../components/wahhf/Buttons';
 import DisclaimerBanner from '../components/wahhf/DisclaimerBanner';
 import { COUNTRIES_DATA, THEMATIC_GUIDES } from '../services/api';
@@ -74,67 +75,58 @@ export default function EuropeSupport() {
           description={`Information vérifiée et gratuite sur les études, la formation et le travail en ${country.name} par WAHHF Foundation.`}
         />
 
-        <section className="surface-green pt-32 pb-16 sm:pt-36 sm:pb-20 bg-nuit text-creme">
-          <div className="container-page space-y-6">
-            <div className="flex flex-wrap items-center gap-2 text-xs text-or font-semibold">
-              <Link to="/mobilite-langues" className="hover:underline">
-                Mobilité & Langues
-              </Link>
-              <span>/</span>
-              <Link to="/mobilite-langues/accompagnement" className="hover:underline">
-                Accompagnement Europe
-              </Link>
-              <span>/</span>
-              <span>{country.name}</span>
-            </div>
+        <PageHeader>
+          <PageMeta>
+            <Link to="/mobilite-langues">
+              Mobilité & Langues
+            </Link>
+            <span>/</span>
+            <Link to="/mobilite-langues/accompagnement">
+              Accompagnement Europe
+            </Link>
+            <span>/</span>
+            <span>{country.name}</span>
+          </PageMeta>
 
-            <div className="flex flex-wrap items-center gap-4">
-              <span className="text-5xl" aria-hidden="true">
-                {country.flag}
-              </span>
-              <div>
-                <div className="flex flex-wrap items-center gap-2.5">
-                  <h1 className="font-serif font-normal text-[clamp(2rem,4.5vw,3.75rem)] leading-tight text-creme">
-                    S’orienter vers : {country.name}
-                  </h1>
-                  <span
-                    className={`px-3.5 py-1 rounded-pill text-xs font-semibold ${
-                      country.isEU
-                        ? 'bg-or/20 text-gold-on-green border border-or/40'
-                        : 'bg-rouge text-white'
-                    }`}
-                  >
-                    {country.isEU
-                      ? 'Membre de l’Union européenne (UE)'
-                      : 'Hors Union européenne (Pays candidat)'}
-                  </span>
-                </div>
-                <p className="text-sm text-creme/80 mt-1">
-                  Langues parlées / d’études : {country.languages.join(' · ')}
-                </p>
+          <div className="flex flex-wrap items-center gap-4">
+            <span className="text-5xl leading-none" aria-hidden="true">
+              {country.flag}
+            </span>
+            <div>
+              <div className="flex flex-wrap items-center gap-2.5">
+                <PageTitle>
+                  S’orienter vers : {country.name}
+                </PageTitle>
+                <span className="px-3 py-1 rounded-pill border border-border-input text-meta text-text">
+                  {country.isEU
+                    ? 'Membre de l’Union européenne (UE)'
+                    : 'Hors Union européenne (Pays candidat)'}
+                </span>
               </div>
-            </div>
-
-            <p className="text-base sm:text-lg text-creme/85 max-w-3xl leading-relaxed">
-              {country.summary}
-            </p>
-
-            <div className="pt-2 flex flex-wrap items-center gap-4">
-              <PrimaryButton
-                to={`/candidater?souhait=accompagnement_europe&pays=${country.slug}`}
-                onInverse
-              >
-                Être accompagné gratuitement pour : {country.name}
-              </PrimaryButton>
-              <SecondaryButton to="/mobilite-langues/accompagnement" onInverse>
-                Voir les 10 pays accompagnés
-              </SecondaryButton>
+              <p className="text-meta text-text-secondary mt-2">
+                Langues parlées / d’études : {country.languages.join(' · ')}
+              </p>
             </div>
           </div>
-        </section>
+
+          <PageIntro>
+            {country.summary}
+          </PageIntro>
+
+          <PageActions>
+            <PrimaryButton
+              to={`/candidater?souhait=accompagnement_europe&pays=${country.slug}`}
+            >
+              Être accompagné gratuitement pour : {country.name}
+            </PrimaryButton>
+            <SecondaryButton to="/mobilite-langues/accompagnement">
+              Voir les 10 pays accompagnés
+            </SecondaryButton>
+          </PageActions>
+        </PageHeader>
 
         {/* BLOC D'AVERTISSEMENT STANDARD OBLIGATOIRE */}
-        <section className="container-page -mt-6 relative z-20 space-y-4">
+        <section className="container-page space-y-4">
           <DisclaimerBanner />
 
           {/* Mention explicite obligatoire si le pays n'est pas membre de l'UE (Albanie) */}
@@ -307,7 +299,6 @@ export default function EuropeSupport() {
 
   if (topicSlug && THEMATIC_GUIDES[topicSlug]) {
     const guide = THEMATIC_GUIDES[topicSlug];
-    const isAntiScam = topicSlug === 'eviter-les-arnaques';
 
     return (
       <>
@@ -316,34 +307,28 @@ export default function EuropeSupport() {
           description={guide.subtitle}
         />
 
-        <section
-          className={`surface-green pt-32 pb-16 sm:pt-36 sm:pb-20 ${
-            isAntiScam ? 'bg-nuit border-b-4 border-or' : 'bg-nuit'
-          } text-creme`}
-        >
-          <div className="container-page *:max-w-5xl space-y-5">
-            <div className="flex flex-wrap items-center gap-2 text-xs text-or font-semibold">
-              <Link to="/mobilite-langues" className="hover:underline">
-                Mobilité & Langues
-              </Link>
-              <span>/</span>
-              <Link to="/mobilite-langues/accompagnement" className="hover:underline">
-                Accompagnement Europe
-              </Link>
-              <span>/</span>
-              <span className="uppercase tracking-[0.18em]">{guide.kicker}</span>
-            </div>
+        <PageHeader>
+          <PageMeta>
+            <Link to="/mobilite-langues">
+              Mobilité & Langues
+            </Link>
+            <span>/</span>
+            <Link to="/mobilite-langues/accompagnement">
+              Accompagnement Europe
+            </Link>
+            <span>/</span>
+            <span>{guide.kicker}</span>
+          </PageMeta>
 
-            <h1 className="font-serif font-normal text-[clamp(2rem,4.5vw,3.6rem)] leading-tight text-creme">
-              {guide.title}
-            </h1>
-            <p className="text-base sm:text-xl text-creme/85 max-w-3xl leading-relaxed">
-              {guide.subtitle}
-            </p>
-          </div>
-        </section>
+          <PageTitle>
+            {guide.title}
+          </PageTitle>
+          <PageIntro>
+            {guide.subtitle}
+          </PageIntro>
+        </PageHeader>
 
-        <section className="container-page *:max-w-5xl -mt-6 relative z-20">
+        <section className="container-page *:max-w-5xl">
           <DisclaimerBanner />
         </section>
 
@@ -429,40 +414,37 @@ export default function EuropeSupport() {
       />
 
       {/* HERO */}
-      <section className="surface-green pt-32 pb-16 sm:pt-36 sm:pb-20 bg-nuit text-creme">
-        <div className="container-page space-y-6">
-          <div className="flex flex-wrap items-center gap-2 text-xs text-or font-semibold">
-            <Link to="/mobilite-langues" className="hover:underline">
-              Mobilité & Langues
-            </Link>
-            <span>/</span>
-            <span>Accompagnement vers l’Europe</span>
-          </div>
+      <PageHeader>
+        <PageMeta>
+          <Link to="/mobilite-langues">
+            Mobilité & Langues
+          </Link>
+          <span>/</span>
+          <span>Accompagnement vers l’Europe</span>
+        </PageMeta>
 
-          <h1 className="font-serif font-normal text-[clamp(2.1rem,4.6vw,3.9rem)] leading-[1.1] text-creme max-w-4xl">
-            Un accompagnement gratuit, transparent et étape par étape
-          </h1>
+        <PageTitle>
+          Un accompagnement gratuit, transparent et étape par étape
+        </PageTitle>
 
-          <p className="text-base sm:text-xl text-creme/85 max-w-3xl leading-relaxed">
-            Comprendre les parcours légaux, préparer un dossier authentique, apprendre la langue du pays et vérifier chaque information sur les portails officiels de 10 pays européens.
-          </p>
+        <PageIntro>
+          Comprendre les parcours légaux, préparer un dossier authentique, apprendre la langue du pays et vérifier chaque information sur les portails officiels de 10 pays européens.
+        </PageIntro>
 
-          <div className="pt-2 flex flex-wrap items-center gap-4">
-            <PrimaryButton
-              to="/candidater?souhait=accompagnement_europe"
-              onInverse
-            >
-              Être accompagné gratuitement
-            </PrimaryButton>
-            <SecondaryButton to="/accompagnement/eviter-les-arnaques" onInverse>
-              Guide prioritaire : Éviter les arnaques
-            </SecondaryButton>
-          </div>
-        </div>
-      </section>
+        <PageActions>
+          <PrimaryButton
+            to="/candidater?souhait=accompagnement_europe"
+          >
+            Être accompagné gratuitement
+          </PrimaryButton>
+          <SecondaryButton to="/accompagnement/eviter-les-arnaques">
+            Guide prioritaire : Éviter les arnaques
+          </SecondaryButton>
+        </PageActions>
+      </PageHeader>
 
       {/* BLOC D'AVERTISSEMENT STANDARD OBLIGATOIRE */}
-      <section className="container-page -mt-6 relative z-20">
+      <section className="container-page">
         <DisclaimerBanner />
       </section>
 

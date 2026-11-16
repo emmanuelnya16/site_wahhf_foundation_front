@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
 import SectionHeader from '../components/wahhf/SectionHeader';
+import PageHeader, { PageMeta, PageTitle, PageIntro } from '../components/wahhf/PageHeader';
 import { PrimaryButton, SecondaryButton, DonateButton } from '../components/wahhf/Buttons';
 import DomainCard from '../components/wahhf/DomainCard';
 import Counter from '../components/wahhf/Counter';
@@ -40,16 +41,14 @@ export function QuiSommesNousPage() {
         description="Découvrez l'histoire, la mission, les valeurs, la gouvernance de WAHHF Foundation (We Are Here Help Foundation) et son lien avec le groupe IROKO."
       />
 
-      <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
-        <div className="container-page space-y-5">
-          <h1 className="font-serif font-normal text-[clamp(2.1rem,4.6vw,3.9rem)] leading-tight max-w-4xl">
-            Une fondation camerouno-allemande au service de la dignité humaine
-          </h1>
-          <p className="text-base sm:text-xl text-creme/85 max-w-3xl leading-relaxed">
-            Née de la solidarité entre le Cameroun et l’Allemagne, WAHHF Foundation accompagne les jeunes et les communautés à travers 6 domaines d’action complémentaires.
-          </p>
-        </div>
-      </section>
+      <PageHeader>
+        <PageTitle>
+          Une fondation camerouno-allemande au service de la dignité humaine
+        </PageTitle>
+        <PageIntro>
+          Née de la solidarité entre le Cameroun et l’Allemagne, WAHHF Foundation accompagne les jeunes et les communautés à travers 6 domaines d’action complémentaires.
+        </PageIntro>
+      </PageHeader>
 
       {/* Histoire, Mission & Valeurs */}
       <section className="container-page section-space space-y-16">
@@ -178,16 +177,14 @@ export function PartenairesPage() {
         description="Découvrez le rôle du groupe IROKO en tant que partenaire fondateur de WAHHF Foundation ainsi que nos partenaires institutionnels et associatifs."
       />
 
-      <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
-        <div className="container-page space-y-4">
-          <h1 className="font-serif font-normal text-[clamp(2.1rem,4.5vw,3.8rem)] leading-tight">
-            Un écosystème engagé pour garantir la gratuité de nos actions
-          </h1>
-          <p className="text-base sm:text-xl text-creme/85 max-w-3xl">
-            En premier lieu le groupe IROKO, accompagné de nos donateurs, professionnels bénévoles et institutions partenaires.
-          </p>
-        </div>
-      </section>
+      <PageHeader>
+        <PageTitle>
+          Un écosystème engagé pour garantir la gratuité de nos actions
+        </PageTitle>
+        <PageIntro>
+          En premier lieu le groupe IROKO, accompagné de nos donateurs, professionnels bénévoles et institutions partenaires.
+        </PageIntro>
+      </PageHeader>
 
       <section className="container-page section-space space-y-12">
         {/* Partenaire Fondateur : Groupe IROKO */}
@@ -273,16 +270,14 @@ export function NosActionsPage() {
         description="Découvrez les 6 domaines d'intervention de WAHHF Foundation au Cameroun et vers l'Europe."
       />
 
-      <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
-        <div className="container-page space-y-4">
-          <h1 className="font-serif font-normal text-[clamp(2.1rem,4.5vw,3.8rem)] leading-tight">
-            Agir sur tous les leviers de l’autonomie humaine
-          </h1>
-          <p className="text-base sm:text-xl text-creme/85 max-w-3xl">
-            Éducation, Santé, Entrepreneuriat des jeunes, Environnement, Droits et inclusion, et Mobilité & Langues.
-          </p>
-        </div>
-      </section>
+      <PageHeader>
+        <PageTitle>
+          Agir sur tous les leviers de l’autonomie humaine
+        </PageTitle>
+        <PageIntro>
+          Éducation, Santé, Entrepreneuriat des jeunes, Environnement, Droits et inclusion, et Mobilité & Langues.
+        </PageIntro>
+      </PageHeader>
 
       <section className="container-page section-space space-y-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -371,16 +366,14 @@ export function NotreImpactPage() {
         description="Mesurez l'impact des programmes éducatifs, sanitaires et linguistiques de WAHHF Foundation au Cameroun et vers l'Europe."
       />
 
-      <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
-        <div className="container-page space-y-4">
-          <h1 className="font-serif font-normal text-[clamp(2.1rem,4.5vw,3.8rem)] leading-tight">
-            Un impact concret, mesuré avec humilité et transparence
-          </h1>
-          <p className="text-base sm:text-xl text-creme/85 max-w-3xl">
-            Chiffres clés d’accompagnement (marqués TODO à consolider), couverture des 10 régions du Cameroun et passerelles vers 10 pays européens.
-          </p>
-        </div>
-      </section>
+      <PageHeader>
+        <PageTitle>
+          Un impact concret, mesuré avec humilité et transparence
+        </PageTitle>
+        <PageIntro>
+          Chiffres clés d’accompagnement (marqués TODO à consolider), couverture des 10 régions du Cameroun et passerelles vers 10 pays européens.
+        </PageIntro>
+      </PageHeader>
 
       <section className="container-page section-space space-y-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -451,30 +444,27 @@ export function ActualitesPage() {
     return (
       <>
         <SEO title={article.title} description={article.excerpt} />
-        <section className="surface-green pt-32 pb-14 bg-nuit text-creme">
-          <div className="container-page *:max-w-4xl space-y-4">
-            <Link
-              to="/actualites"
-              className="text-xs font-semibold text-or hover:underline"
-            >
-              Retour à toutes les actualités
-            </Link>
-            <div className="flex flex-wrap items-center gap-3 text-xs text-creme/80">
-              <span className="px-3 py-1 rounded-pill bg-or text-v1-encre font-semibold">
-                {article.category}
-              </span>
-              <span className="flex items-center gap-1">
-                <Calendar className="w-3.5 h-3.5" /> {article.date}
-              </span>
-              <span className="flex items-center gap-1">
-                <Clock className="w-3.5 h-3.5" /> {article.readTime}
-              </span>
-            </div>
-            <h1 className="font-serif font-normal text-3xl sm:text-5xl leading-tight">
-              {article.title}
-            </h1>
-          </div>
-        </section>
+        <PageHeader>
+          <PageMeta>
+          <Link to="/actualites">
+            Retour à toutes les actualités
+          </Link>
+          </PageMeta>
+          <PageMeta className="gap-x-3">
+            <span className="px-3 py-0.5 rounded-pill border border-border-input text-text">
+              {article.category}
+            </span>
+            <span className="flex items-center gap-1">
+              <Calendar className="w-3.5 h-3.5" /> {article.date}
+            </span>
+            <span className="flex items-center gap-1">
+              <Clock className="w-3.5 h-3.5" /> {article.readTime}
+            </span>
+          </PageMeta>
+          <PageTitle>
+            {article.title}
+          </PageTitle>
+        </PageHeader>
 
         <section className="container-page *:max-w-4xl section-space space-y-8">
           <div className="rounded-card overflow-hidden aspect-[16/9] border border-nuit/15">
@@ -510,13 +500,11 @@ export function ActualitesPage() {
         title="Actualités & Actions de terrain"
         description="Suivez les dernières actualités de WAHHF Foundation : ouvertures des sessions d'allemand gratuites, campagnes de santé et reboisement."
       />
-      <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
-        <div className="container-page space-y-4">
-          <h1 className="font-serif font-normal text-[clamp(2.1rem,4.5vw,3.8rem)] leading-tight">
-            Actualités & Actions de terrain
-          </h1>
-        </div>
-      </section>
+      <PageHeader>
+        <PageTitle>
+          Actualités & Actions de terrain
+        </PageTitle>
+      </PageHeader>
 
       <section className="container-page section-space grid grid-cols-1 md:grid-cols-3 gap-6">
         {NEWS_DATA.map((art) => (
@@ -648,13 +636,11 @@ export function AgirPage() {
         description="Rejoignez l'engagement de WAHHF Foundation : faire un don, devenir formateur ou bénévole, ou bâtir un partenariat institutionnel."
       />
 
-      <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
-        <div className="container-page space-y-4">
-          <h1 className="font-serif font-normal text-[clamp(2.1rem,4.5vw,3.8rem)] leading-tight">
-            Trois manières concrètes de soutenir la jeunesse
-          </h1>
-        </div>
-      </section>
+      <PageHeader>
+        <PageTitle>
+          Trois manières concrètes de soutenir la jeunesse
+        </PageTitle>
+      </PageHeader>
 
       <section className="container-page section-space space-y-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -886,17 +872,15 @@ export function LegalTransparencyPage({
   return (
     <>
       <SEO title={content.title} description={content.blocks[0].p} />
-      <section className="surface-green pt-32 pb-14 bg-nuit text-creme">
-        <div className="container-page *:max-w-4xl space-y-3">
-          {'kicker' in content && (
-            <div className="inline-flex items-center gap-2 text-meta text-text-secondary-on-inverse">
-              <content.icon className="w-4 h-4" />
-              <span>{content.kicker}</span>
-            </div>
-          )}
-          <h1 className="font-serif font-normal text-3xl sm:text-5xl">{content.title}</h1>
-        </div>
-      </section>
+      <PageHeader>
+        {'kicker' in content && (
+          <PageMeta>
+            <content.icon aria-hidden="true" className="w-4 h-4" />
+            <span>{content.kicker}</span>
+          </PageMeta>
+        )}
+        <PageTitle>{content.title}</PageTitle>
+      </PageHeader>
 
       <section className="container-page *:max-w-4xl section-space space-y-6">
         {content.blocks.map((b) => (

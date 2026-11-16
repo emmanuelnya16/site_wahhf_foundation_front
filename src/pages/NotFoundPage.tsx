@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import PageHeader, { PageMeta, PageTitle, PageIntro } from '../components/wahhf/PageHeader';
 import { Link, useLocation } from 'react-router-dom';
 import SEO from '../components/wahhf/SEO';
 import { PrimaryButton, SecondaryButton, DonateButton } from '../components/wahhf/Buttons';
@@ -54,22 +55,20 @@ export default function NotFoundPage({
     <>
       <SEO title="Page introuvable" description="Cette adresse ne correspond à aucune page du site WAHHF Foundation." />
 
-      <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
-        <div className="container-page *:max-w-4xl space-y-4">
-          <span className="text-meta text-text-secondary-on-inverse">
-            Page introuvable (erreur 404)
-          </span>
-          <h1 className="font-serif font-normal text-[clamp(2rem,4.5vw,3.5rem)] leading-tight">{title}</h1>
-          <p className="text-base sm:text-lg text-creme/85 leading-relaxed break-words">
-            {message ?? (
-              <>
-                L’adresse « {pathname} » ne correspond à aucune page du site. Le lien a peut-être été mal copié ou
-                la page a été déplacée.
-              </>
-            )}
-          </p>
-        </div>
-      </section>
+      <PageHeader>
+        <PageMeta>
+          <span>Page introuvable (erreur 404)</span>
+        </PageMeta>
+        <PageTitle>{title}</PageTitle>
+        <PageIntro>
+          {message ?? (
+            <>
+              L’adresse « {pathname} » ne correspond à aucune page du site. Le lien a peut-être été mal copié ou
+              la page a été déplacée.
+            </>
+          )}
+        </PageIntro>
+      </PageHeader>
 
       <section className="container-page *:max-w-4xl section-space space-y-12">
         {children ?? <NotFoundLinks heading="Les 10 pays accompagnés" links={COUNTRY_LINKS} />}

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PageHeader, { PageTitle, PageIntro } from '../components/wahhf/PageHeader';
 import { MapPin } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
 import GalleryGrid from '../components/wahhf/GalleryGrid';
@@ -32,15 +33,13 @@ export default function GalleryPage() {
         description="Photos et vidéos de WAHHF Foundation : First Open Day & Boot Camp à Yaoundé, rencontres de la communauté et actions sur le terrain."
       />
 
-      <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
-        <div className="container-page space-y-4">
-          <h1 className="font-serif font-normal text-[clamp(2.1rem,4.5vw,3.8rem)] leading-tight">La fondation en images</h1>
-          <p className="text-base sm:text-xl text-creme/85 max-w-3xl">
-            Retour en photos et en vidéos sur nos actions : la première journée portes ouvertes et le Boot Camp de Yaoundé, nos rencontres
-            et le terrain.
-          </p>
-        </div>
-      </section>
+      <PageHeader>
+        <PageTitle>La fondation en images</PageTitle>
+        <PageIntro>
+          Retour en photos et en vidéos sur nos actions : la première journée portes ouvertes et le Boot Camp de Yaoundé, nos rencontres
+          et le terrain.
+        </PageIntro>
+      </PageHeader>
 
       <section className="container-page section-space space-y-14">
         <div role="group" aria-label="Filtrer par album" className="flex gap-2 overflow-x-auto sm:flex-wrap pb-1 -mx-1 px-1">

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ShieldCheck, CheckCircle2, Sparkles, Lock } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
 import SectionHeader from '../components/wahhf/SectionHeader';
+import PageHeader, { PageTitle, PageIntro } from '../components/wahhf/PageHeader';
 import { DonateButton } from '../components/wahhf/Buttons';
 import ChoiceTile from '../components/wahhf/ChoiceTile';
 import ContactHandoff from '../components/wahhf/ContactHandoff';
@@ -92,16 +93,14 @@ export default function DonatePage() {
         description="Soutenez WAHHF Foundation : vos dons financent la gratuité des cours d'allemand (A1 à C1), l'accompagnement vers l'Europe et nos actions sociales au Cameroun."
       />
 
-      <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
-        <div className="container-page *:max-w-5xl space-y-5">
-          <h1 className="font-serif font-normal text-[clamp(2.1rem,4.6vw,3.8rem)] leading-tight">
-            Grâce à vos dons, chaque jeune est accompagné gratuitement
-          </h1>
-          <p className="text-base sm:text-xl text-creme/85 max-w-3xl leading-relaxed">
-            Le groupe IROKO soutient notre structure afin que vos dons aillent directement aux actions de terrain : cours d’allemand A1–C1, matériel pédagogique, santé communautaire et éducation.
-          </p>
-        </div>
-      </section>
+      <PageHeader>
+        <PageTitle>
+          Grâce à vos dons, chaque jeune est accompagné gratuitement
+        </PageTitle>
+        <PageIntro>
+          Le groupe IROKO soutient notre structure afin que vos dons aillent directement aux actions de terrain : cours d’allemand A1–C1, matériel pédagogique, santé communautaire et éducation.
+        </PageIntro>
+      </PageHeader>
 
       <section ref={formSectionRef} className="container-page section-space">
         <p role="status" className="sr-only">
