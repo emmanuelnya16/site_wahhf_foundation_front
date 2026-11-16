@@ -17,7 +17,6 @@ import { CardLink, CardMedia, CardBody, CardMeta, CardTitle } from '../component
 import { LABEL_CLASS, FIELD_CLASS } from '../components/wahhf/FormField';
 import { cn } from '../lib/utils';
 import { PrimaryButton, SecondaryButton, DonateButton } from '../components/wahhf/Buttons';
-import DomainCard from '../components/wahhf/DomainCard';
 import Counter from '../components/wahhf/Counter';
 import PresenceSection from '../components/wahhf/PresenceSection';
 import { useFocusOnChange } from '../lib/useFocusOnChange';
@@ -31,6 +30,7 @@ import StaggerGroup from '../effects/StaggerGroup';
 import HeroSection from './home/HeroSection';
 import MobilitySection from './home/MobilitySection';
 import FieldSection from './home/FieldSection';
+import DomainsSection from './home/DomainsSection';
 
 import {
   DOMAINS_DATA,
@@ -131,6 +131,9 @@ export default function Home() {
 
       {/* 3. SUR LE TERRAIN : photos de l'Open Day et lien vers la galerie : src/pages/home/FieldSection.tsx */}
       <FieldSection />
+
+      {/* 4. DOMAINES : liste, photos réelles seulement, ancres vers /nos-actions : src/pages/home/DomainsSection.tsx */}
+      <DomainsSection />
 
       {/* =====================================================================
           2. MISSION (« Qui sommes-nous »)
@@ -264,26 +267,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* =====================================================================
-          4. NOS 6 DOMAINES D'ACTION
-          Ordre : Éducation, Santé, Entrepreneuriat des jeunes, Environnement,
-          Droits et inclusion, Mobilité & Langues.
-          En liste typographique (contrat §7 section 4, §8) : titre-lien et phrase, sans carte ni numéro ni carrousel.
-          ===================================================================== */}
-      <Section id="domaines">
-        <div className="container-page space-y-10">
-          <SectionHeader
-            kicker={t('home.domains.kicker')}
-            title={t('home.domains.title')}
-            subtitle={t('home.domains.subtitle')}
-          />
-          <TextList columns={3}>
-            {DOMAINS_DATA.map((domain) => (
-              <DomainCard key={domain.id} domain={domain} />
-            ))}
-          </TextList>
-        </div>
-      </Section>
 
 
       {/* =====================================================================
