@@ -5,7 +5,6 @@ import {
   GraduationCap,
   ShieldAlert,
   ArrowUpRight,
-  AlertTriangle,
   CheckCircle2,
   Home,
 } from 'lucide-react';
@@ -14,6 +13,7 @@ import SectionHeader from '../components/wahhf/SectionHeader';
 import PageHeader, { PageMeta, PageTitle, PageIntro, PageActions } from '../components/wahhf/PageHeader';
 import { PrimaryButton, SecondaryButton } from '../components/wahhf/Buttons';
 import DisclaimerBanner from '../components/wahhf/DisclaimerBanner';
+import InfoBox from '../components/wahhf/InfoBox';
 import { COUNTRIES_DATA, THEMATIC_GUIDES } from '../services/api';
 import NotFoundPage, { NotFoundLinks, COUNTRY_LINKS } from './NotFoundPage';
 import Section from '../components/wahhf/Section';
@@ -115,7 +115,7 @@ export default function EuropeSupport() {
 
           <PageActions>
             <PrimaryButton
-              to={`/candidater?souhait=accompagnement_europe&pays=${country.slug}`}
+              to={`/candidater?souhait=accompagnement_europe&pays=${country.slug}`}
             >
               Être accompagné gratuitement pour : {country.name}
             </PrimaryButton>
@@ -131,15 +131,9 @@ export default function EuropeSupport() {
 
           {/* Mention explicite obligatoire si le pays n'est pas membre de l'UE (Albanie) */}
           {!country.isEU && country.euNote && (
-            <div className="rounded-card bg-or/20 border-2 border-or p-6 text-text flex items-start gap-4">
-              <AlertTriangle className="w-6 h-6 text-rouge dark:text-or shrink-0 mt-0.5" />
-              <div className="space-y-1">
-                <p className="font-serif text-lg font-medium">
-                  Précision juridique importante concernant l’Albanie (État non membre de l’UE)
-                </p>
-                <p className="text-sm sm:text-base leading-relaxed">{country.euNote}</p>
-              </div>
-            </div>
+            <InfoBox tone="warning" title="Précision juridique importante concernant l’Albanie (État non membre de l’UE)">
+              <p>{country.euNote}</p>
+            </InfoBox>
           )}
         </section>
 
@@ -433,7 +427,7 @@ export default function EuropeSupport() {
 
         <PageActions>
           <PrimaryButton
-            to="/candidater?souhait=accompagnement_europe"
+            to="/candidater?souhait=accompagnement_europe"
           >
             Être accompagné gratuitement
           </PrimaryButton>
