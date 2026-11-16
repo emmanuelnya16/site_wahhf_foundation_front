@@ -132,6 +132,7 @@ Même hiérarchie qu'en clair, pas une simple inversion : page, section, carte, 
 | focus | foret (soleil sur nuit et forêt) | soleil |
 | fil | foret (feuille sur nuit) | feuille |
 | border-input | trait | trait-nuit |
+| border-on-inverse (contour des contrôles posés sur nuit, liseré du don) | brume à 60 % | brume à 60 % |
 | border-subtle (décoratif) | filet | filet-nuit |
 | donate / donate-hover | coeur / coeur-fonce | coeur / coeur-fonce |
 | danger, warning, info | §3.2 | §3.2 |
@@ -140,14 +141,15 @@ Les tokens « on-inverse » couvrent tout ce qui est posé sur nuit, même en th
 
 ### 3.5 Règles d'usage
 
-- **Le bouton de don** reste `--coeur` dans les deux thèmes, **sans liseré** (votre décision du 16 novembre 2026). Son fond se détache peu des fonds sombres : 2,0:1 sur nuit (donc aussi dans le footer en clair), 2,3:1 sur une carte sombre, 2,6:1 sur une section sombre ; au survol et à l'appui (cœur foncé), 1,5:1 sur nuit, 1,7:1 sur carte sombre, 2,2:1 sur humus. La norme d'accessibilité (WCAG, critère 1.4.11 sur le contraste des éléments d'interface) ne l'exige pas quand le texte suffit à reconnaître le bouton : c'est le cas ici, avec un libellé blanc sur cœur à 5,88:1 (noté 5,8:1 une fois tronqué). On jugera sur la capture du footer ; si la forme du bouton s'y perd, la question reviendra.
+- **Le bouton de don** reste `--coeur` dans les deux thèmes. **Sur nuit (footer, bandes), même en clair, et en thème sombre, il porte un liseré intérieur de 1 px, brume à 60 %** (token `border-on-inverse`) : décision du 16 novembre 2026, prise sur la capture du footer, où sa forme se perdait. Son fond seul se détache peu des fonds sombres (2,0:1 sur nuit, 2,3:1 sur une carte sombre, 2,6:1 sur une section sombre) ; le liseré, lui, se détache à 5,5:1 sur nuit, 6,2:1 sur canopée, 7,2:1 sur sous-bois et 8,0:1 sur humus, et encore à 5,2:1 au pire au survol (cœur foncé, sur nuit). Le liseré est intérieur : la taille du bouton ne change pas. La couleur cœur ne change pas. Sur fond clair, pas de liseré : le cœur s'y détache seul (4,8:1 au pire, sur sauge).
 - **Soleil** n'apparaît jamais sur un fond clair (1,7:1 sur brume, 1,5:1 sur sauge).
 - **Miel** est la seule couleur or autorisée sur clair, et seulement pour du petit texte informatif (4,9:1 sur sauge, son pire cas).
 - **Un seul accent par fond** : forêt sur clair, soleil sur sombre et sur nuit. Le miel n'est jamais un accent : il ne sert ni aux liens, ni aux actions, ni aux alertes.
 - **Aucune couleur décorative** : pas de dégradé, pas de pastille colorée sans rôle.
 - **Thème** : à la première visite, le site suit le réglage clair ou sombre du téléphone ; ensuite, il retient le choix du visiteur (comme aujourd'hui). *Pour le développeur : `color-scheme: light` et `color-scheme: dark` sur la racine, pour que les cases à cocher et les barres de défilement natives suivent le thème.*
 
-Le tableau complet est en annexe A : 101 lignes, 87 paires distinctes (certaines paires servent à deux usages), chacune avec son usage. **Toutes les paires de texte passent 4,5:1 et tous les composants passent 3:1**, sauf le fond du bouton de don sur fond sombre et sur nuit : c'est son libellé qui l'identifie (voir ci-dessus).
+Le tableau complet est en annexe A : 109 lignes, 95 paires distinctes (certaines paires servent à deux usages), chacune avec son usage. **Toutes les paires de texte passent 4,5:1 et tous les composants passent 3:1**, sauf le fond du bouton de don sur fond sombre et sur nuit : c'est son liseré qui le détache (voir ci-dessus).
+- **Contrôles en sombre** (vérifiés le 16 novembre 2026 sur l'accueil, Mobilité & Langues, Candidater et Faire un don, à 390 et 1 440 px) : la bordure d'un champ atteint 3:1 sur sa carte, et un bouton se détache de sa carte à 3:1 au moins, par son fond ou par son contour. Aucun contrôle ne porte de couleur écrite en dur : champs, options et pastilles passent par `border-input` ; sur nuit, par `border-on-inverse` ; les cases et boutons radio natifs sont cochés à la couleur de `action` (forêt en clair, soleil en sombre).
 
 ### 3.6 Passage depuis les tokens actuels (pour le développeur)
 
@@ -205,14 +207,14 @@ Règle de la validation : une couleur ajoutée à votre palette n'est gardée qu
 
 ### 4.1 Famille
 
-**Atkinson Hyperlegible Next, en 400 et 700, une seule famille pour tout le site.**
+**Atkinson Hyperlegible Next, en 400 et 600, une seule famille pour tout le site.** *(600 à la place du 700 retenu d'abord : décision du 16 novembre 2026, §4.3.)*
 
 - Dessinée par Applied Design Works et Letters from Sweden pour le Braille Institute, conçue pour distinguer les formes proches (I l 1, O 0). Licence SIL OFL 1.1 (vérifiée dans le fichier). Version 2.001, sur Google Fonts depuis le 7 janvier 2025.
 - Couvre le français courant : accents, Œ œ, « », ’, –, —, …, €, espace insécable U+00A0. **Manque l'espace fine insécable U+202F** : on utilisera U+00A0 avant ; : ! ? et dans les guillemets, plutôt que de laisser une police de repli dessiner U+202F.
 - Pas de ligatures (voulu pour la lisibilité). Les chiffres peuvent prendre une largeur fixe, pour que les montants en € et FCFA, les dates et les niveaux s'alignent en colonne.
-- **Chargement** : la police est servie par le site lui-même (pas par Google), dans le format le plus léger, réduite aux caractères du français. Les deux graisses sont chargées en priorité : la 400 pour le texte, la 700 pour le grand titre de l'accueil. Le texte s'affiche tout de suite dans une police de secours de même encombrement, puis bascule sans faire sauter la page.
-  *Pour le développeur : WOFF2 statiques du paquet `@fontsource/atkinson-hyperlegible-next` 5.3.0, sous-ensemble latin préchargé (400 et 700), latin-ext seulement par `unicode-range` (Ÿ, noms rares), `font-display: swap`, police de repli ajustée (`size-adjust`, `ascent-override`), `font-variant-numeric: tabular-nums` (fonction `tnum` présente).*
-- **Poids** : 400 + 700 en latin = 24 828 octets (environ 25 Ko, mesurés sur le paquet 5.3.0), contre 130 028 octets (environ 130 Ko) pour DM Sans et Fraunces préchargées aujourd'hui (`public/fonts`, `index.html:41-42`). La version variable (33 996 octets, environ 34 Ko) ne vaut pas le coup pour deux graisses.
+- **Chargement** : la police est servie par le site lui-même (pas par Google), dans le format le plus léger, réduite aux caractères du français. Les deux graisses sont chargées en priorité : la 400 pour le texte, la 600 pour les titres et le gras. Le texte s'affiche tout de suite dans une police de secours de même encombrement, puis bascule sans faire sauter la page.
+  *Pour le développeur : WOFF2 statiques du paquet `@fontsource/atkinson-hyperlegible-next` 5.3.0, sous-ensemble latin préchargé (400 et 600), latin-ext seulement par `unicode-range` (Ÿ, noms rares), `font-display: swap`, police de repli ajustée (`size-adjust`, `ascent-override` ; 97,85 % pour la 400, 96,21 % pour la 600 face à Arial Bold), `font-variant-numeric: tabular-nums` (fonction `tnum` présente).*
+- **Poids** : 400 + 600 en latin = 24 768 octets (environ 25 Ko, mesurés sur le paquet 5.3.0 ; 24 828 avec la 700), contre 130 028 octets (environ 130 Ko) pour DM Sans et Fraunces préchargées aujourd'hui (`public/fonts`, `index.html:41-42`). La version variable (33 996 octets, environ 34 Ko) ne vaut pas le coup pour deux graisses.
 
 ### 4.2 Fraunces et DM Sans : retirées (décidé)
 
@@ -221,24 +223,24 @@ Règle de la validation : une couleur ajoutée à votre palette n'est gardée qu
 - Votre brief demande une seule famille ; une deuxième pour un seul titre casse cette règle à l'endroit le plus vu.
 - Fraunces pèse 67 Ko (latin), soit 2,7 fois les deux graisses d'Atkinson, sur le chemin du premier affichage (PERF-04). Le budget polices est de 100 Ko.
 - Le couple crème + police à empattements contrastée + or est le premier tic relevé par l'audit (T-18). Garder Fraunces au hero garderait ce tic en vitrine.
-- Une police à empattements très contrastée est expressive mais pas « calme ». La force du titre viendra de la taille, de la graisse 700, de l'approche serrée et du fil qui se dessine dessous.
+- Une police à empattements très contrastée est expressive mais pas « calme ». La force du titre viendra de la taille, de la graisse 600, de l'approche légèrement serrée et du fil qui se dessine dessous.
 
 ### 4.3 Échelle nommée
 
-Noms, interligne 1 des titres, approche -0,02 em et texte 17-18 px à 1,6 viennent de votre brief ; les tailles, proposées, ont été acceptées. Tailles fluides à partir de 320 px ; elles atteignent leur maximum vers 1 030 px (display) et 1 120 px (page-title, section-title). Les valeurs entre parenthèses sont calculées.
+Noms et texte 17-18 px à 1,6 viennent de votre brief ; les tailles, proposées, ont été acceptées. **Réglage des titres revu le 16 novembre 2026** : le brief demandait 700, interligne 1 et approche -0,02 em ; sur planches comparées (hero et titre de section, 390 et 1 440 px), Atkinson y paraissait trop sèche. Retenu : **600, interligne 1,1, approche -0,01 em**, et 600 à la place du 700 partout (titres et gras du texte), pour ne charger que deux fichiers. Tailles fluides à partir de 320 px ; elles atteignent leur maximum vers 1 030 px (display) et 1 120 px (page-title, section-title). Les valeurs entre parenthèses sont calculées.
 
 | Nom | Taille | Graisse | Interligne | Approche | Usage |
 |---|---|---|---|---|---|
-| `display` | clamp(2.5rem, 1.6rem + 4.5vw, 4.5rem) (40 px à 320, 43 à 390, 72 à 1 440) | 700 | 1 | -0,02 em | le seul titre du hero de l'accueil |
-| `page-title` | clamp(2rem, 1.5rem + 2.5vw, 3.25rem) (32 px à 320, 34 à 390, 52 à 1 440) | 700 | 1 | -0,02 em | le H1 des autres pages |
-| `section-title` | clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem) (24 px à 320, 25 à 390, 36 à 1 440) | 700 | 1 | -0,02 em | H2 de section |
-| `body` | 17 px, puis 18 px à partir de 768 px | 400 (700 pour l'emphase) | 1,6 | normale | texte courant, boutons, champs à partir de 17 px |
-| `meta` | 15 px | 400 ou 700 | 1,5 | normale | légendes, dates, sources, aide des champs |
+| `display` | clamp(2.5rem, 1.6rem + 4.5vw, 4.5rem) (40 px à 320, 43 à 390, 72 à 1 440) | 600 | 1,1 | -0,01 em | le seul titre du hero de l'accueil |
+| `page-title` | clamp(2rem, 1.5rem + 2.5vw, 3.25rem) (32 px à 320, 34 à 390, 52 à 1 440) | 600 | 1,1 | -0,01 em | le H1 des autres pages |
+| `section-title` | clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem) (24 px à 320, 25 à 390, 36 à 1 440) | 600 | 1,1 | -0,01 em | H2 de section |
+| `body` | 17 px, puis 18 px à partir de 768 px | 400 (600 pour l'emphase) | 1,6 | normale | texte courant, boutons, champs à partir de 17 px |
+| `meta` | 15 px | 400 ou 600 | 1,5 | normale | légendes, dates, sources, aide des champs |
 
 - **Titres en casse de phrase**, sans capitales espacées (T-16, T-21), équilibrés (`text-wrap: balance`) ; texte courant en `text-wrap: pretty`.
-- **Un seul H1 par page**, aucun niveau sauté. Un titre de carte ou d'étape (H3) prend la taille `body` (17 puis 18 px) en 700.
+- **Un seul H1 par page**, aucun niveau sauté. Un titre de carte ou d'étape (H3) prend la taille `body` (17 puis 18 px) en 600.
 - **Longueur de ligne** : 65 caractères au plus (`max-width: 65ch`) pour le texte courant.
-- **Interligne 1 sur les titres** : il est tenu tel quel. À vérifier au moment du code : sur trois lignes ou plus à 320 px, un `section-title` à 1 peut serrer les accents des capitales ; si c'est le cas, on proposera 1,05 pour ce seul cas.
+- **Interligne 1,1 sur les titres** (16 novembre 2026) : il laisse de l'air aux accents des capitales quand un titre passe sur trois lignes à 320 px.
 - Les champs de formulaire restent à 16 px minimum (17 px par défaut) : sous 16 px, iOS zoome à la saisie.
 
 ## 5. Mise en page
@@ -319,7 +321,7 @@ Hero, 390 px : une colonne, la photo sous le titre
 
 Le cadre 16/10 suit le format paysage de la source : un cadre 4/5 n'en garderait que la moitié.
 
-**2. Frise des niveaux A1 à C1 (page Académie)** : le fil traverse les cinq niveaux comme des étapes et se termine vers l'Europe. Le niveau affiché est le seul point plein avant l'arrivée ; son nom passe en 700, et les lecteurs d'écran entendent « niveau affiché ». Chaque niveau reste un lien vers sa page. Fixe, aucune animation. Exemple sur la page du niveau B1 :
+**2. Frise des niveaux A1 à C1 (page Académie)** : le fil traverse les cinq niveaux comme des étapes et se termine vers l'Europe. Le niveau affiché est le seul point plein avant l'arrivée ; son nom passe en 600, et les lecteurs d'écran entendent « niveau affiché ». Chaque niveau reste un lien vers sa page. Fixe, aucune animation. Exemple sur la page du niveau B1 :
 
 ```
 Académie, 1 440 px (horizontal)
@@ -402,7 +404,7 @@ Accueil, 390 px (une colonne)       Accueil, 1 440 px
 | 5 | **Carte de présence** | La carte des régions et la mini-carte d'Europe, sans le fil (son arc passe en forêt à 40 % d'opacité, §6). Titre qui dit ce qui est vrai : « Basée à Yaoundé et Douala » tant que les relais ne sont pas confirmés (T-11, IMP-01). | Géographie réelle ; données par région en TODO. |
 | 6 | **Chiffres réels datés** | 2 à 4 résultats, chacun avec une date et une source, en texte fixe (pas de compteur). La section reste masquée tant qu'il n'y a pas au moins deux chiffres sourcés : l'accueil compte alors 7 sections. | À fournir par la fondation (participants à l'Open Day, apprenants par cohorte…). |
 | 7 | **Agir + newsletter** | Un seul bloc : devenir bénévole, devenir partenaire, et le champ newsletter avec un libellé visible (ACC-06). Le don reste dans le hero, l'en-tête et le footer. | Formulaires existants (message préparé WhatsApp ou e-mail). |
-| 8 | **Footer** | Coordonnées, liens (dont Actualités et Partenaires), bouton « Faire un don » (sans liseré, §3.5), mentions légales. | Existant. |
+| 8 | **Footer** | Coordonnées, liens (dont Actualités et Partenaires), bouton « Faire un don » (avec son liseré brume, §3.5), mentions légales. | Existant. |
 
 **Ce qui quitte l'accueil, sans rien supprimer du code :**
 - **Mission, Approche, frise historique** : déplacées vers `/qui-sommes-nous` (ACC-03). Les dates marquées TODO (à compléter) de la frise y restent visibles comme aujourd'hui.
@@ -420,24 +422,32 @@ Ce sont ceux de votre demande sur les composants partagés ; ils appliquent les 
 
 - **Boutons**
   - Primaire : fond forêt, texte brume ; survol : fond nuit ; appui (`:active`) : fond nuit immédiat, sans déplacement, **visible au toucher**. En sombre : fond soleil, texte encre ; survol et appui : soleil pâle. Sur nuit (footer, bandes), même en clair : fond soleil, texte encre (tokens « on-inverse », §3.4).
-  - Don : fond cœur, texte blanc, icône cœur ; survol et appui : cœur foncé ; pas de liseré, même sur fond sombre (§3.5, à juger sur la capture du footer). Réservé au don.
+  - Don : fond cœur, texte blanc, icône cœur ; survol et appui : cœur foncé ; sur nuit et en thème sombre, liseré intérieur de 1 px brume à 60 % (§3.5). Réservé au don.
   - Secondaire : contour 1,5 px forêt, texte forêt, fond transparent ; survol et appui (immédiat, visible au toucher) : fond forêt, texte brume. En sombre, et sur nuit même en clair : contour et texte soleil ; survol et appui : fond soleil, texte encre.
   - Pendant un envoi : le bouton garde ses couleurs, son libellé dit ce qui se passe (« Préparation du message… ») et il ne répond plus au clic.
-  - **Cibles de 44 px minimum** (48 px de haut par défaut). Forme pilule. Texte `body` en 700.
+  - **Cibles de 44 px minimum** (48 px de haut par défaut). Forme pilule. Texte `body` en 600.
   - **↗ seulement pour un lien externe**, avec « (nouvel onglet) » pour les lecteurs d'écran (T-20). Pas de flèche sur les liens internes ni sur les boutons.
 - **Container** : un seul (§5). Variantes de largeur interdites ; la colonne de lecture est une contrainte de texte à l'intérieur, alignée à gauche.
+  - **Section** (ajout du 16 novembre 2026) : une section de page porte l'un des deux fonds, brume (`surface`) ou sauge (`surface-section`) ; en sombre, humus ou sous-bois. Pas de filet entre les sections, pas de voile blanc translucide : le changement de fond suffit. Respiration verticale `clamp(4rem, 9vw, 7.5rem)`.
+- **En-tête de page** (ajout du 16 novembre 2026, 18 pages) : le H1 en `page-title`, texte `text`, sur le fond de la page (brume, humus en sombre), **sans bande nuit ni photo en fond** ; une introduction en `body`, `text-secondary`, 65 caractères au plus ; tout aligné à gauche dans le container. Photo facultative, seulement si elle est réelle, cadrée en 16/10 avec le rayon des cartes, sans voile ni dégradé.
+- **Encadré d'information** (ajout du 16 novembre 2026) : remplace l'avertissement anti-arnaque actuel (bloc nuit bordé d'or, à cheval sur le hero). Fond `info-bg` (ciel pâle, canopée en sombre), rayon 12, sans bordure or ni ombre ; icône « i » couleur `info`, sans carré ; texte `body` en `text`, sans guillemets ; lien `link` souligné. **Précaution** : le message anti-arnaque reste le premier élément sous le titre de la page, en taille `body`, avec un titre court en 600 ; il ne descend jamais en `meta`, n'est ni replié ni masqué, et ne doit pas devenir discret au point de passer inaperçu. Il est posé dans le flux, plus à cheval sur le titre.
 - **Field** (champ partagé) : fait évoluer `src/components/wahhf/FormField.tsx`, qui relie déjà le libellé et gère `aria-invalid` et `aria-describedby`.
   - Libellé visible au-dessus, en casse de phrase (il est aujourd'hui en capitales espacées) ; aide et erreur en `meta` sous le champ, reliées par `aria-describedby`.
   - Texte à 16 px minimum, hauteur de 48 px ; bordure 1 px `--trait` (3,4:1 au pire, sur sauge), rayon 12 ; anneau de focus forêt de 2 px, décalé de 2 px.
   - Erreur : bordure brique, icône et message ; `aria-invalid`.
   - `autocomplete` et `inputmode` obligatoires selon le type (nom, e-mail, téléphone).
+  - **Panneau de formulaire** (ajout du 16 novembre 2026) : sur sauge (sous-bois en sombre), rayon des cartes, sans bordure ni ombre ; les champs y prennent le fond `surface-raised` (papier, canopée en sombre) avec leur bordure `border-input`.
 - **SectionHeader** : le titre (`section-title`) et, au besoin, un paragraphe d'introduction. **Pas de sur-titre ni de filet par défaut** (T-16). Le sur-titre reste possible en option, en casse de phrase, 15 px, couleur encre douce. Aucune apparition animée.
 - **Carte, liste, colonne** (T-15)
   - **La carte est réservée aux collections cliquables** : fiches pays, actualités, albums. Toujours un cran de fond par rapport à ce qui l'entoure : sur brume, fond sauge ; sur sauge, fond papier ; en sombre, canopée. Rayon 20, sans bordure ni ombre ; la carte se reconnaît d'abord à sa photo et à son titre-lien. Toute la carte est le lien, et son survol ne change que la couleur du titre.
-  - **Listes typographiques** pour les valeurs, les principes, les voies et les domaines : titre en 700 et phrase en dessous, séparés par un filet, sans cadre.
+  - **Listes typographiques** pour les valeurs, les principes, les voies et les domaines : titre en 600 et phrase en dessous, séparés par un filet, sans cadre.
   - **Colonne de lecture de 65 caractères** pour les articles et les pages légales : un paragraphe n'est jamais une carte.
-- **StepNumber** (T-17) : un cercle de 32 px, contour forêt de 1,5 px, numéro en 700. **Seulement pour les vraies suites** : étapes de candidature, 4 étapes de l'accompagnement, « Les grandes étapes » de chaque fiche pays. Les niveaux A1 à C1 sont dessinés par le Fil (§6), sans StepNumber.
+  - **Ajouts du 16 novembre 2026** : la liste des 10 pays (lignes de liste, plus de cadres), le bloc d'impact de la page Don et la FAQ de Mobilité (listes typographiques), les liens des deux portes.
+- **StepNumber** (T-17) : un cercle de 32 px, contour forêt de 1,5 px, numéro en 600. **Seulement pour les vraies suites** : étapes de candidature, 4 étapes de l'accompagnement, « Les grandes étapes » de chaque fiche pays. Les niveaux A1 à C1 sont dessinés par le Fil (§6), sans StepNumber.
   Retirés : tous les numéros qui ne marquent pas une suite, notamment « DOMAINE / 01 / 06 », « Domaine 06 / 06 » et « Domaine 06 » (hero et description de Mobilité, méga-menu, `fr.json`), « VALEUR 01 », « PÔLE 01 », « Pays #01 », « Voie 01/02/03 », « 01 · Don solidaire », « 01 · Partenaire fondateur », la numérotation du menu mobile, du méga-menu et du footer, et les 14 numéros en filigrane (chiffres, Mobilité, principes, actualités, Agir, domaines, sessions, voies, guides, pays). *Ce sont des textes : leur retrait sera listé fichier par fichier et vous sera montré avant d'être fait.*
+  **Barre de progression** (ajout du 16 novembre 2026) : couleur pleine `action`, sans dégradé vert vers or.
+- **Footer** (ajout du 16 novembre 2026) : fond nuit ; texte `text-on-inverse` et `text-secondary-on-inverse` en 15 px ; titres de colonne en 600, sans or ; soleil réservé aux liens (`link-on-inverse`) ; contrôles cerclés de `border-on-inverse`.
+- **En-tête du site** (ajout du 16 novembre 2026) : barre opaque pleine largeur (brume, humus en sombre), fixée en haut, contenu dans le container ; sans pilule, sans verre dépoli ; ombre flottante seulement une fois la page défilée (en sombre, une bordure basse trait-nuit à la place) ; « WAHHF Foundation » dans une seule casse et une seule couleur.
 - **Fil** : composant SVG pour la signature (§6). Paramètres : départ, arrivée, étapes facultatives (frise A1 à C1), niveau affiché, orientation (horizontale ou verticale), animation unique (hero seulement). Couleur prise dans le token `fil`, épaisseur 1,5 px, points de 8 px. `aria-hidden`. L'arc de la mini-carte d'Europe n'utilise pas ce composant (§6).
 
 ## 9. Profondeur et rayons
@@ -488,7 +498,7 @@ Jamais de rayon de 20 px sur un petit élément. Les neuf valeurs actuelles (pil
 
 - **Boutons et liens** : repos, survol (souris), appui (toucher), focus clavier (anneau forêt sur clair, soleil sur sombre et sur nuit), envoi en cours (couleurs gardées, libellé qui dit ce qui se passe, clic bloqué ; jamais désactivé sans explication).
 - **Champs** : vide, rempli, focus, invalide (message précis sous le champ), aide.
-- **Choix** (boutons radio en tuiles) : non choisi, choisi, focus. Un seul style pour l'option choisie sur tout le site (T-18) : contour forêt de 2 px et coche visible (soleil en sombre), jamais la couleur seule.
+- **Choix** (boutons radio en tuiles) : non choisi, choisi, focus. Un seul style pour l'option choisie sur tout le site (T-18) : contour forêt de 2 px et coche visible (soleil en sombre et sur nuit), jamais la couleur seule. L'option non choisie a un contour 1 px `border-input`. La coche se place à droite d'un libellé aligné à gauche, devant un libellé centré (montants, fréquence). *Fait le 16 novembre 2026 dans `ChoiceTile` (commit `a26a9f8`) : les trois styles d'option choisie (nuit et or, rouge du don, or plein) ont disparu.*
 - **Formulaires** : erreurs, étape suivante (focus sur le titre de l'étape), message préparé (WhatsApp ou e-mail), sans faux succès.
 - **Images et film** : chargement (fond sauge au ratio réservé), échec (texte alternatif et légende visibles), film indisponible (message et lien direct vers YouTube).
 - **Carte de présence** : chargement des données (squelette à la forme de la carte, `aria-busy`), région choisie, échec de chargement.
@@ -526,7 +536,7 @@ Les tics relevés par l'audit et ce qui les remplace :
 
 **Décisions prises avant la validation**
 - Fraunces et DM Sans retirées au profit d'Atkinson Hyperlegible Next seule (§4.2).
-- Bouton de don sans liseré, footer compris ; à revoir sur la capture du footer (§3.5).
+- Bouton de don sans liseré, footer compris ; à revoir sur la capture du footer (§3.5). *Revu le 16 novembre 2026 : liseré ajouté (voir plus bas).*
 - Structure de tokens en deux couches (TOK-01 à TOK-07) enregistrée dans l'historique (commit `2937307`), avec ses écarts validés sur captures : menu au-dessus du bandeau cookies, barre de lecture sous le menu et les fenêtres, cases à cocher natives qui suivent le thème sombre.
 
 **Trois ajustements demandés à la validation**
@@ -546,11 +556,25 @@ Les tics relevés par l'audit et ce qui les remplace :
 - **Bulle WhatsApp** : à l'étape de l'accueil, vrai glyphe WhatsApp et libellé court visible (RESP-03).
 - **Menu mobile** : le geste « glisser pour fermer » reste, sa phrase d'explication est retirée.
 
+**Décisions du 16 novembre 2026, après les captures de Buttons et SectionHeader**
+- **Liseré du bouton de don** sur nuit et en thème sombre : 1 px intérieur, brume à 60 % ; couleur cœur inchangée (§3.5 ; commit `9bd06c7`).
+- **Titres** : 600, interligne 1,1, approche -0,01 em ; 600 à la place du 700 partout, titres et gras du texte ; seules les graisses 400 et 600 sont chargées (§4 ; commit `905a76c`).
+- **Contrôles en thème sombre** : bordure des champs à 3:1 sur leur carte, boutons détachés de leur carte à 3:1, corrigés par les tokens et non page par page (§3.5 ; commit `a26a9f8`).
+- **Lot 5 élargi** (toutes les propositions de l'analyse de tension acceptées). Ordre : Container (avec la Section brume ou sauge, sans filets), En-tête de page (18 pages, sans bande nuit), Encadré d'information (à la place de l'avertissement), Field (avec les panneaux de formulaire sur sauge, sans ombre), Carte-liste-colonne (avec la liste des pays, le bloc d'impact du Don, la FAQ de Mobilité et les liens des portes), StepNumber (avec la barre de progression pleine), Fil, Footer (couleurs du contrat), En-tête du site (barre opaque). Un commit chacun (§8).
+- **Précaution pour l'encadré d'information** : le message anti-arnaque reste le premier élément sous le titre de la page, bien lisible, et ne doit pas devenir discret au point de passer inaperçu (§8).
+- **TODO gardés** : les textes provisoires restent visibles tant que le contenu réel manque, par exemple « Montants donnés à titre d'exemple (TODO : à confirmer) ».
+
+**Étapes planifiées après le lot 5**
+- **Étape de l'accueil** (§7), avec deux ajouts : les couleurs de la carte de présence (panneau blanc en sombre, régions et pays en or, tuiles crème ; elles valent aussi pour /notre-impact) ; le style de la bulle WhatsApp (ombre, contour et point or), en plus du vrai glyphe et du libellé court (RESP-03).
+- **Petite étape « Mobilité & Langues »** : l'appel final en carte nuit juste au-dessus du footer, réduit à une seule action (« Candidater ») ; les témoignages (TODO, à remplacer par des témoignages réels, T-02) ; la gratuité dite une fois par écran ; le nombre de boutons du hero.
+- **Petite étape « Candidater »** : la gratuité redite avant le premier champ ; le nombre d'actions et d'indicateurs d'étape au premier écran ; les mentions de chantier.
+- **Petite étape « Faire un don »** : la gratuité redite, le nombre d'actions au premier écran, l'encadré « Garantie de transparence » en simple bloc de texte, les mentions de chantier.
+
 **À traiter plus tard : état de succès des formulaires.** Aujourd'hui les formulaires préparent un message et n'envoient rien, d'où l'absence de couleur de succès (§3.2). Quand ils enverront vraiment (API Symfony), il faudra un état de succès (« Candidature envoyée », « Message envoyé ») et donc une couleur de succès, avec son tableau de contrastes. À traiter à ce moment-là.
 
 **Reste à fournir par la fondation** : autorisations de diffusion des photos (GAL-01), originaux HD, chiffres datés et sourcés, date de vérification de chaque fiche pays, formulation du titre du hero (ACC-02).
 
-**Ordre de travail (lot 5)** : la liste des numéros et textes à retirer vous est montrée d'abord ; puis le renommage des tokens (fait : commit `81370be`, sans changement visible) ; puis les composants dans l'ordre prévu, un commit chacun, avec captures à 390 et 1 440 px, en clair et en sombre.
+**Ordre de travail (lot 5)** : la liste des numéros et textes à retirer vous est montrée d'abord ; puis le renommage des tokens (fait : commit `81370be`, sans changement visible) ; puis les composants dans l'ordre prévu, un commit chacun, avec captures à 390 et 1 440 px, en clair et en sombre. Faits : tokens et police (`0b32577`), Buttons (`665c86d`), SectionHeader (`2cb7db1`), creux sombres (`399748d`), liseré (`9bd06c7`), contrôles sombres (`a26a9f8`), titres en 600 (`905a76c`). Suivent, dans l'ordre élargi ci-dessus : Container, En-tête de page, Encadré d'information, Field (arrêt pour captures avant/après des 4 pages), puis Carte-liste-colonne, StepNumber, Fil, Footer, En-tête du site.
 
 ## 14. Test du nom retiré
 
@@ -635,8 +659,11 @@ Calcul WCAG 2.x sur fond uni ; ratios tronqués à une décimale. Seuils : 4,5:1
 | coeur #C8102E | sauge #E3ECE6 | 4,8:1 | 3:1 | passe | bouton don |
 | coeur #C8102E | papier #FFFFFF | 5,8:1 | 3:1 | passe | bouton don |
 | brique #B42318 | papier #FFFFFF | 6,5:1 | 3:1 | passe | bordure d’un champ en erreur |
-| coeur #C8102E | nuit #0F3D2E | 2,0:1 | 3:1 | **échoue** | bouton don dans le footer (fond du bouton ; le libellé l'identifie, §3.5) |
-| coeur-fonce #A50D26 | nuit #0F3D2E | 1,5:1 | 3:1 | **échoue** | bouton don du footer au survol et à l'appui (aussi en sombre ; le libellé l'identifie) |
+| coeur #C8102E | nuit #0F3D2E | 2,0:1 | 3:1 | **échoue** | bouton don dans le footer (fond du bouton ; le liseré le détache, ligne suivante) |
+| liseré brume 60 % sur coeur | nuit #0F3D2E | 5,5:1 | 3:1 | passe | liseré du bouton don sur nuit (§3.5) |
+| coeur-fonce #A50D26 | nuit #0F3D2E | 1,5:1 | 3:1 | **échoue** | bouton don du footer au survol et à l'appui (aussi en sombre ; le liseré le détache, ligne suivante) |
+| liseré brume 60 % sur coeur-fonce | nuit #0F3D2E | 5,2:1 | 3:1 | passe | liseré du bouton don au survol, sur nuit |
+| brume 60 % (border-on-inverse) | nuit #0F3D2E | 5,1:1 | 3:1 | passe | contour des pastilles et boutons-icônes posés sur nuit |
 | filet #CCD8D1 | brume #F7F8F5 | 1,3:1 | — | décoratif | filet décoratif (aucune exigence) |
 
 **Sombre : texte**
@@ -681,12 +708,17 @@ Calcul WCAG 2.x sur fond uni ; ratios tronqués à une décimale. Seuils : 4,5:1
 | trait-nuit #71857B | sous-bois #14261F | 4,0:1 | 3:1 | passe | bordure des champs |
 | trait-nuit #71857B | canopee #1B3129 | 3,5:1 | 3:1 | passe | bordure des champs |
 | coeur #C8102E | humus #0E1B16 | 3,0:1 | 3:1 | passe | bouton don (fond du bouton) |
-| coeur #C8102E | sous-bois #14261F | 2,6:1 | 3:1 | **échoue** | bouton don sur section sombre (fond du bouton ; le libellé l'identifie, §3.5) |
-| coeur #C8102E | canopee #1B3129 | 2,3:1 | 3:1 | **échoue** | bouton don sur carte sombre (fond du bouton ; le libellé l'identifie, §3.5) |
-| coeur #C8102E | nuit #0F3D2E | 2,0:1 | 3:1 | **échoue** | bouton don sur bande ou footer (fond du bouton ; le libellé l'identifie, §3.5) |
-| coeur-fonce #A50D26 | humus #0E1B16 | 2,2:1 | 3:1 | **échoue** | bouton don au survol et à l'appui (le libellé l'identifie) |
-| coeur-fonce #A50D26 | sous-bois #14261F | 2,0:1 | 3:1 | **échoue** | bouton don au survol et à l'appui (le libellé l'identifie) |
-| coeur-fonce #A50D26 | canopee #1B3129 | 1,7:1 | 3:1 | **échoue** | bouton don au survol et à l'appui (le libellé l'identifie) |
+| coeur #C8102E | sous-bois #14261F | 2,6:1 | 3:1 | **échoue** | bouton don sur section sombre (fond du bouton ; le liseré le détache, §3.5) |
+| coeur #C8102E | canopee #1B3129 | 2,3:1 | 3:1 | **échoue** | bouton don sur carte sombre (fond du bouton ; le liseré le détache, §3.5) |
+| coeur #C8102E | nuit #0F3D2E | 2,0:1 | 3:1 | **échoue** | bouton don sur bande ou footer (fond du bouton ; le liseré le détache, §3.5) |
+| coeur-fonce #A50D26 | humus #0E1B16 | 2,2:1 | 3:1 | **échoue** | bouton don au survol et à l'appui (le liseré le détache) |
+| coeur-fonce #A50D26 | sous-bois #14261F | 2,0:1 | 3:1 | **échoue** | bouton don au survol et à l'appui (le liseré le détache) |
+| coeur-fonce #A50D26 | canopee #1B3129 | 1,7:1 | 3:1 | **échoue** | bouton don au survol et à l'appui (le liseré le détache, lignes suivantes) |
+| liseré brume 60 % sur coeur | humus #0E1B16 | 8,0:1 | 3:1 | passe | liseré du bouton don (§3.5) |
+| liseré brume 60 % sur coeur | sous-bois #14261F | 7,2:1 | 3:1 | passe | liseré du bouton don |
+| liseré brume 60 % sur coeur | canopee #1B3129 | 6,2:1 | 3:1 | passe | liseré du bouton don |
+| liseré brume 60 % sur coeur-fonce | canopee #1B3129 | 5,9:1 | 3:1 | passe | liseré du bouton don au survol |
+| soleil #F2B544 | canopee #1B3129 | 7,5:1 | 3:1 | passe | contour de l'option choisie, case cochée |
 
 **Écarts d’élévation (décalage de fond, aucune exigence)**
 
