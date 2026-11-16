@@ -38,7 +38,7 @@ export default function PageHeader({
   return (
     <header
       className={cn(
-        'bg-surface pt-[calc(var(--header-offset)+clamp(1.5rem,4vw,3rem))] pb-[clamp(2rem,4vw,3rem)]',
+        'page-header bg-surface pt-[calc(var(--header-offset)+clamp(1.5rem,4vw,3rem))] pb-[clamp(2rem,4vw,3rem)]',
         className,
       )}
     >

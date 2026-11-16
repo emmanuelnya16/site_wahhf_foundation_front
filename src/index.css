@@ -557,6 +557,13 @@
   padding-block: var(--section-space);
 }
 
+/* Juste après l'en-tête de page (PageHeader), une section sur le même fond ne rajoute pas une respiration complète :
+   la marge basse de l'en-tête suffit presque (48 + 32 px à 1 440, au lieu de 48 + 120). Une section sauge garde la sienne,
+   qui est à l'intérieur de son fond. Hors couche, pour passer devant l'utilitaire section-space. */
+.page-header + .section-space:not(.bg-surface-section) {
+  padding-top: clamp(1rem, 2.5vw, 2rem);
+}
+
 .focus-ring-double:focus-visible {
   outline: 2px solid var(--focus-on-light);
   outline-offset: 2px;
