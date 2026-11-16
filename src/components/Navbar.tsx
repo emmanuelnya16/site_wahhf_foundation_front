@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ChevronDown, Search, Sun, Moon, Menu, X } from 'lucide-react';
 import { DOMAINS_DATA, WAHHF_LOGO_URL, COUNTRIES_DATA, GERMAN_LEVELS_DATA } from '../services/api';
-import { DonateButton } from './wahhf/Buttons';
+import { DonateButton, PrimaryButton } from './wahhf/Buttons';
 import { useDialog } from '../lib/useDialog';
 import { switchTheme } from '../effects/themeTransition';
 import { EASE_OUT, EASE_SCREEN, DURATION } from '../lib/motionTokens';
@@ -195,11 +195,19 @@ export default function Navbar() {
           scrolled && 'shadow-overlay dark:border-border-input',
         )}
       >
-        <div ref={megaRef} className="container-page flex h-16 sm:h-18 items-center justify-between gap-3">
-          {/* Gauche : Logo WAHHF */}
+        {/* En-tête (contrat §8, décisions du 16/11) :
+            - sous 1 280 px, une ligne : marque | outils | Candidater et Faire un don (dès 768 px) | menu ;
+            - dès 1 280 px, deux lignes : marque | Candidater et Faire un don, puis menu | outils.
+            Le sous-titre « Branche sociale du groupe IROKO » reste visible à toutes les largeurs : sur deux lignes
+            sous le nom (de la largeur du nom, 120 px au moins) jusqu'à 1 024 px, sur une ligne au-delà. */}
+        <div
+          ref={megaRef}
+          className="container-page flex h-16 sm:h-18 items-center gap-2 sm:gap-3 xl:grid xl:h-auto xl:grid-cols-[minmax(0,1fr)_auto] xl:grid-rows-[4rem_2.75rem] xl:gap-x-6 xl:gap-y-0"
+        >
+          {/* Marque : logo, nom, sous-titre */}
           <Link
             to="/"
-            className="flex items-center gap-2.5 min-w-0 rounded-pill"
+            className="mr-auto xl:mr-0 xl:col-start-1 xl:row-start-1 flex items-center gap-2 sm:gap-2.5 min-w-0 rounded-pill"
             aria-label="WAHHF Foundation — Accueil"
           >
             <img
@@ -207,20 +215,20 @@ export default function Navbar() {
               alt="Logo WAHHF Foundation"
               width={48}
               height={48}
-              className="w-10 h-10 sm:w-11 sm:h-11 object-contain rounded-pill bg-white p-0.5"
+              className="w-10 h-10 sm:w-11 sm:h-11 shrink-0 object-contain rounded-pill bg-white p-0.5"
             />
-            <div className="flex flex-col min-w-0">
+            <span className="flex flex-col gap-0.5 min-w-30">
               <span className="text-body font-bold leading-none text-text whitespace-nowrap">
                 WAHHF<span className="hidden min-[360px]:inline"> Foundation</span>
               </span>
-              <span className="text-meta text-text-secondary hidden lg:inline xl:hidden whitespace-nowrap">
+              <span className="w-0 min-w-full lg:w-auto lg:whitespace-nowrap text-meta leading-tight text-text-secondary">
                 {t('brand.branch')}
               </span>
-            </div>
+            </span>
           </Link>
 
-          {/* Centre : Menu principal (6 entrées) */}
-          <nav aria-label="Navigation principale" className="hidden xl:flex items-center gap-1">
+          {/* Menu principal (6 entrées) : deuxième ligne dès 1 280 px, aligné sur la marge du logo */}
+          <nav aria-label="Navigation principale" className="hidden xl:flex xl:col-start-1 xl:row-start-2 items-center gap-1 -ml-2.5">
             <Link to="/qui-sommes-nous" aria-current={navState('/qui-sommes-nous')} className={cn(NAV_LINK, navState('/qui-sommes-nous') && NAV_LINK_CURRENT)}>
               {t('nav.about')}
             </Link>
@@ -255,13 +263,13 @@ export default function Navbar() {
             </Link>
           </nav>
 
-          {/* Droite : Langue (FR / EN), Recherche, Thème, Bouton Faire un don (rouge), Burger */}
-          <div className="flex items-center gap-1.5 sm:gap-2 xl:gap-1 shrink-0">
+          {/* Outils : langue (dès 1 024 px), recherche, thème (dès 640 px) ; à droite du menu dès 1 280 px */}
+          <div className="flex items-center gap-1.5 xl:gap-1 shrink-0 xl:col-start-2 xl:row-start-2 xl:justify-self-end">
             {/* Sélecteur de langue FR / EN */}
             <div
               role="group"
               aria-label="Sélecteur de langue"
-              className="hidden md:inline-flex items-center rounded-pill border border-border-input p-0.5 text-meta"
+              className="hidden lg:inline-flex items-center rounded-pill border border-border-input p-0.5 text-meta"
             >
               <button
                 type="button"
@@ -299,27 +307,35 @@ export default function Navbar() {
               title={isDark ? t('nav.themeLight') : t('nav.themeDark')}
               className={cn(ICON_BUTTON, 'hidden sm:inline-flex')}
             >
-              {isDark ? <Sun aria-hidden="true" className="w-4 h-4" /> : <Moon aria-hidden="true" className="w-4 h-4" />}
-            </button>
-
-            {/* 6e entrée / Bouton « Faire un don » (token rouge) */}
-            <div className="hidden sm:block">
-              <DonateButton size="sm" className="whitespace-nowrap">{t('nav.donate')}</DonateButton>
-            </div>
-
-            {/* Menu Burger (Mobile & Tablette) */}
-            <button
-              ref={burgerRef}
-              type="button"
-              onClick={() => setMobileOpen(true)}
-              aria-label="Ouvrir le menu principal"
-              aria-expanded={mobileOpen}
-              aria-controls="menu-mobile"
-              className="xl:hidden w-11 h-11 shrink-0 rounded-pill bg-action text-on-action hover:bg-action-hover flex items-center justify-center cursor-pointer"
-            >
-              <Menu aria-hidden="true" className="w-5 h-5" />
+                            {isDark ? <Sun aria-hidden="true" className="w-4 h-4" /> : <Moon aria-hidden="true" className="w-4 h-4" />}
             </button>
           </div>
+
+          {/* Les deux portes (T-09) : Candidater (forêt) et Faire un don (contour cœur) ; dans le menu sous 768 px */}
+          <div className="hidden md:flex items-center gap-2 shrink-0 xl:col-start-2 xl:row-start-1 xl:justify-self-end">
+            <PrimaryButton to="/candidater" size="sm" className="whitespace-nowrap">
+              {t('nav.apply')}
+            </PrimaryButton>
+            <DonateButton size="sm" variant="outline" className="whitespace-nowrap">
+              {t('nav.donate')}
+            </DonateButton>
+          </div>
+
+          {/* Menu Burger (Mobile & Tablette) */}
+          <button
+            ref={burgerRef}
+            type="button"
+            onClick={() => setMobileOpen(true)}
+            aria-label="Ouvrir le menu principal"
+            aria-expanded={mobileOpen}
+            aria-controls="menu-mobile"
+            className="xl:hidden w-11 h-11 shrink-0 rounded-pill bg-action text-on-action hover:bg-action-hover flex items-center justify-center cursor-pointer"
+          >
+            <Menu aria-hidden="true" className="w-5 h-5" />
+          </button>
+
+          {/* Filet entre les deux lignes (dès 1 280 px), sur toute la largeur */}
+          <div aria-hidden="true" className="hidden xl:block absolute inset-x-0 top-16 border-t border-border-subtle pointer-events-none" />
 
           {/* Méga-menu « Nos actions » (6 domaines) : panneau flottant aligné sur le container */}
           {megaOpen && (
@@ -495,8 +511,19 @@ export default function Navbar() {
               aria-label="Fermer le menu"
               className="w-11 h-11 rounded-pill border border-border-on-inverse text-text-on-inverse flex items-center justify-center"
             >
-              <X className="w-6 h-6" />
+                            <X className="w-6 h-6" />
             </button>
+          </div>
+
+                    {/* Les deux portes en tête du menu (T-09), puis les liens : un seul bloc (le panneau répartit ses enfants) */}
+          <div>
+          <div className="pt-6 grid grid-cols-1 min-[400px]:grid-cols-2 gap-3">
+            <PrimaryButton to="/candidater" onInverse className="w-full">
+              {t('nav.apply')}
+            </PrimaryButton>
+            <DonateButton variant="outline" onInverse className="w-full">
+              {t('nav.donate')}
+            </DonateButton>
           </div>
 
           <motion.nav
@@ -567,14 +594,8 @@ export default function Navbar() {
               {t('nav.contact')}
             </Link>
 
-            <Link
-              to="/candidater"
-              aria-current={navState('/candidater')}
-              className={cn(MOBILE_LINK, 'text-link-on-inverse', navState('/candidater') && MOBILE_LINK_CURRENT)}
-            >
-              Candidater (Cours & Europe — Gratuit)
-            </Link>
-          </motion.nav>
+                                </motion.nav>
+          </div>
 
           <div className="pt-6 border-t border-border-subtle-on-inverse space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-3">
@@ -602,11 +623,7 @@ export default function Navbar() {
                   <span>{isDark ? t('nav.themeLight') : t('nav.themeDark')}</span>
                 </button>
               </div>
-            </div>
-
-            <DonateButton size="lg" className="w-full">
-              {t('nav.donate')}
-            </DonateButton>
+                        </div>
           </div>
         </motion.div>
       )}

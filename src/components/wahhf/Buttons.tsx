@@ -114,6 +114,10 @@ export function SecondaryButton({ onInverse = false, size = 'md', className = ''
 /**
  * Bouton de don : cœur, libellé blanc et icône cœur ; survol et appui : cœur foncé.
  * Réservé au don. Sur nuit et en thème sombre, liseré brume à 60 % (contrat §3.5, décision du 16/11).
+ * Le cœur plein est réservé à la page Don et à la porte « Faire un don » du hero (décision du 16/11) :
+ * ailleurs (en-tête, menu mobile), variante « outline » : contour 1,5 px et icône couleur donate-outline
+ * (cœur sur clair ; corail en sombre et sur nuit, où le cœur n'atteint que 3,0:1 et 2,1:1), libellé
+ * couleur du texte ; survol et appui : fond cœur, libellé blanc.
  */
 export function DonateButton({
   children = 'Faire un don',
@@ -122,6 +126,8 @@ export function DonateButton({
   type,
   className = '',
   size = 'md',
+  variant = 'solid',
+  onInverse = false,
 }: {
   children?: ReactNode;
   to?: string;
@@ -130,17 +136,32 @@ export function DonateButton({
   type?: 'button' | 'submit';
   className?: string;
   size?: ButtonSize;
+  /** « outline » : contour cœur (en-tête, menu mobile) ; « solid » : cœur plein (page Don, porte du hero). */
+  variant?: 'solid' | 'outline';
+  /** Variante « outline » posée sur nuit : libellé brume (le contour prend déjà corail via surface-green). */
+  onInverse?: boolean;
 }) {
   const classes = cn(
     BASE,
     SIZES[size],
-    // donate-button : liseré brume à 60 % quand le bouton est posé sur nuit ou en thème sombre (index.css)
-    'donate-button bg-donate text-on-donate hover:bg-donate-hover active:bg-donate-hover',
+    variant === 'solid'
+      ? // donate-button : liseré brume à 60 % quand le bouton est posé sur nuit ou en thème sombre (index.css)
+        'donate-button bg-donate text-on-donate hover:bg-donate-hover active:bg-donate-hover'
+      : cn(
+          'group border-[1.5px] border-donate-outline bg-transparent hover:bg-donate hover:text-on-donate active:bg-donate active:text-on-donate',
+          onInverse ? 'text-text-on-inverse' : 'text-text'
+        ),
     className
   );
   const inner = (
     <>
-      <Heart aria-hidden="true" className="w-4 h-4 fill-current shrink-0" />
+      <Heart
+        aria-hidden="true"
+        className={cn(
+          'w-4 h-4 fill-current shrink-0',
+          variant === 'outline' && 'text-donate-outline group-hover:text-on-donate group-active:text-on-donate'
+        )}
+      />
       <span>{children}</span>
     </>
   );

@@ -273,6 +273,7 @@
   /* Bouton de don */
   --color-donate: var(--donate);
   --color-donate-hover: var(--donate-hover);
+  --color-donate-outline: var(--donate-outline);
   --color-on-donate: var(--on-donate);
   /* Le fil (signature) */
   --color-fil: var(--fil);
@@ -325,6 +326,7 @@
  */
 :root {
   color-scheme: light;
+    /* En-tête : 72 px sur une ligne ; dès 1 280 px, deux lignes (64 + 44 px), voir plus bas. 24 px d'air dessous. */
   --header-offset: 6rem;
   --body-size: 1.0625rem; /* 17 px ; 18 px dès 768 px (plus bas) */
 
@@ -355,6 +357,8 @@
   --on-action-on-inverse: var(--color-encre);
   --donate: var(--color-coeur);
   --donate-hover: var(--color-coeur-fonce);
+  /* Contour du bouton de don en variante « outline » (en-tête, menu mobile) : cœur sur clair (5,5:1 sur brume) */
+  --donate-outline: var(--color-coeur);
   --on-donate: var(--color-papier);
   --fil: var(--color-foret);
   --fil-on-inverse: var(--color-feuille);
@@ -465,6 +469,8 @@
 .dark,
 .surface-green {
   --focus: var(--focus-on-green);
+  /* Le cœur n'atteint que 3,0:1 sur humus et 2,1:1 sur nuit : le contour du don prend corail (8,9:1 et 6,1:1). */
+  --donate-outline: var(--color-corail);
 }
 
 /* Pages historiques IROKO (Layout) : elles gardent leurs polices et leur corps de texte d'origine. */
@@ -477,6 +483,13 @@
   font-size: 1rem;
   line-height: 1.5;
 }
+}
+
+/* Dès 1 280 px, l'en-tête passe sur deux lignes (marque et actions, puis menu et outils) : 108 px + 24 px d'air. */
+@media (min-width: 80rem) {
+  :root {
+    --header-offset: 8.25rem;
+  }
 }
 
 @layer base {

@@ -30,7 +30,7 @@ Légende de la dernière colonne : **retiré** (le texte ou le numéro disparaî
 10. **« Glisser vers le haut pour fermer » (menu mobile)** ([Navbar.tsx:702](../src/components/Navbar.tsx#L702)). Proposition : La garder : le geste reste (annexe B, ligne 5) et cette consigne est la seule à l'expliquer.
    **Décision : modifiée. Le geste de fermeture reste, la phrase « Glisser vers le haut pour fermer » est retirée.**
 11. **« BRANCHE SOCIALE DU GROUPE IROKO » sous le logo (Qui sommes-nous)** ([TransversalPages.tsx:135](../src/pages/TransversalPages.tsx#L135)). Proposition : La retirer : elle répète mot pour mot le titre placé à côté.
-   **Décision : recommandation acceptée.**
+   ~~**Décision : recommandation acceptée.**~~ **Décision annulée le 16 novembre 2026, après le lot 5 : le sous-titre « Branche sociale du groupe IROKO » reste sous le logo (Qui sommes-nous, rétabli en casse de phrase) et sous le nom dans l'en-tête du site, visible à toutes les largeurs (contrat §8, En-tête du site).**
 
 **Notes pour plus tard**
 - **Bulle WhatsApp** (étape de l'accueil) : vrai glyphe WhatsApp et libellé court visible (RESP-03).
@@ -210,7 +210,7 @@ Une carte entière est déjà un lien : les « Consulter », « Lire l'article �
 | [Home.tsx:963](../src/pages/Home.tsx#L963) | « Lire l'article » (en bas des 3 cartes d'actualité) | / | retiré : C'est un « En savoir plus » sur une carte qui est déjà un lien en entier. Au §8, la carte se reconnaît à sa photo et à son titre-lien, et son survol ne change que la couleur du titre. |
 | [MobilityHub.tsx:176](../src/pages/MobilityHub.tsx#L176) | « Gratuit · Niveaux A1 à C1 » (pastille de la porte Académie) | /mobilite-langues | retiré : C'est une étiquette de carte : la porte n'est pas cliquable en entier, elle devient un bloc sans cadre (§8, voies). « A1 à C1 » figure déjà dans le titre et dans les liens de niveaux juste… |
 | [MobilityHub.tsx:228](../src/pages/MobilityHub.tsx#L228) | « Gratuit · 10 Pays Documentés » (pastille de la porte Accompagnement) | /mobilite-langues | retiré : Même étiquette de carte que la porte Académie. Les 10 pays sont listés en liens juste en dessous ; « gratuit » est répété (T-12). |
-| [TransversalPages.tsx:135](../src/pages/TransversalPages.tsx#L135) | BRANCHE SOCIALE DU GROUPE IROKO (sous le logo) | /qui-sommes-nous | retiré (décision n° 11) : Elle répète mot pour mot le titre placé à côté. |
+| [TransversalPages.tsx:135](../src/pages/TransversalPages.tsx#L135) | BRANCHE SOCIALE DU GROUPE IROKO (sous le logo) | /qui-sommes-nous | rétabli (décision n° 11 annulée le 16/11) : le sous-titre reste sous le logo, en casse de phrase. |
 
 ## 6. Numéros décoratifs et filigranes (commit StepNumber, T-17)
 

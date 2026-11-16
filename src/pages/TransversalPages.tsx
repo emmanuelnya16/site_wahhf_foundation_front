@@ -111,8 +111,9 @@ export function QuiSommesNousPage() {
               alt="Logo WAHHF Foundation"
               className="w-20 h-20 rounded-pill bg-white p-1.5 object-contain"
             />
-            <p className="text-body font-semibold text-text-on-inverse">WAHHF Foundation</p>
-            
+                        <p className="text-body font-semibold text-text-on-inverse">WAHHF Foundation</p>
+            {/* Rétabli : décision n° 11 de la liste du lot 5 annulée le 16/11 */}
+            <p className="text-meta text-text-secondary-on-inverse">Branche sociale du groupe IROKO</p>
           </div>
         </div>
 

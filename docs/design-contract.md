@@ -422,7 +422,8 @@ Ce sont ceux de votre demande sur les composants partagés ; ils appliquent les 
 
 - **Boutons**
   - Primaire : fond forêt, texte brume ; survol : fond nuit ; appui (`:active`) : fond nuit immédiat, sans déplacement, **visible au toucher**. En sombre : fond soleil, texte encre ; survol et appui : soleil pâle. Sur nuit (footer, bandes), même en clair : fond soleil, texte encre (tokens « on-inverse », §3.4).
-  - Don : fond cœur, texte blanc, icône cœur ; survol et appui : cœur foncé ; sur nuit et en thème sombre, liseré intérieur de 1 px brume à 60 % (§3.5). Réservé au don.
+    - Don : fond cœur, texte blanc, icône cœur ; survol et appui : cœur foncé ; sur nuit et en thème sombre, liseré intérieur de 1 px brume à 60 % (§3.5). Réservé au don.
+  - **Don en contour** (décision du 16 novembre 2026, après le lot 5) : le cœur plein est réservé à la page Don et à la porte « Faire un don » du hero. Dans l'en-tête et le menu mobile, le bouton de don passe en contour : bordure 1,5 px et icône cœur, libellé couleur du texte, fond transparent ; survol et appui : fond cœur, libellé blanc. En thème sombre et sur nuit, où le cœur n'atteint que 3,0:1 (humus) et 2,1:1 (nuit), le contour et l'icône prennent corail (8,9:1 et 6,1:1) : token `donate-outline`.
   - Secondaire : contour 1,5 px forêt, texte forêt, fond transparent ; survol et appui (immédiat, visible au toucher) : fond forêt, texte brume. En sombre, et sur nuit même en clair : contour et texte soleil ; survol et appui : fond soleil, texte encre.
   - Pendant un envoi : le bouton garde ses couleurs, son libellé dit ce qui se passe (« Préparation du message… ») et il ne répond plus au clic.
   - **Cibles de 44 px minimum** (48 px de haut par défaut). Forme pilule. Texte `body` en 600.
@@ -448,6 +449,11 @@ Ce sont ceux de votre demande sur les composants partagés ; ils appliquent les 
   **Barre de progression** (ajout du 16 novembre 2026) : couleur pleine `action`, sans dégradé vert vers or.
 - **Footer** (ajout du 16 novembre 2026) : fond nuit ; texte `text-on-inverse` et `text-secondary-on-inverse` en 15 px ; titres de colonne en 600, sans or ; soleil réservé aux liens (`link-on-inverse`) ; contrôles cerclés de `border-on-inverse`.
 - **En-tête du site** (ajout du 16 novembre 2026) : barre opaque pleine largeur (brume, humus en sombre), fixée en haut, contenu dans le container ; sans pilule, sans verre dépoli ; ombre flottante seulement une fois la page défilée (en sombre, une bordure basse trait-nuit à la place) ; « WAHHF Foundation » dans une seule casse et une seule couleur.
+  **Décisions du 16 novembre 2026, après le lot 5 :**
+  - **Sous-titre « Branche sociale du groupe IROKO » visible à toutes les largeurs**, sous le nom, en `meta`, `text-secondary` : sur deux lignes (largeur du nom, 120 px au moins) jusqu'à 1 023 px, sur une ligne au-delà.
+  - **Deux portes** (T-09) : « Candidater » (bouton primaire forêt, soleil en sombre) à côté de « Faire un don » (bouton de don en contour), dans la barre dès 768 px ; sous 768 px, en tête du menu mobile, en pleine largeur (empilées sous 400 px). La ligne « Candidater (Cours & Europe — Gratuit) » et le bouton de don en bas du menu mobile sont remplacés par ces deux boutons.
+  - **Dès 1 280 px, deux lignes** (64 + 44 px) : la marque et les deux portes, puis le menu (6 entrées, aligné sur la marge du logo) et les outils (langue, recherche, thème), séparés par un filet. Sur une seule ligne, l'en-tête demandait 1 261 px pour 1 152 disponibles. `--header-offset` passe de 6 à 8,25 rem à partir de 1 280 px (108 px + 24 px d'air).
+  - Sous 1 280 px, une ligne : marque, outils (langue dès 1 024 px au lieu de 768 px, recherche, thème dès 640 px), les deux portes (dès 768 px), menu. Vérifié de 320 à 1 440 px, en français et en anglais : aucun débordement ni chevauchement.
 - **Fil** : composant SVG pour la signature (§6). Paramètres : départ, arrivée, étapes facultatives (frise A1 à C1), niveau affiché, orientation (horizontale ou verticale), animation unique (hero seulement). Couleur prise dans le token `fil`, épaisseur 1,5 px, points de 8 px. `aria-hidden`. L'arc de la mini-carte d'Europe n'utilise pas ce composant (§6).
 
 ## 9. Profondeur et rayons
@@ -569,6 +575,15 @@ Les tics relevés par l'audit et ce qui les remplace :
 - **Petite étape « Mobilité & Langues »** : l'appel final en carte nuit juste au-dessus du footer, réduit à une seule action (« Candidater ») ; les témoignages (TODO, à remplacer par des témoignages réels, T-02) ; la gratuité dite une fois par écran ; le nombre de boutons du hero.
 - **Petite étape « Candidater »** : la gratuité redite avant le premier champ ; le nombre d'actions et d'indicateurs d'étape au premier écran ; les mentions de chantier.
 - **Petite étape « Faire un don »** : la gratuité redite, le nombre d'actions au premier écran, l'encadré « Garantie de transparence » en simple bloc de texte, les mentions de chantier.
+
+**Décisions du 16 novembre 2026, après le lot 5 (validé)**
+- **Sous-titre IROKO** : la décision n° 11 de la liste du lot 5 est annulée ; « Branche sociale du groupe IROKO » reste sous le logo (Qui sommes-nous) et sous le nom dans l'en-tête, visible à toutes les largeurs (§8, En-tête du site).
+- **En-tête** (T-09) : « Candidater » (forêt) à côté de « Faire un don », qui passe en contour cœur ; le cœur plein est réservé à la page Don et à la porte « Faire un don » du hero (§8, Boutons).
+- **Pages destinées aux jeunes** (Mobilité, Académie, niveaux, Candidater, Accompagnement, fiches pays, Arnaques) : aucun bouton de don dans le contenu (ARN-02) ; le footer garde son lien.
+- **Contrôle des textes provisoires** (T-01) : un script npm échoue si « TODO », « Simulé » ou « démonstration » apparaissent dans le texte affiché, un `aria-label` ou une option de liste des pages WAHHF ; lancé à la fin de chaque lot, son résultat est remis à la fondation.
+- **Début du lot 6** : barre de lecture réservée aux articles, en forêt (plus en or) ; bandeau cookies aux couleurs du contrat.
+- **Groupes 7.1 et 7.2** : encadré « Vigilance » de Contact en alerte ambre, encadré « Message préparé » en information, boîte du test de niveau.
+- **Accueil (lot 6)** : pas de mention d'IROKO dans le hero, l'en-tête la porte déjà.
 
 **À traiter plus tard : état de succès des formulaires.** Aujourd'hui les formulaires préparent un message et n'envoient rien, d'où l'absence de couleur de succès (§3.2). Quand ils enverront vraiment (API Symfony), il faudra un état de succès (« Candidature envoyée », « Message envoyé ») et donc une couleur de succès, avec son tableau de contrastes. À traiter à ce moment-là.
 
