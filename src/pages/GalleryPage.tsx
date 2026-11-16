@@ -32,7 +32,7 @@ export default function GalleryPage() {
         description="Photos et vidéos de WAHHF Foundation : First Open Day & Boot Camp à Yaoundé, rencontres de la communauté et actions sur le terrain."
       />
 
-      <section className="pt-32 pb-16 bg-[#0F3D2E] text-[#F5F1E8]">
+      <section className="surface-green pt-32 pb-16 bg-[#0F3D2E] text-[#F5F1E8]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
           <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#E8A317]">
             <Camera className="w-4 h-4" aria-hidden="true" />

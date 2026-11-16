@@ -17,7 +17,7 @@ export default function DomainCard({ domain, total = '06' }: DomainCardProps) {
   return (
     <Link
       to={domain.link}
-      className="group relative flex flex-col rounded-[24px] overflow-hidden bg-white dark:bg-[#132A21] border border-[#0F3D2E]/10 dark:border-[#F5F1E8]/10 shadow-[0_10px_30px_-12px_rgba(15,61,46,0.1)] hover:shadow-[0_20px_40px_-15px_rgba(15,61,46,0.2)] transition-[translate,color,background-color,border-color,box-shadow] duration-300 hover:-translate-y-1.5 focus-visible:outline-2 focus-visible:outline-[#E8A317] h-full"
+      className="group relative flex flex-col rounded-[24px] overflow-hidden bg-white dark:bg-[#132A21] border border-[#0F3D2E]/10 dark:border-[#F5F1E8]/10 shadow-[0_10px_30px_-12px_rgba(15,61,46,0.1)] hover:shadow-[0_20px_40px_-15px_rgba(15,61,46,0.2)] transition-[translate,color,background-color,border-color,box-shadow] duration-300 hover:-translate-y-1.5 h-full"
     >
       {/* Photo en haut avec ratio réservé 16:10 et lazy loading */}
       <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#0F3D2E]/10">

@@ -21,7 +21,7 @@ export default function WhatsAppButton() {
       animate={{ scale: 1, opacity: 1 }}
       whileHover={{ scale: 1.06 }}
       whileTap={{ scale: 0.95 }}
-      className="fixed bottom-6 right-6 z-40 w-13 h-13 bg-[#0F3D2E] hover:bg-[#14523E] border border-[#E8A317]/50 text-[#F5F1E8] rounded-full flex items-center justify-center shadow-[0_12px_30px_rgba(15,61,46,0.35)] group transition-colors duration-300 cursor-pointer"
+      className="focus-ring-double fixed bottom-6 right-6 z-40 w-13 h-13 bg-[#0F3D2E] hover:bg-[#14523E] border border-[#E8A317]/50 text-[#F5F1E8] rounded-full flex items-center justify-center shadow-[0_12px_30px_rgba(15,61,46,0.35)] group transition-colors duration-300 cursor-pointer"
       aria-label="Contacter WAHHF Foundation sur WhatsApp"
     >
       <div className="relative flex items-center justify-center">

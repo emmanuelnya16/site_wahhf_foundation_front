@@ -174,7 +174,7 @@ export default function Home() {
       <section
         id="accueil"
         ref={heroRef}
-        className="relative min-h-svh w-full flex items-center justify-center overflow-hidden bg-[#0F3D2E] text-[#F5F1E8] pt-28 pb-16"
+        className="surface-green relative min-h-svh w-full flex items-center justify-center overflow-hidden bg-[#0F3D2E] text-[#F5F1E8] pt-28 pb-16"
       >
         {/* 1) Image d'attente (élément principal du chargement, préchargée dans index.html) :
                zoom très lent et léger décalage au défilement sur ordinateur (20 px max).
@@ -351,7 +351,7 @@ export default function Home() {
       {/* =====================================================================
           3. CHIFFRES CLÉS (4 compteurs animés)
           ===================================================================== */}
-      <section id="chiffres-cles" className="py-16 sm:py-20 bg-[#0F3D2E] text-[#F5F1E8] border-y border-[#E8A317]/25">
+      <section id="chiffres-cles" className="surface-green py-16 sm:py-20 bg-[#0F3D2E] text-[#F5F1E8] border-y border-[#E8A317]/25">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <SectionHeader
             kicker={t('home.stats.kicker')}
@@ -438,7 +438,7 @@ export default function Home() {
           3 cartes, mention « 100 % gratuit, financé par IROKO et nos donateurs », bouton « Découvrir le programme ».
           ===================================================================== */}
       {/* Effet fort : la carte verte s'agrandit jusqu'à la pleine largeur, puis cascade du contenu */}
-      <ExpandSection id="mobilite-langues" backgroundClassName="bg-[#0F3D2E]" className="py-20 sm:py-24 text-[#F5F1E8]">
+      <ExpandSection id="mobilite-langues" backgroundClassName="bg-[#0F3D2E]" className="surface-green py-20 sm:py-24 text-[#F5F1E8]">
         <div data-expand-content className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <div data-cascade className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
             <SectionHeader
@@ -806,7 +806,7 @@ export default function Home() {
           align="center"
         />
 
-        <div className="rounded-[24px] bg-[#0F3D2E] text-[#F5F1E8] p-7 sm:p-12 border border-[#E8A317]/30 relative overflow-hidden">
+        <div className="surface-green rounded-[24px] bg-[#0F3D2E] text-[#F5F1E8] p-7 sm:p-12 border border-[#E8A317]/30 relative overflow-hidden">
           <Quote
             aria-hidden="true"
             className="absolute top-6 right-6 w-20 h-20 text-[#E8A317]/15 pointer-events-none"
@@ -1033,7 +1033,7 @@ export default function Home() {
 
           <StaggerGroup className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Carte 1 : Faire un don */}
-            <div className="relative rounded-[24px] bg-[#0F3D2E] text-[#F5F1E8] p-8 border border-[#E8A317]/35 flex flex-col justify-between overflow-hidden">
+            <div className="surface-green relative rounded-[24px] bg-[#0F3D2E] text-[#F5F1E8] p-8 border border-[#E8A317]/35 flex flex-col justify-between overflow-hidden">
               <span
                 aria-hidden="true"
                 className="pointer-events-none select-none absolute -bottom-4 right-4 font-serif text-7xl text-[#F5F1E8]/[0.05]"
@@ -1133,7 +1133,7 @@ export default function Home() {
 
           <div className="lg:col-span-5">
             {newsletterDone ? (
-              <div className="rounded-2xl bg-[#0F3D2E] text-[#F5F1E8] p-4 flex items-center gap-3 text-sm">
+              <div className="surface-green rounded-2xl bg-[#0F3D2E] text-[#F5F1E8] p-4 flex items-center gap-3 text-sm">
                 <CheckCircle2 className="w-5 h-5 text-[#E8A317] shrink-0" />
                 <span>Merci ! Votre inscription à la lettre d’information WAHHF est bien enregistrée.</span>
               </div>
@@ -1151,7 +1151,7 @@ export default function Home() {
                     value={newsletterEmail}
                     onChange={(e) => setNewsletterEmail(e.target.value)}
                     placeholder={t('home.newsletter.placeholder')}
-                    className="w-full pl-11 pr-4 py-3.5 rounded-full bg-[#F5F1E8] dark:bg-[#0F3D2E] border border-[#0F3D2E]/20 dark:border-[#F5F1E8]/20 text-sm text-[#1B1B18] dark:text-[#F5F1E8] focus:outline-2 focus:outline-[#E8A317]"
+                    className="w-full pl-11 pr-4 py-3.5 rounded-full bg-[#F5F1E8] dark:bg-[#0F3D2E] border border-[#0F3D2E]/20 dark:border-[#F5F1E8]/20 text-sm text-[#1B1B18] dark:text-[#F5F1E8]"
                   />
                 </div>
                 <button

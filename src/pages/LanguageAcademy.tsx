@@ -101,7 +101,7 @@ export default function LanguageAcademy() {
       />
 
       {/* HERO */}
-      <section className="pt-32 pb-16 sm:pt-36 sm:pb-20 bg-[#0F3D2E] text-[#F5F1E8]">
+      <section className="surface-green pt-32 pb-16 sm:pt-36 sm:pb-20 bg-[#0F3D2E] text-[#F5F1E8]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
           <div className="flex flex-wrap items-center gap-2 text-xs text-[#E8A317] font-semibold uppercase tracking-[0.18em]">
             <Link to="/mobilite-langues" className="hover:underline">
@@ -311,7 +311,7 @@ export default function LanguageAcademy() {
       {/* TEST DE NIVEAU EN LIGNE GRATUIT (20 QUESTIONS PROGRESSIVES) */}
       <section
         id="test-niveau"
-        className="py-20 bg-[#0F3D2E] text-[#F5F1E8] border-y border-[#E8A317]/30"
+        className="surface-green py-20 bg-[#0F3D2E] text-[#F5F1E8] border-y border-[#E8A317]/30"
       >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           <SectionHeader

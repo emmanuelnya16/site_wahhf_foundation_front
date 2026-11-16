@@ -25,7 +25,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#0F3D2E] text-[#F5F1E8] border-t border-[#E8A317]/25">
+    <footer className="surface-green bg-[#0F3D2E] text-[#F5F1E8] border-t border-[#E8A317]/25">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
         {/* Colonnes : apparition douce et décalée, une seule fois */}
         <StaggerGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-[#F5F1E8]/15">

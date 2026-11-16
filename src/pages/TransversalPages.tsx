@@ -39,7 +39,7 @@ export function QuiSommesNousPage() {
         description="Découvrez l'histoire, la mission, les valeurs, la gouvernance de WAHHF Foundation (We Are Here Help Foundation) et son lien avec le groupe IROKO."
       />
 
-      <section className="pt-32 pb-16 bg-[#0F3D2E] text-[#F5F1E8]">
+      <section className="surface-green pt-32 pb-16 bg-[#0F3D2E] text-[#F5F1E8]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-5">
           <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#E8A317]">
             Qui sommes-nous · We Are Here Help Foundation
@@ -97,7 +97,7 @@ export function QuiSommesNousPage() {
         </div>
 
         {/* Section dédiée : WAHHF, branche sociale du groupe IROKO */}
-        <div className="rounded-[24px] bg-[#0F3D2E] text-[#F5F1E8] p-8 sm:p-12 border border-[#E8A317]/40 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="surface-green rounded-[24px] bg-[#0F3D2E] text-[#F5F1E8] p-8 sm:p-12 border border-[#E8A317]/40 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-8 space-y-4">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8A317]/20 text-gold-on-green text-xs font-semibold uppercase tracking-widest">
               <ShieldCheck className="w-4 h-4" />
@@ -185,7 +185,7 @@ export function PartenairesPage() {
         description="Découvrez le rôle du groupe IROKO en tant que partenaire fondateur de WAHHF Foundation ainsi que nos partenaires institutionnels et associatifs."
       />
 
-      <section className="pt-32 pb-16 bg-[#0F3D2E] text-[#F5F1E8]">
+      <section className="surface-green pt-32 pb-16 bg-[#0F3D2E] text-[#F5F1E8]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
           <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#E8A317]">
             Partenaires & Mécènes
@@ -201,7 +201,7 @@ export function PartenairesPage() {
 
       <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-12">
         {/* Partenaire Fondateur : Groupe IROKO */}
-        <div className="rounded-[24px] bg-[#0F3D2E] text-[#F5F1E8] p-8 sm:p-12 border-2 border-[#E8A317] space-y-5">
+        <div className="surface-green rounded-[24px] bg-[#0F3D2E] text-[#F5F1E8] p-8 sm:p-12 border-2 border-[#E8A317] space-y-5">
           <span className="inline-block px-3.5 py-1 rounded-full bg-[#E8A317] text-[#1B1B18] text-xs font-bold uppercase tracking-wider">
             01 · Partenaire Fondateur & Mécène Structurel
           </span>
@@ -283,7 +283,7 @@ export function NosActionsPage() {
         description="Découvrez les 6 domaines d'intervention de WAHHF Foundation au Cameroun et vers l'Europe."
       />
 
-      <section className="pt-32 pb-16 bg-[#0F3D2E] text-[#F5F1E8]">
+      <section className="surface-green pt-32 pb-16 bg-[#0F3D2E] text-[#F5F1E8]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
           <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#E8A317]">
             Nos 6 domaines d’action
@@ -385,7 +385,7 @@ export function NotreImpactPage() {
         description="Mesurez l'impact des programmes éducatifs, sanitaires et linguistiques de WAHHF Foundation au Cameroun et vers l'Europe."
       />
 
-      <section className="pt-32 pb-16 bg-[#0F3D2E] text-[#F5F1E8]">
+      <section className="surface-green pt-32 pb-16 bg-[#0F3D2E] text-[#F5F1E8]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
           <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#E8A317]">
             Notre Impact & Suivi
@@ -421,7 +421,7 @@ export function NotreImpactPage() {
 
         <PresenceSection />
 
-        <div className="rounded-[24px] bg-[#0F3D2E] text-[#F5F1E8] p-8 sm:p-10 border border-[#E8A317]/35 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="surface-green rounded-[24px] bg-[#0F3D2E] text-[#F5F1E8] p-8 sm:p-10 border border-[#E8A317]/35 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-2">
             <h2 className="font-serif text-2xl sm:text-3xl">
               Consulter nos engagements de transparence financière
@@ -453,7 +453,7 @@ export function ActualitesPage() {
     return (
       <>
         <SEO title={article.title} description={article.excerpt} />
-        <section className="pt-32 pb-14 bg-[#0F3D2E] text-[#F5F1E8]">
+        <section className="surface-green pt-32 pb-14 bg-[#0F3D2E] text-[#F5F1E8]">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
             <Link
               to="/actualites"
@@ -512,7 +512,7 @@ export function ActualitesPage() {
         title="Actualités & Actions de terrain"
         description="Suivez les dernières actualités de WAHHF Foundation : ouvertures des sessions d'allemand gratuites, campagnes de santé et reboisement."
       />
-      <section className="pt-32 pb-16 bg-[#0F3D2E] text-[#F5F1E8]">
+      <section className="surface-green pt-32 pb-16 bg-[#0F3D2E] text-[#F5F1E8]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
           <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#E8A317]">
             Journal de la Fondation
@@ -587,7 +587,7 @@ export function AgirPage() {
         description="Rejoignez l'engagement de WAHHF Foundation : faire un don, devenir formateur ou bénévole, ou bâtir un partenariat institutionnel."
       />
 
-      <section className="pt-32 pb-16 bg-[#0F3D2E] text-[#F5F1E8]">
+      <section className="surface-green pt-32 pb-16 bg-[#0F3D2E] text-[#F5F1E8]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
           <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#E8A317]">
             Agir avec nous
@@ -600,7 +600,7 @@ export function AgirPage() {
 
       <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="rounded-[24px] bg-[#0F3D2E] text-[#F5F1E8] p-7 space-y-4 flex flex-col justify-between">
+          <div className="surface-green rounded-[24px] bg-[#0F3D2E] text-[#F5F1E8] p-7 space-y-4 flex flex-col justify-between">
             <div className="space-y-2">
               <span className="text-xs font-semibold text-[#E8A317]">01 · Don Solidaire</span>
               <h2 className="font-serif text-2xl">Faire un don</h2>
@@ -799,7 +799,7 @@ export function LegalTransparencyPage({
   return (
     <>
       <SEO title={content.title} description={content.blocks[0].p} />
-      <section className="pt-32 pb-14 bg-[#0F3D2E] text-[#F5F1E8]">
+      <section className="surface-green pt-32 pb-14 bg-[#0F3D2E] text-[#F5F1E8]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-3">
           <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#E8A317]">
             <Icon className="w-4 h-4" />

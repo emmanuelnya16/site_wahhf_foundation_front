@@ -114,6 +114,12 @@
   --wahhf-green: #0F3D2E;
   --wahhf-gold: #E8A317;
   --wahhf-red: #C8102E;
+  /* Anneau de focus clavier (WCAG 1.4.11, 3:1 contre le fond qui l'entoure) :
+     vert profond sur fond clair (10,8:1 sur crème, 12,2:1 sur blanc),
+     or sur fond vert ou sombre (5,6:1 sur #0F3D2E). */
+  --focus-on-light: #0F3D2E;
+  --focus-on-green: #E8A317;
+  --color-focus: var(--focus-on-light);
 }
 
 .dark {
@@ -123,6 +129,12 @@
   --wahhf-text: #F5F1E8;
   --wahhf-text-muted: #C2BDB0;
   --wahhf-border: rgba(245, 241, 232, 0.12);
+}
+
+/* Le fond décide de la couleur de l'anneau : thème sombre et surfaces vertes → or. */
+.dark,
+.surface-green {
+  --color-focus: var(--focus-on-green);
 }
 
 @layer base {
@@ -142,6 +154,20 @@
   h1, h2, h3, .font-serif-title {
     font-family: var(--font-serif);
   }
+
+  /* Focus clavier : un seul anneau pour tout le site, couleur selon le fond (--color-focus). */
+  :focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+}
+
+/* Élément flottant au-dessus de fonds variables (bouton WhatsApp, lien d'évitement) :
+   double anneau, 2 px crème dans l'écart puis 2 px vert. L'un des deux contraste toujours (clair ou vert). */
+.focus-ring-double:focus-visible {
+  outline: 2px solid var(--focus-on-light);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px #F5F1E8;
 }
 
 /* Bascule de thème (src/effects/themeTransition.ts) : fondu enchaîné de 0,5 s de toute la page,

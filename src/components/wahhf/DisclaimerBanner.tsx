@@ -17,7 +17,7 @@ export default function DisclaimerBanner({ compact = false, className = '' }: Di
   return (
     <aside
       aria-label={t('disclaimer.title')}
-      className={`rounded-[24px] border border-[#E8A317]/45 bg-[#0F3D2E] text-[#F5F1E8] p-5 sm:p-7 shadow-sm ${className}`}
+      className={`surface-green rounded-[24px] border border-[#E8A317]/45 bg-[#0F3D2E] text-[#F5F1E8] p-5 sm:p-7 shadow-sm ${className}`}
     >
       <div className="flex flex-col md:flex-row items-start gap-4 sm:gap-5">
         <div className="w-11 h-11 rounded-2xl bg-[#E8A317]/20 border border-[#E8A317]/40 flex items-center justify-center shrink-0 text-[#E8A317]">

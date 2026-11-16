@@ -64,7 +64,7 @@ export default function EuropeSupport() {
           description={`Information vérifiée et gratuite sur les études, la formation et le travail en ${country.name} par WAHHF Foundation.`}
         />
 
-        <section className="pt-32 pb-16 sm:pt-36 sm:pb-20 bg-[#0F3D2E] text-[#F5F1E8]">
+        <section className="surface-green pt-32 pb-16 sm:pt-36 sm:pb-20 bg-[#0F3D2E] text-[#F5F1E8]">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
             <div className="flex flex-wrap items-center gap-2 text-xs text-[#E8A317] font-semibold uppercase tracking-[0.18em]">
               <Link to="/mobilite-langues" className="hover:underline">
@@ -208,7 +208,7 @@ export default function EuropeSupport() {
               </ol>
             </div>
 
-            <div className="lg:col-span-5 rounded-[24px] bg-[#0F3D2E] text-[#F5F1E8] border border-[#E8A317]/35 p-7 sm:p-8 space-y-5 flex flex-col justify-between">
+            <div className="surface-green lg:col-span-5 rounded-[24px] bg-[#0F3D2E] text-[#F5F1E8] border border-[#E8A317]/35 p-7 sm:p-8 space-y-5 flex flex-col justify-between">
               <div className="space-y-4">
                 <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#E8A317]">
                   Sources Gouvernementales & Ambassades
@@ -295,7 +295,7 @@ export default function EuropeSupport() {
         />
 
         <section
-          className={`pt-32 pb-16 sm:pt-36 sm:pb-20 ${
+          className={`surface-green pt-32 pb-16 sm:pt-36 sm:pb-20 ${
             isAntiScam ? 'bg-[#0F3D2E] border-b-4 border-[#E8A317]' : 'bg-[#0F3D2E]'
           } text-[#F5F1E8]`}
         >
@@ -360,7 +360,7 @@ export default function EuropeSupport() {
           ))}
 
           {/* Navigation entre les 5 guides thématiques */}
-          <div className="rounded-[24px] bg-[#0F3D2E] text-[#F5F1E8] p-7 sm:p-9 border border-[#E8A317]/35 space-y-5">
+          <div className="surface-green rounded-[24px] bg-[#0F3D2E] text-[#F5F1E8] p-7 sm:p-9 border border-[#E8A317]/35 space-y-5">
             <h3 className="font-serif text-2xl text-[#F5F1E8]">
               Tous nos guides thématiques gratuits
             </h3>
@@ -408,7 +408,7 @@ export default function EuropeSupport() {
       />
 
       {/* HERO */}
-      <section className="pt-32 pb-16 sm:pt-36 sm:pb-20 bg-[#0F3D2E] text-[#F5F1E8]">
+      <section className="surface-green pt-32 pb-16 sm:pt-36 sm:pb-20 bg-[#0F3D2E] text-[#F5F1E8]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
           <div className="flex flex-wrap items-center gap-2 text-xs text-[#E8A317] font-semibold uppercase tracking-[0.18em]">
             <Link to="/mobilite-langues" className="hover:underline">

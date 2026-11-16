@@ -77,7 +77,7 @@ export default function ApplyPage() {
         description="Formulaire unique et 100 % gratuit de demande d'accompagnement et d'inscription aux cours d'allemand WAHHF Foundation. Aucun document d'identité ni paiement demandé."
       />
 
-      <section className="pt-32 pb-14 bg-[#0F3D2E] text-[#F5F1E8]">
+      <section className="surface-green pt-32 pb-14 bg-[#0F3D2E] text-[#F5F1E8]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
           <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8A317]/20 text-gold-on-green text-xs font-semibold uppercase tracking-widest">
             <CheckCircle2 className="w-4 h-4" />

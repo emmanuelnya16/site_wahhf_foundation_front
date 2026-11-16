@@ -77,7 +77,7 @@ export default function PresenceSection() {
         {/* =====================================================================
             CARTE GAUCHE : « PRÉSENCE TERRAIN AU CAMEROUN » (Fond vert profond #0F3D2E)
             ===================================================================== */}
-        <div className="lg:col-span-6 rounded-[24px] bg-[#0F3D2E] text-[#F5F1E8] p-6 sm:p-8 border border-[#E8A317]/30 relative overflow-hidden flex flex-col justify-between shadow-sm">
+        <div className="surface-green lg:col-span-6 rounded-[24px] bg-[#0F3D2E] text-[#F5F1E8] p-6 sm:p-8 border border-[#E8A317]/30 relative overflow-hidden flex flex-col justify-between shadow-sm">
           <div>
             <div className="flex items-center justify-between gap-3 mb-4 flex-wrap">
               <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#E8A317]">

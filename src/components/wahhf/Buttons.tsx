@@ -34,7 +34,7 @@ export function PrimaryButton({
 }: ButtonBaseProps) {
   const ref = useRef<HTMLElement>(null);
   useMagnetic(ref, magnetic);
-  const baseClass = `group inline-flex items-center justify-between gap-3.5 pl-6 pr-2 py-2 rounded-full bg-[#0F3D2E] hover:bg-[#14523E] text-[#F5F1E8] font-medium text-sm sm:text-base transition-[color,background-color,border-color,box-shadow] duration-300 shadow-sm hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8A317] disabled:opacity-50 cursor-pointer ${className}`;
+  const baseClass = `group inline-flex items-center justify-between gap-3.5 pl-6 pr-2 py-2 rounded-full bg-[#0F3D2E] hover:bg-[#14523E] text-[#F5F1E8] font-medium text-sm sm:text-base transition-[color,background-color,border-color,box-shadow] duration-300 shadow-sm hover:shadow-md disabled:opacity-50 cursor-pointer ${className}`;
 
   const inner = (
     <>
@@ -91,7 +91,7 @@ export function SecondaryButton({
 }: ButtonBaseProps & { light?: boolean }) {
   const ref = useRef<HTMLElement>(null);
   useMagnetic(ref, magnetic);
-  const baseClass = `inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-full border transition-[color,background-color,border-color,box-shadow] duration-300 text-sm sm:text-base font-medium cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8A317] ${
+  const baseClass = `inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-full border transition-[color,background-color,border-color,box-shadow] duration-300 text-sm sm:text-base font-medium cursor-pointer ${
     light
       ? 'border-[#F5F1E8]/45 text-[#F5F1E8] hover:bg-[#F5F1E8]/12 hover:border-[#E8A317]'
       : 'border-[#0F3D2E]/35 dark:border-[#F5F1E8]/30 text-[#0F3D2E] dark:text-[#F5F1E8] hover:border-[#E8A317] hover:bg-[#0F3D2E]/5 dark:hover:bg-[#F5F1E8]/10'
@@ -148,7 +148,7 @@ export function DonateButton({
       ? 'px-7 py-3.5 text-base'
       : 'px-5 py-2.5 text-sm';
 
-  const classes = `inline-flex items-center justify-center gap-2 rounded-full bg-[#C8102E] hover:bg-[#a80d26] text-white font-semibold tracking-wide transition-[color,background-color,border-color,box-shadow] duration-300 shadow-sm hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8A317] cursor-pointer ${sizeClasses} ${className}`;
+  const classes = `inline-flex items-center justify-center gap-2 rounded-full bg-[#C8102E] hover:bg-[#a80d26] text-white font-semibold tracking-wide transition-[color,background-color,border-color,box-shadow] duration-300 shadow-sm hover:shadow-md cursor-pointer ${sizeClasses} ${className}`;
 
   if (onClick) {
     return (

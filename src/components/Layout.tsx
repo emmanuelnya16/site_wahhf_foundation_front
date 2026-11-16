@@ -62,7 +62,7 @@ export default function Layout({ children }: LayoutProps) {
           main.focus({ preventScroll: true });
           scrollToElement(main, { immediate: true });
         }}
-        className="sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:top-4 focus-visible:left-4 focus-visible:z-[200] focus-visible:px-5 focus-visible:py-3 focus-visible:rounded-full focus-visible:bg-[#0F3D2E] focus-visible:text-[#F5F1E8] focus-visible:font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8A317]"
+        className="focus-ring-double sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:top-4 focus-visible:left-4 focus-visible:z-[200] focus-visible:px-5 focus-visible:py-3 focus-visible:rounded-full focus-visible:bg-[#0F3D2E] focus-visible:text-[#F5F1E8] focus-visible:font-semibold"
       >
         Aller au contenu
       </a>

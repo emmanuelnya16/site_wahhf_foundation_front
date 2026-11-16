@@ -42,7 +42,7 @@ export default function MobilityHub() {
       />
 
       {/* HERO */}
-      <section className="relative pt-32 pb-20 sm:pt-36 sm:pb-24 bg-[#0F3D2E] text-[#F5F1E8] overflow-hidden">
+      <section className="surface-green relative pt-32 pb-20 sm:pt-36 sm:pb-24 bg-[#0F3D2E] text-[#F5F1E8] overflow-hidden">
         <div className="absolute inset-0 opacity-25">
           <img
             src={WAHHF_IMAGES.openDayVisioconference}
@@ -211,7 +211,7 @@ export default function MobilityHub() {
             </div>
 
             {/* Porte 2 : Accompagnement vers l'Europe */}
-            <div className="relative rounded-[24px] bg-[#0F3D2E] text-[#F5F1E8] border border-[#E8A317]/35 p-8 sm:p-10 shadow-sm flex flex-col justify-between overflow-hidden">
+            <div className="surface-green relative rounded-[24px] bg-[#0F3D2E] text-[#F5F1E8] border border-[#E8A317]/35 p-8 sm:p-10 shadow-sm flex flex-col justify-between overflow-hidden">
               <span
                 aria-hidden="true"
                 className="pointer-events-none select-none absolute -bottom-4 right-5 font-serif text-8xl text-[#F5F1E8]/[0.05]"
@@ -336,7 +336,7 @@ export default function MobilityHub() {
 
       {/* APPEL À CANDIDATER OU À SOUTENIR LE PROGRAMME PAR UN DON */}
       <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-        <div className="rounded-[24px] bg-[#0F3D2E] text-[#F5F1E8] p-8 sm:p-12 border border-[#E8A317]/40 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="surface-green rounded-[24px] bg-[#0F3D2E] text-[#F5F1E8] p-8 sm:p-12 border border-[#E8A317]/40 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-7 space-y-3">
             <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#E8A317]">
               <ShieldCheck className="w-4 h-4" />

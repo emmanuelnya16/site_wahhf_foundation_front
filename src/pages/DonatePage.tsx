@@ -65,7 +65,7 @@ export default function DonatePage() {
         description="Soutenez WAHHF Foundation : vos dons financent la gratuité des cours d'allemand (A1 à C1), l'accompagnement vers l'Europe et nos actions sociales au Cameroun."
       />
 
-      <section className="pt-32 pb-16 bg-[#0F3D2E] text-[#F5F1E8]">
+      <section className="surface-green pt-32 pb-16 bg-[#0F3D2E] text-[#F5F1E8]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-5">
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C8102E] text-white text-xs font-semibold uppercase tracking-widest">
             <Heart className="w-3.5 h-3.5 fill-current" />
@@ -323,7 +323,7 @@ export default function DonatePage() {
 
             {/* Colonne d'impact & transparence */}
             <div className="lg:col-span-5 space-y-6">
-              <div className="rounded-[24px] bg-[#0F3D2E] text-[#F5F1E8] p-7 sm:p-8 border border-[#E8A317]/35 space-y-5">
+              <div className="surface-green rounded-[24px] bg-[#0F3D2E] text-[#F5F1E8] p-7 sm:p-8 border border-[#E8A317]/35 space-y-5">
                 <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#E8A317]">
                   <Sparkles className="w-4 h-4" />
                   <span>Ce que votre don permet (Exemples — TODO)</span>

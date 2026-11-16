@@ -209,7 +209,7 @@ export default function Navbar() {
           {/* Gauche : Logo WAHHF */}
           <Link
             to="/"
-            className="flex items-center gap-2.5 shrink-0 focus-visible:outline-2 focus-visible:outline-[#E8A317] rounded-full"
+            className="flex items-center gap-2.5 shrink-0 rounded-full"
             aria-label="WAHHF Foundation — Accueil"
           >
             <img
@@ -433,7 +433,7 @@ export default function Navbar() {
                 </div>
 
                 {/* Encart direct Mobilité & Langues */}
-                <div className="lg:col-span-4 rounded-2xl bg-[#0F3D2E] text-[#F5F1E8] p-6 flex flex-col justify-between border border-[#E8A317]/30">
+                <div className="surface-green lg:col-span-4 rounded-2xl bg-[#0F3D2E] text-[#F5F1E8] p-6 flex flex-col justify-between border border-[#E8A317]/30">
                   <div className="space-y-3">
                     <span className="inline-block px-3 py-1 rounded-full bg-[#E8A317]/20 text-gold-on-green text-[11px] font-semibold uppercase tracking-wider">
                       100 % Gratuit · Domaine 06
@@ -499,7 +499,7 @@ export default function Navbar() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={t('nav.searchPlaceholder')}
-                className="w-full bg-transparent text-sm sm:text-base text-[#1B1B18] dark:text-[#F5F1E8] placeholder-[#1B1B18]/50 dark:placeholder-[#F5F1E8]/50 focus:outline-none"
+                className="w-full bg-transparent text-sm sm:text-base text-[#1B1B18] dark:text-[#F5F1E8] placeholder-[#1B1B18]/50 dark:placeholder-[#F5F1E8]/50"
               />
               <button
                 type="button"
@@ -572,7 +572,7 @@ export default function Navbar() {
               }
             }
           }}
-          className="fixed inset-0 z-50 bg-[#0F3D2E] text-[#F5F1E8] flex flex-col justify-between p-6 overflow-y-auto"
+          className="surface-green fixed inset-0 z-50 bg-[#0F3D2E] text-[#F5F1E8] flex flex-col justify-between p-6 overflow-y-auto"
         >
           <div className="flex items-center justify-between pb-6 border-b border-white/15">
             <Link to="/" onClick={() => setMobileOpen(false)} className="flex items-center gap-3">
