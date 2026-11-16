@@ -74,6 +74,8 @@ export interface GermanLevelCourse {
   level: 'A1' | 'A2' | 'B1' | 'B2' | 'C1';
   slug: string;
   title: string;
+  /** Intitulé court affiché dans le fil des niveaux (contrat §6). */
+  shortTitle: string;
   subtitle: string;
   duration: string;
   hours: string;
@@ -255,6 +257,7 @@ export const GERMAN_LEVELS_DATA: GermanLevelCourse[] = [
     level: 'A1',
     slug: 'a1',
     title: 'Niveau A1 — Découverte & Bases',
+    shortTitle: 'Découverte',
     subtitle: 'Comprendre et utiliser des expressions familières et quotidiennes.',
     duration: '10 à 12 semaines (indicatif — TODO)',
     hours: '80 heures d’accompagnement',
@@ -276,6 +279,7 @@ export const GERMAN_LEVELS_DATA: GermanLevelCourse[] = [
     level: 'A2',
     slug: 'a2',
     title: 'Niveau A2 — Survie & Échanges Courants',
+    shortTitle: 'Échanges courants',
     subtitle: 'Communiquer lors de tâches simples et habituelles du quotidien.',
     duration: '10 à 12 semaines (indicatif — TODO)',
     hours: '90 heures d’accompagnement',
@@ -297,6 +301,7 @@ export const GERMAN_LEVELS_DATA: GermanLevelCourse[] = [
     level: 'B1',
     slug: 'b1',
     title: 'Niveau B1 — Seuil d’Autonomie',
+    shortTitle: 'Autonomie',
     subtitle: 'Être autonome dans la plupart des situations de voyage, d’études ou de formation.',
     duration: '12 à 14 semaines (indicatif — TODO)',
     hours: '120 heures d’accompagnement',
@@ -318,6 +323,7 @@ export const GERMAN_LEVELS_DATA: GermanLevelCourse[] = [
     level: 'B2',
     slug: 'b2',
     title: 'Niveau B2 — Indépendance & Fluidité',
+    shortTitle: 'Indépendance',
     subtitle: 'Communiquer avec spontanéité et comprendre des textes complexes.',
     duration: '14 à 16 semaines (indicatif — TODO)',
     hours: '140 heures d’accompagnement',
@@ -339,6 +345,7 @@ export const GERMAN_LEVELS_DATA: GermanLevelCourse[] = [
     level: 'C1',
     slug: 'c1',
     title: 'Niveau C1 — Maîtrise Académique & Professionnelle',
+    shortTitle: 'Maîtrise',
     subtitle: 'Utiliser la langue de façon souple et efficace dans la vie universitaire et sociale.',
     duration: '16 semaines (indicatif — TODO)',
     hours: '160 heures d’accompagnement',

@@ -12,6 +12,7 @@ import { PrimaryButton, SecondaryButton, DonateButton } from '../components/wahh
 import DisclaimerBanner from '../components/wahhf/DisclaimerBanner';
 import CourseCard from '../components/wahhf/CourseCard';
 import { ProgressBar } from '../components/wahhf/StepNumber';
+import Fil from '../components/wahhf/Fil';
 import ChoiceTile from '../components/wahhf/ChoiceTile';
 import NotFoundPage, { NotFoundLinks } from './NotFoundPage';
 import {
@@ -170,7 +171,7 @@ export default function LanguageAcademy() {
         <DisclaimerBanner />
       </section>
 
-      {/* FRISE HORIZONTALE DES 5 NIVEAUX : A1 -> A2 -> B1 -> B2 -> C1 */}
+      {/* LE FIL DES 5 NIVEAUX : A1 -> A2 -> B1 -> B2 -> C1 -> Europe */}
       <section className="container-page section-space space-y-12">
         <SectionHeader
           kicker="Parcours structuré CECRL"
@@ -178,49 +179,20 @@ export default function LanguageAcademy() {
           subtitle="Sélectionnez un niveau pour consulter ses objectifs pédagogiques, ce que vous saurez faire, le volume horaire et les prérequis."
         />
 
-        {/* Sélecteur en frise horizontale */}
-        <div className="relative">
-          <div
-            aria-hidden="true"
-            className="hidden md:block absolute top-1/2 left-8 right-8 h-[2px] -translate-y-1/2 bg-gradient-to-r from-nuit via-or to-nuit z-0"
-          />
-          <div className="relative z-10 grid grid-cols-2 sm:grid-cols-5 gap-3">
-            {GERMAN_LEVELS_DATA.map((lvl) => {
-              const isSelected = activeCourse.level === lvl.level;
-              return (
-                <Link
-                  key={lvl.level}
-                  to={`/academie/${lvl.slug}`}
-                  onClick={() => setSelectedLevel(lvl)}
-                  className={`rounded-[20px] p-4 border text-left transition flex flex-col justify-between ${
-                    isSelected
-                      ? 'bg-action text-on-action border-or shadow-md -translate-y-1'
-                      : 'bg-surface-raised text-text border-border hover:border-or'
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-2">
-                    <span
-                      className={`font-serif text-2xl font-normal ${
-                        isSelected ? 'text-or' : 'text-accent'
-                      }`}
-                    >
-                      {lvl.level}
-                    </span>
-                    <span
-                      className={`text-[11px] px-2 py-0.5 rounded-pill bg-or/20 font-semibold ${
-                        isSelected ? 'text-gold-on-green' : 'text-accent-or'
-                      }`}
-                    >
-                      Gratuit
-                    </span>
-                  </div>
-                  <p className="text-xs font-medium line-clamp-1">{lvl.title.split('—')[1] || lvl.title}</p>
-                  <p className="text-[11px] opacity-70 mt-1">{lvl.hours}</p>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
+        {/* Le fil des niveaux (contrat §6) : A1 -> Europe, un point par niveau, le niveau affiché en point plein ;
+            chaque niveau reste un lien vers sa page. Vertical sous 1 024 px. */}
+        <Fil
+          orientation="auto"
+          steps={GERMAN_LEVELS_DATA.map((lvl) => ({
+            id: lvl.slug,
+            label: lvl.level,
+            sublabel: lvl.shortTitle,
+            to: `/academie/${lvl.slug}`,
+            onClick: () => setSelectedLevel(lvl),
+          }))}
+          end={{ id: 'europe', label: 'Europe' }}
+          currentId={activeCourse.slug}
+        />
 
         {/* Détail complet du niveau sélectionné (page /academie/:level incluse) */}
         <div className="space-y-8">

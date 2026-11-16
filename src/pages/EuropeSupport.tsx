@@ -7,6 +7,7 @@ import SEO from '../components/wahhf/SEO';
 import SectionHeader from '../components/wahhf/SectionHeader';
 import { TextList, TextListItem, ReadingColumn, TEXT_LINK_CLASS } from '../components/wahhf/TextList';
 import StepNumber from '../components/wahhf/StepNumber';
+import Fil from '../components/wahhf/Fil';
 import { CardLink, CardBody, CardMeta, CardTitle, CardNote } from '../components/wahhf/Card';
 import PageHeader, { PageMeta, PageTitle, PageIntro, PageActions } from '../components/wahhf/PageHeader';
 import { PrimaryButton, SecondaryButton } from '../components/wahhf/Buttons';
@@ -107,6 +108,7 @@ export default function EuropeSupport() {
             </div>
           </div>
 
+          <Fil start={{ id: 'cameroun', label: 'Cameroun' }} end={{ id: country.slug, label: country.name }} className="max-w-[65ch]" />
           <PageIntro>
             {country.summary}
           </PageIntro>

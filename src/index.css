@@ -567,6 +567,12 @@
   padding-top: clamp(1rem, 2.5vw, 2rem);
 }
 
+/* Le fil du hero se dessine une fois (contrat §10) ; Fil.tsx l'utilise avec drawOnce, jamais en mouvement réduit. */
+@keyframes fil-draw {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
 .focus-ring-double:focus-visible {
   outline: 2px solid var(--focus-on-light);
   outline-offset: 2px;
