@@ -105,7 +105,6 @@ export default function ContactPage() {
 
       <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <span className="text-xs font-semibold uppercase tracking-kicker text-or">Contact</span>
           <h1 className="font-serif font-normal text-[clamp(2.1rem,4.5vw,3.8rem)] leading-tight">
             Écrire à WAHHF Foundation
           </h1>
@@ -133,8 +132,6 @@ export default function ContactPage() {
               <div className="rounded-card bg-surface-raised border border-border p-7 sm:p-10 shadow-sm space-y-8">
                 <SectionHeader
                   titleRef={titleRef}
-                  reveal={false}
-                  kicker="Formulaire de contact"
                   title="Votre message"
                 />
 
@@ -319,7 +316,7 @@ export default function ContactPage() {
             </div>
 
             <div className="rounded-card bg-surface-raised border border-border p-7 space-y-3">
-              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-accent">
+              <div className="flex items-center gap-2 text-meta font-semibold text-accent">
                 <ShieldCheck aria-hidden="true" className="w-4 h-4" />
                 <span>Vigilance</span>
               </div>

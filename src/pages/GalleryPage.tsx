@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Camera, MapPin } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
 import GalleryGrid from '../components/wahhf/GalleryGrid';
 import { AlbumId, GALLERY_ALBUMS, GALLERY_ITEMS } from '../data/gallery';
@@ -34,10 +34,6 @@ export default function GalleryPage() {
 
       <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-kicker text-or">
-            <Camera className="w-4 h-4" aria-hidden="true" />
-            Galerie
-          </span>
           <h1 className="font-serif font-normal text-[clamp(2.1rem,4.5vw,3.8rem)] leading-tight">La fondation en images</h1>
           <p className="text-base sm:text-xl text-creme/85 max-w-3xl">
             Retour en photos et en vidéos sur nos actions : la première journée portes ouvertes et le Boot Camp de Yaoundé, nos rencontres

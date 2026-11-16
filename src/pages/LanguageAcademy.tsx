@@ -2,7 +2,6 @@ import { useState, useRef, Ref } from 'react';
 import { useFocusOnChange } from '../lib/useFocusOnChange';
 import { Link, useParams } from 'react-router-dom';
 import {
-  GraduationCap,
   Clock,
   Calendar,
   CheckCircle2,
@@ -133,7 +132,7 @@ export default function LanguageAcademy() {
       {/* HERO */}
       <section className="surface-green pt-32 pb-16 sm:pt-36 sm:pb-20 bg-nuit text-creme">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-          <div className="flex flex-wrap items-center gap-2 text-xs text-or font-semibold uppercase tracking-[0.18em]">
+          <div className="flex flex-wrap items-center gap-2 text-xs text-or font-semibold">
             <Link to="/mobilite-langues" className="hover:underline">
               Mobilité & Langues
             </Link>
@@ -233,10 +232,6 @@ export default function LanguageAcademy() {
         <div className="rounded-card bg-surface-raised border border-border p-7 sm:p-10 shadow-sm space-y-8">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-border-subtle">
             <div className="space-y-2">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-pill bg-nuit text-or text-xs font-semibold uppercase tracking-wider">
-                <GraduationCap className="w-4 h-4" />
-                <span>Fiche détaillée · {activeCourse.level}</span>
-              </div>
               <h2 className="font-serif font-normal text-2xl sm:text-4xl text-text">
                 {activeCourse.title}
               </h2>
@@ -345,11 +340,9 @@ export default function LanguageAcademy() {
       >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           <SectionHeader
-            kicker="Auto-évaluation gratuite · 20 questions"
             title="Test de niveau d’allemand en ligne"
             subtitle="Évaluez gratuitement vos connaissances actuelles grâce à 20 questions progressives (de A1 à C1) afin de candidater au niveau le plus adapté."
-            align="center"
-            light
+            onInverse
           />
 
           <div ref={quizBoxRef} className="rounded-card bg-feuillage/90 border border-or/35 p-6 sm:p-10 shadow-xl">
@@ -369,9 +362,9 @@ export default function LanguageAcademy() {
               </div>
             ) : quizFinished ? (
               <div className="space-y-6 text-center py-4">
-                <span className="inline-block px-4 py-1.5 rounded-pill bg-or/20 text-gold-on-green text-xs font-semibold uppercase tracking-widest">
+                <p className="text-meta text-text-secondary-on-inverse">
                   Résultat indicatif de votre test
-                </span>
+                </p>
                 <h3
                   ref={quizFocusRef as Ref<HTMLHeadingElement>}
                   tabIndex={-1}
@@ -487,7 +480,7 @@ export default function LanguageAcademy() {
       >
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
           <SectionHeader
-            kicker="Cohortes gratuites (Dates indicatives — TODO)"
+            kicker="Dates indicatives (TODO)"
             title="Calendrier des prochaines sessions d’accompagnement"
             subtitle="Filtrez par niveau (A1 à C1) ou par modalité (En ligne ou Présentiel au Cameroun — lieux à confirmer)."
           />
@@ -534,9 +527,9 @@ export default function LanguageAcademy() {
           <div className="rounded-card bg-surface-raised border border-border p-8 sm:p-10 space-y-6">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div>
-                <span className="text-xs font-semibold uppercase tracking-kicker text-accent-or">
-                  Certifications Internationales (Mention indicative — TODO : à vérifier)
-                </span>
+                <p className="text-meta text-text-secondary">
+                  Mention indicative (TODO : à vérifier)
+                </p>
                 <h2 className="font-serif font-normal text-2xl sm:text-3xl text-text mt-1">
                   Préparation méthodique aux examens officiels d’allemand
                 </h2>

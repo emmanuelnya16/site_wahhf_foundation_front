@@ -2,8 +2,6 @@ import { Link } from 'react-router-dom';
 import {
   GraduationCap,
   Compass,
-  ShieldCheck,
-  CheckCircle2,
   HelpCircle,
   Quote,
 } from 'lucide-react';
@@ -56,11 +54,6 @@ export default function MobilityHub() {
         </div>
 
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-pill bg-or/20 border border-or/45 text-gold-on-green text-xs font-semibold uppercase tracking-[0.18em]">
-            <CheckCircle2 className="w-4 h-4" />
-            <span>Domaine 06 / 06 · 100 % Gratuit, financé par IROKO et nos donateurs</span>
-          </div>
-
           <h1 className="font-serif font-normal text-[clamp(2.2rem,4.8vw,4.1rem)] leading-[1.1] text-creme max-w-4xl">
             Apprendre, se préparer, s’orienter — gratuitement
           </h1>
@@ -96,7 +89,6 @@ export default function MobilityHub() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 space-y-6">
             <SectionHeader
-              kicker="Pourquoi ce programme existe"
               title="Protéger la jeunesse contre la désinformation et ouvrir l’accès au savoir"
               subtitle="Trop de jeunes et de familles s’endettent auprès d’intermédiaires frauduleux qui vendent de fausses promesses. WAHHF Foundation répond par la gratuité, la rigueur linguistique et la transparence."
             />
@@ -149,10 +141,8 @@ export default function MobilityHub() {
       <section className="py-20 bg-white/65 dark:bg-v1-sous-bois/40 border-y border-border-subtle">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <SectionHeader
-            kicker="Deux volets complémentaires"
             title="Choisissez votre porte d’entrée"
             subtitle="Vous pouvez candidater uniquement aux cours de langue allemande, uniquement à l’accompagnement documentaire, ou aux deux."
-            align="center"
           />
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -269,7 +259,6 @@ export default function MobilityHub() {
       {/* TÉMOIGNAGES DU PROGRAMME (TODO) */}
       <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-10">
         <SectionHeader
-          kicker="Retours d’expérience"
           title="Ce que disent nos apprenants accompagnés"
           subtitle="Témoignages d’exemple marqués TODO dans l’attente des citations validées par l’équipe WAHHF."
         />
@@ -310,7 +299,6 @@ export default function MobilityHub() {
           <SectionHeader
             kicker="Questions fréquentes"
             title="Tout comprendre sur la gratuité et nos règles d’éthique"
-            align="center"
           />
 
           <div className="space-y-4">
@@ -336,10 +324,6 @@ export default function MobilityHub() {
       <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
         <div className="surface-green rounded-card bg-nuit text-creme p-8 sm:p-12 border border-or/40 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-7 space-y-3">
-            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-kicker text-or">
-              <ShieldCheck className="w-4 h-4" />
-              Passez à l’action en toute confiance
-            </span>
             <h2 className="font-serif font-normal text-2xl sm:text-4xl text-creme">
               Candidater gratuitement ou financer le parcours d’un jeune
             </h2>

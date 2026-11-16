@@ -1,6 +1,6 @@
 import { useState, useRef, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
-import { Heart, ShieldCheck, CheckCircle2, Sparkles, Lock } from 'lucide-react';
+import { ShieldCheck, CheckCircle2, Sparkles, Lock } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
 import SectionHeader from '../components/wahhf/SectionHeader';
 import { DonateButton } from '../components/wahhf/Buttons';
@@ -94,10 +94,6 @@ export default function DonatePage() {
 
       <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-5">
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-pill bg-rouge text-white text-xs font-semibold uppercase tracking-widest">
-            <Heart className="w-3.5 h-3.5 fill-current" />
-            Soutenir WAHHF Foundation · Financer un parcours
-          </span>
           <h1 className="font-serif font-normal text-[clamp(2.1rem,4.6vw,3.8rem)] leading-tight">
             Grâce à vos dons, chaque jeune est accompagné gratuitement
           </h1>
@@ -131,7 +127,6 @@ export default function DonatePage() {
             <div className="lg:col-span-7 rounded-card bg-surface-raised border border-border p-7 sm:p-10 shadow-sm space-y-8">
               <SectionHeader
                 titleRef={resultTitleRef}
-                kicker="Financer un parcours"
                 title="Choisissez votre contribution solidaire"
               />
 
@@ -347,9 +342,9 @@ export default function DonatePage() {
             {/* Colonne d'impact & transparence */}
             <div className="lg:col-span-5 space-y-6">
               <div className="surface-green rounded-card bg-nuit text-creme p-7 sm:p-8 border border-or/35 space-y-5">
-                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-or">
+                <div className="flex items-center gap-2 text-meta text-text-secondary-on-inverse">
                   <Sparkles className="w-4 h-4" />
-                  <span>Ce que votre don permet (Exemples — TODO)</span>
+                  <span>Ce que votre don permet (exemples — TODO)</span>
                 </div>
                 <h3 className="font-serif text-2xl text-creme">
                   Financer un parcours d’autonomie
@@ -370,7 +365,7 @@ export default function DonatePage() {
               </div>
 
               <div className="rounded-card bg-surface-raised border border-border p-7 space-y-4">
-                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-accent">
+                <div className="flex items-center gap-2 text-meta font-semibold text-accent">
                   <ShieldCheck className="w-4 h-4" />
                   <span>Garantie de transparence</span>
                 </div>

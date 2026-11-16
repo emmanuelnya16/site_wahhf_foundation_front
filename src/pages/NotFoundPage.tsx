@@ -56,7 +56,7 @@ export default function NotFoundPage({
 
       <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <span className="text-xs font-semibold uppercase tracking-kicker text-or">
+          <span className="text-meta text-text-secondary-on-inverse">
             Page introuvable (erreur 404)
           </span>
           <h1 className="font-serif font-normal text-[clamp(2rem,4.5vw,3.5rem)] leading-tight">{title}</h1>

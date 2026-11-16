@@ -390,7 +390,7 @@ export default function Navbar() {
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 <div className="lg:col-span-8">
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-xs font-semibold uppercase tracking-kicker text-accent-or">
+                    <span className="text-meta text-text-secondary">
                       Les 6 domaines d’action de WAHHF Foundation
                     </span>
                     <Link
@@ -435,9 +435,6 @@ export default function Navbar() {
                 {/* Encart direct Mobilité & Langues */}
                 <div className="surface-green lg:col-span-4 rounded-2xl bg-nuit text-creme p-6 flex flex-col justify-between border border-or/30">
                   <div className="space-y-3">
-                    <span className="inline-block px-3 py-1 rounded-pill bg-or/20 text-gold-on-green text-[11px] font-semibold uppercase tracking-wider">
-                      100 % Gratuit · Domaine 06
-                    </span>
                     <h3 className="font-serif font-normal text-xl text-creme">
                       Mobilité & Langues : Allemand (A1–C1) & Europe
                     </h3>

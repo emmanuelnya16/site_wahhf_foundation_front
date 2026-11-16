@@ -75,7 +75,7 @@ export default function EuropeSupport() {
 
         <section className="surface-green pt-32 pb-16 sm:pt-36 sm:pb-20 bg-nuit text-creme">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-            <div className="flex flex-wrap items-center gap-2 text-xs text-or font-semibold uppercase tracking-[0.18em]">
+            <div className="flex flex-wrap items-center gap-2 text-xs text-or font-semibold">
               <Link to="/mobilite-langues" className="hover:underline">
                 Mobilité & Langues
               </Link>
@@ -153,7 +153,6 @@ export default function EuropeSupport() {
         {/* Voies possibles : Études, Formation, Travail */}
         <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-12">
           <SectionHeader
-            kicker={`Voies légales · ${country.name}`}
             title="Les trois grandes voies de mobilité réglementaire"
             subtitle="Aperçu informatif et gratuit. Vérifiez systématiquement les critères à jour sur les portails officiels ci-dessous."
           />
@@ -219,9 +218,6 @@ export default function EuropeSupport() {
 
             <div className="surface-green lg:col-span-5 rounded-card bg-nuit text-creme border border-or/35 p-7 sm:p-8 space-y-5 flex flex-col justify-between">
               <div className="space-y-4">
-                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-or">
-                  Sources Gouvernementales & Ambassades
-                </span>
                 <h3 className="font-serif text-2xl text-creme">
                   Liens vers les sites officiels ({country.name})
                 </h3>
@@ -266,7 +262,7 @@ export default function EuropeSupport() {
 
           {/* Navigation rapide entre les 10 pays */}
           <div className="pt-8 border-t border-border-subtle space-y-4">
-            <p className="text-xs font-semibold uppercase tracking-widest text-accent-or">
+            <p className="text-meta text-text-secondary">
               Consulter une autre fiche parmi les 10 pays accompagnés :
             </p>
             <div className="flex flex-wrap gap-2">
@@ -325,7 +321,7 @@ export default function EuropeSupport() {
           } text-creme`}
         >
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-5">
-            <div className="flex flex-wrap items-center gap-2 text-xs text-or font-semibold uppercase tracking-[0.18em]">
+            <div className="flex flex-wrap items-center gap-2 text-xs text-or font-semibold">
               <Link to="/mobilite-langues" className="hover:underline">
                 Mobilité & Langues
               </Link>
@@ -334,7 +330,7 @@ export default function EuropeSupport() {
                 Accompagnement Europe
               </Link>
               <span>/</span>
-              <span>{guide.kicker}</span>
+              <span className="uppercase tracking-[0.18em]">{guide.kicker}</span>
             </div>
 
             <h1 className="font-serif font-normal text-[clamp(2rem,4.5vw,3.6rem)] leading-tight text-creme">
@@ -434,7 +430,7 @@ export default function EuropeSupport() {
       {/* HERO */}
       <section className="surface-green pt-32 pb-16 sm:pt-36 sm:pb-20 bg-nuit text-creme">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-          <div className="flex flex-wrap items-center gap-2 text-xs text-or font-semibold uppercase tracking-[0.18em]">
+          <div className="flex flex-wrap items-center gap-2 text-xs text-or font-semibold">
             <Link to="/mobilite-langues" className="hover:underline">
               Mobilité & Langues
             </Link>
@@ -472,10 +468,8 @@ export default function EuropeSupport() {
       {/* PARCOURS EN 4 ÉTAPES CLAIRES (Frise verticale) */}
       <section className="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto space-y-12">
         <SectionHeader
-          kicker="Méthodologie d’orientation"
           title="Votre parcours d’accompagnement en 4 étapes claires"
           subtitle="Cliquez sur chaque étape pour lire le guide thématique complet correspondant."
-          align="center"
         />
 
         <div className="relative [--timeline-pad:1.5rem] sm:[--timeline-pad:2.5rem] pl-(--timeline-pad) border-l-2 border-or space-y-8">
@@ -514,7 +508,6 @@ export default function EuropeSupport() {
       <section className="py-16 bg-white/60 dark:bg-v1-sous-bois/30 border-y border-border-subtle">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           <SectionHeader
-            kicker="Guides pratiques gratuits"
             title="5 dossiers thématiques pour avancer sans intermédiaire"
           />
 
@@ -601,7 +594,6 @@ export default function EuropeSupport() {
       {/* LES 10 PAYS ACCOMPAGNÉS */}
       <section id="pays" className="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-12">
         <SectionHeader
-          kicker="10 Pays Documentés"
           title="Fiches d’orientation par pays"
           subtitle="Luxembourg, Allemagne, Slovénie, Italie, Grèce, Portugal, Espagne, Danemark, Pologne et Albanie (avec mention explicite du statut hors UE pour l’Albanie)."
         />

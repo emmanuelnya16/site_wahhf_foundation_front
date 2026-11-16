@@ -282,7 +282,6 @@ export default function Home() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 space-y-6">
             <SectionHeader
-              kicker={t('home.mission.kicker')}
               title={t('home.mission.title')}
             />
             {/* Effet fort de la section : paragraphes révélés ligne par ligne (SplitText).
@@ -361,10 +360,9 @@ export default function Home() {
       <section id="chiffres-cles" className="surface-green py-16 sm:py-20 bg-nuit text-creme border-y border-or/25">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <SectionHeader
-            kicker={t('home.stats.kicker')}
             title={t('home.stats.title')}
             subtitle={t('home.stats.subtitle')}
-            light
+            onInverse
           />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -449,11 +447,9 @@ export default function Home() {
         <div data-expand-content className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <div data-cascade className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
             <SectionHeader
-              kicker={t('home.mobilitySpot.kicker')}
               title={t('home.mobilitySpot.title')}
               subtitle={t('home.mobilitySpot.subtitle')}
-              light
-              reveal={false}
+              onInverse
             />
 
             <div className="shrink-0">
@@ -544,10 +540,8 @@ export default function Home() {
           ===================================================================== */}
       <section id="video" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-10">
         <SectionHeader
-          kicker={t('home.video.kicker')}
           title={t('home.video.title')}
           subtitle={t('home.video.subtitle')}
-          align="center"
         />
 
         {/* Effet de la section : la vignette grandit légèrement au défilement (ordinateur),
@@ -659,7 +653,6 @@ export default function Home() {
       <section id="approche" className="py-20 sm:py-24 bg-white/60 dark:bg-v1-sous-bois/40 border-y border-border-subtle">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <SectionHeader
-            kicker={t('home.approach.kicker')}
             title={t('home.approach.title')}
             subtitle={t('home.approach.subtitle')}
           />
@@ -730,10 +723,8 @@ export default function Home() {
           ===================================================================== */}
       <section id="parcours" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto space-y-12">
         <SectionHeader
-          kicker={t('home.timeline.kicker')}
           title={t('home.timeline.title')}
           subtitle={t('home.timeline.subtitle')}
-          align="center"
         />
 
         <div ref={timelineRef} className="relative [--timeline-pad:1.5rem] [--timeline-x:0.5rem] pl-(--timeline-pad) sm:pl-0">
@@ -793,7 +784,6 @@ export default function Home() {
       <section id="presence" className="py-20 sm:py-28 bg-white/55 dark:bg-v1-sous-bois/30 border-y border-border-subtle">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <SectionHeader
-            kicker={t('home.presence.kicker')}
             title={t('home.presence.title')}
             subtitle={t('home.presence.subtitle')}
           />
@@ -806,10 +796,8 @@ export default function Home() {
           ===================================================================== */}
       <section id="temoignages" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-12">
         <SectionHeader
-          kicker={t('home.testimonials.kicker')}
           title={t('home.testimonials.title')}
           subtitle={t('home.testimonials.subtitle')}
-          align="center"
         />
 
         <div className="surface-green rounded-card bg-nuit text-creme p-7 sm:p-12 border border-or/30 relative overflow-hidden">
@@ -903,7 +891,6 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
             <SectionHeader
-              kicker={t('home.news.kicker')}
               title={t('home.news.title')}
               subtitle={t('home.news.subtitle')}
             />
@@ -968,7 +955,6 @@ export default function Home() {
       <section id="en-images" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-12">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
           <SectionHeader
-            kicker={t('home.gallery.kicker')}
             title={t('home.gallery.title')}
             subtitle={t('home.gallery.subtitle')}
           />
@@ -984,7 +970,6 @@ export default function Home() {
       <section id="partenaires" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-10">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
           <SectionHeader
-            kicker={t('home.partners.kicker')}
             title={t('home.partners.title')}
             subtitle={t('home.partners.subtitle')}
           />
@@ -1031,7 +1016,6 @@ export default function Home() {
             kicker={t('home.act.kicker')}
             title={t('home.act.title')}
             subtitle={t('home.act.subtitle')}
-            align="center"
           />
 
           <StaggerGroup className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -1123,9 +1107,6 @@ export default function Home() {
         {/* Bloc Newsletter */}
         <div className="rounded-card bg-surface-raised border border-border p-8 sm:p-12 shadow-xs grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-7 space-y-2">
-            <span className="text-xs font-semibold uppercase tracking-kicker text-accent-or">
-              {t('home.newsletter.kicker')}
-            </span>
             <h2 className="font-serif font-normal text-2xl sm:text-3xl text-text">
               {t('home.newsletter.title')}
             </h2>

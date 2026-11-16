@@ -1,6 +1,6 @@
 import { useState, useId, useRef, FormEvent } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import { CheckCircle2, ShieldCheck } from 'lucide-react';
+import { ShieldCheck } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
 import { PrimaryButton, SecondaryButton } from '../components/wahhf/Buttons';
 import SectionHeader from '../components/wahhf/SectionHeader';
@@ -156,10 +156,6 @@ export default function ApplyPage() {
 
       <section className="surface-green pt-32 pb-14 bg-nuit text-creme">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-pill bg-or/20 text-gold-on-green text-xs font-semibold uppercase tracking-widest">
-            <CheckCircle2 className="w-4 h-4" />
-            100 % Gratuit · Financé par IROKO et nos donateurs
-          </span>
           <h1 className="font-serif font-normal text-[clamp(2rem,4.5vw,3.5rem)] leading-tight">
             Candidater à un parcours d’accompagnement
           </h1>
@@ -221,7 +217,6 @@ export default function ApplyPage() {
                 <div className="space-y-5">
                   <SectionHeader
                     titleRef={stepTitleRef}
-                    reveal={false}
                     kicker="Étape 01 / 03"
                     title="Vos coordonnées de contact"
                     subtitle="Ces informations servent uniquement à vous recontacter gratuitement."
@@ -334,7 +329,6 @@ export default function ApplyPage() {
                 <div className="space-y-6">
                   <SectionHeader
                     titleRef={stepTitleRef}
-                    reveal={false}
                     kicker="Étape 02 / 03"
                     title="Votre souhait d’accompagnement"
                     subtitle="Précisez le volet qui vous intéresse ainsi que votre niveau linguistique actuel."
@@ -449,7 +443,6 @@ export default function ApplyPage() {
                 <div className="space-y-6">
                   <SectionHeader
                     titleRef={stepTitleRef}
-                    reveal={false}
                     kicker="Étape 03 / 03"
                     title="Votre motivation & validation"
                     subtitle="Présentez brièvement votre parcours et validez votre demande gratuite."

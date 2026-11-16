@@ -1,14 +1,11 @@
 import { useState, useId, useRef, FormEvent } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import {
-  ShieldCheck,
   CheckCircle2,
   Users,
   Handshake,
   Calendar,
   Clock,
-  FileText,
-  Lock,
   Scale,
 } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
@@ -45,9 +42,6 @@ export function QuiSommesNousPage() {
 
       <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-5">
-          <span className="text-xs font-semibold uppercase tracking-kicker text-or">
-            Qui sommes-nous · We Are Here Help Foundation
-          </span>
           <h1 className="font-serif font-normal text-[clamp(2.1rem,4.6vw,3.9rem)] leading-tight max-w-4xl">
             Une fondation camerouno-allemande au service de la dignité humaine
           </h1>
@@ -62,7 +56,6 @@ export function QuiSommesNousPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           <div className="lg:col-span-7 space-y-5">
             <SectionHeader
-              kicker="Notre Mission"
               title="Bâtir l’autonomie par l’éducation, la santé et l’accès gratuit au savoir"
             />
             <p className="text-base sm:text-lg text-v1-encre/85 dark:text-creme/85 leading-relaxed">
@@ -103,10 +96,6 @@ export function QuiSommesNousPage() {
         {/* Section dédiée : WAHHF, branche sociale du groupe IROKO */}
         <div className="surface-green rounded-card bg-nuit text-creme p-8 sm:p-12 border border-or/40 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-8 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-pill bg-or/20 text-gold-on-green text-xs font-semibold uppercase tracking-widest">
-              <ShieldCheck className="w-4 h-4" />
-              <span>Ancrage Institutionnel</span>
-            </div>
             <h2 className="font-serif font-normal text-2xl sm:text-4xl text-creme">
               WAHHF Foundation, branche sociale du groupe IROKO
             </h2>
@@ -139,7 +128,7 @@ export function QuiSommesNousPage() {
         {/* Gouvernance & Équipe (TODO) */}
         <div id="gouvernance" className="space-y-8">
           <SectionHeader
-            kicker="Équipe & Gouvernance (TODO : noms officiels à confirmer)"
+            kicker="Noms officiels à confirmer (TODO)"
             title="Une gouvernance collégiale entre le Cameroun et l’Allemagne"
             subtitle="Les membres du conseil et les responsables de pôles veillent au respect de l’éthique et de la gratuité."
           />
@@ -191,9 +180,6 @@ export function PartenairesPage() {
 
       <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <span className="text-xs font-semibold uppercase tracking-kicker text-or">
-            Partenaires & Mécènes
-          </span>
           <h1 className="font-serif font-normal text-[clamp(2.1rem,4.5vw,3.8rem)] leading-tight">
             Un écosystème engagé pour garantir la gratuité de nos actions
           </h1>
@@ -225,7 +211,7 @@ export function PartenairesPage() {
         {/* Autres partenaires (TODO : logos et accords officiels à valider) */}
         <div className="space-y-6">
           <SectionHeader
-            kicker="Réseau de coopération (TODO : liste officielle à confirmer)"
+            kicker="Liste officielle à confirmer (TODO)"
             title="Catégories de partenaires & soutiens"
             subtitle="Conformément à notre éthique, aucun nom ou logo d’institution tierce n’est affiché sans accord écrit préalable."
           />
@@ -289,9 +275,6 @@ export function NosActionsPage() {
 
       <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <span className="text-xs font-semibold uppercase tracking-kicker text-or">
-            Nos 6 domaines d’action
-          </span>
           <h1 className="font-serif font-normal text-[clamp(2.1rem,4.5vw,3.8rem)] leading-tight">
             Agir sur tous les leviers de l’autonomie humaine
           </h1>
@@ -311,7 +294,6 @@ export function NosActionsPage() {
         {/* Détail des programmes par domaine */}
         <div className="space-y-8">
           <SectionHeader
-            kicker="Programmes de terrain"
             title="Le détail de nos interventions par domaine"
           />
 
@@ -391,9 +373,6 @@ export function NotreImpactPage() {
 
       <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <span className="text-xs font-semibold uppercase tracking-kicker text-or">
-            Notre Impact & Suivi
-          </span>
           <h1 className="font-serif font-normal text-[clamp(2.1rem,4.5vw,3.8rem)] leading-tight">
             Un impact concret, mesuré avec humilité et transparence
           </h1>
@@ -533,9 +512,6 @@ export function ActualitesPage() {
       />
       <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <span className="text-xs font-semibold uppercase tracking-kicker text-or">
-            Journal de la Fondation
-          </span>
           <h1 className="font-serif font-normal text-[clamp(2.1rem,4.5vw,3.8rem)] leading-tight">
             Actualités & Actions de terrain
           </h1>
@@ -674,9 +650,6 @@ export function AgirPage() {
 
       <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <span className="text-xs font-semibold uppercase tracking-kicker text-or">
-            Agir avec nous
-          </span>
           <h1 className="font-serif font-normal text-[clamp(2.1rem,4.5vw,3.8rem)] leading-tight">
             Trois manières concrètes de soutenir la jeunesse
           </h1>
@@ -879,8 +852,6 @@ export function LegalTransparencyPage({
     },
     confidentialite: {
       title: 'Politique de confidentialité & Protection des données (RGPD)',
-      kicker: 'Respect de la vie privée',
-      icon: Lock,
       blocks: [
         {
           h: 'Collecte minimale et transparente',
@@ -899,8 +870,6 @@ export function LegalTransparencyPage({
     },
     transparence: {
       title: 'Transparence financière & Origine des ressources',
-      kicker: 'Éthique & Gouvernance',
-      icon: FileText,
       blocks: [
         {
           h: 'Financement de la gratuité des programmes',
@@ -914,17 +883,17 @@ export function LegalTransparencyPage({
     },
   }[type];
 
-  const Icon = content.icon;
-
   return (
     <>
       <SEO title={content.title} description={content.blocks[0].p} />
       <section className="surface-green pt-32 pb-14 bg-nuit text-creme">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-3">
-          <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-or">
-            <Icon className="w-4 h-4" />
-            <span>{content.kicker}</span>
-          </div>
+          {'kicker' in content && (
+            <div className="inline-flex items-center gap-2 text-meta text-text-secondary-on-inverse">
+              <content.icon className="w-4 h-4" />
+              <span>{content.kicker}</span>
+            </div>
+          )}
           <h1 className="font-serif font-normal text-3xl sm:text-5xl">{content.title}</h1>
         </div>
       </section>

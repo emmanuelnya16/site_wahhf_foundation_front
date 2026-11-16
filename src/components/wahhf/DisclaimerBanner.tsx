@@ -1,4 +1,4 @@
-import { ShieldAlert, CheckCircle2, Info } from 'lucide-react';
+import { ShieldAlert, Info } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -25,15 +25,8 @@ export default function DisclaimerBanner({ compact = false, className = '' }: Di
         </div>
 
         <div className="flex-1 space-y-2.5">
-          <div className="flex flex-wrap items-center gap-2.5">
-            <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-or">
-              <CheckCircle2 className="w-3.5 h-3.5" />
-              100 % Gratuit · Financé par IROKO & nos donateurs
-            </span>
-          </div>
-
           <p className="text-sm sm:text-base leading-relaxed text-creme/95 font-normal">
-            « WAHHF vous accompagne gratuitement. Nous ne vendons ni visa ni emploi et ne garantissons aucun résultat. Nous ne vous demandons jamais d’argent. Les décisions appartiennent aux autorités et aux établissements concernés. Vérifiez toujours les informations sur les sites officiels. »
+            « Nos cours et notre accompagnement sont gratuits. Nous ne vendons ni visa ni emploi et ne garantissons aucun résultat. Nous ne vous demandons jamais d’argent. Les décisions appartiennent aux autorités et aux établissements concernés. Vérifiez toujours les informations sur les sites officiels. »
           </p>
 
           {!compact && (

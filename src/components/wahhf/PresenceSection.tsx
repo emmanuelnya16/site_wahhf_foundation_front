@@ -80,9 +80,6 @@ export default function PresenceSection() {
         <div className="surface-green lg:col-span-6 rounded-card bg-nuit text-creme p-6 sm:p-8 border border-or/30 relative overflow-hidden flex flex-col justify-between shadow-sm">
           <div>
             <div className="flex items-center justify-between gap-3 mb-4 flex-wrap">
-              <span className="text-xs font-semibold uppercase tracking-kicker text-or">
-                ANCRAGE LOCAL · 10 RÉGIONS DU CAMEROUN
-              </span>
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-pill bg-or/15 text-gold-on-green text-xs font-medium border border-or/30">
                 <MapPin className="w-3.5 h-3.5" />
                 10 / 10 régions
@@ -117,7 +114,7 @@ export default function PresenceSection() {
               className="rounded-2xl bg-feuillage border border-or/40 p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
             >
               <div className="space-y-1">
-                <p className="text-[11px] uppercase tracking-wider text-gold-on-green font-semibold">Région sélectionnée</p>
+                <p className="text-meta text-text-on-inverse">Région sélectionnée</p>
                 <p className="font-serif text-lg sm:text-xl text-creme">
                   {selectedRegion.name} ({selectedRegion.capital})
                 </p>
@@ -167,9 +164,6 @@ export default function PresenceSection() {
         <div className="lg:col-span-6 rounded-card bg-white text-v1-encre border border-nuit/15 p-6 sm:p-8 flex flex-col shadow-sm">
           <div>
             <div className="flex items-center justify-between gap-3 mb-4 flex-wrap">
-              <span className="text-xs font-semibold uppercase tracking-kicker text-gold-text">
-                PASSERELLE INTERNATIONALE · 10 PAYS D’ACCOMPAGNEMENT
-              </span>
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-pill bg-nuit/10 text-nuit text-xs font-semibold">
                 <Compass className="w-3.5 h-3.5" />
                 Orientation 100 % gratuite

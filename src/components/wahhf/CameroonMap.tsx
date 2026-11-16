@@ -155,7 +155,6 @@ export default function CameroonMap({ selectedRegion, onSelectRegion }: Cameroon
           >
             <div className="max-w-5xl w-full mx-auto flex items-start justify-between gap-4 border-b border-or/30 pb-4">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-kicker text-or">Ancrage local · 10 régions du Cameroun</p>
                 <h2 id={titleId} className="font-serif text-xl sm:text-2xl text-creme">
                   Région sélectionnée : {selectedRegion.name} ({selectedRegion.capital})
                 </h2>

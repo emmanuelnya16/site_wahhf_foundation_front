@@ -78,7 +78,7 @@ export default function Footer() {
 
           {/* Colonne 2 : Qui sommes-nous */}
           <div className="lg:col-span-2 space-y-3">
-            <h3 className="text-xs font-semibold uppercase tracking-kicker text-or">
+            <h3 className="text-meta font-bold text-or">
               {t('footer.colAbout')}
             </h3>
             <ul className="space-y-2.5 text-sm text-creme/80">
@@ -117,7 +117,7 @@ export default function Footer() {
 
           {/* Colonne 3 : Nos actions (les 6 domaines) */}
           <div className="lg:col-span-3 space-y-3">
-            <h3 className="text-xs font-semibold uppercase tracking-kicker text-or">
+            <h3 className="text-meta font-bold text-or">
               {t('footer.colActions')}
             </h3>
             <ul className="space-y-2.5 text-sm text-creme/80">
@@ -142,7 +142,7 @@ export default function Footer() {
 
           {/* Colonne 4 : Agir et Faire un don */}
           <div className="lg:col-span-2 space-y-3">
-            <h3 className="text-xs font-semibold uppercase tracking-kicker text-or">
+            <h3 className="text-meta font-bold text-or">
               {t('footer.colAct')}
             </h3>
             <ul className="space-y-2.5 text-sm text-creme/80">
@@ -175,7 +175,7 @@ export default function Footer() {
 
           {/* Colonne 5 : Contact et adresse */}
           <div className="lg:col-span-2 space-y-3">
-            <h3 className="text-xs font-semibold uppercase tracking-kicker text-or">
+            <h3 className="text-meta font-bold text-or">
               {t('footer.colContact')}
             </h3>
             <ul className="space-y-3 text-sm text-creme/80">
