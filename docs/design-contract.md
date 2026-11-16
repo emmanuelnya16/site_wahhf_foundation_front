@@ -758,7 +758,7 @@ Inventaire relevé dans le code le 16 novembre 2026 : 39 effets. Les numéros de
 | # | Effet actuel | Fichiers | Outil | Sort |
 |---|---|---|---|---|
 | 1 | Défilement fluide (molette, ancres, « Retour en haut ») | `lib/lenis.ts:13-68`, `lib/scroll.ts:32-60`, `Layout.tsx:23` | Lenis | **retiré** : défilement natif |
-| 2 | Barre de progression de lecture (filet or de 3 px) | `effects/ReadingProgress.tsx:8-16` | Motion | **retirée** |
+| 2 | Barre de progression de lecture (filet or de 3 px) | `effects/ReadingProgress.tsx:8-16` | Motion | ~~retirée~~ **gardée sur les articles seulement** (`/actualites/:slug`), en forêt (feuille en sombre), plus en or : décision du 16/11, après le lot 5 |
 | 3 | Transition de page : entrée 0,4 s, sortie 0,25 s, la nouvelle page attend la sortie | `effects/PageTransition.tsx:30-43` | Motion | **fondu de 0,3 s**, sans attente ; instantané en mouvement réduit |
 | 4 | En-tête masqué au défilement vers le bas (400 ms) | `Navbar.tsx:137-153`, `199-204` | CSS | **(ajout)** l'en-tête reste toujours visible : fond brume opaque, ombre flottante une fois la page défilée (§9) |
 | 5 | Menu mobile en rideau (clip-path 0,7 s), liens qui glissent | `Navbar.tsx:540-606` | Motion | **fondu de 0,3 s** ; liens immobiles. Le geste « glisser pour fermer » reste |

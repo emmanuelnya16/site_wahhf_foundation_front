@@ -22,6 +22,8 @@ export default function Layout({ children }: LayoutProps) {
   const isVkiPage = pathname === '/vkibusiness';
   // Pages historiques IROKO : elles gardent DM Sans et Fraunces (index.css, .legacy-fonts)
   const isLegacyPage = LEGACY_PATHS.has(pathname);
+  // Article d'actualité (/actualites/:slug) : seule page qui garde la barre de lecture
+  const isArticlePage = /^\/actualites\/[^/]+\/?$/.test(pathname);
 
   // Défilement fluide (désactivé si « réduire les animations »)
   useEffect(() => startSmoothScroll(), []);
@@ -73,8 +75,8 @@ export default function Layout({ children }: LayoutProps) {
       {/* Rideau de chargement retiré (PERF-01) : il retardait l'affichage du hero d'environ 1,4 s sur mobile.
           Le composant reste disponible dans src/effects/LoadingCurtain.tsx. */}
 
-      {/* Barre de progression de lecture dorée (Motion useScroll, scaleX) */}
-      {!isVkiPage && <ReadingProgress />}
+      {/* Barre de progression de lecture : articles seulement (décision du 16/11), en forêt */}
+      {isArticlePage && <ReadingProgress />}
       {!isVkiPage && <Navbar />}
       <main id="contenu" tabIndex={-1} className={`flex-grow focus:outline-none${isLegacyPage ? ' legacy-fonts' : ''}`}>
         {children}

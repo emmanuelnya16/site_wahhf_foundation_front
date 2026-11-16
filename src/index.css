@@ -277,6 +277,7 @@
   --color-on-donate: var(--on-donate);
   /* Le fil (signature) */
   --color-fil: var(--fil);
+  --color-reading-bar: var(--reading-bar);
   --color-fil-on-inverse: var(--fil-on-inverse);
   /* Fonds des encadrés d'état */
   --color-danger-bg: var(--danger-bg);
@@ -326,7 +327,7 @@
  */
 :root {
   color-scheme: light;
-    /* En-tête : 72 px sur une ligne ; dès 1 280 px, deux lignes (64 + 44 px), voir plus bas. 24 px d'air dessous. */
+  /* En-tête : 72 px sur une ligne ; dès 1 280 px, deux lignes (64 + 44 px), voir plus bas. 24 px d'air dessous. */
   --header-offset: 6rem;
   --body-size: 1.0625rem; /* 17 px ; 18 px dès 768 px (plus bas) */
 
@@ -361,6 +362,8 @@
   --donate-outline: var(--color-coeur);
   --on-donate: var(--color-papier);
   --fil: var(--color-foret);
+  /* Barre de lecture des articles (décision du 16/11) : forêt, plus d'or */
+  --reading-bar: var(--color-foret);
   --fil-on-inverse: var(--color-feuille);
   /* Bordures : filets décoratifs, traits fonctionnels (champs, cases) */
   --border-subtle: var(--color-filet);
@@ -446,6 +449,7 @@
   --action-hover: var(--color-soleil-pale);
   --on-action: var(--color-encre);
   --fil: var(--color-feuille);
+  --reading-bar: var(--color-feuille);
   --border-subtle: var(--color-filet-nuit);
   --border-soft: var(--color-filet-nuit);
   --border: var(--color-filet-nuit);
