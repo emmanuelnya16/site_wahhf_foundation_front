@@ -33,7 +33,8 @@ export default function Footer() {
 
   return (
     <footer className="surface-green bg-surface-inverse text-text-on-inverse">
-      <div className="container-page pt-16 pb-12">
+      {/* pb-28 : place réservée à la bulle WhatsApp, fixée en bas à droite, sous la barre du bas (RESP-03) */}
+      <div className="container-page pt-16 pb-28">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-border-subtle-on-inverse">
           {/* Bloc de la marque : logo, nom, une phrase, lien au groupe, réseaux sociaux */}
           <div className="md:col-span-2 lg:col-span-4 space-y-4 max-w-[65ch]">

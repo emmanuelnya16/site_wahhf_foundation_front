@@ -516,6 +516,8 @@
      la marge de défilement s'applique aux ancres, au focus clavier et à scrollIntoView. */
   html {
     scroll-padding-top: var(--header-offset);
+    /* Bulle WhatsApp fixée en bas à droite (48 px + marge) : un élément qui reçoit le focus reste au-dessus (RESP-03) */
+    scroll-padding-bottom: 5rem;
   }
 
   body {
