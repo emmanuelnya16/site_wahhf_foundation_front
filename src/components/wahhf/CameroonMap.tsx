@@ -131,7 +131,7 @@ export default function CameroonMap({ selectedRegion, onSelectRegion }: Cameroon
           onClick={() => setIsFullscreen(true)}
           aria-label="Afficher la carte du Cameroun en plein écran"
           title="Plein écran"
-          className="absolute top-0 right-0 w-11 h-11 [@media(pointer:fine)]:w-9 [@media(pointer:fine)]:h-9 rounded-pill bg-feuillage/90 hover:bg-or text-creme hover:text-v1-encre border border-or/40 flex items-center justify-center transition-colors duration-(--dur-fast) cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-creme"
+          className="absolute top-0 right-0 w-11 h-11 [@media(pointer:fine)]:w-9 [@media(pointer:fine)]:h-9 rounded-pill bg-feuillage/90 hover:bg-or text-creme hover:text-v1-encre border border-border-on-inverse flex items-center justify-center transition-colors duration-(--dur-fast) cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-creme"
         >
           <Maximize2 className="w-4 h-4" />
         </button>

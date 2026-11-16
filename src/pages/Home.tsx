@@ -865,7 +865,7 @@ export default function Home() {
               type="button"
               onClick={() => paginateTestimonials(-1)}
               aria-label="Témoignage précédent"
-              className="w-10 h-10 rounded-pill border border-or/40 flex items-center justify-center hover:bg-or hover:text-v1-encre transition-colors cursor-pointer"
+              className="w-10 h-10 rounded-pill border border-border-on-inverse flex items-center justify-center hover:bg-or hover:text-v1-encre transition-colors cursor-pointer"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
@@ -873,7 +873,7 @@ export default function Home() {
               type="button"
               onClick={() => paginateTestimonials(1)}
               aria-label="Témoignage suivant"
-              className="w-10 h-10 rounded-pill border border-or/40 flex items-center justify-center hover:bg-or hover:text-v1-encre transition-colors cursor-pointer"
+              className="w-10 h-10 rounded-pill border border-border-on-inverse flex items-center justify-center hover:bg-or hover:text-v1-encre transition-colors cursor-pointer"
             >
               <ChevronRight className="w-5 h-5" />
             </button>

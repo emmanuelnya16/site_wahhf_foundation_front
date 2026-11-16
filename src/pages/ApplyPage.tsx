@@ -351,11 +351,7 @@ export default function ApplyPage() {
                           checked={wishType === opt.id}
                           onChange={() => setWishType(opt.id)}
                           showCheck
-                          className={`p-4 rounded-2xl border text-left text-sm font-medium transition ${
-                            wishType === opt.id
-                              ? 'bg-nuit text-or border-or'
-                              : 'bg-creme dark:bg-nuit/50 border-nuit/15'
-                          }`}
+                          className="p-4 rounded-2xl text-left text-sm font-medium"
                         >
                           {opt.label}
                         </ChoiceTile>
@@ -487,7 +483,7 @@ export default function ApplyPage() {
                         }}
                         aria-invalid={errors.gdprConsent ? true : undefined}
                         aria-describedby={errors.gdprConsent ? fieldErrorId(fieldId('gdprConsent')) : undefined}
-                        className="mt-1 w-4 h-4 accent-nuit"
+                        className="mt-1 w-4 h-4"
                       />
                       <span>
                         J’accepte que mes coordonnées soient traitées de manière strictement confidentielle par WAHHF Foundation dans le seul but de répondre gratuitement à ma demande d’accompagnement, conformément à la{' '}

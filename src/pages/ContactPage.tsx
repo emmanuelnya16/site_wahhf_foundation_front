@@ -155,11 +155,7 @@ export default function ContactPage() {
                           invalid={!!errors.motif}
                           describedBy={errors.motif ? fieldErrorId(fieldId('motif')) : undefined}
                           showCheck
-                          className={`p-4 rounded-2xl border text-left text-sm font-medium transition ${
-                            motif === m.id
-                              ? 'bg-nuit text-or border-or'
-                              : 'bg-creme dark:bg-nuit/50 border-nuit/15'
-                          }`}
+                          className="p-4 rounded-2xl text-left text-sm font-medium"
                         >
                           {m.label}
                         </ChoiceTile>
@@ -258,7 +254,7 @@ export default function ContactPage() {
                         }}
                         aria-invalid={errors.consent ? true : undefined}
                         aria-describedby={errors.consent ? fieldErrorId(fieldId('consent')) : undefined}
-                        className="mt-1 w-4 h-4 accent-nuit"
+                        className="mt-1 w-4 h-4"
                       />
                       <span>
                         J’accepte que mes coordonnées soient traitées par WAHHF Foundation pour répondre à mon

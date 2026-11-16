@@ -68,7 +68,7 @@ export default function Footer() {
                   key={soc.label}
                   href={soc.href}
                   aria-label={`${soc.label} WAHHF Foundation (TODO)`}
-                  className="px-3 py-1.5 rounded-pill bg-creme/10 hover:bg-or hover:text-v1-encre text-xs font-medium transition-colors"
+                  className="px-3 py-1.5 rounded-pill border border-border-on-inverse hover:bg-or hover:text-v1-encre text-xs font-medium transition-colors"
                 >
                   {soc.label}
                 </a>
@@ -226,7 +226,7 @@ export default function Footer() {
             onClick={handleBackToTop}
             aria-label={t('footer.backToTop')}
             title={t('footer.backToTop')}
-            className="w-11 h-11 rounded-pill bg-feuillage hover:bg-or text-creme hover:text-v1-encre border border-or/40 flex items-center justify-center transition duration-(--dur-fast) cursor-pointer shrink-0"
+            className="w-11 h-11 rounded-pill bg-feuillage hover:bg-or text-creme hover:text-v1-encre border border-border-on-inverse flex items-center justify-center transition duration-(--dur-fast) cursor-pointer shrink-0"
           >
             <ArrowUp className="w-5 h-5" />
           </button>

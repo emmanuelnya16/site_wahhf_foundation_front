@@ -562,7 +562,7 @@ export function ActualitesPage() {
 type AgirField = 'name' | 'email' | 'details' | 'consent';
 const AGIR_FIELDS = ['name', 'email', 'details', 'consent'] as const;
 const AGIR_INPUT_CLASS =
-  'w-full px-4 py-3 rounded-inner bg-surface-inset border border-nuit/20 aria-invalid:border-danger text-sm';
+  'w-full px-4 py-3 rounded-inner bg-surface-inset border border-border-input aria-invalid:border-danger text-sm';
 
 function checkAgirField(key: AgirField, value: string | boolean): string | undefined {
   switch (key) {
@@ -808,7 +808,7 @@ export function AgirPage() {
                     }}
                     aria-invalid={errors.consent ? true : undefined}
                     aria-describedby={errors.consent ? fieldErrorId(fieldId('consent')) : undefined}
-                    className="mt-0.5 w-4 h-4 accent-nuit"
+                    className="mt-0.5 w-4 h-4"
                   />
                   <span>
                     J’accepte que mes données soient traitées par WAHHF Foundation pour étudier ma proposition d’engagement (RGPD). *

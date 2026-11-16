@@ -145,8 +145,8 @@ export default function PresenceSection() {
                     onClick={() => setSelectedRegion(reg)}
                     className={`px-3 py-1.5 rounded-pill text-xs whitespace-nowrap transition-colors duration-(--dur-fast) cursor-pointer shrink-0 focus-visible:outline-2 focus-visible:outline-or ${
                       isSelected
-                        ? 'bg-or text-v1-encre font-semibold shadow-xs'
-                        : 'bg-creme/12 text-creme/90 hover:bg-creme/22'
+                        ? 'border border-or bg-or text-v1-encre font-semibold'
+                        : 'border border-border-on-inverse text-creme/90 hover:bg-creme/12'
                     }`}
                   >
                     {reg.name}

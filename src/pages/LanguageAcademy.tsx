@@ -433,11 +433,8 @@ export default function LanguageAcademy() {
                           checked={selected}
                           onChange={() => handleSelectOption(idx)}
                           showCheck
-                          className={`p-4 rounded-2xl border text-left text-sm sm:text-base font-medium transition ${
-                            selected
-                              ? 'bg-or text-v1-encre border-or font-semibold'
-                              : 'bg-nuit/70 text-creme border-white/15 hover:border-or/60'
-                          }`}
+                          onInverse
+                          className="p-4 rounded-2xl text-left text-sm sm:text-base font-medium"
                         >
                           {opt}
                         </ChoiceTile>

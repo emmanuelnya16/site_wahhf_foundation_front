@@ -293,6 +293,7 @@
   --color-border: var(--border);
   --color-border-input: var(--border-input);
   --color-border-strong: var(--border-strong);
+  --color-border-on-inverse: var(--border-on-inverse);
   /* Focus et états */
   --color-focus: var(--focus);
   --color-danger: var(--danger);
@@ -356,6 +357,9 @@
   --border: var(--color-filet);
   --border-input: var(--color-trait);
   --border-strong: var(--color-trait);
+  /* Contour d'un contrôle posé sur nuit (pastilles, boutons-icônes, liseré du don), même en clair :
+     brume à 60 % : 5,2:1 sur nuit, 4,2:1 sur feuillage. */
+  --border-on-inverse: color-mix(in srgb, var(--color-brume) 60%, transparent);
   /* États */
   --danger: var(--color-brique);
   --danger-bg: var(--color-brique-pale);
@@ -496,6 +500,12 @@
     text-wrap: wrap;
   }
 
+  /* Cases à cocher et boutons radio natifs : cochés à la couleur de l'action (forêt en clair, soleil en sombre :
+     7,6:1 sur canopée), au lieu de nuit, qui se perdait sur les cartes sombres (1,1:1). */
+  :where(input[type='checkbox'], input[type='radio']) {
+    accent-color: var(--action);
+  }
+
   /* Focus clavier : un seul anneau pour tout le site, couleur selon le fond (--focus). */
   :focus-visible {
     outline: 2px solid var(--focus);
@@ -511,7 +521,7 @@
    (5,2:1 au pire au survol, sur nuit). */
 @layer components {
   :where(.dark, .surface-green) .donate-button {
-    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-brume) 60%, transparent);
+    box-shadow: inset 0 0 0 1px var(--border-on-inverse);
   }
 }
 

@@ -177,7 +177,7 @@ export default function MobilityHub() {
                     <Link
                       key={lvl.slug}
                       to={`/academie/${lvl.slug}`}
-                      className="px-3.5 py-1.5 rounded-pill bg-surface-inset text-xs font-semibold text-accent hover:bg-or hover:text-v1-encre transition-colors"
+                      className="px-3.5 py-1.5 rounded-pill border border-border-input text-xs font-semibold text-accent hover:bg-or hover:text-v1-encre transition-colors"
                     >
                       Niveau {lvl.level}
                     </Link>
@@ -229,7 +229,7 @@ export default function MobilityHub() {
                     <Link
                       key={c.slug}
                       to={`/accompagnement/pays/${c.slug}`}
-                      className="px-3 py-1 rounded-pill bg-white/10 hover:bg-or hover:text-v1-encre text-xs font-medium text-creme transition-colors"
+                      className="px-3 py-1 rounded-pill border border-border-on-inverse hover:bg-or hover:text-v1-encre text-xs font-medium text-creme transition-colors"
                     >
                       {c.flag} {c.name}
                     </Link>

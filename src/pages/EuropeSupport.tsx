@@ -392,8 +392,8 @@ export default function EuropeSupport() {
                   to={`/accompagnement/${g.slug}`}
                   className={`px-4 py-2 rounded-pill text-xs sm:text-sm font-medium transition-colors ${
                     g.slug === guide.slug
-                      ? 'bg-or text-v1-encre font-semibold'
-                      : 'bg-white/10 text-creme hover:bg-white/20'
+                      ? 'border border-or bg-or text-v1-encre font-semibold'
+                      : 'border border-border-on-inverse text-creme hover:bg-white/10'
                   }`}
                 >
                   {g.title}
@@ -495,7 +495,7 @@ export default function EuropeSupport() {
               </div>
               <Link
                 to={`/accompagnement/${item.slug}`}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-pill bg-surface-inset text-accent text-xs sm:text-sm font-semibold hover:bg-or hover:text-v1-encre transition-colors shrink-0"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-pill border border-border-input text-accent text-xs sm:text-sm font-semibold hover:bg-or hover:text-v1-encre transition-colors shrink-0"
               >
                 <span>Lire le guide</span>
               </Link>

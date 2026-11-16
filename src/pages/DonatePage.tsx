@@ -134,7 +134,7 @@ export default function DonatePage() {
                 {/* Fréquence : Ponctuel / Mensuel (boutons radio natifs) */}
                 <fieldset>
                   <legend className="sr-only">Fréquence du don</legend>
-                  <div className="grid grid-cols-2 gap-3 p-1.5 rounded-pill bg-surface-inset">
+                  <div className="grid grid-cols-2 gap-3">
                     {[
                       { id: 'unique' as const, label: 'Don ponctuel' },
                       { id: 'mensuel' as const, label: 'Don mensuel régulier' },
@@ -145,11 +145,7 @@ export default function DonatePage() {
                         value={f.id}
                         checked={frequency === f.id}
                         onChange={() => setFrequency(f.id)}
-                        className={`py-2.5 rounded-pill text-sm font-semibold text-center transition ${
-                          frequency === f.id
-                            ? 'bg-accent text-creme dark:text-v1-encre'
-                            : 'text-v1-encre/70 dark:text-creme/70'
-                        }`}
+                        className="py-2.5 px-3 rounded-pill text-sm font-semibold text-center"
                       >
                         {f.label}
                       </ChoiceTile>
@@ -173,11 +169,7 @@ export default function DonatePage() {
                             setSelectedAmount(item.amount);
                             setCustomAmount('');
                           }}
-                          className={`py-4 px-3 rounded-2xl border font-serif text-2xl text-center transition ${
-                            checked
-                              ? 'bg-rouge text-white border-rouge shadow-sm'
-                              : 'bg-creme dark:bg-nuit/50 border-nuit/15 text-text'
-                          }`}
+                          className="py-4 px-3 rounded-2xl font-serif text-2xl text-center"
                         >
                           {item.amount} €
                         </ChoiceTile>
@@ -201,7 +193,7 @@ export default function DonatePage() {
                     value={customAmount}
                     onChange={(e) => setCustomAmount(e.target.value)}
                     placeholder="Autre montant (ex. 75)"
-                    className="w-full px-4 py-3 rounded-inner bg-surface-inset border border-nuit/20 text-sm"
+                    className="w-full px-4 py-3 rounded-inner bg-surface-inset border border-border-input text-sm"
                   />
                 </div>
 
@@ -225,7 +217,7 @@ export default function DonatePage() {
                           | 'materiel_pedagogique'
                       )
                     }
-                    className="w-full px-4 py-3 rounded-inner bg-surface-inset border border-nuit/20 text-sm"
+                    className="w-full px-4 py-3 rounded-inner bg-surface-inset border border-border-input text-sm"
                   >
                     <option value="academie_langues">
                       Financer un parcours : Académie d’allemand A1–C1 & Orientation gratuite
@@ -257,7 +249,7 @@ export default function DonatePage() {
                       required
                       value={donorName}
                       onChange={(e) => setDonorName(e.target.value)}
-                      className="w-full px-4 py-3 rounded-inner bg-surface-inset border border-nuit/20 text-sm"
+                      className="w-full px-4 py-3 rounded-inner bg-surface-inset border border-border-input text-sm"
                     />
                   </div>
                   <div>
@@ -273,7 +265,7 @@ export default function DonatePage() {
                       required
                       value={donorEmail}
                       onChange={(e) => setDonorEmail(e.target.value)}
-                      className="w-full px-4 py-3 rounded-inner bg-surface-inset border border-nuit/20 text-sm"
+                      className="w-full px-4 py-3 rounded-inner bg-surface-inset border border-border-input text-sm"
                     />
                   </div>
                 </div>
@@ -296,11 +288,7 @@ export default function DonatePage() {
                         checked={paymentMethod === m.id}
                         onChange={() => setPaymentMethod(m.id)}
                         showCheck
-                        className={`p-3 rounded-inner border text-left font-medium ${
-                          paymentMethod === m.id
-                            ? 'bg-nuit text-or border-or'
-                            : 'bg-creme dark:bg-nuit/40 border-nuit/15'
-                        }`}
+                        className="p-3 rounded-inner text-left font-medium"
                       >
                         {m.label}
                       </ChoiceTile>
@@ -314,7 +302,7 @@ export default function DonatePage() {
                       type="checkbox"
                       checked={anonymous}
                       onChange={(e) => setAnonymous(e.target.checked)}
-                      className="w-4 h-4 accent-nuit"
+                      className="w-4 h-4"
                     />
                     <span>Je souhaite que mon don reste anonyme publiquement</span>
                   </label>
@@ -325,7 +313,7 @@ export default function DonatePage() {
                       required
                       checked={gdprConsent}
                       onChange={(e) => setGdprConsent(e.target.checked)}
-                      className="mt-1 w-4 h-4 accent-nuit"
+                      className="mt-1 w-4 h-4"
                     />
                     <span>
                       J’accepte le traitement confidentiel de mes informations pour la gestion de mon don (RGPD). Aucune donnée bancaire n’est enregistrée sur ce formulaire de démonstration. *
