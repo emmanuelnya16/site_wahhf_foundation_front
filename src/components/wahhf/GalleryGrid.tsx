@@ -11,6 +11,8 @@ interface GalleryGridProps {
   /** Colonnes de la grille (classes Tailwind) */
   cols?: string;
   className?: string;
+  /** false : vignettes affichées d'un coup, sans apparition décalée (accueil, lot 6). Par défaut : apparition gardée. */
+  reveal?: boolean;
 }
 
 /**
@@ -23,13 +25,15 @@ export default function GalleryGrid({
   featureFirst = false,
   cols = 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4',
   className = '',
+  reveal = true,
 }: GalleryGridProps) {
+  const Grid = reveal ? StaggerGroup : 'div';
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const openerRef = useRef<HTMLElement | null>(null);
 
   return (
     <>
-      <StaggerGroup className={`grid ${cols} gap-3 sm:gap-4 ${className}`}>
+      <Grid className={`grid ${cols} gap-3 sm:gap-4 ${className}`}>
         {items.map((item, i) => {
           const featured = featureFirst && i === 0;
           const thumb = item.kind === 'photo' ? item.src : item.poster;
@@ -75,7 +79,7 @@ export default function GalleryGrid({
             </button>
           );
         })}
-      </StaggerGroup>
+      </Grid>
 
       <GalleryLightbox items={items} index={openIndex} onChange={setOpenIndex} returnFocusRef={openerRef} />
     </>

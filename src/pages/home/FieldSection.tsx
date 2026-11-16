@@ -24,8 +24,8 @@ export default function FieldSection() {
             {t('home.gallery.link')}
           </SecondaryButton>
         </div>
-        {/* 1 grande + 4 petites : 2 colonnes sur téléphone, 4 dès la tablette ; visionneuse au clic */}
-        <GalleryGrid items={items} featureFirst cols="grid-cols-2 md:grid-cols-4" />
+        {/* 1 grande + 4 petites : 2 colonnes sur téléphone, 4 dès la tablette ; visionneuse au clic ; sans apparition décalée */}
+        <GalleryGrid items={items} featureFirst cols="grid-cols-2 md:grid-cols-4" reveal={false} />
       </div>
     </Section>
   );

@@ -16,6 +16,9 @@ const H = 560;
 
 const REGION_BY_ISO = new Map(CAMEROON_REGIONS_LIST.map((r) => [r.iso, r]));
 
+/** Cascade d'apparition des régions : retirée (contrat §10, annexe B n° 33 ; lot 6). */
+const CASCADE_ENABLED = false;
+
 /** Apparition en cascade : de la côte (sud) vers le nord, selon la latitude des chefs-lieux. */
 const CASCADE_ORDER = [...CAMEROON_REGIONS_LIST]
   .sort((a, b) => a.coordinates[1] - b.coordinates[1])
@@ -71,9 +74,11 @@ export default function CameroonMap({ selectedRegion, onSelectRegion }: Cameroon
   const inView = useInView(scope, { once: true, amount: 0.35 });
   const cascade = useRef<'idle' | 'hidden' | 'done'>('idle');
 
+  // Contrat §10 et annexe B n° 33 (lot 6) : la carte s'affiche d'un coup, plus de cascade. Le code de la cascade
+  // reste en place, désactivé : il suffirait de remettre CASCADE_ENABLED à true.
   useLayoutEffect(() => {
     if (cascade.current !== 'idle') return;
-    if (prefersReducedMotion()) {
+    if (!CASCADE_ENABLED || prefersReducedMotion()) {
       cascade.current = 'done';
       return;
     }
@@ -356,7 +361,8 @@ function RegionMap({
                   {isSelected ? (
                     <>
                       <circle r={8} className="fill-text" fillOpacity={0.2} />
-                      {!reduce && <circle r={4} fill="none" strokeWidth={1.4} className="map-pulse stroke-text" />}
+                      {/* Pulsation du chef-lieu retirée (contrat §10, annexe B n° 33 ; lot 6) ; keyframes map-pulse gardées dans index.css */}
+
                       <circle r={3.8} className="fill-text stroke-surface-raised" strokeWidth={1.3} />
                     </>
                   ) : (
