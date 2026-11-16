@@ -300,6 +300,7 @@
   --color-border-input: var(--border-input);
   --color-border-strong: var(--border-strong);
   --color-border-on-inverse: var(--border-on-inverse);
+  --color-border-subtle-on-inverse: var(--border-subtle-on-inverse);
   /* Focus et états */
   --color-focus: var(--focus);
   --color-danger: var(--danger);
@@ -366,6 +367,8 @@
   /* Contour d'un contrôle posé sur nuit (pastilles, boutons-icônes, liseré du don), même en clair :
      brume à 60 % : 5,1:1 sur nuit, 4,1:1 sur feuillage. */
   --border-on-inverse: color-mix(in srgb, var(--color-brume) 60%, transparent);
+  /* Filet décoratif posé sur nuit (listes sur les bandes vertes) : brume à 20 %, comme filet-nuit en sombre. */
+  --border-subtle-on-inverse: color-mix(in srgb, var(--color-brume) 20%, transparent);
   /* États */
   --danger: var(--color-brique);
   --danger-bg: var(--color-brique-pale);

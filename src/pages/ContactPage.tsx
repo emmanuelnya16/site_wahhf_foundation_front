@@ -274,7 +274,7 @@ export default function ContactPage() {
 
           {/* Coordonnées directes */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="surface-green rounded-card bg-nuit text-creme p-7 sm:p-8 border border-or/35 space-y-5">
+            <div className="surface-green rounded-card bg-nuit text-text-on-inverse p-7 sm:p-8 space-y-5">
               <h2 className="font-serif font-normal text-2xl text-creme">Nous joindre directement</h2>
               {/* Lien externe : PrimaryButton ajoute ↗ et « (nouvel onglet) » pour les lecteurs d'écran */}
               <PrimaryButton

@@ -1,9 +1,10 @@
 import { useState, useRef, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
-import { ShieldCheck, CheckCircle2, Sparkles, Lock } from 'lucide-react';
+import { ShieldCheck, CheckCircle2, Lock } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
 import SectionHeader from '../components/wahhf/SectionHeader';
 import { LABEL_CLASS, FIELD_CLASS, CHECK_LABEL_CLASS, CHECKBOX_CLASS } from '../components/wahhf/FormField';
+import { TextList, TextListItem } from '../components/wahhf/TextList';
 import PageHeader, { PageTitle, PageIntro } from '../components/wahhf/PageHeader';
 import { DonateButton } from '../components/wahhf/Buttons';
 import ChoiceTile from '../components/wahhf/ChoiceTile';
@@ -331,27 +332,17 @@ export default function DonatePage() {
 
             {/* Colonne d'impact & transparence */}
             <div className="lg:col-span-5 space-y-6">
-              <div className="surface-green rounded-card bg-nuit text-creme p-7 sm:p-8 border border-or/35 space-y-5">
-                <div className="flex items-center gap-2 text-meta text-text-secondary-on-inverse">
-                  <Sparkles className="w-4 h-4" />
-                  <span>Ce que votre don permet (exemples — TODO)</span>
-                </div>
-                <h3 className="font-serif text-2xl text-creme">
-                  Financer un parcours d’autonomie
-                </h3>
-                <ul className="space-y-4 text-sm text-creme/85">
+              <div className="space-y-3">
+                {/* Bloc d'impact en liste typographique (ajout du 16/11 au §8) : montant, phrase, filet ; ni nuit ni or */}
+                <p className="text-meta text-text-secondary">Ce que votre don permet (exemples — TODO)</p>
+                <h3 className="text-body font-semibold text-text">Financer un parcours d’autonomie</h3>
+                <TextList columns={1}>
                   {SUGGESTED_AMOUNTS.map((s) => (
-                    <li
-                      key={s.amount}
-                      className="p-3.5 rounded-2xl bg-white/10 border border-white/10 flex items-start gap-3"
-                    >
-                      <span className="font-serif text-xl text-or font-semibold shrink-0">
-                        {s.amount} €
-                      </span>
-                      <span className="text-xs sm:text-sm">{s.impact}</span>
-                    </li>
+                    <TextListItem key={s.amount} title={<span className="tabular-nums">{s.amount} €</span>} titleAs="p">
+                      <p>{s.impact}</p>
+                    </TextListItem>
                   ))}
-                </ul>
+                </TextList>
               </div>
 
               <div className="rounded-card bg-surface-raised border border-border p-7 space-y-4">

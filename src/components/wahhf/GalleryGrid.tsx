@@ -41,7 +41,7 @@ export default function GalleryGrid({
                 openerRef.current = e.currentTarget;
                 setOpenIndex(i);
               }}
-              className={`group relative block w-full overflow-hidden rounded-2xl bg-nuit/10 dark:bg-creme/10 cursor-zoom-in focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
+              className={`relative block w-full overflow-hidden rounded-inner bg-surface-section cursor-zoom-in ${
                 featured ? 'col-span-2 aspect-[4/3] md:row-span-2 md:aspect-auto md:h-full' : 'aspect-[4/3]'
               }`}
             >
@@ -60,7 +60,7 @@ export default function GalleryGrid({
                 loading="lazy"
                 decoding="async"
                 style={item.focus ? { objectPosition: item.focus } : undefined}
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-(--dur-screen) ease-out group-hover:scale-105"
+                className="absolute inset-0 w-full h-full object-cover"
               />
               {item.kind === 'video' && (
                 <span aria-hidden="true" className="absolute inset-0 flex items-center justify-center bg-v1-nuit/25">

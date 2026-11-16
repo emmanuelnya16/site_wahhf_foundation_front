@@ -1,15 +1,14 @@
-import { useState, useId, useRef, FormEvent } from 'react';
+import { Fragment, useState, useId, useRef, FormEvent } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import {
-  CheckCircle2,
-  Users,
-  Handshake,
   Calendar,
   Clock,
   Scale,
 } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
 import SectionHeader from '../components/wahhf/SectionHeader';
+import { TextList, TextListItem, ReadingColumn } from '../components/wahhf/TextList';
+import { CardLink, CardMedia, CardBody, CardMeta, CardTitle } from '../components/wahhf/Card';
 import PageHeader, { PageMeta, PageTitle, PageIntro } from '../components/wahhf/PageHeader';
 import { PrimaryButton, SecondaryButton, DonateButton } from '../components/wahhf/Buttons';
 import DomainCard from '../components/wahhf/DomainCard';
@@ -57,7 +56,7 @@ export function QuiSommesNousPage() {
             <SectionHeader
               title="Bâtir l’autonomie par l’éducation, la santé et l’accès gratuit au savoir"
             />
-            <p className="text-base sm:text-lg text-v1-encre/85 dark:text-creme/85 leading-relaxed">
+            <p className="text-body text-text">
               WAHHF Foundation (We Are Here Help Foundation) part d’une conviction simple : chaque jeune mérite d’accéder à l’éducation, aux soins de prévention, à l’apprentissage des langues et à une information vérifiée, sans que le manque de ressources financières ou les réseaux de désinformation ne brisent son avenir.
             </p>
             <p className="text-base text-text-secondary leading-relaxed">
@@ -65,7 +64,7 @@ export function QuiSommesNousPage() {
             </p>
           </div>
 
-          <div className="lg:col-span-5 grid grid-cols-1 gap-4">
+          <TextList columns={1} className="lg:col-span-5">
             {[
               {
                 title: 'Dignité & Respect',
@@ -79,26 +78,21 @@ export function QuiSommesNousPage() {
                 title: 'Intégrité & Vérité',
                 desc: 'Nous combattons les fausses promesses migratoires par une information rigoureuse et vérifiable.',
               },
-            ].map((val, idx) => (
-              <div
-                key={val.title}
-                className="rounded-card bg-surface-raised border border-border-soft p-6 space-y-1.5"
-              >
-                <span className="text-xs font-bold text-accent-or">VALEUR 0{idx + 1}</span>
-                <h3 className="font-serif text-xl">{val.title}</h3>
-                <p className="text-sm text-text-tertiary">{val.desc}</p>
-              </div>
+            ].map((val) => (
+              <TextListItem key={val.title} title={val.title}>
+                <p>{val.desc}</p>
+              </TextListItem>
             ))}
-          </div>
+          </TextList>
         </div>
 
         {/* Section dédiée : WAHHF, branche sociale du groupe IROKO */}
-        <div className="surface-green rounded-card bg-nuit text-creme p-8 sm:p-12 border border-or/40 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="surface-green rounded-card bg-nuit text-text-on-inverse p-8 sm:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-8 space-y-4">
-            <h2 className="font-serif font-normal text-2xl sm:text-4xl text-creme">
+            <h2 className="text-section-title text-text-on-inverse">
               WAHHF Foundation, branche sociale du groupe IROKO
             </h2>
-            <p className="text-sm sm:text-base text-creme/85 leading-relaxed">
+            <p className="text-body text-text-secondary-on-inverse">
               Le groupe multisectoriel camerouno-allemand <strong>IROKO</strong> a structuré WAHHF Foundation comme sa branche sociale et philanthropique indépendante à but non lucratif. Ce soutien structurel permet de couvrir les frais opérationnels et pédagogiques afin que les cours de langue allemande et les actions de terrain demeurent 100 % gratuits pour les bénéficiaires.
             </p>
             <div className="pt-2 flex flex-wrap gap-4">
@@ -111,16 +105,14 @@ export function QuiSommesNousPage() {
             </div>
           </div>
 
-          <div className="lg:col-span-4 flex flex-col items-center justify-center text-center p-6 rounded-2xl bg-feuillage border border-or/30 space-y-3">
+          <div className="lg:col-span-4 flex flex-col items-center justify-center text-center space-y-3">
             <img
               src={WAHHF_LOGO_URL}
               alt="Logo WAHHF Foundation"
               className="w-20 h-20 rounded-pill bg-white p-1.5 object-contain"
             />
-            <p className="font-serif text-xl text-creme">WAHHF Foundation</p>
-            <p className="text-xs text-gold-on-green font-semibold uppercase tracking-wider">
-              Branche sociale du groupe IROKO
-            </p>
+            <p className="text-body font-semibold text-text-on-inverse">WAHHF Foundation</p>
+            
           </div>
         </div>
 
@@ -132,7 +124,7 @@ export function QuiSommesNousPage() {
             subtitle="Les membres du conseil et les responsables de pôles veillent au respect de l’éthique et de la gratuité."
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <TextList columns={3}>
             {[
               {
                 role: 'Direction & Conseil de Fondation (TODO)',
@@ -146,19 +138,12 @@ export function QuiSommesNousPage() {
                 role: 'Coordination Terrain Cameroun (TODO)',
                 desc: 'Relais régionaux pour les campagnes d’éducation, de santé préventive, d’agroécologie et d’inclusion.',
               },
-            ].map((gov, idx) => (
-              <div
-                key={gov.role}
-                className="rounded-card bg-surface-raised border border-border-soft p-7 space-y-3"
-              >
-                <span className="text-xs font-bold text-accent-or">PÔLE 0{idx + 1}</span>
-                <h3 className="font-serif text-xl">{gov.role}</h3>
-                <p className="text-sm text-text-tertiary leading-relaxed">
-                  {gov.desc}
-                </p>
-              </div>
+            ].map((gov) => (
+              <TextListItem key={gov.role} title={gov.role}>
+                <p>{gov.desc}</p>
+              </TextListItem>
             ))}
-          </div>
+          </TextList>
         </div>
       </section>
     </>
@@ -188,14 +173,14 @@ export function PartenairesPage() {
 
       <section className="container-page section-space space-y-12">
         {/* Partenaire Fondateur : Groupe IROKO */}
-        <div className="surface-green rounded-card bg-nuit text-creme p-8 sm:p-12 border-2 border-or space-y-5">
+        <div className="surface-green rounded-card bg-nuit text-text-on-inverse p-8 sm:p-12 space-y-5">
           <span className="inline-block px-3.5 py-1 rounded-pill bg-or text-v1-encre text-xs font-bold uppercase tracking-wider">
             01 · Partenaire Fondateur & Mécène Structurel
           </span>
-          <h2 className="font-serif font-normal text-3xl sm:text-4xl text-creme">
+          <h2 className="text-section-title text-text-on-inverse">
             Groupe IROKO — Holding & 10 Pôles d’Expertise
           </h2>
-          <p className="text-base text-creme/85 leading-relaxed max-w-4xl">
+          <p className="text-body text-text-secondary-on-inverse max-w-[65ch]">
             WAHHF Foundation est la branche sociale du groupe IROKO. Par son mécénat financier, technologique et humain, le groupe IROKO finance durablement l’Académie de langues (allemand A1 à C1), les supports d’orientation vérifiés vers l’Europe ainsi que les déploiements solidaires dans les 10 régions du Cameroun.
           </p>
           <div className="pt-2 flex flex-wrap gap-4">
@@ -213,7 +198,7 @@ export function PartenairesPage() {
             subtitle="Conformément à notre éthique, aucun nom ou logo d’institution tierce n’est affiché sans accord écrit préalable."
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <TextList columns={3}>
             {[
               {
                 title: 'Établissements scolaires & éducatifs (TODO)',
@@ -228,22 +213,17 @@ export function PartenairesPage() {
                 desc: 'Citoyens et philanthropes au Cameroun, en Allemagne et en Europe finançant les parcours des jeunes.',
               },
             ].map((p) => (
-              <div
-                key={p.title}
-                className="rounded-card bg-surface-raised border border-border-soft p-7 space-y-3"
-              >
-                <Handshake className="w-7 h-7 text-or" />
-                <h3 className="font-serif text-xl">{p.title}</h3>
-                <p className="text-sm text-text-tertiary">{p.desc}</p>
-              </div>
+              <TextListItem key={p.title} title={p.title}>
+                <p>{p.desc}</p>
+              </TextListItem>
             ))}
-          </div>
+          </TextList>
         </div>
 
         {/* Appel à devenir partenaire */}
-        <div className="rounded-card bg-surface-raised border border-nuit/15 p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="rounded-card bg-surface-section p-8 sm:p-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-2 max-w-xl">
-            <h3 className="font-serif text-2xl">Comment devenir partenaire de WAHHF Foundation ?</h3>
+            <h3 className="text-body font-semibold text-text">Comment devenir partenaire de WAHHF Foundation ?</h3>
             <p className="text-sm text-text-tertiary">
               Vous représentez une université, un centre de formation, une ONG, un établissement médical ou une entreprise engagée ? Construisons ensemble un programme à impact mesurable.
             </p>
@@ -280,11 +260,11 @@ export function NosActionsPage() {
       </PageHeader>
 
       <section className="container-page section-space space-y-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <TextList columns={3}>
           {DOMAINS_DATA.map((d) => (
-            <DomainCard key={d.id} domain={d} total="06" />
+            <DomainCard key={d.id} domain={d} />
           ))}
-        </div>
+        </TextList>
 
         {/* Détail des programmes par domaine */}
         <div className="space-y-8">
@@ -292,55 +272,40 @@ export function NosActionsPage() {
             title="Le détail de nos interventions par domaine"
           />
 
-          <div className="space-y-6">
+          {/* Blocs non cliquables : plus de carte (T-15) ; le domaine demandé (?domaine=) est posé dans un encart sauge. */}
+          <div>
             {DOMAINS_DATA.map((dom) => {
               const isHighlighted = activeSlug === dom.slug;
               return (
                 <div
                   key={dom.id}
                   id={dom.slug}
-                  className={`rounded-card p-7 sm:p-9 border transition ${
+                  className={
                     isHighlighted
-                      ? 'bg-nuit text-creme border-or'
-                      : 'bg-surface-raised border-border-soft'
-                  }`}
+                      ? 'rounded-card bg-surface-section p-6 sm:p-8 my-4'
+                      : 'border-t border-border-subtle py-8'
+                  }
                 >
                   <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-                    <div className="space-y-3 max-w-3xl">
-                      <span
-                        className={`text-xs font-bold uppercase tracking-widest ${
-                          isHighlighted ? 'text-or' : 'text-accent-or'
-                        }`}
-                      >
-                        Domaine {dom.number} / 06
-                      </span>
-                      <h2 className="font-serif font-normal text-2xl sm:text-3xl">{dom.title}</h2>
-                      <p className="text-sm sm:text-base opacity-85 leading-relaxed">
+                    <div className="space-y-3 max-w-[65ch]">
+                      <h3 className="text-body font-semibold text-text">{dom.title}</h3>
+                      <p className="text-body text-text-secondary">
                         {dom.fullDesc}
                       </p>
-                      <ul className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+                      <ul className="list-disc pl-5 space-y-1 text-body text-text marker:text-text-secondary">
                         {dom.programs.map((prog) => (
-                          <li
-                            key={prog}
-                            className="p-3.5 rounded-2xl bg-black/5 dark:bg-white/5 text-xs sm:text-sm flex items-start gap-2"
-                          >
-                            <CheckCircle2 className="w-4 h-4 text-or shrink-0 mt-0.5" />
-                            <span>{prog}</span>
-                          </li>
+                          <li key={prog}>{prog}</li>
                         ))}
                       </ul>
                     </div>
 
                     <div className="shrink-0">
                       {dom.slug === 'mobilite-langues' ? (
-                        <PrimaryButton
-                          to="/mobilite-langues"
-                          onInverse={isHighlighted}
-                        >
+                        <PrimaryButton to="/mobilite-langues">
                           Accéder au hub Mobilité & Langues
                         </PrimaryButton>
                       ) : (
-                        <PrimaryButton to="/agir" onInverse={isHighlighted}>Soutenir ce domaine</PrimaryButton>
+                        <PrimaryButton to="/agir">Soutenir ce domaine</PrimaryButton>
                       )}
                     </div>
                   </div>
@@ -383,26 +348,23 @@ export function NotreImpactPage() {
             { end: 10, suffix: '', label: 'Régions du Cameroun couvertes' },
             { end: 10, suffix: '', label: 'Pays européens documentés gratuitement' },
           ].map((item, i) => (
-            <div
-              key={i}
-              className="rounded-card bg-surface-raised border border-border-soft p-7 space-y-2"
-            >
-              <p className="font-serif text-4xl sm:text-5xl text-accent">
+            <div key={i} className="border-t border-border-subtle pt-5 space-y-2">
+              <p className="text-page-title text-accent tabular-nums">
                 <Counter end={item.end} suffix={item.suffix} />
               </p>
-              <p className="text-sm font-medium">{item.label}</p>
+              <p className="text-body text-text">{item.label}</p>
             </div>
           ))}
         </div>
 
         <PresenceSection />
 
-        <div className="surface-green rounded-card bg-nuit text-creme p-8 sm:p-10 border border-or/35 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="surface-green rounded-card bg-nuit text-text-on-inverse p-8 sm:p-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-2">
-            <h2 className="font-serif text-2xl sm:text-3xl">
+            <h2 className="text-section-title text-text-on-inverse">
               Consulter nos engagements de transparence financière
             </h2>
-            <p className="text-sm text-creme/80">
+            <p className="text-body text-text-secondary-on-inverse">
               Découvrez comment les ressources du groupe IROKO et les dons sont affectés aux missions sociales.
             </p>
           </div>
@@ -466,12 +428,12 @@ export function ActualitesPage() {
           </PageTitle>
         </PageHeader>
 
-        <section className="container-page *:max-w-4xl section-space space-y-8">
-          <div className="rounded-card overflow-hidden aspect-[16/9] border border-nuit/15">
+        <section className="container-page section-space space-y-8">
+          <div className="max-w-[65ch] rounded-card overflow-hidden aspect-[16/9] bg-surface-section">
             <img
               src={article.image}
               srcSet={imageSrcSet(article.image)}
-              sizes="(min-width: 896px) 832px, 100vw"
+              sizes="(min-width: 768px) 600px, calc(100vw - 2.5rem)"
               alt={article.title}
               width={1200}
               height={675}
@@ -479,11 +441,11 @@ export function ActualitesPage() {
             />
           </div>
 
-          <div className="rounded-card bg-surface-raised border border-nuit/12 p-7 sm:p-10 space-y-5 text-base sm:text-lg leading-relaxed">
+          <ReadingColumn as="article">
             {article.content.map((p, i) => (
               <p key={i}>{p}</p>
             ))}
-          </div>
+          </ReadingColumn>
 
           <div className="flex flex-wrap justify-between items-center gap-4 pt-4">
             <PrimaryButton to="/candidater">Candidater au programme gratuit</PrimaryButton>
@@ -508,35 +470,24 @@ export function ActualitesPage() {
 
       <section className="container-page section-space grid grid-cols-1 md:grid-cols-3 gap-6">
         {NEWS_DATA.map((art) => (
-          <Link
-            key={art.slug}
-            to={`/actualites/${art.slug}`}
-            className="group rounded-card overflow-hidden bg-surface-raised border border-nuit/12 flex flex-col justify-between hover:-translate-y-1 transition"
-          >
-            <div>
-              <div className="aspect-[16/10] overflow-hidden">
-                <img
-                  src={art.image}
-                  srcSet={imageSrcSet(art.image)}
-                  sizes="(min-width: 768px) 33vw, 100vw"
-                  alt={art.title}
-                  loading="lazy"
-                  decoding="async"
-                  width={600}
-                  height={375}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              <div className="p-6 space-y-3">
-                <span className="text-xs font-semibold text-accent-or">{art.category}</span>
-                <h2 className="font-serif text-xl">{art.title}</h2>
-                <p className="text-sm text-text-tertiary">{art.excerpt}</p>
-              </div>
-            </div>
-            <div className="px-6 pb-6 text-xs font-semibold text-accent flex items-center justify-between">
-              <span>{art.date}</span>
-            </div>
-          </Link>
+          <CardLink key={art.slug} to={`/actualites/${art.slug}`}>
+            <CardMedia
+              src={art.image}
+              srcSet={imageSrcSet(art.image)}
+              sizes="(min-width: 768px) 33vw, 100vw"
+              alt={art.title}
+              width={600}
+              height={375}
+            />
+            <CardBody>
+              <CardMeta>
+                <span>{art.category}</span>
+                <span>{art.date}</span>
+              </CardMeta>
+              <CardTitle as="h2">{art.title}</CardTitle>
+              <p className="text-body text-text-secondary">{art.excerpt}</p>
+            </CardBody>
+          </CardLink>
         ))}
       </section>
     </>
@@ -642,50 +593,18 @@ export function AgirPage() {
       </PageHeader>
 
       <section className="container-page section-space space-y-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="surface-green rounded-card bg-nuit text-creme p-7 space-y-4 flex flex-col justify-between">
-            <div className="space-y-2">
-              <span className="text-xs font-semibold text-or">01 · Don Solidaire</span>
-              <h2 className="font-serif text-2xl">Faire un don</h2>
-              <p className="text-sm text-creme/80">
-                Financez les cours d’allemand gratuits et les actions sociales de terrain.
-              </p>
-            </div>
-            <DonateButton className="w-full" />
-          </div>
-
-          <div
-            id="benevole"
-            className="rounded-card bg-surface-raised border border-nuit/15 p-7 space-y-4 flex flex-col justify-between"
-          >
-            <div className="space-y-2">
-              <Users className="w-6 h-6 text-or" />
-              <h2 className="font-serif text-2xl">Devenir bénévole</h2>
-              <p className="text-sm text-text-tertiary">
-                Enseignants d’allemand, médecins, mentors ou coordinateurs locaux au Cameroun et en Europe.
-              </p>
-            </div>
-            <PrimaryButton onClick={() => chooseRole('benevole')}>
-              Remplir le formulaire bénévole
-            </PrimaryButton>
-          </div>
-
-          <div
-            id="partenaire"
-            className="rounded-card bg-surface-raised border border-nuit/15 p-7 space-y-4 flex flex-col justify-between"
-          >
-            <div className="space-y-2">
-              <Handshake className="w-6 h-6 text-or" />
-              <h2 className="font-serif text-2xl">Devenir partenaire</h2>
-              <p className="text-sm text-text-tertiary">
-                Écoles, universités, ONG et entreprises souhaitant co-financer ou appuyer un programme.
-              </p>
-            </div>
-            <PrimaryButton onClick={() => chooseRole('partenaire')}>
-              Proposer un partenariat
-            </PrimaryButton>
-          </div>
-        </div>
+        {/* Trois voies en liste typographique (contrat §8, T-15) : titre, phrase, action ; ancres #benevole et #partenaire gardées */}
+        <TextList columns={3}>
+          <TextListItem title="Faire un don" titleAs="h2" actions={<DonateButton />}>
+            <p>Financez les cours d’allemand gratuits et les actions sociales de terrain.</p>
+          </TextListItem>
+          <TextListItem id="benevole" title="Devenir bénévole" titleAs="h2" actions={<PrimaryButton onClick={() => chooseRole('benevole')}>Remplir le formulaire bénévole</PrimaryButton>}>
+            <p>Enseignants d’allemand, médecins, mentors ou coordinateurs locaux au Cameroun et en Europe.</p>
+          </TextListItem>
+          <TextListItem id="partenaire" title="Devenir partenaire" titleAs="h2" actions={<PrimaryButton onClick={() => chooseRole('partenaire')}>Proposer un partenariat</PrimaryButton>}>
+            <p>Écoles, universités, ONG et entreprises souhaitant co-financer ou appuyer un programme.</p>
+          </TextListItem>
+        </TextList>
 
         {/* Formulaire Bénévole / Partenaire */}
         <div ref={formBlockRef} className="rounded-card bg-surface-section p-7 sm:p-10 max-w-3xl">
@@ -878,18 +797,16 @@ export function LegalTransparencyPage({
         <PageTitle>{content.title}</PageTitle>
       </PageHeader>
 
-      <section className="container-page *:max-w-4xl section-space space-y-6">
-        {content.blocks.map((b) => (
-          <div
-            key={b.h}
-            className="rounded-card bg-surface-raised border border-nuit/12 p-7 sm:p-9 space-y-3"
-          >
-            <h2 className="font-serif text-2xl">{b.h}</h2>
-            <p className="text-base text-text-secondary leading-relaxed">
-              {b.p}
-            </p>
-          </div>
-        ))}
+      {/* Colonne de lecture de 65 caractères (contrat §8) : un paragraphe n'est jamais une carte */}
+      <section className="container-page section-space">
+        <ReadingColumn as="article">
+          {content.blocks.map((b) => (
+            <Fragment key={b.h}>
+              <h2>{b.h}</h2>
+              <p>{b.p}</p>
+            </Fragment>
+          ))}
+        </ReadingColumn>
       </section>
     </>
   );

@@ -1,93 +1,59 @@
 import { Link } from 'react-router-dom';
-import { Calendar, Clock, Globe2, Users, CheckCircle2 } from 'lucide-react';
 import { CourseSession } from '../../services/api';
 import { PrimaryButton } from './Buttons';
 
 interface CourseCardProps {
-  key?: string | number;
   session: CourseSession;
-  index?: number;
 }
 
 /**
- * Composant CourseCard réutilisable :
- * niveau, titre, format, jours, durée, date de début, places disponibles,
- * mention « Gratuit » bien visible à la place du prix, et bouton « Candidater » (jamais « Réserver » ni « Acheter »).
+ * Session de cours en ligne de liste dense (contrat §5 « liste dense pour les sessions de cours », §8) :
+ * niveau et lien vers le programme, titre, format, rythme, date de début et places dans une liste de définitions,
+ * bouton « Candidater » (jamais « Réserver » ni « Acheter »). Ni carte, ni filigrane, ni icônes or.
+ * La gratuité est dite une seule fois, au-dessus de la liste (décision n° 5) ; à poser dans une <ul>.
  */
-export default function CourseCard({ session, index = 1 }: CourseCardProps) {
-  const watermarkNum = String(index).padStart(2, '0');
-
+export default function CourseCard({ session }: CourseCardProps) {
   return (
-    <article className="group relative rounded-card bg-surface-raised border border-border-soft p-6 sm:p-7 shadow-[0_10px_30px_-12px_rgba(15,61,46,0.08)] hover:shadow-[0_18px_36px_-12px_rgba(15,61,46,0.16)] transition duration-(--dur-fast) hover:-translate-y-1 flex flex-col justify-between overflow-hidden">
-      {/* Grand numéro en filigrane très pâle derrière le texte */}
-      <span
-        aria-hidden="true"
-        className="pointer-events-none select-none absolute -bottom-3 right-4 font-serif font-normal text-[6rem] leading-none text-nuit/[0.05] dark:text-creme/[0.05]"
-      >
-        {watermarkNum}
-      </span>
-
-      <div className="relative z-10 space-y-4">
-        <div className="flex items-center justify-between gap-2 flex-wrap">
-          <div className="flex items-center gap-2">
-            <span className="inline-flex items-center justify-center px-3.5 py-1 rounded-pill bg-nuit text-or text-xs font-bold tracking-wider uppercase">
-              Niveau {session.level}
-            </span>
-            <Link
-              to={`/academie/${session.level.toLowerCase()}`}
-              className="text-xs font-medium text-accent underline underline-offset-4 hover:opacity-80"
-            >
-              Programme {session.level}
-            </Link>
-          </div>
-
-          {/* Mention GRATUIT bien visible à la place du prix */}
-          <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-pill bg-or/20 border border-or/50 text-accent text-xs font-semibold">
-            <CheckCircle2 className="w-3.5 h-3.5" />
-            {session.costLabel} · Financé par WAHHF
-          </span>
-        </div>
-
-        <h3 className="font-serif font-normal text-xl sm:text-2xl text-text leading-snug">
-          {session.title}
-        </h3>
-
-        <ul className="space-y-2.5 text-sm text-text-secondary pt-1">
-          <li className="flex items-start gap-2.5">
-            <Globe2 className="w-4 h-4 text-or shrink-0 mt-0.5" />
-            <span>
-              <strong className="font-medium text-text">Format :</strong> {session.format}
-            </span>
-          </li>
-          <li className="flex items-start gap-2.5">
-            <Clock className="w-4 h-4 text-or shrink-0 mt-0.5" />
-            <span>
-              <strong className="font-medium text-text">Rythme & durée :</strong> {session.days} ({session.duration})
-            </span>
-          </li>
-          <li className="flex items-start gap-2.5">
-            <Calendar className="w-4 h-4 text-or shrink-0 mt-0.5" />
-            <span>
-              <strong className="font-medium text-text">Début de session :</strong> {session.startDate}
-            </span>
-          </li>
-          <li className="flex items-start gap-2.5">
-            <Users className="w-4 h-4 text-or shrink-0 mt-0.5" />
-            <span>
-              <strong className="font-medium text-text">Places d’accompagnement :</strong> {session.seatsAvailable} places disponibles (indicatif)
-            </span>
-          </li>
-        </ul>
+    <li className="grid gap-x-8 gap-y-3 border-t border-border-subtle py-6 md:grid-cols-[10rem_1fr_auto] md:items-start">
+      <div className="space-y-1">
+        <p className="text-meta font-semibold text-text">Niveau {session.level}</p>
+        <Link
+          to={`/academie/${session.level.toLowerCase()}`}
+          className="inline-flex min-h-11 items-center text-meta text-link underline underline-offset-4 md:min-h-0"
+        >
+          Programme {session.level}
+        </Link>
       </div>
 
-      <div className="relative z-10 pt-5 mt-6 border-t border-border-subtle flex items-center justify-between gap-3">
-        <span className="text-xs text-text-muted">
-          Aucun frais demandé
-        </span>
+      <div className="space-y-3">
+        <h3 className="text-body font-semibold text-text">{session.title}</h3>
+        <dl className="grid gap-x-8 gap-y-2 text-meta sm:grid-cols-2">
+          <div>
+            <dt className="text-text-secondary">Format :</dt>
+            <dd className="text-text">{session.format}</dd>
+          </div>
+          <div>
+            <dt className="text-text-secondary">Rythme & durée :</dt>
+            <dd className="text-text">
+              {session.days} ({session.duration})
+            </dd>
+          </div>
+          <div>
+            <dt className="text-text-secondary">Début de session :</dt>
+            <dd className="text-text">{session.startDate}</dd>
+          </div>
+          <div>
+            <dt className="text-text-secondary">Places d’accompagnement :</dt>
+            <dd className="text-text">{session.seatsAvailable} places disponibles (indicatif)</dd>
+          </div>
+        </dl>
+      </div>
+
+      <div className="md:pt-0.5">
         <PrimaryButton size="sm" to={`/candidater?souhait=cours_allemand&niveau=${session.level}`}>
           Candidater
         </PrimaryButton>
       </div>
-    </article>
+    </li>
   );
 }

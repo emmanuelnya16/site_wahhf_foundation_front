@@ -1,8 +1,5 @@
 import { Link } from 'react-router-dom';
 import {
-  GraduationCap,
-  Compass,
-  HelpCircle,
   Quote,
 } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
@@ -12,6 +9,7 @@ import { PrimaryButton, SecondaryButton, DonateButton } from '../components/wahh
 import DisclaimerBanner from '../components/wahhf/DisclaimerBanner';
 import { COUNTRIES_DATA, GERMAN_LEVELS_DATA } from '../services/api';
 import Section from '../components/wahhf/Section';
+import { TextList, TextListItem, TEXT_LINK_CLASS } from '../components/wahhf/TextList';
 
 const MOBILITY_FAQS = [
   {
@@ -75,7 +73,7 @@ export default function MobilityHub() {
               subtitle="Trop de jeunes et de familles s’endettent auprès d’intermédiaires frauduleux qui vendent de fausses promesses. WAHHF Foundation répond par la gratuité, la rigueur linguistique et la transparence."
             />
 
-            <div className="space-y-4 text-base text-text-secondary leading-relaxed">
+            <div className="space-y-4 text-body text-text-secondary max-w-[65ch]">
               <p>
                 Un projet d’études ou de formation professionnelle à l’étranger ne s’achète pas : il se construit par l’apprentissage exigeant de la langue, la conformité des diplômes et le respect strict des procédures consulaires officielles.
               </p>
@@ -85,7 +83,7 @@ export default function MobilityHub() {
             </div>
           </div>
 
-          <div className="lg:col-span-5 grid grid-cols-1 gap-4">
+          <TextList columns={1} className="lg:col-span-5">
             {[
               {
                 title: 'Zéro frais pour le bénéficiaire',
@@ -99,23 +97,12 @@ export default function MobilityHub() {
                 title: 'Exigence académique & linguistique',
                 desc: 'Accompagnement progressif du niveau débutant A1 jusqu’à l’autonomie universitaire C1.',
               },
-            ].map((item, idx) => (
-              <div
-                key={item.title}
-                className="rounded-card bg-surface-raised border border-border-soft p-6 shadow-xs flex items-start gap-4"
-              >
-                <span className="w-9 h-9 rounded-pill bg-nuit text-or font-serif text-sm flex items-center justify-center shrink-0">
-                  0{idx + 1}
-                </span>
-                <div>
-                  <h3 className="font-serif text-lg text-text mb-1">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm text-text-tertiary">{item.desc}</p>
-                </div>
-              </div>
+            ].map((item) => (
+              <TextListItem key={item.title} title={item.title}>
+                <p>{item.desc}</p>
+              </TextListItem>
             ))}
-          </div>
+          </TextList>
         </div>
       </section>
 
@@ -127,39 +114,25 @@ export default function MobilityHub() {
             subtitle="Vous pouvez candidater uniquement aux cours de langue allemande, uniquement à l’accompagnement documentaire, ou aux deux."
           />
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-10 gap-y-12">
             {/* Porte 1 : Académie de langues */}
-            <div className="relative rounded-card bg-surface-raised border border-border p-8 sm:p-10 shadow-sm flex flex-col justify-between overflow-hidden">
-              <span
-                aria-hidden="true"
-                className="pointer-events-none select-none absolute -bottom-4 right-5 font-serif text-8xl text-nuit/[0.05]"
-              >
-                01
-              </span>
-              <div className="space-y-5 relative z-10">
-                <div className="flex items-center justify-between">
-                  <div className="w-13 h-13 rounded-2xl bg-nuit text-or flex items-center justify-center">
-                    <GraduationCap className="w-7 h-7" />
-                  </div>
-                  <span className="px-3.5 py-1 rounded-pill bg-or/20 text-accent text-xs font-semibold">
-                    Gratuit · Niveaux A1 à C1
-                  </span>
-                </div>
+            <div className="border-t border-border-subtle pt-6 flex flex-col justify-between">
+              <div className="space-y-4">
 
-                <h3 className="font-serif font-normal text-3xl text-text">
+                <h3 className="text-body font-semibold text-text">
                   Académie de langues (Allemand A1 à C1)
                 </h3>
 
-                <p className="text-sm sm:text-base text-text-secondary leading-relaxed">
+                <p className="text-body text-text-secondary max-w-[65ch]">
                   Accompagnement complet pour apprendre l’allemand étape par étape : compréhension, expression orale et écrite, test de niveau interactif gratuit et préparation méthodique aux certifications.
                 </p>
 
-                <div className="flex flex-wrap gap-2 pt-2">
+                <div className="flex flex-wrap gap-x-5">
                   {GERMAN_LEVELS_DATA.map((lvl) => (
                     <Link
                       key={lvl.slug}
                       to={`/academie/${lvl.slug}`}
-                      className="px-3.5 py-1.5 rounded-pill border border-border-input text-xs font-semibold text-accent hover:bg-or hover:text-v1-encre transition-colors"
+                      className={TEXT_LINK_CLASS}
                     >
                       Niveau {lvl.level}
                     </Link>
@@ -167,13 +140,13 @@ export default function MobilityHub() {
                 </div>
               </div>
 
-              <div className="pt-8 mt-8 border-t border-border-subtle flex flex-wrap items-center justify-between gap-4 relative z-10">
+              <div className="pt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
                 <PrimaryButton to="/mobilite-langues/academie">
                   Accéder à l’Académie de langues
                 </PrimaryButton>
                 <Link
                   to="/mobilite-langues/academie#test-niveau"
-                  className="text-xs sm:text-sm font-semibold text-accent underline underline-offset-4"
+                  className={TEXT_LINK_CLASS}
                 >
                   Passer le test de niveau (20 questions)
                 </Link>
@@ -181,37 +154,23 @@ export default function MobilityHub() {
             </div>
 
             {/* Porte 2 : Accompagnement vers l'Europe */}
-            <div className="surface-green relative rounded-card bg-nuit text-creme border border-or/35 p-8 sm:p-10 shadow-sm flex flex-col justify-between overflow-hidden">
-              <span
-                aria-hidden="true"
-                className="pointer-events-none select-none absolute -bottom-4 right-5 font-serif text-8xl text-creme/[0.05]"
-              >
-                02
-              </span>
-              <div className="space-y-5 relative z-10">
-                <div className="flex items-center justify-between">
-                  <div className="w-13 h-13 rounded-2xl bg-or text-v1-encre flex items-center justify-center">
-                    <Compass className="w-7 h-7" />
-                  </div>
-                  <span className="px-3.5 py-1 rounded-pill bg-or/20 text-gold-on-green text-xs font-semibold">
-                    Gratuit · 10 Pays Documentés
-                  </span>
-                </div>
+            <div className="border-t border-border-subtle pt-6 flex flex-col justify-between">
+              <div className="space-y-4">
 
-                <h3 className="font-serif font-normal text-3xl text-creme">
+                <h3 className="text-body font-semibold text-text">
                   Accompagnement vers l’Europe
                 </h3>
 
-                <p className="text-sm sm:text-base text-creme/85 leading-relaxed">
+                <p className="text-body text-text-secondary max-w-[65ch]">
                   Un parcours pédagogique en 4 étapes pour comprendre les voies légales (études, formation professionnelle, travail), préparer son dossier et vérifier chaque démarche sur les portails officiels.
                 </p>
 
-                <div className="flex flex-wrap gap-2 pt-2">
+                <div className="flex flex-wrap gap-x-5">
                   {COUNTRIES_DATA.map((c) => (
                     <Link
                       key={c.slug}
                       to={`/accompagnement/pays/${c.slug}`}
-                      className="px-3 py-1 rounded-pill border border-border-on-inverse hover:bg-or hover:text-v1-encre text-xs font-medium text-creme transition-colors"
+                      className={TEXT_LINK_CLASS}
                     >
                       {c.flag} {c.name}
                     </Link>
@@ -219,16 +178,13 @@ export default function MobilityHub() {
                 </div>
               </div>
 
-              <div className="pt-8 mt-8 border-t border-white/15 flex flex-wrap items-center justify-between gap-4 relative z-10">
-                <PrimaryButton
-                  to="/mobilite-langues/accompagnement"
-                  onInverse
-                >
+              <div className="pt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+                <PrimaryButton to="/mobilite-langues/accompagnement">
                   Explorer l’accompagnement Europe
                 </PrimaryButton>
                 <Link
                   to="/accompagnement/eviter-les-arnaques"
-                  className="text-xs sm:text-sm font-semibold text-or underline underline-offset-4"
+                  className={TEXT_LINK_CLASS}
                 >
                   Guide : Éviter les arnaques
                 </Link>
@@ -277,28 +233,20 @@ export default function MobilityHub() {
 
       {/* FAQ */}
       <Section tone="sauge">
-        <div className="container-page *:max-w-5xl space-y-10">
+        <div className="container-page space-y-10">
           <SectionHeader
             kicker="Questions fréquentes"
             title="Tout comprendre sur la gratuité et nos règles d’éthique"
           />
 
-          <div className="space-y-4">
+          {/* FAQ en liste typographique (ajout du 16/11 au §8) : question en 600, réponse, filet ; tout reste visible */}
+          <TextList columns={1} className="max-w-[65ch]">
             {MOBILITY_FAQS.map((faq) => (
-              <div
-                key={faq.q}
-                className="rounded-[20px] bg-surface-raised border border-border-soft p-6 space-y-2"
-              >
-                <h3 className="font-serif text-lg sm:text-xl text-text flex items-start gap-2.5">
-                  <HelpCircle className="w-5 h-5 text-or shrink-0 mt-1" />
-                  <span>{faq.q}</span>
-                </h3>
-                <p className="text-sm sm:text-base text-text-tertiary pl-7 leading-relaxed">
-                  {faq.a}
-                </p>
-              </div>
+              <TextListItem key={faq.q} title={faq.q}>
+                <p>{faq.a}</p>
+              </TextListItem>
             ))}
-          </div>
+          </TextList>
         </div>
       </Section>
 

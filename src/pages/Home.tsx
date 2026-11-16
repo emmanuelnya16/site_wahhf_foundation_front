@@ -8,23 +8,16 @@ import {
   ChevronRight,
   Play,
   X,
-  Ear,
-  Users,
-  Sprout,
-  ShieldCheck,
-  Handshake,
-  GraduationCap,
-  Compass,
-  Globe2,
   CheckCircle2,
   Quote,
-  Calendar,
   Heart,
   Mail,
 } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
 import SectionHeader from '../components/wahhf/SectionHeader';
 import Section from '../components/wahhf/Section';
+import { TextList, TextListItem } from '../components/wahhf/TextList';
+import { CardLink, CardMedia, CardBody, CardMeta, CardTitle } from '../components/wahhf/Card';
 import { LABEL_CLASS, FIELD_CLASS } from '../components/wahhf/FormField';
 import { cn } from '../lib/utils';
 import { PrimaryButton, SecondaryButton, DonateButton } from '../components/wahhf/Buttons';
@@ -40,7 +33,7 @@ import { buildDraft } from '../lib/contactDraft';
 import { MQ } from '../lib/gsap';
 import MaskedLines, { splitAtComma } from '../effects/MaskedLines';
 import SplitReveal from '../effects/SplitReveal';
-import HorizontalGallery from '../effects/HorizontalGallery';
+
 import ExpandSection from '../effects/ExpandSection';
 import { useTimelineDraw } from '../effects/useTimelineDraw';
 import StaggerGroup from '../effects/StaggerGroup';
@@ -420,25 +413,22 @@ export default function Home() {
           4. NOS 6 DOMAINES D'ACTION
           Ordre : Éducation, Santé, Entrepreneuriat des jeunes, Environnement,
           Droits et inclusion, Mobilité & Langues.
-          Sur mobile : carrousel horizontal avec flèches rondes ; sur ordinateur : grille.
+          En liste typographique (contrat §7 section 4, §8) : titre-lien et phrase, sans carte ni numéro ni carrousel.
           ===================================================================== */}
-      <HorizontalGallery
-        id="domaines"
-        header={
+      <Section id="domaines">
+        <div className="container-page space-y-10">
           <SectionHeader
             kicker={t('home.domains.kicker')}
             title={t('home.domains.title')}
             subtitle={t('home.domains.subtitle')}
           />
-        }
-        items={DOMAINS_DATA.map((domain) => ({
-          key: domain.id,
-          node: <DomainCard domain={domain} total="06" />,
-        }))}
-        prevLabel="Domaine précédent"
-        nextLabel="Domaine suivant"
-        pinHint="Faites défiler pour parcourir les 6 domaines"
-      />
+          <TextList columns={3}>
+            {DOMAINS_DATA.map((domain) => (
+              <DomainCard key={domain.id} domain={domain} />
+            ))}
+          </TextList>
+        </div>
+      </Section>
 
       {/* =====================================================================
           5. MOBILITÉ & LANGUES À LA UNE
@@ -463,66 +453,19 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Trois cartes */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Trois voies en liste typographique (contrat §7 section 2, §8) : le titre porte le lien. Sur la bande nuit
+              jusqu'à l'étape de l'accueil ; data-cascade garde l'apparition d'ExpandSection. */}
+          <TextList columns={3} onInverse>
             {[
-              {
-                num: '01',
-                icon: GraduationCap,
-                title: t('home.mobilitySpot.card1Title'),
-                desc: t('home.mobilitySpot.card1Desc'),
-                to: '/mobilite-langues/academie',
-                cta: 'Explorer les niveaux A1 à C1',
-              },
-              {
-                num: '02',
-                icon: Compass,
-                title: t('home.mobilitySpot.card2Title'),
-                desc: t('home.mobilitySpot.card2Desc'),
-                to: '/mobilite-langues/accompagnement',
-                cta: 'Voir les 4 étapes du parcours',
-              },
-              {
-                num: '03',
-                icon: Globe2,
-                title: t('home.mobilitySpot.card3Title'),
-                desc: t('home.mobilitySpot.card3Desc'),
-                to: '/mobilite-langues/accompagnement#pays',
-                cta: 'Consulter les 10 fiches pays',
-              },
-            ].map((item) => {
-              const Icon = item.icon;
-              return (
-                <Link
-                  data-cascade
-                  key={item.num}
-                  to={item.to}
-                  className="group relative rounded-card bg-feuillage/85 border border-or/30 p-7 flex flex-col justify-between hover:-translate-y-1 transition-[translate,color,background-color,border-color,box-shadow] duration-(--dur-fast) overflow-hidden"
-                >
-                  <span
-                    aria-hidden="true"
-                    className="pointer-events-none select-none absolute -bottom-4 right-4 font-serif text-7xl text-creme/[0.05]"
-                  >
-                    {item.num}
-                  </span>
-                  <div className="space-y-4 relative z-10">
-                    <div className="w-12 h-12 rounded-2xl bg-or text-v1-encre flex items-center justify-center">
-                      <Icon className="w-6 h-6" />
-                    </div>
-                    <h3 className="font-serif font-normal text-2xl text-creme group-hover:text-or transition-colors">
-                      {item.title}
-                    </h3>
-                    <p className="text-sm sm:text-base text-creme/80 leading-relaxed">
-                      {item.desc}
-                    </p>
-                  </div>
-                  <div className="pt-6 mt-6 border-t border-creme/15 flex items-center justify-between text-sm font-medium text-gold-on-green relative z-10">
-                    <span>{item.cta}</span>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
+              { title: t('home.mobilitySpot.card1Title'), desc: t('home.mobilitySpot.card1Desc'), to: '/mobilite-langues/academie' },
+              { title: t('home.mobilitySpot.card2Title'), desc: t('home.mobilitySpot.card2Desc'), to: '/mobilite-langues/accompagnement' },
+              { title: t('home.mobilitySpot.card3Title'), desc: t('home.mobilitySpot.card3Desc'), to: '/mobilite-langues/accompagnement#pays' },
+            ].map((item) => (
+              <TextListItem data-cascade key={item.to} title={item.title} to={item.to}>
+                <p>{item.desc}</p>
+              </TextListItem>
+            ))}
+          </TextList>
 
           <div data-cascade className="pt-2 flex flex-wrap items-center justify-between gap-4">
             <PrimaryButton
@@ -660,64 +603,39 @@ export default function Home() {
             subtitle={t('home.approach.subtitle')}
           />
 
-          <StaggerGroup className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+          <TextList columns={3}>
             {[
               {
                 num: '01',
-                icon: Ear,
                 title: 'Écoute',
                 desc: 'Partir des besoins exprimés par les jeunes, les mères et les acteurs de terrain sans imposer de modèle préconçu.',
               },
               {
                 num: '02',
-                icon: Users,
                 title: 'Co-construction',
                 desc: 'Bâtir chaque action avec les enseignants, soignants et associations locales pour un impact partagé.',
               },
               {
                 num: '03',
-                icon: Sprout,
                 title: 'Durabilité',
                 desc: 'Privilégier la transmission de compétences durables (langues, métiers, écologie) plutôt que l’assistanat.',
               },
               {
                 num: '04',
-                icon: ShieldCheck,
                 title: 'Transparence',
                 desc: 'Garantir une gratuité totale pour les bénéficiaires et une traçabilité exemplaire des fonds engagés.',
               },
               {
                 num: '05',
-                icon: Handshake,
                 title: 'Partenariats',
                 desc: 'Mobiliser les compétences du groupe IROKO et des institutions camerounaises et européennes.',
               },
-            ].map((pillar) => {
-              const Icon = pillar.icon;
-              return (
-                <div
-                  key={pillar.num}
-                  className="relative rounded-card bg-surface-raised border border-border-subtle p-6 shadow-xs hover:-translate-y-1 transition-[translate,color,background-color,border-color,box-shadow] duration-(--dur-fast) overflow-hidden"
-                >
-                  <span
-                    aria-hidden="true"
-                    className="pointer-events-none select-none absolute -bottom-3 right-3 font-serif text-6xl text-nuit/[0.05] dark:text-creme/[0.05]"
-                  >
-                    {pillar.num}
-                  </span>
-                  <div className="w-11 h-11 rounded-2xl bg-nuit text-or flex items-center justify-center mb-4">
-                    <Icon className="w-5 h-5" />
-                  </div>
-                  <h3 className="font-serif font-normal text-xl text-text mb-2">
-                    {pillar.title}
-                  </h3>
-                  <p className="text-sm text-text-tertiary leading-relaxed">
-                    {pillar.desc}
-                  </p>
-                </div>
-              );
-            })}
-          </StaggerGroup>
+            ].map((pillar) => (
+              <TextListItem key={pillar.num} title={pillar.title}>
+                <p>{pillar.desc}</p>
+              </TextListItem>
+            ))}
+          </TextList>
         </div>
       </Section>
 
@@ -900,55 +818,29 @@ export default function Home() {
             <SecondaryButton to="/actualites">{t('home.news.allLink')}</SecondaryButton>
           </div>
 
-          <StaggerGroup className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {NEWS_DATA.map((article, idx) => (
-              <Link
-                key={article.slug}
-                to={`/actualites/${article.slug}`}
-                className="group rounded-card overflow-hidden bg-surface-raised border border-border-subtle shadow-xs hover:shadow-md hover:-translate-y-1 transition-[translate,color,background-color,border-color,box-shadow] duration-(--dur-fast) flex flex-col justify-between"
-              >
-                <div>
-                  <div className="relative aspect-[16/10] overflow-hidden bg-nuit/10">
-                    <img
-                      src={article.image}
-                      srcSet={imageSrcSet(article.image)}
-                      sizes="(min-width: 768px) 33vw, 100vw"
-                      alt={article.title}
-                      loading="lazy"
-                      decoding="async"
-                      width={600}
-                      height={375}
-                      className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
-                    />
-                    <span className="absolute top-4 left-4 px-3 py-1 rounded-pill bg-nuit/90 text-gold-on-green text-xs font-semibold">
-                      {article.category}
-                    </span>
-                  </div>
-                  <div className="p-6 space-y-3 relative">
-                    <span
-                      aria-hidden="true"
-                      className="pointer-events-none select-none absolute bottom-0 right-4 font-serif text-6xl text-nuit/[0.04]"
-                    >
-                      0{idx + 1}
-                    </span>
-                    <div className="flex items-center gap-2 text-xs text-v1-encre/60 dark:text-creme/60">
-                      <Calendar className="w-3.5 h-3.5 text-or" />
-                      <span>{article.date}</span>
-                    </div>
-                    <h3 className="font-serif font-normal text-xl text-text group-hover:text-accent transition-colors">
-                      {article.title}
-                    </h3>
-                    <p className="text-sm text-text-tertiary line-clamp-2">
-                      {article.excerpt}
-                    </p>
-                  </div>
-                </div>
-                <div className="px-6 pb-6 pt-3 flex items-center justify-between text-xs font-semibold text-accent">
-                  <span>Lire l’article</span>
-                </div>
-              </Link>
+          {/* Collection cliquable : cartes sans bordure ni ombre, papier sur la section sauge ; survol = couleur du titre (§8) */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {NEWS_DATA.map((article) => (
+              <CardLink key={article.slug} to={`/actualites/${article.slug}`} surface="section">
+                <CardMedia
+                  src={article.image}
+                  srcSet={imageSrcSet(article.image)}
+                  sizes="(min-width: 768px) 33vw, 100vw"
+                  alt={article.title}
+                  width={600}
+                  height={375}
+                />
+                <CardBody>
+                  <CardMeta>
+                    <span>{article.category}</span>
+                    <span>{article.date}</span>
+                  </CardMeta>
+                  <CardTitle>{article.title}</CardTitle>
+                  <p className="text-body text-text-secondary">{article.excerpt}</p>
+                </CardBody>
+              </CardLink>
             ))}
-          </StaggerGroup>
+          </div>
         </div>
       </Section>
 

@@ -2,13 +2,7 @@ import { useState, useRef, Ref } from 'react';
 import { useFocusOnChange } from '../lib/useFocusOnChange';
 import { Link, useParams } from 'react-router-dom';
 import {
-  Clock,
-  Calendar,
-  CheckCircle2,
-  Award,
   RotateCcw,
-  Sparkles,
-  BookOpen,
 } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
 import SectionHeader from '../components/wahhf/SectionHeader';
@@ -228,13 +222,13 @@ export default function LanguageAcademy() {
         </div>
 
         {/* Détail complet du niveau sélectionné (page /academie/:level incluse) */}
-        <div className="rounded-card bg-surface-raised border border-border p-7 sm:p-10 shadow-sm space-y-8">
+        <div className="space-y-8">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-border-subtle">
             <div className="space-y-2">
-              <h2 className="font-serif font-normal text-2xl sm:text-4xl text-text">
+              <h2 className="text-section-title text-text">
                 {activeCourse.title}
               </h2>
-              <p className="text-base text-text-tertiary">
+              <p className="text-body text-text-secondary">
                 {activeCourse.subtitle}
               </p>
             </div>
@@ -247,85 +241,56 @@ export default function LanguageAcademy() {
           </div>
 
           {/* 4 indicateurs du niveau */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="rounded-2xl bg-creme dark:bg-nuit/50 p-4 space-y-1">
-              <div className="flex items-center gap-2 text-xs font-semibold text-accent">
-                <Clock className="w-4 h-4" />
-                <span>Durée indicative</span>
-              </div>
-              <p className="text-sm font-medium text-text">
-                {activeCourse.duration}
-              </p>
+          <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8">
+            <div className="border-t border-border-subtle py-4 space-y-1">
+              <dt className="text-meta text-text-secondary">Durée indicative</dt>
+              <dd className="text-body text-text">{activeCourse.duration}</dd>
             </div>
 
-            <div className="rounded-2xl bg-creme dark:bg-nuit/50 p-4 space-y-1">
-              <div className="flex items-center gap-2 text-xs font-semibold text-accent">
-                <BookOpen className="w-4 h-4" />
-                <span>Volume horaire</span>
-              </div>
-              <p className="text-sm font-medium text-text">
-                {activeCourse.hours}
-              </p>
+            <div className="border-t border-border-subtle py-4 space-y-1">
+              <dt className="text-meta text-text-secondary">Volume horaire</dt>
+              <dd className="text-body text-text">{activeCourse.hours}</dd>
             </div>
 
-            <div className="rounded-2xl bg-creme dark:bg-nuit/50 p-4 space-y-1">
-              <div className="flex items-center gap-2 text-xs font-semibold text-accent">
-                <CheckCircle2 className="w-4 h-4" />
-                <span>Prérequis</span>
-              </div>
-              <p className="text-sm font-medium text-text">
-                {activeCourse.prerequisites}
-              </p>
+            <div className="border-t border-border-subtle py-4 space-y-1">
+              <dt className="text-meta text-text-secondary">Prérequis</dt>
+              <dd className="text-body text-text">{activeCourse.prerequisites}</dd>
             </div>
 
-            <div className="rounded-2xl bg-creme dark:bg-nuit/50 p-4 space-y-1">
-              <div className="flex items-center gap-2 text-xs font-semibold text-accent">
-                <Calendar className="w-4 h-4" />
-                <span>Prochaine session</span>
-              </div>
-              <p className="text-sm font-medium text-text">
-                {activeCourse.nextSession}
-              </p>
+            <div className="border-t border-border-subtle py-4 space-y-1">
+              <dt className="text-meta text-text-secondary">Prochaine session</dt>
+              <dd className="text-body text-text">{activeCourse.nextSession}</dd>
             </div>
-          </div>
+          </dl>
 
           {/* Objectifs & Ce qu'on sait faire à la fin du niveau */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-4">
-              <h3 className="font-serif text-xl text-text">
+              <h3 className="text-body font-semibold text-text">
                 Objectifs pédagogiques du niveau {activeCourse.level}
               </h3>
-              <ul className="space-y-3">
+              <ul className="list-disc pl-5 space-y-2 text-body text-text marker:text-text-secondary">
                 {activeCourse.objectives.map((obj) => (
-                  <li key={obj} className="flex items-start gap-3 text-sm sm:text-base text-text-secondary">
-                    <CheckCircle2 className="w-5 h-5 text-accent shrink-0 mt-0.5" />
-                    <span>{obj}</span>
-                  </li>
+                  <li key={obj}>{obj}</li>
                 ))}
               </ul>
             </div>
 
             <div className="space-y-4">
-              <h3 className="font-serif text-xl text-text">
+              <h3 className="text-body font-semibold text-text">
                 Ce que vous savez faire à la fin du niveau {activeCourse.level}
               </h3>
-              <ul className="space-y-3">
+              <ul className="list-disc pl-5 space-y-2 text-body text-text marker:text-text-secondary">
                 {activeCourse.canDo.map((skill) => (
-                  <li key={skill} className="flex items-start gap-3 text-sm sm:text-base text-text-secondary">
-                    <Sparkles className="w-5 h-5 text-or shrink-0 mt-0.5" />
-                    <span>{skill}</span>
-                  </li>
+                  <li key={skill}>{skill}</li>
                 ))}
               </ul>
             </div>
           </div>
 
-          <div className="pt-4 border-t border-border-subtle flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-sm">
-            <div className="flex items-center gap-2 text-accent font-medium">
-              <Award className="w-5 h-5 shrink-0" />
-              <span>{activeCourse.examTarget}</span>
-            </div>
-            <span className="text-xs text-text-muted">
+          <div className="pt-4 border-t border-border-subtle flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <p className="text-body font-semibold text-text">{activeCourse.examTarget}</p>
+            <span className="text-meta text-text-secondary">
               Modalité : En ligne & Présentiel au Cameroun (selon cohortes) · 100 % Gratuit
             </span>
           </div>
@@ -510,30 +475,31 @@ export default function LanguageAcademy() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredSessions.map((session, idx) => (
-            <CourseCard key={session.id} session={session} index={idx + 1} />
-          ))}
-        </div>
+        <p className="text-body text-text-secondary">Toutes les sessions sont gratuites, financées par WAHHF.</p>
+          <ul>
+            {filteredSessions.map((session) => (
+              <CourseCard key={session.id} session={session} />
+            ))}
+          </ul>
       </section>
 
       {/* PRÉPARATION AUX EXAMENS OFFICIELS (Goethe, telc, TestDaF — mention indicative TODO) */}
       <Section tone="sauge">
         <div className="container-page">
-          <div className="rounded-card bg-surface-raised border border-border p-8 sm:p-10 space-y-6">
+          <div className="space-y-6">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div>
                 <p className="text-meta text-text-secondary">
                   Mention indicative (TODO : à vérifier)
                 </p>
-                <h2 className="font-serif font-normal text-2xl sm:text-3xl text-text mt-1">
+                <h2 className="text-section-title text-text mt-1">
                   Préparation méthodique aux examens officiels d’allemand
                 </h2>
               </div>
               <DonateButton to="/faire-un-don">Soutenir l’Académie</DonateButton>
             </div>
 
-            <p className="text-sm sm:text-base text-text-secondary leading-relaxed">
+            <p className="text-body text-text-secondary max-w-[65ch]">
               Nos parcours d’accompagnement intègrent des entraînements blancs aux épreuves de compréhension écrite, d’écoute, d’expression écrite et d’oral selon les standards des examens reconnus : <strong>Goethe-Zertifikat, telc Deutsch et TestDaF</strong> (mention indicative — TODO : modalités exactes de partenariat ou d’inscription aux centres d’examen officiels à confirmer par WAHHF).
             </p>
           </div>

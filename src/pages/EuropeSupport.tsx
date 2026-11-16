@@ -1,15 +1,12 @@
+import { Fragment } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import {
-  Compass,
-  FileCheck2,
-  GraduationCap,
-  ShieldAlert,
   ArrowUpRight,
-  CheckCircle2,
-  Home,
 } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
 import SectionHeader from '../components/wahhf/SectionHeader';
+import { TextList, TextListItem, ReadingColumn } from '../components/wahhf/TextList';
+import { CardLink, CardBody, CardMeta, CardTitle, CardNote } from '../components/wahhf/Card';
 import PageHeader, { PageMeta, PageTitle, PageIntro, PageActions } from '../components/wahhf/PageHeader';
 import { PrimaryButton, SecondaryButton } from '../components/wahhf/Buttons';
 import DisclaimerBanner from '../components/wahhf/DisclaimerBanner';
@@ -144,7 +141,7 @@ export default function EuropeSupport() {
             subtitle="Aperçu informatif et gratuit. Vérifiez systématiquement les critères à jour sur les portails officiels ci-dessous."
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <TextList columns={3}>
             {[
               {
                 num: '01',
@@ -162,28 +159,11 @@ export default function EuropeSupport() {
                 text: country.pathways.work,
               },
             ].map((p) => (
-              <div
-                key={p.num}
-                className="relative rounded-card bg-surface-raised border border-border-soft p-7 space-y-3 overflow-hidden shadow-xs"
-              >
-                <span
-                  aria-hidden="true"
-                  className="pointer-events-none select-none absolute -bottom-3 right-3 font-serif text-6xl text-nuit/[0.05]"
-                >
-                  {p.num}
-                </span>
-                <span className="text-xs font-semibold uppercase tracking-wider text-accent-or">
-                  Voie {p.num}
-                </span>
-                <h3 className="font-serif text-2xl text-text">
-                  {p.title}
-                </h3>
-                <p className="text-sm sm:text-base text-text-secondary leading-relaxed">
-                  {p.text}
-                </p>
-              </div>
+              <TextListItem key={p.num} title={p.title}>
+                <p>{p.text}</p>
+              </TextListItem>
             ))}
-          </div>
+          </TextList>
 
           {/* Grandes étapes & Liens officiels */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-6">
@@ -203,43 +183,40 @@ export default function EuropeSupport() {
               </ol>
             </div>
 
-            <div className="surface-green lg:col-span-5 rounded-card bg-nuit text-creme border border-or/35 p-7 sm:p-8 space-y-5 flex flex-col justify-between">
+            <div className="surface-green lg:col-span-5 rounded-card bg-nuit text-text-on-inverse p-7 sm:p-8 space-y-5 flex flex-col justify-between">
               <div className="space-y-4">
-                <h3 className="font-serif text-2xl text-creme">
+                <h3 className="text-body font-semibold text-text-on-inverse">
                   Liens vers les sites officiels ({country.name})
                 </h3>
-                <p className="text-xs text-creme/75">
+                <p className="text-meta text-text-secondary-on-inverse">
                   Ne vous fiez jamais à des pages non officielles. Consultez directement les portails institutionnels :
                 </p>
 
-                <div className="space-y-3 pt-2">
+                <ul className="pt-2">
                   {country.officialLinks.map((lnk) => (
-                    <a
-                      key={lnk.url}
-                      href={lnk.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group block p-4 rounded-2xl bg-white/10 hover:bg-white/15 border border-or/30 transition"
-                    >
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="font-medium text-sm text-creme group-hover:text-or">
-                          {lnk.label}
-                          <span className="sr-only"> (nouvel onglet)</span>
-                        </span>
-                        <ArrowUpRight aria-hidden="true" className="w-4 h-4 text-or shrink-0" />
-                      </div>
-                      <span className="text-[11px] text-gold-on-green block mt-1">
+                    <li key={lnk.url} className="border-t border-border-subtle-on-inverse py-3">
+                      <a
+                        href={lnk.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex min-h-11 items-center gap-2 text-body font-semibold text-link-on-inverse underline underline-offset-4 decoration-1 hover:decoration-2"
+                      >
+                        {lnk.label}
+                        <span className="sr-only"> (nouvel onglet)</span>
+                        <ArrowUpRight aria-hidden="true" className="w-4 h-4 shrink-0" />
+                      </a>
+                      <p className="text-meta text-text-secondary-on-inverse break-all">
                         {lnk.url} ({lnk.todoNote})
-                      </span>
-                    </a>
+                      </p>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
 
-              <div className="pt-6 border-t border-white/15">
+              <div className="pt-4">
                 <Link
                   to="/accompagnement/eviter-les-arnaques"
-                  className="text-xs font-semibold text-or underline underline-offset-4"
+                  className="inline-flex min-h-11 items-center text-body text-link-on-inverse underline underline-offset-4"
                 >
                   Lire notre guide de vigilance contre les fausses offres
                 </Link>
@@ -326,43 +303,27 @@ export default function EuropeSupport() {
           <DisclaimerBanner />
         </section>
 
-        <section className="container-page *:max-w-5xl section-space space-y-8">
-          {guide.sections.map((sec, idx) => (
-            <article
-              key={sec.heading}
-              className="rounded-card bg-surface-raised border border-border-soft p-7 sm:p-10 space-y-4 shadow-xs relative overflow-hidden"
-            >
-              <span
-                aria-hidden="true"
-                className="pointer-events-none select-none absolute -bottom-3 right-4 font-serif text-7xl text-nuit/[0.04]"
-              >
-                0{idx + 1}
-              </span>
-              <h2 className="font-serif font-normal text-2xl sm:text-3xl text-text">
-                {sec.heading}
-              </h2>
-              <p className="text-base text-text-secondary leading-relaxed">
-                {sec.body}
-              </p>
-              {sec.bullets && (
-                <ul className="space-y-2.5 pt-2">
-                  {sec.bullets.map((b) => (
-                    <li
-                      key={b}
-                      className="flex items-start gap-3 text-sm sm:text-base text-v1-encre/85 dark:text-creme/85"
-                    >
-                      <CheckCircle2 className="w-5 h-5 text-accent shrink-0 mt-0.5" />
-                      <span>{b}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </article>
-          ))}
+        <section className="container-page section-space space-y-12">
+          {/* Colonne de lecture de 65 caractères (contrat §8) : sections sans carte ni filigrane (liste §6, EuropeSupport:363) */}
+          <ReadingColumn as="article">
+            {guide.sections.map((sec) => (
+              <Fragment key={sec.heading}>
+                <h2>{sec.heading}</h2>
+                <p>{sec.body}</p>
+                {sec.bullets && (
+                  <ul>
+                    {sec.bullets.map((b) => (
+                      <li key={b}>{b}</li>
+                    ))}
+                  </ul>
+                )}
+              </Fragment>
+            ))}
+          </ReadingColumn>
 
           {/* Navigation entre les 5 guides thématiques */}
-          <div className="surface-green rounded-card bg-nuit text-creme p-7 sm:p-9 border border-or/35 space-y-5">
-            <h3 className="font-serif text-2xl text-creme">
+          <div className="surface-green rounded-card bg-nuit text-text-on-inverse p-7 sm:p-9 space-y-5">
+            <h3 className="text-body font-semibold text-text-on-inverse">
               Tous nos guides thématiques gratuits
             </h3>
             <div className="flex flex-wrap gap-2.5">
@@ -488,82 +449,41 @@ export default function EuropeSupport() {
             title="5 dossiers thématiques pour avancer sans intermédiaire"
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
                 slug: 'comprendre-les-parcours',
-                icon: Compass,
-                title: '1. Comprendre les parcours',
+                title: 'Comprendre les parcours',
                 sub: 'Études, formation professionnelle et travail',
               },
               {
                 slug: 'preparer-son-dossier',
-                icon: FileCheck2,
-                title: '2. Préparer son dossier',
+                title: 'Préparer son dossier',
                 sub: 'Authenticité, CV, motivation et équivalences',
               },
               {
                 slug: 'apprendre-la-langue',
-                icon: GraduationCap,
-                title: '3. Apprendre la langue',
+                title: 'Apprendre la langue',
                 sub: 'Pourquoi la langue précède le départ',
               },
               {
                 slug: 's-installer',
-                icon: Home,
-                title: '4. S’installer en Europe',
+                title: 'S’installer en Europe',
                 sub: 'Logement, assurance et démarches d’arrivée',
               },
               {
                 slug: 'eviter-les-arnaques',
-                icon: ShieldAlert,
-                title: '5. Éviter les arnaques',
+                title: 'Éviter les arnaques',
                 sub: 'Reconnaître une fausse offre et se protéger',
-                highlight: true,
               },
-            ].map((topic) => {
-              const Icon = topic.icon;
-              return (
-                <Link
-                  key={topic.slug}
-                  to={`/accompagnement/${topic.slug}`}
-                  className={`group rounded-card p-6 border transition flex flex-col justify-between ${
-                    topic.highlight
-                      ? 'bg-action text-on-action border-or'
-                      : 'bg-surface-raised border-border-soft hover:border-or'
-                  }`}
-                >
-                  <div className="space-y-3">
-                    <div
-                      className={`w-10 h-10 rounded-inner flex items-center justify-center ${
-                        topic.highlight
-                          ? 'bg-or text-v1-encre'
-                          : 'bg-nuit text-or'
-                      }`}
-                    >
-                      <Icon className="w-5 h-5" />
-                    </div>
-                    <h3 className="font-serif text-lg">{topic.title}</h3>
-                    <p
-                      className={`text-xs leading-relaxed ${
-                        topic.highlight
-                          ? 'text-creme/80'
-                          : 'text-v1-encre/70 dark:text-creme/70'
-                      }`}
-                    >
-                      {topic.sub}
-                    </p>
-                  </div>
-                  <div
-                    className={`pt-4 mt-4 border-t border-current/10 flex items-center justify-between text-xs font-semibold ${
-                      topic.highlight ? 'text-or' : 'text-accent-or'
-                    }`}
-                  >
-                    <span>Consulter</span>
-                  </div>
-                </Link>
-              );
-            })}
+            ].map((topic) => (
+              <CardLink key={topic.slug} to={`/accompagnement/${topic.slug}`} surface="section">
+                <CardBody>
+                  <CardTitle>{topic.title}</CardTitle>
+                  <p className="text-body text-text-secondary">{topic.sub}</p>
+                </CardBody>
+              </CardLink>
+            ))}
           </div>
         </div>
       </Section>
@@ -576,57 +496,26 @@ export default function EuropeSupport() {
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {COUNTRIES_DATA.map((country, idx) => (
-            <Link
-              key={country.slug}
-              to={`/accompagnement/pays/${country.slug}`}
-              className="group relative rounded-card bg-surface-raised border border-border-soft p-7 shadow-xs hover:shadow-md hover:-translate-y-1 transition flex flex-col justify-between overflow-hidden"
-            >
-              <span
-                aria-hidden="true"
-                className="pointer-events-none select-none absolute -bottom-4 right-4 font-serif text-7xl text-nuit/[0.05]"
-              >
-                {String(idx + 1).padStart(2, '0')}
-              </span>
-
-              <div className="space-y-4 relative z-10">
-                <div className="flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-3">
-                    <span className="text-3xl">{country.flag}</span>
-                    <h3 className="font-serif font-normal text-2xl text-text group-hover:text-accent">
-                      {country.name}
-                    </h3>
-                  </div>
-                  <span
-                    className={`px-2.5 py-1 rounded-pill text-[11px] font-semibold ${
-                      country.isEU
-                        ? 'bg-nuit/10 dark:bg-creme/10 text-accent'
-                        : 'bg-or/30 text-v1-encre dark:text-gold-on-green'
-                    }`}
-                  >
-                    {country.isEU ? 'Membre UE' : 'Hors UE'}
-                  </span>
-                </div>
-
-                <p className="text-xs font-medium text-accent">
-                  Langues : {country.languages.join(', ')}
-                </p>
-
-                <p className="text-sm text-text-tertiary line-clamp-3 leading-relaxed">
-                  {country.summary}
-                </p>
-
+          {/* Collection cliquable : sauge sur brume, sans bordure, filigrane ni « Consulter » (liste §5 et §6) */}
+          {COUNTRIES_DATA.map((country) => (
+            <CardLink key={country.slug} to={`/accompagnement/pays/${country.slug}`}>
+              <CardBody>
+                <CardTitle>
+                  <span className="mr-2">{country.flag}</span>
+                  {country.name}
+                </CardTitle>
+                <CardMeta>
+                  <span>{country.isEU ? 'Membre UE' : 'Hors UE'}</span>
+                  <span>Langues : {country.languages.join(', ')}</span>
+                </CardMeta>
+                <p className="text-body text-text-secondary">{country.summary}</p>
                 {!country.isEU && (
-                  <p className="text-xs bg-or/15 border border-or/40 rounded-inner p-2.5 text-text">
+                  <CardNote>
                     <strong>Note :</strong> L’Albanie est un pays européen candidat mais n’est pas membre de l’Union européenne.
-                  </p>
+                  </CardNote>
                 )}
-              </div>
-
-              <div className="pt-5 mt-5 border-t border-border-subtle flex items-center justify-between text-xs font-semibold text-accent relative z-10">
-                <span>Consulter la fiche pays & liens officiels</span>
-              </div>
-            </Link>
+              </CardBody>
+            </CardLink>
           ))}
         </div>
       </section>

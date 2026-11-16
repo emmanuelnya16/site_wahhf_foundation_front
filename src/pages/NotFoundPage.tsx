@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import PageHeader, { PageMeta, PageTitle, PageIntro } from '../components/wahhf/PageHeader';
 import { Link, useLocation } from 'react-router-dom';
 import SEO from '../components/wahhf/SEO';
+import { LinkList, LINK_ROW_CLASS } from '../components/wahhf/TextList';
 import { PrimaryButton, SecondaryButton, DonateButton } from '../components/wahhf/Buttons';
 import { useNoIndex } from '../lib/useNoIndex';
 import { COUNTRIES_DATA } from '../services/api';
@@ -10,19 +11,16 @@ import { COUNTRIES_DATA } from '../services/api';
 export function NotFoundLinks({ heading, links }: { heading: string; links: Array<{ to: string; label: string }> }) {
   return (
     <div className="space-y-4">
-      <h2 className="font-serif font-normal text-2xl text-text">{heading}</h2>
-      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+      <h2 className="text-section-title text-text">{heading}</h2>
+      <LinkList>
         {links.map((l) => (
           <li key={l.to}>
-            <Link
-              to={l.to}
-              className="flex items-center justify-between gap-3 px-4 py-3 rounded-2xl bg-surface-raised border border-border text-sm font-medium text-text hover:border-or transition-colors"
-            >
+            <Link to={l.to} className={LINK_ROW_CLASS}>
               <span>{l.label}</span>
             </Link>
           </li>
         ))}
-      </ul>
+      </LinkList>
     </div>
   );
 }
