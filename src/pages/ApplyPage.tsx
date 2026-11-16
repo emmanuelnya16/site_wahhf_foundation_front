@@ -8,7 +8,9 @@ import ChoiceTile from '../components/wahhf/ChoiceTile';
 import FormField, { FieldError, fieldErrorId } from '../components/wahhf/FormField';
 import { emailError, phoneError, requiredError, focusFirstError } from '../lib/formValidation';
 import { useFocusOnChange } from '../lib/useFocusOnChange';
-import { COUNTRIES_DATA, submitApplication } from '../services/api';
+import ContactHandoff from '../components/wahhf/ContactHandoff';
+import { COUNTRIES_DATA } from '../services/api';
+import { buildDraft } from '../lib/contactDraft';
 
 /**
  * Page /candidater :
@@ -19,8 +21,14 @@ import { COUNTRIES_DATA, submitApplication } from '../services/api';
  * 4. Niveau d'allemand actuel et format souhaité (en ligne / présentiel)
  * 5. Message libre
  * 6. Consentement RGPD + rappel clair : « Aucun document d'identité ni aucun paiement ne vous est demandé à cette étape. »
- * Confirmation chaleureuse à l'envoi avec délai de réponse indicatif (marqué TODO).
+ * Pas encore d'envoi par le site (API Symfony à venir) : un message WhatsApp ou e-mail prérempli est préparé, avec le délai de réponse indicatif (marqué TODO).
  */
+const WISH_LABELS = {
+  cours_allemand: 'Cours d’allemand (A1 à C1)',
+  accompagnement_europe: 'Accompagnement vers l’Europe',
+  les_deux: 'Les deux (Cours + Orientation)',
+} as const;
+
 type ApplyField = 'fullName' | 'email' | 'phone' | 'residenceCountry' | 'city' | 'gdprConsent';
 const STEP1_FIELDS = ['fullName', 'email', 'phone', 'residenceCountry', 'city'] as const;
 const INPUT_CLASS =
@@ -55,11 +63,8 @@ export default function ApplyPage() {
   const initialCountry = searchParams.get('pays') || 'allemagne';
 
   const [step, setStep] = useState<1 | 2 | 3>(1);
-  const [submitting, setSubmitting] = useState(false);
-  const [confirmation, setConfirmation] = useState<{
-    reference: string;
-    responseDelayNote: string;
-  } | null>(null);
+  // Message prêt à envoyer (WhatsApp ou e-mail) : le site ne transmet pas encore la candidature lui-même
+  const [prepared, setPrepared] = useState(false);
 
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -98,14 +103,16 @@ export default function ApplyPage() {
 
   // Après chaque étape ou envoi : défilement en haut du formulaire, focus sur le titre, annonce polie
   const formSectionRef = useRef<HTMLElement>(null);
-  const stepTitleRef = useFocusOnChange<HTMLHeadingElement>(confirmation ? 'confirmation' : step, {
+  const stepTitleRef = useFocusOnChange<HTMLHeadingElement>(prepared ? 'message-pret' : step, {
     scrollRef: formSectionRef,
   });
   const STEP_LABELS = { 1: 'Identité et coordonnées', 2: 'Souhait, pays et niveau d’allemand', 3: 'Projet et consentement' };
-  const statusMessage = confirmation ? 'Envoi terminé.' : `Étape ${step} sur 3 : ${STEP_LABELS[step]}.`;
+  const statusMessage = prepared
+    ? 'Votre message est prêt : envoyez-le par WhatsApp ou par e-mail.'
+    : `Étape ${step} sur 3 : ${STEP_LABELS[step]}.`;
 
   // Chaque étape est validée à l'envoi du formulaire (bouton ou touche Entrée)
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (step === 1) {
       if (validate(STEP1_FIELDS)) setStep(2);
@@ -116,23 +123,28 @@ export default function ApplyPage() {
       return;
     }
     if (!validate(['gdprConsent'])) return;
-    setSubmitting(true);
-    const res = await submitApplication({
-      fullName,
-      email,
-      phone,
-      residenceCountry,
-      city,
-      wishType,
-      targetCountry,
-      currentGermanLevel,
-      preferredFormat,
-      message,
-      gdprConsent,
-    });
-    setSubmitting(false);
-    setConfirmation(res);
+    setPrepared(true);
   };
+
+  // Message préparé avec les réponses : rien n'est stocké ni envoyé par le site
+  const targetCountryName = COUNTRIES_DATA.find((c) => c.slug === targetCountry)?.name;
+  const draft = buildDraft(
+    `Candidature WAHHF — ${fullName.trim()}`,
+    'Je souhaite candidater à un parcours d’accompagnement de WAHHF Foundation. Voici mes réponses au formulaire du site :',
+    [
+      ['Nom complet', fullName],
+      ['E-mail', email],
+      ['Téléphone / WhatsApp', phone],
+      ['Pays de résidence', residenceCountry],
+      ['Ville', city],
+      ['Souhait', WISH_LABELS[wishType]],
+      ['Pays d’intérêt', wishType === 'cours_allemand' ? undefined : targetCountryName],
+      ['Niveau d’allemand', currentGermanLevel],
+      ['Format souhaité', preferredFormat],
+      ['Message', message],
+    ],
+    'J’accepte que mes coordonnées soient traitées par WAHHF Foundation dans le seul but de répondre à ma demande d’accompagnement.'
+  );
 
   return (
     <>
@@ -165,48 +177,22 @@ export default function ApplyPage() {
         <p role="status" className="sr-only">
           {statusMessage}
         </p>
-        {confirmation ? (
-          <div className="rounded-[24px] bg-white dark:bg-[#132A21] border-2 border-[#E8A317] p-8 sm:p-12 text-center space-y-6 shadow-md">
-            <div className="w-16 h-16 rounded-full bg-[#0F3D2E] text-[#E8A317] flex items-center justify-center mx-auto">
-              <CheckCircle2 className="w-9 h-9" />
-            </div>
-
-            <span className="inline-block px-4 py-1 rounded-full bg-[#0F3D2E]/10 dark:bg-[#E8A317]/20 text-xs font-semibold text-[#0F3D2E] dark:text-[#E8A317]">
-              Référence : {confirmation.reference}
-            </span>
-
-            <h2 ref={stepTitleRef} tabIndex={-1} className="font-serif font-normal text-3xl sm:text-4xl text-[#1B1B18] dark:text-[#F5F1E8]">
-              Merci {fullName}, votre candidature est bien enregistrée
-            </h2>
-
-            <p className="text-base text-[#1B1B18]/80 dark:text-[#F5F1E8]/80 max-w-2xl mx-auto leading-relaxed">
-              Toute l’équipe de WAHHF Foundation vous remercie pour votre confiance. Votre demande sera étudiée avec bienveillance par nos coordinateurs pédagogiques.
-            </p>
-
-            <div className="rounded-2xl bg-[#F5F1E8] dark:bg-[#0F3D2E] p-5 max-w-xl mx-auto text-sm text-[#1B1B18] dark:text-[#F5F1E8]">
+        {prepared ? (
+          <ContactHandoff
+            title="Dernière étape : envoyez votre candidature"
+            draft={draft}
+            titleRef={stepTitleRef}
+            onEdit={() => setPrepared(false)}
+          >
+            <div className="rounded-2xl bg-[#0F3D2E]/8 dark:bg-[#0F3D2E] border border-[#0F3D2E]/20 dark:border-[#E8A317]/40 p-5 text-sm text-[#1B1B18] dark:text-[#F5F1E8]">
               <p className="font-semibold text-[#0F3D2E] dark:text-[#E8A317] mb-1">
-                {confirmation.responseDelayNote}
+                Délai de réponse indicatif : sous 7 à 14 jours ouvrés (TODO : délai exact à confirmer par l’équipe WAHHF).
               </p>
               <p className="text-xs opacity-80">
                 Rappel : Aucun collaborateur de WAHHF ne vous demandera d’argent par téléphone, e-mail ou WhatsApp pour traiter votre dossier.
               </p>
             </div>
-
-            <div className="pt-4 flex flex-wrap justify-center gap-4">
-              <Link
-                to="/mobilite-langues"
-                className="px-6 py-3 rounded-full bg-[#0F3D2E] text-[#F5F1E8] text-sm font-semibold"
-              >
-                Retour au hub Mobilité & Langues
-              </Link>
-              <Link
-                to="/"
-                className="px-6 py-3 rounded-full border border-[#0F3D2E]/30 dark:border-[#F5F1E8]/30 text-sm font-medium"
-              >
-                Retour à l’accueil
-              </Link>
-            </div>
-          </div>
+          </ContactHandoff>
         ) : (
           <div className="rounded-[24px] bg-white dark:bg-[#132A21] border border-[#0F3D2E]/15 dark:border-[#F5F1E8]/15 p-6 sm:p-10 shadow-sm space-y-8">
             {/* Barre de progression des 3 étapes */}
@@ -551,12 +537,9 @@ export default function ApplyPage() {
 
                     <button
                       type="submit"
-                      disabled={submitting}
-                      className="px-8 py-3.5 rounded-full bg-[#0F3D2E] hover:bg-[#14523E] text-[#F5F1E8] text-sm sm:text-base font-semibold disabled:opacity-50 cursor-pointer"
+                      className="px-8 py-3.5 rounded-full bg-[#0F3D2E] hover:bg-[#14523E] text-[#F5F1E8] text-sm sm:text-base font-semibold cursor-pointer"
                     >
-                      {submitting
-                        ? 'Enregistrement en cours...'
-                        : 'Envoyer ma candidature gratuite'}
+                      Préparer l’envoi de ma candidature
                     </button>
                   </div>
                 </div>

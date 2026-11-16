@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, FormEvent } from 'react';
+import { useEffect, useState, useRef, FormEvent, Ref } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform, Variants } from 'motion/react';
@@ -32,6 +32,8 @@ import PresenceSection from '../components/wahhf/PresenceSection';
 import { useDialog } from '../lib/useDialog';
 import { useMediaQuery } from '../lib/useMediaQuery';
 import { useFocusOnChange } from '../lib/useFocusOnChange';
+import ContactHandoff from '../components/wahhf/ContactHandoff';
+import { buildDraft } from '../lib/contactDraft';
 import { MQ } from '../lib/gsap';
 import MaskedLines, { splitAtComma } from '../effects/MaskedLines';
 import SplitReveal from '../effects/SplitReveal';
@@ -53,7 +55,6 @@ import {
   WAHHF_IMAGES,
   WAHHF_LOGO_URL,
   imageSrcSet,
-  subscribeNewsletter,
 } from '../services/api';
 
 /**
@@ -153,17 +154,21 @@ export default function Home() {
 
   // Newsletter
   const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [newsletterDone, setNewsletterDone] = useState(false);
-  // Après l'envoi, le formulaire disparaît : le focus passe sur le message qui le remplace
-  const newsletterResultRef = useFocusOnChange<HTMLDivElement>(newsletterDone);
+  // Demande d'inscription prête à envoyer (WhatsApp ou e-mail) : le site n'inscrit encore personne lui-même
+  const [newsletterPrepared, setNewsletterPrepared] = useState(false);
+  // Le formulaire et l'encart se remplacent : le focus passe au titre de l'encart, puis revient au champ
+  const newsletterFocusRef = useFocusOnChange<HTMLElement>(newsletterPrepared);
 
-  const handleNewsletter = async (e: FormEvent) => {
+  const handleNewsletter = (e: FormEvent) => {
     e.preventDefault();
     if (!newsletterEmail.trim()) return;
-    await subscribeNewsletter(newsletterEmail);
-    setNewsletterDone(true);
-    setNewsletterEmail('');
+    setNewsletterPrepared(true);
   };
+  const newsletterDraft = buildDraft(
+    'Inscription à la lettre d’information WAHHF',
+    'Je souhaite recevoir la lettre d’information de WAHHF Foundation.',
+    [['Adresse e-mail', newsletterEmail]]
+  );
 
   return (
     <>
@@ -1137,17 +1142,18 @@ export default function Home() {
 
           <div className="lg:col-span-5">
             <p role="status" className="sr-only">
-              {newsletterDone ? 'Envoi terminé.' : ''}
+              {newsletterPrepared ? 'Votre message est prêt : envoyez-le par WhatsApp ou par e-mail.' : ''}
             </p>
-            {newsletterDone ? (
-              <div
-                ref={newsletterResultRef}
-                tabIndex={-1}
-                className="surface-green rounded-2xl bg-[#0F3D2E] text-[#F5F1E8] p-4 flex items-center gap-3 text-sm"
-              >
-                <CheckCircle2 className="w-5 h-5 text-[#E8A317] shrink-0" />
-                <span>Merci ! Votre inscription à la lettre d’information WAHHF est bien enregistrée.</span>
-              </div>
+            {newsletterPrepared ? (
+              <ContactHandoff
+                compact
+                headingLevel="h3"
+                title="Dernière étape : envoyez votre demande d’inscription"
+                draft={newsletterDraft}
+                titleRef={newsletterFocusRef as Ref<HTMLHeadingElement>}
+                onEdit={() => setNewsletterPrepared(false)}
+                editLabel="Modifier mon adresse"
+              />
             ) : (
               <form onSubmit={handleNewsletter} className="flex flex-col sm:flex-row gap-3">
                 <label htmlFor="wahhf-newsletter-email" className="sr-only">
@@ -1156,6 +1162,7 @@ export default function Home() {
                 <div className="relative flex-1">
                   <Mail className="w-4 h-4 text-[#1B1B18]/50 dark:text-[#F5F1E8]/50 absolute left-4 top-1/2 -translate-y-1/2" />
                   <input
+                    ref={newsletterFocusRef as Ref<HTMLInputElement>}
                     id="wahhf-newsletter-email"
                     type="email"
                     required

@@ -4,7 +4,8 @@ import { Heart, ShieldCheck, CheckCircle2, Sparkles, Lock } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
 import SectionHeader from '../components/wahhf/SectionHeader';
 import ChoiceTile from '../components/wahhf/ChoiceTile';
-import { submitDonation } from '../services/api';
+import ContactHandoff from '../components/wahhf/ContactHandoff';
+import { buildDraft } from '../lib/contactDraft';
 import { useFocusOnChange } from '../lib/useFocusOnChange';
 
 const SUGGESTED_AMOUNTS = [
@@ -26,6 +27,19 @@ const SUGGESTED_AMOUNTS = [
   },
 ];
 
+const ALLOCATION_LABELS = {
+  academie_langues: 'Académie d’allemand A1–C1 & Orientation gratuite',
+  materiel_pedagogique: 'Manuels scolaires, livres d’allemand & bibliothèques',
+  sante_education: 'Actions de terrain : Éducation, Santé & Environnement au Cameroun',
+  general: 'Fonds général WAHHF Foundation',
+} as const;
+
+const PAYMENT_LABELS = {
+  card_sim: 'Carte / Virement SEPA',
+  mobile_money_sim: 'Mobile Money Cameroun',
+  bank_transfer_sim: 'RIB / Virement Fondation',
+} as const;
+
 export default function DonatePage() {
   const [frequency, setFrequency] = useState<'unique' | 'mensuel'>('unique');
   const [selectedAmount, setSelectedAmount] = useState<number>(50);
@@ -40,29 +54,35 @@ export default function DonatePage() {
   >('card_sim');
   const [anonymous, setAnonymous] = useState(false);
   const [gdprConsent, setGdprConsent] = useState(false);
-  const [receiptRef, setReceiptRef] = useState<string | null>(null);
+  // Intention de don prête à envoyer (WhatsApp ou e-mail) : aucun paiement ni enregistrement sur le site
+  const [prepared, setPrepared] = useState(false);
 
   const effectiveAmount = customAmount ? Number(customAmount) || selectedAmount : selectedAmount;
 
-  // Après l'envoi : défilement en haut du bloc, focus sur le titre de la confirmation, annonce polie
+  // Message prêt ou retour au formulaire : défilement en haut du bloc, focus sur le titre, annonce polie
   const formSectionRef = useRef<HTMLElement>(null);
-  const resultTitleRef = useFocusOnChange<HTMLHeadingElement>(receiptRef, { scrollRef: formSectionRef });
+  const resultTitleRef = useFocusOnChange<HTMLHeadingElement>(prepared, { scrollRef: formSectionRef });
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (!gdprConsent || effectiveAmount <= 0) return;
-    const res = await submitDonation({
-      amount: effectiveAmount,
-      frequency,
-      allocation,
-      donorName,
-      donorEmail,
-      paymentMethod,
-      anonymous,
-      gdprConsent,
-    });
-    setReceiptRef(res.receiptRef);
+    setPrepared(true);
   };
+
+  const draft = buildDraft(
+    `Intention de don — ${donorName.trim()}`,
+    'Je souhaite faire un don à WAHHF Foundation. Voici mon intention, saisie sur le site (aucun paiement n’a été effectué) :',
+    [
+      ['Montant', `${effectiveAmount} €`],
+      ['Fréquence', frequency === 'mensuel' ? 'Don mensuel régulier' : 'Don ponctuel'],
+      ['Affectation souhaitée', ALLOCATION_LABELS[allocation]],
+      ['Moyen de règlement souhaité', PAYMENT_LABELS[paymentMethod]],
+      ['Nom ou organisation', donorName],
+      ['E-mail', donorEmail],
+      ['Don anonyme publiquement', anonymous ? 'oui' : 'non'],
+    ],
+    'J’accepte le traitement confidentiel de mes informations pour la gestion de mon don (RGPD).'
+  );
 
   return (
     <>
@@ -88,36 +108,28 @@ export default function DonatePage() {
 
       <section ref={formSectionRef} className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
         <p role="status" className="sr-only">
-          {receiptRef ? 'Envoi terminé.' : ''}
+          {prepared ? 'Votre message est prêt : envoyez-le par WhatsApp ou par e-mail.' : ''}
         </p>
-        {receiptRef ? (
-          <div className="rounded-[24px] bg-white dark:bg-[#132A21] border-2 border-[#E8A317] p-8 sm:p-12 text-center space-y-6 max-w-3xl mx-auto">
-            <div className="w-16 h-16 rounded-full bg-[#C8102E] text-white flex items-center justify-center mx-auto">
-              <Heart className="w-8 h-8 fill-current" />
-            </div>
-            <span className="inline-block px-4 py-1 rounded-full bg-[#0F3D2E]/10 dark:bg-[#E8A317]/20 text-xs font-semibold">
-              Intention de don simulée · Référence : {receiptRef}
-            </span>
-            <h2 ref={resultTitleRef} tabIndex={-1} className="font-serif font-normal text-3xl sm:text-4xl">
-              Merci infiniment pour votre générosité ({effectiveAmount} €)
-            </h2>
-            <p className="text-base text-[#1B1B18]/80 dark:text-[#F5F1E8]/80 max-w-xl mx-auto">
-              Votre intention de don ({frequency === 'mensuel' ? 'mensuel' : 'ponctuel'}) a bien été enregistrée en mode démonstration sécurisée (aucune donnée bancaire collectée). Dès le raccordement du prestataire de paiement officiel Symfony, vous recevrez votre reçu par e-mail.
-            </p>
-            <div className="pt-4">
-              <Link
-                to="/"
-                className="px-7 py-3 rounded-full bg-[#0F3D2E] text-[#F5F1E8] text-sm font-semibold"
-              >
-                Retour à l’accueil
-              </Link>
-            </div>
+        {prepared ? (
+          <div className="max-w-3xl mx-auto">
+            <ContactHandoff
+              title={`Dernière étape : envoyez votre intention de don (${effectiveAmount} €)`}
+              draft={draft}
+              titleRef={resultTitleRef}
+              onEdit={() => setPrepared(false)}
+              editLabel="Modifier mon don"
+            >
+              <p className="text-xs sm:text-sm text-[#1B1B18]/70 dark:text-[#F5F1E8]/70">
+                Aucun paiement n’est effectué sur ce site et aucune donnée bancaire n’y est demandée.
+              </p>
+            </ContactHandoff>
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
             {/* Formulaire de don */}
             <div className="lg:col-span-7 rounded-[24px] bg-white dark:bg-[#132A21] border border-[#0F3D2E]/15 dark:border-[#F5F1E8]/15 p-7 sm:p-10 shadow-sm space-y-8">
               <SectionHeader
+                titleRef={resultTitleRef}
                 kicker="Financer un parcours"
                 title="Choisissez votre contribution solidaire"
               />
@@ -331,7 +343,7 @@ export default function DonatePage() {
                 >
                   <Heart className="w-5 h-5 fill-current" />
                   <span>
-                    Faire un don {frequency === 'mensuel' ? 'mensuel' : ''} de {effectiveAmount} €
+                    Préparer mon don {frequency === 'mensuel' ? 'mensuel' : ''} de {effectiveAmount} €
                   </span>
                 </button>
               </form>

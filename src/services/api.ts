@@ -959,34 +959,28 @@ export async function getArticleBySlug(slug: string): Promise<NewsArticle | unde
   return Promise.resolve(NEWS_DATA.find((a) => a.slug === slug));
 }
 
-export async function submitApplication(payload: ApplicationPayload): Promise<{ reference: string; responseDelayNote: string }> {
-  await new Promise((r) => setTimeout(r, 500));
-  const ref = `WAHHF-CAND-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
-  try {
-    const existing = JSON.parse(localStorage.getItem('wahhf_applications') || '[]');
-    existing.push({ ...payload, reference: ref, submittedAt: new Date().toISOString() });
-    localStorage.setItem('wahhf_applications', JSON.stringify(existing));
-  } catch {
-    // ignore storage errors
-  }
-  return {
-    reference: ref,
-    responseDelayNote: 'Délai de réponse indicatif : sous 7 à 14 jours ouvrés (TODO : délai exact à confirmer par l’équipe WAHHF).',
-  };
+/**
+ * Envois des formulaires : PAS ENCORE BRANCHÉS (API Symfony à venir).
+ * En attendant, les pages préparent un message WhatsApp ou e-mail que la personne envoie elle-même
+ * (src/components/wahhf/ContactHandoff.tsx) ; ces fonctions ne sont plus appelées.
+ * Elles échouent volontairement : jamais de succès simulé, de référence inventée ni de donnée stockée
+ * dans le navigateur. Au branchement : vrai appel réseau, confirmation seulement sur réponse 2xx,
+ * référence créée par le serveur, et côté page un état « envoi en cours » avec try/catch/finally (ETA-01, ETA-02).
+ */
+const FORMS_NOT_CONNECTED = 'Envoi en ligne pas encore disponible : l’API Symfony n’est pas branchée.';
+
+export async function submitApplication(_payload: ApplicationPayload): Promise<{ reference: string; responseDelayNote: string }> {
+  throw new Error(FORMS_NOT_CONNECTED);
 }
 
-export async function submitDonation(payload: DonationPayload): Promise<{ receiptRef: string }> {
-  await new Promise((r) => setTimeout(r, 500));
-  const receiptRef = `WAHHF-DON-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
-  return { receiptRef };
+export async function submitDonation(_payload: DonationPayload): Promise<{ receiptRef: string }> {
+  throw new Error(FORMS_NOT_CONNECTED);
 }
 
-export async function submitContactOrAction(payload: Record<string, unknown>): Promise<{ ok: boolean }> {
-  await new Promise((r) => setTimeout(r, 400));
-  return { ok: Boolean(payload) };
+export async function submitContactOrAction(_payload: Record<string, unknown>): Promise<{ ok: boolean }> {
+  throw new Error(FORMS_NOT_CONNECTED);
 }
 
-export async function subscribeNewsletter(email: string): Promise<{ ok: boolean }> {
-  await new Promise((r) => setTimeout(r, 350));
-  return { ok: Boolean(email) };
+export async function subscribeNewsletter(_email: string): Promise<{ ok: boolean }> {
+  throw new Error(FORMS_NOT_CONNECTED);
 }

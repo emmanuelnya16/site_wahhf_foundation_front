@@ -21,13 +21,14 @@ import PresenceSection from '../components/wahhf/PresenceSection';
 import FormField, { FieldError, fieldErrorId } from '../components/wahhf/FormField';
 import { emailError, requiredError, focusFirstError } from '../lib/formValidation';
 import { useFocusOnChange } from '../lib/useFocusOnChange';
+import ContactHandoff from '../components/wahhf/ContactHandoff';
+import { buildDraft } from '../lib/contactDraft';
 import {
   DOMAINS_DATA,
   NEWS_DATA,
   TIMELINE_MILESTONES,
   WAHHF_LOGO_URL,
   imageSrcSet,
-  submitContactOrAction,
 } from '../services/api';
 
 /**
@@ -595,7 +596,8 @@ export function AgirPage() {
   const [email, setEmail] = useState('');
   const [details, setDetails] = useState('');
   const [consent, setConsent] = useState(false);
-  const [sent, setSent] = useState(false);
+  // Message prêt à envoyer (WhatsApp ou e-mail) : le site ne transmet pas encore la proposition lui-même
+  const [prepared, setPrepared] = useState(false);
 
   // Labels reliés aux champs (useId) ; erreurs précises sous chaque champ, focus sur la première
   const uid = useId();
@@ -613,28 +615,41 @@ export function AgirPage() {
   // (Un nouveau clic sur le même rôle ramène aussi au formulaire, d'où le compteur.)
   const formBlockRef = useRef<HTMLDivElement>(null);
   const [roleRequest, setRoleRequest] = useState(0);
-  const formTitleRef = useFocusOnChange<HTMLHeadingElement>(sent ? 'envoye' : `${roleType}-${roleRequest}`, {
+  const formTitleRef = useFocusOnChange<HTMLHeadingElement>(prepared ? 'message-pret' : `${roleType}-${roleRequest}`, {
     scrollRef: formBlockRef,
   });
   const chooseRole = (role: 'benevole' | 'partenaire') => {
     setRoleType(role);
     setRoleRequest((n) => n + 1);
+    setPrepared(false);
   };
-  const statusMessage = sent
-    ? 'Envoi terminé.'
+  const statusMessage = prepared
+    ? 'Votre message est prêt : envoyez-le par WhatsApp ou par e-mail.'
     : roleRequest > 0
     ? `Formulaire : ${roleType === 'benevole' ? 'devenir bénévole' : 'devenir partenaire'}.`
     : '';
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     const found: Partial<Record<AgirField, string>> = {};
     for (const key of AGIR_FIELDS) found[key] = checkAgirField(key, values[key]);
     setErrors(found);
     if (focusFirstError(AGIR_FIELDS, found, fieldId)) return;
-    await submitContactOrAction({ roleType, name, email, details });
-    setSent(true);
+    setPrepared(true);
   };
+
+  const draft = buildDraft(
+    roleType === 'benevole' ? `Proposition de bénévolat — ${name.trim()}` : `Proposition de partenariat — ${name.trim()}`,
+    roleType === 'benevole'
+      ? 'Je souhaite devenir bénévole pour WAHHF Foundation. Voici ma proposition, saisie sur le site :'
+      : 'Je souhaite proposer un partenariat à WAHHF Foundation. Voici ma proposition, saisie sur le site :',
+    [
+      ['Nom complet / Structure', name],
+      ['E-mail', email],
+      ['Message', details],
+    ],
+    'J’accepte que mes données soient traitées par WAHHF Foundation pour étudier ma proposition d’engagement (RGPD).'
+  );
 
   return (
     <>
@@ -713,14 +728,19 @@ export function AgirPage() {
           <p role="status" className="sr-only">
             {statusMessage}
           </p>
-          {sent ? (
-            <div className="text-center space-y-4 py-6">
-              <CheckCircle2 className="w-12 h-12 text-[#0F3D2E] dark:text-[#E8A317] mx-auto" />
-              <h3 ref={formTitleRef} tabIndex={-1} className="font-serif text-2xl">Merci pour votre proposition d’engagement</h3>
+          {prepared ? (
+            <ContactHandoff
+              compact
+              headingLevel="h3"
+              title={roleType === 'benevole' ? 'Dernière étape : envoyez votre proposition de bénévolat' : 'Dernière étape : envoyez votre proposition de partenariat'}
+              draft={draft}
+              titleRef={formTitleRef}
+              onEdit={() => setPrepared(false)}
+            >
               <p className="text-sm text-[#1B1B18]/75 dark:text-[#F5F1E8]/75">
                 Notre équipe prendra contact avec vous sous 7 à 14 jours ouvrés (TODO : confirmer délai).
               </p>
-            </div>
+            </ContactHandoff>
           ) : (
             <form onSubmit={handleSubmit} noValidate className="space-y-5">
               <h3 ref={formTitleRef} tabIndex={-1} className="font-serif text-2xl">
@@ -822,7 +842,7 @@ export function AgirPage() {
                 type="submit"
                 className="px-7 py-3.5 rounded-full bg-[#0F3D2E] text-[#F5F1E8] text-sm font-semibold cursor-pointer"
               >
-                Envoyer ma proposition
+                Préparer l’envoi de ma proposition
               </button>
             </form>
           )}
