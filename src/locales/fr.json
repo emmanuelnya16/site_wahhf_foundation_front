@@ -133,14 +133,15 @@
     "act": {
       "kicker": "Agir avec nous",
       "title": "Chaque geste renforce un parcours de vie",
-      "subtitle": "Trois manières concrètes de contribuer à la mission de WAHHF Foundation."
+      "subtitle": "Rejoindre la mission comme bénévole ou comme partenaire, ou suivre nos actions par la lettre d'information."
     },
     "newsletter": {
       "kicker": "Restons en lien",
       "title": "Recevoir nos actualités et les dates des prochaines sessions",
-      "subtitle": "Une lettre d'information sobre, envoyée une fois par mois. Désinscription en un clic.",
+      "subtitle": "Votre adresse sert uniquement à vous envoyer cette lettre. Le site ne l'enregistre pas encore : il prépare un message d'inscription à nous envoyer par WhatsApp ou par e-mail.",
       "placeholder": "Votre adresse e-mail",
-      "button": "S'inscrire",
+      "button": "Préparer mon inscription",
+      "privacyLink": "Politique de confidentialité",
       "donateBannerTitle": "Soutenez la gratuité de nos programmes éducatifs et sociaux",
       "donateBannerSub": "100 % des dons financent directement les cours de langue, l'accompagnement des jeunes et les actions de terrain.",
       "donateBannerBtn": "Faire un don"

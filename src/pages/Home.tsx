@@ -31,6 +31,7 @@ import FieldSection from './home/FieldSection';
 import DomainsSection from './home/DomainsSection';
 import PresenceHome from './home/PresenceHome';
 import FiguresSection from './home/FiguresSection';
+import ActSection from './home/ActSection';
 
 import {
   DOMAINS_DATA,
@@ -98,23 +99,6 @@ export default function Home() {
   const paginateTestimonials = (dir: 1 | -1) =>
     setTestimonial(([index]) => [(index + dir + TESTIMONIALS_TODO.length) % TESTIMONIALS_TODO.length, dir]);
 
-  // Newsletter
-  const [newsletterEmail, setNewsletterEmail] = useState('');
-  // Demande d'inscription prête à envoyer (WhatsApp ou e-mail) : le site n'inscrit encore personne lui-même
-  const [newsletterPrepared, setNewsletterPrepared] = useState(false);
-  // Le formulaire et l'encart se remplacent : le focus passe au titre de l'encart, puis revient au champ
-  const newsletterFocusRef = useFocusOnChange<HTMLElement>(newsletterPrepared);
-
-  const handleNewsletter = (e: FormEvent) => {
-    e.preventDefault();
-    if (!newsletterEmail.trim()) return;
-    setNewsletterPrepared(true);
-  };
-  const newsletterDraft = buildDraft(
-    'Inscription à la lettre d’information WAHHF',
-    'Je souhaite recevoir la lettre d’information de WAHHF Foundation.',
-    [['Adresse e-mail', newsletterEmail]]
-  );
 
   return (
     <>
@@ -140,6 +124,9 @@ export default function Home() {
 
       {/* 6. CHIFFRES RÉELS DATÉS : masqués tant que la fondation n'a pas fourni deux résultats sourcés (FiguresSection) */}
       <FiguresSection />
+
+      {/* 7. AGIR + LETTRE D'INFORMATION, un seul bloc, sans bande de don finale : src/pages/home/ActSection.tsx */}
+      <ActSection />
 
       {/* =====================================================================
           2. MISSION (« Qui sommes-nous »)
@@ -505,162 +492,7 @@ export default function Home() {
         </StaggerGroup>
       </section>
 
-      {/* =====================================================================
-          13. AGIR (Trois cartes : Faire un don · Devenir bénévole · Devenir partenaire)
-          ===================================================================== */}
-      <Section tone="sauge" id="agir">
-        <div className="container-page space-y-12">
-          <SectionHeader
-            kicker={t('home.act.kicker')}
-            title={t('home.act.title')}
-            subtitle={t('home.act.subtitle')}
-          />
 
-          <StaggerGroup className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Carte 1 : Faire un don */}
-            <div className="surface-green relative rounded-card bg-nuit text-creme p-8 border border-or/35 flex flex-col justify-between overflow-hidden">
-              <div className="space-y-4">
-                <span className="inline-block px-3 py-1 rounded-pill bg-rouge text-white text-xs font-semibold">
-                  Soutien Financier Direct
-                </span>
-                <h3 className="font-serif font-normal text-2xl sm:text-3xl text-creme">
-                  Faire un don
-                </h3>
-                <p className="text-sm sm:text-base text-creme/80 leading-relaxed">
-                  Financez directement les heures de cours d’allemand gratuits, les manuels pédagogiques et les campagnes de santé communautaire.
-                </p>
-              </div>
-              <div className="pt-8">
-                <DonateButton size="lg" className="w-full">
-                  Faire un don maintenant
-                </DonateButton>
-              </div>
-            </div>
-
-            {/* Carte 2 : Devenir bénévole */}
-            <div className="relative rounded-card bg-surface-raised p-8 border border-border-soft flex flex-col justify-between overflow-hidden shadow-xs">
-              <div className="space-y-4">
-                <span className="inline-block px-3 py-1 rounded-pill bg-nuit/10 dark:bg-or/20 text-accent text-xs font-semibold">
-                  Engagement Humain
-                </span>
-                <h3 className="font-serif font-normal text-2xl sm:text-3xl text-text">
-                  Devenir bénévole
-                </h3>
-                <p className="text-sm sm:text-base text-text-tertiary leading-relaxed">
-                  Rejoignez nos équipes au Cameroun, en Allemagne ou à distance : enseignement des langues, mentorat, santé ou logistique.
-                </p>
-              </div>
-              <div className="pt-8">
-                <PrimaryButton to="/agir#benevole" className="w-full">
-                  Proposer mon aide bénévole
-                </PrimaryButton>
-              </div>
-            </div>
-
-            {/* Carte 3 : Devenir partenaire */}
-            <div className="relative rounded-card bg-surface-raised p-8 border border-border-soft flex flex-col justify-between overflow-hidden shadow-xs">
-              <div className="space-y-4">
-                <span className="inline-block px-3 py-1 rounded-pill bg-or/20 text-v1-encre dark:text-or text-xs font-semibold">
-                  Mécénat & Institutions
-                </span>
-                <h3 className="font-serif font-normal text-2xl sm:text-3xl text-text">
-                  Devenir partenaire
-                </h3>
-                <p className="text-sm sm:text-base text-text-tertiary leading-relaxed">
-                  Écoles, universités, ONG, fondations et entreprises : co-construisons des programmes d’intérêt général mesurables.
-                </p>
-              </div>
-              <div className="pt-8">
-                <PrimaryButton to="/agir#partenaire" className="w-full">
-                  Bâtir un partenariat
-                </PrimaryButton>
-              </div>
-            </div>
-          </StaggerGroup>
-        </div>
-      </Section>
-
-      {/* =====================================================================
-          14. NEWSLETTER + BANDE FINALE D'APPEL AU DON (juste avant le footer)
-          ===================================================================== */}
-      <section id="newsletter" className="container-page section-space space-y-10">
-        {/* Bloc Newsletter */}
-        <div className="rounded-card bg-surface-raised border border-border p-8 sm:p-12 shadow-xs grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          <div className="lg:col-span-7 space-y-2">
-            <h2 className="font-serif font-normal text-2xl sm:text-3xl text-text">
-              {t('home.newsletter.title')}
-            </h2>
-            <p className="text-sm sm:text-base text-text-tertiary">
-              {t('home.newsletter.subtitle')}
-            </p>
-          </div>
-
-          <div className="lg:col-span-5">
-            <p role="status" className="sr-only">
-              {newsletterPrepared ? 'Votre message est prêt : envoyez-le par WhatsApp ou par e-mail.' : ''}
-            </p>
-            {newsletterPrepared ? (
-              <ContactHandoff
-                compact
-                headingLevel="h3"
-                title="Dernière étape : envoyez votre demande d’inscription"
-                draft={newsletterDraft}
-                titleRef={newsletterFocusRef as Ref<HTMLHeadingElement>}
-                onEdit={() => setNewsletterPrepared(false)}
-                editLabel="Modifier mon adresse"
-              />
-            ) : (
-              <form onSubmit={handleNewsletter}>
-                <label htmlFor="wahhf-newsletter-email" className={LABEL_CLASS}>
-                  {t('home.newsletter.placeholder')}
-                </label>
-                <div className="flex flex-col sm:flex-row gap-3">
-                <div className="relative flex-1">
-                  <Mail aria-hidden="true" className="w-4 h-4 text-text-secondary absolute left-4 top-1/2 -translate-y-1/2" />
-                  <input
-                    ref={newsletterFocusRef as Ref<HTMLInputElement>}
-                    id="wahhf-newsletter-email"
-                    type="email"
-                    required
-                    autoComplete="email"
-                    value={newsletterEmail}
-                    onChange={(e) => setNewsletterEmail(e.target.value)}
-                    placeholder={t('home.newsletter.placeholder')}
-                    className={cn(FIELD_CLASS, 'pl-11')}
-                  />
-                </div>
-                <PrimaryButton type="submit" className="shrink-0">
-                  {t('home.newsletter.button')}
-                </PrimaryButton>
-                </div>
-              </form>
-            )}
-          </div>
-        </div>
-
-        {/* Bande finale d'appel au don juste avant le footer */}
-        <div className="surface-green rounded-card bg-gradient-to-r from-nuit via-feuillage to-nuit text-creme p-8 sm:p-12 border border-or/40 flex flex-col lg:flex-row items-center justify-between gap-8">
-          <div className="space-y-2 text-center lg:text-left max-w-2xl">
-            <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-kicker text-or">
-              <Heart className="w-4 h-4 text-rouge fill-current" />
-              <span>Solidarité & Gratuité</span>
-            </div>
-            <h2 className="font-serif font-normal text-2xl sm:text-3xl text-creme">
-              {t('home.newsletter.donateBannerTitle')}
-            </h2>
-            <p className="text-sm sm:text-base text-creme/80">
-              {t('home.newsletter.donateBannerSub')}
-            </p>
-          </div>
-
-          <div className="flex flex-wrap items-center justify-center gap-4 shrink-0">
-            <DonateButton size="lg">{t('home.newsletter.donateBannerBtn')}</DonateButton>
-            <SecondaryButton to="/candidater" onInverse>
-              Être accompagné gratuitement
-            </SecondaryButton>
-          </div>
-        </div>
-      </section>
     </>
   );
 }

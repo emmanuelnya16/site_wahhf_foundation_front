@@ -133,14 +133,15 @@
     "act": {
       "kicker": "Take action with us",
       "title": "Every gesture strengthens a life journey",
-      "subtitle": "Three concrete ways to contribute to WAHHF Foundation's mission."
+      "subtitle": "Join the mission as a volunteer or a partner, or follow our work through the newsletter."
     },
     "newsletter": {
       "kicker": "Stay connected",
       "title": "Receive our news and upcoming session dates",
-      "subtitle": "A thoughtful monthly update. One-click unsubscribe.",
+      "subtitle": "Your address is only used to send you this newsletter. The site does not store it yet: it prepares a sign-up message for you to send us by WhatsApp or e-mail.",
       "placeholder": "Your email address",
-      "button": "Subscribe",
+      "button": "Prepare my sign-up",
+      "privacyLink": "Privacy policy",
       "donateBannerTitle": "Support the free access to our educational and social programs",
       "donateBannerSub": "100% of donations directly fund language courses, youth guidance, and field initiatives.",
       "donateBannerBtn": "Donate"
