@@ -2,41 +2,40 @@ import { useState, useEffect, useRef } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import {
-  ChevronDown,
-  Search,
-  Sun,
-  Moon,
-  Menu,
-  X,
-  GraduationCap,
-  HeartPulse,
-  Briefcase,
-  Sprout,
-  Scale,
-  Globe2,
-} from 'lucide-react';
+import { ChevronDown, Search, Sun, Moon, Menu, X } from 'lucide-react';
 import { DOMAINS_DATA, WAHHF_LOGO_URL, COUNTRIES_DATA, GERMAN_LEVELS_DATA } from '../services/api';
 import { DonateButton } from './wahhf/Buttons';
 import { useDialog } from '../lib/useDialog';
 import { switchTheme } from '../effects/themeTransition';
 import { EASE_OUT, EASE_SCREEN, DURATION } from '../lib/motionTokens';
+import { cn } from '../lib/utils';
 
-const DOMAIN_ICONS: Record<string, typeof GraduationCap> = {
-  education: GraduationCap,
-  sante: HeartPulse,
-  entrepreneuriat: Briefcase,
-  environnement: Sprout,
-  'droits-inclusion': Scale,
-  'mobilite-langues': Globe2,
-};
+/*
+ * En-tête du site (contrat §8, ajout du 16/11 ; §9, §10) : barre opaque pleine largeur fixée en haut, contenu dans le
+ * container, sans pilule ni verre dépoli, toujours visible ; ombre flottante seulement une fois la page défilée (en
+ * sombre : une bordure basse trait-nuit à la place). Lien actif : souligné et aria-current (A11Y-11), pas la couleur seule.
+ */
+const NAV_LINK =
+  'inline-flex items-center gap-1 min-h-11 px-2.5 text-meta text-text whitespace-nowrap underline-offset-[0.4em] decoration-2 transition-colors duration-(--dur-fast) hover:text-link hover:underline cursor-pointer';
+const NAV_LINK_CURRENT = 'underline';
+const ICON_BUTTON =
+  'w-11 h-11 shrink-0 rounded-pill inline-flex items-center justify-center text-text hover:bg-surface-section transition-colors duration-(--dur-fast) cursor-pointer';
+const PANEL = 'rounded-card bg-surface-raised shadow-overlay dark:border dark:border-border-input';
+const PANEL_LINK = 'text-meta text-link underline underline-offset-4 decoration-1 hover:decoration-2';
+const MOBILE_LINK =
+  'block py-2 text-section-title text-text-on-inverse hover:text-link-on-inverse underline-offset-8 decoration-2 transition-colors duration-(--dur-fast)';
+const MOBILE_LINK_CURRENT = 'underline';
+const INVERSE_CHIP =
+  'inline-flex items-center gap-1.5 min-h-11 px-4 rounded-pill text-meta font-bold border transition-colors duration-(--dur-fast)';
+const INVERSE_CHIP_ON = 'bg-action-on-inverse text-on-action-on-inverse border-transparent';
+const INVERSE_CHIP_OFF = 'border-border-on-inverse text-text-on-inverse';
 
 export default function Navbar() {
   const { t, i18n } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
 
-  const [hiddenOnScroll, setHiddenOnScroll] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [megaOpen, setMegaOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -46,7 +45,6 @@ export default function Navbar() {
     () => typeof document !== 'undefined' && document.documentElement.classList.contains('dark')
   );
 
-  const lastScrollY = useRef(0);
   const headerRef = useRef<HTMLElement>(null);
   const megaRef = useRef<HTMLDivElement>(null);
   const megaTriggerRef = useRef<HTMLButtonElement>(null);
@@ -133,23 +131,18 @@ export default function Navbar() {
     });
   };
 
-  // Se CACHE quand on défile vers le bas et RÉAPPARAÎT quand on remonte (transition 0,4 s).
-  // Jamais caché quand un menu est ouvert ou que le focus clavier est dans le header.
+  // En-tête toujours visible (contrat §10) ; ombre flottante dès que la page a défilé (§9).
   useEffect(() => {
-    const handleScroll = () => {
-      const currentY = window.scrollY;
-      const focusInHeader = !!headerRef.current?.contains(document.activeElement);
-      if (currentY > 110 && currentY > lastScrollY.current + 8 && !megaOpen && !mobileOpen && !searchOpen && !focusInHeader) {
-        setHiddenOnScroll(true);
-      } else if (currentY < lastScrollY.current - 6 || currentY <= 80) {
-        setHiddenOnScroll(false);
-      }
-      lastScrollY.current = currentY;
-    };
+    const update = () => setScrolled(window.scrollY > 0);
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    return () => window.removeEventListener('scroll', update);
+  }, []);
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [megaOpen, mobileOpen, searchOpen]);
+  // Lien actif (A11Y-11) : « page » sur la page elle-même, « true » dans sa rubrique.
+  const navState = (path: string, section: string[] = []): 'page' | 'true' | undefined =>
+    location.pathname === path ? 'page' : section.some((x) => location.pathname.startsWith(x)) ? 'true' : undefined;
+  const ACTIONS_SECTION = ['/nos-actions', '/mobilite-langues', '/academie', '/accompagnement'];
 
   // Fermer les menus au changement de route
   useEffect(() => {
@@ -197,15 +190,12 @@ export default function Navbar() {
     <>
       <header
         ref={headerRef}
-        onFocusCapture={() => setHiddenOnScroll(false)}
-        className={`fixed top-3 sm:top-4 left-0 right-0 z-(--z-header) px-3 sm:px-6 transition-transform duration-[400ms] ease-reveal ${
-          hiddenOnScroll ? '-translate-y-28' : 'translate-y-0'
-        }`}
+        className={cn(
+          'fixed inset-x-0 top-0 z-(--z-header) bg-surface border-b border-transparent transition-[box-shadow,border-color] duration-(--dur-fast)',
+          scrolled && 'shadow-overlay dark:border-border-input',
+        )}
       >
-        <div
-          ref={megaRef}
-          className="max-w-7xl mx-auto rounded-pill bg-white/95 dark:bg-v1-sous-bois/95 backdrop-blur-md border border-nuit/12 dark:border-creme/15 shadow-overlay px-3.5 sm:px-6 py-2.5 flex items-center justify-between gap-2"
-        >
+        <div ref={megaRef} className="container-page flex h-16 sm:h-18 items-center justify-between gap-3">
           {/* Gauche : Logo WAHHF */}
           <Link
             to="/"
@@ -217,126 +207,73 @@ export default function Navbar() {
               alt="Logo WAHHF Foundation"
               width={48}
               height={48}
-              className="w-10 h-10 sm:w-11 sm:h-11 object-contain rounded-pill bg-white p-0.5 shadow-xs"
+              className="w-10 h-10 sm:w-11 sm:h-11 object-contain rounded-pill bg-white p-0.5"
             />
             <div className="flex flex-col min-w-0">
-              <span className="font-serif font-normal text-base sm:text-lg leading-none text-nuit dark:text-creme tracking-tight whitespace-nowrap">
-                WAHHF <span className="hidden min-[360px]:inline text-accent-or font-sans text-xs font-semibold uppercase tracking-widest">Foundation</span>
+              <span className="text-body font-bold leading-none text-text whitespace-nowrap">
+                WAHHF<span className="hidden min-[360px]:inline"> Foundation</span>
               </span>
-              <span className="text-[10px] text-text-muted hidden lg:inline whitespace-nowrap">
+              <span className="text-meta text-text-secondary hidden lg:inline xl:hidden whitespace-nowrap">
                 {t('brand.branch')}
               </span>
             </div>
           </Link>
 
           {/* Centre : Menu principal (6 entrées) */}
-          <nav aria-label="Navigation principale" className="hidden xl:flex items-center gap-2">
-            <Link
-              to="/qui-sommes-nous"
-              className={`px-3 py-2 rounded-pill text-sm font-medium whitespace-nowrap transition-colors ${
-                location.pathname === '/qui-sommes-nous'
-                  ? 'bg-nuit/10 dark:bg-creme/15 text-accent'
-                  : 'text-text hover:text-accent'
-              }`}
-            >
+          <nav aria-label="Navigation principale" className="hidden xl:flex items-center gap-1">
+            <Link to="/qui-sommes-nous" aria-current={navState('/qui-sommes-nous')} className={cn(NAV_LINK, navState('/qui-sommes-nous') && NAV_LINK_CURRENT)}>
               {t('nav.about')}
             </Link>
 
-            {/* Entrée 2 : Nos actions (ouvre le méga-menu des 6 domaines) */}
-            <div className="relative">
-              <button
-                ref={megaTriggerRef}
-                type="button"
-                onClick={() => setMegaOpen((prev) => !prev)}
-                aria-expanded={megaOpen}
-                className={`inline-flex items-center gap-1 px-3 py-2 rounded-pill text-sm font-medium whitespace-nowrap transition-colors cursor-pointer ${
-                  location.pathname.startsWith('/nos-actions') ||
-                  location.pathname.startsWith('/mobilite-langues') ||
-                  location.pathname.startsWith('/academie') ||
-                  location.pathname.startsWith('/accompagnement')
-                    ? 'bg-nuit/10 dark:bg-creme/15 text-accent'
-                    : 'text-text hover:text-accent'
-                }`}
-              >
-                <span>{t('nav.actions')}</span>
-                <ChevronDown
-                  className={`w-4 h-4 transition-transform duration-200 ${megaOpen ? 'rotate-180 text-or' : ''}`}
-                />
-              </button>
-            </div>
-
-            <Link
-              to="/notre-impact"
-              className={`px-3 py-2 rounded-pill text-sm font-medium whitespace-nowrap transition-colors ${
-                location.pathname === '/notre-impact'
-                  ? 'bg-nuit/10 dark:bg-creme/15 text-accent'
-                  : 'text-text hover:text-accent'
-              }`}
+            {/* Nos actions : ouvre le méga-menu des 6 domaines ; souligné dans toute la rubrique */}
+            <button
+              ref={megaTriggerRef}
+              type="button"
+              onClick={() => setMegaOpen((prev) => !prev)}
+              aria-expanded={megaOpen}
+              aria-current={navState('/nos-actions', ACTIONS_SECTION) ? 'true' : undefined}
+              className={cn(NAV_LINK, navState('/nos-actions', ACTIONS_SECTION) && NAV_LINK_CURRENT)}
             >
+              <span>{t('nav.actions')}</span>
+              <ChevronDown aria-hidden="true" className={cn('w-4 h-4 transition-transform duration-(--dur-fast)', megaOpen && 'rotate-180')} />
+            </button>
+
+            <Link to="/notre-impact" aria-current={navState('/notre-impact')} className={cn(NAV_LINK, navState('/notre-impact') && NAV_LINK_CURRENT)}>
               {t('nav.impact')}
             </Link>
 
-            <Link
-              to="/actualites"
-              className={`px-3 py-2 rounded-pill text-sm font-medium whitespace-nowrap transition-colors ${
-                location.pathname.startsWith('/actualites')
-                  ? 'bg-nuit/10 dark:bg-creme/15 text-accent'
-                  : 'text-text hover:text-accent'
-              }`}
-            >
+            <Link to="/actualites" aria-current={navState('/actualites', ['/actualites/'])} className={cn(NAV_LINK, navState('/actualites', ['/actualites/']) && NAV_LINK_CURRENT)}>
               {t('nav.news')}
             </Link>
 
-            <Link
-              to="/agir"
-              className={`px-3 py-2 rounded-pill text-sm font-medium whitespace-nowrap transition-colors ${
-                location.pathname === '/agir'
-                  ? 'bg-nuit/10 dark:bg-creme/15 text-accent'
-                  : 'text-text hover:text-accent'
-              }`}
-            >
+            <Link to="/agir" aria-current={navState('/agir')} className={cn(NAV_LINK, navState('/agir') && NAV_LINK_CURRENT)}>
               {t('nav.act')}
             </Link>
 
-            <Link
-              to="/contact"
-              className={`px-3 py-2 rounded-pill text-sm font-medium whitespace-nowrap transition-colors ${
-                location.pathname === '/contact'
-                  ? 'bg-nuit/10 dark:bg-creme/15 text-accent'
-                  : 'text-text hover:text-accent'
-              }`}
-            >
+            <Link to="/contact" aria-current={navState('/contact')} className={cn(NAV_LINK, navState('/contact') && NAV_LINK_CURRENT)}>
               {t('nav.contact')}
             </Link>
           </nav>
 
           {/* Droite : Langue (FR / EN), Recherche, Thème, Bouton Faire un don (rouge), Burger */}
-          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-2 xl:gap-1 shrink-0">
             {/* Sélecteur de langue FR / EN */}
             <div
               role="group"
               aria-label="Sélecteur de langue"
-              className="hidden md:inline-flex items-center rounded-pill bg-surface-inset p-0.5 border border-nuit/10 dark:border-creme/15 text-xs"
+              className="hidden md:inline-flex items-center rounded-pill border border-border-input p-0.5 text-meta"
             >
               <button
                 type="button"
                 onClick={() => switchLanguage('fr')}
-                className={`px-2.5 py-1 rounded-pill font-semibold transition-colors cursor-pointer ${
-                  i18n.language.startsWith('fr')
-                    ? 'bg-accent text-creme dark:text-v1-encre'
-                    : 'text-v1-encre/70 dark:text-creme/70'
-                }`}
+                className={cn('px-2.5 py-1 rounded-pill font-semibold transition-colors cursor-pointer', i18n.language.startsWith('fr') ? 'bg-action text-on-action' : 'text-text-secondary hover:text-link')}
               >
                 FR
               </button>
               <button
                 type="button"
                 onClick={() => switchLanguage('en')}
-                className={`px-2.5 py-1 rounded-pill font-semibold transition-colors cursor-pointer ${
-                  i18n.language.startsWith('en')
-                    ? 'bg-accent text-creme dark:text-v1-encre'
-                    : 'text-v1-encre/70 dark:text-creme/70'
-                }`}
+                className={cn('px-2.5 py-1 rounded-pill font-semibold transition-colors cursor-pointer', i18n.language.startsWith('en') ? 'bg-action text-on-action' : 'text-text-secondary hover:text-link')}
               >
                 EN
               </button>
@@ -349,9 +286,9 @@ export default function Navbar() {
               onClick={() => setSearchOpen((prev) => !prev)}
               aria-expanded={searchOpen}
               aria-label="Rechercher sur le site"
-              className="w-9 h-9 rounded-pill flex items-center justify-center text-text hover:bg-nuit/10 dark:hover:bg-creme/10 transition-colors cursor-pointer"
+              className={ICON_BUTTON}
             >
-              <Search className="w-4 h-4" />
+              <Search aria-hidden="true" className="w-4 h-4" />
             </button>
 
             {/* Interrupteur de thème Clair / Sombre */}
@@ -360,9 +297,9 @@ export default function Navbar() {
               onClick={toggleTheme}
               aria-label={isDark ? t('nav.themeLight') : t('nav.themeDark')}
               title={isDark ? t('nav.themeLight') : t('nav.themeDark')}
-              className="hidden sm:flex w-9 h-9 rounded-pill items-center justify-center text-v1-encre dark:text-or hover:bg-nuit/10 dark:hover:bg-creme/10 transition-colors cursor-pointer"
+              className={cn(ICON_BUTTON, 'hidden sm:inline-flex')}
             >
-              {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              {isDark ? <Sun aria-hidden="true" className="w-4 h-4" /> : <Moon aria-hidden="true" className="w-4 h-4" />}
             </button>
 
             {/* 6e entrée / Bouton « Faire un don » (token rouge) */}
@@ -378,95 +315,69 @@ export default function Navbar() {
               aria-label="Ouvrir le menu principal"
               aria-expanded={mobileOpen}
               aria-controls="menu-mobile"
-              className="xl:hidden w-10 h-10 shrink-0 rounded-pill bg-action text-on-action flex items-center justify-center cursor-pointer"
+              className="xl:hidden w-11 h-11 shrink-0 rounded-pill bg-action text-on-action hover:bg-action-hover flex items-center justify-center cursor-pointer"
             >
-              <Menu className="w-5 h-5" />
+              <Menu aria-hidden="true" className="w-5 h-5" />
             </button>
           </div>
 
-          {/* Méga-menu « Nos actions » (6 domaines) */}
+          {/* Méga-menu « Nos actions » (6 domaines) : panneau flottant aligné sur le container */}
           {megaOpen && (
-            <div className="absolute top-full left-0 right-0 mt-3 rounded-card bg-surface-raised border border-border shadow-2xl p-6 sm:p-8 z-50">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <div className="lg:col-span-8">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-meta text-text-secondary">
-                      Les 6 domaines d’action de WAHHF Foundation
-                    </span>
-                    <Link
-                      to="/nos-actions"
-                      className="text-xs font-semibold text-accent hover:underline flex items-center gap-1"
-                    >
-                      Voir la vue d’ensemble
-                    </Link>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {DOMAINS_DATA.map((dom) => {
-                      const Icon = DOMAIN_ICONS[dom.id] || Globe2;
-                      return (
-                        <Link
-                          key={dom.id}
-                          to={dom.link}
-                          className="group flex items-start gap-3.5 p-3.5 rounded-2xl hover:bg-creme dark:hover:bg-nuit/60 border border-transparent hover:border-or/30 transition"
-                        >
-                          <div className="w-10 h-10 rounded-inner bg-nuit text-or flex items-center justify-center shrink-0 mt-0.5">
-                            <Icon className="w-5 h-5" />
-                          </div>
-                          <div>
-                            <div className="flex items-center gap-2">
-                              <p className="font-serif font-normal text-base text-text group-hover:text-accent">
-                                {dom.title}
-                              </p>
-                            </div>
-                            <p className="text-xs text-v1-encre/70 dark:text-creme/70 line-clamp-2 mt-0.5">
-                              {dom.shortDesc}
-                            </p>
-                          </div>
+            <div className="absolute inset-x-0 top-full pointer-events-none">
+              <div className="container-page">
+                <div className={cn(PANEL, 'pointer-events-auto mt-2 p-6 sm:p-8')}>
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <div className="lg:col-span-8">
+                      <div className="flex items-center justify-between gap-4 mb-4">
+                        <span className="text-meta text-text-secondary">Les 6 domaines d’action de WAHHF Foundation</span>
+                        <Link to="/nos-actions" className={PANEL_LINK}>
+                          Voir la vue d’ensemble
                         </Link>
-                      );
-                    })}
-                  </div>
-                </div>
+                      </div>
 
-                {/* Encart direct Mobilité & Langues */}
-                <div className="surface-green lg:col-span-4 rounded-2xl bg-nuit text-creme p-6 flex flex-col justify-between border border-or/30">
-                  <div className="space-y-3">
-                    <h3 className="font-serif font-normal text-xl text-creme">
-                      Mobilité & Langues : Allemand (A1–C1) & Europe
-                    </h3>
-                    <p className="text-xs text-creme/80 leading-relaxed">
-                      Accompagnement gratuit aux cours d’allemand et orientation vérifiée vers 10 pays européens, financé par IROKO et nos donateurs.
-                    </p>
-                    <div className="pt-2 space-y-1.5 text-xs">
-                      <Link
-                        to="/mobilite-langues/academie"
-                        className="flex items-center justify-between py-1.5 px-3 rounded-inner bg-white/10 hover:bg-white/15 text-creme"
-                      >
-                        <span>Académie de langues (A1 à C1)</span>
-                      </Link>
-                      <Link
-                        to="/mobilite-langues/accompagnement"
-                        className="flex items-center justify-between py-1.5 px-3 rounded-inner bg-white/10 hover:bg-white/15 text-creme"
-                      >
-                        <span>Accompagnement vers 10 pays</span>
-                      </Link>
-                      <Link
-                        to="/accompagnement/eviter-les-arnaques"
-                        className="flex items-center justify-between py-1.5 px-3 rounded-inner bg-or/20 hover:bg-or/30 text-gold-on-green font-medium"
-                      >
-                        <span>Vigilance : Éviter les arnaques</span>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-1">
+                        {DOMAINS_DATA.map((dom) => (
+                          <Link
+                            key={dom.id}
+                            to={dom.link}
+                            className="group block p-3 rounded-inner hover:bg-surface-section transition-colors duration-(--dur-fast)"
+                          >
+                            <p className="text-body font-semibold text-text group-hover:text-link">{dom.title}</p>
+                            <p className="text-meta text-text-secondary mt-0.5">{dom.shortDesc}</p>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Encart Mobilité & Langues : sauge, sans cadre ni carte nuit */}
+                    <div className="lg:col-span-4 rounded-inner bg-surface-section p-6 flex flex-col justify-between gap-4">
+                      <div className="space-y-3">
+                        <h3 className="text-body font-semibold text-text">Mobilité & Langues : Allemand (A1–C1) & Europe</h3>
+                        <p className="text-meta text-text-secondary">
+                          Accompagnement gratuit aux cours d’allemand et orientation vérifiée vers 10 pays européens, financé par IROKO et nos donateurs.
+                        </p>
+                        <ul className="pt-1 space-y-2">
+                          <li>
+                            <Link to="/mobilite-langues/academie" className={PANEL_LINK}>
+                              Académie de langues (A1 à C1)
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to="/mobilite-langues/accompagnement" className={PANEL_LINK}>
+                              Accompagnement vers 10 pays
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to="/accompagnement/eviter-les-arnaques" className={PANEL_LINK}>
+                              Vigilance : Éviter les arnaques
+                            </Link>
+                          </li>
+                        </ul>
+                      </div>
+                      <Link to="/candidater" className={PANEL_LINK}>
+                        Candidater gratuitement
                       </Link>
                     </div>
-                  </div>
-
-                  <div className="pt-4 mt-4 border-t border-white/15 flex items-center justify-between">
-                    <Link
-                      to="/candidater"
-                      className="text-xs font-semibold text-or hover:underline flex items-center gap-1"
-                    >
-                      Candidater gratuitement
-                    </Link>
                   </div>
                 </div>
               </div>
@@ -476,13 +387,11 @@ export default function Navbar() {
 
         {/* Barre de recherche déroulante */}
         {searchOpen && (
-          <div
-            ref={searchPanelRef}
-            role="search"
-            className="max-w-2xl mx-auto mt-2 rounded-card bg-surface-raised border border-border shadow-xl p-4"
-          >
+          <div className="absolute inset-x-0 top-full pointer-events-none">
+          <div className="container-page">
+          <div ref={searchPanelRef} role="search" className={cn(PANEL, 'pointer-events-auto mt-2 ml-auto max-w-2xl p-4')}>
             <div className="flex items-center gap-3">
-              <Search aria-hidden="true" className="w-5 h-5 text-or shrink-0" />
+              <Search aria-hidden="true" className="w-5 h-5 text-text-secondary shrink-0" />
               <input
                 ref={searchInputRef}
                 aria-label={t('nav.searchPlaceholder')}
@@ -490,13 +399,13 @@ export default function Navbar() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={t('nav.searchPlaceholder')}
-                className="w-full bg-transparent text-sm sm:text-base text-text placeholder-v1-encre/50 dark:placeholder-creme/50"
+                className="w-full min-h-11 bg-transparent text-body text-text placeholder:text-text-secondary"
               />
               <button
                 type="button"
                 onClick={() => setSearchOpen(false)}
                 aria-label="Fermer la recherche"
-                className="p-1.5 rounded-pill hover:bg-nuit/10 text-text cursor-pointer"
+                className={ICON_BUTTON}
               >
                 <X className="w-4 h-4" />
               </button>
@@ -513,13 +422,15 @@ export default function Navbar() {
                       setSearchOpen(false);
                       setSearchQuery('');
                     }}
-                    className="w-full text-left px-3 py-2 rounded-inner hover:bg-surface-inset text-sm text-text flex items-center justify-between cursor-pointer"
+                    className="w-full min-h-11 text-left px-3 py-2 rounded-inner hover:bg-surface-section text-body text-text flex items-center justify-between cursor-pointer"
                   >
                     <span>{res.label}</span>
                   </button>
                 ))}
               </div>
             )}
+          </div>
+          </div>
           </div>
         )}
       </header>
@@ -562,9 +473,9 @@ export default function Navbar() {
               }
             }
           }}
-          className="surface-green fixed inset-0 z-(--z-menu) bg-nuit text-creme flex flex-col justify-between p-6 overflow-y-auto"
+          className="surface-green fixed inset-0 z-(--z-menu) bg-surface-inverse text-text-on-inverse flex flex-col justify-between p-6 overflow-y-auto"
         >
-          <div className="flex items-center justify-between pb-6 border-b border-white/15">
+          <div className="flex items-center justify-between pb-6 border-b border-border-subtle-on-inverse">
             <Link to="/" onClick={() => setMobileOpen(false)} className="flex items-center gap-3">
               <img
                 src={WAHHF_LOGO_URL}
@@ -572,8 +483,8 @@ export default function Navbar() {
                 className="w-11 h-11 object-contain rounded-pill bg-white p-0.5"
               />
               <div>
-                <p className="font-serif text-lg text-creme">WAHHF Foundation</p>
-                <p className="text-xs text-or">{t('brand.branch')}</p>
+                <p className="text-body font-bold text-text-on-inverse">WAHHF Foundation</p>
+                <p className="text-meta text-text-secondary-on-inverse">{t('brand.branch')}</p>
               </div>
             </Link>
 
@@ -582,7 +493,7 @@ export default function Navbar() {
               type="button"
               onClick={() => setMobileOpen(false)}
               aria-label="Fermer le menu"
-              className="w-11 h-11 rounded-pill bg-white/10 text-creme flex items-center justify-center"
+              className="w-11 h-11 rounded-pill border border-border-on-inverse text-text-on-inverse flex items-center justify-center"
             >
               <X className="w-6 h-6" />
             </button>
@@ -596,7 +507,8 @@ export default function Navbar() {
           >
             <Link
               to="/qui-sommes-nous"
-              className="block font-serif text-2xl sm:text-3xl text-creme hover:text-or py-1"
+              aria-current={navState('/qui-sommes-nous')}
+              className={cn(MOBILE_LINK, navState('/qui-sommes-nous') && MOBILE_LINK_CURRENT)}
             >
               {t('nav.about')}
             </Link>
@@ -604,16 +516,18 @@ export default function Navbar() {
             <div className="space-y-2">
               <Link
                 to="/nos-actions"
-                className="block font-serif text-2xl sm:text-3xl text-creme hover:text-or py-1"
+              aria-current={navState('/nos-actions', ACTIONS_SECTION)}
+              className={cn(MOBILE_LINK, navState('/nos-actions', ACTIONS_SECTION) && MOBILE_LINK_CURRENT)}
               >
                 {t('nav.actions')} (6 domaines)
               </Link>
-              <div className="pl-4 border-l-2 border-or/40 grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+              <div className="pl-4 border-l border-border-subtle-on-inverse grid grid-cols-1 sm:grid-cols-2 gap-x-4 pt-1">
                 {DOMAINS_DATA.map((d) => (
                   <Link
                     key={d.id}
                     to={d.link}
-                    className="text-sm text-creme/85 hover:text-or py-1 flex items-center gap-2"
+                    aria-current={location.pathname + location.search === d.link ? 'page' : undefined}
+                    className={cn('block py-2 text-body text-text-secondary-on-inverse hover:text-link-on-inverse underline-offset-4 decoration-2', location.pathname + location.search === d.link && 'underline')}
                   >
                     <span>{d.title}</span>
                   </Link>
@@ -623,65 +537,66 @@ export default function Navbar() {
 
             <Link
               to="/notre-impact"
-              className="block font-serif text-2xl sm:text-3xl text-creme hover:text-or py-1"
+              aria-current={navState('/notre-impact')}
+              className={cn(MOBILE_LINK, navState('/notre-impact') && MOBILE_LINK_CURRENT)}
             >
               {t('nav.impact')}
             </Link>
 
             <Link
               to="/actualites"
-              className="block font-serif text-2xl sm:text-3xl text-creme hover:text-or py-1"
+              aria-current={navState('/actualites', ['/actualites/'])}
+              className={cn(MOBILE_LINK, navState('/actualites', ['/actualites/']) && MOBILE_LINK_CURRENT)}
             >
               {t('nav.news')}
             </Link>
 
             <Link
               to="/agir"
-              className="block font-serif text-2xl sm:text-3xl text-creme hover:text-or py-1"
+              aria-current={navState('/agir')}
+              className={cn(MOBILE_LINK, navState('/agir') && MOBILE_LINK_CURRENT)}
             >
               {t('nav.act')}
             </Link>
 
             <Link
               to="/contact"
-              className="block font-serif text-2xl sm:text-3xl text-creme hover:text-or py-1"
+              aria-current={navState('/contact')}
+              className={cn(MOBILE_LINK, navState('/contact') && MOBILE_LINK_CURRENT)}
             >
               {t('nav.contact')}
             </Link>
 
             <Link
               to="/candidater"
-              className="block font-serif text-2xl sm:text-3xl text-or py-1"
+              aria-current={navState('/candidater')}
+              className={cn(MOBILE_LINK, 'text-link-on-inverse', navState('/candidater') && MOBILE_LINK_CURRENT)}
             >
               Candidater (Cours & Europe — Gratuit)
             </Link>
           </motion.nav>
 
-          <div className="pt-6 border-t border-white/15 space-y-4">
+          <div className="pt-6 border-t border-border-subtle-on-inverse space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div className="flex flex-wrap items-center gap-2">
                 <button
                   type="button"
                   onClick={() => switchLanguage('fr')}
-                  className={`px-3 py-1.5 rounded-pill text-xs font-semibold ${
-                    i18n.language.startsWith('fr') ? 'bg-or text-v1-encre' : 'bg-white/10 text-white'
-                  }`}
+                  className={cn(INVERSE_CHIP, i18n.language.startsWith('fr') ? INVERSE_CHIP_ON : INVERSE_CHIP_OFF)}
                 >
                   Français (FR)
                 </button>
                 <button
                   type="button"
                   onClick={() => switchLanguage('en')}
-                  className={`px-3 py-1.5 rounded-pill text-xs font-semibold ${
-                    i18n.language.startsWith('en') ? 'bg-or text-v1-encre' : 'bg-white/10 text-white'
-                  }`}
+                  className={cn(INVERSE_CHIP, i18n.language.startsWith('en') ? INVERSE_CHIP_ON : INVERSE_CHIP_OFF)}
                 >
                   English (EN)
                 </button>
                 <button
                   type="button"
                   onClick={toggleTheme}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-pill text-xs font-semibold bg-white/10 text-white"
+                  className={cn(INVERSE_CHIP, INVERSE_CHIP_OFF)}
                 >
                   {isDark ? <Sun aria-hidden="true" className="w-3.5 h-3.5" /> : <Moon aria-hidden="true" className="w-3.5 h-3.5" />}
                   <span>{isDark ? t('nav.themeLight') : t('nav.themeDark')}</span>
