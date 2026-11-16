@@ -1,6 +1,7 @@
 import { ReactNode, Ref } from 'react';
-import { ArrowLeft, Mail, MessageCircle } from 'lucide-react';
+import { Mail, MessageCircle } from 'lucide-react';
 import { CONTACT } from '../../config/contact';
+import { PrimaryButton, SecondaryButton } from './Buttons';
 import { ContactDraft, mailtoHref, whatsappHref } from '../../lib/contactDraft';
 
 /**
@@ -52,23 +53,19 @@ export default function ContactHandoff({
       </p>
 
       <div className="flex flex-wrap gap-3">
-        <a
-          href={whatsappHref(draft)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-pill bg-action hover:bg-action-hover text-on-action text-sm font-semibold transition-colors"
-        >
-          <MessageCircle aria-hidden="true" className="w-4 h-4" />
-          <span>Envoyer par WhatsApp</span>
-          <span className="sr-only">(nouvel onglet)</span>
-        </a>
-        <a
-          href={mailtoHref(draft)}
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-pill border border-nuit/35 dark:border-creme/30 text-nuit dark:text-creme text-sm font-semibold hover:border-or transition-colors"
-        >
-          <Mail aria-hidden="true" className="w-4 h-4" />
-          <span>Envoyer par e-mail</span>
-        </a>
+        {/* Lien externe : PrimaryButton ajoute ↗ et « (nouvel onglet) » pour les lecteurs d'écran. */}
+        <PrimaryButton href={whatsappHref(draft)}>
+          <span className="inline-flex items-center gap-2">
+            <MessageCircle aria-hidden="true" className="w-4 h-4 shrink-0" />
+            <span>Envoyer par WhatsApp</span>
+          </span>
+        </PrimaryButton>
+        <SecondaryButton href={mailtoHref(draft)}>
+          <span className="inline-flex items-center gap-2">
+            <Mail aria-hidden="true" className="w-4 h-4 shrink-0" />
+            <span>Envoyer par e-mail</span>
+          </span>
+        </SecondaryButton>
       </div>
 
       <p className="text-xs sm:text-sm text-v1-encre/70 dark:text-creme/70">
@@ -87,14 +84,7 @@ export default function ContactHandoff({
 
       {children}
 
-      <button
-        type="button"
-        onClick={onEdit}
-        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-pill border border-border-strong text-sm cursor-pointer"
-      >
-        <ArrowLeft aria-hidden="true" className="w-4 h-4" />
-        <span>{editLabel}</span>
-      </button>
+      <SecondaryButton onClick={onEdit}>{editLabel}</SecondaryButton>
     </div>
   );
 }

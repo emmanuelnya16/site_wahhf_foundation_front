@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ArrowUpRight } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
 import { PrimaryButton, SecondaryButton, DonateButton } from '../components/wahhf/Buttons';
 import { useNoIndex } from '../lib/useNoIndex';
@@ -19,7 +18,6 @@ export function NotFoundLinks({ heading, links }: { heading: string; links: Arra
               className="flex items-center justify-between gap-3 px-4 py-3 rounded-2xl bg-surface-raised border border-border text-sm font-medium text-text hover:border-or transition-colors"
             >
               <span>{l.label}</span>
-              <ArrowUpRight aria-hidden="true" className="w-4 h-4 text-accent-or shrink-0" />
             </Link>
           </li>
         ))}

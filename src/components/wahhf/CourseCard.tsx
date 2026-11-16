@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
-import { Calendar, Clock, Globe2, Users, ArrowUpRight, CheckCircle2 } from 'lucide-react';
+import { Calendar, Clock, Globe2, Users, CheckCircle2 } from 'lucide-react';
 import { CourseSession } from '../../services/api';
+import { PrimaryButton } from './Buttons';
 
 interface CourseCardProps {
   key?: string | number;
@@ -83,15 +84,9 @@ export default function CourseCard({ session, index = 1 }: CourseCardProps) {
         <span className="text-xs text-text-muted">
           Aucun frais demandé
         </span>
-        <Link
-          to={`/candidater?souhait=cours_allemand&niveau=${session.level}`}
-          className="group/btn inline-flex items-center gap-2.5 pl-5 pr-2 py-1.5 rounded-pill bg-action hover:bg-action-hover text-on-action text-sm font-medium transition"
-        >
-          <span>Candidater</span>
-          <span className="w-7 h-7 rounded-pill bg-or text-v1-encre flex items-center justify-center transition-transform duration-(--dur-fast) group-hover/btn:rotate-45">
-            <ArrowUpRight className="w-3.5 h-3.5" />
-          </span>
-        </Link>
+        <PrimaryButton size="sm" to={`/candidater?souhait=cours_allemand&niveau=${session.level}`}>
+          Candidater
+        </PrimaryButton>
       </div>
     </article>
   );

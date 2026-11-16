@@ -3,7 +3,6 @@ import {
   GraduationCap,
   Compass,
   ShieldCheck,
-  ArrowUpRight,
   CheckCircle2,
   HelpCircle,
   Quote,
@@ -73,16 +72,14 @@ export default function MobilityHub() {
           <div className="pt-2 flex flex-wrap items-center gap-4">
             <PrimaryButton
               to="/candidater"
-              magnetic
-              variant="gold"
-              className="hover:bg-or-vif"
+              onInverse
             >
               Candidater au programme
             </PrimaryButton>
-            <SecondaryButton to="/mobilite-langues/academie" light>
+            <SecondaryButton to="/mobilite-langues/academie" onInverse>
               Découvrir l’Académie d’allemand (A1–C1)
             </SecondaryButton>
-            <SecondaryButton to="/mobilite-langues/accompagnement" light>
+            <SecondaryButton to="/mobilite-langues/accompagnement" onInverse>
               Explorer les 10 pays accompagnés
             </SecondaryButton>
           </div>
@@ -253,7 +250,7 @@ export default function MobilityHub() {
               <div className="pt-8 mt-8 border-t border-white/15 flex flex-wrap items-center justify-between gap-4 relative z-10">
                 <PrimaryButton
                   to="/mobilite-langues/accompagnement"
-                  variant="gold"
+                  onInverse
                 >
                   Explorer l’accompagnement Europe
                 </PrimaryButton>
@@ -353,13 +350,12 @@ export default function MobilityHub() {
           <div className="lg:col-span-5 flex flex-col sm:flex-row lg:flex-col gap-3.5 justify-end">
             <PrimaryButton
               to="/candidater"
-              magnetic
-              variant="gold"
+              onInverse
               className="justify-center"
             >
               Candidater gratuitement
             </PrimaryButton>
-            <DonateButton size="lg" magnetic to="/faire-un-don">
+            <DonateButton size="lg" to="/faire-un-don">
               Financer un parcours (Faire un don)
             </DonateButton>
           </div>

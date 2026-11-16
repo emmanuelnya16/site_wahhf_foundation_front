@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform, Variants } from 'motion/react';
 import {
   ArrowDown,
-  ArrowUpRight,
   ChevronLeft,
   ChevronRight,
   Play,
@@ -250,13 +249,11 @@ export default function Home() {
           >
             <PrimaryButton
               to="/faire-un-don"
-              magnetic
-              variant="gold"
-              className="hover:bg-or-vif"
+              onInverse
             >
               {t('hero.ctaPrimary')}
             </PrimaryButton>
-            <SecondaryButton to="/nos-actions" light>
+            <SecondaryButton to="/nos-actions" onInverse>
               {t('hero.ctaSecondary')}
             </SecondaryButton>
           </motion.div>
@@ -307,10 +304,9 @@ export default function Home() {
             <div className="pt-2">
               <Link
                 to="/qui-sommes-nous"
-                className="inline-flex items-center gap-2 text-accent font-semibold hover:underline underline-offset-4 group"
+                className="inline-flex items-center gap-2 text-accent font-semibold hover:underline underline-offset-4"
               >
                 <span>{t('home.mission.link')}</span>
-                <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
             </div>
           </div>
@@ -523,7 +519,6 @@ export default function Home() {
                   </div>
                   <div className="pt-6 mt-6 border-t border-creme/15 flex items-center justify-between text-sm font-medium text-gold-on-green relative z-10">
                     <span>{item.cta}</span>
-                    <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </div>
                 </Link>
               );
@@ -533,8 +528,7 @@ export default function Home() {
           <div data-cascade className="pt-2 flex flex-wrap items-center justify-between gap-4">
             <PrimaryButton
               to="/mobilite-langues"
-              variant="gold"
-              className="hover:bg-or-soleil"
+              onInverse
             >
               {t('home.mobilitySpot.cta')}
             </PrimaryButton>
@@ -961,7 +955,6 @@ export default function Home() {
                 </div>
                 <div className="px-6 pb-6 pt-3 flex items-center justify-between text-xs font-semibold text-accent">
                   <span>Lire l’article</span>
-                  <ArrowUpRight className="w-4 h-4" />
                 </div>
               </Link>
             ))}
@@ -1000,7 +993,6 @@ export default function Home() {
             className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:underline shrink-0"
           >
             <span>{t('home.partners.link')}</span>
-            <ArrowUpRight className="w-4 h-4" />
           </Link>
         </div>
 
@@ -1025,7 +1017,6 @@ export default function Home() {
                 </span>
                 <p className="font-serif text-base sm:text-lg mt-0.5">{p.name}</p>
               </div>
-              <ArrowUpRight className="w-4 h-4 text-or shrink-0" />
             </Link>
           ))}
         </StaggerGroup>
@@ -1064,7 +1055,7 @@ export default function Home() {
                 </p>
               </div>
               <div className="pt-8">
-                <DonateButton size="lg" magnetic className="w-full">
+                <DonateButton size="lg" className="w-full">
                   Faire un don maintenant
                 </DonateButton>
               </div>
@@ -1175,12 +1166,9 @@ export default function Home() {
                     className="w-full pl-11 pr-4 py-3.5 rounded-pill bg-surface-inset border border-border-input text-sm text-text"
                   />
                 </div>
-                <button
-                  type="submit"
-                  className="px-7 py-3.5 rounded-pill bg-action hover:bg-action-hover text-on-action text-sm font-semibold transition-colors cursor-pointer shrink-0"
-                >
+                <PrimaryButton type="submit" className="shrink-0">
                   {t('home.newsletter.button')}
-                </button>
+                </PrimaryButton>
               </form>
             )}
           </div>
@@ -1202,8 +1190,8 @@ export default function Home() {
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-4 shrink-0">
-            <DonateButton size="lg" magnetic>{t('home.newsletter.donateBannerBtn')}</DonateButton>
-            <SecondaryButton to="/candidater" light magnetic>
+            <DonateButton size="lg">{t('home.newsletter.donateBannerBtn')}</DonateButton>
+            <SecondaryButton to="/candidater" onInverse>
               Être accompagné gratuitement
             </SecondaryButton>
           </div>

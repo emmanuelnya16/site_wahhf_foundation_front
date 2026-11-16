@@ -5,7 +5,6 @@ import {
   GraduationCap,
   ShieldAlert,
   ArrowUpRight,
-  ExternalLink,
   AlertTriangle,
   CheckCircle2,
   Home,
@@ -122,11 +121,11 @@ export default function EuropeSupport() {
             <div className="pt-2 flex flex-wrap items-center gap-4">
               <PrimaryButton
                 to={`/candidater?souhait=accompagnement_europe&pays=${country.slug}`}
-                variant="gold"
+                onInverse
               >
                 Être accompagné gratuitement pour : {country.name}
               </PrimaryButton>
-              <SecondaryButton to="/mobilite-langues/accompagnement" light>
+              <SecondaryButton to="/mobilite-langues/accompagnement" onInverse>
                 Voir les 10 pays accompagnés
               </SecondaryButton>
             </div>
@@ -242,8 +241,9 @@ export default function EuropeSupport() {
                       <div className="flex items-center justify-between gap-2">
                         <span className="font-medium text-sm text-creme group-hover:text-or">
                           {lnk.label}
+                          <span className="sr-only"> (nouvel onglet)</span>
                         </span>
-                        <ExternalLink className="w-4 h-4 text-or shrink-0" />
+                        <ArrowUpRight aria-hidden="true" className="w-4 h-4 text-or shrink-0" />
                       </div>
                       <span className="text-[11px] text-gold-on-green block mt-1">
                         {lnk.url} ({lnk.todoNote})
@@ -258,7 +258,7 @@ export default function EuropeSupport() {
                   to="/accompagnement/eviter-les-arnaques"
                   className="text-xs font-semibold text-or underline underline-offset-4"
                 >
-                  → Lire notre guide de vigilance contre les fausses offres
+                  Lire notre guide de vigilance contre les fausses offres
                 </Link>
               </div>
             </div>
@@ -407,12 +407,11 @@ export default function EuropeSupport() {
             <div className="pt-3 flex flex-wrap gap-4">
               <PrimaryButton
                 to="/candidater"
-                magnetic
-                variant="gold"
+                onInverse
               >
                 Demander un accompagnement gratuit
               </PrimaryButton>
-              <SecondaryButton to="/mobilite-langues/accompagnement" light>
+              <SecondaryButton to="/mobilite-langues/accompagnement" onInverse>
                 Retour aux 10 pays accompagnés
               </SecondaryButton>
             </div>
@@ -454,11 +453,11 @@ export default function EuropeSupport() {
           <div className="pt-2 flex flex-wrap items-center gap-4">
             <PrimaryButton
               to="/candidater?souhait=accompagnement_europe"
-              variant="gold"
+              onInverse
             >
               Être accompagné gratuitement
             </PrimaryButton>
-            <SecondaryButton to="/accompagnement/eviter-les-arnaques" light>
+            <SecondaryButton to="/accompagnement/eviter-les-arnaques" onInverse>
               Guide prioritaire : Éviter les arnaques
             </SecondaryButton>
           </div>
@@ -505,7 +504,6 @@ export default function EuropeSupport() {
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-pill bg-surface-inset text-accent text-xs sm:text-sm font-semibold hover:bg-or hover:text-v1-encre transition-colors shrink-0"
               >
                 <span>Lire le guide</span>
-                <ArrowUpRight className="w-4 h-4" />
               </Link>
             </div>
           ))}
@@ -592,7 +590,6 @@ export default function EuropeSupport() {
                     }`}
                   >
                     <span>Consulter</span>
-                    <ArrowUpRight className="w-4 h-4" />
                   </div>
                 </Link>
               );
@@ -659,7 +656,6 @@ export default function EuropeSupport() {
 
               <div className="pt-5 mt-5 border-t border-border-subtle flex items-center justify-between text-xs font-semibold text-accent relative z-10">
                 <span>Consulter la fiche pays & liens officiels</span>
-                <ArrowUpRight className="w-4 h-4" />
               </div>
             </Link>
           ))}

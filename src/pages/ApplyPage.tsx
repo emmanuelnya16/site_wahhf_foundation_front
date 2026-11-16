@@ -1,7 +1,8 @@
 import { useState, useId, useRef, FormEvent } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import { CheckCircle2, ShieldCheck, ArrowRight, ArrowLeft } from 'lucide-react';
+import { CheckCircle2, ShieldCheck } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
+import { PrimaryButton, SecondaryButton } from '../components/wahhf/Buttons';
 import SectionHeader from '../components/wahhf/SectionHeader';
 import DisclaimerBanner from '../components/wahhf/DisclaimerBanner';
 import ChoiceTile from '../components/wahhf/ChoiceTile';
@@ -324,13 +325,7 @@ export default function ApplyPage() {
                   </div>
 
                   <div className="pt-4 flex justify-end">
-                    <button
-                      type="submit"
-                      className="inline-flex items-center gap-2 px-7 py-3 rounded-pill bg-action text-on-action text-sm font-semibold cursor-pointer"
-                    >
-                      <span>Continuer vers l’étape 2</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </button>
+                    <PrimaryButton type="submit">Continuer vers l’étape 2</PrimaryButton>
                   </div>
                 </div>
               )}
@@ -443,22 +438,9 @@ export default function ApplyPage() {
                     </div>
                   </div>
 
-                  <div className="pt-4 flex items-center justify-between">
-                    <button
-                      type="button"
-                      onClick={() => setStep(1)}
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-pill border border-nuit/25 text-sm cursor-pointer"
-                    >
-                      <ArrowLeft className="w-4 h-4" />
-                      <span>Étape précédente</span>
-                    </button>
-                    <button
-                      type="submit"
-                      className="inline-flex items-center gap-2 px-7 py-3 rounded-pill bg-action text-on-action text-sm font-semibold cursor-pointer"
-                    >
-                      <span>Continuer vers l’étape 3</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </button>
+                  <div className="pt-4 flex flex-wrap items-center justify-between gap-3">
+                    <SecondaryButton onClick={() => setStep(1)}>Étape précédente</SecondaryButton>
+                    <PrimaryButton type="submit">Continuer vers l’étape 3</PrimaryButton>
                   </div>
                 </div>
               )}
@@ -525,22 +507,10 @@ export default function ApplyPage() {
                     <FieldError id={fieldErrorId(fieldId('gdprConsent'))} message={errors.gdprConsent} />
                   </div>
 
-                  <div className="pt-4 flex items-center justify-between gap-4">
-                    <button
-                      type="button"
-                      onClick={() => setStep(2)}
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-pill border border-nuit/25 text-sm cursor-pointer"
-                    >
-                      <ArrowLeft className="w-4 h-4" />
-                      <span>Étape précédente</span>
-                    </button>
+                  <div className="pt-4 flex flex-wrap items-center justify-between gap-3">
+                    <SecondaryButton onClick={() => setStep(2)}>Étape précédente</SecondaryButton>
 
-                    <button
-                      type="submit"
-                      className="px-8 py-3.5 rounded-pill bg-action hover:bg-action-hover text-on-action text-sm sm:text-base font-semibold cursor-pointer"
-                    >
-                      Préparer l’envoi de ma candidature
-                    </button>
+                    <PrimaryButton type="submit">Préparer l’envoi de ma candidature</PrimaryButton>
                   </div>
                 </div>
               )}

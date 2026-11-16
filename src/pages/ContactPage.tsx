@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Mail, MapPin, MessageCircle, Phone, ShieldCheck } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
 import SectionHeader from '../components/wahhf/SectionHeader';
+import { PrimaryButton } from '../components/wahhf/Buttons';
 import ChoiceTile from '../components/wahhf/ChoiceTile';
 import FormField, { FieldError, fieldErrorId } from '../components/wahhf/FormField';
 import ContactHandoff from '../components/wahhf/ContactHandoff';
@@ -274,12 +275,7 @@ export default function ContactPage() {
                     <FieldError id={fieldErrorId(fieldId('consent'))} message={errors.consent} />
                   </div>
 
-                  <button
-                    type="submit"
-                    className="px-8 py-3.5 rounded-pill bg-action hover:bg-action-hover text-on-action text-sm sm:text-base font-semibold cursor-pointer"
-                  >
-                    Préparer l’envoi de mon message
-                  </button>
+                  <PrimaryButton type="submit">Préparer l’envoi de mon message</PrimaryButton>
                 </form>
               </div>
             )}
@@ -289,16 +285,16 @@ export default function ContactPage() {
           <div className="lg:col-span-5 space-y-6">
             <div className="surface-green rounded-card bg-nuit text-creme p-7 sm:p-8 border border-or/35 space-y-5">
               <h2 className="font-serif font-normal text-2xl text-creme">Nous joindre directement</h2>
-              <a
+              {/* Lien externe : PrimaryButton ajoute ↗ et « (nouvel onglet) » pour les lecteurs d'écran */}
+              <PrimaryButton
                 href={`https://wa.me/${CONTACT.whatsappNumber}?text=${encodeURIComponent('Bonjour WAHHF Foundation, ')}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-pill bg-or text-v1-encre text-sm font-semibold hover:bg-or-vif transition-colors"
+                onInverse
               >
-                <MessageCircle aria-hidden="true" className="w-4 h-4" />
-                <span>Écrire sur WhatsApp</span>
-                <span className="sr-only">(nouvel onglet)</span>
-              </a>
+                <span className="inline-flex items-center gap-2">
+                  <MessageCircle aria-hidden="true" className="w-4 h-4 shrink-0" />
+                  Écrire sur WhatsApp
+                </span>
+              </PrimaryButton>
               <ul className="space-y-3 text-sm text-creme/85">
                 <li className="flex items-center gap-2.5">
                   <Phone aria-hidden="true" className="w-4 h-4 text-or shrink-0" />

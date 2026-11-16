@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { ArrowUpRight } from 'lucide-react';
 import { DomainItem, imageSrcSet } from '../../services/api';
 
 interface DomainCardProps {
@@ -10,7 +9,7 @@ interface DomainCardProps {
 
 /**
  * Carte domaine d'action : coins très arrondis (24 px), photo en haut avec ratio réservé,
- * étiquette « DOMAINE / 01 / 06 », titre, deux lignes, flèche, et grand numéro en filigrane (01, 02...)
+ * étiquette « DOMAINE / 01 / 06 », titre, deux lignes, et grand numéro en filigrane (01, 02...)
  * très pâle derrière le texte.
  */
 export default function DomainCard({ domain, total = '06' }: DomainCardProps) {
@@ -61,9 +60,6 @@ export default function DomainCard({ domain, total = '06' }: DomainCardProps) {
         <div className="relative z-10 pt-5 mt-5 border-t border-border-subtle flex items-center justify-between">
           <span className="text-xs sm:text-sm font-medium text-accent">
             {domain.slug === 'mobilite-langues' ? 'Découvrir le hub dédié' : 'Découvrir ce domaine'}
-          </span>
-          <span className="w-9 h-9 rounded-pill bg-surface-inset text-accent group-hover:bg-or group-hover:text-v1-encre flex items-center justify-center transition duration-(--dur-fast) group-hover:rotate-45">
-            <ArrowUpRight className="w-4 h-4" />
           </span>
         </div>
       </div>

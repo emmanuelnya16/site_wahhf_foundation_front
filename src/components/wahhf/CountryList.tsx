@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { ArrowUpRight } from 'lucide-react';
 import { EUROPE_SUPPORTED_COUNTRIES } from '../../data/countries';
 
 interface CountryListProps {
@@ -73,12 +72,6 @@ export default function CountryList({
                 </p>
               </div>
             </div>
-
-            <ArrowUpRight
-              className={`w-4 h-4 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 ${
-                isHighlighted ? 'text-or' : 'text-nuit'
-              }`}
-            />
           </Link>
         );
       })}

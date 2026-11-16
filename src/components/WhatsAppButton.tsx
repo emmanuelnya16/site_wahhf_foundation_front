@@ -22,7 +22,7 @@ export default function WhatsAppButton() {
       whileHover={{ scale: 1.06 }}
       whileTap={{ scale: 0.95 }}
       className="focus-ring-double fixed bottom-6 right-6 z-(--z-float) w-13 h-13 bg-action hover:bg-action-hover border border-or/50 text-on-action rounded-pill flex items-center justify-center shadow-[0_12px_30px_rgba(15,61,46,0.35)] group transition-colors duration-(--dur-fast) cursor-pointer"
-      aria-label="Contacter WAHHF Foundation sur WhatsApp"
+      aria-label="Contacter WAHHF Foundation sur WhatsApp (nouvel onglet)"
     >
       <div className="relative flex items-center justify-center">
         <MessageCircle size={24} className="text-creme transition-transform group-hover:scale-105" />

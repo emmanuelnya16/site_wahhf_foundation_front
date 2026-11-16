@@ -1,8 +1,8 @@
 import { lazy, Suspense, useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { MapPin, Compass, AlertCircle } from 'lucide-react';
+import { MapPin, Compass, AlertCircle, ArrowUpRight } from 'lucide-react';
 import { CAMEROON_REGIONS_LIST, CameroonRegionData } from '../../data/regions';
 import { prefetchPresenceGeo } from '../../lib/geoData';
+import { PrimaryButton } from './Buttons';
 import CountryList from './CountryList';
 import ChunkErrorBoundary from './ChunkErrorBoundary';
 
@@ -126,12 +126,9 @@ export default function PresenceSection() {
               </div>
 
               {/* TODO : la page /nos-actions ne filtre pas encore par région (paramètre ?region= ignoré) */}
-              <Link
-                to={`/nos-actions?region=${selectedRegion.id}`}
-                className="px-4 py-2.5 rounded-pill bg-or text-v1-encre text-xs font-semibold hover:bg-or-vif transition-colors shrink-0 text-center"
-              >
+              <PrimaryButton to={`/nos-actions?region=${selectedRegion.id}`} onInverse size="sm" className="shrink-0">
                 Voir les actions
-              </Link>
+              </PrimaryButton>
             </div>
 
             {/* Chips des 10 régions : défilement horizontal sur mobile, retour à la ligne sur desktop */}
@@ -224,18 +221,22 @@ export default function PresenceSection() {
           href="https://www.geoboundaries.org"
           target="_blank"
           rel="noopener noreferrer"
-          className="underline underline-offset-2 hover:text-accent"
+          className="inline-flex items-center gap-0.5 underline underline-offset-2 hover:text-accent"
         >
           geoBoundaries
+          <ArrowUpRight aria-hidden="true" className="w-3 h-3 shrink-0" />
+          <span className="sr-only"> (nouvel onglet)</span>
         </a>{' '}
         (
         <a
           href="https://creativecommons.org/licenses/by/3.0/deed.fr"
           target="_blank"
           rel="noopener noreferrer"
-          className="underline underline-offset-2 hover:text-accent"
+          className="inline-flex items-center gap-0.5 underline underline-offset-2 hover:text-accent"
         >
           CC BY 3.0
+          <ArrowUpRight aria-hidden="true" className="w-3 h-3 shrink-0" />
+          <span className="sr-only"> (nouvel onglet)</span>
         </a>
         ) · pays Natural Earth (domaine public).
       </p>

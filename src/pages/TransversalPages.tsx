@@ -3,7 +3,6 @@ import { Link, useParams, useSearchParams } from 'react-router-dom';
 import {
   ShieldCheck,
   CheckCircle2,
-  ArrowUpRight,
   Users,
   Handshake,
   Calendar,
@@ -117,7 +116,7 @@ export function QuiSommesNousPage() {
             <div className="pt-2 flex flex-wrap gap-4">
               <PrimaryButton
                 to="/partenaires"
-                variant="gold"
+                onInverse
               >
                 Découvrir nos partenaires et financeurs
               </PrimaryButton>
@@ -217,7 +216,7 @@ export function PartenairesPage() {
             WAHHF Foundation est la branche sociale du groupe IROKO. Par son mécénat financier, technologique et humain, le groupe IROKO finance durablement l’Académie de langues (allemand A1 à C1), les supports d’orientation vérifiés vers l’Europe ainsi que les déploiements solidaires dans les 10 régions du Cameroun.
           </p>
           <div className="pt-2 flex flex-wrap gap-4">
-            <SecondaryButton to="/qui-sommes-nous" light>
+            <SecondaryButton to="/qui-sommes-nous" onInverse>
               En savoir plus sur notre gouvernance
             </SecondaryButton>
           </div>
@@ -359,12 +358,12 @@ export function NosActionsPage() {
                       {dom.slug === 'mobilite-langues' ? (
                         <PrimaryButton
                           to="/mobilite-langues"
-                          variant="gold"
+                          onInverse={isHighlighted}
                         >
                           Accéder au hub Mobilité & Langues
                         </PrimaryButton>
                       ) : (
-                        <PrimaryButton to="/agir">Soutenir ce domaine</PrimaryButton>
+                        <PrimaryButton to="/agir" onInverse={isHighlighted}>Soutenir ce domaine</PrimaryButton>
                       )}
                     </div>
                   </div>
@@ -437,7 +436,7 @@ export function NotreImpactPage() {
           </div>
           <PrimaryButton
             to="/transparence"
-            variant="gold"
+            onInverse
             className="shrink-0"
           >
             Voir la page Transparence
@@ -477,9 +476,9 @@ export function ActualitesPage() {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
             <Link
               to="/actualites"
-              className="text-xs font-semibold uppercase tracking-widest text-or hover:underline"
+              className="text-xs font-semibold text-or hover:underline"
             >
-              ← Retour à toutes les actualités
+              Retour à toutes les actualités
             </Link>
             <div className="flex flex-wrap items-center gap-3 text-xs text-creme/80">
               <span className="px-3 py-1 rounded-pill bg-or text-v1-encre font-semibold">
@@ -518,7 +517,7 @@ export function ActualitesPage() {
           </div>
 
           <div className="flex flex-wrap justify-between items-center gap-4 pt-4">
-            <PrimaryButton to="/candidater" magnetic>Candidater au programme gratuit</PrimaryButton>
+            <PrimaryButton to="/candidater">Candidater au programme gratuit</PrimaryButton>
             <DonateButton />
           </div>
         </section>
@@ -572,7 +571,6 @@ export function ActualitesPage() {
             </div>
             <div className="px-6 pb-6 text-xs font-semibold text-accent flex items-center justify-between">
               <span>{art.date}</span>
-              <ArrowUpRight className="w-4 h-4" />
             </div>
           </Link>
         ))}
@@ -709,13 +707,9 @@ export function AgirPage() {
                 Enseignants d’allemand, médecins, mentors ou coordinateurs locaux au Cameroun et en Europe.
               </p>
             </div>
-            <button
-              type="button"
-              onClick={() => chooseRole('benevole')}
-              className="px-5 py-2.5 rounded-pill bg-action text-on-action text-xs font-semibold cursor-pointer"
-            >
-              Remplir le formulaire bénévole ↓
-            </button>
+            <PrimaryButton onClick={() => chooseRole('benevole')}>
+              Remplir le formulaire bénévole
+            </PrimaryButton>
           </div>
 
           <div
@@ -729,13 +723,9 @@ export function AgirPage() {
                 Écoles, universités, ONG et entreprises souhaitant co-financer ou appuyer un programme.
               </p>
             </div>
-            <button
-              type="button"
-              onClick={() => chooseRole('partenaire')}
-              className="px-5 py-2.5 rounded-pill bg-action text-on-action text-xs font-semibold cursor-pointer"
-            >
-              Proposer un partenariat ↓
-            </button>
+            <PrimaryButton onClick={() => chooseRole('partenaire')}>
+              Proposer un partenariat
+            </PrimaryButton>
           </div>
         </div>
 
@@ -854,12 +844,7 @@ export function AgirPage() {
                 <FieldError id={fieldErrorId(fieldId('consent'))} message={errors.consent} />
               </div>
 
-              <button
-                type="submit"
-                className="px-7 py-3.5 rounded-pill bg-action text-on-action text-sm font-semibold cursor-pointer"
-              >
-                Préparer l’envoi de ma proposition
-              </button>
+              <PrimaryButton type="submit">Préparer l’envoi de ma proposition</PrimaryButton>
             </form>
           )}
         </div>

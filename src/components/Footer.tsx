@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ArrowUp, Mail, MapPin, Phone, ShieldCheck, Heart } from 'lucide-react';
+import { ArrowUp, Mail, MapPin, Phone, ShieldCheck } from 'lucide-react';
 import { DOMAINS_DATA, WAHHF_LOGO_URL } from '../services/api';
 import { scrollToTop } from '../lib/scroll';
 import StaggerGroup from '../effects/StaggerGroup';
+import { DonateButton } from './wahhf/Buttons';
 
 /**
  * Footer sombre vert forêt (token foret), 5 colonnes :
@@ -133,7 +134,7 @@ export default function Footer() {
                   to="/mobilite-langues/academie"
                   className="text-xs text-or underline underline-offset-4 hover:text-white"
                 >
-                  → Académie d’allemand A1–C1 (Gratuit)
+                  Académie d’allemand A1–C1 (Gratuit)
                 </Link>
               </li>
             </ul>
@@ -146,13 +147,8 @@ export default function Footer() {
             </h3>
             <ul className="space-y-2.5 text-sm text-creme/80">
               <li>
-                <Link
-                  to="/faire-un-don"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-pill bg-rouge hover:bg-rouge-fonce text-white text-xs font-semibold transition-colors"
-                >
-                  <Heart className="w-3.5 h-3.5 fill-current" />
-                  <span>Faire un don</span>
-                </Link>
+                <DonateButton size="sm" />
+
               </li>
               <li>
                 <Link to="/candidater" className="hover:text-or transition-colors">

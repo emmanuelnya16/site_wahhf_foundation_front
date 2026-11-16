@@ -7,7 +7,6 @@ import {
   Calendar,
   CheckCircle2,
   Award,
-  ArrowUpRight,
   RotateCcw,
   Sparkles,
   BookOpen,
@@ -159,14 +158,14 @@ export default function LanguageAcademy() {
           <div className="pt-2 flex flex-wrap items-center gap-4">
             <PrimaryButton
               to={`/candidater?souhait=cours_allemand&niveau=${activeCourse.level}`}
-              variant="gold"
+              onInverse
             >
               Candidater au niveau {activeCourse.level}
             </PrimaryButton>
-            <SecondaryButton href="#test-niveau" light>
+            <SecondaryButton href="#test-niveau" onInverse>
               Passer le test d’orientation gratuit (20 questions)
             </SecondaryButton>
-            <SecondaryButton href="#calendrier-sessions" light>
+            <SecondaryButton href="#calendrier-sessions" onInverse>
               Voir le calendrier des sessions
             </SecondaryButton>
           </div>
@@ -363,14 +362,9 @@ export default function LanguageAcademy() {
                   Ce questionnaire comporte <strong>20 questions à choix multiples</strong> classées par difficulté croissante (4 questions par niveau : A1, A2, B1, B2, C1). Il dure environ 5 à 8 minutes et est entièrement gratuit.
                 </p>
                 <div className="flex flex-wrap justify-center gap-4">
-                  <button
-                    type="button"
-                    onClick={() => setQuizStarted(true)}
-                    className="inline-flex items-center gap-3 px-7 py-3.5 rounded-pill bg-or text-v1-encre font-semibold text-sm sm:text-base hover:bg-or-vif transition-colors cursor-pointer"
-                  >
-                    <span>Commencer le test des 20 questions</span>
-                    <ArrowUpRight className="w-5 h-5" />
-                  </button>
+                  <PrimaryButton onInverse onClick={() => setQuizStarted(true)}>
+                    Commencer le test des 20 questions
+                  </PrimaryButton>
                 </div>
               </div>
             ) : quizFinished ? (
@@ -393,18 +387,14 @@ export default function LanguageAcademy() {
                 <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
                   <PrimaryButton
                     to={`/candidater?souhait=cours_allemand&niveau=${recommendedLevel}`}
-                    variant="gold"
+                    onInverse
                   >
                     Candidater au niveau {recommendedLevel}
                   </PrimaryButton>
-                  <button
-                    type="button"
-                    onClick={resetQuiz}
-                    className="inline-flex items-center gap-2 px-5 py-3 rounded-pill border border-white/30 text-sm text-creme hover:bg-white/10 transition-colors cursor-pointer"
-                  >
-                    <RotateCcw className="w-4 h-4" />
+                  <SecondaryButton onInverse onClick={resetQuiz}>
+                    <RotateCcw aria-hidden="true" className="inline w-4 h-4 mr-2" />
                     Recommencer le test
-                  </button>
+                  </SecondaryButton>
                 </div>
               </div>
             ) : (
@@ -470,19 +460,19 @@ export default function LanguageAcademy() {
                     onClick={() => setCurrentQIndex((i) => Math.max(0, i - 1))}
                     className="text-xs sm:text-sm text-creme/75 hover:text-white disabled:opacity-40 cursor-pointer"
                   >
-                    ← Question précédente
+                    Question précédente
                   </button>
 
-                  <button
-                    type="button"
+                  <PrimaryButton
+                    onInverse
                     disabled={answers[PLACEMENT_QUESTIONS[currentQIndex].id] === undefined}
                     onClick={handleNextQuestion}
-                    className="px-6 py-2.5 rounded-pill bg-or text-v1-encre text-sm font-semibold disabled:opacity-40 cursor-pointer"
+                    className="disabled:opacity-40 disabled:cursor-not-allowed"
                   >
                     {currentQIndex === PLACEMENT_QUESTIONS.length - 1
                       ? 'Voir mon niveau conseillé'
-                      : 'Question suivante →'}
-                  </button>
+                      : 'Question suivante'}
+                  </PrimaryButton>
                 </div>
               </div>
             )}

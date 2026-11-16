@@ -9,7 +9,6 @@ import {
   Moon,
   Menu,
   X,
-  ArrowUpRight,
   GraduationCap,
   HeartPulse,
   Briefcase,
@@ -398,7 +397,7 @@ export default function Navbar() {
                       to="/nos-actions"
                       className="text-xs font-semibold text-accent hover:underline flex items-center gap-1"
                     >
-                      Voir la vue d’ensemble <ArrowUpRight className="w-3.5 h-3.5" />
+                      Voir la vue d’ensemble
                     </Link>
                   </div>
 
@@ -451,21 +450,18 @@ export default function Navbar() {
                         className="flex items-center justify-between py-1.5 px-3 rounded-inner bg-white/10 hover:bg-white/15 text-creme"
                       >
                         <span>Académie de langues (A1 à C1)</span>
-                        <ArrowUpRight className="w-3.5 h-3.5 text-or" />
                       </Link>
                       <Link
                         to="/mobilite-langues/accompagnement"
                         className="flex items-center justify-between py-1.5 px-3 rounded-inner bg-white/10 hover:bg-white/15 text-creme"
                       >
                         <span>Accompagnement vers 10 pays</span>
-                        <ArrowUpRight className="w-3.5 h-3.5 text-or" />
                       </Link>
                       <Link
                         to="/accompagnement/eviter-les-arnaques"
                         className="flex items-center justify-between py-1.5 px-3 rounded-inner bg-or/20 hover:bg-or/30 text-gold-on-green font-medium"
                       >
                         <span>Vigilance : Éviter les arnaques</span>
-                        <ArrowUpRight className="w-3.5 h-3.5" />
                       </Link>
                     </div>
                   </div>
@@ -475,7 +471,7 @@ export default function Navbar() {
                       to="/candidater"
                       className="text-xs font-semibold text-or hover:underline flex items-center gap-1"
                     >
-                      Candidater gratuitement <ArrowUpRight className="w-3.5 h-3.5" />
+                      Candidater gratuitement
                     </Link>
                   </div>
                 </div>
@@ -526,7 +522,6 @@ export default function Navbar() {
                     className="w-full text-left px-3 py-2 rounded-inner hover:bg-surface-inset text-sm text-text flex items-center justify-between cursor-pointer"
                   >
                     <span>{res.label}</span>
-                    <ArrowUpRight className="w-4 h-4 text-or" />
                   </button>
                 ))}
               </div>
@@ -665,7 +660,7 @@ export default function Navbar() {
               to="/candidater"
               className="block font-serif text-2xl sm:text-3xl text-or py-1"
             >
-              → Candidater (Cours & Europe — Gratuit)
+              Candidater (Cours & Europe — Gratuit)
             </Link>
           </motion.nav>
 

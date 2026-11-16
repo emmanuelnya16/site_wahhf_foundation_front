@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Heart, ShieldCheck, CheckCircle2, Sparkles, Lock } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
 import SectionHeader from '../components/wahhf/SectionHeader';
+import { DonateButton } from '../components/wahhf/Buttons';
 import ChoiceTile from '../components/wahhf/ChoiceTile';
 import ContactHandoff from '../components/wahhf/ContactHandoff';
 import { buildDraft } from '../lib/contactDraft';
@@ -337,15 +338,9 @@ export default function DonatePage() {
                   </label>
                 </div>
 
-                <button
-                  type="submit"
-                  className="w-full py-4 rounded-pill bg-rouge hover:bg-rouge-fonce text-white font-semibold text-base shadow-md transition-colors cursor-pointer flex items-center justify-center gap-2"
-                >
-                  <Heart className="w-5 h-5 fill-current" />
-                  <span>
-                    Préparer mon don {frequency === 'mensuel' ? 'mensuel' : ''} de {effectiveAmount} €
-                  </span>
-                </button>
+                <DonateButton type="submit" size="lg" className="w-full">
+                  Préparer mon don {frequency === 'mensuel' ? 'mensuel' : ''} de {effectiveAmount} €
+                </DonateButton>
               </form>
             </div>
 
@@ -390,7 +385,7 @@ export default function DonatePage() {
                   to="/transparence"
                   className="inline-block text-xs font-semibold text-accent underline underline-offset-4"
                 >
-                  Consulter notre page Transparence financière →
+                  Consulter notre page Transparence financière
                 </Link>
               </div>
             </div>
