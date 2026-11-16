@@ -1,12 +1,10 @@
 import { useEffect, useState, useRef, FormEvent, Ref } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform, Variants } from 'motion/react';
+import { AnimatePresence, motion, Variants } from 'motion/react';
 import {
   ChevronLeft,
   ChevronRight,
-  Play,
-  X,
   Quote,
   Heart,
   Mail,
@@ -22,24 +20,18 @@ import { PrimaryButton, SecondaryButton, DonateButton } from '../components/wahh
 import DomainCard from '../components/wahhf/DomainCard';
 import Counter from '../components/wahhf/Counter';
 import PresenceSection from '../components/wahhf/PresenceSection';
-import { useDialog } from '../lib/useDialog';
-import { useMediaQuery } from '../lib/useMediaQuery';
 import { useFocusOnChange } from '../lib/useFocusOnChange';
 import { EASE_OUT, EASE_SCREEN, DURATION } from '../lib/motionTokens';
 import ContactHandoff from '../components/wahhf/ContactHandoff';
 import { buildDraft } from '../lib/contactDraft';
-import { MQ } from '../lib/gsap';
 import SplitReveal from '../effects/SplitReveal';
 
 import { useTimelineDraw } from '../effects/useTimelineDraw';
 import StaggerGroup from '../effects/StaggerGroup';
-import GalleryGrid from '../components/wahhf/GalleryGrid';
 import HeroSection from './home/HeroSection';
 import MobilitySection from './home/MobilitySection';
-import { galleryItem, GalleryItem, HOME_GALLERY_IDS } from '../data/gallery';
+import FieldSection from './home/FieldSection';
 
-/** Aperçu « En images » de l'accueil (5 photos du First Open Day & Boot Camp). */
-const homeGalleryItems = HOME_GALLERY_IDS.map(galleryItem).filter((item): item is GalleryItem => !!item);
 import {
   DOMAINS_DATA,
   NEWS_DATA,
@@ -94,36 +86,12 @@ const PARTNERS_LIST = [
 
 export default function Home() {
   const { t, i18n } = useTranslation();
-  const shouldReduceMotion = useReducedMotion();
 
-  // Vignette vidéo (section « Vidéo ») : agrandissement sur ordinateur seulement, jamais en « réduire les animations »
-  const isDesktop = useMediaQuery(MQ.desktop);
-  const heroParallax = isDesktop && !shouldReduceMotion;
 
-  // Modale vidéo plein écran à la demande : Échap, focus gardé puis rendu, page figée dessous
-  const [videoModalOpen, setVideoModalOpen] = useState(false);
-  const videoDialogRef = useRef<HTMLDivElement>(null);
-  const videoCloseRef = useRef<HTMLButtonElement>(null);
-  useDialog(videoModalOpen, videoDialogRef, () => setVideoModalOpen(false), {
-    initialFocusRef: videoCloseRef,
-  });
-  // À la fermeture, la vignette est remontée : le focus revient sur son bouton « Regarder »
-  const videoPlayRef = useRef<HTMLButtonElement>(null);
-  const videoWasOpen = useRef(false);
-  useEffect(() => {
-    if (videoWasOpen.current && !videoModalOpen) {
-      requestAnimationFrame(() => videoPlayRef.current?.focus({ preventScroll: true }));
-    }
-    videoWasOpen.current = videoModalOpen;
-  }, [videoModalOpen]);
   // Frise : la ligne se dessine au défilement, chaque jalon apparaît quand il est atteint
   const timelineRef = useRef<HTMLDivElement>(null);
   useTimelineDraw(timelineRef);
 
-  // Léger agrandissement de la vignette (0,92 -> 1) lié au défilement, ordinateur uniquement
-  const videoFrameRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress: videoProgress } = useScroll({ target: videoFrameRef, offset: ['start end', 'center center'] });
-  const videoScale = useTransform(videoProgress, [0, 1], [0.92, 1]);
 
   // Carrousel témoignages
   const [[activeTestimonial, testimonialDir], setTestimonial] = useState<[number, number]>([0, 0]);
@@ -160,6 +128,9 @@ export default function Home() {
 
       {/* 2. MOBILITÉ & LANGUES, juste après le hero (Candidater bien visible) : src/pages/home/MobilitySection.tsx */}
       <MobilitySection />
+
+      {/* 3. SUR LE TERRAIN : photos de l'Open Day et lien vers la galerie : src/pages/home/FieldSection.tsx */}
+      <FieldSection />
 
       {/* =====================================================================
           2. MISSION (« Qui sommes-nous »)
@@ -314,118 +285,6 @@ export default function Home() {
         </div>
       </Section>
 
-
-      {/* =====================================================================
-          6. VIDÉO (Vignette qui s'agrandit en plein écran à la demande — jamais en lecture auto avec son)
-          ===================================================================== */}
-      <section id="video" className="container-page section-space space-y-10">
-        <SectionHeader
-          title={t('home.video.title')}
-          subtitle={t('home.video.subtitle')}
-        />
-
-        {/* Effet de la section : la vignette grandit légèrement au défilement (ordinateur),
-            puis s'ouvre en plein écran AU CLIC par une transition partagée (layoutId).
-            Le cadre garde sa place (16:9) pendant que la vignette est ouverte. */}
-        <motion.div
-          ref={videoFrameRef}
-          style={{ scale: heroParallax ? videoScale : 1 }}
-          className="relative aspect-[16/9] max-w-5xl mx-auto"
-        >
-          {!videoModalOpen && (
-            <motion.div
-              layoutId="wahhf-video-frame"
-              transition={{ duration: DURATION.screen, ease: EASE_SCREEN }}
-              className="absolute inset-0 rounded-card overflow-hidden border border-border shadow-xl group bg-nuit"
-            >
-              <img
-                src={WAHHF_IMAGES.education}
-                srcSet={imageSrcSet(WAHHF_IMAGES.education)}
-                sizes="(min-width: 1024px) 1024px, 100vw"
-                alt="Aperçu vidéo WAHHF Foundation"
-                loading="lazy"
-                decoding="async"
-                width={1280}
-                height={720}
-                className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105 opacity-80"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-nuit/90 via-nuit/35 to-transparent flex flex-col items-center justify-center p-6 text-center">
-                <button
-                  ref={videoPlayRef}
-                  type="button"
-                  onClick={() => setVideoModalOpen(true)}
-                  aria-label={t('home.video.playLabel')}
-                  aria-haspopup="dialog"
-                  className="group/play inline-flex items-center gap-4 pl-4 pr-7 py-3.5 rounded-pill bg-or text-v1-encre font-semibold text-sm sm:text-base shadow-xl hover:scale-[1.03] transition-transform duration-(--dur-fast) cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-creme"
-                >
-                  <span className="w-12 h-12 rounded-pill bg-nuit text-creme flex items-center justify-center">
-                    <Play className="w-5 h-5 fill-current ml-0.5" />
-                  </span>
-                  <span>{t('home.video.playLabel')}</span>
-                </button>
-                <p className="mt-4 text-xs sm:text-sm text-creme/85 max-w-lg">
-                  Lecture à la demande uniquement (respect de votre forfait mobile et de votre tranquillité).
-                </p>
-              </div>
-            </motion.div>
-          )}
-        </motion.div>
-
-        {/* Plein écran : Échap ferme, focus gardé dans la fenêtre, page figée dessous.
-            La vidéo ne démarre que si l'on appuie sur lecture (jamais de son automatique). */}
-        <AnimatePresence>
-          {videoModalOpen && (
-            <motion.div
-              key="video-dialog"
-              ref={videoDialogRef}
-              role="dialog"
-              aria-modal="true"
-              tabIndex={-1}
-              data-lenis-prevent
-              aria-label="Lecteur vidéo WAHHF Foundation"
-              className="fixed inset-0 z-(--z-modal) flex items-center justify-center p-4 sm:p-8"
-            >
-              <motion.div
-                aria-hidden="true"
-                className="absolute inset-0 bg-black/90"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1, transition: { duration: DURATION.screen, ease: EASE_SCREEN } }}
-                exit={{ opacity: 0, transition: { duration: DURATION.screen, ease: EASE_SCREEN } }}
-                onClick={() => setVideoModalOpen(false)}
-              />
-              <motion.div
-                layoutId="wahhf-video-frame"
-                transition={{ duration: DURATION.screen, ease: EASE_SCREEN }}
-                className="relative w-full max-w-5xl rounded-card overflow-hidden bg-nuit border border-or/40 shadow-2xl"
-              >
-                <div className="flex items-center justify-between gap-4 px-6 py-4 border-b border-white/15 text-creme">
-                  <span className="font-serif text-lg">
-                    WAHHF Foundation — Présentation & Écosystème Solidaire (TODO : vidéo dédiée WAHHF à confirmer)
-                  </span>
-                  <button
-                    ref={videoCloseRef}
-                    type="button"
-                    onClick={() => setVideoModalOpen(false)}
-                    aria-label="Fermer la vidéo"
-                    className="w-9 h-9 shrink-0 rounded-pill bg-white/10 hover:bg-or hover:text-v1-encre flex items-center justify-center transition-colors cursor-pointer"
-                  >
-                    <X className="w-5 h-5" />
-                  </button>
-                </div>
-                <div className="aspect-video w-full bg-black">
-                  <video
-                    src="https://res.cloudinary.com/dtntkknaq/video/upload/v1792318859/IROKO-Showreel-2026_1_njl3pg.mp4"
-                    controls
-                    playsInline
-                    preload="none"
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </section>
 
       {/* =====================================================================
           7. NOTRE APPROCHE (5 vignettes avec icônes)
@@ -677,21 +536,6 @@ export default function Home() {
           </div>
         </div>
       </Section>
-
-      {/* =====================================================================
-          11 bis. EN IMAGES (5 vraies photos du First Open Day ; visionneuse ; lien /galerie)
-          ===================================================================== */}
-      <section id="en-images" className="container-page section-space space-y-12">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
-          <SectionHeader
-            title={t('home.gallery.title')}
-            subtitle={t('home.gallery.subtitle')}
-          />
-          <SecondaryButton to="/galerie">{t('home.gallery.link')}</SecondaryButton>
-        </div>
-        {/* 1 grande + 4 petites : grille pleine sur téléphone (2 col.) comme dès la tablette (4 col.) */}
-        <GalleryGrid items={homeGalleryItems} featureFirst cols="grid-cols-2 md:grid-cols-4" />
-      </section>
 
       {/* =====================================================================
           12. PARTENAIRES ET FINANCEURS (Bandeau avec IROKO en premier ; lien vers /partenaires)
