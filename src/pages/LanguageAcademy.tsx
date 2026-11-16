@@ -461,7 +461,7 @@ export default function LanguageAcademy() {
                 <h2 className="text-section-title text-text mt-1">
                   Préparation méthodique aux examens officiels d’allemand
                 </h2>
-                            </div>
+              </div>
               {/* Bouton « Soutenir l’Académie » retiré : pas de don sur les pages des jeunes (ARN-02) */}
             </div>
 

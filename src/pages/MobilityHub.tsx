@@ -267,7 +267,7 @@ export default function MobilityHub() {
               onInverse
               className="justify-center"
             >
-                            Candidater gratuitement
+              Candidater gratuitement
             </PrimaryButton>
             {/* Bouton « Financer un parcours (Faire un don) » retiré : pas de don sur les pages des jeunes (ARN-02) */}
           </div>

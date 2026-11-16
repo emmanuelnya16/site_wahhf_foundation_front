@@ -307,7 +307,7 @@ export default function Navbar() {
               title={isDark ? t('nav.themeLight') : t('nav.themeDark')}
               className={cn(ICON_BUTTON, 'hidden sm:inline-flex')}
             >
-                            {isDark ? <Sun aria-hidden="true" className="w-4 h-4" /> : <Moon aria-hidden="true" className="w-4 h-4" />}
+              {isDark ? <Sun aria-hidden="true" className="w-4 h-4" /> : <Moon aria-hidden="true" className="w-4 h-4" />}
             </button>
           </div>
 
@@ -511,11 +511,11 @@ export default function Navbar() {
               aria-label="Fermer le menu"
               className="w-11 h-11 rounded-pill border border-border-on-inverse text-text-on-inverse flex items-center justify-center"
             >
-                            <X className="w-6 h-6" />
+              <X className="w-6 h-6" />
             </button>
           </div>
 
-                    {/* Les deux portes en tête du menu (T-09), puis les liens : un seul bloc (le panneau répartit ses enfants) */}
+          {/* Les deux portes en tête du menu (T-09), puis les liens : un seul bloc (le panneau répartit ses enfants) */}
           <div>
           <div className="pt-6 grid grid-cols-1 min-[400px]:grid-cols-2 gap-3">
             <PrimaryButton to="/candidater" onInverse className="w-full">
@@ -594,7 +594,7 @@ export default function Navbar() {
               {t('nav.contact')}
             </Link>
 
-                                </motion.nav>
+          </motion.nav>
           </div>
 
           <div className="pt-6 border-t border-border-subtle-on-inverse space-y-4">
@@ -623,7 +623,7 @@ export default function Navbar() {
                   <span>{isDark ? t('nav.themeLight') : t('nav.themeDark')}</span>
                 </button>
               </div>
-                        </div>
+            </div>
           </div>
         </motion.div>
       )}

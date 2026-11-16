@@ -422,7 +422,7 @@ Ce sont ceux de votre demande sur les composants partagés ; ils appliquent les 
 
 - **Boutons**
   - Primaire : fond forêt, texte brume ; survol : fond nuit ; appui (`:active`) : fond nuit immédiat, sans déplacement, **visible au toucher**. En sombre : fond soleil, texte encre ; survol et appui : soleil pâle. Sur nuit (footer, bandes), même en clair : fond soleil, texte encre (tokens « on-inverse », §3.4).
-    - Don : fond cœur, texte blanc, icône cœur ; survol et appui : cœur foncé ; sur nuit et en thème sombre, liseré intérieur de 1 px brume à 60 % (§3.5). Réservé au don.
+  - Don : fond cœur, texte blanc, icône cœur ; survol et appui : cœur foncé ; sur nuit et en thème sombre, liseré intérieur de 1 px brume à 60 % (§3.5). Réservé au don.
   - **Don en contour** (décision du 16 novembre 2026, après le lot 5) : le cœur plein est réservé à la page Don et à la porte « Faire un don » du hero. Dans l'en-tête et le menu mobile, le bouton de don passe en contour : bordure 1,5 px et icône cœur, libellé couleur du texte, fond transparent ; survol et appui : fond cœur, libellé blanc. En thème sombre et sur nuit, où le cœur n'atteint que 3,0:1 (humus) et 2,1:1 (nuit), le contour et l'icône prennent corail (8,9:1 et 6,1:1) : token `donate-outline`.
   - Secondaire : contour 1,5 px forêt, texte forêt, fond transparent ; survol et appui (immédiat, visible au toucher) : fond forêt, texte brume. En sombre, et sur nuit même en clair : contour et texte soleil ; survol et appui : fond soleil, texte encre.
   - Pendant un envoi : le bouton garde ses couleurs, son libellé dit ce qui se passe (« Préparation du message… ») et il ne répond plus au clic.
