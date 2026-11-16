@@ -17,7 +17,6 @@ import { CardLink, CardMedia, CardBody, CardMeta, CardTitle } from '../component
 import { LABEL_CLASS, FIELD_CLASS } from '../components/wahhf/FormField';
 import { cn } from '../lib/utils';
 import { PrimaryButton, SecondaryButton, DonateButton } from '../components/wahhf/Buttons';
-import Counter from '../components/wahhf/Counter';
 import { useFocusOnChange } from '../lib/useFocusOnChange';
 import { EASE_OUT, EASE_SCREEN, DURATION } from '../lib/motionTokens';
 import ContactHandoff from '../components/wahhf/ContactHandoff';
@@ -31,6 +30,7 @@ import MobilitySection from './home/MobilitySection';
 import FieldSection from './home/FieldSection';
 import DomainsSection from './home/DomainsSection';
 import PresenceHome from './home/PresenceHome';
+import FiguresSection from './home/FiguresSection';
 
 import {
   DOMAINS_DATA,
@@ -138,6 +138,9 @@ export default function Home() {
       {/* 5. CARTE DE PRÉSENCE : src/pages/home/PresenceHome.tsx */}
       <PresenceHome />
 
+      {/* 6. CHIFFRES RÉELS DATÉS : masqués tant que la fondation n'a pas fourni deux résultats sourcés (FiguresSection) */}
+      <FiguresSection />
+
       {/* =====================================================================
           2. MISSION (« Qui sommes-nous »)
           ===================================================================== */}
@@ -217,58 +220,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* =====================================================================
-          3. CHIFFRES CLÉS (4 compteurs animés)
-          ===================================================================== */}
-      <section id="chiffres-cles" className="surface-green py-16 sm:py-20 bg-nuit text-creme border-y border-or/25">
-        <div className="container-page space-y-12">
-          <SectionHeader
-            title={t('home.stats.title')}
-            subtitle={t('home.stats.subtitle')}
-            onInverse
-          />
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                number: 1250,
-                suffix: '+',
-                label: t('home.stats.s1Label'),
-                note: 'Valeur d’exemple — TODO : confirmer chiffre officiel',
-              },
-              {
-                number: 6,
-                suffix: '',
-                label: t('home.stats.s2Label'),
-                note: 'Éducation, Santé, Entrepreneuriat, Environnement, Droits, Mobilité',
-              },
-              {
-                number: 10,
-                suffix: '',
-                label: t('home.stats.s3Label'),
-                note: 'Présence et relais communautaires au Cameroun',
-              },
-              {
-                number: 10,
-                suffix: '',
-                label: t('home.stats.s4Label'),
-                note: 'Fiches pays vérifiées & cours d’allemand A1–C1 gratuits',
-              },
-            ].map((stat, idx) => (
-              <div
-                key={idx}
-                className="relative rounded-card bg-feuillage/70 border border-or/30 p-7 overflow-hidden"
-              >
-                <p className="font-serif font-normal text-4xl sm:text-5xl text-or mb-3">
-                  <Counter end={stat.number} suffix={stat.suffix} />
-                </p>
-                <p className="text-base font-medium text-creme mb-1.5">{stat.label}</p>
-                <p className="text-xs text-creme/65">{stat.note}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
 
 
