@@ -6,7 +6,7 @@ import SectionHeader from '../components/wahhf/SectionHeader';
 import PageHeader, { PageTitle, PageIntro } from '../components/wahhf/PageHeader';
 import { PrimaryButton } from '../components/wahhf/Buttons';
 import ChoiceTile from '../components/wahhf/ChoiceTile';
-import FormField, { FieldError, fieldErrorId } from '../components/wahhf/FormField';
+import FormField, { FieldError, fieldErrorId, LABEL_CLASS, FIELD_CLASS, CHECK_LABEL_CLASS, CHECKBOX_CLASS } from '../components/wahhf/FormField';
 import ContactHandoff from '../components/wahhf/ContactHandoff';
 import { CONTACT } from '../config/contact';
 import { buildDraft } from '../lib/contactDraft';
@@ -25,8 +25,7 @@ type Motif = (typeof MOTIFS)[number]['id'];
 
 type ContactField = 'motif' | 'name' | 'email' | 'whatsapp' | 'message' | 'consent';
 const CONTACT_FIELDS = ['motif', 'name', 'email', 'whatsapp', 'message', 'consent'] as const;
-const INPUT_CLASS =
-  'w-full px-4 py-3 rounded-inner bg-surface-inset border border-border-input aria-invalid:border-danger text-sm';
+const INPUT_CLASS = FIELD_CLASS;
 
 function checkContactField(key: ContactField, value: string | boolean): string | undefined {
   switch (key) {
@@ -128,7 +127,7 @@ export default function ContactPage() {
                 onEdit={() => setPrepared(false)}
               />
             ) : (
-              <div className="rounded-card bg-surface-raised border border-border p-7 sm:p-10 shadow-sm space-y-8">
+              <div className="rounded-card bg-surface-section p-7 sm:p-10 space-y-8">
                 <SectionHeader
                   titleRef={titleRef}
                   title="Votre message"
@@ -136,7 +135,7 @@ export default function ContactPage() {
 
                 <form onSubmit={handleSubmit} noValidate className="space-y-6">
                   <fieldset>
-                    <legend className="text-xs font-semibold uppercase tracking-wider mb-3">
+                    <legend className={LABEL_CLASS}>
                       Motif de votre message *
                     </legend>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -154,7 +153,7 @@ export default function ContactPage() {
                           invalid={!!errors.motif}
                           describedBy={errors.motif ? fieldErrorId(fieldId('motif')) : undefined}
                           showCheck
-                          className="p-4 rounded-2xl text-left text-sm font-medium"
+                          className="p-4 rounded-2xl text-left font-medium"
                         >
                           {m.label}
                         </ChoiceTile>
@@ -241,7 +240,7 @@ export default function ContactPage() {
                   </FormField>
 
                   <div>
-                    <label className="flex items-start gap-3 cursor-pointer text-xs sm:text-sm text-v1-encre/85 dark:text-creme/85">
+                    <label className={CHECK_LABEL_CLASS}>
                       <input
                         id={fieldId('consent')}
                         type="checkbox"
@@ -253,7 +252,7 @@ export default function ContactPage() {
                         }}
                         aria-invalid={errors.consent ? true : undefined}
                         aria-describedby={errors.consent ? fieldErrorId(fieldId('consent')) : undefined}
-                        className="mt-1 w-4 h-4"
+                        className={CHECKBOX_CLASS}
                       />
                       <span>
                         J’accepte que mes coordonnées soient traitées par WAHHF Foundation pour répondre à mon

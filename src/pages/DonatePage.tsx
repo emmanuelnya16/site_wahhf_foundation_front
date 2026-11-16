@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ShieldCheck, CheckCircle2, Sparkles, Lock } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
 import SectionHeader from '../components/wahhf/SectionHeader';
+import { LABEL_CLASS, FIELD_CLASS, CHECK_LABEL_CLASS, CHECKBOX_CLASS } from '../components/wahhf/FormField';
 import PageHeader, { PageTitle, PageIntro } from '../components/wahhf/PageHeader';
 import { DonateButton } from '../components/wahhf/Buttons';
 import ChoiceTile from '../components/wahhf/ChoiceTile';
@@ -123,7 +124,7 @@ export default function DonatePage() {
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
             {/* Formulaire de don */}
-            <div className="lg:col-span-7 rounded-card bg-surface-raised border border-border p-7 sm:p-10 shadow-sm space-y-8">
+            <div className="lg:col-span-7 rounded-card bg-surface-section p-7 sm:p-10 space-y-8">
               <SectionHeader
                 titleRef={resultTitleRef}
                 title="Choisissez votre contribution solidaire"
@@ -144,7 +145,7 @@ export default function DonatePage() {
                         value={f.id}
                         checked={frequency === f.id}
                         onChange={() => setFrequency(f.id)}
-                        className="py-2.5 px-3 rounded-pill text-sm font-semibold text-center"
+                        className="py-2.5 px-3 rounded-pill font-semibold text-center"
                       >
                         {f.label}
                       </ChoiceTile>
@@ -181,7 +182,7 @@ export default function DonatePage() {
                 <div>
                   <label
                     htmlFor="donate-custom"
-                    className="block text-xs font-semibold uppercase tracking-wider mb-2"
+                    className={LABEL_CLASS}
                   >
                     Ou saisissez un montant libre (en € ou équivalent FCFA)
                   </label>
@@ -192,7 +193,7 @@ export default function DonatePage() {
                     value={customAmount}
                     onChange={(e) => setCustomAmount(e.target.value)}
                     placeholder="Autre montant (ex. 75)"
-                    className="w-full px-4 py-3 rounded-inner bg-surface-inset border border-border-input text-sm"
+                    className={FIELD_CLASS}
                   />
                 </div>
 
@@ -200,7 +201,7 @@ export default function DonatePage() {
                 <div>
                   <label
                     htmlFor="donate-allocation"
-                    className="block text-xs font-semibold uppercase tracking-wider mb-2"
+                    className={LABEL_CLASS}
                   >
                     Affecter mon don en priorité à :
                   </label>
@@ -216,7 +217,7 @@ export default function DonatePage() {
                           | 'materiel_pedagogique'
                       )
                     }
-                    className="w-full px-4 py-3 rounded-inner bg-surface-inset border border-border-input text-sm"
+                    className={FIELD_CLASS}
                   >
                     <option value="academie_langues">
                       Financer un parcours : Académie d’allemand A1–C1 & Orientation gratuite
@@ -238,40 +239,42 @@ export default function DonatePage() {
                   <div>
                     <label
                       htmlFor="donor-name"
-                      className="block text-xs font-semibold uppercase tracking-wider mb-2"
+                      className={LABEL_CLASS}
                     >
                       Nom & Prénom (ou Organisation) *
                     </label>
                     <input
                       id="donor-name"
                       type="text"
+                      autoComplete="name"
                       required
                       value={donorName}
                       onChange={(e) => setDonorName(e.target.value)}
-                      className="w-full px-4 py-3 rounded-inner bg-surface-inset border border-border-input text-sm"
+                      className={FIELD_CLASS}
                     />
                   </div>
                   <div>
                     <label
                       htmlFor="donor-email"
-                      className="block text-xs font-semibold uppercase tracking-wider mb-2"
+                      className={LABEL_CLASS}
                     >
                       E-mail (pour le reçu) *
                     </label>
                     <input
                       id="donor-email"
                       type="email"
+                      autoComplete="email"
                       required
                       value={donorEmail}
                       onChange={(e) => setDonorEmail(e.target.value)}
-                      className="w-full px-4 py-3 rounded-inner bg-surface-inset border border-border-input text-sm"
+                      className={FIELD_CLASS}
                     />
                   </div>
                 </div>
 
                 {/* Mode de paiement simulé sans collecte de données bancaires */}
                 <fieldset>
-                  <legend className="text-xs font-semibold uppercase tracking-wider mb-2">
+                  <legend className={LABEL_CLASS}>
                     Moyen de règlement souhaité (Simulation sécurisée — aucune donnée bancaire collectée)
                   </legend>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs">
@@ -296,23 +299,23 @@ export default function DonatePage() {
                 </fieldset>
 
                 <div className="space-y-2.5 pt-2">
-                  <label className="flex items-center gap-2.5 text-xs sm:text-sm cursor-pointer">
+                  <label className={CHECK_LABEL_CLASS}>
                     <input
                       type="checkbox"
                       checked={anonymous}
                       onChange={(e) => setAnonymous(e.target.checked)}
-                      className="w-4 h-4"
+                      className={CHECKBOX_CLASS}
                     />
                     <span>Je souhaite que mon don reste anonyme publiquement</span>
                   </label>
 
-                  <label className="flex items-start gap-2.5 text-xs sm:text-sm cursor-pointer">
+                  <label className={CHECK_LABEL_CLASS}>
                     <input
                       type="checkbox"
                       required
                       checked={gdprConsent}
                       onChange={(e) => setGdprConsent(e.target.checked)}
-                      className="mt-1 w-4 h-4"
+                      className={CHECKBOX_CLASS}
                     />
                     <span>
                       J’accepte le traitement confidentiel de mes informations pour la gestion de mon don (RGPD). Aucune donnée bancaire n’est enregistrée sur ce formulaire de démonstration. *

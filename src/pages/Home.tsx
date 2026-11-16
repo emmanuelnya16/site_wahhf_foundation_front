@@ -25,6 +25,8 @@ import {
 import SEO from '../components/wahhf/SEO';
 import SectionHeader from '../components/wahhf/SectionHeader';
 import Section from '../components/wahhf/Section';
+import { LABEL_CLASS, FIELD_CLASS } from '../components/wahhf/FormField';
+import { cn } from '../lib/utils';
 import { PrimaryButton, SecondaryButton, DonateButton } from '../components/wahhf/Buttons';
 import DomainCard from '../components/wahhf/DomainCard';
 import Counter from '../components/wahhf/Counter';
@@ -1131,26 +1133,29 @@ export default function Home() {
                 editLabel="Modifier mon adresse"
               />
             ) : (
-              <form onSubmit={handleNewsletter} className="flex flex-col sm:flex-row gap-3">
-                <label htmlFor="wahhf-newsletter-email" className="sr-only">
+              <form onSubmit={handleNewsletter}>
+                <label htmlFor="wahhf-newsletter-email" className={LABEL_CLASS}>
                   {t('home.newsletter.placeholder')}
                 </label>
+                <div className="flex flex-col sm:flex-row gap-3">
                 <div className="relative flex-1">
-                  <Mail className="w-4 h-4 text-v1-encre/50 dark:text-creme/50 absolute left-4 top-1/2 -translate-y-1/2" />
+                  <Mail aria-hidden="true" className="w-4 h-4 text-text-secondary absolute left-4 top-1/2 -translate-y-1/2" />
                   <input
                     ref={newsletterFocusRef as Ref<HTMLInputElement>}
                     id="wahhf-newsletter-email"
                     type="email"
                     required
+                    autoComplete="email"
                     value={newsletterEmail}
                     onChange={(e) => setNewsletterEmail(e.target.value)}
                     placeholder={t('home.newsletter.placeholder')}
-                    className="w-full pl-11 pr-4 py-3.5 rounded-pill bg-surface-inset border border-border-input text-sm text-text"
+                    className={cn(FIELD_CLASS, 'pl-11')}
                   />
                 </div>
                 <PrimaryButton type="submit" className="shrink-0">
                   {t('home.newsletter.button')}
                 </PrimaryButton>
+                </div>
               </form>
             )}
           </div>

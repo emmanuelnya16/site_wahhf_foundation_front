@@ -15,7 +15,7 @@ import { PrimaryButton, SecondaryButton, DonateButton } from '../components/wahh
 import DomainCard from '../components/wahhf/DomainCard';
 import Counter from '../components/wahhf/Counter';
 import PresenceSection from '../components/wahhf/PresenceSection';
-import FormField, { FieldError, fieldErrorId } from '../components/wahhf/FormField';
+import FormField, { FieldError, fieldErrorId, FIELD_CLASS, CHECK_LABEL_CLASS, CHECKBOX_CLASS } from '../components/wahhf/FormField';
 import { emailError, requiredError, focusFirstError } from '../lib/formValidation';
 import { useFocusOnChange } from '../lib/useFocusOnChange';
 import ContactHandoff from '../components/wahhf/ContactHandoff';
@@ -549,8 +549,7 @@ export function ActualitesPage() {
  */
 type AgirField = 'name' | 'email' | 'details' | 'consent';
 const AGIR_FIELDS = ['name', 'email', 'details', 'consent'] as const;
-const AGIR_INPUT_CLASS =
-  'w-full px-4 py-3 rounded-inner bg-surface-inset border border-border-input aria-invalid:border-danger text-sm';
+const AGIR_INPUT_CLASS = FIELD_CLASS;
 
 function checkAgirField(key: AgirField, value: string | boolean): string | undefined {
   switch (key) {
@@ -689,7 +688,7 @@ export function AgirPage() {
         </div>
 
         {/* Formulaire Bénévole / Partenaire */}
-        <div ref={formBlockRef} className="rounded-card bg-surface-raised border border-nuit/15 p-8 sm:p-10 max-w-3xl">
+        <div ref={formBlockRef} className="rounded-card bg-surface-section p-7 sm:p-10 max-w-3xl">
           <p role="status" className="sr-only">
             {statusMessage}
           </p>
@@ -717,7 +716,6 @@ export function AgirPage() {
                   id={fieldId('name')}
                   label="Nom complet / Structure *"
                   error={errors.name}
-                  labelClassName="block text-xs font-semibold uppercase mb-1.5"
                 >
                   {(a11y) => (
                     <input
@@ -739,7 +737,6 @@ export function AgirPage() {
                   id={fieldId('email')}
                   label="E-mail *"
                   error={errors.email}
-                  labelClassName="block text-xs font-semibold uppercase mb-1.5"
                 >
                   {(a11y) => (
                     <input
@@ -763,7 +760,6 @@ export function AgirPage() {
                 id={fieldId('details')}
                 label="Votre message (compétences, disponibilités ou projet de partenariat) *"
                 error={errors.details}
-                labelClassName="block text-xs font-semibold uppercase mb-1.5"
               >
                 {(a11y) => (
                   <textarea
@@ -782,7 +778,7 @@ export function AgirPage() {
               </FormField>
 
               <div>
-                <label className="flex items-start gap-2.5 text-xs cursor-pointer">
+                <label className={CHECK_LABEL_CLASS}>
                   <input
                     id={fieldId('consent')}
                     type="checkbox"
@@ -794,7 +790,7 @@ export function AgirPage() {
                     }}
                     aria-invalid={errors.consent ? true : undefined}
                     aria-describedby={errors.consent ? fieldErrorId(fieldId('consent')) : undefined}
-                    className="mt-0.5 w-4 h-4"
+                    className={CHECKBOX_CLASS}
                   />
                   <span>
                     J’accepte que mes données soient traitées par WAHHF Foundation pour étudier ma proposition d’engagement (RGPD). *

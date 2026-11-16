@@ -23,20 +23,21 @@ interface ChoiceTileProps {
 
 /**
  * Un seul style d'option pour tout le site (contrat §11) :
- * - non choisie : contour 1 px, trait (3:1 sur les fonds clairs, 3,5:1 sur canopée) ; sur nuit, brume à 60 % ;
+ * - non choisie : fond des champs (surface-raised), contour 1 px border-input (3,4:1 au pire sur sauge ; 4,0:1 sur
+ *   sous-bois, le panneau de formulaire en sombre) ; sur nuit, brume à 60 % ;
  * - choisie : contour 2 px de la couleur de l'action (forêt en clair, soleil en sombre et sur nuit) et coche visible
  *   (à droite avec showCheck, sinon devant le libellé). Le second pixel est un liseré intérieur : la tuile ne change
  *   pas de taille.
  */
 const STYLES = {
   surface: {
-    base: 'bg-surface-inset text-text',
+    base: 'bg-surface-raised text-body text-text',
     off: 'border-border-input hover:border-action',
     on: 'border-action [box-shadow:inset_0_0_0_1px_var(--action)]',
     check: 'text-action',
   },
   inverse: {
-    base: 'bg-transparent text-text-on-inverse',
+    base: 'bg-transparent text-body text-text-on-inverse',
     off: 'border-border-on-inverse hover:border-action-on-inverse',
     on: 'border-action-on-inverse [box-shadow:inset_0_0_0_1px_var(--action-on-inverse)]',
     check: 'text-action-on-inverse',

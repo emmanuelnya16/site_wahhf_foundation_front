@@ -433,7 +433,7 @@ export default function LanguageAcademy() {
                           onChange={() => handleSelectOption(idx)}
                           showCheck
                           onInverse
-                          className="p-4 rounded-2xl text-left text-sm sm:text-base font-medium"
+                          className="p-4 rounded-2xl text-left font-medium"
                         >
                           {opt}
                         </ChoiceTile>

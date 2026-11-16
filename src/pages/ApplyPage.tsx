@@ -7,7 +7,7 @@ import PageHeader, { PageTitle, PageIntro } from '../components/wahhf/PageHeader
 import DisclaimerBanner from '../components/wahhf/DisclaimerBanner';
 import InfoBox from '../components/wahhf/InfoBox';
 import ChoiceTile from '../components/wahhf/ChoiceTile';
-import FormField, { FieldError, fieldErrorId } from '../components/wahhf/FormField';
+import FormField, { FieldError, fieldErrorId, LABEL_CLASS, FIELD_CLASS, CHECK_LABEL_CLASS, CHECKBOX_CLASS } from '../components/wahhf/FormField';
 import { emailError, phoneError, requiredError, focusFirstError } from '../lib/formValidation';
 import { useFocusOnChange } from '../lib/useFocusOnChange';
 import ContactHandoff from '../components/wahhf/ContactHandoff';
@@ -33,8 +33,7 @@ const WISH_LABELS = {
 
 type ApplyField = 'fullName' | 'email' | 'phone' | 'residenceCountry' | 'city' | 'gdprConsent';
 const STEP1_FIELDS = ['fullName', 'email', 'phone', 'residenceCountry', 'city'] as const;
-const INPUT_CLASS =
-  'w-full px-4 py-3 rounded-inner bg-surface-inset border border-border-input aria-invalid:border-danger text-sm';
+const INPUT_CLASS = FIELD_CLASS;
 
 function checkField(key: ApplyField, value: string | boolean): string | undefined {
   switch (key) {
@@ -190,7 +189,7 @@ export default function ApplyPage() {
             </InfoBox>
           </ContactHandoff>
         ) : (
-          <div className="rounded-card bg-surface-raised border border-border p-6 sm:p-10 shadow-sm space-y-8">
+          <div className="rounded-card bg-surface-section p-6 sm:p-10 space-y-8">
             {/* Barre de progression des 3 étapes */}
             <div className="space-y-3">
               <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-accent">
@@ -334,7 +333,7 @@ export default function ApplyPage() {
                   />
 
                   <fieldset>
-                    <legend className="text-xs font-semibold uppercase tracking-wider mb-3">
+                    <legend className={LABEL_CLASS}>
                       Que souhaitez-vous ? *
                     </legend>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -350,7 +349,7 @@ export default function ApplyPage() {
                           checked={wishType === opt.id}
                           onChange={() => setWishType(opt.id)}
                           showCheck
-                          className="p-4 rounded-2xl text-left text-sm font-medium"
+                          className="p-4 rounded-2xl text-left font-medium"
                         >
                           {opt.label}
                         </ChoiceTile>
@@ -362,7 +361,7 @@ export default function ApplyPage() {
                     <div>
                       <label
                         htmlFor="apply-target-country"
-                        className="block text-xs font-semibold uppercase tracking-wider mb-2"
+                        className={LABEL_CLASS}
                       >
                         Pays d’intérêt principal parmi les 10 pays accompagnés
                       </label>
@@ -370,7 +369,7 @@ export default function ApplyPage() {
                         id="apply-target-country"
                         value={targetCountry}
                         onChange={(e) => setTargetCountry(e.target.value)}
-                        className="w-full px-4 py-3 rounded-inner bg-surface-inset border border-border-input text-sm"
+                        className={FIELD_CLASS}
                       >
                         {COUNTRIES_DATA.map((c) => (
                           <option key={c.slug} value={c.slug}>
@@ -385,7 +384,7 @@ export default function ApplyPage() {
                     <div>
                       <label
                         htmlFor="apply-german-level"
-                        className="block text-xs font-semibold uppercase tracking-wider mb-2"
+                        className={LABEL_CLASS}
                       >
                         Niveau d’allemand actuel / visé
                       </label>
@@ -393,7 +392,7 @@ export default function ApplyPage() {
                         id="apply-german-level"
                         value={currentGermanLevel}
                         onChange={(e) => setCurrentGermanLevel(e.target.value)}
-                        className="w-full px-4 py-3 rounded-inner bg-surface-inset border border-border-input text-sm"
+                        className={FIELD_CLASS}
                       >
                         <option value="A1">A1 — Débutant complet</option>
                         <option value="A2">A2 — Bases élémentaires</option>
@@ -406,7 +405,7 @@ export default function ApplyPage() {
                     <div>
                       <label
                         htmlFor="apply-format"
-                        className="block text-xs font-semibold uppercase tracking-wider mb-2"
+                        className={LABEL_CLASS}
                       >
                         Format souhaité
                       </label>
@@ -414,7 +413,7 @@ export default function ApplyPage() {
                         id="apply-format"
                         value={preferredFormat}
                         onChange={(e) => setPreferredFormat(e.target.value)}
-                        className="w-full px-4 py-3 rounded-inner bg-surface-inset border border-border-input text-sm"
+                        className={FIELD_CLASS}
                       >
                         <option value="En ligne">En ligne (accessible partout)</option>
                         <option value="Présentiel Douala (TODO)">
@@ -446,7 +445,7 @@ export default function ApplyPage() {
                   <div>
                     <label
                       htmlFor="apply-message"
-                      className="block text-xs font-semibold uppercase tracking-wider mb-2"
+                      className={LABEL_CLASS}
                     >
                       Message libre (études actuelles, objectifs, disponibilités)
                     </label>
@@ -456,7 +455,7 @@ export default function ApplyPage() {
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       placeholder="Expliquez en quelques lignes votre motivation et votre projet..."
-                      className="w-full px-4 py-3 rounded-inner bg-surface-inset border border-border-input text-sm"
+                      className={FIELD_CLASS}
                     />
                   </div>
 
@@ -469,7 +468,7 @@ export default function ApplyPage() {
 
                   {/* Case consentement RGPD explicite */}
                   <div>
-                    <label className="flex items-start gap-3 cursor-pointer text-xs sm:text-sm text-v1-encre/85 dark:text-creme/85">
+                    <label className={CHECK_LABEL_CLASS}>
                       <input
                         id={fieldId('gdprConsent')}
                         type="checkbox"
@@ -481,7 +480,7 @@ export default function ApplyPage() {
                         }}
                         aria-invalid={errors.gdprConsent ? true : undefined}
                         aria-describedby={errors.gdprConsent ? fieldErrorId(fieldId('gdprConsent')) : undefined}
-                        className="mt-1 w-4 h-4"
+                        className={CHECKBOX_CLASS}
                       />
                       <span>
                         J’accepte que mes coordonnées soient traitées de manière strictement confidentielle par WAHHF Foundation dans le seul but de répondre gratuitement à ma demande d’accompagnement, conformément à la{' '}
