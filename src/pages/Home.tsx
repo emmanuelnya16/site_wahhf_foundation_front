@@ -39,7 +39,6 @@ import HorizontalGallery from '../effects/HorizontalGallery';
 import ExpandSection from '../effects/ExpandSection';
 import { useTimelineDraw } from '../effects/useTimelineDraw';
 import StaggerGroup from '../effects/StaggerGroup';
-import { useIntroDone } from '../effects/introState';
 import GalleryGrid from '../components/wahhf/GalleryGrid';
 import { HeroVideoBackground, HeroVideoToggle, useHeroVideo } from '../components/wahhf/HeroVideoBackground';
 import { HERO_POSTER } from '../config/heroVideo';
@@ -57,10 +56,13 @@ import {
   subscribeNewsletter,
 } from '../services/api';
 
-/** Apparition douce d'un bloc du hero (0,9 s, sans rebond), décalée de `delay` secondes. */
+/**
+ * Léger glissement d'un bloc du hero (0,9 s, sans rebond), décalé de `delay` secondes.
+ * Pas d'opacité : sur-titre, phrase d'appui et boutons sont lisibles dès le premier rendu (élément LCP, PERF-01).
+ */
 const heroFade = (delay: number): Variants => ({
-  hidden: { opacity: 0, y: 16 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.9, delay, ease: [0.22, 1, 0.36, 1] } },
+  hidden: { y: 16 },
+  show: { y: 0, transition: { duration: 0.9, delay, ease: [0.22, 1, 0.36, 1] } },
 });
 
 /** Changement de témoignage : léger glissement dans le sens de navigation, sans rebond. */
@@ -110,8 +112,7 @@ export default function Home() {
   const { t, i18n } = useTranslation();
   const shouldReduceMotion = useReducedMotion();
 
-  // Hero : intro (rideau), parallaxe sur ordinateur seulement et jamais en « réduire les animations »
-  const introDone = useIntroDone();
+  // Hero : parallaxe sur ordinateur seulement et jamais en « réduire les animations »
   const heroRef = useRef<HTMLElement>(null);
   const isDesktop = useMediaQuery(MQ.desktop);
   const heroParallax = isDesktop && !shouldReduceMotion;
@@ -202,11 +203,11 @@ export default function Home() {
           <div className="absolute inset-0 hero-veil" />
         </div>
 
-        {/* Séquence : sur-titre, titre ligne par ligne derrière un masque, phrase, puis boutons.
-            Attend la fin du rideau de chargement (introDone). */}
+        {/* Séquence dès le montage : titre ligne par ligne derrière un masque ; sur-titre, phrase et boutons
+            sont déjà visibles et ne font que glisser de quelques pixels. */}
         <motion.div
           initial="hidden"
-          animate={introDone ? 'show' : 'hidden'}
+          animate="show"
           className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-7"
         >
           <motion.div

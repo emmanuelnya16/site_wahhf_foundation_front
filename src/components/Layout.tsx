@@ -5,7 +5,6 @@ import Footer from './Footer';
 import WhatsAppButton from './WhatsAppButton';
 import CookieBanner from './wahhf/CookieBanner';
 import ReadingProgress from '../effects/ReadingProgress';
-import LoadingCurtain from '../effects/LoadingCurtain';
 import { routeKey } from '../effects/PageTransition';
 import { scrollToElement, scrollToHash, scrollToTop } from '../lib/scroll';
 import { startSmoothScroll } from '../lib/lenis';
@@ -67,8 +66,8 @@ export default function Layout({ children }: LayoutProps) {
         Aller au contenu
       </a>
 
-      {/* Rideau de chargement : accueil, une fois par session (rien en « réduire les animations ») */}
-      {!isVkiPage && <LoadingCurtain />}
+      {/* Rideau de chargement retiré (PERF-01) : il retardait l'affichage du hero d'environ 1,4 s sur mobile.
+          Le composant reste disponible dans src/effects/LoadingCurtain.tsx. */}
 
       {/* Barre de progression de lecture dorée (Motion useScroll, scaleX) */}
       {!isVkiPage && <ReadingProgress />}
