@@ -209,7 +209,7 @@ export default function Navbar() {
           {/* Gauche : Logo WAHHF */}
           <Link
             to="/"
-            className="flex items-center gap-2.5 shrink-0 rounded-full"
+            className="flex items-center gap-2.5 min-w-0 rounded-full"
             aria-label="WAHHF Foundation — Accueil"
           >
             <img
@@ -219,21 +219,21 @@ export default function Navbar() {
               height={48}
               className="w-10 h-10 sm:w-11 sm:h-11 object-contain rounded-full bg-white p-0.5 shadow-xs"
             />
-            <div className="flex flex-col">
-              <span className="font-serif font-normal text-base sm:text-lg leading-none text-[#0F3D2E] dark:text-[#F5F1E8] tracking-tight">
-                WAHHF <span className="text-gold-text dark:text-[#E8A317] font-sans text-xs font-semibold uppercase tracking-widest">Foundation</span>
+            <div className="flex flex-col min-w-0">
+              <span className="font-serif font-normal text-base sm:text-lg leading-none text-[#0F3D2E] dark:text-[#F5F1E8] tracking-tight whitespace-nowrap">
+                WAHHF <span className="hidden min-[360px]:inline text-gold-text dark:text-[#E8A317] font-sans text-xs font-semibold uppercase tracking-widest">Foundation</span>
               </span>
-              <span className="text-[10px] text-[#1B1B18]/65 dark:text-[#F5F1E8]/65 hidden sm:inline">
+              <span className="text-[10px] text-[#1B1B18]/65 dark:text-[#F5F1E8]/65 hidden lg:inline whitespace-nowrap">
                 {t('brand.branch')}
               </span>
             </div>
           </Link>
 
           {/* Centre : Menu principal (6 entrées) */}
-          <nav aria-label="Navigation principale" className="hidden lg:flex items-center gap-1 xl:gap-2">
+          <nav aria-label="Navigation principale" className="hidden xl:flex items-center gap-2">
             <Link
               to="/qui-sommes-nous"
-              className={`px-3 py-2 rounded-full text-sm font-medium transition-colors ${
+              className={`px-3 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
                 location.pathname === '/qui-sommes-nous'
                   ? 'bg-[#0F3D2E]/10 dark:bg-[#F5F1E8]/15 text-[#0F3D2E] dark:text-[#E8A317]'
                   : 'text-[#1B1B18] dark:text-[#F5F1E8] hover:text-[#0F3D2E] dark:hover:text-[#E8A317]'
@@ -249,7 +249,7 @@ export default function Navbar() {
                 type="button"
                 onClick={() => setMegaOpen((prev) => !prev)}
                 aria-expanded={megaOpen}
-                className={`inline-flex items-center gap-1 px-3 py-2 rounded-full text-sm font-medium transition-colors cursor-pointer ${
+                className={`inline-flex items-center gap-1 px-3 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors cursor-pointer ${
                   location.pathname.startsWith('/nos-actions') ||
                   location.pathname.startsWith('/mobilite-langues') ||
                   location.pathname.startsWith('/academie') ||
@@ -267,7 +267,7 @@ export default function Navbar() {
 
             <Link
               to="/notre-impact"
-              className={`px-3 py-2 rounded-full text-sm font-medium transition-colors ${
+              className={`px-3 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
                 location.pathname === '/notre-impact'
                   ? 'bg-[#0F3D2E]/10 dark:bg-[#F5F1E8]/15 text-[#0F3D2E] dark:text-[#E8A317]'
                   : 'text-[#1B1B18] dark:text-[#F5F1E8] hover:text-[#0F3D2E] dark:hover:text-[#E8A317]'
@@ -278,7 +278,7 @@ export default function Navbar() {
 
             <Link
               to="/actualites"
-              className={`px-3 py-2 rounded-full text-sm font-medium transition-colors ${
+              className={`px-3 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
                 location.pathname.startsWith('/actualites')
                   ? 'bg-[#0F3D2E]/10 dark:bg-[#F5F1E8]/15 text-[#0F3D2E] dark:text-[#E8A317]'
                   : 'text-[#1B1B18] dark:text-[#F5F1E8] hover:text-[#0F3D2E] dark:hover:text-[#E8A317]'
@@ -289,7 +289,7 @@ export default function Navbar() {
 
             <Link
               to="/agir"
-              className={`px-3 py-2 rounded-full text-sm font-medium transition-colors ${
+              className={`px-3 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
                 location.pathname === '/agir'
                   ? 'bg-[#0F3D2E]/10 dark:bg-[#F5F1E8]/15 text-[#0F3D2E] dark:text-[#E8A317]'
                   : 'text-[#1B1B18] dark:text-[#F5F1E8] hover:text-[#0F3D2E] dark:hover:text-[#E8A317]'
@@ -298,25 +298,15 @@ export default function Navbar() {
               {t('nav.act')}
             </Link>
 
-            <Link
-              to="/faire-un-don"
-              className={`px-3 py-2 rounded-full text-sm font-medium transition-colors xl:hidden ${
-                location.pathname === '/faire-un-don'
-                  ? 'text-[#C8102E] font-semibold'
-                  : 'text-[#1B1B18] dark:text-[#F5F1E8] hover:text-[#C8102E]'
-              }`}
-            >
-              {t('nav.donate')}
-            </Link>
           </nav>
 
           {/* Droite : Langue (FR / EN), Recherche, Thème, Bouton Faire un don (#C8102E), Burger */}
-          <div className="flex items-center gap-1.5 sm:gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             {/* Sélecteur de langue FR / EN */}
             <div
               role="group"
               aria-label="Sélecteur de langue"
-              className="hidden sm:inline-flex items-center rounded-full bg-[#F5F1E8] dark:bg-[#0F3D2E] p-0.5 border border-[#0F3D2E]/10 dark:border-[#F5F1E8]/15 text-xs"
+              className="hidden md:inline-flex items-center rounded-full bg-[#F5F1E8] dark:bg-[#0F3D2E] p-0.5 border border-[#0F3D2E]/10 dark:border-[#F5F1E8]/15 text-xs"
             >
               <button
                 type="button"
@@ -360,14 +350,14 @@ export default function Navbar() {
               onClick={toggleTheme}
               aria-label={isDark ? t('nav.themeLight') : t('nav.themeDark')}
               title={isDark ? t('nav.themeLight') : t('nav.themeDark')}
-              className="w-9 h-9 rounded-full flex items-center justify-center text-[#1B1B18] dark:text-[#E8A317] hover:bg-[#0F3D2E]/10 dark:hover:bg-[#F5F1E8]/10 transition-colors cursor-pointer"
+              className="hidden sm:flex w-9 h-9 rounded-full items-center justify-center text-[#1B1B18] dark:text-[#E8A317] hover:bg-[#0F3D2E]/10 dark:hover:bg-[#F5F1E8]/10 transition-colors cursor-pointer"
             >
               {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </button>
 
             {/* 6e entrée / Bouton « Faire un don » rouge #C8102E */}
             <div className="hidden sm:block">
-              <DonateButton size="sm">{t('nav.donate')}</DonateButton>
+              <DonateButton size="sm" className="whitespace-nowrap">{t('nav.donate')}</DonateButton>
             </div>
 
             {/* Menu Burger (Mobile & Tablette) */}
@@ -378,7 +368,7 @@ export default function Navbar() {
               aria-label="Ouvrir le menu principal"
               aria-expanded={mobileOpen}
               aria-controls="menu-mobile"
-              className="lg:hidden w-10 h-10 rounded-full bg-[#0F3D2E] text-[#F5F1E8] flex items-center justify-center cursor-pointer"
+              className="xl:hidden w-10 h-10 shrink-0 rounded-full bg-[#0F3D2E] text-[#F5F1E8] flex items-center justify-center cursor-pointer"
             >
               <Menu className="w-5 h-5" />
             </button>
@@ -662,8 +652,8 @@ export default function Navbar() {
           </motion.nav>
 
           <div className="pt-6 border-t border-white/15 space-y-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="flex flex-wrap items-center gap-2">
                 <button
                   type="button"
                   onClick={() => switchLanguage('fr')}
@@ -681,6 +671,14 @@ export default function Navbar() {
                   }`}
                 >
                   English (EN)
+                </button>
+                <button
+                  type="button"
+                  onClick={toggleTheme}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-white/10 text-white"
+                >
+                  {isDark ? <Sun aria-hidden="true" className="w-3.5 h-3.5" /> : <Moon aria-hidden="true" className="w-3.5 h-3.5" />}
+                  <span>{isDark ? t('nav.themeLight') : t('nav.themeDark')}</span>
                 </button>
               </div>
               <span className="text-xs text-[#F5F1E8]/60">Glisser vers le haut pour fermer</span>

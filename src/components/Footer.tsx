@@ -56,7 +56,7 @@ export default function Footer() {
             </div>
 
             {/* Réseaux sociaux (Liens officiels à confirmer — TODO) */}
-            <div className="pt-2 flex items-center gap-2.5">
+            <div className="pt-2 flex flex-wrap items-center gap-2.5">
               {[
                 { label: 'LinkedIn', href: '#linkedin-todo' },
                 { label: 'Facebook', href: '#facebook-todo' },
