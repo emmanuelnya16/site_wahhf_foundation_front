@@ -42,7 +42,7 @@ export default function MobilityHub() {
       />
 
       {/* HERO */}
-      <section className="surface-green relative pt-32 pb-20 sm:pt-36 sm:pb-24 bg-foret text-creme overflow-hidden">
+      <section className="surface-green relative pt-32 pb-20 sm:pt-36 sm:pb-24 bg-nuit text-creme overflow-hidden">
         <div className="absolute inset-0 opacity-25">
           <img
             src={WAHHF_IMAGES.openDayVisioconference}
@@ -53,7 +53,7 @@ export default function MobilityHub() {
             height={628}
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-foret via-foret/85 to-foret" />
+          <div className="absolute inset-0 bg-gradient-to-b from-nuit via-nuit/85 to-nuit" />
         </div>
 
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
@@ -133,7 +133,7 @@ export default function MobilityHub() {
                 key={item.title}
                 className="rounded-card bg-surface-raised border border-border-soft p-6 shadow-xs flex items-start gap-4"
               >
-                <span className="w-9 h-9 rounded-pill bg-foret text-or font-serif text-sm flex items-center justify-center shrink-0">
+                <span className="w-9 h-9 rounded-pill bg-nuit text-or font-serif text-sm flex items-center justify-center shrink-0">
                   0{idx + 1}
                 </span>
                 <div>
@@ -149,7 +149,7 @@ export default function MobilityHub() {
       </section>
 
       {/* LES DEUX GRANDES PORTES D'ENTRÉE */}
-      <section className="py-20 bg-white/65 dark:bg-sous-bois/40 border-y border-border-subtle">
+      <section className="py-20 bg-white/65 dark:bg-v1-sous-bois/40 border-y border-border-subtle">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <SectionHeader
             kicker="Deux volets complémentaires"
@@ -163,13 +163,13 @@ export default function MobilityHub() {
             <div className="relative rounded-card bg-surface-raised border border-border p-8 sm:p-10 shadow-sm flex flex-col justify-between overflow-hidden">
               <span
                 aria-hidden="true"
-                className="pointer-events-none select-none absolute -bottom-4 right-5 font-serif text-8xl text-foret/[0.05]"
+                className="pointer-events-none select-none absolute -bottom-4 right-5 font-serif text-8xl text-nuit/[0.05]"
               >
                 01
               </span>
               <div className="space-y-5 relative z-10">
                 <div className="flex items-center justify-between">
-                  <div className="w-13 h-13 rounded-2xl bg-foret text-or flex items-center justify-center">
+                  <div className="w-13 h-13 rounded-2xl bg-nuit text-or flex items-center justify-center">
                     <GraduationCap className="w-7 h-7" />
                   </div>
                   <span className="px-3.5 py-1 rounded-pill bg-or/20 text-accent text-xs font-semibold">
@@ -190,7 +190,7 @@ export default function MobilityHub() {
                     <Link
                       key={lvl.slug}
                       to={`/academie/${lvl.slug}`}
-                      className="px-3.5 py-1.5 rounded-pill bg-surface-inset text-xs font-semibold text-accent hover:bg-or hover:text-encre transition-colors"
+                      className="px-3.5 py-1.5 rounded-pill bg-surface-inset text-xs font-semibold text-accent hover:bg-or hover:text-v1-encre transition-colors"
                     >
                       Niveau {lvl.level}
                     </Link>
@@ -212,7 +212,7 @@ export default function MobilityHub() {
             </div>
 
             {/* Porte 2 : Accompagnement vers l'Europe */}
-            <div className="surface-green relative rounded-card bg-foret text-creme border border-or/35 p-8 sm:p-10 shadow-sm flex flex-col justify-between overflow-hidden">
+            <div className="surface-green relative rounded-card bg-nuit text-creme border border-or/35 p-8 sm:p-10 shadow-sm flex flex-col justify-between overflow-hidden">
               <span
                 aria-hidden="true"
                 className="pointer-events-none select-none absolute -bottom-4 right-5 font-serif text-8xl text-creme/[0.05]"
@@ -221,7 +221,7 @@ export default function MobilityHub() {
               </span>
               <div className="space-y-5 relative z-10">
                 <div className="flex items-center justify-between">
-                  <div className="w-13 h-13 rounded-2xl bg-or text-encre flex items-center justify-center">
+                  <div className="w-13 h-13 rounded-2xl bg-or text-v1-encre flex items-center justify-center">
                     <Compass className="w-7 h-7" />
                   </div>
                   <span className="px-3.5 py-1 rounded-pill bg-or/20 text-gold-on-green text-xs font-semibold">
@@ -242,7 +242,7 @@ export default function MobilityHub() {
                     <Link
                       key={c.slug}
                       to={`/accompagnement/pays/${c.slug}`}
-                      className="px-3 py-1 rounded-pill bg-white/10 hover:bg-or hover:text-encre text-xs font-medium text-creme transition-colors"
+                      className="px-3 py-1 rounded-pill bg-white/10 hover:bg-or hover:text-v1-encre text-xs font-medium text-creme transition-colors"
                     >
                       {c.flag} {c.name}
                     </Link>
@@ -308,7 +308,7 @@ export default function MobilityHub() {
       </section>
 
       {/* FAQ */}
-      <section className="py-16 sm:py-20 bg-white/60 dark:bg-sous-bois/30 border-t border-border-subtle">
+      <section className="py-16 sm:py-20 bg-white/60 dark:bg-v1-sous-bois/30 border-t border-border-subtle">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           <SectionHeader
             kicker="Questions fréquentes"
@@ -337,7 +337,7 @@ export default function MobilityHub() {
 
       {/* APPEL À CANDIDATER OU À SOUTENIR LE PROGRAMME PAR UN DON */}
       <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-        <div className="surface-green rounded-card bg-foret text-creme p-8 sm:p-12 border border-or/40 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="surface-green rounded-card bg-nuit text-creme p-8 sm:p-12 border border-or/40 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-7 space-y-3">
             <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-kicker text-or">
               <ShieldCheck className="w-4 h-4" />

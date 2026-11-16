@@ -26,7 +26,7 @@ interface ButtonBaseProps {
  */
 const PRIMARY_VARIANTS = {
   forest: 'bg-action hover:bg-action-hover text-on-action',
-  gold: 'bg-or text-encre',
+  gold: 'bg-or text-v1-encre',
 } as const;
 
 /** Tailles du bouton principal : la pilule et le rond fléché grandissent ensemble. md = taille historique. */
@@ -68,7 +68,7 @@ export function PrimaryButton({
       <span>{children}</span>
       <span
         className={cn(
-          'rounded-pill bg-or text-encre flex items-center justify-center transition-transform duration-(--dur-fast) ease-reveal group-hover:rotate-45 shrink-0',
+          'rounded-pill bg-or text-v1-encre flex items-center justify-center transition-transform duration-(--dur-fast) ease-reveal group-hover:rotate-45 shrink-0',
           s.ring
         )}
       >
@@ -127,7 +127,7 @@ export function SecondaryButton({
     'inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-pill border transition-[color,background-color,border-color,box-shadow] duration-(--dur-fast) text-sm sm:text-base font-medium cursor-pointer',
     light
       ? 'border-creme/45 text-creme hover:bg-creme/12 hover:border-or'
-      : 'border-foret/35 dark:border-creme/30 text-foret dark:text-creme hover:border-or hover:bg-foret/5 dark:hover:bg-creme/10',
+      : 'border-nuit/35 dark:border-creme/30 text-nuit dark:text-creme hover:border-or hover:bg-nuit/5 dark:hover:bg-creme/10',
     className
   );
 

@@ -67,18 +67,18 @@
 /* =============================================================================
    COUCHE 1 : TOKENS D'UNIVERS
    Les couleurs du monde de la fondation, valeurs fixes (identiques en clair et en sombre).
-   « static » : toujours émis en variables CSS (--color-foret…), la couche 2 s'y réfère.
-   « inline » : les utilitaires reçoivent la valeur littérale ; avec une opacité (bg-foret/10),
+   « static » : toujours émis en variables CSS (--color-nuit…), la couche 2 s'y réfère.
+   « inline » : les utilitaires reçoivent la valeur littérale ; avec une opacité (bg-nuit/10),
    Tailwind calcule le même hex à 8 chiffres qu'avec l'ancien bg-[#0F3D2E]/10 : rendu identique.
    ============================================================================= */
 @theme static inline {
   /* Verts */
-  --color-foret: #0F3D2E;        /* vert forêt profond : bandeaux, actions, texte d'accent */
+  --color-nuit: #0F3D2E;        /* vert forêt profond : bandeaux, actions, texte d'accent */
   --color-feuillage: #14523E;    /* vert moyen : survols, encarts dans les bandeaux */
   --color-fougere: #1B634B;      /* étape intermédiaire du filet de titre */
-  --color-canopee: #1F6B50;      /* régions de la carte du Cameroun */
-  --color-sous-bois: #132A21;    /* sombre : cartes et surfaces élevées */
-  --color-nuit: #0B1F18;         /* sombre : fond de page */
+  --color-v1-canopee: #1F6B50;      /* régions de la carte du Cameroun */
+  --color-v1-sous-bois: #132A21;    /* sombre : cartes et surfaces élevées */
+  --color-v1-nuit: #0B1F18;         /* sombre : fond de page */
   --color-nuit-profonde: #081C15;/* sombre : fond du body, masqué par la page (voir TOK-03) */
   /* Ors */
   --color-or: #E8A317;           /* or de marque : décors, fonds de boutons, texte sur vert */
@@ -95,17 +95,17 @@
   --color-creme: #F5F1E8;        /* fond de page clair, texte sur vert */
   --color-sable: #E4DFD5;        /* terres de la mini-carte */
   --color-blanc: #FFFFFF;
-  --color-brume: #F4F6FA;        /* fond de la page historique VKI */
+  --color-vki-brume: #F4F6FA;        /* fond de la page historique VKI */
   /* Encres et gris */
-  --color-encre: #1B1B18;
+  --color-v1-encre: #1B1B18;
   --color-gris-encre: #57554E;
   --color-gris-pierre: #C2BDB0;
   /* Rouges */
   --color-rouge: #C8102E;        /* réservé au bouton « Faire un don » */
   --color-rouge-fonce: #A80D26;  /* survol du don */
   --color-grenat: #B42318;       /* erreurs en clair : 6,5:1 sur blanc, 5,8:1 sur crème */
-  --color-corail: #FDA29B;       /* erreurs en sombre : 7,8:1 sur #132A21 */
-  --color-menthe: #34D399;       /* succès en sombre */
+  --color-v1-corail: #FDA29B;       /* erreurs en sombre : 7,8:1 sur #132A21 */
+  --color-v1-menthe: #34D399;       /* succès en sombre */
 
   /* Rayons : un rôle chacun */
   --radius-inner: 12px;                /* champs, vignettes, icônes */
@@ -183,13 +183,13 @@
   --surface: var(--color-creme);
   --surface-raised: var(--color-blanc);
   --surface-inset: var(--color-creme);
-  --text: var(--color-encre);
+  --text: var(--color-v1-encre);
   --text-secondary: #1b1b18cc;  /* encre à 80 % */
   --text-tertiary: #1b1b18bf;   /* encre à 75 % */
   --text-muted: #1b1b18a6;      /* encre à 65 % */
-  --accent: var(--color-foret);
+  --accent: var(--color-nuit);
   --accent-or: var(--color-or-texte);
-  --action: var(--color-foret);
+  --action: var(--color-nuit);
   --action-hover: var(--color-feuillage);
   --on-action: var(--color-creme);
   --border-subtle: #0f3d2e1a;   /* forêt à 10 % */
@@ -206,13 +206,13 @@
 
   /* Anneau de focus clavier (WCAG 1.4.11, 3:1 contre le fond qui l'entoure) :
      vert forêt sur fond clair (10,7:1 sur crème, 12,1:1 sur blanc), or sur fond vert ou sombre (5,6:1 sur forêt). */
-  --focus-on-light: var(--color-foret);
+  --focus-on-light: var(--color-nuit);
   --focus-on-green: var(--color-or);
   --focus: var(--focus-on-light);
 
   /* Fond et texte du body (le fond de page visible est celui de Layout : token surface) */
   --wahhf-bg: var(--color-creme);
-  --wahhf-text: var(--color-encre);
+  --wahhf-text: var(--color-v1-encre);
 
   /* Durées partagées avec Motion et GSAP (src/lib/motionTokens.ts) */
   --dur-fast: 300ms;    /* survols, retours visuels */
@@ -233,9 +233,9 @@
 .dark {
   color-scheme: dark;
 
-  --surface: var(--color-nuit);
-  --surface-raised: var(--color-sous-bois);
-  --surface-inset: var(--color-foret);
+  --surface: var(--color-v1-nuit);
+  --surface-raised: var(--color-v1-sous-bois);
+  --surface-inset: var(--color-nuit);
   --text: var(--color-creme);
   --text-secondary: #f5f1e8cc;  /* crème à 80 % */
   --text-tertiary: #f5f1e8bf;   /* crème à 75 % */
@@ -243,7 +243,7 @@
   --accent: var(--color-or);
   --accent-or: var(--color-or);
   /* Action : encore vert forêt en sombre, comme avant (changement à décider : TOK-03) */
-  --action: var(--color-foret);
+  --action: var(--color-nuit);
   --action-hover: var(--color-feuillage);
   --on-action: var(--color-creme);
   --border-subtle: #f5f1e81a;   /* crème à 10 % */
@@ -251,9 +251,9 @@
   --border: #f5f1e826;          /* crème à 15 % */
   --border-input: #f5f1e833;    /* crème à 20 % */
   --border-strong: #f5f1e840;   /* crème à 25 % */
-  --danger: var(--color-corail);
+  --danger: var(--color-v1-corail);
   --warning: var(--color-or-clair);
-  --success: var(--color-menthe);
+  --success: var(--color-v1-menthe);
   --info: var(--color-gris-pierre);
 
   --wahhf-bg: var(--color-nuit-profonde);
@@ -385,11 +385,11 @@
 
 /* Dégradés des pages historiques IROKO (seules à les utiliser) */
 .bg-gradient-blend {
-  background: linear-gradient(135deg, var(--color-foret) 0%, var(--color-or) 100%);
+  background: linear-gradient(135deg, var(--color-nuit) 0%, var(--color-or) 100%);
 }
 
 .text-gradient-violet-orange {
-  background: linear-gradient(90deg, var(--color-foret) 0%, var(--color-or) 100%);
+  background: linear-gradient(90deg, var(--color-nuit) 0%, var(--color-or) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

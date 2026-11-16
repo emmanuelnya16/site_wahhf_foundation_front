@@ -64,14 +64,14 @@ export default function ContactHandoff({
         </a>
         <a
           href={mailtoHref(draft)}
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-pill border border-foret/35 dark:border-creme/30 text-foret dark:text-creme text-sm font-semibold hover:border-or transition-colors"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-pill border border-nuit/35 dark:border-creme/30 text-nuit dark:text-creme text-sm font-semibold hover:border-or transition-colors"
         >
           <Mail aria-hidden="true" className="w-4 h-4" />
           <span>Envoyer par e-mail</span>
         </a>
       </div>
 
-      <p className="text-xs sm:text-sm text-encre/70 dark:text-creme/70">
+      <p className="text-xs sm:text-sm text-v1-encre/70 dark:text-creme/70">
         Si aucune application ne s’ouvre, écrivez directement à{' '}
         <a href={`mailto:${CONTACT.email}`} className="underline underline-offset-2 text-accent break-all">
           {CONTACT.email}

@@ -56,7 +56,7 @@ export default function NotFoundPage({
     <>
       <SEO title="Page introuvable" description="Cette adresse ne correspond à aucune page du site WAHHF Foundation." />
 
-      <section className="surface-green pt-32 pb-16 bg-foret text-creme">
+      <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
           <span className="text-xs font-semibold uppercase tracking-kicker text-or">
             Page introuvable (erreur 404)

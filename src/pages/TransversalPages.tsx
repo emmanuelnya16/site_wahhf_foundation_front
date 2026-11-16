@@ -44,7 +44,7 @@ export function QuiSommesNousPage() {
         description="Découvrez l'histoire, la mission, les valeurs, la gouvernance de WAHHF Foundation (We Are Here Help Foundation) et son lien avec le groupe IROKO."
       />
 
-      <section className="surface-green pt-32 pb-16 bg-foret text-creme">
+      <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-5">
           <span className="text-xs font-semibold uppercase tracking-kicker text-or">
             Qui sommes-nous · We Are Here Help Foundation
@@ -66,7 +66,7 @@ export function QuiSommesNousPage() {
               kicker="Notre Mission"
               title="Bâtir l’autonomie par l’éducation, la santé et l’accès gratuit au savoir"
             />
-            <p className="text-base sm:text-lg text-encre/85 dark:text-creme/85 leading-relaxed">
+            <p className="text-base sm:text-lg text-v1-encre/85 dark:text-creme/85 leading-relaxed">
               WAHHF Foundation (We Are Here Help Foundation) part d’une conviction simple : chaque jeune mérite d’accéder à l’éducation, aux soins de prévention, à l’apprentissage des langues et à une information vérifiée, sans que le manque de ressources financières ou les réseaux de désinformation ne brisent son avenir.
             </p>
             <p className="text-base text-text-secondary leading-relaxed">
@@ -102,7 +102,7 @@ export function QuiSommesNousPage() {
         </div>
 
         {/* Section dédiée : WAHHF, branche sociale du groupe IROKO */}
-        <div className="surface-green rounded-card bg-foret text-creme p-8 sm:p-12 border border-or/40 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="surface-green rounded-card bg-nuit text-creme p-8 sm:p-12 border border-or/40 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-8 space-y-4">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-pill bg-or/20 text-gold-on-green text-xs font-semibold uppercase tracking-widest">
               <ShieldCheck className="w-4 h-4" />
@@ -190,7 +190,7 @@ export function PartenairesPage() {
         description="Découvrez le rôle du groupe IROKO en tant que partenaire fondateur de WAHHF Foundation ainsi que nos partenaires institutionnels et associatifs."
       />
 
-      <section className="surface-green pt-32 pb-16 bg-foret text-creme">
+      <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
           <span className="text-xs font-semibold uppercase tracking-kicker text-or">
             Partenaires & Mécènes
@@ -206,8 +206,8 @@ export function PartenairesPage() {
 
       <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-12">
         {/* Partenaire Fondateur : Groupe IROKO */}
-        <div className="surface-green rounded-card bg-foret text-creme p-8 sm:p-12 border-2 border-or space-y-5">
-          <span className="inline-block px-3.5 py-1 rounded-pill bg-or text-encre text-xs font-bold uppercase tracking-wider">
+        <div className="surface-green rounded-card bg-nuit text-creme p-8 sm:p-12 border-2 border-or space-y-5">
+          <span className="inline-block px-3.5 py-1 rounded-pill bg-or text-v1-encre text-xs font-bold uppercase tracking-wider">
             01 · Partenaire Fondateur & Mécène Structurel
           </span>
           <h2 className="font-serif font-normal text-3xl sm:text-4xl text-creme">
@@ -259,7 +259,7 @@ export function PartenairesPage() {
         </div>
 
         {/* Appel à devenir partenaire */}
-        <div className="rounded-card bg-surface-raised border border-foret/15 p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="rounded-card bg-surface-raised border border-nuit/15 p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-2 max-w-xl">
             <h3 className="font-serif text-2xl">Comment devenir partenaire de WAHHF Foundation ?</h3>
             <p className="text-sm text-text-tertiary">
@@ -288,7 +288,7 @@ export function NosActionsPage() {
         description="Découvrez les 6 domaines d'intervention de WAHHF Foundation au Cameroun et vers l'Europe."
       />
 
-      <section className="surface-green pt-32 pb-16 bg-foret text-creme">
+      <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
           <span className="text-xs font-semibold uppercase tracking-kicker text-or">
             Nos 6 domaines d’action
@@ -325,7 +325,7 @@ export function NosActionsPage() {
                   id={dom.slug}
                   className={`rounded-card p-7 sm:p-9 border transition ${
                     isHighlighted
-                      ? 'bg-foret text-creme border-or'
+                      ? 'bg-nuit text-creme border-or'
                       : 'bg-surface-raised border-border-soft'
                   }`}
                 >
@@ -390,7 +390,7 @@ export function NotreImpactPage() {
         description="Mesurez l'impact des programmes éducatifs, sanitaires et linguistiques de WAHHF Foundation au Cameroun et vers l'Europe."
       />
 
-      <section className="surface-green pt-32 pb-16 bg-foret text-creme">
+      <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
           <span className="text-xs font-semibold uppercase tracking-kicker text-or">
             Notre Impact & Suivi
@@ -426,7 +426,7 @@ export function NotreImpactPage() {
 
         <PresenceSection />
 
-        <div className="surface-green rounded-card bg-foret text-creme p-8 sm:p-10 border border-or/35 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="surface-green rounded-card bg-nuit text-creme p-8 sm:p-10 border border-or/35 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-2">
             <h2 className="font-serif text-2xl sm:text-3xl">
               Consulter nos engagements de transparence financière
@@ -473,7 +473,7 @@ export function ActualitesPage() {
     return (
       <>
         <SEO title={article.title} description={article.excerpt} />
-        <section className="surface-green pt-32 pb-14 bg-foret text-creme">
+        <section className="surface-green pt-32 pb-14 bg-nuit text-creme">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
             <Link
               to="/actualites"
@@ -482,7 +482,7 @@ export function ActualitesPage() {
               ← Retour à toutes les actualités
             </Link>
             <div className="flex flex-wrap items-center gap-3 text-xs text-creme/80">
-              <span className="px-3 py-1 rounded-pill bg-or text-encre font-semibold">
+              <span className="px-3 py-1 rounded-pill bg-or text-v1-encre font-semibold">
                 {article.category}
               </span>
               <span className="flex items-center gap-1">
@@ -499,7 +499,7 @@ export function ActualitesPage() {
         </section>
 
         <section className="py-14 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto space-y-8">
-          <div className="rounded-card overflow-hidden aspect-[16/9] border border-foret/15">
+          <div className="rounded-card overflow-hidden aspect-[16/9] border border-nuit/15">
             <img
               src={article.image}
               srcSet={imageSrcSet(article.image)}
@@ -511,7 +511,7 @@ export function ActualitesPage() {
             />
           </div>
 
-          <div className="rounded-card bg-surface-raised border border-foret/12 p-7 sm:p-10 space-y-5 text-base sm:text-lg leading-relaxed">
+          <div className="rounded-card bg-surface-raised border border-nuit/12 p-7 sm:p-10 space-y-5 text-base sm:text-lg leading-relaxed">
             {article.content.map((p, i) => (
               <p key={i}>{p}</p>
             ))}
@@ -532,7 +532,7 @@ export function ActualitesPage() {
         title="Actualités & Actions de terrain"
         description="Suivez les dernières actualités de WAHHF Foundation : ouvertures des sessions d'allemand gratuites, campagnes de santé et reboisement."
       />
-      <section className="surface-green pt-32 pb-16 bg-foret text-creme">
+      <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
           <span className="text-xs font-semibold uppercase tracking-kicker text-or">
             Journal de la Fondation
@@ -548,7 +548,7 @@ export function ActualitesPage() {
           <Link
             key={art.slug}
             to={`/actualites/${art.slug}`}
-            className="group rounded-card overflow-hidden bg-surface-raised border border-foret/12 flex flex-col justify-between hover:-translate-y-1 transition"
+            className="group rounded-card overflow-hidden bg-surface-raised border border-nuit/12 flex flex-col justify-between hover:-translate-y-1 transition"
           >
             <div>
               <div className="aspect-[16/10] overflow-hidden">
@@ -588,7 +588,7 @@ export function ActualitesPage() {
 type AgirField = 'name' | 'email' | 'details' | 'consent';
 const AGIR_FIELDS = ['name', 'email', 'details', 'consent'] as const;
 const AGIR_INPUT_CLASS =
-  'w-full px-4 py-3 rounded-inner bg-surface-inset border border-foret/20 aria-invalid:border-danger text-sm';
+  'w-full px-4 py-3 rounded-inner bg-surface-inset border border-nuit/20 aria-invalid:border-danger text-sm';
 
 function checkAgirField(key: AgirField, value: string | boolean): string | undefined {
   switch (key) {
@@ -674,7 +674,7 @@ export function AgirPage() {
         description="Rejoignez l'engagement de WAHHF Foundation : faire un don, devenir formateur ou bénévole, ou bâtir un partenariat institutionnel."
       />
 
-      <section className="surface-green pt-32 pb-16 bg-foret text-creme">
+      <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
           <span className="text-xs font-semibold uppercase tracking-kicker text-or">
             Agir avec nous
@@ -687,7 +687,7 @@ export function AgirPage() {
 
       <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="surface-green rounded-card bg-foret text-creme p-7 space-y-4 flex flex-col justify-between">
+          <div className="surface-green rounded-card bg-nuit text-creme p-7 space-y-4 flex flex-col justify-between">
             <div className="space-y-2">
               <span className="text-xs font-semibold text-or">01 · Don Solidaire</span>
               <h2 className="font-serif text-2xl">Faire un don</h2>
@@ -700,7 +700,7 @@ export function AgirPage() {
 
           <div
             id="benevole"
-            className="rounded-card bg-surface-raised border border-foret/15 p-7 space-y-4 flex flex-col justify-between"
+            className="rounded-card bg-surface-raised border border-nuit/15 p-7 space-y-4 flex flex-col justify-between"
           >
             <div className="space-y-2">
               <Users className="w-6 h-6 text-or" />
@@ -720,7 +720,7 @@ export function AgirPage() {
 
           <div
             id="partenaire"
-            className="rounded-card bg-surface-raised border border-foret/15 p-7 space-y-4 flex flex-col justify-between"
+            className="rounded-card bg-surface-raised border border-nuit/15 p-7 space-y-4 flex flex-col justify-between"
           >
             <div className="space-y-2">
               <Handshake className="w-6 h-6 text-or" />
@@ -740,7 +740,7 @@ export function AgirPage() {
         </div>
 
         {/* Formulaire Bénévole / Partenaire */}
-        <div ref={formBlockRef} className="rounded-card bg-surface-raised border border-foret/15 p-8 sm:p-10 max-w-3xl mx-auto">
+        <div ref={formBlockRef} className="rounded-card bg-surface-raised border border-nuit/15 p-8 sm:p-10 max-w-3xl mx-auto">
           <p role="status" className="sr-only">
             {statusMessage}
           </p>
@@ -845,7 +845,7 @@ export function AgirPage() {
                     }}
                     aria-invalid={errors.consent ? true : undefined}
                     aria-describedby={errors.consent ? fieldErrorId(fieldId('consent')) : undefined}
-                    className="mt-0.5 w-4 h-4 accent-foret"
+                    className="mt-0.5 w-4 h-4 accent-nuit"
                   />
                   <span>
                     J’accepte que mes données soient traitées par WAHHF Foundation pour étudier ma proposition d’engagement (RGPD). *
@@ -934,7 +934,7 @@ export function LegalTransparencyPage({
   return (
     <>
       <SEO title={content.title} description={content.blocks[0].p} />
-      <section className="surface-green pt-32 pb-14 bg-foret text-creme">
+      <section className="surface-green pt-32 pb-14 bg-nuit text-creme">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-3">
           <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-or">
             <Icon className="w-4 h-4" />
@@ -948,7 +948,7 @@ export function LegalTransparencyPage({
         {content.blocks.map((b) => (
           <div
             key={b.h}
-            className="rounded-card bg-surface-raised border border-foret/12 p-7 sm:p-9 space-y-3"
+            className="rounded-card bg-surface-raised border border-nuit/12 p-7 sm:p-9 space-y-3"
           >
             <h2 className="font-serif text-2xl">{b.h}</h2>
             <p className="text-base text-text-secondary leading-relaxed">

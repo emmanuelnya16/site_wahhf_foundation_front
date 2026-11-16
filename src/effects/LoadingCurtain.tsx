@@ -58,7 +58,7 @@ export default function LoadingCurtain() {
   return (
     <motion.div
       aria-hidden="true"
-      className="fixed inset-0 z-(--z-curtain) bg-foret pointer-events-none flex items-center justify-center"
+      className="fixed inset-0 z-(--z-curtain) bg-nuit pointer-events-none flex items-center justify-center"
       initial={{ clipPath: 'inset(0% 0% 0% 0%)' }}
       animate={{ clipPath: phase === 'leaving' ? 'inset(0% 0% 100% 0%)' : 'inset(0% 0% 0% 0%)' }}
       transition={{ duration: DURATION.screen, ease: EASE_SCREEN }}

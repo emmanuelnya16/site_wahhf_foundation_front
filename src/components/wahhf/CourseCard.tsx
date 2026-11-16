@@ -21,7 +21,7 @@ export default function CourseCard({ session, index = 1 }: CourseCardProps) {
       {/* Grand numéro en filigrane très pâle derrière le texte */}
       <span
         aria-hidden="true"
-        className="pointer-events-none select-none absolute -bottom-3 right-4 font-serif font-normal text-[6rem] leading-none text-foret/[0.05] dark:text-creme/[0.05]"
+        className="pointer-events-none select-none absolute -bottom-3 right-4 font-serif font-normal text-[6rem] leading-none text-nuit/[0.05] dark:text-creme/[0.05]"
       >
         {watermarkNum}
       </span>
@@ -29,7 +29,7 @@ export default function CourseCard({ session, index = 1 }: CourseCardProps) {
       <div className="relative z-10 space-y-4">
         <div className="flex items-center justify-between gap-2 flex-wrap">
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center justify-center px-3.5 py-1 rounded-pill bg-foret text-or text-xs font-bold tracking-wider uppercase">
+            <span className="inline-flex items-center justify-center px-3.5 py-1 rounded-pill bg-nuit text-or text-xs font-bold tracking-wider uppercase">
               Niveau {session.level}
             </span>
             <Link
@@ -88,7 +88,7 @@ export default function CourseCard({ session, index = 1 }: CourseCardProps) {
           className="group/btn inline-flex items-center gap-2.5 pl-5 pr-2 py-1.5 rounded-pill bg-action hover:bg-action-hover text-on-action text-sm font-medium transition"
         >
           <span>Candidater</span>
-          <span className="w-7 h-7 rounded-pill bg-or text-encre flex items-center justify-center transition-transform duration-(--dur-fast) group-hover/btn:rotate-45">
+          <span className="w-7 h-7 rounded-pill bg-or text-v1-encre flex items-center justify-center transition-transform duration-(--dur-fast) group-hover/btn:rotate-45">
             <ArrowUpRight className="w-3.5 h-3.5" />
           </span>
         </Link>

@@ -27,18 +27,18 @@ export default function CountryList({
             onMouseLeave={() => onHoverCountry(null)}
             onFocus={() => onHoverCountry(country.slug)}
             onBlur={() => onHoverCountry(null)}
-            className={`group flex items-center justify-between gap-1 p-2.5 sm:p-3 rounded-2xl border transition-colors duration-(--dur-fast) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foret ${
+            className={`group flex items-center justify-between gap-1 p-2.5 sm:p-3 rounded-2xl border transition-colors duration-(--dur-fast) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-nuit ${
               isHighlighted
                 ? 'bg-action text-on-action border-or shadow-xs'
-                : 'bg-creme/65 hover:bg-creme border-foret/12 text-encre'
+                : 'bg-creme/65 hover:bg-creme border-nuit/12 text-v1-encre'
             }`}
           >
             <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
               <span
                 className={`w-7 h-7 sm:w-8 sm:h-8 rounded-pill text-[11px] font-bold flex items-center justify-center shrink-0 transition-colors ${
                   isHighlighted
-                    ? 'bg-or text-encre'
-                    : 'bg-foret/10 text-foret'
+                    ? 'bg-or text-v1-encre'
+                    : 'bg-nuit/10 text-nuit'
                 }`}
               >
                 {country.code}
@@ -47,7 +47,7 @@ export default function CountryList({
                 <div className="flex items-center gap-1.5 flex-wrap">
                   <span
                     className={`font-medium text-xs sm:text-sm truncate ${
-                      isHighlighted ? 'text-creme' : 'text-encre'
+                      isHighlighted ? 'text-creme' : 'text-v1-encre'
                     }`}
                   >
                     {country.nameFr}
@@ -56,8 +56,8 @@ export default function CountryList({
                     <span
                       className={`px-1.5 py-0.5 text-[9px] sm:text-[10px] rounded font-semibold shrink-0 ${
                         isHighlighted
-                          ? 'bg-or text-encre'
-                          : 'bg-or/30 text-encre'
+                          ? 'bg-or text-v1-encre'
+                          : 'bg-or/30 text-v1-encre'
                       }`}
                     >
                       Hors UE
@@ -66,7 +66,7 @@ export default function CountryList({
                 </div>
                 <p
                   className={`text-[10px] sm:text-[11px] leading-snug ${
-                    isHighlighted ? 'text-or' : 'text-encre/65'
+                    isHighlighted ? 'text-or' : 'text-v1-encre/65'
                   }`}
                 >
                   Pays #{country.order} · Voir la fiche
@@ -76,7 +76,7 @@ export default function CountryList({
 
             <ArrowUpRight
               className={`w-4 h-4 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 ${
-                isHighlighted ? 'text-or' : 'text-foret'
+                isHighlighted ? 'text-or' : 'text-nuit'
               }`}
             />
           </Link>

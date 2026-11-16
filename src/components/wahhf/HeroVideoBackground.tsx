@@ -402,7 +402,7 @@ export function HeroVideoToggle({ video, pauseLabel, playLabel }: { video: HeroV
     <button
       type="button"
       onClick={video.toggle}
-      className="absolute bottom-24 right-6 z-20 inline-flex items-center gap-2 h-11 px-4 rounded-pill bg-foret/85 border border-or/50 text-creme text-xs font-semibold cursor-pointer transition-colors duration-(--dur-fast) hover:bg-or hover:text-encre focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-or"
+      className="absolute bottom-24 right-6 z-20 inline-flex items-center gap-2 h-11 px-4 rounded-pill bg-nuit/85 border border-or/50 text-creme text-xs font-semibold cursor-pointer transition-colors duration-(--dur-fast) hover:bg-or hover:text-v1-encre focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-or"
     >
       <Icon className="w-4 h-4" aria-hidden="true" fill="currentColor" />
       {video.userPaused ? playLabel : pauseLabel}

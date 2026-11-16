@@ -102,7 +102,7 @@ export default function ContactPage() {
         description="Contacter WAHHF Foundation par WhatsApp ou par e-mail : candidature, bénévolat, partenariat, presse ou toute autre demande."
       />
 
-      <section className="surface-green pt-32 pb-16 bg-foret text-creme">
+      <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
           <span className="text-xs font-semibold uppercase tracking-kicker text-or">Contact</span>
           <h1 className="font-serif font-normal text-[clamp(2.1rem,4.5vw,3.8rem)] leading-tight">
@@ -159,8 +159,8 @@ export default function ContactPage() {
                           showCheck
                           className={`p-4 rounded-2xl border text-left text-sm font-medium transition ${
                             motif === m.id
-                              ? 'bg-foret text-or border-or'
-                              : 'bg-creme dark:bg-foret/50 border-foret/15'
+                              ? 'bg-nuit text-or border-or'
+                              : 'bg-creme dark:bg-nuit/50 border-nuit/15'
                           }`}
                         >
                           {m.label}
@@ -248,7 +248,7 @@ export default function ContactPage() {
                   </FormField>
 
                   <div>
-                    <label className="flex items-start gap-3 cursor-pointer text-xs sm:text-sm text-encre/85 dark:text-creme/85">
+                    <label className="flex items-start gap-3 cursor-pointer text-xs sm:text-sm text-v1-encre/85 dark:text-creme/85">
                       <input
                         id={fieldId('consent')}
                         type="checkbox"
@@ -260,7 +260,7 @@ export default function ContactPage() {
                         }}
                         aria-invalid={errors.consent ? true : undefined}
                         aria-describedby={errors.consent ? fieldErrorId(fieldId('consent')) : undefined}
-                        className="mt-1 w-4 h-4 accent-foret"
+                        className="mt-1 w-4 h-4 accent-nuit"
                       />
                       <span>
                         J’accepte que mes coordonnées soient traitées par WAHHF Foundation pour répondre à mon
@@ -287,13 +287,13 @@ export default function ContactPage() {
 
           {/* Coordonnées directes */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="surface-green rounded-card bg-foret text-creme p-7 sm:p-8 border border-or/35 space-y-5">
+            <div className="surface-green rounded-card bg-nuit text-creme p-7 sm:p-8 border border-or/35 space-y-5">
               <h2 className="font-serif font-normal text-2xl text-creme">Nous joindre directement</h2>
               <a
                 href={`https://wa.me/${CONTACT.whatsappNumber}?text=${encodeURIComponent('Bonjour WAHHF Foundation, ')}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-pill bg-or text-encre text-sm font-semibold hover:bg-or-vif transition-colors"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-pill bg-or text-v1-encre text-sm font-semibold hover:bg-or-vif transition-colors"
               >
                 <MessageCircle aria-hidden="true" className="w-4 h-4" />
                 <span>Écrire sur WhatsApp</span>

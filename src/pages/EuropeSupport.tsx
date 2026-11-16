@@ -74,7 +74,7 @@ export default function EuropeSupport() {
           description={`Information vérifiée et gratuite sur les études, la formation et le travail en ${country.name} par WAHHF Foundation.`}
         />
 
-        <section className="surface-green pt-32 pb-16 sm:pt-36 sm:pb-20 bg-foret text-creme">
+        <section className="surface-green pt-32 pb-16 sm:pt-36 sm:pb-20 bg-nuit text-creme">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
             <div className="flex flex-wrap items-center gap-2 text-xs text-or font-semibold uppercase tracking-[0.18em]">
               <Link to="/mobilite-langues" className="hover:underline">
@@ -183,7 +183,7 @@ export default function EuropeSupport() {
               >
                 <span
                   aria-hidden="true"
-                  className="pointer-events-none select-none absolute -bottom-3 right-3 font-serif text-6xl text-foret/[0.05]"
+                  className="pointer-events-none select-none absolute -bottom-3 right-3 font-serif text-6xl text-nuit/[0.05]"
                 >
                   {p.num}
                 </span>
@@ -209,16 +209,16 @@ export default function EuropeSupport() {
               <ol className="space-y-4">
                 {country.steps.map((st, i) => (
                   <li key={st} className="flex items-start gap-3.5 text-sm sm:text-base">
-                    <span className="w-7 h-7 rounded-pill bg-foret text-or text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
+                    <span className="w-7 h-7 rounded-pill bg-nuit text-or text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
                       {i + 1}
                     </span>
-                    <span className="text-encre/85 dark:text-creme/85">{st}</span>
+                    <span className="text-v1-encre/85 dark:text-creme/85">{st}</span>
                   </li>
                 ))}
               </ol>
             </div>
 
-            <div className="surface-green lg:col-span-5 rounded-card bg-foret text-creme border border-or/35 p-7 sm:p-8 space-y-5 flex flex-col justify-between">
+            <div className="surface-green lg:col-span-5 rounded-card bg-nuit text-creme border border-or/35 p-7 sm:p-8 space-y-5 flex flex-col justify-between">
               <div className="space-y-4">
                 <span className="text-xs font-semibold uppercase tracking-[0.18em] text-or">
                   Sources Gouvernementales & Ambassades
@@ -277,7 +277,7 @@ export default function EuropeSupport() {
                   className={`px-3.5 py-2 rounded-pill text-xs font-medium transition-colors ${
                     c.slug === country.slug
                       ? 'bg-action text-or font-semibold'
-                      : 'bg-surface-raised border border-foret/15 text-text hover:border-or'
+                      : 'bg-surface-raised border border-nuit/15 text-text hover:border-or'
                   }`}
                 >
                   {c.flag} {c.name}
@@ -321,7 +321,7 @@ export default function EuropeSupport() {
 
         <section
           className={`surface-green pt-32 pb-16 sm:pt-36 sm:pb-20 ${
-            isAntiScam ? 'bg-foret border-b-4 border-or' : 'bg-foret'
+            isAntiScam ? 'bg-nuit border-b-4 border-or' : 'bg-nuit'
           } text-creme`}
         >
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-5">
@@ -358,7 +358,7 @@ export default function EuropeSupport() {
             >
               <span
                 aria-hidden="true"
-                className="pointer-events-none select-none absolute -bottom-3 right-4 font-serif text-7xl text-foret/[0.04]"
+                className="pointer-events-none select-none absolute -bottom-3 right-4 font-serif text-7xl text-nuit/[0.04]"
               >
                 0{idx + 1}
               </span>
@@ -373,7 +373,7 @@ export default function EuropeSupport() {
                   {sec.bullets.map((b) => (
                     <li
                       key={b}
-                      className="flex items-start gap-3 text-sm sm:text-base text-encre/85 dark:text-creme/85"
+                      className="flex items-start gap-3 text-sm sm:text-base text-v1-encre/85 dark:text-creme/85"
                     >
                       <CheckCircle2 className="w-5 h-5 text-accent shrink-0 mt-0.5" />
                       <span>{b}</span>
@@ -385,7 +385,7 @@ export default function EuropeSupport() {
           ))}
 
           {/* Navigation entre les 5 guides thématiques */}
-          <div className="surface-green rounded-card bg-foret text-creme p-7 sm:p-9 border border-or/35 space-y-5">
+          <div className="surface-green rounded-card bg-nuit text-creme p-7 sm:p-9 border border-or/35 space-y-5">
             <h3 className="font-serif text-2xl text-creme">
               Tous nos guides thématiques gratuits
             </h3>
@@ -396,7 +396,7 @@ export default function EuropeSupport() {
                   to={`/accompagnement/${g.slug}`}
                   className={`px-4 py-2 rounded-pill text-xs sm:text-sm font-medium transition-colors ${
                     g.slug === guide.slug
-                      ? 'bg-or text-encre font-semibold'
+                      ? 'bg-or text-v1-encre font-semibold'
                       : 'bg-white/10 text-creme hover:bg-white/20'
                   }`}
                 >
@@ -433,7 +433,7 @@ export default function EuropeSupport() {
       />
 
       {/* HERO */}
-      <section className="surface-green pt-32 pb-16 sm:pt-36 sm:pb-20 bg-foret text-creme">
+      <section className="surface-green pt-32 pb-16 sm:pt-36 sm:pb-20 bg-nuit text-creme">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
           <div className="flex flex-wrap items-center gap-2 text-xs text-or font-semibold uppercase tracking-[0.18em]">
             <Link to="/mobilite-langues" className="hover:underline">
@@ -487,7 +487,7 @@ export default function EuropeSupport() {
             >
               <div
                 aria-hidden="true"
-                className="absolute -left-[calc(var(--timeline-pad)+9px)] top-8 w-4 h-4 rounded-pill bg-foret border-2 border-or"
+                className="absolute -left-[calc(var(--timeline-pad)+9px)] top-8 w-4 h-4 rounded-pill bg-nuit border-2 border-or"
               />
               <div className="space-y-2">
                 <span className="text-xs font-bold uppercase tracking-widest text-accent-or">
@@ -502,7 +502,7 @@ export default function EuropeSupport() {
               </div>
               <Link
                 to={`/accompagnement/${item.slug}`}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-pill bg-surface-inset text-accent text-xs sm:text-sm font-semibold hover:bg-or hover:text-encre transition-colors shrink-0"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-pill bg-surface-inset text-accent text-xs sm:text-sm font-semibold hover:bg-or hover:text-v1-encre transition-colors shrink-0"
               >
                 <span>Lire le guide</span>
                 <ArrowUpRight className="w-4 h-4" />
@@ -513,7 +513,7 @@ export default function EuropeSupport() {
       </section>
 
       {/* LES 5 PAGES THÉMATIQUES D'INFORMATION */}
-      <section className="py-16 bg-white/60 dark:bg-sous-bois/30 border-y border-border-subtle">
+      <section className="py-16 bg-white/60 dark:bg-v1-sous-bois/30 border-y border-border-subtle">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           <SectionHeader
             kicker="Guides pratiques gratuits"
@@ -569,8 +569,8 @@ export default function EuropeSupport() {
                     <div
                       className={`w-10 h-10 rounded-inner flex items-center justify-center ${
                         topic.highlight
-                          ? 'bg-or text-encre'
-                          : 'bg-foret text-or'
+                          ? 'bg-or text-v1-encre'
+                          : 'bg-nuit text-or'
                       }`}
                     >
                       <Icon className="w-5 h-5" />
@@ -580,7 +580,7 @@ export default function EuropeSupport() {
                       className={`text-xs leading-relaxed ${
                         topic.highlight
                           ? 'text-creme/80'
-                          : 'text-encre/70 dark:text-creme/70'
+                          : 'text-v1-encre/70 dark:text-creme/70'
                       }`}
                     >
                       {topic.sub}
@@ -618,7 +618,7 @@ export default function EuropeSupport() {
             >
               <span
                 aria-hidden="true"
-                className="pointer-events-none select-none absolute -bottom-4 right-4 font-serif text-7xl text-foret/[0.05]"
+                className="pointer-events-none select-none absolute -bottom-4 right-4 font-serif text-7xl text-nuit/[0.05]"
               >
                 {String(idx + 1).padStart(2, '0')}
               </span>
@@ -634,8 +634,8 @@ export default function EuropeSupport() {
                   <span
                     className={`px-2.5 py-1 rounded-pill text-[11px] font-semibold ${
                       country.isEU
-                        ? 'bg-foret/10 dark:bg-creme/10 text-accent'
-                        : 'bg-or/30 text-encre dark:text-gold-on-green'
+                        ? 'bg-nuit/10 dark:bg-creme/10 text-accent'
+                        : 'bg-or/30 text-v1-encre dark:text-gold-on-green'
                     }`}
                   >
                     {country.isEU ? 'Membre UE' : 'Hors UE'}

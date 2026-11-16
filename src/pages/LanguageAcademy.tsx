@@ -132,7 +132,7 @@ export default function LanguageAcademy() {
       />
 
       {/* HERO */}
-      <section className="surface-green pt-32 pb-16 sm:pt-36 sm:pb-20 bg-foret text-creme">
+      <section className="surface-green pt-32 pb-16 sm:pt-36 sm:pb-20 bg-nuit text-creme">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
           <div className="flex flex-wrap items-center gap-2 text-xs text-or font-semibold uppercase tracking-[0.18em]">
             <Link to="/mobilite-langues" className="hover:underline">
@@ -190,7 +190,7 @@ export default function LanguageAcademy() {
         <div className="relative">
           <div
             aria-hidden="true"
-            className="hidden md:block absolute top-1/2 left-8 right-8 h-[2px] -translate-y-1/2 bg-gradient-to-r from-foret via-or to-foret z-0"
+            className="hidden md:block absolute top-1/2 left-8 right-8 h-[2px] -translate-y-1/2 bg-gradient-to-r from-nuit via-or to-nuit z-0"
           />
           <div className="relative z-10 grid grid-cols-2 sm:grid-cols-5 gap-3">
             {GERMAN_LEVELS_DATA.map((lvl) => {
@@ -234,7 +234,7 @@ export default function LanguageAcademy() {
         <div className="rounded-card bg-surface-raised border border-border p-7 sm:p-10 shadow-sm space-y-8">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-border-subtle">
             <div className="space-y-2">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-pill bg-foret text-or text-xs font-semibold uppercase tracking-wider">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-pill bg-nuit text-or text-xs font-semibold uppercase tracking-wider">
                 <GraduationCap className="w-4 h-4" />
                 <span>Fiche détaillée · {activeCourse.level}</span>
               </div>
@@ -255,7 +255,7 @@ export default function LanguageAcademy() {
 
           {/* 4 indicateurs du niveau */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="rounded-2xl bg-creme dark:bg-foret/50 p-4 space-y-1">
+            <div className="rounded-2xl bg-creme dark:bg-nuit/50 p-4 space-y-1">
               <div className="flex items-center gap-2 text-xs font-semibold text-accent">
                 <Clock className="w-4 h-4" />
                 <span>Durée indicative</span>
@@ -265,7 +265,7 @@ export default function LanguageAcademy() {
               </p>
             </div>
 
-            <div className="rounded-2xl bg-creme dark:bg-foret/50 p-4 space-y-1">
+            <div className="rounded-2xl bg-creme dark:bg-nuit/50 p-4 space-y-1">
               <div className="flex items-center gap-2 text-xs font-semibold text-accent">
                 <BookOpen className="w-4 h-4" />
                 <span>Volume horaire</span>
@@ -275,7 +275,7 @@ export default function LanguageAcademy() {
               </p>
             </div>
 
-            <div className="rounded-2xl bg-creme dark:bg-foret/50 p-4 space-y-1">
+            <div className="rounded-2xl bg-creme dark:bg-nuit/50 p-4 space-y-1">
               <div className="flex items-center gap-2 text-xs font-semibold text-accent">
                 <CheckCircle2 className="w-4 h-4" />
                 <span>Prérequis</span>
@@ -285,7 +285,7 @@ export default function LanguageAcademy() {
               </p>
             </div>
 
-            <div className="rounded-2xl bg-creme dark:bg-foret/50 p-4 space-y-1">
+            <div className="rounded-2xl bg-creme dark:bg-nuit/50 p-4 space-y-1">
               <div className="flex items-center gap-2 text-xs font-semibold text-accent">
                 <Calendar className="w-4 h-4" />
                 <span>Prochaine session</span>
@@ -342,7 +342,7 @@ export default function LanguageAcademy() {
       {/* TEST DE NIVEAU EN LIGNE GRATUIT (20 QUESTIONS PROGRESSIVES) */}
       <section
         id="test-niveau"
-        className="surface-green py-20 bg-foret text-creme border-y border-or/30"
+        className="surface-green py-20 bg-nuit text-creme border-y border-or/30"
       >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           <SectionHeader
@@ -366,7 +366,7 @@ export default function LanguageAcademy() {
                   <button
                     type="button"
                     onClick={() => setQuizStarted(true)}
-                    className="inline-flex items-center gap-3 px-7 py-3.5 rounded-pill bg-or text-encre font-semibold text-sm sm:text-base hover:bg-or-vif transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-3 px-7 py-3.5 rounded-pill bg-or text-v1-encre font-semibold text-sm sm:text-base hover:bg-or-vif transition-colors cursor-pointer"
                   >
                     <span>Commencer le test des 20 questions</span>
                     <ArrowUpRight className="w-5 h-5" />
@@ -419,7 +419,7 @@ export default function LanguageAcademy() {
                       Palier testé : Niveau {PLACEMENT_QUESTIONS[currentQIndex].level}
                     </span>
                   </div>
-                  <div aria-hidden="true" className="w-full h-2 rounded-pill bg-foret overflow-hidden">
+                  <div aria-hidden="true" className="w-full h-2 rounded-pill bg-nuit overflow-hidden">
                     <div
                       className="h-full w-full origin-left bg-or transition-transform duration-(--dur-fast)"
                       style={{
@@ -452,8 +452,8 @@ export default function LanguageAcademy() {
                           showCheck
                           className={`p-4 rounded-2xl border text-left text-sm sm:text-base font-medium transition ${
                             selected
-                              ? 'bg-or text-encre border-or font-semibold'
-                              : 'bg-foret/70 text-creme border-white/15 hover:border-or/60'
+                              ? 'bg-or text-v1-encre border-or font-semibold'
+                              : 'bg-nuit/70 text-creme border-white/15 hover:border-or/60'
                           }`}
                         >
                           {opt}
@@ -477,7 +477,7 @@ export default function LanguageAcademy() {
                     type="button"
                     disabled={answers[PLACEMENT_QUESTIONS[currentQIndex].id] === undefined}
                     onClick={handleNextQuestion}
-                    className="px-6 py-2.5 rounded-pill bg-or text-encre text-sm font-semibold disabled:opacity-40 cursor-pointer"
+                    className="px-6 py-2.5 rounded-pill bg-or text-v1-encre text-sm font-semibold disabled:opacity-40 cursor-pointer"
                   >
                     {currentQIndex === PLACEMENT_QUESTIONS.length - 1
                       ? 'Voir mon niveau conseillé'
@@ -539,7 +539,7 @@ export default function LanguageAcademy() {
       </section>
 
       {/* PRÉPARATION AUX EXAMENS OFFICIELS (Goethe, telc, TestDaF — mention indicative TODO) */}
-      <section className="py-16 bg-white/60 dark:bg-sous-bois/40 border-t border-border-subtle">
+      <section className="py-16 bg-white/60 dark:bg-v1-sous-bois/40 border-t border-border-subtle">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="rounded-card bg-surface-raised border border-border p-8 sm:p-10 space-y-6">
             <div className="flex flex-wrap items-center justify-between gap-4">

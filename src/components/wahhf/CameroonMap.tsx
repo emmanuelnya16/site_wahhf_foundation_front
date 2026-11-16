@@ -118,7 +118,7 @@ export default function CameroonMap({ selectedRegion, onSelectRegion }: Cameroon
         {hoveredRegion && (
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute top-1 left-1 px-3 py-1.5 rounded-pill bg-foret/95 border border-or/50 text-xs text-creme"
+            className="pointer-events-none absolute top-1 left-1 px-3 py-1.5 rounded-pill bg-nuit/95 border border-or/50 text-xs text-creme"
           >
             <span className="text-or font-semibold">{hoveredRegion.name}</span> · Chef-lieu : {hoveredRegion.capital}
           </div>
@@ -131,7 +131,7 @@ export default function CameroonMap({ selectedRegion, onSelectRegion }: Cameroon
           onClick={() => setIsFullscreen(true)}
           aria-label="Afficher la carte du Cameroun en plein écran"
           title="Plein écran"
-          className="absolute top-0 right-0 w-11 h-11 [@media(pointer:fine)]:w-9 [@media(pointer:fine)]:h-9 rounded-pill bg-feuillage/90 hover:bg-or text-creme hover:text-encre border border-or/40 flex items-center justify-center transition-colors duration-(--dur-fast) cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-creme"
+          className="absolute top-0 right-0 w-11 h-11 [@media(pointer:fine)]:w-9 [@media(pointer:fine)]:h-9 rounded-pill bg-feuillage/90 hover:bg-or text-creme hover:text-v1-encre border border-or/40 flex items-center justify-center transition-colors duration-(--dur-fast) cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-creme"
         >
           <Maximize2 className="w-4 h-4" />
         </button>
@@ -151,7 +151,7 @@ export default function CameroonMap({ selectedRegion, onSelectRegion }: Cameroon
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.6, ease: EASE_SCREEN }}
-            className="fixed inset-0 z-(--z-modal) bg-foret flex flex-col p-4 sm:p-8 text-creme outline-none"
+            className="fixed inset-0 z-(--z-modal) bg-nuit flex flex-col p-4 sm:p-8 text-creme outline-none"
           >
             <div className="max-w-5xl w-full mx-auto flex items-start justify-between gap-4 border-b border-or/30 pb-4">
               <div>
@@ -165,7 +165,7 @@ export default function CameroonMap({ selectedRegion, onSelectRegion }: Cameroon
                 ref={closeFullscreenRef}
                 type="button"
                 onClick={() => setIsFullscreen(false)}
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-pill bg-or text-encre text-xs font-semibold cursor-pointer shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-creme"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-pill bg-or text-v1-encre text-xs font-semibold cursor-pointer shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-creme"
               >
                 <Minimize2 className="w-4 h-4" aria-hidden="true" />
                 <span>Fermer</span>
@@ -190,7 +190,7 @@ export default function CameroonMap({ selectedRegion, onSelectRegion }: Cameroon
                     aria-pressed={isSelected}
                     onClick={() => onSelectRegion(reg)}
                     className={`px-3 py-1.5 rounded-pill text-xs whitespace-nowrap shrink-0 cursor-pointer transition-colors duration-(--dur-fast) focus-visible:outline-2 focus-visible:outline-creme ${
-                      isSelected ? 'bg-or text-encre font-semibold' : 'bg-white/10 text-creme hover:bg-white/20'
+                      isSelected ? 'bg-or text-v1-encre font-semibold' : 'bg-white/10 text-creme hover:bg-white/20'
                     }`}
                   >
                     {reg.name}
@@ -319,7 +319,7 @@ function RegionMap({
                 strokeWidth={0.7}
                 strokeLinejoin="round"
                 className={`cursor-pointer outline-none stroke-or transition-[fill] duration-(--dur-fast) ease-out ${
-                  isSelected ? 'fill-or' : isHovered ? 'fill-bronze' : 'fill-canopee'
+                  isSelected ? 'fill-or' : isHovered ? 'fill-bronze' : 'fill-v1-canopee'
                 }`}
               />
             );
@@ -342,7 +342,7 @@ function RegionMap({
         {/* 4. Indicateur de focus clavier : double trait sombre + clair, lisible sur le vert comme sur l'or */}
         {focusShape && (
           <g pointerEvents="none">
-            <path d={focusShape.d} fill="none" className="stroke-nuit" strokeWidth={4 * u} strokeLinejoin="round" />
+            <path d={focusShape.d} fill="none" className="stroke-v1-nuit" strokeWidth={4 * u} strokeLinejoin="round" />
             <path d={focusShape.d} fill="none" className="stroke-creme" strokeWidth={2 * u} strokeLinejoin="round" />
           </g>
         )}
@@ -356,14 +356,14 @@ function RegionMap({
                 <g data-cascade={cascadeId(region.id)}>
                   {isSelected ? (
                     <>
-                      <circle r={8} className="fill-foret" fillOpacity={0.28} />
+                      <circle r={8} className="fill-nuit" fillOpacity={0.28} />
                       {!reduce && <circle r={4} fill="none" strokeWidth={1.4} className="map-pulse stroke-ivoire" />}
-                      <circle r={3.8} className="fill-foret stroke-ivoire" strokeWidth={1.3} />
+                      <circle r={3.8} className="fill-nuit stroke-ivoire" strokeWidth={1.3} />
                     </>
                   ) : (
                     <>
                       <circle r={6.5} className="fill-or-clair" fillOpacity={0.24} />
-                      <circle r={2.6} className="fill-creme stroke-foret" strokeWidth={1.1} />
+                      <circle r={2.6} className="fill-creme stroke-nuit" strokeWidth={1.1} />
                     </>
                   )}
                 </g>
@@ -379,7 +379,7 @@ function RegionMap({
             return (
               <Marker key={region.id} coordinates={region.coordinates}>
                 <g data-cascade={cascadeId(region.id)} transform={`translate(0, ${-7 - pillH})`}>
-                  <rect x={-width / 2} y={0} width={width} height={pillH} rx={pillH / 2} className="fill-foret stroke-or" strokeWidth={0.9 * u} />
+                  <rect x={-width / 2} y={0} width={width} height={pillH} rx={pillH / 2} className="fill-nuit stroke-or" strokeWidth={0.9 * u} />
                   <text y={pillH / 2} dy="0.35em" textAnchor="middle" fontSize={fs} fontWeight={600} className="font-sans fill-creme">
                     {region.capital}
                   </text>

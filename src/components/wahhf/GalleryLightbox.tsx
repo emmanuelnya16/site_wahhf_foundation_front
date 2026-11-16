@@ -77,7 +77,7 @@ export default function GalleryLightbox({ items, index, onChange, returnFocusRef
   const item = index !== null ? items[index] : null;
   const album = item ? GALLERY_ALBUMS.find((a) => a.id === item.album) : undefined;
   const navButton =
-    'absolute top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-pill bg-foret/85 border border-or/40 text-creme flex items-center justify-center cursor-pointer transition-colors duration-(--dur-fast) hover:bg-or hover:text-encre focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-creme';
+    'absolute top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-pill bg-nuit/85 border border-or/40 text-creme flex items-center justify-center cursor-pointer transition-colors duration-(--dur-fast) hover:bg-or hover:text-v1-encre focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-creme';
 
   return (
     <AnimatePresence>
@@ -94,7 +94,7 @@ export default function GalleryLightbox({ items, index, onChange, returnFocusRef
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={SCREEN}
-          className="fixed inset-0 z-(--z-modal) bg-nuit/95 text-creme flex flex-col outline-none"
+          className="fixed inset-0 z-(--z-modal) bg-v1-nuit/95 text-creme flex flex-col outline-none"
         >
           <div className="flex items-start justify-between gap-4 px-4 sm:px-8 pt-4 sm:pt-6">
             <div className="min-w-0">
@@ -112,7 +112,7 @@ export default function GalleryLightbox({ items, index, onChange, returnFocusRef
                 type="button"
                 onClick={() => onChange(null)}
                 aria-label="Fermer la galerie"
-                className="w-11 h-11 rounded-pill bg-or text-encre flex items-center justify-center cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-creme"
+                className="w-11 h-11 rounded-pill bg-or text-v1-encre flex items-center justify-center cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-creme"
               >
                 <X className="w-5 h-5" />
               </button>

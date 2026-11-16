@@ -41,7 +41,7 @@ export default function GalleryGrid({
                 openerRef.current = e.currentTarget;
                 setOpenIndex(i);
               }}
-              className={`group relative block w-full overflow-hidden rounded-2xl bg-foret/10 dark:bg-creme/10 cursor-zoom-in focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
+              className={`group relative block w-full overflow-hidden rounded-2xl bg-nuit/10 dark:bg-creme/10 cursor-zoom-in focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
                 featured ? 'col-span-2 aspect-[4/3] md:row-span-2 md:aspect-auto md:h-full' : 'aspect-[4/3]'
               }`}
             >
@@ -63,11 +63,11 @@ export default function GalleryGrid({
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-(--dur-screen) ease-out group-hover:scale-105"
               />
               {item.kind === 'video' && (
-                <span aria-hidden="true" className="absolute inset-0 flex items-center justify-center bg-nuit/25">
-                  <span className="w-12 h-12 rounded-pill bg-or text-encre flex items-center justify-center shadow-lg">
+                <span aria-hidden="true" className="absolute inset-0 flex items-center justify-center bg-v1-nuit/25">
+                  <span className="w-12 h-12 rounded-pill bg-or text-v1-encre flex items-center justify-center shadow-lg">
                     <Play className="w-5 h-5 translate-x-px" fill="currentColor" />
                   </span>
-                  <span className="absolute bottom-2 right-2 px-2 py-0.5 rounded-pill bg-nuit/85 text-creme text-[11px] font-semibold tabular-nums">
+                  <span className="absolute bottom-2 right-2 px-2 py-0.5 rounded-pill bg-v1-nuit/85 text-creme text-[11px] font-semibold tabular-nums">
                     {formatDuration(item.duration)}
                   </span>
                 </span>

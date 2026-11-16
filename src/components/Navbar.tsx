@@ -205,7 +205,7 @@ export default function Navbar() {
       >
         <div
           ref={megaRef}
-          className="max-w-7xl mx-auto rounded-pill bg-white/95 dark:bg-sous-bois/95 backdrop-blur-md border border-foret/12 dark:border-creme/15 shadow-overlay px-3.5 sm:px-6 py-2.5 flex items-center justify-between gap-2"
+          className="max-w-7xl mx-auto rounded-pill bg-white/95 dark:bg-v1-sous-bois/95 backdrop-blur-md border border-nuit/12 dark:border-creme/15 shadow-overlay px-3.5 sm:px-6 py-2.5 flex items-center justify-between gap-2"
         >
           {/* Gauche : Logo WAHHF */}
           <Link
@@ -221,7 +221,7 @@ export default function Navbar() {
               className="w-10 h-10 sm:w-11 sm:h-11 object-contain rounded-pill bg-white p-0.5 shadow-xs"
             />
             <div className="flex flex-col min-w-0">
-              <span className="font-serif font-normal text-base sm:text-lg leading-none text-foret dark:text-creme tracking-tight whitespace-nowrap">
+              <span className="font-serif font-normal text-base sm:text-lg leading-none text-nuit dark:text-creme tracking-tight whitespace-nowrap">
                 WAHHF <span className="hidden min-[360px]:inline text-accent-or font-sans text-xs font-semibold uppercase tracking-widest">Foundation</span>
               </span>
               <span className="text-[10px] text-text-muted hidden lg:inline whitespace-nowrap">
@@ -236,7 +236,7 @@ export default function Navbar() {
               to="/qui-sommes-nous"
               className={`px-3 py-2 rounded-pill text-sm font-medium whitespace-nowrap transition-colors ${
                 location.pathname === '/qui-sommes-nous'
-                  ? 'bg-foret/10 dark:bg-creme/15 text-accent'
+                  ? 'bg-nuit/10 dark:bg-creme/15 text-accent'
                   : 'text-text hover:text-accent'
               }`}
             >
@@ -255,7 +255,7 @@ export default function Navbar() {
                   location.pathname.startsWith('/mobilite-langues') ||
                   location.pathname.startsWith('/academie') ||
                   location.pathname.startsWith('/accompagnement')
-                    ? 'bg-foret/10 dark:bg-creme/15 text-accent'
+                    ? 'bg-nuit/10 dark:bg-creme/15 text-accent'
                     : 'text-text hover:text-accent'
                 }`}
               >
@@ -270,7 +270,7 @@ export default function Navbar() {
               to="/notre-impact"
               className={`px-3 py-2 rounded-pill text-sm font-medium whitespace-nowrap transition-colors ${
                 location.pathname === '/notre-impact'
-                  ? 'bg-foret/10 dark:bg-creme/15 text-accent'
+                  ? 'bg-nuit/10 dark:bg-creme/15 text-accent'
                   : 'text-text hover:text-accent'
               }`}
             >
@@ -281,7 +281,7 @@ export default function Navbar() {
               to="/actualites"
               className={`px-3 py-2 rounded-pill text-sm font-medium whitespace-nowrap transition-colors ${
                 location.pathname.startsWith('/actualites')
-                  ? 'bg-foret/10 dark:bg-creme/15 text-accent'
+                  ? 'bg-nuit/10 dark:bg-creme/15 text-accent'
                   : 'text-text hover:text-accent'
               }`}
             >
@@ -292,7 +292,7 @@ export default function Navbar() {
               to="/agir"
               className={`px-3 py-2 rounded-pill text-sm font-medium whitespace-nowrap transition-colors ${
                 location.pathname === '/agir'
-                  ? 'bg-foret/10 dark:bg-creme/15 text-accent'
+                  ? 'bg-nuit/10 dark:bg-creme/15 text-accent'
                   : 'text-text hover:text-accent'
               }`}
             >
@@ -303,7 +303,7 @@ export default function Navbar() {
               to="/contact"
               className={`px-3 py-2 rounded-pill text-sm font-medium whitespace-nowrap transition-colors ${
                 location.pathname === '/contact'
-                  ? 'bg-foret/10 dark:bg-creme/15 text-accent'
+                  ? 'bg-nuit/10 dark:bg-creme/15 text-accent'
                   : 'text-text hover:text-accent'
               }`}
             >
@@ -317,15 +317,15 @@ export default function Navbar() {
             <div
               role="group"
               aria-label="Sélecteur de langue"
-              className="hidden md:inline-flex items-center rounded-pill bg-surface-inset p-0.5 border border-foret/10 dark:border-creme/15 text-xs"
+              className="hidden md:inline-flex items-center rounded-pill bg-surface-inset p-0.5 border border-nuit/10 dark:border-creme/15 text-xs"
             >
               <button
                 type="button"
                 onClick={() => switchLanguage('fr')}
                 className={`px-2.5 py-1 rounded-pill font-semibold transition-colors cursor-pointer ${
                   i18n.language.startsWith('fr')
-                    ? 'bg-accent text-creme dark:text-encre'
-                    : 'text-encre/70 dark:text-creme/70'
+                    ? 'bg-accent text-creme dark:text-v1-encre'
+                    : 'text-v1-encre/70 dark:text-creme/70'
                 }`}
               >
                 FR
@@ -335,8 +335,8 @@ export default function Navbar() {
                 onClick={() => switchLanguage('en')}
                 className={`px-2.5 py-1 rounded-pill font-semibold transition-colors cursor-pointer ${
                   i18n.language.startsWith('en')
-                    ? 'bg-accent text-creme dark:text-encre'
-                    : 'text-encre/70 dark:text-creme/70'
+                    ? 'bg-accent text-creme dark:text-v1-encre'
+                    : 'text-v1-encre/70 dark:text-creme/70'
                 }`}
               >
                 EN
@@ -350,7 +350,7 @@ export default function Navbar() {
               onClick={() => setSearchOpen((prev) => !prev)}
               aria-expanded={searchOpen}
               aria-label="Rechercher sur le site"
-              className="w-9 h-9 rounded-pill flex items-center justify-center text-text hover:bg-foret/10 dark:hover:bg-creme/10 transition-colors cursor-pointer"
+              className="w-9 h-9 rounded-pill flex items-center justify-center text-text hover:bg-nuit/10 dark:hover:bg-creme/10 transition-colors cursor-pointer"
             >
               <Search className="w-4 h-4" />
             </button>
@@ -361,7 +361,7 @@ export default function Navbar() {
               onClick={toggleTheme}
               aria-label={isDark ? t('nav.themeLight') : t('nav.themeDark')}
               title={isDark ? t('nav.themeLight') : t('nav.themeDark')}
-              className="hidden sm:flex w-9 h-9 rounded-pill items-center justify-center text-encre dark:text-or hover:bg-foret/10 dark:hover:bg-creme/10 transition-colors cursor-pointer"
+              className="hidden sm:flex w-9 h-9 rounded-pill items-center justify-center text-v1-encre dark:text-or hover:bg-nuit/10 dark:hover:bg-creme/10 transition-colors cursor-pointer"
             >
               {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </button>
@@ -409,9 +409,9 @@ export default function Navbar() {
                         <Link
                           key={dom.id}
                           to={dom.link}
-                          className="group flex items-start gap-3.5 p-3.5 rounded-2xl hover:bg-creme dark:hover:bg-foret/60 border border-transparent hover:border-or/30 transition"
+                          className="group flex items-start gap-3.5 p-3.5 rounded-2xl hover:bg-creme dark:hover:bg-nuit/60 border border-transparent hover:border-or/30 transition"
                         >
-                          <div className="w-10 h-10 rounded-inner bg-foret text-or flex items-center justify-center shrink-0 mt-0.5">
+                          <div className="w-10 h-10 rounded-inner bg-nuit text-or flex items-center justify-center shrink-0 mt-0.5">
                             <Icon className="w-5 h-5" />
                           </div>
                           <div>
@@ -423,7 +423,7 @@ export default function Navbar() {
                                 {dom.title}
                               </p>
                             </div>
-                            <p className="text-xs text-encre/70 dark:text-creme/70 line-clamp-2 mt-0.5">
+                            <p className="text-xs text-v1-encre/70 dark:text-creme/70 line-clamp-2 mt-0.5">
                               {dom.shortDesc}
                             </p>
                           </div>
@@ -434,7 +434,7 @@ export default function Navbar() {
                 </div>
 
                 {/* Encart direct Mobilité & Langues */}
-                <div className="surface-green lg:col-span-4 rounded-2xl bg-foret text-creme p-6 flex flex-col justify-between border border-or/30">
+                <div className="surface-green lg:col-span-4 rounded-2xl bg-nuit text-creme p-6 flex flex-col justify-between border border-or/30">
                   <div className="space-y-3">
                     <span className="inline-block px-3 py-1 rounded-pill bg-or/20 text-gold-on-green text-[11px] font-semibold uppercase tracking-wider">
                       100 % Gratuit · Domaine 06
@@ -500,13 +500,13 @@ export default function Navbar() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={t('nav.searchPlaceholder')}
-                className="w-full bg-transparent text-sm sm:text-base text-text placeholder-encre/50 dark:placeholder-creme/50"
+                className="w-full bg-transparent text-sm sm:text-base text-text placeholder-v1-encre/50 dark:placeholder-creme/50"
               />
               <button
                 type="button"
                 onClick={() => setSearchOpen(false)}
                 aria-label="Fermer la recherche"
-                className="p-1.5 rounded-pill hover:bg-foret/10 text-text cursor-pointer"
+                className="p-1.5 rounded-pill hover:bg-nuit/10 text-text cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -573,7 +573,7 @@ export default function Navbar() {
               }
             }
           }}
-          className="surface-green fixed inset-0 z-(--z-menu) bg-foret text-creme flex flex-col justify-between p-6 overflow-y-auto"
+          className="surface-green fixed inset-0 z-(--z-menu) bg-nuit text-creme flex flex-col justify-between p-6 overflow-y-auto"
         >
           <div className="flex items-center justify-between pb-6 border-b border-white/15">
             <Link to="/" onClick={() => setMobileOpen(false)} className="flex items-center gap-3">
@@ -676,7 +676,7 @@ export default function Navbar() {
                   type="button"
                   onClick={() => switchLanguage('fr')}
                   className={`px-3 py-1.5 rounded-pill text-xs font-semibold ${
-                    i18n.language.startsWith('fr') ? 'bg-or text-encre' : 'bg-white/10 text-white'
+                    i18n.language.startsWith('fr') ? 'bg-or text-v1-encre' : 'bg-white/10 text-white'
                   }`}
                 >
                   Français (FR)
@@ -685,7 +685,7 @@ export default function Navbar() {
                   type="button"
                   onClick={() => switchLanguage('en')}
                   className={`px-3 py-1.5 rounded-pill text-xs font-semibold ${
-                    i18n.language.startsWith('en') ? 'bg-or text-encre' : 'bg-white/10 text-white'
+                    i18n.language.startsWith('en') ? 'bg-or text-v1-encre' : 'bg-white/10 text-white'
                   }`}
                 >
                   English (EN)

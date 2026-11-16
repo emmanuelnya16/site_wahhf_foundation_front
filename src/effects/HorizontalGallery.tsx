@@ -102,7 +102,7 @@ export default function HorizontalGallery({ id, header, items, prevLabel, nextLa
             {header}
 
             {pinHint && (
-              <p aria-hidden="true" className="hidden pin:flex items-center gap-2 text-sm text-encre/70 dark:text-creme/70">
+              <p aria-hidden="true" className="hidden pin:flex items-center gap-2 text-sm text-v1-encre/70 dark:text-creme/70">
                 <ChevronRight className="w-4 h-4 text-or" />
                 {pinHint}
               </p>
@@ -114,7 +114,7 @@ export default function HorizontalGallery({ id, header, items, prevLabel, nextLa
                 type="button"
                 onClick={() => scrollCarousel('prev')}
                 aria-label={prevLabel}
-                className="w-11 h-11 rounded-pill border border-border-strong flex items-center justify-center text-accent hover:bg-or hover:text-encre transition-colors"
+                className="w-11 h-11 rounded-pill border border-border-strong flex items-center justify-center text-accent hover:bg-or hover:text-v1-encre transition-colors"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
@@ -122,7 +122,7 @@ export default function HorizontalGallery({ id, header, items, prevLabel, nextLa
                 type="button"
                 onClick={() => scrollCarousel('next')}
                 aria-label={nextLabel}
-                className="w-11 h-11 rounded-pill border border-border-strong flex items-center justify-center text-accent hover:bg-or hover:text-encre transition-colors"
+                className="w-11 h-11 rounded-pill border border-border-strong flex items-center justify-center text-accent hover:bg-or hover:text-v1-encre transition-colors"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>

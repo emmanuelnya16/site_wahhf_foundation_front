@@ -91,7 +91,7 @@ export default function DonatePage() {
         description="Soutenez WAHHF Foundation : vos dons financent la gratuité des cours d'allemand (A1 à C1), l'accompagnement vers l'Europe et nos actions sociales au Cameroun."
       />
 
-      <section className="surface-green pt-32 pb-16 bg-foret text-creme">
+      <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-5">
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-pill bg-rouge text-white text-xs font-semibold uppercase tracking-widest">
             <Heart className="w-3.5 h-3.5 fill-current" />
@@ -119,7 +119,7 @@ export default function DonatePage() {
               onEdit={() => setPrepared(false)}
               editLabel="Modifier mon don"
             >
-              <p className="text-xs sm:text-sm text-encre/70 dark:text-creme/70">
+              <p className="text-xs sm:text-sm text-v1-encre/70 dark:text-creme/70">
                 Aucun paiement n’est effectué sur ce site et aucune donnée bancaire n’y est demandée.
               </p>
             </ContactHandoff>
@@ -151,8 +151,8 @@ export default function DonatePage() {
                         onChange={() => setFrequency(f.id)}
                         className={`py-2.5 rounded-pill text-sm font-semibold text-center transition ${
                           frequency === f.id
-                            ? 'bg-accent text-creme dark:text-encre'
-                            : 'text-encre/70 dark:text-creme/70'
+                            ? 'bg-accent text-creme dark:text-v1-encre'
+                            : 'text-v1-encre/70 dark:text-creme/70'
                         }`}
                       >
                         {f.label}
@@ -180,7 +180,7 @@ export default function DonatePage() {
                           className={`py-4 px-3 rounded-2xl border font-serif text-2xl text-center transition ${
                             checked
                               ? 'bg-rouge text-white border-rouge shadow-sm'
-                              : 'bg-creme dark:bg-foret/50 border-foret/15 text-text'
+                              : 'bg-creme dark:bg-nuit/50 border-nuit/15 text-text'
                           }`}
                         >
                           {item.amount} €
@@ -205,7 +205,7 @@ export default function DonatePage() {
                     value={customAmount}
                     onChange={(e) => setCustomAmount(e.target.value)}
                     placeholder="Autre montant (ex. 75)"
-                    className="w-full px-4 py-3 rounded-inner bg-surface-inset border border-foret/20 text-sm"
+                    className="w-full px-4 py-3 rounded-inner bg-surface-inset border border-nuit/20 text-sm"
                   />
                 </div>
 
@@ -229,7 +229,7 @@ export default function DonatePage() {
                           | 'materiel_pedagogique'
                       )
                     }
-                    className="w-full px-4 py-3 rounded-inner bg-surface-inset border border-foret/20 text-sm"
+                    className="w-full px-4 py-3 rounded-inner bg-surface-inset border border-nuit/20 text-sm"
                   >
                     <option value="academie_langues">
                       Financer un parcours : Académie d’allemand A1–C1 & Orientation gratuite
@@ -261,7 +261,7 @@ export default function DonatePage() {
                       required
                       value={donorName}
                       onChange={(e) => setDonorName(e.target.value)}
-                      className="w-full px-4 py-3 rounded-inner bg-surface-inset border border-foret/20 text-sm"
+                      className="w-full px-4 py-3 rounded-inner bg-surface-inset border border-nuit/20 text-sm"
                     />
                   </div>
                   <div>
@@ -277,7 +277,7 @@ export default function DonatePage() {
                       required
                       value={donorEmail}
                       onChange={(e) => setDonorEmail(e.target.value)}
-                      className="w-full px-4 py-3 rounded-inner bg-surface-inset border border-foret/20 text-sm"
+                      className="w-full px-4 py-3 rounded-inner bg-surface-inset border border-nuit/20 text-sm"
                     />
                   </div>
                 </div>
@@ -302,8 +302,8 @@ export default function DonatePage() {
                         showCheck
                         className={`p-3 rounded-inner border text-left font-medium ${
                           paymentMethod === m.id
-                            ? 'bg-foret text-or border-or'
-                            : 'bg-creme dark:bg-foret/40 border-foret/15'
+                            ? 'bg-nuit text-or border-or'
+                            : 'bg-creme dark:bg-nuit/40 border-nuit/15'
                         }`}
                       >
                         {m.label}
@@ -318,7 +318,7 @@ export default function DonatePage() {
                       type="checkbox"
                       checked={anonymous}
                       onChange={(e) => setAnonymous(e.target.checked)}
-                      className="w-4 h-4 accent-foret"
+                      className="w-4 h-4 accent-nuit"
                     />
                     <span>Je souhaite que mon don reste anonyme publiquement</span>
                   </label>
@@ -329,7 +329,7 @@ export default function DonatePage() {
                       required
                       checked={gdprConsent}
                       onChange={(e) => setGdprConsent(e.target.checked)}
-                      className="mt-1 w-4 h-4 accent-foret"
+                      className="mt-1 w-4 h-4 accent-nuit"
                     />
                     <span>
                       J’accepte le traitement confidentiel de mes informations pour la gestion de mon don (RGPD). Aucune donnée bancaire n’est enregistrée sur ce formulaire de démonstration. *
@@ -351,7 +351,7 @@ export default function DonatePage() {
 
             {/* Colonne d'impact & transparence */}
             <div className="lg:col-span-5 space-y-6">
-              <div className="surface-green rounded-card bg-foret text-creme p-7 sm:p-8 border border-or/35 space-y-5">
+              <div className="surface-green rounded-card bg-nuit text-creme p-7 sm:p-8 border border-or/35 space-y-5">
                 <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-or">
                   <Sparkles className="w-4 h-4" />
                   <span>Ce que votre don permet (Exemples — TODO)</span>

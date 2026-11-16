@@ -153,7 +153,7 @@ export default function ApplyPage() {
         description="Formulaire unique et 100 % gratuit de demande d'accompagnement et d'inscription aux cours d'allemand WAHHF Foundation. Aucun document d'identité ni paiement demandé."
       />
 
-      <section className="surface-green pt-32 pb-14 bg-foret text-creme">
+      <section className="surface-green pt-32 pb-14 bg-nuit text-creme">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
           <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-pill bg-or/20 text-gold-on-green text-xs font-semibold uppercase tracking-widest">
             <CheckCircle2 className="w-4 h-4" />
@@ -184,7 +184,7 @@ export default function ApplyPage() {
             titleRef={stepTitleRef}
             onEdit={() => setPrepared(false)}
           >
-            <div className="rounded-2xl bg-foret/8 dark:bg-foret border border-foret/20 dark:border-or/40 p-5 text-sm text-text">
+            <div className="rounded-2xl bg-nuit/8 dark:bg-nuit border border-nuit/20 dark:border-or/40 p-5 text-sm text-text">
               <p className="font-semibold text-accent mb-1">
                 Délai de réponse indicatif : sous 7 à 14 jours ouvrés (TODO : délai exact à confirmer par l’équipe WAHHF).
               </p>
@@ -209,7 +209,7 @@ export default function ApplyPage() {
               </div>
               <div aria-hidden="true" className="w-full h-2 rounded-pill bg-surface-inset overflow-hidden">
                 <div
-                  className="h-full w-full origin-left bg-gradient-to-r from-foret to-or transition-transform duration-(--dur-fast)"
+                  className="h-full w-full origin-left bg-gradient-to-r from-nuit to-or transition-transform duration-(--dur-fast)"
                   style={{ transform: `scaleX(${step / 3})` }}
                 />
               </div>
@@ -364,8 +364,8 @@ export default function ApplyPage() {
                           showCheck
                           className={`p-4 rounded-2xl border text-left text-sm font-medium transition ${
                             wishType === opt.id
-                              ? 'bg-foret text-or border-or'
-                              : 'bg-creme dark:bg-foret/50 border-foret/15'
+                              ? 'bg-nuit text-or border-or'
+                              : 'bg-creme dark:bg-nuit/50 border-nuit/15'
                           }`}
                         >
                           {opt.label}
@@ -447,7 +447,7 @@ export default function ApplyPage() {
                     <button
                       type="button"
                       onClick={() => setStep(1)}
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-pill border border-foret/25 text-sm cursor-pointer"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-pill border border-nuit/25 text-sm cursor-pointer"
                     >
                       <ArrowLeft className="w-4 h-4" />
                       <span>Étape précédente</span>
@@ -491,7 +491,7 @@ export default function ApplyPage() {
                   </div>
 
                   {/* Rappel clair obligatoire : aucun document d'identité ni paiement demandé */}
-                  <div className="rounded-2xl bg-foret/8 dark:bg-foret border border-foret/20 dark:border-or/40 p-5 flex items-start gap-3.5">
+                  <div className="rounded-2xl bg-nuit/8 dark:bg-nuit border border-nuit/20 dark:border-or/40 p-5 flex items-start gap-3.5">
                     <ShieldCheck className="w-6 h-6 text-accent shrink-0 mt-0.5" />
                     <p className="text-sm font-medium text-text">
                       « Aucun document d’identité ni aucun paiement ne vous est demandé à cette étape. »
@@ -500,7 +500,7 @@ export default function ApplyPage() {
 
                   {/* Case consentement RGPD explicite */}
                   <div>
-                    <label className="flex items-start gap-3 cursor-pointer text-xs sm:text-sm text-encre/85 dark:text-creme/85">
+                    <label className="flex items-start gap-3 cursor-pointer text-xs sm:text-sm text-v1-encre/85 dark:text-creme/85">
                       <input
                         id={fieldId('gdprConsent')}
                         type="checkbox"
@@ -512,7 +512,7 @@ export default function ApplyPage() {
                         }}
                         aria-invalid={errors.gdprConsent ? true : undefined}
                         aria-describedby={errors.gdprConsent ? fieldErrorId(fieldId('gdprConsent')) : undefined}
-                        className="mt-1 w-4 h-4 accent-foret"
+                        className="mt-1 w-4 h-4 accent-nuit"
                       />
                       <span>
                         J’accepte que mes coordonnées soient traitées de manière strictement confidentielle par WAHHF Foundation dans le seul but de répondre gratuitement à ma demande d’accompagnement, conformément à la{' '}
@@ -529,7 +529,7 @@ export default function ApplyPage() {
                     <button
                       type="button"
                       onClick={() => setStep(2)}
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-pill border border-foret/25 text-sm cursor-pointer"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-pill border border-nuit/25 text-sm cursor-pointer"
                     >
                       <ArrowLeft className="w-4 h-4" />
                       <span>Étape précédente</span>

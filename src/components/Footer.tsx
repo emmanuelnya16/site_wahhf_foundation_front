@@ -25,7 +25,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="surface-green bg-foret text-creme border-t border-or/25">
+    <footer className="surface-green bg-nuit text-creme border-t border-or/25">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
         {/* Colonnes : apparition douce et décalée, une seule fois */}
         <StaggerGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-creme/15">
@@ -67,7 +67,7 @@ export default function Footer() {
                   key={soc.label}
                   href={soc.href}
                   aria-label={`${soc.label} WAHHF Foundation (TODO)`}
-                  className="px-3 py-1.5 rounded-pill bg-creme/10 hover:bg-or hover:text-encre text-xs font-medium transition-colors"
+                  className="px-3 py-1.5 rounded-pill bg-creme/10 hover:bg-or hover:text-v1-encre text-xs font-medium transition-colors"
                 >
                   {soc.label}
                 </a>
@@ -230,7 +230,7 @@ export default function Footer() {
             onClick={handleBackToTop}
             aria-label={t('footer.backToTop')}
             title={t('footer.backToTop')}
-            className="w-11 h-11 rounded-pill bg-feuillage hover:bg-or text-creme hover:text-encre border border-or/40 flex items-center justify-center transition duration-(--dur-fast) cursor-pointer shrink-0"
+            className="w-11 h-11 rounded-pill bg-feuillage hover:bg-or text-creme hover:text-v1-encre border border-or/40 flex items-center justify-center transition duration-(--dur-fast) cursor-pointer shrink-0"
           >
             <ArrowUp className="w-5 h-5" />
           </button>

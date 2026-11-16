@@ -61,7 +61,7 @@ export default function SectionHeader({
       {/* 3. Petit filet en dégradé vert vers or, sous le titre */}
       <div
         aria-hidden="true"
-        className={`h-[3px] w-20 rounded-pill bg-gradient-to-r from-foret via-fougere to-or mt-5 mb-5 ${
+        className={`h-[3px] w-20 rounded-pill bg-gradient-to-r from-nuit via-fougere to-or mt-5 mb-5 ${
           align === 'center' ? 'mx-auto' : ''
         }`}
       />

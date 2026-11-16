@@ -107,7 +107,7 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
       const y = above ? activePoint[1] - 28 : activePoint[1] + 10;
       label = (
         <g transform={`translate(${x.toFixed(1)}, ${y.toFixed(1)})`} pointerEvents="none">
-          <rect x={-lw / 2} y={0} width={lw} height={19} rx={9.5} className="fill-foret stroke-or" strokeWidth={0.9} />
+          <rect x={-lw / 2} y={0} width={lw} height={19} rx={9.5} className="fill-nuit stroke-or" strokeWidth={0.9} />
           <text x={0} y={13} textAnchor="middle" fontSize={10} fontWeight={600} className="font-sans fill-creme">
             {text}
           </text>
@@ -146,7 +146,7 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
                 onKeyDown={(e) => handleKeyDown(e, supported.slug)}
                 strokeWidth={isActive ? 1 : 0.7}
                 strokeLinejoin="round"
-                className={`cursor-pointer outline-none transition-[fill] duration-(--dur-fast) ease-out ${isActive ? 'fill-foret stroke-foret' : 'fill-or-pale stroke-or-sombre'}`}
+                className={`cursor-pointer outline-none transition-[fill] duration-(--dur-fast) ease-out ${isActive ? 'fill-nuit stroke-nuit' : 'fill-or-pale stroke-or-sombre'}`}
               />
             );
           })}
@@ -156,7 +156,7 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
         {focusShape && (
           <g pointerEvents="none">
             <path d={focusShape.d} fill="none" className="stroke-blanc" strokeWidth={4.5} strokeLinejoin="round" />
-            <path d={focusShape.d} fill="none" className="stroke-foret" strokeWidth={2} strokeLinejoin="round" />
+            <path d={focusShape.d} fill="none" className="stroke-nuit" strokeWidth={2} strokeLinejoin="round" />
           </g>
         )}
 
@@ -174,7 +174,7 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
                 className="cursor-pointer"
               >
                 <circle r={9} fill="transparent" />
-                <circle r={isActive ? 3.6 : 2.3} className={isActive ? 'fill-or stroke-blanc' : 'fill-foret stroke-blanc'} strokeWidth={1} pointerEvents="none" />
+                <circle r={isActive ? 3.6 : 2.3} className={isActive ? 'fill-or stroke-blanc' : 'fill-nuit stroke-blanc'} strokeWidth={1} pointerEvents="none" />
               </Marker>
             );
           })}
@@ -188,7 +188,7 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
                 key={arcSlug}
                 d={arcPath(origin, arcEnd)}
                 fill="none"
-                className="stroke-foret"
+                className="stroke-nuit"
                 strokeWidth={1.6}
                 strokeLinecap="round"
                 initial={reduce ? false : { pathLength: 0 }}
@@ -201,7 +201,7 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
                 cy={arcEnd[1]}
                 r={5.5}
                 fill="none"
-                className="stroke-foret"
+                className="stroke-nuit"
                 strokeWidth={1.2}
                 initial={reduce ? false : { opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -210,8 +210,8 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
             </>
           )}
           <g transform={`translate(${origin[0]}, ${origin[1]})`}>
-            <circle r={4} className="fill-foret stroke-or" strokeWidth={1.5} />
-            <rect x={9} y={-9.5} width={106} height={19} rx={9.5} className="fill-foret" />
+            <circle r={4} className="fill-nuit stroke-or" strokeWidth={1.5} />
+            <rect x={9} y={-9.5} width={106} height={19} rx={9.5} className="fill-nuit" />
             <text x={62} y={3.5} textAnchor="middle" fontSize={9.5} fontWeight={600} className="font-sans fill-creme">
               Depuis le Cameroun
             </text>
@@ -224,7 +224,7 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
   }
 
   return (
-    <div ref={boxRef} className="absolute inset-0 rounded-2xl bg-creme border border-foret/12 overflow-hidden">
+    <div ref={boxRef} className="absolute inset-0 rounded-2xl bg-creme border border-nuit/12 overflow-hidden">
       {overlay}
     </div>
   );

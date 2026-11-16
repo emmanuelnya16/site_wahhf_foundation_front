@@ -26,10 +26,10 @@ export default function WhatsAppButton() {
     >
       <div className="relative flex items-center justify-center">
         <MessageCircle size={24} className="text-creme transition-transform group-hover:scale-105" />
-        <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-pill bg-or ring-2 ring-foret" />
+        <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-pill bg-or ring-2 ring-nuit" />
       </div>
 
-      <span className="absolute right-full mr-3 bg-foret text-creme border border-or/30 px-3.5 py-1.5 rounded-pill text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity shadow-xl pointer-events-none">
+      <span className="absolute right-full mr-3 bg-nuit text-creme border border-or/30 px-3.5 py-1.5 rounded-pill text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity shadow-xl pointer-events-none">
         {i18n.language.startsWith('en') ? 'Free Orientation Support' : 'Écoute & Orientation (Gratuit)'}
       </span>
     </motion.a>

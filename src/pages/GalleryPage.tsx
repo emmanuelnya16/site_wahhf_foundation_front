@@ -21,8 +21,8 @@ export default function GalleryPage() {
   const chip = (active: boolean) =>
     `px-4 py-2 rounded-pill text-sm whitespace-nowrap shrink-0 cursor-pointer transition-colors duration-(--dur-fast) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
       active
-        ? 'bg-accent text-creme dark:text-encre font-semibold'
-        : 'bg-foret/8 text-text hover:bg-foret/15 dark:bg-creme/10 dark:hover:bg-creme/18'
+        ? 'bg-accent text-creme dark:text-v1-encre font-semibold'
+        : 'bg-nuit/8 text-text hover:bg-nuit/15 dark:bg-creme/10 dark:hover:bg-creme/18'
     }`;
 
   return (
@@ -32,7 +32,7 @@ export default function GalleryPage() {
         description="Photos et vidéos de WAHHF Foundation : First Open Day & Boot Camp à Yaoundé, rencontres de la communauté et actions sur le terrain."
       />
 
-      <section className="surface-green pt-32 pb-16 bg-foret text-creme">
+      <section className="surface-green pt-32 pb-16 bg-nuit text-creme">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
           <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-kicker text-or">
             <Camera className="w-4 h-4" aria-hidden="true" />
@@ -71,7 +71,7 @@ export default function GalleryPage() {
               <h2 id={`album-${album.id}`} className="font-serif font-normal text-2xl sm:text-3xl text-text">
                 {album.title}
               </h2>
-              <p className="inline-flex items-center gap-1.5 text-sm text-encre/70 dark:text-creme/70">
+              <p className="inline-flex items-center gap-1.5 text-sm text-v1-encre/70 dark:text-creme/70">
                 <MapPin className="w-4 h-4 text-accent-or" aria-hidden="true" />
                 {album.meta} · {items.length} {items.length > 1 ? 'éléments' : 'élément'}
               </p>

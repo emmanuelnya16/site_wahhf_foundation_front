@@ -38,7 +38,7 @@ export default function CookieBanner() {
             <button
               type="button"
               onClick={() => handleChoice('essential')}
-              className="px-4 py-2 rounded-pill border border-foret/30 dark:border-creme/30 text-xs font-medium hover:bg-foret/5 dark:hover:bg-creme/10 transition-colors cursor-pointer"
+              className="px-4 py-2 rounded-pill border border-nuit/30 dark:border-creme/30 text-xs font-medium hover:bg-nuit/5 dark:hover:bg-creme/10 transition-colors cursor-pointer"
             >
               Refuser le non-essentiel
             </button>

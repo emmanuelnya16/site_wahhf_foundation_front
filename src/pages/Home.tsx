@@ -184,7 +184,7 @@ export default function Home() {
       <section
         id="accueil"
         ref={heroRef}
-        className="surface-green relative min-h-svh w-full flex items-center justify-center overflow-hidden bg-foret text-creme pt-28 pb-16"
+        className="surface-green relative min-h-svh w-full flex items-center justify-center overflow-hidden bg-nuit text-creme pt-28 pb-16"
       >
         {/* 1) Image d'attente (élément principal du chargement, préchargée dans index.html) :
                zoom très lent et léger décalage au défilement sur ordinateur (20 px max).
@@ -218,7 +218,7 @@ export default function Home() {
         >
           <motion.div
             variants={heroFade(0)}
-            className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-pill bg-foret/85 border border-or/40 text-or text-xs font-semibold uppercase tracking-kicker"
+            className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-pill bg-nuit/85 border border-or/40 text-or text-xs font-semibold uppercase tracking-kicker"
           >
             <img
               src={WAHHF_LOGO_URL}
@@ -293,7 +293,7 @@ export default function Home() {
             <SplitReveal
               key={`mission-p1-${i18n.language}`}
               id="mission-p1"
-              className="text-base sm:text-lg text-encre/85 dark:text-creme/85 leading-relaxed"
+              className="text-base sm:text-lg text-v1-encre/85 dark:text-creme/85 leading-relaxed"
             >
               {t('home.mission.p1')}
             </SplitReveal>
@@ -324,7 +324,7 @@ export default function Home() {
                   width={68}
                   height={68}
                   loading="lazy"
-                  className="w-16 h-16 object-contain rounded-2xl bg-creme p-1.5 border border-foret/10"
+                  className="w-16 h-16 object-contain rounded-2xl bg-creme p-1.5 border border-nuit/10"
                 />
                 <div>
                   <span className="text-xs font-semibold uppercase tracking-[0.18em] text-accent-or">
@@ -341,13 +341,13 @@ export default function Home() {
               </p>
 
               <div className="grid grid-cols-2 gap-3 pt-2">
-                <div className="rounded-2xl bg-creme dark:bg-foret/60 p-4">
+                <div className="rounded-2xl bg-creme dark:bg-nuit/60 p-4">
                   <p className="text-xs text-text-muted">Ancrage</p>
                   <p className="font-serif text-lg text-accent mt-0.5">
                     Cameroun & Allemagne
                   </p>
                 </div>
-                <div className="rounded-2xl bg-creme dark:bg-foret/60 p-4">
+                <div className="rounded-2xl bg-creme dark:bg-nuit/60 p-4">
                   <p className="text-xs text-text-muted">Principe</p>
                   <p className="font-serif text-lg text-accent mt-0.5">
                     100 % Non lucratif
@@ -362,7 +362,7 @@ export default function Home() {
       {/* =====================================================================
           3. CHIFFRES CLÉS (4 compteurs animés)
           ===================================================================== */}
-      <section id="chiffres-cles" className="surface-green py-16 sm:py-20 bg-foret text-creme border-y border-or/25">
+      <section id="chiffres-cles" className="surface-green py-16 sm:py-20 bg-nuit text-creme border-y border-or/25">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <SectionHeader
             kicker={t('home.stats.kicker')}
@@ -449,7 +449,7 @@ export default function Home() {
           3 cartes, mention « 100 % gratuit, financé par IROKO et nos donateurs », bouton « Découvrir le programme ».
           ===================================================================== */}
       {/* Effet fort : la carte verte s'agrandit jusqu'à la pleine largeur, puis cascade du contenu */}
-      <ExpandSection id="mobilite-langues" backgroundClassName="bg-foret" className="surface-green py-20 sm:py-24 text-creme">
+      <ExpandSection id="mobilite-langues" backgroundClassName="bg-nuit" className="surface-green py-20 sm:py-24 text-creme">
         <div data-expand-content className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <div data-cascade className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
             <SectionHeader
@@ -511,7 +511,7 @@ export default function Home() {
                     {item.num}
                   </span>
                   <div className="space-y-4 relative z-10">
-                    <div className="w-12 h-12 rounded-2xl bg-or text-encre flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-2xl bg-or text-v1-encre flex items-center justify-center">
                       <Icon className="w-6 h-6" />
                     </div>
                     <h3 className="font-serif font-normal text-2xl text-creme group-hover:text-or transition-colors">
@@ -568,7 +568,7 @@ export default function Home() {
             <motion.div
               layoutId="wahhf-video-frame"
               transition={{ duration: DURATION.screen, ease: EASE_SCREEN }}
-              className="absolute inset-0 rounded-card overflow-hidden border border-border shadow-xl group bg-foret"
+              className="absolute inset-0 rounded-card overflow-hidden border border-border shadow-xl group bg-nuit"
             >
               <img
                 src={WAHHF_IMAGES.education}
@@ -581,16 +581,16 @@ export default function Home() {
                 height={720}
                 className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105 opacity-80"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-foret/90 via-foret/35 to-transparent flex flex-col items-center justify-center p-6 text-center">
+              <div className="absolute inset-0 bg-gradient-to-t from-nuit/90 via-nuit/35 to-transparent flex flex-col items-center justify-center p-6 text-center">
                 <button
                   ref={videoPlayRef}
                   type="button"
                   onClick={() => setVideoModalOpen(true)}
                   aria-label={t('home.video.playLabel')}
                   aria-haspopup="dialog"
-                  className="group/play inline-flex items-center gap-4 pl-4 pr-7 py-3.5 rounded-pill bg-or text-encre font-semibold text-sm sm:text-base shadow-xl hover:scale-[1.03] transition-transform duration-(--dur-fast) cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-creme"
+                  className="group/play inline-flex items-center gap-4 pl-4 pr-7 py-3.5 rounded-pill bg-or text-v1-encre font-semibold text-sm sm:text-base shadow-xl hover:scale-[1.03] transition-transform duration-(--dur-fast) cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-creme"
                 >
-                  <span className="w-12 h-12 rounded-pill bg-foret text-creme flex items-center justify-center">
+                  <span className="w-12 h-12 rounded-pill bg-nuit text-creme flex items-center justify-center">
                     <Play className="w-5 h-5 fill-current ml-0.5" />
                   </span>
                   <span>{t('home.video.playLabel')}</span>
@@ -628,7 +628,7 @@ export default function Home() {
               <motion.div
                 layoutId="wahhf-video-frame"
                 transition={{ duration: DURATION.screen, ease: EASE_SCREEN }}
-                className="relative w-full max-w-5xl rounded-card overflow-hidden bg-foret border border-or/40 shadow-2xl"
+                className="relative w-full max-w-5xl rounded-card overflow-hidden bg-nuit border border-or/40 shadow-2xl"
               >
                 <div className="flex items-center justify-between gap-4 px-6 py-4 border-b border-white/15 text-creme">
                   <span className="font-serif text-lg">
@@ -639,7 +639,7 @@ export default function Home() {
                     type="button"
                     onClick={() => setVideoModalOpen(false)}
                     aria-label="Fermer la vidéo"
-                    className="w-9 h-9 shrink-0 rounded-pill bg-white/10 hover:bg-or hover:text-encre flex items-center justify-center transition-colors cursor-pointer"
+                    className="w-9 h-9 shrink-0 rounded-pill bg-white/10 hover:bg-or hover:text-v1-encre flex items-center justify-center transition-colors cursor-pointer"
                   >
                     <X className="w-5 h-5" />
                   </button>
@@ -662,7 +662,7 @@ export default function Home() {
       {/* =====================================================================
           7. NOTRE APPROCHE (5 vignettes avec icônes)
           ===================================================================== */}
-      <section id="approche" className="py-20 sm:py-24 bg-white/60 dark:bg-sous-bois/40 border-y border-border-subtle">
+      <section id="approche" className="py-20 sm:py-24 bg-white/60 dark:bg-v1-sous-bois/40 border-y border-border-subtle">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <SectionHeader
             kicker={t('home.approach.kicker')}
@@ -711,11 +711,11 @@ export default function Home() {
                 >
                   <span
                     aria-hidden="true"
-                    className="pointer-events-none select-none absolute -bottom-3 right-3 font-serif text-6xl text-foret/[0.05] dark:text-creme/[0.05]"
+                    className="pointer-events-none select-none absolute -bottom-3 right-3 font-serif text-6xl text-nuit/[0.05] dark:text-creme/[0.05]"
                   >
                     {pillar.num}
                   </span>
-                  <div className="w-11 h-11 rounded-2xl bg-foret text-or flex items-center justify-center mb-4">
+                  <div className="w-11 h-11 rounded-2xl bg-nuit text-or flex items-center justify-center mb-4">
                     <Icon className="w-5 h-5" />
                   </div>
                   <h3 className="font-serif font-normal text-xl text-text mb-2">
@@ -746,12 +746,12 @@ export default function Home() {
           {/* Ligne verticale : rail pâle fixe + tracé doré qui se dessine au défilement (scaleY) */}
           <div
             aria-hidden="true"
-            className="absolute left-(--timeline-x) sm:left-1/2 top-2 bottom-2 w-[2px] sm:-translate-x-1/2 bg-foret/12 dark:bg-creme/12"
+            className="absolute left-(--timeline-x) sm:left-1/2 top-2 bottom-2 w-[2px] sm:-translate-x-1/2 bg-nuit/12 dark:bg-creme/12"
           />
           <div
             aria-hidden="true"
             data-timeline-line
-            className="absolute left-(--timeline-x) sm:left-1/2 top-2 bottom-2 w-[2px] sm:-translate-x-1/2 origin-top bg-gradient-to-b from-foret via-or to-foret"
+            className="absolute left-(--timeline-x) sm:left-1/2 top-2 bottom-2 w-[2px] sm:-translate-x-1/2 origin-top bg-gradient-to-b from-nuit via-or to-nuit"
           />
 
           <div className="space-y-10">
@@ -767,7 +767,7 @@ export default function Home() {
                 >
                   <div className="sm:w-1/2 sm:px-8">
                     <div className="rounded-card bg-surface-raised border border-border-soft p-6 shadow-xs">
-                      <span className="inline-block px-3 py-1 rounded-pill bg-foret text-or text-xs font-semibold mb-2">
+                      <span className="inline-block px-3 py-1 rounded-pill bg-nuit text-or text-xs font-semibold mb-2">
                         {item.year}
                       </span>
                       <h3 className="font-serif font-normal text-xl text-text mb-2">
@@ -782,7 +782,7 @@ export default function Home() {
                   {/* Point d'ancrage sur la frise */}
                   <div
                     aria-hidden="true"
-                    className="absolute left-[calc(var(--timeline-x)-var(--timeline-pad)-5px)] sm:left-1/2 top-6 sm:-translate-x-1/2 w-4 h-4 rounded-pill bg-or ring-4 ring-creme dark:ring-nuit"
+                    className="absolute left-[calc(var(--timeline-x)-var(--timeline-pad)-5px)] sm:left-1/2 top-6 sm:-translate-x-1/2 w-4 h-4 rounded-pill bg-or ring-4 ring-creme dark:ring-v1-nuit"
                   />
 
                   <div className="hidden sm:block sm:w-1/2" />
@@ -796,7 +796,7 @@ export default function Home() {
       {/* =====================================================================
           9. PRÉSENCE (Carte stylisée du Cameroun 10 régions + 10 pays européens)
           ===================================================================== */}
-      <section id="presence" className="py-20 sm:py-28 bg-white/55 dark:bg-sous-bois/30 border-y border-border-subtle">
+      <section id="presence" className="py-20 sm:py-28 bg-white/55 dark:bg-v1-sous-bois/30 border-y border-border-subtle">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <SectionHeader
             kicker={t('home.presence.kicker')}
@@ -818,7 +818,7 @@ export default function Home() {
           align="center"
         />
 
-        <div className="surface-green rounded-card bg-foret text-creme p-7 sm:p-12 border border-or/30 relative overflow-hidden">
+        <div className="surface-green rounded-card bg-nuit text-creme p-7 sm:p-12 border border-or/30 relative overflow-hidden">
           <Quote
             aria-hidden="true"
             className="absolute top-6 right-6 w-20 h-20 text-or/15 pointer-events-none"
@@ -883,7 +883,7 @@ export default function Home() {
               type="button"
               onClick={() => paginateTestimonials(-1)}
               aria-label="Témoignage précédent"
-              className="w-10 h-10 rounded-pill border border-or/40 flex items-center justify-center hover:bg-or hover:text-encre transition-colors cursor-pointer"
+              className="w-10 h-10 rounded-pill border border-or/40 flex items-center justify-center hover:bg-or hover:text-v1-encre transition-colors cursor-pointer"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
@@ -891,7 +891,7 @@ export default function Home() {
               type="button"
               onClick={() => paginateTestimonials(1)}
               aria-label="Témoignage suivant"
-              className="w-10 h-10 rounded-pill border border-or/40 flex items-center justify-center hover:bg-or hover:text-encre transition-colors cursor-pointer"
+              className="w-10 h-10 rounded-pill border border-or/40 flex items-center justify-center hover:bg-or hover:text-v1-encre transition-colors cursor-pointer"
             >
               <ChevronRight className="w-5 h-5" />
             </button>
@@ -905,7 +905,7 @@ export default function Home() {
       {/* =====================================================================
           11. ACTUALITÉS (3 cartes + lien « Toutes les actualités »)
           ===================================================================== */}
-      <section id="actualites" className="py-20 sm:py-28 bg-white/55 dark:bg-sous-bois/30 border-t border-border-subtle">
+      <section id="actualites" className="py-20 sm:py-28 bg-white/55 dark:bg-v1-sous-bois/30 border-t border-border-subtle">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
             <SectionHeader
@@ -924,7 +924,7 @@ export default function Home() {
                 className="group rounded-card overflow-hidden bg-surface-raised border border-border-subtle shadow-xs hover:shadow-md hover:-translate-y-1 transition-[translate,color,background-color,border-color,box-shadow] duration-(--dur-fast) flex flex-col justify-between"
               >
                 <div>
-                  <div className="relative aspect-[16/10] overflow-hidden bg-foret/10">
+                  <div className="relative aspect-[16/10] overflow-hidden bg-nuit/10">
                     <img
                       src={article.image}
                       srcSet={imageSrcSet(article.image)}
@@ -936,18 +936,18 @@ export default function Home() {
                       height={375}
                       className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
                     />
-                    <span className="absolute top-4 left-4 px-3 py-1 rounded-pill bg-foret/90 text-gold-on-green text-xs font-semibold">
+                    <span className="absolute top-4 left-4 px-3 py-1 rounded-pill bg-nuit/90 text-gold-on-green text-xs font-semibold">
                       {article.category}
                     </span>
                   </div>
                   <div className="p-6 space-y-3 relative">
                     <span
                       aria-hidden="true"
-                      className="pointer-events-none select-none absolute bottom-0 right-4 font-serif text-6xl text-foret/[0.04]"
+                      className="pointer-events-none select-none absolute bottom-0 right-4 font-serif text-6xl text-nuit/[0.04]"
                     >
                       0{idx + 1}
                     </span>
-                    <div className="flex items-center gap-2 text-xs text-encre/60 dark:text-creme/60">
+                    <div className="flex items-center gap-2 text-xs text-v1-encre/60 dark:text-creme/60">
                       <Calendar className="w-3.5 h-3.5 text-or" />
                       <span>{article.date}</span>
                     </div>
@@ -1034,7 +1034,7 @@ export default function Home() {
       {/* =====================================================================
           13. AGIR (Trois cartes : Faire un don · Devenir bénévole · Devenir partenaire)
           ===================================================================== */}
-      <section id="agir" className="py-20 sm:py-28 bg-white/70 dark:bg-sous-bois/40 border-t border-border-subtle">
+      <section id="agir" className="py-20 sm:py-28 bg-white/70 dark:bg-v1-sous-bois/40 border-t border-border-subtle">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <SectionHeader
             kicker={t('home.act.kicker')}
@@ -1045,7 +1045,7 @@ export default function Home() {
 
           <StaggerGroup className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Carte 1 : Faire un don */}
-            <div className="surface-green relative rounded-card bg-foret text-creme p-8 border border-or/35 flex flex-col justify-between overflow-hidden">
+            <div className="surface-green relative rounded-card bg-nuit text-creme p-8 border border-or/35 flex flex-col justify-between overflow-hidden">
               <span
                 aria-hidden="true"
                 className="pointer-events-none select-none absolute -bottom-4 right-4 font-serif text-7xl text-creme/[0.05]"
@@ -1074,12 +1074,12 @@ export default function Home() {
             <div className="relative rounded-card bg-surface-raised p-8 border border-border-soft flex flex-col justify-between overflow-hidden shadow-xs">
               <span
                 aria-hidden="true"
-                className="pointer-events-none select-none absolute -bottom-4 right-4 font-serif text-7xl text-foret/[0.05]"
+                className="pointer-events-none select-none absolute -bottom-4 right-4 font-serif text-7xl text-nuit/[0.05]"
               >
                 02
               </span>
               <div className="space-y-4">
-                <span className="inline-block px-3 py-1 rounded-pill bg-foret/10 dark:bg-or/20 text-accent text-xs font-semibold">
+                <span className="inline-block px-3 py-1 rounded-pill bg-nuit/10 dark:bg-or/20 text-accent text-xs font-semibold">
                   Engagement Humain
                 </span>
                 <h3 className="font-serif font-normal text-2xl sm:text-3xl text-text">
@@ -1100,12 +1100,12 @@ export default function Home() {
             <div className="relative rounded-card bg-surface-raised p-8 border border-border-soft flex flex-col justify-between overflow-hidden shadow-xs">
               <span
                 aria-hidden="true"
-                className="pointer-events-none select-none absolute -bottom-4 right-4 font-serif text-7xl text-foret/[0.05]"
+                className="pointer-events-none select-none absolute -bottom-4 right-4 font-serif text-7xl text-nuit/[0.05]"
               >
                 03
               </span>
               <div className="space-y-4">
-                <span className="inline-block px-3 py-1 rounded-pill bg-or/20 text-encre dark:text-or text-xs font-semibold">
+                <span className="inline-block px-3 py-1 rounded-pill bg-or/20 text-v1-encre dark:text-or text-xs font-semibold">
                   Mécénat & Institutions
                 </span>
                 <h3 className="font-serif font-normal text-2xl sm:text-3xl text-text">
@@ -1163,7 +1163,7 @@ export default function Home() {
                   {t('home.newsletter.placeholder')}
                 </label>
                 <div className="relative flex-1">
-                  <Mail className="w-4 h-4 text-encre/50 dark:text-creme/50 absolute left-4 top-1/2 -translate-y-1/2" />
+                  <Mail className="w-4 h-4 text-v1-encre/50 dark:text-creme/50 absolute left-4 top-1/2 -translate-y-1/2" />
                   <input
                     ref={newsletterFocusRef as Ref<HTMLInputElement>}
                     id="wahhf-newsletter-email"
@@ -1187,7 +1187,7 @@ export default function Home() {
         </div>
 
         {/* Bande finale d'appel au don juste avant le footer */}
-        <div className="rounded-card bg-gradient-to-r from-foret via-feuillage to-foret text-creme p-8 sm:p-12 border border-or/40 flex flex-col lg:flex-row items-center justify-between gap-8">
+        <div className="rounded-card bg-gradient-to-r from-nuit via-feuillage to-nuit text-creme p-8 sm:p-12 border border-or/40 flex flex-col lg:flex-row items-center justify-between gap-8">
           <div className="space-y-2 text-center lg:text-left max-w-2xl">
             <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-kicker text-or">
               <Heart className="w-4 h-4 text-rouge fill-current" />
