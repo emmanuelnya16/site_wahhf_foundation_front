@@ -16,7 +16,7 @@
 /* Polices auto-hébergées (fichiers OFL dans public/fonts, styles droits uniquement :
    aucune requête vers Google, préchargement possible).
 
-   Police du site (contrat §4) : Atkinson Hyperlegible Next, 400 et 700, paquet @fontsource 5.3.0
+   Police du site (contrat §4) : Atkinson Hyperlegible Next, 400 et 600, paquet @fontsource 5.3.0
    (licence : public/fonts/LICENSE-atkinson-hyperlegible-next.txt). Latin préchargé (index.html),
    latin-ext chargé seulement si un caractère du sous-ensemble apparaît (unicode-range). */
 @font-face {
@@ -38,17 +38,17 @@
 @font-face {
   font-family: 'Atkinson Hyperlegible Next';
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
   font-display: swap;
-  src: url('/fonts/atkinson-hyperlegible-next-latin-ext-700.woff2') format('woff2');
+  src: url('/fonts/atkinson-hyperlegible-next-latin-ext-600.woff2') format('woff2');
   unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 @font-face {
   font-family: 'Atkinson Hyperlegible Next';
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
   font-display: swap;
-  src: url('/fonts/atkinson-hyperlegible-next-latin-700.woff2') format('woff2');
+  src: url('/fonts/atkinson-hyperlegible-next-latin-600.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 /* Police de secours aux mêmes encombrements, le temps du chargement (pas de saut de mise en page) :
@@ -64,11 +64,11 @@
 }
 @font-face {
   font-family: 'Atkinson Fallback';
-  font-weight: 700;
+  font-weight: 600;
   src: local('Arial Bold'), local('Arial-BoldMT');
-  size-adjust: 98.32%;
-  ascent-override: 100.08%;
-  descent-override: 32.14%;
+  size-adjust: 96.21%;
+  ascent-override: 102.28%;
+  descent-override: 32.84%;
   line-gap-override: 0%;
 }
 
@@ -119,20 +119,24 @@
   --font-serif: "Atkinson Hyperlegible Next", "Atkinson Fallback", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-cursive: "Fraunces", Georgia, serif; /* pages historiques seulement */
 
-  /* Échelle typographique nommée (contrat §4.3) : tailles fluides de 320 px jusqu'au plafond
+  /* Échelle typographique nommée (contrat §4.3) : titres en 600, interligne 1,1, approche -0,01 em (réglage choisi
+     le 16/11 sur planches comparées) ; tailles fluides de 320 px jusqu'au plafond
      (display vers 1 030 px, page-title et section-title vers 1 120 px). */
   --text-display: clamp(2.5rem, 1.6rem + 4.5vw, 4.5rem);
-  --text-display--line-height: 1;
-  --text-display--letter-spacing: -0.02em;
-  --text-display--font-weight: 700;
+  --text-display--line-height: 1.1;
+  --text-display--letter-spacing: -0.01em;
+  --text-display--font-weight: 600;
   --text-page-title: clamp(2rem, 1.5rem + 2.5vw, 3.25rem);
-  --text-page-title--line-height: 1;
-  --text-page-title--letter-spacing: -0.02em;
-  --text-page-title--font-weight: 700;
+  --text-page-title--line-height: 1.1;
+  --text-page-title--letter-spacing: -0.01em;
+  --text-page-title--font-weight: 600;
   --text-section-title: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);
-  --text-section-title--line-height: 1;
-  --text-section-title--letter-spacing: -0.02em;
-  --text-section-title--font-weight: 700;
+  --text-section-title--line-height: 1.1;
+  --text-section-title--letter-spacing: -0.01em;
+  --text-section-title--font-weight: 600;
+  /* Une seule graisse forte sur tout le site : 600 (décision du 16/11 ; seuls 400 et 600 sont chargés).
+     font-bold vaut donc 600 ; les pages historiques reprennent 700 (.legacy-fonts). */
+  --font-weight-bold: 600;
   --text-meta: 0.9375rem;   /* 15 px : légendes, dates, sources, aide des champs */
   --text-meta--line-height: 1.5;
 
@@ -457,6 +461,7 @@
 /* Pages historiques IROKO (Layout) : elles gardent leurs polices et leur corps de texte d'origine. */
 @layer base {
 .legacy-fonts {
+  --font-weight-bold: 700;
   --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-serif: "Fraunces", Georgia, Cambria, "Times New Roman", Times, serif;
   font-family: var(--font-sans);
@@ -488,7 +493,11 @@
     text-wrap: balance;
   }
   h1, h2 {
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
+  }
+  /* Gras du texte courant : 600, comme font-bold (le navigateur en ferait du 700, synthétisé faute de fichier) */
+  b, strong {
+    font-weight: 600;
   }
   p {
     text-wrap: pretty;
@@ -498,6 +507,9 @@
   .legacy-fonts :where(h1, h2, h3, p) {
     letter-spacing: normal;
     text-wrap: wrap;
+  }
+  .legacy-fonts :where(b, strong) {
+    font-weight: bolder;
   }
 
   /* Cases à cocher et boutons radio natifs : cochés à la couleur de l'action (forêt en clair, soleil en sombre :
