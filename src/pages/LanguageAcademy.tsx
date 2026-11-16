@@ -16,6 +16,7 @@ import SectionHeader from '../components/wahhf/SectionHeader';
 import { PrimaryButton, SecondaryButton, DonateButton } from '../components/wahhf/Buttons';
 import DisclaimerBanner from '../components/wahhf/DisclaimerBanner';
 import CourseCard from '../components/wahhf/CourseCard';
+import ChoiceTile from '../components/wahhf/ChoiceTile';
 import {
   GERMAN_LEVELS_DATA,
   COURSE_SESSIONS_DATA,
@@ -391,32 +392,35 @@ export default function LanguageAcademy() {
                   </div>
                 </div>
 
-                {/* Énoncé */}
-                <p className="font-serif text-xl sm:text-2xl text-[#F5F1E8] pt-2">
-                  {PLACEMENT_QUESTIONS[currentQIndex].question}
-                </p>
-
-                {/* Options */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {PLACEMENT_QUESTIONS[currentQIndex].options.map((opt, idx) => {
-                    const selected =
-                      answers[PLACEMENT_QUESTIONS[currentQIndex].id] === idx;
-                    return (
-                      <button
-                        key={opt}
-                        type="button"
-                        onClick={() => handleSelectOption(idx)}
-                        className={`p-4 rounded-2xl border text-left text-sm sm:text-base font-medium transition cursor-pointer ${
-                          selected
-                            ? 'bg-[#E8A317] text-[#1B1B18] border-[#E8A317] font-semibold'
-                            : 'bg-[#0F3D2E]/70 text-[#F5F1E8] border-white/15 hover:border-[#E8A317]/60'
-                        }`}
-                      >
-                        {opt}
-                      </button>
-                    );
-                  })}
-                </div>
+                {/* Énoncé (légende du groupe) et réponses en boutons radio natifs */}
+                <fieldset>
+                  <legend className="font-serif text-xl sm:text-2xl text-[#F5F1E8] pt-2 mb-6">
+                    {PLACEMENT_QUESTIONS[currentQIndex].question}
+                  </legend>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {PLACEMENT_QUESTIONS[currentQIndex].options.map((opt, idx) => {
+                      const selected =
+                        answers[PLACEMENT_QUESTIONS[currentQIndex].id] === idx;
+                      return (
+                        <ChoiceTile
+                          key={opt}
+                          name={`placement-q${PLACEMENT_QUESTIONS[currentQIndex].id}`}
+                          value={String(idx)}
+                          checked={selected}
+                          onChange={() => handleSelectOption(idx)}
+                          showCheck
+                          className={`p-4 rounded-2xl border text-left text-sm sm:text-base font-medium transition ${
+                            selected
+                              ? 'bg-[#E8A317] text-[#1B1B18] border-[#E8A317] font-semibold'
+                              : 'bg-[#0F3D2E]/70 text-[#F5F1E8] border-white/15 hover:border-[#E8A317]/60'
+                          }`}
+                        >
+                          {opt}
+                        </ChoiceTile>
+                      );
+                    })}
+                  </div>
+                </fieldset>
 
                 <div className="pt-4 flex items-center justify-between">
                   <button

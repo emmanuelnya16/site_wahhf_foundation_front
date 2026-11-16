@@ -4,6 +4,7 @@ import { CheckCircle2, ShieldCheck, ArrowRight, ArrowLeft } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
 import SectionHeader from '../components/wahhf/SectionHeader';
 import DisclaimerBanner from '../components/wahhf/DisclaimerBanner';
+import ChoiceTile from '../components/wahhf/ChoiceTile';
 import { COUNTRIES_DATA, submitApplication } from '../services/api';
 
 /**
@@ -284,38 +285,34 @@ export default function ApplyPage() {
                     subtitle="Précisez le volet qui vous intéresse ainsi que votre niveau linguistique actuel."
                   />
 
-                  <div className="space-y-3">
-                    <p className="text-xs font-semibold uppercase tracking-wider">
+                  <fieldset>
+                    <legend className="text-xs font-semibold uppercase tracking-wider mb-3">
                       Que souhaitez-vous ? *
-                    </p>
+                    </legend>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                       {[
-                        { id: 'cours_allemand', label: 'Cours d’allemand (A1 à C1)' },
-                        { id: 'accompagnement_europe', label: 'Accompagnement vers l’Europe' },
-                        { id: 'les_deux', label: 'Les deux (Cours + Orientation)' },
+                        { id: 'cours_allemand' as const, label: 'Cours d’allemand (A1 à C1)' },
+                        { id: 'accompagnement_europe' as const, label: 'Accompagnement vers l’Europe' },
+                        { id: 'les_deux' as const, label: 'Les deux (Cours + Orientation)' },
                       ].map((opt) => (
-                        <button
+                        <ChoiceTile
                           key={opt.id}
-                          type="button"
-                          onClick={() =>
-                            setWishType(
-                              opt.id as
-                                | 'cours_allemand'
-                                | 'accompagnement_europe'
-                                | 'les_deux'
-                            )
-                          }
-                          className={`p-4 rounded-2xl border text-left text-sm font-medium transition cursor-pointer ${
+                          name="apply-wish"
+                          value={opt.id}
+                          checked={wishType === opt.id}
+                          onChange={() => setWishType(opt.id)}
+                          showCheck
+                          className={`p-4 rounded-2xl border text-left text-sm font-medium transition ${
                             wishType === opt.id
                               ? 'bg-[#0F3D2E] text-[#E8A317] border-[#E8A317]'
                               : 'bg-[#F5F1E8] dark:bg-[#0F3D2E]/50 border-[#0F3D2E]/15'
                           }`}
                         >
                           {opt.label}
-                        </button>
+                        </ChoiceTile>
                       ))}
                     </div>
-                  </div>
+                  </fieldset>
 
                   {(wishType === 'accompagnement_europe' || wishType === 'les_deux') && (
                     <div>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Heart, ShieldCheck, CheckCircle2, Sparkles, Lock } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
 import SectionHeader from '../components/wahhf/SectionHeader';
+import ChoiceTile from '../components/wahhf/ChoiceTile';
 import { submitDonation } from '../services/api';
 
 const SUGGESTED_AMOUNTS = [
@@ -114,52 +115,60 @@ export default function DonatePage() {
               />
 
               <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Fréquence : Ponctuel / Mensuel */}
-                <div className="grid grid-cols-2 gap-3 p-1.5 rounded-full bg-[#F5F1E8] dark:bg-[#0F3D2E]">
-                  <button
-                    type="button"
-                    onClick={() => setFrequency('unique')}
-                    className={`py-2.5 rounded-full text-sm font-semibold transition cursor-pointer ${
-                      frequency === 'unique'
-                        ? 'bg-[#0F3D2E] text-[#F5F1E8] dark:bg-[#E8A317] dark:text-[#1B1B18]'
-                        : 'text-[#1B1B18]/70 dark:text-[#F5F1E8]/70'
-                    }`}
-                  >
-                    Don ponctuel
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setFrequency('mensuel')}
-                    className={`py-2.5 rounded-full text-sm font-semibold transition cursor-pointer ${
-                      frequency === 'mensuel'
-                        ? 'bg-[#0F3D2E] text-[#F5F1E8] dark:bg-[#E8A317] dark:text-[#1B1B18]'
-                        : 'text-[#1B1B18]/70 dark:text-[#F5F1E8]/70'
-                    }`}
-                  >
-                    Don mensuel régulier
-                  </button>
-                </div>
+                {/* Fréquence : Ponctuel / Mensuel (boutons radio natifs) */}
+                <fieldset>
+                  <legend className="sr-only">Fréquence du don</legend>
+                  <div className="grid grid-cols-2 gap-3 p-1.5 rounded-full bg-[#F5F1E8] dark:bg-[#0F3D2E]">
+                    {[
+                      { id: 'unique' as const, label: 'Don ponctuel' },
+                      { id: 'mensuel' as const, label: 'Don mensuel régulier' },
+                    ].map((f) => (
+                      <ChoiceTile
+                        key={f.id}
+                        name="donate-frequency"
+                        value={f.id}
+                        checked={frequency === f.id}
+                        onChange={() => setFrequency(f.id)}
+                        className={`py-2.5 rounded-full text-sm font-semibold text-center transition ${
+                          frequency === f.id
+                            ? 'bg-[#0F3D2E] text-[#F5F1E8] dark:bg-[#E8A317] dark:text-[#1B1B18]'
+                            : 'text-[#1B1B18]/70 dark:text-[#F5F1E8]/70'
+                        }`}
+                      >
+                        {f.label}
+                      </ChoiceTile>
+                    ))}
+                  </div>
+                </fieldset>
 
-                {/* Montants suggérés */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                  {SUGGESTED_AMOUNTS.map((item) => (
-                    <button
-                      key={item.amount}
-                      type="button"
-                      onClick={() => {
-                        setSelectedAmount(item.amount);
-                        setCustomAmount('');
-                      }}
-                      className={`py-4 px-3 rounded-2xl border font-serif text-2xl transition cursor-pointer ${
-                        !customAmount && selectedAmount === item.amount
-                          ? 'bg-[#C8102E] text-white border-[#C8102E] shadow-sm'
-                          : 'bg-[#F5F1E8] dark:bg-[#0F3D2E]/50 border-[#0F3D2E]/15 text-[#1B1B18] dark:text-[#F5F1E8]'
-                      }`}
-                    >
-                      {item.amount} €
-                    </button>
-                  ))}
-                </div>
+                {/* Montants suggérés (boutons radio natifs) */}
+                <fieldset>
+                  <legend className="sr-only">Montant du don</legend>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    {SUGGESTED_AMOUNTS.map((item) => {
+                      const checked = !customAmount && selectedAmount === item.amount;
+                      return (
+                        <ChoiceTile
+                          key={item.amount}
+                          name="donate-amount"
+                          value={String(item.amount)}
+                          checked={checked}
+                          onChange={() => {
+                            setSelectedAmount(item.amount);
+                            setCustomAmount('');
+                          }}
+                          className={`py-4 px-3 rounded-2xl border font-serif text-2xl text-center transition ${
+                            checked
+                              ? 'bg-[#C8102E] text-white border-[#C8102E] shadow-sm'
+                              : 'bg-[#F5F1E8] dark:bg-[#0F3D2E]/50 border-[#0F3D2E]/15 text-[#1B1B18] dark:text-[#F5F1E8]'
+                          }`}
+                        >
+                          {item.amount} €
+                        </ChoiceTile>
+                      );
+                    })}
+                  </div>
+                </fieldset>
 
                 {/* Montant libre */}
                 <div>
@@ -254,35 +263,34 @@ export default function DonatePage() {
                 </div>
 
                 {/* Mode de paiement simulé sans collecte de données bancaires */}
-                <div className="space-y-2">
-                  <p className="text-xs font-semibold uppercase tracking-wider">
+                <fieldset>
+                  <legend className="text-xs font-semibold uppercase tracking-wider mb-2">
                     Moyen de règlement souhaité (Simulation sécurisée — aucune donnée bancaire collectée)
-                  </p>
+                  </legend>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs">
                     {[
-                      { id: 'card_sim', label: 'Carte / Virement SEPA (Simulé)' },
-                      { id: 'mobile_money_sim', label: 'Mobile Money Cameroun (Simulé)' },
-                      { id: 'bank_transfer_sim', label: 'RIB / Virement Fondation (Simulé)' },
+                      { id: 'card_sim' as const, label: 'Carte / Virement SEPA (Simulé)' },
+                      { id: 'mobile_money_sim' as const, label: 'Mobile Money Cameroun (Simulé)' },
+                      { id: 'bank_transfer_sim' as const, label: 'RIB / Virement Fondation (Simulé)' },
                     ].map((m) => (
-                      <button
+                      <ChoiceTile
                         key={m.id}
-                        type="button"
-                        onClick={() =>
-                          setPaymentMethod(
-                            m.id as 'mobile_money_sim' | 'card_sim' | 'bank_transfer_sim'
-                          )
-                        }
-                        className={`p-3 rounded-xl border text-left font-medium cursor-pointer ${
+                        name="donate-payment"
+                        value={m.id}
+                        checked={paymentMethod === m.id}
+                        onChange={() => setPaymentMethod(m.id)}
+                        showCheck
+                        className={`p-3 rounded-xl border text-left font-medium ${
                           paymentMethod === m.id
                             ? 'bg-[#0F3D2E] text-[#E8A317] border-[#E8A317]'
                             : 'bg-[#F5F1E8] dark:bg-[#0F3D2E]/40 border-[#0F3D2E]/15'
                         }`}
                       >
                         {m.label}
-                      </button>
+                      </ChoiceTile>
                     ))}
                   </div>
-                </div>
+                </fieldset>
 
                 <div className="space-y-2.5 pt-2">
                   <label className="flex items-center gap-2.5 text-xs sm:text-sm cursor-pointer">
