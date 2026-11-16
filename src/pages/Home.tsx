@@ -7,7 +7,6 @@ import {
   ChevronRight,
   Play,
   X,
-  CheckCircle2,
   Quote,
   Heart,
   Mail,
@@ -32,11 +31,11 @@ import { buildDraft } from '../lib/contactDraft';
 import { MQ } from '../lib/gsap';
 import SplitReveal from '../effects/SplitReveal';
 
-import ExpandSection from '../effects/ExpandSection';
 import { useTimelineDraw } from '../effects/useTimelineDraw';
 import StaggerGroup from '../effects/StaggerGroup';
 import GalleryGrid from '../components/wahhf/GalleryGrid';
 import HeroSection from './home/HeroSection';
+import MobilitySection from './home/MobilitySection';
 import { galleryItem, GalleryItem, HOME_GALLERY_IDS } from '../data/gallery';
 
 /** Aperçu « En images » de l'accueil (5 photos du First Open Day & Boot Camp). */
@@ -158,6 +157,9 @@ export default function Home() {
 
       {/* 1. HERO (décision du 16/11 : vidéo en fond) : src/pages/home/HeroSection.tsx */}
       <HeroSection />
+
+      {/* 2. MOBILITÉ & LANGUES, juste après le hero (Candidater bien visible) : src/pages/home/MobilitySection.tsx */}
+      <MobilitySection />
 
       {/* =====================================================================
           2. MISSION (« Qui sommes-nous »)
@@ -312,56 +314,6 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* =====================================================================
-          5. MOBILITÉ & LANGUES À LA UNE
-          Bandeau pleine largeur « Apprendre l'allemand, s'orienter vers l'Europe — gratuitement »,
-          3 cartes, mention « 100 % gratuit, financé par IROKO et nos donateurs », bouton « Découvrir le programme ».
-          ===================================================================== */}
-      {/* Effet fort : la carte verte s'agrandit jusqu'à la pleine largeur, puis cascade du contenu */}
-      <ExpandSection id="mobilite-langues" backgroundClassName="bg-nuit" className="surface-green py-20 sm:py-24 text-creme">
-        <div data-expand-content className="container-page space-y-12">
-          <div data-cascade className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
-            <SectionHeader
-              title={t('home.mobilitySpot.title')}
-              subtitle={t('home.mobilitySpot.subtitle')}
-              onInverse
-            />
-
-            <div className="shrink-0">
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-pill bg-or/20 border border-or text-gold-on-green text-xs sm:text-sm font-semibold">
-                <CheckCircle2 className="w-4 h-4" />
-                100 % gratuit, financé par IROKO et nos donateurs
-              </span>
-            </div>
-          </div>
-
-          {/* Trois voies en liste typographique (contrat §7 section 2, §8) : le titre porte le lien. Sur la bande nuit
-              jusqu'à l'étape de l'accueil ; data-cascade garde l'apparition d'ExpandSection. */}
-          <TextList columns={3} onInverse>
-            {[
-              { title: t('home.mobilitySpot.card1Title'), desc: t('home.mobilitySpot.card1Desc'), to: '/mobilite-langues/academie' },
-              { title: t('home.mobilitySpot.card2Title'), desc: t('home.mobilitySpot.card2Desc'), to: '/mobilite-langues/accompagnement' },
-              { title: t('home.mobilitySpot.card3Title'), desc: t('home.mobilitySpot.card3Desc'), to: '/mobilite-langues/accompagnement#pays' },
-            ].map((item) => (
-              <TextListItem data-cascade key={item.to} title={item.title} to={item.to}>
-                <p>{item.desc}</p>
-              </TextListItem>
-            ))}
-          </TextList>
-
-          <div data-cascade className="pt-2 flex flex-wrap items-center justify-between gap-4">
-            <PrimaryButton
-              to="/mobilite-langues"
-              onInverse
-            >
-              {t('home.mobilitySpot.cta')}
-            </PrimaryButton>
-            <p className="text-xs sm:text-sm text-creme/75">
-              Aucun frais de dossier · Aucune promesse commerciale · Information vérifiée.
-            </p>
-          </div>
-        </div>
-      </ExpandSection>
 
       {/* =====================================================================
           6. VIDÉO (Vignette qui s'agrandit en plein écran à la demande — jamais en lecture auto avec son)
