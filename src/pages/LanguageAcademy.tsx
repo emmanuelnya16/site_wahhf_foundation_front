@@ -157,7 +157,7 @@ export default function LanguageAcademy() {
 
         <PageActions>
           <PrimaryButton
-            to={`/candidater?souhait=cours_allemand&niveau=${activeCourse.level}`}
+            to={`/candidater?souhait=cours_allemand&niveau=${activeCourse.level}`}
           >
             Candidater au niveau {activeCourse.level}
           </PrimaryButton>
