@@ -1,5 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, ElementType, ReactNode } from 'react';
 // m : composant léger de Motion, animé dès que LazyMotion a chargé son moteur (App.tsx, lot 7). Rendu inchangé.
+// Repli CSS du menu tant que ce moteur n'est pas chargé, ou s'il ne se charge jamais (décision du 17/11).
 // framer-motion : le même paquet que motion/react (14.14), importé sans passer par le fichier d'entrée de motion/react,
 // qui embarque toujours motion.div complet : le premier chargement n'a que m, AnimatePresence et LazyMotion (lot 7).
 import { AnimatePresence, m, useReducedMotion } from 'framer-motion';
@@ -9,6 +10,7 @@ import { ChevronDown, Search, Sun, Moon, Menu, X } from 'lucide-react';
 import { DOMAINS_DATA, WAHHF_LOGO_URL, COUNTRIES_DATA, GERMAN_LEVELS_DATA } from '../services/api';
 import { DonateButton } from './wahhf/Buttons';
 import { useDialog } from '../lib/useDialog';
+import { useMotionEngineReady } from '../lib/motionEngine';
 import { switchTheme } from '../effects/themeTransition';
 import { EASE_OUT, EASE_SCREEN, DURATION } from '../lib/motionTokens';
 import { cn } from '../lib/utils';
@@ -54,6 +56,14 @@ export default function Navbar() {
   const reduceMotion = useReducedMotion();
   const touchStartY = useRef<number | null>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
+  // Moteur de Motion chargé après le premier affichage : sans lui, le menu passe par son repli CSS (.menu-fallback),
+  // hors AnimatePresence (qui attendrait une animation de sortie qui ne viendrait jamais). Le mode choisi reste le même
+  // tant que le menu est ouvert : un changement en cours le remonterait.
+  const engineReady = useMotionEngineReady();
+  const menuWithMotion = useRef(engineReady);
+  if (!mobileOpen) menuWithMotion.current = engineReady;
+  const withMotion = menuWithMotion.current;
+  const MenuPanel = (withMotion ? m.div : 'div') as ElementType;
   const mobileCloseRef = useRef<HTMLButtonElement>(null);
   const searchPanelRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
@@ -440,23 +450,23 @@ export default function Navbar() {
 
       {/* Menu Mobile Plein Écran (fermeture au geste & grands liens) */}
       {/* Se déroule de haut en bas (clip-path, 0,7 s) ; simple fondu si « réduire les animations » */}
-      <AnimatePresence>
+      <MaybePresence enabled={withMotion}>
       {mobileOpen && (
-        <m.div
+        <MenuPanel
           key="menu-mobile"
           id="menu-mobile"
           ref={mobileMenuRef}
-          initial={reduceMotion ? { opacity: 0 } : { clipPath: 'inset(0% 0% 100% 0%)' }}
-          animate={
-            reduceMotion
-              ? { opacity: 1, transition: { duration: 0.2 } }
-              : { clipPath: 'inset(0% 0% 0% 0%)', transition: { duration: DURATION.screen, ease: EASE_SCREEN } }
-          }
-          exit={
-            reduceMotion
-              ? { opacity: 0, transition: { duration: 0.15 } }
-              : { clipPath: 'inset(0% 0% 100% 0%)', transition: { duration: 0.6, ease: EASE_SCREEN } }
-          }
+          {...(withMotion
+            ? {
+                initial: reduceMotion ? { opacity: 0 } : { clipPath: 'inset(0% 0% 100% 0%)' },
+                animate: reduceMotion
+                  ? { opacity: 1, transition: { duration: 0.2 } }
+                  : { clipPath: 'inset(0% 0% 0% 0%)', transition: { duration: DURATION.screen, ease: EASE_SCREEN } },
+                exit: reduceMotion
+                  ? { opacity: 0, transition: { duration: 0.15 } }
+                  : { clipPath: 'inset(0% 0% 100% 0%)', transition: { duration: 0.6, ease: EASE_SCREEN } },
+              }
+            : {})}
           role="dialog"
           aria-modal="true"
           aria-label="Menu mobile WAHHF Foundation"
@@ -476,7 +486,10 @@ export default function Navbar() {
               }
             }
           }}
-          className="surface-green fixed inset-0 z-(--z-menu) bg-surface-inverse text-text-on-inverse flex flex-col justify-between p-6 overflow-y-auto"
+          className={cn(
+            'surface-green fixed inset-0 z-(--z-menu) bg-surface-inverse text-text-on-inverse flex flex-col justify-between p-6 overflow-y-auto',
+            !withMotion && 'menu-fallback'
+          )}
         >
           <div className="flex items-center justify-between pb-6 border-b border-border-subtle-on-inverse">
             <Link to="/" onClick={() => setMobileOpen(false)} className="flex items-center gap-3">
@@ -505,7 +518,7 @@ export default function Navbar() {
           <m.nav
             aria-label="Navigation principale (mobile)"
             className="py-6 space-y-4"
-            initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+            initial={reduceMotion || !withMotion ? false : { opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.15, ease: EASE_OUT } }}
           >
             <Link
@@ -611,9 +624,14 @@ export default function Navbar() {
               {t('nav.donate')}
             </DonateButton>
           </div>
-        </m.div>
+        </MenuPanel>
       )}
-      </AnimatePresence>
+      </MaybePresence>
     </>
   );
+}
+
+/** AnimatePresence seulement quand le moteur de Motion est là (sorties animées) ; sinon, rendu direct. */
+function MaybePresence({ enabled, children }: { enabled: boolean; children: ReactNode }) {
+  return enabled ? <AnimatePresence>{children}</AnimatePresence> : <>{children}</>;
 }

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { ElementType, ReactNode, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 // framer-motion : le même paquet que motion/react (14.14), importé sans passer par le fichier d'entrée de motion/react,
 // qui embarque toujours motion.div complet : le premier chargement n'a que m, AnimatePresence et LazyMotion (lot 7).
@@ -10,6 +10,7 @@ import { HeroVideoBackground, HeroVideoConsent, HeroVideoToggle, useHeroVideo } 
 import { HERO_FILM, HERO_POSTER, heroFilmUrl } from '../../config/heroVideo';
 import { getVideoConsent } from '../../lib/consent';
 import { useDialog } from '../../lib/useDialog';
+import { useMotionEngineReady } from '../../lib/motionEngine';
 import { DURATION, EASE_OUT } from '../../lib/motionTokens';
 import LineReveal from '../../effects/LineReveal';
 import { AfterFirstDisplay, HeroMotion } from '../../effects/DeferredMotion';
@@ -44,6 +45,13 @@ export default function HeroSection() {
   const filmCloseRef = useRef<HTMLButtonElement>(null);
   const filmLinkRef = useRef<HTMLButtonElement>(null);
   useDialog(filmOpen, filmDialogRef, () => setFilmOpen(false), { initialFocusRef: filmCloseRef, returnFocusRef: filmLinkRef });
+  // Moteur de Motion chargé après le premier affichage : sans lui, fondu CSS (.dialog-fallback) et fermeture immédiate.
+  // Le mode reste le même tant que la fenêtre est ouverte.
+  const engineReady = useMotionEngineReady();
+  const filmWithMotion = useRef(engineReady);
+  if (!filmOpen) filmWithMotion.current = engineReady;
+  const withMotion = filmWithMotion.current;
+  const FilmPanel = (withMotion ? m.div : 'div') as ElementType;
   const openFilm = () => {
     setFilmLoaded(getVideoConsent());
     setFilmOpen(true);
@@ -142,9 +150,9 @@ export default function HeroSection() {
 
       {/* Film avec le son : fenêtre hors de la section (le hero isole son empilement, elle passerait sous l'en-tête).
           Échap, focus gardé puis rendu au lien, page figée dessous. */}
-      <AnimatePresence>
+      <MaybePresence enabled={withMotion}>
         {filmOpen && (
-          <m.div
+          <FilmPanel
             key="film"
             ref={filmDialogRef}
             role="dialog"
@@ -152,10 +160,14 @@ export default function HeroSection() {
             aria-label={HERO_FILM.title}
             tabIndex={-1}
             data-lenis-prevent
-            className="fixed inset-0 z-(--z-modal) flex items-center justify-center p-4 sm:p-8"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1, transition: { duration: DURATION.fast, ease: EASE_OUT } }}
-            exit={{ opacity: 0, transition: { duration: DURATION.fast, ease: EASE_OUT } }}
+            className={`fixed inset-0 z-(--z-modal) flex items-center justify-center p-4 sm:p-8${withMotion ? '' : ' dialog-fallback'}`}
+            {...(withMotion
+              ? {
+                  initial: { opacity: 0 },
+                  animate: { opacity: 1, transition: { duration: DURATION.fast, ease: EASE_OUT } },
+                  exit: { opacity: 0, transition: { duration: DURATION.fast, ease: EASE_OUT } },
+                }
+              : {})}
           >
             <div aria-hidden="true" className="absolute inset-0 bg-surface-inverse/95" onClick={() => setFilmOpen(false)} />
             <div className="surface-green relative w-full max-w-5xl overflow-hidden rounded-card bg-surface-inverse text-text-on-inverse">
@@ -202,9 +214,14 @@ export default function HeroSection() {
                 )}
               </div>
             </div>
-          </m.div>
+          </FilmPanel>
         )}
-      </AnimatePresence>
+      </MaybePresence>
     </>
   );
+}
+
+/** AnimatePresence seulement quand le moteur de Motion est là (sortie animée) ; sinon, rendu direct. */
+function MaybePresence({ enabled, children }: { enabled: boolean; children: ReactNode }) {
+  return enabled ? <AnimatePresence>{children}</AnimatePresence> : <>{children}</>;
 }

@@ -2,7 +2,8 @@ import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 // framer-motion : le même paquet que motion/react (14.14), importé sans passer par le fichier d'entrée de motion/react,
 // qui embarque toujours motion.div complet : le premier chargement n'a que m, AnimatePresence et LazyMotion (lot 7).
-import { LazyMotion, MotionConfig, domAnimation } from 'framer-motion';
+import { LazyMotion, MotionConfig } from 'framer-motion';
+import { loadMotionFeatures } from './lib/motionEngine';
 import Layout from './components/Layout';
 import PageTransition, { routeKey } from './effects/PageTransition';
 import ChunkErrorBoundary from './components/wahhf/ChunkErrorBoundary';
@@ -109,16 +110,16 @@ function AppRoutes() {
   );
 }
 
-// Motion allégé (contrat §10, lot 7 : JS initial sous 200 Ko compressés) : LazyMotion avec le moteur domAnimation
-// (animations, sorties, gestes), chargé d'emblée pour que le menu mobile et la fenêtre du film ne puissent jamais
-// s'ouvrir avant lui (ils resteraient invisibles). Les composants du premier affichage utilisent m.div ; les pages
-// historiques, la visionneuse et les cartes gardent motion.div, qui embarque le reste dans leur propre fichier.
+// Motion allégé (contrat §10) : LazyMotion, moteur domAnimation chargé après le premier affichage (décision du 17/11,
+// LCP mobile). Le menu mobile et la fenêtre du film ont un repli CSS tant qu'il n'est pas là, ou s'il ne se charge
+// jamais (src/lib/motionEngine.ts). Les composants du premier affichage utilisent m.div ; les pages historiques, la
+// visionneuse et les cartes gardent motion.div, qui embarque le reste dans leur propre fichier.
 
 export default function App() {
   return (
     // « Réduire les animations » : Motion supprime les déplacements et ne garde que les fondus.
     <MotionConfig reducedMotion="user">
-      <LazyMotion features={domAnimation}>
+      <LazyMotion features={loadMotionFeatures}>
         <Router>
           <Layout>
             <AppRoutes />

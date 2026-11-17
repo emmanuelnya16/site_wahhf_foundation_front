@@ -523,7 +523,7 @@ Jamais de rayon de 20 px sur un petit élément. Les neuf valeurs actuelles (pil
 **Outils**
 - **GSAP + ScrollTrigger** (avec `@gsap/react`) : tout ce qui suit le défilement ou s'enchaîne (apparitions, épinglage, frises, cascade, arc, parallaxe). Code dans `src/effects/motion/`.
 - **CSS** : l'arrivée du hero (titre, phrase, boutons, fil). Elle doit jouer dès le premier affichage, avant l'arrivée de GSAP, qui est chargé après. Aussi les survols et le fondu d'entrée des pages.
-- **Motion** : le menu mobile et les fenêtres qui entrent et sortent de la page, en version allégée (`LazyMotion` et `m.div`). Son moteur d'animation est chargé d'emblée, pour que le menu et la fenêtre du film ne puissent jamais s'ouvrir invisibles. La version complète (avec le glisser) n'arrive qu'avec la visionneuse, les cartes et les pages historiques.
+- **Motion** : le menu mobile et les fenêtres qui entrent et sortent de la page, en version allégée (`LazyMotion` et `m.div`). *Votre décision du 17 novembre 2026 :* son moteur d'animation est chargé après le premier affichage (LCP mobile). Tant qu'il n'est pas là, ou s'il ne se charge jamais, le menu mobile et la fenêtre du film passent par un repli CSS. Ils s'ouvrent avec une animation CSS (le menu se déroule en 0,7 s, la fenêtre apparaît en fondu) et se ferment aussitôt. Ce cas est vérifié avec le fichier du moteur bloqué. La version complète (avec le glisser) n'arrive qu'avec la visionneuse, les cartes et les pages historiques.
 - **Lenis** : défilement fluide, ordinateur à souris seulement.
 
 **Mouvement réduit** (`prefers-reduced-motion: reduce`) :

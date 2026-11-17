@@ -707,6 +707,33 @@
   }
 }
 
+/*
+ * Repli CSS du menu mobile et de la fenêtre du film (décision du 17/11) : tant que le moteur de Motion n'est pas chargé,
+ * ou s'il ne se charge jamais (src/lib/motionEngine.ts). Ouverture animée en CSS (le menu se déroule de haut en bas en
+ * 0,7 s comme avec Motion ; la fenêtre apparaît en fondu de 0,3 s), fermeture immédiate. Mouvement réduit : fondu court.
+ */
+@keyframes menu-unroll {
+  from { clip-path: inset(0% 0% 100% 0%); }
+  to { clip-path: inset(0% 0% 0% 0%); }
+}
+@keyframes overlay-fade {
+  from { opacity: 0; }
+}
+.menu-fallback {
+  animation: menu-unroll 0.7s var(--ease-screen) both;
+}
+.dialog-fallback {
+  animation: overlay-fade 0.3s var(--ease-power2-out) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .menu-fallback {
+    animation: overlay-fade 0.2s linear both !important;
+  }
+  .dialog-fallback {
+    animation: none !important;
+  }
+}
+
 /* Le fil du hero se dessine une fois (contrat §10) ; Fil.tsx l'utilise avec drawOnce, jamais en mouvement réduit. */
 @keyframes fil-draw {
   from { transform: scaleX(0); }
