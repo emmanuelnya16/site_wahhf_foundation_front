@@ -1,6 +1,8 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import { MotionConfig } from 'motion/react';
+// framer-motion : le même paquet que motion/react (14.14), importé sans passer par le fichier d'entrée de motion/react,
+// qui embarque toujours motion.div complet : le premier chargement n'a que m, AnimatePresence et LazyMotion (lot 7).
+import { LazyMotion, MotionConfig } from 'framer-motion';
 import Layout from './components/Layout';
 import PageTransition, { routeKey } from './effects/PageTransition';
 import ChunkErrorBoundary from './components/wahhf/ChunkErrorBoundary';
@@ -42,16 +44,16 @@ function PageFallback() {
 }
 
 /**
- * Routes enveloppées dans la transition de page. La location est figée par élément :
- * pendant le fondu de sortie, l'ancienne page continue d'afficher son propre contenu.
+ * Routes enveloppées dans la transition de page (fondu d'entrée de 0,3 s, sans sortie ni attente : contrat §10,
+ * ANIM-03). La transition est sous le Suspense : le fondu joue sur la page chargée, pas sur l'espace réservé.
  */
 function AppRoutes() {
   const location = useLocation();
   return (
-    <PageTransition transitionKey={routeKey(location.pathname)}>
-      {/* Filet : une page qui ne se télécharge pas affiche « Réessayer » au lieu d'une page blanche */}
-      <ChunkErrorBoundary key={routeKey(location.pathname)} variant="page">
+    // Filet : une page qui ne se télécharge pas affiche « Réessayer » au lieu d'une page blanche
+    <ChunkErrorBoundary key={routeKey(location.pathname)} variant="page">
       <Suspense fallback={<PageFallback />}>
+      <PageTransition transitionKey={routeKey(location.pathname)}>
       <Routes location={location}>
         {/* =================================================================
             ROUTES PRINCIPALES WAHHF FOUNDATION (PROMPT 1 & PROMPT 2)
@@ -101,21 +103,27 @@ function AppRoutes() {
         {/* Adresse inconnue : vraie page « introuvable » (noindex), l'adresse reste visible dans la barre */}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      </PageTransition>
       </Suspense>
-      </ChunkErrorBoundary>
-    </PageTransition>
+    </ChunkErrorBoundary>
   );
 }
+
+// Moteur d'animation de Motion chargé à part, juste après le premier rendu (contrat §10, lot 7 : JS initial sous
+// 200 Ko compressés). Les composants du premier affichage utilisent m.div ; les pages historiques gardent motion.div.
+const loadMotionFeatures = () => import('./lib/motionFeatures').then((m) => m.default);
 
 export default function App() {
   return (
     // « Réduire les animations » : Motion supprime les déplacements et ne garde que les fondus.
     <MotionConfig reducedMotion="user">
-      <Router>
-        <Layout>
-          <AppRoutes />
-        </Layout>
-      </Router>
+      <LazyMotion features={loadMotionFeatures}>
+        <Router>
+          <Layout>
+            <AppRoutes />
+          </Layout>
+        </Router>
+      </LazyMotion>
     </MotionConfig>
   );
 }

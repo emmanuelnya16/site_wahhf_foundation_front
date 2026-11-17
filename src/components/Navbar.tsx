@@ -1,5 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
-import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
+// m : composant léger de Motion, animé dès que LazyMotion a chargé son moteur (App.tsx, lot 7). Rendu inchangé.
+// framer-motion : le même paquet que motion/react (14.14), importé sans passer par le fichier d'entrée de motion/react,
+// qui embarque toujours motion.div complet : le premier chargement n'a que m, AnimatePresence et LazyMotion (lot 7).
+import { AnimatePresence, m, useReducedMotion } from 'framer-motion';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ChevronDown, Search, Sun, Moon, Menu, X } from 'lucide-react';
@@ -439,7 +442,7 @@ export default function Navbar() {
       {/* Se déroule de haut en bas (clip-path, 0,7 s) ; simple fondu si « réduire les animations » */}
       <AnimatePresence>
       {mobileOpen && (
-        <motion.div
+        <m.div
           key="menu-mobile"
           id="menu-mobile"
           ref={mobileMenuRef}
@@ -499,7 +502,7 @@ export default function Navbar() {
             </button>
           </div>
 
-          <motion.nav
+          <m.nav
             aria-label="Navigation principale (mobile)"
             className="py-6 space-y-4"
             initial={reduceMotion ? false : { opacity: 0, y: 12 }}
@@ -574,7 +577,7 @@ export default function Navbar() {
             >
               Candidater (Cours & Europe — Gratuit)
             </Link>
-          </motion.nav>
+          </m.nav>
 
           <div className="pt-6 border-t border-border-subtle-on-inverse space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-3">
@@ -608,7 +611,7 @@ export default function Navbar() {
               {t('nav.donate')}
             </DonateButton>
           </div>
-        </motion.div>
+        </m.div>
       )}
       </AnimatePresence>
     </>

@@ -1,8 +1,9 @@
-import { useRef, useState } from 'react';
+import { lazy, Suspense, useRef, useState } from 'react';
 import { Play } from 'lucide-react';
-import StaggerGroup from '../../effects/StaggerGroup';
 import { formatDuration, GalleryItem } from '../../data/gallery';
-import GalleryLightbox from './GalleryLightbox';
+
+// Visionneuse chargée au premier clic (avec Motion complet, pour le glisser) : rien de plus au premier affichage.
+const GalleryLightbox = lazy(() => import('./GalleryLightbox'));
 
 interface GalleryGridProps {
   items: GalleryItem[];
@@ -11,13 +12,15 @@ interface GalleryGridProps {
   /** Colonnes de la grille (classes Tailwind) */
   cols?: string;
   className?: string;
-  /** false : vignettes affichées d'un coup, sans apparition décalée (accueil, lot 6). Par défaut : apparition gardée. */
+  /** false : vignettes affichées d'un coup, sans apparition. Par défaut : apparition au défilement (contrat §10). */
   reveal?: boolean;
 }
 
 /**
  * Grille de vignettes (ratio 4:3 réservé, chargement différé) qui ouvre la visionneuse.
- * Apparition décalée douce (StaggerGroup, opacité) ; zoom lent au survol (souris seulement).
+ * Lot 7 (contrat §10) : chaque vignette porte data-reveal ; les apparitions groupées (fondu et montée de 24 px,
+ * src/effects/motion/RevealBatch.tsx) remplacent l'ancienne apparition décalée de Motion (StaggerGroup, gardé dans
+ * src/effects). Aucun zoom au survol.
  * Chaque vignette est un bouton : son nom accessible est le texte alternatif de l'image.
  */
 export default function GalleryGrid({
@@ -27,13 +30,14 @@ export default function GalleryGrid({
   className = '',
   reveal = true,
 }: GalleryGridProps) {
-  const Grid = reveal ? StaggerGroup : 'div';
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  // La visionneuse reste montée après sa première ouverture (fondu de fermeture)
+  const [lightboxLoaded, setLightboxLoaded] = useState(false);
   const openerRef = useRef<HTMLElement | null>(null);
 
   return (
     <>
-      <Grid className={`grid ${cols} gap-3 sm:gap-4 ${className}`}>
+      <div className={`grid ${cols} gap-3 sm:gap-4 ${className}`}>
         {items.map((item, i) => {
           const featured = featureFirst && i === 0;
           const thumb = item.kind === 'photo' ? item.src : item.poster;
@@ -41,8 +45,10 @@ export default function GalleryGrid({
             <button
               key={item.id}
               type="button"
+              data-reveal={reveal || undefined}
               onClick={(e) => {
                 openerRef.current = e.currentTarget;
+                setLightboxLoaded(true);
                 setOpenIndex(i);
               }}
               className={`relative block w-full overflow-hidden rounded-inner bg-surface-section cursor-zoom-in ${
@@ -79,9 +85,13 @@ export default function GalleryGrid({
             </button>
           );
         })}
-      </Grid>
+      </div>
 
-      <GalleryLightbox items={items} index={openIndex} onChange={setOpenIndex} returnFocusRef={openerRef} />
+      {lightboxLoaded && (
+        <Suspense fallback={null}>
+          <GalleryLightbox items={items} index={openIndex} onChange={setOpenIndex} returnFocusRef={openerRef} />
+        </Suspense>
+      )}
     </>
   );
 }

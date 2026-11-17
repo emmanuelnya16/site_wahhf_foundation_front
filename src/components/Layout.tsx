@@ -1,15 +1,16 @@
-import { ReactNode, useEffect, useRef } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import WhatsAppButton from './WhatsAppButton';
 import CookieBanner from './wahhf/CookieBanner';
 import ReadingProgress from '../effects/ReadingProgress';
-import { routeKey } from '../effects/PageTransition';
 import { scrollToElement, scrollToHash, scrollToTop } from '../lib/scroll';
-import { startSmoothScroll } from '../lib/lenis';
-import { ScrollTrigger } from '../lib/gsap';
+import { afterFirstDisplay, requestScrollRefresh } from '../lib/afterFirstDisplay';
 import { useTranslation } from 'react-i18next';
+
+/** Défilement fluide (Lenis) : ordinateur à souris seulement, jamais en mouvement réduit (contrat §10, lot 7). */
+const SMOOTH_SCROLL_QUERY = '(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)';
 
 interface LayoutProps {
   children: ReactNode;
@@ -25,26 +26,49 @@ export default function Layout({ children }: LayoutProps) {
   // Article d'actualité (/actualites/:slug) : seule page qui garde la barre de lecture
   const isArticlePage = /^\/actualites\/[^/]+\/?$/.test(pathname);
 
-  // Défilement fluide (désactivé si « réduire les animations »)
-  useEffect(() => startSmoothScroll(), []);
+  // Défilement fluide : Lenis (et GSAP) chargés après le premier affichage, seulement sur ordinateur à souris ;
+  // arrêté aussitôt si le visiteur passe en mouvement réduit ou au tactile, relancé s'il en revient.
+  useEffect(() => {
+    const query = window.matchMedia(SMOOTH_SCROLL_QUERY);
+    let stop: (() => void) | null = null;
+    let loading = false;
+    let disposed = false;
+    const sync = () => {
+      if (disposed) return;
+      if (query.matches && !stop && !loading) {
+        loading = true;
+        import('../lib/lenis')
+          .then(({ startSmoothScroll }) => {
+            loading = false;
+            if (!disposed && query.matches && !stop) stop = startSmoothScroll();
+          })
+          .catch(() => {
+            loading = false;
+          });
+      } else if (!query.matches && stop) {
+        stop();
+        stop = null;
+      }
+    };
+    afterFirstDisplay().then(sync);
+    query.addEventListener('change', sync);
+    return () => {
+      disposed = true;
+      query.removeEventListener('change', sync);
+      stop?.();
+    };
+  }, []);
 
-  // Bascule FR/EN : les textes changent de hauteur, les positions ScrollTrigger sont recalculées
-  // (après le rendu des enfants, dont le re-découpage SplitText de la mission).
+  // Bascule FR/EN : les textes changent de hauteur, les positions ScrollTrigger sont recalculées (si GSAP est chargé).
   const { i18n } = useTranslation();
   useEffect(() => {
-    const frame = requestAnimationFrame(() => ScrollTrigger.refresh());
+    const frame = requestAnimationFrame(requestScrollRefresh);
     return () => cancelAnimationFrame(frame);
   }, [i18n.language]);
 
-  // Défilement à la navigation : haut de page, ou l'ancre demandée (/agir#benevole…).
-  // Quand la page change vraiment (nouvelle clé de transition), c'est la fin du fondu de sortie
-  // qui s'en charge (PageTransition), pour que l'ancienne page ne saute pas pendant qu'elle disparaît.
-  const previousKey = useRef<string | null>(null);
+  // Défilement à la navigation : haut de page, ou l'ancre demandée (/agir#benevole…). Plus de fondu de sortie à
+  // attendre (contrat §10, ANIM-03) : la nouvelle page s'affiche en haut, ou à son ancre, tout de suite.
   useEffect(() => {
-    const key = routeKey(pathname);
-    const pageChanged = previousKey.current !== null && previousKey.current !== key;
-    previousKey.current = key;
-    if (pageChanged) return;
     if (hash) return scrollToHash(hash);
     scrollToTop({ immediate: true });
   }, [pathname, hash]);

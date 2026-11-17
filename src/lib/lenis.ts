@@ -1,16 +1,17 @@
 import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
 import { gsap, ScrollTrigger } from './gsap';
-import { prefersReducedMotion, onReducedMotionChange } from './reducedMotion';
 import { scrollToElement, setLenis } from './scroll';
 
 /**
  * Défilement fluide Lenis, branché sur ScrollTrigger via le ticker GSAP.
- * - Désactivé si « réduire les animations » (et coupé/relancé si le réglage change en cours de visite).
- * - Tactile : défilement natif (syncTouch: false, valeur par défaut de Lenis).
- * - Ancres de la même page (#mission…) : Lenis les fait défiler en tenant compte du header fixe.
+ * Lot 7 (contrat §10) : ordinateur à souris seulement, jamais en mouvement réduit. Layout.tsx décide quand le démarrer
+ * ou l'arrêter (requête SMOOTH_SCROLL_QUERY) et charge ce module par import(), après le premier affichage.
+ * - Tactile : jamais démarré (défilement natif).
+ * - Ancres de la même page (#mission…) : Lenis les fait défiler en tenant compte de l'en-tête fixe.
+ * - Clavier (Espace, Page suivante), recherche dans la page : défilement natif, que Lenis suit.
  */
-function createLenis() {
+export function startSmoothScroll() {
   const lenis = new Lenis({
     lerp: 0.1,
     smoothWheel: true,
@@ -46,23 +47,5 @@ function createLenis() {
     gsap.ticker.lagSmoothing(500, 33);
     lenis.destroy();
     setLenis(null);
-  };
-}
-
-/** Démarre Lenis (sauf réduire les animations). Renvoie la fonction d'arrêt. */
-export function startSmoothScroll() {
-  let stop: (() => void) | null = prefersReducedMotion() ? null : createLenis();
-  const unsubscribe = onReducedMotionChange((reduced) => {
-    if (reduced && stop) {
-      stop();
-      stop = null;
-    } else if (!reduced && !stop) {
-      stop = createLenis();
-    }
-    ScrollTrigger.refresh();
-  });
-  return () => {
-    unsubscribe();
-    stop?.();
   };
 }

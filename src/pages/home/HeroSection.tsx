@@ -1,6 +1,8 @@
 import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { AnimatePresence, motion } from 'motion/react';
+// framer-motion : le même paquet que motion/react (14.14), importé sans passer par le fichier d'entrée de motion/react,
+// qui embarque toujours motion.div complet : le premier chargement n'a que m, AnimatePresence et LazyMotion (lot 7).
+import { AnimatePresence, m } from 'framer-motion';
 import { X } from 'lucide-react';
 import { PrimaryButton, DonateButton } from '../../components/wahhf/Buttons';
 import Fil from '../../components/wahhf/Fil';
@@ -129,7 +131,7 @@ export default function HeroSection() {
           Échap, focus gardé puis rendu au lien, page figée dessous. */}
       <AnimatePresence>
         {filmOpen && (
-          <motion.div
+          <m.div
             key="film"
             ref={filmDialogRef}
             role="dialog"
@@ -187,7 +189,7 @@ export default function HeroSection() {
                 )}
               </div>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </>

@@ -238,6 +238,10 @@
   --ease-reveal: cubic-bezier(0.22, 1, 0.36, 1); /* apparitions, survols doux */
   --ease-screen: cubic-bezier(0.76, 0, 0.24, 1); /* rideau, menu, changement d'écran */
   --ease-theme: cubic-bezier(0.16, 1, 0.3, 1);   /* bascule clair / sombre */
+  /* Lot 7 (contrat §10) : mêmes courbes que GSAP, pour ce qui joue en CSS avant l'arrivée de GSAP */
+  --ease-power2-out: cubic-bezier(0.33, 1, 0.68, 1);  /* GSAP power2.out (cubique) : fondus courts */
+  --ease-power3-out: cubic-bezier(0.25, 1, 0.5, 1);   /* GSAP power3.out (quartique) : titre du hero */
+  --ease-power3-inout: cubic-bezier(0.76, 0, 0.24, 1); /* GSAP power3.inOut : tracé du fil */
 
   /* Espacement des lettres des sur-titres */
   --tracking-kicker: 0.2em;
@@ -591,6 +595,20 @@
    qui est à l'intérieur de son fond. Hors couche, pour passer devant l'utilitaire section-space. */
 .page-header + .section-space:not(.bg-surface-section) {
   padding-top: clamp(1rem, 2.5vw, 2rem);
+}
+
+/* Transition entre pages (contrat §10, ANIM-03, lot 7) : fondu d'entrée de 0,3 s, sans sortie ni attente.
+   « backwards » : une fois le fondu fini, plus aucune opacité posée sur la page. Instantanée en mouvement réduit. */
+@keyframes page-enter {
+  from { opacity: 0; }
+}
+.page-enter {
+  animation: page-enter 0.3s var(--ease-power2-out) backwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-enter {
+    animation: none !important;
+  }
 }
 
 /* Le fil du hero se dessine une fois (contrat §10) ; Fil.tsx l'utilise avec drawOnce, jamais en mouvement réduit. */

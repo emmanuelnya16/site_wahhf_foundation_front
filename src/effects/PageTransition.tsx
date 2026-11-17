@@ -1,8 +1,5 @@
-import { ReactNode } from 'react';
-import { AnimatePresence, motion } from 'motion/react';
-import { ScrollTrigger } from '../lib/gsap';
-import { scrollToHash, scrollToTop } from '../lib/scroll';
-import { EASE_OUT, EASE_SCREEN } from '../lib/motionTokens';
+import { ReactNode, useEffect, useState } from 'react';
+import { requestScrollRefresh } from '../lib/afterFirstDisplay';
 
 /**
  * Clé de transition d'une route. Les URL servies par un même composant avec un paramètre différent
@@ -15,30 +12,31 @@ export function routeKey(pathname: string): string {
   return pathname;
 }
 
-/** Après la sortie de l'ancienne page : haut de page, ou ancre demandée. */
-function restoreScroll() {
-  const { hash } = window.location;
-  if (hash) scrollToHash(hash);
-  else scrollToTop({ immediate: true });
-}
+let firstPageShown = false;
 
 /**
- * Fondu léger entre les pages (opacité seulement : un transform sur ce conteneur casserait
- * l'épinglage ScrollTrigger et les éléments position: fixed des pages).
- * Sortie 0,25 s, entrée 0,4 s. Avec « réduire les animations », le fondu reste (pas de déplacement).
+ * Transition entre pages (contrat §10, ANIM-03, lot 7) : fondu d'entrée de 0,3 s, sans fondu de sortie ni attente.
+ * La nouvelle page remplace l'ancienne dès qu'elle est prête ; pas de fondu au premier chargement (l'image du hero,
+ * élément LCP, n'est jamais à opacité 0) ; instantané en mouvement réduit (.page-enter, src/index.css).
+ * CSS seul, opacité seule : un transform sur ce conteneur casserait l'épinglage ScrollTrigger et les position: fixed.
+ * Placé sous le Suspense des pages : le fondu joue sur la page elle-même, pas sur l'espace réservé du chargement.
  */
 export default function PageTransition({ transitionKey, children }: { transitionKey: string; children: ReactNode }) {
+  // Premier affichage : pas de fondu. Chaque page affichée ensuite : fondu d'entrée. Le composant est remonté à chaque
+  // changement de page (filet ChunkErrorBoundary, App.tsx) : le premier affichage est donc retenu hors du composant.
+  const [navigated] = useState(() => firstPageShown);
+  useEffect(() => {
+    firstPageShown = true;
+  }, []);
+
+  // Nouvelle page : les positions des effets liés au défilement sont recalculées (si GSAP est chargé)
+  useEffect(() => {
+    requestScrollRefresh();
+  }, [transitionKey]);
+
   return (
-    <AnimatePresence mode="wait" initial={false} onExitComplete={restoreScroll}>
-      <motion.div
-        key={transitionKey}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1, transition: { duration: 0.4, ease: EASE_OUT } }}
-        exit={{ opacity: 0, transition: { duration: 0.25, ease: EASE_SCREEN } }}
-        onAnimationComplete={() => ScrollTrigger.refresh()}
-      >
-        {children}
-      </motion.div>
-    </AnimatePresence>
+    <div key={transitionKey} className={navigated ? 'page-enter' : undefined}>
+      {children}
+    </div>
   );
 }
