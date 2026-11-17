@@ -1,14 +1,16 @@
-import { ReactNode, useEffect, useRef } from 'react';
+import { lazy, ReactNode, Suspense, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import WhatsAppButton from './WhatsAppButton';
 import CookieBanner from './wahhf/CookieBanner';
-import ReadingProgress from '../effects/ReadingProgress';
 import { scrollToElement, scrollToHash, scrollToTop } from '../lib/scroll';
 import { afterFirstDisplay, requestScrollRefresh } from '../lib/afterFirstDisplay';
 import { AfterFirstDisplay, RevealBatch } from '../effects/DeferredMotion';
 import { useTranslation } from 'react-i18next';
+
+// Barre de lecture : articles seulement, chargée avec eux (lot 7 : hors du JS du premier affichage)
+const ReadingProgress = lazy(() => import('../effects/ReadingProgress'));
 
 /** Défilement fluide (Lenis) : ordinateur à souris seulement, jamais en mouvement réduit (contrat §10, lot 7). */
 const SMOOTH_SCROLL_QUERY = '(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)';
@@ -102,7 +104,11 @@ export default function Layout({ children }: LayoutProps) {
           Le composant reste disponible dans src/effects/LoadingCurtain.tsx. */}
 
       {/* Barre de progression de lecture : articles seulement (décision du 16/11), en forêt */}
-      {isArticlePage && <ReadingProgress />}
+      {isArticlePage && (
+        <Suspense fallback={null}>
+          <ReadingProgress />
+        </Suspense>
+      )}
       {!isVkiPage && <Navbar />}
       <main ref={mainRef} id="contenu" tabIndex={-1} className={`flex-grow focus:outline-none${isLegacyPage ? ' legacy-fonts' : ''}`}>
         {children}
