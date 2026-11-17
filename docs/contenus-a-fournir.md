@@ -202,3 +202,41 @@ Ces informations n'étaient pas encore sur le site. Les nouvelles pages en ont b
 94. Que se passe-t-il quand une session est complète : liste d'attente, report à la session suivante ?
 95. Reste-t-il des frais à la charge du jeune (par exemple les frais d'inscription aux examens officiels, les manuels, le transport) ? Si oui, lesquels et combien ?
 96. Pouvez-vous nous envoyer des photos de vrais cours d'allemand (salle, formateurs, apprenants), avec l'accord des personnes photographiées ? La page de l'Académie n'a aujourd'hui aucune photo.
+
+---
+
+## Questions ajoutées par la refonte des pages Faire un don, Agir, Contact et Transparence
+
+Le site ne présente plus de faux paiement : en attendant vos moyens de don (demande D), le donateur choisit un montant et vous envoie un message par WhatsApp ou par e-mail, et c'est vous qui lui indiquez comment régler. Les informations ci-dessous manquent encore ; en attendant, elles ne sont pas affichées.
+
+### Page « Faire un don »
+
+Les questions 63 à 71 restent valables. Les exemples de la question 67 (« 25 € = manuels A1 »…) ne sont plus affichés, et la case à cocher de la question 66 a été remplacée par une phrase d'information.
+
+97. Quand un donateur choisit un domaine (par exemple la santé), son don sert-il uniquement à ce domaine ?
+98. Faut-il un montant minimum ou maximum pour un don ? Aujourd'hui : « entre 5 € et 10 000 € » et « entre 3 000 FCFA et 6 500 000 FCFA ».
+99. Les donateurs peuvent-ils donner chaque mois ? Si oui, à quelle date le don est-il pris, et comment le donateur peut-il l'arrêter ?
+100. Les noms des donateurs sont-ils publiés quelque part (liste, rapport) ? Si oui, un donateur peut-il demander à rester anonyme ?
+101. Qui répond aux questions des donateurs (nom, fonction, e-mail ou téléphone) ?
+
+### Page « Agir »
+
+102. Que fait concrètement un bénévole (par exemple donner des cours d'allemand, aider aux journées de santé) ? Combien d'heures par semaine, et où (en ligne, à Douala, à Yaoundé, en Allemagne) ?
+103. Quel profil recherchez-vous pour les bénévoles (compétences, niveau d'allemand, âge minimum) ?
+104. Que proposez-vous aux écoles, universités, associations et entreprises qui veulent devenir partenaires (financer un programme, accueillir des stagiaires, envoyer des enseignants, donner du matériel) ?
+105. Qui est la personne à contacter pour les partenariats (nom, fonction, e-mail) ?
+106. Sous quel délai répondez-vous à une proposition de bénévolat ou de partenariat ? Ce délai n'est plus affiché ; avant : « sous 7 à 14 jours ouvrés ».
+107. Avez-vous des photos de bénévoles au travail, avec leur accord, pour la page « Agir » ?
+
+### Page « Contact »
+
+Le numéro, l'e-mail et l'adresse sont ceux de la demande E et de la question 1 : ils sont maintenant écrits à un seul endroit du site, et la page Contact, le bas de page et le bouton WhatsApp les affichent tous de la même façon.
+
+### Page « Transparence »
+
+Tant que ces informations manquent, la page reste en ligne mais aucun lien n'y mène (ni le bas de page, ni « Notre impact », ni la page de don). Les questions 88 et 89 restent valables.
+
+108. Quelle part du budget de la fondation vient de son financeur principal, et quelle part vient des dons ?
+109. Comment les dons sont-ils répartis entre les domaines d'action (cours d'allemand, éducation, santé, autres) ?
+110. Les comptes de la fondation sont-ils vérifiés par un expert-comptable ou un commissaire aux comptes ?
+111. À qui un donateur ou une institution peut-il poser une question sur les finances de la fondation (nom, e-mail) ?
