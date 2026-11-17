@@ -35,8 +35,9 @@ export default function PhotoReveal({ scope }: { scope: RefObject<HTMLElement | 
           media: block.querySelector<HTMLElement>('[data-photo-reveal-media]'),
           text: gsap.utils.toArray<HTMLElement>('[data-photo-reveal-text]', block),
         });
-        // Masque du bas vers le haut, au rayon de la photo (lu dans le style calculé : GSAP n'interpole pas var())
-        const clip = (media: HTMLElement, top: string) => `inset(${top} 0% 0% 0% round ${getComputedStyle(media).borderTopLeftRadius || '0px'})`;
+        // Masque du bas vers le haut, au rayon de la photo (lu dans le style calculé : GSAP n'interpole pas var()).
+        // Forme à trois valeurs, celle que renvoie le navigateur : les nombres de départ et d'arrivée se correspondent.
+        const clip = (media: HTMLElement, top: string) => `inset(${top} 0% 0% round ${getComputedStyle(media).borderTopLeftRadius || '0px'})`;
 
         const play = self.add('play', (block: HTMLElement) => {
           if (!hidden.delete(block)) return;

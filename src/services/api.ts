@@ -206,7 +206,7 @@ export const DOMAINS_DATA: DomainItem[] = [
     image: WAHHF_IMAGES.entrepreneurship,
     link: '/nos-actions?domaine=entrepreneuriat',
     programs: [
-      'Ateliers gratuits de gestion et de comptabilité simplifiée',
+      'Ateliers de gestion et de comptabilité simplifiée',
       'Initiation aux outils numériques et à la bureautique',
       'Mise en réseau avec les experts solidaires du groupe IROKO',
     ],
@@ -238,7 +238,7 @@ export const DOMAINS_DATA: DomainItem[] = [
     programs: [
       'Autonomisation des jeunes femmes et leadership communautaire',
       'Soutien à la scolarisation des jeunes en situation de handicap',
-      'Permanences d’écoute et d’orientation sociale gratuite',
+      'Permanences d’écoute et d’orientation sociale',
     ],
   },
   {
@@ -247,7 +247,8 @@ export const DOMAINS_DATA: DomainItem[] = [
     slug: 'mobilite-langues',
     title: 'Mobilité & Langues',
     shortDesc: 'Académie d’allemand gratuite (A1 à C1) et accompagnement transparent vers 10 pays européens.',
-    fullDesc: 'Un programme 100 % gratuit, financé par IROKO et nos donateurs, pour apprendre l’allemand et préparer un projet d’études, de formation ou de mobilité en toute sécurité.',
+    // Groupe 7.3 : sans « 100 % gratuit » (déjà dit juste au-dessus) ni financeur nommé, comme la FAQ de Mobilité (contrat §13)
+    fullDesc: 'Un programme financé par nos partenaires et nos donateurs, pour apprendre l’allemand et préparer un projet d’études, de formation ou de mobilité en toute sécurité.',
     image: WAHHF_IMAGES.openDayVisioconference,
     link: '/mobilite-langues',
     programs: [
