@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import Container from './Container';
 import { cn } from '../../lib/utils';
 import { GALLERY_ALBUMS, galleryItem } from '../../data/gallery';
@@ -24,20 +25,26 @@ const RevealContext = createContext(false);
  *
  * `reveal` (groupe 7.1 : Mobilité, Académie, niveaux, Candidater ; contrat §10) : l'en-tête arrive comme le hero de
  * l'accueil, en CSS (il joue avant GSAP) : le titre monte ligne par ligne derrière un masque (0,8 s, LineReveal),
- * puis l'introduction et les boutons en fondu court ; sur ordinateur, la photo se découvre du bas vers le haut
- * (clip-path, 0,9 s). Le texte reste lisible si l'animation ne joue pas ; tout est en place en mouvement réduit.
+ * puis l'introduction et les boutons en fondu court. `revealPhoto` : sur ordinateur, la photo se découvre du bas vers
+ * le haut (clip-path, 0,9 s). Le texte reste lisible si l'animation ne joue pas ; tout est en place en mouvement réduit.
  */
 export default function PageHeader({
   children,
   photoId,
   notice,
+  photoRatio = '16/10',
   reveal = false,
+  revealPhoto = false,
   className,
 }: {
   children: ReactNode;
   photoId?: string;
-  /** Arrivée animée de l'en-tête (titre ligne par ligne, introduction en fondu, photo découverte). */
+  /** 'source' : la photo garde ses proportions, visible en entier (MOB-01) ; '16/10' par défaut (recadrée). */
+  photoRatio?: '16/10' | 'source';
+  /** Arrivée animée de l'en-tête (titre ligne par ligne, introduction en fondu). */
   reveal?: boolean;
+  /** Photo découverte du bas vers le haut à l'arrivée (ordinateur ; Mobilité seulement, brief du groupe 7.1). */
+  revealPhoto?: boolean;
   /**
    * Encadré à garder juste sous le titre (avertissement anti-arnaque) quand l'en-tête porte une photo : sur
    * téléphone, il passe avant la photo ; sur ordinateur, il s'étend sous les deux colonnes.
@@ -55,9 +62,10 @@ export default function PageHeader({
         className,
       )}
     >
-      <Container className={cn((photo || notice) && 'grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-x-12')}>
+      {/* Deux colonnes seulement avec une photo ; avec l'encadré seul, une colonne (le titre garde toute la largeur) */}
+      <Container className={cn(photo ? 'grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-x-12' : notice && 'grid gap-8')}>
         <div className="space-y-5">{children}</div>
-        {notice && <div className="lg:col-span-2 lg:row-start-2">{notice}</div>}
+        {notice && <div className={cn(photo && 'lg:col-span-2 lg:row-start-2')}>{notice}</div>}
         {photo && photo.kind === 'photo' && (
           <figure className="w-full max-w-[32rem] lg:col-start-2 lg:row-start-1 lg:justify-self-end">
             <img
@@ -68,18 +76,54 @@ export default function PageHeader({
               width={photo.w}
               height={photo.h}
               fetchPriority="high"
-              className={cn('w-full aspect-[16/10] object-cover rounded-card bg-surface-section', reveal && 'photo-rise')}
-              style={photo.focus ? { objectPosition: photo.focus } : undefined}
+              className={cn(
+                'w-full object-cover rounded-card bg-surface-section',
+                photoRatio === 'source' ? 'h-auto' : 'aspect-[16/10]',
+                revealPhoto && 'photo-rise',
+              )}
+              style={photo.focus && photoRatio !== 'source' ? { objectPosition: photo.focus } : undefined}
             />
+            {/* Légende datée : celle de la galerie, puis l'événement, le lieu et la date de l'album (sans « A · B »,
+                contrat §12) ; rien de l'album s'il est encore provisoire */}
             <figcaption className="mt-2 text-meta text-text-secondary">
               {photo.caption}
-              {album && <> {album.meta}</>}
+              {album && !/TODO/.test(album.meta) && (
+                <>
+                  {' '}
+                  {album.title}, {album.meta.replace(' · ', ', ')}.
+                </>
+              )}
             </figcaption>
           </figure>
         )}
       </Container>
     </header>
     </RevealContext.Provider>
+  );
+}
+
+/**
+ * Fil d'Ariane (audit A11Y-11, groupe 7.1) : <nav> nommée et liste ordonnée, séparateurs « / » masqués aux lecteurs
+ * d'écran, page courante en aria-current. Même apparence que PageMeta.
+ */
+export function PageBreadcrumb({ items }: { items: { label: string; to?: string }[] }) {
+  return (
+    <nav aria-label="Fil d’Ariane">
+      <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-meta text-text-secondary">
+        {items.map((item, i) => (
+          <li key={item.label} className="flex items-center gap-x-2">
+            {i > 0 && <span aria-hidden="true">/</span>}
+            {item.to ? (
+              <Link to={item.to} className="text-link underline underline-offset-4">
+                {item.label}
+              </Link>
+            ) : (
+              <span aria-current="page">{item.label}</span>
+            )}
+          </li>
+        ))}
+      </ol>
+    </nav>
   );
 }
 

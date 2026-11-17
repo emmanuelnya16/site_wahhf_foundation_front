@@ -46,7 +46,7 @@ export default function CourseCard({ session }: CourseCardProps) {
           </div>
           <div>
             <dt className="text-text-secondary">Places prévues :</dt>
-            <dd className="text-text tabular-nums">{session.seatsAvailable}</dd>
+            <dd className="text-text tabular-nums">{session.seatsAvailable} (indicatif)</dd>
           </div>
         </dl>
       </div>

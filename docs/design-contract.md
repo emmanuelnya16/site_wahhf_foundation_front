@@ -251,7 +251,7 @@ Noms et texte 17-18 px à 1,6 viennent de votre brief ; les tailles, proposées,
 - **Alignement** : gauche partout. Le centrage est réservé aux états vides et à la page 404.
 - **Espacement** : base 4 px. Respiration de section `clamp(4rem, 9vw, 7.5rem)` (64 à 120 px). Piles internes de 8, 12, 16, 24, 32 et 48 px.
 - **Densité qui varie avec le contenu** : grand air au hero et aux preuves ; liste dense pour les sessions de cours ; colonne de lecture pour les articles et les pages légales.
-- **Images** : vraies photos uniquement, à ratio fixe (16/10, 4/5 ou 1/1), légendées avec le lieu et la date, `alt` précis. Pas d'image générée (T-04). Les sources actuelles ne dépassent pas environ 1 050 px de large : **pas d'image pleine largeur ni de photo en fond plein écran** tant que les originaux HD ne sont pas fournis (GAL-04), et **aucune image affichée plus grande que sa taille réelle en densité 2** (largeur affichée ≤ largeur de la source / 2).
+- **Images** : vraies photos uniquement, à ratio fixe (16/10, 4/5 ou 1/1), légendées avec le lieu et la date, `alt` précis. Pas d'image générée (T-04). Les sources actuelles ne dépassent pas environ 1 050 px de large : **pas d'image pleine largeur ni de photo en fond plein écran** tant que les originaux HD ne sont pas fournis (GAL-04), et **aucune image affichée plus grande que sa taille réelle en densité 2** (largeur affichée ≤ largeur de la source / 2). *Groupe 7.1 : les photos des en-têtes de page (Mobilité & Langues, Candidater) s'affichent à 512 px au plus, pour des sources de 1 027 et 1 030 px : la règle est tenue. Seule exception, votre décision du 17 novembre 2026 : l'ouverture de « Sur le terrain », arrêtée à la largeur du container (§10, §13).*
 
 ```
 Principe de page (1 440 px)
@@ -274,9 +274,11 @@ Principe de page (1 440 px)
 
 **Un trait fin de 1,5 px, couleur forêt, qui relie le Cameroun à l'Europe** (votre brief). Il relie toujours un départ à une arrivée : « Cameroun » → « Europe » dans le hero, « Cameroun » → le pays dans les fiches pays, A1 → « Europe » dans la frise des niveaux. Départ et arrivée sont des points pleins ; dans la frise, les niveaux sont des cercles, sauf le niveau affiché. Il ne promet rien : il montre un trajet, avec ses étapes. Sur fond nuit et en thème sombre, il prend `--feuille`.
 
-Il apparaît à **trois endroits précis**, ceux de votre brief, et nulle part ailleurs. Il est décoratif (`aria-hidden`) : son sens est toujours écrit en texte à côté.
+Il apparaît à **des endroits précis**, ceux de vos briefs (trois au départ, complétés par le lot 7 et le groupe 7.1 dans les notes ci-dessous), et nulle part ailleurs. Il est décoratif (`aria-hidden`) : son sens est toujours écrit en texte à côté.
 
 *Lot 7 (votre brief sur le mouvement, décision du 16 novembre 2026) : un quatrième endroit, la section Mobilité & Langues de l'accueil. Le fil A1 → C1 y reprend la frise de l'Académie, sans niveau affiché, et se dessine au défilement (§10).*
+
+*Groupe 7.1 (votre brief du 17 novembre 2026) : la même frise A1 → C1 apparaît aussi sur la page Mobilité & Langues (porte « Académie », sans niveau affiché, dessinée au défilement sur ordinateur), sur chaque page de niveau (tracée jusqu'au niveau affiché, qui s'allume, à l'arrivée) et dans le résultat du test de niveau (tracée jusqu'au niveau conseillé). C'est toujours le même trajet, A1 → C1 → Europe.*
 
 **1. Hero de l'accueil** : sous le titre, de « Cameroun » à « Europe ». Il se dessine une fois, à l'arrivée, après le titre, la phrase et les boutons (1,2 s, en CSS, §10). Posé sur le voile nuit de la vidéo, il prend **soleil** (et non `--feuille`) pour rester lisible ; **absent en mouvement réduit** (votre décision du 16 novembre 2026).
 
@@ -443,7 +445,7 @@ Ce sont ceux de votre demande sur les composants partagés ; ils appliquent les 
   - **Listes typographiques** pour les valeurs, les principes, les voies et les domaines : titre en 600 et phrase en dessous, séparés par un filet, sans cadre.
   - **Colonne de lecture de 65 caractères** pour les articles et les pages légales : un paragraphe n'est jamais une carte.
   - **Ajouts du 16 novembre 2026** : la liste des 10 pays (lignes de liste, plus de cadres), le bloc d'impact de la page Don et la FAQ de Mobilité (listes typographiques), les liens des deux portes.
-- **StepNumber** (T-17) : un cercle de 32 px, contour forêt de 1,5 px, numéro en 600. **Seulement pour les vraies suites** : étapes de candidature, 4 étapes de l'accompagnement, « Les grandes étapes » de chaque fiche pays. Les niveaux A1 à C1 sont dessinés par le Fil (§6), sans StepNumber.
+- **StepNumber** (T-17) : un cercle de 32 px, contour forêt de 1,5 px, numéro en 600. **Seulement pour les vraies suites** : « Après votre candidature » (Académie, pages de niveau, Candidater), 4 étapes de l'accompagnement, « Les grandes étapes » de chaque fiche pays. Les niveaux A1 à C1 sont dessinés par le Fil (§6), sans StepNumber. *Groupe 7.1 : le formulaire de Candidater n'a plus qu'un indicateur d'étape, « Étape 2 sur 3 » et la barre de progression, sans StepNumber.*
   Retirés : tous les numéros qui ne marquent pas une suite, notamment « DOMAINE / 01 / 06 », « Domaine 06 / 06 » et « Domaine 06 » (hero et description de Mobilité, méga-menu, `fr.json`), « VALEUR 01 », « PÔLE 01 », « Pays #01 », « Voie 01/02/03 », « 01 · Don solidaire », « 01 · Partenaire fondateur », la numérotation du menu mobile, du méga-menu et du footer, et les 14 numéros en filigrane (chiffres, Mobilité, principes, actualités, Agir, domaines, sessions, voies, guides, pays). *Ce sont des textes : leur retrait sera listé fichier par fichier et vous sera montré avant d'être fait.*
   **Barre de progression** (ajout du 16 novembre 2026) : couleur pleine `action`, sans dégradé vert vers or.
 - **Footer** (ajout du 16 novembre 2026) : fond nuit ; texte `text-on-inverse` et `text-secondary-on-inverse` en 15 px ; titres de colonne en 600, sans or ; soleil réservé aux liens (`link-on-inverse`) ; contrôles cerclés de `border-on-inverse`.
@@ -454,7 +456,7 @@ Ce sont ceux de votre demande sur les composants partagés ; ils appliquent les 
   - **Deux portes** (T-09) : « Candidater » (bouton primaire forêt, soleil en sombre) à côté de « Faire un don » (bouton de don en contour), dans la barre dès 768 px ; sous 768 px, en tête du menu mobile, en pleine largeur (empilées sous 400 px). La ligne « Candidater (Cours & Europe — Gratuit) » et le bouton de don en bas du menu mobile sont remplacés par ces deux boutons.
   - **Dès 1 280 px, deux lignes** (64 + 44 px) : la marque et les deux portes, puis le menu (6 entrées, aligné sur la marge du logo) et les outils (langue, recherche, thème), séparés par un filet. Sur une seule ligne, l'en-tête demandait 1 261 px pour 1 152 disponibles. `--header-offset` passe de 6 à 8,25 rem à partir de 1 280 px (108 px + 24 px d'air).
   - Sous 1 280 px, une ligne : marque, outils (langue dès 1 024 px au lieu de 768 px, recherche, thème dès 640 px), les deux portes (dès 768 px), menu. Vérifié de 320 à 1 440 px, en français et en anglais : aucun débordement ni chevauchement.
-- **Fil** : composant SVG pour la signature (§6). Paramètres : départ, arrivée, étapes facultatives (frise A1 à C1), niveau affiché, orientation (horizontale ou verticale), animation unique (hero seulement). Couleur prise dans le token `fil`, épaisseur 1,5 px, points de 8 px. `aria-hidden`. L'arc de la mini-carte d'Europe n'utilise pas ce composant (§6).
+- **Fil** : composant SVG pour la signature (§6). Paramètres : départ, arrivée, étapes facultatives (frise A1 à C1), niveau affiché, orientation (horizontale ou verticale). Animation : tracé unique à l'arrivée (hero) ; tracé au défilement (accueil, Académie, Mobilité & Langues ; ordinateur seulement) ; tracé jusqu'au niveau affiché, qui s'allume (pages de niveau, résultat du test ; ordinateur seulement, groupe 7.1). Couleur prise dans le token `fil`, épaisseur 1,5 px, points de 8 px. `aria-hidden`. L'arc de la mini-carte d'Europe n'utilise pas ce composant (§6).
 
 ## 9. Profondeur et rayons
 
@@ -502,10 +504,16 @@ Jamais de rayon de 20 px sur un petit élément. Les neuf valeurs actuelles (pil
 **Autres pages**
 - **Académie** : sur ordinateur, la frise A1 → C1 se dessine au défilement ; le niveau affiché reste le point plein.
 - **Fiches pays** : le fil Cameroun → pays se dessine une fois, à l'arrivée.
+- **Groupe 7.1 (votre brief du 17 novembre 2026)**, sur Mobilité & Langues, l'Académie, les pages de niveau et Candidater :
+  - chaque en-tête de page arrive comme le hero, en CSS : titre ligne par ligne derrière un masque (0,8 s), puis introduction et boutons en fondu court ;
+  - Mobilité : frise A1 → C1 au défilement (ordinateur) ; photo de l'en-tête découverte du bas vers le haut par un clip-path (ordinateur seulement, une fois, comme pour « Sur le terrain »), simplement en place ailleurs ;
+  - pages de niveau : le fil se dessine jusqu'au niveau affiché, qui s'allume ;
+  - apparitions groupées des listes et des photos, comme ailleurs.
 - **Listes** : apparitions groupées, comme sur l'accueil.
-- **Rien** sur les formulaires (Candidater, Contact, Don, test de niveau), les pages légales, la page Arnaques et les pages historiques.
+- **Formulaires** : rien sur Contact et Don. *Groupe 7.1 :* sur le test de niveau et sur Candidater, seulement des retours d'action. Le passage d'une question ou d'une étape à l'autre se fait en fondu avec un glissement de 16 px (0,3 s, power2.out). La barre de progression se remplit (0,3 s). Le focus passe au titre de la question ou de l'étape une fois l'animation finie (aussitôt en mouvement réduit). Au résultat du test, le fil se dessine jusqu'au niveau conseillé, qui s'allume. Aucune apparition au défilement dans un formulaire.
+- **Rien** sur les pages légales, la page Arnaques et les pages historiques.
 
-**Ce qui ne bouge pas** : l'en-tête (toujours visible), le footer, les textes courants, les boutons (couleur au survol seulement), la bulle WhatsApp, les cartes géographiques une fois apparues.
+**Ce qui ne bouge pas** : l'en-tête du site (toujours visible ; les en-têtes de page arrivent une fois, groupe 7.1), le footer, les textes courants, les boutons (couleur au survol seulement), la bulle WhatsApp, les cartes géographiques une fois apparues.
 
 **Inchangés** : survols (couleur en 0,3 s, sans déplacement ni zoom, seulement sur ce qui est cliquable) ; appui (`:active`) immédiat ; fondus de 0,3 s du menu mobile, des fenêtres et des messages d'état ; barres de progression du test de niveau et de la candidature (0,3 s, un retour d'action).
 
@@ -617,7 +625,7 @@ Les tics relevés par l'audit et ce qui les remplace :
 - **Contrôles en thème sombre** : bordure des champs à 3:1 sur leur carte, boutons détachés de leur carte à 3:1, corrigés par les tokens et non page par page (§3.5 ; commit `a26a9f8`).
 - **Lot 5 élargi** (toutes les propositions de l'analyse de tension acceptées). Ordre : Container (avec la Section brume ou sauge, sans filets), En-tête de page (18 pages, sans bande nuit), Encadré d'information (à la place de l'avertissement), Field (avec les panneaux de formulaire sur sauge, sans ombre), Carte-liste-colonne (avec la liste des pays, le bloc d'impact du Don, la FAQ de Mobilité et les liens des portes), StepNumber (avec la barre de progression pleine), Fil, Footer (couleurs du contrat), En-tête du site (barre opaque). Un commit chacun (§8).
 - **Précaution pour l'encadré d'information** : le message anti-arnaque reste le premier élément sous le titre de la page, bien lisible, et ne doit pas devenir discret au point de passer inaperçu (§8).
-- **TODO gardés** : les textes provisoires restent visibles tant que le contenu réel manque, par exemple « Montants donnés à titre d'exemple (TODO : à confirmer) ».
+- **TODO gardés** : les textes provisoires restent visibles tant que le contenu réel manque, par exemple « Montants donnés à titre d'exemple (TODO : à confirmer) ». *Groupe 7.1 (votre brief du 17 novembre 2026) : sur Mobilité & Langues, l'Académie, les pages de niveau et Candidater, les textes provisoires sont au contraire masqués tant qu'ils ne sont pas fournis. Les questions correspondantes sont dans `docs/contenus-a-fournir.md`. Ailleurs, la règle ne change pas.*
 
 **Étapes planifiées après le lot 5**
 - **Étape de l'accueil** (§7), avec deux ajouts : les couleurs de la carte de présence (panneau blanc en sombre, régions et pays en or, tuiles crème ; elles valent aussi pour /notre-impact) ; le style de la bulle WhatsApp (ombre, contour et point or), en plus du vrai glyphe et du libellé court (RESP-03).
@@ -646,6 +654,19 @@ Les tics relevés par l'audit et ce qui les remplace :
 - **Sur le terrain** : l'ouverture s'arrête à la largeur du container (72 rem, rayon 20 px) tant que la photo source fait 986 px. Le plein écran reviendra avec les originaux HD ou la boucle vidéo (§10, moment 3).
 - **Fil sur la frise de l'accueil** : accepté, c'est le quatrième endroit du fil (§6).
 - **Contenus à fournir** : la liste des questions pour la fondation est dans `docs/contenus-a-fournir.md`.
+
+**Groupe 7.1 (votre brief du 17 novembre 2026)**, sur Mobilité & Langues, l'Académie, les pages de niveau et Candidater :
+- un en-tête du lot 5 au contenu propre : la photo de l'Open Day sur Mobilité (en entier, légendée et datée) et sur Candidater (accompagnement d'une participante) ; l'Académie n'a pas de vraie photo de cours ;
+- l'encadré d'information sous le titre ;
+- une seule action en fin de page, sans carte nuit au-dessus du footer ;
+- la gratuité une fois par écran ;
+- les textes provisoires masqués.
+
+Audit traité :
+- Mobilité : MOB-01, témoignages masqués, portes d'entrée avant « Pourquoi ».
+- Académie : le test avant la fiche, ACAD-01 à ACAD-08, sessions passées masquées d'elles-mêmes (T-05, dates ISO).
+- Pages de niveau : NIV-01. Ce sont de vraies pages qui ouvrent sur le niveau, avec leur adresse canonique.
+- Candidater : CAND-02 (étape dans l'adresse, brouillon gardé dans l'onglet), CAND-04, « Qui peut candidater » et « Après votre candidature » avant le formulaire, un seul indicateur d'étape.
 
 **À traiter plus tard : état de succès des formulaires.** Aujourd'hui les formulaires préparent un message et n'envoient rien, d'où l'absence de couleur de succès (§3.2). Quand ils enverront vraiment (API Symfony), il faudra un état de succès (« Candidature envoyée », « Message envoyé ») et donc une couleur de succès, avec son tableau de contrastes. À traiter à ce moment-là.
 

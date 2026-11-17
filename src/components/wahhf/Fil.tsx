@@ -47,8 +47,9 @@ interface FilProps {
 
 type Node = FilPoint & { filled: boolean; current: boolean };
 
-/** Tracé jusqu'à un point : délai de chaque segment (horizontal : 0,45 s chacun ; vertical : deux demi-traits). */
-const H_STEP = 0.45;
+/** Tracé jusqu'à un point : délai de chaque segment (horizontal : 0,3 s chacun, 1,5 s au plus jusqu'au C1). La frise
+ *  verticale (téléphone) ne se dessine pas : les demi-traits gardent la classe, sans animation sous 1 024 px. */
+const H_STEP = 0.3;
 const V_STEP = 0.22;
 const DRAW_START = 0.25;
 const delay = (s: number) => ({ '--fil-d': `${s.toFixed(2)}s` }) as CSSProperties;

@@ -188,3 +188,17 @@ Pour chaque lien, la question est la même : est-ce bien le site officiel à rec
 
 88. À quelle date le premier rapport annuel sera-t-il publié ?
 89. Pouvez-vous nous envoyer le rapport d'activité et le bilan financier dès qu'ils seront validés (fichier PDF), pour qu'ils soient publiés sur cette page ?
+
+---
+
+## Questions ajoutées par la refonte des pages Mobilité, Académie et Candidater
+
+Ces informations n'étaient pas encore sur le site. Les nouvelles pages en ont besoin pour expliquer aux jeunes ce qui se passe après leur candidature. En attendant, elles ne sont pas affichées.
+
+90. Qui peut candidater ? Y a-t-il un âge minimum ou maximum, un diplôme ou un niveau d'études demandé ?
+91. Comment les places sont-elles attribuées quand il y a plus de candidats que de places (ordre d'arrivée, test, entretien, autre) ?
+92. Sous quel délai l'équipe répond-elle à une candidature ?
+93. Y a-t-il une date limite pour candidater à chaque session ?
+94. Que se passe-t-il quand une session est complète : liste d'attente, report à la session suivante ?
+95. Reste-t-il des frais à la charge du jeune (par exemple les frais d'inscription aux examens officiels, les manuels, le transport) ? Si oui, lesquels et combien ?
+96. Pouvez-vous nous envoyer des photos de vrais cours d'allemand (salle, formateurs, apprenants), avec l'accord des personnes photographiées ? La page de l'Académie n'a aujourd'hui aucune photo.

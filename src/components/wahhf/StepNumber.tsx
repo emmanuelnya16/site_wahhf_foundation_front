@@ -1,3 +1,4 @@
+import { CSSProperties } from 'react';
 import { cn } from '../../lib/utils';
 
 /**
@@ -35,10 +36,10 @@ export function ProgressBar({ value, max, onInverse = false, label, className }:
     >
       <div
         className={cn(
-          'h-full w-full origin-left transition-transform duration-(--dur-fast) motion-reduce:transition-none',
+          'h-full w-full origin-left [transform:scaleX(var(--progress))] starting:[transform:scaleX(0)] transition-transform duration-(--dur-fast) ease-(--ease-power2-out) motion-reduce:transition-none',
           onInverse ? 'bg-action-on-inverse' : 'bg-action',
         )}
-        style={{ transform: `scaleX(${Math.min(1, Math.max(0, value / max))})` }}
+        style={{ '--progress': Math.min(1, Math.max(0, value / max)) } as CSSProperties}
       />
     </div>
   );

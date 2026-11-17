@@ -593,7 +593,7 @@
 /* Juste après l'en-tête de page (PageHeader), une section sur le même fond ne rajoute pas une respiration complète :
    la marge basse de l'en-tête suffit presque (48 + 32 px à 1 440, au lieu de 48 + 120). Une section sauge garde la sienne,
    qui est à l'intérieur de son fond. Hors couche, pour passer devant l'utilitaire section-space. */
-.page-header + .section-space:not(.bg-surface-section) {
+.page-header + .section-space:not(.bg-surface-section):not(.bg-surface-inverse) {
   padding-top: clamp(1rem, 2.5vw, 2rem);
 }
 
@@ -708,8 +708,18 @@
   [data-expand-media] {
     transform: none !important;
   }
-  .expand-frame {
+  .expand-frame,
+  .photo-rise {
     clip-path: none !important;
+  }
+  .step-enter,
+  .line-rise,
+  .hero-fade,
+  .fil-draw-to-x,
+  .fil-draw-to-y,
+  .fil-lit,
+  .fil-lit-label {
+    animation: none !important;
   }
 }
 
@@ -800,19 +810,18 @@
 @keyframes fil-lit-label {
   from { opacity: 0.35; }
 }
-.fil-draw-to-x {
-  transform-origin: left center;
-  animation: fil-draw 0.45s linear var(--fil-d, 0s) both;
-}
-.fil-draw-to-y {
-  transform-origin: center top;
-  animation: fil-draw-y 0.22s linear var(--fil-d, 0s) both;
-}
-.fil-lit {
-  animation: fil-lit 0.6s var(--ease-power3-out) var(--fil-d, 0s) backwards;
-}
-.fil-lit-label {
-  animation: fil-lit-label 0.6s var(--ease-power2-out) var(--fil-d, 0s) backwards;
+/* Ordinateur seulement : sur téléphone la frise (verticale) reste fixe (contrat §6, §10 : pas d'autre tracé que le hero) */
+@media (min-width: 1024px) {
+  .fil-draw-to-x {
+    transform-origin: left center;
+    animation: fil-draw 0.3s linear var(--fil-d, 0s) backwards;
+  }
+  .fil-lit {
+    animation: fil-lit 0.6s var(--ease-power3-out) var(--fil-d, 0s) backwards;
+  }
+  .fil-lit-label {
+    animation: fil-lit-label 0.6s var(--ease-power2-out) var(--fil-d, 0s) backwards;
+  }
 }
 .fil-lit-label:focus-within {
   opacity: 1 !important;
@@ -833,6 +842,10 @@
 }
 .step-enter {
   animation: step-enter 0.3s var(--ease-power2-out) backwards;
+}
+.step-enter:focus-within {
+  opacity: 1 !important;
+  transform: none !important;
 }
 @media (prefers-reduced-motion: reduce) {
   .step-enter {

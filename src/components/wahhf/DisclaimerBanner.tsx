@@ -17,6 +17,8 @@ export default function DisclaimerBanner({ compact = false, className = '' }: Di
 
   return (
     <InfoBox title={t('disclaimer.title')} className={className}>
+      {/* Texte validé (contrat §13). En français même sur le site anglais : les pages qui l'affichent ne sont pas encore
+          traduites, l'encadré ne doit pas être la seule partie en anglais (T-08, à traiter avec la traduction). */}
       <p>
         Nos cours et notre accompagnement sont gratuits. Nous ne vendons ni visa ni emploi et ne garantissons aucun résultat. Nous ne vous demandons jamais d’argent. Les décisions appartiennent aux autorités et aux établissements concernés. Vérifiez toujours les informations sur les sites officiels.
       </p>
