@@ -714,6 +714,7 @@
   }
   .step-enter,
   .crossfade-in,
+  .arrive-rise,
   .line-rise,
   .hero-fade,
   .fil-draw-to-x,
@@ -898,6 +899,26 @@
   }
   .crossfade-out {
     display: none;
+  }
+}
+
+/* Agir (groupe 7.2) : les trois voies, déjà à l'écran à l'arrivée (RevealBatch ne masque jamais ce qui est visible),
+   apparaissent en groupe juste après l'en-tête, comme les apparitions du contrat §10 : fondu et montée de 24 px, 0,7 s,
+   power2.out, 0,08 s de décalage (--arrive-delay). En CSS, pour jouer avant GSAP ; une voie qui reçoit le focus
+   s'affiche aussitôt ; tout est en place en mouvement réduit. Plus bas dans l'écran, RevealBatch prend le relais. */
+@keyframes arrive-rise {
+  from { opacity: 0; transform: translateY(24px); }
+}
+.arrive-rise {
+  animation: arrive-rise 0.7s var(--ease-power2-out) var(--arrive-delay, 0.6s) backwards;
+}
+.arrive-rise:focus-within {
+  opacity: 1 !important;
+  transform: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .arrive-rise {
+    animation: none !important;
   }
 }
 /* Photo d'en-tête découverte du bas vers le haut (Mobilité, groupe 7.1) : ordinateur à souris seulement, une fois.
