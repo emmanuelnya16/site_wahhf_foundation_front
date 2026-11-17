@@ -87,15 +87,18 @@ function Label({ node, onInverse, currentLabel }: { node: Node; onInverse: boole
 function Horizontal({ nodes, onInverse, drawOnce, currentLabel, className }: { nodes: Node[]; onInverse: boolean; drawOnce: boolean; currentLabel: string; className?: string }) {
   const line = onInverse ? 'bg-fil-on-inverse' : 'bg-fil';
   return (
-    <ol className={cn('flex text-body', className)}>
+    <ol data-fil="horizontal" className={cn('flex text-body', className)}>
       {nodes.map((n, i) => {
         const last = i === nodes.length - 1;
         return (
           <li key={n.id} className={cn('flex flex-col gap-2', !last && 'flex-1 min-w-0')}>
             <div className="flex items-center" aria-hidden="true">
-              <Dot filled={n.filled} onInverse={onInverse} />
+              <span data-fil-dot="" className="inline-flex">
+                <Dot filled={n.filled} onInverse={onInverse} />
+              </span>
               {!last && (
                 <span
+                  data-fil-seg=""
                   className={cn(
                     'h-[1.5px] flex-1 min-w-6',
                     line,
@@ -105,7 +108,7 @@ function Horizontal({ nodes, onInverse, drawOnce, currentLabel, className }: { n
                 />
               )}
             </div>
-            <div className="flex flex-col pr-3 text-balance">
+            <div data-fil-label="" className="flex flex-col pr-3 text-balance">
               <Label node={n} onInverse={onInverse} currentLabel={currentLabel} />
             </div>
           </li>

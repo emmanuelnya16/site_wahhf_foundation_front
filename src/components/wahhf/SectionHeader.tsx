@@ -15,13 +15,15 @@ interface SectionHeaderProps {
   className?: string;
   /** Titre qui peut recevoir le focus par script (changement d'étape d'un formulaire). */
   titleRef?: Ref<HTMLHeadingElement>;
+  /** Le titre apparaît au défilement (fondu et montée de 24 px). Accueil, sections 2 et 3 seulement (contrat §10). */
+  revealTitle?: boolean;
 }
 
 /**
  * En-tête de section (contrat §8) : le titre (échelle section-title) et, au besoin, une introduction.
- * Aligné à gauche, sans filet ni apparition animée.
+ * Aligné à gauche, sans filet. Pas d'apparition, sauf revealTitle (contrat §10, lot 7 : accueil, sections 2 et 3).
  */
-export default function SectionHeader({ title, subtitle, kicker, onInverse = false, className = '', titleRef }: SectionHeaderProps) {
+export default function SectionHeader({ title, subtitle, kicker, onInverse = false, className = '', titleRef, revealTitle = false }: SectionHeaderProps) {
   return (
     <div className={cn('max-w-[65ch]', className)}>
       {kicker && (
@@ -30,6 +32,7 @@ export default function SectionHeader({ title, subtitle, kicker, onInverse = fal
       <h2
         ref={titleRef}
         tabIndex={titleRef ? -1 : undefined}
+        data-reveal={revealTitle || undefined}
         className={cn('text-section-title', onInverse ? 'text-text-on-inverse' : 'text-text')}
       >
         {title}

@@ -84,7 +84,16 @@
       "card2Desc": "Clear, verified 4-step guidance: understanding study, vocational training, or work pathways and preparing your file.",
       "card3Title": "10 supported countries",
       "card3Desc": "Luxembourg, Germany, Slovenia, Italy, Greece, Portugal, Spain, Denmark, Poland, and Albania.",
-      "cta": "Discover the program"
+      "cta": "Discover the program",
+      "filLabel": "The five German levels, from A1 to C1, then Europe",
+      "filEnd": "Europe",
+      "levels": {
+        "a1": "Discovery",
+        "a2": "Everyday exchanges",
+        "b1": "Autonomy",
+        "b2": "Independence",
+        "c1": "Mastery"
+      }
     },
     "video": {
       "kicker": "In the field",

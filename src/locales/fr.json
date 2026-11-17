@@ -84,7 +84,16 @@
       "card2Desc": "Information claire et vérifiée en 4 étapes : compréhension des parcours d'études, de formation ou de travail, et préparation de dossier.",
       "card3Title": "10 pays accompagnés",
       "card3Desc": "Luxembourg, Allemagne, Slovénie, Italie, Grèce, Portugal, Espagne, Danemark, Pologne et Albanie.",
-      "cta": "Découvrir le programme"
+      "cta": "Découvrir le programme",
+      "filLabel": "Les cinq niveaux d'allemand, de A1 à C1, puis l'Europe",
+      "filEnd": "Europe",
+      "levels": {
+        "a1": "Découverte",
+        "a2": "Échanges courants",
+        "b1": "Autonomie",
+        "b2": "Indépendance",
+        "c1": "Maîtrise"
+      }
     },
     "video": {
       "kicker": "Au cœur du terrain",

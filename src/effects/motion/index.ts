@@ -4,3 +4,4 @@
  * avec le scope de ce qu'il anime.
  */
 export { default as HeroMotion } from './HeroMotion';
+export { default as FilScrub } from './FilScrub';
