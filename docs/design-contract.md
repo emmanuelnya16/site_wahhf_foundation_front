@@ -276,7 +276,9 @@ Principe de page (1 440 px)
 
 Il apparaît à **trois endroits précis**, ceux de votre brief, et nulle part ailleurs. Il est décoratif (`aria-hidden`) : son sens est toujours écrit en texte à côté.
 
-**1. Hero de l'accueil** : sous le titre, de « Cameroun » à « Europe ». C'est le seul moment fort du site : il se dessine une fois, au chargement, en 1,2 s (CSS seul, §10). Posé sur le voile nuit de la vidéo, il prend **soleil** (et non `--feuille`) pour rester lisible ; **absent en mouvement réduit** (votre décision du 16 novembre 2026).
+*Lot 7 (votre brief sur le mouvement, décision du 16 novembre 2026) : un quatrième endroit, la section Mobilité & Langues de l'accueil. Le fil A1 → C1 y reprend la frise de l'Académie, sans niveau affiché, et se dessine au défilement (§10).*
+
+**1. Hero de l'accueil** : sous le titre, de « Cameroun » à « Europe ». Il se dessine une fois, à l'arrivée, après le titre, la phrase et les boutons (1,2 s, en CSS, §10). Posé sur le voile nuit de la vidéo, il prend **soleil** (et non `--feuille`) pour rester lisible ; **absent en mouvement réduit** (votre décision du 16 novembre 2026).
 
 > **Décision du 16 novembre 2026 (la vôtre) : le hero garde la vidéo en fond.** Elle remplace la photo cadrée validée plus tôt (ajustement n° 1 du §13). Le reste du contrat ne change pas.
 
@@ -318,7 +320,7 @@ Hero, 390 px (téléphone, tactile, réseau lent, mouvement réduit) : image fix
 - **Contenu** : titre à l'échelle `display` en 600, couleur brume ; phrase concrète qui nomme le lien Cameroun–Allemagne ; deux portes, « Passer le test d'allemand gratuit » (bouton primaire sur fond sombre, soleil, vers `/mobilite-langues/academie#test-niveau`) et « Faire un don » (cœur plein avec liseré) ; un lien discret « Regarder le film avec le son (1 min) » ouvre le lecteur.
 - **Pas** de sur-titre, de mention d'IROKO (l'en-tête la porte déjà), de « Défiler pour découvrir » ni de rideau. Hauteur d'environ 85 à 90 svh sur ordinateur, pour laisser deviner la section suivante.
 
-**2. Frise des niveaux A1 à C1 (page Académie)** : le fil traverse les cinq niveaux comme des étapes et se termine vers l'Europe. Le niveau affiché est le seul point plein avant l'arrivée ; son nom passe en 600, et les lecteurs d'écran entendent « niveau affiché ». Chaque niveau reste un lien vers sa page. Fixe, aucune animation. Exemple sur la page du niveau B1 :
+**2. Frise des niveaux A1 à C1 (page Académie)** : le fil traverse les cinq niveaux comme des étapes et se termine vers l'Europe. Le niveau affiché est le seul point plein avant l'arrivée ; son nom passe en 600, et les lecteurs d'écran entendent « niveau affiché ». Chaque niveau reste un lien vers sa page. Sur ordinateur, le fil se dessine au défilement et chaque niveau s'allume quand le trait l'atteint ; fixe sur téléphone et en mouvement réduit (§10). Exemple sur la page du niveau B1 :
 
 ```
 Académie, 1 440 px (horizontal)
@@ -342,7 +344,7 @@ Académie, 390 px (vertical : même fil, de haut en bas)
 ```
 *Intitulés courts tirés des titres existants de `GERMAN_LEVELS_DATA` (« Niveau A1 — Découverte & Bases », « Niveau A2 — Survie & Échanges Courants », « Niveau B1 — Seuil d'Autonomie », « Niveau B2 — Indépendance & Fluidité », « Niveau C1 — Maîtrise Académique & Professionnelle »), en casse de phrase et sans « & » (T-21). Formulation validée le 16 novembre 2026.*
 
-**3. Fiches pays** : en tête de fiche, sous le titre, de « Cameroun » au pays, avec la date de vérification de la fiche. Les fiches n'ont aujourd'hui ni carte ni repère géographique : le fil y est un trait droit, sans carte.
+**3. Fiches pays** : en tête de fiche, sous le titre, de « Cameroun » au pays, avec la date de vérification de la fiche. Les fiches n'ont aujourd'hui ni carte ni repère géographique : le fil y est un trait droit, sans carte. Il se dessine une fois, à l'arrivée (§10).
 
 ```
 Fiche Allemagne, 390 px
@@ -351,7 +353,7 @@ Fiche Allemagne, 390 px
   Fiche vérifiée le … (date à fournir)
 ```
 
-**Ce qui n'est pas le fil** : la mini-carte d'Europe de l'accueil et de Notre impact garde son arc « Depuis le Cameroun » vers le pays choisi. Pour que le fil reste à trois endroits, cet arc passe en **forêt à opacité réduite (environ 40 %)** (votre décision du 16 novembre 2026), immobile, et change de pays d'un coup ; le pays visé reste écrit dans la liste à côté. Il est décoratif : aucun contraste n'est requis.
+**Ce qui n'est pas le fil** : la mini-carte d'Europe de l'accueil et de Notre impact garde son arc « Depuis le Cameroun » vers le pays choisi. Pour que le fil reste à trois endroits, cet arc passe en **forêt à opacité réduite (environ 40 %)** (votre décision du 16 novembre 2026), se trace une fois quand la carte entre à l'écran (§10), puis change de pays d'un coup ; le pays visé reste écrit dans la liste à côté. Il est décoratif : aucun contraste n'est requis.
 
 ## 7. Accueil en 8 sections (ACC-03)
 
@@ -395,7 +397,7 @@ Accueil, 390 px (une colonne)       Accueil, 1 440 px
 | # | Section | Contenu | Matière réelle disponible |
 |---|---|---|---|
 | 1 | **Hero, deux portes** | *(Décision du 16 novembre 2026 : vidéo en fond, voir §6.)* Titre concret à l'échelle `display` ; le fil sous le titre ; phrase qui nomme le lien Cameroun–Allemagne ; **« Passer le test d'allemand gratuit »** (bouton primaire sur fond sombre, vers `/mobilite-langues/academie#test-niveau`) et **« Faire un don »** (cœur plein avec liseré, vers `/faire-un-don`) ; lien « Regarder le film avec le son (1 min) ». | Vidéo WAHHF (YouTube, 70 s, coupée à 64 s) ; image d'attente nette ; photo portrait pour le téléphone. Pas de sur-titre ni de mention d'IROKO (ACC-05). |
-| 2 | **Mobilité & Langues** | Les trois voies en liste typographique (Académie A1 à C1, accompagnement en 4 étapes, 10 pays) et le bouton « Candidater ». Un seul « gratuit », au bon endroit (T-12). | Programme réel, test réel (20 questions). |
+| 2 | **Mobilité & Langues** | Les trois voies en liste typographique (Académie A1 à C1, accompagnement en 4 étapes, 10 pays) et le bouton « Candidater ». Le fil A1 → C1 (lot 7, §6 et §10). Un seul « gratuit », au bon endroit (T-12). | Programme réel, test réel (20 questions). |
 | 3 | **Sur le terrain** | Les vraies photos de l'Open Day, légendées, et le lien vers la galerie. Le film WAHHF s'ouvre depuis le hero ; le showreel IROKO quitte l'accueil. Aucune image générée. | 13 photos et 1 vidéo de l'Open Day ; film YouTube WAHHF de 70 s. |
 | 4 | **Domaines** | Les 6 domaines en liste : titre et une phrase chacun, sans carte ni numéro ; photo seulement si elle est réelle (3 sur 6 aujourd'hui). | `DOMAINS_DATA` ; 3 images générées à retirer (T-04). |
 | 5 | **Carte de présence** | La carte des régions et la mini-carte d'Europe, sans le fil (son arc passe en forêt à 40 % d'opacité, §6). Titre qui dit ce qui est vrai : « Basée à Yaoundé et Douala » tant que les relais ne sont pas confirmés (T-11, IMP-01). | Géographie réelle ; données par région en TODO. |
@@ -474,28 +476,76 @@ Jamais de rayon de 20 px sur un petit élément. Les neuf valeurs actuelles (pil
 
 ## 10. Mouvement
 
-**Un seul moment fort : le fil du hero qui se dessine une fois. Ailleurs, des fondus de 0,3 s. Rien d'autre ne bouge** (votre brief).
+> **Décision du 16 novembre 2026 (la vôtre) : un mouvement riche, fluide et doux, construit avec GSAP.** Elle remplace « un seul moment fort ». GSAP et ScrollTrigger restent dans le projet : leur retrait, prévu au lot 8, est annulé. Lenis ne sert que sur ordinateur à souris. Mise en œuvre au lot 7, après la validation de l'accueil statique (lot 6).
 
-- **Le moment fort** : à l'affichage de l'accueil, le fil se trace de « Cameroun » vers « Europe » en 1,2 s, après 0,2 s, sur une courbe douce (`cubic-bezier(0.22, 1, 0.36, 1)`, token `--ease-reveal`). Le titre, le texte, les boutons et l'image d'attente sont **visibles dès le premier rendu** : rien n'attend l'animation, l'affichage du premier écran n'est pas retardé. Il se joue une fois par chargement de l'accueil, jamais en boucle. Outil : CSS seul (tracé du trait), sans JavaScript.
-- **Fondus de 0,3 s** (opacité seule, sans glissement) : ouverture et fermeture du menu mobile, des fenêtres (vidéo, visionneuse, carte plein écran), des messages d'état, changement de page. Outil : Motion (bibliothèque d'animation déjà installée) pour ce qui apparaît ou disparaît de la page, CSS pour le reste.
-- **Survols** : changement de couleur en 0,3 s, sans déplacement, sans zoom, et seulement sur ce qui est cliquable. **Appui (`:active`)** : immédiat, sans déplacement.
-- Les barres de progression du test de niveau et de la candidature continuent d'avancer en 0,3 s : c'est un retour d'action, pas un décor.
-- **Ce qui ne bouge pas** : titres, sections, cartes, chiffres, cartes géographiques, frise A1 à C1, fiches pays, en-tête (il ne se masque plus au défilement), défilement (natif).
-- **Bibliothèques** : CSS et Motion suffisent. GSAP (ScrollTrigger, SplitText) et Lenis ne servent plus à rien une fois les effets retirés ; ils pourront être retirés du site (environ 53 Ko compressés de moins à télécharger, mesure isolée en annexe B, à refaire sur le site réel).
+**Principes**
+- **Doux, c'est-à-dire fluide et posé** : courbes `power2.out`, `power3.out` ou `power3.inOut`, de 0,6 à 1,2 s. Aucun rebond, aucun élastique, aucun effet magnétique. Ce qui suit le défilement n'a pas de courbe (`ease: "none"`) et un lissage (`scrub`) de 0,5 s au plus.
+- **Chaque effet raconte WAHHF** : la passerelle Cameroun → Europe, la progression A1 → C1, la preuve du terrain. Pas d'effet décoratif répété partout, et au plus un effet fort par section.
+- **Rien n'attend l'animation** : l'état final de chaque effet est celui du HTML. Si le JavaScript tarde ou échoue, tout reste lisible. L'image d'attente du hero (élément LCP) n'est jamais à opacité 0. Un élément encore masqué qui reçoit le focus s'affiche aussitôt.
 
-**Effets retirés** (inventaire complet des 39 effets et fichiers en annexe B) : rideau de chargement, zoom lent et parallaxe de l'image du hero, ~~vidéo YouTube en fond~~ (gardée : décision du 16 novembre 2026, §6), titre révélé ligne par ligne, glissement du sur-titre, de la phrase d'appui et des boutons du hero, paragraphe découpé (SplitText), compteurs animés, galerie horizontale épinglée, section Mobilité qui s'agrandit, vignette vidéo qui grandit au défilement, apparition en fondu-glissement des titres de section et des grilles, frise historique qui se dessine, boutons magnétiques, barre de lecture, défilement fluide (Lenis), carrousel de témoignages, soulèvement et zoom des cartes au survol, rotation de la flèche des boutons, pulsation et cascade de la carte du Cameroun, arc de la mini-carte qui se redessine au survol, rideau du menu mobile (devient un fondu), fondu de 0,5 s de la bascule de thème (devient instantané), entrée en ressort de la bulle WhatsApp, en-tête qui se masque au défilement.
+**Les moments de l'accueil**
+
+| # | Moment | Ordinateur (1 024 px et plus, souris) | Téléphone et tactile | Mouvement réduit |
+|---|---|---|---|---|
+| 1 | Hero, à l'arrivée | Le titre est révélé ligne par ligne derrière un masque (de 100 % à 0, 1 s, décalage de 0,12 s). Suivent la phrase et les boutons, en fondu court (0,6 s), puis le fil, qui se dessine (1,2 s). | idem | tout est en place, le fil est absent |
+| 1 bis | Hero, au défilement | La vidéo (ou l'image) descend un peu moins vite que la page (parallaxe de 8 % au plus) et le voile s'assombrit doucement. | rien | rien |
+| 2 | Mobilité & Langues | Le titre apparaît. Le fil A1 → C1 se dessine au fil du défilement, et chaque niveau s'allume quand le trait l'atteint. | titre en fondu, fil déjà tracé | tout est en place |
+| 3 | Sur le terrain | Le titre apparaît. Une photo de l'Open Day, dans un cadre arrondi au centre (environ 42 % × 58 %), s'ouvre en plein écran au défilement pendant que l'image passe de 1,2 à 1. À la fin apparaissent la légende « Yaoundé, 25 avril 2026 » et le lien vers la galerie. La section est épinglée, seulement sur un écran d'au moins 700 px de haut. | photo normale en fondu, légende et lien dessous | photo normale, sans fondu |
+| 4 | Domaines | Les lignes de la liste apparaissent. | idem | en place |
+| 5 | Carte de présence | Les régions apparaissent en cascade douce, puis l'arc Cameroun → Europe se trace une fois, quand la carte entre à l'écran. | idem | carte et arc en place |
+| 7 | Agir | Les lignes apparaissent. | idem | en place |
+
+**Apparitions** (listes, cartes d'actualités, photos) : fondu et montée de 24 px, en 0,7 s, `power2.out`, une seule fois, groupées par `ScrollTrigger.batch`. Elles se déclenchent quand **le haut de l'élément** atteint 85 % de la hauteur de l'écran, jamais selon une fraction de la surface d'un groupe (ANIM-02). Sur l'accueil, seuls les titres des sections 2 et 3 s'animent. Un élément déjà à l'écran quand GSAP arrive n'est jamais masqué.
+
+**Transitions entre pages** : fondu d'entrée de 0,3 s, sans fondu de sortie ni attente (ANIM-03), instantané en mouvement réduit. Pas de fondu au premier chargement.
+
+**Autres pages**
+- **Académie** : sur ordinateur, la frise A1 → C1 se dessine au défilement ; le niveau affiché reste le point plein.
+- **Fiches pays** : le fil Cameroun → pays se dessine une fois, à l'arrivée.
+- **Listes** : apparitions groupées, comme sur l'accueil.
+- **Rien** sur les formulaires (Candidater, Contact, Don, test de niveau), les pages légales, la page Arnaques et les pages historiques.
+
+**Ce qui ne bouge pas** : l'en-tête (toujours visible), le footer, les textes courants, les boutons (couleur au survol seulement), la bulle WhatsApp, les cartes géographiques une fois apparues.
+
+**Inchangés** : survols (couleur en 0,3 s, sans déplacement ni zoom, seulement sur ce qui est cliquable) ; appui (`:active`) immédiat ; fondus de 0,3 s du menu mobile, des fenêtres et des messages d'état ; barres de progression du test de niveau et de la candidature (0,3 s, un retour d'action).
+
+**Garde-fous (non négociables)**
+- **Mouvement réduit** : tout est visible tout de suite. Aucun épinglage, aucun scrub, pas de Lenis.
+- **Téléphone et tactile** : ni épinglage ni scrub lourd. Seulement les apparitions légères et le fil du hero. Pas de Lenis.
+- **Performance** :
+  - GSAP et ScrollTrigger sont chargés à la demande (`import()`), après le premier affichage ;
+  - le LCP mobile n'est pas dégradé ;
+  - le JS initial reste sous 200 Ko compressés ;
+  - seuls `transform` et `opacity` sont animés (le `clip-path` est toléré pour « Sur le terrain » sur ordinateur) ;
+  - le profil Performance, processeur ralenti ×4, ne montre aucune image de plus de 50 ms pendant le défilement.
+- **Code** : `useGSAP` avec un `scope` ; `gsap.matchMedia()` pour l'ordinateur, le téléphone et le mouvement réduit ; `ScrollTrigger.refresh()` après le chargement des images et des polices ; aucun `markers` en production.
+
+**Outils**
+- **GSAP + ScrollTrigger** (avec `@gsap/react`) : tout ce qui suit le défilement ou s'enchaîne (apparitions, épinglage, frises, cascade, arc, parallaxe). Code dans `src/effects/motion/`.
+- **CSS** : l'arrivée du hero (titre, phrase, boutons, fil). Elle doit jouer dès le premier affichage, avant l'arrivée de GSAP, qui est chargé après. Aussi les survols et le fondu d'entrée des pages.
+- **Motion** : le menu mobile et les fenêtres qui entrent et sortent de la page. Il est chargé en différé (`LazyMotion`) pour tenir le budget du JS initial.
+- **Lenis** : défilement fluide, ordinateur à souris seulement.
 
 **Mouvement réduit** (`prefers-reduced-motion: reduce`) :
 
 | Effet | Avec animations | Mouvement réduit |
 |---|---|---|
+| Arrivée du hero (titre, phrase, boutons) | masque et fondus, 2 s en tout | tout en place dès le premier rendu |
 | Fil du hero | se dessine en 1,2 s, une fois | absent (décision du 16 novembre 2026) |
+| Parallaxe et voile du hero | au défilement, ordinateur | rien |
 | Vidéo de fond du hero | muette, en boucle, bouton Pause | jamais : image fixe |
-| Fondus (menu, fenêtres, messages, pages) | 0,3 s | instantanés |
+| Fil A1 → C1 (accueil, Académie) | se dessine au défilement, ordinateur | tracé, niveaux allumés |
+| Sur le terrain | s'ouvre en plein écran, ordinateur | photo normale |
+| Carte de présence | cascade puis arc | en place |
+| Apparitions (listes, photos, actualités) | fondu et montée de 24 px | en place |
+| Changement de page | fondu d'entrée de 0,3 s | instantané |
+| Défilement | Lenis sur ordinateur à souris | natif |
+| Fondus (menu, fenêtres, messages) | 0,3 s | instantanés |
 | Survols | couleur en 0,3 s | couleur instantanée |
 | Barres de progression (test, candidature) | avancent en 0,3 s | changent d'un coup |
 | Film de présentation | lecture seulement au clic | lecture seulement au clic, sans lecture automatique |
-| Tout le reste | immobile | immobile |
+
+*Avant le 16 novembre 2026, ce paragraphe disait : « Un seul moment fort : le fil du hero qui se dessine une fois. Ailleurs, des fondus de 0,3 s. Rien d'autre ne bouge. » La liste des effets retirés (annexe B) reste valable, sauf ceux qui reviennent sous la forme décrite ci-dessus (note en tête de l'annexe B).*
 
 ## 11. États
 
@@ -529,8 +579,8 @@ Les tics relevés par l'audit et ce qui les remplace :
 | Rayons partout (9 valeurs) | TOK-05 | 12 / 20 / pilule |
 | Gabarit hero → chiffres → grille → témoignages → appel, en 15 sections | ACC-03 | 8 sections, chacune avec une raison d'être |
 | Gros chiffres animés avec une petite étiquette, dont un chiffre d'exemple | T-11 | chiffres réels, datés et sourcés, en texte fixe, ou rien |
-| Empilement d'effets spectaculaires, façon sites primés | ANIM-01 | un seul moment fort, lié à la signature |
-| Fondu et glissement sur chaque section | ANIM-04 | aucune apparition au défilement |
+| Empilement d'effets spectaculaires, façon sites primés | ANIM-01 | ~~un seul moment fort, lié à la signature~~ un mouvement doux qui raconte WAHHF, un effet fort par section au plus (décision du 16 novembre 2026, §10) |
+| Fondu et glissement sur chaque section | ANIM-04 | ~~aucune apparition au défilement~~ apparitions sur les listes, les cartes d'actualités et les photos seulement, déclenchées par le haut de chaque élément ; sur l'accueil, titres animés dans les sections 2 et 3 seulement (§10) |
 | Métadonnées « A · B · C » et libellés « MOT — fragment » | audit, l. 158-159 | phrases complètes ou deux lignes distinctes |
 | Slogans creux (« Autonomiser la jeunesse… ») et étiquettes décoratives | ACC-02 | une promesse concrète qui nomme l'allemand, l'Europe et la gratuité |
 | Icônes posées dans des carrés arrondis colorés | audit, l. 180 | pas d'icône décorative ; icône seulement si elle porte un sens (état, lien externe, don) |
@@ -551,10 +601,10 @@ Les tics relevés par l'audit et ce qui les remplace :
 
 **Propositions acceptées telles quelles**
 - Container unique de 72 rem (§5) ; en-tête toujours visible (§10) ; barres de progression du test et de la candidature gardées (§10).
-- Retrait de GSAP et Lenis quand plus rien ne les utilise ; le fil du hero en CSS seul (§10).
+- ~~Retrait de GSAP et Lenis quand plus rien ne les utilise ; le fil du hero en CSS seul (§10).~~ *Annulé par votre décision du 16 novembre 2026 sur le mouvement : GSAP et ScrollTrigger restent, Lenis sur ordinateur à souris (§10).*
 - Section Chiffres masquée tant qu'elle n'a pas deux chiffres sourcés (§7).
 - Alerte en ambre (§3.2) ; soleil sur les fonds sombres (§3.3) ; tokens « on-inverse » (§3.4) ; renommage des tokens en trois temps (§3.6).
-- Tailles de l'échelle typographique (§4.3), intitulés courts de la frise A1 à C1 (§6), ce qui quitte l'accueil (§7, pour l'étape qui traitera l'accueil), retrait des effets (§10, annexe B).
+- Tailles de l'échelle typographique (§4.3), intitulés courts de la frise A1 à C1 (§6), ce qui quitte l'accueil (§7, pour l'étape qui traitera l'accueil), retrait des effets (§10, annexe B ; revu par la décision sur le mouvement).
 
 **Décisions prises après la validation (16 novembre 2026)**, avec la liste des textes du lot 5 (`docs/lot5-textes-a-retirer.md`)
 - **Gratuité** : une seule mention par écran ; l'avertissement dit « Nos cours et notre accompagnement sont gratuits. », sans nommer le financeur tant que la question IROKO n'est pas tranchée.
@@ -588,6 +638,8 @@ Les tics relevés par l'audit et ce qui les remplace :
 **Décision du 16 novembre 2026 (la vôtre) : le hero garde la vidéo en fond.** Elle remplace la photo cadrée (ajustement n° 1 ci-dessus). Vidéo WAHHF coupée à 64 s ; consentement explicite (sans accord : image fixe et lien « Activer la vidéo ») ; jamais sur téléphone, écran tactile, réseau lent, économie de données ni en mouvement réduit (image portrait via `<picture>`) ; voile en dégradé horizontal nuit, contraste ≥ 4,5:1 sur le pire pixel ; image d'attente nette préchargée, élément LCP ; fil soleil qui se dessine une fois, absent en mouvement réduit ; code prêt pour une boucle hébergée sur le site (§6, §7, §10).
 
 **Accueil (lot 6), suite de la même décision** : Mobilité & Langues juste après le hero, avec « Candidater » bien visible ; « Sur le terrain » avec les vraies photos de l'Open Day et le lien vers la galerie (le showreel IROKO quitte l'accueil) ; domaines en liste, liens en ancre vers `/nos-actions#<domaine>` (T-10) ; carte de présence aux couleurs du contrat (« Choisissez une région », sans « Voir les actions » ni « 10 régions couvertes », T-11) ; chiffres masqués ; un seul bloc Agir avec la newsletter, sans bande de don finale ; masqués sans suppression des données : témoignages, partenaires, actualités d'exemple, carte « Identité & Lien IROKO », Approche et frise (elles iront sur `/qui-sommes-nous`).
+
+**Décision du 16 novembre 2026 (la vôtre) : le mouvement.** « Un mouvement riche, fluide et doux, construit avec GSAP » remplace « un seul moment fort ». GSAP et ScrollTrigger restent dans le projet (le retrait prévu au lot 8 est annulé) ; Lenis seulement sur ordinateur à souris. Courbes douces de 0,6 à 1,2 s, sans rebond ni effet magnétique ; chaque effet raconte la passerelle Cameroun → Europe, la progression A1 → C1 ou la preuve du terrain ; un effet fort par section au plus. Mouvement réduit : tout visible, sans épinglage, scrub ni Lenis. Téléphone : apparitions légères et fil du hero seulement. Lancé après la validation de l'accueil statique (lot 6), au lot 7 (§6, §10, §12, annexe B).
 
 **À traiter plus tard : état de succès des formulaires.** Aujourd'hui les formulaires préparent un message et n'envoient rien, d'où l'absence de couleur de succès (§3.2). Quand ils enverront vraiment (API Symfony), il faudra un état de succès (« Candidature envoyée », « Message envoyé ») et donc une couleur de succès, avec son tableau de contrastes. À traiter à ce moment-là.
 
@@ -754,6 +806,19 @@ Calcul WCAG 2.x sur fond uni ; ratios tronqués à une décimale. Seuils : 4,5:1
 | filet-nuit #2C4339 | canopee #1B3129 | 1,2:1 | — | décoratif | filet de séparation (sombre) |
 
 ## Annexe B : effets de mouvement actuels et leur sort
+
+> **Lot 7 (décision du 16 novembre 2026 sur le mouvement, §10).** Certains effets reviennent, sous une forme nouvelle décrite au §10 :
+> - 1 : Lenis, sur ordinateur à souris seulement ;
+> - 3 : fondu d'entrée de 0,3 s, sans sortie ;
+> - 19 : parallaxe de 8 % au plus, sur ordinateur, avec le voile qui s'assombrit ;
+> - 20 et 21 : arrivée du hero (titre masqué ligne par ligne, puis phrase et boutons en fondu), en CSS ;
+> - 25 : « Sur le terrain » s'ouvre en plein écran (nouvelle forme ; Mobilité & Langues ne s'agrandit plus) ;
+> - 29 : apparitions groupées des listes, photos et actualités ;
+> - 30 : frise A1 → C1 (Académie, accueil), pas la frise historique ;
+> - 33 : cascade des régions ;
+> - 36 : arc tracé une fois, à l'entrée de la carte.
+>
+> Restent retirés : boutons magnétiques (15), SplitText (22), compteurs (23), galerie épinglée (24), vignette qui grandit (27), apparition des titres hors sections 2 et 3 de l'accueil (9), zoom au survol (12).
 
 Inventaire relevé dans le code le 16 novembre 2026 : 39 effets. Les numéros de ligne renvoient au code au moment du relevé (copie de travail, tokens compris). « Sort » applique le §10 ; les lignes marquées **(ajout)** ne figuraient pas au §10 avant ce relevé ; elles ont été acceptées à la validation.
 
