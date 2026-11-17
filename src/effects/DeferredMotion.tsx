@@ -41,3 +41,4 @@ export const FilScrub = lazy(() => loadEffects().then((m) => ({ default: m.FilSc
 export const ScrollExpandMotion = lazy(() => loadEffects().then((m) => ({ default: m.ScrollExpandMotion })));
 export const MapMotion = lazy(() => loadEffects().then((m) => ({ default: m.MapMotion })));
 export const RevealBatch = lazy(() => loadEffects().then((m) => ({ default: m.RevealBatch })));
+export const PhotoReveal = lazy(() => loadEffects().then((m) => ({ default: m.PhotoReveal })));

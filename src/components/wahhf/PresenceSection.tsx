@@ -34,7 +34,16 @@ const europePlaceholder = (
  *   Les 10 pays d'orientation vers l'Europe (mini-carte Europe + liste 2 colonnes synchronisées + note Albanie).
  * - Chargement différé (lazy loading) des cartes et de leurs données dès que la section approche de l'écran.
  */
-export default function PresenceSection() {
+export default function PresenceSection({
+  hidePending = false,
+}: {
+  /**
+   * Groupe 7.3 (Notre impact) : les lignes provisoires du panneau de région (« Antenne locale : à confirmer (TODO) »,
+   * « Actions dans la région : à renseigner (TODO) ») sont masquées tant que la fondation ne les a pas fournies.
+   * L'accueil garde l'affichage actuel (false par défaut).
+   */
+  hidePending?: boolean;
+} = {}) {
   // Région par défaut : Littoral (Douala)
   const [selectedRegion, setSelectedRegion] = useState<CameroonRegionData>(CAMEROON_REGIONS_LIST[0]);
 
@@ -84,7 +93,9 @@ export default function PresenceSection() {
               Présence terrain au Cameroun
             </h3>
             <p className="text-body text-text-secondary mb-4">
-              Choisissez une région ou son chef-lieu pour afficher nos relais locaux (éducation, santé, agroécologie et orientation).
+              {hidePending
+                ? 'Choisissez une région ou son chef-lieu sur la carte.'
+                : 'Choisissez une région ou son chef-lieu pour afficher nos relais locaux (éducation, santé, agroécologie et orientation).'}
             </p>
           </div>
 
@@ -112,8 +123,13 @@ export default function PresenceSection() {
                 <p className="text-body font-semibold text-text">
                   {selectedRegion.name} ({selectedRegion.capital})
                 </p>
-                <p className="text-meta text-text-secondary">{selectedRegion.antennaTodo}</p>
-                <p className="text-meta text-text-secondary">{selectedRegion.actionsTodo}</p>
+                {[selectedRegion.antennaTodo, selectedRegion.actionsTodo]
+                  .filter((line) => !hidePending || !/TODO/.test(line))
+                  .map((line) => (
+                    <p key={line} className="text-meta text-text-secondary">
+                      {line}
+                    </p>
+                  ))}
               </div>
 
             </div>

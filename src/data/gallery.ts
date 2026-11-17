@@ -22,8 +22,10 @@ export type AlbumId = 'open-day' | 'communaute' | 'terrain';
 export interface GalleryAlbum {
   id: AlbumId;
   title: string;
-  /** Lieu et date affichés sous le titre */
+  /** Lieu et date affichés sous le titre (« lieu · date ») ; marqués TODO tant qu'ils ne sont pas confirmés */
   meta: string;
+  /** Quelques phrases sur l'album (page Galerie, GAL-02), seulement avec des faits établis */
+  story?: string;
 }
 
 interface GalleryBase {
@@ -43,6 +45,8 @@ export interface GalleryPhoto extends GalleryBase {
   kind: 'photo';
   /** Plus grande version (≈ 1 000 px) */
   src: string;
+  /** Plus petite version (480 px) : image d'attente de la visionneuse pendant le chargement (GAL-07) */
+  thumb: string;
   /** Vignettes et visionneuse : 480 / 800 / pleine taille */
   srcSet: string;
 }
@@ -57,7 +61,15 @@ export interface GalleryVideo extends GalleryBase {
 export type GalleryItem = GalleryPhoto | GalleryVideo;
 
 export const GALLERY_ALBUMS: GalleryAlbum[] = [
-  { id: 'open-day', title: 'First Open Day & Boot Camp', meta: 'Hôtel Albatros Premium, Yaoundé · 25 avril 2026' },
+  {
+    id: 'open-day',
+    title: 'First Open Day & Boot Camp',
+    meta: 'Hôtel Albatros Premium, Yaoundé · 25 avril 2026',
+    // Groupe 7.3 (GAL-02) : uniquement ce que montrent les photos et leurs légendes ; le nombre de participants et ce
+    // qu'a produit le Boot Camp sont demandés à la fondation (docs/contenus-a-fournir.md)
+    story:
+      'La première journée portes ouvertes de la fondation, avec les jeunes du Boot Camp et leurs encadrants : une marche dans les rues de Yaoundé, un rassemblement au centre-ville, des prises de parole sur place et en visioconférence, un accompagnement sur ordinateur et des chants sur scène.',
+  },
   { id: 'communaute', title: 'Rencontres de la communauté', meta: 'Lieu et date à confirmer (TODO)' },
   { id: 'terrain', title: 'Sur le terrain', meta: 'Lieux, dates et projets à confirmer (TODO)' },
 ];
@@ -75,6 +87,7 @@ function photo(id: string, album: AlbumId, alt: string, caption: string, focus?:
     w,
     h,
     src: url(`${id}-full.webp`),
+    thumb: url(`${id}-480.webp`) ?? url(`${id}-full.webp`),
     srcSet: [...sizes, `${url(`${id}-full.webp`)} ${w}w`].join(', '),
   };
 }
@@ -135,6 +148,22 @@ export function galleryPhoto(id: string): { src: string; srcSet: string } {
   const item = galleryItem(id);
   if (!item || item.kind !== 'photo') throw new Error(`Photo de galerie inconnue : ${id}`);
   return { src: item.src, srcSet: item.srcSet };
+}
+
+/** Lieu et date d'un album, sans « A · B » (contrat §12) ; null tant qu'ils ne sont pas confirmés (TODO). */
+export function albumPlaceDate(album: GalleryAlbum | undefined): string | null {
+  if (!album || /TODO/.test(album.meta)) return null;
+  return album.meta.replace(' · ', ', le ');
+}
+
+/** « 13 photos et 1 vidéo » (GAL-08) : les mots du visiteur, pas « 14 éléments ». */
+export function countLabel(items: GalleryItem[]): string {
+  const photos = items.filter((it) => it.kind === 'photo').length;
+  const videos = items.length - photos;
+  const parts: string[] = [];
+  if (photos) parts.push(`${photos}\u00a0photo${photos > 1 ? 's' : ''}`);
+  if (videos) parts.push(`${videos}\u00a0vidéo${videos > 1 ? 's' : ''}`);
+  return parts.join(' et ');
 }
 
 export const formatDuration = (s: number) => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, '0')}`;

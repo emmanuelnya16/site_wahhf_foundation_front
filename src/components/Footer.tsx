@@ -4,6 +4,7 @@ import { ArrowUp, Mail, MapPin, Phone } from 'lucide-react';
 import { DOMAINS_DATA, WAHHF_LOGO_URL } from '../services/api';
 import { CONTACT } from '../config/contact';
 import { TRANSPARENCY_DATA_PUBLISHED } from '../config/transparency';
+import { GOVERNANCE_PUBLISHED } from '../config/governance';
 import { scrollToTop } from '../lib/scroll';
 import { DonateButton } from './wahhf/Buttons';
 import { cn } from '../lib/utils';
@@ -90,14 +91,17 @@ export default function Footer() {
                   Notre histoire & mission
                 </Link>
               </li>
-              <li>
-                <Link to="/qui-sommes-nous#gouvernance" className={LINK}>
-                  Équipe & Gouvernance
-                </Link>
-              </li>
+              {/* Groupe 7.3 (QSN-01) : masqué tant qu'aucun nom n'est publié (src/config/governance.ts) */}
+              {GOVERNANCE_PUBLISHED && (
+                <li>
+                  <Link to="/qui-sommes-nous#gouvernance" className={LINK}>
+                    Équipe & Gouvernance
+                  </Link>
+                </li>
+              )}
               <li>
                 <Link to="/notre-impact" className={LINK}>
-                  Notre impact & chiffres
+                  Notre impact
                 </Link>
               </li>
               <li>
