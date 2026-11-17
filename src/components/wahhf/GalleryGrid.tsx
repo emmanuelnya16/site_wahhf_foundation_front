@@ -1,5 +1,4 @@
-import { ComponentType, useRef, useState } from 'react';
-import { flushSync } from 'react-dom';
+import { ComponentType, startTransition, useLayoutEffect, useRef, useState } from 'react';
 import { Play } from 'lucide-react';
 import { formatDuration, GalleryItem } from '../../data/gallery';
 import ChunkErrorBoundary from './ChunkErrorBoundary';
@@ -79,8 +78,25 @@ export default function GalleryGrid({
   // Nom de transition posé sur la photo de la visionneuse pendant l'ouverture partagée
   const [sharedIndex, setSharedIndex] = useState<number | null>(null);
   const openerRef = useRef<HTMLElement | null>(null);
+  // Ouverture partagée : la transition attend que la visionneuse soit affichée (rendu découpé, sans tâche longue)
+  const committedRef = useRef<{ index: number; resolve: () => void } | null>(null);
+  useLayoutEffect(() => {
+    const pending = committedRef.current;
+    if (pending && openIndex === pending.index) {
+      committedRef.current = null;
+      pending.resolve();
+    }
+  }, [openIndex]);
 
   const layout = fill ?? null;
+
+  // Survol ou focus d'une vignette : la visionneuse se télécharge et se monte, fermée. Son premier rendu ne tombe donc
+  // pas dans la transition partagée (processeur ralenti ×4 : plus de tâche longue à l'ouverture).
+  const prepare = () => {
+    loadLightbox()
+      .then((Component) => setLightboxView((current) => current ?? { Component }))
+      .catch(() => {});
+  };
 
   const open = (i: number, button: HTMLButtonElement) => {
     openerRef.current = button;
@@ -94,6 +110,8 @@ export default function GalleryGrid({
           setOpenIndex(i);
           return;
         }
+        // Visionneuse montée (fermée) avant la transition, si le survol ne l'a pas déjà fait
+        setLightboxView((current) => current ?? { Component });
         // La grande photo est demandée avant la transition (0,35 s au plus) : sinon la visionneuse s'ouvrirait sur
         // son image d'attente (la vignette de 480 px)
         const item = items[i];
@@ -104,17 +122,24 @@ export default function GalleryGrid({
           img.src = item.src;
           await Promise.race([img.decode().catch(() => {}), new Promise((r) => setTimeout(r, 350))]);
         }
+        await new Promise((r) => requestAnimationFrame(r));
         const thumb = button.querySelector('img');
         if (thumb) thumb.style.viewTransitionName = SHARED_NAME;
         const root = document.documentElement;
         root.classList.add('vt-galerie');
+        // Le nouvel état est rendu en transition React (découpé en tranches courtes) ; la photographie du nouvel état
+        // attend qu'il soit dans la page (au plus 1 s, ensuite la transition part quand même).
         const transition = doc.startViewTransition!(() => {
           if (thumb) thumb.style.viewTransitionName = '';
-          flushSync(() => {
-            setLightboxView((current) => current ?? { Component });
+          const committed = new Promise<void>((resolve) => {
+            committedRef.current = { index: i, resolve };
+            setTimeout(resolve, 1000);
+          });
+          startTransition(() => {
             setSharedIndex(i);
             setOpenIndex(i);
           });
+          return committed;
         });
         transition.finished.finally(() => {
           root.classList.remove('vt-galerie');
@@ -140,8 +165,8 @@ export default function GalleryGrid({
                 key={item.id}
                 type="button"
                 data-reveal={reveal || undefined}
-                onPointerEnter={() => void loadLightbox().catch(() => {})}
-                onFocus={() => void loadLightbox().catch(() => {})}
+                onPointerEnter={prepare}
+                onFocus={prepare}
                 onClick={(e) => open(i, e.currentTarget)}
                 style={layout?.itemStyle(i)}
                 className={cn(
