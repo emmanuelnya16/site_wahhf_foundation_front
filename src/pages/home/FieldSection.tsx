@@ -65,6 +65,7 @@ export default function FieldSection() {
       {media && (
         <ScrollExpand
           className="mt-10"
+          fit={FIELD_EXPAND.fit}
           media={media}
           caption={
             <>

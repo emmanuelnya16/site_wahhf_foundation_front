@@ -10,4 +10,10 @@ export const FIELD_EXPAND = {
    * public/) pour qu'elle remplace la photo. Elle ne démarre pas en mouvement réduit (la photo sert d'affiche).
    */
   loop: { mp4: null as string | null, webm: null as string | null },
+  /**
+   * Fin de l'ouverture au défilement (décision du 17/11). 'container' : le cadre s'arrête à la largeur du container
+   * (72 rem), rayon 20 px, tant que la photo source fait 986 px (au-delà, elle serait agrandie et floue).
+   * Passer à 'screen' (plein écran) dès que les originaux HD (1 920 px au moins) ou la boucle vidéo sont fournis.
+   */
+  fit: 'container' as 'container' | 'screen',
 };

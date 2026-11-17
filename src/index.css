@@ -665,7 +665,7 @@
     to bottom,
     transparent 0,
     transparent 40%,
-    color-mix(in srgb, var(--color-nuit) 88%, transparent) calc(100% - 10rem),
+    color-mix(in srgb, var(--color-nuit) 88%, transparent) calc(100% - 10rem - var(--expand-y, 0px)),
     color-mix(in srgb, var(--color-nuit) 88%, transparent) 100%
   );
 }
@@ -674,6 +674,12 @@
   left: max(var(--gutter), (100% - var(--container-page)) / 2);
   right: max(var(--gutter), (100% - var(--container-page)) / 2);
   bottom: 2.5rem;
+  /* Cadre arrêté au container (--expand-x, --expand-y posés par ScrollExpandMotion) : la légende reste dedans */
+  &:where([data-expand-fit='container'] *) {
+    left: calc(var(--expand-x, 0px) + 2rem);
+    right: calc(var(--expand-x, 0px) + 2rem);
+    bottom: calc(var(--expand-y, 0px) + 2rem);
+  }
   margin: 0;
   /* En bas à gauche, l'un sous l'autre : à droite, le lien passerait sous la bulle WhatsApp */
   flex-direction: column;
