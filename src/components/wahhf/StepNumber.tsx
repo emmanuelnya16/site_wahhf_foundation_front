@@ -22,11 +22,17 @@ export default function StepNumber({ n, decorative = false, className }: { n: nu
 
 /**
  * Barre de progression (contrat §10 : gardée, retour d'action) : remplissage plein à la couleur de l'action, sans
- * dégradé ; elle avance en 0,3 s (instantané en mouvement réduit). Décorative : la position est annoncée en texte.
+ * dégradé ; elle se remplit en 0,3 s (transform, instantané en mouvement réduit). Décorative par défaut (la position
+ * est écrite à côté) ; avec `label`, c'est une vraie barre de progression pour les lecteurs d'écran (ACAD-04).
  */
-export function ProgressBar({ value, max, onInverse = false, className }: { value: number; max: number; onInverse?: boolean; className?: string }) {
+export function ProgressBar({ value, max, onInverse = false, label, className }: { value: number; max: number; onInverse?: boolean; label?: string; className?: string }) {
   return (
-    <div aria-hidden="true" className={cn('h-2 w-full overflow-hidden rounded-pill', onInverse ? 'bg-border-subtle-on-inverse' : 'bg-border-subtle', className)}>
+    <div
+      {...(label
+        ? { role: 'progressbar', 'aria-label': label, 'aria-valuemin': 0, 'aria-valuemax': max, 'aria-valuenow': value }
+        : { 'aria-hidden': true })}
+      className={cn('h-2 w-full overflow-hidden rounded-pill', onInverse ? 'bg-border-subtle-on-inverse' : 'bg-border-subtle', className)}
+    >
       <div
         className={cn(
           'h-full w-full origin-left transition-transform duration-(--dur-fast) motion-reduce:transition-none',

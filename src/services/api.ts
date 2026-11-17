@@ -90,10 +90,16 @@ export interface CourseSession {
   id: string;
   level: 'A1' | 'A2' | 'B1' | 'B2' | 'C1';
   title: string;
-  format: 'En ligne' | 'Présentiel (Douala — à confirmer)' | 'Présentiel (Yaoundé — à confirmer)';
+  format: 'En ligne' | 'Présentiel à Douala' | 'Présentiel à Yaoundé';
   days: string;
   duration: string;
-  startDate: string;
+  /**
+   * Date de début au format ISO (AAAA-MM-JJ), comparée à la date du jour : une session commencée n'est plus affichée
+   * (audit T-05, groupe 7.1). Formatée à l'affichage (src/lib/sessions.ts).
+   */
+  startsOn: string;
+  /** false tant que la fondation n'a pas confirmé la date : seul le mois est affiché, « à confirmer ». */
+  dateConfirmed: boolean;
   seatsAvailable: number;
   costLabel: 'Gratuit';
 }
@@ -369,77 +375,84 @@ export const COURSE_SESSIONS_DATA: CourseSession[] = [
   {
     id: 'sess-a1-online',
     level: 'A1',
-    title: 'Allemand A1 — Fondations & Communication Quotidienne',
+    title: 'Allemand A1 : fondations et communication quotidienne',
     format: 'En ligne',
     days: 'Lundi, Mercredi, Vendredi (18h00 – 20h00)',
     duration: '12 semaines',
-    startDate: '14 Septembre 2026 (TODO)',
+    startsOn: '2026-09-14',
+    dateConfirmed: false,
     seatsAvailable: 24,
     costLabel: 'Gratuit',
   },
   {
     id: 'sess-a1-dla',
     level: 'A1',
-    title: 'Allemand A1 — Cohorte Présentiel Douala',
-    format: 'Présentiel (Douala — à confirmer)',
+    title: 'Allemand A1 : cohorte en présentiel à Douala',
+    format: 'Présentiel à Douala',
     days: 'Mardi, Jeudi (16h00 – 18h30) & Samedi matin',
     duration: '12 semaines',
-    startDate: '21 Septembre 2026 (TODO)',
+    startsOn: '2026-09-21',
+    dateConfirmed: false,
     seatsAvailable: 18,
     costLabel: 'Gratuit',
   },
   {
     id: 'sess-a2-online',
     level: 'A2',
-    title: 'Allemand A2 — Consolidation & Autonomie Quotidienne',
+    title: 'Allemand A2 : consolidation et autonomie au quotidien',
     format: 'En ligne',
     days: 'Mardi, Jeudi (18h30 – 20h30) & Samedi (10h00 – 12h00)',
     duration: '12 semaines',
-    startDate: '05 Octobre 2026 (TODO)',
+    startsOn: '2026-10-05',
+    dateConfirmed: false,
     seatsAvailable: 20,
     costLabel: 'Gratuit',
   },
   {
     id: 'sess-b1-online',
     level: 'B1',
-    title: 'Allemand B1 — Parcours Études & Formation (Ausbildung)',
+    title: 'Allemand B1 : parcours études et formation (Ausbildung)',
     format: 'En ligne',
     days: 'Lundi, Mercredi, Vendredi (18h30 – 21h00)',
     duration: '14 semaines',
-    startDate: '12 Octobre 2026 (TODO)',
+    startsOn: '2026-10-12',
+    dateConfirmed: false,
     seatsAvailable: 20,
     costLabel: 'Gratuit',
   },
   {
     id: 'sess-b1-yde',
     level: 'B1',
-    title: 'Allemand B1 — Atelier Intensif Yaoundé',
-    format: 'Présentiel (Yaoundé — à confirmer)',
+    title: 'Allemand B1 : atelier intensif à Yaoundé',
+    format: 'Présentiel à Yaoundé',
     days: 'Mercredi, Vendredi (16h00 – 18h30) & Samedi',
     duration: '14 semaines',
-    startDate: '19 Octobre 2026 (TODO)',
+    startsOn: '2026-10-19',
+    dateConfirmed: false,
     seatsAvailable: 15,
     costLabel: 'Gratuit',
   },
   {
     id: 'sess-b2-online',
     level: 'B2',
-    title: 'Allemand B2 — Expression Avancée & Dossiers Techniques',
+    title: 'Allemand B2 : expression avancée et dossiers techniques',
     format: 'En ligne',
     days: 'Mardi, Jeudi (18h30 – 21h00) & Samedi (14h00 – 16h30)',
     duration: '15 semaines',
-    startDate: '02 Novembre 2026 (TODO)',
+    startsOn: '2026-11-02',
+    dateConfirmed: false,
     seatsAvailable: 16,
     costLabel: 'Gratuit',
   },
   {
     id: 'sess-c1-online',
     level: 'C1',
-    title: 'Allemand C1 — Préparation Universitaire & TestDaF',
+    title: 'Allemand C1 : préparation universitaire et TestDaF',
     format: 'En ligne',
     days: 'Lundi, Jeudi (19h00 – 21h30) & Samedi (09h00 – 12h00)',
     duration: '16 semaines',
-    startDate: '11 Janvier 2027 (TODO)',
+    startsOn: '2027-01-11',
+    dateConfirmed: false,
     seatsAvailable: 14,
     costLabel: 'Gratuit',
   },

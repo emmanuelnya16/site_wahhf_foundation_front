@@ -788,9 +788,77 @@
 .hero-fade:focus-within {
   opacity: 1 !important;
 }
+/* Fil tracé jusqu'au niveau affiché (pages de niveau, résultat du test ; Fil.tsx drawTo, lightCurrent) : segment après
+   segment (délai --fil-d), puis le niveau s'allume. Une fois, à l'arrivée ; tout en place en mouvement réduit. */
+@keyframes fil-draw-y {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+@keyframes fil-lit {
+  from { opacity: 0.35; transform: scale(0.5); }
+}
+@keyframes fil-lit-label {
+  from { opacity: 0.35; }
+}
+.fil-draw-to-x {
+  transform-origin: left center;
+  animation: fil-draw 0.45s linear var(--fil-d, 0s) both;
+}
+.fil-draw-to-y {
+  transform-origin: center top;
+  animation: fil-draw-y 0.22s linear var(--fil-d, 0s) both;
+}
+.fil-lit {
+  animation: fil-lit 0.6s var(--ease-power3-out) var(--fil-d, 0s) backwards;
+}
+.fil-lit-label {
+  animation: fil-lit-label 0.6s var(--ease-power2-out) var(--fil-d, 0s) backwards;
+}
+.fil-lit-label:focus-within {
+  opacity: 1 !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .fil-draw-to-x,
+  .fil-draw-to-y,
+  .fil-lit,
+  .fil-lit-label {
+    animation: none !important;
+  }
+}
+
+/* Changement d'étape (Candidater) et de question (test de niveau), groupe 7.1 : fondu et glissement de 16 px en
+   0,3 s, une fois ; le focus passe au titre une fois l'entrée finie (useFocusOnChange afterMs). Rien en mouvement réduit. */
+@keyframes step-enter {
+  from { opacity: 0; transform: translateY(16px); }
+}
+.step-enter {
+  animation: step-enter 0.3s var(--ease-power2-out) backwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .step-enter {
+    animation: none !important;
+  }
+}
+
+/* En-têtes de page (groupe 7.1, PageHeader reveal) : titre en 0,8 s */
+.reveal-08 .line-rise {
+  animation-duration: 0.8s;
+}
+/* Photo d'en-tête découverte du bas vers le haut (Mobilité, groupe 7.1) : ordinateur à souris seulement, une fois.
+   Clip-path toléré ici comme pour « Sur le terrain » (contrat §10) ; ailleurs la photo est simplement en place. */
+@keyframes photo-rise {
+  from { clip-path: inset(100% 0 0 0 round var(--radius-card)); }
+  to { clip-path: inset(0 0 0 0 round var(--radius-card)); }
+}
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .photo-rise {
+    animation: photo-rise 0.9s var(--ease-power3-out) 0.2s backwards;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   .line-rise,
-  .hero-fade {
+  .hero-fade,
+  .photo-rise {
     animation: none !important;
   }
 }

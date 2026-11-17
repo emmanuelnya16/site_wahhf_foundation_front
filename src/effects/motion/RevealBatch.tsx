@@ -2,11 +2,11 @@ import { RefObject } from 'react';
 import { gsap, MQ, ScrollTrigger, useGSAP, GSAP_EASE, DURATION, APPEAR_RISE, APPEAR_START } from '../../lib/gsap';
 
 /**
- * Pages sans apparition (contrat §10) : formulaires, pages légales, page Arnaques, pages historiques.
- * Ailleurs, un formulaire ou un bloc marqué data-no-reveal (test de niveau) n'a pas d'apparition non plus.
+ * Pages sans apparition (contrat §10) : formulaires de contact et de don, pages légales, page Arnaques, pages
+ * historiques. Candidater (groupe 7.1) garde ses listes animées hors du formulaire. Partout, un formulaire ou un bloc
+ * marqué data-no-reveal (test de niveau) n'a pas d'apparition.
  */
 const EXCLUDED = [
-  /^\/candidater\/?$/,
   /^\/contact\/?$/,
   /^\/faire-un-don\/?$/,
   /^\/(mentions-legales|confidentialite|transparence)\/?$/,

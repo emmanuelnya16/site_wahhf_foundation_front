@@ -7,7 +7,10 @@ import { requestScrollRefresh } from '../lib/afterFirstDisplay';
  * (niveau d'allemand, fiche pays, article) partagent une clé : pas de fondu, l'état de la page est conservé.
  */
 export function routeKey(pathname: string): string {
-  if (pathname.startsWith('/academie/') || pathname === '/mobilite-langues/academie') return 'academie';
+  // Pages de niveau (/academie/a1…) : de vraies pages qui ouvrent sur le niveau (NIV-01), distinctes de l'Académie ;
+  // passer d'un niveau à l'autre garde la même page (pas de fondu), qui se remonte sur le nouveau niveau.
+  if (pathname.startsWith('/academie/')) return 'academie-niveau';
+  if (pathname === '/mobilite-langues/academie') return 'academie';
   if (pathname.startsWith('/accompagnement/') || pathname === '/mobilite-langues/accompagnement') return 'accompagnement';
   if (pathname.startsWith('/actualites')) return 'actualites';
   return pathname;
