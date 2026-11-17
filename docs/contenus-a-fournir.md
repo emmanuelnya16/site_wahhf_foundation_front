@@ -290,3 +290,28 @@ Les questions 55 à 57 restent valables : les trois articles d'exemple ne sont p
 
 127. Souhaitez-vous publier un premier article sur le First Open Day & Boot Camp du 25 avril 2026 ? Si oui, envoyez un court texte (ce qui s'est passé, le nombre de participants, la suite) et dites quelles photos utiliser.
 128. Si l'annonce de l'ouverture des candidatures doit revenir, quelles informations y mettre : date limite, date de début des cours, en ligne ou sur place, nombre de places ?
+
+---
+
+## Questions ajoutées par la refonte des pages Accompagnement vers l'Europe, fiches pays et Éviter les arnaques
+
+Sur ces pages, ce qui n'est pas encore confirmé n'est plus affiché : les mentions « à vérifier » des liens officiels, l'adresse de signalement « integrite@wahhf-foundation.org » et la phrase « pays partenaire historique de la fondation » de la fiche Allemagne. Vos réponses permettront d'afficher la date de vérification des fiches et de compléter la page des arnaques.
+
+### Fiches pays
+
+Les questions 34 à 54 (chaque lien officiel est-il le bon ?) restent valables.
+
+129. À quelle date avez-vous vérifié les liens officiels de chaque fiche pays ? Dès que vous nous donnez la date d'un lien, la fiche affiche « Lien vérifié le … » sous ce lien ; quand tous les liens d'une fiche sont datés, elle l'écrit aussi sous son titre.
+130. Qui vérifie les fiches pays dans la fondation (fonction) ? Faut-il l'écrire sur la fiche (« Vérifié le … par … ») ?
+131. L'Allemagne est-elle un « pays partenaire historique » de la fondation ? Si oui, en quoi (partenaires, depuis quand) ? Cette phrase n'est plus affichée.
+132. Souhaitez-vous que la fiche Allemagne parle aussi de la carte d'opportunité (Chancenkarte), de la carte bleue européenne et du compte bloqué demandé pour un visa d'études ? Si oui, pouvez-vous nous envoyer le texte, ou relire celui que nous vous proposerons ?
+133. Pour chaque pays, combien de temps faut-il prévoir pour les démarches, et combien coûtent-elles (visa, traductions, légalisations) ?
+
+### Page « Éviter les arnaques »
+
+La question 33 (l'adresse « integrite@wahhf-foundation.org » existe-t-elle ?) reste valable. En attendant, la page renvoie au numéro WhatsApp et à l'adresse de contact.
+
+134. Le numéro WhatsApp +237 693 12 92 05 et l'adresse contact@wahhf-foundation.org sont-ils les seuls moyens officiels de joindre la fondation ? La page dit : « Tout autre numéro ou adresse qui se présente comme WAHHF Foundation n'est pas le nôtre. » Est-ce exact ?
+135. Qui lit les signalements d'arnaque envoyés sur WhatsApp ou par e-mail, et sous quel délai répondez-vous ?
+136. Comment une personne peut-elle vérifier qu'un interlocuteur fait vraiment partie de WAHHF Foundation ?
+137. Que conseillez-vous à une personne qui a déjà payé un faux intermédiaire (porter plainte, et auprès de qui au Cameroun) ?
