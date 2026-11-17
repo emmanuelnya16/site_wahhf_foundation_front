@@ -15,7 +15,10 @@ const MobilityHub = lazy(() => import('./pages/MobilityHub'));
 const LanguageAcademy = lazy(() => import('./pages/LanguageAcademy'));
 // Pages de niveau : de vraies pages qui ouvrent sur le niveau (NIV-01, groupe 7.1)
 const LanguageLevelPage = lazy(() => import('./pages/LanguageLevelPage'));
-const EuropeSupport = lazy(() => import('./pages/EuropeSupport'));
+// Accompagnement vers l'Europe : un fichier par gabarit (page principale, fiche pays, guide), un morceau de JS chacun
+const AccompagnementPage = lazy(() => import('./pages/accompagnement/AccompagnementPage'));
+const CountryPage = lazy(() => import('./pages/accompagnement/CountryPage'));
+const GuidePage = lazy(() => import('./pages/accompagnement/GuidePage'));
 const ApplyPage = lazy(() => import('./pages/ApplyPage'));
 const DonatePage = lazy(() => import('./pages/DonatePage'));
 // Une page par fichier (src/pages/transversal/), un morceau de JS par page
@@ -75,9 +78,9 @@ function AppRoutes() {
         <Route path="/mobilite-langues" element={<MobilityHub />} />
         <Route path="/mobilite-langues/academie" element={<LanguageAcademy />} />
         <Route path="/academie/:level" element={<LanguageLevelPage />} />
-        <Route path="/mobilite-langues/accompagnement" element={<EuropeSupport />} />
-        <Route path="/accompagnement/pays/:countrySlug" element={<EuropeSupport />} />
-        <Route path="/accompagnement/:topicSlug" element={<EuropeSupport />} />
+        <Route path="/mobilite-langues/accompagnement" element={<AccompagnementPage />} />
+        <Route path="/accompagnement/pays/:countrySlug" element={<CountryPage />} />
+        <Route path="/accompagnement/:topicSlug" element={<GuidePage />} />
         <Route path="/candidater" element={<ApplyPage />} />
 
         {/* PAGES TRANSVERSALES & RGPD */}
