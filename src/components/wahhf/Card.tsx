@@ -34,6 +34,8 @@ export function CardLink({
   return (
     <Link
       to={to}
+      // Apparition au défilement des collections (actualités, pays, guides, albums) : contrat §10, lot 7
+      data-reveal=""
       className={cn(
         'group flex flex-col overflow-hidden rounded-card transition-colors duration-(--dur-fast)',
         surface === 'section' ? 'bg-surface-raised' : 'bg-surface-card',

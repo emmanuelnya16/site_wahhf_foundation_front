@@ -273,6 +273,7 @@ export default function LanguageAcademy() {
       {/* TEST DE NIVEAU EN LIGNE GRATUIT (20 QUESTIONS PROGRESSIVES) */}
       <section
         id="test-niveau"
+        data-no-reveal=""
         className="surface-green py-20 bg-nuit text-creme border-y border-or/30"
       >
         <div className="container-page *:max-w-4xl space-y-10">

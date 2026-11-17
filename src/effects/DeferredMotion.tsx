@@ -40,3 +40,4 @@ export const HeroMotion = lazy(() => loadEffects().then((m) => ({ default: m.Her
 export const FilScrub = lazy(() => loadEffects().then((m) => ({ default: m.FilScrub })));
 export const ScrollExpandMotion = lazy(() => loadEffects().then((m) => ({ default: m.ScrollExpandMotion })));
 export const MapMotion = lazy(() => loadEffects().then((m) => ({ default: m.MapMotion })));
+export const RevealBatch = lazy(() => loadEffects().then((m) => ({ default: m.RevealBatch })));

@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
@@ -7,6 +7,7 @@ import CookieBanner from './wahhf/CookieBanner';
 import ReadingProgress from '../effects/ReadingProgress';
 import { scrollToElement, scrollToHash, scrollToTop } from '../lib/scroll';
 import { afterFirstDisplay, requestScrollRefresh } from '../lib/afterFirstDisplay';
+import { AfterFirstDisplay, RevealBatch } from '../effects/DeferredMotion';
 import { useTranslation } from 'react-i18next';
 
 /** Défilement fluide (Lenis) : ordinateur à souris seulement, jamais en mouvement réduit (contrat §10, lot 7). */
@@ -25,6 +26,7 @@ export default function Layout({ children }: LayoutProps) {
   const isLegacyPage = LEGACY_PATHS.has(pathname);
   // Article d'actualité (/actualites/:slug) : seule page qui garde la barre de lecture
   const isArticlePage = /^\/actualites\/[^/]+\/?$/.test(pathname);
+  const mainRef = useRef<HTMLElement>(null);
 
   // Défilement fluide : Lenis (et GSAP) chargés après le premier affichage, seulement sur ordinateur à souris ;
   // arrêté aussitôt si le visiteur passe en mouvement réduit ou au tactile, relancé s'il en revient.
@@ -102,9 +104,13 @@ export default function Layout({ children }: LayoutProps) {
       {/* Barre de progression de lecture : articles seulement (décision du 16/11), en forêt */}
       {isArticlePage && <ReadingProgress />}
       {!isVkiPage && <Navbar />}
-      <main id="contenu" tabIndex={-1} className={`flex-grow focus:outline-none${isLegacyPage ? ' legacy-fonts' : ''}`}>
+      <main ref={mainRef} id="contenu" tabIndex={-1} className={`flex-grow focus:outline-none${isLegacyPage ? ' legacy-fonts' : ''}`}>
         {children}
       </main>
+      {/* Apparitions groupées des listes, cartes et photos (contrat §10 ; GSAP après le premier affichage) */}
+      <AfterFirstDisplay>
+        <RevealBatch scope={mainRef} pathname={pathname} />
+      </AfterFirstDisplay>
       {!isVkiPage && <Footer />}
       {!isVkiPage && <WhatsAppButton />}
       {!isVkiPage && <CookieBanner />}

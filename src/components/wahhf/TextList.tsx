@@ -44,13 +44,17 @@ type ItemProps = {
   meta?: ReactNode;
   /** Boutons ou liens d'action sous la phrase. */
   actions?: ReactNode;
+  /** Apparition au défilement (contrat §10, lot 7) : oui par défaut ; jamais dans un formulaire ni sur les pages
+   *  sans mouvement (src/effects/motion/RevealBatch.tsx). */
+  reveal?: boolean;
   className?: string;
   children?: ReactNode;
 } & Omit<ComponentPropsWithoutRef<'li'>, 'title' | 'className' | 'children'>;
 
-export function TextListItem({ title, titleAs: Title = 'h3', to, meta, actions, className, children, ...li }: ItemProps) {
+export function TextListItem({ title, titleAs: Title = 'h3', to, meta, actions, reveal = true, className, children, ...li }: ItemProps) {
   return (
     <li
+      data-reveal={reveal || undefined}
       className={cn(
         'border-t py-5 sm:py-6 space-y-2 border-border-subtle group-data-[on-inverse]/list:border-border-subtle-on-inverse',
         className,

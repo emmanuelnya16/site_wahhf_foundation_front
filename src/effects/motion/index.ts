@@ -7,3 +7,4 @@ export { default as HeroMotion } from './HeroMotion';
 export { default as FilScrub } from './FilScrub';
 export { default as ScrollExpandMotion } from './ScrollExpandMotion';
 export { default as MapMotion } from './MapMotion';
+export { default as RevealBatch } from './RevealBatch';
