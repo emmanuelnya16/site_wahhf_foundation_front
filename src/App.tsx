@@ -18,16 +18,14 @@ const LanguageLevelPage = lazy(() => import('./pages/LanguageLevelPage'));
 const EuropeSupport = lazy(() => import('./pages/EuropeSupport'));
 const ApplyPage = lazy(() => import('./pages/ApplyPage'));
 const DonatePage = lazy(() => import('./pages/DonatePage'));
-const transversal = () => import('./pages/TransversalPages');
-const QuiSommesNousPage = lazy(() => transversal().then((m) => ({ default: m.QuiSommesNousPage })));
-const PartenairesPage = lazy(() => transversal().then((m) => ({ default: m.PartenairesPage })));
-const NosActionsPage = lazy(() => transversal().then((m) => ({ default: m.NosActionsPage })));
-const NotreImpactPage = lazy(() => transversal().then((m) => ({ default: m.NotreImpactPage })));
-const ActualitesPage = lazy(() => transversal().then((m) => ({ default: m.ActualitesPage })));
-const AgirPage = lazy(() => transversal().then((m) => ({ default: m.AgirPage })));
-const LegalTransparencyPage = lazy(() =>
-  transversal().then((m) => ({ default: m.LegalTransparencyPage }))
-);
+// Une page par fichier (src/pages/transversal/), un morceau de JS par page
+const QuiSommesNousPage = lazy(() => import('./pages/transversal/QuiSommesNousPage'));
+const PartenairesPage = lazy(() => import('./pages/transversal/PartenairesPage'));
+const NosActionsPage = lazy(() => import('./pages/transversal/NosActionsPage'));
+const NotreImpactPage = lazy(() => import('./pages/transversal/NotreImpactPage'));
+const ActualitesPage = lazy(() => import('./pages/transversal/ActualitesPage'));
+const AgirPage = lazy(() => import('./pages/transversal/AgirPage'));
+const LegalTransparencyPage = lazy(() => import('./pages/transversal/LegalTransparencyPage'));
 
 // Pages existantes conservées intégralement (Règle générale : ne rien supprimer)
 const About = lazy(() => import('./pages/About'));
