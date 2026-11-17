@@ -1,71 +1,86 @@
+import { useTranslation } from 'react-i18next';
 import SEO from '../../components/wahhf/SEO';
+import Section from '../../components/wahhf/Section';
+import SectionHeader from '../../components/wahhf/SectionHeader';
 import PageHeader, { PageTitle, PageIntro } from '../../components/wahhf/PageHeader';
-import { PrimaryButton } from '../../components/wahhf/Buttons';
-import Counter from '../../components/wahhf/Counter';
+import { DonateButton, PrimaryButton } from '../../components/wahhf/Buttons';
 import PresenceSection from '../../components/wahhf/PresenceSection';
 import { TRANSPARENCY_DATA_PUBLISHED } from '../../config/transparency';
 
-/**
- * 4. PAGE /notre-impact
- * Chiffres clés, carte des 10 régions & 10 pays, et frise.
+/*
+ * Notre impact (groupe 7.3 : contrat validé, audit IMP-01, T-11, A11Y-09).
+ * - IMP-01 : la page n'est pas renommée (proposition « Où nous agissons » à valider avec la cliente) ; un bouton
+ *   « Faire un don » la termine.
+ * - Chiffres clés masqués (contrat §7 et §12, T-11) : « 1 250+ (TODO) » est un exemple, « 10 régions couvertes » n'est
+ *   étayé nulle part, et les gros compteurs animés sont un défaut rejeté. Ils sont gardés dans
+ *   EXAMPLE_IMPACT_FIGURES_NOT_VALIDATED ; la section reviendra avec au moins deux résultats datés et sourcés, en texte
+ *   fixe.
+ * - La carte de présence garde ses régions et ses pays ; les lignes provisoires de son panneau sont masquées
+ *   (PresenceSection hidePending). Un H2 la précède (A11Y-09 : plus de H1 suivi d'un H3).
+ * - Mouvement (contrat §10) : en-tête révélé comme le hero ; la carte (cascade des régions, puis l'arc), déjà faite.
+ * - Lien vers /transparence masqué tant qu'aucune donnée n'y est publiée (TRA-01, groupe 7.2).
  */
+
+/** Chiffres d'exemple de l'ancienne page : jamais affichés (« 1 250+ » est marqué TODO, « 10 régions » non étayé). */
+export const EXAMPLE_IMPACT_FIGURES_NOT_VALIDATED = [
+  { end: 1250, suffix: '+', label: 'Jeunes et familles accompagnés (TODO)' },
+  { end: 6, suffix: '', label: 'Domaines d’action structurés' },
+  { end: 10, suffix: '', label: 'Régions du Cameroun couvertes' },
+  { end: 10, suffix: '', label: 'Pays européens documentés gratuitement' },
+];
+
 export function NotreImpactPage() {
+  const { t } = useTranslation();
   return (
     <>
       <SEO
-        title="Notre impact — Résultats, présence dans 10 régions & transparence"
-        description="Mesurez l'impact des programmes éducatifs, sanitaires et linguistiques de WAHHF Foundation au Cameroun et vers l'Europe."
+        title="Notre impact — Présence au Cameroun et orientation vers 10 pays européens"
+        description="Où agit WAHHF Foundation : basée à Yaoundé et Douala, au Cameroun, elle informe les jeunes sur les études, la formation et le travail dans 10 pays européens."
       />
 
-      <PageHeader>
-        <PageTitle>
-          Un impact concret, mesuré avec humilité et transparence
-        </PageTitle>
+      <PageHeader reveal>
+        <PageTitle>Un impact concret, mesuré avec humilité et transparence</PageTitle>
         <PageIntro>
-          Chiffres clés d’accompagnement (marqués TODO à consolider), couverture des 10 régions du Cameroun et passerelles vers 10 pays européens.
+          Où la fondation est présente au Cameroun et les 10 pays européens sur lesquels elle informe les jeunes. Les
+          résultats chiffrés seront publiés ici quand ils seront datés et vérifiés.
         </PageIntro>
       </PageHeader>
 
-      <section className="container-page section-space space-y-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[
-            { end: 1250, suffix: '+', label: 'Jeunes et familles accompagnés (TODO)' },
-            { end: 6, suffix: '', label: 'Domaines d’action structurés' },
-            { end: 10, suffix: '', label: 'Régions du Cameroun couvertes' },
-            { end: 10, suffix: '', label: 'Pays européens documentés gratuitement' },
-          ].map((item, i) => (
-            <div key={i} className="border-t border-border-subtle pt-5 space-y-2">
-              <p className="text-page-title text-accent tabular-nums">
-                <Counter end={item.end} suffix={item.suffix} />
-              </p>
-              <p className="text-body text-text">{item.label}</p>
+      {/* Carte de présence : régions du Cameroun et pays européens, sans lignes provisoires */}
+      <Section>
+        <div className="container-page space-y-10">
+          <SectionHeader title={t('home.presence.title')} subtitle={t('home.presence.subtitle')} />
+          <PresenceSection hidePending />
+        </div>
+      </Section>
+
+      {/* Lien vers /transparence : masqué tant qu'aucune donnée n'y est publiée (TRA-01, groupe 7.2) */}
+      {TRANSPARENCY_DATA_PUBLISHED && (
+        <Section tone="sauge">
+          <div className="container-page">
+            <div className="max-w-[65ch] space-y-5">
+              <SectionHeader
+                title="Consulter nos engagements de transparence financière"
+                subtitle="Découvrez comment les ressources du groupe IROKO et les dons sont affectés aux missions sociales."
+              />
+              <PrimaryButton to="/transparence">Voir la page Transparence</PrimaryButton>
             </div>
-          ))}
-        </div>
-
-        <PresenceSection />
-
-        {/* Lien vers /transparence : masqué tant qu'aucune donnée n'y est publiée (TRA-01, groupe 7.2) */}
-        {TRANSPARENCY_DATA_PUBLISHED && (
-        <div className="surface-green rounded-card bg-nuit text-text-on-inverse p-8 sm:p-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div className="space-y-2">
-            <h2 className="text-section-title text-text-on-inverse">
-              Consulter nos engagements de transparence financière
-            </h2>
-            <p className="text-body text-text-secondary-on-inverse">
-              Découvrez comment les ressources du groupe IROKO et les dons sont affectés aux missions sociales.
-            </p>
           </div>
-          <PrimaryButton
-            to="/transparence"
-            onInverse
-            className="shrink-0"
-          >
-            Voir la page Transparence
-          </PrimaryButton>
+        </Section>
+      )}
+
+      {/* FIN DE PAGE : le don (IMP-01), sur le fond de la page, sans carte nuit au-dessus du footer */}
+      <Section tone={TRANSPARENCY_DATA_PUBLISHED ? 'brume' : 'sauge'}>
+        <div className="container-page">
+          <div className="max-w-[65ch] space-y-6">
+            <SectionHeader
+              title="Soutenir nos actions"
+              subtitle="Votre don finance des cours d’allemand et nos actions au Cameroun. Vous pouvez choisir le domaine qu’il soutient."
+            />
+            <DonateButton size="lg" />
+          </div>
         </div>
-        )}
-      </section>
+      </Section>
     </>
   );
 }
