@@ -1,9 +1,16 @@
 import { Link } from 'react-router-dom';
+import { AlertTriangle } from 'lucide-react';
 import { EUROPE_SUPPORTED_COUNTRIES } from '../../data/countries';
+import { cn } from '../../lib/utils';
 
 interface CountryListProps {
   activeCountrySlug: string | null;
   onHoverCountry: (slug: string | null) => void;
+  /**
+   * Groupe 7.4 (page Accompagnement) : « Hors UE » en couleur d'alerte (ambre, avec le triangle), comme le badge des
+   * fiches pays. Par défaut (accueil, Notre impact) : encre douce, inchangé.
+   */
+  nonEuWarning?: boolean;
 }
 
 /**
@@ -15,7 +22,7 @@ interface CountryListProps {
  * dans les deux thèmes jusqu'à l'étape de l'accueil. Elle garde donc des couleurs fixes de la palette claire (encre,
  * encre douce, filet, forêt) au lieu des tokens sémantiques, qui passeraient en clair sur blanc en thème sombre.
  */
-export default function CountryList({ activeCountrySlug, onHoverCountry }: CountryListProps) {
+export default function CountryList({ activeCountrySlug, onHoverCountry, nonEuWarning = false }: CountryListProps) {
   return (
     <ul className="grid grid-cols-2 gap-x-6">
       {EUROPE_SUPPORTED_COUNTRIES.map((country) => {
@@ -24,7 +31,7 @@ export default function CountryList({ activeCountrySlug, onHoverCountry }: Count
           <li key={country.slug} className="border-t border-border-subtle">
             <Link
               to={`/accompagnement/pays/${country.slug}`}
-              aria-label={`${country.nameFr}${!country.isEU ? ', Hors Union européenne' : ''} — Voir la fiche`}
+              aria-label={`${country.name}${!country.isEU ? ', Hors Union européenne' : ''} — Voir la fiche`}
               onMouseEnter={() => onHoverCountry(country.slug)}
               onMouseLeave={() => onHoverCountry(null)}
               onFocus={() => onHoverCountry(country.slug)}
@@ -36,8 +43,16 @@ export default function CountryList({ activeCountrySlug, onHoverCountry }: Count
               <span aria-hidden="true" className="w-7 shrink-0 text-meta text-text-secondary tabular-nums">
                 {country.code}
               </span>
-              <span className="text-body min-w-0">{country.nameFr}</span>
-              {!country.isEU && <span className="text-meta text-text-secondary">Hors UE</span>}
+              {/* Nom et « Hors UE » : le repère passe d'un bloc sous le nom quand la colonne est étroite (390 px) */}
+              <span className="flex min-w-0 flex-wrap items-center gap-x-3">
+                <span className="text-body">{country.name}</span>
+                {!country.isEU && (
+                  <span className={cn('inline-flex items-center gap-1 whitespace-nowrap text-meta', nonEuWarning ? 'font-semibold text-warning' : 'text-text-secondary')}>
+                    {nonEuWarning && <AlertTriangle aria-hidden="true" className="w-4 h-4 shrink-0" />}
+                    Hors UE
+                  </span>
+                )}
+              </span>
             </Link>
           </li>
         );

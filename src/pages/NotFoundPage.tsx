@@ -25,10 +25,11 @@ export function NotFoundLinks({ heading, links }: { heading: string; links: Arra
   );
 }
 
-/** Les 10 pays accompagnés : le cas le plus fréquent d'un lien mal copié depuis WhatsApp. */
+/** Les 10 pays accompagnés : le cas le plus fréquent d'un lien mal copié depuis WhatsApp. Sans drapeau emoji, qui
+ *  s'affiche en lettres sous Windows et se lit « drapeau Allemagne Allemagne » (audit T-22, groupe 7.4). */
 export const COUNTRY_LINKS = COUNTRIES_DATA.map((c) => ({
   to: `/accompagnement/pays/${c.slug}`,
-  label: `${c.flag} ${c.name}${c.isEU ? '' : ' (hors Union européenne)'}`,
+  label: `${c.name}${c.isEU ? '' : ' (hors Union européenne)'}`,
 }));
 
 /**

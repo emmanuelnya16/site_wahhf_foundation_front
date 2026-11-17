@@ -705,8 +705,13 @@
     transform: none !important;
   }
   [data-arc-mask],
-  [data-expand-media] {
+  [data-expand-media],
+  [data-fil-steps-seg] {
     transform: none !important;
+  }
+  [data-fil-steps-dot],
+  [data-seq] > li {
+    opacity: 1 !important;
   }
   .expand-frame,
   .photo-rise {
@@ -715,6 +720,8 @@
   .step-enter,
   .crossfade-in,
   .arrive-rise,
+  .arc-redraw,
+  .seq-play > li,
   .line-rise,
   .hero-fade,
   .fil-draw-to-x,
@@ -918,6 +925,49 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .arrive-rise {
+    animation: none !important;
+  }
+}
+
+/* Mini-carte de la page Accompagnement (groupe 7.4, EuropeMiniMap redrawArc) : l'arc se trace quand la carte entre à
+   l'écran (1,2 s), puis se retrace à chaque changement de pays (0,8 s), power3.inOut : le masque circulaire centré sur
+   le départ grandit (transform seulement). Ordinateur à souris seulement ; ailleurs et en mouvement réduit, l'arc est
+   en place et change de pays d'un coup. */
+@keyframes arc-redraw {
+  from { transform: scale(0); }
+}
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .arc-wait {
+    transform: scale(0);
+  }
+  .arc-redraw {
+    animation: arc-redraw 0.8s var(--ease-power3-inout) backwards;
+  }
+  .arc-redraw[data-first] {
+    animation-duration: 1.2s;
+  }
+}
+
+/* Check-list « 5 signes d'arnaque » (groupe 7.4, useSequentialFade) : sobre, les signes apparaissent l'un après
+   l'autre, en fondu seul (0,6 s, power2.out, 0,08 s de décalage, --seq-i), une seule fois : à l'arrivée si la liste est
+   déjà à l'écran, sinon quand son haut atteint 85 % de l'écran. Rien n'est lié à la position du défilement (ni scrub,
+   ni épinglage). data-seq="armed" : la liste attend, sous l'écran ; un signe qui reçoit le focus s'affiche aussitôt.
+   Mouvement réduit : tout est en place. */
+@keyframes seq-fade {
+  from { opacity: 0; }
+}
+[data-seq='armed'] > li {
+  opacity: 0;
+}
+.seq-play > li {
+  animation: seq-fade 0.6s var(--ease-power2-out) calc(var(--seq-start, 0s) + var(--seq-i, 0) * 0.08s) backwards;
+}
+[data-seq] > li:focus-within {
+  opacity: 1 !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-seq] > li {
+    opacity: 1 !important;
     animation: none !important;
   }
 }

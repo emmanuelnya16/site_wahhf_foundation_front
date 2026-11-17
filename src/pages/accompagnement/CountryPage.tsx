@@ -170,7 +170,7 @@ export default function CountryPage() {
                       <ArrowUpRight aria-hidden="true" className="w-4 h-4 shrink-0" />
                     </a>
                     <p className="text-meta text-text-secondary-on-inverse break-all">
-                      {lnk.url} ({lnk.todoNote})
+                      {lnk.url}
                     </p>
                   </li>
                 ))}
