@@ -1,22 +1,236 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import SEO from '../../components/wahhf/SEO';
 import SectionHeader from '../../components/wahhf/SectionHeader';
-import { TextList, TextListItem } from '../../components/wahhf/TextList';
+import { TextList, TextListItem, TEXT_LINK_CLASS } from '../../components/wahhf/TextList';
 import StepNumber from '../../components/wahhf/StepNumber';
 import Fil from '../../components/wahhf/Fil';
-import PageHeader, { PageMeta, PageTitle, PageIntro, PageActions } from '../../components/wahhf/PageHeader';
+import PageHeader, { PageBreadcrumb, PageTitle, PageIntro, PageActions } from '../../components/wahhf/PageHeader';
 import { PrimaryButton, SecondaryButton } from '../../components/wahhf/Buttons';
 import DisclaimerBanner from '../../components/wahhf/DisclaimerBanner';
 import InfoBox from '../../components/wahhf/InfoBox';
-import { COUNTRIES_DATA } from '../../services/api';
+import Section from '../../components/wahhf/Section';
+import { CountryCode, EuStatus } from '../../components/wahhf/CountryBadges';
+import { COUNTRIES_DATA, CountryGuide } from '../../services/api';
+import { cn } from '../../lib/utils';
 import NotFoundPage, { NotFoundLinks, COUNTRY_LINKS } from '../NotFoundPage';
 
-/** Fiche pays (/accompagnement/pays/:countrySlug), gabarit des 10 fiches (venu de EuropeSupport.tsx, vue 1). */
+/*
+ * Fiche pays (/accompagnement/pays/:countrySlug), gabarit des 10 fiches, groupe 7.4 : contrat validé (§6 : le fil en
+ * tête de fiche), audit PAYS-01, PAYS-03, PAYS-04, PAYS-05, T-22, ETA-06, A11Y-11.
+ * - En-tête révélé comme le hero : code du pays (plus de drapeau emoji, T-22) et statut UE (« Hors Union européenne »
+ *   en ambre), titre « S'orienter vers l'Allemagne » (PAYS-03 : l'article vient des données), puis le fil
+ *   Cameroun → pays, trait droit qui se dessine une fois, puis la mention « Liens officiels vérifiés le … » en fondu,
+ *   seulement quand la fondation a donné la date de chaque lien (PAYS-01) ; sinon rien.
+ * - L'avertissement anti-arnaque (et la précision juridique d'un pays hors UE) juste sous le titre.
+ * - Les trois voies ; puis, sur sauge, les grandes étapes et les sites officiels côte à côte, alignés en haut (PAYS-04),
+ *   les sites en lignes de liens (plus de carte nuit), sans aucune note « TODO » ; « Lien vérifié le … » sous un lien
+ *   quand sa date est fournie ; la navigation vers les autres fiches.
+ * - Une seule action en fin de page, « Être accompagné pour partir en Allemagne », sans carte nuit.
+ * Adresse en majuscules : redirection vers l'adresse en minuscules ; pays inconnu : page « introuvable » (ETA-06).
+ */
+
+const NB = ' ';
+const DAY = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+/** « 12 novembre 2026 » (date ISO AAAA-MM-JJ) */
+const formatDay = (iso: string) => DAY.format(new Date(`${iso}T00:00:00Z`));
+
+/** Fin de l'en-tête : le fil (fondu dès 0,45 s, trait dessiné de 0,75 à 1,95 s), puis la mention de vérification. */
+const VERIFIED_DELAY = '[--hero-fade-delay:1.95s]';
+
+function CountryFiche({ country }: { country: CountryGuide }) {
+  const links = country.officialLinks;
+  // Toutes les dates fournies : la plus ancienne vaut pour la fiche ; sinon, aucune mention dans l'en-tête
+  const allVerified = links.length > 0 && links.every((l) => l.verifiedOn);
+  const oldest = allVerified ? links.map((l) => l.verifiedOn as string).sort()[0] : undefined;
+  const applyTo = `/candidater?souhait=accompagnement_europe&pays=${country.slug}`;
+  const actionLabel = `Être accompagné pour partir ${country.inside}`;
+
+  return (
+    <>
+      <SEO
+        title={`${country.name} — Fiche d'orientation gratuite vers l'Europe`}
+        description={`Information gratuite sur les études, la formation et le travail ${country.inside}, par WAHHF Foundation.`}
+        canonical={`/accompagnement/pays/${country.slug}`}
+      />
+
+      <PageHeader
+        reveal
+        notice={
+          <div className="space-y-4">
+            <DisclaimerBanner />
+            {/* Mention explicite obligatoire si le pays n'est pas membre de l'UE (Albanie) */}
+            {!country.isEU && country.euNote && (
+              <InfoBox tone="warning" title={`Précision juridique importante concernant ${country.towards.replace(/^vers /, '')} (État non membre de l’UE)`}>
+                <p>{country.euNote}</p>
+              </InfoBox>
+            )}
+          </div>
+        }
+      >
+        <PageBreadcrumb
+          items={[
+            { label: 'Mobilité & Langues', to: '/mobilite-langues' },
+            { label: 'Accompagnement vers l’Europe', to: '/mobilite-langues/accompagnement' },
+            { label: country.name },
+          ]}
+        />
+
+        <div className="hero-fade [--hero-fade-delay:0.3s] flex flex-wrap items-center gap-x-3 gap-y-2">
+          <CountryCode code={country.code} />
+          <EuStatus isEU={country.isEU} />
+        </div>
+
+        <PageTitle>{`S’orienter ${country.towards}`}</PageTitle>
+
+        <p className="hero-fade [--hero-fade-delay:0.4s] text-meta text-text-secondary">
+          Langues{NB}: {country.languages.join(', ')}
+        </p>
+
+        {/* Le fil Cameroun → pays (contrat §6) : trait droit qui se dessine une fois, à l'arrivée, après le titre */}
+        <div className="hero-fade [--hero-fade-delay:0.45s]">
+          <Fil
+            start={{ id: 'cameroun', label: 'Cameroun' }}
+            end={{ id: country.slug, label: country.name }}
+            drawOnce
+            className="max-w-[65ch] [--fil-draw-delay:0.75s]"
+          />
+        </div>
+        {oldest && (
+          <p className={cn('hero-fade text-meta text-text-secondary', VERIFIED_DELAY)}>Liens officiels vérifiés le {formatDay(oldest)}</p>
+        )}
+
+        <PageIntro>{country.summary}</PageIntro>
+
+        <PageActions>
+          <PrimaryButton to={applyTo}>{actionLabel}</PrimaryButton>
+          <SecondaryButton to="/mobilite-langues/accompagnement#pays">Voir les 10 pays accompagnés</SecondaryButton>
+        </PageActions>
+      </PageHeader>
+
+      {/* Les trois voies : études, formation, travail */}
+      <Section>
+        <div className="container-page space-y-10">
+          <SectionHeader
+            title="Les trois grandes voies de mobilité réglementaire"
+            subtitle="Aperçu informatif. Vérifiez toujours les critères à jour sur les portails officiels ci-dessous."
+          />
+          {/* break-words : « Fachkräfteeinwanderungsgesetz » ne déborde plus de sa colonne (RESP-04) */}
+          <TextList columns={3} className="break-words">
+            {[
+              { title: 'Études supérieures', text: country.pathways.studies },
+              { title: 'Formation professionnelle', text: country.pathways.training },
+              { title: 'Travail et mobilité qualifiée', text: country.pathways.work },
+            ].map((p) => (
+              <TextListItem key={p.title} title={p.title}>
+                <p>{p.text}</p>
+              </TextListItem>
+            ))}
+          </TextList>
+        </div>
+      </Section>
+
+      {/* Grandes étapes et sites officiels, alignés en haut (PAYS-04) ; puis les autres fiches */}
+      <Section tone="sauge">
+        <div className="container-page space-y-14">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-start">
+            <div className="lg:col-span-7 space-y-8">
+              <SectionHeader title={`Les grandes étapes pour préparer votre projet ${country.towards}`} />
+              <ol className="space-y-5 max-w-[65ch]">
+                {country.steps.map((st, i) => (
+                  <li key={st} data-reveal="" className="flex items-start gap-4">
+                    <StepNumber n={i + 1} />
+                    <span className="pt-1 text-body text-text">{st}</span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+
+            <div className="lg:col-span-5 space-y-6">
+              <SectionHeader
+                title="Les sites officiels"
+                subtitle="Ne vous fiez jamais à des pages non officielles. Consultez directement les portails institutionnels :"
+              />
+              {/* Lignes de liens (contrat §8), plus de carte nuit ; aucune note « à vérifier » (PAYS-01) */}
+              <ul>
+                {links.map((lnk) => (
+                  <li key={lnk.url} data-reveal="" className="border-t border-border-subtle py-3 space-y-1">
+                    <a
+                      href={lnk.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex min-h-11 items-center gap-2 text-body font-semibold text-link underline underline-offset-4 decoration-1 hover:decoration-2"
+                    >
+                      <span>{lnk.label}</span>
+                      <span className="sr-only"> (nouvel onglet)</span>
+                      <ArrowUpRight aria-hidden="true" className="w-4 h-4 shrink-0" />
+                    </a>
+                    <p className="text-meta text-text-secondary break-all">{lnk.url}</p>
+                    {lnk.verifiedOn && <p className="text-meta text-text-secondary">Lien vérifié le {formatDay(lnk.verifiedOn)}</p>}
+                  </li>
+                ))}
+              </ul>
+              <Link to="/accompagnement/eviter-les-arnaques" className={TEXT_LINK_CLASS}>
+                Lire notre guide de vigilance contre les fausses offres
+              </Link>
+            </div>
+          </div>
+
+          {/* Navigation entre les 10 fiches : code (masqué aux lecteurs d'écran) et nom ; fiche affichée en aria-current */}
+          <nav aria-labelledby="autres-pays" className="pt-8 border-t border-border-subtle space-y-4">
+            <p id="autres-pays" className="text-body font-semibold text-text">
+              Consulter une autre fiche parmi les 10 pays accompagnés
+            </p>
+            <ul className="flex flex-wrap gap-2">
+              {COUNTRIES_DATA.map((c) => {
+                const current = c.slug === country.slug;
+                return (
+                  <li key={c.slug}>
+                    <Link
+                      to={`/accompagnement/pays/${c.slug}`}
+                      aria-current={current ? 'page' : undefined}
+                      className={cn(
+                        'inline-flex min-h-11 items-center gap-2 rounded-pill border-[1.5px] px-4 text-meta transition-colors duration-(--dur-fast)',
+                        current
+                          ? 'border-action bg-action text-on-action font-semibold'
+                          : 'border-border-input text-text hover:border-action hover:text-link',
+                      )}
+                    >
+                      <span aria-hidden="true" className="tabular-nums opacity-80">
+                        {c.code}
+                      </span>
+                      {c.name}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+        </div>
+      </Section>
+
+      {/* Une seule action en fin de page, sur le fond de la page, sans carte nuit au-dessus du footer */}
+      <Section>
+        <div className="container-page">
+          <div className="max-w-[65ch] space-y-5">
+            <SectionHeader
+              title="Être accompagné"
+              subtitle="Un seul formulaire pour l’orientation vers l’Europe et les cours d’allemand. Aucun document d’identité ni paiement ne vous est demandé."
+            />
+            <PrimaryButton to={applyTo} size="lg">
+              {actionLabel}
+            </PrimaryButton>
+          </div>
+        </div>
+      </Section>
+    </>
+  );
+}
+
 export default function CountryPage() {
   const { countrySlug = '' } = useParams<{ countrySlug?: string }>();
-
   const country = COUNTRIES_DATA.find((c) => c.slug === countrySlug.toLowerCase());
+
   // Pays inconnu : on le dit, au lieu d'afficher la fiche d'un autre pays
   if (!country) {
     return (
@@ -28,188 +242,8 @@ export default function CountryPage() {
       </NotFoundPage>
     );
   }
-
-  return (
-    <>
-      <SEO
-        title={`${country.name} — Fiche d'orientation gratuite vers l'Europe`}
-        description={`Information vérifiée et gratuite sur les études, la formation et le travail en ${country.name} par WAHHF Foundation.`}
-      />
-
-      <PageHeader>
-        <PageMeta>
-          <Link to="/mobilite-langues">
-            Mobilité & Langues
-          </Link>
-          <span>/</span>
-          <Link to="/mobilite-langues/accompagnement">
-            Accompagnement Europe
-          </Link>
-          <span>/</span>
-          <span>{country.name}</span>
-        </PageMeta>
-
-        <div className="flex flex-wrap items-center gap-4">
-          <span className="text-5xl leading-none" aria-hidden="true">
-            {country.flag}
-          </span>
-          <div>
-            <div className="flex flex-wrap items-center gap-2.5">
-              <PageTitle>
-                S’orienter vers : {country.name}
-              </PageTitle>
-              <span className="px-3 py-1 rounded-pill border border-border-input text-meta text-text">
-                {country.isEU
-                  ? 'Membre de l’Union européenne (UE)'
-                  : 'Hors Union européenne (Pays candidat)'}
-              </span>
-            </div>
-            <p className="text-meta text-text-secondary mt-2">
-              Langues parlées / d’études : {country.languages.join(' · ')}
-            </p>
-          </div>
-        </div>
-
-        {/* Le fil Cameroun → pays se dessine une fois, à l'arrivée (CSS, contrat §10, lot 7) ; tracé en mouvement réduit */}
-        <Fil start={{ id: 'cameroun', label: 'Cameroun' }} end={{ id: country.slug, label: country.name }} drawOnce className="max-w-[65ch]" />
-        <PageIntro>
-          {country.summary}
-        </PageIntro>
-
-        <PageActions>
-          <PrimaryButton
-            to={`/candidater?souhait=accompagnement_europe&pays=${country.slug}`}
-          >
-            Être accompagné gratuitement pour : {country.name}
-          </PrimaryButton>
-          <SecondaryButton to="/mobilite-langues/accompagnement">
-            Voir les 10 pays accompagnés
-          </SecondaryButton>
-        </PageActions>
-      </PageHeader>
-
-      {/* BLOC D'AVERTISSEMENT STANDARD OBLIGATOIRE */}
-      <section className="container-page space-y-4">
-        <DisclaimerBanner />
-
-        {/* Mention explicite obligatoire si le pays n'est pas membre de l'UE (Albanie) */}
-        {!country.isEU && country.euNote && (
-          <InfoBox tone="warning" title="Précision juridique importante concernant l’Albanie (État non membre de l’UE)">
-            <p>{country.euNote}</p>
-          </InfoBox>
-        )}
-      </section>
-
-      {/* Voies possibles : Études, Formation, Travail */}
-      <section className="container-page section-space space-y-12">
-        <SectionHeader
-          title="Les trois grandes voies de mobilité réglementaire"
-          subtitle="Aperçu informatif et gratuit. Vérifiez systématiquement les critères à jour sur les portails officiels ci-dessous."
-        />
-
-        <TextList columns={3}>
-          {[
-            {
-              num: '01',
-              title: 'Études supérieures',
-              text: country.pathways.studies,
-            },
-            {
-              num: '02',
-              title: 'Formation professionnelle',
-              text: country.pathways.training,
-            },
-            {
-              num: '03',
-              title: 'Travail & mobilité qualifiée',
-              text: country.pathways.work,
-            },
-          ].map((p) => (
-            <TextListItem key={p.num} title={p.title}>
-              <p>{p.text}</p>
-            </TextListItem>
-          ))}
-        </TextList>
-
-        {/* Grandes étapes & Liens officiels */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-6">
-          <div className="lg:col-span-7 space-y-5">
-            <h3 className="text-body font-semibold text-text">
-              Les grandes étapes pour préparer votre projet vers : {country.name}
-            </h3>
-            <ol className="space-y-4">
-              {country.steps.map((st, i) => (
-                <li key={st} className="flex items-start gap-4">
-                  <StepNumber n={i + 1} />
-                  <span className="pt-1 text-body text-text">{st}</span>
-                </li>
-              ))}
-            </ol>
-          </div>
-
-          <div className="surface-green lg:col-span-5 rounded-card bg-nuit text-text-on-inverse p-7 sm:p-8 space-y-5 flex flex-col justify-between">
-            <div className="space-y-4">
-              <h3 className="text-body font-semibold text-text-on-inverse">
-                Liens vers les sites officiels ({country.name})
-              </h3>
-              <p className="text-meta text-text-secondary-on-inverse">
-                Ne vous fiez jamais à des pages non officielles. Consultez directement les portails institutionnels :
-              </p>
-
-              <ul className="pt-2">
-                {country.officialLinks.map((lnk) => (
-                  <li key={lnk.url} className="border-t border-border-subtle-on-inverse py-3">
-                    <a
-                      href={lnk.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex min-h-11 items-center gap-2 text-body font-semibold text-link-on-inverse underline underline-offset-4 decoration-1 hover:decoration-2"
-                    >
-                      {lnk.label}
-                      <span className="sr-only"> (nouvel onglet)</span>
-                      <ArrowUpRight aria-hidden="true" className="w-4 h-4 shrink-0" />
-                    </a>
-                    <p className="text-meta text-text-secondary-on-inverse break-all">
-                      {lnk.url}
-                    </p>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="pt-4">
-              <Link
-                to="/accompagnement/eviter-les-arnaques"
-                className="inline-flex min-h-11 items-center text-body text-link-on-inverse underline underline-offset-4"
-              >
-                Lire notre guide de vigilance contre les fausses offres
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        {/* Navigation rapide entre les 10 pays */}
-        <div className="pt-8 border-t border-border-subtle space-y-4">
-          <p className="text-meta text-text-secondary">
-            Consulter une autre fiche parmi les 10 pays accompagnés :
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {COUNTRIES_DATA.map((c) => (
-              <Link
-                key={c.slug}
-                to={`/accompagnement/pays/${c.slug}`}
-                className={`px-3.5 py-2 rounded-pill text-xs font-medium transition-colors ${
-                  c.slug === country.slug
-                    ? 'bg-action text-or font-semibold'
-                    : 'bg-surface-raised border border-nuit/15 text-text hover:border-or'
-                }`}
-              >
-                {c.flag} {c.name}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-    </>
-  );
+  // Une seule adresse par pays (ETA-06)
+  if (countrySlug !== country.slug) return <Navigate replace to={`/accompagnement/pays/${country.slug}`} />;
+  // Passer d'une fiche à l'autre remonte la page : l'en-tête et le fil rejouent leur arrivée
+  return <CountryFiche key={country.slug} country={country} />;
 }
