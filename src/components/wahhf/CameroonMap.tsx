@@ -16,7 +16,8 @@ const H = 560;
 
 const REGION_BY_ISO = new Map(CAMEROON_REGIONS_LIST.map((r) => [r.iso, r]));
 
-/** Cascade d'apparition des régions : retirée (contrat §10, annexe B n° 33 ; lot 6). */
+/** Cascade d'apparition des régions par Motion : retirée au lot 6. Lot 7 (contrat §10, moment 5) : la cascade revient,
+ *  jouée par GSAP (src/effects/motion/MapMotion.tsx, qui lit les attributs data-cascade). Ce code reste désactivé. */
 const CASCADE_ENABLED = false;
 
 /** Apparition en cascade : de la côte (sud) vers le nord, selon la latitude des chefs-lieux. */

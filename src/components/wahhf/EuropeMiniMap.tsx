@@ -1,4 +1,4 @@
-import { FocusEvent, KeyboardEvent, use, useMemo, useRef, useState } from 'react';
+import { FocusEvent, KeyboardEvent, use, useId, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ComposableMap, Marker } from 'react-simple-maps';
 import { geoAzimuthalEqualArea, geoPath } from 'd3-geo';
@@ -42,6 +42,8 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
   const boxRef = useRef<HTMLDivElement>(null);
   const size = useElementSize(boxRef);
   const [focusSlug, setFocusSlug] = useState<string | null>(null);
+  // Masque de l'arc (contrat §10, moment 5) : identifiant sans caractères spéciaux pour url(#…)
+  const arcMaskId = `arc-trace-${useId().replace(/[^a-zA-Z0-9_-]/g, '')}`;
 
   // Cible de l'arc : le pays survolé ou sélectionné ; l'arc reste sur le dernier pays visé (Allemagne au départ)
   const [arcSlug, setArcSlug] = useState(EUROPE_SUPPORTED_COUNTRIES[0].slug);
@@ -180,10 +182,24 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
           })}
         </g>
 
-        {/* Arc « Depuis le Cameroun » : se dessine une fois à chaque nouveau pays (statique en « réduire les animations ») */}
+        {/* Arc « Depuis le Cameroun » (forêt à 40 %, ce n'est pas le fil). Lot 7 (contrat §10) : il se trace une fois quand
+            la carte entre à l'écran, par le masque circulaire centré sur le départ, que MapMotion fait grandir (transform
+            seulement) ; ensuite il change de pays d'un coup. Au repos (HTML), le masque couvre tout l'arc. */}
         <g pointerEvents="none" aria-hidden="true">
           {arcEnd && (
             <>
+              <defs>
+                <mask id={arcMaskId} maskUnits="userSpaceOnUse" x={0} y={0} width={w} height={h}>
+                  <circle
+                    data-arc-mask=""
+                    cx={origin[0]}
+                    cy={origin[1]}
+                    r={Math.hypot(arcEnd[0] - origin[0], arcEnd[1] - origin[1]) + 16}
+                    fill="white"
+                  />
+                </mask>
+              </defs>
+              <g mask={`url(#${arcMaskId})`}>
               <motion.path
                 key={arcSlug}
                 d={arcPath(origin, arcEnd)}
@@ -203,6 +219,7 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
                 strokeOpacity={0.4}
                 strokeWidth={1.2}
               />
+              </g>
             </>
           )}
           <g transform={`translate(${origin[0]}, ${origin[1]})`}>

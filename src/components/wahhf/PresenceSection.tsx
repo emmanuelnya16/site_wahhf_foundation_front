@@ -4,6 +4,7 @@ import { CAMEROON_REGIONS_LIST, CameroonRegionData } from '../../data/regions';
 import { prefetchPresenceGeo } from '../../lib/geoData';
 import CountryList from './CountryList';
 import ChunkErrorBoundary from './ChunkErrorBoundary';
+import { AfterFirstDisplay, MapMotion } from '../../effects/DeferredMotion';
 
 // Les cartes (react-simple-maps + d3) et leurs données (public/geo) sont téléchargées
 // seulement quand la section approche de l'écran.
@@ -87,8 +88,8 @@ export default function PresenceSection() {
             </p>
           </div>
 
-          {/* Carte géographique réelle des 10 régions du Cameroun */}
-          <div className="my-1">
+          {/* Carte géographique réelle des 10 régions du Cameroun (cascade des régions : MapMotion, contrat §10) */}
+          <div className="my-1" data-map="cameroun">
             {shouldLoadMaps ? (
               <ChunkErrorBoundary className={`${CAMEROON_BOX} text-text`}>
                 <Suspense fallback={cameroonPlaceholder}>
@@ -164,7 +165,7 @@ export default function PresenceSection() {
           {/* Mobile : la mini-carte passe SOUS la liste (order-2). Dès md : au-dessus (order-1).
               Sur ordinateur, la mini-carte prend toute la hauteur restante (flex-1) : plus de vide sous la liste. */}
           <div className="flex-1 flex flex-col gap-5">
-            <div className="order-2 md:order-1 relative flex-1 min-h-[220px] sm:min-h-[250px]">
+            <div data-map="europe" className="order-2 md:order-1 relative flex-1 min-h-[220px] sm:min-h-[250px]">
               {shouldLoadMaps ? (
                 <ChunkErrorBoundary className="absolute inset-0 text-text">
                   <Suspense fallback={europePlaceholder}>
@@ -217,6 +218,10 @@ export default function PresenceSection() {
         </a>
         ) · pays Natural Earth (domaine public).
       </p>
+      {/* Cascade des régions, puis arc Cameroun → Europe (contrat §10, moment 5 ; GSAP après le premier affichage) */}
+      <AfterFirstDisplay>
+        <MapMotion scope={sectionRef} />
+      </AfterFirstDisplay>
     </div>
   );
 }
