@@ -13,6 +13,8 @@ import Home from './pages/Home';
 // Toutes les autres pages sont chargées à la demande.
 const MobilityHub = lazy(() => import('./pages/MobilityHub'));
 const LanguageAcademy = lazy(() => import('./pages/LanguageAcademy'));
+// Pages de niveau : de vraies pages qui ouvrent sur le niveau (NIV-01, groupe 7.1)
+const LanguageLevelPage = lazy(() => import('./pages/LanguageLevelPage'));
 const EuropeSupport = lazy(() => import('./pages/EuropeSupport'));
 const ApplyPage = lazy(() => import('./pages/ApplyPage'));
 const DonatePage = lazy(() => import('./pages/DonatePage'));
@@ -74,7 +76,7 @@ function AppRoutes() {
         {/* DOMAINE 06 : MOBILITÉ & LANGUES (ACADÉMIE D'ALLEMAND A1–C1 & EUROPE) */}
         <Route path="/mobilite-langues" element={<MobilityHub />} />
         <Route path="/mobilite-langues/academie" element={<LanguageAcademy />} />
-        <Route path="/academie/:level" element={<LanguageAcademy />} />
+        <Route path="/academie/:level" element={<LanguageLevelPage />} />
         <Route path="/mobilite-langues/accompagnement" element={<EuropeSupport />} />
         <Route path="/accompagnement/pays/:countrySlug" element={<EuropeSupport />} />
         <Route path="/accompagnement/:topicSlug" element={<EuropeSupport />} />
