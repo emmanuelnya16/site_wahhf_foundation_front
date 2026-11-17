@@ -17,7 +17,9 @@ type State = 'off' | 'armed' | 'hidden' | 'done';
  *    où la mini-carte est plus bas, l'arc se trace quand elle entre à son tour. Il change ensuite de pays d'un coup.
  * Les cartes arrivent après coup (chargées à l'approche) : leurs éléments sont masqués dès leur arrivée, seulement si
  * la carte est encore sous 85 % de l'écran ; déjà visible, elle reste telle quelle. Un élément de carte qui reçoit le
- * focus (région, pays) : tout s'affiche aussitôt. Mouvement réduit : rien (gsap.matchMedia).
+ * focus (région, pays) : tout s'affiche aussitôt. Mouvement réduit : rien (gsap.matchMedia). Ce qui est fait plus tard
+ * (masquage à l'arrivée des cartes, cascade, arc) passe par le contexte de gsap.matchMedia (self.add) : le passage en
+ * mouvement réduit ou le départ de la page l'annule, et tout redevient visible.
  * Repères : [data-map="cameroun"], [data-map="europe"] (PresenceSection), [data-cascade] (CameroonMap),
  * [data-arc-mask] (EuropeMiniMap).
  */
@@ -29,7 +31,7 @@ export default function MapMotion({ scope }: { scope: RefObject<HTMLElement | nu
       const europe = root?.querySelector<HTMLElement>('[data-map="europe"]');
       if (!root || !cameroon || !europe) return;
       const mm = gsap.matchMedia();
-      mm.add(MQ.motionOk, () => {
+      mm.add(MQ.motionOk, (self) => {
         const below = (el: HTMLElement) => el.getBoundingClientRect().top > window.innerHeight * 0.85;
         const state: Record<'regions' | 'arc', State> = {
           regions: below(cameroon) ? 'armed' : 'off',
@@ -40,8 +42,9 @@ export default function MapMotion({ scope }: { scope: RefObject<HTMLElement | nu
         const regionEls = () => gsap.utils.toArray<SVGElement>('[data-cascade]', cameroon);
         const arcMask = () => europe.querySelector<SVGCircleElement>('[data-arc-mask]');
 
+        // self.add('nom', fn) : fonctions appelées plus tard, dont les animations sont rattachées au contexte.
         // Masquer les éléments des cartes dès qu'ils arrivent dans la page (avant que la carte n'entre à l'écran)
-        const prepare = () => {
+        const prepare = self.add('prepare', () => {
           const regions = regionEls();
           if (state.regions === 'armed' && regions.length) {
             gsap.set(regions, { opacity: 0 });
@@ -52,13 +55,13 @@ export default function MapMotion({ scope }: { scope: RefObject<HTMLElement | nu
             gsap.set(mask, { scale: 0, svgOrigin: `${mask.getAttribute('cx')} ${mask.getAttribute('cy')}` });
             state.arc = 'hidden';
           }
-        };
+        }) as unknown as () => void;
         prepare();
         const observer = new MutationObserver(prepare);
         observer.observe(root, { childList: true, subtree: true });
 
         let regionsStart = -1;
-        const playRegions = () => {
+        const playRegions = self.add('playRegions', () => {
           if (state.regions !== 'hidden') {
             state.regions = 'done';
             return;
@@ -70,8 +73,8 @@ export default function MapMotion({ scope }: { scope: RefObject<HTMLElement | nu
             const group = regions.filter((el) => el.getAttribute('data-cascade') === id);
             gsap.to(group, { opacity: 1, duration: 0.8, delay: 0.1 + i * STEP, ease: GSAP_EASE.soft });
           });
-        };
-        const playArc = () => {
+        }) as unknown as () => void;
+        const playArc = self.add('playArc', () => {
           if (state.arc !== 'hidden') {
             state.arc = 'done';
             return;
@@ -80,12 +83,12 @@ export default function MapMotion({ scope }: { scope: RefObject<HTMLElement | nu
           // « Puis » : l'arc attend la fin de la cascade si elle vient de commencer (carte côte à côte, ordinateur)
           const elapsed = regionsStart < 0 ? Infinity : (performance.now() - regionsStart) / 1000;
           gsap.to(arcMask(), { scale: 1, duration: DURATION.draw, ease: GSAP_EASE.draw, delay: Math.max(0.1, 0.9 - elapsed) });
-        };
+        }) as unknown as () => void;
         ScrollTrigger.create({ trigger: cameroon, start: 'top 75%', once: true, onEnter: playRegions });
         ScrollTrigger.create({ trigger: europe, start: 'top 75%', once: true, onEnter: playArc });
 
         // Clavier : une région ou un pays atteint avant la fin, tout s'affiche
-        const revealAll = () => {
+        const revealAll = self.add('revealAll', () => {
           const regions = regionEls();
           const mask = arcMask();
           gsap.killTweensOf(regions);
@@ -96,7 +99,7 @@ export default function MapMotion({ scope }: { scope: RefObject<HTMLElement | nu
           }
           state.regions = 'done';
           state.arc = 'done';
-        };
+        }) as unknown as () => void;
         root.addEventListener('focusin', revealAll);
         return () => {
           observer.disconnect();

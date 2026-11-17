@@ -31,7 +31,8 @@ export default function FilScrub({ scope }: { scope: RefObject<HTMLElement | nul
           scrollTrigger: { trigger: fil, start: 'top 85%', end: 'top 40%', scrub: 0.5, invalidateOnRefresh: true },
         });
         segs.forEach((seg, i) => {
-          tl.fromTo(seg, { scaleX: 0 }, { scaleX: 1, duration: 1 }, i);
+          // Depuis le niveau précédent (à gauche), comme un trait qu'on tire
+          tl.fromTo(seg, { scaleX: 0, transformOrigin: 'left center' }, { scaleX: 1, duration: 1 }, i);
           const next = steps[i + 1];
           if (next) tl.fromTo(parts(next), { opacity: DIM }, { opacity: 1, duration: 0.15 }, i + 0.9);
         });

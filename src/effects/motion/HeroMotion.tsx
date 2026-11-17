@@ -7,7 +7,8 @@ import { gsap, MQ, useGSAP } from '../../lib/gsap';
  *   l'écran : elle défile un peu moins vite que la page (parallaxe de 8 % au plus). Le bord du haut qui se découvre
  *   reste toujours au-dessus de l'écran ou sous l'en-tête opaque : jamais visible.
  * - Le voile s'assombrit doucement : un calque nuit [data-hero-dim] passe de 0 à 40 % (le contraste ne fait que monter).
- * Lié au défilement : sans courbe, lissage de 0,5 s. Transform et opacité seulement.
+ * Lié au défilement : sans courbe et sans lissage (scrub immédiat) : avec un retard, l'image pourrait rester décalée
+ * quand on remonte vite et laisser voir une bande vide en haut du hero. Transform et opacité seulement.
  * Téléphone, tactile, mouvement réduit : rien (gsap.matchMedia).
  */
 export default function HeroMotion({ scope }: { scope: RefObject<HTMLElement | null> }) {
@@ -22,7 +23,7 @@ export default function HeroMotion({ scope }: { scope: RefObject<HTMLElement | n
         gsap
           .timeline({
             defaults: { ease: 'none' },
-            scrollTrigger: { trigger: hero, start: 0, end: 'bottom top', scrub: 0.5, invalidateOnRefresh: true },
+            scrollTrigger: { trigger: hero, start: 0, end: 'bottom top', scrub: true, invalidateOnRefresh: true },
           })
           .fromTo(media, { y: 0 }, { y: () => hero.offsetHeight * 0.08 }, 0)
           .fromTo(dim, { opacity: 0 }, { opacity: 0.4 }, 0);

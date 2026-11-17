@@ -1,6 +1,7 @@
 import { RefObject } from 'react';
 import { gsap, MQ, useGSAP } from '../../lib/gsap';
 import { scrollToPosition } from '../../lib/scroll';
+import { requestScrollRefresh } from '../../lib/afterFirstDisplay';
 
 /** Hauteur de l'en-tête fixe, lue dans --header-height (src/index.css) */
 function headerHeight() {
@@ -45,13 +46,20 @@ export default function ScrollExpandMotion({ scope }: { scope: RefObject<HTMLEle
             scrub: 0.5,
             anticipatePin: 1,
             invalidateOnRefresh: true,
+            // Créé après les déclencheurs placés plus bas (apparitions, carte) : recalculé en premier, pour que leurs
+            // positions tiennent compte de l'espace ajouté par l'épinglage
+            refreshPriority: 1,
           },
         });
         tl.fromTo(frame, { clipPath: 'inset(21% 29% 21% 29% round 20px)' }, { clipPath: 'inset(0% 0% 0% 0% round 0px)', duration: 1 }, 0)
           .fromTo(media, { scale: 1.2 }, { scale: 1, duration: 1 }, 0)
           .fromTo(veil, { opacity: 0 }, { opacity: 1, duration: 1 }, 0)
           .fromTo(caption, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.25 }, 0.85)
+          // Lien invisible = non cliquable ; il redevient cliquable quand la légende apparaît
+          .set(caption, { pointerEvents: 'none' }, 0)
+          .set(caption, { pointerEvents: 'auto' }, 0.85)
           .to({}, { duration: 0.2 });
+        requestScrollRefresh();
 
         // Clavier : le lien encore masqué reçoit le focus, on va à la fin de l'ouverture
         const reveal = () => {

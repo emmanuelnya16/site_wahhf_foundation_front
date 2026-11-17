@@ -22,10 +22,13 @@ const EXCLUDED = [
  *   dans un même groupe).
  * - Déclenchement : le HAUT de chaque élément atteint 85 % de la hauteur de l'écran (ANIM-02), jamais une fraction de
  *   la surface d'un groupe.
- * - Seuls les éléments encore sous cette ligne à l'arrivée de GSAP sont masqués : rien de ce qui est déjà à l'écran ne
- *   disparaît. Les pages et les blocs chargés plus tard sont pris au passage (MutationObserver).
- * - Un élément encore masqué qui reçoit le focus s'affiche aussitôt.
- * - Mouvement réduit : rien n'est masqué (gsap.matchMedia). Téléphone : apparitions gardées (légères).
+ * - Seuls les éléments encore SOUS l'écran (hors de la vue) à l'arrivée de GSAP sont masqués : rien de ce qui est déjà
+ *   visible, même dans le bas de l'écran, ne disparaît. Les pages et les blocs chargés plus tard sont pris au passage
+ *   (MutationObserver).
+ * - Un élément encore masqué qui reçoit le focus s'affiche aussitôt. À l'impression, tout est visible (index.css).
+ * - Tout ce qui est créé plus tard (masquages, déclencheurs, fondus) passe par le contexte de gsap.matchMedia
+ *   (self.add) : un changement de page ou le passage en mouvement réduit les annule et rend tout visible.
+ * - Mouvement réduit : rien n'est masqué. Téléphone : apparitions gardées (légères).
  * Monté une fois dans Layout, sur <main> ; relancé à chaque page.
  */
 export default function RevealBatch({ scope, pathname }: { scope: RefObject<HTMLElement | null>; pathname: string }) {
@@ -34,11 +37,12 @@ export default function RevealBatch({ scope, pathname }: { scope: RefObject<HTML
       const main = scope.current;
       if (!main || EXCLUDED.some((re) => re.test(pathname))) return;
       const mm = gsap.matchMedia();
-      mm.add(MQ.motionOk, () => {
+      mm.add(MQ.motionOk, (self) => {
         const seen = new WeakSet<Element>();
         const hidden = new Set<Element>();
 
-        const show = (els: Element[]) => {
+        // self.add('nom', fn) : fonction appelée plus tard, dont les animations sont rattachées au contexte
+        const show = self.add('show', (els: Element[]) => {
           els.forEach((el) => hidden.delete(el));
           gsap.to(els, {
             opacity: 1,
@@ -49,22 +53,21 @@ export default function RevealBatch({ scope, pathname }: { scope: RefObject<HTML
             overwrite: true,
             clearProps: 'opacity,transform',
           });
-        };
+        }) as unknown as (els: Element[]) => void;
 
-        const scan = () => {
-          const line = window.innerHeight * 0.85;
+        const scan = self.add('scan', () => {
           const fresh = gsap.utils.toArray<HTMLElement>('[data-reveal]', main).filter((el) => {
             if (seen.has(el)) return false;
             seen.add(el);
             if (el.closest('form, [data-no-reveal], [data-expand="on"]')) return false;
             if (!el.getClientRects().length) return false;
-            return el.getBoundingClientRect().top > line;
+            return el.getBoundingClientRect().top >= window.innerHeight;
           });
           if (!fresh.length) return;
           gsap.set(fresh, { opacity: 0, y: APPEAR_RISE });
           fresh.forEach((el) => hidden.add(el));
           ScrollTrigger.batch(fresh, { start: APPEAR_START, once: true, onEnter: (batch) => show(batch as Element[]) });
-        };
+        }) as unknown as () => void;
 
         // Après le défilement en haut de la nouvelle page (Layout) : deux images plus tard
         let frame = requestAnimationFrame(() => {
@@ -77,12 +80,14 @@ export default function RevealBatch({ scope, pathname }: { scope: RefObject<HTML
         });
         observer.observe(main, { childList: true, subtree: true });
 
-        const onFocus = (event: FocusEvent) => {
-          const el = (event.target as Element | null)?.closest?.('[data-reveal]');
-          if (!el || !hidden.has(el)) return;
+        const reveal = self.add('reveal', (el: Element) => {
           hidden.delete(el);
           gsap.killTweensOf(el);
           gsap.set(el, { opacity: 1, y: 0, clearProps: 'opacity,transform' });
+        }) as unknown as (el: Element) => void;
+        const onFocus = (event: FocusEvent) => {
+          const el = (event.target as Element | null)?.closest?.('[data-reveal]');
+          if (el && hidden.has(el)) reveal(el);
         };
         main.addEventListener('focusin', onFocus);
 

@@ -1,6 +1,7 @@
 import { lazy, Suspense, useRef, useState } from 'react';
 import { Play } from 'lucide-react';
 import { formatDuration, GalleryItem } from '../../data/gallery';
+import ChunkErrorBoundary from './ChunkErrorBoundary';
 
 // Visionneuse chargée au premier clic (avec Motion complet, pour le glisser) : rien de plus au premier affichage.
 const GalleryLightbox = lazy(() => import('./GalleryLightbox'));
@@ -87,10 +88,13 @@ export default function GalleryGrid({
         })}
       </div>
 
+      {/* Échec de téléchargement de la visionneuse : « Réessayer » sous la grille, la page reste en place */}
       {lightboxLoaded && (
-        <Suspense fallback={null}>
-          <GalleryLightbox items={items} index={openIndex} onChange={setOpenIndex} returnFocusRef={openerRef} />
-        </Suspense>
+        <ChunkErrorBoundary className="mt-4">
+          <Suspense fallback={null}>
+            <GalleryLightbox items={items} index={openIndex} onChange={setOpenIndex} returnFocusRef={openerRef} />
+          </Suspense>
+        </ChunkErrorBoundary>
       )}
     </>
   );

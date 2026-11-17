@@ -1,4 +1,5 @@
 import { ReactNode, useEffect, useState } from 'react';
+import { useNavigationType } from 'react-router-dom';
 import { requestScrollRefresh } from '../lib/afterFirstDisplay';
 
 /**
@@ -24,7 +25,10 @@ let firstPageShown = false;
 export default function PageTransition({ transitionKey, children }: { transitionKey: string; children: ReactNode }) {
   // Premier affichage : pas de fondu. Chaque page affichée ensuite : fondu d'entrée. Le composant est remonté à chaque
   // changement de page (filet ChunkErrorBoundary, App.tsx) : le premier affichage est donc retenu hors du composant.
-  const [navigated] = useState(() => firstPageShown);
+  // Une redirection (<Navigate replace>, ex. /a-propos → /qui-sommes-nous) remplace l'adresse sans nouvelle page
+  // pour le visiteur : pas de fondu, au premier chargement comme ensuite.
+  const navigationType = useNavigationType();
+  const [navigated] = useState(() => firstPageShown && navigationType !== 'REPLACE');
   useEffect(() => {
     firstPageShown = true;
   }, []);

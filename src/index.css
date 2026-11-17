@@ -683,6 +683,29 @@
 .expand-stage[data-expand='on'] .expand-caption a {
   color: var(--color-link-on-inverse);
 }
+/* Sur le voile nuit, l'anneau de focus passe en soleil (contrat §8), comme sur les surfaces vertes */
+.expand-stage[data-expand='on'] .expand-caption {
+  --focus: var(--focus-on-green);
+}
+
+/* Impression : tout ce que le mouvement masque encore (apparitions, cascade, arc, ouverture de « Sur le terrain »)
+   est imprimé dans son état final. */
+@media print {
+  [data-reveal],
+  [data-cascade],
+  .expand-caption,
+  .expand-veil {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  [data-arc-mask],
+  [data-expand-media] {
+    transform: none !important;
+  }
+  .expand-frame {
+    clip-path: none !important;
+  }
+}
 
 /* Le fil du hero se dessine une fois (contrat §10) ; Fil.tsx l'utilise avec drawOnce, jamais en mouvement réduit. */
 @keyframes fil-draw {
@@ -697,7 +720,9 @@
  * 2. Phrase, boutons, lien du film, puis le fil : fondu court de 0,6 s (power2.out), délai propre à chacun
  *    (--hero-fade-delay) ; le trait du fil se dessine ensuite (--fil-draw-delay, Fil.tsx).
  * « backwards » : une fois l'animation finie, plus aucun style posé. Un bouton qui reçoit le focus pendant son fondu
- * s'affiche aussitôt. Mouvement réduit : tout est en place dès le premier rendu (le fil du hero est absent).
+ * s'affiche aussitôt : opacité forcée (une déclaration !important l'emporte sur l'animation sans la relancer ;
+ * « animation: none » la ferait rejouer, à opacité 0, chaque fois que le focus repart). Mouvement réduit : tout est
+ * en place dès le premier rendu (le fil du hero est absent).
  */
 @keyframes line-rise {
   from { transform: translateY(calc(100% + 0.1em)); }
@@ -720,11 +745,15 @@
 .line-mask:nth-child(4) .line-rise { animation-delay: 0.36s; }
 .line-mask:nth-child(5) .line-rise { animation-delay: 0.48s; }
 .line-mask:nth-child(6) .line-rise { animation-delay: 0.6s; }
+.line-mask:nth-child(7) .line-rise { animation-delay: 0.72s; }
+.line-mask:nth-child(8) .line-rise { animation-delay: 0.84s; }
+.line-mask:nth-child(9) .line-rise { animation-delay: 0.96s; }
+.line-mask:nth-child(n + 10) .line-rise { animation-delay: 1.08s; }
 .hero-fade {
   animation: hero-fade 0.6s var(--ease-power2-out) var(--hero-fade-delay, 0.6s) backwards;
 }
 .hero-fade:focus-within {
-  animation: none;
+  opacity: 1 !important;
 }
 @media (prefers-reduced-motion: reduce) {
   .line-rise,

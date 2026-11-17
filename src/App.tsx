@@ -2,7 +2,7 @@ import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 // framer-motion : le même paquet que motion/react (14.14), importé sans passer par le fichier d'entrée de motion/react,
 // qui embarque toujours motion.div complet : le premier chargement n'a que m, AnimatePresence et LazyMotion (lot 7).
-import { LazyMotion, MotionConfig } from 'framer-motion';
+import { LazyMotion, MotionConfig, domAnimation } from 'framer-motion';
 import Layout from './components/Layout';
 import PageTransition, { routeKey } from './effects/PageTransition';
 import ChunkErrorBoundary from './components/wahhf/ChunkErrorBoundary';
@@ -109,15 +109,16 @@ function AppRoutes() {
   );
 }
 
-// Moteur d'animation de Motion chargé à part, juste après le premier rendu (contrat §10, lot 7 : JS initial sous
-// 200 Ko compressés). Les composants du premier affichage utilisent m.div ; les pages historiques gardent motion.div.
-const loadMotionFeatures = () => import('./lib/motionFeatures').then((m) => m.default);
+// Motion allégé (contrat §10, lot 7 : JS initial sous 200 Ko compressés) : LazyMotion avec le moteur domAnimation
+// (animations, sorties, gestes), chargé d'emblée pour que le menu mobile et la fenêtre du film ne puissent jamais
+// s'ouvrir avant lui (ils resteraient invisibles). Les composants du premier affichage utilisent m.div ; les pages
+// historiques, la visionneuse et les cartes gardent motion.div, qui embarque le reste dans leur propre fichier.
 
 export default function App() {
   return (
     // « Réduire les animations » : Motion supprime les déplacements et ne garde que les fondus.
     <MotionConfig reducedMotion="user">
-      <LazyMotion features={loadMotionFeatures}>
+      <LazyMotion features={domAnimation}>
         <Router>
           <Layout>
             <AppRoutes />
