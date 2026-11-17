@@ -905,7 +905,9 @@ export const TIMELINE_MILESTONES = [
   {
     year: '2025 (TODO)',
     title: 'Adossement comme branche sociale du groupe IROKO',
-    desc: 'Le groupe IROKO s’engage structurellement à financer le fonctionnement de la fondation pour garantir la gratuité totale pour les bénéficiaires.',
+    // Groupe 7.3 : « pour garantir la gratuité totale pour les bénéficiaires » retiré (la gratuité est dite une fois par
+    // écran, à l'étape suivante de la frise)
+    desc: 'Le groupe IROKO s’engage structurellement à financer le fonctionnement de la fondation.',
   },
   {
     year: '2026',
