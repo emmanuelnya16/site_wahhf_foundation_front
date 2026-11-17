@@ -1,5 +1,5 @@
-import { useState, useId, useRef, useEffect, FormEvent } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
+import { useState, useId, useRef, useEffect, FormEvent, Ref } from 'react';
+import { useSearchParams, useLocation, useNavigate, Link } from 'react-router-dom';
 import SEO from '../components/wahhf/SEO';
 import { PrimaryButton, SecondaryButton } from '../components/wahhf/Buttons';
 import SectionHeader from '../components/wahhf/SectionHeader';
@@ -14,6 +14,7 @@ import { emailError, phoneError, requiredError, focusFirstError } from '../lib/f
 import { useFocusOnChange } from '../lib/useFocusOnChange';
 import ContactHandoff from '../components/wahhf/ContactHandoff';
 import { COUNTRIES_DATA, COURSE_SESSIONS_DATA } from '../services/api';
+import { upcomingSessions } from '../lib/sessions';
 import { buildDraft } from '../lib/contactDraft';
 
 /**
@@ -33,7 +34,7 @@ import { buildDraft } from '../lib/contactDraft';
 const WISH_LABELS = {
   cours_allemand: 'Cours d’allemand (A1 à C1)',
   accompagnement_europe: 'Accompagnement vers l’Europe',
-  les_deux: 'Les deux (Cours + Orientation)',
+  les_deux: 'Les deux : cours et orientation',
 } as const;
 type Wish = keyof typeof WISH_LABELS;
 const LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1'] as const;
@@ -42,7 +43,8 @@ const FORMATS = [
   { value: 'Présentiel à Douala', label: 'Présentiel à Douala' },
   { value: 'Présentiel à Yaoundé', label: 'Présentiel à Yaoundé' },
 ] as const;
-const STEP_LABELS = { 1: 'Identité et coordonnées', 2: 'Souhait, pays et niveau d’allemand', 3: 'Projet et consentement' } as const;
+/** Titres des étapes : affichés en h3 et annoncés à chaque changement (un seul libellé par étape, critique 7.1). */
+const STEP_LABELS = { 1: 'Vos coordonnées de contact', 2: 'Votre souhait d’accompagnement', 3: 'Votre motivation et votre accord' } as const;
 
 type ApplyField = 'fullName' | 'email' | 'phone' | 'residenceCountry' | 'city' | 'gdprConsent';
 const STEP1_FIELDS = ['fullName', 'email', 'phone', 'residenceCountry', 'city'] as const;
@@ -87,6 +89,10 @@ function readDraft(): Partial<Draft> | null {
     return null;
   }
 }
+/** Le brouillon contient-il une saisie de la personne (et pas seulement les valeurs par défaut) ? */
+const hasTyped = (d: Partial<Draft> | null | undefined) =>
+  !!d && [d.fullName, d.email, d.phone, d.city, d.message].some((v) => typeof v === 'string' && v.trim() !== '');
+
 const isWish = (v: unknown): v is Wish => typeof v === 'string' && v in WISH_LABELS;
 const isLevel = (v: unknown): v is (typeof LEVELS)[number] => typeof v === 'string' && (LEVELS as readonly string[]).includes(v);
 const isCountry = (v: unknown): v is string => typeof v === 'string' && COUNTRIES_DATA.some((c) => c.slug === v);
@@ -94,6 +100,18 @@ const isFormat = (v: unknown): v is string => typeof v === 'string' && FORMATS.s
 /** Format d'une session de l'Académie, dans les valeurs du formulaire. */
 const sessionFormat = (format: string) =>
   format.includes('Douala') ? 'Présentiel à Douala' : format.includes('Yaoundé') ? 'Présentiel à Yaoundé' : 'En ligne';
+
+/** Titre d'une étape (h3 sous le h2 « Votre candidature », T-19), qui reçoit le focus au changement d'étape. */
+function StepTitle({ title, text, titleRef }: { title: string; text: string; titleRef: Ref<HTMLHeadingElement> }) {
+  return (
+    <div className="space-y-2">
+      <h3 ref={titleRef} tabIndex={-1} className="text-body font-semibold text-text">
+        {title}
+      </h3>
+      <p className="text-body text-text-secondary max-w-[65ch]">{text}</p>
+    </div>
+  );
+}
 
 export default function ApplyPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -104,9 +122,9 @@ export default function ApplyPage() {
     const wish = searchParams.get('souhait');
     const level = searchParams.get('niveau')?.toUpperCase();
     const country = searchParams.get('pays');
-    const session = COURSE_SESSIONS_DATA.find((s) => s.id === searchParams.get('session'));
+    const session = upcomingSessions(COURSE_SESSIONS_DATA).find((s) => s.id === searchParams.get('session'));
     return {
-      restored: !!draft && Object.values(draft).some((v) => typeof v === 'string' && v.trim() !== '' && v !== 'Cameroun'),
+      restored: hasTyped(draft),
       fullName: draft?.fullName ?? '',
       email: draft?.email ?? '',
       phone: draft?.phone ?? '',
@@ -133,13 +151,16 @@ export default function ApplyPage() {
   const [gdprConsent, setGdprConsent] = useState(false);
   const [restored, setRestored] = useState(initial.restored);
 
-  // Session choisie sur l'Académie (ACAD-01), affichée en tête du formulaire
-  const session = COURSE_SESSIONS_DATA.find((s) => s.id === searchParams.get('session'));
+  // Session choisie sur l'Académie (ACAD-01), affichée en tête du formulaire ; une session commencée est ignorée
+  const session = upcomingSessions(COURSE_SESSIONS_DATA).find((s) => s.id === searchParams.get('session'));
 
   // Étape dans l'adresse (CAND-02) : 1, 2, 3, ou « envoi » (message prêt)
   const etape = searchParams.get('etape');
   const prepared = etape === 'envoi';
   const step: 1 | 2 | 3 = etape === '2' ? 2 : etape === '3' || prepared ? 3 : 1;
+  const location = useLocation();
+  const navigate = useNavigate();
+  // Avancer : nouvelle entrée d'historique, marquée (le bouton retour du téléphone revient à l'étape d'avant)
   const goTo = (next: '2' | '3' | 'envoi' | null, replace = false) =>
     setSearchParams(
       (prev) => {
@@ -148,8 +169,14 @@ export default function ApplyPage() {
         else params.delete('etape');
         return params;
       },
-      { replace }
+      { replace, state: replace ? location.state : { candidatureStep: true } }
     );
+  // Revenir (« Étape précédente », « Modifier mes réponses ») : on remonte l'historique si l'on y est arrivé en
+  // avançant, sinon on remplace l'adresse ; jamais de boucle entre deux étapes avec le bouton retour
+  const goBack = (to: '2' | '3' | null) => {
+    if ((location.state as { candidatureStep?: boolean } | null)?.candidatureStep) navigate(-1);
+    else goTo(to, true);
+  };
 
   // Champs reliés à leur label par un id unique (useId) ; erreurs affichées sous chaque champ
   const uid = useId();
@@ -158,17 +185,43 @@ export default function ApplyPage() {
   const values: Record<ApplyField, string | boolean> = { fullName, email, phone, residenceCountry, city, gdprConsent };
   const step1Valid = STEP1_FIELDS.every((key) => !checkField(key, values[key]));
 
-  // Adresse d'une étape plus loin sans coordonnées valides (lien partagé, brouillon effacé) : retour à l'étape 1
+  // Adresse corrigée en une seule fois (deux appels à setSearchParams dans le même rendu s'écraseraient) :
+  // - souhait, niveau et pays de l'adresse : appliqués à l'arrivée, puis retirés (un rechargement garde ensuite les
+  //   choix faits dans le formulaire, gardés en brouillon) ;
+  // - étape plus loin sans coordonnées valides (lien partagé, brouillon effacé) : retour à l'étape 1 ;
+  // - message prêt sans la case d'accord cochée (rechargement, lien direct) : retour à l'étape 3 pour la cocher.
   useEffect(() => {
-    if (step > 1 && !step1Valid) goTo(null, true);
+    const params = new URLSearchParams(searchParams);
+    ['souhait', 'niveau', 'pays'].forEach((k) => params.delete(k));
+    if (step > 1 && !step1Valid) params.delete('etape');
+    else if (prepared && !gdprConsent) params.set('etape', '3');
+    if (params.toString() !== searchParams.toString()) setSearchParams(params, { replace: true, state: location.state });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [step]);
+  }, [step, prepared]);
+
+  // Un autre niveau ou un autre format que ceux de la session choisie : la session n'est plus retenue
+  useEffect(() => {
+    if (!session) return;
+    if (currentGermanLevel !== session.level || preferredFormat !== sessionFormat(session.format)) {
+      setSearchParams(
+        (prev) => {
+          const params = new URLSearchParams(prev);
+          params.delete('session');
+          return params;
+        },
+        { replace: true, state: location.state }
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentGermanLevel, preferredFormat]);
 
   // Brouillon : enregistré à chaque modification (le consentement n'est jamais gardé)
   useEffect(() => {
     const draft: Draft = { fullName, email, phone, residenceCountry, city, wishType, targetCountry, currentGermanLevel, preferredFormat, message };
     try {
-      sessionStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
+      // Rien de saisi : pas de brouillon (les valeurs par défaut ne sont pas des réponses)
+      if (hasTyped(draft)) sessionStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
+      else sessionStorage.removeItem(DRAFT_KEY);
     } catch {
       /* stockage indisponible : le formulaire marche sans brouillon */
     }
@@ -257,6 +310,7 @@ export default function ApplyPage() {
       <SEO
         title="Candidater gratuitement — Cours d'allemand & Accompagnement Europe"
         description="Formulaire unique et 100 % gratuit de demande d'accompagnement et d'inscription aux cours d'allemand WAHHF Foundation. Aucun document d'identité ni paiement demandé."
+        canonical="/candidater"
       />
 
       {/* En-tête : titre, avertissement complet juste dessous (T-14), vraie photo d'accompagnement de l'Open Day */}
@@ -269,7 +323,8 @@ export default function ApplyPage() {
       </PageHeader>
 
       {/* Avant le formulaire : qui peut candidater, et ce qui se passe ensuite (ACAD-06) */}
-      <section className="container-page section-space pt-0!">
+      <section className="container-page section-space pt-0! space-y-8">
+        <SectionHeader title="Avant de commencer" />
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-12">
           <WhoCanApply />
           <AfterApplicationSteps />
@@ -286,17 +341,23 @@ export default function ApplyPage() {
             title="Dernière étape : envoyez votre candidature"
             draft={draft}
             titleRef={stepTitleRef}
-            onEdit={() => goTo('3')}
+            onEdit={() => goBack('3')}
           >
-            <InfoBox>
-              <p>
-                Rappel : aucun collaborateur de WAHHF ne vous demandera d’argent par téléphone, e-mail ou WhatsApp pour traiter votre dossier.
-              </p>
-            </InfoBox>
+            <p className="text-body text-text max-w-[65ch]">
+              Rappel : aucun collaborateur de WAHHF ne vous demandera d’argent par téléphone, e-mail ou WhatsApp pour traiter votre dossier.
+            </p>
+            <p className="text-meta text-text-secondary max-w-[65ch]">
+              Vos réponses restent dans ce navigateur jusqu’à la fermeture de l’onglet.{' '}
+              <button type="button" onClick={clearDraft} className="text-link underline underline-offset-4 decoration-1 hover:decoration-2 cursor-pointer">
+                Effacer mes réponses maintenant
+              </button>{' '}
+              (conseillé sur un téléphone ou un ordinateur partagé).
+            </p>
           </ContactHandoff>
         ) : (
-          <div className="rounded-card bg-surface-section p-6 sm:p-10 space-y-8">
-            <SectionHeader title="Formulaire de candidature" />
+          // data-no-reveal : rien n'apparaît au défilement dans le formulaire (seulement ses changements d'étape)
+          <div data-no-reveal="" className="rounded-card bg-surface-section p-6 sm:p-10 space-y-8">
+            <SectionHeader title="Votre candidature" />
 
             {/* Réponses gardées dans l'onglet (CAND-02) */}
             {restored && (
@@ -337,10 +398,7 @@ export default function ApplyPage() {
 
             {/* Un seul indicateur d'étape : la position en texte et la barre de progression */}
             <div className="space-y-3">
-              <p className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 text-meta text-text-secondary">
-                <span className="font-bold text-text">Étape {step} sur 3</span>
-                <span>{STEP_LABELS[step]}</span>
-              </p>
+              <p className="text-meta font-bold text-text">Étape {step} sur 3</p>
               <ProgressBar value={step} max={3} />
             </div>
 
@@ -349,20 +407,18 @@ export default function ApplyPage() {
               <div key={step} className="step-enter">
                 {step === 1 && (
                   <div className="space-y-5">
-                    <SectionHeader
-                      titleRef={stepTitleRef}
-                      title="Vos coordonnées de contact"
-                      subtitle="Ces informations servent uniquement à vous recontacter."
-                    />
+                    <StepTitle titleRef={stepTitleRef} title={STEP_LABELS[1]} text="Ces informations servent uniquement à vous recontacter." />
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      <FormField id={fieldId('fullName')} label="Nom complet (Prénom & Nom) *" error={errors.fullName}>
+                      <FormField id={fieldId('fullName')} label="Nom complet (prénom et nom) *" error={errors.fullName}>
                         {(a11y) => (
                           <input
                             {...a11y}
                             type="text"
                             required
                             autoComplete="name"
+                            autoCapitalize="words"
+                            maxLength={100}
                             placeholder="Ex. Marie Nguenang"
                             value={fullName}
                             onChange={(e) => {
@@ -382,6 +438,9 @@ export default function ApplyPage() {
                             type="email"
                             required
                             autoComplete="email"
+                            autoCapitalize="none"
+                            spellCheck={false}
+                            maxLength={254}
                             placeholder="exemple@domaine.com"
                             value={email}
                             onChange={(e) => {
@@ -402,6 +461,7 @@ export default function ApplyPage() {
                             required
                             autoComplete="tel"
                             inputMode="tel"
+                            maxLength={30}
                             placeholder="Ex. +237 6..."
                             value={phone}
                             onChange={(e) => {
@@ -421,6 +481,7 @@ export default function ApplyPage() {
                             type="text"
                             required
                             autoComplete="country-name"
+                            maxLength={100}
                             value={residenceCountry}
                             onChange={(e) => {
                               setResidenceCountry(e.target.value);
@@ -439,6 +500,7 @@ export default function ApplyPage() {
                             type="text"
                             required
                             autoComplete="address-level2"
+                            maxLength={100}
                             placeholder="Ex. Douala, Yaoundé, Bafoussam, Garoua..."
                             value={city}
                             onChange={(e) => {
@@ -452,7 +514,7 @@ export default function ApplyPage() {
                       </FormField>
                     </div>
 
-                    <div className="pt-4 flex justify-end">
+                    <div className="pt-4 flex">
                       <PrimaryButton type="submit">Continuer vers l’étape 2</PrimaryButton>
                     </div>
                   </div>
@@ -460,10 +522,10 @@ export default function ApplyPage() {
 
                 {step === 2 && (
                   <div className="space-y-6">
-                    <SectionHeader
+                    <StepTitle
                       titleRef={stepTitleRef}
-                      title="Votre souhait d’accompagnement"
-                      subtitle="Précisez le volet qui vous intéresse ainsi que votre niveau linguistique actuel."
+                      title={STEP_LABELS[2]}
+                      text="Précisez le volet qui vous intéresse ainsi que votre niveau linguistique actuel."
                     />
 
                     <fieldset>
@@ -477,7 +539,7 @@ export default function ApplyPage() {
                             checked={wishType === id}
                             onChange={() => setWishType(id)}
                             showCheck
-                            className="p-4 rounded-2xl text-left font-medium"
+                            className="p-4 text-left"
                           >
                             {WISH_LABELS[id]}
                           </ChoiceTile>
@@ -498,7 +560,8 @@ export default function ApplyPage() {
                         >
                           {COUNTRIES_DATA.map((c) => (
                             <option key={c.slug} value={c.slug}>
-                              {c.flag} {c.name} {!c.isEU ? '(Hors Union européenne)' : ''}
+                              {c.name}
+                              {!c.isEU ? ' (hors Union européenne)' : ''}
                             </option>
                           ))}
                         </select>
@@ -543,8 +606,8 @@ export default function ApplyPage() {
                       </div>
                     </div>
 
-                    <div className="pt-4 flex flex-wrap items-center justify-between gap-3">
-                      <SecondaryButton onClick={() => goTo(null)}>Étape précédente</SecondaryButton>
+                    <div className="pt-4 flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
+                      <SecondaryButton onClick={() => goBack(null)}>Étape précédente</SecondaryButton>
                       <PrimaryButton type="submit">Continuer vers l’étape 3</PrimaryButton>
                     </div>
                   </div>
@@ -552,10 +615,10 @@ export default function ApplyPage() {
 
                 {step === 3 && (
                   <div className="space-y-6">
-                    <SectionHeader
+                    <StepTitle
                       titleRef={stepTitleRef}
-                      title="Votre motivation et votre accord"
-                      subtitle="Présentez brièvement votre parcours, puis validez votre demande."
+                      title={STEP_LABELS[3]}
+                      text="Présentez brièvement votre parcours, puis validez votre demande."
                     />
 
                     <div>
@@ -565,6 +628,7 @@ export default function ApplyPage() {
                       <textarea
                         id="apply-message"
                         rows={4}
+                        maxLength={2000}
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                         placeholder="Expliquez en quelques lignes votre motivation et votre projet..."
@@ -605,8 +669,8 @@ export default function ApplyPage() {
                       <FieldError id={fieldErrorId(fieldId('gdprConsent'))} message={errors.gdprConsent} />
                     </div>
 
-                    <div className="pt-4 flex flex-wrap items-center justify-between gap-3">
-                      <SecondaryButton onClick={() => goTo('2')}>Étape précédente</SecondaryButton>
+                    <div className="pt-4 flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
+                      <SecondaryButton onClick={() => goBack('2')}>Étape précédente</SecondaryButton>
                       <PrimaryButton type="submit">Préparer l’envoi de ma candidature</PrimaryButton>
                     </div>
                   </div>
