@@ -14,7 +14,9 @@ import { AfterFirstDisplay, FilScrub } from '../effects/DeferredMotion';
 /*
  * Mobilité & Langues (groupe 7.1 : contrat validé, audit MOB-01, T-14, ARN-02, T-12).
  * - En-tête : la vraie photo de l'Open Day (MOB-01), en entier, légendée et datée ; l'avertissement anti-arnaque juste
- *   sous le titre ; deux portes seulement (Candidater, l'Académie).
+ *   sous le titre ; deux boutons seulement (Candidater, l'Académie).
+ * - Le choix de la porte d'entrée vient juste après l'en-tête, avant « Pourquoi » (audit : le visiteur veut d'abord
+ *   savoir quoi faire). Fonds alternés : brume, sauge, brume, sauge, brume.
  * - Gratuité dite une fois par écran : l'avertissement au premier écran, « Zéro frais » dans « Pourquoi », la question
  *   de la FAQ ; jamais dans un titre.
  * - Témoignages : masqués tant qu'aucun témoignage réel et autorisé n'est fourni (docs/contenus-a-fournir.md, n° 76-78).
@@ -25,8 +27,9 @@ import { AfterFirstDisplay, FilScrub } from '../effects/DeferredMotion';
 
 const MOBILITY_FAQS = [
   {
-    q: 'Les cours d’allemand et l’accompagnement sont-ils vraiment 100 % gratuits ?',
-    a: 'Oui. L’intégralité des cours d’allemand (du niveau A1 au C1) et des séances d’orientation vers l’Europe est gratuite pour les bénéficiaires. Ce programme est financé par le groupe IROKO (dont WAHHF est la branche sociale) et par nos donateurs.',
+    q: 'Les cours d’allemand et l’accompagnement sont-ils vraiment 100 % gratuits ?',
+    // Sans nommer le financeur tant que la question n'est pas tranchée (contrat §13) ; une seule mention de gratuité
+    a: 'Oui, pour tous les bénéficiaires : les cours d’allemand, du niveau A1 au niveau C1, comme les séances d’orientation vers l’Europe. Le programme est financé par nos partenaires et nos donateurs.',
   },
   {
     q: 'WAHHF Foundation délivre-t-elle des visas ou des contrats de travail ?',
@@ -67,11 +70,11 @@ export default function MobilityHub() {
     <>
       <SEO
         title="Mobilité & Langues — Apprendre, se préparer, s'orienter gratuitement"
-        description="WAHHF Foundation : Académie de langue allemande gratuite (A1 à C1) et accompagnement transparent vers 10 pays européens, financé par IROKO et nos donateurs."
+        description="WAHHF Foundation : Académie de langue allemande gratuite (A1 à C1) et accompagnement transparent vers 10 pays européens, financé par nos partenaires et nos donateurs."
       />
 
       {/* En-tête : titre, avertissement juste dessous (avant la photo sur téléphone), photo de l'Open Day légendée */}
-      <PageHeader reveal photoId="open-day-visioconference" notice={<DisclaimerBanner />}>
+      <PageHeader reveal revealPhoto photoId="open-day-visioconference" photoRatio="source" notice={<DisclaimerBanner />}>
         <PageTitle>Apprendre l’allemand, se préparer, s’orienter vers l’Europe</PageTitle>
 
         <PageIntro>
@@ -85,48 +88,6 @@ export default function MobilityHub() {
         </PageActions>
       </PageHeader>
 
-      {/* POURQUOI CE PROGRAMME EXISTE */}
-      <section className="container-page section-space">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-7 space-y-6">
-            <SectionHeader
-              title="Protéger la jeunesse contre la désinformation et ouvrir l’accès au savoir"
-              subtitle="Trop de jeunes et de familles s’endettent auprès d’intermédiaires frauduleux qui vendent de fausses promesses. WAHHF Foundation répond par la rigueur linguistique et la transparence."
-            />
-
-            <div className="space-y-4 text-body text-text-secondary max-w-[65ch]">
-              <p>
-                Un projet d’études ou de formation professionnelle à l’étranger ne s’achète pas : il se construit par l’apprentissage exigeant de la langue, la conformité des diplômes et le respect strict des procédures consulaires officielles.
-              </p>
-              <p>
-                Avec le soutien de nos partenaires et de nos donateurs, nous proposons ce que beaucoup marchandent : des cours d’allemand structurés du niveau A1 au C1 et une orientation documentée étape par étape.
-              </p>
-            </div>
-          </div>
-
-          <TextList columns={1} className="lg:col-span-5">
-            {[
-              {
-                title: 'Zéro frais pour le bénéficiaire',
-                desc: 'Aucun frais d’inscription, aucun frais de dossier, aucune commission à aucun moment du parcours.',
-              },
-              {
-                title: 'Lutte active contre les arnaques',
-                desc: 'Ateliers de prévention pour reconnaître les faux contrats, les faux visas et vérifier les sources officielles.',
-              },
-              {
-                title: 'Exigence académique et linguistique',
-                desc: 'Accompagnement progressif du niveau débutant A1 jusqu’à l’autonomie universitaire C1.',
-              },
-            ].map((item) => (
-              <TextListItem key={item.title} title={item.title}>
-                <p>{item.desc}</p>
-              </TextListItem>
-            ))}
-          </TextList>
-        </div>
-      </section>
-
       {/* LES DEUX PORTES D'ENTRÉE */}
       <Section tone="sauge">
         <div className="container-page space-y-12">
@@ -136,7 +97,7 @@ export default function MobilityHub() {
           />
 
           {/* Porte 1 : l'Académie, avec le fil A1 → C1 (contrat §6) ; il se dessine au défilement sur ordinateur */}
-          <div className="border-t border-border-subtle pt-6 space-y-6">
+          <div data-reveal="" className="border-t border-border-subtle pt-6 space-y-6">
             <div className="space-y-4">
               <h3 className="text-body font-semibold text-text">Académie de langues (allemand A1 à C1)</h3>
               <p className="text-body text-text-secondary max-w-[65ch]">
@@ -167,7 +128,7 @@ export default function MobilityHub() {
           </div>
 
           {/* Porte 2 : l'accompagnement vers l'Europe */}
-          <div className="border-t border-border-subtle pt-6 space-y-6">
+          <div data-reveal="" className="border-t border-border-subtle pt-6 space-y-6">
             <div className="space-y-4">
               <h3 className="text-body font-semibold text-text">Accompagnement vers l’Europe</h3>
               <p className="text-body text-text-secondary max-w-[65ch]">
@@ -190,6 +151,48 @@ export default function MobilityHub() {
           </div>
         </div>
       </Section>
+
+      {/* POURQUOI CE PROGRAMME EXISTE */}
+      <section className="container-page section-space">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-7 space-y-6">
+            <SectionHeader
+              title="Protéger la jeunesse contre la désinformation et ouvrir l’accès au savoir"
+              subtitle="Trop de jeunes et de familles s’endettent auprès d’intermédiaires frauduleux qui vendent de fausses promesses. WAHHF Foundation répond par la rigueur linguistique et la transparence."
+            />
+
+            <div className="space-y-4 text-body text-text-secondary max-w-[65ch]">
+              <p>
+                Un projet d’études ou de formation professionnelle à l’étranger ne s’achète pas : il se construit par l’apprentissage exigeant de la langue, la conformité des diplômes et le respect strict des procédures consulaires officielles.
+              </p>
+              <p>
+                Avec le soutien de nos partenaires et de nos donateurs, nous proposons ce que beaucoup marchandent : des cours d’allemand structurés du niveau A1 au C1 et une orientation documentée étape par étape.
+              </p>
+            </div>
+          </div>
+
+          <TextList columns={1} className="lg:col-span-5">
+            {[
+              {
+                title: 'Zéro frais pour le bénéficiaire',
+                desc: 'Aucun frais d’inscription, aucun frais de dossier, aucune commission à aucun moment du parcours.',
+              },
+              {
+                title: 'Lutte active contre les arnaques',
+                desc: 'Un guide pour reconnaître les faux contrats et les faux visas, et vérifier chaque information sur les sources officielles.',
+              },
+              {
+                title: 'Exigence académique et linguistique',
+                desc: 'Accompagnement progressif du niveau débutant A1 jusqu’à l’autonomie universitaire C1.',
+              },
+            ].map((item) => (
+              <TextListItem key={item.title} title={item.title}>
+                <p>{item.desc}</p>
+              </TextListItem>
+            ))}
+          </TextList>
+        </div>
+      </section>
 
       {/* TÉMOIGNAGES : seulement des témoignages réels et autorisés (aucun pour l'instant) */}
       {TESTIMONIALS.length > 0 && (
