@@ -108,7 +108,8 @@ export default function EuropeSupport() {
             </div>
           </div>
 
-          <Fil start={{ id: 'cameroun', label: 'Cameroun' }} end={{ id: country.slug, label: country.name }} className="max-w-[65ch]" />
+          {/* Le fil Cameroun → pays se dessine une fois, à l'arrivée (CSS, contrat §10, lot 7) ; tracé en mouvement réduit */}
+          <Fil start={{ id: 'cameroun', label: 'Cameroun' }} end={{ id: country.slug, label: country.name }} drawOnce className="max-w-[65ch]" />
           <PageIntro>
             {country.summary}
           </PageIntro>

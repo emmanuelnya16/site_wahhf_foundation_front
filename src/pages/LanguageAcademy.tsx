@@ -13,6 +13,7 @@ import DisclaimerBanner from '../components/wahhf/DisclaimerBanner';
 import CourseCard from '../components/wahhf/CourseCard';
 import { ProgressBar } from '../components/wahhf/StepNumber';
 import Fil from '../components/wahhf/Fil';
+import { AfterFirstDisplay, FilScrub } from '../effects/DeferredMotion';
 import ChoiceTile from '../components/wahhf/ChoiceTile';
 import NotFoundPage, { NotFoundLinks } from './NotFoundPage';
 import {
@@ -71,6 +72,8 @@ export default function LanguageAcademy() {
   // Démarrage, question suivante ou précédente, résultat : focus sur l'énoncé (ou le résultat) + annonce polie
   const quizView = !quizStarted ? 'accueil' : quizFinished ? 'resultat' : `question-${currentQIndex}`;
   const quizBoxRef = useRef<HTMLDivElement>(null);
+  // Frise A1 → C1 : se dessine au défilement sur ordinateur (contrat §10, lot 7)
+  const filRef = useRef<HTMLDivElement>(null);
   const quizFocusRef = useFocusOnChange<HTMLElement>(quizView, { scrollRef: quizBoxRef });
   const quizStatus = !quizStarted
     ? ''
@@ -180,7 +183,9 @@ export default function LanguageAcademy() {
         />
 
         {/* Le fil des niveaux (contrat §6) : A1 -> Europe, un point par niveau, le niveau affiché en point plein ;
-            chaque niveau reste un lien vers sa page. Vertical sous 1 024 px. */}
+            chaque niveau reste un lien vers sa page. Vertical sous 1 024 px. Sur ordinateur, il se dessine au
+            défilement et chaque niveau s'allume quand le trait l'atteint (FilScrub, contrat §10, lot 7). */}
+        <div ref={filRef}>
         <Fil
           orientation="auto"
           steps={GERMAN_LEVELS_DATA.map((lvl) => ({
@@ -193,6 +198,10 @@ export default function LanguageAcademy() {
           end={{ id: 'europe', label: 'Europe' }}
           currentId={activeCourse.slug}
         />
+        </div>
+        <AfterFirstDisplay>
+          <FilScrub scope={filRef} />
+        </AfterFirstDisplay>
 
         {/* Détail complet du niveau sélectionné (page /academie/:level incluse) */}
         <div className="space-y-8">
