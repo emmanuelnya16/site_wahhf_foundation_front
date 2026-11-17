@@ -5,3 +5,4 @@
  */
 export { default as HeroMotion } from './HeroMotion';
 export { default as FilScrub } from './FilScrub';
+export { default as ScrollExpandMotion } from './ScrollExpandMotion';

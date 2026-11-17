@@ -611,6 +611,79 @@
   }
 }
 
+/*
+ * « Sur le terrain » : Scroll Expand (contrat §10, moment 3, lot 7 ; src/effects/ScrollExpand.tsx).
+ * Mode normal (téléphone, tactile, petit écran, mouvement réduit, ou avant GSAP) : photo 3:2 dans un cadre arrondi,
+ * légende et lien dessous. Mode « on » (posé par ScrollExpandMotion, ordinateur) : la scène occupe l'écran sous
+ * l'en-tête, le cadre la remplit (c'est son clip-path qui s'ouvre), la légende se pose en bas, sur le voile nuit.
+ */
+.expand-frame {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 2;
+  border-radius: var(--radius-card);
+  background: var(--color-surface-section);
+}
+.expand-frame [data-expand-media] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.expand-veil {
+  display: none;
+}
+.expand-caption {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem 1.5rem;
+  color: var(--color-text);
+}
+.expand-caption a {
+  color: var(--color-link);
+}
+.expand-stage[data-expand='on'] {
+  position: relative;
+  height: calc(100svh - var(--header-height));
+}
+.expand-stage[data-expand='on'] .expand-frame {
+  position: absolute;
+  inset: 0;
+  aspect-ratio: auto;
+  border-radius: 0;
+}
+/* Voile nuit qui monte par le bas : 88 % sous la légende (même densité que le voile du hero, brume à 7,6:1 au pire) */
+.expand-stage[data-expand='on'] .expand-veil {
+  display: block;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 40%,
+    color-mix(in srgb, var(--color-nuit) 88%, transparent) calc(100% - 10rem),
+    color-mix(in srgb, var(--color-nuit) 88%, transparent) 100%
+  );
+}
+.expand-stage[data-expand='on'] .expand-caption {
+  position: absolute;
+  left: max(var(--gutter), (100% - var(--container-page)) / 2);
+  right: max(var(--gutter), (100% - var(--container-page)) / 2);
+  bottom: 2.5rem;
+  margin: 0;
+  /* En bas à gauche, l'un sous l'autre : à droite, le lien passerait sous la bulle WhatsApp */
+  flex-direction: column;
+  align-items: flex-start;
+  color: var(--color-text-on-inverse);
+}
+.expand-stage[data-expand='on'] .expand-caption a {
+  color: var(--color-link-on-inverse);
+}
+
 /* Le fil du hero se dessine une fois (contrat §10) ; Fil.tsx l'utilise avec drawOnce, jamais en mouvement réduit. */
 @keyframes fil-draw {
   from { transform: scaleX(0); }

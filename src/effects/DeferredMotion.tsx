@@ -38,3 +38,4 @@ export function AfterFirstDisplay({ children }: { children: ReactNode }) {
 const loadEffects = () => import('./motion');
 export const HeroMotion = lazy(() => loadEffects().then((m) => ({ default: m.HeroMotion })));
 export const FilScrub = lazy(() => loadEffects().then((m) => ({ default: m.FilScrub })));
+export const ScrollExpandMotion = lazy(() => loadEffects().then((m) => ({ default: m.ScrollExpandMotion })));
