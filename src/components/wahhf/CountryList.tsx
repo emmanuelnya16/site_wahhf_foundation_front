@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { ArrowUpRight } from 'lucide-react';
 import { EUROPE_SUPPORTED_COUNTRIES } from '../../data/countries';
 
 interface CountryListProps {
@@ -7,81 +6,42 @@ interface CountryListProps {
   onHoverCountry: (slug: string | null) => void;
 }
 
-export default function CountryList({
-  activeCountrySlug,
-  onHoverCountry,
-}: CountryListProps) {
+/**
+ * Les 10 pays accompagnés en lignes de liste (ajout du 16/11 au §8) : code, nom, « Hors UE » le cas échéant, filet
+ * entre les lignes ; chaque ligne est le lien vers la fiche. Plus de cadres, plus de « Pays #01 · Voir la fiche »
+ * (liste §5 et §6). Le pays survolé ou lié à la mini-carte est souligné : un repère autre que la couleur.
+ *
+ * Îlot clair : la liste est posée dans le panneau blanc de la carte de présence (PresenceSection), qui reste blanc
+ * dans les deux thèmes jusqu'à l'étape de l'accueil. Elle garde donc des couleurs fixes de la palette claire (encre,
+ * encre douce, filet, forêt) au lieu des tokens sémantiques, qui passeraient en clair sur blanc en thème sombre.
+ */
+export default function CountryList({ activeCountrySlug, onHoverCountry }: CountryListProps) {
   return (
-    <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
+    <ul className="grid grid-cols-2 gap-x-6">
       {EUROPE_SUPPORTED_COUNTRIES.map((country) => {
         const isHighlighted = activeCountrySlug === country.slug;
-
         return (
-          <Link
-            key={country.slug}
-            to={`/accompagnement/pays/${country.slug}`}
-            aria-label={`${country.nameFr}, Pays #${country.order}${
-              !country.isEU ? ', Hors Union européenne' : ''
-            } — Voir la fiche`}
-            onMouseEnter={() => onHoverCountry(country.slug)}
-            onMouseLeave={() => onHoverCountry(null)}
-            onFocus={() => onHoverCountry(country.slug)}
-            onBlur={() => onHoverCountry(null)}
-            className={`group flex items-center justify-between gap-1 p-2.5 sm:p-3 rounded-2xl border transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0F3D2E] ${
-              isHighlighted
-                ? 'bg-[#0F3D2E] text-[#F5F1E8] border-[#E8A317] shadow-xs'
-                : 'bg-[#F5F1E8]/65 hover:bg-[#F5F1E8] border-[#0F3D2E]/12 text-[#1B1B18]'
-            }`}
-          >
-            <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
-              <span
-                className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full text-[11px] font-bold flex items-center justify-center shrink-0 transition-colors ${
-                  isHighlighted
-                    ? 'bg-[#E8A317] text-[#1B1B18]'
-                    : 'bg-[#0F3D2E]/10 text-[#0F3D2E]'
-                }`}
-              >
+          <li key={country.slug} className="border-t border-border-subtle">
+            <Link
+              to={`/accompagnement/pays/${country.slug}`}
+              aria-label={`${country.nameFr}${!country.isEU ? ', Hors Union européenne' : ''} — Voir la fiche`}
+              onMouseEnter={() => onHoverCountry(country.slug)}
+              onMouseLeave={() => onHoverCountry(null)}
+              onFocus={() => onHoverCountry(country.slug)}
+              onBlur={() => onHoverCountry(null)}
+              className={`flex min-h-11 items-center gap-3 py-2.5 transition-colors duration-(--dur-fast) ${
+                isHighlighted ? 'text-link underline underline-offset-4 decoration-2' : 'text-text hover:text-link'
+              }`}
+            >
+              <span aria-hidden="true" className="w-7 shrink-0 text-meta text-text-secondary tabular-nums">
                 {country.code}
               </span>
-              <div className="min-w-0">
-                <div className="flex items-center gap-1.5 flex-wrap">
-                  <span
-                    className={`font-medium text-xs sm:text-sm truncate ${
-                      isHighlighted ? 'text-[#F5F1E8]' : 'text-[#1B1B18]'
-                    }`}
-                  >
-                    {country.nameFr}
-                  </span>
-                  {!country.isEU && (
-                    <span
-                      className={`px-1.5 py-0.5 text-[9px] sm:text-[10px] rounded font-semibold shrink-0 ${
-                        isHighlighted
-                          ? 'bg-[#E8A317] text-[#1B1B18]'
-                          : 'bg-[#E8A317]/30 text-[#1B1B18]'
-                      }`}
-                    >
-                      Hors UE
-                    </span>
-                  )}
-                </div>
-                <p
-                  className={`text-[10px] sm:text-[11px] leading-snug ${
-                    isHighlighted ? 'text-[#E8A317]' : 'text-[#1B1B18]/65'
-                  }`}
-                >
-                  Pays #{country.order} · Voir la fiche
-                </p>
-              </div>
-            </div>
-
-            <ArrowUpRight
-              className={`w-4 h-4 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 ${
-                isHighlighted ? 'text-[#E8A317]' : 'text-[#0F3D2E]'
-              }`}
-            />
-          </Link>
+              <span className="text-body min-w-0">{country.nameFr}</span>
+              {!country.isEU && <span className="text-meta text-text-secondary">Hors UE</span>}
+            </Link>
+          </li>
         );
       })}
-    </div>
+    </ul>
   );
 }

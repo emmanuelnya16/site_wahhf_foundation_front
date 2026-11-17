@@ -2,9 +2,11 @@ import { useState, type FormEvent } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Mail, Phone, MapPin, Clock, MessageSquare, Send, Calendar, CheckCircle2, Sparkles, Building } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { useNoIndex } from '@/src/lib/useNoIndex';
 import { cn } from '@/src/lib/utils';
 
 export default function Contact() {
+  useNoIndex();
   const { t, i18n } = useTranslation();
   const [activeTab, setActiveTab] = useState<'quote' | 'group'>('quote');
   const [submitted, setSubmitted] = useState(false);

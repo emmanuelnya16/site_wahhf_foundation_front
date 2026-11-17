@@ -6,3 +6,6 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Rapport du contrôle des textes provisoires (npm run check:todo)
+rapport-textes-provisoires.md

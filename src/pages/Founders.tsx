@@ -2,8 +2,10 @@ import { motion } from 'motion/react';
 import { Sparkles, ArrowRight, Quote, ShieldCheck, Target, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useNoIndex } from '@/src/lib/useNoIndex';
 
 export default function Founders() {
+  useNoIndex();
   const { t } = useTranslation();
 
   const founders = [

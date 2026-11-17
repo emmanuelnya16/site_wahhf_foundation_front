@@ -2,8 +2,10 @@ import { motion } from 'motion/react';
 import { Layers, Sparkles, Building, Briefcase, ArrowRight, CheckCircle2, ShieldCheck, Scale, TrendingUp, Laptop, Film } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useNoIndex } from '@/src/lib/useNoIndex';
 
 export default function Structure() {
+  useNoIndex();
   const { t } = useTranslation();
 
   const holdingRoles = [

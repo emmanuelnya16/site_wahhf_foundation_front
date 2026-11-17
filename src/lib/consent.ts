@@ -38,3 +38,43 @@ export function onConsentChange(callback: (choice: ConsentChoice | null) => void
     window.removeEventListener('storage', onStorage);
   };
 }
+
+/*
+ * Accord explicite pour la vidéo YouTube du hero (MEL-03, décision du 16/11) : YouTube reçoit l'adresse IP du
+ * visiteur. Distinct du bandeau cookies, qui ne parle que des cookies techniques : seul le lien « Activer la vidéo »
+ * du hero donne cet accord. Valeur stockée : '1' ; absente = pas d'accord (image fixe).
+ */
+export const VIDEO_CONSENT_KEY = 'wahhf_video_consent';
+const VIDEO_CONSENT_EVENT = 'wahhf:video-consent';
+
+export function getVideoConsent(): boolean {
+  try {
+    return localStorage.getItem(VIDEO_CONSENT_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+
+export function setVideoConsent(granted: boolean) {
+  try {
+    if (granted) localStorage.setItem(VIDEO_CONSENT_KEY, '1');
+    else localStorage.removeItem(VIDEO_CONSENT_KEY);
+  } catch {
+    // stockage indisponible : l'accord vaut pour cette page seulement
+  }
+  window.dispatchEvent(new CustomEvent<boolean>(VIDEO_CONSENT_EVENT, { detail: granted }));
+}
+
+/** Prévient quand l'accord vidéo change, y compris depuis un autre onglet. */
+export function onVideoConsentChange(callback: (granted: boolean) => void): () => void {
+  const onLocal = (e: Event) => callback((e as CustomEvent<boolean>).detail);
+  const onStorage = (e: StorageEvent) => {
+    if (e.key === VIDEO_CONSENT_KEY) callback(getVideoConsent());
+  };
+  window.addEventListener(VIDEO_CONSENT_EVENT, onLocal);
+  window.addEventListener('storage', onStorage);
+  return () => {
+    window.removeEventListener(VIDEO_CONSENT_EVENT, onLocal);
+    window.removeEventListener('storage', onStorage);
+  };
+}

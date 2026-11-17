@@ -1,15 +1,16 @@
-import { FocusEvent, KeyboardEvent, use, useMemo, useRef, useState } from 'react';
+import { FocusEvent, KeyboardEvent, use, useId, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ComposableMap, Marker } from 'react-simple-maps';
 import { geoAzimuthalEqualArea, geoPath } from 'd3-geo';
 import { motion, useReducedMotion } from 'motion/react';
-import type { FeatureCollection } from 'geojson';
+import type { FeatureCollection, Polygon, Position } from 'geojson';
 import { EUROPE_FRAME_NE_NAMES, EUROPE_SUPPORTED_COUNTRIES, SupportedEuropeCountry } from '../../data/countries';
 import { useElementSize } from '../../lib/useElementSize';
-import { loadEuropeGeo } from './presenceGeo';
+import { useSlicedWork } from '../../lib/useSlicedWork';
+import { loadEuropeGeo, CountryFeature } from './presenceGeo';
+import { EASE_OUT, DURATION } from '../../lib/motionTokens';
 
 const SUPPORTED_BY_NE_NAME = new Map<string, SupportedEuropeCountry>(EUROPE_SUPPORTED_COUNTRIES.map((c) => [c.neName, c]));
-const EASE_OUT = [0.22, 1, 0.36, 1] as const;
 /** Départ de l'arc : coin bas-gauche du cadre (« Depuis le Cameroun »), en pixels. */
 const ORIGIN_INSET = 16;
 
@@ -23,6 +24,32 @@ function arcPath([x0, y0]: [number, number], [x1, y1]: [number, number]) {
   const cy = (y0 + y1) / 2 - (dx / len) * bend;
   return `M${x0.toFixed(1)},${y0.toFixed(1)} Q${cx.toFixed(1)},${cy.toFixed(1)} ${x1.toFixed(1)},${y1.toFixed(1)}`;
 }
+
+type Box = [minLon: number, minLat: number, maxLon: number, maxLat: number];
+type CountryPart = { coords: Polygon['coordinates']; box: Box };
+type Shape = { key: string; d: string; supported: SupportedEuropeCountry | undefined };
+
+/** Emprise (longitude, latitude) d'un polygone, d'après son anneau extérieur. */
+function ringBox(ring: Position[]): Box {
+  let minLon = Infinity, minLat = Infinity, maxLon = -Infinity, maxLat = -Infinity;
+  for (const [lon, lat] of ring) {
+    if (lon < minLon) minLon = lon;
+    if (lon > maxLon) maxLon = lon;
+    if (lat < minLat) minLat = lat;
+    if (lat > maxLat) maxLat = lat;
+  }
+  return [minLon, minLat, maxLon, maxLat];
+}
+
+/** Les parties (polygones) d'un pays, chacune avec son emprise. */
+function countryParts(f: CountryFeature): CountryPart[] {
+  const g = f.geometry;
+  if (g.type === 'Polygon') return [{ coords: g.coordinates, box: ringBox(g.coordinates[0]) }];
+  if (g.type === 'MultiPolygon') return g.coordinates.map((coords) => ({ coords, box: ringBox(coords[0]) }));
+  return [];
+}
+
+const overlaps = (a: Box, b: Box) => a[0] <= b[2] && a[2] >= b[0] && a[1] <= b[3] && a[3] >= b[1];
 
 interface EuropeMiniMapProps {
   activeCountrySlug: string | null;
@@ -42,12 +69,21 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
   const boxRef = useRef<HTMLDivElement>(null);
   const size = useElementSize(boxRef);
   const [focusSlug, setFocusSlug] = useState<string | null>(null);
+  // Masque de l'arc (contrat §10, moment 5) : identifiant sans caractères spéciaux pour url(#…)
+  const arcMaskId = `arc-trace-${useId().replace(/[^a-zA-Z0-9_-]/g, '')}`;
 
   // Cible de l'arc : le pays survolé ou sélectionné ; l'arc reste sur le dernier pays visé (Allemagne au départ)
   const [arcSlug, setArcSlug] = useState(EUROPE_SUPPORTED_COUNTRIES[0].slug);
   if (activeCountrySlug && activeCountrySlug !== arcSlug) setArcSlug(activeCountrySlug);
 
-  const model = useMemo(() => {
+  // Emprise de chaque partie de chaque pays : calculée une fois par chargement des données
+  const parts = useMemo(() => geo.countries.map((f) => ({ f, parts: countryParts(f) })), [geo]);
+
+  // Lot 7 (contrat §10, garde-fou de performance) : seuls les pays (et parties de pays) qui touchent le cadre sont
+  // projetés, et leurs tracés sont calculés par tranches de 8 ms (useSlicedWork). Avant, les 177 pays du monde étaient
+  // projetés d'un bloc, en une tâche de plus de 200 ms au processeur ralenti ×4, pendant le défilement. Dessin identique :
+  // ce qui est écarté tombait hors du cadre.
+  const frameModel = useMemo(() => {
     if (!size || size.w < 80 || size.h < 80) return null;
     const { w, h } = size;
     const frame: FeatureCollection = {
@@ -59,17 +95,41 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
       .rotate([-10, -52])
       .fitExtent([[18, 14], [w - 18, h - 14]], frame)
       .clipExtent([[0, 0], [w, h]]);
+    // Partie du globe visible : les bords du cadre ramenés en longitude et latitude, avec 5° de marge
+    const view: Box = [Infinity, Infinity, -Infinity, -Infinity];
+    for (let i = 0; i <= 8; i++) {
+      const t = i / 8;
+      for (const p of [[t * w, 0], [t * w, h], [0, t * h], [w, t * h]] as [number, number][]) {
+        const ll = projection.invert?.(p);
+        if (!ll || !Number.isFinite(ll[0]) || !Number.isFinite(ll[1])) continue;
+        view[0] = Math.min(view[0], ll[0] - 5);
+        view[1] = Math.min(view[1], ll[1] - 5);
+        view[2] = Math.max(view[2], ll[0] + 5);
+        view[3] = Math.max(view[3], ll[1] + 5);
+      }
+    }
+    const visible: CountryFeature[] = parts.flatMap(({ f, parts: ps }) => {
+      const kept = ps.filter((p) => overlaps(p.box, view));
+      if (!kept.length) return [];
+      if (kept.length === ps.length) return [f];
+      return [{ ...f, geometry: { type: 'MultiPolygon', coordinates: kept.map((k) => k.coords) } }];
+    });
     const path = geoPath(projection);
-    const shapes = geo.countries
-      .flatMap((f) => {
-        const d = path(f);
-        return d ? [{ key: String(f.id ?? f.properties.name), d, supported: SUPPORTED_BY_NE_NAME.get(f.properties.name) }] : [];
-      })
-      // Les pays accompagnés sont dessinés en dernier (leurs bordures restent visibles),
-      // dans l'ordre de la liste (#01 → #10) : c'est aussi l'ordre de tabulation
-      .sort((a, b) => (a.supported?.order ?? '00').localeCompare(b.supported?.order ?? '00'));
-    return { w, h, projection, shapes };
-  }, [geo, size]);
+    const compute = (f: CountryFeature): Shape | null => {
+      const d = path(f);
+      return d ? { key: String(f.id ?? f.properties.name), d, supported: SUPPORTED_BY_NE_NAME.get(f.properties.name) } : null;
+    };
+    return { w, h, projection, visible, compute };
+  }, [geo, parts, size]);
+
+  const computed = useSlicedWork(frameModel?.visible ?? null, frameModel?.compute ?? null);
+  // Les pays accompagnés sont dessinés en dernier (leurs bordures restent visibles),
+  // dans l'ordre de la liste (#01 → #10) : c'est aussi l'ordre de tabulation
+  const shapes = useMemo(
+    () => (computed ? [...computed].sort((a, b) => (a.supported?.order ?? '00').localeCompare(b.supported?.order ?? '00')) : null),
+    [computed]
+  );
+  const model = frameModel && shapes ? { ...frameModel, shapes } : null;
 
   const open = (slug: string) => navigate(`/accompagnement/pays/${slug}`);
   const handleKeyDown = (e: KeyboardEvent<SVGPathElement>, slug: string) => {
@@ -107,8 +167,8 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
       const y = above ? activePoint[1] - 28 : activePoint[1] + 10;
       label = (
         <g transform={`translate(${x.toFixed(1)}, ${y.toFixed(1)})`} pointerEvents="none">
-          <rect x={-lw / 2} y={0} width={lw} height={19} rx={9.5} fill="#0F3D2E" stroke="#E8A317" strokeWidth={0.9} />
-          <text x={0} y={13} textAnchor="middle" fill="#F5F1E8" fontSize={10} fontWeight={600} className="font-sans">
+          <rect x={-lw / 2} y={0} width={lw} height={19} rx={9.5} className="fill-text stroke-text" strokeWidth={0.9} />
+          <text x={0} y={13} textAnchor="middle" fontSize={10} fontWeight={600} className="font-sans fill-surface-raised">
             {text}
           </text>
         </g>
@@ -128,7 +188,7 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
         <g>
           {shapes.map(({ key, d, supported }) => {
             if (!supported) {
-              return <path key={key} d={d} className="fill-[#E4DFD5]" stroke="#FFFFFF" strokeWidth={0.6} aria-hidden="true" pointerEvents="none" />;
+              return <path key={key} d={d} className="fill-surface-section stroke-surface-raised" strokeWidth={0.6} aria-hidden="true" pointerEvents="none" />;
             }
             const isActive = supported.slug === activeCountrySlug;
             return (
@@ -137,17 +197,16 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
                 d={d}
                 role="link"
                 tabIndex={0}
-                aria-label={`${supported.nameFr}, pays #${supported.order}${supported.isEU ? '' : ', hors Union européenne'} : ouvrir la fiche`}
+                aria-label={`${supported.nameFr}${supported.isEU ? '' : ', hors Union européenne'} : ouvrir la fiche`}
                 onClick={() => open(supported.slug)}
                 onPointerEnter={() => onHoverCountry(supported.slug)}
                 onPointerLeave={() => onHoverCountry(null)}
                 onFocus={(e) => handleFocus(e, supported.slug)}
                 onBlur={handleBlur}
                 onKeyDown={(e) => handleKeyDown(e, supported.slug)}
-                stroke={isActive ? '#0F3D2E' : '#C98F12'}
                 strokeWidth={isActive ? 1 : 0.7}
                 strokeLinejoin="round"
-                className={`cursor-pointer outline-none transition-[fill] duration-300 ease-out ${isActive ? 'fill-[#0F3D2E]' : 'fill-[#F2C76E]'}`}
+                className={`cursor-pointer outline-none transition-[fill] duration-(--dur-fast) ease-out ${isActive ? 'fill-foret stroke-foret dark:fill-feuille dark:stroke-feuille' : 'fill-border-subtle stroke-border-input'}`}
               />
             );
           })}
@@ -156,8 +215,8 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
         {/* Indicateur de focus clavier : double trait blanc + vert, au-dessus des voisins */}
         {focusShape && (
           <g pointerEvents="none">
-            <path d={focusShape.d} fill="none" stroke="#FFFFFF" strokeWidth={4.5} strokeLinejoin="round" />
-            <path d={focusShape.d} fill="none" stroke="#0F3D2E" strokeWidth={2} strokeLinejoin="round" />
+            <path d={focusShape.d} fill="none" className="stroke-surface-raised" strokeWidth={4.5} strokeLinejoin="round" />
+            <path d={focusShape.d} fill="none" className="stroke-(--focus)" strokeWidth={2} strokeLinejoin="round" />
           </g>
         )}
 
@@ -175,26 +234,38 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
                 className="cursor-pointer"
               >
                 <circle r={9} fill="transparent" />
-                <circle r={isActive ? 3.6 : 2.3} fill={isActive ? '#E8A317' : '#0F3D2E'} stroke="#FFFFFF" strokeWidth={1} pointerEvents="none" />
+                <circle r={isActive ? 3.6 : 2.3} className={isActive ? 'fill-foret dark:fill-feuille stroke-surface-raised' : 'fill-text stroke-surface-raised'} strokeWidth={1} pointerEvents="none" />
               </Marker>
             );
           })}
         </g>
 
-        {/* Arc « Depuis le Cameroun » : se dessine une fois à chaque nouveau pays (statique en « réduire les animations ») */}
+        {/* Arc « Depuis le Cameroun » (forêt à 40 %, ce n'est pas le fil). Lot 7 (contrat §10) : il se trace une fois quand
+            la carte entre à l'écran, par le masque circulaire centré sur le départ, que MapMotion fait grandir (transform
+            seulement) ; ensuite il change de pays d'un coup. Au repos (HTML), le masque couvre tout l'arc. */}
         <g pointerEvents="none" aria-hidden="true">
           {arcEnd && (
             <>
+              <defs>
+                <mask id={arcMaskId} maskUnits="userSpaceOnUse" x={0} y={0} width={w} height={h}>
+                  <circle
+                    data-arc-mask=""
+                    cx={origin[0]}
+                    cy={origin[1]}
+                    r={Math.hypot(arcEnd[0] - origin[0], arcEnd[1] - origin[1]) + 16}
+                    fill="white"
+                  />
+                </mask>
+              </defs>
+              <g mask={`url(#${arcMaskId})`}>
               <motion.path
                 key={arcSlug}
                 d={arcPath(origin, arcEnd)}
                 fill="none"
-                stroke="#0F3D2E"
+                className="stroke-foret dark:stroke-feuille"
+                strokeOpacity={0.4}
                 strokeWidth={1.6}
                 strokeLinecap="round"
-                initial={reduce ? false : { pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 0.9, ease: EASE_OUT }}
               />
               <motion.circle
                 key={`fin-${arcSlug}`}
@@ -202,18 +273,17 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
                 cy={arcEnd[1]}
                 r={5.5}
                 fill="none"
-                stroke="#0F3D2E"
+                className="stroke-foret dark:stroke-feuille"
+                strokeOpacity={0.4}
                 strokeWidth={1.2}
-                initial={reduce ? false : { opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.7, duration: 0.3 }}
               />
+              </g>
             </>
           )}
           <g transform={`translate(${origin[0]}, ${origin[1]})`}>
-            <circle r={4} fill="#0F3D2E" stroke="#E8A317" strokeWidth={1.5} />
-            <rect x={9} y={-9.5} width={106} height={19} rx={9.5} fill="#0F3D2E" />
-            <text x={62} y={3.5} textAnchor="middle" fill="#F5F1E8" fontSize={9.5} fontWeight={600} className="font-sans">
+            <circle r={4} className="fill-text stroke-surface-raised" strokeWidth={1.5} />
+            <rect x={9} y={-9.5} width={106} height={19} rx={9.5} className="fill-text" />
+            <text x={62} y={3.5} textAnchor="middle" fontSize={9.5} fontWeight={600} className="font-sans fill-surface-raised">
               Depuis le Cameroun
             </text>
           </g>
@@ -225,8 +295,13 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
   }
 
   return (
-    <div ref={boxRef} className="absolute inset-0 rounded-2xl bg-[#F5F1E8] border border-[#0F3D2E]/12 overflow-hidden">
-      {overlay}
+    <div ref={boxRef} className="absolute inset-0 rounded-inner bg-surface-raised overflow-hidden">
+      {overlay ?? (
+        // Pendant le calcul des tracés (quelques images) : le même message que pendant le chargement
+        <div role="status" aria-busy="true" className="absolute inset-0 flex items-center justify-center text-meta text-text-secondary">
+          Chargement de la carte Europe…
+        </div>
+      )}
     </div>
   );
 }

@@ -5,17 +5,21 @@ import { AnimatePresence, motion, useAnimate, useInView, useReducedMotion } from
 import { Maximize2, Minimize2 } from 'lucide-react';
 import { useDialog } from '../../lib/useDialog';
 import { useElementSize } from '../../lib/useElementSize';
+import { useSlicedWork } from '../../lib/useSlicedWork';
 import { prefersReducedMotion } from '../../lib/reducedMotion';
 import { CAMEROON_NEIGHBORS, CAMEROON_REGIONS_LIST, CameroonRegionData } from '../../data/regions';
 import { loadCameroonGeo } from './presenceGeo';
+import { EASE_OUT, EASE_SCREEN } from '../../lib/motionTokens';
 
 /** Espace de coordonnées du SVG (la carte reste nette à toutes les tailles). */
 const W = 480;
 const H = 560;
-const EASE_OUT = [0.22, 1, 0.36, 1] as const;
-const EASE_SCREEN = [0.76, 0, 0.24, 1] as const;
 
 const REGION_BY_ISO = new Map(CAMEROON_REGIONS_LIST.map((r) => [r.iso, r]));
+
+/** Cascade d'apparition des régions par Motion : retirée au lot 6. Lot 7 (contrat §10, moment 5) : la cascade revient,
+ *  jouée par GSAP (src/effects/motion/MapMotion.tsx, qui lit les attributs data-cascade). Ce code reste désactivé. */
+const CASCADE_ENABLED = false;
 
 /** Apparition en cascade : de la côte (sud) vers le nord, selon la latitude des chefs-lieux. */
 const CASCADE_ORDER = [...CAMEROON_REGIONS_LIST]
@@ -55,26 +59,39 @@ export default function CameroonMap({ selectedRegion, onSelectRegion }: Cameroon
     returnFocusRef: openFullscreenRef,
   });
 
-  // Projection calée sur l'emprise réelle des régions ; bande basse réservée aux étiquettes des voisins du sud
-  const { projection, shapes, neighborD } = useMemo(() => {
+  // Projection calée sur l'emprise réelle des régions ; bande basse réservée aux étiquettes des voisins du sud.
+  // Tracés calculés par tranches de 8 ms (useSlicedWork) : d'un bloc, ils faisaient une tâche de plus de 50 ms au
+  // moment où la carte arrive pendant le défilement (contrat §10, lot 7).
+  const { projection, items, compute } = useMemo(() => {
     const projection = geoMercator().fitExtent([[24, 22], [W - 24, H - 46]], geo.regions);
     const path = geoPath(projection);
-    const shapes: RegionShape[] = geo.regions.features.flatMap((f) => {
-      const region = REGION_BY_ISO.get(f.properties?.shapeISO);
-      const d = path(f);
-      return region && d ? [{ region, d }] : [];
-    });
-    return { projection, shapes, neighborD: path(geo.neighborLines) ?? '' };
+    const items: Array<{ f: (typeof geo.regions.features)[number] } | 'voisins'> = [
+      ...geo.regions.features.map((f) => ({ f })),
+      'voisins',
+    ];
+    const compute = (item: (typeof items)[number]): RegionShape | { neighborD: string } | null => {
+      if (item === 'voisins') return { neighborD: path(geo.neighborLines) ?? '' };
+      const region = REGION_BY_ISO.get(item.f.properties?.shapeISO);
+      const d = path(item.f);
+      return region && d ? { region, d } : null;
+    };
+    return { projection, items, compute };
   }, [geo]);
+  const computed = useSlicedWork(items, compute);
+  const ready = computed !== null;
+  const shapes = useMemo(() => (computed ?? []).filter((x): x is RegionShape => 'region' in x), [computed]);
+  const neighborD = useMemo(() => (computed ?? []).find((x): x is { neighborD: string } => 'neighborD' in x)?.neighborD ?? '', [computed]);
 
   // --- Cascade d'apparition (effet 11) ---
   const [scope, animate] = useAnimate<HTMLDivElement>();
   const inView = useInView(scope, { once: true, amount: 0.35 });
   const cascade = useRef<'idle' | 'hidden' | 'done'>('idle');
 
+  // Contrat §10 et annexe B n° 33 (lot 6) : la carte s'affiche d'un coup, plus de cascade. Le code de la cascade
+  // reste en place, désactivé : il suffirait de remettre CASCADE_ENABLED à true.
   useLayoutEffect(() => {
     if (cascade.current !== 'idle') return;
-    if (prefersReducedMotion()) {
+    if (!CASCADE_ENABLED || prefersReducedMotion()) {
       cascade.current = 'done';
       return;
     }
@@ -113,15 +130,22 @@ export default function CameroonMap({ selectedRegion, onSelectRegion }: Cameroon
   return (
     <>
       <div ref={scope} onFocusCapture={revealNow} className="relative w-full max-w-[400px] mx-auto">
-        <RegionMap {...mapProps} inModal={false} />
+        {ready ? (
+          <RegionMap {...mapProps} inModal={false} />
+        ) : (
+          // Même format que la carte (480 × 560) pendant le calcul des tracés : rien ne bouge à l'arrivée
+          <div role="status" aria-busy="true" className="w-full aspect-[480/560] rounded-inner bg-surface-raised flex items-center justify-center text-meta text-text-secondary">
+            Chargement de la carte des 10 régions du Cameroun…
+          </div>
+        )}
 
         {/* Infobulle de survol (doublon visuel de l'aria-label, donc masquée aux lecteurs d'écran) */}
         {hoveredRegion && (
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute top-1 left-1 px-3 py-1.5 rounded-full bg-[#0F3D2E]/95 border border-[#E8A317]/50 text-xs text-[#F5F1E8]"
+            className="pointer-events-none absolute top-1 left-1 px-3 py-1.5 rounded-pill bg-surface-raised text-meta text-text shadow-overlay dark:border dark:border-border-input"
           >
-            <span className="text-[#E8A317] font-semibold">{hoveredRegion.name}</span> · Chef-lieu : {hoveredRegion.capital}
+            <span className="font-semibold">{hoveredRegion.name}</span> · Chef-lieu : {hoveredRegion.capital}
           </div>
         )}
 
@@ -132,7 +156,7 @@ export default function CameroonMap({ selectedRegion, onSelectRegion }: Cameroon
           onClick={() => setIsFullscreen(true)}
           aria-label="Afficher la carte du Cameroun en plein écran"
           title="Plein écran"
-          className="absolute top-0 right-0 w-11 h-11 [@media(pointer:fine)]:w-9 [@media(pointer:fine)]:h-9 rounded-full bg-[#14523E]/90 hover:bg-[#E8A317] text-[#F5F1E8] hover:text-[#1B1B18] border border-[#E8A317]/40 flex items-center justify-center transition-colors duration-300 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5F1E8]"
+          className="absolute top-0 right-0 w-11 h-11 [@media(pointer:fine)]:w-9 [@media(pointer:fine)]:h-9 rounded-pill bg-surface-raised hover:bg-action text-text hover:text-on-action border border-border-input flex items-center justify-center transition-colors duration-(--dur-fast) cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-creme"
         >
           <Maximize2 className="w-4 h-4" />
         </button>
@@ -152,21 +176,20 @@ export default function CameroonMap({ selectedRegion, onSelectRegion }: Cameroon
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.6, ease: EASE_SCREEN }}
-            className="fixed inset-0 z-[120] bg-[#0F3D2E] flex flex-col p-4 sm:p-8 text-[#F5F1E8] outline-none"
+            className="fixed inset-0 z-(--z-modal) bg-surface flex flex-col p-4 sm:p-8 text-text outline-none"
           >
-            <div className="max-w-5xl w-full mx-auto flex items-start justify-between gap-4 border-b border-[#E8A317]/30 pb-4">
+            <div className="max-w-5xl w-full mx-auto flex items-start justify-between gap-4 border-b border-border-subtle pb-4">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#E8A317]">Ancrage local · 10 régions du Cameroun</p>
-                <h2 id={titleId} className="font-serif text-xl sm:text-2xl text-[#F5F1E8]">
+                <h2 id={titleId} className="text-section-title text-text">
                   Région sélectionnée : {selectedRegion.name} ({selectedRegion.capital})
                 </h2>
-                <p className="mt-1 text-xs text-[#F5F1E8]/80">{selectedRegion.antennaTodo}</p>
+                <p className="mt-1 text-meta text-text-secondary">{selectedRegion.antennaTodo}</p>
               </div>
               <button
                 ref={closeFullscreenRef}
                 type="button"
                 onClick={() => setIsFullscreen(false)}
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#E8A317] text-[#1B1B18] text-xs font-semibold cursor-pointer shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5F1E8]"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-pill bg-action text-on-action text-meta font-semibold cursor-pointer shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-creme"
               >
                 <Minimize2 className="w-4 h-4" aria-hidden="true" />
                 <span>Fermer</span>
@@ -180,7 +203,7 @@ export default function CameroonMap({ selectedRegion, onSelectRegion }: Cameroon
             <div
               role="group"
               aria-label="Sélection rapide des 10 régions du Cameroun"
-              className="max-w-5xl w-full mx-auto pt-3 border-t border-[#E8A317]/25 flex sm:flex-wrap sm:justify-center gap-1.5 overflow-x-auto pb-1"
+              className="max-w-5xl w-full mx-auto pt-3 border-t border-border-subtle flex sm:flex-wrap sm:justify-center gap-1.5 overflow-x-auto pb-1"
             >
               {CAMEROON_REGIONS_LIST.map((reg) => {
                 const isSelected = selectedRegion.id === reg.id;
@@ -190,8 +213,8 @@ export default function CameroonMap({ selectedRegion, onSelectRegion }: Cameroon
                     type="button"
                     aria-pressed={isSelected}
                     onClick={() => onSelectRegion(reg)}
-                    className={`px-3 py-1.5 rounded-full text-xs whitespace-nowrap shrink-0 cursor-pointer transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-[#F5F1E8] ${
-                      isSelected ? 'bg-[#E8A317] text-[#1B1B18] font-semibold' : 'bg-white/10 text-[#F5F1E8] hover:bg-white/20'
+                    className={`px-3 py-1.5 inline-flex min-h-11 items-center rounded-pill text-meta whitespace-nowrap shrink-0 cursor-pointer transition-colors duration-(--dur-fast) ${
+                      isSelected ? 'bg-action text-on-action font-semibold' : 'border border-border-input text-text hover:bg-surface-section'
                     }`}
                   >
                     {reg.name}
@@ -281,11 +304,11 @@ function RegionMap({
       >
         {/* 1. Contexte : les 6 voisins, contours très discrets sans remplissage ; le golfe de Guinée reste vide */}
         <g aria-hidden="true" pointerEvents="none">
-          <path d={neighborD} fill="none" stroke="#F5F1E8" strokeOpacity={0.26} strokeWidth={0.8 * Math.min(u, 1.4)} strokeDasharray="3 3" />
+          <path d={neighborD} fill="none" className="stroke-text-secondary" strokeOpacity={0.45} strokeWidth={0.8 * Math.min(u, 1.4)} strokeDasharray="3 3" />
           {showNeighborLabels &&
             CAMEROON_NEIGHBORS.map((n) => (
               <Marker key={n.neName} coordinates={n.labelCoords}>
-                <text textAnchor="middle" fill="#F5F1E8" fillOpacity={0.45} fontSize={8 * u} style={{ letterSpacing: '0.14em' }} className="font-sans">
+                <text textAnchor="middle" fillOpacity={0.45} fontSize={8 * u} style={{ letterSpacing: '0.14em' }} className="font-sans fill-text-secondary">
                   {n.label.map((line, i) => (
                     <tspan key={line} x={0} dy={i === 0 ? 0 : 10 * u}>
                       {line}
@@ -296,7 +319,7 @@ function RegionMap({
             ))}
         </g>
 
-        {/* 2. Les 10 régions : vert moyen, fines bordures or ; survol et sélection s'éclairent en or */}
+        {/* 2. Les 10 régions (contrat, décision du 16/11) : papier (canopée en sombre), bordure trait ; survol filet ; sélection couleur d'action */}
         <g>
           {shapes.map(({ region, d }) => {
             const isSelected = region.id === selectedRegion.id;
@@ -316,12 +339,11 @@ function RegionMap({
                 onFocus={(e) => handleFocus(e, region.id)}
                 onBlur={handleBlur}
                 onKeyDown={(e) => handleKeyDown(e, region)}
-                stroke="#E8A317"
                 strokeOpacity={0.75}
                 strokeWidth={0.7}
                 strokeLinejoin="round"
-                className={`cursor-pointer outline-none transition-[fill] duration-300 ease-out ${
-                  isSelected ? 'fill-[#E8A317]' : isHovered ? 'fill-[#B98A2C]' : 'fill-[#1F6B50]'
+                className={`cursor-pointer outline-none stroke-border-input transition-[fill] duration-(--dur-fast) ease-out ${
+                  isSelected ? 'fill-foret dark:fill-feuille' : isHovered ? 'fill-border-subtle' : 'fill-surface-raised'
                 }`}
               />
             );
@@ -334,7 +356,7 @@ function RegionMap({
             d={selectedShape.d}
             data-cascade={cascadeId(selectedShape.region.id)}
             fill="none"
-            stroke="#FFF3D1"
+            className="stroke-text"
             strokeWidth={1.3}
             strokeLinejoin="round"
             pointerEvents="none"
@@ -344,8 +366,8 @@ function RegionMap({
         {/* 4. Indicateur de focus clavier : double trait sombre + clair, lisible sur le vert comme sur l'or */}
         {focusShape && (
           <g pointerEvents="none">
-            <path d={focusShape.d} fill="none" stroke="#0B1F18" strokeWidth={4 * u} strokeLinejoin="round" />
-            <path d={focusShape.d} fill="none" stroke="#F5F1E8" strokeWidth={2 * u} strokeLinejoin="round" />
+            <path d={focusShape.d} fill="none" className="stroke-surface-raised" strokeWidth={4 * u} strokeLinejoin="round" />
+            <path d={focusShape.d} fill="none" className="stroke-(--focus)" strokeWidth={2 * u} strokeLinejoin="round" />
           </g>
         )}
 
@@ -358,14 +380,15 @@ function RegionMap({
                 <g data-cascade={cascadeId(region.id)}>
                   {isSelected ? (
                     <>
-                      <circle r={8} fill="#0F3D2E" fillOpacity={0.28} />
-                      {!reduce && <circle r={4} fill="none" stroke="#FFF3D1" strokeWidth={1.4} className="map-pulse" />}
-                      <circle r={3.8} fill="#0F3D2E" stroke="#FFF3D1" strokeWidth={1.3} />
+                      <circle r={8} className="fill-text" fillOpacity={0.2} />
+                      {/* Pulsation du chef-lieu retirée (contrat §10, annexe B n° 33 ; lot 6) ; keyframes map-pulse gardées dans index.css */}
+
+                      <circle r={3.8} className="fill-text stroke-surface-raised" strokeWidth={1.3} />
                     </>
                   ) : (
                     <>
-                      <circle r={6.5} fill="#F2B544" fillOpacity={0.24} />
-                      <circle r={2.6} fill="#F5F1E8" stroke="#0F3D2E" strokeWidth={1.1} />
+                      <circle r={6.5} className="fill-foret dark:fill-feuille" fillOpacity={0.18} />
+                      <circle r={2.6} className="fill-surface-raised stroke-text" strokeWidth={1.1} />
                     </>
                   )}
                 </g>
@@ -381,8 +404,8 @@ function RegionMap({
             return (
               <Marker key={region.id} coordinates={region.coordinates}>
                 <g data-cascade={cascadeId(region.id)} transform={`translate(0, ${-7 - pillH})`}>
-                  <rect x={-width / 2} y={0} width={width} height={pillH} rx={pillH / 2} fill="#0F3D2E" stroke="#E8A317" strokeWidth={0.9 * u} />
-                  <text y={pillH / 2} dy="0.35em" textAnchor="middle" fill="#F5F1E8" fontSize={fs} fontWeight={600} className="font-sans">
+                  <rect x={-width / 2} y={0} width={width} height={pillH} rx={pillH / 2} className="fill-text stroke-text" strokeWidth={0.9 * u} />
+                  <text y={pillH / 2} dy="0.35em" textAnchor="middle" fontSize={fs} fontWeight={600} className="font-sans fill-surface-raised">
                     {region.capital}
                   </text>
                 </g>

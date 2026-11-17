@@ -1,0 +1,7 @@
+# Fichiers de /assets : noms avec empreinte (générés par Vite), ils ne changent jamais sous le même nom.
+# Cache d'un an, sans revalidation. Bloc FilesMatch : il passe après celui de public/.htaccess et le remplace.
+<IfModule mod_headers.c>
+  <FilesMatch ".+">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>

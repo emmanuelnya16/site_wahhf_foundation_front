@@ -1,5 +1,6 @@
 import { ReactNode, useEffect, useLayoutEffect, useState } from 'react';
 import { stagger, useAnimate, useInView, useReducedMotion } from 'motion/react';
+import { EASE_OUT, DURATION } from '../lib/motionTokens';
 
 interface StaggerGroupProps {
   className?: string;
@@ -8,7 +9,7 @@ interface StaggerGroupProps {
 
 /**
  * Grille de cartes qui apparaissent décalées quand le groupe entre à l'écran
- * (Motion : useInView once, amount 0,3 ; décalage 0,1 s ; 0,9 s, courbe [0.22, 1, 0.36, 1]).
+ * (Motion : useInView once, amount 0,3 ; décalage 0,1 s ; DURATION.reveal et EASE_OUT de src/lib/motionTokens.ts).
  * Les enfants directs sont animés : aucune modification des cartes elles-mêmes.
  * L'état masqué n'est posé qu'au montage, par JS, et jamais avec « réduire les animations » :
  * sans JS, le contenu reste visible. Opacité seule (les cartes restent atteignables au clavier),
@@ -43,7 +44,7 @@ export default function StaggerGroup({ className = '', children }: StaggerGroupP
       animate(items, { opacity: 1, y: 0 }, { duration: 0 });
       return;
     }
-    animate(items, { opacity: 1, y: 0 }, { duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: stagger(0.1) });
+    animate(items, { opacity: 1, y: 0 }, { duration: DURATION.reveal, ease: EASE_OUT, delay: stagger(0.1) });
   }, [inView, focused, reduce, animate, scope]);
 
   // Clavier : une carte encore (partiellement) masquée qui reçoit le focus termine l'apparition du groupe

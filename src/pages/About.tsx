@@ -2,8 +2,10 @@ import { motion } from 'motion/react';
 import { ShieldCheck, Award, Eye, Compass, Gem, Network, CheckCircle2, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useNoIndex } from '@/src/lib/useNoIndex';
 
 export default function About() {
+  useNoIndex();
   const { t, i18n } = useTranslation();
 
   const values = [

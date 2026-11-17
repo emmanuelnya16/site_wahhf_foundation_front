@@ -1,6 +1,6 @@
 import { ReactNode, useRef } from 'react';
 import { SplitText } from 'gsap/SplitText';
-import { gsap, useGSAP } from '../lib/gsap';
+import { gsap, useGSAP, GSAP_EASE } from '../lib/gsap';
 import { prefersReducedMotion } from '../lib/reducedMotion';
 
 // SplitText n'est importé et enregistré qu'ici (seul effet qui l'utilise).
@@ -38,7 +38,7 @@ export default function SplitReveal({ id, className = '', children }: SplitRevea
           return gsap.from(self.lines, {
             yPercent: 100,
             duration: 1,
-            ease: 'power4.out',
+            ease: GSAP_EASE.reveal,
             stagger: 0.1,
             scrollTrigger: { trigger: el, start: 'top 85%', once: true },
             onComplete: () => {

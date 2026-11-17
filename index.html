@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Site en préparation : aucune page ne doit être indexée (à retirer au lancement, avec robots.txt). -->
+    <meta name="robots" content="noindex" />
     <!-- Thème appliqué AVANT le premier rendu (aucun flash clair pour les visiteurs en thème sombre).
          Même logique que Navbar : choix enregistré, sinon préférence système à la première visite. -->
     <script>
@@ -37,20 +39,29 @@
     />
     <meta name="theme-color" content="#0F3D2E" />
     <link rel="icon" type="image/png" href="/assets/aistudio/LogoWAHHF.c09000774835c3abb59a__1__a1f28366.png" />
-    <!-- Polices auto-hébergées (voir src/index.css) : préchargement des deux fichiers latin utilisés au premier écran -->
-    <link rel="preload" href="/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <!-- Accueil seulement : image d'attente du hero préchargée (mêmes srcset/sizes que l'image, voir src/config/heroVideo.ts).
-         Aucune connexion à YouTube ici : la vidéo n'est chargée qu'après la page, si elle est autorisée. -->
+    <!-- Police du site (voir src/index.css) : Atkinson Hyperlegible Next, latin, 400 pour le texte et 700 pour les titres
+         (24,8 Ko à eux deux). DM Sans et Fraunces ne servent plus qu'aux pages historiques : pas de préchargement. -->
+    <link rel="preload" href="/fonts/atkinson-hyperlegible-next-latin-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/atkinson-hyperlegible-next-latin-600.woff2" as="font" type="font/woff2" crossorigin />
+    <!-- Accueil seulement : image d'attente du hero préchargée (élément LCP ; mêmes srcset/sizes que le <picture>,
+         voir src/config/heroVideo.ts) : portrait sous 768 px, paysage au-delà.
+         Aucune connexion à YouTube ici : la vidéo n'est chargée qu'après la page, avec l'accord du visiteur. -->
     <script>
       if (location.pathname === '/') {
-        var heroPoster = document.createElement('link');
-        heroPoster.rel = 'preload';
-        heroPoster.as = 'image';
-        heroPoster.setAttribute('imagesrcset', '/hero/hero-video-poster-960.webp 960w, /hero/hero-video-poster-1280.webp 1280w');
-        heroPoster.setAttribute('imagesizes', '100vw');
-        heroPoster.setAttribute('fetchpriority', 'high');
-        document.head.appendChild(heroPoster);
+        [
+          ['(max-width: 47.99rem)', '/hero/hero-film-t49-portrait-456.webp 456w, /hero/hero-film-t49-portrait-608.webp 608w'],
+          ['(min-width: 48rem)', '/hero/hero-film-t49-960.webp 960w, /hero/hero-film-t49-1280.webp 1280w, /hero/hero-film-t49-1920.webp 1920w'],
+        ].forEach(function (p) {
+          var link = document.createElement('link');
+          link.rel = 'preload';
+          link.as = 'image';
+          link.type = 'image/webp';
+          link.media = p[0];
+          link.setAttribute('imagesrcset', p[1]);
+          link.setAttribute('imagesizes', '100vw');
+          link.setAttribute('fetchpriority', 'high');
+          document.head.appendChild(link);
+        });
       }
     </script>
     <script type="application/ld+json">
@@ -70,6 +81,18 @@
   </head>
   <body>
     <div id="root"></div>
+    <!-- Accueil seulement : l'image du hero est posée dans le HTML, sous son voile, avant le JavaScript (élément LCP,
+         PERF-01). React remplace ce contenu à son premier rendu par le même hero (mêmes fichiers, même cadre :
+         .hero-shell dans src/index.css). Décoratif, masqué aux lecteurs d'écran. -->
+    <script>
+      if (location.pathname === '/') {
+        document.getElementById('root').innerHTML =
+          '<div class="hero-shell" aria-hidden="true"><picture>' +
+          '<source media="(max-width: 47.99rem)" type="image/webp" srcset="/hero/hero-film-t49-portrait-456.webp 456w, /hero/hero-film-t49-portrait-608.webp 608w" sizes="100vw">' +
+          '<img src="/hero/hero-film-t49-1280.webp" srcset="/hero/hero-film-t49-960.webp 960w, /hero/hero-film-t49-1280.webp 1280w, /hero/hero-film-t49-1920.webp 1920w" sizes="100vw" width="1920" height="1080" alt="" fetchpriority="high">' +
+          '</picture><div class="hero-veil"></div></div>';
+      }
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

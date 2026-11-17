@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "clean": "rm -rf dist",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "check:todo": "vite build && node scripts/check-textes-provisoires.mjs --out rapport-textes-provisoires.md"
   },
   "dependencies": {
     "@google/genai": "^1.29.0",

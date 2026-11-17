@@ -5,8 +5,10 @@ import {
   Camera, Languages, Copy, Check, ExternalLink, ChevronRight
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { useNoIndex } from '@/src/lib/useNoIndex';
 
 export default function VkiBusiness() {
+  useNoIndex();
   const { t, i18n } = useTranslation();
   const [copiedLabel, setCopiedLabel] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);

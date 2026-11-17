@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Camera, MapPin } from 'lucide-react';
+import PageHeader, { PageTitle, PageIntro } from '../components/wahhf/PageHeader';
+import { MapPin } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
 import GalleryGrid from '../components/wahhf/GalleryGrid';
 import { AlbumId, GALLERY_ALBUMS, GALLERY_ITEMS } from '../data/gallery';
@@ -19,10 +20,10 @@ export default function GalleryPage() {
   const visible = filter === 'tout' ? albums : albums.filter(({ album }) => album.id === filter);
 
   const chip = (active: boolean) =>
-    `px-4 py-2 rounded-full text-sm whitespace-nowrap shrink-0 cursor-pointer transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0F3D2E] dark:focus-visible:outline-[#E8A317] ${
+    `px-4 py-2 rounded-pill text-sm whitespace-nowrap shrink-0 cursor-pointer transition-colors duration-(--dur-fast) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
       active
-        ? 'bg-[#0F3D2E] text-[#F5F1E8] dark:bg-[#E8A317] dark:text-[#1B1B18] font-semibold'
-        : 'bg-[#0F3D2E]/8 text-[#1B1B18] hover:bg-[#0F3D2E]/15 dark:bg-[#F5F1E8]/10 dark:text-[#F5F1E8] dark:hover:bg-[#F5F1E8]/18'
+        ? 'bg-accent text-creme dark:text-v1-encre font-semibold'
+        : 'bg-nuit/8 text-text hover:bg-nuit/15 dark:bg-creme/10 dark:hover:bg-creme/18'
     }`;
 
   return (
@@ -32,21 +33,15 @@ export default function GalleryPage() {
         description="Photos et vidéos de WAHHF Foundation : First Open Day & Boot Camp à Yaoundé, rencontres de la communauté et actions sur le terrain."
       />
 
-      <section className="pt-32 pb-16 bg-[#0F3D2E] text-[#F5F1E8]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#E8A317]">
-            <Camera className="w-4 h-4" aria-hidden="true" />
-            Galerie
-          </span>
-          <h1 className="font-serif font-normal text-[clamp(2.1rem,4.5vw,3.8rem)] leading-tight">La fondation en images</h1>
-          <p className="text-base sm:text-xl text-[#F5F1E8]/85 max-w-3xl">
-            Retour en photos et en vidéos sur nos actions : la première journée portes ouvertes et le Boot Camp de Yaoundé, nos rencontres
-            et le terrain.
-          </p>
-        </div>
-      </section>
+      <PageHeader>
+        <PageTitle>La fondation en images</PageTitle>
+        <PageIntro>
+          Retour en photos et en vidéos sur nos actions : la première journée portes ouvertes et le Boot Camp de Yaoundé, nos rencontres
+          et le terrain.
+        </PageIntro>
+      </PageHeader>
 
-      <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-14">
+      <section className="container-page section-space space-y-14">
         <div role="group" aria-label="Filtrer par album" className="flex gap-2 overflow-x-auto sm:flex-wrap pb-1 -mx-1 px-1">
           <button type="button" aria-pressed={filter === 'tout'} onClick={() => setFilter('tout')} className={chip(filter === 'tout')}>
             Tout ({GALLERY_ITEMS.length})
@@ -68,11 +63,11 @@ export default function GalleryPage() {
           // Clé = filtre : la grille réapparaît en douceur quand on change d'album
           <section key={`${filter}-${album.id}`} aria-labelledby={`album-${album.id}`} className="space-y-6">
             <div className="space-y-1">
-              <h2 id={`album-${album.id}`} className="font-serif font-normal text-2xl sm:text-3xl text-[#1B1B18] dark:text-[#F5F1E8]">
+              <h2 id={`album-${album.id}`} className="font-serif font-normal text-2xl sm:text-3xl text-text">
                 {album.title}
               </h2>
-              <p className="inline-flex items-center gap-1.5 text-sm text-[#1B1B18]/70 dark:text-[#F5F1E8]/70">
-                <MapPin className="w-4 h-4 text-gold-text dark:text-[#E8A317]" aria-hidden="true" />
+              <p className="inline-flex items-center gap-1.5 text-sm text-v1-encre/70 dark:text-creme/70">
+                <MapPin className="w-4 h-4 text-accent-or" aria-hidden="true" />
                 {album.meta} · {items.length} {items.length > 1 ? 'éléments' : 'élément'}
               </p>
             </div>

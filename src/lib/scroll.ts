@@ -6,8 +6,18 @@ import type Lenis from 'lenis';
  * sinon (réduire les animations, avant le démarrage) on utilise le défilement natif, instantané.
  */
 
-/** Hauteur réservée au header fixe (doit rester égale à --header-offset dans index.css). */
-export const HEADER_OFFSET = 96;
+/**
+ * Hauteur réservée au header fixe, lue dans --header-offset (src/index.css) : une seule source de vérité.
+ * 96 px (6rem) si la variable est absente ou illisible.
+ */
+export function headerOffset(): number {
+  if (typeof document === 'undefined') return 96;
+  const root = document.documentElement;
+  const raw = getComputedStyle(root).getPropertyValue('--header-offset').trim();
+  const value = parseFloat(raw);
+  if (!Number.isFinite(value)) return 96;
+  return raw.endsWith('rem') ? value * parseFloat(getComputedStyle(root).fontSize) : value;
+}
 
 let lenisInstance: Lenis | null = null;
 
@@ -36,7 +46,7 @@ export function scrollToElement(el: HTMLElement, { immediate = false }: { immedi
     lenisInstance.scrollTo(el, { immediate, force: true });
     return;
   }
-  const top = el.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
+  const top = el.getBoundingClientRect().top + window.scrollY - headerOffset();
   window.scrollTo({ top: Math.max(0, top), left: 0, behavior: 'instant' as ScrollBehavior });
 }
 

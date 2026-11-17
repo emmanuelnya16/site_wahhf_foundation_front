@@ -1,4 +1,5 @@
 import { motion, Variants } from 'motion/react';
+import { EASE_OUT } from '../lib/motionTokens';
 
 /** Conteneur : les lignes montent l'une après l'autre (décalage 0,12 s). */
 export const maskedLinesContainer: Variants = {
@@ -9,7 +10,7 @@ export const maskedLinesContainer: Variants = {
 /** Chaque ligne monte derrière son masque (1,1 s, courbe douce, sans rebond). */
 export const maskedLine: Variants = {
   hidden: { y: '110%' },
-  show: { y: '0%', transition: { duration: 1.1, ease: [0.22, 1, 0.36, 1] } },
+  show: { y: '0%', transition: { duration: 1.1, ease: EASE_OUT } },
 };
 
 // Composants Motion créés une seule fois (jamais dans le rendu, sinon remontage à chaque mise à jour)

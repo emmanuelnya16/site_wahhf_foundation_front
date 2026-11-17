@@ -14,7 +14,67 @@
 @custom-variant pin (@media (min-width: 1024px) and (min-height: 760px) and (pointer: fine) and (prefers-reduced-motion: no-preference));
 
 /* Polices auto-hébergées (fichiers OFL dans public/fonts, styles droits uniquement :
-   aucune requête vers Google, préchargement possible). Axes variables : graisse + taille optique. */
+   aucune requête vers Google, préchargement possible).
+
+   Police du site (contrat §4) : Atkinson Hyperlegible Next, 400 et 600, paquet @fontsource 5.3.0
+   (licence : public/fonts/LICENSE-atkinson-hyperlegible-next.txt). Latin préchargé (index.html),
+   latin-ext chargé seulement si un caractère du sous-ensemble apparaît (unicode-range). */
+@font-face {
+  font-family: 'Atkinson Hyperlegible Next';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/atkinson-hyperlegible-next-latin-ext-400.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Atkinson Hyperlegible Next';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/atkinson-hyperlegible-next-latin-400.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Atkinson Hyperlegible Next';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/atkinson-hyperlegible-next-latin-ext-600.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Atkinson Hyperlegible Next';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/atkinson-hyperlegible-next-latin-600.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* Police de secours aux mêmes encombrements, le temps du chargement (pas de saut de mise en page) :
+   largeurs mesurées dans Chrome sur un texte français (Atkinson / Arial), hauteurs 984 / 316 sur 1 000. */
+@font-face {
+  font-family: 'Atkinson Fallback';
+  font-weight: 400;
+  src: local('Arial'), local('ArialMT');
+  size-adjust: 97.85%;
+  ascent-override: 100.56%;
+  descent-override: 32.29%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Atkinson Fallback';
+  font-weight: 600;
+  src: local('Arial Bold'), local('Arial-BoldMT');
+  size-adjust: 96.21%;
+  ascent-override: 102.28%;
+  descent-override: 32.84%;
+  line-gap-override: 0%;
+}
+
+/* DM Sans et Fraunces : retirées du site (contrat §4.2). Elles ne servent plus qu'aux pages historiques
+   IROKO, qui ne doivent pas changer : Layout pose .legacy-fonts sur leur contenu (voir plus bas).
+   Plus de préchargement : les fichiers ne sont téléchargés que sur ces pages. */
 /* DM Sans — latin-ext */
 @font-face {
   font-family: 'DM Sans';
@@ -53,76 +113,398 @@
 }
 
 @theme {
-  --font-serif: "Fraunces", Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-cursive: "Fraunces", Georgia, serif;
+  /* Une seule famille (contrat §4.1). font-serif pointe aussi vers Atkinson : les titres qui portent
+     encore cette classe passent à la police du site sans autre changement. */
+  --font-sans: "Atkinson Hyperlegible Next", "Atkinson Fallback", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Atkinson Hyperlegible Next", "Atkinson Fallback", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-cursive: "Fraunces", Georgia, serif; /* pages historiques seulement */
 
-  /* WAHHF Official Brand Palette */
-  --color-wahhf-green: #0F3D2E;
-  --color-wahhf-green-light: #165B44;
-  --color-wahhf-green-dark: #09261C;
-  --color-wahhf-gold: #E8A317;
-  --color-wahhf-gold-dark: #C4860C;
-  --color-wahhf-red: #C8102E;
-  --color-wahhf-red-hover: #A50C25;
-  --color-wahhf-cream: #F5F1E8;
-  --color-wahhf-cream-card: #FFFFFF;
-  --color-wahhf-ink: #1B1B18;
-  --color-wahhf-muted: #57554E;
+  /* Échelle typographique nommée (contrat §4.3) : titres en 600, interligne 1,1, approche -0,01 em (réglage choisi
+     le 16/11 sur planches comparées) ; tailles fluides de 320 px jusqu'au plafond
+     (display vers 1 030 px, page-title et section-title vers 1 120 px). */
+  --text-display: clamp(2.5rem, 1.6rem + 4.5vw, 4.5rem);
+  --text-display--line-height: 1.1;
+  --text-display--letter-spacing: -0.01em;
+  --text-display--font-weight: 600;
+  --text-page-title: clamp(2rem, 1.5rem + 2.5vw, 3.25rem);
+  --text-page-title--line-height: 1.1;
+  --text-page-title--letter-spacing: -0.01em;
+  --text-page-title--font-weight: 600;
+  --text-section-title: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);
+  --text-section-title--line-height: 1.1;
+  --text-section-title--letter-spacing: -0.01em;
+  --text-section-title--font-weight: 600;
+  /* Une seule graisse forte sur tout le site : 600 (décision du 16/11 ; seuls 400 et 600 sont chargés).
+     font-bold vaut donc 600 ; les pages historiques reprennent 700 (.legacy-fonts). */
+  --font-weight-bold: 600;
+  /* Container unique (contrat §5) : 72 rem de contenu, utilitaire max-w-page et classe container-page */
+  --container-page: 72rem;
+  --text-meta: 0.9375rem;   /* 15 px : légendes, dates, sources, aide des champs */
+  --text-meta--line-height: 1.5;
 
-  /* Semantic Theme Aliases for Preserved Components */
-  --color-primary: #0F3D2E;
-  --color-primary-light: #165B44;
-  --color-primary-hover: #09261C;
-  --color-secondary: #E8A317;
-  --color-secondary-hover: #C4860C;
-  --color-ink: #1B1B18;
-  --color-page-bg: #F5F1E8;
-  --color-footer-bg: #0F3D2E;
-  --color-card-bg: #FFFFFF;
-  --color-card-surface: #EFE9DC;
-  --color-search-bg: #EBE4D5;
-  --color-badge-green: #0F3D2E;
-
-  /* Legacy tokens mapped to WAHHF palette (zero violet/orange) */
+  /* Anciens tokens des 8 pages historiques IROKO (seules à les utiliser) : à retirer avec elles */
   --color-ktv-red: #0F3D2E;
   --color-ktv-orange: #E8A317;
-  --color-accent-orange: #E8A317;
   --color-ktv-blue: #0F3D2E;
   --color-ktv-black: #09261C;
 }
 
-/* Or lisible pour le TEXTE (AA ≥ 4,5:1). L'or #E8A317 reste réservé aux décors, filets,
-   fonds de boutons (texte foncé) et aux textes posés sur le vert profond #0F3D2E. */
+/* =============================================================================
+   COUCHE 1 : TOKENS D'UNIVERS
+   Les couleurs du monde de la fondation, valeurs fixes (identiques en clair et en sombre).
+   « static » : toujours émis en variables CSS (--color-nuit…), la couche 2 s'y réfère.
+   « inline » : les utilitaires reçoivent la valeur littérale ; avec une opacité (bg-nuit/10),
+   Tailwind calcule le même hex à 8 chiffres qu'avec l'ancien bg-[#0F3D2E]/10 : rendu identique.
+   ============================================================================= */
+@theme static inline {
+  /* Verts */
+  --color-nuit: #0F3D2E;        /* vert forêt profond : bandeaux, actions, texte d'accent */
+  --color-feuillage: #14523E;    /* vert moyen : survols, encarts dans les bandeaux */
+  --color-fougere: #1B634B;      /* étape intermédiaire du filet de titre */
+  --color-v1-canopee: #1F6B50;      /* régions de la carte du Cameroun */
+  --color-v1-sous-bois: #132A21;    /* sombre : cartes et surfaces élevées */
+  --color-v1-nuit: #0B1F18;         /* sombre : fond de page */
+  --color-nuit-profonde: #081C15;/* sombre : fond du body, masqué par la page (voir TOK-03) */
+  /* Ors */
+  --color-or: #E8A317;           /* or de marque : décors, fonds de boutons, texte sur vert */
+  --color-or-vif: #F3B32B;       /* survol des boutons or */
+  --color-or-soleil: #F2B029;    /* survol du bouton or de la section Mobilité (accueil) */
+  --color-or-clair: #F2B544;     /* petit texte or sur vert moyen (4,9:1 sur feuillage) */
+  --color-or-pale: #F2C76E;      /* pays de la mini-carte d'Europe */
+  --color-or-sombre: #C98F12;    /* contour des pays de la mini-carte */
+  --color-or-texte: #8A5A00;     /* or lisible sur clair : 5,2:1 sur crème, 5,9:1 sur blanc */
+  --color-ocre: #B57B0B;         /* icône d'avertissement de la section Présence */
+  --color-bronze: #B98A2C;       /* région survolée de la carte */
+  --color-ivoire: #FFF3D1;       /* repères de la carte */
+  /* Clairs */
+  --color-creme: #F5F1E8;        /* fond de page clair, texte sur vert */
+  --color-sable: #E4DFD5;        /* terres de la mini-carte */
+  --color-blanc: #FFFFFF;
+  --color-vki-brume: #F4F6FA;        /* fond de la page historique VKI */
+  /* Encres et gris */
+  --color-v1-encre: #1B1B18;
+  --color-gris-encre: #57554E;
+  --color-gris-pierre: #C2BDB0;
+  /* Rouges */
+  --color-rouge: #C8102E;        /* réservé au bouton « Faire un don » */
+  --color-rouge-fonce: #A80D26;  /* survol du don */
+  --color-grenat: #B42318;       /* erreurs en clair : 6,5:1 sur blanc, 5,8:1 sur crème */
+  --color-v1-corail: #FDA29B;       /* erreurs en sombre : 7,8:1 sur #132A21 */
+  --color-v1-menthe: #34D399;       /* succès en sombre (plus utilisé) */
+
+  /* --- Palette du contrat (docs/design-contract.md §3). Les composants passent par la couche 2. ---
+     Votre brief : brume, sauge, encre, encre-douce, foret, nuit (plus haut), soleil, miel, coeur. */
+  --color-brume: #F7F8F5;        /* fond de page */
+  --color-sauge: #E3ECE6;        /* fond de section, carte posée sur la page */
+  --color-encre: #1F2D27;        /* texte courant, titres */
+  --color-encre-douce: #4A5A53;  /* texte secondaire, méta */
+  --color-foret: #24503F;        /* actions, liens, focus et fil sur clair */
+  --color-soleil: #F2B544;       /* accent sur nuit et en sombre ; jamais sur fond clair */
+  --color-miel: #8A5A00;         /* petit texte or sur clair */
+  --color-coeur: #C8102E;        /* bouton de don uniquement */
+  /* Ajouts (§3.7 : chacun sert à au moins deux endroits) */
+  --color-papier: #FFFFFF;       /* champs, cartes sur sauge, libellé du bouton de don */
+  --color-trait: #6F8078;        /* bordure des champs et cases (3:1 sur tous les fonds clairs) */
+  --color-filet: #CCD8D1;        /* séparateur décoratif */
+  --color-brume-douce: #C5D3CC;  /* texte secondaire sur nuit */
+  --color-coeur-fonce: #A50D26;  /* survol et appui du bouton de don */
+  /* États (§3.2) : erreur, alerte, information ; pas de succès (aucun n'est affiché) */
+  --color-brique: #B42318;
+  --color-brique-pale: #FBEAE7;
+  --color-corail: #F2A497;
+  --color-ambre: #9C4A00;
+  --color-ambre-pale: #FDEBDC;
+  --color-ambre-clair: #F7A35C;
+  --color-ciel: #245E78;
+  --color-ciel-pale: #E3EEF3;
+  --color-ciel-clair: #93C6DE;
+  /* Thème sombre (§3.3) */
+  --color-humus: #0E1B16;        /* fond de page */
+  --color-sous-bois: #14261F;    /* fond de section */
+  --color-canopee: #1B3129;      /* cartes, champs, encadrés */
+  --color-brume-voilee: #E8EEEA; /* texte courant */
+  --color-lichen: #A9BAB2;       /* texte secondaire */
+  --color-soleil-pale: #F6C76A;  /* survol des actions soleil */
+  --color-feuille: #7DBA98;      /* le fil en sombre et sur nuit */
+  --color-trait-nuit: #71857B;   /* bordure des champs */
+  --color-filet-nuit: #2C4339;   /* séparateur décoratif */
+
+  /* Rayons : 12 / 20 / pilule (contrat §9) */
+  --radius-inner: 12px;                /* champs, cases, encadrés d'état, vignettes */
+  --radius-card: 20px;                 /* cartes cliquables, photos, fenêtres, menus */
+  --radius-pill: calc(infinity * 1px); /* boutons, badges, filtres */
+
+  /* Courbes partagées avec Motion et GSAP (src/lib/motionTokens.ts) */
+  --ease-reveal: cubic-bezier(0.22, 1, 0.36, 1); /* apparitions, survols doux */
+  --ease-screen: cubic-bezier(0.76, 0, 0.24, 1); /* rideau, menu, changement d'écran */
+  --ease-theme: cubic-bezier(0.16, 1, 0.3, 1);   /* bascule clair / sombre */
+  /* Lot 7 (contrat §10) : mêmes courbes que GSAP, pour ce qui joue en CSS avant l'arrivée de GSAP */
+  --ease-power2-out: cubic-bezier(0.33, 1, 0.68, 1);  /* GSAP power2.out (cubique) : fondus courts */
+  --ease-power3-out: cubic-bezier(0.25, 1, 0.5, 1);   /* GSAP power3.out (quartique) : titre du hero */
+  --ease-power3-inout: cubic-bezier(0.76, 0, 0.24, 1); /* GSAP power3.inOut : tracé du fil */
+
+  /* Espacement des lettres des sur-titres */
+  --tracking-kicker: 0.2em;
+}
+
+/* =============================================================================
+   COUCHE 2 : TOKENS SÉMANTIQUES
+   Ce que la couleur signifie. Valeurs dans :root (clair) et .dark (sombre) plus bas :
+   un composant qui n'utilise que ces tokens change de thème sans classe dark:.
+   ============================================================================= */
 @theme inline {
+  /* Texte courant : 17 px, puis 18 px dès 768 px (contrat §4.3) */
+  --text-body: var(--body-size);
+  --text-body--line-height: 1.6;
+  /* Profondeur : une ombre unique pour ce qui flotte (en sombre : aucune, une bordure à la place) */
+  --shadow-overlay: var(--ombre-flottante);
+
+  /* Surfaces */
+  --color-surface: var(--surface);               /* fond de page */
+  --color-surface-section: var(--surface-section); /* sections alternées (décalage de fond) */
+  --color-surface-raised: var(--surface-raised); /* champs ; cartes posées sur une section */
+  --color-surface-card: var(--surface-card);     /* cartes posées directement sur la page */
+  --color-surface-inset: var(--surface-inset);   /* champs, tuiles en creux */
+  --color-surface-inverse: var(--surface-inverse); /* bandes et footer (nuit) */
+  /* Posé sur nuit (même en clair) */
+  --color-text-on-inverse: var(--text-on-inverse);
+  --color-text-secondary-on-inverse: var(--text-secondary-on-inverse);
+  --color-link: var(--link);
+  --color-link-on-inverse: var(--link-on-inverse);
+  --color-action-on-inverse: var(--action-on-inverse);
+  --color-action-on-inverse-hover: var(--action-on-inverse-hover);
+  --color-on-action-on-inverse: var(--on-action-on-inverse);
+  /* Bouton de don */
+  --color-donate: var(--donate);
+  --color-donate-hover: var(--donate-hover);
+  --color-donate-outline: var(--donate-outline);
+  --color-on-donate: var(--on-donate);
+  /* Le fil (signature) */
+  --color-fil: var(--fil);
+  --color-reading-bar: var(--reading-bar);
+  --color-fil-on-inverse: var(--fil-on-inverse);
+  /* Fonds des encadrés d'état */
+  --color-danger-bg: var(--danger-bg);
+  --color-warning-bg: var(--warning-bg);
+  --color-info-bg: var(--info-bg);
+  /* Texte : 4 niveaux */
+  --color-text: var(--text);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-text-muted: var(--text-muted);
+  /* Accent de marque, un par thème (vert sur clair, or sur sombre) */
+  --color-accent: var(--accent);
+  --color-accent-or: var(--accent-or);
+  /* Action principale */
+  --color-action: var(--action);
+  --color-action-hover: var(--action-hover);
+  --color-on-action: var(--on-action);
+  /* Bordures */
+  --color-border-subtle: var(--border-subtle);
+  --color-border-soft: var(--border-soft);
+  --color-border: var(--border);
+  --color-border-input: var(--border-input);
+  --color-border-strong: var(--border-strong);
+  --color-border-on-inverse: var(--border-on-inverse);
+  --color-border-subtle-on-inverse: var(--border-subtle-on-inverse);
+  /* Focus et états */
+  --color-focus: var(--focus);
+  --color-danger: var(--danger);
+  --color-warning: var(--warning);
+  --color-info: var(--info);
+  /* Or lisible pour le TEXTE (AA ≥ 4,5:1). L'or de marque reste réservé aux décors, filets,
+     fonds de boutons (texte foncé) et aux textes posés sur le vert forêt. */
   --color-gold-text: var(--gold-text);
   --color-gold-on-green: var(--gold-text-on-green);
 }
 
+/*
+ * Valeurs des tokens sémantiques (contrat §3.4). Tous les ratios du tableau de l'annexe A du contrat
+ * (calculés, tronqués à une décimale). Les principaux :
+ *   clair : encre/brume 13,4 · encre-douce/brume 6,8 · forêt/brume 8,5 (liens, focus, fil) · brume/forêt 8,5
+ *           (texte des actions) · trait/sauge 3,4 (bordure des champs, pire cas) · miel/sauge 4,9.
+ *   sur nuit (même en clair) : brume/nuit 11,4 · brume-douce/nuit 7,8 · soleil/nuit 6,6 · encre/soleil 7,8.
+ *   sombre : brume-voilée/humus 15,0 · lichen/canopée 6,8 · soleil/humus 9,6 · encre/soleil-pâle 9,0 ·
+ *           trait-nuit/canopée 3,5 · feuille/nuit 5,4.
+ *   états : brique/papier 6,5 · ambre/sauge 5,1 · ciel/sauge 5,9 ; sombre : corail 6,9 · ambre-clair 6,8 ·
+ *           ciel-clair 7,4 sur canopée.
+ */
 :root {
+  color-scheme: light;
   --header-offset: 6rem;
-  /* Texte or sur fond clair (crème, blanc) : 5,3:1 sur crème, 5,9:1 sur blanc */
-  --gold-text: #8A5A00;
-  /* Petit texte or sur vert moyen #14523E ou badge teinté or : 5,0:1 */
-  --gold-text-on-green: #F2B544;
-  --wahhf-bg: #F5F1E8;
-  --wahhf-surface: #FFFFFF;
-  --wahhf-surface-alt: #ECE6D8;
-  --wahhf-text: #1B1B18;
-  --wahhf-text-muted: #57554E;
-  --wahhf-border: rgba(27, 27, 24, 0.1);
-  --wahhf-green: #0F3D2E;
-  --wahhf-gold: #E8A317;
-  --wahhf-red: #C8102E;
+  /* Hauteur réelle de l'en-tête fixe (barre + filet de 1 px) : 65 px, 73 px dès 640 px. */
+  --header-height: 4.0625rem;
+  /* Colonne de texte du hero (contrat §6) : le voile reste dense jusqu'à sa fin. */
+  --hero-text-width: 34rem;
+  --body-size: 1.0625rem; /* 17 px ; 18 px dès 768 px (plus bas) */
+
+  /* Surfaces : page brume → section sauge → carte et champ papier ; bandes et footer nuit */
+  --surface: var(--color-brume);
+  --surface-section: var(--color-sauge);
+  --surface-raised: var(--color-papier);
+  --surface-card: var(--color-sauge);
+  --surface-inset: var(--color-papier);
+  --surface-inverse: var(--color-nuit);
+  /* Texte : courant et secondaire (les niveaux tertiary et muted rejoignent le secondaire) */
+  --text: var(--color-encre);
+  --text-secondary: var(--color-encre-douce);
+  --text-tertiary: var(--color-encre-douce);
+  --text-muted: var(--color-encre-douce);
+  --text-on-inverse: var(--color-brume);
+  --text-secondary-on-inverse: var(--color-brume-douce);
+  /* Un seul accent par fond : forêt sur clair, soleil sur nuit et en sombre */
+  --accent: var(--color-foret);
+  --accent-or: var(--color-miel);
+  --link: var(--color-foret);
+  --link-on-inverse: var(--color-soleil);
+  --action: var(--color-foret);
+  --action-hover: var(--color-nuit);
+  --on-action: var(--color-brume);
+  --action-on-inverse: var(--color-soleil);
+  --action-on-inverse-hover: var(--color-soleil-pale);
+  --on-action-on-inverse: var(--color-encre);
+  --donate: var(--color-coeur);
+  --donate-hover: var(--color-coeur-fonce);
+  /* Contour du bouton de don en variante « outline » (en-tête, menu mobile) : cœur sur clair (5,5:1 sur brume) */
+  --donate-outline: var(--color-coeur);
+  --on-donate: var(--color-papier);
+  --fil: var(--color-foret);
+  /* Barre de lecture des articles (décision du 16/11) : forêt, plus d'or */
+  --reading-bar: var(--color-foret);
+  --fil-on-inverse: var(--color-feuille);
+  /* Bordures : filets décoratifs, traits fonctionnels (champs, cases) */
+  --border-subtle: var(--color-filet);
+  --border-soft: var(--color-filet);
+  --border: var(--color-filet);
+  --border-input: var(--color-trait);
+  --border-strong: var(--color-trait);
+  /* Contour d'un contrôle posé sur nuit (pastilles, boutons-icônes, liseré du don), même en clair :
+     brume à 60 % : 5,1:1 sur nuit, 4,1:1 sur feuillage. */
+  --border-on-inverse: color-mix(in srgb, var(--color-brume) 60%, transparent);
+  /* Filet décoratif posé sur nuit (listes sur les bandes vertes) : brume à 20 %, comme filet-nuit en sombre. */
+  --border-subtle-on-inverse: color-mix(in srgb, var(--color-brume) 20%, transparent);
+  /* États */
+  --danger: var(--color-brique);
+  --danger-bg: var(--color-brique-pale);
+  --warning: var(--color-ambre);
+  --warning-bg: var(--color-ambre-pale);
+  --info: var(--color-ciel);
+  --info-bg: var(--color-ciel-pale);
+  --gold-text: var(--color-miel);
+  --gold-text-on-green: var(--color-soleil);
+  /* L'ombre unique (contrat §9) : encre à 28 % */
+  --ombre-flottante: 0 12px 32px -16px rgb(31 45 39 / 0.28);
+
+  /* Anneau de focus clavier (3:1 contre le fond) : forêt sur clair (8,5:1 sur brume),
+     soleil sur nuit et sur forêt (6,6:1 et 4,9:1). */
+  --focus-on-light: var(--color-foret);
+  --focus-on-green: var(--color-soleil);
+  --focus: var(--focus-on-light);
+
+  /* Fond et texte du body (le fond de page visible est celui de Layout : token surface) */
+  --wahhf-bg: var(--color-brume);
+  --wahhf-text: var(--color-encre);
+
+  /* Mise en page (contrat §5) : gouttière du container et respiration des sections */
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --section-space: clamp(4rem, 9vw, 7.5rem);
+
+  /* Durées partagées avec Motion et GSAP (src/lib/motionTokens.ts) */
+  --dur-fast: 300ms;    /* survols, retours visuels */
+  --dur-screen: 700ms;  /* rideau, menu, fenêtre */
+  --dur-reveal: 900ms;  /* apparition d'un bloc */
+
+  /* Échelle des couches (z-index) : n'utiliser qu'elle pour les éléments fixes ou superposés */
+  --z-float: 30;     /* bulle WhatsApp */
+  --z-header: 40;    /* header fixe */
+  --z-progress: 45;  /* barre de lecture */
+  --z-banner: 50;    /* bandeau cookies */
+  --z-menu: 60;      /* menu mobile plein écran */
+  --z-modal: 70;     /* vidéo, visionneuse, carte plein écran */
+  --z-curtain: 90;   /* rideau de chargement (non affiché aujourd'hui) */
+  --z-skip: 100;     /* lien « Aller au contenu » */
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --body-size: 1.125rem;
+  }
 }
 
 .dark {
-  --wahhf-bg: #081C15;
-  --wahhf-surface: #0F3D2E;
-  --wahhf-surface-alt: #133126;
-  --wahhf-text: #F5F1E8;
-  --wahhf-text-muted: #C2BDB0;
-  --wahhf-border: rgba(245, 241, 232, 0.12);
+  color-scheme: dark;
+
+  /* Plus une surface est haute, plus elle est claire : humus → sous-bois → canopée */
+  --surface: var(--color-humus);
+  --surface-section: var(--color-sous-bois);
+  --surface-raised: var(--color-canopee);
+  --surface-card: var(--color-canopee);
+  /* En creux (champs, sélecteurs) : un cran plus sombre que la carte qui les porte, en attendant
+     la bordure trait-nuit du composant Field (sinon champ et carte ont la même couleur). */
+  --surface-inset: var(--color-humus);
+  --surface-inverse: var(--color-nuit);
+  --text: var(--color-brume-voilee);
+  --text-secondary: var(--color-lichen);
+  --text-tertiary: var(--color-lichen);
+  --text-muted: var(--color-lichen);
+  --text-on-inverse: var(--color-brume-voilee);
+  --text-secondary-on-inverse: var(--color-lichen);
+  --accent: var(--color-soleil);
+  --accent-or: var(--color-soleil);
+  --link: var(--color-soleil);
+  --action: var(--color-soleil);
+  --action-hover: var(--color-soleil-pale);
+  --on-action: var(--color-encre);
+  --fil: var(--color-feuille);
+  --reading-bar: var(--color-feuille);
+  --border-subtle: var(--color-filet-nuit);
+  --border-soft: var(--color-filet-nuit);
+  --border: var(--color-filet-nuit);
+  --border-input: var(--color-trait-nuit);
+  --border-strong: var(--color-trait-nuit);
+  --danger: var(--color-corail);
+  --danger-bg: var(--color-canopee);
+  --warning: var(--color-ambre-clair);
+  --warning-bg: var(--color-canopee);
+  --info: var(--color-ciel-clair);
+  --info-bg: var(--color-canopee);
+  --gold-text: var(--color-soleil);
+  /* En sombre, pas d'ombre : ce qui flotte prend une bordure trait-nuit (composant par composant) */
+  --ombre-flottante: 0 0 #0000;
+
+  --wahhf-bg: var(--color-humus);
+  --wahhf-text: var(--color-brume-voilee);
+}
+
+/* Le fond décide de la couleur de l'anneau : thème sombre et surfaces vertes (nuit) → soleil. */
+.dark,
+.surface-green {
+  --focus: var(--focus-on-green);
+  /* Le cœur n'atteint que 3,0:1 sur humus et 2,1:1 sur nuit : le contour du don prend corail (8,9:1 et 6,1:1). */
+  --donate-outline: var(--color-corail);
+}
+
+/* Pages historiques IROKO (Layout) : elles gardent leurs polices et leur corps de texte d'origine. */
+@layer base {
+.legacy-fonts {
+  --font-weight-bold: 700;
+  --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Fraunces", Georgia, Cambria, "Times New Roman", Times, serif;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+}
+
+@media (min-width: 40rem) {
+  :root {
+    --header-height: 4.5625rem;
+  }
+}
+@media (min-width: 64rem) {
+  :root {
+    --hero-text-width: 40rem;
+  }
 }
 
 @layer base {
@@ -130,18 +512,361 @@
      la marge de défilement s'applique aux ancres, au focus clavier et à scrollIntoView. */
   html {
     scroll-padding-top: var(--header-offset);
+    /* Bulle WhatsApp fixée en bas à droite (48 px + marge) : un élément qui reçoit le focus reste au-dessus (RESP-03) */
+    scroll-padding-bottom: 5rem;
   }
 
   body {
     background-color: var(--wahhf-bg);
     color: var(--wahhf-text);
     font-family: var(--font-sans);
-    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: var(--body-size);
+    line-height: 1.6;
+    transition: background-color var(--dur-fast) ease, color var(--dur-fast) ease;
   }
 
-  h1, h2, h3, .font-serif-title {
+  /* Titres en casse de phrase, approche serrée, lignes équilibrées ; texte courant sans veuve (contrat §4.3).
+     Taille, graisse et interligne viennent de l'échelle nommée (text-display, text-page-title…). */
+  h1, h2, h3 {
     font-family: var(--font-serif);
+    text-wrap: balance;
   }
+  h1, h2 {
+    letter-spacing: -0.01em;
+  }
+  /* Gras du texte courant : 600, comme font-bold (le navigateur en ferait du 700, synthétisé faute de fichier) */
+  b, strong {
+    font-weight: 600;
+  }
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Pages historiques : leurs titres et paragraphes gardent le rendu d'origine */
+  .legacy-fonts :where(h1, h2, h3, p) {
+    letter-spacing: normal;
+    text-wrap: wrap;
+  }
+  .legacy-fonts :where(b, strong) {
+    font-weight: bolder;
+  }
+
+  /* Cases à cocher et boutons radio natifs : cochés à la couleur de l'action (forêt en clair, soleil en sombre :
+     7,6:1 sur canopée), au lieu de nuit, qui se perdait sur les cartes sombres (1,1:1). */
+  :where(input[type='checkbox'], input[type='radio']) {
+    accent-color: var(--action);
+  }
+
+  /* Focus clavier : un seul anneau pour tout le site, couleur selon le fond (--focus). */
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+}
+
+/* Élément flottant au-dessus de fonds variables (bouton WhatsApp, lien d'évitement) :
+   double anneau, 2 px blanc dans l'écart puis 2 px forêt. L'un des deux contraste toujours (clair ou vert). */
+/* Bouton de don posé sur nuit (surface-green) ou en thème sombre : liseré intérieur de 1 px, brume à 60 %,
+   pour que sa forme ne se perde pas (décision du 16/11 ; la couleur cœur ne change pas). Liseré intérieur :
+   la taille du bouton ne bouge pas. Contraste du liseré : 5,5:1 sur nuit, 8,0:1 sur humus, 6,2:1 sur canopée
+   (5,2:1 au pire au survol, sur nuit). */
+@layer components {
+  :where(.dark, .surface-green) .donate-button {
+    box-shadow: inset 0 0 0 1px var(--border-on-inverse);
+  }
+}
+
+/* Container unique (contrat §5) : 72 rem de contenu au plus, gouttière à l'extérieur (content-box), centré.
+   Composant React : src/components/wahhf/Container.tsx. Une colonne plus étroite se pose dedans, à gauche. */
+@utility container-page {
+  box-sizing: content-box;
+  max-width: var(--container-page);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Respiration verticale d'une section (contrat §5) : 64 px à 120 px. Composant : Section.tsx. */
+@utility section-space {
+  padding-block: var(--section-space);
+}
+
+/* Juste après l'en-tête de page (PageHeader), une section sur le même fond ne rajoute pas une respiration complète :
+   la marge basse de l'en-tête suffit presque (48 + 32 px à 1 440, au lieu de 48 + 120). Une section sauge garde la sienne,
+   qui est à l'intérieur de son fond. Hors couche, pour passer devant l'utilitaire section-space. */
+.page-header + .section-space:not(.bg-surface-section) {
+  padding-top: clamp(1rem, 2.5vw, 2rem);
+}
+
+/* Transition entre pages (contrat §10, ANIM-03, lot 7) : fondu d'entrée de 0,3 s, sans sortie ni attente.
+   « backwards » : une fois le fondu fini, plus aucune opacité posée sur la page. Instantanée en mouvement réduit. */
+@keyframes page-enter {
+  from { opacity: 0; }
+}
+.page-enter {
+  animation: page-enter 0.3s var(--ease-power2-out) backwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-enter {
+    animation: none !important;
+  }
+}
+
+/*
+ * « Sur le terrain » : Scroll Expand (contrat §10, moment 3, lot 7 ; src/effects/ScrollExpand.tsx).
+ * Mode normal (téléphone, tactile, petit écran, mouvement réduit, ou avant GSAP) : photo 3:2 dans un cadre arrondi,
+ * légende et lien dessous. Mode « on » (posé par ScrollExpandMotion, ordinateur) : la scène occupe l'écran sous
+ * l'en-tête, le cadre la remplit (c'est son clip-path qui s'ouvre), la légende se pose en bas, sur le voile nuit.
+ */
+.expand-frame {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 2;
+  border-radius: var(--radius-card);
+  background: var(--color-surface-section);
+}
+.expand-frame [data-expand-media] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.expand-veil {
+  display: none;
+}
+.expand-caption {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem 1.5rem;
+  color: var(--color-text);
+}
+.expand-caption a {
+  color: var(--color-link);
+}
+.expand-stage[data-expand='on'] {
+  position: relative;
+  height: calc(100svh - var(--header-height));
+}
+.expand-stage[data-expand='on'] .expand-frame {
+  position: absolute;
+  inset: 0;
+  aspect-ratio: auto;
+  border-radius: 0;
+}
+/* Voile nuit qui monte par le bas : 88 % sous la légende (même densité que le voile du hero, brume à 7,6:1 au pire) */
+.expand-stage[data-expand='on'] .expand-veil {
+  display: block;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 40%,
+    color-mix(in srgb, var(--color-nuit) 88%, transparent) calc(100% - 10rem - var(--expand-y, 0px)),
+    color-mix(in srgb, var(--color-nuit) 88%, transparent) 100%
+  );
+}
+.expand-stage[data-expand='on'] .expand-caption {
+  position: absolute;
+  left: max(var(--gutter), (100% - var(--container-page)) / 2);
+  right: max(var(--gutter), (100% - var(--container-page)) / 2);
+  bottom: 2.5rem;
+  /* Cadre arrêté au container (--expand-x, --expand-y posés par ScrollExpandMotion) : la légende reste dedans */
+  &:where([data-expand-fit='container'] *) {
+    left: calc(var(--expand-x, 0px) + 2rem);
+    right: calc(var(--expand-x, 0px) + 2rem);
+    bottom: calc(var(--expand-y, 0px) + 2rem);
+  }
+  margin: 0;
+  /* En bas à gauche, l'un sous l'autre : à droite, le lien passerait sous la bulle WhatsApp */
+  flex-direction: column;
+  align-items: flex-start;
+  color: var(--color-text-on-inverse);
+}
+.expand-stage[data-expand='on'] .expand-caption a {
+  color: var(--color-link-on-inverse);
+}
+/* Sur le voile nuit, l'anneau de focus passe en soleil (contrat §8), comme sur les surfaces vertes */
+.expand-stage[data-expand='on'] .expand-caption {
+  --focus: var(--focus-on-green);
+}
+
+/* Impression : tout ce que le mouvement masque encore (apparitions, cascade, arc, ouverture de « Sur le terrain »)
+   est imprimé dans son état final. */
+@media print {
+  [data-reveal],
+  [data-cascade],
+  .expand-caption,
+  .expand-veil {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  [data-arc-mask],
+  [data-expand-media] {
+    transform: none !important;
+  }
+  .expand-frame {
+    clip-path: none !important;
+  }
+}
+
+/*
+ * Repli CSS du menu mobile et de la fenêtre du film (décision du 17/11) : tant que le moteur de Motion n'est pas chargé,
+ * ou s'il ne se charge jamais (src/lib/motionEngine.ts). Ouverture animée en CSS (le menu se déroule de haut en bas en
+ * 0,7 s comme avec Motion ; la fenêtre apparaît en fondu de 0,3 s), fermeture immédiate. Mouvement réduit : fondu court.
+ */
+@keyframes menu-unroll {
+  from { clip-path: inset(0% 0% 100% 0%); }
+  to { clip-path: inset(0% 0% 0% 0%); }
+}
+@keyframes overlay-fade {
+  from { opacity: 0; }
+}
+.menu-fallback {
+  animation: menu-unroll 0.7s var(--ease-screen) both;
+}
+.dialog-fallback {
+  animation: overlay-fade 0.3s var(--ease-power2-out) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .menu-fallback {
+    animation: overlay-fade 0.2s linear both !important;
+  }
+  .dialog-fallback {
+    animation: none !important;
+  }
+}
+
+/* Le fil du hero se dessine une fois (contrat §10) ; Fil.tsx l'utilise avec drawOnce, jamais en mouvement réduit. */
+@keyframes fil-draw {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/*
+ * Arrivée du hero (contrat §10, moment 1, lot 7), en CSS : elle joue dès le premier affichage, avant GSAP.
+ * 1. Titre (LineReveal) : chaque ligne monte de 100 % à 0 derrière son masque, 1 s, power3.out, 0,12 s de décalage.
+ *    Le masque garde 0,1 em sous la ligne pour les jambages (g, p) : la ligne part donc de 100 % + 0,1 em.
+ * 2. Phrase, boutons, lien du film, puis le fil : fondu court de 0,6 s (power2.out), délai propre à chacun
+ *    (--hero-fade-delay) ; le trait du fil se dessine ensuite (--fil-draw-delay, Fil.tsx).
+ * « backwards » : une fois l'animation finie, plus aucun style posé. Un bouton qui reçoit le focus pendant son fondu
+ * s'affiche aussitôt : opacité forcée (une déclaration !important l'emporte sur l'animation sans la relancer ;
+ * « animation: none » la ferait rejouer, à opacité 0, chaque fois que le focus repart). Mouvement réduit : tout est
+ * en place dès le premier rendu (le fil du hero est absent).
+ */
+@keyframes line-rise {
+  from { transform: translateY(calc(100% + 0.1em)); }
+}
+@keyframes hero-fade {
+  from { opacity: 0; }
+}
+.line-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+}
+.line-rise {
+  display: block;
+  animation: line-rise 1s var(--ease-power3-out) backwards;
+}
+.line-mask:nth-child(2) .line-rise { animation-delay: 0.12s; }
+.line-mask:nth-child(3) .line-rise { animation-delay: 0.24s; }
+.line-mask:nth-child(4) .line-rise { animation-delay: 0.36s; }
+.line-mask:nth-child(5) .line-rise { animation-delay: 0.48s; }
+.line-mask:nth-child(6) .line-rise { animation-delay: 0.6s; }
+.line-mask:nth-child(7) .line-rise { animation-delay: 0.72s; }
+.line-mask:nth-child(8) .line-rise { animation-delay: 0.84s; }
+.line-mask:nth-child(9) .line-rise { animation-delay: 0.96s; }
+.line-mask:nth-child(n + 10) .line-rise { animation-delay: 1.08s; }
+.hero-fade {
+  animation: hero-fade 0.6s var(--ease-power2-out) var(--hero-fade-delay, 0.6s) backwards;
+}
+.hero-fade:focus-within {
+  opacity: 1 !important;
+}
+/* Fil tracé jusqu'au niveau affiché (pages de niveau, résultat du test ; Fil.tsx drawTo, lightCurrent) : segment après
+   segment (délai --fil-d), puis le niveau s'allume. Une fois, à l'arrivée ; tout en place en mouvement réduit. */
+@keyframes fil-draw-y {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+@keyframes fil-lit {
+  from { opacity: 0.35; transform: scale(0.5); }
+}
+@keyframes fil-lit-label {
+  from { opacity: 0.35; }
+}
+.fil-draw-to-x {
+  transform-origin: left center;
+  animation: fil-draw 0.45s linear var(--fil-d, 0s) both;
+}
+.fil-draw-to-y {
+  transform-origin: center top;
+  animation: fil-draw-y 0.22s linear var(--fil-d, 0s) both;
+}
+.fil-lit {
+  animation: fil-lit 0.6s var(--ease-power3-out) var(--fil-d, 0s) backwards;
+}
+.fil-lit-label {
+  animation: fil-lit-label 0.6s var(--ease-power2-out) var(--fil-d, 0s) backwards;
+}
+.fil-lit-label:focus-within {
+  opacity: 1 !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .fil-draw-to-x,
+  .fil-draw-to-y,
+  .fil-lit,
+  .fil-lit-label {
+    animation: none !important;
+  }
+}
+
+/* Changement d'étape (Candidater) et de question (test de niveau), groupe 7.1 : fondu et glissement de 16 px en
+   0,3 s, une fois ; le focus passe au titre une fois l'entrée finie (useFocusOnChange afterMs). Rien en mouvement réduit. */
+@keyframes step-enter {
+  from { opacity: 0; transform: translateY(16px); }
+}
+.step-enter {
+  animation: step-enter 0.3s var(--ease-power2-out) backwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .step-enter {
+    animation: none !important;
+  }
+}
+
+/* En-têtes de page (groupe 7.1, PageHeader reveal) : titre en 0,8 s */
+.reveal-08 .line-rise {
+  animation-duration: 0.8s;
+}
+/* Photo d'en-tête découverte du bas vers le haut (Mobilité, groupe 7.1) : ordinateur à souris seulement, une fois.
+   Clip-path toléré ici comme pour « Sur le terrain » (contrat §10) ; ailleurs la photo est simplement en place. */
+@keyframes photo-rise {
+  from { clip-path: inset(100% 0 0 0 round var(--radius-card)); }
+  to { clip-path: inset(0 0 0 0 round var(--radius-card)); }
+}
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .photo-rise {
+    animation: photo-rise 0.9s var(--ease-power3-out) 0.2s backwards;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .line-rise,
+  .hero-fade,
+  .photo-rise {
+    animation: none !important;
+  }
+}
+
+.focus-ring-double:focus-visible {
+  outline: 2px solid var(--focus-on-light);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px var(--color-papier);
 }
 
 /* Bascule de thème (src/effects/themeTransition.ts) : fondu enchaîné de 0,5 s de toute la page,
@@ -149,7 +874,7 @@
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation-duration: 0.5s;
-  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-timing-function: var(--ease-theme);
 }
 
 /* Pendant la bascule : aucune transition CSS de couleur (sinon double fondu / photo à mi-chemin) */
@@ -168,7 +893,7 @@
   to { transform: scale(1.1); }
 }
 .hero-zoom {
-  animation: hero-zoom 14s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: hero-zoom 14s var(--ease-reveal) both;
 }
 
 /*
@@ -189,7 +914,7 @@
   pointer-events: none;
   opacity: 0;
   transition-property: opacity;
-  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  transition-timing-function: var(--ease-reveal);
 }
 .hero-video[data-visible='true'] {
   opacity: 1;
@@ -204,21 +929,61 @@
   height: calc(max(100cqh, 100cqw / var(--video-ratio)) * var(--video-render-scale));
   transform: translate(-50%, -50%) scale(calc(var(--video-zoom) / var(--video-render-scale)));
 }
+/* Image du hero posée dans le HTML avant le JavaScript (index.html, accueil seulement) : même cadre que le hero
+   (sous l'en-tête, 94 svh moins l'en-tête sur téléphone, 88 svh dès 768 px), remplacée au premier rendu de React. */
+.hero-shell {
+  position: absolute;
+  inset-inline: 0;
+  top: var(--header-height);
+  height: calc(94svh - var(--header-height));
+  overflow: hidden;
+  background: var(--color-nuit);
+}
+.hero-shell img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero-shell .hero-veil {
+  position: absolute;
+  inset: 0;
+}
+@media (min-width: 48rem) {
+  .hero-shell {
+    height: calc(88svh - var(--header-height));
+  }
+}
+/* Boucle hébergée sur le site (HERO_LOOP) : la balise video accepte object-fit. */
+.hero-video video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 /*
- * Voile du hero (au-dessus de la vidéo ou de l'image d'attente) : vert profond ~60 % sur les bords,
- * 74-76 % dans la bande du texte (15-85 % de la hauteur, où se trouve tout le texte de 390 à 1440 px),
- * 88 % en bas. Calcul pire cas (image entièrement blanche) : titre crème 4,9:1, sur-titre or (pastille
- * verte) 4,8:1, phrase d'appui (crème 95 %) 4,7:1, lien de défilement (crème 85 %) 5,6:1.
+ * Voile du hero (décision du 16/11, contrat §6) : couleur nuit, dense derrière le texte, léger ailleurs.
+ * - Téléphone (image fixe portrait, texte en bas) : du haut vers le bas, 25 % puis 88 % dès 10 rem, jusqu'en bas.
+ * - Dès 768 px (vidéo ou image paysage, texte à gauche) : dégradé horizontal, 88 % jusqu'à la fin de la colonne de
+ *   texte (marge du container + --hero-text-width), puis 20 % au bord droit : la vidéo reste nettement visible.
+ * Pire cas (pixel blanc sous 88 % de nuit) : brume 7,6:1, soleil (bouton) 5,2:1. Mesure réelle sur les images de la
+ * vidéo : voir le commit du hero.
  */
 .hero-veil {
+  --veil-dense: color-mix(in srgb, var(--color-nuit) 88%, transparent);
+  --veil-light: color-mix(in srgb, var(--color-nuit) 20%, transparent);
   background: linear-gradient(
     to bottom,
-    rgb(15 61 46 / 0.6) 0%,
-    rgb(15 61 46 / 0.74) 15%,
-    rgb(15 61 46 / 0.76) 50%,
-    rgb(15 61 46 / 0.74) 85%,
-    rgb(15 61 46 / 0.88) 100%
+    color-mix(in srgb, var(--color-nuit) 25%, transparent) 0,
+    var(--veil-dense) 10rem,
+    var(--veil-dense) 100%
   );
+}
+@media (min-width: 48rem) {
+  .hero-veil {
+    --hero-text-end: calc(max(var(--gutter), (100% - var(--container-page)) / 2) + var(--hero-text-width));
+    background: linear-gradient(to right, var(--veil-dense) 0, var(--veil-dense) var(--hero-text-end), var(--veil-light) 100%);
+  }
 }
 /* Repli sans unités de conteneur : le hero occupe l'écran (100svh) */
 @supports not (width: 1cqw) {
@@ -228,22 +993,13 @@
   }
 }
 
-/* Reusable WAHHF Gradient & Accent Utilities */
-.bg-wahhf-gradient-rule {
-  background: linear-gradient(90deg, #0F3D2E 0%, #E8A317 100%);
-}
-
-.dark .bg-wahhf-gradient-rule {
-  background: linear-gradient(90deg, #E8A317 0%, #34D399 100%);
-}
-
+/* Dégradés des pages historiques IROKO (seules à les utiliser) */
 .bg-gradient-blend {
-  background: linear-gradient(135deg, #0F3D2E 0%, #E8A317 100%);
+  background: linear-gradient(135deg, var(--color-nuit) 0%, var(--color-or) 100%);
 }
 
-.text-gradient-blend,
 .text-gradient-violet-orange {
-  background: linear-gradient(90deg, #0F3D2E 0%, #E8A317 100%);
+  background: linear-gradient(90deg, var(--color-nuit) 0%, var(--color-or) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -277,7 +1033,7 @@
 .map-pulse {
   transform-box: fill-box;
   transform-origin: center;
-  animation: map-pulse 1.6s cubic-bezier(0.22, 1, 0.36, 1) 3 both;
+  animation: map-pulse 1.6s var(--ease-reveal) 3 both;
 }
 
 @media (prefers-reduced-motion: reduce) {

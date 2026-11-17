@@ -1,520 +1,235 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import {
-  GraduationCap,
-  Clock,
-  Calendar,
-  CheckCircle2,
-  Award,
-  ArrowUpRight,
-  RotateCcw,
-  Sparkles,
-  BookOpen,
-} from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
 import SectionHeader from '../components/wahhf/SectionHeader';
-import { PrimaryButton, SecondaryButton, DonateButton } from '../components/wahhf/Buttons';
+import PageHeader, { PageMeta, PageTitle, PageIntro, PageActions } from '../components/wahhf/PageHeader';
+import Section from '../components/wahhf/Section';
+import { PrimaryButton, SecondaryButton } from '../components/wahhf/Buttons';
 import DisclaimerBanner from '../components/wahhf/DisclaimerBanner';
-import CourseCard from '../components/wahhf/CourseCard';
-import {
-  GERMAN_LEVELS_DATA,
-  COURSE_SESSIONS_DATA,
-  PLACEMENT_QUESTIONS,
-} from '../services/api';
+import Fil from '../components/wahhf/Fil';
+import { AfterApplicationSteps } from '../components/wahhf/AfterApplication';
+import { TEXT_LINK_CLASS } from '../components/wahhf/TextList';
+import { AfterFirstDisplay, FilScrub } from '../effects/DeferredMotion';
+import NotFoundPage, { NotFoundLinks } from './NotFoundPage';
+import PlacementTest from './academie/PlacementTest';
+import SessionsCalendar from './academie/SessionsCalendar';
+import LevelDetail from './academie/LevelDetail';
+import { GERMAN_LEVELS_DATA, GermanLevelCourse } from '../services/api';
 
-export default function LanguageAcademy() {
-  const { level: routeLevel } = useParams<{ level?: string }>();
+/*
+ * Académie (/mobilite-langues/academie) et pages de niveau (/academie/:niveau), groupe 7.1 : contrat validé, audit
+ * ACAD-01 à ACAD-08, NIV-01, T-05, T-14.
+ * - Académie : en-tête et avertissement ; le test de niveau AVANT la fiche (on ne connaît pas encore son niveau) ;
+ *   la frise et la fiche du niveau (celui du test une fois fait, A1 sinon) ; le calendrier ; « Après votre
+ *   candidature » ; les examens ; une seule action en fin de page.
+ * - Page de niveau (NIV-01) : une vraie page qui ouvre sur le niveau (titre, frise tracée jusqu'à lui, fiche, sessions
+ *   du niveau, Candidater), avec son adresse canonique ; un niveau inconnu mène à la page « introuvable ».
+ * - ACAD-02 : un niveau de la frise mène à sa page, qui s'ouvre en haut sur ce niveau, le focus sur son titre.
+ */
 
-  // Niveau sélectionné dans la frise horizontale A1 -> C1
-  const initialLevel =
-    GERMAN_LEVELS_DATA.find((l) => l.slug === routeLevel?.toLowerCase()) ||
-    GERMAN_LEVELS_DATA[0];
-  const [selectedLevel, setSelectedLevel] = useState(initialLevel);
+const levelSteps = GERMAN_LEVELS_DATA.map((lvl) => ({
+  id: lvl.slug,
+  label: lvl.level,
+  sublabel: lvl.shortTitle,
+  to: `/academie/${lvl.slug}`,
+}));
+const levelName = (lvl: GermanLevelCourse) => `Allemand ${lvl.level} : ${lvl.shortTitle.toLowerCase()}`;
 
-  // Filtres du calendrier des sessions
-  const [filterLevel, setFilterLevel] = useState<string>('ALL');
-  const [filterFormat, setFilterFormat] = useState<string>('ALL');
-
-  // État du test de niveau interactif gratuit (20 questions progressives)
-  const [quizStarted, setQuizStarted] = useState(false);
-  const [currentQIndex, setCurrentQIndex] = useState(0);
-  const [answers, setAnswers] = useState<Record<number, number>>({});
-  const [quizFinished, setQuizFinished] = useState(false);
-
-  // Synchroniser si routeLevel change
-  const activeCourse =
-    GERMAN_LEVELS_DATA.find((l) => l.slug === routeLevel?.toLowerCase()) || selectedLevel;
-
-  const filteredSessions = COURSE_SESSIONS_DATA.filter((s) => {
-    const matchLevel = filterLevel === 'ALL' || s.level === filterLevel;
-    const matchFormat =
-      filterFormat === 'ALL' ||
-      (filterFormat === 'ONLINE' && s.format === 'En ligne') ||
-      (filterFormat === 'PRESENTIEL' && s.format.startsWith('Présentiel'));
-    return matchLevel && matchFormat;
-  });
-
-  // Calcul du niveau indicatif à la fin des 20 questions
-  const score = PLACEMENT_QUESTIONS.reduce((acc, q) => {
-    return answers[q.id] === q.correctIndex ? acc + 1 : acc;
-  }, 0);
-
-  const getRecommendedLevel = (pts: number): 'A1' | 'A2' | 'B1' | 'B2' | 'C1' => {
-    if (pts <= 5) return 'A1';
-    if (pts <= 9) return 'A2';
-    if (pts <= 14) return 'B1';
-    if (pts <= 17) return 'B2';
-    return 'C1';
-  };
-
-  const recommendedLevel = getRecommendedLevel(score);
-
-  const handleSelectOption = (optionIdx: number) => {
-    const currentQ = PLACEMENT_QUESTIONS[currentQIndex];
-    setAnswers((prev) => ({ ...prev, [currentQ.id]: optionIdx }));
-  };
-
-  const handleNextQuestion = () => {
-    if (currentQIndex < PLACEMENT_QUESTIONS.length - 1) {
-      setCurrentQIndex((i) => i + 1);
-    } else {
-      setQuizFinished(true);
+/** Page affichée après une navigation dans le site (pas au premier chargement) : focus sur son titre (ACAD-02). */
+let academyPageShown = false;
+function useFocusTitleAfterNavigation() {
+  useEffect(() => {
+    if (!academyPageShown) {
+      academyPageShown = true;
+      return;
     }
-  };
+    const frame = requestAnimationFrame(() => {
+      const h1 = document.querySelector<HTMLElement>('#contenu h1');
+      if (!h1) return;
+      h1.tabIndex = -1;
+      h1.focus({ preventScroll: true });
+    });
+    return () => cancelAnimationFrame(frame);
+  }, []);
+}
 
-  const resetQuiz = () => {
-    setAnswers({});
-    setCurrentQIndex(0);
-    setQuizFinished(false);
-    setQuizStarted(true);
-  };
+/** Fin de page : une seule action (contrat §7, groupe 7.1). */
+function FinalAction({ to, label }: { to: string; label: string }) {
+  return (
+    <section className="container-page section-space">
+      <div className="max-w-[65ch] space-y-5">
+        <SectionHeader
+          title="Rejoindre la prochaine cohorte"
+          subtitle="Un seul formulaire, 5 minutes environ ; aucun document d’identité ni paiement ne vous est demandé."
+        />
+        <PrimaryButton to={to} size="lg">
+          {label}
+        </PrimaryButton>
+      </div>
+    </section>
+  );
+}
+
+function AcademyPage() {
+  useFocusTitleAfterNavigation();
+  const [selected, setSelected] = useState(GERMAN_LEVELS_DATA[0]);
+  const filRef = useRef<HTMLDivElement>(null);
 
   return (
     <>
       <SEO
-        title={
-          routeLevel
-            ? `Allemand Niveau ${activeCourse.level} — Académie de langues gratuite`
-            : 'Académie de langues — Allemand A1 à C1 gratuit'
-        }
-        description="Accompagnement gratuit des cours de langue allemande du niveau A1 au niveau C1 par WAHHF Foundation : programme par niveau, test d'orientation de 20 questions et sessions."
+        title="Académie de langues — Allemand A1 à C1 gratuit"
+        description="Accompagnement gratuit des cours de langue allemande du niveau A1 au niveau C1 par WAHHF Foundation : test de niveau de 20 questions, programme par niveau et sessions."
+        canonical="/mobilite-langues/academie"
       />
 
-      {/* HERO */}
-      <section className="pt-32 pb-16 sm:pt-36 sm:pb-20 bg-[#0F3D2E] text-[#F5F1E8]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-          <div className="flex flex-wrap items-center gap-2 text-xs text-[#E8A317] font-semibold uppercase tracking-[0.18em]">
-            <Link to="/mobilite-langues" className="hover:underline">
-              Mobilité & Langues
-            </Link>
-            <span>/</span>
-            <span>Académie de langues (A1 à C1)</span>
-            {routeLevel && (
-              <>
-                <span>/</span>
-                <span>Niveau {activeCourse.level}</span>
-              </>
-            )}
-          </div>
+      <PageHeader reveal notice={<DisclaimerBanner />}>
+        <PageMeta>
+          <Link to="/mobilite-langues">Mobilité & Langues</Link>
+          <span aria-hidden="true">/</span>
+          <span>Académie de langues</span>
+        </PageMeta>
+        <PageTitle>Académie de langues : l’allemand, du niveau A1 au niveau C1</PageTitle>
+        <PageIntro>
+          Des cours d’allemand du niveau débutant jusqu’à la maîtrise académique, en ligne ou en présentiel à Douala et à
+          Yaoundé. Commencez par le test : il vous dit par quel niveau commencer.
+        </PageIntro>
+        <PageActions>
+          {/* ACAD-07 : le test est la porte principale ; la candidature ne choisit pas le niveau à votre place */}
+          <PrimaryButton href="#test-niveau">Trouver mon niveau (5 minutes)</PrimaryButton>
+          <SecondaryButton to="/candidater?souhait=cours_allemand">Candidater (choisir mon niveau)</SecondaryButton>
+        </PageActions>
+      </PageHeader>
 
-          <h1 className="font-serif font-normal text-[clamp(2.1rem,4.6vw,3.9rem)] leading-[1.1] text-[#F5F1E8]">
-            Académie de langues — Allemand A1 à C1
-          </h1>
+      {/* Le test avant la fiche du niveau ; son résultat règle la fiche ci-dessous */}
+      <PlacementTest onResult={(lvl) => setSelected(GERMAN_LEVELS_DATA.find((l) => l.level === lvl) ?? GERMAN_LEVELS_DATA[0])} />
 
-          <p className="text-base sm:text-xl text-[#F5F1E8]/85 max-w-3xl leading-relaxed">
-            Accompagnement linguistique 100 % gratuit, financé par le groupe IROKO et nos donateurs. Progressez méthodiquement du niveau débutant A1 jusqu’à la maîtrise académique C1.
-          </p>
-
-          <div className="pt-2 flex flex-wrap items-center gap-4">
-            <PrimaryButton
-              to={`/candidater?souhait=cours_allemand&niveau=${activeCourse.level}`}
-              className="!bg-[#E8A317] !text-[#1B1B18]"
-            >
-              Candidater au niveau {activeCourse.level}
-            </PrimaryButton>
-            <SecondaryButton href="#test-niveau" light>
-              Passer le test d’orientation gratuit (20 questions)
-            </SecondaryButton>
-            <SecondaryButton href="#calendrier-sessions" light>
-              Voir le calendrier des sessions
-            </SecondaryButton>
-          </div>
-        </div>
-      </section>
-
-      {/* BLOC D'AVERTISSEMENT STANDARD */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-20">
-        <DisclaimerBanner />
-      </section>
-
-      {/* FRISE HORIZONTALE DES 5 NIVEAUX : A1 -> A2 -> B1 -> B2 -> C1 */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-12">
+      {/* Les 5 niveaux : la frise (dessinée au défilement sur ordinateur) et la fiche du niveau affiché */}
+      <section id="niveaux" className="container-page section-space space-y-10">
         <SectionHeader
-          kicker="Parcours structuré CECRL"
-          title="Frise des 5 niveaux d’allemand : A1, A2, B1, B2, C1"
-          subtitle="Sélectionnez un niveau pour consulter ses objectifs pédagogiques, ce que vous saurez faire, le volume horaire et les prérequis."
+          title="Les 5 niveaux, de A1 à C1"
+          subtitle="Chaque niveau mène à sa page : objectifs, compétences, volume horaire et prochaines sessions."
         />
-
-        {/* Sélecteur en frise horizontale */}
-        <div className="relative">
-          <div
-            aria-hidden="true"
-            className="hidden md:block absolute top-1/2 left-8 right-8 h-[2px] -translate-y-1/2 bg-gradient-to-r from-[#0F3D2E] via-[#E8A317] to-[#0F3D2E] z-0"
-          />
-          <div className="relative z-10 grid grid-cols-2 sm:grid-cols-5 gap-3">
-            {GERMAN_LEVELS_DATA.map((lvl) => {
-              const isSelected = activeCourse.level === lvl.level;
-              return (
-                <Link
-                  key={lvl.level}
-                  to={`/academie/${lvl.slug}`}
-                  onClick={() => setSelectedLevel(lvl)}
-                  className={`rounded-[20px] p-4 border text-left transition flex flex-col justify-between ${
-                    isSelected
-                      ? 'bg-[#0F3D2E] text-[#F5F1E8] border-[#E8A317] shadow-md -translate-y-1'
-                      : 'bg-white dark:bg-[#132A21] text-[#1B1B18] dark:text-[#F5F1E8] border-[#0F3D2E]/15 dark:border-[#F5F1E8]/15 hover:border-[#E8A317]'
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-2">
-                    <span
-                      className={`font-serif text-2xl font-normal ${
-                        isSelected ? 'text-[#E8A317]' : 'text-[#0F3D2E] dark:text-[#E8A317]'
-                      }`}
-                    >
-                      {lvl.level}
-                    </span>
-                    <span
-                      className={`text-[11px] px-2 py-0.5 rounded-full bg-[#E8A317]/20 font-semibold ${
-                        isSelected ? 'text-gold-on-green' : 'text-gold-text dark:text-[#E8A317]'
-                      }`}
-                    >
-                      Gratuit
-                    </span>
-                  </div>
-                  <p className="text-xs font-medium line-clamp-1">{lvl.title.split('—')[1] || lvl.title}</p>
-                  <p className="text-[11px] opacity-70 mt-1">{lvl.hours}</p>
-                </Link>
-              );
-            })}
-          </div>
+        <div ref={filRef} role="group" aria-label="Les cinq niveaux d’allemand, de A1 à C1, puis l’Europe">
+          <Fil orientation="auto" steps={levelSteps} end={{ id: 'europe', label: 'Europe' }} currentId={selected.slug} />
         </div>
+        <AfterFirstDisplay>
+          <FilScrub scope={filRef} />
+        </AfterFirstDisplay>
 
-        {/* Détail complet du niveau sélectionné (page /academie/:level incluse) */}
-        <div className="rounded-[24px] bg-white dark:bg-[#132A21] border border-[#0F3D2E]/15 dark:border-[#F5F1E8]/15 p-7 sm:p-10 shadow-sm space-y-8">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-[#0F3D2E]/10 dark:border-[#F5F1E8]/10">
+        <div className="space-y-6 border-t border-border-subtle pt-8">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
             <div className="space-y-2">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0F3D2E] text-[#E8A317] text-xs font-semibold uppercase tracking-wider">
-                <GraduationCap className="w-4 h-4" />
-                <span>Fiche détaillée · {activeCourse.level}</span>
-              </div>
-              <h2 className="font-serif font-normal text-2xl sm:text-4xl text-[#1B1B18] dark:text-[#F5F1E8]">
-                {activeCourse.title}
-              </h2>
-              <p className="text-base text-[#1B1B18]/75 dark:text-[#F5F1E8]/75">
-                {activeCourse.subtitle}
-              </p>
+              <h3 className="text-section-title text-text">{levelName(selected)}</h3>
+              <p className="text-body text-text-secondary max-w-[65ch]">{selected.subtitle}</p>
             </div>
-
-            <div className="flex flex-wrap items-center gap-3 shrink-0">
-              <PrimaryButton to={`/candidater?souhait=cours_allemand&niveau=${activeCourse.level}`}>
-                Candidater au niveau {activeCourse.level}
-              </PrimaryButton>
-            </div>
+            <Link to={`/academie/${selected.slug}`} className={TEXT_LINK_CLASS}>
+              Toute la page du niveau {selected.level}
+            </Link>
           </div>
-
-          {/* 4 indicateurs du niveau */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="rounded-2xl bg-[#F5F1E8] dark:bg-[#0F3D2E]/50 p-4 space-y-1">
-              <div className="flex items-center gap-2 text-xs font-semibold text-[#0F3D2E] dark:text-[#E8A317]">
-                <Clock className="w-4 h-4" />
-                <span>Durée indicative</span>
-              </div>
-              <p className="text-sm font-medium text-[#1B1B18] dark:text-[#F5F1E8]">
-                {activeCourse.duration}
-              </p>
-            </div>
-
-            <div className="rounded-2xl bg-[#F5F1E8] dark:bg-[#0F3D2E]/50 p-4 space-y-1">
-              <div className="flex items-center gap-2 text-xs font-semibold text-[#0F3D2E] dark:text-[#E8A317]">
-                <BookOpen className="w-4 h-4" />
-                <span>Volume horaire</span>
-              </div>
-              <p className="text-sm font-medium text-[#1B1B18] dark:text-[#F5F1E8]">
-                {activeCourse.hours}
-              </p>
-            </div>
-
-            <div className="rounded-2xl bg-[#F5F1E8] dark:bg-[#0F3D2E]/50 p-4 space-y-1">
-              <div className="flex items-center gap-2 text-xs font-semibold text-[#0F3D2E] dark:text-[#E8A317]">
-                <CheckCircle2 className="w-4 h-4" />
-                <span>Prérequis</span>
-              </div>
-              <p className="text-sm font-medium text-[#1B1B18] dark:text-[#F5F1E8]">
-                {activeCourse.prerequisites}
-              </p>
-            </div>
-
-            <div className="rounded-2xl bg-[#F5F1E8] dark:bg-[#0F3D2E]/50 p-4 space-y-1">
-              <div className="flex items-center gap-2 text-xs font-semibold text-[#0F3D2E] dark:text-[#E8A317]">
-                <Calendar className="w-4 h-4" />
-                <span>Prochaine session</span>
-              </div>
-              <p className="text-sm font-medium text-[#1B1B18] dark:text-[#F5F1E8]">
-                {activeCourse.nextSession}
-              </p>
-            </div>
-          </div>
-
-          {/* Objectifs & Ce qu'on sait faire à la fin du niveau */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="space-y-4">
-              <h3 className="font-serif text-xl text-[#1B1B18] dark:text-[#F5F1E8]">
-                Objectifs pédagogiques du niveau {activeCourse.level}
-              </h3>
-              <ul className="space-y-3">
-                {activeCourse.objectives.map((obj) => (
-                  <li key={obj} className="flex items-start gap-3 text-sm sm:text-base text-[#1B1B18]/80 dark:text-[#F5F1E8]/80">
-                    <CheckCircle2 className="w-5 h-5 text-[#0F3D2E] dark:text-[#E8A317] shrink-0 mt-0.5" />
-                    <span>{obj}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="space-y-4">
-              <h3 className="font-serif text-xl text-[#1B1B18] dark:text-[#F5F1E8]">
-                Ce que vous savez faire à la fin du niveau {activeCourse.level}
-              </h3>
-              <ul className="space-y-3">
-                {activeCourse.canDo.map((skill) => (
-                  <li key={skill} className="flex items-start gap-3 text-sm sm:text-base text-[#1B1B18]/80 dark:text-[#F5F1E8]/80">
-                    <Sparkles className="w-5 h-5 text-[#E8A317] shrink-0 mt-0.5" />
-                    <span>{skill}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          <div className="pt-4 border-t border-[#0F3D2E]/10 dark:border-[#F5F1E8]/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-sm">
-            <div className="flex items-center gap-2 text-[#0F3D2E] dark:text-[#E8A317] font-medium">
-              <Award className="w-5 h-5 shrink-0" />
-              <span>{activeCourse.examTarget}</span>
-            </div>
-            <span className="text-xs text-[#1B1B18]/65 dark:text-[#F5F1E8]/65">
-              Modalité : En ligne & Présentiel au Cameroun (selon cohortes) · 100 % Gratuit
-            </span>
-          </div>
+          <LevelDetail level={selected} />
         </div>
       </section>
 
-      {/* TEST DE NIVEAU EN LIGNE GRATUIT (20 QUESTIONS PROGRESSIVES) */}
-      <section
-        id="test-niveau"
-        className="py-20 bg-[#0F3D2E] text-[#F5F1E8] border-y border-[#E8A317]/30"
-      >
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-          <SectionHeader
-            kicker="Auto-évaluation gratuite · 20 questions"
-            title="Test de niveau d’allemand en ligne"
-            subtitle="Évaluez gratuitement vos connaissances actuelles grâce à 20 questions progressives (de A1 à C1) afin de candidater au niveau le plus adapté."
-            align="center"
-            light
-          />
+      <SessionsCalendar />
 
-          <div className="rounded-[24px] bg-[#14523E]/90 border border-[#E8A317]/35 p-6 sm:p-10 shadow-xl">
-            {!quizStarted ? (
-              <div className="text-center space-y-6 py-4">
-                <p className="text-base sm:text-lg text-[#F5F1E8]/90 max-w-2xl mx-auto">
-                  Ce questionnaire comporte <strong>20 questions à choix multiples</strong> classées par difficulté croissante (4 questions par niveau : A1, A2, B1, B2, C1). Il dure environ 5 à 8 minutes et est entièrement gratuit.
-                </p>
-                <div className="flex flex-wrap justify-center gap-4">
-                  <button
-                    type="button"
-                    onClick={() => setQuizStarted(true)}
-                    className="inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-[#E8A317] text-[#1B1B18] font-semibold text-sm sm:text-base hover:bg-[#f3b32b] transition-colors cursor-pointer"
-                  >
-                    <span>Commencer le test des 20 questions</span>
-                    <ArrowUpRight className="w-5 h-5" />
-                  </button>
-                </div>
-              </div>
-            ) : quizFinished ? (
-              <div className="space-y-6 text-center py-4">
-                <span className="inline-block px-4 py-1.5 rounded-full bg-[#E8A317]/20 text-gold-on-green text-xs font-semibold uppercase tracking-widest">
-                  Résultat indicatif de votre test
-                </span>
-                <h3 className="font-serif font-normal text-3xl sm:text-4xl text-[#F5F1E8]">
-                  Score : {score} / {PLACEMENT_QUESTIONS.length} — Niveau conseillé :{' '}
-                  <span className="text-[#E8A317]">{recommendedLevel}</span>
-                </h3>
-                <p className="text-sm sm:text-base text-[#F5F1E8]/85 max-w-2xl mx-auto leading-relaxed">
-                  Ce résultat est un indicateur pédagogique pour vous orienter. Lors de l’étude de votre candidature, nos formateurs bénévoles confirmeront avec vous le groupe qui vous permettra de progresser dans les meilleures conditions.
-                </p>
-
-                <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
-                  <PrimaryButton
-                    to={`/candidater?souhait=cours_allemand&niveau=${recommendedLevel}`}
-                    className="!bg-[#E8A317] !text-[#1B1B18]"
-                  >
-                    Candidater au niveau {recommendedLevel}
-                  </PrimaryButton>
-                  <button
-                    type="button"
-                    onClick={resetQuiz}
-                    className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-white/30 text-sm text-[#F5F1E8] hover:bg-white/10 transition-colors cursor-pointer"
-                  >
-                    <RotateCcw className="w-4 h-4" />
-                    Recommencer le test
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <div className="space-y-6">
-                {/* Barre de progression du quiz */}
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between text-xs text-[#E8A317] font-semibold">
-                    <span>
-                      Question {currentQIndex + 1} sur {PLACEMENT_QUESTIONS.length}
-                    </span>
-                    <span>
-                      Palier testé : Niveau {PLACEMENT_QUESTIONS[currentQIndex].level}
-                    </span>
-                  </div>
-                  <div className="w-full h-2 rounded-full bg-[#0F3D2E] overflow-hidden">
-                    <div
-                      className="h-full w-full origin-left bg-[#E8A317] transition-transform duration-300"
-                      style={{
-                        transform: `scaleX(${(currentQIndex + 1) / PLACEMENT_QUESTIONS.length})`,
-                      }}
-                    />
-                  </div>
-                </div>
-
-                {/* Énoncé */}
-                <p className="font-serif text-xl sm:text-2xl text-[#F5F1E8] pt-2">
-                  {PLACEMENT_QUESTIONS[currentQIndex].question}
-                </p>
-
-                {/* Options */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {PLACEMENT_QUESTIONS[currentQIndex].options.map((opt, idx) => {
-                    const selected =
-                      answers[PLACEMENT_QUESTIONS[currentQIndex].id] === idx;
-                    return (
-                      <button
-                        key={opt}
-                        type="button"
-                        onClick={() => handleSelectOption(idx)}
-                        className={`p-4 rounded-2xl border text-left text-sm sm:text-base font-medium transition cursor-pointer ${
-                          selected
-                            ? 'bg-[#E8A317] text-[#1B1B18] border-[#E8A317] font-semibold'
-                            : 'bg-[#0F3D2E]/70 text-[#F5F1E8] border-white/15 hover:border-[#E8A317]/60'
-                        }`}
-                      >
-                        {opt}
-                      </button>
-                    );
-                  })}
-                </div>
-
-                <div className="pt-4 flex items-center justify-between">
-                  <button
-                    type="button"
-                    disabled={currentQIndex === 0}
-                    onClick={() => setCurrentQIndex((i) => Math.max(0, i - 1))}
-                    className="text-xs sm:text-sm text-[#F5F1E8]/75 hover:text-white disabled:opacity-40 cursor-pointer"
-                  >
-                    ← Question précédente
-                  </button>
-
-                  <button
-                    type="button"
-                    disabled={answers[PLACEMENT_QUESTIONS[currentQIndex].id] === undefined}
-                    onClick={handleNextQuestion}
-                    className="px-6 py-2.5 rounded-full bg-[#E8A317] text-[#1B1B18] text-sm font-semibold disabled:opacity-40 cursor-pointer"
-                  >
-                    {currentQIndex === PLACEMENT_QUESTIONS.length - 1
-                      ? 'Voir mon niveau conseillé'
-                      : 'Question suivante →'}
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* CALENDRIER DES SESSIONS (Cartes filtrables par niveau et par format) */}
-      <section
-        id="calendrier-sessions"
-        className="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-12"
-      >
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
-          <SectionHeader
-            kicker="Cohortes gratuites (Dates indicatives — TODO)"
-            title="Calendrier des prochaines sessions d’accompagnement"
-            subtitle="Filtrez par niveau (A1 à C1) ou par modalité (En ligne ou Présentiel au Cameroun — lieux à confirmer)."
-          />
-
-          {/* Filtres Niveau & Format */}
-          <div className="flex flex-wrap items-center gap-3">
-            <select
-              aria-label="Filtrer par niveau"
-              value={filterLevel}
-              onChange={(e) => setFilterLevel(e.target.value)}
-              className="px-4 py-2.5 rounded-full bg-white dark:bg-[#132A21] border border-[#0F3D2E]/20 dark:border-[#F5F1E8]/20 text-sm text-[#1B1B18] dark:text-[#F5F1E8]"
-            >
-              <option value="ALL">Tous les niveaux (A1–C1)</option>
-              <option value="A1">Niveau A1</option>
-              <option value="A2">Niveau A2</option>
-              <option value="B1">Niveau B1</option>
-              <option value="B2">Niveau B2</option>
-              <option value="C1">Niveau C1</option>
-            </select>
-
-            <select
-              aria-label="Filtrer par format"
-              value={filterFormat}
-              onChange={(e) => setFilterFormat(e.target.value)}
-              className="px-4 py-2.5 rounded-full bg-white dark:bg-[#132A21] border border-[#0F3D2E]/20 dark:border-[#F5F1E8]/20 text-sm text-[#1B1B18] dark:text-[#F5F1E8]"
-            >
-              <option value="ALL">Tous les formats</option>
-              <option value="ONLINE">En ligne</option>
-              <option value="PRESENTIEL">Présentiel au Cameroun (TODO)</option>
-            </select>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredSessions.map((session, idx) => (
-            <CourseCard key={session.id} session={session} index={idx + 1} />
-          ))}
-        </div>
-      </section>
-
-      {/* PRÉPARATION AUX EXAMENS OFFICIELS (Goethe, telc, TestDaF — mention indicative TODO) */}
-      <section className="py-16 bg-white/60 dark:bg-[#132A21]/40 border-t border-[#0F3D2E]/10 dark:border-[#F5F1E8]/10">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="rounded-[24px] bg-white dark:bg-[#132A21] border border-[#0F3D2E]/15 dark:border-[#F5F1E8]/15 p-8 sm:p-10 space-y-6">
-            <div className="flex flex-wrap items-center justify-between gap-4">
-              <div>
-                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-text dark:text-[#E8A317]">
-                  Certifications Internationales (Mention indicative — TODO : à vérifier)
-                </span>
-                <h2 className="font-serif font-normal text-2xl sm:text-3xl text-[#1B1B18] dark:text-[#F5F1E8] mt-1">
-                  Préparation méthodique aux examens officiels d’allemand
-                </h2>
-              </div>
-              <DonateButton to="/faire-un-don">Soutenir l’Académie</DonateButton>
-            </div>
-
-            <p className="text-sm sm:text-base text-[#1B1B18]/80 dark:text-[#F5F1E8]/80 leading-relaxed">
-              Nos parcours d’accompagnement intègrent des entraînements blancs aux épreuves de compréhension écrite, d’écoute, d’expression écrite et d’oral selon les standards des examens reconnus : <strong>Goethe-Zertifikat, telc Deutsch et TestDaF</strong> (mention indicative — TODO : modalités exactes de partenariat ou d’inscription aux centres d’examen officiels à confirmer par WAHHF).
+      <Section tone="sauge">
+        <div className="container-page grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-12">
+          <AfterApplicationSteps headingLevel="h2" />
+          <div className="space-y-4">
+            <h2 className="text-section-title text-text">Préparation aux examens officiels</h2>
+            <p className="text-body text-text-secondary max-w-[65ch]">
+              Nos parcours intègrent des entraînements blancs aux épreuves de compréhension écrite, d’écoute,
+              d’expression écrite et d’oral, selon les standards des examens reconnus : Goethe-Zertifikat, telc Deutsch
+              et TestDaF.
             </p>
           </div>
         </div>
-      </section>
+      </Section>
+
+      <FinalAction to="/candidater?souhait=cours_allemand" label="Candidater" />
     </>
   );
+}
+
+function LevelPage({ level }: { level: GermanLevelCourse }) {
+  useFocusTitleAfterNavigation();
+  return (
+    <>
+      <SEO
+        title={`Allemand niveau ${level.level} — Académie de langues gratuite`}
+        description={`Niveau ${level.level} d'allemand à l'Académie WAHHF : ${level.subtitle} Objectifs, compétences, volume horaire et prochaines sessions.`}
+        canonical={`/academie/${level.slug}`}
+      />
+
+      <PageHeader reveal notice={<DisclaimerBanner />}>
+        <PageMeta>
+          <Link to="/mobilite-langues">Mobilité & Langues</Link>
+          <span aria-hidden="true">/</span>
+          <Link to="/mobilite-langues/academie">Académie de langues</Link>
+          <span aria-hidden="true">/</span>
+          <span>Niveau {level.level}</span>
+        </PageMeta>
+        <PageTitle>{levelName(level)}</PageTitle>
+        <PageIntro>{level.subtitle}</PageIntro>
+        <PageActions>
+          <PrimaryButton to={`/candidater?souhait=cours_allemand&niveau=${level.level}`}>Candidater au niveau {level.level}</PrimaryButton>
+          <SecondaryButton to="/mobilite-langues/academie#test-niveau">Vérifier mon niveau (test)</SecondaryButton>
+        </PageActions>
+      </PageHeader>
+
+      {/* La frise se dessine jusqu'au niveau affiché, qui s'allume ; puis la fiche */}
+      <section className="container-page section-space pt-0! space-y-10">
+        <div role="group" aria-label={`Les cinq niveaux d’allemand ; niveau affiché : ${level.level}`}>
+          <Fil
+            orientation="auto"
+            steps={levelSteps}
+            end={{ id: 'europe', label: 'Europe' }}
+            currentId={level.slug}
+            drawTo={level.slug}
+            lightCurrent
+          />
+        </div>
+        <LevelDetail level={level} />
+      </section>
+
+      <SessionsCalendar level={level.level} />
+
+      <Section tone="sauge">
+        <div className="container-page">
+          <AfterApplicationSteps headingLevel="h2" />
+        </div>
+      </Section>
+
+      <FinalAction to={`/candidater?souhait=cours_allemand&niveau=${level.level}`} label={`Candidater au niveau ${level.level}`} />
+    </>
+  );
+}
+
+export default function LanguageAcademy() {
+  const { level: routeLevel } = useParams<{ level?: string }>();
+
+  if (routeLevel) {
+    const level = GERMAN_LEVELS_DATA.find((l) => l.slug === routeLevel.toLowerCase());
+    // Niveau inconnu (/academie/z9) : page « introuvable » avec la liste des 5 niveaux
+    if (!level) {
+      return (
+        <NotFoundPage
+          title="Ce niveau d’allemand n’existe pas"
+          message="L’Académie de langues propose 5 niveaux, de A1 à C1. Choisissez le vôtre ci-dessous, ou faites le test de niveau."
+        >
+          <NotFoundLinks
+            heading="Les niveaux de l’Académie"
+            links={[
+              ...GERMAN_LEVELS_DATA.map((l) => ({ to: `/academie/${l.slug}`, label: levelName(l) })),
+              { to: '/mobilite-langues/academie#test-niveau', label: 'Test de niveau (20 questions)' },
+            ]}
+          />
+        </NotFoundPage>
+      );
+    }
+    // Remontée à chaque niveau : l'en-tête et la frise rejouent leur arrivée
+    return <LevelPage key={level.slug} level={level} />;
+  }
+  return <AcademyPage />;
 }

@@ -74,6 +74,8 @@ export interface GermanLevelCourse {
   level: 'A1' | 'A2' | 'B1' | 'B2' | 'C1';
   slug: string;
   title: string;
+  /** Intitulé court affiché dans le fil des niveaux (contrat §6). */
+  shortTitle: string;
   subtitle: string;
   duration: string;
   hours: string;
@@ -88,10 +90,16 @@ export interface CourseSession {
   id: string;
   level: 'A1' | 'A2' | 'B1' | 'B2' | 'C1';
   title: string;
-  format: 'En ligne' | 'Présentiel (Douala — à confirmer)' | 'Présentiel (Yaoundé — à confirmer)';
+  format: 'En ligne' | 'Présentiel à Douala' | 'Présentiel à Yaoundé';
   days: string;
   duration: string;
-  startDate: string;
+  /**
+   * Date de début au format ISO (AAAA-MM-JJ), comparée à la date du jour : une session commencée n'est plus affichée
+   * (audit T-05, groupe 7.1). Formatée à l'affichage (src/lib/sessions.ts).
+   */
+  startsOn: string;
+  /** false tant que la fondation n'a pas confirmé la date : seul le mois est affiché, « à confirmer ». */
+  dateConfirmed: boolean;
   seatsAvailable: number;
   costLabel: 'Gratuit';
 }
@@ -255,6 +263,7 @@ export const GERMAN_LEVELS_DATA: GermanLevelCourse[] = [
     level: 'A1',
     slug: 'a1',
     title: 'Niveau A1 — Découverte & Bases',
+    shortTitle: 'Découverte',
     subtitle: 'Comprendre et utiliser des expressions familières et quotidiennes.',
     duration: '10 à 12 semaines (indicatif — TODO)',
     hours: '80 heures d’accompagnement',
@@ -276,6 +285,7 @@ export const GERMAN_LEVELS_DATA: GermanLevelCourse[] = [
     level: 'A2',
     slug: 'a2',
     title: 'Niveau A2 — Survie & Échanges Courants',
+    shortTitle: 'Échanges courants',
     subtitle: 'Communiquer lors de tâches simples et habituelles du quotidien.',
     duration: '10 à 12 semaines (indicatif — TODO)',
     hours: '90 heures d’accompagnement',
@@ -297,6 +307,7 @@ export const GERMAN_LEVELS_DATA: GermanLevelCourse[] = [
     level: 'B1',
     slug: 'b1',
     title: 'Niveau B1 — Seuil d’Autonomie',
+    shortTitle: 'Autonomie',
     subtitle: 'Être autonome dans la plupart des situations de voyage, d’études ou de formation.',
     duration: '12 à 14 semaines (indicatif — TODO)',
     hours: '120 heures d’accompagnement',
@@ -318,6 +329,7 @@ export const GERMAN_LEVELS_DATA: GermanLevelCourse[] = [
     level: 'B2',
     slug: 'b2',
     title: 'Niveau B2 — Indépendance & Fluidité',
+    shortTitle: 'Indépendance',
     subtitle: 'Communiquer avec spontanéité et comprendre des textes complexes.',
     duration: '14 à 16 semaines (indicatif — TODO)',
     hours: '140 heures d’accompagnement',
@@ -339,6 +351,7 @@ export const GERMAN_LEVELS_DATA: GermanLevelCourse[] = [
     level: 'C1',
     slug: 'c1',
     title: 'Niveau C1 — Maîtrise Académique & Professionnelle',
+    shortTitle: 'Maîtrise',
     subtitle: 'Utiliser la langue de façon souple et efficace dans la vie universitaire et sociale.',
     duration: '16 semaines (indicatif — TODO)',
     hours: '160 heures d’accompagnement',
@@ -362,77 +375,84 @@ export const COURSE_SESSIONS_DATA: CourseSession[] = [
   {
     id: 'sess-a1-online',
     level: 'A1',
-    title: 'Allemand A1 — Fondations & Communication Quotidienne',
+    title: 'Allemand A1 : fondations et communication quotidienne',
     format: 'En ligne',
     days: 'Lundi, Mercredi, Vendredi (18h00 – 20h00)',
     duration: '12 semaines',
-    startDate: '14 Septembre 2026 (TODO)',
+    startsOn: '2026-09-14',
+    dateConfirmed: false,
     seatsAvailable: 24,
     costLabel: 'Gratuit',
   },
   {
     id: 'sess-a1-dla',
     level: 'A1',
-    title: 'Allemand A1 — Cohorte Présentiel Douala',
-    format: 'Présentiel (Douala — à confirmer)',
+    title: 'Allemand A1 : cohorte en présentiel à Douala',
+    format: 'Présentiel à Douala',
     days: 'Mardi, Jeudi (16h00 – 18h30) & Samedi matin',
     duration: '12 semaines',
-    startDate: '21 Septembre 2026 (TODO)',
+    startsOn: '2026-09-21',
+    dateConfirmed: false,
     seatsAvailable: 18,
     costLabel: 'Gratuit',
   },
   {
     id: 'sess-a2-online',
     level: 'A2',
-    title: 'Allemand A2 — Consolidation & Autonomie Quotidienne',
+    title: 'Allemand A2 : consolidation et autonomie au quotidien',
     format: 'En ligne',
     days: 'Mardi, Jeudi (18h30 – 20h30) & Samedi (10h00 – 12h00)',
     duration: '12 semaines',
-    startDate: '05 Octobre 2026 (TODO)',
+    startsOn: '2026-10-05',
+    dateConfirmed: false,
     seatsAvailable: 20,
     costLabel: 'Gratuit',
   },
   {
     id: 'sess-b1-online',
     level: 'B1',
-    title: 'Allemand B1 — Parcours Études & Formation (Ausbildung)',
+    title: 'Allemand B1 : parcours études et formation (Ausbildung)',
     format: 'En ligne',
     days: 'Lundi, Mercredi, Vendredi (18h30 – 21h00)',
     duration: '14 semaines',
-    startDate: '12 Octobre 2026 (TODO)',
+    startsOn: '2026-10-12',
+    dateConfirmed: false,
     seatsAvailable: 20,
     costLabel: 'Gratuit',
   },
   {
     id: 'sess-b1-yde',
     level: 'B1',
-    title: 'Allemand B1 — Atelier Intensif Yaoundé',
-    format: 'Présentiel (Yaoundé — à confirmer)',
+    title: 'Allemand B1 : atelier intensif à Yaoundé',
+    format: 'Présentiel à Yaoundé',
     days: 'Mercredi, Vendredi (16h00 – 18h30) & Samedi',
     duration: '14 semaines',
-    startDate: '19 Octobre 2026 (TODO)',
+    startsOn: '2026-10-19',
+    dateConfirmed: false,
     seatsAvailable: 15,
     costLabel: 'Gratuit',
   },
   {
     id: 'sess-b2-online',
     level: 'B2',
-    title: 'Allemand B2 — Expression Avancée & Dossiers Techniques',
+    title: 'Allemand B2 : expression avancée et dossiers techniques',
     format: 'En ligne',
     days: 'Mardi, Jeudi (18h30 – 21h00) & Samedi (14h00 – 16h30)',
     duration: '15 semaines',
-    startDate: '02 Novembre 2026 (TODO)',
+    startsOn: '2026-11-02',
+    dateConfirmed: false,
     seatsAvailable: 16,
     costLabel: 'Gratuit',
   },
   {
     id: 'sess-c1-online',
     level: 'C1',
-    title: 'Allemand C1 — Préparation Universitaire & TestDaF',
+    title: 'Allemand C1 : préparation universitaire et TestDaF',
     format: 'En ligne',
     days: 'Lundi, Jeudi (19h00 – 21h30) & Samedi (09h00 – 12h00)',
     duration: '16 semaines',
-    startDate: '11 Janvier 2027 (TODO)',
+    startsOn: '2027-01-11',
+    dateConfirmed: false,
     seatsAvailable: 14,
     costLabel: 'Gratuit',
   },
@@ -698,19 +718,17 @@ export const PLACEMENT_QUESTIONS: PlacementQuestion[] = [
 
 export const THEMATIC_GUIDES: Record<string, {
   slug: string;
-  kicker: string;
   title: string;
   subtitle: string;
   sections: { heading: string; body: string; bullets?: string[] }[];
 }> = {
   'comprendre-les-parcours': {
     slug: 'comprendre-les-parcours',
-    kicker: 'Guide Thématique 01',
     title: 'Comprendre les parcours vers l’Europe',
     subtitle: 'Distinguer clairement les études universitaires, la formation professionnelle et la mobilité liée au travail.',
     sections: [
       {
-        heading: '1. Les études supérieures (Bachelor, Master, Doctorat)',
+        heading: 'Les études supérieures (Bachelor, Master, Doctorat)',
         body: 'Le parcours académique s’adresse aux titulaires du baccalauréat ou d’un diplôme universitaire souhaitant poursuivre une formation théorique et de recherche dans une université publique ou privée accréditée.',
         bullets: [
           'Nécessite la reconnaissance officielle du diplôme de fin d’études secondaires ou supérieures',
@@ -719,7 +737,7 @@ export const THEMATIC_GUIDES: Record<string, {
         ],
       },
       {
-        heading: '2. La formation professionnelle (ex. Ausbildung en Allemagne)',
+        heading: 'La formation professionnelle (ex. Ausbildung en Allemagne)',
         body: 'La formation professionnelle en alternance combine des cours dans une école professionnelle et une pratique rémunérée en entreprise pendant 2 à 3 ans.',
         bullets: [
           'Excellente maîtrise de la langue du pays indispensable (minimum B1 solide ou B2)',
@@ -728,7 +746,7 @@ export const THEMATIC_GUIDES: Record<string, {
         ],
       },
       {
-        heading: '3. La mobilité professionnelle qualifiée',
+        heading: 'La mobilité professionnelle qualifiée',
         body: 'Destinée aux professionnels disposant déjà d’un diplôme supérieur ou technique reconnu et d’une expérience vérifiable.',
         bullets: [
           'Procédure préalable d’équivalence ou de reconnaissance des qualifications professionnelles',
@@ -739,7 +757,6 @@ export const THEMATIC_GUIDES: Record<string, {
   },
   'preparer-son-dossier': {
     slug: 'preparer-son-dossier',
-    kicker: 'Guide Thématique 02',
     title: 'Préparer son dossier avec rigueur',
     subtitle: 'Les bonnes pratiques documentaires pour constituer un dossier authentique, lisible et conforme.',
     sections: [
@@ -765,7 +782,6 @@ export const THEMATIC_GUIDES: Record<string, {
   },
   'apprendre-la-langue': {
     slug: 'apprendre-la-langue',
-    kicker: 'Guide Thématique 03',
     title: 'Apprendre la langue du pays : la clé de l’autonomie',
     subtitle: 'Pourquoi la maîtrise linguistique précède toujours les démarches administratives.',
     sections: [
@@ -782,7 +798,6 @@ export const THEMATIC_GUIDES: Record<string, {
   },
   's-installer': {
     slug: 's-installer',
-    kicker: 'Guide Thématique 04',
     title: 'Préparer son arrivée et son intégration',
     subtitle: 'Se préparer aux réalités pratiques, culturelles et administratives de la vie en Europe.',
     sections: [
@@ -799,7 +814,6 @@ export const THEMATIC_GUIDES: Record<string, {
   },
   'eviter-les-arnaques': {
     slug: 'eviter-les-arnaques',
-    kicker: 'Vigilance & Protection · Priorité Absolue',
     title: 'Éviter les arnaques et les fausses promesses',
     subtitle: 'Comment reconnaître une offre frauduleuse, protéger vos proches et vérifier chaque information.',
     sections: [
@@ -959,34 +973,28 @@ export async function getArticleBySlug(slug: string): Promise<NewsArticle | unde
   return Promise.resolve(NEWS_DATA.find((a) => a.slug === slug));
 }
 
-export async function submitApplication(payload: ApplicationPayload): Promise<{ reference: string; responseDelayNote: string }> {
-  await new Promise((r) => setTimeout(r, 500));
-  const ref = `WAHHF-CAND-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
-  try {
-    const existing = JSON.parse(localStorage.getItem('wahhf_applications') || '[]');
-    existing.push({ ...payload, reference: ref, submittedAt: new Date().toISOString() });
-    localStorage.setItem('wahhf_applications', JSON.stringify(existing));
-  } catch {
-    // ignore storage errors
-  }
-  return {
-    reference: ref,
-    responseDelayNote: 'Délai de réponse indicatif : sous 7 à 14 jours ouvrés (TODO : délai exact à confirmer par l’équipe WAHHF).',
-  };
+/**
+ * Envois des formulaires : PAS ENCORE BRANCHÉS (API Symfony à venir).
+ * En attendant, les pages préparent un message WhatsApp ou e-mail que la personne envoie elle-même
+ * (src/components/wahhf/ContactHandoff.tsx) ; ces fonctions ne sont plus appelées.
+ * Elles échouent volontairement : jamais de succès simulé, de référence inventée ni de donnée stockée
+ * dans le navigateur. Au branchement : vrai appel réseau, confirmation seulement sur réponse 2xx,
+ * référence créée par le serveur, et côté page un état « envoi en cours » avec try/catch/finally (ETA-01, ETA-02).
+ */
+const FORMS_NOT_CONNECTED = 'Envoi en ligne pas encore disponible : l’API Symfony n’est pas branchée.';
+
+export async function submitApplication(_payload: ApplicationPayload): Promise<{ reference: string; responseDelayNote: string }> {
+  throw new Error(FORMS_NOT_CONNECTED);
 }
 
-export async function submitDonation(payload: DonationPayload): Promise<{ receiptRef: string }> {
-  await new Promise((r) => setTimeout(r, 500));
-  const receiptRef = `WAHHF-DON-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
-  return { receiptRef };
+export async function submitDonation(_payload: DonationPayload): Promise<{ receiptRef: string }> {
+  throw new Error(FORMS_NOT_CONNECTED);
 }
 
-export async function submitContactOrAction(payload: Record<string, unknown>): Promise<{ ok: boolean }> {
-  await new Promise((r) => setTimeout(r, 400));
-  return { ok: Boolean(payload) };
+export async function submitContactOrAction(_payload: Record<string, unknown>): Promise<{ ok: boolean }> {
+  throw new Error(FORMS_NOT_CONNECTED);
 }
 
-export async function subscribeNewsletter(email: string): Promise<{ ok: boolean }> {
-  await new Promise((r) => setTimeout(r, 350));
-  return { ok: Boolean(email) };
+export async function subscribeNewsletter(_email: string): Promise<{ ok: boolean }> {
+  throw new Error(FORMS_NOT_CONNECTED);
 }

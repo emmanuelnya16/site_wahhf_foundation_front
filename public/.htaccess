@@ -1,0 +1,95 @@
+# =============================================================================
+# WAHHF Foundation : hébergement Verpex (cPanel, serveur Apache ou LiteSpeed)
+# Vite copie ce fichier tel quel à la racine de dist/ : envoyer le CONTENU de dist/ dans public_html.
+# Le cache long des fichiers de /assets est réglé dans public/assets/.htaccess.
+# =============================================================================
+
+Options -Indexes -MultiViews
+DirectoryIndex index.html
+
+<IfModule mod_mime.c>
+  AddType font/woff2 .woff2
+  AddType image/webp .webp
+  AddType application/manifest+json .webmanifest
+</IfModule>
+
+# -----------------------------------------------------------------------------
+# 1. Réécriture : HTTPS, fichiers réels, routes de l'application, vraie page 404
+# -----------------------------------------------------------------------------
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # HTTPS obligatoire (le certificat AutoSSL de cPanel doit être actif).
+  # X-Forwarded-Proto : derrière un proxy (Cloudflare…), évite une boucle de redirection.
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # Fichiers et dossiers réels (assets, polices, images, robots.txt, sitemap.xml) : servis tels quels
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Routes de l'application (src/App.tsx) : index.html avec le statut 200.
+  # À mettre à jour quand une route est ajoutée ; sinon elle s'affiche quand même, mais avec le statut 404.
+  RewriteRule ^(qui-sommes-nous|nos-actions|notre-impact|galerie|actualites|partenaires|agir|faire-un-don|contact|candidater|mobilite-langues|mobilite-langues/academie|mobilite-langues/accompagnement|mentions-legales|confidentialite|transparence|le-groupe|structure|poles|tarifs|methode|fondateurs|a-propos|catalogue|realisations|vkibusiness)/?$ index.html [L]
+
+  # Routes à paramètre (article, niveau, guide, pays) : statut 200 ; si le paramètre est inconnu,
+  # la page affiche elle-même « introuvable » avec une balise noindex.
+  RewriteRule ^(actualites|academie|accompagnement|accompagnement/pays)/[A-Za-z0-9_-]+/?$ index.html [L]
+</IfModule>
+
+# Toute autre adresse : statut 404, et index.html affiche la page « introuvable » (noindex)
+ErrorDocument 404 /index.html
+
+# -----------------------------------------------------------------------------
+# 2. Cache
+# -----------------------------------------------------------------------------
+<IfModule mod_headers.c>
+  # index.html : toujours revalidé, une nouvelle version est visible dès le déploiement
+  <FilesMatch "^index\.html$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+  # Autres fichiers de public/ (polices, image du hero, logo, données geo) : noms fixes, donc cache d'une semaine
+  <FilesMatch "\.(woff2|webp|png|jpe?g|svg|ico|json)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+</IfModule>
+
+# -----------------------------------------------------------------------------
+# 3. Compression (Brotli si disponible, sinon gzip ; LiteSpeed compresse aussi de lui-même)
+# -----------------------------------------------------------------------------
+<IfModule mod_filter.c>
+  <IfModule mod_brotli.c>
+    AddOutputFilterByType BROTLI_COMPRESS text/html text/css text/plain text/xml text/javascript application/javascript application/json application/xml application/manifest+json image/svg+xml
+  </IfModule>
+  <IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml text/javascript application/javascript application/json application/xml application/manifest+json image/svg+xml
+  </IfModule>
+</IfModule>
+
+# -----------------------------------------------------------------------------
+# 4. En-têtes de sécurité
+# -----------------------------------------------------------------------------
+<IfModule mod_headers.c>
+  # HTTPS imposé au navigateur pendant 1 an (ignoré en HTTP). Pas de includeSubDomains : d'éventuels
+  # sous-domaines sans certificat resteraient accessibles.
+  Header always set Strict-Transport-Security "max-age=31536000"
+  Header always set X-Content-Type-Options "nosniff"
+  # Origine seule vers les autres sites ; YouTube en a besoin pour la vidéo intégrée
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  # Le site ne peut être affiché dans le cadre d'aucun autre site (anciens navigateurs + CSP frame-ancestors)
+  Header always set X-Frame-Options "DENY"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+
+  # Content-Security-Policy :
+  # - script-src : les fichiers du site, plus les 2 scripts en ligne d'index.html (thème avant rendu,
+  #   préchargement de l'image du hero) autorisés par leur empreinte SHA-256, en fins de ligne LF puis
+  #   CRLF (git peut convertir index.html sous Windows). Si l'un de ces scripts est modifié, recalculer
+  #   ses empreintes (sinon le navigateur le bloque).
+  # - frame-src : vidéo YouTube en mode confidentialité renforcée (youtube-nocookie.com).
+  # - img-src / media-src : Cloudinary (vidéo), Unsplash et api.qrserver.com (pages historiques).
+  # - frame-ancestors 'none' : aucun site ne peut afficher celui-ci dans un cadre (page de don comprise).
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'sha256-t91OsHpVt6iYtpPv+HE7RuLVsbSxVxJJF+cCRMsjhKQ=' 'sha256-9UW0WCBKOV0lz77HsCmnsty5fDAetzdHfTqz+1O8K4I=' 'sha256-t9cwHM0es/Y5Xtpe4/1bwRF4d7iIGH+PvbgBNc1FAw8=' 'sha256-aNYI4GNfwYQ6ysRxcYf1BmVOzZ86cxaPGwLxWWE0r8Q='; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://res.cloudinary.com https://images.unsplash.com https://api.qrserver.com; media-src 'self' https://res.cloudinary.com; font-src 'self'; connect-src 'self'; frame-src https://www.youtube-nocookie.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+</IfModule>

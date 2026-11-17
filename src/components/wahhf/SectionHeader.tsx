@@ -1,76 +1,45 @@
-import { motion, useReducedMotion } from 'motion/react';
+import { Ref } from 'react';
+import { cn } from '../../lib/utils';
 
 interface SectionHeaderProps {
-  kicker: string;
   title: string;
+  /** Introduction facultative, sous le titre (texte courant, 65 caractères par ligne au plus). */
   subtitle?: string;
-  align?: 'left' | 'center';
-  light?: boolean;
+  /**
+   * Sur-titre facultatif (contrat §8, T-16) : seulement s'il porte une information (statut, source, état).
+   * Affiché en casse de phrase, 15 px, encre douce ; jamais en capitales espacées.
+   */
+  kicker?: string;
+  /** Posé sur une surface nuit (même en thème clair) : couleurs « on-inverse » (§3.4). */
+  onInverse?: boolean;
   className?: string;
-  /** false : pas d'apparition propre (la section anime déjà ce bloc, évite une double apparition). */
-  reveal?: boolean;
+  /** Titre qui peut recevoir le focus par script (changement d'étape d'un formulaire). */
+  titleRef?: Ref<HTMLHeadingElement>;
+  /** Le titre apparaît au défilement (fondu et montée de 24 px). Accueil, sections 2 et 3 seulement (contrat §10). */
+  revealTitle?: boolean;
 }
 
-export default function SectionHeader({
-  kicker,
-  title,
-  subtitle,
-  align = 'left',
-  light = false,
-  className = '',
-  reveal = true,
-}: SectionHeaderProps) {
-  const shouldReduceMotion = useReducedMotion();
-  const animated = reveal && !shouldReduceMotion;
-
+/**
+ * En-tête de section (contrat §8) : le titre (échelle section-title) et, au besoin, une introduction.
+ * Aligné à gauche, sans filet. Pas d'apparition, sauf revealTitle (contrat §10, lot 7 : accueil, sections 2 et 3).
+ */
+export default function SectionHeader({ title, subtitle, kicker, onInverse = false, className = '', titleRef, revealTitle = false }: SectionHeaderProps) {
   return (
-    <motion.div
-      initial={animated ? { opacity: 0, y: 18 } : false}
-      whileInView={animated ? { opacity: 1, y: 0 } : undefined}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-      className={`max-w-3xl ${align === 'center' ? 'mx-auto text-center' : ''} ${className}`}
-    >
-      {/* 1. Sur-titre en petites capitales espacées, couleur or */}
-      <p
-        className={`text-xs sm:text-sm font-semibold uppercase tracking-[0.22em] mb-3 ${
-          light ? 'text-[#E8A317]' : 'text-gold-text dark:text-[#E8A317]'
-        }`}
-      >
-        {kicker}
-      </p>
-
-      {/* 2. Grand titre en serif élégante Fraunces, graisse NORMALE */}
+    <div className={cn('max-w-[65ch]', className)}>
+      {kicker && (
+        <p className={cn('text-meta mb-2', onInverse ? 'text-text-secondary-on-inverse' : 'text-text-secondary')}>{kicker}</p>
+      )}
       <h2
-        className={`font-serif font-normal tracking-tight leading-[1.12] text-[clamp(1.85rem,3.6vw,3.1rem)] ${
-          light
-            ? 'text-[#F5F1E8]'
-            : 'text-[#1B1B18] dark:text-[#F5F1E8]'
-        }`}
+        ref={titleRef}
+        tabIndex={titleRef ? -1 : undefined}
+        data-reveal={revealTitle || undefined}
+        className={cn('text-section-title', onInverse ? 'text-text-on-inverse' : 'text-text')}
       >
         {title}
       </h2>
-
-      {/* 3. Petit filet en dégradé vert vers or, sous le titre */}
-      <div
-        aria-hidden="true"
-        className={`h-[3px] w-20 rounded-full bg-gradient-to-r from-[#0F3D2E] via-[#1b634b] to-[#E8A317] mt-5 mb-5 ${
-          align === 'center' ? 'mx-auto' : ''
-        }`}
-      />
-
-      {/* 4. Sous-titre léger */}
       {subtitle && (
-        <p
-          className={`text-base sm:text-lg font-normal leading-relaxed ${
-            light
-              ? 'text-[#F5F1E8]/80'
-              : 'text-[#1B1B18]/75 dark:text-[#F5F1E8]/75'
-          }`}
-        >
-          {subtitle}
-        </p>
+        <p className={cn('text-body mt-4', onInverse ? 'text-text-secondary-on-inverse' : 'text-text-secondary')}>{subtitle}</p>
       )}
-    </motion.div>
+    </div>
   );
 }

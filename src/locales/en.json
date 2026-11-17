@@ -14,6 +14,7 @@
     "donate": "Donate",
     "apply": "Apply",
     "partners": "Partners",
+    "contact": "Contact",
     "searchPlaceholder": "Search a program, German course, country...",
     "themeLight": "Light mode",
     "themeDark": "Dark mode",
@@ -27,7 +28,7 @@
     }
   },
   "disclaimer": {
-    "title": "Integrity & Free Support Commitment",
+    "title": "What we will never ask of you",
     "text": "WAHHF supports you free of charge. We do not sell visas or jobs and do not guarantee any outcome. We never ask you for money. Decisions belong solely to the relevant authorities and institutions. Always verify information on official websites."
   },
   "hero": {
@@ -38,7 +39,19 @@
     "ctaSecondary": "Explore our programs",
     "scrollHint": "Scroll to explore",
     "videoPause": "Pause the video",
-    "videoPlay": "Play the video"
+    "videoPlay": "Play the video",
+    "headline": "German lessons to prepare for Europe with confidence",
+    "lead": "A Cameroonian-German foundation in Yaoundé and Douala: levels A1 to C1, an online test and guidance towards 10 European countries, with no paid intermediary.",
+    "ctaTest": "Take the free German test",
+    "filmLink": "Watch the film with sound (1 min)",
+    "filStart": "Cameroon",
+    "filEnd": "Europe",
+    "videoConsent": "Turn on the video",
+    "videoConsentNote": "It is streamed by YouTube, which then receives your IP address.",
+    "filmTitle": "WAHHF Foundation film",
+    "filmPlay": "Play the film on YouTube",
+    "filmNote": "The film is streamed by YouTube, which then receives your IP address.",
+    "filmClose": "Close the film"
   },
   "home": {
     "mission": {
@@ -63,16 +76,24 @@
       "subtitle": "From primary schooling access to international academic and language mobility."
     },
     "mobilitySpot": {
-      "kicker": "Domain 06 · Flagship Program",
-      "title": "Learn German, navigate towards Europe — free of charge",
-      "subtitle": "100% free, funded by IROKO and our donors. Zero registration fees, zero commercial intermediaries.",
+      "title": "Learn German, navigate towards Europe",
+      "subtitle": "Free German lessons and guidance, with no registration fees and no commercial intermediaries.",
       "card1Title": "Language Academy A1 to C1",
-      "card1Desc": "Structured German language course support from beginner A1 to advanced C1, with a free placement test.",
+      "card1Desc": "Structured German language course support from beginner A1 to advanced C1, with an online placement test.",
       "card2Title": "Support towards Europe",
       "card2Desc": "Clear, verified 4-step guidance: understanding study, vocational training, or work pathways and preparing your file.",
       "card3Title": "10 supported countries",
       "card3Desc": "Luxembourg, Germany, Slovenia, Italy, Greece, Portugal, Spain, Denmark, Poland, and Albania.",
-      "cta": "Discover the program"
+      "cta": "Discover the program",
+      "filLabel": "The five German levels, from A1 to C1, then Europe",
+      "filEnd": "Europe",
+      "levels": {
+        "a1": "Discovery",
+        "a2": "Everyday exchanges",
+        "b1": "Autonomy",
+        "b2": "Independence",
+        "c1": "Mastery"
+      }
     },
     "video": {
       "kicker": "In the field",
@@ -92,8 +113,8 @@
     },
     "presence": {
       "kicker": "Presence & reach",
-      "title": "10 regions in Cameroon, 10 guidance countries in Europe",
-      "subtitle": "Local roots across all ten Cameroonian regions and documented pathways to ten European countries."
+      "title": "Based in Yaoundé and Douala, looking towards 10 European countries",
+      "subtitle": "Our teams are in Yaoundé and Douala; relays in the other regions are still to be confirmed. In Europe, verified guides for 10 countries."
     },
     "testimonials": {
       "kicker": "Testimonials",
@@ -110,7 +131,8 @@
       "kicker": "In pictures",
       "title": "The foundation in action",
       "subtitle": "Photos from the First Open Day & Boot Camp, 25 April 2026 in Yaoundé.",
-      "link": "See the full gallery"
+      "link": "See the full gallery",
+      "expandCaption": "Yaoundé, 25 April 2026"
     },
     "partners": {
       "kicker": "Partners and funders",
@@ -121,14 +143,15 @@
     "act": {
       "kicker": "Take action with us",
       "title": "Every gesture strengthens a life journey",
-      "subtitle": "Three concrete ways to contribute to WAHHF Foundation's mission."
+      "subtitle": "Join the mission as a volunteer or a partner, or follow our work through the newsletter."
     },
     "newsletter": {
       "kicker": "Stay connected",
       "title": "Receive our news and upcoming session dates",
-      "subtitle": "A thoughtful monthly update. One-click unsubscribe.",
+      "subtitle": "Your address is only used to send you this newsletter. The site does not store it yet: it prepares a sign-up message for you to send us by WhatsApp or e-mail.",
       "placeholder": "Your email address",
-      "button": "Subscribe",
+      "button": "Prepare my sign-up",
+      "privacyLink": "Privacy policy",
       "donateBannerTitle": "Support the free access to our educational and social programs",
       "donateBannerSub": "100% of donations directly fund language courses, youth guidance, and field initiatives.",
       "donateBannerBtn": "Donate"
@@ -139,8 +162,8 @@
     "irokoBadge": "Social branch of the IROKO Group",
     "colAbout": "Who we are",
     "colActions": "Our actions",
-    "colAct": "Take action & Donate",
-    "colContact": "Contact & Address",
+    "colAct": "Take action & donate",
+    "colContact": "Contact & address",
     "legal": "Legal notice",
     "privacy": "Privacy policy",
     "transparency": "Financial transparency",

@@ -1,5 +1,5 @@
 import { ReactNode, useRef } from 'react';
-import { gsap, useGSAP, MQ } from '../lib/gsap';
+import { gsap, useGSAP, MQ, GSAP_EASE } from '../lib/gsap';
 import { prefersReducedMotion } from '../lib/reducedMotion';
 
 interface ExpandSectionProps {
@@ -48,7 +48,7 @@ export default function ExpandSection({ id, backgroundClassName, className = '',
             { clipPath: () => `inset(4% ${sideInset()}px 4% ${sideInset()}px round 32px)` },
             {
               clipPath: 'inset(0% 0px 0% 0px round 0px)',
-              ease: 'none',
+              ease: GSAP_EASE.scrub,
               scrollTrigger: { trigger: section, start: 'top 90%', end: 'top 20%', scrub: true, invalidateOnRefresh: true },
             }
           );
@@ -65,7 +65,7 @@ export default function ExpandSection({ id, backgroundClassName, className = '',
             opacity: 1,
             y: 0,
             duration: 1,
-            ease: 'power4.out',
+            ease: GSAP_EASE.reveal,
             stagger: 0.12,
             scrollTrigger: { trigger: section, start: isDesktop ? 'top 45%' : 'top 80%', once: true },
           }

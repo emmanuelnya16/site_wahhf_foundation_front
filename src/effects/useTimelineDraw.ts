@@ -1,5 +1,5 @@
 import { RefObject } from 'react';
-import { gsap, useGSAP } from '../lib/gsap';
+import { gsap, useGSAP, GSAP_EASE, DURATION } from '../lib/gsap';
 import { prefersReducedMotion } from '../lib/reducedMotion';
 
 /**
@@ -21,7 +21,7 @@ export function useTimelineDraw(scopeRef: RefObject<HTMLElement | null>) {
           { scaleY: 0 },
           {
             scaleY: 1,
-            ease: 'none',
+            ease: GSAP_EASE.scrub,
             scrollTrigger: { trigger: root, start: 'top 70%', end: 'bottom 70%', scrub: true },
           }
         );
@@ -33,8 +33,8 @@ export function useTimelineDraw(scopeRef: RefObject<HTMLElement | null>) {
           {
             opacity: 1,
             y: 0,
-            duration: 0.9,
-            ease: 'power4.out',
+            duration: DURATION.reveal,
+            ease: GSAP_EASE.reveal,
             scrollTrigger: { trigger: milestone, start: 'top 70%', once: true },
           }
         );

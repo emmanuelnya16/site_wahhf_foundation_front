@@ -1,6 +1,9 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import { MotionConfig } from 'motion/react';
+// framer-motion : le même paquet que motion/react (14.14), importé sans passer par le fichier d'entrée de motion/react,
+// qui embarque toujours motion.div complet : le premier chargement n'a que m, AnimatePresence et LazyMotion (lot 7).
+import { LazyMotion, MotionConfig } from 'framer-motion';
+import { loadMotionFeatures } from './lib/motionEngine';
 import Layout from './components/Layout';
 import PageTransition, { routeKey } from './effects/PageTransition';
 import ChunkErrorBoundary from './components/wahhf/ChunkErrorBoundary';
@@ -31,8 +34,9 @@ const Catalogue = lazy(() => import('./pages/Catalogue'));
 const Tarifs = lazy(() => import('./pages/Tarifs'));
 const Realisation = lazy(() => import('./pages/Realisation'));
 const Founders = lazy(() => import('./pages/Founders'));
-const Contact = lazy(() => import('./pages/Contact'));
 const GalleryPage = lazy(() => import('./pages/GalleryPage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
 const VkiBusiness = lazy(() => import('./pages/VkiBusiness'));
 
 /** Espace réservé pendant le chargement d'une page : garde la hauteur, aucun saut de mise en page. */
@@ -41,16 +45,16 @@ function PageFallback() {
 }
 
 /**
- * Routes enveloppées dans la transition de page. La location est figée par élément :
- * pendant le fondu de sortie, l'ancienne page continue d'afficher son propre contenu.
+ * Routes enveloppées dans la transition de page (fondu d'entrée de 0,3 s, sans sortie ni attente : contrat §10,
+ * ANIM-03). La transition est sous le Suspense : le fondu joue sur la page chargée, pas sur l'espace réservé.
  */
 function AppRoutes() {
   const location = useLocation();
   return (
-    <PageTransition transitionKey={routeKey(location.pathname)}>
-      {/* Filet : une page qui ne se télécharge pas affiche « Réessayer » au lieu d'une page blanche */}
-      <ChunkErrorBoundary key={routeKey(location.pathname)} variant="page">
+    // Filet : une page qui ne se télécharge pas affiche « Réessayer » au lieu d'une page blanche
+    <ChunkErrorBoundary key={routeKey(location.pathname)} variant="page">
       <Suspense fallback={<PageFallback />}>
+      <PageTransition transitionKey={routeKey(location.pathname)}>
       <Routes location={location}>
         {/* =================================================================
             ROUTES PRINCIPALES WAHHF FOUNDATION (PROMPT 1 & PROMPT 2)
@@ -65,6 +69,7 @@ function AppRoutes() {
         <Route path="/partenaires" element={<PartenairesPage />} />
         <Route path="/agir" element={<AgirPage />} />
         <Route path="/faire-un-don" element={<DonatePage />} />
+        <Route path="/contact" element={<ContactPage />} />
 
         {/* DOMAINE 06 : MOBILITÉ & LANGUES (ACADÉMIE D'ALLEMAND A1–C1 & EUROPE) */}
         <Route path="/mobilite-langues" element={<MobilityHub />} />
@@ -89,30 +94,38 @@ function AppRoutes() {
         <Route path="/tarifs" element={<Tarifs />} />
         <Route path="/methode" element={<Realisation />} />
         <Route path="/fondateurs" element={<Founders />} />
-        <Route path="/contact" element={<Contact />} />
+        {/* /contact mène désormais à la page Contact WAHHF (ci-dessus). L'ancien formulaire de devis
+            (src/pages/Contact.tsx) est conservé tel quel, sans route. */}
         <Route path="/a-propos" element={<Navigate to="/qui-sommes-nous" replace />} />
         <Route path="/catalogue" element={<Navigate to="/nos-actions" replace />} />
         <Route path="/realisations" element={<Navigate to="/notre-impact" replace />} />
         <Route path="/vkibusiness" element={<VkiBusiness />} />
 
-        {/* Fallback */}
-        <Route path="*" element={<Navigate to="/" replace />} />
+        {/* Adresse inconnue : vraie page « introuvable » (noindex), l'adresse reste visible dans la barre */}
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      </PageTransition>
       </Suspense>
-      </ChunkErrorBoundary>
-    </PageTransition>
+    </ChunkErrorBoundary>
   );
 }
+
+// Motion allégé (contrat §10) : LazyMotion, moteur domAnimation chargé après le premier affichage (décision du 17/11,
+// LCP mobile). Le menu mobile et la fenêtre du film ont un repli CSS tant qu'il n'est pas là, ou s'il ne se charge
+// jamais (src/lib/motionEngine.ts). Les composants du premier affichage utilisent m.div ; les pages historiques, la
+// visionneuse et les cartes gardent motion.div, qui embarque le reste dans leur propre fichier.
 
 export default function App() {
   return (
     // « Réduire les animations » : Motion supprime les déplacements et ne garde que les fondus.
     <MotionConfig reducedMotion="user">
-      <Router>
-        <Layout>
-          <AppRoutes />
-        </Layout>
-      </Router>
+      <LazyMotion features={loadMotionFeatures}>
+        <Router>
+          <Layout>
+            <AppRoutes />
+          </Layout>
+        </Router>
+      </LazyMotion>
     </MotionConfig>
   );
 }
