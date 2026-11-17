@@ -23,7 +23,7 @@ function GermanText({ text }: { text: string }) {
           {i < parts.length - 1 && (
             <>
               <span aria-hidden="true" className="inline-block w-16 border-b-2 border-current align-baseline mx-1" />
-              <span className="sr-only">(blanc)</span>
+              <span lang="fr" className="sr-only">(blanc)</span>
             </>
           )}
         </Fragment>
@@ -60,7 +60,11 @@ export default function PlacementTest({ onResult }: { onResult?: (level: Level) 
   const view = !started ? 'accueil' : finished ? 'resultat' : `question-${index}`;
   const boxRef = useRef<HTMLDivElement>(null);
   const focusRef = useFocusOnChange<HTMLElement>(view, { scrollRef: boxRef, afterMs: 300 });
-  const status = !started ? '' : finished ? `Test terminé. Score : ${score} sur ${total}. Niveau conseillé : ${recommended}.` : `Question ${index + 1} sur ${total}.`;
+  const status = !started
+    ? ''
+    : finished
+    ? `Test terminé. Score : ${score} sur ${total}. Niveau conseillé : ${recommended}.${onResult ? ` La fiche du niveau ${recommended} est affichée plus bas.` : ''}`
+    : `Question ${index + 1} sur ${total}.`;
 
   const next = () => {
     if (answers[question.id] === undefined) {
@@ -111,7 +115,7 @@ export default function PlacementTest({ onResult }: { onResult?: (level: Level) 
             <div key="resultat" className="step-enter space-y-6">
               <p className="text-meta text-text-secondary-on-inverse">Résultat indicatif de votre test</p>
               <h3 ref={focusRef as Ref<HTMLHeadingElement>} tabIndex={-1} className="text-section-title text-text-on-inverse">
-                Niveau conseillé : {recommended}
+                Niveau conseillé : {recommended}{' '}
                 <span className="block mt-1 text-body text-text-secondary-on-inverse">
                   {score} bonnes réponses sur {total}
                 </span>
@@ -180,6 +184,8 @@ export default function PlacementTest({ onResult }: { onResult?: (level: Level) 
                       }}
                       showCheck
                       onInverse
+                      invalid={missing}
+                      describedBy={missing ? errorId : undefined}
                       className="p-4 text-left"
                     >
                       <span lang="de">{opt}</span>
@@ -187,7 +193,7 @@ export default function PlacementTest({ onResult }: { onResult?: (level: Level) 
                   ))}
                 </div>
                 {missing && (
-                  <p id={errorId} className="mt-3 text-body font-semibold text-text-on-inverse">
+                  <p id={errorId} role="alert" className="mt-3 text-body font-semibold text-text-on-inverse">
                     Choisissez une réponse pour passer à la question suivante.
                   </p>
                 )}

@@ -6,7 +6,7 @@ import { formatSessionStart, isProvisional, upcomingSessions } from '../../lib/s
  * marqués TODO dans les données) sont masqués tant que la fondation ne les a pas confirmés ; la prochaine session
  * vient du calendrier réel (dates ISO, sessions passées exclues), plus d'un texte libre.
  */
-export default function LevelDetail({ level }: { level: GermanLevelCourse }) {
+export default function LevelDetail({ level, headingLevel: H = 'h3' }: { level: GermanLevelCourse; headingLevel?: 'h3' | 'h4' }) {
   const next = upcomingSessions(COURSE_SESSIONS_DATA).find((s) => s.level === level.level);
   const facts: { term: string; value: string }[] = [
     { term: 'Volume horaire', value: level.hours },
@@ -28,16 +28,16 @@ export default function LevelDetail({ level }: { level: GermanLevelCourse }) {
       </dl>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <h3 className="text-body font-semibold text-text">Objectifs du niveau {level.level}</h3>
+        <div data-reveal="" className="space-y-4">
+          <H className="text-body font-semibold text-text">Objectifs du niveau {level.level}</H>
           <ul className="list-disc pl-5 space-y-2 text-body text-text marker:text-text-secondary">
             {level.objectives.map((obj) => (
               <li key={obj}>{obj}</li>
             ))}
           </ul>
         </div>
-        <div className="space-y-4">
-          <h3 className="text-body font-semibold text-text">Ce que vous saurez faire à la fin du niveau {level.level}</h3>
+        <div data-reveal="" className="space-y-4">
+          <H className="text-body font-semibold text-text">Ce que vous saurez faire à la fin du niveau {level.level}</H>
           <ul className="list-disc pl-5 space-y-2 text-body text-text marker:text-text-secondary">
             {level.canDo.map((skill) => (
               <li key={skill}>{skill}</li>
