@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { ArrowUp, Mail, MapPin, Phone } from 'lucide-react';
 import { DOMAINS_DATA, WAHHF_LOGO_URL } from '../services/api';
 import { CONTACT } from '../config/contact';
+import { TRANSPARENCY_DATA_PUBLISHED } from '../config/transparency';
 import { scrollToTop } from '../lib/scroll';
 import { DonateButton } from './wahhf/Buttons';
 import { cn } from '../lib/utils';
@@ -11,7 +12,8 @@ import { cn } from '../lib/utils';
  * Footer (contrat §8, ajout du 16/11) : fond nuit ; texte brume et brume douce en 15 px ; titres de colonne en 600,
  * sans or ; soleil réservé aux liens (au survol et à l'appui) ; contrôles cerclés du contour sur nuit.
  * Mise en page : le bloc de la marque sur sa rangée, puis 4 colonnes (Qui sommes-nous, Nos actions, Agir et faire un
- * don, Contact et adresse) ; barre du bas : © 2026, mentions légales, confidentialité, transparence, retour en haut.
+ * don, Contact et adresse) ; barre du bas : © 2026, mentions légales, confidentialité, retour en haut ; le lien vers la
+ * transparence revient quand ses données sont publiées (TRA-01, src/config/transparency.ts).
  * `surface-green` donne l'anneau de focus soleil et le liseré du bouton de don.
  * Coordonnées : celles de src/config/contact.ts, la seule source du site (CTC-03, groupe 7.2).
  */
@@ -209,9 +211,11 @@ export default function Footer() {
             <Link to="/confidentialite" className={LINK}>
               {t('footer.privacy')}
             </Link>
-            <Link to="/transparence" className={LINK}>
-              {t('footer.transparency')}
-            </Link>
+            {TRANSPARENCY_DATA_PUBLISHED && (
+              <Link to="/transparence" className={LINK}>
+                {t('footer.transparency')}
+              </Link>
+            )}
           </div>
 
           <button

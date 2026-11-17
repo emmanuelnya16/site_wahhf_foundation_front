@@ -2,10 +2,27 @@ import { Fragment } from 'react';
 import { Scale } from 'lucide-react';
 import SEO from '../../components/wahhf/SEO';
 import { ReadingColumn } from '../../components/wahhf/TextList';
-import PageHeader, { PageMeta, PageTitle } from '../../components/wahhf/PageHeader';
+import PageHeader, { PageMeta, PageTitle, PageIntro } from '../../components/wahhf/PageHeader';
+import SectionHeader from '../../components/wahhf/SectionHeader';
+import { PrimaryButton } from '../../components/wahhf/Buttons';
+
+/**
+ * Bloc de /transparence encore provisoire (« TODO ») : masqué tant que le rapport annuel n'est pas fourni (groupe 7.2,
+ * docs/contenus-a-fournir.md, questions 88 et 89). Le remettre dans content.transparence.blocks avec le vrai lien.
+ */
+export const TRANSPARENCY_PENDING_BLOCKS = [
+  {
+    h: 'Publication des rapports annuels (TODO)',
+    p: 'Les rapports d’activité et bilans financiers certifiés seront publiés sur cette page à chaque clôture d’exercice (TODO : insérer lien PDF du rapport annuel dès validation).',
+  },
+];
 
 /**
  * 7. PAGES LÉGALES & TRANSPARENCE (/mentions-legales, /confidentialite, /transparence)
+ * Groupe 7.2, /transparence seulement (TRA-01, TRA-02) : en-tête révélé à l'arrivée avec une introduction, titre en
+ * casse de phrase, sans « gratuité » dans un titre, bloc provisoire masqué, une seule action en fin de page (retour au
+ * don). Aucun lien n'y mène tant qu'aucune donnée n'est publiée (src/config/transparency.ts). Mentions légales et
+ * confidentialité : inchangées.
  */
 export function LegalTransparencyPage({
   type,
@@ -47,15 +64,12 @@ export function LegalTransparencyPage({
       ],
     },
     transparence: {
-      title: 'Transparence financière & Origine des ressources',
+      title: 'Transparence financière et origine des ressources',
+      intro: 'D’où viennent les ressources de WAHHF Foundation, et comment elles financent ses programmes.',
       blocks: [
         {
-          h: 'Financement de la gratuité des programmes',
+          h: 'Comment nos programmes sont financés',
           p: 'Les programmes de WAHHF Foundation (dont l’Académie de langue allemande A1 à C1 et l’accompagnement vers l’Europe) sont financés par la dotation du groupe IROKO et par les dons volontaires des mécènes et donateurs.',
-        },
-        {
-          h: 'Publication des rapports annuels (TODO)',
-          p: 'Les rapports d’activité et bilans financiers certifiés seront publiés sur cette page à chaque clôture d’exercice (TODO : insérer lien PDF du rapport annuel dès validation).',
         },
       ],
     },
@@ -64,7 +78,7 @@ export function LegalTransparencyPage({
   return (
     <>
       <SEO title={content.title} description={content.blocks[0].p} />
-      <PageHeader>
+      <PageHeader reveal={type === 'transparence'}>
         {'kicker' in content && (
           <PageMeta>
             <content.icon aria-hidden="true" className="w-4 h-4" />
@@ -72,6 +86,7 @@ export function LegalTransparencyPage({
           </PageMeta>
         )}
         <PageTitle>{content.title}</PageTitle>
+        {'intro' in content && <PageIntro>{content.intro}</PageIntro>}
       </PageHeader>
 
       {/* Colonne de lecture de 65 caractères (contrat §8) : un paragraphe n'est jamais une carte */}
@@ -85,6 +100,23 @@ export function LegalTransparencyPage({
           ))}
         </ReadingColumn>
       </section>
+
+      {/* Transparence : une seule action en fin de page, le retour au don (TRA-02) ; sans carte nuit */}
+      {type === 'transparence' && (
+        <section className="section-space bg-surface-section">
+          <div className="container-page">
+            <div className="max-w-[65ch] space-y-5">
+              <SectionHeader
+                title="Soutenir nos actions"
+                subtitle="La page de don explique comment donner aujourd’hui et à quoi sert votre don."
+              />
+              <PrimaryButton to="/faire-un-don" size="lg">
+                Revenir à la page de don
+              </PrimaryButton>
+            </div>
+          </div>
+        </section>
+      )}
     </>
   );
 }

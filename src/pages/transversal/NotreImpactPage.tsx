@@ -3,6 +3,7 @@ import PageHeader, { PageTitle, PageIntro } from '../../components/wahhf/PageHea
 import { PrimaryButton } from '../../components/wahhf/Buttons';
 import Counter from '../../components/wahhf/Counter';
 import PresenceSection from '../../components/wahhf/PresenceSection';
+import { TRANSPARENCY_DATA_PUBLISHED } from '../../config/transparency';
 
 /**
  * 4. PAGE /notre-impact
@@ -44,6 +45,8 @@ export function NotreImpactPage() {
 
         <PresenceSection />
 
+        {/* Lien vers /transparence : masqué tant qu'aucune donnée n'y est publiée (TRA-01, groupe 7.2) */}
+        {TRANSPARENCY_DATA_PUBLISHED && (
         <div className="surface-green rounded-card bg-nuit text-text-on-inverse p-8 sm:p-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-2">
             <h2 className="text-section-title text-text-on-inverse">
@@ -61,6 +64,7 @@ export function NotreImpactPage() {
             Voir la page Transparence
           </PrimaryButton>
         </div>
+        )}
       </section>
     </>
   );
