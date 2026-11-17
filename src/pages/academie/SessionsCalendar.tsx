@@ -34,7 +34,7 @@ export default function SessionsCalendar({ level }: { level?: 'A1' | 'A2' | 'B1'
       <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
         <SectionHeader
           title={level ? `Prochaines sessions de niveau ${level}` : 'Calendrier des prochaines sessions'}
-          subtitle="Les sessions déjà commencées n’apparaissent plus. En ligne ou en présentiel à Douala et à Yaoundé."
+          subtitle="Toutes les sessions sont gratuites. En ligne ou en présentiel à Douala et à Yaoundé ; celles déjà commencées n’apparaissent plus."
         />
 
         <div className="flex flex-wrap items-end gap-4">
