@@ -251,7 +251,7 @@ Noms et texte 17-18 px à 1,6 viennent de votre brief ; les tailles, proposées,
 - **Alignement** : gauche partout. Le centrage est réservé aux états vides et à la page 404.
 - **Espacement** : base 4 px. Respiration de section `clamp(4rem, 9vw, 7.5rem)` (64 à 120 px). Piles internes de 8, 12, 16, 24, 32 et 48 px.
 - **Densité qui varie avec le contenu** : grand air au hero et aux preuves ; liste dense pour les sessions de cours ; colonne de lecture pour les articles et les pages légales.
-- **Images** : vraies photos uniquement, à ratio fixe (16/10, 4/5 ou 1/1), légendées avec le lieu et la date, `alt` précis. Pas d'image générée (T-04). Les sources actuelles ne dépassent pas environ 1 050 px de large : **pas d'image pleine largeur ni de photo en fond plein écran** tant que les originaux HD ne sont pas fournis (GAL-04), et **aucune image affichée plus grande que sa taille réelle en densité 2** (largeur affichée ≤ largeur de la source / 2). *Groupe 7.1 : les photos des en-têtes de page (Mobilité & Langues, Candidater) s'affichent à 512 px au plus, pour des sources de 1 027 et 1 030 px : la règle est tenue. Seule exception, votre décision du 17 novembre 2026 : l'ouverture de « Sur le terrain », arrêtée à la largeur du container (§10, §13).*
+- **Images** : vraies photos uniquement, à ratio fixe (16/10, 4/5 ou 1/1), légendées avec le lieu et la date, `alt` précis. Pas d'image générée (T-04). Les sources actuelles ne dépassent pas environ 1 050 px de large : **pas d'image pleine largeur ni de photo en fond plein écran** tant que les originaux HD ne sont pas fournis (GAL-04), et **aucune image affichée plus grande que sa taille réelle en densité 2** (largeur affichée ≤ largeur de la source / 2). *Groupe 7.1 : les photos des en-têtes de page (Mobilité & Langues, Candidater) s'affichent à 512 px au plus, pour des sources de 1 027 et 1 030 px : la règle est tenue. Seule exception, votre décision du 17 novembre 2026 : l'ouverture de « Sur le terrain », arrêtée à la largeur du container (§10, §13).* *Groupe 7.3 : les photos des domaines de Nos actions s'affichent à 512 px au plus ; la grille de la galerie est plafonnée pour qu'aucune vignette, mise en avant comprise, ne dépasse la moitié de sa source (environ 1 066 px de large pour l'album de l'Open Day) ; dans la visionneuse, les vidéos ne dépassent plus leur taille réelle (576 px).*
 
 ```
 Principe de page (1 440 px)
@@ -279,6 +279,8 @@ Il apparaît à **des endroits précis**, ceux de vos briefs (trois au départ, 
 *Lot 7 (votre brief sur le mouvement, décision du 16 novembre 2026) : un quatrième endroit, la section Mobilité & Langues de l'accueil. Le fil A1 → C1 y reprend la frise de l'Académie, sans niveau affiché, et se dessine au défilement (§10).*
 
 *Groupe 7.1 (votre brief du 17 novembre 2026) : la même frise A1 → C1 apparaît aussi sur la page Mobilité & Langues (porte « Académie », sans niveau affiché, dessinée au défilement sur ordinateur), sur chaque page de niveau (tracée jusqu'au niveau affiché, qui s'allume, à l'arrivée) et dans le résultat du test de niveau (tracée jusqu'au niveau conseillé). C'est toujours le même trajet, A1 → C1 → Europe.*
+
+*Groupe 7.3 (votre brief du 17 novembre 2026) : un nouvel endroit, la frise « Notre parcours » de Qui sommes-nous, venue de l'accueil (§7). Le fil y relie la première étape de la fondation à la dernière (points pleins), les étapes intermédiaires en cercles ; horizontal sur ordinateur, vertical sur téléphone. Il se dessine au défilement sur ordinateur, chaque étape s'allumant quand le trait l'atteint ; il est déjà tracé sur téléphone et en mouvement réduit (§10). Seules les années confirmées sont écrites (2026 aujourd'hui).*
 
 **1. Hero de l'accueil** : sous le titre, de « Cameroun » à « Europe ». Il se dessine une fois, à l'arrivée, après le titre, la phrase et les boutons (1,2 s, en CSS, §10). Posé sur le voile nuit de la vidéo, il prend **soleil** (et non `--feuille`) pour rester lisible ; **absent en mouvement réduit** (votre décision du 16 novembre 2026).
 
@@ -408,7 +410,7 @@ Accueil, 390 px (une colonne)       Accueil, 1 440 px
 | 8 | **Footer** | Coordonnées, liens (dont Actualités et Partenaires), bouton « Faire un don » (avec son liseré brume, §3.5), mentions légales. | Existant. |
 
 **Ce qui quitte l'accueil, sans rien supprimer du code :**
-- **Mission, Approche, frise historique** : déplacées vers `/qui-sommes-nous` (ACC-03). Les dates marquées TODO (à compléter) de la frise y restent visibles comme aujourd'hui.
+- **Mission, Approche, frise historique** : déplacées vers `/qui-sommes-nous` (ACC-03). Les dates marquées TODO (à compléter) de la frise y restent visibles comme aujourd'hui. *Groupe 7.3 : fait (Approche en liste typographique, frise dessinée par le fil) ; les années non confirmées sont au contraire masquées, selon l'exception du §13 : seule 2026 s'affiche.*
 - **Témoignages** : retirés de l'accueil tant qu'aucun témoignage réel n'existe (T-02). Les données restent dans le code, marquées TODO.
 - **Actualités** : lien dans le footer et la navigation ; la section revient quand un article réel existe (T-03).
 - **Partenaires** : sur `/partenaires`. La bande démo d'IROKO y va aussi, ou est retirée (ACC-04, à décider à l'étape de l'accueil).
@@ -515,6 +517,14 @@ Jamais de rayon de 20 px sur un petit élément. Les neuf valeurs actuelles (pil
   - Faire un don : seulement des retours d'action. L'option choisie (affectation, devise, montant) se marque en 150 ms, coche comprise ; la ligne d'impact change en fondu croisé de 0,3 s, l'ancienne phrase s'effaçant pendant que la nouvelle apparaît. Pendant la frappe d'un montant libre, elle attend une courte pause ;
   - Contact et Transparence : seulement l'en-tête de page, rien sur les champs ni sur le texte ;
   - mouvement réduit : tout est en place et change d'un coup.
+- **Groupe 7.3 (votre brief du 17 novembre 2026)**, sur Qui sommes-nous, Nos actions, Notre impact, Partenaires, Galerie, Actualités et l'article :
+  - chaque en-tête de page arrive comme le hero, en CSS (titre ligne par ligne derrière un masque en 0,8 s, puis introduction en fondu) ;
+  - Qui sommes-nous : la frise « Notre parcours » se dessine au défilement sur ordinateur (§6) ; les photos de la gouvernance, quand elle sera publiée, se découvriront du bas vers le haut par un clip-path ;
+  - Nos actions : pour chaque domaine, sur ordinateur, la photo se découvre du bas vers le haut par un clip-path (0,9 s, power3.out), puis le texte apparaît en fondu (0,6 s, power2.out), une fois ; un domaine déjà à l'écran à l'arrivée n'est jamais masqué, un domaine atteint au clavier s'affiche aussitôt ; tout est en place sur téléphone et en mouvement réduit ;
+  - Notre impact : la carte (cascade des régions, puis l'arc), inchangée ;
+  - Galerie : vignettes en apparitions groupées ; la visionneuse s'ouvre depuis la vignette cliquée, la photo passant de sa place dans la grille à la visionneuse (0,6 s, power3.inOut) pendant que le fond apparaît en fondu (0,3 s), avec l'API View Transitions du navigateur ; sans elle, ou en mouvement réduit, ouverture simple. D'un élément à l'autre, fondu de 0,3 s sans glissement (annexe B, ligne 38), instantané en mouvement réduit ;
+  - Actualités : cartes en apparitions groupées ; article : barre de lecture forêt (feuille en sombre), qui suit le défilement sans dépendre du moteur de Motion, et image découverte du bas vers le haut à l'arrivée (ordinateur, comme l'en-tête de Mobilité) ;
+  - Partenaires : l'en-tête et les apparitions de la liste, rien d'autre.
 - **Listes** : apparitions groupées, comme sur l'accueil.
 - **Formulaires** : rien sur Contact et Don. *Groupe 7.2 : sur Don, les retours d'action ci-dessus (option en 150 ms, ligne d'impact en fondu croisé) ; toujours rien au défilement.* *Groupe 7.1 :* sur le test de niveau et sur Candidater, seulement des retours d'action. Le passage d'une question ou d'une étape à l'autre se fait en fondu avec un glissement de 16 px (0,3 s, power2.out). La barre de progression se remplit (0,3 s). Le focus passe au titre de la question ou de l'étape une fois l'animation finie (aussitôt en mouvement réduit). Au résultat du test, le fil se dessine jusqu'au niveau conseillé, qui s'allume. Aucune apparition au défilement dans un formulaire.
 - **Rien** sur les pages légales, la page Arnaques et les pages historiques. *Groupe 7.2 : Transparence, rangée jusqu'ici avec les pages légales, a l'arrivée de son en-tête ; Mentions légales et Confidentialité restent sans mouvement.*
@@ -530,7 +540,7 @@ Jamais de rayon de 20 px sur un petit élément. Les neuf valeurs actuelles (pil
   - GSAP et ScrollTrigger sont chargés à la demande (`import()`), après le premier affichage ;
   - le LCP mobile n'est pas dégradé ;
   - le JS initial reste sous 200 Ko compressés ;
-  - seuls `transform` et `opacity` sont animés (le `clip-path` est toléré pour « Sur le terrain » sur ordinateur) ;
+  - seuls `transform` et `opacity` sont animés (le `clip-path` est toléré pour « Sur le terrain » sur ordinateur) ; *groupes 7.1 et 7.3 : aussi pour les photos découvertes du bas vers le haut (en-tête de Mobilité, domaines de Nos actions, gouvernance, image de l'article), sur ordinateur seulement* ;
   - le profil Performance, processeur ralenti ×4, ne montre aucune image de plus de 50 ms pendant le défilement.
 - **Code** : `useGSAP` avec un `scope` ; `gsap.matchMedia()` pour l'ordinateur, le téléphone et le mouvement réduit ; `ScrollTrigger.refresh()` après le chargement des images et des polices ; aucun `markers` en production.
 
@@ -571,7 +581,7 @@ Jamais de rayon de 20 px sur un petit élément. Les neuf valeurs actuelles (pil
 - **Formulaires** : erreurs, étape suivante (focus sur le titre de l'étape), message préparé (WhatsApp ou e-mail), sans faux succès.
 - **Images et film** : chargement (fond sauge au ratio réservé), échec (texte alternatif et légende visibles), film indisponible (message et lien direct vers YouTube).
 - **Carte de présence** : chargement des données (squelette à la forme de la carte, `aria-busy`), région choisie, échec de chargement.
-- **Vide** : section Chiffres masquée tant qu'il n'y a pas deux chiffres sourcés ; Actualités sans article réel (« Aucun article publié pour le moment » et lien vers la galerie).
+- **Vide** : section Chiffres masquée tant qu'il n'y a pas deux chiffres sourcés ; Actualités sans article réel (« Aucun article publié pour le moment » et lien vers la galerie). *Groupe 7.3 : fait, avec une carte vers l'album de l'Open Day ; les adresses des articles d'exemple affichent « Cet article est introuvable ».*
 - **Page introuvable, paramètre inconnu** : déjà en place (ETA-06), à habiller avec les nouveaux tokens.
 - **Thème** : clair et sombre pour chacun de ces états.
 
@@ -631,7 +641,7 @@ Les tics relevés par l'audit et ce qui les remplace :
 - **Contrôles en thème sombre** : bordure des champs à 3:1 sur leur carte, boutons détachés de leur carte à 3:1, corrigés par les tokens et non page par page (§3.5 ; commit `a26a9f8`).
 - **Lot 5 élargi** (toutes les propositions de l'analyse de tension acceptées). Ordre : Container (avec la Section brume ou sauge, sans filets), En-tête de page (18 pages, sans bande nuit), Encadré d'information (à la place de l'avertissement), Field (avec les panneaux de formulaire sur sauge, sans ombre), Carte-liste-colonne (avec la liste des pays, le bloc d'impact du Don, la FAQ de Mobilité et les liens des portes), StepNumber (avec la barre de progression pleine), Fil, Footer (couleurs du contrat), En-tête du site (barre opaque). Un commit chacun (§8).
 - **Précaution pour l'encadré d'information** : le message anti-arnaque reste le premier élément sous le titre de la page, bien lisible, et ne doit pas devenir discret au point de passer inaperçu (§8).
-- **TODO gardés** : les textes provisoires restent visibles tant que le contenu réel manque, par exemple « Montants donnés à titre d'exemple (TODO : à confirmer) ». *Groupe 7.1 (votre brief du 17 novembre 2026) : sur Mobilité & Langues, l'Académie, les pages de niveau et Candidater, les textes provisoires sont au contraire masqués tant qu'ils ne sont pas fournis. Les questions correspondantes sont dans `docs/contenus-a-fournir.md`. Ailleurs, la règle ne change pas.* *Groupe 7.2 (votre brief du 17 novembre 2026) : l'exception s'étend à Faire un don, Agir, Contact et Transparence ; leurs questions sont aux numéros 97 à 111. Le footer, commun à toutes les pages, garde ses textes provisoires (« TODO : adresse exacte », réseaux sociaux).*
+- **TODO gardés** : les textes provisoires restent visibles tant que le contenu réel manque, par exemple « Montants donnés à titre d'exemple (TODO : à confirmer) ». *Groupe 7.1 (votre brief du 17 novembre 2026) : sur Mobilité & Langues, l'Académie, les pages de niveau et Candidater, les textes provisoires sont au contraire masqués tant qu'ils ne sont pas fournis. Les questions correspondantes sont dans `docs/contenus-a-fournir.md`. Ailleurs, la règle ne change pas.* *Groupe 7.2 (votre brief du 17 novembre 2026) : l'exception s'étend à Faire un don, Agir, Contact et Transparence ; leurs questions sont aux numéros 97 à 111. Le footer, commun à toutes les pages, garde ses textes provisoires (« TODO : adresse exacte », réseaux sociaux).* *Groupe 7.3 (votre brief du 17 novembre 2026) : l'exception s'étend à Qui sommes-nous, Nos actions, Notre impact, Partenaires, la Galerie et les Actualités ; leurs questions sont aux numéros 112 à 128. La carte de présence de l'accueil garde ses lignes « à confirmer (TODO) » ; celle de Notre impact les masque.*
 
 **Étapes planifiées après le lot 5**
 - **Étape de l'accueil** (§7), avec deux ajouts : les couleurs de la carte de présence (panneau blanc en sombre, régions et pays en or, tuiles crème ; elles valent aussi pour /notre-impact) ; le style de la bulle WhatsApp (ombre, contour et point or), en plus du vrai glyphe et du libellé court (RESP-03).
@@ -693,7 +703,28 @@ Audit traité :
 - Affectation par défaut : « Là où le besoin est le plus urgent » (avant : l'Académie d'allemand).
 - Contact : sur téléphone, les coordonnées directes passent avant le formulaire, pour que la page finisse sur une seule action.
 
-**À traiter plus tard : état de succès des formulaires.** Aujourd'hui les formulaires préparent un message et n'envoient rien, d'où l'absence de couleur de succès (§3.2). Quand ils enverront vraiment (API Symfony), il faudra un état de succès (« Candidature envoyée », « Message envoyé ») et donc une couleur de succès, avec son tableau de contrastes. À traiter à ce moment-là.
+*Groupe 7.3 (votre brief du 17 novembre 2026)*, sur Qui sommes-nous, Nos actions, Notre impact, Partenaires, la Galerie et les Actualités (avec l'article) :
+- un en-tête du lot 5 révélé à l'arrivée sur chaque page ; une vraie photo seulement sur Qui sommes-nous (photo de groupe de l'Open Day, légendée et datée) ;
+- plus aucune carte nuit ni carte dans la carte : le groupe IROKO de Qui sommes-nous et de Partenaires passe sur une section ; la carte reste réservée aux collections cliquables (albums, articles) ;
+- en fin de page, sur le fond de la page : « Faire un don » et « Devenir partenaire » (Qui sommes-nous), « Faire un don » (Notre impact), « Proposer un partenariat » (Partenaires), « Faire un don » et « Candidater au programme » (Galerie), la carte de l'album de l'Open Day (Actualités) ;
+- la gratuité une fois par écran, jamais dans un titre (vérifié écran par écran à 390 et 1 440 px) ; IROKO n'est nommé dans aucun texte nouveau, sauf sur Partenaires, où le brief demande de le décrire ;
+- les textes provisoires masqués, gardés dans le code : rôles de la gouvernance (`EXAMPLE_GOVERNANCE_ROLES_NOT_VALIDATED`, `src/config/governance.ts`, avec le lien du footer), chiffres de Notre impact (`EXAMPLE_IMPACT_FIGURES_NOT_VALIDATED`), catégories de partenaires (`EXAMPLE_PARTNER_CATEGORIES_NOT_VALIDATED`), articles d'exemple (`EXAMPLE_NEWS_SLUGS`, visibles seulement dans une construction d'aperçu `VITE_APERCU_ACTUALITES=1`), années de la frise, lieux et dates « à confirmer » des albums.
+
+Audit traité :
+- Qui sommes-nous : QSN-01 (gouvernance masquée), QSN-03 (plus de colonne logo dans une carte ; « indépendante » et « 100 % » retirés tant que rien ne les étaye), QSN-04 ; QSN-02 en partie (Approche, frise, photo de l'Open Day ; histoire datée à fournir) ; T-11 (« Basée à Yaoundé et à Douala, avec une coordination en Allemagne » au lieu des « 10 régions »).
+- Nos actions : ACT-01 (une seule liste, texte complet, sommaire en liens d'ancre), ACT-02 (`/faire-un-don?affectation=<domaine>`), T-04 (photos réelles seulement), T-10 (`?domaine=` ouvre la page sur le domaine), A11Y-09 ; ACT-03 à fournir.
+- Notre impact : chiffres d'exemple masqués (T-11, §7 et §12), lignes TODO de la carte masquées, H2 avant la carte (A11Y-09), « Faire un don » ; IMP-01 en attente de votre choix (ci-dessous).
+- Partenaires : PAR-01 (IROKO décrit avec les faits du projet, catégories TODO masquées, « Ce que nous proposons » prête, affichée dès que le contenu est fourni).
+- Galerie : GAL-02, GAL-03 (rangées complètes à toutes les largeurs), GAL-05, GAL-07, GAL-08 ; GAL-04 en partie (vidéos à leur taille réelle) ; GAL-01 et GAL-06 restent à faire (autorisations, fichiers sources).
+- Actualités et article : ACTU-01, ART-02, ART-03 (image prioritaire), A11Y-10 ; ART-01 en partie (temps de lecture retiré ; l'article lui-même est masqué).
+
+À valider :
+- Notre impact (IMP-01) : renommer la page « Où nous agissons » tant qu'aucun résultat n'est publié ; elle garde aujourd'hui son titre. Textes proposés : titre « Où nous agissons » ; introduction « Basée à Yaoundé et à Douala, la fondation agit au Cameroun et informe les jeunes sur les études, la formation et le travail dans 10 pays européens. Les résultats chiffrés de nos actions seront publiés ici dès qu'ils seront datés et vérifiés. » ; titre d'onglet « Où nous agissons — Cameroun et 10 pays européens » ; description « Où agit WAHHF Foundation : basée à Yaoundé et à Douala, au Cameroun, elle informe les jeunes sur les études, la formation et le travail dans 10 pays européens. » ; menu et footer « Où nous agissons » au lieu de « Notre impact » (clé `nav.impact` de `fr.json`) ; adresse `/notre-impact` gardée.
+- Frise de Qui sommes-nous : étapes affichées sans leurs années non confirmées (ou frise masquée entière jusqu'à confirmation).
+- Puces de la galerie sans nombre (« Tous les albums » au lieu de « Tout (19) ») ; le nombre est sous chaque titre d'album.
+- Visionneuse de l'accueil : mêmes couleurs du contrat et mêmes fondus de 0,3 s que celle de la galerie (composant partagé) ; l'ouverture depuis la vignette n'est activée que sur la page Galerie.
+
+ Aujourd'hui les formulaires préparent un message et n'envoient rien, d'où l'absence de couleur de succès (§3.2). Quand ils enverront vraiment (API Symfony), il faudra un état de succès (« Candidature envoyée », « Message envoyé ») et donc une couleur de succès, avec son tableau de contrastes. À traiter à ce moment-là.
 
 **Reste à fournir par la fondation** : autorisations de diffusion des photos (GAL-01), originaux HD, chiffres datés et sourcés, date de vérification de chaque fiche pays, formulation du titre du hero (ACC-02).
 

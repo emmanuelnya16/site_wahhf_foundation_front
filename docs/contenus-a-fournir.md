@@ -240,3 +240,53 @@ Tant que ces informations manquent, la page reste en ligne mais aucun lien n'y m
 109. Comment les dons sont-ils répartis entre les domaines d'action (cours d'allemand, éducation, santé, autres) ?
 110. Les comptes de la fondation sont-ils vérifiés par un expert-comptable ou un commissaire aux comptes ?
 111. À qui un donateur ou une institution peut-il poser une question sur les finances de la fondation (nom, e-mail) ?
+
+---
+
+## Questions ajoutées par la refonte des pages Qui sommes-nous, Nos actions, Notre impact, Partenaires, Galerie et Actualités
+
+Sur ces pages, ce qui n'est pas encore confirmé n'est plus affiché : la partie « Gouvernance », les années de la frise, les chiffres d'exemple, les catégories de partenaires « à confirmer », les lieux et dates « à confirmer » des albums et les trois articles d'exemple. Vos réponses permettront de les remettre en ligne.
+
+### Page « Qui sommes-nous »
+
+Les questions 84 à 87 restent valables : la partie « Gouvernance » et le lien « Équipe & Gouvernance » du bas de page reviendront avec les noms. Les questions 101 et 105 (personnes à contacter) valent aussi pour la fin de cette page.
+
+112. En quelle année l'initiative solidaire a-t-elle commencé ? L'année « 2021 », non confirmée, n'est plus affichée.
+113. En quelle année WAHHF Foundation a-t-elle été organisée en fondation ? L'année « 2023 », non confirmée, n'est plus affichée.
+114. En quelle année la fondation est-elle devenue la branche sociale du groupe IROKO ? L'année « 2025 », non confirmée, n'est plus affichée.
+115. Les quatre grandes étapes de la frise sont-elles exactes : les premières actions d'entraide entre le Cameroun et la diaspora en Allemagne, l'organisation en fondation, le rattachement au groupe IROKO, puis l'ouverture de l'Académie d'allemand en 2026 ? Faut-il ajouter le First Open Day du 25 avril 2026 ?
+116. Qui décide des programmes de la fondation (un conseil, un comité, la direction) ? Qu'est-ce qui garantit son indépendance vis-à-vis du groupe IROKO ? En attendant, le site ne dit plus « indépendante ».
+
+### Page « Nos actions »
+
+117. Pour chaque programme des six domaines (par exemple « Kits scolaires et manuels pour les élèves en zone rurale »), est-il déjà réalisé, en cours ou seulement prévu ? Si possible, dites où, quand et pour combien de personnes.
+118. Avez-vous de vraies photos des actions Santé, Entrepreneuriat des jeunes et Environnement ? En attendant, ces trois domaines s'affichent sans photo (les images précédentes avaient été créées par ordinateur).
+119. Les six domaines du site (éducation, santé, entrepreneuriat des jeunes, environnement, droits et inclusion, Mobilité & Langues) sont-ils bien ceux de la fondation ? Les kakémonos de l'Open Day en citent d'autres (moyens de subsistance, agriculture et élevage…).
+
+### Page « Notre impact »
+
+Les questions 6, 7, 79 et 80 restent valables : les chiffres d'exemple et les lignes « à confirmer » de la carte ne sont plus affichés sur cette page. Les chiffres reviendront dès que vous en aurez fourni au moins deux, chacun avec sa date et sa source.
+
+### Page « Partenaires »
+
+Les questions 81 à 83, 104, 105 et 108 restent valables. La partie « Ce que nous proposons » s'affichera dès la réponse à la question 104.
+
+120. La description du groupe IROKO est-elle juste et à jour ? Aujourd'hui : « un groupe camerouno-allemand organisé autour d'une holding et de neuf pôles d'activité, en trois familles ; son pôle de communication et d'événementiel, IROKO Event, est en activité, les autres sont annoncés ».
+121. Dans quelles villes et dans quels pays le groupe IROKO est-il installé ?
+122. Le groupe IROKO a-t-il un site internet que nous pouvons indiquer ? Si oui, à quelle adresse ?
+
+### Page « Galerie »
+
+Les questions 72 et 73 restent valables, ainsi que la demande B (autorisations de publication des photos).
+
+123. Combien de jeunes et combien d'encadrants ont participé au First Open Day & Boot Camp du 25 avril 2026 ?
+124. Qu'a apporté le Boot Camp (par exemple : nombre de jeunes inscrits ensuite aux cours, nombre de candidatures) ?
+125. Pour les albums « Rencontres de la communauté » et « Sur le terrain », pouvez-vous écrire deux ou trois phrases : ce qui s'est passé, avec qui, et pour quel projet ?
+126. La musique de l'extrait vidéo de la chorale peut-elle être diffusée sur le site (droits d'auteur) ?
+
+### Page « Actualités »
+
+Les questions 55 à 57 restent valables : les trois articles d'exemple ne sont plus affichés.
+
+127. Souhaitez-vous publier un premier article sur le First Open Day & Boot Camp du 25 avril 2026 ? Si oui, envoyez un court texte (ce qui s'est passé, le nombre de participants, la suite) et dites quelles photos utiliser.
+128. Si l'annonce de l'ouverture des candidatures doit revenir, quelles informations y mettre : date limite, date de début des cours, en ligne ou sur place, nombre de places ?
