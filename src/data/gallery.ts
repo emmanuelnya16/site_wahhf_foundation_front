@@ -153,7 +153,9 @@ export function galleryPhoto(id: string): { src: string; srcSet: string } {
 /** Lieu et date d'un album, sans « A · B » (contrat §12) ; null tant qu'ils ne sont pas confirmés (TODO). */
 export function albumPlaceDate(album: GalleryAlbum | undefined): string | null {
   if (!album || /TODO/.test(album.meta)) return null;
-  return album.meta.replace(' · ', ', le ');
+  const [place, date] = album.meta.split(' · ');
+  // La date ne se coupe pas en fin de ligne (« 25 avril 2026 » reste d'un bloc)
+  return date ? `${place}, le ${date.replace(/ /g, ' ')}` : place;
 }
 
 /** « 13 photos et 1 vidéo » (GAL-08) : les mots du visiteur, pas « 14 éléments ». */

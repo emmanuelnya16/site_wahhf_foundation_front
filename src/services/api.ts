@@ -137,6 +137,8 @@ export interface NewsArticle {
   excerpt: string;
   content: string[];
   image: string;
+  /** Ce que montre l'image (A11Y-10) ; vide : image décorative, le titre suffit */
+  imageAlt?: string;
   readTime: string;
 }
 
