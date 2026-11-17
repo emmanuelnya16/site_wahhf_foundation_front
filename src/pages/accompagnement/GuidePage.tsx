@@ -49,7 +49,7 @@ export default function GuidePage() {
         description={guide.subtitle}
       />
 
-      <PageHeader reveal notice={<DisclaimerBanner compact={guide.slug === 'eviter-les-arnaques'} />}>
+      <PageHeader reveal notice={<DisclaimerBanner />}>
         <PageBreadcrumb
           items={[
             { label: 'Mobilité & Langues', to: '/mobilite-langues' },

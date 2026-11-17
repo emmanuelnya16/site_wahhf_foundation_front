@@ -571,6 +571,9 @@ export const THEMATIC_GUIDES: Record<string, {
       },
     ],
   },
+  // Groupe 7.4 : la page /accompagnement/eviter-les-arnaques a sa propre forme (src/pages/accompagnement/ArnaquesPage.tsx)
+  // et lit src/data/arnaques.ts. Ce guide d'origine reste ici pour mémoire (titre lu par la liste des guides) ; son adresse
+  // integrite@… (TODO) n'est plus affichée nulle part.
   'eviter-les-arnaques': {
     slug: 'eviter-les-arnaques',
     title: 'Éviter les arnaques et les fausses promesses',

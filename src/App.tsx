@@ -19,6 +19,8 @@ const LanguageLevelPage = lazy(() => import('./pages/LanguageLevelPage'));
 const AccompagnementPage = lazy(() => import('./pages/accompagnement/AccompagnementPage'));
 const CountryPage = lazy(() => import('./pages/accompagnement/CountryPage'));
 const GuidePage = lazy(() => import('./pages/accompagnement/GuidePage'));
+// « Éviter les arnaques » : une forme propre (groupe 7.4, ARN-04), plus le gabarit des guides
+const ArnaquesPage = lazy(() => import('./pages/accompagnement/ArnaquesPage'));
 const ApplyPage = lazy(() => import('./pages/ApplyPage'));
 const DonatePage = lazy(() => import('./pages/DonatePage'));
 // Une page par fichier (src/pages/transversal/), un morceau de JS par page
@@ -80,6 +82,7 @@ function AppRoutes() {
         <Route path="/academie/:level" element={<LanguageLevelPage />} />
         <Route path="/mobilite-langues/accompagnement" element={<AccompagnementPage />} />
         <Route path="/accompagnement/pays/:countrySlug" element={<CountryPage />} />
+        <Route path="/accompagnement/eviter-les-arnaques" element={<ArnaquesPage />} />
         <Route path="/accompagnement/:topicSlug" element={<GuidePage />} />
         <Route path="/candidater" element={<ApplyPage />} />
 
