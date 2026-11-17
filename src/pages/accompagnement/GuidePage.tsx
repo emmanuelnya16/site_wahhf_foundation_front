@@ -1,14 +1,26 @@
 import { Fragment } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import SEO from '../../components/wahhf/SEO';
+import SectionHeader from '../../components/wahhf/SectionHeader';
 import { ReadingColumn } from '../../components/wahhf/TextList';
-import PageHeader, { PageMeta, PageTitle, PageIntro } from '../../components/wahhf/PageHeader';
-import { PrimaryButton, SecondaryButton } from '../../components/wahhf/Buttons';
+import PageHeader, { PageBreadcrumb, PageTitle, PageIntro } from '../../components/wahhf/PageHeader';
+import { PrimaryButton } from '../../components/wahhf/Buttons';
 import DisclaimerBanner from '../../components/wahhf/DisclaimerBanner';
+import Section from '../../components/wahhf/Section';
+import FilSteps from '../../components/wahhf/FilSteps';
 import { THEMATIC_GUIDES } from '../../services/api';
 import NotFoundPage, { NotFoundLinks } from '../NotFoundPage';
+import { ACCOMPANIMENT_STEPS, filSteps } from './steps';
 
-/** Guide thématique (/accompagnement/:topicSlug), dont « Éviter les arnaques » (venu de EuropeSupport.tsx, vue 2). */
+/*
+ * Guide d'une étape de l'accompagnement (/accompagnement/:topicSlug), groupe 7.4 : les guides sont les 5 étapes de la
+ * page Accompagnement (ACCO-02).
+ * - En-tête du lot 5 révélé comme le hero, avec « Étape N sur 5 » et l'avertissement anti-arnaque juste sous le titre.
+ * - Le texte du guide en colonne de lecture (inchangé).
+ * - Fin de page sur sauge, sans carte nuit au-dessus du footer : les 5 étapes (l'étape affichée marquée, sans le fil :
+ *   il reste propre à la page Accompagnement) et une seule action, « Être accompagné ».
+ * Guide inconnu : page « introuvable » avec la liste des guides (ETA-06).
+ */
 export default function GuidePage() {
   const { topicSlug = '' } = useParams<{ topicSlug?: string }>();
 
@@ -28,90 +40,63 @@ export default function GuidePage() {
   }
 
   const guide = THEMATIC_GUIDES[topicSlug];
+  const stepIndex = ACCOMPANIMENT_STEPS.findIndex((s) => s.slug === guide.slug);
 
   return (
-    <>
+    <Fragment key={guide.slug}>
       <SEO
         title={`${guide.title} — Accompagnement gratuit vers l'Europe`}
         description={guide.subtitle}
       />
 
-      <PageHeader>
-        <PageMeta>
-          <Link to="/mobilite-langues">
-            Mobilité & Langues
-          </Link>
-          <span>/</span>
-          <Link to="/mobilite-langues/accompagnement">
-            Accompagnement Europe
-          </Link>
-          <span>/</span>
-          <span>{guide.title}</span>
-        </PageMeta>
-
-        <PageTitle>
-          {guide.title}
-        </PageTitle>
-        <PageIntro>
-          {guide.subtitle}
-        </PageIntro>
+      <PageHeader reveal notice={<DisclaimerBanner compact={guide.slug === 'eviter-les-arnaques'} />}>
+        <PageBreadcrumb
+          items={[
+            { label: 'Mobilité & Langues', to: '/mobilite-langues' },
+            { label: 'Accompagnement vers l’Europe', to: '/mobilite-langues/accompagnement' },
+            { label: guide.title },
+          ]}
+        />
+        {stepIndex >= 0 && (
+          <p className="text-meta text-text-secondary">
+            Étape {stepIndex + 1} sur {ACCOMPANIMENT_STEPS.length} de l’accompagnement
+          </p>
+        )}
+        <PageTitle>{guide.title}</PageTitle>
+        <PageIntro>{guide.subtitle}</PageIntro>
       </PageHeader>
 
-      <section className="container-page *:max-w-5xl">
-        <DisclaimerBanner />
-      </section>
-
-      <section className="container-page section-space space-y-12">
-        {/* Colonne de lecture de 65 caractères (contrat §8) : sections sans carte ni filigrane (liste §6, EuropeSupport:363) */}
-        <ReadingColumn as="article">
-          {guide.sections.map((sec) => (
-            <Fragment key={sec.heading}>
-              <h2>{sec.heading}</h2>
-              <p>{sec.body}</p>
-              {sec.bullets && (
-                <ul>
-                  {sec.bullets.map((b) => (
-                    <li key={b}>{b}</li>
-                  ))}
-                </ul>
-              )}
-            </Fragment>
-          ))}
-        </ReadingColumn>
-
-        {/* Navigation entre les 5 guides thématiques */}
-        <div className="surface-green rounded-card bg-nuit text-text-on-inverse p-7 sm:p-9 space-y-5">
-          <h3 className="text-body font-semibold text-text-on-inverse">
-            Tous nos guides thématiques gratuits
-          </h3>
-          <div className="flex flex-wrap gap-2.5">
-            {Object.values(THEMATIC_GUIDES).map((g) => (
-              <Link
-                key={g.slug}
-                to={`/accompagnement/${g.slug}`}
-                className={`px-4 py-2 rounded-pill text-xs sm:text-sm font-medium transition-colors ${
-                  g.slug === guide.slug
-                    ? 'border border-or bg-or text-v1-encre font-semibold'
-                    : 'border border-border-on-inverse text-creme hover:bg-white/10'
-                }`}
-              >
-                {g.title}
-              </Link>
+      <Section>
+        <div className="container-page">
+          {/* Colonne de lecture de 65 caractères (contrat §8) : sections sans carte ni filigrane */}
+          <ReadingColumn as="article">
+            {guide.sections.map((sec) => (
+              <Fragment key={sec.heading}>
+                <h2>{sec.heading}</h2>
+                <p>{sec.body}</p>
+                {sec.bullets && (
+                  <ul>
+                    {sec.bullets.map((b) => (
+                      <li key={b}>{b}</li>
+                    ))}
+                  </ul>
+                )}
+              </Fragment>
             ))}
-          </div>
-          <div className="pt-3 flex flex-wrap gap-4">
-            <PrimaryButton
-              to="/candidater"
-              onInverse
-            >
-              Demander un accompagnement gratuit
-            </PrimaryButton>
-            <SecondaryButton to="/mobilite-langues/accompagnement" onInverse>
-              Retour aux 10 pays accompagnés
-            </SecondaryButton>
-          </div>
+          </ReadingColumn>
         </div>
-      </section>
-    </>
+      </Section>
+
+      {/* Fin de page : les 5 étapes, puis une seule action ; sur sauge, sans carte nuit au-dessus du footer */}
+      <Section tone="sauge">
+        <div className="container-page space-y-10">
+          <SectionHeader title="Les 5 étapes de l’accompagnement" />
+          <FilSteps steps={filSteps(false)} currentId={guide.slug} withFil={false} />
+          <PrimaryButton to="/candidater?souhait=accompagnement_europe" size="lg">
+            Être accompagné
+          </PrimaryButton>
+        </div>
+      </Section>
+    </Fragment>
   );
 }

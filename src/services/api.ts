@@ -533,7 +533,8 @@ export const THEMATIC_GUIDES: Record<string, {
         bullets: [
           'Mettre en valeur son parcours réel avec honnêteté et clarté',
           'Expliquer la cohérence entre ses études passées et le projet visé',
-          'Faire relire ses textes lors des ateliers gratuits d’accompagnement WAHHF',
+          // Groupe 7.4 : « gratuits » retiré (la gratuité est déjà dite par l'avertissement, au même écran)
+          'Faire relire ses textes lors des ateliers d’accompagnement WAHHF',
         ],
       },
     ],
