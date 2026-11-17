@@ -1,11 +1,12 @@
 import { useState, useId, useRef, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, MapPin, MessageCircle, Phone, ShieldCheck } from 'lucide-react';
+import { Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
 import SectionHeader from '../components/wahhf/SectionHeader';
 import PageHeader, { PageTitle, PageIntro } from '../components/wahhf/PageHeader';
 import { PrimaryButton } from '../components/wahhf/Buttons';
 import ChoiceTile from '../components/wahhf/ChoiceTile';
+import InfoBox from '../components/wahhf/InfoBox';
 import FormField, { FieldError, fieldErrorId, LABEL_CLASS, FIELD_CLASS, CHECK_LABEL_CLASS, CHECKBOX_CLASS } from '../components/wahhf/FormField';
 import ContactHandoff from '../components/wahhf/ContactHandoff';
 import { CONTACT } from '../config/contact';
@@ -46,8 +47,16 @@ function checkContactField(key: ContactField, value: string | boolean): string |
 }
 
 /**
- * Page /contact de WAHHF Foundation. Tant que l'API Symfony n'est pas branchée, le formulaire prépare
- * un message (WhatsApp ou e-mail) que la personne envoie elle-même : aucun faux envoi, rien de stocké.
+ * Page /contact de WAHHF Foundation (lot 2 ; groupe 7.2 : charte du contrat, audit CTC-01 à CTC-04).
+ * - En-tête du lot 5, révélé à l'arrivée ; l'encadré « Vigilance » en alerte ambre juste sous le titre (décision du
+ *   16 novembre 2026, §13) ; plus de carte nuit ni de police à empattements.
+ * - Coordonnées lues dans src/config/contact.ts, la seule source du site (CTC-03) : celles du footer et de la bulle
+ *   WhatsApp. L'adresse postale exacte n'est pas fournie : le lieu seul est affiché, sans « TODO ».
+ * - Sur téléphone, les coordonnées directes viennent avant le formulaire : la page se termine par une seule action,
+ *   « Préparer l'envoi de mon message ». Sur ordinateur, coordonnées à gauche, formulaire à droite (même ordre).
+ * - Tant que l'API Symfony n'est pas branchée, le formulaire prépare un message (WhatsApp ou e-mail) que la personne
+ *   envoie elle-même : aucun faux envoi, rien de stocké.
+ * - Mouvement : seulement l'en-tête ; rien sur les champs.
  */
 export default function ContactPage() {
   const [motif, setMotif] = useState<Motif | ''>('');
@@ -103,41 +112,80 @@ export default function ContactPage() {
         description="Contacter WAHHF Foundation par WhatsApp ou par e-mail : candidature, bénévolat, partenariat, presse ou toute autre demande."
       />
 
-      <PageHeader>
-        <PageTitle>
-          Écrire à WAHHF Foundation
-        </PageTitle>
+      <PageHeader
+        reveal
+        notice={
+          // Alerte ambre (décision des groupes 7.1 et 7.2) : premier élément sous le titre, jamais repliée
+          <InfoBox tone="warning" title="Vigilance">
+            <p>
+              Aucun collaborateur de WAHHF ne vous demandera d’argent par téléphone, e-mail ou WhatsApp pour traiter
+              votre dossier.
+            </p>
+            <p>
+              <Link to="/accompagnement/eviter-les-arnaques" className="text-link underline underline-offset-4">
+                Reconnaître une fausse offre
+              </Link>
+            </p>
+          </InfoBox>
+        }
+      >
+        <PageTitle>Écrire à WAHHF Foundation</PageTitle>
         <PageIntro>
-          Choisissez le motif de votre message et écrivez-nous. Vous pouvez aussi nous joindre directement par
-          WhatsApp ou par e-mail.
+          Joignez-nous directement par WhatsApp ou par e-mail, ou utilisez le formulaire{' '}: il prépare votre
+          message selon son motif.
         </PageIntro>
       </PageHeader>
 
       <section className="container-page section-space">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-          <div ref={formBlockRef} className="lg:col-span-7">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-12 gap-y-14">
+          {/* Coordonnées directes : texte sur le fond de la page, sans carte (contrat §8, §12) */}
+          <div className="lg:col-span-4 space-y-6">
+            <h2 className="text-section-title text-text">Nous joindre directement</h2>
+            {/* Lien externe : PrimaryButton ajoute ↗ et « (nouvel onglet) » pour les lecteurs d'écran */}
+            <PrimaryButton href={`https://wa.me/${CONTACT.whatsappNumber}?text=${encodeURIComponent('Bonjour WAHHF Foundation, ')}`}>
+              <span className="inline-flex items-center gap-2">
+                <MessageCircle aria-hidden="true" className="w-4 h-4 shrink-0" />
+                Écrire sur WhatsApp
+              </span>
+            </PrimaryButton>
+            <ul className="space-y-3 text-body text-text">
+              <li className="flex items-start gap-3">
+                <Phone aria-hidden="true" className="w-5 h-5 mt-1 shrink-0 text-text-secondary" />
+                <a href={`tel:+${CONTACT.whatsappNumber}`} className="text-link underline underline-offset-4 decoration-1 hover:decoration-2">
+                  {CONTACT.whatsappDisplay}
+                </a>
+              </li>
+              <li className="flex items-start gap-3">
+                <Mail aria-hidden="true" className="w-5 h-5 mt-1 shrink-0 text-text-secondary" />
+                <a href={`mailto:${CONTACT.email}`} className="text-link underline underline-offset-4 decoration-1 hover:decoration-2 break-all">
+                  {CONTACT.email}
+                </a>
+              </li>
+              <li className="flex items-start gap-3">
+                <MapPin aria-hidden="true" className="w-5 h-5 mt-1 shrink-0 text-text-secondary" />
+                <span>{CONTACT.place}</span>
+              </li>
+            </ul>
+          </div>
+
+          <div ref={formBlockRef} className="lg:col-span-8">
             <p role="status" className="sr-only">
               {prepared ? 'Votre message est prêt : envoyez-le par WhatsApp ou par e-mail.' : ''}
             </p>
             {prepared ? (
               <ContactHandoff
-                title="Dernière étape : envoyez votre message"
+                title={'Dernière étape : envoyez votre message'}
                 draft={draft}
                 titleRef={titleRef}
                 onEdit={() => setPrepared(false)}
               />
             ) : (
-              <div className="rounded-card bg-surface-section p-7 sm:p-10 space-y-8">
-                <SectionHeader
-                  titleRef={titleRef}
-                  title="Votre message"
-                />
+              <div className="rounded-card bg-surface-section p-6 sm:p-10 space-y-8">
+                <SectionHeader titleRef={titleRef} title="Votre message" />
 
                 <form onSubmit={handleSubmit} noValidate className="space-y-6">
                   <fieldset>
-                    <legend className={LABEL_CLASS}>
-                      Motif de votre message *
-                    </legend>
+                    <legend className={LABEL_CLASS}>Motif de votre message *</legend>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {MOTIFS.map((m, i) => (
                         <ChoiceTile
@@ -153,7 +201,7 @@ export default function ContactPage() {
                           invalid={!!errors.motif}
                           describedBy={errors.motif ? fieldErrorId(fieldId('motif')) : undefined}
                           showCheck
-                          className="p-4 rounded-2xl text-left font-medium"
+                          className="p-4 text-left"
                         >
                           {m.label}
                         </ChoiceTile>
@@ -163,13 +211,14 @@ export default function ContactPage() {
                   </fieldset>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <FormField id={fieldId('name')} label="Nom complet / Structure *" error={errors.name}>
+                    <FormField id={fieldId('name')} label="Nom complet ou structure *" error={errors.name}>
                       {(a11y) => (
                         <input
                           {...a11y}
                           type="text"
                           required
                           autoComplete="name"
+                          maxLength={100}
                           value={name}
                           onChange={(e) => {
                             setName(e.target.value);
@@ -187,6 +236,9 @@ export default function ContactPage() {
                           type="email"
                           required
                           autoComplete="email"
+                          autoCapitalize="none"
+                          spellCheck={false}
+                          maxLength={254}
                           value={email}
                           onChange={(e) => {
                             setEmail(e.target.value);
@@ -209,6 +261,7 @@ export default function ContactPage() {
                           type="tel"
                           autoComplete="tel"
                           inputMode="tel"
+                          maxLength={30}
                           placeholder="Ex. +237 6..."
                           value={whatsapp}
                           onChange={(e) => {
@@ -228,6 +281,7 @@ export default function ContactPage() {
                         {...a11y}
                         rows={5}
                         required
+                        maxLength={2000}
                         value={message}
                         onChange={(e) => {
                           setMessage(e.target.value);
@@ -239,6 +293,7 @@ export default function ContactPage() {
                     )}
                   </FormField>
 
+                  {/* Consentement : la politique s'ouvre dans un nouvel onglet, la saisie n'est jamais perdue */}
                   <div>
                     <label className={CHECK_LABEL_CLASS}>
                       <input
@@ -257,8 +312,9 @@ export default function ContactPage() {
                       <span>
                         J’accepte que mes coordonnées soient traitées par WAHHF Foundation pour répondre à mon
                         message, conformément à la{' '}
-                        <Link to="/confidentialite" className="underline text-accent">
-                          politique de confidentialité (RGPD)
+                        <Link to="/confidentialite" target="_blank" rel="noopener" className="text-link underline underline-offset-4">
+                          politique de confidentialité
+                          <span className="sr-only"> (nouvel onglet)</span>
                         </Link>
                         . *
                       </span>
@@ -270,61 +326,6 @@ export default function ContactPage() {
                 </form>
               </div>
             )}
-          </div>
-
-          {/* Coordonnées directes */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className="surface-green rounded-card bg-nuit text-text-on-inverse p-7 sm:p-8 space-y-5">
-              <h2 className="font-serif font-normal text-2xl text-creme">Nous joindre directement</h2>
-              {/* Lien externe : PrimaryButton ajoute ↗ et « (nouvel onglet) » pour les lecteurs d'écran */}
-              <PrimaryButton
-                href={`https://wa.me/${CONTACT.whatsappNumber}?text=${encodeURIComponent('Bonjour WAHHF Foundation, ')}`}
-                onInverse
-              >
-                <span className="inline-flex items-center gap-2">
-                  <MessageCircle aria-hidden="true" className="w-4 h-4 shrink-0" />
-                  Écrire sur WhatsApp
-                </span>
-              </PrimaryButton>
-              <ul className="space-y-3 text-sm text-creme/85">
-                <li className="flex items-center gap-2.5">
-                  <Phone aria-hidden="true" className="w-4 h-4 text-or shrink-0" />
-                  <a href={`tel:+${CONTACT.whatsappNumber}`} className="hover:text-or transition-colors">
-                    {CONTACT.whatsappDisplay}
-                  </a>
-                </li>
-                <li className="flex items-center gap-2.5">
-                  <Mail aria-hidden="true" className="w-4 h-4 text-or shrink-0" />
-                  <a href={`mailto:${CONTACT.email}`} className="hover:text-or transition-colors break-all">
-                    {CONTACT.email}
-                  </a>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <MapPin aria-hidden="true" className="w-4 h-4 text-or shrink-0 mt-1" />
-                  <span>
-                    Cameroun (Douala / Yaoundé) & Coordination Allemagne{' '}
-                    <span className="text-xs text-or">(TODO : adresse exacte)</span>
-                  </span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="rounded-card bg-surface-raised border border-border p-7 space-y-3">
-              <div className="flex items-center gap-2 text-meta font-semibold text-accent">
-                <ShieldCheck aria-hidden="true" className="w-4 h-4" />
-                <span>Vigilance</span>
-              </div>
-              <p className="text-sm text-text-secondary leading-relaxed">
-                Aucun collaborateur de WAHHF ne vous demandera d’argent par téléphone, e-mail ou WhatsApp pour traiter
-                votre dossier.
-              </p>
-              <Link
-                to="/accompagnement/eviter-les-arnaques"
-                className="inline-block text-sm font-semibold text-accent underline underline-offset-4"
-              >
-                Reconnaître une fausse offre
-              </Link>
-            </div>
           </div>
         </div>
       </section>
