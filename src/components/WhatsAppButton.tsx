@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { CONTACT } from '../config/contact';
 
 /**
  * Bulle WhatsApp (RESP-03, décision du 16/11 ; contrat §13) : vrai glyphe WhatsApp et libellé court visible dès
@@ -7,11 +8,12 @@ import { useTranslation } from 'react-i18next';
  * trait-nuit. Aucune animation d’entrée.
  * Place réservée en bas de page : le footer garde une marge basse et scroll-padding-bottom (index.css) garde
  * l'élément qui reçoit le focus au-dessus de la bulle.
+ * Numéro : celui de src/config/contact.ts, la seule source du site (CTC-03, groupe 7.2).
  */
 export default function WhatsAppButton() {
   const { i18n } = useTranslation();
   const en = i18n.language.startsWith('en');
-  const phoneNumber = '237693129205';
+  const phoneNumber = CONTACT.whatsappNumber;
   const message = encodeURIComponent(
     en
       ? 'Hello WAHHF Foundation, I would like information about your free programs...'

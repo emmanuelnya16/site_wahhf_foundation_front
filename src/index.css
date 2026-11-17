@@ -713,6 +713,7 @@
     clip-path: none !important;
   }
   .step-enter,
+  .crossfade-in,
   .line-rise,
   .hero-fade,
   .fil-draw-to-x,
@@ -856,6 +857,48 @@
 /* En-têtes de page (groupe 7.1, PageHeader reveal) : titre en 0,8 s */
 .reveal-08 .line-rise {
   animation-duration: 0.8s;
+}
+
+/* Faire un don (groupe 7.2) : retours d'action seulement, rien au défilement dans le formulaire.
+   1. Choix d'une affectation, d'une devise ou d'un montant (ChoiceTile className="choice-150") : contour et liseré de
+      l'option choisie en 150 ms, coche qui apparaît en fondu et en échelle (150 ms).
+   2. Ligne d'impact (DonatePage) : l'ancienne phrase s'efface pendant que la nouvelle apparaît, fondu croisé de 0,3 s
+      (deux couches superposées ; l'ancienne est retirée à la fin). Opacité et transform seulement.
+   Mouvement réduit : tout change d'un coup, l'ancienne phrase n'est jamais affichée. */
+.choice-150 {
+  transition-property: border-color, box-shadow, background-color, color;
+  transition-duration: 150ms;
+  transition-timing-function: var(--ease-power2-out);
+}
+@keyframes choice-check {
+  from { opacity: 0; transform: scale(0.6); }
+}
+.choice-150 svg {
+  animation: choice-check 150ms var(--ease-power2-out) backwards;
+}
+@keyframes crossfade-in {
+  from { opacity: 0; }
+}
+@keyframes crossfade-out {
+  to { opacity: 0; }
+}
+.crossfade-in {
+  animation: crossfade-in 0.3s var(--ease-power2-out) backwards;
+}
+.crossfade-out {
+  animation: crossfade-out 0.3s var(--ease-power2-out) forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .choice-150 {
+    transition: none;
+  }
+  .choice-150 svg,
+  .crossfade-in {
+    animation: none !important;
+  }
+  .crossfade-out {
+    display: none;
+  }
 }
 /* Photo d'en-tête découverte du bas vers le haut (Mobilité, groupe 7.1) : ordinateur à souris seulement, une fois.
    Clip-path toléré ici comme pour « Sur le terrain » (contrat §10) ; ailleurs la photo est simplement en place. */

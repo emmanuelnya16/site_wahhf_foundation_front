@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ArrowUp, Mail, MapPin, Phone } from 'lucide-react';
 import { DOMAINS_DATA, WAHHF_LOGO_URL } from '../services/api';
+import { CONTACT } from '../config/contact';
 import { scrollToTop } from '../lib/scroll';
 import { DonateButton } from './wahhf/Buttons';
 import { cn } from '../lib/utils';
@@ -12,6 +13,7 @@ import { cn } from '../lib/utils';
  * Mise en page : le bloc de la marque sur sa rangée, puis 4 colonnes (Qui sommes-nous, Nos actions, Agir et faire un
  * don, Contact et adresse) ; barre du bas : © 2026, mentions légales, confidentialité, transparence, retour en haut.
  * `surface-green` donne l'anneau de focus soleil et le liseré du bouton de don.
+ * Coordonnées : celles de src/config/contact.ts, la seule source du site (CTC-03, groupe 7.2).
  */
 const LINK =
   'transition-colors duration-(--dur-fast) underline-offset-4 hover:text-link-on-inverse hover:underline active:text-link-on-inverse';
@@ -178,19 +180,19 @@ export default function Footer() {
               <li className="flex items-start gap-2.5">
                 <MapPin aria-hidden="true" className={cn(ICON, 'mt-1')} />
                 <span>
-                  Cameroun (Douala / Yaoundé) & Coordination Allemagne <span>(TODO : adresse exacte)</span>
+                  {CONTACT.place} <span>(TODO : adresse exacte)</span>
                 </span>
               </li>
               <li className="flex items-center gap-2.5">
                 <Phone aria-hidden="true" className={ICON} />
-                <a href="tel:+237693129205" className={LINK}>
-                  +237 693 12 92 05
+                <a href={`tel:+${CONTACT.whatsappNumber}`} className={LINK}>
+                  {CONTACT.whatsappDisplay}
                 </a>
               </li>
               <li className="flex items-center gap-2.5">
                 <Mail aria-hidden="true" className={ICON} />
-                <a href="mailto:contact@wahhf-foundation.org" className={cn(LINK, 'break-all')}>
-                  contact@wahhf-foundation.org
+                <a href={`mailto:${CONTACT.email}`} className={cn(LINK, 'break-all')}>
+                  {CONTACT.email}
                 </a>
               </li>
             </ul>
