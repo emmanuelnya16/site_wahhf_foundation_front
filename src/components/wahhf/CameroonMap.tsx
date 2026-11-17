@@ -5,6 +5,7 @@ import { AnimatePresence, motion, useAnimate, useInView, useReducedMotion } from
 import { Maximize2, Minimize2 } from 'lucide-react';
 import { useDialog } from '../../lib/useDialog';
 import { useElementSize } from '../../lib/useElementSize';
+import { useSlicedWork } from '../../lib/useSlicedWork';
 import { prefersReducedMotion } from '../../lib/reducedMotion';
 import { CAMEROON_NEIGHBORS, CAMEROON_REGIONS_LIST, CameroonRegionData } from '../../data/regions';
 import { loadCameroonGeo } from './presenceGeo';
@@ -58,17 +59,28 @@ export default function CameroonMap({ selectedRegion, onSelectRegion }: Cameroon
     returnFocusRef: openFullscreenRef,
   });
 
-  // Projection calée sur l'emprise réelle des régions ; bande basse réservée aux étiquettes des voisins du sud
-  const { projection, shapes, neighborD } = useMemo(() => {
+  // Projection calée sur l'emprise réelle des régions ; bande basse réservée aux étiquettes des voisins du sud.
+  // Tracés calculés par tranches de 8 ms (useSlicedWork) : d'un bloc, ils faisaient une tâche de plus de 50 ms au
+  // moment où la carte arrive pendant le défilement (contrat §10, lot 7).
+  const { projection, items, compute } = useMemo(() => {
     const projection = geoMercator().fitExtent([[24, 22], [W - 24, H - 46]], geo.regions);
     const path = geoPath(projection);
-    const shapes: RegionShape[] = geo.regions.features.flatMap((f) => {
-      const region = REGION_BY_ISO.get(f.properties?.shapeISO);
-      const d = path(f);
-      return region && d ? [{ region, d }] : [];
-    });
-    return { projection, shapes, neighborD: path(geo.neighborLines) ?? '' };
+    const items: Array<{ f: (typeof geo.regions.features)[number] } | 'voisins'> = [
+      ...geo.regions.features.map((f) => ({ f })),
+      'voisins',
+    ];
+    const compute = (item: (typeof items)[number]): RegionShape | { neighborD: string } | null => {
+      if (item === 'voisins') return { neighborD: path(geo.neighborLines) ?? '' };
+      const region = REGION_BY_ISO.get(item.f.properties?.shapeISO);
+      const d = path(item.f);
+      return region && d ? { region, d } : null;
+    };
+    return { projection, items, compute };
   }, [geo]);
+  const computed = useSlicedWork(items, compute);
+  const ready = computed !== null;
+  const shapes = useMemo(() => (computed ?? []).filter((x): x is RegionShape => 'region' in x), [computed]);
+  const neighborD = useMemo(() => (computed ?? []).find((x): x is { neighborD: string } => 'neighborD' in x)?.neighborD ?? '', [computed]);
 
   // --- Cascade d'apparition (effet 11) ---
   const [scope, animate] = useAnimate<HTMLDivElement>();
@@ -118,7 +130,14 @@ export default function CameroonMap({ selectedRegion, onSelectRegion }: Cameroon
   return (
     <>
       <div ref={scope} onFocusCapture={revealNow} className="relative w-full max-w-[400px] mx-auto">
-        <RegionMap {...mapProps} inModal={false} />
+        {ready ? (
+          <RegionMap {...mapProps} inModal={false} />
+        ) : (
+          // Même format que la carte (480 × 560) pendant le calcul des tracés : rien ne bouge à l'arrivée
+          <div role="status" aria-busy="true" className="w-full aspect-[480/560] rounded-inner bg-surface-raised flex items-center justify-center text-meta text-text-secondary">
+            Chargement de la carte des 10 régions du Cameroun…
+          </div>
+        )}
 
         {/* Infobulle de survol (doublon visuel de l'aria-label, donc masquée aux lecteurs d'écran) */}
         {hoveredRegion && (
