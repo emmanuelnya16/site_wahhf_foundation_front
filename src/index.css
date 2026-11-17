@@ -617,6 +617,49 @@
   to { transform: scaleX(1); }
 }
 
+/*
+ * Arrivée du hero (contrat §10, moment 1, lot 7), en CSS : elle joue dès le premier affichage, avant GSAP.
+ * 1. Titre (LineReveal) : chaque ligne monte de 100 % à 0 derrière son masque, 1 s, power3.out, 0,12 s de décalage.
+ *    Le masque garde 0,1 em sous la ligne pour les jambages (g, p) : la ligne part donc de 100 % + 0,1 em.
+ * 2. Phrase, boutons, lien du film, puis le fil : fondu court de 0,6 s (power2.out), délai propre à chacun
+ *    (--hero-fade-delay) ; le trait du fil se dessine ensuite (--fil-draw-delay, Fil.tsx).
+ * « backwards » : une fois l'animation finie, plus aucun style posé. Un bouton qui reçoit le focus pendant son fondu
+ * s'affiche aussitôt. Mouvement réduit : tout est en place dès le premier rendu (le fil du hero est absent).
+ */
+@keyframes line-rise {
+  from { transform: translateY(calc(100% + 0.1em)); }
+}
+@keyframes hero-fade {
+  from { opacity: 0; }
+}
+.line-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+}
+.line-rise {
+  display: block;
+  animation: line-rise 1s var(--ease-power3-out) backwards;
+}
+.line-mask:nth-child(2) .line-rise { animation-delay: 0.12s; }
+.line-mask:nth-child(3) .line-rise { animation-delay: 0.24s; }
+.line-mask:nth-child(4) .line-rise { animation-delay: 0.36s; }
+.line-mask:nth-child(5) .line-rise { animation-delay: 0.48s; }
+.line-mask:nth-child(6) .line-rise { animation-delay: 0.6s; }
+.hero-fade {
+  animation: hero-fade 0.6s var(--ease-power2-out) var(--hero-fade-delay, 0.6s) backwards;
+}
+.hero-fade:focus-within {
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .line-rise,
+  .hero-fade {
+    animation: none !important;
+  }
+}
+
 .focus-ring-double:focus-visible {
   outline: 2px solid var(--focus-on-light);
   outline-offset: 2px;

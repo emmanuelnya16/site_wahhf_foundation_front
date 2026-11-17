@@ -1,4 +1,4 @@
-import { Component, ReactNode, Suspense } from 'react';
+import { Component, lazy, ReactNode, Suspense } from 'react';
 import { useAfterFirstDisplay } from '../lib/afterFirstDisplay';
 
 /**
@@ -33,3 +33,7 @@ export function AfterFirstDisplay({ children }: { children: ReactNode }) {
     </QuietBoundary>
   );
 }
+
+// Les effets, chargés ensemble (un seul fichier, avec GSAP et ScrollTrigger)
+const loadEffects = () => import('./motion');
+export const HeroMotion = lazy(() => loadEffects().then((m) => ({ default: m.HeroMotion })));

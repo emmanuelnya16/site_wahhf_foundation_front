@@ -6,8 +6,9 @@ import { cn } from '../../lib/utils';
  * Le fil (contrat §6, signature) : un trait de 1,5 px couleur du fil (forêt en clair, feuille en sombre et sur nuit)
  * qui relie toujours un départ à une arrivée. Départ, arrivée et étape affichée sont des points pleins de 8 px ;
  * les autres étapes sont des cercles. Le dessin est décoratif (aria-hidden) : le sens est toujours écrit en texte,
- * et chaque libellé reste lisible (et cliquable s'il a un lien). Fixe ; seul le hero de l'accueil le dessine une fois
- * (drawOnce, §10), et jamais en mouvement réduit.
+ * et chaque libellé reste lisible (et cliquable s'il a un lien). Lot 7 (§10) : drawOnce le dessine une fois en CSS
+ * (hero de l'accueil, fiches pays), jamais en mouvement réduit ; la frise A1 → C1 se dessine au défilement sur
+ * ordinateur (src/effects/motion/FilScrub.tsx, qui lit les attributs data-fil-*).
  *
  *   <Fil start={{ id: 'cameroun', label: 'Cameroun' }} end={{ id: 'allemagne', label: 'Allemagne' }} />
  *   <Fil orientation="auto" steps={niveaux} end={{ id: 'europe', label: 'Europe' }} currentId="b1" />
@@ -98,7 +99,8 @@ function Horizontal({ nodes, onInverse, drawOnce, currentLabel, className }: { n
                   className={cn(
                     'h-[1.5px] flex-1 min-w-6',
                     line,
-                    drawOnce && 'origin-left motion-safe:animate-[fil-draw_1.2s_var(--ease-reveal)_0.2s_both]',
+                    // Tracé unique : 1,2 s, power3.inOut ; délai --fil-draw-delay (0,2 s par défaut, plus long dans le hero)
+                    drawOnce && 'origin-left motion-safe:animate-[fil-draw_1.2s_var(--ease-power3-inout)_var(--fil-draw-delay,0.2s)_both]',
                   )}
                 />
               )}

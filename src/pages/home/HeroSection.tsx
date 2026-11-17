@@ -11,6 +11,8 @@ import { HERO_FILM, HERO_POSTER, heroFilmUrl } from '../../config/heroVideo';
 import { getVideoConsent } from '../../lib/consent';
 import { useDialog } from '../../lib/useDialog';
 import { DURATION, EASE_OUT } from '../../lib/motionTokens';
+import LineReveal from '../../effects/LineReveal';
+import { AfterFirstDisplay, HeroMotion } from '../../effects/DeferredMotion';
 
 /**
  * 1. Hero de l'accueil (contrat §6 et §7 ; décision de la cliente du 16/11 : la vidéo en fond).
@@ -19,7 +21,11 @@ import { DURATION, EASE_OUT } from '../../lib/motionTokens';
  *   ACC-07) ; la vidéo WAHHF par-dessus, sur ordinateur seulement et avec l'accord du visiteur (HeroVideoBackground).
  * - Voile nuit (.hero-veil) : horizontal dès 768 px, dense derrière la colonne de texte ; du bas vers le haut sur
  *   téléphone. Texte et boutons visibles dès le premier rendu (PERF-01) : rien n'attend la vidéo ni une animation.
- * - Le fil (soleil sur le voile) se dessine une fois sous le titre, en CSS ; absent en mouvement réduit.
+ * - Arrivée (contrat §10, moment 1, lot 7), en CSS pour jouer dès le premier affichage : le titre monte ligne par
+ *   ligne derrière un masque (LineReveal), puis la phrase, les boutons et le lien du film en fondu court (.hero-fade),
+ *   puis le fil (soleil sur le voile), qui se dessine ; absent en mouvement réduit. L'image d'attente (LCP) ne bouge pas.
+ * - Au défilement, sur ordinateur (HeroMotion, GSAP chargé après le premier affichage) : parallaxe de 8 % au plus de
+ *   la vidéo ou de l'image [data-hero-media] et voile qui s'assombrit [data-hero-dim].
  * - Deux portes : le test d'allemand (soleil) et le don (cœur plein avec liseré). Lien discret vers le film avec
  *   le son, ouvert dans une fenêtre (fondu de 0,3 s) ; YouTube n'est contacté qu'après « Lire le film sur YouTube »,
  *   sauf si le visiteur a déjà activé la vidéo.
@@ -53,6 +59,8 @@ export default function HeroSection() {
     >
       {/* Fond : image d'attente, vidéo, voile (décoratifs) */}
       <div className="absolute inset-0 -z-10" aria-hidden="true">
+        {/* Image et vidéo ensemble : c'est ce calque que la parallaxe déplace (jamais l'image seule) */}
+        <div data-hero-media className="absolute inset-0">
         <picture>
           <source
             media="(max-width: 47.99rem)"
@@ -74,28 +82,30 @@ export default function HeroSection() {
           />
         </picture>
         <HeroVideoBackground video={video} />
+        </div>
         <div className="hero-veil absolute inset-0" />
+        {/* Voile qui s'assombrit au défilement (ordinateur) ; transparent au repos */}
+        <div data-hero-dim className="absolute inset-0 bg-nuit opacity-0" />
       </div>
 
       {/* Enveloppe pleine largeur : le container (content-box, marges auto) ne s'étire pas seul dans une colonne flex */}
       <div className="w-full">
       <div className="container-page py-10">
         <div className="max-w-(--hero-text-width)">
-          <h1 id="hero-titre" className="text-display text-text-on-inverse text-balance">
-            {t('hero.headline')}
-          </h1>
+          <LineReveal id="hero-titre" text={t('hero.headline')} className="text-display text-text-on-inverse text-balance" />
 
+          {/* Le fil arrive en dernier : ses libellés en fondu à 0,85 s, puis le trait se dessine à 0,95 s */}
           <Fil
             start={{ id: 'cameroun', label: t('hero.filStart') }}
             end={{ id: 'europe', label: t('hero.filEnd') }}
             drawOnce
             onMedia
-            className="mt-5 max-w-sm motion-reduce:hidden"
+            className="hero-fade [--hero-fade-delay:0.85s] [--fil-draw-delay:0.95s] mt-5 max-w-sm motion-reduce:hidden"
           />
 
-          <p className="mt-5 text-body text-text-on-inverse max-w-[52ch]">{t('hero.lead')}</p>
+          <p className="hero-fade [--hero-fade-delay:0.55s] mt-5 text-body text-text-on-inverse max-w-[52ch]">{t('hero.lead')}</p>
 
-          <div className="mt-7 flex flex-col sm:flex-row sm:flex-wrap gap-3">
+          <div className="hero-fade [--hero-fade-delay:0.65s] mt-7 flex flex-col sm:flex-row sm:flex-wrap gap-3">
             <PrimaryButton to="/mobilite-langues/academie#test-niveau" onInverse size="lg">
               {t('hero.ctaTest')}
             </PrimaryButton>
@@ -110,7 +120,7 @@ export default function HeroSection() {
             type="button"
             onClick={openFilm}
             aria-haspopup="dialog"
-            className="mt-3 inline-flex min-h-11 items-center text-meta text-text-on-inverse underline underline-offset-4 decoration-1 transition-colors duration-(--dur-fast) hover:decoration-2 hover:text-link-on-inverse cursor-pointer"
+            className="hero-fade [--hero-fade-delay:0.75s] mt-3 inline-flex min-h-11 items-center text-meta text-text-on-inverse underline underline-offset-4 decoration-1 transition-colors duration-(--dur-fast) hover:decoration-2 hover:text-link-on-inverse cursor-pointer"
           >
             {t('hero.filmLink')}
           </button>
@@ -125,6 +135,9 @@ export default function HeroSection() {
         <HeroVideoToggle video={video} pauseLabel={t('hero.videoPause')} playLabel={t('hero.videoPlay')} />
       </div>
 
+      <AfterFirstDisplay>
+        <HeroMotion scope={heroRef} />
+      </AfterFirstDisplay>
     </section>
 
       {/* Film avec le son : fenêtre hors de la section (le hero isole son empilement, elle passerait sous l'en-tête).
