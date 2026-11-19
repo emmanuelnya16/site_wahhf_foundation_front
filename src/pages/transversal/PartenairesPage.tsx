@@ -10,9 +10,12 @@ import { PrimaryButton } from '../../components/wahhf/Buttons';
  * - PAR-01 : le groupe IROKO décrit concrètement, avec les seuls faits déjà présents dans le projet (pages historiques
  *   du groupe : une holding, neuf pôles en trois familles, IROKO Event en activité) ; son site et sa part du budget
  *   sont demandés à la fondation (docs/contenus-a-fournir.md). Plus de « 10 Pôles d'Expertise » ni de « 10 régions ».
- * - Catégories de partenaires marquées TODO masquées (EXAMPLE_PARTNER_CATEGORIES_NOT_VALIDATED) ; seule reste celle des
- *   donateurs. La section « Ce que nous proposons » s'affiche dès que PARTNER_OFFERS est rempli (formats, contreparties,
- *   contact nommé : questions 104 et 105).
+ * - Catégories de partenaires marquées TODO masquées (EXAMPLE_PARTNER_CATEGORIES_NOT_VALIDATED). Revue du groupe 7.3 :
+ *   la section « Les autres soutiens », qui ne gardait qu'une catégorie (les donateurs) dans une liste à trois
+ *   colonnes et répétait l'introduction, est retirée ; les donateurs sont nommés dans l'introduction, la règle de
+ *   l'accord écrit n'est dite qu'une fois (SUPPORTER_CATEGORIES_NOT_SHOWN garde le texte). La section « Ce que nous
+ *   proposons » s'affiche dès que PARTNER_OFFERS est rempli (formats, contreparties, contact nommé : questions 104 et
+ *   105).
  * - Plus de carte nuit bordée d'or ni de carte pour un bloc non cliquable (T-15) ; plus de « 01 » pour un seul
  *   partenaire (T-17) ; titre sans gratuité. Une seule action en fin de page : « Proposer un partenariat » (/agir#partenaire).
  * - Mouvement (contrat §10) : en-tête révélé comme le hero ; apparitions groupées des listes.
@@ -30,7 +33,11 @@ export const EXAMPLE_PARTNER_CATEGORIES_NOT_VALIDATED = [
   },
 ];
 
-const SUPPORTERS = [
+/**
+ * Catégorie de soutien de l'ancienne liste, seule non marquée TODO : plus affichée seule (revue du groupe 7.3), les
+ * donateurs sont nommés dans l'introduction. À reprendre avec la liste officielle des catégories (question 81).
+ */
+export const SUPPORTER_CATEGORIES_NOT_SHOWN = [
   {
     title: 'Donateurs individuels et mécènes',
     desc: 'Citoyens et philanthropes au Cameroun, en Allemagne et en Europe finançant les parcours des jeunes.',
@@ -53,8 +60,8 @@ export function PartenairesPage() {
       <PageHeader reveal>
         <PageTitle>Nos partenaires et nos soutiens</PageTitle>
         <PageIntro>
-          Le groupe IROKO, dont WAHHF Foundation est la branche sociale, et nos donateurs. Aucun autre partenaire n’est
-          nommé sans son accord écrit.
+          WAHHF Foundation est soutenue par le groupe IROKO, dont elle est la branche sociale, et par ses donateurs.
+          Aucun autre partenaire n’est nommé sans son accord écrit.
         </PageIntro>
       </PageHeader>
 
@@ -79,26 +86,9 @@ export function PartenairesPage() {
         </div>
       </Section>
 
-      {/* LES AUTRES SOUTIENS : catégories TODO masquées */}
-      <Section tone="sauge">
-        <div className="container-page space-y-8">
-          <SectionHeader
-            title="Les autres soutiens de la fondation"
-            subtitle="Conformément à notre éthique, aucun nom ou logo d’institution tierce n’est affiché sans accord écrit préalable."
-          />
-          <TextList columns={3}>
-            {SUPPORTERS.map((p) => (
-              <TextListItem key={p.title} title={p.title}>
-                <p>{p.desc}</p>
-              </TextListItem>
-            ))}
-          </TextList>
-        </div>
-      </Section>
-
       {/* CE QUE NOUS PROPOSONS : seulement si le contenu est fourni (PAR-01) */}
       {PARTNER_OFFERS.length > 0 && (
-        <Section>
+        <Section tone="sauge">
           <div className="container-page space-y-8">
             <SectionHeader title="Ce que nous proposons" />
             <TextList columns={2}>
@@ -112,8 +102,8 @@ export function PartenairesPage() {
         </Section>
       )}
 
-      {/* UNE SEULE ACTION EN FIN DE PAGE, sur le fond de la page */}
-      <Section tone={PARTNER_OFFERS.length > 0 ? 'sauge' : 'brume'}>
+      {/* UNE SEULE ACTION EN FIN DE PAGE : sections alternées par le fond (sauge après IROKO), sans carte nuit */}
+      <Section tone={PARTNER_OFFERS.length > 0 ? 'brume' : 'sauge'}>
         <div className="container-page">
           <div className="max-w-[65ch] space-y-5">
             <SectionHeader
