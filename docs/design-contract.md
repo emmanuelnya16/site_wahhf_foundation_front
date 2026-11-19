@@ -482,6 +482,8 @@ Ce sont ceux de votre demande sur les composants partagés ; ils appliquent les 
 | `--radius-card` | 20 px | cartes cliquables, photos, fenêtres, menus déroulants |
 | `--radius-pill` | pilule | boutons, badges, filtres, pastilles de navigation |
 
+**Exception réservée à la section « Cinq principes » de Qui sommes-nous (lot 7.8, votre brief du 19 novembre 2026) : le coin feuille.** Chaque carte a un rayon de 0,75 rem sur trois coins et de 3 rem sur un seul ; ce grand coin change d'une carte à l'autre, comme une feuille qui pousse (haut droit, bas gauche, haut gauche, bas droit, haut droit, puis bas gauche pour la carte finale). Une encoche en demi-cercle de 12 px de rayon est découpée dans la carte, là où le fil entre : sur le bord gauche, à 70 px du haut, dans le parcours épinglé ; en haut de la carte, à 70 px du bord, en colonne. Classes `principle-leaf-*` et `principle-notch` (src/index.css). Les cartes sont des aplats pleins, identiques en clair et en sombre (tokens `--principle-*`), sans ombre ni bordure, sauf la carte finale (papier, bordure forêt de 1,5 px). Nulle part ailleurs.
+
 Jamais de rayon de 20 px sur un petit élément. Les neuf valeurs actuelles (pilule, 24 px sous deux écritures, 16, 12, 20, 8, 32 et 4 px ; TOK-05) sont toutes ramenées à ces trois-là.
 
 ## 10. Mouvement
@@ -937,6 +939,23 @@ Calcul WCAG 2.x sur fond uni ; ratios tronqués à une décimale. Seuils : 4,5:1
 | liseré brume 60 % sur coeur | canopee #1B3129 | 6,2:1 | 3:1 | passe | liseré du bouton don |
 | liseré brume 60 % sur coeur-fonce | canopee #1B3129 | 5,9:1 | 3:1 | passe | liseré du bouton don au survol |
 | soleil #F2B544 | canopee #1B3129 | 7,5:1 | 3:1 | passe | contour de l'option choisie, case cochée |
+
+**Cartes des cinq principes (lot 7.8, Qui sommes-nous ; identiques en clair et en sombre)**
+
+| Devant | Fond | Ratio | Seuil | Résultat | Usage |
+|---|---|---|---|---|---|
+| blanc #FFFFFF | forêt #24503F | 9,15:1 | 4,5:1 | passe | carte 01 (Écoute) : titre, description |
+| soleil #F2B544 | forêt #24503F | 5,00:1 | 4,5:1 | passe | carte 01 : numéro, rubrique, étiquette |
+| encre #1F2D27 | sauge #E3ECE6 | 11,90:1 | 4,5:1 | passe | carte 02 (Co-construction) : titre, description |
+| forêt #24503F | sauge #E3ECE6 | 7,59:1 | 4,5:1 | passe | carte 02 : numéro, rubrique, étiquette |
+| encre #1F2D27 | soleil #F2B544 | 7,84:1 | 4,5:1 | passe | carte 03 (Durabilité) : tout le texte (l'accent est l'encre) |
+| blanc #FFFFFF | nuit #0F3D2E | 12,16:1 | 4,5:1 | passe | carte 04 (Transparence) : titre, description |
+| soleil #F2B544 | nuit #0F3D2E | 6,64:1 | 4,5:1 | passe | carte 04 : numéro, rubrique, étiquette |
+| blanc #FFFFFF | miel #8A5A00 | 5,93:1 | 4,5:1 | passe | carte 05 (Partenariats) : titre, description |
+| blanc à 85 % (#EDE6D9) | miel #8A5A00 | 4,78:1 | 4,5:1 | passe | carte 05 : numéro, rubrique, étiquette |
+| encre #1F2D27 | papier #FFFFFF | 14,35:1 | 4,5:1 | passe | carte finale : titre |
+| forêt #24503F | papier #FFFFFF | 9,15:1 | 4,5:1 | passe | carte finale : rubrique ; anneau de focus du bouton |
+| blanc #FFFFFF | forêt #24503F | 9,15:1 | 4,5:1 | passe | bouton « Voir nos actions » |
 
 **Écarts d’élévation (décalage de fond, aucune exigence)**
 

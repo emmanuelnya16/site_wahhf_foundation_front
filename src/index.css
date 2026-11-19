@@ -1731,3 +1731,178 @@ html.vt-galerie::view-transition-new(root) {
   background: var(--color-fil);
   transform-origin: center top;
 }
+
+/* ==========================================================================
+   Lot 7.8 : « Cinq principes qui guident chaque projet » (Qui sommes-nous), src/components/principles/
+   Cartes en aplats pleins, identiques en clair et en sombre (ces tokens ne sont pas redéfinis sous .dark).
+   Contrastes mesurés (annexe A du contrat) : texte 9,15 / 11,90 / 7,84 / 12,16 / 5,93:1 ; accent 5,00 / 7,59 /
+   7,84 / 6,64 / 4,78:1 (cartes 01 à 05).
+   ========================================================================== */
+:root {
+  --principle-1-bg: var(--color-foret);
+  --principle-1-text: var(--color-blanc);
+  --principle-1-accent: var(--color-soleil);
+  --principle-2-bg: var(--color-sauge);
+  --principle-2-text: var(--color-encre);
+  --principle-2-accent: var(--color-foret);
+  --principle-3-bg: var(--color-soleil);
+  --principle-3-text: var(--color-encre);
+  --principle-3-accent: var(--color-encre);
+  --principle-4-bg: var(--color-nuit);
+  --principle-4-text: var(--color-blanc);
+  --principle-4-accent: var(--color-soleil);
+  --principle-5-bg: var(--color-miel);
+  --principle-5-text: var(--color-blanc);
+  /* blanc à 85 % sur miel : #EDE6D9, 4,78:1 */
+  --principle-5-accent: color-mix(in srgb, var(--color-blanc) 85%, transparent);
+  --principle-final-bg: var(--color-blanc);
+  --principle-final-text: var(--color-encre);
+  --principle-final-accent: var(--color-foret);
+  --principle-final-border: var(--color-foret);
+  --principle-final-action: var(--color-foret);
+  --principle-final-action-hover: var(--color-nuit);
+  --principle-final-action-text: var(--color-blanc);
+  /* Le point qui parcourt le fil (ordinateur) */
+  --principle-dot: var(--color-soleil);
+  --principle-dot-ring: var(--color-nuit);
+}
+
+/* La piste : une colonne (téléphone, tablette, mouvement réduit) ; sur tablette, les cartes alternent à gauche et à
+   droite. Le parcours épinglé (ordinateur) la met en ligne avec .is-pinned. */
+.principles-track {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+.principles-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+.principles-item {
+  position: relative;
+  width: min(100%, 30rem);
+}
+@media (min-width: 768px) {
+  .principles-item[data-side='end'] {
+    align-self: flex-end;
+  }
+}
+
+/* La carte : aplat plein, marges intérieures de 2,5 rem (un peu moins sur un petit téléphone) */
+.principle-card {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.75rem, 6vw, 2.5rem);
+  border-radius: 0.75rem;
+  background: var(--pc-bg);
+  color: var(--pc-text);
+}
+/* Hauteur selon le contenu, 26 rem au moins dès la tablette (cartes alignées) ; sur téléphone, sans minimum */
+@media (min-width: 768px) {
+  .principle-card {
+    min-height: 26rem;
+  }
+}
+.principle-card-1 { --pc-bg: var(--principle-1-bg); --pc-text: var(--principle-1-text); --pc-accent: var(--principle-1-accent); }
+.principle-card-2 { --pc-bg: var(--principle-2-bg); --pc-text: var(--principle-2-text); --pc-accent: var(--principle-2-accent); }
+.principle-card-3 { --pc-bg: var(--principle-3-bg); --pc-text: var(--principle-3-text); --pc-accent: var(--principle-3-accent); }
+.principle-card-4 { --pc-bg: var(--principle-4-bg); --pc-text: var(--principle-4-text); --pc-accent: var(--principle-4-accent); }
+.principle-card-5 { --pc-bg: var(--principle-5-bg); --pc-text: var(--principle-5-text); --pc-accent: var(--principle-5-accent); }
+.principle-card-final {
+  --pc-bg: var(--principle-final-bg);
+  --pc-text: var(--principle-final-text);
+  --pc-accent: var(--principle-final-accent);
+  min-height: 0;
+  border: 1.5px solid var(--principle-final-border);
+}
+
+/* Coin feuille (forme signature de cette section, exception au §9 du contrat) : 0,75 rem sur trois coins, 3 rem sur
+   un seul, qui change d'une carte à l'autre comme une feuille qui pousse */
+.principle-leaf-tr { border-top-right-radius: 3rem; }
+.principle-leaf-bl { border-bottom-left-radius: 3rem; }
+.principle-leaf-tl { border-top-left-radius: 3rem; }
+.principle-leaf-br { border-bottom-right-radius: 3rem; }
+
+/* Encoche en demi-cercle de 12 px de rayon : l'entrée du fil. Une découpe nette (masque, sans fondu), qui laisse voir
+   le fond de la section et le nœud du fil. En colonne, en haut de la carte, à 70 px du bord (gauche ou droit selon le
+   côté) ; sur le parcours épinglé, sur le bord gauche, à 70 px du haut. */
+.principle-notch {
+  --notch-r: 12px;
+  --notch-x: 70px;
+  --notch-y: 0px;
+  -webkit-mask: radial-gradient(circle var(--notch-r) at var(--notch-x) var(--notch-y), transparent calc(var(--notch-r) - 0.5px), #000 var(--notch-r));
+  mask: radial-gradient(circle var(--notch-r) at var(--notch-x) var(--notch-y), transparent calc(var(--notch-r) - 0.5px), #000 var(--notch-r));
+}
+.principles-item[data-side='end'] .principle-notch {
+  --notch-x: calc(100% - 70px);
+}
+
+/* Contenu, de haut en bas : grand numéro, rubrique, titre, description, filet, étiquette */
+.principle-number {
+  font-size: 4.25rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  color: var(--pc-accent);
+}
+.principle-rubric {
+  margin-top: 1.25rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pc-accent);
+}
+.principle-card-final .principle-rubric {
+  margin-top: 0;
+}
+.principle-title {
+  margin-top: 0.5rem;
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+.principle-desc {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  max-width: 36ch;
+  font-size: var(--text-body);
+  line-height: 1.6;
+}
+.principle-label {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid color-mix(in srgb, var(--pc-text) 30%, transparent);
+  font-size: var(--text-meta);
+  font-weight: 600;
+  color: var(--pc-accent);
+}
+/* Bouton de la carte finale : forêt plein, pleine largeur, identique en clair et en sombre */
+.principle-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 3.5rem;
+  margin-top: 2rem;
+  padding: 0.875rem 1.5rem;
+  border-radius: var(--radius-pill);
+  background: var(--principle-final-action);
+  color: var(--principle-final-action-text);
+  font-weight: 600;
+  transition: background-color var(--dur-fast) var(--ease-reveal);
+}
+.principle-action:hover {
+  background: var(--principle-final-action-hover);
+}
+.principle-action:focus-visible {
+  outline: 3px solid var(--principle-final-border);
+  outline-offset: 3px;
+}

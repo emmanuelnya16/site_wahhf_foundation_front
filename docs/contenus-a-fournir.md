@@ -377,3 +377,12 @@ Pour les photos « à vérifier », il suffit de nous dire si toutes les personn
 147. Qui est la 3e personne (photo « 3 eme personne ilfluente de la fondation ») : son nom et son rôle dans la fondation ? Tant que nous ne le savons pas, elle n’apparaît pas sur le site en ligne.
 148. Pouvez-vous écrire deux phrases sur chaque personne (son parcours, ce qu’elle fait pour la fondation) ? Sans elles, l’organigramme n’affiche que le nom et le rôle.
 149. Avez-vous l’accord écrit de chacun pour publier son portrait sur le site ? Tant qu’il manque, les portraits ne s’affichent pas sur le site en ligne (les noms et les rôles, si).
+
+---
+
+## Questions ajoutées avec les cinq principes (lot 7.8)
+
+### Page « Qui sommes-nous » (section « Cinq principes qui guident chaque projet »)
+
+150. La carte qui termine le parcours s’intitule « Ces principes, sur le terrain », sous la rubrique « Sur le terrain », avec le bouton « Voir nos actions ». Ce titre vous convient-il ?
+151. Les traductions anglaises de la section sont des propositions, à valider : « Principle 01 / 05 » (compteur), « Scroll to go through the 5 principles · WAHHF Foundation » (consigne), les cinq principes (« Listening », « Co-construction », « Sustainability », « Transparency », « Partnerships », avec leur phrase), les étiquettes (« Youth · Mothers · Field », « Teachers · Health workers · Associations », « Languages · Trades · Ecology », « Use of funds », « IROKO · Cameroon · Europe ») et la carte finale (« On the ground », « These principles, on the ground », « See our actions »). Le texte complet est dans src/locales/en.json (principles).

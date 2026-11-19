@@ -9,6 +9,7 @@ import Fil, { FilPoint } from '../../components/wahhf/Fil';
 import { AfterFirstDisplay, FilScrub } from '../../effects/DeferredMotion';
 import { TIMELINE_MILESTONES } from '../../services/api';
 import OrgChart from '../../components/team/OrgChart';
+import PrinciplesSection from '../../components/principles/PrinciplesSection';
 import { TEAM } from '../../data/team';
 import { displayName } from '../../lib/team';
 import Photo from '../../components/wahhf/Photo';
@@ -57,29 +58,10 @@ const VALUES = [
   },
 ];
 
-/** Notre approche : les cinq principes de l'ancienne section de l'accueil (lot 6, src/pages/home/archive). */
-const APPROACH = [
-  {
-    title: 'Écoute',
-    desc: 'Partir des besoins exprimés par les jeunes, les mères et les acteurs de terrain sans imposer de modèle préconçu.',
-  },
-  {
-    title: 'Co-construction',
-    desc: 'Bâtir chaque action avec les enseignants, soignants et associations locales pour un impact partagé.',
-  },
-  {
-    title: 'Durabilité',
-    desc: 'Privilégier la transmission de compétences durables (langues, métiers, écologie) plutôt que l’assistanat.',
-  },
-  {
-    title: 'Transparence',
-    desc: 'Rendre compte de l’usage des fonds engagés.',
-  },
-  {
-    title: 'Partenariats',
-    desc: 'Mobiliser les compétences du groupe IROKO et des institutions camerounaises et européennes.',
-  },
-];
+/*
+ * Notre approche : les cinq principes de l'ancienne section de l'accueil, déplacés mot pour mot dans les fichiers de
+ * langue (principles.items de src/locales/fr.json et en.json) au lot 7.8 : src/components/principles/.
+ */
 
 /**
  * Trois faits sur le lien avec IROKO (QSN-03 : année de rattachement, part du budget, organe qui décide des
@@ -168,22 +150,8 @@ export function QuiSommesNousPage() {
         )}
       </Section>
 
-      {/* NOTRE APPROCHE (venue de l'accueil) */}
-      <Section id="approche">
-        <div className="container-page space-y-10">
-          <SectionHeader
-            title="Cinq principes qui guident chaque projet"
-            subtitle="Une méthode humble, rigoureuse et ancrée dans les réalités locales."
-          />
-          <TextList columns={3}>
-            {APPROACH.map((item) => (
-              <TextListItem key={item.title} title={item.title}>
-                <p>{item.desc}</p>
-              </TextListItem>
-            ))}
-          </TextList>
-        </div>
-      </Section>
+      {/* NOTRE APPROCHE (venue de l'accueil) : les cinq principes en cartes, en parcours sur ordinateur (lot 7.8) */}
+      <PrinciplesSection />
 
       {/* NOTRE PARCOURS : la frise, avec le fil (venue de l'accueil). Années non confirmées masquées. */}
       <Section tone="sauge" id="parcours">
