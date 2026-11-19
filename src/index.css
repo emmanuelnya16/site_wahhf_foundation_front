@@ -1788,6 +1788,11 @@ html.vt-galerie::view-transition-new(root) {
   .principles-item[data-side='end'] {
     align-self: flex-end;
   }
+  /* Plus d'espace entre deux cartes : le fil y ondule d'un côté à l'autre */
+  .principles-track,
+  .principles-list {
+    gap: 6rem;
+  }
 }
 
 /* La carte : aplat plein, marges intérieures de 2,5 rem (un peu moins sur un petit téléphone) */
@@ -1905,4 +1910,146 @@ html.vt-galerie::view-transition-new(root) {
 .principle-action:focus-visible {
   outline: 3px solid var(--principle-final-border);
   outline-offset: 3px;
+}
+
+/* Le fil des principes (lot 7.8) : 2,5 px, couleur du fil (forêt ; feuille en sombre), derrière les cartes */
+.principles-fil {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+.principles-fil-path {
+  fill: none;
+  stroke: var(--color-fil);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* Nœud de chaque encoche : fond de la section, cerclé du fil ; visible avant que sa carte n'apparaisse */
+.principles-node {
+  fill: var(--color-surface);
+  stroke: var(--color-fil);
+  stroke-width: 2.5;
+}
+/* Le point qui avance (parcours épinglé seulement) : soleil cerclé de nuit, 14 px */
+.principles-dot {
+  display: none;
+}
+.principles-dot circle {
+  fill: var(--principle-dot);
+  stroke: var(--principle-dot-ring);
+  stroke-width: 2;
+}
+/* Compteur et consigne : seulement sur le parcours épinglé */
+.principles-counter,
+.principles-hint {
+  display: none;
+}
+.principles-counter {
+  flex: none;
+  align-items: center;
+  gap: 0.4em;
+  min-height: 2.75rem;
+  padding: 0.5rem 1.25rem;
+  border: 1.5px solid var(--color-fil);
+  border-radius: var(--radius-pill);
+  color: var(--color-text);
+  font-size: var(--text-meta);
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+/* Chiffres du compteur : une colonne de 01 à 05 qui roule dans un masque d'une ligne */
+.principles-counter-mask {
+  display: inline-block;
+  height: 1.5em;
+  overflow: hidden;
+}
+.principles-counter-roll {
+  display: flex;
+  flex-direction: column;
+}
+.principles-counter-roll > span {
+  display: block;
+  height: 1.5em;
+}
+
+/* Parcours épinglé (ordinateur, PrinciplesMotion) : la scène occupe l'écran sous l'en-tête ; la piste est une ligne
+   qui glisse sous un cadre plein écran ; la carte paire descend de 4 rem. */
+.principles.is-pinned {
+  padding-block: 0;
+}
+.principles.is-pinned .principles-pin {
+  display: flex;
+  flex-direction: column;
+  height: calc(100svh - var(--header-height));
+  padding-block: clamp(1.25rem, 3.5vh, 2.5rem) clamp(1rem, 2.5vh, 1.5rem);
+  overflow: clip;
+}
+/* Dans la colonne flex de la scène, une marge automatique empêcherait l'étirement : largeur du container fixée */
+.principles.is-pinned .principles-head,
+.principles.is-pinned .principles-hint {
+  width: calc(100% - 2 * var(--gutter));
+}
+.principles.is-pinned .principles-viewport {
+  width: 100%;
+}
+.principles.is-pinned .principles-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.principles.is-pinned .principles-counter {
+  display: inline-flex;
+}
+.principles.is-pinned .principles-viewport {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  max-width: none;
+  margin: clamp(1rem, 3vh, 2rem) 0 0;
+  padding: 0;
+  /* clip et non hidden : le focus du bouton final ne fait pas défiler ce cadre (la caméra garde la main) */
+  overflow: clip;
+}
+.principles.is-pinned .principles-track {
+  position: absolute;
+  left: 0;
+  top: 0;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 7rem;
+  width: max-content;
+  padding-inline: var(--principles-lead, 5rem);
+}
+.principles.is-pinned .principles-list {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 7rem;
+}
+.principles.is-pinned .principles-item {
+  flex: none;
+  width: 30rem;
+}
+.principles.is-pinned .principles-item[data-side='end'] {
+  align-self: auto;
+  margin-top: 4rem;
+}
+.principles.is-pinned .principle-notch,
+.principles.is-pinned .principles-item[data-side='end'] .principle-notch {
+  --notch-x: 0px;
+  --notch-y: 70px;
+}
+.principles.is-pinned .principles-dot {
+  display: inline;
+}
+.principles.is-pinned .principles-hint {
+  display: block;
+  margin-top: clamp(0.75rem, 2vh, 1.25rem);
 }

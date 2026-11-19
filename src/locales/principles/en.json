@@ -1,0 +1,40 @@
+{
+  "_aValider": "TODO : traductions proposées au lot 7.8, à valider (compteur, rubrique, consigne, principes, étiquettes, carte finale). Le titre et l'introduction reprennent home.approach.",
+  "title": "Five principles guiding every project",
+  "intro": "A humble, rigorous methodology rooted in local realities.",
+  "counter": "Principle",
+  "rubric": "Principle {{n}}",
+  "hint": "Scroll to go through the 5 principles · WAHHF Foundation",
+  "items": [
+    {
+      "title": "Listening",
+      "desc": "Start from the needs expressed by young people, mothers and people on the ground, without imposing a preconceived model.",
+      "label": "Youth · Mothers · Field"
+    },
+    {
+      "title": "Co-construction",
+      "desc": "Build every action with local teachers, health workers and associations, for a shared impact.",
+      "label": "Teachers · Health workers · Associations"
+    },
+    {
+      "title": "Sustainability",
+      "desc": "Favour passing on lasting skills (languages, trades, ecology) over handouts.",
+      "label": "Languages · Trades · Ecology"
+    },
+    {
+      "title": "Transparency",
+      "desc": "Account for how the funds committed are used.",
+      "label": "Use of funds"
+    },
+    {
+      "title": "Partnerships",
+      "desc": "Draw on the skills of the IROKO group and of Cameroonian and European institutions.",
+      "label": "IROKO · Cameroon · Europe"
+    }
+  ],
+  "final": {
+    "rubric": "On the ground",
+    "title": "These principles, on the ground",
+    "cta": "See our actions"
+  }
+}

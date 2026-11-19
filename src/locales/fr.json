@@ -169,44 +169,5 @@
     "transparency": "Transparence financière",
     "backToTop": "Retour en haut",
     "rights": "Tous droits réservés."
-  },
-  "principles": {
-    "title": "Cinq principes qui guident chaque projet",
-    "intro": "Une méthode humble, rigoureuse et ancrée dans les réalités locales.",
-    "counter": "Principe",
-    "rubric": "Principe {{n}}",
-    "hint": "Faites défiler pour parcourir les 5 principes · WAHHF Foundation",
-    "items": [
-      {
-        "title": "Écoute",
-        "desc": "Partir des besoins exprimés par les jeunes, les mères et les acteurs de terrain sans imposer de modèle préconçu.",
-        "label": "Jeunes · Mères · Terrain"
-      },
-      {
-        "title": "Co-construction",
-        "desc": "Bâtir chaque action avec les enseignants, soignants et associations locales pour un impact partagé.",
-        "label": "Enseignants · Soignants · Associations"
-      },
-      {
-        "title": "Durabilité",
-        "desc": "Privilégier la transmission de compétences durables (langues, métiers, écologie) plutôt que l’assistanat.",
-        "label": "Langues · Métiers · Écologie"
-      },
-      {
-        "title": "Transparence",
-        "desc": "Rendre compte de l’usage des fonds engagés.",
-        "label": "Usage des fonds"
-      },
-      {
-        "title": "Partenariats",
-        "desc": "Mobiliser les compétences du groupe IROKO et des institutions camerounaises et européennes.",
-        "label": "IROKO · Cameroun · Europe"
-      }
-    ],
-    "final": {
-      "rubric": "Sur le terrain",
-      "title": "Ces principes, sur le terrain",
-      "cta": "Voir nos actions"
-    }
   }
 }
