@@ -520,7 +520,7 @@ export const THEMATIC_GUIDES: Record<string, {
     sections: [
       {
         heading: 'Authenticité absolue des documents',
-        body: 'Tout document falsifié ou inexact entraîne un refus immédiat et des interdictions durables auprès des autorités consulaires. WAHHF sensibilise chaque candidat à l’importance d’un dossier 100 % authentique.',
+        body: 'Tout document falsifié ou inexact entraîne un refus immédiat et des interdictions durables auprès des autorités consulaires. WAHHF sensibilise chaque candidat à l’importance d’un dossier 100 % authentique.',
         bullets: [
           'Rassembler les relevés de notes et diplômes originaux',
           'Effectuer les démarches de légalisation ou d’authentification uniquement auprès des administrations officielles',
@@ -541,7 +541,7 @@ export const THEMATIC_GUIDES: Record<string, {
   },
   'apprendre-la-langue': {
     slug: 'apprendre-la-langue',
-    title: 'Apprendre la langue du pays : la clé de l’autonomie',
+    title: 'Apprendre la langue du pays : la clé de l’autonomie',
     subtitle: 'Pourquoi la maîtrise linguistique précède toujours les démarches administratives.',
     sections: [
       {
@@ -562,7 +562,7 @@ export const THEMATIC_GUIDES: Record<string, {
     sections: [
       {
         heading: 'Les premières démarches à l’arrivée',
-        body: 'Une installation réussie se prépare plusieurs mois avant le départ : logement étudiant, assurance maladie, inscription municipale et ouverture de compte.',
+        body: 'Une installation réussie se prépare plusieurs mois avant le départ : logement étudiant, assurance maladie, inscription municipale et ouverture de compte.',
         bullets: [
           'Anticiper la recherche de logement via les résidences universitaires officielles (ex. Studierendenwerk)',
           'Comprendre le fonctionnement de l’enregistrement de domicile (Anmeldung) et de l’assurance santé obligatoire',
