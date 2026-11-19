@@ -149,7 +149,7 @@ function CountryFiche({ country }: { country: CountryGuide }) {
             <div className="lg:col-span-5 space-y-6">
               <SectionHeader
                 title="Les sites officiels"
-                subtitle="Ne vous fiez jamais à des pages non officielles. Consultez directement les portails institutionnels :"
+                subtitle={`Ne vous fiez jamais à des pages non officielles. Consultez directement les portails institutionnels${NB}:`}
               />
               {/* Lignes de liens (contrat §8), plus de carte nuit ; aucune note « à vérifier » (PAYS-01) */}
               <ul>
