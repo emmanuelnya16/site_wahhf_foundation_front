@@ -1,52 +1,108 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { flushSync } from 'react-dom';
+import { useSearchParams } from 'react-router-dom';
 import { Check } from 'lucide-react';
 import PageHeader, { PageTitle, PageIntro } from '../components/wahhf/PageHeader';
 import SEO from '../components/wahhf/SEO';
 import Section from '../components/wahhf/Section';
 import SectionHeader from '../components/wahhf/SectionHeader';
-import GalleryGrid from '../components/wahhf/GalleryGrid';
-import { fillLayout, sharedCellCaps } from '../components/wahhf/galleryLayout';
+import PhotoGrid from '../components/gallery/PhotoGrid';
+import PhotoLightbox, { LIGHTBOX_SHARED_NAME } from '../components/gallery/PhotoLightbox';
 import { DonateButton, SecondaryButton } from '../components/wahhf/Buttons';
-import { AlbumId, albumPlaceDate, countLabel, GALLERY_ALBUMS, GALLERY_ITEMS } from '../data/gallery';
+import type { PhotoAlbumId } from '../data/photos';
+import { albumLabel, photoCount, visibleAlbums } from '../lib/photos';
 import { requestScrollRefresh } from '../lib/afterFirstDisplay';
 import { cn } from '../lib/utils';
 
-type Filter = 'tout' | AlbumId;
-
 /**
- * Albums non vides, avec leur mise en page sans trou (GAL-03), calculée une fois, et une seule taille de case pour tous
- * (revue du groupe 7.3) : les colonnes des albums s'alignent d'un album à l'autre.
+ * Albums du catalogue (docs/photos-catalogue.md), dans son ordre ; en production, seules les photos dont l'accord est
+ * confirmé, et un album vide disparaît (GAL-01, lot 7.6). Les anciens albums de la galerie (First Open Day & Boot Camp,
+ * Rencontres de la communauté, Sur le terrain, dont 4 extraits vidéo) ne sont plus affichés ici : leurs données restent
+ * dans src/data/gallery.ts (accueil, Candidater).
  */
-const ALBUM_ITEMS = GALLERY_ALBUMS.map((album) => ({ album, items: GALLERY_ITEMS.filter((it) => it.album === album.id) })).filter(
-  ({ items }) => items.length > 0
-);
-const CELL = sharedCellCaps(
-  ALBUM_ITEMS.map(({ items }) => items),
-  true
-);
-const ALBUMS = ALBUM_ITEMS.map(({ album, items }) => ({ album, items, layout: fillLayout(items, true, CELL) }));
+const ALBUMS = visibleAlbums();
+const ALBUM_IDS = new Set<string>(ALBUMS.map(({ album }) => album.id));
+
+type ViewTransitionDocument = Document & { startViewTransition?: (update: () => void) => { finished: Promise<void> } };
 
 /*
- * Galerie (groupe 7.3 : contrat validé, audit GAL-02, GAL-03, GAL-05, GAL-07, GAL-08, RESP-05, T-16).
+ * Galerie (groupe 7.3, adaptée au lot 7.6 : contrat validé, audit GAL-01 à GAL-08).
  * - En-tête du lot 5 révélé à l'arrivée comme le hero.
- * - Puces de filtre de 44 px, sur plusieurs lignes au besoin (plus de rangée qui défile cachée, GAL-05), sans nombre ;
- *   l'option choisie a le style unique du site (contour 2 px et coche, contrat §11).
- * - Chaque album : son titre, le lieu et la date seulement s'ils sont confirmés, « 13 photos et 1 vidéo » (GAL-08),
- *   un court texte quand les faits sont établis (GAL-02 : l'Open Day, d'après ses photos et légendes).
- * - Grille sans trou : rangées complètes à chaque largeur (GAL-03, GalleryGrid fill).
- * - Fin de page : « Faire un don » et « Candidater au programme » (GAL-02), sur sauge, sans carte nuit.
+ * - Filtres par album en boutons (aria-pressed) de 44 px, sur plusieurs lignes au besoin ; l'adresse garde l'album
+ *   (?album=…) : les liens de l'accordéon de l'accueil et d'Actualités tombent sur le bon album.
+ * - Chaque album : son titre, ce qui reste à confirmer (lieu, date) quand le catalogue le dit, le nombre de photos.
+ * - Vignettes en rangées justifiées, au vrai format (PhotoGrid) ; visionneuse en <dialog> (PhotoLightbox).
+ * - Fin de page : « Faire un don » et « Candidater au programme » (GAL-02), sur sauge.
  * - Mouvement (contrat §10) : vignettes en apparitions groupées ; la visionneuse s'ouvre depuis la vignette cliquée
- *   (transition partagée, View Transitions API ; ouverture simple sans l'API et en mouvement réduit), libellés exacts
- *   (GAL-07). Changer de filtre ne rejoue aucune apparition (les albums gardent leur clé).
+ *   (transition partagée, View Transitions API ; ouverture simple sans l'API et en mouvement réduit).
  */
 export default function GalleryPage() {
-  const [filter, setFilter] = useState<Filter>('tout');
-  const visible = filter === 'tout' ? ALBUMS : ALBUMS.filter(({ album }) => album.id === filter);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const requested = searchParams.get('album');
+  const filter = requested && ALBUM_IDS.has(requested) ? (requested as PhotoAlbumId) : null;
+  const shown = filter ? ALBUMS.filter(({ album }) => album.id === filter) : ALBUMS;
+  const [view, setView] = useState<{ album: PhotoAlbumId; index: number } | null>(null);
+  const [shared, setShared] = useState(false);
+  const openerRef = useRef<HTMLElement | null>(null);
 
-  const choose = (next: Filter) => {
-    setFilter(next);
+  // Album inconnu (ou vide en production) dans l'adresse : tous les albums, adresse nettoyée
+  useEffect(() => {
+    if (requested && !filter) {
+      setSearchParams(
+        (prev) => {
+          const next = new URLSearchParams(prev);
+          next.delete('album');
+          return next;
+        },
+        { replace: true }
+      );
+    }
+  }, [requested, filter, setSearchParams]);
+
+  const choose = (next: PhotoAlbumId | null) => {
+    setSearchParams(
+      (prev) => {
+        const params = new URLSearchParams(prev);
+        if (next) params.set('album', next);
+        else params.delete('album');
+        return params;
+      },
+      { replace: true }
+    );
     // Les albums restants remontent : les apparitions recalculent leurs positions (si GSAP est chargé)
     requestAnimationFrame(requestScrollRefresh);
+  };
+
+  const open = (albumId: PhotoAlbumId) => async (index: number, button: HTMLButtonElement) => {
+    openerRef.current = button;
+    const doc = document as ViewTransitionDocument;
+    if (!doc.startViewTransition || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setView({ album: albumId, index });
+      return;
+    }
+    // La grande photo est demandée avant la transition (0,35 s au plus), sinon la visionneuse s'ouvrirait vide
+    const photo = ALBUMS.find(({ album }) => album.id === albumId)?.photos[index];
+    if (photo) {
+      const img = new Image();
+      img.sizes = '(min-width: 1024px) 1600px, 100vw';
+      img.srcset = photo.sources.avif;
+      await Promise.race([img.decode().catch(() => {}), new Promise((resolve) => setTimeout(resolve, 350))]);
+    }
+    const thumb = button.querySelector('img');
+    if (thumb) thumb.style.viewTransitionName = LIGHTBOX_SHARED_NAME;
+    const root = document.documentElement;
+    root.classList.add('vt-galerie');
+    const transition = doc.startViewTransition(() => {
+      if (thumb) thumb.style.viewTransitionName = '';
+      flushSync(() => {
+        setShared(true);
+        setView({ album: albumId, index });
+      });
+    });
+    transition.finished.finally(() => {
+      root.classList.remove('vt-galerie');
+      setShared(false);
+    });
   };
 
   const chip = (active: boolean) =>
@@ -55,53 +111,65 @@ export default function GalleryPage() {
       active ? 'border-action [box-shadow:inset_0_0_0_1px_var(--action)] font-semibold' : 'border-border-input hover:border-action'
     );
 
-  const options: { id: Filter; label: string }[] = [{ id: 'tout', label: 'Tous les albums' }, ...ALBUMS.map(({ album }) => ({ id: album.id, label: album.title }))];
+  const options: { id: PhotoAlbumId | null; label: string }[] = [
+    { id: null, label: 'Tous les albums' },
+    ...ALBUMS.map(({ album }) => ({ id: album.id, label: albumLabel(album) })),
+  ];
+  const viewed = view ? ALBUMS.find(({ album }) => album.id === view.album) : undefined;
 
   return (
     <>
       <SEO
         title="Galerie — La fondation en images"
-        description="Photos et vidéos de WAHHF Foundation : First Open Day & Boot Camp à Yaoundé, rencontres de la communauté et actions sur le terrain."
+        description="Photos de WAHHF Foundation : la journée du 25 avril 2026 à l’Albatros Hotel, une visite de plantation, des sorties à Nkongsamba, au mont et au lac, et une randonnée avec les jeunes."
       />
 
       <PageHeader reveal>
         <PageTitle>La fondation en images</PageTitle>
         <PageIntro>
-          Retour en photos et en vidéos sur nos actions : la première journée portes ouvertes et le Boot Camp de Yaoundé, nos rencontres
-          et le terrain.
+          Retour en photos sur nos actions : la journée du 25&nbsp;avril&nbsp;2026 à l’Albatros Hotel, une visite de
+          plantation, des sorties à Nkongsamba, au mont et au lac, et une randonnée avec les jeunes.
         </PageIntro>
       </PageHeader>
 
       <Section>
         <div className="container-page space-y-14">
           <div role="group" aria-label="Filtrer par album" className="flex flex-wrap gap-2">
-            {options.map((o) => (
-              <button key={o.id} type="button" aria-pressed={filter === o.id} onClick={() => choose(o.id)} className={chip(filter === o.id)}>
-                {filter === o.id && <Check aria-hidden="true" className="w-4 h-4 shrink-0 text-action" />}
-                {o.label}
-              </button>
-            ))}
+            {options.map((o) => {
+              const active = filter === o.id;
+              return (
+                <button key={o.id ?? 'tout'} type="button" aria-pressed={active} onClick={() => choose(o.id)} className={chip(active)}>
+                  {active && <Check aria-hidden="true" className="w-4 h-4 shrink-0 text-action" />}
+                  {o.label}
+                </button>
+              );
+            })}
           </div>
 
-          {visible.map(({ album, items, layout }) => {
-            const placeDate = albumPlaceDate(album);
-            return (
-              // Clé = album (et non plus le filtre) : changer de filtre ne rejoue pas les apparitions
-              <section key={album.id} id={album.id} aria-labelledby={`album-${album.id}`} className="space-y-6">
-                <div className="max-w-[65ch] space-y-2">
-                  <h2 id={`album-${album.id}`} className="text-section-title text-text">
-                    {album.title}
-                  </h2>
-                  {placeDate && <p className="text-meta text-text-secondary">{placeDate}</p>}
-                  <p className="text-meta text-text-secondary">{countLabel(items)}</p>
-                  {album.story && <p className="pt-2 text-body text-text-secondary">{album.story}</p>}
-                </div>
-                <GalleryGrid items={items} featureFirst fill={layout} openFromThumb />
-              </section>
-            );
-          })}
+          {shown.map(({ album, photos }) => (
+            // Clé = album : changer de filtre ne rejoue pas les apparitions
+            <section key={album.id} id={album.id} aria-labelledby={`album-${album.id}`} className="space-y-6">
+              <div className="max-w-[65ch] space-y-2">
+                <h2 id={`album-${album.id}`} className="text-section-title text-text">
+                  {albumLabel(album)}
+                </h2>
+                {album.note && <p className="text-meta text-text-secondary">{album.note}</p>}
+                <p className="text-meta text-text-secondary">{photoCount(photos.length)}</p>
+              </div>
+              <PhotoGrid photos={photos} onOpen={open(album.id)} />
+            </section>
+          ))}
         </div>
       </Section>
+
+      <PhotoLightbox
+        photos={viewed?.photos ?? []}
+        index={viewed && view ? view.index : null}
+        onChange={(index) => setView((current) => (current ? { ...current, index } : current))}
+        onClose={() => setView(null)}
+        openerRef={openerRef}
+        shared={shared}
+      />
 
       {/* FIN DE PAGE : deux actions (GAL-02), sur sauge, sans carte nuit au-dessus du footer */}
       <Section tone="sauge">

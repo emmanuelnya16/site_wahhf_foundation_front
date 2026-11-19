@@ -26,6 +26,8 @@ type PhotoProps = {
   style?: CSSProperties;
   /** Attributs data-* posés sur l'image (ex. data-photo-reveal-media pour PhotoReveal, data-expand-media) */
   imgAttributes?: Record<`data-${string}`, string>;
+  /** Échec du chargement (visionneuse : message à la place de la photo) */
+  onError?: () => void;
 };
 
 /**
@@ -33,7 +35,7 @@ type PhotoProps = {
  * (aucun décalage de mise en page) ; la couleur dominante de la photo sert de fond pendant le chargement ; le texte
  * alternatif vient du catalogue.
  */
-export default function Photo({ photo, sizes, priority = false, fit = 'intrinsic', radius = 'card', decorative = false, className, style, imgAttributes }: PhotoProps) {
+export default function Photo({ photo, sizes, priority = false, fit = 'intrinsic', radius = 'card', decorative = false, className, style, imgAttributes, onError }: PhotoProps) {
   return (
     // <picture> en bloc (et non display: contents) : dans une grille, ses <source> occuperaient sinon des cases
     <picture className={fit === 'cover' ? 'block h-full w-full' : 'block'}>
@@ -50,6 +52,7 @@ export default function Photo({ photo, sizes, priority = false, fit = 'intrinsic
         fetchPriority={priority ? 'high' : undefined}
         className={cn(fit === 'cover' ? 'h-full w-full object-cover' : 'h-auto w-full', RADIUS[radius], className)}
         style={{ objectPosition: photo.focus, backgroundColor: photo.dominantColor, ...style }}
+        onError={onError}
       />
     </picture>
   );
