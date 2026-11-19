@@ -364,3 +364,16 @@ Pour les photos « à vérifier », il suffit de nous dire si toutes les personn
 ### Page introuvable (erreur 404)
 
 143. Sous la photo du lac de cratère, la page introuvable dit : « On s’est perdus en route. » Ce clin d’œil vous convient-il, ou préférez-vous une phrase plus sobre ?
+
+---
+
+## Questions ajoutées avec les portraits de l’équipe (lot 7.7)
+
+### Page « Qui sommes-nous » (portraits et organigramme)
+
+144. Pouvez-vous nous envoyer des portraits en meilleure définition, idéalement 1 200 px de haut, sur un fond simple ? Deux des portraits reçus font environ 500 px de large (Ing. Pr. Christian Wilberg et la 3e personne) : ils restent petits à l’écran.
+145. Quels sont les noms complets exacts, avec leur orthographe ? Aujourd’hui : « Marrion Watio Notesse » (le fichier reçu écrit « wation »), « Ing. Pr. Christian Wilberg » et « Wilfried » (nom de famille à nous donner).
+146. Dans quel ordre hiérarchique faut-il les présenter ? Aujourd’hui : Président, Vice-président, la 3e personne, Secrétaire général.
+147. Qui est la 3e personne (photo « 3 eme personne ilfluente de la fondation ») : son nom et son rôle dans la fondation ? Tant que nous ne le savons pas, elle n’apparaît pas sur le site en ligne.
+148. Pouvez-vous écrire deux phrases sur chaque personne (son parcours, ce qu’elle fait pour la fondation) ? Sans elles, l’organigramme n’affiche que le nom et le rôle.
+149. Avez-vous l’accord écrit de chacun pour publier son portrait sur le site ? Tant qu’il manque, les portraits ne s’affichent pas sur le site en ligne (les noms et les rôles, si).

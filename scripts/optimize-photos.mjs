@@ -9,7 +9,12 @@
 //    dépasse de plus de 10 % la plus grande taille retenue) ; un JPEG de 800 px au plus pour les navigateurs sans AVIF
 //    ni WebP ; sortie dans public/photos/<album>/ ; une couleur dominante par photo (fond pendant le chargement).
 // 3. Données : src/data/photos.ts (généré, à ne pas modifier à la main).
+// 4. Portraits de l'équipe (lot 7.7), listés dans scripts/team-portraits.json : copie depuis --team-source vers
+//    photos-src/equipe/ ; recadrage 4:5 autour du visage (le plus grand cadre possible), sans filtre ni lissage ;
+//    AVIF et WebP en 320, 480 et 640 px, jamais agrandis ; JPEG de 480 px au plus ; public/photos/equipe/ ;
+//    données dans src/data/teamPortraits.ts (généré).
 //
+//   npm run photos -- --team-source <dossier des portraits>
 // Relançable : les noms de sortie sont fixes, un fichier à jour n'est pas recalculé, les fichiers qui ne correspondent
 // plus au catalogue sont retirés de public/photos.
 import { copyFile, mkdir, readFile, readdir, rm, stat, writeFile } from 'node:fs/promises';
@@ -25,10 +30,16 @@ const DATA_FILE = path.join(ROOT, 'src/data/photos.ts');
 const WIDTHS = [480, 800, 1200, 1600];
 const JPEG_WIDTH = 800;
 const QUALITY = { avif: 50, webp: 72, jpeg: 78 };
+const TEAM_MANIFEST = path.join(ROOT, 'scripts/team-portraits.json');
+const TEAM_DATA_FILE = path.join(ROOT, 'src/data/teamPortraits.ts');
+const TEAM_WIDTHS = [320, 480, 640];
+const TEAM_JPEG_WIDTH = 480;
 
 const args = process.argv.slice(2);
 const sourceIndex = args.indexOf('--source');
 const SOURCE = sourceIndex >= 0 ? args[sourceIndex + 1] : null;
+const teamIndex = args.indexOf('--team-source');
+const TEAM_SOURCE = teamIndex >= 0 ? args[teamIndex + 1] : null;
 
 // --- Lecture du catalogue ---------------------------------------------------------------------------------------
 /** Sections « ## Titre  (`album`) », note en italique facultative, puis le tableau des photos. */
@@ -124,6 +135,100 @@ async function processPhoto(photo) {
   await Promise.all(jobs);
   photo.generated = jobs.length;
   return { ...photo, width, height, widths, jpegWidth, dominantColor: hex(dominant), outputs };
+}
+
+/** Largeurs d'un portrait : 320, 480, 640 jusqu'à la largeur du cadre, plus elle si elle dépasse nettement la dernière. */
+function teamWidthsFor(width) {
+  const widths = TEAM_WIDTHS.filter((w) => w <= width);
+  const largest = widths.at(-1) ?? 0;
+  if (width < TEAM_WIDTHS.at(-1) && (width - largest) / width > 0.1) widths.push(width);
+  return widths;
+}
+
+/** Portrait de l'équipe : le plus grand cadre 4:5 dans la photo, centré sur le visage (sans en sortir), puis tailles. */
+async function processPortrait(entry) {
+  const dir = path.join(SRC_DIR, 'equipe');
+  const ext = path.extname(entry.fichier).toLowerCase();
+  const src = path.join(dir, `${entry.slug}${ext}`);
+  if (!existsSync(src)) {
+    if (!TEAM_SOURCE) throw new Error(`Portrait ${entry.slug} : ${path.relative(ROOT, src)} manque ; relancer avec --team-source <dossier>`);
+    const original = path.join(TEAM_SOURCE, entry.fichier);
+    if (!existsSync(original)) throw new Error(`Portrait ${entry.slug} : fichier source introuvable (${entry.fichier})`);
+    await mkdir(dir, { recursive: true });
+    await copyFile(original, src);
+    entry.copied = true;
+  }
+  const meta = await sharp(src).metadata();
+  const swap = (meta.orientation ?? 1) >= 5;
+  const W = swap ? meta.height : meta.width;
+  const H = swap ? meta.width : meta.height;
+  // Cadre 4:5 le plus grand possible, centré sur le visage et gardé dans la photo
+  const cropW = Math.min(W, Math.floor((H * 4) / 5));
+  const cropH = Math.min(H, Math.floor((cropW * 5) / 4));
+  const [fx, fy] = entry.visage;
+  const left = Math.round(Math.min(Math.max(fx * W - cropW / 2, 0), W - cropW));
+  const top = Math.round(Math.min(Math.max(fy * H - cropH / 2, 0), H - cropH));
+  const crop = { left, top, width: cropW, height: cropH };
+  const widths = teamWidthsFor(cropW);
+  const jpegWidth = Math.min(TEAM_JPEG_WIDTH, cropW);
+  const outDir = path.join(OUT_DIR, 'equipe');
+  await mkdir(outDir, { recursive: true });
+  const srcTime = Math.max(await mtime(src), await mtime(TEAM_MANIFEST));
+  const outputs = [];
+  const jobs = [];
+  const base = () => sharp(src).rotate().extract(crop);
+  for (const w of widths) {
+    for (const format of ['avif', 'webp']) {
+      const out = path.join(outDir, `${entry.slug}-${w}.${format}`);
+      outputs.push(out);
+      if ((await mtime(out)) >= srcTime) continue;
+      const pipeline = base().resize({ width: w, withoutEnlargement: true });
+      jobs.push((format === 'avif' ? pipeline.avif({ quality: QUALITY.avif, effort: 5 }) : pipeline.webp({ quality: QUALITY.webp, effort: 5 })).toFile(out));
+    }
+  }
+  const jpeg = path.join(outDir, `${entry.slug}-${jpegWidth}.jpg`);
+  outputs.push(jpeg);
+  if ((await mtime(jpeg)) < srcTime) jobs.push(base().resize({ width: jpegWidth, withoutEnlargement: true }).jpeg({ quality: QUALITY.jpeg, mozjpeg: true }).toFile(jpeg));
+  await Promise.all(jobs);
+  const { dominant } = await base().stats();
+  return { ...entry, source: { width: W, height: H }, width: cropW, height: cropH, widths, jpegWidth, dominantColor: hex(dominant), outputs, generated: jobs.length };
+}
+
+function teamModule(portraits) {
+  const lines = portraits.map(
+    (p) => `  ${q(p.slug)}: portrait(${q(p.slug)}, ${p.width}, ${p.height}, ${p.source.width}, ${q(p.dominantColor)}, [${p.widths.join(', ')}], ${p.jpegWidth}),`
+  );
+  return [
+    "// Généré par scripts/optimize-photos.mjs depuis scripts/team-portraits.json (npm run photos). Ne pas modifier à la main.",
+    "// Portraits de l'équipe recadrés en 4:5 autour du visage : public/photos/equipe/<slug>-<largeur>.avif | .webp | .jpg.",
+    "import type { PhotoSources } from './photos';",
+    '',
+    'export interface TeamPortrait {',
+    '  slug: string;',
+    '  /** Dimensions du cadre 4:5, avant réduction */',
+    '  width: number;',
+    '  height: number;',
+    "  /** Largeur de la photo d'origine (pour savoir quand demander un portrait plus grand) */",
+    '  sourceWidth: number;',
+    '  dominantColor: string;',
+    '  sources: PhotoSources;',
+    '}',
+    '',
+    'const set = (slug: string, widths: number[], format: string) =>',
+    '  widths.map((w) => `/photos/equipe/${slug}-${w}.${format} ${w}w`).join(\', \');',
+    '',
+    'function portrait(slug: string, width: number, height: number, sourceWidth: number, dominantColor: string, widths: number[], jpegWidth: number): TeamPortrait {',
+    '  return {',
+    '    slug, width, height, sourceWidth, dominantColor,',
+    "    sources: { avif: set(slug, widths, 'avif'), webp: set(slug, widths, 'webp'), jpeg: `/photos/equipe/${slug}-${jpegWidth}.jpg`, widths },",
+    '  };',
+    '}',
+    '',
+    'export const TEAM_PORTRAITS: Record<string, TeamPortrait> = {',
+    ...lines,
+    '};',
+    '',
+  ].join('\n');
 }
 
 /** Retire de public/photos ce qui ne correspond plus au catalogue (dossier entièrement généré par ce script). */
@@ -231,16 +336,25 @@ const { albums, photos } = parseCatalogue(await readFile(CATALOGUE, 'utf8'));
 console.log(`Catalogue : ${photos.length} photos, ${albums.length} albums.`);
 const results = [];
 for (const photo of photos) results.push(await processPhoto(photo)); // une photo à la fois : sharp parallélise déjà
-const expected = new Set(results.flatMap((r) => r.outputs));
+const team = existsSync(TEAM_MANIFEST) ? JSON.parse(await readFile(TEAM_MANIFEST, 'utf8')).portraits : [];
+const portraits = [];
+for (const entry of team) portraits.push(await processPortrait(entry));
+const expected = new Set([...results.flatMap((r) => r.outputs), ...portraits.flatMap((p) => p.outputs)]);
 const removed = await removeOrphans(expected);
 const module = dataModule(albums, results);
 const previous = existsSync(DATA_FILE) ? await readFile(DATA_FILE, 'utf8') : '';
 if (previous !== module) await writeFile(DATA_FILE, module);
+const teamData = teamModule(portraits);
+const previousTeam = existsSync(TEAM_DATA_FILE) ? await readFile(TEAM_DATA_FILE, 'utf8') : '';
+if (portraits.length && previousTeam !== teamData) await writeFile(TEAM_DATA_FILE, teamData);
 
 const copied = results.filter((r) => r.copied).length;
 const generated = results.reduce((n, r) => n + r.generated, 0);
 console.log(`Copiées : ${copied} ; fichiers créés ou mis à jour : ${generated} ; retirés : ${removed.length} ; src/data/photos.ts ${previous === module ? 'inchangé' : 'écrit'}.`);
 for (const r of results.filter((r) => r.warning)) console.log(`  attention, ${r.id} : ${r.warning}`);
+for (const p of portraits) {
+  console.log(`Portrait ${p.slug} : source ${p.source.width}x${p.source.height}, cadre 4:5 ${p.width}x${p.height}, tailles ${p.widths.join(', ')} px${p.copied ? ', copié' : ''}${p.generated ? `, ${p.generated} fichier(s) écrit(s)` : ''}.`);
+}
 const pending = results.filter((r) => r.consent === 'pending');
 console.log(`Consentement : ${results.length - pending.length} publiables, ${pending.length} en attente (${pending.map((r) => r.id).join(', ')}).`);
 console.log(`Terminé en ${((Date.now() - started) / 1000).toFixed(1)} s.`);

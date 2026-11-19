@@ -5,8 +5,11 @@ import { cn } from '../../lib/utils';
 /** Rayons du contrat (§9) : 20 px pour une photo, 12 px pour une vignette ou une petite image, aucun dans un cadre déjà arrondi. */
 const RADIUS = { card: 'rounded-card', inner: 'rounded-inner', none: '' } as const;
 
+/** Ce dont <Photo> a besoin : une photo du catalogue, ou un portrait de l'équipe (src/lib/team.ts). */
+export type PhotoLike = Pick<CatalogPhoto, 'width' | 'height' | 'sources' | 'dominantColor' | 'alt' | 'focus'>;
+
 type PhotoProps = {
-  photo: CatalogPhoto;
+  photo: PhotoLike;
   /** Largeur affichée, pour que le navigateur choisisse la bonne taille (obligatoire : sans lui, il prendrait 100vw). */
   sizes: string;
   /**
