@@ -10,7 +10,7 @@ import { TRANSPARENCY_DATA_PUBLISHED } from '../../config/transparency';
 /*
  * Notre impact (groupe 7.3 : contrat validé, audit IMP-01, T-11, A11Y-09).
  * - IMP-01 : la page n'est pas renommée (proposition « Où nous agissons » à valider avec la cliente) ; un bouton
- *   « Faire un don » la termine.
+ *   « Faire un don » la termine. Introduction en phrase complète (revue du groupe 7.3).
  * - Chiffres clés masqués (contrat §7 et §12, T-11) : « 1 250+ (TODO) » est un exemple, « 10 régions couvertes » n'est
  *   étayé nulle part, et les gros compteurs animés sont un défaut rejeté. Ils sont gardés dans
  *   EXAMPLE_IMPACT_FIGURES_NOT_VALIDATED ; la section reviendra avec au moins deux résultats datés et sourcés, en texte
@@ -41,8 +41,8 @@ export function NotreImpactPage() {
       <PageHeader reveal>
         <PageTitle>Un impact concret, mesuré avec humilité et transparence</PageTitle>
         <PageIntro>
-          Où la fondation est présente au Cameroun et les 10 pays européens sur lesquels elle informe les jeunes. Les
-          résultats chiffrés seront publiés ici quand ils seront datés et vérifiés.
+          Voici où la fondation est présente au Cameroun, et les 10 pays européens sur lesquels elle informe les jeunes.
+          Les résultats chiffrés seront publiés ici quand ils seront datés et vérifiés.
         </PageIntro>
       </PageHeader>
 
