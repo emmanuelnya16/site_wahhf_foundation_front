@@ -92,9 +92,16 @@ export function packGallery(count: number, cols: number, featureFirst: boolean, 
   return base;
 }
 
-/** Colonnes de la grille selon le nombre d'éléments : petits albums sur 1, 2 ou 3 colonnes ; sinon 2, 3 puis 4. */
+/**
+ * Colonnes de la grille selon le nombre d'éléments : petits albums sur 1, 2 ou 3 colonnes ; sinon 2, 3 puis 4.
+ * Revue du groupe 7.3 : un album de 3 éléments passe sur une colonne sous 768 px (sur 3 colonnes, à 390 px, les
+ * vignettes faisaient 109 × 82 px et la durée d'une vidéo chevauchait son bouton de lecture).
+ */
 export function galleryColumns(count: number): { base: number; md: number; lg: number } {
-  if (count <= 3) return { base: Math.max(1, count), md: Math.max(1, count), lg: Math.max(1, count) };
+  if (count <= 3) {
+    const n = Math.max(1, count);
+    return { base: n === 3 ? 1 : n, md: n, lg: n };
+  }
   return { base: 2, md: 3, lg: 4 };
 }
 
@@ -102,7 +109,10 @@ const BREAKPOINTS = ['base', 'md', 'lg'] as const;
 type Breakpoint = (typeof BREAKPOINTS)[number];
 /** Largeur utile la plus grande de chaque palier (container de 72 rem, gouttière comprise) et écart entre les cases. */
 const MAX_AVAILABLE: Record<Breakpoint, number> = { base: 767 - 2 * 30.7, md: 1023 - 2 * 41, lg: 1152 };
-const GAP: Record<Breakpoint, number> = { base: 16, md: 16, lg: 16 };
+/** Écart le plus petit du palier (index.css : 0,75 rem sous 640 px, 1 rem au-delà) : la case calculée est un plafond. */
+const GAP: Record<Breakpoint, number> = { base: 12, md: 16, lg: 16 };
+/** Hauteur d'une case / largeur (cases 4:3, index.css, .gallery-fill). */
+const CELL_RATIO = 0.75;
 
 export interface FillLayout {
   /** Variables de la grille : colonnes et largeur maximale par palier (index.css, .gallery-fill) */
@@ -114,8 +124,9 @@ export interface FillLayout {
 }
 
 /**
- * Mise en page sans trou d'un album, par palier (2, 3, 4 colonnes), et largeur maximale par palier : la vignette (ou la
- * mise en avant) la plus exigeante ne dépasse pas la moitié de la largeur de sa source (aperçu pour une vidéo).
+ * Mise en page sans trou d'un album, par palier (2, 3, 4 colonnes), et largeur maximale par palier : aucune vignette
+ * (ni mise en avant) n'est affichée à plus de la moitié de la taille de sa source (aperçu pour une vidéo), en densité 2
+ * (contrat §5).
  */
 export function fillLayout(items: GalleryItem[], featureFirst: boolean): FillLayout {
   const columns = galleryColumns(items.length);
@@ -124,13 +135,17 @@ export function fillLayout(items: GalleryItem[], featureFirst: boolean): FillLay
     BREAKPOINTS.map((bp) => [bp, packGallery(items.length, columns[bp], featureFirst && items.length >= 6, canGrow)])
   ) as Record<Breakpoint, Span[]>;
   // Case la plus large permise : la vignette (ou la mise en avant) la plus exigeante ne dépasse pas la moitié de sa
-  // source (aperçu de la vidéo pour une vidéo)
+  // source (aperçu de la vidéo pour une vidéo). L'image couvre sa case (object-cover) : son échelle est la plus grande
+  // de largeur affichée / largeur de la source et hauteur affichée / hauteur de la source. Revue du groupe 7.3 : la
+  // hauteur compte aussi (sources en 5:3 ou plus larges dans des cases 4:3 : c'est elle qui limite).
   const maxWidth = (bp: Breakpoint) => {
     const c = columns[bp];
     const gap = GAP[bp];
     let cell = Infinity;
     spans[bp].forEach((s, i) => {
-      cell = Math.min(cell, (items[i].w / 2 - gap * (s.w - 1)) / s.w);
+      const byWidth = (items[i].w / 2 - gap * (s.w - 1)) / s.w;
+      const byHeight = (items[i].h / 2 - gap * (s.h - 1)) / (CELL_RATIO * s.h);
+      cell = Math.min(cell, byWidth, byHeight);
     });
     const width = Math.floor(c * cell + (c - 1) * gap);
     return width >= MAX_AVAILABLE[bp] ? 'none' : `${width}px`;

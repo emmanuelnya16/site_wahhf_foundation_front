@@ -80,7 +80,7 @@ export default function GalleryPage() {
             const placeDate = albumPlaceDate(album);
             return (
               // Clé = album (et non plus le filtre) : changer de filtre ne rejoue pas les apparitions
-              <section key={album.id} id={album.id} aria-labelledby={`album-${album.id}`} className="scroll-mt-(--header-offset) space-y-6">
+              <section key={album.id} id={album.id} aria-labelledby={`album-${album.id}`} className="space-y-6">
                 <div className="max-w-[65ch] space-y-2">
                   <h2 id={`album-${album.id}`} className="text-section-title text-text">
                     {album.title}
