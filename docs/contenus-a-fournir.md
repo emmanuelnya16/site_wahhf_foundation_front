@@ -341,3 +341,18 @@ Le statut juridique de la fondation, attendu aussi sur cette page, est demandé 
 ### Pages « Mentions légales » et « Confidentialité »
 
 140. Quand le juriste vous remettra les textes des mentions légales et de la politique de confidentialité, de quelle date faudra-t-il les dater ? Aujourd'hui, les deux pages affichent « Mise à jour le 15 novembre 2026 » : c'est la date à laquelle les textes actuels figurent déjà dans le projet, pas celle d'une relecture juridique.
+
+---
+
+## Question ajoutée avec les photos de la fondation (lot 7.6)
+
+### Toutes les pages qui montrent des photos
+
+141. Avez-vous l'autorisation écrite des parents pour les photos de mineurs du 25 avril et des sorties ? Liste des photos concernées (51, repères de docs/photos-catalogue.md) :
+
+- Journée du 25 avril 2026 — Albatros Hotel : mineurs identifiables : A33, A36, A80, A81, A83, A85, A87, A89, A90, A92, A95, A97 ; à vérifier : A17, A18, A23, A26, A27, A29, A37, A38, A48, A51, A56, A57, A59, A60.
+- Visite de terrain dans une plantation : à vérifier : B03, B04, B10, B13, B16, B17, B20, B21, B26, B27.
+- Sortie à Nkongsamba : à vérifier : B51, B53, B56.
+- Randonnée avec les jeunes : mineurs identifiables : B60, B62, B63, B65, B68, B69, B73, B75, B77, B80, B82, B84.
+
+Pour les photos « à vérifier », il suffit de nous dire si toutes les personnes reconnaissables sont majeures. Tant que l'accord n'est pas confirmé, ces photos ne s'affichent pas sur le site en ligne ; des photos d'adultes ou de personnes vues de dos les remplacent.
