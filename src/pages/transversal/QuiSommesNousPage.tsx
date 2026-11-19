@@ -9,6 +9,8 @@ import Fil, { FilPoint } from '../../components/wahhf/Fil';
 import { AfterFirstDisplay, FilScrub } from '../../effects/DeferredMotion';
 import { TIMELINE_MILESTONES } from '../../services/api';
 import OrgChart from '../../components/team/OrgChart';
+import { TEAM } from '../../data/team';
+import { displayName } from '../../lib/team';
 import Photo from '../../components/wahhf/Photo';
 import { cn } from '../../lib/utils';
 import { photoCaption, photoOrFallback } from '../../lib/photos';
@@ -18,29 +20,26 @@ import { photoCaption, photoOrFallback } from '../../lib/photos';
  * et les parents au premier rang sous la mission ; les trois aînés à côté de l'appel final (A31 et A88 montrent les
  * mêmes personnes : elles ne sont pas côte à côte). Une photo absente (accord parental en attente) n'est pas remplacée.
  */
-const HEADER_PHOTO = photoOrFallback('A02');
+const STORY_PHOTO = photoOrFallback('A02');
+/** Le président pendant sa présentation du 25 avril (A71 ; A45 et A77 le montrent aussi) */
+const PRESIDENT_PHOTO = photoOrFallback('A71');
 const MISSION_PORTRAIT = photoOrFallback('A14');
 const MISSION_LANDSCAPE = photoOrFallback('A31');
 const CLOSING_PHOTO = photoOrFallback('A88');
 
 /*
- * Qui sommes-nous (groupe 7.3 : contrat validé, audit QSN-01 à QSN-04, T-11, T-15).
- * - En-tête du lot 5, révélé à l'arrivée comme le hero (titre ligne par ligne, introduction en fondu), avec une vraie
- *   photo de l'Open Day, légendée et datée (QSN-02) : trois responsables de la fondation, adultes (revue du groupe 7.3 :
- *   pas de gros plan de jeunes mineurs tant que les autorisations ne sont pas confirmées, GAL-01, demande B).
- * - Mission et valeurs ; puis l'Approche et la frise « Notre parcours », venues de l'accueil (contrat §7, ACC-03),
- *   refaites avec les composants du lot 5 : liste typographique pour les cinq principes, le fil pour la frise.
- * - Le groupe IROKO sur une section sauge, sans carte dans la carte (QSN-03) : plus de colonne logo, qui répétait le titre.
- * - Gouvernance masquée tant qu'aucun nom n'est fourni (QSN-01, src/config/governance.ts) ; ses rôles d'exemple,
- *   marqués TODO, sont gardés dans EXAMPLE_GOVERNANCE_ROLES_NOT_VALIDATED.
- * - Fin de page : « Faire un don » et « Devenir partenaire » (QSN-04), sans carte nuit au-dessus du footer.
- * - Gratuité dite une fois par écran, jamais dans un titre, mots voisins compris (« aucun frais », « sans frais »,
- *   « contrepartie financière » : revue du groupe 7.3) ; elle est dite dans le paragraphe de la mission et à l'étape 2026
- *   de la frise. Présence décrite telle qu'elle est (Yaoundé et Douala, coordination en Allemagne, T-11) au lieu des
- *   « 10 régions ».
- * - Mouvement (contrat §10) : la frise se dessine au défilement sur ordinateur (FilScrub), fixe sur téléphone et en
- *   mouvement réduit ; seuls ses points s'allument, ses paragraphes restent lisibles à pleine opacité (revue du groupe
- *   7.3) ; les photos de la gouvernance, quand elles existeront, se découvrent par clip-path (PhotoReveal).
+ * Qui sommes-nous (groupe 7.3, refondue au lot 7.7 : contrat validé, audit QSN-01 à QSN-04, T-11, T-15).
+ * - Hero sur nuit (lot 7.7, TeamHero) : le seul h1, une phrase, « Rejoindre la fondation », « Voir l'organigramme » et
+ *   la colonne de portraits de l'équipe (PortraitCarousel).
+ * - Organigramme (lot 7.7, OrgChart) : un h3 par niveau, reliés par le fil ; il remplace l'ancienne section
+ *   Gouvernance, jamais affichée (ses rôles d'exemple restent dans src/config/governance.ts).
+ * - Puis, sur des fonds alternés : mission et valeurs (kakémono A14, parents au premier rang A31) ; l'Approche et la
+ *   frise « Notre parcours », venues de l'accueil, avec la banderole A02 et le président à la tribune A71 ; le groupe
+ *   IROKO, sans carte dans la carte (QSN-03) ; la fin de page « Faire un don » et « Devenir partenaire » (QSN-04), avec
+ *   les trois aînés A88.
+ * - Gratuité dite une fois par écran, jamais dans un titre ; présence décrite telle qu'elle est (T-11).
+ * - Mouvement (contrat §10) : hero comme celui du site ; le fil de l'organigramme et la frise se dessinent au
+ *   défilement sur ordinateur ; photos en apparitions groupées ; tout en place en mouvement réduit.
  */
 
 const NB = ' ';
@@ -89,6 +88,12 @@ const APPROACH = [
 const IROKO_FACTS: { title: string; text: string }[] = [];
 
 /** Année d'une étape, seulement si elle est confirmée (« 2021 (TODO) » n'est pas affichée). */
+/** Texte alternatif de la photo du président : son nom seulement s'il est confirmé (src/data/team.ts, nomConfirme). */
+function presidentAlt(catalogueAlt: string) {
+  const president = TEAM.find((m) => m.niveau === 1);
+  return president?.nomConfirme ? `${displayName(president)}, ${president.role ?? ''}, pendant sa présentation` : catalogueAlt;
+}
+
 const confirmedYear = (year: string) => (/TODO/.test(year) ? null : year);
 
 /**
@@ -124,7 +129,7 @@ export function QuiSommesNousPage() {
       <OrgChart />
 
       {/* MISSION ET VALEURS */}
-      <Section>
+      <Section tone="sauge">
         <div className="container-page grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           <div className="lg:col-span-7 space-y-5">
             <SectionHeader title="Bâtir l’autonomie par l’éducation, la santé et l’accès au savoir" />
@@ -164,7 +169,7 @@ export function QuiSommesNousPage() {
       </Section>
 
       {/* NOTRE APPROCHE (venue de l'accueil) */}
-      <Section tone="sauge" id="approche">
+      <Section id="approche">
         <div className="container-page space-y-10">
           <SectionHeader
             title="Cinq principes qui guident chaque projet"
@@ -181,7 +186,7 @@ export function QuiSommesNousPage() {
       </Section>
 
       {/* NOTRE PARCOURS : la frise, avec le fil (venue de l'accueil). Années non confirmées masquées. */}
-      <Section id="parcours">
+      <Section tone="sauge" id="parcours">
         <div className="container-page space-y-10">
           <SectionHeader
             title="Les grandes étapes de WAHHF Foundation"
@@ -199,10 +204,26 @@ export function QuiSommesNousPage() {
             <FilScrub scope={filRef} dim="[data-fil-dot]" />
           </AfterFirstDisplay>
         </div>
+
+        {/* Le 25 avril 2026 : la banderole et le président à la tribune, côte à côte à la même hauteur (ratios réels
+            3:2 et 2:3, colonnes 9 / 4). Le texte alternatif ne le nomme que si son nom est confirmé. */}
+        {STORY_PHOTO && PRESIDENT_PHOTO && (
+          <figure className="container-page mt-12 lg:mt-16">
+            <div className="grid max-w-4xl grid-cols-[9fr_4fr] gap-2 sm:gap-3">
+              <Photo photo={STORY_PHOTO} sizes="(min-width: 56rem) 38rem, 70vw" imgAttributes={{ 'data-reveal': '' }} />
+              <Photo
+                photo={{ ...PRESIDENT_PHOTO, alt: presidentAlt(PRESIDENT_PHOTO.alt) }}
+                sizes="(min-width: 56rem) 17rem, 30vw"
+                imgAttributes={{ 'data-reveal': '' }}
+              />
+            </div>
+            <figcaption className="mt-3 text-meta text-text-secondary">{photoCaption(STORY_PHOTO)}</figcaption>
+          </figure>
+        )}
       </Section>
 
       {/* LE GROUPE IROKO : une section, plus une carte nuit contenant une seconde carte (QSN-03) */}
-      <Section tone="sauge" id="iroko">
+      <Section id="iroko">
         <div className="container-page space-y-8">
           <div className="max-w-[65ch] space-y-5">
             <SectionHeader title="WAHHF Foundation, branche sociale du groupe IROKO" />
@@ -225,7 +246,7 @@ export function QuiSommesNousPage() {
       </Section>
 
       {/* FIN DE PAGE : deux actions (QSN-04), sur le fond de la page, sans carte nuit au-dessus du footer */}
-      <Section tone="brume">
+      <Section tone="sauge">
         <div className={cn('container-page', CLOSING_PHOTO && 'grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-12')}>
           <div className="max-w-[65ch] space-y-6">
             <SectionHeader

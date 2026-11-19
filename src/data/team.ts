@@ -20,6 +20,8 @@ export interface TeamMember {
   id: string;
   /** null : nom inconnu */
   prenom: string | null;
+  /** true quand la fondation a confirmé l'orthographe exacte du nom (sinon il n'apparaît dans aucun texte alternatif) */
+  nomConfirme: boolean;
   nom: string | null;
   /** Civilité ou titre devant le nom (« Ing. Pr. ») */
   titre?: string;
@@ -54,13 +56,13 @@ export const TEAM_LEVEL_TITLES: Record<number, string> = {
 
 export const TEAM: TeamMember[] = [
   // TODO (fondation) : orthographe du nom et ordre à confirmer ; bio et accord écrit à fournir
-  { id: 'marrion-watio-notesse', prenom: 'Marrion', nom: 'Watio Notesse', role: 'Président', niveau: 1, ordre: 1, photo: 'marrion-watio-notesse', focus: '50% 35%', bio: null, liens: [], consent: 'pending' },
+  { id: 'marrion-watio-notesse', prenom: 'Marrion', nomConfirme: false, nom: 'Watio Notesse', role: 'Président', niveau: 1, ordre: 1, photo: 'marrion-watio-notesse', focus: '50% 35%', bio: null, liens: [], consent: 'pending' },
   // TODO (fondation) : orthographe du nom et ordre à confirmer ; bio et accord écrit à fournir
-  { id: 'christian-wilberg', titre: 'Ing. Pr.', prenom: 'Christian', nom: 'Wilberg', role: 'Vice-président', niveau: 2, ordre: 1, photo: 'christian-wilberg', focus: '50% 35%', bio: null, liens: [], consent: 'pending' },
+  { id: 'christian-wilberg', titre: 'Ing. Pr.', prenom: 'Christian', nomConfirme: false, nom: 'Wilberg', role: 'Vice-président', niveau: 2, ordre: 1, photo: 'christian-wilberg', focus: '50% 35%', bio: null, liens: [], consent: 'pending' },
   // TODO (fondation) : nom, rôle et ordre inconnus ; bio et accord écrit à fournir
-  { id: 'personne-niveau-3', prenom: null, nom: null, role: null, niveau: 3, ordre: 1, photo: 'personne-niveau-3', focus: '50% 25%', bio: null, liens: [], consent: 'pending' },
+  { id: 'personne-niveau-3', prenom: null, nomConfirme: false, nom: null, role: null, niveau: 3, ordre: 1, photo: 'personne-niveau-3', focus: '50% 25%', bio: null, liens: [], consent: 'pending' },
   // TODO (fondation) : nom de famille à demander, ordre à confirmer ; bio et accord écrit à fournir
-  { id: 'wilfried', prenom: 'Wilfried', nom: null, role: 'Secrétaire général', niveau: 4, ordre: 1, photo: 'wilfried', focus: '50% 35%', bio: null, liens: [], consent: 'pending' },
+  { id: 'wilfried', prenom: 'Wilfried', nomConfirme: false, nom: null, role: 'Secrétaire général', niveau: 4, ordre: 1, photo: 'wilfried', focus: '50% 35%', bio: null, liens: [], consent: 'pending' },
 ];
 
 /** Au moins une personne au nom connu : l'organigramme est publié (lien du footer). */
