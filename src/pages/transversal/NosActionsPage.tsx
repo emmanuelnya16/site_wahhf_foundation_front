@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { MouseEvent, useEffect, useRef } from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import SEO from '../../components/wahhf/SEO';
 import Section from '../../components/wahhf/Section';
@@ -7,7 +7,7 @@ import { PrimaryButton, SecondaryButton } from '../../components/wahhf/Buttons';
 import { TEXT_LINK_CLASS } from '../../components/wahhf/TextList';
 import { DOMAINS_DATA } from '../../services/api';
 import { GALLERY_ALBUMS, galleryItem, albumPlaceDate } from '../../data/gallery';
-import { scrollToHash } from '../../lib/scroll';
+import { scrollToElement, scrollToHash } from '../../lib/scroll';
 import { AfterFirstDisplay, PhotoReveal } from '../../effects/DeferredMotion';
 
 /*
@@ -20,10 +20,18 @@ import { AfterFirstDisplay, PhotoReveal } from '../../effects/DeferredMotion';
  *   images générées des trois autres domaines ne sont plus affichées (elles restent dans DOMAINS_DATA).
  * - T-10 : /nos-actions#education comme /nos-actions?domaine=education (méga-menu, footer) ouvrent la page sur le
  *   domaine demandé.
+ * - Sommaire et arrivée sur un domaine (revue du groupe 7.3) : le titre du domaine reçoit le focus (tabIndex -1), Tab
+ *   repart donc de là et non du haut de page ; l'adresse prend #domaine (lien partageable), aussi sur ordinateur à
+ *   souris où le défilement fluide (Lenis) gère l'ancre. Aucun décalage d'ancre en plus : scrollToElement et Lenis
+ *   tiennent déjà compte de l'en-tête fixe.
  * - Plan des titres : H1, puis un H2 par domaine (A11Y-09).
  * - Mouvement (contrat §10) : en-tête révélé comme le hero ; pour chaque domaine, sur ordinateur, la photo se découvre
  *   par clip-path puis le texte apparaît en fondu (PhotoReveal) ; tout est en place sur téléphone et en mouvement réduit.
  */
+
+/** Le titre d'un domaine reçoit le focus, sans défilement de plus (le défilement est déjà demandé). */
+const focusDomain = (slug: string) => document.getElementById(`domaine-${slug}`)?.focus({ preventScroll: true });
+const isDomain = (slug: string | null) => !!slug && DOMAINS_DATA.some((d) => d.slug === slug);
 
 /** Photos réelles des domaines (galerie de l'Open Day), mêmes que sur l'accueil ; aucune pour les trois autres. */
 const DOMAIN_PHOTOS: Record<string, string> = {
@@ -39,10 +47,31 @@ export function NosActionsPage() {
   const listRef = useRef<HTMLDivElement>(null);
 
   // ?domaine=education (méga-menu, footer, recherche) : la page s'ouvre sur le domaine, comme avec l'ancre #education
+  // (Layout fait défiler jusqu'à l'ancre) ; dans les deux cas, le titre du domaine reçoit le focus
   useEffect(() => {
-    if (hash || !asked || !DOMAINS_DATA.some((d) => d.slug === asked)) return;
+    const fromHash = decodeURIComponent(hash.replace(/^#/, ''));
+    if (hash) {
+      if (isDomain(fromHash)) focusDomain(fromHash);
+      return;
+    }
+    if (!asked || !isDomain(asked)) return;
+    focusDomain(asked);
     return scrollToHash(`#${asked}`);
   }, [asked, hash]);
+
+  // Lien du sommaire : défilement jusqu'au domaine (fluide avec Lenis, qui a déjà pris le clic), focus sur son titre,
+  // adresse en #domaine sans nouvelle entrée d'historique
+  const goTo = (slug: string) => (event: MouseEvent<HTMLAnchorElement>) => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    const target = document.getElementById(slug);
+    if (!target) return;
+    if (!event.defaultPrevented) {
+      event.preventDefault();
+      scrollToElement(target);
+    }
+    focusDomain(slug);
+    window.history.replaceState(window.history.state, '', `${window.location.pathname}#${slug}`);
+  };
 
   return (
     <>
@@ -62,7 +91,7 @@ export function NosActionsPage() {
           <ul className="flex flex-wrap gap-x-5">
             {DOMAINS_DATA.map((d) => (
               <li key={d.id}>
-                <Link to={`#${d.slug}`} className={TEXT_LINK_CLASS}>
+                <Link to={`#${d.slug}`} replace onClick={goTo(d.slug)} className={TEXT_LINK_CLASS}>
                   {d.title}
                 </Link>
               </li>
@@ -84,10 +113,10 @@ export function NosActionsPage() {
                 id={dom.slug}
                 aria-labelledby={titleId}
                 data-photo-reveal=""
-                className="scroll-mt-(--header-offset) border-t border-border-subtle first:border-t-0 first:pt-0 py-10 sm:py-14 grid gap-8 lg:grid-cols-12 lg:gap-12 items-start"
+                className="border-t border-border-subtle first:border-t-0 first:pt-0 py-10 sm:py-14 grid gap-8 lg:grid-cols-12 lg:gap-12 items-start"
               >
                 <div data-photo-reveal-text="" className="lg:col-span-7 space-y-4 max-w-[65ch]">
-                  <h2 id={titleId} className="text-section-title text-text">
+                  <h2 id={titleId} tabIndex={-1} className="text-section-title text-text">
                     {dom.title}
                   </h2>
                   <p className="text-body text-text">{dom.shortDesc}</p>
