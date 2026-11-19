@@ -50,7 +50,7 @@ Les 89 textes encore provisoires sur le site, chacun avec sa question. Entre gui
 
 ### Sur toutes les pages (bas de page)
 
-1. Quelle adresse exacte afficher pour la fondation au Cameroun (Douala, Yaoundé) et pour la coordination en Allemagne ? Aujourd'hui : « Cameroun (Douala / Yaoundé) & Coordination Allemagne ».
+1. Quelle adresse exacte afficher pour la fondation au Cameroun (Douala, Yaoundé) et pour la coordination en Allemagne ? Aujourd'hui : « Cameroun (Douala, Yaoundé) et coordination en Allemagne ».
 2. Quelle est l'adresse de la page LinkedIn officielle de la fondation ? (Si elle n'existe pas, le lien sera retiré.)
 3. Quelle est l'adresse de la page Facebook officielle de la fondation ?
 4. Quelle est l'adresse du compte Instagram officiel de la fondation ?
@@ -211,7 +211,7 @@ Le site ne présente plus de faux paiement : en attendant vos moyens de don (dem
 
 ### Page « Faire un don »
 
-Les questions 63 à 71 restent valables. Les exemples de la question 67 (« 25 € = manuels A1 »…) ne sont plus affichés, et la case à cocher de la question 66 a été remplacée par une phrase d'information.
+Les questions 63 à 71 restent valables. Les exemples de la question 67 (« 25 € = manuels A1 »…) ne sont plus affichés, et la case à cocher de la question 66 a été remplacée par une phrase d'information. La ligne « À quoi servira votre don » ne décrit le programme que pour Mobilité & Langues : pour les autres domaines, elle attend la réponse à la question 117. Voir aussi la question 138, à la fin de ce document.
 
 97. Quand un donateur choisit un domaine (par exemple la santé), son don sert-il uniquement à ce domaine ?
 98. Faut-il un montant minimum ou maximum pour un don ? Aujourd'hui : « entre 5 € et 10 000 € » et « entre 3 000 FCFA et 6 500 000 FCFA ».
@@ -315,3 +315,11 @@ La question 33 (l'adresse « integrite@wahhf-foundation.org » existe-t-elle ?) 
 135. Qui lit les signalements d'arnaque envoyés sur WhatsApp ou par e-mail, et sous quel délai répondez-vous ?
 136. Comment une personne peut-elle vérifier qu'un interlocuteur fait vraiment partie de WAHHF Foundation ?
 137. Que conseillez-vous à une personne qui a déjà payé un faux intermédiaire (porter plainte, et auprès de qui au Cameroun) ?
+
+---
+
+## Question ajoutée après la relecture des pages Faire un don, Agir, Contact et Transparence
+
+### Page « Faire un don »
+
+138. Quand un donateur vous écrit pour faire un don, qui lui répond, et depuis quel numéro ou quelle adresse ? La page de don dit aujourd'hui : « la fondation vous répond seulement par WhatsApp au +237 693 12 92 05 ou par e-mail depuis contact@wahhf-foundation.org. Si quelqu'un vous écrit d'un autre numéro ou d'une autre adresse au sujet de votre don, ne payez rien et prévenez-nous. » Est-ce exact ?
