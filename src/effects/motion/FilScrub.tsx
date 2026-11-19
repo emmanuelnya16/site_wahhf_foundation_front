@@ -13,8 +13,17 @@ const DIM = 0.35;
  * - Un libellé (lien) qui reçoit le focus avant la fin : le fil est tracé et tous les niveaux allumés aussitôt.
  * - Téléphone, tactile, mouvement réduit : fil tracé, niveaux allumés (état du HTML).
  * Lit les repères posés par Fil.tsx : [data-fil="horizontal"], [data-fil-seg], [data-fil-dot], [data-fil-label].
+ * `dim` (revue du groupe 7.3) : ce qui s'atténue avant d'être atteint. Par défaut le point et le libellé (niveaux A1 à
+ * C1, libellés courts) ; '[data-fil-dot]' pour une frise dont les libellés sont des paragraphes (Qui sommes-nous) : le
+ * texte reste toujours à pleine opacité, lisible (contraste AA), seul le point s'allume.
  */
-export default function FilScrub({ scope }: { scope: RefObject<HTMLElement | null> }) {
+export default function FilScrub({
+  scope,
+  dim = '[data-fil-dot], [data-fil-label]',
+}: {
+  scope: RefObject<HTMLElement | null>;
+  dim?: string;
+}) {
   useGSAP(
     () => {
       const fil = scope.current?.querySelector<HTMLElement>('[data-fil="horizontal"]');
@@ -24,7 +33,7 @@ export default function FilScrub({ scope }: { scope: RefObject<HTMLElement | nul
         if (fil.getBoundingClientRect().top < window.innerHeight * 0.85) return;
         const steps = gsap.utils.toArray<HTMLElement>(fil.children);
         const segs = gsap.utils.toArray<HTMLElement>('[data-fil-seg]', fil);
-        const parts = (li: HTMLElement) => li.querySelectorAll('[data-fil-dot], [data-fil-label]');
+        const parts = (li: HTMLElement) => li.querySelectorAll(dim);
 
         const tl = gsap.timeline({
           defaults: { ease: 'none' },

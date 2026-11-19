@@ -7,7 +7,8 @@ import { useEffect, useRef } from 'react';
  * Groupe 7.3 : elle suit le défilement sans Motion (un écouteur de défilement passif, une mise à jour par image, scaleX
  * seulement) ; elle fonctionne donc même si le moteur de Motion ne se charge jamais. Sans courbe ni durée : elle
  * indique une position, elle ne s'anime pas (identique en mouvement réduit). Elle reste vide tant que la page ne
- * contient pas d'article ([data-reading-progress] ; « Cet article est introuvable » n'en a pas).
+ * contient pas d'article ([data-reading-progress] ; « Cet article est introuvable » n'en a pas), et se remplit sur la
+ * hauteur de l'article seulement.
  */
 export default function ReadingProgress() {
   const ref = useRef<HTMLDivElement>(null);
@@ -18,12 +19,15 @@ export default function ReadingProgress() {
     let frame = 0;
     const update = () => {
       frame = 0;
-      if (!document.querySelector('[data-reading-progress]')) {
+      const article = document.querySelector('[data-reading-progress]');
+      if (!article) {
         bar.style.transform = 'scaleX(0)';
         return;
       }
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+      // Revue du groupe 7.3 : la progression suit l'article, pas toute la page (footer compris). Vide en haut de page,
+      // pleine quand la fin de l'article atteint le bas de l'écran ; un article qui tient dans l'écran est lu d'emblée.
+      const end = article.getBoundingClientRect().bottom + window.scrollY - window.innerHeight;
+      const progress = end > 0 ? Math.min(1, Math.max(0, window.scrollY / end)) : 1;
       bar.style.transform = `scaleX(${progress})`;
     };
     const schedule = () => {

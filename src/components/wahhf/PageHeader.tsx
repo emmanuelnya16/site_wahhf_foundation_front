@@ -2,7 +2,7 @@ import { createContext, ReactNode, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Container from './Container';
 import { cn } from '../../lib/utils';
-import { GALLERY_ALBUMS, galleryItem } from '../../data/gallery';
+import { albumPlaceDate, GALLERY_ALBUMS, galleryItem } from '../../data/gallery';
 import LineReveal from '../../effects/LineReveal';
 
 /** Arrivée de l'en-tête (groupe 7.1, contrat §10) : activée page par page avec <PageHeader reveal>. */
@@ -54,6 +54,7 @@ export default function PageHeader({
 }) {
   const photo = photoId ? galleryItem(photoId) : undefined;
   const album = photo ? GALLERY_ALBUMS.find((a) => a.id === photo.album) : undefined;
+  const placeDate = albumPlaceDate(album);
   return (
     <RevealContext.Provider value={reveal}>
     <header
@@ -84,13 +85,14 @@ export default function PageHeader({
               style={photo.focus && photoRatio !== 'source' ? { objectPosition: photo.focus } : undefined}
             />
             {/* Légende datée : celle de la galerie, puis l'événement, le lieu et la date de l'album (sans « A · B »,
-                contrat §12) ; rien de l'album s'il est encore provisoire */}
+                contrat §12) ; rien de l'album s'il est encore provisoire. Même format que la galerie, Nos actions et la
+                visionneuse (albumPlaceDate : « Yaoundé, le 25 avril 2026 », date insécable ; revue du groupe 7.3) */}
             <figcaption className="mt-2 text-meta text-text-secondary">
               {photo.caption}
-              {album && !/TODO/.test(album.meta) && (
+              {album && placeDate && (
                 <>
                   {' '}
-                  {album.title}, {album.meta.replace(' · ', ', ')}.
+                  {album.title}, {placeDate}.
                 </>
               )}
             </figcaption>
