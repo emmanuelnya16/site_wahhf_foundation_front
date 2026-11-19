@@ -1518,3 +1518,126 @@ html.vt-galerie::view-transition-new(root) {
 .photo-lightbox::backdrop {
   background: transparent;
 }
+
+/* =============================================================================
+   Portraits de l'équipe (lot 7.7) : src/components/team/PortraitCarousel.tsx
+   Colonne de cartes 4:5 ; la carte du centre en grand, ses voisines à 0,75, décalées vers la droite, un peu derrière
+   elle ; la zone s'efface en haut et en bas dans le fond. Position de chaque carte : --d (-2 à 2, rang par rapport au
+   centre), --side (0 au centre, 1 sinon), --s (échelle). Transform et opacité seulement, 700 ms, --ease-reveal.
+   Coins de 1,5 rem, comme l'accordéon (lot 7.6).
+   ============================================================================= */
+.pc {
+  --pc-w: 14rem;
+  --pc-h: calc(var(--pc-w) * 1.25);
+  /* Pas vertical : moitié de la carte du centre + moitié d'une voisine (0,75), moins un recouvrement */
+  --pc-step: calc(var(--pc-h) * 0.875 - 1.25rem);
+  --pc-x: calc(var(--pc-w) * 0.16);
+  --pc-zone: 26rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+@media (min-width: 768px) {
+  .pc {
+    --pc-w: 17rem;
+    --pc-zone: clamp(30rem, 68vh, 38rem);
+  }
+}
+.pc-stage {
+  position: relative;
+  width: 100%;
+  height: var(--pc-zone);
+  overflow: hidden;
+  /* Les cartes voisines s'effacent dans la couleur du fond, en haut et en bas */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 16%, #000 84%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 16%, #000 84%, transparent 100%);
+}
+.pc-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--pc-w);
+  height: var(--pc-h);
+  margin: calc(var(--pc-h) / -2) 0 0 calc(var(--pc-w) / -2);
+  overflow: hidden;
+  border-radius: 1.5rem;
+  background: var(--color-filet-nuit);
+  transform: translate(calc(var(--pc-x) * var(--side)), calc(var(--pc-step) * var(--d))) scale(var(--s));
+  z-index: 1;
+  opacity: 0;
+  transition: transform 700ms var(--ease-reveal), opacity 700ms var(--ease-reveal);
+}
+.pc-card[data-pos='0'] {
+  z-index: 3;
+  opacity: 1;
+}
+.pc-card[data-pos='1'],
+.pc-card[data-pos='-1'] {
+  z-index: 2;
+  opacity: 1;
+}
+/* Nom et rôle, sur un dégradé sombre en bas de la carte du centre ; ils arrivent une fois la carte en place */
+.pc-caption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 3rem 1rem 1rem;
+  background: linear-gradient(to top, rgb(4 18 13 / 0.88), rgb(4 18 13 / 0.6) 55%, rgb(4 18 13 / 0));
+  color: var(--color-brume);
+  opacity: 0;
+  transition: opacity 150ms linear;
+}
+.pc-card[data-pos='0'] .pc-caption {
+  opacity: 1;
+  transition: opacity 300ms var(--ease-reveal) 600ms;
+}
+.pc-name {
+  font-weight: 600;
+  line-height: 1.3;
+}
+.pc-role {
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+.pc-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.pc-button {
+  display: inline-flex;
+  min-height: 2.75rem;
+  min-width: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-trait-nuit);
+  color: var(--color-brume);
+  cursor: pointer;
+  transition: background-color var(--dur-fast) linear, color var(--dur-fast) linear;
+}
+.pc-button-text {
+  /* Largeur fixe : « Mettre en pause » et « Reprendre » ne font pas glisser les boutons voisins */
+  min-width: 11rem;
+  padding: 0 1.125rem;
+  font-size: 0.9375rem;
+}
+@media (hover: hover) {
+  .pc-button:hover {
+    background: var(--color-soleil);
+    border-color: var(--color-soleil);
+    color: var(--color-encre);
+  }
+}
+.pc-button:focus-visible {
+  outline: 2px solid var(--color-soleil);
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pc-card,
+  .pc-caption,
+  .pc-card[data-pos='0'] .pc-caption {
+    transition: none !important;
+  }
+}

@@ -3,7 +3,7 @@ import SEO from '../../components/wahhf/SEO';
 import Section from '../../components/wahhf/Section';
 import SectionHeader from '../../components/wahhf/SectionHeader';
 import { TextList, TextListItem } from '../../components/wahhf/TextList';
-import PageHeader, { PageTitle, PageIntro } from '../../components/wahhf/PageHeader';
+import TeamHero from '../../components/team/TeamHero';
 import { DonateButton, SecondaryButton } from '../../components/wahhf/Buttons';
 import Fil, { FilPoint } from '../../components/wahhf/Fil';
 import { AfterFirstDisplay, FilScrub, PhotoReveal } from '../../effects/DeferredMotion';
@@ -119,13 +119,8 @@ export function QuiSommesNousPage() {
         description="Découvrez l’histoire, la mission, les valeurs et l’approche de WAHHF Foundation, et son lien avec le groupe IROKO."
       />
 
-      <PageHeader reveal catalogPhoto={HEADER_PHOTO} photoCaption={HEADER_PHOTO ? photoCaption(HEADER_PHOTO) : undefined}>
-        <PageTitle>Une fondation camerouno-allemande au service de la dignité humaine</PageTitle>
-        <PageIntro>
-          Née de la solidarité entre le Cameroun et l’Allemagne, WAHHF Foundation accompagne les jeunes et les communautés à
-          travers 6 domaines d’action complémentaires.
-        </PageIntro>
-      </PageHeader>
+      {/* HERO : titre et portraits de l'équipe (lot 7.7) */}
+      <TeamHero />
 
       {/* MISSION ET VALEURS */}
       <Section>
