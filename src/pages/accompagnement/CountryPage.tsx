@@ -44,7 +44,9 @@ function CountryFiche({ country }: { country: CountryGuide }) {
   const allVerified = links.length > 0 && links.every((l) => l.verifiedOn);
   const oldest = allVerified ? links.map((l) => l.verifiedOn as string).sort()[0] : undefined;
   const applyTo = `/candidater?souhait=accompagnement_europe&pays=${country.slug}`;
-  const actionLabel = `Être accompagné pour partir ${country.inside}`;
+  // « en Allemagne », « au Luxembourg » insécables : sur téléphone, le bouton passe à la ligne avant la préposition,
+  // et non entre elle et le pays (revue du groupe 7.4)
+  const actionLabel = `Être accompagné pour partir ${country.inside.replace(' ', NB)}`;
 
   return (
     <>
