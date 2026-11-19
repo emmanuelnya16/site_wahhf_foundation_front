@@ -28,6 +28,9 @@ export default function Layout({ children }: LayoutProps) {
   const isLegacyPage = LEGACY_PATHS.has(pathname);
   // Article d'actualité (/actualites/:slug) : seule page qui garde la barre de lecture
   const isArticlePage = /^\/actualites\/[^/]+\/?$/.test(pathname);
+  // Bulle WhatsApp : pas sur /contact, qui a son propre bouton « Écrire sur WhatsApp » en tête des coordonnées (la bulle
+  // le doublait et le recouvrait à l'arrivée sur téléphone ; revue du groupe 7.2, à valider au contrat §13)
+  const showWhatsAppBubble = !isVkiPage && pathname.replace(/\/+$/, '') !== '/contact';
   const mainRef = useRef<HTMLElement>(null);
 
   // Défilement fluide : Lenis (et GSAP) chargés après le premier affichage, seulement sur ordinateur à souris ;
@@ -118,7 +121,7 @@ export default function Layout({ children }: LayoutProps) {
         <RevealBatch scope={mainRef} pathname={pathname} />
       </AfterFirstDisplay>
       {!isVkiPage && <Footer />}
-      {!isVkiPage && <WhatsAppButton />}
+      {showWhatsAppBubble && <WhatsAppButton />}
       {!isVkiPage && <CookieBanner />}
     </div>
   );

@@ -54,6 +54,8 @@ function checkContactField(key: ContactField, value: string | boolean): string |
  *   WhatsApp. L'adresse postale exacte n'est pas fournie : le lieu seul est affiché, sans « TODO ».
  * - Sur téléphone, les coordonnées directes viennent avant le formulaire : la page se termine par une seule action,
  *   « Préparer l'envoi de mon message ». Sur ordinateur, coordonnées à gauche, formulaire à droite (même ordre).
+ * - Revue du groupe 7.2 : liens téléphone, e-mail et « Reconnaître une fausse offre » d'au moins 44 px de haut ; pas de
+ *   bulle WhatsApp sur cette page (Layout.tsx), qui a déjà son bouton « Écrire sur WhatsApp ».
  * - Tant que l'API Symfony n'est pas branchée, le formulaire prépare un message (WhatsApp ou e-mail) que la personne
  *   envoie elle-même : aucun faux envoi, rien de stocké.
  * - Mouvement : seulement l'en-tête ; rien sur les champs.
@@ -122,7 +124,10 @@ export default function ContactPage() {
               votre dossier.
             </p>
             <p>
-              <Link to="/accompagnement/eviter-les-arnaques" className="text-link underline underline-offset-4">
+              <Link
+                to="/accompagnement/eviter-les-arnaques"
+                className="inline-flex min-h-11 items-center text-link underline underline-offset-4"
+              >
                 Reconnaître une fausse offre
               </Link>
             </p>
@@ -148,20 +153,27 @@ export default function ContactPage() {
                 Écrire sur WhatsApp
               </span>
             </PrimaryButton>
-            <ul className="space-y-3 text-body text-text">
-              <li className="flex items-start gap-3">
-                <Phone aria-hidden="true" className="w-5 h-5 mt-1 shrink-0 text-text-secondary" />
-                <a href={`tel:+${CONTACT.whatsappNumber}`} className="text-link underline underline-offset-4 decoration-1 hover:decoration-2">
+            {/* Liens d'au moins 44 px de haut (contrat §8, A11Y-07) : ce sont les actions directes sur téléphone */}
+            <ul className="space-y-1 text-body text-text">
+              <li className="flex items-center gap-3">
+                <Phone aria-hidden="true" className="w-5 h-5 shrink-0 text-text-secondary" />
+                <a
+                  href={`tel:+${CONTACT.whatsappNumber}`}
+                  className="inline-flex min-h-11 items-center text-link underline underline-offset-4 decoration-1 hover:decoration-2"
+                >
                   {CONTACT.whatsappDisplay}
                 </a>
               </li>
-              <li className="flex items-start gap-3">
-                <Mail aria-hidden="true" className="w-5 h-5 mt-1 shrink-0 text-text-secondary" />
-                <a href={`mailto:${CONTACT.email}`} className="text-link underline underline-offset-4 decoration-1 hover:decoration-2 break-all">
+              <li className="flex items-center gap-3">
+                <Mail aria-hidden="true" className="w-5 h-5 shrink-0 text-text-secondary" />
+                <a
+                  href={`mailto:${CONTACT.email}`}
+                  className="inline-flex min-h-11 items-center text-link underline underline-offset-4 decoration-1 hover:decoration-2 break-all"
+                >
                   {CONTACT.email}
                 </a>
               </li>
-              <li className="flex items-start gap-3">
+              <li className="flex items-start gap-3 pt-2">
                 <MapPin aria-hidden="true" className="w-5 h-5 mt-1 shrink-0 text-text-secondary" />
                 <span>{CONTACT.place}</span>
               </li>
