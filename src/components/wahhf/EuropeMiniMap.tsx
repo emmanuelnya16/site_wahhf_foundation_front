@@ -62,6 +62,13 @@ interface EuropeMiniMapProps {
    * l'arc est tracé une fois par MapMotion, puis change de pays d'un coup (contrat §6).
    */
   redrawArc?: boolean;
+  /**
+   * Revue du groupe 7.4 (page Accompagnement) : `keyboard={false}` retire les 10 pays de la carte de l'ordre de tabulation
+   * et des lecteurs d'écran (carte aria-hidden) ; ils restent cliquables à la souris. La liste synchronisée posée à côté
+   * mène déjà à chaque fiche et, au clavier, montre le pays sur la carte : les 10 mêmes liens n'étaient plus qu'une
+   * redite. Par défaut (accueil, Notre impact) : pays focalisables, inchangé.
+   */
+  keyboard?: boolean;
 }
 
 /**
@@ -70,7 +77,7 @@ interface EuropeMiniMapProps {
  * recalcule à chaque redimensionnement (ResizeObserver), pixel pour pixel : textes nets.
  * Les 10 pays accompagnés (or doux) sont des liens vers leur fiche, synchronisés avec la liste.
  */
-export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry, redrawArc = false }: EuropeMiniMapProps) {
+export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry, redrawArc = false, keyboard = true }: EuropeMiniMapProps) {
   const geo = use(loadEuropeGeo());
   const navigate = useNavigate();
   const reduce = useReducedMotion();
@@ -215,8 +222,9 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry, redra
         projection={projection}
         width={w}
         height={h}
-        role="group"
-        aria-label="Carte de l'Europe : les 10 pays accompagnés, chacun avec un lien vers sa fiche"
+        {...(keyboard
+          ? { role: 'group', 'aria-label': "Carte de l'Europe : les 10 pays accompagnés, chacun avec un lien vers sa fiche" }
+          : { 'aria-hidden': true })}
         className="absolute inset-0 w-full h-full select-none overflow-hidden"
       >
         {/* Pays : les 10 accompagnés en or doux (liens), les autres en gris très clair */}
@@ -226,19 +234,25 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry, redra
               return <path key={key} d={d} className="fill-surface-section stroke-surface-raised" strokeWidth={0.6} aria-hidden="true" pointerEvents="none" />;
             }
             const isActive = supported.slug === activeCountrySlug;
+            // Lien au clavier et pour les lecteurs d'écran, sauf keyboard={false} (souris seulement)
+            const linkProps = keyboard
+              ? {
+                  role: 'link',
+                  tabIndex: 0,
+                  'aria-label': `${supported.name}${supported.isEU ? '' : ', hors Union européenne'} : ouvrir la fiche`,
+                  onFocus: (e: FocusEvent<SVGPathElement>) => handleFocus(e, supported.slug),
+                  onBlur: handleBlur,
+                  onKeyDown: (e: KeyboardEvent<SVGPathElement>) => handleKeyDown(e, supported.slug),
+                }
+              : {};
             return (
               <path
                 key={key}
                 d={d}
-                role="link"
-                tabIndex={0}
-                aria-label={`${supported.name}${supported.isEU ? '' : ', hors Union européenne'} : ouvrir la fiche`}
+                {...linkProps}
                 onClick={() => open(supported.slug)}
                 onPointerEnter={() => onHoverCountry(supported.slug)}
                 onPointerLeave={() => onHoverCountry(null)}
-                onFocus={(e) => handleFocus(e, supported.slug)}
-                onBlur={handleBlur}
-                onKeyDown={(e) => handleKeyDown(e, supported.slug)}
                 strokeWidth={isActive ? 1 : 0.7}
                 strokeLinejoin="round"
                 className={`cursor-pointer outline-none transition-[fill] duration-(--dur-fast) ease-out ${isActive ? 'fill-foret stroke-foret dark:fill-feuille dark:stroke-feuille' : 'fill-border-subtle stroke-border-input'}`}

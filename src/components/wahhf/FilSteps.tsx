@@ -58,10 +58,12 @@ export default function FilSteps({
             </span>
             <div className="space-y-2 pt-1">
               <Title className="text-body font-semibold text-text">
+                {/* Cible de 44 px au moins (contrat §8, revue du groupe 7.4) : 11 px de marge intérieure en haut et en bas
+                    du lien, qui reste en ligne ; la mise en page ne bouge pas, seule la zone d'appui s'agrandit */}
                 <Link
                   to={step.to}
                   aria-current={current ? 'step' : undefined}
-                  className={cn('text-link underline underline-offset-4 decoration-1 hover:decoration-2', current && 'decoration-2')}
+                  className={cn('py-[11px] text-link underline underline-offset-4 decoration-1 hover:decoration-2', current && 'decoration-2')}
                 >
                   {step.title}
                   {current && <span className="sr-only"> (étape affichée)</span>}

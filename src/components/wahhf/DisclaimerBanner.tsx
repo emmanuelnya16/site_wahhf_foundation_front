@@ -23,10 +23,11 @@ export default function DisclaimerBanner({ compact = false, className = '' }: Di
         Nos cours et notre accompagnement sont gratuits. Nous ne vendons ni visa ni emploi et ne garantissons aucun résultat. Nous ne vous demandons jamais d’argent. Les décisions appartiennent aux autorités et aux établissements concernés. Vérifiez toujours les informations sur les sites officiels.
       </p>
 
+      {/* Espace insécable avant « ? » (T-19, revue du groupe 7.4) : le point d'interrogation ne passe jamais seul à la ligne */}
       {!compact && (
         <p>
           <Link to="/accompagnement/eviter-les-arnaques" className="text-link underline underline-offset-4">
-            Comment reconnaître une fausse offre et éviter les arnaques ?
+            Comment reconnaître une fausse offre et éviter les arnaques{' '}?
           </Link>
         </p>
       )}

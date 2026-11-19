@@ -73,7 +73,7 @@ export default function NotFoundPage({
         {children ?? <NotFoundLinks heading="Les 10 pays accompagnés" links={COUNTRY_LINKS} />}
 
         <div className="space-y-4">
-          <h2 className="font-serif font-normal text-2xl text-text">Où aller maintenant ?</h2>
+          <h2 className="font-serif font-normal text-2xl text-text">Où aller maintenant{' '}?</h2>
           <div className="flex flex-wrap items-center gap-3">
             <PrimaryButton to="/candidater">Candidater gratuitement</PrimaryButton>
             <DonateButton />

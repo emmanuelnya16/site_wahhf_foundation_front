@@ -1,14 +1,15 @@
 import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
 import { gsap, ScrollTrigger } from './gsap';
-import { scrollToElement, setLenis } from './scroll';
+import { focusAnchorTarget, scrollToElement, setLenis } from './scroll';
 
 /**
  * Défilement fluide Lenis, branché sur ScrollTrigger via le ticker GSAP.
  * Lot 7 (contrat §10) : ordinateur à souris seulement, jamais en mouvement réduit. Layout.tsx décide quand le démarrer
  * ou l'arrêter (requête SMOOTH_SCROLL_QUERY) et charge ce module par import(), après le premier affichage.
  * - Tactile : jamais démarré (défilement natif).
- * - Ancres de la même page (#mission…) : Lenis les fait défiler en tenant compte de l'en-tête fixe.
+ * - Ancres de la même page (#mission…) : Lenis les fait défiler en tenant compte de l'en-tête fixe ; le focus passe à
+ *   leur titre (focusAnchorTarget, groupe 7.4).
  * - Clavier (Espace, Page suivante), recherche dans la page : défilement natif, que Lenis suit.
  */
 export function startSmoothScroll() {
@@ -37,6 +38,8 @@ export function startSmoothScroll() {
     if (!target) return;
     event.preventDefault();
     scrollToElement(target);
+    // Le focus suit (revue du groupe 7.4) : Tab repart de l'ancre, et non du lien ou du haut de la page
+    focusAnchorTarget(target);
   };
   document.addEventListener('click', anchorClick, true);
 

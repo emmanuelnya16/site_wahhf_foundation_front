@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { MouseEvent, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, Heart } from 'lucide-react';
 import { cn } from '../../lib/utils';
@@ -17,7 +17,8 @@ interface ButtonBaseProps {
   children: ReactNode;
   to?: string;
   href?: string;
-  onClick?: () => void;
+  /** Bouton, ou lien (to, href) : appelé avant la navigation, qu'il peut empêcher (ancre de la même page, groupe 7.4). */
+  onClick?: (event: MouseEvent<HTMLElement>) => void;
   type?: 'button' | 'submit';
   className?: string;
   disabled?: boolean;
@@ -64,7 +65,7 @@ function ButtonOrLink({ to, href, onClick, type = 'button', disabled, ariaLabel,
   const external = isExternal(href);
   if (to) {
     return (
-      <Link to={to} className={className} aria-label={ariaLabel}>
+      <Link to={to} onClick={onClick} className={className} aria-label={ariaLabel}>
         <Label external={false}>{children}</Label>
       </Link>
     );
@@ -73,6 +74,7 @@ function ButtonOrLink({ to, href, onClick, type = 'button', disabled, ariaLabel,
     return (
       <a
         href={href}
+        onClick={onClick}
         className={className}
         aria-label={ariaLabel}
         {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}

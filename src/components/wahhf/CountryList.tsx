@@ -36,11 +36,14 @@ export default function CountryList({ activeCountrySlug, onHoverCountry, nonEuWa
               onMouseLeave={() => onHoverCountry(null)}
               onFocus={() => onHoverCountry(country.slug)}
               onBlur={() => onHoverCountry(null)}
-              className={`flex min-h-11 items-center gap-3 py-2.5 transition-colors duration-(--dur-fast) ${
+              className={`flex min-h-11 items-start gap-3 py-2.5 transition-colors duration-(--dur-fast) ${
                 isHighlighted ? 'text-link underline underline-offset-4 decoration-2' : 'text-text hover:text-link'
               }`}
             >
-              <span aria-hidden="true" className="w-7 shrink-0 text-meta text-text-secondary tabular-nums">
+              {/* Code aligné sur la ligne du nom (revue du groupe 7.4) : même hauteur de ligne que le nom (text-body, 1,6) et
+                  ligne alignée en haut ; quand « Hors UE » passe sous le nom (390 px), le code reste face au nom. Une ligne
+                  seule rend comme avant (code centré sur le nom). */}
+              <span aria-hidden="true" className="w-7 shrink-0 text-meta leading-[calc(var(--body-size)*1.6)] text-text-secondary tabular-nums">
                 {country.code}
               </span>
               {/* Nom et « Hors UE » : le repère passe d'un bloc sous le nom quand la colonne est étroite (390 px) */}
