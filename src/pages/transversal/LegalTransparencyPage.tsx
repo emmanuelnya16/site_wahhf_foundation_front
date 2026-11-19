@@ -5,6 +5,7 @@ import { ReadingColumn } from '../../components/wahhf/TextList';
 import PageHeader, { PageMeta, PageTitle, PageIntro } from '../../components/wahhf/PageHeader';
 import SectionHeader from '../../components/wahhf/SectionHeader';
 import { PrimaryButton } from '../../components/wahhf/Buttons';
+import { CONTACT } from '../../config/contact';
 
 /**
  * Bloc de /transparence encore provisoire (« TODO ») : masqué tant que le rapport annuel n'est pas fourni (groupe 7.2,
@@ -54,7 +55,8 @@ export function LegalTransparencyPage({
         },
         {
           h: 'Absence de revente et droits des utilisateurs',
-          p: 'Vos informations ne sont jamais vendues ni cédées à des tiers commerciaux. Conformément au RGPD, vous pouvez demander l’accès, la rectification ou la suppression de vos données à tout moment en écrivant à contact@wahhf-foundation.org (TODO : confirmer adresse DPO).',
+          // Adresse lue dans src/config/contact.ts, la seule source du site (CTC-03, revue du groupe 7.2) : même texte affiché
+          p: `Vos informations ne sont jamais vendues ni cédées à des tiers commerciaux. Conformément au RGPD, vous pouvez demander l’accès, la rectification ou la suppression de vos données à tout moment en écrivant à ${CONTACT.email} (TODO : confirmer adresse DPO).`,
         },
         {
           // TODO : texte à valider par la fondation
@@ -108,7 +110,7 @@ export function LegalTransparencyPage({
             <div className="max-w-[65ch] space-y-5">
               <SectionHeader
                 title="Soutenir nos actions"
-                subtitle="La page de don explique comment donner aujourd’hui et à quoi sert votre don."
+                subtitle="La page de don explique comment donner aujourd’hui."
               />
               <PrimaryButton to="/faire-un-don" size="lg">
                 Revenir à la page de don
