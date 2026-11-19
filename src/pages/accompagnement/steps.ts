@@ -4,7 +4,8 @@
  * - ACCO-01 : l'étape « Connaître les démarches officielles et éviter les arnaques » mène au guide des arnaques (elle
  *   menait au guide d'installation) ; l'installation devient la 5e et dernière étape.
  * - Lue par la page Accompagnement (FilSteps, avec le fil) et par la fin de chaque guide (étape affichée).
- * Titres et descriptions repris des anciennes étapes et des anciennes cartes de guides.
+ * Titres et descriptions repris des anciennes étapes et des anciennes cartes de guides ; espaces insécables avant « : »
+ * et dans « 100 % » (T-19, revue du groupe 7.4).
  */
 export interface AccompanimentStep {
   /** Adresse du guide : /accompagnement/<slug> */
@@ -22,7 +23,7 @@ export const ACCOMPANIMENT_STEPS: AccompanimentStep[] = [
   {
     slug: 'preparer-son-dossier',
     title: 'Préparer son dossier (CV, lettre, diplômes, équivalences)',
-    desc: 'Rassembler des pièces 100 % authentiques, comprendre les procédures d’équivalence académique et rédiger un dossier lisible aux normes européennes.',
+    desc: 'Rassembler des pièces 100 % authentiques, comprendre les procédures d’équivalence académique et rédiger un dossier lisible aux normes européennes.',
   },
   {
     slug: 'apprendre-la-langue',
@@ -37,7 +38,7 @@ export const ACCOMPANIMENT_STEPS: AccompanimentStep[] = [
   {
     slug: 's-installer',
     title: 'Préparer son arrivée et son intégration',
-    desc: 'Se préparer aux réalités pratiques de la vie en Europe : logement, assurance et démarches d’arrivée.',
+    desc: 'Se préparer aux réalités pratiques de la vie en Europe : logement, assurance et démarches d’arrivée.',
   },
 ];
 
