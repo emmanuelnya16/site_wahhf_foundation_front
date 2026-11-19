@@ -6,7 +6,8 @@ import PageHeader, { PageTitle, PageIntro } from '../../components/wahhf/PageHea
 import { PrimaryButton, SecondaryButton } from '../../components/wahhf/Buttons';
 import { TEXT_LINK_CLASS } from '../../components/wahhf/TextList';
 import { DOMAINS_DATA } from '../../services/api';
-import { GALLERY_ALBUMS, galleryItem, albumPlaceDate } from '../../data/gallery';
+import Photo from '../../components/wahhf/Photo';
+import { photoCaption, photoOrFallback } from '../../lib/photos';
 import { scrollToElement, scrollToHash } from '../../lib/scroll';
 import { AfterFirstDisplay, PhotoReveal } from '../../effects/DeferredMotion';
 
@@ -16,8 +17,9 @@ import { AfterFirstDisplay, PhotoReveal } from '../../effects/DeferredMotion';
  *   texte complet (description, approche, programmes) ; une rangée de liens d'ancre en tête sert de sommaire.
  * - ACT-02 : « Soutenir ce domaine » mène à /faire-un-don?affectation=<domaine>, qui présélectionne l'affectation
  *   (DonatePage, groupe 7.2).
- * - T-04 : photo seulement si elle est réelle (3 domaines sur 6 : photos de l'Open Day, légendées et datées) ; les
- *   images générées des trois autres domaines ne sont plus affichées (elles restent dans DOMAINS_DATA).
+ * - T-04 : photo seulement si elle est réelle : une photo de la fondation par domaine (lot 7.6, DOMAIN_PHOTO_IDS),
+ *   légendée par son album ; aucune pour Santé ; les images générées ne sont plus affichées (elles restent dans
+ *   DOMAINS_DATA).
  * - T-10 : /nos-actions#education comme /nos-actions?domaine=education (méga-menu, footer) ouvrent la page sur le
  *   domaine demandé.
  * - Sommaire et arrivée sur un domaine (revue du groupe 7.3) : le titre du domaine reçoit le focus (tabIndex -1), Tab
@@ -33,12 +35,20 @@ import { AfterFirstDisplay, PhotoReveal } from '../../effects/DeferredMotion';
 const focusDomain = (slug: string) => document.getElementById(`domaine-${slug}`)?.focus({ preventScroll: true });
 const isDomain = (slug: string | null) => !!slug && DOMAINS_DATA.some((d) => d.slug === slug);
 
-/** Photos réelles des domaines (galerie de l'Open Day), mêmes que sur l'accueil ; aucune pour les trois autres. */
-const DOMAIN_PHOTOS: Record<string, string> = {
-  education: 'open-day-accompagnement',
-  'droits-inclusion': 'open-day-marche-slogan',
-  'mobilite-langues': 'open-day-visioconference',
+/**
+ * Une photo de la fondation par domaine (lot 7.6, vos choix du 19/11) ; une photo qui attend l'accord parental n'est
+ * pas remplacée (rien en production pour Éducation et Environnement tant que A27 et B10 sont en attente).
+ * TODO (fondation) : aucune photo d'une action de santé ; demandée dans docs/contenus-a-fournir.md (question 142).
+ */
+const DOMAIN_PHOTO_IDS: Record<string, string> = {
+  education: 'A27',
+  environnement: 'B10',
+  entrepreneuriat: 'B23',
+  'droits-inclusion': 'A31',
+  'mobilite-langues': 'A53',
 };
+/** Vue d'ensemble dans l'en-tête : la diapositive des domaines (A60), ou l'intervenant qui les présente (A66). */
+const HEADER_PHOTO = photoOrFallback('A60', 'A66');
 
 export function NosActionsPage() {
   const [searchParams] = useSearchParams();
@@ -80,7 +90,7 @@ export function NosActionsPage() {
         description="Découvrez les 6 domaines d'intervention de WAHHF Foundation au Cameroun et vers l'Europe, et soutenez celui de votre choix."
       />
 
-      <PageHeader reveal>
+      <PageHeader reveal catalogPhoto={HEADER_PHOTO} photoCaption={HEADER_PHOTO ? photoCaption(HEADER_PHOTO) : undefined}>
         <PageTitle>Agir sur tous les leviers de l’autonomie humaine</PageTitle>
         <PageIntro>
           Éducation, santé, entrepreneuriat des jeunes, environnement, droits et inclusion, Mobilité & Langues : les six
@@ -103,9 +113,7 @@ export function NosActionsPage() {
       <Section>
         <div ref={listRef} className="container-page">
           {DOMAINS_DATA.map((dom) => {
-            const photo = DOMAIN_PHOTOS[dom.slug] ? galleryItem(DOMAIN_PHOTOS[dom.slug]) : undefined;
-            const album = photo ? GALLERY_ALBUMS.find((a) => a.id === photo.album) : undefined;
-            const placeDate = albumPlaceDate(album);
+            const photo = DOMAIN_PHOTO_IDS[dom.slug] ? photoOrFallback(DOMAIN_PHOTO_IDS[dom.slug]) : null;
             const titleId = `domaine-${dom.slug}`;
             return (
               <section
@@ -136,31 +144,16 @@ export function NosActionsPage() {
                   </div>
                 </div>
 
-                {photo && photo.kind === 'photo' && (
+                {photo && (
                   <figure className="lg:col-span-5 w-full max-w-[32rem] lg:justify-self-end">
-                    <img
-                      data-photo-reveal-media=""
-                      src={photo.src}
-                      srcSet={photo.srcSet}
+                    <Photo
+                      photo={photo}
                       sizes="(min-width: 1024px) 28rem, calc(100vw - 2.5rem)"
-                      alt={photo.alt}
-                      width={photo.w}
-                      height={photo.h}
-                      loading="lazy"
-                      decoding="async"
-                      style={photo.focus ? { objectPosition: photo.focus } : undefined}
-                      className="w-full aspect-[16/10] object-cover rounded-card bg-surface-section"
+                      className="aspect-[16/10] object-cover"
+                      imgAttributes={{ 'data-photo-reveal-media': '' }}
                     />
-                    {/* Légende datée : la photo vient de l'Open Day, elle n'illustre pas un programme précis */}
-                    <figcaption className="mt-2 text-meta text-text-secondary">
-                      {photo.caption}
-                      {album && placeDate && (
-                        <>
-                          {' '}
-                          {album.title}, {placeDate}.
-                        </>
-                      )}
-                    </figcaption>
+                    {/* Légende : l'album d'où vient la photo ; elle n'illustre pas un programme précis */}
+                    <figcaption className="mt-2 text-meta text-text-secondary">{photoCaption(photo)}</figcaption>
                   </figure>
                 )}
               </section>

@@ -4,6 +4,10 @@ import SEO from '../../components/wahhf/SEO';
 import SectionHeader from '../../components/wahhf/SectionHeader';
 import { TextList, TextListItem } from '../../components/wahhf/TextList';
 import PageHeader, { PageTitle, PageIntro } from '../../components/wahhf/PageHeader';
+import { photoCaption, photoOrFallback } from '../../lib/photos';
+
+/** En-tête (lot 7.6, catalogue : « Rejoindre / bénévolat ») : la photo de groupe de la visite de terrain ; rien tant qu'elle attend l'accord parental. */
+const HEADER_PHOTO = photoOrFallback('B26');
 import { PrimaryButton, DonateButton } from '../../components/wahhf/Buttons';
 import ChoiceTile from '../../components/wahhf/ChoiceTile';
 import FormField, { FieldError, fieldErrorId, LABEL_CLASS, FIELD_CLASS, CHECK_LABEL_CLASS, CHECKBOX_CLASS } from '../../components/wahhf/FormField';
@@ -250,7 +254,7 @@ export function AgirPage() {
         description="Rejoignez l'engagement de WAHHF Foundation : faire un don, devenir formateur ou bénévole, ou bâtir un partenariat institutionnel."
       />
 
-      <PageHeader reveal>
+      <PageHeader reveal catalogPhoto={HEADER_PHOTO} photoCaption={HEADER_PHOTO ? photoCaption(HEADER_PHOTO) : undefined}>
         <PageTitle>Trois manières concrètes de soutenir la jeunesse</PageTitle>
         <PageIntro>
           Donner, partager vos compétences ou engager votre structure{' '}: voici comment agir avec WAHHF Foundation,

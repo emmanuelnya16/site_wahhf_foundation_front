@@ -24,6 +24,8 @@ type PhotoProps = {
   decorative?: boolean;
   className?: string;
   style?: CSSProperties;
+  /** Attributs data-* posés sur l'image (ex. data-photo-reveal-media pour PhotoReveal, data-expand-media) */
+  imgAttributes?: Record<`data-${string}`, string>;
 };
 
 /**
@@ -31,12 +33,14 @@ type PhotoProps = {
  * (aucun décalage de mise en page) ; la couleur dominante de la photo sert de fond pendant le chargement ; le texte
  * alternatif vient du catalogue.
  */
-export default function Photo({ photo, sizes, priority = false, fit = 'intrinsic', radius = 'card', decorative = false, className, style }: PhotoProps) {
+export default function Photo({ photo, sizes, priority = false, fit = 'intrinsic', radius = 'card', decorative = false, className, style, imgAttributes }: PhotoProps) {
   return (
-    <picture className="contents">
+    // <picture> en bloc (et non display: contents) : dans une grille, ses <source> occuperaient sinon des cases
+    <picture className={fit === 'cover' ? 'block h-full w-full' : 'block'}>
       <source type="image/avif" srcSet={photo.sources.avif} sizes={sizes} />
       <source type="image/webp" srcSet={photo.sources.webp} sizes={sizes} />
       <img
+        {...imgAttributes}
         src={photo.sources.jpeg}
         width={photo.width}
         height={photo.height}

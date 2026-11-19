@@ -31,6 +31,27 @@ export function photoOrFallback(id: string, ...fallbacks: string[]): CatalogPhot
   return null;
 }
 
+const NB = '\u00a0';
+
+/** Album d'une photo. */
+export const albumOf = (photo: CatalogPhoto): PhotoAlbum => PHOTO_ALBUMS.find((a) => a.id === photo.album)!;
+
+/**
+ * Légende d'une photo placée hors de la galerie : l'album d'où elle vient, tel que le catalogue le nomme
+ * (« Journée du 25 avril 2026, Albatros Hotel. ») ; jamais de lieu ni de date que le catalogue ne donne pas.
+ */
+export function photoCaption(photo: CatalogPhoto): string {
+  return `${albumLabel(albumOf(photo))}.`;
+}
+
+/** Nom d'un album pour le texte courant : « Journée du 25 avril 2026, Albatros Hotel » (date insécable, T-19). */
+export function albumLabel(album: PhotoAlbum): string {
+  return album.title.replace(/\s+—\s+/, ', ').replace(/(\d+) (\p{L}+) (\d{4})/u, `$1${NB}$2${NB}$3`);
+}
+
+/** « 13 photos », « 1 photo » (nombre et mot insécables). */
+export const photoCount = (n: number) => `${n}${NB}photo${n > 1 ? 's' : ''}`;
+
 /** Albums qui ont au moins une photo affichable, dans l'ordre du catalogue. */
 export function visibleAlbums(): { album: PhotoAlbum; photos: CatalogPhoto[] }[] {
   const photos = visiblePhotos();

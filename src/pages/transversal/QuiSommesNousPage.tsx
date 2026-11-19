@@ -9,6 +9,19 @@ import Fil, { FilPoint } from '../../components/wahhf/Fil';
 import { AfterFirstDisplay, FilScrub, PhotoReveal } from '../../effects/DeferredMotion';
 import { TIMELINE_MILESTONES } from '../../services/api';
 import { GOVERNANCE_MEMBERS } from '../../config/governance';
+import Photo from '../../components/wahhf/Photo';
+import { cn } from '../../lib/utils';
+import { photoCaption, photoOrFallback } from '../../lib/photos';
+
+/**
+ * Photos de la fondation (lot 7.6, catalogue : « À propos ») : la banderole dans l'en-tête ; le kakémono des domaines
+ * et les parents au premier rang sous la mission ; les trois aînés à côté de l'appel final (A31 et A88 montrent les
+ * mêmes personnes : elles ne sont pas côte à côte). Une photo absente (accord parental en attente) n'est pas remplacée.
+ */
+const HEADER_PHOTO = photoOrFallback('A02');
+const MISSION_PORTRAIT = photoOrFallback('A14');
+const MISSION_LANDSCAPE = photoOrFallback('A31');
+const CLOSING_PHOTO = photoOrFallback('A88');
 
 /*
  * Qui sommes-nous (groupe 7.3 : contrat validé, audit QSN-01 à QSN-04, T-11, T-15).
@@ -106,7 +119,7 @@ export function QuiSommesNousPage() {
         description="Découvrez l’histoire, la mission, les valeurs et l’approche de WAHHF Foundation, et son lien avec le groupe IROKO."
       />
 
-      <PageHeader reveal photoId="open-day-trophee">
+      <PageHeader reveal catalogPhoto={HEADER_PHOTO} photoCaption={HEADER_PHOTO ? photoCaption(HEADER_PHOTO) : undefined}>
         <PageTitle>Une fondation camerouno-allemande au service de la dignité humaine</PageTitle>
         <PageIntro>
           Née de la solidarité entre le Cameroun et l’Allemagne, WAHHF Foundation accompagne les jeunes et les communautés à
@@ -140,6 +153,18 @@ export function QuiSommesNousPage() {
             ))}
           </TextList>
         </div>
+
+        {/* Deux photos du 25 avril côte à côte, à la même hauteur (ratios réels : 2:3 et 3:2, colonnes 4 / 9) : le
+            kakémono des domaines, les parents au premier rang ; apparition avec les autres photos (data-reveal) */}
+        {MISSION_PORTRAIT && MISSION_LANDSCAPE && (
+          <figure className="container-page mt-12 lg:mt-16">
+            <div className="grid max-w-4xl grid-cols-[4fr_9fr] gap-2 sm:gap-3">
+              <Photo photo={MISSION_PORTRAIT} sizes="(min-width: 56rem) 17rem, 30vw" imgAttributes={{ 'data-reveal': '' }} />
+              <Photo photo={MISSION_LANDSCAPE} sizes="(min-width: 56rem) 38rem, 70vw" imgAttributes={{ 'data-reveal': '' }} />
+            </div>
+            <figcaption className="mt-3 text-meta text-text-secondary">{photoCaption(MISSION_PORTRAIT)}</figcaption>
+          </figure>
+        )}
       </Section>
 
       {/* NOTRE APPROCHE (venue de l'accueil) */}
@@ -245,7 +270,7 @@ export function QuiSommesNousPage() {
 
       {/* FIN DE PAGE : deux actions (QSN-04), sur le fond de la page, sans carte nuit au-dessus du footer */}
       <Section tone={hasGovernance ? 'sauge' : 'brume'}>
-        <div className="container-page">
+        <div className={cn('container-page', CLOSING_PHOTO && 'grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-12')}>
           <div className="max-w-[65ch] space-y-6">
             <SectionHeader
               title="Soutenir la fondation"
@@ -258,6 +283,12 @@ export function QuiSommesNousPage() {
               </SecondaryButton>
             </div>
           </div>
+          {CLOSING_PHOTO && (
+            <figure className="w-full max-w-[32rem] lg:justify-self-end">
+              <Photo photo={CLOSING_PHOTO} sizes="(min-width: 1024px) 32rem, calc(100vw - 2.5rem)" imgAttributes={{ 'data-reveal': '' }} />
+              <figcaption className="mt-2 text-meta text-text-secondary">{photoCaption(CLOSING_PHOTO)}</figcaption>
+            </figure>
+          )}
         </div>
       </Section>
     </>

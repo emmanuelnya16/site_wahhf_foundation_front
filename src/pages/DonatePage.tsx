@@ -4,6 +4,10 @@ import SEO from '../components/wahhf/SEO';
 import SectionHeader from '../components/wahhf/SectionHeader';
 import { LABEL_CLASS, FIELD_CLASS, FieldError, fieldErrorId } from '../components/wahhf/FormField';
 import PageHeader, { PageTitle, PageIntro } from '../components/wahhf/PageHeader';
+import { photoCaption, photoOrFallback } from '../lib/photos';
+
+/** En-tête (lot 7.6) : des jeunes vus de dos, en t-shirts de la fondation ; aucun visage. */
+const HEADER_PHOTO = photoOrFallback('A16');
 import { DonateButton } from '../components/wahhf/Buttons';
 import ChoiceTile from '../components/wahhf/ChoiceTile';
 import ContactHandoff from '../components/wahhf/ContactHandoff';
@@ -283,7 +287,7 @@ export default function DonatePage() {
         description="Soutenez WAHHF Foundation : vos dons financent les cours d'allemand (A1 à C1), l'accompagnement des jeunes vers l'Europe et nos actions d'éducation, de santé et d'environnement au Cameroun."
       />
 
-      <PageHeader reveal>
+      <PageHeader reveal catalogPhoto={HEADER_PHOTO} photoCaption={HEADER_PHOTO ? photoCaption(HEADER_PHOTO) : undefined}>
         <PageTitle>Votre don finance des cours d’allemand et nos actions au Cameroun</PageTitle>
         <PageIntro>
           Les cours d’allemand (A1 à C1) et l’accompagnement vers l’Europe sont gratuits pour les jeunes{NBSP}: ils

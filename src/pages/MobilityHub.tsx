@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 import SEO from '../components/wahhf/SEO';
 import SectionHeader from '../components/wahhf/SectionHeader';
 import PageHeader, { PageTitle, PageIntro, PageActions } from '../components/wahhf/PageHeader';
+import { photoCaption, photoOrFallback } from '../lib/photos';
+
+/** En-tête (lot 7.6, catalogue : « Mobilité / Allemagne ») : la présentation sur les études en Allemagne du 25 avril. */
+const HEADER_PHOTO = photoOrFallback('A53');
 import { PrimaryButton, SecondaryButton } from '../components/wahhf/Buttons';
 import DisclaimerBanner from '../components/wahhf/DisclaimerBanner';
 import { COUNTRIES_DATA, GERMAN_LEVELS_DATA } from '../services/api';
@@ -74,7 +78,15 @@ export default function MobilityHub() {
       />
 
       {/* En-tête : titre, avertissement juste dessous (avant la photo sur téléphone), photo de l'Open Day légendée */}
-      <PageHeader reveal revealPhoto photoId="open-day-visioconference" photoRatio="source" notice={<DisclaimerBanner />}>
+      <PageHeader
+        reveal
+        revealPhoto
+        catalogPhoto={HEADER_PHOTO}
+        photoCaption={HEADER_PHOTO ? photoCaption(HEADER_PHOTO) : undefined}
+        photoId="open-day-visioconference"
+        photoRatio="source"
+        notice={<DisclaimerBanner />}
+      >
         <PageTitle>Apprendre l’allemand, se préparer, s’orienter vers l’Europe</PageTitle>
 
         <PageIntro>

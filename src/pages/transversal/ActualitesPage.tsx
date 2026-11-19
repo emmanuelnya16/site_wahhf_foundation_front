@@ -4,11 +4,12 @@ import Section from '../../components/wahhf/Section';
 import SectionHeader from '../../components/wahhf/SectionHeader';
 import { ReadingColumn, TEXT_LINK_CLASS } from '../../components/wahhf/TextList';
 import { CardLink, CardMedia, CardBody, CardMeta, CardTitle } from '../../components/wahhf/Card';
+import Photo from '../../components/wahhf/Photo';
+import { albumLabel, photoCount, photoOrFallback, visibleAlbums } from '../../lib/photos';
 import PageHeader, { PageBreadcrumb, PageMeta, PageTitle, PageIntro } from '../../components/wahhf/PageHeader';
 import { PrimaryButton } from '../../components/wahhf/Buttons';
 import NotFoundPage, { NotFoundLinks } from '../NotFoundPage';
 import { DOMAINS_DATA, NEWS_DATA, NewsArticle, imageSrcSet } from '../../services/api';
-import { albumPlaceDate, countLabel, GALLERY_ALBUMS, GALLERY_ITEMS, galleryItem } from '../../data/gallery';
 
 /*
  * Actualités et article (groupe 7.3 : contrat validé, audit ACTU-01, ART-01 à ART-03, T-03, T-04, T-15, A11Y-10).
@@ -40,29 +41,28 @@ const confirmedDate = (date: string) => (/TODO/.test(date) ? null : date);
 /** Domaine d'un article (sa rubrique), pour son action principale. */
 const domainOf = (article: NewsArticle) => DOMAINS_DATA.find((d) => d.title === article.category);
 
-/** L'album de l'Open Day, seule action réelle documentée (ACTU-01) : sa photo, son lieu et sa date. */
-const OPEN_DAY = GALLERY_ALBUMS.find((a) => a.id === 'open-day');
-const OPEN_DAY_ITEMS = GALLERY_ITEMS.filter((it) => it.album === 'open-day');
-const OPEN_DAY_PHOTO = galleryItem('open-day-marche');
+/**
+ * La journée du 25 avril 2026, seule action réelle documentée (ACTU-01) : son album de la galerie (lot 7.6), avec en
+ * couverture les participants devant l'Albatros Hotel (A07, catalogue : « carte événement »).
+ */
+const EVENT = visibleAlbums().find(({ album }) => album.id === 'journee-2026-04-25');
+const EVENT_COVER = photoOrFallback('A07');
 
 function OpenDayCard() {
-  if (!OPEN_DAY || !OPEN_DAY_PHOTO || OPEN_DAY_PHOTO.kind !== 'photo') return null;
-  const placeDate = albumPlaceDate(OPEN_DAY);
+  if (!EVENT || !EVENT_COVER) return null;
   return (
-    <CardLink to={`/galerie#${OPEN_DAY.id}`} surface="section">
-      <CardMedia
-        src={OPEN_DAY_PHOTO.src}
-        srcSet={OPEN_DAY_PHOTO.srcSet}
+    <CardLink to={`/galerie?album=${EVENT.album.id}`} surface="section">
+      {/* Couverture décorative : le titre de la carte dit déjà l'événement */}
+      <Photo
+        photo={EVENT_COVER}
         sizes="(min-width: 1024px) 22rem, (min-width: 768px) 45vw, 100vw"
-        alt=""
-        width={OPEN_DAY_PHOTO.w}
-        height={OPEN_DAY_PHOTO.h}
-        style={OPEN_DAY_PHOTO.focus ? { objectPosition: OPEN_DAY_PHOTO.focus } : undefined}
+        decorative
+        radius="none"
+        className="block aspect-[16/10] object-cover"
       />
       <CardBody>
-        <CardMeta>{placeDate}</CardMeta>
-        <CardTitle as="h3">{OPEN_DAY.title}</CardTitle>
-        <p className="text-body text-text-secondary">{countLabel(OPEN_DAY_ITEMS)}, dans la galerie.</p>
+        <CardTitle as="h3">{albumLabel(EVENT.album)}</CardTitle>
+        <p className="text-body text-text-secondary">{photoCount(EVENT.photos.length)}, dans la galerie.</p>
       </CardBody>
     </CardLink>
   );

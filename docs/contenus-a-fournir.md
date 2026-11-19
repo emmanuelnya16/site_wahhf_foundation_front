@@ -356,3 +356,11 @@ Le statut juridique de la fondation, attendu aussi sur cette page, est demandé 
 - Randonnée avec les jeunes : mineurs identifiables : B60, B62, B63, B65, B68, B69, B73, B75, B77, B80, B82, B84.
 
 Pour les photos « à vérifier », il suffit de nous dire si toutes les personnes reconnaissables sont majeures. Tant que l'accord n'est pas confirmé, ces photos ne s'affichent pas sur le site en ligne ; des photos d'adultes ou de personnes vues de dos les remplacent.
+
+### Page « Nos actions »
+
+142. Avez-vous des photos d’une action de santé de la fondation (consultation, prévention, sensibilisation), avec l’accord des personnes visibles ? Aujourd’hui, le domaine Santé est le seul sans photo.
+
+### Page introuvable (erreur 404)
+
+143. Sous la photo du lac de cratère, la page introuvable dit : « On s’est perdus en route. » Ce clin d’œil vous convient-il, ou préférez-vous une phrase plus sobre ?

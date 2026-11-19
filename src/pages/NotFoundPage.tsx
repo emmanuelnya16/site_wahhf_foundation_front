@@ -1,5 +1,12 @@
 import { ReactNode } from 'react';
 import PageHeader, { PageMeta, PageTitle, PageIntro } from '../components/wahhf/PageHeader';
+import { photoCaption, photoOrFallback } from '../lib/photos';
+
+/**
+ * Photo (lot 7.6) : un lac de cratère vu d'en haut, « on s'est perdus en route » (texte à valider avec la fondation,
+ * docs/contenus-a-fournir.md).
+ */
+const LOST_PHOTO = photoOrFallback('B40', 'B85');
 import { Link, useLocation } from 'react-router-dom';
 import SEO from '../components/wahhf/SEO';
 import { LinkList, LINK_ROW_CLASS } from '../components/wahhf/TextList';
@@ -54,7 +61,10 @@ export default function NotFoundPage({
     <>
       <SEO title="Page introuvable" description="Cette adresse ne correspond à aucune page du site WAHHF Foundation." />
 
-      <PageHeader>
+      <PageHeader
+        catalogPhoto={LOST_PHOTO}
+        photoCaption={LOST_PHOTO ? `On s’est perdus en route. ${photoCaption(LOST_PHOTO)}` : undefined}
+      >
         <PageMeta>
           <span>Page introuvable (erreur 404)</span>
         </PageMeta>

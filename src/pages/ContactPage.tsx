@@ -4,6 +4,10 @@ import { Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
 import SectionHeader from '../components/wahhf/SectionHeader';
 import PageHeader, { PageTitle, PageIntro } from '../components/wahhf/PageHeader';
+import { photoCaption, photoOrFallback } from '../lib/photos';
+
+/** En-tête (lot 7.6) : les participants devant l'Albatros Hotel, le 25 avril 2026. */
+const HEADER_PHOTO = photoOrFallback('A07');
 import { PrimaryButton } from '../components/wahhf/Buttons';
 import ChoiceTile from '../components/wahhf/ChoiceTile';
 import InfoBox from '../components/wahhf/InfoBox';
@@ -116,6 +120,8 @@ export default function ContactPage() {
 
       <PageHeader
         reveal
+        catalogPhoto={HEADER_PHOTO}
+        photoCaption={HEADER_PHOTO ? photoCaption(HEADER_PHOTO) : undefined}
         notice={
           // Alerte ambre (décision des groupes 7.1 et 7.2) : premier élément sous le titre, jamais repliée
           <InfoBox tone="warning" title="Vigilance">

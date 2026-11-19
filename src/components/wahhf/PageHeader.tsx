@@ -4,6 +4,8 @@ import Container from './Container';
 import { cn } from '../../lib/utils';
 import { albumPlaceDate, GALLERY_ALBUMS, galleryItem } from '../../data/gallery';
 import LineReveal from '../../effects/LineReveal';
+import type { CatalogPhoto } from '../../data/photos';
+import Photo from './Photo';
 
 /** Arrivée de l'en-tête (groupe 7.1, contrat §10) : activée page par page avec <PageHeader reveal>. */
 const RevealContext = createContext(false);
@@ -31,6 +33,8 @@ const RevealContext = createContext(false);
 export default function PageHeader({
   children,
   photoId,
+  catalogPhoto,
+  photoCaption,
   notice,
   photoRatio = '16/10',
   reveal = false,
@@ -39,6 +43,13 @@ export default function PageHeader({
 }: {
   children: ReactNode;
   photoId?: string;
+  /**
+   * Photo du catalogue (lot 7.6, src/data/photos.ts), à la place de photoId ; null ou absente : pas de photo (par
+   * exemple quand la seule photo prévue attend encore l'accord parental, en production).
+   */
+  catalogPhoto?: CatalogPhoto | null;
+  /** Légende de la photo du catalogue (photoCaption() de src/lib/photos.ts : l'album d'où elle vient). */
+  photoCaption?: string;
   /** 'source' : la photo garde ses proportions, visible en entier (MOB-01) ; '16/10' par défaut (recadrée). */
   photoRatio?: '16/10' | 'source';
   /** Arrivée animée de l'en-tête (titre ligne par ligne, introduction en fondu). */
@@ -52,7 +63,8 @@ export default function PageHeader({
   notice?: ReactNode;
   className?: string;
 }) {
-  const photo = photoId ? galleryItem(photoId) : undefined;
+  const photo = !catalogPhoto && photoId ? galleryItem(photoId) : undefined;
+  const hasPhoto = !!catalogPhoto || !!photo;
   const album = photo ? GALLERY_ALBUMS.find((a) => a.id === photo.album) : undefined;
   const placeDate = albumPlaceDate(album);
   return (
@@ -64,9 +76,21 @@ export default function PageHeader({
       )}
     >
       {/* Deux colonnes seulement avec une photo ; avec l'encadré seul, une colonne (le titre garde toute la largeur) */}
-      <Container className={cn(photo ? 'grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-x-12' : notice && 'grid gap-8')}>
+      <Container className={cn(hasPhoto ? 'grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-x-12' : notice && 'grid gap-8')}>
         <div className="space-y-5">{children}</div>
-        {notice && <div className={cn(photo && 'lg:col-span-2 lg:row-start-2')}>{notice}</div>}
+        {notice && <div className={cn(hasPhoto && 'lg:col-span-2 lg:row-start-2')}>{notice}</div>}
+        {catalogPhoto && (
+          <figure className="w-full max-w-[32rem] lg:col-start-2 lg:row-start-1 lg:justify-self-end">
+            {/* Photo de l'en-tête : l'image LCP de la page (chargée en priorité), 512 px au plus */}
+            <Photo
+              photo={catalogPhoto}
+              sizes="(min-width: 1024px) 32rem, calc(100vw - 2.5rem)"
+              priority
+              className={cn(photoRatio === 'source' ? undefined : 'aspect-[16/10] object-cover', revealPhoto && 'photo-rise')}
+            />
+            {photoCaption && <figcaption className="mt-2 text-meta text-text-secondary">{photoCaption}</figcaption>}
+          </figure>
+        )}
         {photo && photo.kind === 'photo' && (
           <figure className="w-full max-w-[32rem] lg:col-start-2 lg:row-start-1 lg:justify-self-end">
             <img
