@@ -8,6 +8,7 @@ import { DonateButton } from '../components/wahhf/Buttons';
 import ChoiceTile from '../components/wahhf/ChoiceTile';
 import ContactHandoff from '../components/wahhf/ContactHandoff';
 import { DOMAINS_DATA } from '../services/api';
+import { CONTACT } from '../config/contact';
 import { buildDraft } from '../lib/contactDraft';
 import { useFocusOnChange } from '../lib/useFocusOnChange';
 import { cn } from '../lib/utils';
@@ -25,16 +26,25 @@ import { cn } from '../lib/utils';
  *   L'adresse suit ensuite le choix fait dans le formulaire (remplacée, sans nouvelle entrée d'historique).
  * - Montant (DON-07) : en euros ou en francs CFA, au choix ; montants proposés, ou montant libre entre un minimum et un
  *   maximum écrits sous le champ ; conversion à la parité fixe (1 € = 655,957 FCFA) affichée à côté.
- * - Ligne d'impact (DON-05) : sous les montants, elle suit le montant et l'affectation et dit à quoi sert le domaine
- *   choisi (programmes de DOMAINS_DATA). Les montants d'exemple (« 25 € = manuels A1 »…) ne sont pas confirmés : ils
+ * - Ligne d'impact (DON-05) : sous les montants, elle suit le montant et l'affectation. Elle ne décrit le programme que
+ *   pour Mobilité & Langues, seul programme réel et vérifiable (contrat §1) ; pour les cinq autres domaines, elle nomme
+ *   le domaine seulement : leurs programmes ne sont pas confirmés (audit T-13, ACT-03 ; question 117), ils restent dans
+ *   DOMAIN_IMPACT_NOT_VALIDATED. Les montants d'exemple (« 25 € = manuels A1 »…) ne sont pas confirmés non plus : ils
  *   restent masqués (EXAMPLE_IMPACTS_NOT_VALIDATED) jusqu'à ce que la fondation donne de vrais coûts (questions 67 à 71).
+ * - Précaution anti-arnaque (revue du groupe 7.2) : la fondation indique comment régler le don par WhatsApp ou par
+ *   e-mail ; la page dit donc depuis quels canaux elle répond (src/config/contact.ts, les « seuls canaux officiels » de
+ *   la page Arnaques) et de ne rien payer à un autre numéro (question 138).
  * - Un seul style d'option choisie (DON-06, ChoiceTile) ; le rouge reste au seul bouton de don.
  * - Mouvement (groupe 7.2, contrat §10) : en-tête révélé comme le hero ; choix d'une option en 150 ms ; ligne d'impact
  *   en fondu croisé de 0,3 s. Rien au défilement (formulaire). Tout est immédiat en mouvement réduit.
  */
 
-/** Ce que finance chaque domaine, résumé des programmes de DOMAINS_DATA (sans montant inventé). */
-const DOMAIN_IMPACT: Record<string, { for: string; what: string }> = {
+/**
+ * Programmes des cinq domaines autres que Mobilité & Langues, résumés de DOMAINS_DATA : NON CONFIRMÉS (audit T-13 et
+ * ACT-03 : on ne sait pas s'ils sont réalisés, en cours ou prévus). Masqués de la ligne d'impact (revue du groupe 7.2)
+ * jusqu'à la réponse à la question 117 de docs/contenus-a-fournir.md ; un domaine confirmé passe dans DOMAIN_IMPACT.
+ */
+export const DOMAIN_IMPACT_NOT_VALIDATED: Record<string, { for: string; what: string }> = {
   education: { for: 'l’éducation', what: 'kits scolaires et manuels, bibliothèques communautaires, mentorat et orientation des élèves' },
   sante: { for: 'la santé', what: 'consultations préventives, santé maternelle et infantile, eau potable et hygiène à l’école' },
   entrepreneuriat: {
@@ -46,6 +56,10 @@ const DOMAIN_IMPACT: Record<string, { for: string; what: string }> = {
     for: 'les droits et l’inclusion',
     what: 'autonomie des jeunes femmes, scolarisation des jeunes en situation de handicap, écoute et orientation sociale',
   },
+};
+
+/** Ce que finance un domaine dont le programme est réel et vérifiable (contrat §1 : Mobilité & Langues seulement). */
+const DOMAIN_IMPACT: Record<string, { for: string; what: string }> = {
   'mobilite-langues': { for: 'la mobilité et les langues', what: 'cours d’allemand du niveau A1 au C1 et orientation vers 10 pays européens' },
 };
 
@@ -112,17 +126,19 @@ function amountError(raw: string, currency: Currency): string | undefined {
   return undefined;
 }
 
-/** Ligne d'impact : le montant, sa conversion, puis ce que finance l'affectation choisie (et l'exemple confirmé, s'il y en a un). */
+/**
+ * Ligne d'impact : le montant, sa conversion, puis l'affectation choisie ; le programme n'est décrit que s'il est
+ * confirmé (DOMAIN_IMPACT), et l'exemple chiffré seulement s'il est confirmé (CONFIRMED_IMPACTS).
+ */
 function impactSentence(amount: number, currency: Currency, allocation: string): string {
   const money = `${formatAmount(amount, currency)} (environ ${convertedAmount(amount, currency)})`;
   const domain = DOMAIN_IMPACT[allocation];
-  const fallback = DOMAINS_DATA.find((d) => d.slug === allocation);
-  let sentence =
-    allocation === GENERAL || (!domain && !fallback)
-      ? `${money}, affectés par la fondation là où le besoin est le plus urgent, parmi ses six domaines d’action.`
-      : domain
-      ? `${money} pour ${domain.for}${NBSP}: ${domain.what}.`
-      : `${money} pour le domaine «${NBSP}${fallback!.title}${NBSP}»${NBSP}: ${fallback!.shortDesc}`;
+  const title = allocation === GENERAL ? undefined : DOMAINS_DATA.find((d) => d.slug === allocation)?.title;
+  let sentence = domain
+    ? `${money} pour ${domain.for}${NBSP}: ${domain.what}.`
+    : title
+    ? `${money} pour le domaine «${NBSP}${title}${NBSP}».`
+    : `${money}, là où le besoin est le plus urgent.`;
   const example = CONFIRMED_IMPACTS.find((e) => e.currency === currency && e.amount === amount);
   if (example) sentence += ` Par exemple${NBSP}: ${example.text}`;
   return sentence;
@@ -152,6 +168,22 @@ function CrossfadeText({ text, className }: { text: string; className?: string }
         {layers.current}
       </p>
     </div>
+  );
+}
+
+/**
+ * Précaution anti-arnaque (revue du groupe 7.2) : c'est la fondation qui indique comment régler le don, par WhatsApp ou
+ * par e-mail. La page dit donc depuis quels canaux elle répond (src/config/contact.ts, les « seuls canaux officiels » de
+ * la page Arnaques) et de ne rien payer à quelqu'un d'autre. Affichée avant l'envoi et à la dernière étape.
+ */
+function OfficialChannelsNote() {
+  return (
+    <p className="text-body text-text max-w-[65ch]">
+      Pour votre sécurité, la fondation vous répond seulement par WhatsApp au{' '}
+      <span className="whitespace-nowrap tabular-nums">{CONTACT.whatsappDisplay}</span> ou par e-mail depuis{' '}
+      <span className="break-all">{CONTACT.email}</span>. Si quelqu’un vous écrit d’un autre numéro ou d’une autre
+      adresse au sujet de votre don, ne payez rien et prévenez-nous.
+    </p>
   );
 }
 
@@ -276,6 +308,7 @@ export default function DonatePage() {
               Votre message demande à la fondation comment régler votre don de {amountLabel}. Aucun paiement n’est
               demandé sur ce site.
             </p>
+            <OfficialChannelsNote />
           </ContactHandoff>
         ) : (
           // Panneau de formulaire sur sauge (contrat §8) ; rien n'y apparaît au défilement (contrat §10)
@@ -285,6 +318,7 @@ export default function DonatePage() {
               title="Comment donner aujourd’hui"
               subtitle={`Le paiement en ligne n’est pas encore ouvert sur ce site. Choisissez un montant${NBSP}: un message est préparé, vous l’envoyez par WhatsApp ou par e-mail, et la fondation vous indique comment régler votre don.`}
             />
+            <OfficialChannelsNote />
 
             <form onSubmit={handleSubmit} noValidate className="space-y-7">
               {/* Affectation (ACT-02, DON-08) : libellés courts, le détail est dans la ligne d'impact */}
@@ -409,11 +443,13 @@ export default function DonatePage() {
                 />
               </div>
 
-              {/* Plus de case de consentement obligatoire (DON-04) : le site ne garde rien, une phrase d'information suffit */}
+              {/* Plus de case de consentement obligatoire (DON-04) : le site ne garde rien, une phrase d'information suffit.
+                  La politique s'ouvre dans un nouvel onglet : montant, devise et nom saisis ne sont jamais perdus. */}
               <p className="text-meta text-text-secondary max-w-[65ch]">
                 Ce site n’enregistre rien{NBSP}: le message part de votre propre messagerie. Voir notre{' '}
-                <Link to="/confidentialite" className="text-link underline underline-offset-4">
+                <Link to="/confidentialite" target="_blank" rel="noopener" className="text-link underline underline-offset-4">
                   politique de confidentialité
+                  <span className="sr-only"> (nouvel onglet)</span>
                 </Link>
                 .
               </p>

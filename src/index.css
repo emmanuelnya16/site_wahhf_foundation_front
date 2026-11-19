@@ -868,15 +868,32 @@
 }
 
 /* Faire un don (groupe 7.2) : retours d'action seulement, rien au défilement dans le formulaire.
-   1. Choix d'une affectation, d'une devise ou d'un montant (ChoiceTile className="choice-150") : contour et liseré de
-      l'option choisie en 150 ms, coche qui apparaît en fondu et en échelle (150 ms).
+   1. Choix d'une devise ou d'un montant (ChoiceTile className="choice-150" ; l'affectation est un menu natif) : le
+      contour de 2 px de l'option choisie apparaît en fondu de 150 ms, dessiné en ::after (opacité seulement : revue du
+      groupe 7.2, rien d'autre que transform, opacity et clip-path n'est animé) ; la coche apparaît en fondu et en
+      échelle (150 ms). Le contour 1 px de la tuile ne change pas. Sans :has(), style choisi de ChoiceTile, immédiat.
    2. Ligne d'impact (DonatePage) : l'ancienne phrase s'efface pendant que la nouvelle apparaît, fondu croisé de 0,3 s
       (deux couches superposées ; l'ancienne est retirée à la fin). Opacité et transform seulement.
    Mouvement réduit : tout change d'un coup, l'ancienne phrase n'est jamais affichée. */
 .choice-150 {
-  transition-property: border-color, box-shadow, background-color, color;
-  transition-duration: 150ms;
-  transition-timing-function: var(--ease-power2-out);
+  transition: none;
+}
+.choice-150:has(:checked) {
+  border-color: var(--border-input);
+  box-shadow: none;
+}
+.choice-150::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border: 2px solid var(--action);
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 150ms var(--ease-power2-out);
+}
+.choice-150:has(:checked)::after {
+  opacity: 1;
 }
 @keyframes choice-check {
   from { opacity: 0; transform: scale(0.6); }
@@ -897,7 +914,7 @@
   animation: crossfade-out 0.3s var(--ease-power2-out) forwards;
 }
 @media (prefers-reduced-motion: reduce) {
-  .choice-150 {
+  .choice-150::after {
     transition: none;
   }
   .choice-150 svg,
