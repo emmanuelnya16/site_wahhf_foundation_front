@@ -323,3 +323,13 @@ La question 33 (l'adresse « integrite@wahhf-foundation.org » existe-t-elle ?) 
 ### Page « Faire un don »
 
 138. Quand un donateur vous écrit pour faire un don, qui lui répond, et depuis quel numéro ou quelle adresse ? La page de don dit aujourd'hui : « la fondation vous répond seulement par WhatsApp au +237 693 12 92 05 ou par e-mail depuis contact@wahhf-foundation.org. Si quelqu'un vous écrit d'un autre numéro ou d'une autre adresse au sujet de votre don, ne payez rien et prévenez-nous. » Est-ce exact ?
+
+---
+
+## Question ajoutée après la relecture des pages Qui sommes-nous, Nos actions, Notre impact, Partenaires, Galerie et Actualités
+
+### Page « Qui sommes-nous »
+
+Le statut juridique de la fondation, attendu aussi sur cette page, est demandé plus haut (demande A).
+
+139. Quel slogan voulez-vous afficher en tête de la page « Qui sommes-nous » ? Sur les t-shirts de l'Open Day, on lit : « Bâtir l'Afrique qui nourrit, soigne et instruit sa jeunesse ». Est-ce le slogan officiel de la fondation ?
