@@ -1264,3 +1264,204 @@ html.vt-galerie::view-transition-new(root) {
     scroll-behavior: auto !important;
   }
 }
+
+/* =============================================================================
+   Accordéon d'images (lot 7.6) : src/components/gallery/ExpandingGallery.tsx
+   Toujours un panneau ouvert. Bureau (1 024 px et souris) : rangée de bandes, l'ouverte vaut 7 bandes (~60 % de la
+   largeur, comme flex-grow 7 contre 1). Téléphone et tablette : bandes empilées de 4,5 rem, l'ouverte fait 22 rem.
+   Positions calculées en CSS (--i : rang du panneau, --after : 1 s'il suit le panneau ouvert) et appliquées par
+   transform, pas par le flux : quand un panneau s'ouvre au survol, rien ne « se décale » au sens du CLS (le survol
+   n'est pas une saisie, Chrome compterait chaque déplacement de bande). La photo garde la taille du panneau ouvert :
+   la bande en montre une tranche, centrée sur le cadrage du catalogue (--fx, --fy) ; ni zoom ni saut.
+   Coins de 1,5 rem (votre brief, au-dessus des 20 px du contrat §9, pour ces seuls panneaux).
+   ============================================================================= */
+.xg {
+  --xg-radius: 1.5rem;
+  --xg-duration: 650ms;
+  --xg-gap: 8px;
+  --xg-strip: 4.5rem;
+  --xg-open: 22rem;
+  position: relative;
+  container-type: inline-size;
+  height: calc((var(--xg-n) - 1) * (var(--xg-strip) + var(--xg-gap)) + var(--xg-open));
+}
+.xg-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--xg-strip);
+  border-radius: var(--xg-radius);
+  transform: translateY(calc(var(--i) * (var(--xg-strip) + var(--xg-gap)) + var(--after) * (var(--xg-open) - var(--xg-strip))));
+  transition: transform var(--xg-duration) var(--ease-reveal), height var(--xg-duration) var(--ease-reveal);
+}
+.xg-panel[data-open] {
+  height: var(--xg-open);
+}
+/* Focus très net sur les bandes, qui n'ont pas de texte : anneau soleil de 3 px, décalé de 3 px, sur le panneau */
+.xg-panel:has(.xg-button:focus-visible) {
+  outline: 3px solid var(--color-soleil);
+  outline-offset: 3px;
+}
+.xg-button:focus-visible {
+  outline: none;
+}
+.xg-frame {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  background: var(--color-filet-nuit);
+}
+/* La photo, à la taille du panneau ouvert ; sur une bande, décalée pour en montrer la tranche du cadrage */
+.xg-media {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--xg-open);
+  transform: translateY(calc((var(--xg-strip) - var(--xg-open)) * var(--fy)));
+  transition: transform var(--xg-duration) var(--ease-reveal);
+}
+.xg-panel[data-open] .xg-media {
+  transform: none;
+}
+/* Dégradé sombre qui monte du bas, sous le texte du panneau ouvert seulement (pas de voile sur le reste) */
+.xg-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* Mesuré en hauteur absolue : le titre (~10 rem au-dessus du bas) reste sur un fond assez sombre pour 4,5:1 */
+  background: linear-gradient(to top, rgb(4 18 13 / 0.9) 0, rgb(4 18 13 / 0.74) 10rem, rgb(4 18 13 / 0) 16rem);
+  opacity: 0;
+  transition: opacity 120ms linear;
+  pointer-events: none;
+}
+.xg-panel[data-open] .xg-frame::after {
+  opacity: 1;
+  transition: opacity 300ms linear 250ms;
+}
+.xg-button {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  cursor: pointer;
+}
+/* Titre en petit des bandes réduites (téléphone seulement), sur un léger dégradé, dans une boîte de la hauteur d'une bande */
+.xg-strip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--xg-strip);
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 1rem 0.75rem;
+  background: linear-gradient(to top, rgb(4 18 13 / 0.8), rgb(4 18 13 / 0) 75%);
+  color: var(--color-brume);
+  font-size: 0.875rem;
+  font-weight: 600;
+  pointer-events: none;
+  transition: opacity 120ms linear;
+}
+.xg-panel[data-open] .xg-strip {
+  opacity: 0;
+}
+/* Texte du panneau ouvert, dans une boîte à la taille du panneau ouvert (il ne bouge pas pendant l'ouverture) ;
+   il arrive quand l'élargissement est presque fini, et part tout de suite à la fermeture */
+.xg-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  width: 100%;
+  height: var(--xg-open);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 1.25rem;
+  color: var(--color-brume);
+  pointer-events: none;
+}
+.xg-text > * {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 120ms linear, transform 120ms linear;
+}
+.xg-panel[data-open] .xg-text > * {
+  opacity: 1;
+  transform: none;
+  transition: opacity 300ms var(--ease-reveal) 350ms, transform 300ms var(--ease-reveal) 350ms;
+}
+.xg-text a {
+  pointer-events: auto;
+}
+.xg-title {
+  font-size: 1.25rem;
+  line-height: 1.3;
+  font-weight: 600;
+}
+.xg-meta {
+  margin-top: 0.125rem;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+.xg-description {
+  margin-top: 0.5rem;
+  max-width: 28ch;
+  font-size: 1rem;
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@media (min-width: 1024px) and (pointer: fine) {
+  .xg {
+    /* Une bande = 1 unité, le panneau ouvert = 7 : n - 1 + 7 unités et n - 1 espaces sur la largeur du conteneur */
+    --xg-unit: calc((100cqw - (var(--xg-n) - 1) * var(--xg-gap)) / (var(--xg-n) + 6));
+    height: clamp(26rem, 58vh, 34rem);
+  }
+  .xg-panel {
+    width: var(--xg-unit);
+    height: 100%;
+    transform: translateX(calc(var(--i) * (var(--xg-unit) + var(--xg-gap)) + var(--after) * 6 * var(--xg-unit)));
+    transition: transform var(--xg-duration) var(--ease-reveal), width var(--xg-duration) var(--ease-reveal);
+  }
+  .xg-panel[data-open] {
+    width: calc(7 * var(--xg-unit));
+    height: 100%;
+  }
+  .xg-media {
+    width: calc(7 * var(--xg-unit));
+    height: 100%;
+    transform: translateX(calc(-6 * var(--xg-unit) * var(--fx)));
+  }
+  .xg-text {
+    width: calc(7 * var(--xg-unit));
+    height: 100%;
+    padding: 1.75rem;
+  }
+  .xg-strip {
+    display: none;
+  }
+  .xg-frame::after {
+    background: linear-gradient(to top, rgb(4 18 13 / 0.9) 0, rgb(4 18 13 / 0.74) 11rem, rgb(4 18 13 / 0) 19rem);
+  }
+}
+
+/* Mouvement réduit : changement de panneau instantané, texte affiché directement (les délais aussi sont retirés) */
+@media (prefers-reduced-motion: reduce) {
+  .xg-panel,
+  .xg-media,
+  .xg-strip,
+  .xg-frame::after,
+  .xg-text > *,
+  .xg-panel[data-open] .xg-frame::after,
+  .xg-panel[data-open] .xg-text > * {
+    transition: none !important;
+  }
+}

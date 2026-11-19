@@ -3,13 +3,14 @@ import HeroSection from './home/HeroSection';
 import MobilitySection from './home/MobilitySection';
 import FieldSection from './home/FieldSection';
 import DomainsSection from './home/DomainsSection';
+import JourneySection from './home/JourneySection';
 import PresenceHome from './home/PresenceHome';
 import FiguresSection from './home/FiguresSection';
 import ActSection from './home/ActSection';
 
 /**
  * Accueil (contrat §7 ; lot 6, décisions du 16/11) : 8 blocs, dont le footer commun.
- * Hero vidéo, Mobilité & Langues, Sur le terrain, Domaines, Carte de présence, Chiffres datés (masqués tant qu'il n'y
+ * Hero vidéo, Mobilité & Langues, Sur le terrain, Domaines, Apprendre cultiver grandir (lot 7.6), Carte de présence, Chiffres datés (masqués tant qu'il n'y
  * en a pas deux sourcés), Agir + lettre d'information. Les sections retirées (mission et carte IROKO, approche, frise,
  * témoignages, actualités, partenaires, anciens chiffres, cartes Agir, bande de don) sont masquées sans suppression
  * dans src/pages/home/archive/.
@@ -33,6 +34,9 @@ export default function Home() {
 
       {/* 4. DOMAINES : liste, photos réelles seulement, ancres vers /nos-actions : src/pages/home/DomainsSection.tsx */}
       <DomainsSection />
+
+      {/* 4 bis. APPRENDRE, CULTIVER, GRANDIR : accordéon de 5 photos, sur nuit (lot 7.6) : src/pages/home/JourneySection.tsx */}
+      <JourneySection />
 
       {/* 5. CARTE DE PRÉSENCE : src/pages/home/PresenceHome.tsx */}
       <PresenceHome />

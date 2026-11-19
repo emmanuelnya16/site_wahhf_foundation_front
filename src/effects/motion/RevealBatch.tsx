@@ -29,6 +29,8 @@ const EXCLUDED = [
  * - Tout ce qui est créé plus tard (masquages, déclencheurs, fondus) passe par le contexte de gsap.matchMedia
  *   (self.add) : un changement de page ou le passage en mouvement réduit les annule et rend tout visible.
  * - Mouvement réduit : rien n'est masqué. Téléphone : apparitions gardées (légères).
+ * - data-reveal="clip" (lot 7.6, panneaux de l'accordéon de l'accueil) : découverte du bas vers le haut par clip-path
+ *   au lieu du fondu, 0,9 s, 0,08 s de décalage, même déclenchement ; ordinateur à souris seulement.
  * Monté une fois dans Layout, sur <main> ; relancé à chaque page.
  */
 export default function RevealBatch({ scope, pathname }: { scope: RefObject<HTMLElement | null>; pathname: string }) {
@@ -55,6 +57,22 @@ export default function RevealBatch({ scope, pathname }: { scope: RefObject<HTML
           });
         }) as unknown as (els: Element[]) => void;
 
+        // Découverte du bas vers le haut (data-reveal="clip", panneaux de l'accordéon de l'accueil, lot 7.6) :
+        // clip-path inset(100 % 0 0 0) → inset(0), au rayon du panneau (data-reveal-radius), 0,08 s de décalage
+        const clip = (el: Element, top: number) =>
+          `inset(${top}% 0% 0% 0% round ${(el as HTMLElement).dataset.revealRadius ?? '0px'})`;
+        const showClip = self.add('showClip', (els: Element[]) => {
+          els.forEach((el) => hidden.delete(el));
+          gsap.to(els, {
+            clipPath: (_: number, el: Element) => clip(el, 0),
+            duration: DURATION.reveal,
+            ease: GSAP_EASE.glide,
+            stagger: 0.08,
+            overwrite: true,
+            clearProps: 'clipPath',
+          });
+        }) as unknown as (els: Element[]) => void;
+
         const scan = self.add('scan', () => {
           const fresh = gsap.utils.toArray<HTMLElement>('[data-reveal]', main).filter((el) => {
             if (seen.has(el)) return false;
@@ -64,9 +82,19 @@ export default function RevealBatch({ scope, pathname }: { scope: RefObject<HTML
             return el.getBoundingClientRect().top >= window.innerHeight;
           });
           if (!fresh.length) return;
-          gsap.set(fresh, { opacity: 0, y: APPEAR_RISE });
-          fresh.forEach((el) => hidden.add(el));
-          ScrollTrigger.batch(fresh, { start: APPEAR_START, once: true, onEnter: (batch) => show(batch as Element[]) });
+          // Découvertes : ordinateur à souris seulement (votre brief) ; ailleurs, ces éléments sont déjà en place
+          const clipEls = window.matchMedia(MQ.computer).matches ? fresh.filter((el) => el.dataset.reveal === 'clip') : [];
+          const fadeEls = fresh.filter((el) => el.dataset.reveal !== 'clip');
+          if (fadeEls.length) {
+            gsap.set(fadeEls, { opacity: 0, y: APPEAR_RISE });
+            fadeEls.forEach((el) => hidden.add(el));
+            ScrollTrigger.batch(fadeEls, { start: APPEAR_START, once: true, onEnter: (batch) => show(batch as Element[]) });
+          }
+          if (clipEls.length) {
+            gsap.set(clipEls, { clipPath: (_: number, el: Element) => clip(el, 100) });
+            clipEls.forEach((el) => hidden.add(el));
+            ScrollTrigger.batch(clipEls, { start: APPEAR_START, once: true, onEnter: (batch) => showClip(batch as Element[]) });
+          }
         }) as unknown as () => void;
 
         // Après le défilement en haut de la nouvelle page (Layout) : deux images plus tard
@@ -83,7 +111,7 @@ export default function RevealBatch({ scope, pathname }: { scope: RefObject<HTML
         const reveal = self.add('reveal', (el: Element) => {
           hidden.delete(el);
           gsap.killTweensOf(el);
-          gsap.set(el, { opacity: 1, y: 0, clearProps: 'opacity,transform' });
+          gsap.set(el, { opacity: 1, y: 0, clearProps: 'opacity,transform,clipPath' });
         }) as unknown as (el: Element) => void;
         const onFocus = (event: FocusEvent) => {
           const el = (event.target as Element | null)?.closest?.('[data-reveal]');
