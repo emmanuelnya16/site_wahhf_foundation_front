@@ -49,7 +49,7 @@ export default function ContactHandoff({
         {title}
       </Heading>
       <p className="text-body text-text max-w-[65ch]">
-        Le site ne transmet pas encore les formulaires. Votre message est prêt avec vos réponses : envoyez-le
+        Le site ne transmet pas encore les formulaires. Votre message est prêt avec vos réponses : envoyez-le
         par WhatsApp ou par e-mail. La fondation ne le reçoit qu’une fois que vous l’avez envoyé.
       </p>
 
