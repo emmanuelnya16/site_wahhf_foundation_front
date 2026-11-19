@@ -333,3 +333,11 @@ La question 33 (l'adresse « integrite@wahhf-foundation.org » existe-t-elle ?) 
 Le statut juridique de la fondation, attendu aussi sur cette page, est demandé plus haut (demande A).
 
 139. Quel slogan voulez-vous afficher en tête de la page « Qui sommes-nous » ? Sur les t-shirts de l'Open Day, on lit : « Bâtir l'Afrique qui nourrit, soigne et instruit sa jeunesse ». Est-ce le slogan officiel de la fondation ?
+
+---
+
+## Question ajoutée avec la mise en page des pages légales
+
+### Pages « Mentions légales » et « Confidentialité »
+
+140. Quand le juriste vous remettra les textes des mentions légales et de la politique de confidentialité, de quelle date faudra-t-il les dater ? Aujourd'hui, les deux pages affichent « Mise à jour le 15 novembre 2026 » : c'est la date à laquelle les textes actuels figurent déjà dans le projet, pas celle d'une relecture juridique.

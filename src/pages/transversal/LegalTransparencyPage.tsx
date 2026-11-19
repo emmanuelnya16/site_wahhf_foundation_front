@@ -1,11 +1,43 @@
 import { Fragment } from 'react';
 import { Scale } from 'lucide-react';
 import SEO from '../../components/wahhf/SEO';
-import { ReadingColumn } from '../../components/wahhf/TextList';
+import { ReadingColumn, TEXT_LINK_CLASS } from '../../components/wahhf/TextList';
 import PageHeader, { PageMeta, PageTitle, PageIntro } from '../../components/wahhf/PageHeader';
 import SectionHeader from '../../components/wahhf/SectionHeader';
 import { PrimaryButton } from '../../components/wahhf/Buttons';
 import { CONTACT } from '../../config/contact';
+import { followAnchorLink } from '../../lib/scroll';
+import { cn } from '../../lib/utils';
+
+/** « 15 novembre 2026 », insécable (T-19) : la date ne se coupe jamais en fin de ligne. */
+const DAY = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+const formatDay = (iso: string) => DAY.format(new Date(`${iso}T00:00:00Z`)).replace(/ /g, ' ');
+
+/** Ancre d'un intertitre : « Vidéo de la page d’accueil (YouTube) » → « video-de-la-page-d-accueil-youtube ». */
+const anchorId = (title: string) =>
+  title
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+
+/**
+ * Adresses e-mail du texte en liens mailto (CONF-01), sans toucher au texte : il viendra du juriste, et toute adresse
+ * qu'il contiendra sera cliquable d'elle-même.
+ */
+const EMAIL = /([\w.+-]+@[\w-]+(?:\.[\w-]+)+)/g;
+function withEmailLinks(text: string) {
+  return text.split(EMAIL).map((part, i) =>
+    i % 2 === 1 ? (
+      <a key={i} href={`mailto:${part}`} className="text-link underline underline-offset-4 decoration-1 hover:decoration-2">
+        {part}
+      </a>
+    ) : (
+      part
+    ),
+  );
+}
 
 /**
  * Bloc de /transparence encore provisoire (« TODO ») : masqué tant que le rapport annuel n'est pas fourni (groupe 7.2,
@@ -22,8 +54,10 @@ export const TRANSPARENCY_PENDING_BLOCKS = [
  * 7. PAGES LÉGALES & TRANSPARENCE (/mentions-legales, /confidentialite, /transparence)
  * Groupe 7.2, /transparence seulement (TRA-01, TRA-02) : en-tête révélé à l'arrivée avec une introduction, titre en
  * casse de phrase, sans « gratuité » dans un titre, bloc provisoire masqué, une seule action en fin de page (retour au
- * don). Aucun lien n'y mène tant qu'aucune donnée n'est publiée (src/config/transparency.ts). Mentions légales et
- * confidentialité : inchangées.
+ * don). Aucun lien n'y mène tant qu'aucune donnée n'est publiée (src/config/transparency.ts).
+ * Mentions légales et confidentialité (MEN-01, CONF-01, mise en page seulement : le texte viendra du juriste) : date de
+ * mise à jour sous le titre, sommaire (au-dessus du texte sur téléphone, à droite et fixe sur ordinateur), intertitres
+ * ancrés, colonne de lecture de 65 caractères, e-mails en liens mailto. Aucun mouvement (contrat §10).
  */
 export function LegalTransparencyPage({
   type,
@@ -35,6 +69,9 @@ export function LegalTransparencyPage({
       title: 'Mentions légales',
       kicker: 'Informations statutaires (TODO : compléter numéros d’enregistrement)',
       icon: Scale,
+      // Date du texte affiché (AAAA-MM-JJ), à changer avec lui. Aujourd'hui, celle du premier commit du projet, qui
+      // contient déjà ce texte ; le juriste donnera la sienne (docs/contenus-a-fournir.md, question 140).
+      updatedOn: '2026-11-15',
       blocks: [
         {
           h: 'Éditeur du site',
@@ -48,6 +85,8 @@ export function LegalTransparencyPage({
     },
     confidentialite: {
       title: 'Politique de confidentialité & Protection des données (RGPD)',
+      // Même règle que les mentions légales (question 140)
+      updatedOn: '2026-11-15',
       blocks: [
         {
           h: 'Collecte minimale et transparente',
@@ -76,6 +115,8 @@ export function LegalTransparencyPage({
       ],
     },
   }[type];
+  // Sommaire, ancres et date : Mentions légales et Confidentialité seulement (Transparence a sa fin de page, groupe 7.2)
+  const legal = type !== 'transparence';
 
   return (
     <>
@@ -89,18 +130,50 @@ export function LegalTransparencyPage({
         )}
         <PageTitle>{content.title}</PageTitle>
         {'intro' in content && <PageIntro>{content.intro}</PageIntro>}
+        {'updatedOn' in content && (
+          <p className="text-meta text-text-secondary">
+            Mise à jour le <time dateTime={content.updatedOn}>{formatDay(content.updatedOn)}</time>
+          </p>
+        )}
       </PageHeader>
 
-      {/* Colonne de lecture de 65 caractères (contrat §8) : un paragraphe n'est jamais une carte */}
+      {/* Colonne de lecture de 65 caractères (contrat §8) : un paragraphe n'est jamais une carte. Pages légales : le
+          sommaire vient d'abord dans le code (clavier, lecteur d'écran) ; sur ordinateur, il passe à droite de la
+          colonne et reste visible au défilement, sous l'en-tête du site. La colonne garde la marge gauche du titre. */}
       <section className="container-page section-space">
-        <ReadingColumn as="article">
-          {content.blocks.map((b) => (
-            <Fragment key={b.h}>
-              <h2>{b.h}</h2>
-              <p>{b.p}</p>
-            </Fragment>
-          ))}
-        </ReadingColumn>
+        <div className={cn(legal && 'text-body lg:grid lg:grid-cols-[minmax(0,65ch)_15rem] lg:items-start lg:gap-x-16')}>
+          {legal && (
+            <nav
+              aria-labelledby="sommaire"
+              className="mb-12 max-w-[65ch] lg:sticky lg:top-[calc(var(--header-offset)+2rem)] lg:col-start-2 lg:row-start-1 lg:mb-0"
+            >
+              <h2 id="sommaire" className="text-body font-semibold text-text">
+                Sommaire
+              </h2>
+              <ol className="mt-3 border-t border-border-subtle">
+                {content.blocks.map((b) => (
+                  <li key={b.h} className="border-b border-border-subtle">
+                    <a
+                      href={`#${anchorId(b.h)}`}
+                      onClick={(event) => followAnchorLink(event, anchorId(b.h))}
+                      className={cn(TEXT_LINK_CLASS, 'w-full py-2')}
+                    >
+                      {b.h}
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          )}
+          <ReadingColumn as="article" className={cn(legal && 'lg:col-start-1 lg:row-start-1')}>
+            {content.blocks.map((b) => (
+              <Fragment key={b.h}>
+                <h2 id={legal ? anchorId(b.h) : undefined}>{b.h}</h2>
+                <p>{withEmailLinks(b.p)}</p>
+              </Fragment>
+            ))}
+          </ReadingColumn>
+        </div>
       </section>
 
       {/* Transparence : une seule action en fin de page, le retour au don (TRA-02) ; sans carte nuit */}
