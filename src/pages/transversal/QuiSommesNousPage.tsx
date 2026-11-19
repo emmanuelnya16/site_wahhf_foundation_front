@@ -13,29 +13,31 @@ import { GOVERNANCE_MEMBERS } from '../../config/governance';
 /*
  * Qui sommes-nous (groupe 7.3 : contrat validé, audit QSN-01 à QSN-04, T-11, T-15).
  * - En-tête du lot 5, révélé à l'arrivée comme le hero (titre ligne par ligne, introduction en fondu), avec une vraie
- *   photo de l'Open Day, légendée et datée (QSN-02).
+ *   photo de l'Open Day, légendée et datée (QSN-02) : trois responsables de la fondation, adultes (revue du groupe 7.3 :
+ *   pas de gros plan de jeunes mineurs tant que les autorisations ne sont pas confirmées, GAL-01, demande B).
  * - Mission et valeurs ; puis l'Approche et la frise « Notre parcours », venues de l'accueil (contrat §7, ACC-03),
  *   refaites avec les composants du lot 5 : liste typographique pour les cinq principes, le fil pour la frise.
  * - Le groupe IROKO sur une section sauge, sans carte dans la carte (QSN-03) : plus de colonne logo, qui répétait le titre.
  * - Gouvernance masquée tant qu'aucun nom n'est fourni (QSN-01, src/config/governance.ts) ; ses rôles d'exemple,
  *   marqués TODO, sont gardés dans EXAMPLE_GOVERNANCE_ROLES_NOT_VALIDATED.
  * - Fin de page : « Faire un don » et « Devenir partenaire » (QSN-04), sans carte nuit au-dessus du footer.
- * - Gratuité dite une fois par écran, jamais dans un titre ; présence décrite telle qu'elle est (Yaoundé et Douala,
- *   coordination en Allemagne, T-11) au lieu des « 10 régions ».
+ * - Gratuité dite une fois par écran, jamais dans un titre, mots voisins compris (« aucun frais », « sans frais »,
+ *   « contrepartie financière » : revue du groupe 7.3) ; elle est dite dans le paragraphe de la mission et à l'étape 2026
+ *   de la frise. Présence décrite telle qu'elle est (Yaoundé et Douala, coordination en Allemagne, T-11) au lieu des
+ *   « 10 régions ».
  * - Mouvement (contrat §10) : la frise se dessine au défilement sur ordinateur (FilScrub), fixe sur téléphone et en
- *   mouvement réduit ; les photos de la gouvernance, quand elles existeront, se découvrent par clip-path (PhotoReveal).
+ *   mouvement réduit ; seuls ses points s'allument, ses paragraphes restent lisibles à pleine opacité (revue du groupe
+ *   7.3) ; les photos de la gouvernance, quand elles existeront, se découvrent par clip-path (PhotoReveal).
  */
 
 const NB = ' ';
 
+// Revue du groupe 7.3 : la valeur « Aucun frais pour les familles » (ex-« Gratuité Totale ») est retirée : c'était une
+// gratuité dans un titre, la troisième du premier écran. La gratuité reste dite dans le paragraphe de la mission.
 const VALUES = [
   {
     title: 'Dignité et respect',
     desc: 'Chaque bénéficiaire est accueilli comme un acteur de son propre parcours, jamais comme un client.',
-  },
-  {
-    title: 'Aucun frais pour les familles',
-    desc: 'Aucune contrepartie financière n’est demandée aux jeunes et aux familles que nous accompagnons.',
   },
   {
     title: 'Intégrité et vérité',
@@ -59,7 +61,7 @@ const APPROACH = [
   },
   {
     title: 'Transparence',
-    desc: 'Ne rien demander aux bénéficiaires et rendre compte de l’usage des fonds engagés.',
+    desc: 'Rendre compte de l’usage des fonds engagés.',
   },
   {
     title: 'Partenariats',
@@ -104,7 +106,7 @@ export function QuiSommesNousPage() {
         description="Découvrez l’histoire, la mission, les valeurs et l’approche de WAHHF Foundation, et son lien avec le groupe IROKO."
       />
 
-      <PageHeader reveal photoId="open-day-groupe">
+      <PageHeader reveal photoId="open-day-trophee">
         <PageTitle>Une fondation camerouno-allemande au service de la dignité humaine</PageTitle>
         <PageIntro>
           Née de la solidarité entre le Cameroun et l’Allemagne, WAHHF Foundation accompagne les jeunes et les communautés à
@@ -173,7 +175,7 @@ export function QuiSommesNousPage() {
             />
           </div>
           <AfterFirstDisplay>
-            <FilScrub scope={filRef} />
+            <FilScrub scope={filRef} dim="[data-fil-dot]" />
           </AfterFirstDisplay>
         </div>
       </Section>
@@ -185,8 +187,7 @@ export function QuiSommesNousPage() {
             <SectionHeader title="WAHHF Foundation, branche sociale du groupe IROKO" />
             <p className="text-body text-text-secondary">
               Le groupe multisectoriel camerouno-allemand IROKO a structuré WAHHF Foundation comme sa branche sociale et
-              philanthropique, à but non lucratif. Ce soutien couvre les frais de fonctionnement et d’enseignement, pour que
-              les cours d’allemand et les actions de terrain restent sans frais pour les bénéficiaires.
+              philanthropique, à but non lucratif. Ce soutien couvre les frais de fonctionnement et d’enseignement.
             </p>
           </div>
           {IROKO_FACTS.length > 0 && (
