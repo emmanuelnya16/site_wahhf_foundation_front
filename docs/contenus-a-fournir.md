@@ -359,7 +359,7 @@ Pour les photos « à vérifier », il suffit de nous dire si toutes les personn
 
 ### Page « Nos actions »
 
-142. Avez-vous des photos d’une action de santé de la fondation (consultation, prévention, sensibilisation), avec l’accord des personnes visibles ? Aujourd’hui, le domaine Santé est le seul sans photo.
+142. Avez-vous des photos d’une action de santé de la fondation (consultation, prévention, sensibilisation), avec l’accord des personnes visibles ? Aujourd’hui, faute de mieux, le domaine Santé est illustré par l’intervenant devant le pictogramme « Santé » de vos domaines (A63, journée du 25 avril), sur l’accueil et sur Nos actions.
 
 ### Page introuvable (erreur 404)
 

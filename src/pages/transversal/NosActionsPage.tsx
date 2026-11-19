@@ -9,6 +9,7 @@ import { DOMAINS_DATA } from '../../services/api';
 import Photo from '../../components/wahhf/Photo';
 import { photoCaption, photoOrFallback } from '../../lib/photos';
 import { scrollToElement, scrollToHash } from '../../lib/scroll';
+import { DOMAIN_PHOTO_IDS } from '../../config/domainPhotos';
 import { AfterFirstDisplay, PhotoReveal } from '../../effects/DeferredMotion';
 
 /*
@@ -17,8 +18,8 @@ import { AfterFirstDisplay, PhotoReveal } from '../../effects/DeferredMotion';
  *   texte complet (description, approche, programmes) ; une rangée de liens d'ancre en tête sert de sommaire.
  * - ACT-02 : « Soutenir ce domaine » mène à /faire-un-don?affectation=<domaine>, qui présélectionne l'affectation
  *   (DonatePage, groupe 7.2).
- * - T-04 : photo seulement si elle est réelle : une photo de la fondation par domaine (lot 7.6, DOMAIN_PHOTO_IDS),
- *   légendée par son album ; aucune pour Santé ; les images générées ne sont plus affichées (elles restent dans
+ * - T-04 : photo seulement si elle est réelle : une photo de la fondation par domaine (lot 7.6 et retouches du 19/11,
+ *   DOMAIN_PHOTO_IDS), légendée par son album ; les images générées ne sont plus affichées (elles restent dans
  *   DOMAINS_DATA).
  * - T-10 : /nos-actions#education comme /nos-actions?domaine=education (méga-menu, footer) ouvrent la page sur le
  *   domaine demandé.
@@ -36,17 +37,10 @@ const focusDomain = (slug: string) => document.getElementById(`domaine-${slug}`)
 const isDomain = (slug: string | null) => !!slug && DOMAINS_DATA.some((d) => d.slug === slug);
 
 /**
- * Une photo de la fondation par domaine (lot 7.6, vos choix du 19/11) ; une photo qui attend l'accord parental n'est
- * pas remplacée (rien en production pour Éducation et Environnement tant que A27 et B10 sont en attente).
- * TODO (fondation) : aucune photo d'une action de santé ; demandée dans docs/contenus-a-fournir.md (question 142).
+ * Une photo de la fondation par domaine (lot 7.6, vos choix du 19/11 ; retouches du 19/11 : Santé a la sienne, A63) :
+ * src/config/domainPhotos.ts, partagé avec l'accueil. Une photo qui attend l'accord parental laisse la place à sa
+ * remplaçante en production (A98 pour Éducation, B40 pour Environnement).
  */
-const DOMAIN_PHOTO_IDS: Record<string, string> = {
-  education: 'A27',
-  environnement: 'B10',
-  entrepreneuriat: 'B23',
-  'droits-inclusion': 'A31',
-  'mobilite-langues': 'A53',
-};
 /** Vue d'ensemble dans l'en-tête : la diapositive des domaines (A60), ou l'intervenant qui les présente (A66). */
 const HEADER_PHOTO = photoOrFallback('A60', 'A66');
 
@@ -113,7 +107,8 @@ export function NosActionsPage() {
       <Section>
         <div ref={listRef} className="container-page">
           {DOMAINS_DATA.map((dom) => {
-            const photo = DOMAIN_PHOTO_IDS[dom.slug] ? photoOrFallback(DOMAIN_PHOTO_IDS[dom.slug]) : null;
+            const [photoId, ...fallbacks] = DOMAIN_PHOTO_IDS[dom.slug] ?? [];
+            const photo = photoId ? photoOrFallback(photoId, ...fallbacks) : null;
             const titleId = `domaine-${dom.slug}`;
             return (
               <section
