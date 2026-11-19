@@ -1641,3 +1641,93 @@ html.vt-galerie::view-transition-new(root) {
     transition: none !important;
   }
 }
+
+/* =============================================================================
+   Organigramme (lot 7.7) : src/components/team/OrgChart.tsx
+   Niveaux empilés et centrés, reliés par le fil (trait vertical de 1,5 px, couleur du fil) : carte(s) → trait → point
+   → titre du niveau suivant → cartes… Portraits 4:5, coins 1,5 rem.
+   ============================================================================= */
+.org {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.org-level {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.org-dot {
+  display: block;
+  width: 0.625rem;
+  height: 0.625rem;
+  margin-bottom: 1rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-fil);
+}
+.org-title {
+  margin-bottom: 1.25rem;
+  font-size: var(--text-body);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+.org-people {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem 2.5rem;
+}
+.org-card {
+  width: 12rem;
+  text-align: center;
+}
+.org-card-top {
+  width: 15rem;
+}
+@media (min-width: 768px) {
+  .org-card {
+    width: 13rem;
+  }
+  .org-card-top {
+    width: 18rem;
+  }
+}
+.org-portrait {
+  aspect-ratio: 4 / 5;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  background: var(--color-surface-section);
+}
+.org-name {
+  font-weight: 600;
+  color: var(--color-text);
+}
+.org-card-top .org-name {
+  font-size: 1.25rem;
+}
+.org-role {
+  margin-top: 0.125rem;
+  font-size: var(--text-meta);
+  color: var(--color-text-secondary);
+}
+.org-bio {
+  margin-top: 0.75rem;
+  font-size: var(--text-body);
+  color: var(--color-text-secondary);
+}
+.org-links {
+  margin-top: 0.5rem;
+}
+/* Le fil entre deux niveaux : il part du bas des cartes et descend jusqu'au point du niveau suivant */
+.org-seg {
+  display: block;
+  width: 1.5px;
+  height: 4rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  background: var(--color-fil);
+  transform-origin: center top;
+}

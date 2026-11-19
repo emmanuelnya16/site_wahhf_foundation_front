@@ -1,3 +1,5 @@
+import { TEAM_PUBLISHED } from '../data/team';
+
 /**
  * Équipe et gouvernance de WAHHF Foundation (groupe 7.3, audit QSN-01). Aucun nom ni aucune photo n'est fourni pour
  * l'instant : la section « Gouvernance » de Qui sommes-nous est masquée, et le lien « Équipe & Gouvernance » du footer
@@ -19,7 +21,11 @@ export interface GovernanceMember {
 
 export const GOVERNANCE_MEMBERS: GovernanceMember[] = [];
 
-export const GOVERNANCE_PUBLISHED = GOVERNANCE_MEMBERS.length > 0;
+/**
+ * Lot 7.7 : l'équipe est présentée par l'organigramme de Qui sommes-nous (src/data/team.ts) ; le lien du footer
+ * « Équipe & Gouvernance » y mène dès qu'une personne au nom connu y figure.
+ */
+export const GOVERNANCE_PUBLISHED = GOVERNANCE_MEMBERS.length > 0 || TEAM_PUBLISHED;
 
 /**
  * Rôles d'exemple de l'ancienne section (marqués TODO, sans nom) : gardés ici, jamais affichés. Ils peuvent servir de

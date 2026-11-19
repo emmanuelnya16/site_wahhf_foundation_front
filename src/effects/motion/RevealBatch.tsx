@@ -31,8 +31,12 @@ const EXCLUDED = [
  * - Mouvement réduit : rien n'est masqué. Téléphone : apparitions gardées (légères).
  * - data-reveal="clip" (lot 7.6, panneaux de l'accordéon de l'accueil) : découverte du bas vers le haut par clip-path
  *   au lieu du fondu, 0,9 s, 0,08 s de décalage, même déclenchement ; ordinateur à souris seulement.
+ * - data-reveal="soft" (lot 7.7, cartes de l'organigramme) : fondu et montée de 16 px ; ordinateur à souris seulement.
  * Monté une fois dans Layout, sur <main> ; relancé à chaque page.
  */
+/** Montée des apparitions « soft » (cartes de l'organigramme, lot 7.7) */
+const SOFT_RISE = 16;
+
 export default function RevealBatch({ scope, pathname }: { scope: RefObject<HTMLElement | null>; pathname: string }) {
   useGSAP(
     () => {
@@ -83,10 +87,12 @@ export default function RevealBatch({ scope, pathname }: { scope: RefObject<HTML
           });
           if (!fresh.length) return;
           // Découvertes : ordinateur à souris seulement (votre brief) ; ailleurs, ces éléments sont déjà en place
-          const clipEls = window.matchMedia(MQ.computer).matches ? fresh.filter((el) => el.dataset.reveal === 'clip') : [];
-          const fadeEls = fresh.filter((el) => el.dataset.reveal !== 'clip');
+          const computer = window.matchMedia(MQ.computer).matches;
+          const clipEls = computer ? fresh.filter((el) => el.dataset.reveal === 'clip') : [];
+          // « soft » (cartes de l'organigramme, lot 7.7) : montée de 16 px, ordinateur seulement
+          const fadeEls = fresh.filter((el) => el.dataset.reveal !== 'clip' && (computer || el.dataset.reveal !== 'soft'));
           if (fadeEls.length) {
-            gsap.set(fadeEls, { opacity: 0, y: APPEAR_RISE });
+            gsap.set(fadeEls, { opacity: 0, y: (_: number, el: HTMLElement) => (el.dataset.reveal === 'soft' ? SOFT_RISE : APPEAR_RISE) });
             fadeEls.forEach((el) => hidden.add(el));
             ScrollTrigger.batch(fadeEls, { start: APPEAR_START, once: true, onEnter: (batch) => show(batch as Element[]) });
           }

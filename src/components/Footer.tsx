@@ -91,10 +91,10 @@ export default function Footer() {
                   Notre histoire & mission
                 </Link>
               </li>
-              {/* Groupe 7.3 (QSN-01) : masqué tant qu'aucun nom n'est publié (src/config/governance.ts) */}
+              {/* Groupe 7.3 (QSN-01) : masqué tant qu'aucun nom n'est publié ; lot 7.7 : vers l'organigramme */}
               {GOVERNANCE_PUBLISHED && (
                 <li>
-                  <Link to="/qui-sommes-nous#gouvernance" className={LINK}>
+                  <Link to="/qui-sommes-nous#organigramme" className={LINK}>
                     Équipe & Gouvernance
                   </Link>
                 </li>

@@ -15,7 +15,8 @@ export function visibleMembers(): TeamMember[] {
 /** « Ing. Pr. Christian Wilberg », « Wilfried » ; « Nom à confirmer » quand il est inconnu (développement seulement). */
 export function displayName(member: TeamMember): string {
   if (!member.prenom) return 'Nom à confirmer';
-  return [member.titre, member.prenom, member.nom].filter(Boolean).join(' ');
+  // « Ing. Pr. » ne se coupe pas en fin de ligne
+  return [member.titre?.replace(/ /g, '\u00a0'), member.prenom, member.nom].filter(Boolean).join(' ');
 }
 
 /** Rôle affiché ; « Rôle à confirmer » quand il est inconnu (développement seulement). */

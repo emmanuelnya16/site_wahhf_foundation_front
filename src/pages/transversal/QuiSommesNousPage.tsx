@@ -6,9 +6,9 @@ import { TextList, TextListItem } from '../../components/wahhf/TextList';
 import TeamHero from '../../components/team/TeamHero';
 import { DonateButton, SecondaryButton } from '../../components/wahhf/Buttons';
 import Fil, { FilPoint } from '../../components/wahhf/Fil';
-import { AfterFirstDisplay, FilScrub, PhotoReveal } from '../../effects/DeferredMotion';
+import { AfterFirstDisplay, FilScrub } from '../../effects/DeferredMotion';
 import { TIMELINE_MILESTONES } from '../../services/api';
-import { GOVERNANCE_MEMBERS } from '../../config/governance';
+import OrgChart from '../../components/team/OrgChart';
 import Photo from '../../components/wahhf/Photo';
 import { cn } from '../../lib/utils';
 import { photoCaption, photoOrFallback } from '../../lib/photos';
@@ -109,8 +109,6 @@ const milestones: FilPoint[] = TIMELINE_MILESTONES.map((m, i) => {
 
 export function QuiSommesNousPage() {
   const filRef = useRef<HTMLDivElement>(null);
-  const governanceRef = useRef<HTMLDivElement>(null);
-  const hasGovernance = GOVERNANCE_MEMBERS.length > 0;
 
   return (
     <>
@@ -121,6 +119,9 @@ export function QuiSommesNousPage() {
 
       {/* HERO : titre et portraits de l'équipe (lot 7.7) */}
       <TeamHero />
+
+      {/* ORGANIGRAMME : un bloc par niveau, reliés par le fil (lot 7.7) ; remplace l'ancienne section Gouvernance */}
+      <OrgChart />
 
       {/* MISSION ET VALEURS */}
       <Section>
@@ -223,48 +224,8 @@ export function QuiSommesNousPage() {
         </div>
       </Section>
 
-      {/* GOUVERNANCE : seulement avec de vraies personnes (QSN-01) ; photos découvertes par clip-path (ordinateur) */}
-      {hasGovernance && (
-        <Section id="gouvernance">
-          <div ref={governanceRef} className="container-page space-y-10">
-            <SectionHeader
-              title="Une gouvernance collégiale entre le Cameroun et l’Allemagne"
-              subtitle="Les membres du conseil et les responsables de pôles veillent au respect de l’éthique et de la gratuité."
-            />
-            <ul className="grid gap-x-10 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
-              {GOVERNANCE_MEMBERS.map((member) => (
-                <li key={member.name} data-photo-reveal="" className="space-y-4">
-                  {member.photo && (
-                    <img
-                      data-photo-reveal-media=""
-                      src={member.photo.src}
-                      width={member.photo.width}
-                      height={member.photo.height}
-                      alt={`Portrait de ${member.name}`}
-                      loading="lazy"
-                      decoding="async"
-                      className="w-full max-w-[20rem] aspect-[4/5] object-cover rounded-card bg-surface-section"
-                    />
-                  )}
-                  <div data-photo-reveal-text="" className="space-y-1">
-                    <h3 className="text-body font-semibold text-text">{member.name}</h3>
-                    <p className="text-meta text-text-secondary">
-                      {member.role}, {member.country}
-                    </p>
-                    <p className="text-body text-text-secondary">{member.text}</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-            <AfterFirstDisplay>
-              <PhotoReveal scope={governanceRef} />
-            </AfterFirstDisplay>
-          </div>
-        </Section>
-      )}
-
       {/* FIN DE PAGE : deux actions (QSN-04), sur le fond de la page, sans carte nuit au-dessus du footer */}
-      <Section tone={hasGovernance ? 'sauge' : 'brume'}>
+      <Section tone="brume">
         <div className={cn('container-page', CLOSING_PHOTO && 'grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-12')}>
           <div className="max-w-[65ch] space-y-6">
             <SectionHeader
