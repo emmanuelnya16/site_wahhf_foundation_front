@@ -5,7 +5,7 @@ import SEO from '../components/wahhf/SEO';
 import Section from '../components/wahhf/Section';
 import SectionHeader from '../components/wahhf/SectionHeader';
 import GalleryGrid from '../components/wahhf/GalleryGrid';
-import { fillLayout } from '../components/wahhf/galleryLayout';
+import { fillLayout, sharedCellCaps } from '../components/wahhf/galleryLayout';
 import { DonateButton, SecondaryButton } from '../components/wahhf/Buttons';
 import { AlbumId, albumPlaceDate, countLabel, GALLERY_ALBUMS, GALLERY_ITEMS } from '../data/gallery';
 import { requestScrollRefresh } from '../lib/afterFirstDisplay';
@@ -13,11 +13,18 @@ import { cn } from '../lib/utils';
 
 type Filter = 'tout' | AlbumId;
 
-/** Albums non vides, avec leur mise en page sans trou (GAL-03), calculée une fois. */
-const ALBUMS = GALLERY_ALBUMS.map((album) => {
-  const items = GALLERY_ITEMS.filter((it) => it.album === album.id);
-  return { album, items, layout: fillLayout(items, true) };
-}).filter(({ items }) => items.length > 0);
+/**
+ * Albums non vides, avec leur mise en page sans trou (GAL-03), calculée une fois, et une seule taille de case pour tous
+ * (revue du groupe 7.3) : les colonnes des albums s'alignent d'un album à l'autre.
+ */
+const ALBUM_ITEMS = GALLERY_ALBUMS.map((album) => ({ album, items: GALLERY_ITEMS.filter((it) => it.album === album.id) })).filter(
+  ({ items }) => items.length > 0
+);
+const CELL = sharedCellCaps(
+  ALBUM_ITEMS.map(({ items }) => items),
+  true
+);
+const ALBUMS = ALBUM_ITEMS.map(({ album, items }) => ({ album, items, layout: fillLayout(items, true, CELL) }));
 
 /*
  * Galerie (groupe 7.3 : contrat validé, audit GAL-02, GAL-03, GAL-05, GAL-07, GAL-08, RESP-05, T-16).

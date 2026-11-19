@@ -123,23 +123,28 @@ export interface FillLayout {
   isLarge: (i: number) => boolean;
 }
 
-/**
- * Mise en page sans trou d'un album, par palier (2, 3, 4 colonnes), et largeur maximale par palier : aucune vignette
- * (ni mise en avant) n'est affichée à plus de la moitié de la taille de sa source (aperçu pour une vidéo), en densité 2
- * (contrat §5).
- */
-export function fillLayout(items: GalleryItem[], featureFirst: boolean): FillLayout {
+/** Largeur de case la plus grande permise, par palier (px). */
+export type CellCaps = Record<Breakpoint, number>;
+
+/** Colonnes et mise en page sans trou d'un album, par palier. */
+function albumSpans(items: GalleryItem[], featureFirst: boolean) {
   const columns = galleryColumns(items.length);
   const canGrow = (i: number) => items[i].kind === 'photo';
   const spans = Object.fromEntries(
     BREAKPOINTS.map((bp) => [bp, packGallery(items.length, columns[bp], featureFirst && items.length >= 6, canGrow)])
   ) as Record<Breakpoint, Span[]>;
-  // Case la plus large permise : la vignette (ou la mise en avant) la plus exigeante ne dépasse pas la moitié de sa
-  // source (aperçu de la vidéo pour une vidéo). L'image couvre sa case (object-cover) : son échelle est la plus grande
-  // de largeur affichée / largeur de la source et hauteur affichée / hauteur de la source. Revue du groupe 7.3 : la
-  // hauteur compte aussi (sources en 5:3 ou plus larges dans des cases 4:3 : c'est elle qui limite).
-  const maxWidth = (bp: Breakpoint) => {
-    const c = columns[bp];
+  return { columns, spans };
+}
+
+/**
+ * Case la plus large permise : la vignette (ou la mise en avant) la plus exigeante ne dépasse pas la moitié de sa
+ * source (aperçu de la vidéo pour une vidéo). L'image couvre sa case (object-cover) : son échelle est la plus grande de
+ * largeur affichée / largeur de la source et hauteur affichée / hauteur de la source. Revue du groupe 7.3 : la hauteur
+ * compte aussi (sources en 5:3 ou plus larges dans des cases 4:3 : c'est elle qui limite).
+ */
+function cellCaps(items: GalleryItem[], spans: Record<Breakpoint, Span[]>): CellCaps {
+  const caps = {} as CellCaps;
+  for (const bp of BREAKPOINTS) {
     const gap = GAP[bp];
     let cell = Infinity;
     spans[bp].forEach((s, i) => {
@@ -147,7 +152,32 @@ export function fillLayout(items: GalleryItem[], featureFirst: boolean): FillLay
       const byHeight = (items[i].h / 2 - gap * (s.h - 1)) / (CELL_RATIO * s.h);
       cell = Math.min(cell, byWidth, byHeight);
     });
-    const width = Math.floor(c * cell + (c - 1) * gap);
+    caps[bp] = cell;
+  }
+  return caps;
+}
+
+/**
+ * Une seule taille de case pour toute la page (revue du groupe 7.3) : la plus petite des cases permises de chaque
+ * album, par palier. Les colonnes des albums s'alignent, et un petit album n'est jamais plus large que le grand.
+ */
+export function sharedCellCaps(albums: GalleryItem[][], featureFirst: boolean): CellCaps {
+  const all = albums.filter((items) => items.length > 0).map((items) => cellCaps(items, albumSpans(items, featureFirst).spans));
+  return Object.fromEntries(BREAKPOINTS.map((bp) => [bp, Math.min(...all.map((c) => c[bp]))])) as CellCaps;
+}
+
+/**
+ * Mise en page sans trou d'un album, par palier (2, 3, 4 colonnes), et largeur maximale par palier : aucune vignette
+ * (ni mise en avant) n'est affichée à plus de la moitié de la taille de sa source (aperçu pour une vidéo), en densité 2
+ * (contrat §5). `shared` : taille de case commune à toute la page (sharedCellCaps).
+ */
+export function fillLayout(items: GalleryItem[], featureFirst: boolean, shared?: CellCaps): FillLayout {
+  const { columns, spans } = albumSpans(items, featureFirst);
+  const own = cellCaps(items, spans);
+  const maxWidth = (bp: Breakpoint) => {
+    const c = columns[bp];
+    const cell = Math.min(own[bp], shared?.[bp] ?? Infinity);
+    const width = Math.floor(c * cell + (c - 1) * GAP[bp]);
     return width >= MAX_AVAILABLE[bp] ? 'none' : `${width}px`;
   };
   const style = {
