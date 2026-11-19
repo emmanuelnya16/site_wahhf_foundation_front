@@ -15,6 +15,7 @@ import { fetchGeo, GEO_URLS } from '../../lib/geoData';
 import { followAnchorLink } from '../../lib/scroll';
 import { COUNTRIES_DATA } from '../../services/api';
 import { filSteps } from './steps';
+import { photoCaption, photoOrFallback } from '../../lib/photos';
 
 /*
  * Accompagnement vers l'Europe (/mobilite-langues/accompagnement), groupe 7.4 : contrat validé, audit ACCO-01 à ACCO-03,
@@ -35,7 +36,12 @@ import { filSteps } from './steps';
  * - Fin de page sur le fond de la page : « Être accompagné » et « Signaler une arnaque » (ACCO-02), sans carte nuit ; les
  *   deux boutons alignés, quelle que soit la longueur des textes au-dessus.
  * - Gratuité : dite par l'avertissement, au premier écran ; jamais dans un titre.
+ * - Retouches du 19/11 (des images) : photo dans l'en-tête, l'intervenant devant la diapositive de la fondation le
+ *   25 avril (A59), ou, tant que l'accord parental manque (production), devant l'écran et le kakémono (A46) ;
+ *   découverte du bas vers le haut sur ordinateur, comme Mobilité.
  */
+
+const HEADER_PHOTO = photoOrFallback('A59', 'A46');
 
 const EuropeMiniMap = lazy(() => import('../../components/wahhf/EuropeMiniMap'));
 
@@ -149,7 +155,13 @@ export default function AccompagnementPage() {
         description={`Orientation gratuite et transparente vers 10 pays européens (${names.join(', ')}) par WAHHF Foundation.`}
       />
 
-      <PageHeader reveal notice={<DisclaimerBanner />}>
+      <PageHeader
+        reveal
+        revealPhoto
+        catalogPhoto={HEADER_PHOTO}
+        photoCaption={HEADER_PHOTO ? photoCaption(HEADER_PHOTO) : undefined}
+        notice={<DisclaimerBanner />}
+      >
         <PageBreadcrumb items={[{ label: 'Mobilité & Langues', to: '/mobilite-langues' }, { label: 'Accompagnement vers l’Europe' }]} />
 
         <PageTitle>Un accompagnement transparent, étape par étape</PageTitle>

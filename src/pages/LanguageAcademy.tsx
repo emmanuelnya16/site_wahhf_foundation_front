@@ -15,6 +15,7 @@ import SessionsCalendar from './academie/SessionsCalendar';
 import LevelDetail from './academie/LevelDetail';
 import { FinalAction, levelName, levelSteps, useFocusTitleAfterNavigation } from './academie/shared';
 import { GERMAN_LEVELS_DATA } from '../services/api';
+import { photoCaption, photoOrFallback } from '../lib/photos';
 
 /*
  * Académie de langues (/mobilite-langues/academie), groupe 7.1 : contrat validé, audit ACAD-01 à ACAD-08, T-05, T-14.
@@ -22,7 +23,12 @@ import { GERMAN_LEVELS_DATA } from '../services/api';
  * fiche du niveau (celui du test une fois fait, A1 sinon) ; le calendrier ; « Après votre candidature » ; les examens ;
  * une seule action en fin de page. Les pages de niveau (/academie/:niveau) sont dans LanguageLevelPage.tsx (NIV-01).
  * ACAD-02 : un niveau de la frise mène à sa page, qui s'ouvre en haut sur ce niveau, le focus sur son titre.
+ * Retouches du 19/11 (des images) : photo dans l'en-tête, des jeunes participantes attentives le 25 avril (A33), ou,
+ * tant que l'accord parental manque (production), un participant qui prend des notes (A98) ; découverte du bas vers le
+ * haut sur ordinateur, comme Mobilité.
  */
+
+const HEADER_PHOTO = photoOrFallback('A33', 'A98');
 
 export default function LanguageAcademy() {
   useFocusTitleAfterNavigation();
@@ -37,7 +43,13 @@ export default function LanguageAcademy() {
         canonical="/mobilite-langues/academie"
       />
 
-      <PageHeader reveal notice={<DisclaimerBanner />}>
+      <PageHeader
+        reveal
+        revealPhoto
+        catalogPhoto={HEADER_PHOTO}
+        photoCaption={HEADER_PHOTO ? photoCaption(HEADER_PHOTO) : undefined}
+        notice={<DisclaimerBanner />}
+      >
         <PageBreadcrumb items={[{ label: 'Mobilité & Langues', to: '/mobilite-langues' }, { label: 'Académie de langues' }]} />
         <PageTitle>Académie de langues : l’allemand, du niveau A1 au niveau C1</PageTitle>
         <PageIntro>

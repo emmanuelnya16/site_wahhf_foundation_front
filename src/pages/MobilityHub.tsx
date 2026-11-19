@@ -1,12 +1,12 @@
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { Plus } from 'lucide-react';
 import SEO from '../components/wahhf/SEO';
 import SectionHeader from '../components/wahhf/SectionHeader';
 import PageHeader, { PageTitle, PageIntro, PageActions } from '../components/wahhf/PageHeader';
+import Photo from '../components/wahhf/Photo';
+import type { CatalogPhoto } from '../data/photos';
 import { photoCaption, photoOrFallback } from '../lib/photos';
-
-/** En-tête (lot 7.6, catalogue : « Mobilité / Allemagne ») : la présentation sur les études en Allemagne du 25 avril. */
-const HEADER_PHOTO = photoOrFallback('A53');
 import { PrimaryButton, SecondaryButton } from '../components/wahhf/Buttons';
 import DisclaimerBanner from '../components/wahhf/DisclaimerBanner';
 import { COUNTRIES_DATA, GERMAN_LEVELS_DATA } from '../services/api';
@@ -14,6 +14,12 @@ import Section from '../components/wahhf/Section';
 import Fil from '../components/wahhf/Fil';
 import { TextList, TextListItem, TEXT_LINK_CLASS } from '../components/wahhf/TextList';
 import { AfterFirstDisplay, FilScrub } from '../effects/DeferredMotion';
+
+/** En-tête (lot 7.6, catalogue : « Mobilité / Allemagne ») : la présentation sur les études en Allemagne du 25 avril. */
+const HEADER_PHOTO = photoOrFallback('A53');
+/** Portes d'entrée (retouches du 19/11) : un participant prend des notes (A98) ; une question au micro pendant les échanges (A34). */
+const ACADEMY_PHOTO = photoOrFallback('A98');
+const EUROPE_PHOTO = photoOrFallback('A34');
 
 /*
  * Mobilité & Langues (groupe 7.1 : contrat validé, audit MOB-01, T-14, ARN-02, T-12).
@@ -27,7 +33,29 @@ import { AfterFirstDisplay, FilScrub } from '../effects/DeferredMotion';
  * - Une seule action en fin de page (Candidater), sans carte nuit au-dessus du footer.
  * - Mouvement (contrat §10) : en-tête révélé comme le hero, photo découverte du bas vers le haut (ordinateur), frise
  *   A1 → C1 au défilement (FilScrub, ordinateur), apparitions des listes.
+ * - Retouches du 19/11 (« trop de texte », des images) : une photo pour chaque porte d'entrée, à côté de son texte
+ *   (découverte du bas vers le haut sur ordinateur) ; la FAQ devient une liste de questions qui s'ouvrent (<details>,
+ *   réponses gardées mot pour mot) ; dans « Pourquoi », le second paragraphe, qui redisait l'introduction et le point
+ *   « Exigence », n'est plus affiché (WHY_SECOND_PARAGRAPH_HIDDEN). L'avertissement reste visible et entier (contrat §8).
  */
+
+/** « Pourquoi », second paragraphe : plus affiché (retouches du 19/11, il redit l'introduction et « Exigence »). */
+export const WHY_SECOND_PARAGRAPH_HIDDEN =
+  'Avec le soutien de nos partenaires et de nos donateurs, nous proposons ce que beaucoup marchandent : des cours d’allemand structurés du niveau A1 au C1 et une orientation documentée étape par étape.';
+
+/** Photo d'une porte d'entrée : 3:2 entière, légendée par son album, à droite du texte sur ordinateur. */
+function DoorPhoto({ photo }: { photo: CatalogPhoto | null }) {
+  if (!photo) return null;
+  return (
+    <figure className="w-full max-w-[26rem] lg:col-span-5 lg:justify-self-end">
+      <div data-reveal="clip" data-reveal-radius="1.25rem" className="overflow-hidden rounded-card">
+        <Photo photo={photo} radius="none" sizes="(min-width: 1024px) 26rem, calc(100vw - 2.5rem)" />
+      </div>
+      <figcaption className="mt-2 text-meta text-text-secondary">{photoCaption(photo)}</figcaption>
+    </figure>
+  );
+}
+
 
 const MOBILITY_FAQS = [
   {
@@ -109,12 +137,15 @@ export default function MobilityHub() {
           />
 
           {/* Porte 1 : l'Académie, avec le fil A1 → C1 (contrat §6) ; il se dessine au défilement sur ordinateur */}
-          <div data-reveal="" className="border-t border-border-subtle pt-6 space-y-6">
-            <div className="space-y-4">
-              <h3 className="text-body font-semibold text-text">Académie de langues (allemand A1 à C1)</h3>
-              <p className="text-body text-text-secondary max-w-[65ch]">
-                Apprendre l’allemand étape par étape : compréhension, expression orale et écrite, test de niveau en ligne et préparation méthodique aux certifications.
-              </p>
+          <div className="border-t border-border-subtle pt-6 space-y-6">
+            <div className="grid gap-6 lg:grid-cols-12 lg:items-start lg:gap-12">
+              <div data-reveal="" className="space-y-4 lg:col-span-7">
+                <h3 className="text-body font-semibold text-text">Académie de langues (allemand A1 à C1)</h3>
+                <p className="text-body text-text-secondary max-w-[65ch]">
+                  Apprendre l’allemand étape par étape : compréhension, expression orale et écrite, test de niveau en ligne et préparation méthodique aux certifications.
+                </p>
+              </div>
+              <DoorPhoto photo={ACADEMY_PHOTO} />
             </div>
             <div ref={filRef} role="group" aria-label="Les cinq niveaux d’allemand, de A1 à C1, puis l’Europe">
               <Fil
@@ -140,8 +171,9 @@ export default function MobilityHub() {
           </div>
 
           {/* Porte 2 : l'accompagnement vers l'Europe */}
-          <div data-reveal="" className="border-t border-border-subtle pt-6 space-y-6">
-            <div className="space-y-4">
+          <div className="border-t border-border-subtle pt-6 space-y-6">
+            <div className="grid gap-6 lg:grid-cols-12 lg:items-start lg:gap-12">
+            <div data-reveal="" className="space-y-4 lg:col-span-7">
               <h3 className="text-body font-semibold text-text">Accompagnement vers l’Europe</h3>
               <p className="text-body text-text-secondary max-w-[65ch]">
                 Un parcours pédagogique en 4 étapes pour comprendre les voies légales (études, formation professionnelle, travail), préparer son dossier et vérifier chaque démarche sur les portails officiels.
@@ -153,6 +185,8 @@ export default function MobilityHub() {
                   </Link>
                 ))}
               </div>
+            </div>
+              <DoorPhoto photo={EUROPE_PHOTO} />
             </div>
             <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
               <SecondaryButton to="/mobilite-langues/accompagnement">Explorer l’accompagnement Europe</SecondaryButton>
@@ -176,9 +210,6 @@ export default function MobilityHub() {
             <div className="space-y-4 text-body text-text-secondary max-w-[65ch]">
               <p>
                 Un projet d’études ou de formation professionnelle à l’étranger ne s’achète pas : il se construit par l’apprentissage exigeant de la langue, la conformité des diplômes et le respect strict des procédures consulaires officielles.
-              </p>
-              <p>
-                Avec le soutien de nos partenaires et de nos donateurs, nous proposons ce que beaucoup marchandent : des cours d’allemand structurés du niveau A1 au C1 et une orientation documentée étape par étape.
               </p>
             </div>
           </div>
@@ -225,14 +256,19 @@ export default function MobilityHub() {
         <div className="container-page space-y-10">
           <SectionHeader title="Questions fréquentes" />
 
-          {/* FAQ en liste typographique (ajout du 16/11 au §8) : question en 600, réponse, filet ; tout reste visible */}
-          <TextList columns={1} className="max-w-[65ch]">
+          {/* FAQ (retouches du 19/11, « trop de texte ») : chaque question s'ouvre sur sa réponse (<details> natif : clavier,
+              Entrée et Espace, lecteurs d'écran « réduit / développé ») ; question en 600, filet entre les lignes */}
+          <div className="max-w-[65ch] border-b border-border-subtle">
             {MOBILITY_FAQS.map((faq) => (
-              <TextListItem key={faq.q} title={faq.q}>
-                <p>{faq.a}</p>
-              </TextListItem>
+              <details key={faq.q} data-reveal="" className="group border-t border-border-subtle">
+                <summary className="flex min-h-11 cursor-pointer list-none items-start justify-between gap-4 py-5 text-body font-semibold text-text [&::-webkit-details-marker]:hidden">
+                  <span>{faq.q}</span>
+                  <Plus aria-hidden="true" className="mt-1 h-5 w-5 shrink-0 text-link transition-transform duration-300 group-open:rotate-45" />
+                </summary>
+                <p className="pb-6 text-body text-text-secondary">{faq.a}</p>
+              </details>
             ))}
-          </TextList>
+          </div>
         </div>
       </Section>
 
