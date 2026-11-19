@@ -11,7 +11,8 @@ import { TEXT_LINK_CLASS } from '../../components/wahhf/TextList';
 import { CONTACT } from '../../config/contact';
 import { buildDraft, mailtoHref, whatsappHref } from '../../lib/contactDraft';
 import { useSequentialFade } from '../../effects/useSequentialFade';
-import { FAKE_MESSAGE, SCAM_PRACTICES, SCAM_PROMISES, SCAM_SIGNS } from '../../data/arnaques';
+import { FAKE_MESSAGE, FakeMessageFlag, SCAM_PRACTICES, SCAM_PROMISES, SCAM_SIGNS, ScamItemType } from '../../data/arnaques';
+import { cn } from '../../lib/utils';
 import { ACCOMPANIMENT_STEPS } from './steps';
 
 /*
@@ -29,6 +30,7 @@ import { ACCOMPANIMENT_STEPS } from './steps';
  *   réflexes, seuls à porter une coche (ARN-03) ;
  * - fin de page sur « Signaler » (et non plus « Demander un accompagnement »), sans carte nuit.
  * Aucune apparition groupée sur cette page (src/effects/motion/RevealBatch.tsx, EXCLUDED) ; aucun bouton de don.
+ * Revue du groupe 7.4 : l'icône de chaque puce est lue dans son type (ScamIcon), et non plus choisie par section.
  */
 
 const NB = ' ';
@@ -40,6 +42,19 @@ const REPORT = buildDraft(
   [],
   'Ce qui s’est passé (date, numéro ou profil, somme demandée) :\n\n(Joignez si possible une capture d’écran du message.)'
 );
+
+/**
+ * Icône d'une puce, lue dans son type (ARN-03) : triangle d'alerte ambre pour un signe d'arnaque, coche pour un bon
+ * réflexe, aucune pour un engagement de la fondation. Décorative : le texte dit déjà de quoi il s'agit.
+ */
+function ScamIcon({ type }: { type: ScamItemType }) {
+  if (type === 'sign') return <AlertTriangle aria-hidden="true" className="mt-0.5 w-6 h-6 text-warning" />;
+  if (type === 'practice') return <CheckCircle2 aria-hidden="true" className="mt-0.5 w-6 h-6 text-fil" />;
+  return null;
+}
+
+/** Colonne de l'icône, seulement pour les types qui en portent une. */
+const withIcon = (type: ScamItemType) => type !== 'promise' && 'grid grid-cols-[1.5rem_1fr] gap-x-4';
 
 /** Les deux boutons de signalement (48 px de haut, au-delà des 44 px demandés par ARN-01). */
 function ReportButtons() {
@@ -109,9 +124,9 @@ export default function ArnaquesPage() {
               <li
                 key={sign.title}
                 style={{ '--seq-i': i } as CSSProperties}
-                className="grid grid-cols-[1.5rem_1fr] gap-x-4 border-t border-border-subtle py-5"
+                className={cn(withIcon(sign.type), 'border-t border-border-subtle py-5')}
               >
-                <AlertTriangle aria-hidden="true" className="mt-0.5 w-6 h-6 text-warning" />
+                <ScamIcon type={sign.type} />
                 <div className="space-y-1.5">
                   <h3 className="text-body font-semibold text-text">{sign.title}</h3>
                   <p className="text-body text-text-secondary">{sign.text}</p>
@@ -145,14 +160,15 @@ export default function ArnaquesPage() {
                   )}
                 </p>
               </div>
-              <figcaption className="text-meta text-text-secondary">Exemple inventé : ce message ne vient pas de WAHHF Foundation.</figcaption>
+              <figcaption className="text-meta text-text-secondary">Exemple inventé{NB}: ce message ne vient pas de WAHHF Foundation.</figcaption>
             </figure>
             <ul className="max-w-[65ch]">
-              {FAKE_MESSAGE.filter((p): p is { flag: string; note: string } => typeof p !== 'string').map((p) => (
-                <li key={p.flag} className="grid grid-cols-[1.5rem_1fr] gap-x-4 border-t border-border-subtle py-4">
-                  <AlertTriangle aria-hidden="true" className="mt-0.5 w-6 h-6 text-warning" />
+              {FAKE_MESSAGE.filter((p): p is FakeMessageFlag => typeof p !== 'string').map((p) => (
+                <li key={p.flag} className={cn(withIcon(p.type), 'border-t border-border-subtle py-4')}>
+                  <ScamIcon type={p.type} />
                   <p className="text-body text-text-secondary">
-                    <span className="font-semibold text-text">«{NB}{p.flag.replace(/\.$/, '')}{NB}»</span> : {p.note}
+                    <span className="font-semibold text-text">«{NB}{p.flag.replace(/\.$/, '')}{NB}»</span>
+                    {NB}: {p.note}
                   </p>
                 </li>
               ))}
@@ -171,9 +187,12 @@ export default function ArnaquesPage() {
             />
             <ul className="max-w-[65ch]">
               {SCAM_PROMISES.map((item) => (
-                <li key={item.text} className="border-t border-border-subtle py-4 space-y-1">
-                  {item.title && <p className="text-body font-semibold text-text">{item.title}</p>}
-                  <p className="text-body text-text-secondary">{item.text}</p>
+                <li key={item.text} className={cn(withIcon(item.type), 'border-t border-border-subtle py-4')}>
+                  <ScamIcon type={item.type} />
+                  <div className="space-y-1">
+                    {item.title && <p className="text-body font-semibold text-text">{item.title}</p>}
+                    <p className="text-body text-text-secondary">{item.text}</p>
+                  </div>
                 </li>
               ))}
             </ul>
@@ -182,8 +201,8 @@ export default function ArnaquesPage() {
             <SectionHeader title="Les bons réflexes" />
             <ul className="max-w-[65ch]">
               {SCAM_PRACTICES.map((item) => (
-                <li key={item.text} className="grid grid-cols-[1.5rem_1fr] gap-x-4 border-t border-border-subtle py-4">
-                  <CheckCircle2 aria-hidden="true" className="mt-0.5 w-6 h-6 text-fil" />
+                <li key={item.text} className={cn(withIcon(item.type), 'border-t border-border-subtle py-4')}>
+                  <ScamIcon type={item.type} />
                   <p className="text-body text-text">{item.text}</p>
                 </li>
               ))}
