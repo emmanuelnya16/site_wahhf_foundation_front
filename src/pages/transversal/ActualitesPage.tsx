@@ -85,26 +85,29 @@ function Article({ article }: { article: NewsArticle }) {
       </PageHeader>
 
       <Section>
-        {/* data-reading-progress : la barre de lecture (Layout) ne s'affiche que sur un vrai article */}
-        <div className="container-page" data-reading-progress="">
-          <ReadingColumn as="article" className="[&>figure]:mb-8">
-            {/* Image principale : 16/10, rayon des cartes ; découverte du bas vers le haut à l'arrivée (ordinateur) */}
-            <figure className="m-0">
-              <img
-                src={article.image}
-                srcSet={imageSrcSet(article.image)}
-                sizes="(min-width: 768px) 38rem, calc(100vw - 2.5rem)"
-                alt={article.imageAlt ?? ''}
-                width={1200}
-                height={750}
-                fetchPriority="high"
-                className="photo-rise w-full aspect-[16/10] object-cover rounded-card bg-surface-section"
-              />
-            </figure>
-            {article.content.map((p, i) => (
-              <p key={i}>{p}</p>
-            ))}
-          </ReadingColumn>
+        <div className="container-page">
+          {/* data-reading-progress : la barre de lecture (Layout) ne s'affiche que sur un vrai article, et se remplit
+              sur la hauteur du texte (pleine quand son dernier paragraphe atteint le bas de l'écran ; revue du groupe 7.3) */}
+          <div data-reading-progress="">
+            <ReadingColumn as="article" className="[&>figure]:mb-8">
+              {/* Image principale : 16/10, rayon des cartes ; découverte du bas vers le haut à l'arrivée (ordinateur) */}
+              <figure className="m-0">
+                <img
+                  src={article.image}
+                  srcSet={imageSrcSet(article.image)}
+                  sizes="(min-width: 768px) 38rem, calc(100vw - 2.5rem)"
+                  alt={article.imageAlt ?? ''}
+                  width={1200}
+                  height={750}
+                  fetchPriority="high"
+                  className="photo-rise w-full aspect-[16/10] object-cover rounded-card bg-surface-section"
+                />
+              </figure>
+              {article.content.map((p, i) => (
+                <p key={i}>{p}</p>
+              ))}
+            </ReadingColumn>
+          </div>
 
           {/* Une seule action principale (ART-02) ; le don en lien, sous le texte, sans effet */}
           <div className="max-w-[65ch] mt-10 pt-8 border-t border-border-subtle flex flex-wrap items-center gap-x-6 gap-y-3">
@@ -206,11 +209,13 @@ export function ActualitesPage() {
         </div>
       </Section>
 
-      {/* SUR LE TERRAIN : l'album de l'Open Day (ACTU-01) */}
+      {/* EN IMAGES : l'album de l'Open Day (ACTU-01). Pas « Sur le terrain », nom d'un autre album de la galerie (revue
+          du groupe 7.3) */}
       <Section tone="sauge">
         <div className="container-page space-y-8">
-          <SectionHeader title="Sur le terrain" />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <SectionHeader title="En images" />
+          {/* 30 rem au plus sur une colonne : la photo (986 px) ne s'affiche jamais à plus de la moitié de sa taille (§5) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[30rem] md:max-w-none">
             <OpenDayCard />
           </div>
           <Link to="/galerie" className={TEXT_LINK_CLASS}>
