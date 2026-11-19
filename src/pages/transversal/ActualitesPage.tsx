@@ -4,8 +4,8 @@ import Section from '../../components/wahhf/Section';
 import SectionHeader from '../../components/wahhf/SectionHeader';
 import { ReadingColumn, TEXT_LINK_CLASS } from '../../components/wahhf/TextList';
 import { CardLink, CardMedia, CardBody, CardMeta, CardTitle } from '../../components/wahhf/Card';
-import Photo from '../../components/wahhf/Photo';
-import { albumLabel, photoCount, photoOrFallback, visibleAlbums } from '../../lib/photos';
+import { photoCaption, photoOrFallback } from '../../lib/photos';
+import FieldAlbums from './FieldAlbums';
 import PageHeader, { PageBreadcrumb, PageMeta, PageTitle, PageIntro } from '../../components/wahhf/PageHeader';
 import { PrimaryButton } from '../../components/wahhf/Buttons';
 import NotFoundPage, { NotFoundLinks } from '../NotFoundPage';
@@ -22,6 +22,9 @@ import { DOMAINS_DATA, NEWS_DATA, NewsArticle, imageSrcSet } from '../../service
  *   principal, le don en simple lien (ART-02) ; image prioritaire (fetchpriority, ART-03).
  * - Mouvement (contrat §10) : en-têtes révélés comme le hero ; cartes en apparitions groupées ; article : barre de
  *   lecture forêt (Layout, ReadingProgress) et image découverte du bas vers le haut (clip-path, ordinateur, .photo-rise).
+ * - Retouches du 19/11 (« page vide, sans design ni animations ») : photo dans l'en-tête (découverte du bas vers le
+ *   haut sur ordinateur) ; l'état vide et les albums dans une seule section ; la journée du 25 avril en mosaïque, puis
+ *   les autres albums de la galerie en cartes (FieldAlbums).
  * Aperçu des articles d'exemple, pour vérifier la mise en page sans les publier : construire le site avec
  * VITE_APERCU_ACTUALITES=1 (jamais pour la mise en ligne).
  */
@@ -42,31 +45,11 @@ const confirmedDate = (date: string) => (/TODO/.test(date) ? null : date);
 const domainOf = (article: NewsArticle) => DOMAINS_DATA.find((d) => d.title === article.category);
 
 /**
- * La journée du 25 avril 2026, seule action réelle documentée (ACTU-01) : son album de la galerie (lot 7.6), avec en
- * couverture les participants devant l'Albatros Hotel (A07, catalogue : « carte événement »).
+ * Photo de l'en-tête (retouches du 19/11) : un intervenant au pupitre le 25 avril (A41, catalogue : « Galerie,
+ * Actualités »), légendée par son album.
+ * L'ancienne carte de l'album (OpenDayCard, couverture A07) est remplacée par FieldAlbums, qui présente tous les albums.
  */
-const EVENT = visibleAlbums().find(({ album }) => album.id === 'journee-2026-04-25');
-const EVENT_COVER = photoOrFallback('A07');
-
-function OpenDayCard() {
-  if (!EVENT || !EVENT_COVER) return null;
-  return (
-    <CardLink to={`/galerie?album=${EVENT.album.id}`} surface="section">
-      {/* Couverture décorative : le titre de la carte dit déjà l'événement */}
-      <Photo
-        photo={EVENT_COVER}
-        sizes="(min-width: 1024px) 22rem, (min-width: 768px) 45vw, 100vw"
-        decorative
-        radius="none"
-        className="block aspect-[16/10] object-cover"
-      />
-      <CardBody>
-        <CardTitle as="h3">{albumLabel(EVENT.album)}</CardTitle>
-        <p className="text-body text-text-secondary">{photoCount(EVENT.photos.length)}, dans la galerie.</p>
-      </CardBody>
-    </CardLink>
-  );
-}
+const HEADER_PHOTO = photoOrFallback('A41');
 
 function Article({ article }: { article: NewsArticle }) {
   const date = confirmedDate(article.date);
@@ -163,19 +146,24 @@ export function ActualitesPage() {
         title="Actualités et actions de terrain"
         description="Les actualités de WAHHF Foundation, et en images la première journée portes ouvertes et le Boot Camp de Yaoundé."
       />
-      <PageHeader reveal>
+      <PageHeader
+        reveal
+        revealPhoto
+        catalogPhoto={HEADER_PHOTO}
+        photoCaption={HEADER_PHOTO ? photoCaption(HEADER_PHOTO) : undefined}
+      >
         <PageTitle>Actualités et actions de terrain</PageTitle>
         <PageIntro>Les nouvelles de la fondation et de ses actions, au Cameroun et vers l’Europe.</PageIntro>
       </PageHeader>
 
-      <Section>
-        <div className="container-page space-y-10">
+      <Section tone="sauge">
+        <div className="container-page space-y-14 lg:space-y-20">
           {PUBLISHED.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {PUBLISHED.map((art) => {
                 const date = confirmedDate(art.date);
                 return (
-                  <CardLink key={art.slug} to={`/actualites/${art.slug}`}>
+                  <CardLink key={art.slug} to={`/actualites/${art.slug}`} surface="section">
                     <CardMedia
                       src={art.image}
                       srcSet={imageSrcSet(art.image)}
@@ -197,7 +185,7 @@ export function ActualitesPage() {
               })}
             </div>
           ) : (
-            // État vide (contrat §11) : on le dit, et on mène à la preuve qui existe (ACTU-01)
+            // État vide (contrat §11) : on le dit, et on mène à la preuve qui existe (ACTU-01), juste dessous
             <div className="max-w-[65ch] space-y-3">
               <h2 className="text-section-title text-text">Aucun article publié pour le moment</h2>
               <p className="text-body text-text-secondary">
@@ -206,21 +194,16 @@ export function ActualitesPage() {
               </p>
             </div>
           )}
-        </div>
-      </Section>
 
-      {/* EN IMAGES : l'album de l'Open Day (ACTU-01). Pas « Sur le terrain », nom d'un autre album de la galerie (revue
-          du groupe 7.3) */}
-      <Section tone="sauge">
-        <div className="container-page space-y-8">
-          <SectionHeader title="En images" />
-          {/* 30 rem au plus sur une colonne : la photo (986 px) ne s'affiche jamais à plus de la moitié de sa taille (§5) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[30rem] md:max-w-none">
-            <OpenDayCard />
+          {/* EN IMAGES : les albums de la galerie (ACTU-01 ; retouches du 19/11). Pas « Sur le terrain », nom d'un autre
+              album de la galerie (revue du groupe 7.3) */}
+          <div className="space-y-8">
+            <SectionHeader title="En images" />
+            <FieldAlbums />
+            <Link to="/galerie" className={TEXT_LINK_CLASS}>
+              Voir toute la galerie
+            </Link>
           </div>
-          <Link to="/galerie" className={TEXT_LINK_CLASS}>
-            Voir toute la galerie
-          </Link>
         </div>
       </Section>
     </>
