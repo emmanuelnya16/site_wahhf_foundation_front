@@ -165,7 +165,8 @@ export default function RevealBatch({ scope, pathname }: { scope: RefObject<HTML
         }) as unknown as (el: Element) => void;
         const onFocus = (event: FocusEvent) => {
           const el = (event.target as Element | null)?.closest?.('[data-reveal]');
-          if (el && hidden.has(el)) reveal(el);
+          // Masqué, ou en train d'apparaître (lot 7.9 : un Tab rapide peut tomber sur une carte encore transparente)
+          if (el && (hidden.has(el) || gsap.isTweening(el))) reveal(el);
         };
         main.addEventListener('focusin', onFocus);
 

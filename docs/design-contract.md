@@ -848,6 +848,61 @@ Contrat validé le 16/11/2026, avec les ajustements du §13.
 
 **Mouvement** (étape 3 ; écart voulu par le brief au « un effet fort par section » du §10, réservé à ces pages) : keyframes CSS de la référence, mêmes noms, durées et courbes (`src/styles/events-motion.css`) : entrée du hero bloc par bloc, trait soleil sous le mot accent (0,7 s de délai), panneau lieu, pastille logo qui flotte, étincelle, reflet du bouton principal, taches qui dérivent, confettis (14 sur ordinateur, 6 sur téléphone), point qui pulse, chiffres qui tombent, bandeau qui défile (45 s), survols (montée, flèche qui glisse, fond qui se remplit, cartes qui se soulèvent ou penchent), entrée du sous-menu Actualités. Apparitions par le RevealBatch du site (`data-reveal="ev"` : 92 % de l'écran, 28 px, 0,8 s, cubic-bezier(.2,.7,.2,1), 80 ms entre deux cartes). Frise du déroulé remplie au défilement (ScrollTrigger, scaleY). Mieux que la référence : chaque boucle s'arrête hors de l'écran, onglet caché et par le bouton « Mettre les animations en pause » du hero (retenu pour la visite) ; le bandeau a son propre bouton (aria-pressed) et s'arrête au survol et au focus (WCAG 2.2.2) ; compte à rebours calculé au premier rendu, un seul intervalle arrêté hors de l'écran, chiffres masqués aux lecteurs d'écran et date écrite à côté. Mouvement réduit : tout visible et fixe, bandeau arrêté, frise pleine, chiffres sans chute, boutons pause masqués.
 
+**Contrastes mesurés** (48 paires, clair et sombre ; fonds translucides composés sur leur fond réel ; aucun échec) :
+
+| Thème | Usage | Texte | Fond | Ratio | Seuil |
+|---|---|---|---|---|---|
+| clair | Texte courant, titres (h1, h2, h3) | encre | brume | 13,47:1 | 4,5:1 |
+| clair | Texte secondaire, accroche | encre-douce | brume | 6,84:1 | 4,5:1 |
+| clair | Texte secondaire sur section sauge (déroulé, FAQ) | encre-douce | sauge | 6,05:1 | 4,5:1 |
+| clair | Texte des cartes papier | encre-douce | papier | 7,3:1 | 4,5:1 |
+| clair | Surtitres, mot accent, liens, icônes (forêt) | foret | brume | 8,59:1 | 4,5:1 |
+| clair | Surtitres et liens sur sauge | foret | sauge | 7,59:1 | 4,5:1 |
+| clair | Icône forêt dans son carré sauge | foret | sauge | 7,59:1 | 3,0:1 |
+| clair | Places restantes (miel) | miel | brume | 5,56:1 | 4,5:1 |
+| clair | Pastille du hero (texte sur voile) | encre | #FDFDFC (composé) | 14,1:1 | 4,5:1 |
+| clair | Compte à rebours : titre et date (voile) | encre-douce | #FDFDFC (composé) | 7,17:1 | 4,5:1 |
+| clair | Chiffres et libellés des cases (papier) | encre-douce | papier | 7,3:1 | 4,5:1 |
+| clair | Anneau de focus (forêt) sur brume | foret | brume | 8,59:1 | 3,0:1 |
+| clair | Contour des boutons (encre) sur brume | encre | brume | 13,47:1 | 3,0:1 |
+| les deux | Boutons soleil, bandeau, panneau, cercles, bloc final, carte soleil | encre | soleil | 7,84:1 | 4,5:1 |
+| les deux | Bouton soleil au survol (soleil pâle) | encre | soleil-pale | 9,09:1 | 4,5:1 |
+| les deux | Cartes nuit, section programme, bouton nuit | brume | nuit | 11,41:1 | 4,5:1 |
+| les deux | Texte secondaire sur nuit | brume-douce | nuit | 7,85:1 | 4,5:1 |
+| les deux | Surtitre et libellés soleil sur nuit | soleil | nuit | 6,64:1 | 4,5:1 |
+| les deux | Cartes du programme (brume à 5 % sur nuit) : titre | brume | #1B4638 (composé) | 9,95:1 | 4,5:1 |
+| les deux | Cartes du programme : texte | brume-douce | #1B4638 (composé) | 6,85:1 | 4,5:1 |
+| les deux | Carte activité forêt : texte | brume | foret | 8,59:1 | 4,5:1 |
+| clair | Carte activité papier : texte | encre | papier | 14,35:1 | 4,5:1 |
+| clair | Carte activité papier : icône brume sur carré forêt | brume | foret | 8,59:1 | 3,0:1 |
+| les deux | Carte activité forêt : icône forêt sur carré papier | foret | papier | 9,15:1 | 3,0:1 |
+| les deux | Carte activité nuit : icône encre sur carré soleil | encre | soleil | 7,84:1 | 3,0:1 |
+| les deux | Carte activité soleil : icône soleil sur carré nuit | soleil | nuit | 6,64:1 | 3,0:1 |
+| clair | Croix brume sur rond forêt (« jamais ») | brume | foret | 8,59:1 | 3,0:1 |
+| les deux | Coche encre sur rond soleil | encre | soleil | 7,84:1 | 3,0:1 |
+| les deux | Épingle brume sur rond forêt (panneau) | brume | foret | 8,59:1 | 3,0:1 |
+| les deux | Panneau lieu : bordure encre sur soleil | encre | soleil | 7,84:1 | 3,0:1 |
+| sombre | Texte courant, titres | brume-voilee | humus | 15,04:1 | 4,5:1 |
+| sombre | Texte secondaire | lichen | humus | 8,72:1 | 4,5:1 |
+| sombre | Texte sur sections sous-bois | brume-voilee | sous-bois | 13,45:1 | 4,5:1 |
+| sombre | Texte secondaire sur sous-bois | lichen | sous-bois | 7,8:1 | 4,5:1 |
+| sombre | Cartes canopée : titre | brume-voilee | canopee | 11,76:1 | 4,5:1 |
+| sombre | Cartes canopée : texte | lichen | canopee | 6,82:1 | 4,5:1 |
+| sombre | Surtitres, mot accent, liens, icônes (soleil) sur humus | soleil | humus | 9,66:1 | 4,5:1 |
+| sombre | Surtitres et liens soleil sur sous-bois | soleil | sous-bois | 8,64:1 | 4,5:1 |
+| sombre | Icône soleil dans son carré sous-bois | soleil | sous-bois | 8,64:1 | 3,0:1 |
+| sombre | Places restantes (soleil) | soleil | humus | 9,66:1 | 4,5:1 |
+| sombre | Pastille et compte à rebours (voile canopée) | brume-voilee | #182C25 (composé) | 12,52:1 | 4,5:1 |
+| sombre | Date du compte à rebours (lichen sur voile) | lichen | #182C25 (composé) | 7,26:1 | 4,5:1 |
+| sombre | Anneau de focus (soleil) sur humus | soleil | humus | 9,66:1 | 3,0:1 |
+| sombre | Contour des boutons (brume voilée) sur humus | brume-voilee | humus | 15,04:1 | 3,0:1 |
+| sombre | Carte activité papier devenue canopée : texte | brume-voilee | canopee | 11,76:1 | 4,5:1 |
+| sombre | Croix encre sur rond feuille | encre | feuille | 6,39:1 | 3,0:1 |
+| sombre | Remplissage de la frise (feuille) sur sa piste | feuille | filet-nuit | 4,75:1 | 3,0:1 |
+| clair | Remplissage de la frise (forêt) sur sa piste (filet) | foret | filet | 6,24:1 | 3,0:1 |
+
+**Vérifié le 20 novembre 2026** (build de production et aperçu) : JS initial 167,9 Ko (pages chargées à la demande : 4,2 + 1,6 Ko pour les deux pages, 9,7 Ko de code commun, 6,0 Ko de CSS) ; défilement sans tâche longue (processeur ralenti × 4) ; interaction la plus lente 160 ms (× 4) ; Lighthouse mobile : CLS 0, accessibilité 100, LCP 4,3 s (le titre h1 sur téléphone ; 4,1 s pour Actualités et 3,8 s pour Qui sommes-nous dans les mêmes conditions) ; clavier complet, anneau de focus partout, un seul h1, aucun niveau sauté ; aucun texte provisoire en ligne ; aucun défilement horizontal de 320 à 1 440 px.
+
 **Contenu** : une section ne s'affiche que si ses données existent ; un texte « TODO » s'affiche en développement et dans l'aperçu `VITE_APERCU_EVENEMENTS=1`, jamais en ligne. Questions 156 et suivantes de `docs/contenus-a-fournir.md`.
 
 ## Annexe A : tableau des contrastes
