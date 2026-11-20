@@ -1,6 +1,8 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
+// Lot 7.9 : le détecteur de langue (i18next-browser-languagedetector) n'est plus chargé. Depuis le premier commit,
+// lng: 'fr' l'empêchait de choisir la langue au chargement ; il ne faisait qu'écrire le choix FR / EN dans le
+// navigateur, sans que rien ne le relise. Retiré du JS initial (environ 6 Ko), sans changement visible.
 import frLocale from './locales/fr.json';
 import enLocale from './locales/en.json';
 
@@ -142,7 +144,6 @@ const resources = {
 };
 
 i18n
-  .use(LanguageDetector)
   .use(initReactI18next)
   .init({
     resources,

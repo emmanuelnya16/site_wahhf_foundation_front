@@ -29,6 +29,8 @@ const PartenairesPage = lazy(() => import('./pages/transversal/PartenairesPage')
 const NosActionsPage = lazy(() => import('./pages/transversal/NosActionsPage'));
 const NotreImpactPage = lazy(() => import('./pages/transversal/NotreImpactPage'));
 const ActualitesPage = lazy(() => import('./pages/transversal/ActualitesPage'));
+const EventsListPage = lazy(() => import('./pages/events/EventsListPage'));
+const EventPage = lazy(() => import('./pages/events/EventPage'));
 const AgirPage = lazy(() => import('./pages/transversal/AgirPage'));
 const LegalTransparencyPage = lazy(() => import('./pages/transversal/LegalTransparencyPage'));
 
@@ -71,6 +73,9 @@ function AppRoutes() {
         <Route path="/galerie" element={<GalleryPage />} />
         <Route path="/actualites" element={<ActualitesPage />} />
         <Route path="/actualites/:slug" element={<ActualitesPage />} />
+        {/* Lot 7.9 : événements (liste et fiche) */}
+        <Route path="/evenements" element={<EventsListPage />} />
+        <Route path="/evenements/:slug" element={<EventPage />} />
         <Route path="/partenaires" element={<PartenairesPage />} />
         <Route path="/agir" element={<AgirPage />} />
         <Route path="/faire-un-don" element={<DonatePage />} />

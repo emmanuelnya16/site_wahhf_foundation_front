@@ -42,6 +42,8 @@ export default function Navbar() {
 
   const [scrolled, setScrolled] = useState(false);
   const [megaOpen, setMegaOpen] = useState(false);
+  // Lot 7.9 : sous-menu « Actualités » (Actualités, Événements)
+  const [newsOpen, setNewsOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -53,6 +55,8 @@ export default function Navbar() {
   const headerRef = useRef<HTMLElement>(null);
   const megaRef = useRef<HTMLDivElement>(null);
   const megaTriggerRef = useRef<HTMLButtonElement>(null);
+  const newsRef = useRef<HTMLDivElement>(null);
+  const newsTriggerRef = useRef<HTMLButtonElement>(null);
   const reduceMotion = useReducedMotion();
   const touchStartY = useRef<number | null>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
@@ -93,6 +97,19 @@ export default function Navbar() {
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
   }, [megaOpen]);
+
+  // Sous-menu « Actualités » (lot 7.9) : Échap le ferme, comme le méga-menu
+  useEffect(() => {
+    if (!newsOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return;
+      const focusInMenu = !!newsRef.current?.contains(document.activeElement) && document.activeElement !== newsTriggerRef.current;
+      setNewsOpen(false);
+      if (focusInMenu) newsTriggerRef.current?.focus();
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [newsOpen]);
 
   // Initialisation du thème : Clair par défaut, respecte prefers-color-scheme uniquement à la 1re visite
   useEffect(() => {
@@ -156,10 +173,12 @@ export default function Navbar() {
   const navState = (path: string, section: string[] = []): 'page' | 'true' | undefined =>
     location.pathname === path ? 'page' : section.some((x) => location.pathname.startsWith(x)) ? 'true' : undefined;
   const ACTIONS_SECTION = ['/nos-actions', '/mobilite-langues', '/academie', '/accompagnement'];
+  const NEWS_SECTION = ['/actualites', '/evenements'];
 
   // Fermer les menus au changement de route
   useEffect(() => {
     setMegaOpen(false);
+    setNewsOpen(false);
     setMobileOpen(false);
     setSearchOpen(false);
   }, [location.pathname, location.search]);
@@ -169,6 +188,9 @@ export default function Navbar() {
     const handleClickOutside = (e: MouseEvent) => {
       if (megaRef.current && !megaRef.current.contains(e.target as Node)) {
         setMegaOpen(false);
+      }
+      if (newsRef.current && !newsRef.current.contains(e.target as Node)) {
+        setNewsOpen(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -232,7 +254,7 @@ export default function Navbar() {
             </div>
           </Link>
 
-          {/* Centre : Menu principal (6 entrées) */}
+          {/* Centre : Menu principal (6 entrées ; Événements dans le sous-menu d'Actualités, lot 7.9) */}
           <nav aria-label="Navigation principale" className="hidden xl:flex items-center gap-1">
             <Link to="/qui-sommes-nous" aria-current={navState('/qui-sommes-nous')} className={cn(NAV_LINK, navState('/qui-sommes-nous') && NAV_LINK_CURRENT)}>
               {t('nav.about')}
@@ -255,9 +277,46 @@ export default function Navbar() {
               {t('nav.impact')}
             </Link>
 
-            <Link to="/actualites" aria-current={navState('/actualites', ['/actualites/'])} className={cn(NAV_LINK, navState('/actualites', ['/actualites/']) && NAV_LINK_CURRENT)}>
-              {t('nav.news')}
-            </Link>
+            {/* Actualités (lot 7.9) : sous-menu Actualités et Événements. Avec une 7e entrée, le menu chevauchait le nom
+                « WAHHF Foundation » (mesuré à 1 280 et 1 440 px) : votre brief prévoit alors le sous-menu. */}
+            <div ref={newsRef} className="relative">
+              <button
+                ref={newsTriggerRef}
+                type="button"
+                onClick={() => setNewsOpen((prev) => !prev)}
+                aria-expanded={newsOpen}
+                aria-controls="sous-menu-actualites"
+                aria-current={navState('/actualites', NEWS_SECTION) ? 'true' : undefined}
+                className={cn(NAV_LINK, navState('/actualites', NEWS_SECTION) && NAV_LINK_CURRENT)}
+              >
+                <span>{t('nav.news')}</span>
+                <ChevronDown aria-hidden="true" className={cn('w-4 h-4 transition-transform duration-(--dur-fast)', newsOpen && 'rotate-180')} />
+              </button>
+              {newsOpen && (
+                <div id="sous-menu-actualites" className={cn(PANEL, 'absolute left-0 top-full z-10 mt-2 min-w-56 p-2')}>
+                  <ul>
+                    <li>
+                      <Link
+                        to="/actualites"
+                        aria-current={navState('/actualites', ['/actualites/'])}
+                        className={cn(NAV_LINK, 'w-full rounded-inner px-4 hover:bg-surface-section', navState('/actualites', ['/actualites/']) && NAV_LINK_CURRENT)}
+                      >
+                        {t('nav.news')}
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/evenements"
+                        aria-current={navState('/evenements', ['/evenements/'])}
+                        className={cn(NAV_LINK, 'w-full rounded-inner px-4 hover:bg-surface-section', navState('/evenements', ['/evenements/']) && NAV_LINK_CURRENT)}
+                      >
+                        {t('nav.events')}
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              )}
+            </div>
 
             <Link to="/agir" aria-current={navState('/agir')} className={cn(NAV_LINK, navState('/agir') && NAV_LINK_CURRENT)}>
               {t('nav.act')}
@@ -559,13 +618,25 @@ export default function Navbar() {
               {t('nav.impact')}
             </Link>
 
-            <Link
-              to="/actualites"
-              aria-current={navState('/actualites', ['/actualites/'])}
-              className={cn(MOBILE_LINK, navState('/actualites', ['/actualites/']) && MOBILE_LINK_CURRENT)}
-            >
-              {t('nav.news')}
-            </Link>
+            {/* Actualités et son sous-menu (lot 7.9) : Événements en retrait, comme les domaines de « Nos actions » */}
+            <div className="space-y-2">
+              <Link
+                to="/actualites"
+                aria-current={navState('/actualites', ['/actualites/'])}
+                className={cn(MOBILE_LINK, navState('/actualites', ['/actualites/']) && MOBILE_LINK_CURRENT)}
+              >
+                {t('nav.news')}
+              </Link>
+              <div className="pl-4 border-l border-border-subtle-on-inverse pt-1">
+                <Link
+                  to="/evenements"
+                  aria-current={navState('/evenements', ['/evenements/'])}
+                  className={cn('block py-2 text-body text-text-secondary-on-inverse hover:text-link-on-inverse underline-offset-4 decoration-2', navState('/evenements', ['/evenements/']) && 'underline')}
+                >
+                  {t('nav.events')}
+                </Link>
+              </div>
+            </div>
 
             <Link
               to="/agir"
