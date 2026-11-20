@@ -235,13 +235,13 @@ export const DOMAINS_DATA: DomainItem[] = [
     number: '06',
     slug: 'mobilite-langues',
     title: 'Mobilité & Langues',
-    shortDesc: 'Académie d’allemand gratuite (A1 à C1) et accompagnement transparent vers 10 pays européens.',
+    shortDesc: 'Académie d’allemand /anglais gratuite (A1 à C1) et accompagnement transparent vers 10 pays européens.',
     // Groupe 7.3 : sans « 100 % gratuit » (déjà dit juste au-dessus) ni financeur nommé, comme la FAQ de Mobilité (contrat §13)
-    fullDesc: 'Un programme financé par nos partenaires et nos donateurs, pour apprendre l’allemand et préparer un projet d’études, de formation ou de mobilité en toute sécurité.',
+    fullDesc: 'Un programme financé par nos partenaires et nos donateurs, pour apprendre l’allemand /anglais et préparer un projet d’études, de formation ou de mobilité en toute sécurité.',
     image: WAHHF_IMAGES.openDayVisioconference,
     link: '/mobilite-langues',
     programs: [
-      'Accompagnement des cours de langue allemande du niveau A1 au C1',
+      'Accompagnement des cours de langue allemande /anglaise du niveau A1 au C1',
       'Orientation documentée vers 10 pays européens',
       'Prévention active contre les arnaques et fausses promesses de visa',
     ],
@@ -591,7 +591,7 @@ export const THEMATIC_GUIDES: Record<string, {
       },
       {
         heading: 'Rappel fondamental : WAHHF ne demande jamais d’argent',
-        body: 'WAHHF Foundation est une fondation à but non lucratif financée par le groupe IROKO et ses donateurs. L’intégralité de notre accompagnement et de nos cours d’allemand est 100 % gratuite.',
+        body: 'WAHHF Foundation est une fondation à but non lucratif financée par le groupe IROKO et ses donateurs. L’intégralité de notre accompagnement et de nos cours d’allemand /anglais est 100 % gratuite.',
         bullets: [
           'Aucun membre, bénévole ou partenaire de WAHHF ne vous demandera jamais de frais de dossier, d’inscription ou de caution',
           'Nous ne demandons aucun document d’identité (passeport, CNI) lors du premier contact en ligne',
@@ -613,14 +613,14 @@ export const THEMATIC_GUIDES: Record<string, {
 export const NEWS_DATA: NewsArticle[] = [
   {
     slug: 'ouverture-inscriptions-academie-allemand-2026',
-    title: 'Ouverture des candidatures pour la nouvelle cohorte gratuite d’allemand (A1 à B2)',
+    title: 'Ouverture des candidatures pour la nouvelle cohorte gratuite d’allemand /anglais (A1 à B2)',
     date: '12 Mai 2026 (TODO)',
     category: 'Mobilité & Langues',
     readTime: '3 min de lecture',
     image: WAHHF_IMAGES.education,
     excerpt: 'Grâce au soutien du groupe IROKO et de nos donateurs, de nouvelles sessions gratuites d’accompagnement linguistique ouvrent en ligne et au Cameroun.',
     content: [
-      'WAHHF Foundation annonce l’ouverture des candidatures pour sa prochaine session d’accompagnement des cours de langue allemande, accessible gratuitement du niveau A1 au niveau B2.',
+      'WAHHF Foundation annonce l’ouverture des candidatures pour sa prochaine session d’accompagnement des cours de langue allemande /anglaise, accessible gratuitement du niveau A1 au niveau B2.',
       'Ce dispositif solidaire s’adresse à toute personne motivée souhaitant construire un projet d’études ou de formation professionnelle avec sérieux et méthode.',
       'Pour rejoindre une cohorte, nous invitons les candidats à passer d’abord le test d’orientation gratuit en ligne puis à remplir le formulaire unique de candidature.',
     ],

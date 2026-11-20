@@ -267,7 +267,7 @@ export function AgirPage() {
             en CSS juste après l'en-tête quand elles sont déjà à l'écran (.arrive-rise), sinon au défilement (RevealBatch). */}
         <TextList columns={3}>
           <TextListItem title="Faire un don" titleAs="h2" actions={<DonateButton />} className="arrive-rise [--arrive-delay:0.6s]">
-            <p>Financez les cours d’allemand gratuits et les actions sociales de terrain.</p>
+            <p>Financez les cours d’allemand /anglais gratuits et les actions sociales de terrain.</p>
           </TextListItem>
           <TextListItem
             id="benevole"
@@ -276,7 +276,7 @@ export function AgirPage() {
             className="arrive-rise [--arrive-delay:0.68s]"
             actions={<PrimaryButton onClick={() => goToForm('benevole')}>Remplir le formulaire bénévole</PrimaryButton>}
           >
-            <p>Enseignants d’allemand, médecins, mentors ou coordinateurs locaux au Cameroun et en Europe.</p>
+            <p>Enseignants d’allemand /anglais, médecins, mentors ou coordinateurs locaux au Cameroun et en Europe.</p>
           </TextListItem>
           <TextListItem
             id="partenaire"
@@ -414,7 +414,7 @@ export function AgirPage() {
                       maxLength={2000}
                       placeholder={
                         roleType === 'benevole'
-                          ? 'Ex. enseignante d’allemand, disponible le samedi, en ligne ou à Douala.'
+                          ? 'Ex. enseignante d’allemand /anglais, disponible le samedi, en ligne ou à Douala.'
                           : 'Quel programme souhaitez-vous soutenir, et comment ?'
                       }
                       value={details}

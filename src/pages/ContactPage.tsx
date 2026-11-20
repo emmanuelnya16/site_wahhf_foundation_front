@@ -20,7 +20,7 @@ import { useFocusOnChange } from '../lib/useFocusOnChange';
 
 /** Motifs du message : ils donnent l'objet du message préparé. */
 const MOTIFS = [
-  { id: 'candidat', label: 'Je suis candidat (cours d’allemand, accompagnement)' },
+  { id: 'candidat', label: 'Je suis candidat (cours d’allemand /anglais, accompagnement)' },
   { id: 'benevole', label: 'Je souhaite devenir bénévole' },
   { id: 'partenaire', label: 'Partenaire ou institution' },
   { id: 'presse', label: 'Presse et médias' },

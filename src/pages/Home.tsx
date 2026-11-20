@@ -20,7 +20,7 @@ export default function Home() {
     <>
       <SEO
         title="Accueil — Autonomiser la jeunesse, transformer les communautés"
-        description="WAHHF Foundation (We Are Here Help Foundation), fondation camerouno-allemande à but non lucratif et branche sociale du groupe IROKO : 6 domaines d'action et cours d'allemand gratuits."
+        description="WAHHF Foundation (We Are Here Help Foundation), fondation camerouno-allemande à but non lucratif et branche sociale du groupe IROKO : 6 domaines d'action et cours d'allemand /anglais gratuits."
       />
 
       {/* 1. HERO (décision du 16/11 : vidéo en fond) : src/pages/home/HeroSection.tsx */}

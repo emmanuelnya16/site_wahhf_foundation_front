@@ -110,7 +110,7 @@ export function LegalTransparencyPage({
       blocks: [
         {
           h: 'Comment nos programmes sont financés',
-          p: 'Les programmes de WAHHF Foundation (dont l’Académie de langue allemande A1 à C1 et l’accompagnement vers l’Europe) sont financés par la dotation du groupe IROKO et par les dons volontaires des mécènes et donateurs.',
+          p: 'Les programmes de WAHHF Foundation (dont l’Académie de langue allemande /anglaise A1 à C1 et l’accompagnement vers l’Europe) sont financés par la dotation du groupe IROKO et par les dons volontaires des mécènes et donateurs.',
         },
       ],
     },

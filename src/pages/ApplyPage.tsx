@@ -32,7 +32,7 @@ import { buildDraft } from '../lib/contactDraft';
  *   focus placé sur le titre de l'étape une fois l'animation finie ; barre qui avance en 0,3 s.
  */
 const WISH_LABELS = {
-  cours_allemand: 'Cours d’allemand (A1 à C1)',
+  cours_allemand: 'Cours d’allemand /anglais (A1 à C1)',
   accompagnement_europe: 'Accompagnement vers l’Europe',
   les_deux: 'Les deux : cours et orientation',
 } as const;
@@ -298,7 +298,7 @@ export default function ApplyPage() {
       ['Souhait', WISH_LABELS[wishType]],
       ['Session choisie', session ? `${session.title} (${session.id})` : undefined],
       ['Pays d’intérêt', wishType === 'cours_allemand' ? undefined : targetCountryName],
-      ['Niveau d’allemand', currentGermanLevel],
+      ['Niveau d’allemand /anglais', currentGermanLevel],
       ['Format souhaité', preferredFormat],
       ['Message', message],
     ],
@@ -308,8 +308,8 @@ export default function ApplyPage() {
   return (
     <>
       <SEO
-        title="Candidater gratuitement — Cours d'allemand & Accompagnement Europe"
-        description="Formulaire unique et 100 % gratuit de demande d'accompagnement et d'inscription aux cours d'allemand WAHHF Foundation. Aucun document d'identité ni paiement demandé."
+        title="Candidater gratuitement — Cours d'allemand /anglais & Accompagnement Europe"
+        description="Formulaire unique et 100 % gratuit de demande d'accompagnement et d'inscription aux cours d'allemand /anglais WAHHF Foundation. Aucun document d'identité ni paiement demandé."
         canonical="/candidater"
       />
 
@@ -317,7 +317,7 @@ export default function ApplyPage() {
       <PageHeader reveal photoId="open-day-accompagnement" notice={<DisclaimerBanner />}>
         <PageTitle>Candidater à un parcours d’accompagnement</PageTitle>
         <PageIntro>
-          Un seul formulaire pour rejoindre l’Académie d’allemand (A1 à C1), être orienté vers l’Europe, ou les deux. Il
+          Un seul formulaire pour rejoindre l’Académie d’allemand /anglais (A1 à C1), être orienté vers l’Europe, ou les deux. Il
           se remplit en 5 minutes environ.
         </PageIntro>
       </PageHeader>
@@ -571,7 +571,7 @@ export default function ApplyPage() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                       <div>
                         <label htmlFor="apply-german-level" className={LABEL_CLASS}>
-                          Niveau d’allemand actuel / visé
+                          Niveau d’allemand /anglais actuel / visé
                         </label>
                         <select
                           id="apply-german-level"

@@ -78,7 +78,7 @@ export function PartenairesPage() {
                 pôle de communication et d’événementiel, IROKO Event, est en activité&nbsp;; les autres sont annoncés.
               </p>
               <p>
-                WAHHF Foundation est sa branche sociale. Le groupe finance l’Académie de langues (allemand A1 à C1) et les
+                WAHHF Foundation est sa branche sociale. Le groupe finance l’Académie de langues (allemand /anglais A1 à C1) et les
                 supports d’orientation vérifiés vers l’Europe.
               </p>
             </div>

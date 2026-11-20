@@ -38,8 +38,8 @@ export default function LanguageAcademy() {
   return (
     <>
       <SEO
-        title="Académie de langues — Allemand A1 à C1 gratuit"
-        description="Accompagnement gratuit des cours de langue allemande du niveau A1 au niveau C1 par WAHHF Foundation : test de niveau de 20 questions, programme par niveau et sessions."
+        title="Académie de langues — Allemand /anglais A1 à C1 gratuit"
+        description="Accompagnement gratuit des cours de langue allemande /anglaise du niveau A1 au niveau C1 par WAHHF Foundation : test de niveau de 20 questions, programme par niveau et sessions."
         canonical="/mobilite-langues/academie"
       />
 
@@ -51,9 +51,9 @@ export default function LanguageAcademy() {
         notice={<DisclaimerBanner />}
       >
         <PageBreadcrumb items={[{ label: 'Mobilité & Langues', to: '/mobilite-langues' }, { label: 'Académie de langues' }]} />
-        <PageTitle>Académie de langues : l’allemand, du niveau A1 au niveau C1</PageTitle>
+        <PageTitle>Académie de langues : l’allemand /anglais, du niveau A1 au niveau C1 avec WAHHF Institute</PageTitle>
         <PageIntro>
-          Des cours d’allemand du niveau débutant jusqu’à la maîtrise académique, en ligne ou en présentiel à Douala et à
+          Des cours d’allemand /anglais du niveau débutant jusqu’à la maîtrise académique, en ligne ou en présentiel à Douala et à
           Yaoundé. Commencez par le test : il vous dit par quel niveau commencer.
         </PageIntro>
         <PageActions>
@@ -72,7 +72,7 @@ export default function LanguageAcademy() {
           title="Les 5 niveaux, de A1 à C1"
           subtitle="Chaque niveau mène à sa page : objectifs, compétences, volume horaire et prochaines sessions."
         />
-        <div ref={filRef} role="group" aria-label="Les cinq niveaux d’allemand, de A1 à C1, puis l’Europe">
+        <div ref={filRef} role="group" aria-label="Les cinq niveaux d’allemand /anglais, de A1 à C1, puis l’Europe">
           <Fil orientation="auto" steps={levelSteps} end={{ id: 'europe', label: 'Europe' }} currentId={selected.slug} />
         </div>
         <AfterFirstDisplay>

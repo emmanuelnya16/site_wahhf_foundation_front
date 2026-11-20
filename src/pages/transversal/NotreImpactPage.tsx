@@ -131,7 +131,7 @@ export function NotreImpactPage() {
           <div className="max-w-[65ch] space-y-6">
             <SectionHeader
               title="Soutenir nos actions"
-              subtitle="Votre don finance des cours d’allemand et nos actions au Cameroun. Vous pouvez choisir le domaine qu’il soutient."
+              subtitle="Votre don finance des cours d’allemand /anglais et nos actions au Cameroun. Vous pouvez choisir le domaine qu’il soutient."
             />
             <DonateButton size="lg" />
           </div>

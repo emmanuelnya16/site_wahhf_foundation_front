@@ -217,7 +217,7 @@ function CountryFiche({ country }: { country: CountryGuide }) {
           <div className="max-w-[65ch] space-y-5">
             <SectionHeader
               title="Être accompagné"
-              subtitle="Un seul formulaire pour l’orientation vers l’Europe et les cours d’allemand. Aucun document d’identité ni paiement ne vous est demandé."
+              subtitle="Un seul formulaire pour l’orientation vers l’Europe et les cours d’allemand /anglais. Aucun document d’identité ni paiement ne vous est demandé."
             />
             <PrimaryButton to={applyTo} size="lg">
               {actionLabel}

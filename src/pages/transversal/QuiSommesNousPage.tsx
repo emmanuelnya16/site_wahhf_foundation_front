@@ -123,7 +123,7 @@ export function QuiSommesNousPage() {
               </p>
               <p>
                 Basée à Yaoundé et à Douala, avec une coordination en Allemagne, la fondation propose un programme gratuit
-                d’apprentissage de l’allemand (A1 à C1) et d’orientation vers 10 pays européens.
+                d’apprentissage de l’allemand /anglais (A1 à C1) et d’orientation vers 10 pays européens.
               </p>
             </div>
           </div>

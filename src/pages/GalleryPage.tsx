@@ -177,7 +177,7 @@ export default function GalleryPage() {
           <div className="max-w-[65ch] space-y-6">
             <SectionHeader
               title="Participer à la suite"
-              subtitle="Un don soutient les actions de la fondation. Les jeunes peuvent candidater aux cours d’allemand et à l’orientation vers l’Europe."
+              subtitle="Un don soutient les actions de la fondation. Les jeunes peuvent candidater aux cours d’allemand /anglais et à l’orientation vers l’Europe."
             />
             <div className="flex flex-wrap items-center gap-3">
               <DonateButton size="lg" />

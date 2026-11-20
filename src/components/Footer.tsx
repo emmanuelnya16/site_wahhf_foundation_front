@@ -138,7 +138,7 @@ export default function Footer() {
                   to="/mobilite-langues/academie"
                   className="text-link-on-inverse underline underline-offset-4 decoration-1 hover:decoration-2"
                 >
-                  Académie d’allemand A1–C1 (Gratuit)
+                  Académie d’allemand /anglais A1–C1 (Gratuit)
                 </Link>
               </li>
             </ul>

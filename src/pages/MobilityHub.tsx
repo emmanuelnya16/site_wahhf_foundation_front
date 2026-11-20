@@ -41,7 +41,7 @@ const EUROPE_PHOTO = photoOrFallback('A34');
 
 /** « Pourquoi », second paragraphe : plus affiché (retouches du 19/11, il redit l'introduction et « Exigence »). */
 export const WHY_SECOND_PARAGRAPH_HIDDEN =
-  'Avec le soutien de nos partenaires et de nos donateurs, nous proposons ce que beaucoup marchandent : des cours d’allemand structurés du niveau A1 au C1 et une orientation documentée étape par étape.';
+  'Avec le soutien de nos partenaires et de nos donateurs, nous proposons ce que beaucoup marchandent : des cours d’allemand /anglais structurés du niveau A1 au C1 et une orientation documentée étape par étape.';
 
 /** Photo d'une porte d'entrée : 3:2 entière, légendée par son album, à droite du texte sur ordinateur. */
 function DoorPhoto({ photo }: { photo: CatalogPhoto | null }) {
@@ -59,9 +59,9 @@ function DoorPhoto({ photo }: { photo: CatalogPhoto | null }) {
 
 const MOBILITY_FAQS = [
   {
-    q: 'Les cours d’allemand et l’accompagnement sont-ils vraiment 100 % gratuits ?',
+    q: 'Les cours d’allemand /anglais et l’accompagnement sont-ils vraiment 100 % gratuits ?',
     // Sans nommer le financeur tant que la question n'est pas tranchée (contrat §13) ; une seule mention de gratuité
-    a: 'Oui, pour tous les bénéficiaires : les cours d’allemand, du niveau A1 au niveau C1, comme les séances d’orientation vers l’Europe. Le programme est financé par nos partenaires et nos donateurs.',
+    a: 'Oui, pour tous les bénéficiaires : les cours d’allemand /anglais, du niveau A1 au niveau C1, comme les séances d’orientation vers l’Europe. Le programme est financé par nos partenaires et nos donateurs.',
   },
   {
     q: 'WAHHF Foundation délivre-t-elle des visas ou des contrats de travail ?',
@@ -72,7 +72,7 @@ const MOBILITY_FAQS = [
     a: 'Non. Lors de votre candidature en ligne sur ce site, aucun document d’identité (ni passeport, ni CNI) et aucune somme d’argent ne vous sont demandés.',
   },
   {
-    q: 'Comment savoir par quel niveau d’allemand commencer ?',
+    q: 'Comment savoir par quel niveau d’allemand /anglais commencer ?',
     a: 'Si vous débutez totalement, choisissez le niveau A1. Si vous avez déjà des bases, passez notre test d’orientation de 20 questions sur la page Académie de langues.',
   },
 ];
@@ -86,8 +86,8 @@ const TESTIMONIALS: { name: string; track: string; text: string }[] = [];
 export const EXAMPLE_TESTIMONIALS_NOT_VALIDATED = [
   {
     name: 'Boris K. (TODO : confirmer témoignage)',
-    track: 'Parcours Allemand B1 & Orientation Formation (Ausbildung)',
-    text: '« Avant de connaître WAHHF, on me demandait des sommes énormes sur les réseaux sociaux pour de simples formulaires. Ici, j’ai appris l’allemand gratuitement et compris comment postuler moi-même sur les sites officiels. »',
+    track: 'Parcours Allemand /anglais B1 & Orientation Formation (Ausbildung)',
+    text: '« Avant de connaître WAHHF, on me demandait des sommes énormes sur les réseaux sociaux pour de simples formulaires. Ici, j’ai appris l’allemand /anglais gratuitement et compris comment postuler moi-même sur les sites officiels. »',
   },
   {
     name: 'Raïssa T. (TODO : confirmer témoignage)',
@@ -102,7 +102,7 @@ export default function MobilityHub() {
     <>
       <SEO
         title="Mobilité & Langues — Apprendre, se préparer, s'orienter gratuitement"
-        description="WAHHF Foundation : Académie de langue allemande gratuite (A1 à C1) et accompagnement transparent vers 10 pays européens, financé par nos partenaires et nos donateurs."
+        description="WAHHF Foundation : Académie de langue allemande /anglaise gratuite (A1 à C1) et accompagnement transparent vers 10 pays européens, financé par nos partenaires et nos donateurs."
       />
 
       {/* En-tête : titre, avertissement juste dessous (avant la photo sur téléphone), photo de l'Open Day légendée */}
@@ -115,16 +115,16 @@ export default function MobilityHub() {
         photoRatio="source"
         notice={<DisclaimerBanner />}
       >
-        <PageTitle>Apprendre l’allemand, se préparer, s’orienter vers l’Europe</PageTitle>
+        <PageTitle>Apprendre l’allemand /anglais, se préparer, s’orienter vers l’Europe</PageTitle>
 
         <PageIntro>
-          Des cours d’allemand du niveau A1 au niveau C1 et une information fiable sur les études, la formation et le
+          Des cours d’allemand /anglais du niveau A1 au niveau C1 et une information fiable sur les études, la formation et le
           travail dans 10 pays européens.
         </PageIntro>
 
         <PageActions>
           <PrimaryButton to="/candidater">Candidater au programme</PrimaryButton>
-          <SecondaryButton to="/mobilite-langues/academie">Découvrir l’Académie d’allemand</SecondaryButton>
+          <SecondaryButton to="/mobilite-langues/academie">Découvrir l’Académie d’allemand /anglais</SecondaryButton>
         </PageActions>
       </PageHeader>
 
@@ -133,21 +133,21 @@ export default function MobilityHub() {
         <div className="container-page space-y-12">
           <SectionHeader
             title="Choisissez votre porte d’entrée"
-            subtitle="Vous pouvez candidater uniquement aux cours de langue allemande, uniquement à l’accompagnement documentaire, ou aux deux."
+            subtitle="Vous pouvez candidater uniquement aux cours de langue allemande /anglaise, uniquement à l’accompagnement documentaire, ou aux deux."
           />
 
           {/* Porte 1 : l'Académie, avec le fil A1 → C1 (contrat §6) ; il se dessine au défilement sur ordinateur */}
           <div className="border-t border-border-subtle pt-6 space-y-6">
             <div className="grid gap-6 lg:grid-cols-12 lg:items-start lg:gap-12">
               <div data-reveal="" className="space-y-4 lg:col-span-7">
-                <h3 className="text-body font-semibold text-text">Académie de langues (allemand A1 à C1)</h3>
+                <h3 className="text-body font-semibold text-text">Académie de langues (allemand /anglais A1 à C1)</h3>
                 <p className="text-body text-text-secondary max-w-[65ch]">
-                  Apprendre l’allemand étape par étape : compréhension, expression orale et écrite, test de niveau en ligne et préparation méthodique aux certifications.
+                  Apprendre l’allemand /anglais étape par étape : compréhension, expression orale et écrite, test de niveau en ligne et préparation méthodique aux certifications.
                 </p>
               </div>
               <DoorPhoto photo={ACADEMY_PHOTO} />
             </div>
-            <div ref={filRef} role="group" aria-label="Les cinq niveaux d’allemand, de A1 à C1, puis l’Europe">
+            <div ref={filRef} role="group" aria-label="Les cinq niveaux d’allemand /anglais, de A1 à C1, puis l’Europe">
               <Fil
                 orientation="auto"
                 steps={GERMAN_LEVELS_DATA.map((lvl) => ({
@@ -277,7 +277,7 @@ export default function MobilityHub() {
         <div className="max-w-[65ch] space-y-5">
           <SectionHeader
             title="Rejoindre la prochaine cohorte"
-            subtitle="Un seul formulaire pour les cours d’allemand et l’orientation vers l’Europe. Il se remplit en 5 minutes environ ; aucun document d’identité ni paiement ne vous est demandé."
+            subtitle="Un seul formulaire pour les cours d’allemand /anglais et l’orientation vers l’Europe. Il se remplit en 5 minutes environ ; aucun document d’identité ni paiement ne vous est demandé."
           />
           <PrimaryButton to="/candidater" size="lg">
             Candidater

@@ -385,4 +385,15 @@ Pour les photos « à vérifier », il suffit de nous dire si toutes les personn
 ### Page « Qui sommes-nous » (section « Cinq principes qui guident chaque projet »)
 
 150. La carte qui termine le parcours s’intitule « Ces principes, sur le terrain », sous la rubrique « Sur le terrain », avec le bouton « Voir nos actions ». Ce titre vous convient-il ?
-151. Les traductions anglaises de la section sont des propositions, à valider : « Principle 01 / 05 » (compteur), « Scroll to go through the 5 principles · WAHHF Foundation » (consigne), les cinq principes (« Listening », « Co-construction », « Sustainability », « Transparency », « Partnerships », avec leur phrase), les étiquettes (« Youth · Mothers · Field », « Teachers · Health workers · Associations », « Languages · Trades · Ecology », « Use of funds », « IROKO · Cameroon · Europe ») et la carte finale (« On the ground », « These principles, on the ground », « See our actions »). Le texte complet est dans src/locales/en.json (principles).
+151. Les traductions anglaises de la section sont des propositions, à valider : « Principle 01 / 05 » (compteur), « Scroll to go through the 5 principles · WAHHF Foundation » (consigne), les cinq principes (« Listening », « Co-construction », « Sustainability », « Transparency », « Partnerships », avec leur phrase), les étiquettes (« Youth · Mothers · Field », « Teachers · Health workers · Associations », « Languages · Trades · Ecology », « Use of funds », « IROKO · Cameroon · Europe ») et la carte finale (« On the ground », « These principles, on the ground », « See our actions »). Le texte complet est dans src/locales/principles/en.json.
+
+---
+
+## Questions ajoutées avec l’anglais à l’Académie (20 novembre 2026)
+
+### Académie de langues (allemand et anglais)
+
+152. Le test de niveau (20 questions) et les pages de niveau A1 à C1 décrivent l’allemand : questions en allemand, objectifs « en allemand », sessions, préparation au TestDaF et à l’Ausbildung. Existe-t-il un test et un programme d’anglais par niveau ? Tant que nous ne les avons pas, le test, son bouton sur l’accueil (« Passer le test d’allemand gratuit ») et les pages de niveau restent consacrés à l’allemand.
+153. Le formulaire de candidature ne demande pas quelle langue la personne veut apprendre. Faut-il ajouter un choix « allemand » ou « anglais » ?
+154. « WAHHF Institute » apparaît désormais dans le titre de l’Académie. Est-ce le nom de l’Académie de langues ? Faut-il le présenter ailleurs (Partenaires, Qui sommes-nous), ou remplacer « Académie WAHHF » dans les autres textes ?
+155. La frise « Les grandes étapes » (Qui sommes-nous) dit « Ouverture de l’Académie d’allemand gratuite (A1 à C1) ». L’anglais était-il proposé dès l’ouverture, ou faut-il ajouter une étape ?

@@ -183,7 +183,7 @@ export default function ArnaquesPage() {
           <div className="space-y-6">
             <SectionHeader
               title="WAHHF Foundation ne demande jamais d’argent"
-              subtitle="WAHHF Foundation est une fondation à but non lucratif, financée par ses partenaires et ses donateurs. Notre accompagnement et nos cours d’allemand sont gratuits."
+              subtitle="WAHHF Foundation est une fondation à but non lucratif, financée par ses partenaires et ses donateurs. Notre accompagnement et nos cours d’allemand /anglais sont gratuits."
             />
             <ul className="max-w-[65ch]">
               {SCAM_PROMISES.map((item) => (

@@ -28,7 +28,7 @@ export const ACCOMPANIMENT_STEPS: AccompanimentStep[] = [
   {
     slug: 'apprendre-la-langue',
     title: 'Apprendre la langue du pays',
-    desc: 'Acquérir le niveau linguistique requis (notamment l’allemand de A1 à C1 avec l’Académie WAHHF) avant d’entamer les démarches.',
+    desc: 'Acquérir le niveau linguistique requis (notamment l’allemand /anglais de A1 à C1 avec l’Académie WAHHF) avant d’entamer les démarches.',
   },
   {
     slug: 'eviter-les-arnaques',

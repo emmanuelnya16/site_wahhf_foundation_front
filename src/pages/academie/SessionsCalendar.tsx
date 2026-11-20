@@ -7,7 +7,7 @@ import { upcomingSessions } from '../../lib/sessions';
 import { FIELD_CLASS, LABEL_CLASS } from '../../components/wahhf/FormField';
 
 const WHATSAPP_ALERT = `https://wa.me/237693129205?text=${encodeURIComponent(
-  'Bonjour WAHHF Foundation, je souhaite être prévenu(e) de la prochaine session de cours d’allemand.'
+  'Bonjour WAHHF Foundation, je souhaite être prévenu(e) de la prochaine session de cours d’allemand /anglais.'
 )}`;
 
 /**
