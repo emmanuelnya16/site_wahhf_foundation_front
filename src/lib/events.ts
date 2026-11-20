@@ -1,4 +1,4 @@
-import { EVENTS, type Event, type EventStatus } from '../data/events';
+import { EVENTS, type Event, type EventDomain, type EventStatus } from '../data/events';
 import { photoOrFallback } from './photos';
 import type { CatalogPhoto } from '../data/photos';
 
@@ -15,6 +15,16 @@ export const isShown = (text: string | null | undefined): text is string =>
 export function shownItems<T>(items: readonly T[], texts: (item: T) => (string | null | undefined)[]): T[] {
   return items.filter((item) => texts(item).every((t) => t == null || isShown(t)));
 }
+
+/** Page de chaque domaine (comme DOMAINS_DATA, src/services/api.ts) : lien des cartes d'activité */
+export const DOMAIN_LINKS: Record<EventDomain, string> = {
+  education: '/nos-actions?domaine=education',
+  health: '/nos-actions?domaine=sante',
+  entrepreneurship: '/nos-actions?domaine=entrepreneuriat',
+  environment: '/nos-actions?domaine=environnement',
+  rights: '/nos-actions?domaine=droits-inclusion',
+  mobility: '/mobilite-langues',
+};
 
 /** Statut réel : un événement « à venir » dont la fin est passée est passé. */
 export function eventStatus(event: Event, now = Date.now()): EventStatus {

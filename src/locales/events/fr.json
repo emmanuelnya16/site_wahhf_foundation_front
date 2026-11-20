@@ -61,7 +61,8 @@
   "activities": {
     "eyebrow": "Les activités",
     "title": "Ce qui se passe pendant la journée.",
-    "more": "En savoir plus : {{title}}"
+    "more": "En savoir plus : {{title}}",
+    "domainLink": "{{title}}, domaine {{domain}}"
   },
   "program": {
     "eyebrow": "Le programme en un coup d’œil",

@@ -71,7 +71,13 @@ export default function Hero({
         <div className="relative grid justify-items-start gap-7">
           <p className="ev-pastille ev-entree" style={delay(0)}>
             <Sparkles aria-hidden="true" className="h-4 w-4" />
-            {upcoming ? t('events.hero.badgeUpcoming') : t('events.hero.badgePast')}
+            {event.pastille && isShown(event.pastille.texte) ? (
+              <span lang={event.pastille.lang}>{event.pastille.texte}</span>
+            ) : upcoming ? (
+              t('events.hero.badgeUpcoming')
+            ) : (
+              t('events.hero.badgePast')
+            )}
           </p>
           <div id="ev-titre" className="ev-entree-titre" style={delay(0.08)}>
             <AccentTitle title={event.titre} accent={event.motAccent} className="ev-h1" />

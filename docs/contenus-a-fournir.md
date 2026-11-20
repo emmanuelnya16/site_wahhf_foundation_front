@@ -410,8 +410,8 @@ Seuls les faits de la banderole (photo A02) sont affichés en ligne : WAHHF Foun
 157. Dans quelle ville se trouve l’Albatros Hotel ? Le panneau « L’événement a eu lieu à » affiche le nom de l’hôtel faute de ville.
 158. Qui a organisé la journée avec la fondation (partenaires, logos à nous envoyer) ?
 159. Quel était le déroulé de la journée (heures, titres, une phrase par moment) ?
-160. Quelles activités voulez-vous montrer (quatre au plus : titre, une phrase, une étiquette) ? Photos prévues : A53, A48, A41 et A85 (A48 et A85 attendent l’accord des parents ; en ligne, A63 et A34 les remplacent).
-161. Pourquoi venir : quatre raisons, avec un titre et une phrase chacune.
+160. Quelles activités voulez-vous montrer ? **Réponse du 20 novembre 2026** : les six « Activités » de la banderole (formations gratuites, logiciels gratuits, accompagnement des startups, équipement des hôpitaux, subvention du meilleur projet, transfert technologique Allemagne–Cameroun), titre et domaine seulement ; photos A17 (en ligne, A30 la remplace tant que l’accord des parents manque), A22, A41, A53 ; hôpitaux et subvention sans photo. Une phrase par activité reste possible : elle s’afficherait sous le titre.
+161. Pourquoi venir : quatre raisons, avec un titre et une phrase chacune. **Réponse du 20 novembre 2026** : les quatre « Points forts » de la banderole (gratuit, networking professionnel, un professeur venu d’Allemagne, accompagnement voyage), avec vos phrases.
 162. Le programme en un coup d’œil : quatre temps forts (titre et phrase).
 163. Qui a pris la parole ce jour-là (personnes de l’organigramme ou invités) ?
 164. Pour les parents, ces engagements sont-ils exacts ? « Une autorisation écrite des parents pour chaque mineur », « Des jeunes encadrés par l’équipe de la fondation pendant toute la journée », « Une entrée gratuite, ou un prix clair annoncé à l’avance » ; et ce que la fondation ne promettra jamais : « Une promesse de visa », « Une promesse d’emploi », « Des frais cachés ou payés à un intermédiaire ».
@@ -423,3 +423,4 @@ Seuls les faits de la banderole (photo A02) sont affichés en ligne : WAHHF Foun
 167. Y a-t-il un prochain événement à annoncer (date, heures, lieu, ville, lien d’inscription, nombre de places si vous le suivez) ? La page /evenements dit aujourd’hui qu’aucun événement n’est annoncé.
 168. Le nombre de places restantes ne s’affiche que s’il vient d’une vraie source (votre billetterie ou votre liste d’inscrits) : comment le tiendrez-vous à jour ?
 169. Les textes anglais des pages Événements (src/locales/events/en.json) sont des propositions, à valider.
+170. La banderole du 25 avril (photo A02) développe le sigle en « Watio Hearts Humanitary Foundation », alors que le site écrit partout « WAHHF Foundation (We Are Here Help Foundation) ». Quel est le nom complet exact ? Le site n’a pas été modifié.

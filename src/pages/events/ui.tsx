@@ -2,7 +2,15 @@ import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowRight,
+  ArrowRightLeft,
+  Gift,
   GraduationCap,
+  Hospital,
+  Laptop,
+  Network,
+  Plane,
+  Rocket,
+  Trophy,
   Handshake,
   HeartPulse,
   Languages,
@@ -20,6 +28,15 @@ import { cn } from '../../lib/utils';
 
 /** Icônes des cartes (src/data/events.ts) */
 export const ICONS: Record<EventIcon, LucideIcon> = {
+  gratuit: Gift,
+  reseau: Network,
+  professeur: GraduationCap,
+  voyage: Plane,
+  logiciel: Laptop,
+  startup: Rocket,
+  hopital: Hospital,
+  subvention: Trophy,
+  transfert: ArrowRightLeft,
   ecoute: ShieldCheck,
   parcours: ListChecks,
   partenaires: Handshake,

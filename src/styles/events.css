@@ -857,6 +857,43 @@
   }
 }
 
+/* --- Activités : 4 cartes (une ligne) ou 6 cartes (deux lignes de 3 à partir de 1 024 px) --- */
+.ev-grille-voies-3 {
+  display: grid;
+  gap: 1.5rem;
+}
+@media (min-width: 640px) {
+  .ev-grille-voies-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1024px) {
+  .ev-grille-voies-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+/* Carte sans texte (titre et étiquette seulement) : plus courte */
+.ev-voie.is-court {
+  min-height: 0;
+}
+.ev-voie.is-court .ev-voie-pied {
+  padding-top: 1.5rem;
+}
+/* Variante sans photo : grande icône sur aplat, à la hauteur d'une photo */
+.ev-voie-aplat {
+  display: grid;
+  place-items: center;
+  height: 13.75rem;
+  flex: none;
+  background: color-mix(in srgb, currentColor 7%, transparent);
+  color: var(--voie-icone-fond);
+}
+.ev-voie-aplat svg {
+  width: 6.5rem;
+  height: 6.5rem;
+}
+/* Même retrait du titre que les cartes à photo (icône qui chevauche) : les titres d'une ligne restent alignés */
+
 /* --- Activités : quatre cartes couleur --- */
 .ev-voie {
   position: relative;

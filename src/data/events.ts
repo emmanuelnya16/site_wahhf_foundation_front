@@ -15,8 +15,17 @@ import type { PhotoAlbumId } from './photos';
 
 export type EventStatus = 'a-venir' | 'passe';
 
-/** Icônes disponibles pour les cartes (associées à lucide-react dans src/pages/events/icons.tsx) */
+/** Icônes disponibles pour les cartes (associées à lucide-react dans src/pages/events/ui.tsx) */
 export type EventIcon =
+  | 'gratuit'
+  | 'reseau'
+  | 'professeur'
+  | 'voyage'
+  | 'logiciel'
+  | 'startup'
+  | 'hopital'
+  | 'subvention'
+  | 'transfert'
   | 'ecoute'
   | 'parcours'
   | 'partenaires'
@@ -46,15 +55,23 @@ export interface EventStep {
   lien?: { libelle: string; to: string };
 }
 
-/** Une activité (cartes couleur) : photo du catalogue, icône, étiquette */
+/** Domaines de la fondation (clés de nav.domains dans src/locales/*.json) */
+export type EventDomain = 'education' | 'health' | 'entrepreneurship' | 'environment' | 'rights' | 'mobility';
+
+/**
+ * Une activité (cartes couleur, 4 ou 6) : titre, et au choix un texte, une étiquette libre ou un domaine (étiquette =
+ * nom du domaine, lien vers sa page). Photo du catalogue, ou aucune : la carte montre alors une grande icône sur aplat.
+ */
 export interface EventActivity {
   icon: EventIcon;
   titre: string;
-  texte: string;
-  etiquette: string;
-  /** Repères du catalogue, par ordre de préférence */
+  /** Facultatif : sans texte, la carte n'a pas de paragraphe */
+  texte?: string;
+  etiquette?: string;
+  domaine?: EventDomain;
+  /** Repères du catalogue, par ordre de préférence ; [] : variante sans photo (grande icône sur aplat) */
   photo: readonly string[];
-  /** Lien de la carte (rond flèche), facultatif */
+  /** Lien de la carte (rond flèche) ; par défaut, la page du domaine */
   to?: string;
 }
 
@@ -72,6 +89,8 @@ export interface EventFaq {
 
 export interface Event {
   slug: string;
+  /** Texte de la pastille du hero (à la place du libellé par défaut), et sa langue s'il n'est pas en français */
+  pastille?: { texte: string; lang?: string };
   /** Statut saisi ; un événement « à venir » dont la fin est passée est traité comme passé (src/lib/events.ts) */
   statut: EventStatus;
   /** Titre (h1), écrit tel qu'il doit se lire */
@@ -112,12 +131,15 @@ export interface Event {
 
 /**
  * Journée du 25 avril 2026 à l'Albatros Hotel. Faits sûrs : ceux de la banderole (photo A02) : WAHHF Foundation,
- * Albatros Hotel, 25 avril 2026, 8 h à 21 h, « Bâtir l'Afrique qui nourrit, soigne et instruit sa jeunesse ».
- * Tout le reste est à confirmer (TODO), donc masqué en ligne.
+ * « Sowing hope harvesting change », « Bâtir l'Afrique qui nourrit, soigne et instruit sa jeunesse », Albatros Hotel,
+ * 25 avril 2026, 8 h à 21 h ; ses « Activités » (six) et ses « Points forts » (quatre), publiés le 20 novembre 2026 à
+ * la demande de la fondation (phrases des points forts fournies par elle). Le reste (déroulé, temps forts, parents,
+ * FAQ) attend ses réponses (TODO) et reste masqué en ligne.
  */
 const JOURNEE_2026_04_25: Event = {
   slug: 'journee-2026-04-25',
   statut: 'passe',
+  pastille: { texte: 'Sowing hope, harvesting change', lang: 'en' },
   titre: 'Journée du 25 avril 2026 à l’Albatros Hotel',
   motAccent: '25 avril 2026',
   accroche: 'Bâtir l’Afrique qui nourrit, soigne et instruit sa jeunesse.',
@@ -135,11 +157,12 @@ const JOURNEE_2026_04_25: Event = {
     { nom: 'WAHHF Foundation', logo: 'wahhf' },
     { nom: 'Partenaire de la journée (TODO)', logo: null },
   ],
+  // « Points forts » de la banderole ; phrases fournies par la fondation (20 novembre 2026)
   pourquoi: [
-    { icon: 'ecoute', titre: 'Des réponses vérifiées (TODO)', texte: 'Ce que la journée apportait aux jeunes : texte à fournir par la fondation (TODO).' },
-    { icon: 'parcours', titre: 'Un parcours clair (TODO)', texte: 'Les étapes présentées pendant la journée : texte à fournir (TODO).' },
-    { icon: 'partenaires', titre: 'Des partenaires présents (TODO)', texte: 'Écoles, associations ou institutions présentes : à confirmer (TODO).' },
-    { icon: 'temoignages', titre: 'Des témoignages (TODO)', texte: 'Les personnes qui ont pris la parole : à confirmer (TODO).' },
+    { icon: 'gratuit', titre: 'Gratuit', texte: 'L’entrée et les formations sont gratuites.' },
+    { icon: 'reseau', titre: 'Networking professionnel', texte: 'Rencontrer des professionnels et élargir son réseau.' },
+    { icon: 'professeur', titre: 'Un professeur venu d’Allemagne', texte: 'Un professeur d’Allemagne présent sur place.' },
+    { icon: 'voyage', titre: 'Accompagnement voyage', texte: 'Un accompagnement pour préparer un projet de voyage.' },
   ],
   deroule: [
     { heure: '8 h 00', titre: 'Accueil des participants (TODO)', texte: 'Ouverture des portes à 8 h (banderole) ; déroulé à confirmer (TODO).' },
@@ -148,11 +171,15 @@ const JOURNEE_2026_04_25: Event = {
     { heure: '14 h 00 (TODO)', titre: 'Échanges avec le public (TODO)', texte: 'Questions de la salle au micro (TODO).' },
     { heure: '21 h 00', titre: 'Clôture (TODO)', texte: 'Fin de la journée à 21 h (banderole) ; contenu à confirmer (TODO).' },
   ],
+  // « Activités » de la banderole : titre et domaine seulement (étiquette et lien), aucune description.
+  // Photos : A17 (attend l'accord des parents ; en ligne, A30), A22, A41, A53 ; hôpitaux et subvention sans photo.
   activites: [
-    { icon: 'presentation', titre: 'Présentations (TODO)', texte: 'Les présentations de la journée : texte à fournir (TODO).', etiquette: 'Études (TODO)', photo: ['A53', 'A44'], to: '/mobilite-langues' },
-    { icon: 'communaute', titre: 'Le terrain en images (TODO)', texte: 'Les actions de terrain projetées : texte à fournir (TODO).', etiquette: 'Terrain (TODO)', photo: ['A48', 'A63'], to: '/nos-actions' },
-    { icon: 'echange', titre: 'Prises de parole (TODO)', texte: 'Les interventions au pupitre : texte à fournir (TODO).', etiquette: 'Intervenants (TODO)', photo: ['A41', 'A61'] },
-    { icon: 'rencontre', titre: 'Moments partagés (TODO)', texte: 'Les temps forts collectifs : texte à fournir (TODO).', etiquette: 'Ensemble (TODO)', photo: ['A85', 'A34'], to: '/galerie' },
+    { icon: 'education', titre: 'Formations gratuites', domaine: 'education', photo: ['A17', 'A30'] },
+    { icon: 'logiciel', titre: 'Logiciels gratuits', domaine: 'education', photo: ['A22'] },
+    { icon: 'startup', titre: 'Accompagnement des startups', domaine: 'entrepreneurship', photo: ['A41'] },
+    { icon: 'hopital', titre: 'Équipement des hôpitaux', domaine: 'health', photo: [] },
+    { icon: 'subvention', titre: 'Subvention du meilleur projet', domaine: 'entrepreneurship', photo: [] },
+    { icon: 'transfert', titre: 'Transfert technologique Allemagne–Cameroun', domaine: 'mobility', photo: ['A53'] },
   ],
   tempsForts: [
     { icon: 'presentation', titre: 'Comprendre (TODO)', texte: 'Premier temps fort de la journée : à fournir (TODO).' },
@@ -201,6 +228,7 @@ const DEMO: Event = {
   ...JOURNEE_2026_04_25,
   slug: 'exemple-a-venir',
   statut: 'a-venir',
+  pastille: undefined,
   titre: 'Prochaine journée de la fondation (TODO)',
   motAccent: 'journée',
   accroche: 'Événement d’exemple pour tester la page : textes, date et lieu à remplacer (TODO).',

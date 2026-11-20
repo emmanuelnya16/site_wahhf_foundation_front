@@ -62,7 +62,8 @@
   "activities": {
     "eyebrow": "Activities",
     "title": "What happens during the day.",
-    "more": "Learn more: {{title}}"
+    "more": "Learn more: {{title}}",
+    "domainLink": "{{title}}, {{domain}} field"
   },
   "program": {
     "eyebrow": "The programme at a glance",

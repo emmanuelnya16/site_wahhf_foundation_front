@@ -4,7 +4,7 @@ import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import type { Event } from '../../data/events';
 import Photo from '../../components/wahhf/Photo';
 import { WAHHF_LOGO_URL } from '../../services/api';
-import { eventPhoto, isShown, shownItems } from '../../lib/events';
+import { DOMAIN_LINKS, eventPhoto, isShown, shownItems } from '../../lib/events';
 import { cn } from '../../lib/utils';
 import { ICONS, SectionHead, pad2 } from './ui';
 import { TickerPause } from './motion';
@@ -155,7 +155,11 @@ export function Schedule({ event }: { event: Event }) {
 
 const VOIES = ['nuit', 'foret', 'soleil', 'papier'] as const;
 
-/** Les activités (référence : rtg-06, les « quatre voies ») : cartes couleur avec une vraie photo du catalogue */
+/**
+ * Les activités (référence : rtg-06, les « quatre voies ») : cartes couleur, 4 (une ligne de 4) ou 6 (deux lignes de 3
+ * à partir de 1 024 px). Photo du catalogue, ou variante sans photo : grande icône sur aplat. Titre, puis texte s'il
+ * existe (jamais de paragraphe vide), étiquette (libre, ou nom du domaine) et lien (par défaut, la page du domaine).
+ */
 export function Activities({ event }: { event: Event }) {
   const { t } = useTranslation();
   const items = shownItems(event.activites, (a) => [a.titre, a.texte, a.etiquette]);
@@ -164,38 +168,53 @@ export function Activities({ event }: { event: Event }) {
     <section className="ev-section" aria-labelledby="ev-activites">
       <div className="ev-container">
         <SectionHead id="ev-activites" eyebrow={t('events.activities.eyebrow')} title={t('events.activities.title')} center />
-        <ul className="ev-grille-4">
+        <ul className={items.length > 4 ? 'ev-grille-voies-3' : 'ev-grille-4'}>
           {items.map((a, i) => {
             const Icon = ICONS[a.icon];
-            const photo = eventPhoto(a.photo);
+            const photo = a.photo.length ? eventPhoto(a.photo) : null;
+            const label = a.etiquette ?? (a.domaine ? t(`nav.domains.${a.domaine}`) : null);
+            const to = a.to ?? (a.domaine ? DOMAIN_LINKS[a.domaine] : undefined);
+            const name = label && a.domaine ? t('events.activities.domainLink', { title: a.titre, domain: label }) : t('events.activities.more', { title: a.titre });
             return (
-              <li key={a.titre} className={cn('ev-voie ev-carte-voie', `ev-voie-${VOIES[i % VOIES.length]}`)} data-reveal="ev">
-                <div className="ev-voie-photo">
-                  {photo && <Photo photo={photo} sizes="(min-width: 1024px) 18rem, (min-width: 640px) 50vw, 100vw" fit="cover" radius="none" />}
-                </div>
+              <li
+                key={a.titre}
+                className={cn('ev-voie ev-carte-voie', `ev-voie-${VOIES[i % VOIES.length]}`, !photo && 'is-aplat', !isShown(a.texte) && 'is-court')}
+                data-reveal="ev"
+              >
+                {photo ? (
+                  <div className="ev-voie-photo">
+                    <Photo photo={photo} sizes="(min-width: 1024px) 24rem, (min-width: 640px) 50vw, 100vw" fit="cover" radius="none" />
+                  </div>
+                ) : (
+                  <div className="ev-voie-aplat" aria-hidden="true">
+                    <Icon strokeWidth={1.25} />
+                  </div>
+                )}
                 <div className="ev-voie-corps">
-                  <span className="ev-voie-icone" aria-hidden="true">
-                    <Icon />
-                  </span>
+                  {photo && (
+                    <span className="ev-voie-icone" aria-hidden="true">
+                      <Icon />
+                    </span>
+                  )}
                   <h3 className="ev-h3">
-                    {a.to ? (
-                      <Link to={a.to} className="ev-voie-lien" aria-label={t('events.activities.more', { title: a.titre })}>
+                    {to ? (
+                      <Link to={to} className="ev-voie-lien" aria-label={name}>
                         {a.titre}
                       </Link>
                     ) : (
                       a.titre
                     )}
                   </h3>
-                  <p className="ev-voie-texte">{a.texte}</p>
+                  {isShown(a.texte) && <p className="ev-voie-texte">{a.texte}</p>}
                   <div className="ev-voie-pied">
-                    {isShown(a.etiquette) && <span className="ev-voie-etiquette ev-label">{a.etiquette}</span>}
-                    {a.to && (
+                    {isShown(label) && <span className="ev-voie-etiquette ev-label">{label}</span>}
+                    {to && (
                       <span className="ev-rond-fleche" aria-hidden="true">
                         <ArrowUpRight className="h-5 w-5" />
                       </span>
                     )}
                   </div>
-                  <Icon aria-hidden="true" className="ev-filigrane" strokeWidth={1.25} />
+                  {photo && <Icon aria-hidden="true" className="ev-filigrane" strokeWidth={1.25} />}
                 </div>
               </li>
             );
