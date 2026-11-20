@@ -93,7 +93,7 @@ function Live({ event }: { event: Event }) {
 export default function Countdown({ event, status, photosHref }: { event: Event; status: EventStatus; photosHref: string | null }) {
   const { t, i18n } = useTranslation();
   return (
-    <div className="ev-container relative -mt-4 mb-4 lg:-mt-8">
+    <div className="ev-container relative -mt-4 mb-4 lg:-mt-8" data-ev-zone="">
       {status === 'a-venir' ? (
         <Live event={event} />
       ) : (

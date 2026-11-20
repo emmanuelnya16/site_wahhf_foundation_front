@@ -1,0 +1,358 @@
+/* ==========================================================================
+   Lot 7.9, étape 3 : mouvement des pages Événements. Keyframes de la référence (docs/references/evenement/
+   analyse-roadtogermany.md §2), mêmes noms, durées et courbes.
+   - Les boucles (.ev-boucle : taches, confettis, étincelle, reflet, flotte, ping, bandeau) s'arrêtent quand leur zone
+     sort de l'écran (.is-hors-ecran), quand l'onglet est caché (.ev-onglet-cache) et avec le bouton « Mettre les
+     animations en pause » (.ev-pause, retenu pour la visite) : WCAG 2.2.2. Le bandeau a aussi son propre bouton.
+   - Seuls transform (translate, rotate, scale) et opacity s'animent ; les taches sont des dégradés déjà flous (aucun
+     filter: blur animé).
+   - Survols : propriétés translate / rotate / scale séparées, pour ne jamais toucher au transform que GSAP pose pendant
+     les apparitions (RevealBatch, data-reveal="ev").
+   - Mouvement réduit : tout est visible et fixe, bandeau arrêté, frise pleine, chiffres sans chute.
+   ========================================================================== */
+
+@keyframes entree {
+  from {
+    opacity: 0;
+    translate: 0 24px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+@keyframes entree-titre {
+  from {
+    translate: 0 18px;
+  }
+  to {
+    translate: 0 0;
+  }
+}
+@keyframes surligne {
+  from {
+    background-size: 0% 0.16em;
+  }
+  to {
+    background-size: 100% 0.16em;
+  }
+}
+@keyframes entree-panneau {
+  from {
+    opacity: 0;
+    translate: -24px 40px;
+    scale: 0.92;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+    scale: 1;
+  }
+}
+@keyframes flotte {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -12px;
+  }
+}
+@keyframes etincelle {
+  0%,
+  100% {
+    rotate: 0deg;
+    scale: 1;
+  }
+  50% {
+    rotate: 18deg;
+    scale: 1.25;
+  }
+}
+@keyframes reflet {
+  0% {
+    translate: -160% 0;
+  }
+  30%,
+  100% {
+    translate: 260% 0;
+  }
+}
+@keyframes derive {
+  from {
+    translate: 0 0;
+    scale: 1;
+  }
+  to {
+    translate: -6rem 4rem;
+    scale: 1.15;
+  }
+}
+@keyframes confetti {
+  from {
+    translate: 0 0;
+    rotate: 0deg;
+  }
+  to {
+    translate: 10px -26px;
+    rotate: 160deg;
+  }
+}
+@keyframes ping {
+  0% {
+    scale: 1;
+    opacity: 0.6;
+  }
+  80%,
+  100% {
+    scale: 2.6;
+    opacity: 0;
+  }
+}
+@keyframes tombe {
+  from {
+    opacity: 0;
+    translate: 0 -60%;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+@keyframes defile {
+  from {
+    translate: 0 0;
+  }
+  to {
+    translate: -50% 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* --- Entrées du hero (une fois) : décalées bloc par bloc --- */
+  .ev-entree {
+    animation: entree 0.85s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation-delay: var(--delai, 0s);
+  }
+  .ev-entree-titre {
+    animation: entree-titre 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation-delay: var(--delai, 0s);
+  }
+  .ev-hero .ev-accent,
+  .ev-hero-court .ev-accent {
+    animation: surligne 0.9s cubic-bezier(0.6, 0, 0.2, 1) 0.7s both;
+  }
+  .ev-panneau {
+    animation: entree-panneau 1s cubic-bezier(0.2, 0.7, 0.2, 1) 0.45s both;
+  }
+
+  /* --- Boucles --- */
+  .ev-logo-rond.ev-flotte {
+    animation: flotte 7s ease-in-out infinite;
+  }
+  .ev-pastille svg {
+    animation: etincelle 2.4s ease-in-out infinite;
+  }
+  .ev-btn-reflet::after {
+    content: '';
+    position: absolute;
+    inset: -20% auto -20% 0;
+    width: 40%;
+    background: linear-gradient(100deg, transparent, color-mix(in srgb, var(--color-papier) 55%, transparent), transparent);
+    rotate: 12deg;
+    translate: -160% 0;
+    animation: reflet 4.5s ease-in-out 2s infinite;
+    pointer-events: none;
+  }
+  .ev-btn-reflet:hover::after {
+    animation: none;
+    opacity: 0;
+  }
+  .ev-tache-soleil {
+    animation: derive 18s ease-in-out infinite alternate;
+  }
+  .ev-tache-foret {
+    animation: derive 22s ease-in-out infinite alternate-reverse;
+  }
+  .ev-tache-sauge {
+    animation: derive 26s ease-in-out infinite alternate;
+  }
+  .ev-confetti i {
+    animation: confetti var(--duree, 8s) ease-in-out var(--delai, 0s) infinite alternate;
+  }
+  .ev-ping::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: currentColor;
+    color: var(--ev-accent);
+    animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+  .ev-defile {
+    animation: defile 45s linear infinite;
+  }
+  .ev-bandeau:hover .ev-defile,
+  .ev-bandeau:focus-within .ev-defile,
+  .ev-bandeau.is-arrete .ev-defile {
+    animation-play-state: paused;
+  }
+
+  /* Pause : zone hors de l'écran, onglet caché, bouton « Mettre les animations en pause » */
+  .is-hors-ecran .ev-logo-rond,
+  .is-hors-ecran .ev-pastille svg,
+  .is-hors-ecran .ev-btn-reflet::after,
+  .is-hors-ecran .ev-tache,
+  .is-hors-ecran .ev-confetti i,
+  .is-hors-ecran .ev-ping::after,
+  .is-hors-ecran .ev-defile,
+  .ev-onglet-cache .ev-logo-rond,
+  .ev-onglet-cache .ev-pastille svg,
+  .ev-onglet-cache .ev-btn-reflet::after,
+  .ev-onglet-cache .ev-tache,
+  .ev-onglet-cache .ev-confetti i,
+  .ev-onglet-cache .ev-ping::after,
+  .ev-onglet-cache .ev-defile,
+  .ev-pause .ev-logo-rond,
+  .ev-pause .ev-pastille svg,
+  .ev-pause .ev-btn-reflet::after,
+  .ev-pause .ev-tache,
+  .ev-pause .ev-confetti i,
+  .ev-pause .ev-ping::after,
+  .ev-pause .ev-defile {
+    animation-play-state: paused;
+  }
+
+  /* --- Chiffres du compte à rebours : le nouveau chiffre tombe --- */
+  .ev-tombe {
+    animation: tombe 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  /* --- Survols (souris seulement) --- */
+  @media (hover: hover) {
+    .ev-btn {
+      transition: translate 0.25s var(--ease-reveal), scale 0.15s var(--ease-reveal), color 0.4s var(--ease-reveal),
+        background-color var(--dur-fast) linear;
+    }
+    .ev-btn:hover {
+      translate: 0 -2px;
+    }
+    .ev-btn:hover .ev-btn-fleche {
+      translate: 5px 0;
+    }
+    .ev-btn-fleche {
+      transition: translate 0.25s var(--ease-reveal);
+    }
+    .ev-btn-soleil:hover {
+      background: var(--ev-soleil-survol);
+    }
+    .ev-carte-lift {
+      transition: translate 0.3s var(--ease-reveal), box-shadow 0.3s var(--ease-reveal);
+    }
+    .ev-carte-lift:hover {
+      translate: 0 -4px;
+      box-shadow: 0 24px 50px -28px color-mix(in srgb, var(--color-nuit) 35%, transparent);
+    }
+    .ev-carte-voie {
+      transition: translate 0.45s var(--ease-reveal), rotate 0.45s var(--ease-reveal), box-shadow 0.45s var(--ease-reveal);
+    }
+    .ev-carte-voie:hover {
+      translate: 0 -8px;
+      rotate: -1deg;
+      box-shadow: 0 40px 70px -35px color-mix(in srgb, var(--color-nuit) 55%, transparent);
+    }
+    .dark .ev-carte-lift:hover,
+    .dark .ev-carte-voie:hover {
+      box-shadow: none;
+    }
+  }
+  .ev-btn:active {
+    scale: 0.97;
+  }
+
+  /* Fond qui se remplit de gauche à droite (boutons contour), 0,4 s */
+  .ev-btn-contour::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: var(--ev-contour);
+    scale: 0 1;
+    transform-origin: left center;
+    transition: scale 0.4s var(--ease-reveal);
+  }
+  @media (hover: hover) {
+    .ev-btn-contour:hover {
+      color: var(--ev-fond);
+    }
+    .ev-on-nuit .ev-btn-contour:hover {
+      color: var(--color-nuit);
+    }
+    .ev-on-soleil .ev-btn-contour:hover {
+      color: var(--color-soleil);
+    }
+    .ev-btn-contour:hover::before {
+      scale: 1 1;
+    }
+  }
+}
+
+
+/* --- Confettis (décor du hero et du bloc final) : 14 sur ordinateur, 6 sur téléphone --- */
+.ev-confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.ev-confetti i {
+  position: absolute;
+  width: 0.75rem;
+  height: 0.3rem;
+  border-radius: 2px;
+  background: var(--couleur);
+}
+.ev-confetti i.is-rond {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+}
+@media (max-width: 767px) {
+  .ev-confetti i:nth-child(n + 7) {
+    display: none;
+  }
+}
+
+/* --- Bouton « Mettre les animations en pause » (hero) --- */
+.ev-pause-anim {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0 0.25rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--ev-texte-doux);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.ev-pause-anim:hover {
+  color: var(--ev-accent);
+}
+.ev-pause-anim:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+.ev-bandeau-pause[aria-pressed='true'] {
+  background: var(--color-foret);
+}
+
+/* Mouvement réduit : rien ne bouge, les boutons pause sont inutiles (en fin de fichier : prime sur leur display) */
+@media (prefers-reduced-motion: reduce) {
+  .ev-pause-anim,
+  .ev-bandeau-pause,
+  .ev-confetti {
+    display: none;
+  }
+}

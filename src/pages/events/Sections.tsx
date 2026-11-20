@@ -7,6 +7,8 @@ import { WAHHF_LOGO_URL } from '../../services/api';
 import { eventPhoto, isShown, shownItems } from '../../lib/events';
 import { cn } from '../../lib/utils';
 import { ICONS, SectionHead, pad2 } from './ui';
+import { TickerPause } from './motion';
+import { useState } from 'react';
 
 /** Organisé par (référence : rtg-02) : libellé à gauche, logos à droite ; un partenaire sans logo s'écrit en texte */
 export function Organizers({ event }: { event: Event }) {
@@ -14,7 +16,7 @@ export function Organizers({ event }: { event: Event }) {
   const orgs = shownItems(event.organisateurs, (o) => [o.nom]);
   if (!orgs.length) return null;
   return (
-    <div className="ev-container ev-orga">
+    <div className="ev-container ev-orga" data-reveal="ev">
       <p className="ev-label">{t('events.organizers.label')}</p>
       <ul>
         {orgs.map((o) => (
@@ -58,18 +60,19 @@ function TickerWords({ hidden = false }: { hidden?: boolean }) {
  * Bandeau soleil penché de -1,5deg : la liste est doublée (la copie est masquée aux lecteurs d'écran) pour défiler
  * sans trou (étape 3) ; contrôles fournis par la page (bouton pause).
  */
-export function Ticker({ controls }: { controls?: React.ReactNode }) {
+export function Ticker() {
   const { t } = useTranslation();
+  const [stopped, setStopped] = useState(false);
   return (
-    <section className="ev-bandeau-zone" aria-label={t('events.ticker.label')}>
-      <div className="ev-bandeau">
+    <section className="ev-bandeau-zone" aria-label={t('events.ticker.label')} data-ev-zone="">
+      <div className={cn('ev-bandeau', stopped && 'is-arrete')}>
         <div className="ev-bandeau-piste">
           <div className="ev-bandeau-liste ev-defile">
             <TickerWords />
             <TickerWords hidden />
           </div>
         </div>
-        {controls}
+        <TickerPause pressed={stopped} onToggle={() => setStopped((s) => !s)} />
       </div>
     </section>
   );
@@ -88,7 +91,7 @@ export function Why({ event }: { event: Event }) {
           {items.map((c, i) => {
             const Icon = ICONS[c.icon];
             return (
-              <li key={c.titre} className="ev-carte ev-carte-lift">
+              <li key={c.titre} className="ev-carte ev-carte-lift" data-reveal="ev">
                 <div className="ev-carte-haut">
                   <span className="ev-icone" aria-hidden="true">
                     <Icon />
@@ -126,7 +129,7 @@ export function Schedule({ event }: { event: Event }) {
           </div>
           <ol className="ev-frise-liste">
           {steps.map((s, i) => (
-            <li key={`${s.heure}-${s.titre}`} className="ev-etape">
+            <li key={`${s.heure}-${s.titre}`} className="ev-etape" data-reveal="ev">
               <span className="ev-cercle" aria-hidden="true">
                 {i + 1}
               </span>
@@ -166,7 +169,7 @@ export function Activities({ event }: { event: Event }) {
             const Icon = ICONS[a.icon];
             const photo = eventPhoto(a.photo);
             return (
-              <li key={a.titre} className={cn('ev-voie ev-carte-voie', `ev-voie-${VOIES[i % VOIES.length]}`)}>
+              <li key={a.titre} className={cn('ev-voie ev-carte-voie', `ev-voie-${VOIES[i % VOIES.length]}`)} data-reveal="ev">
                 <div className="ev-voie-photo">
                   {photo && <Photo photo={photo} sizes="(min-width: 1024px) 18rem, (min-width: 640px) 50vw, 100vw" fit="cover" radius="none" />}
                 </div>

@@ -1,5 +1,6 @@
 import './i18n';
 import '../../styles/events.css';
+import '../../styles/events-motion.css';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -12,6 +13,7 @@ import { cn } from '../../lib/utils';
 import { AccentTitle, HeroBackdrop } from './Hero';
 import { useNow } from './Countdown';
 import { EvButton, pad2 } from './ui';
+import { PauseButton, useLoopControl } from './motion';
 
 const place = (e: Event) => [e.lieu, isShown(e.ville) ? e.ville : null, e.pays].filter(Boolean).join(', ');
 
@@ -81,20 +83,25 @@ export default function EventsListPage() {
   const { t, i18n } = useTranslation();
   const upcoming = upcomingEvents();
   const past = pastEvents();
+  const root = useRef<HTMLDivElement>(null);
+  const loops = useLoopControl(root);
   return (
-    <div className="ev">
+    <div ref={root} className={cn('ev', loops.paused && 'ev-pause')}>
       <SEO title={t('events.seo.listTitle')} description={t('events.seo.listDescription')} />
-      <section className="ev-hero-court" aria-labelledby="ev-liste-titre">
+      <section className="ev-hero-court" aria-labelledby="ev-liste-titre" data-ev-zone="">
         <HeroBackdrop />
         <div className="ev-container relative grid justify-items-start gap-6">
-          <p className="ev-pastille">
+          <p className="ev-pastille ev-entree">
             <Sparkles aria-hidden="true" className="h-4 w-4" />
             {t('events.list.badge')}
           </p>
-          <div id="ev-liste-titre">
+          <div id="ev-liste-titre" className="ev-entree-titre">
             <AccentTitle title={t('events.list.title')} accent={t('events.list.accent')} className="ev-h1" />
           </div>
-          <p className="ev-lead">{t('events.list.intro')}</p>
+          <p className="ev-lead ev-entree" style={{ '--delai': '0.16s' } as React.CSSProperties}>
+            {t('events.list.intro')}
+          </p>
+          <PauseButton paused={loops.paused} onToggle={loops.toggle} />
         </div>
       </section>
 
@@ -106,7 +113,7 @@ export default function EventsListPage() {
           {upcoming.length > 0 ? (
             <ul className="grid gap-8">
               {upcoming.map((e) => (
-                <li key={e.slug}>
+                <li key={e.slug} data-reveal="ev">
                   <UpcomingCard event={e} />
                 </li>
               ))}
@@ -132,7 +139,7 @@ export default function EventsListPage() {
               {past.map((e, i) => {
                 const photo = eventPhoto(e.photoHero);
                 return (
-                  <li key={e.slug} className={cn('ev-voie ev-carte-voie', `ev-voie-${VOIES[i % VOIES.length]}`)}>
+                  <li key={e.slug} className={cn('ev-voie ev-carte-voie', `ev-voie-${VOIES[i % VOIES.length]}`)} data-reveal="ev">
                     <div className="ev-voie-photo">
                       {photo && <Photo photo={photo} sizes="(min-width: 1024px) 18rem, (min-width: 640px) 50vw, 100vw" fit="cover" radius="none" />}
                     </div>

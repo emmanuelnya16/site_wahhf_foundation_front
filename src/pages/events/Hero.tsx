@@ -6,6 +6,10 @@ import Photo from '../../components/wahhf/Photo';
 import { WAHHF_LOGO_URL } from '../../services/api';
 import { eventDate, eventHours, eventPhoto, isShown, splitAccent } from '../../lib/events';
 import { CameroonFlag, EvButton } from './ui';
+import { Confetti } from './motion';
+
+/** Décalage d'entrée d'un bloc du hero (keyframes « entree », src/styles/events-motion.css) */
+const delay = (s: number) => ({ '--delai': `${s}s` }) as React.CSSProperties;
 
 /** Fond commun aux heros des pages Événements : grille de 56 px masquée et trois taches (soleil, forêt, sauge) */
 export function HeroBackdrop({ children }: { children?: ReactNode }) {
@@ -59,19 +63,25 @@ export default function Hero({
   const register = upcoming && isShown(event.lienInscription) ? event.lienInscription : null;
 
   return (
-    <section className="ev-hero" aria-labelledby="ev-titre">
-      <HeroBackdrop />
+    <section className="ev-hero" aria-labelledby="ev-titre" data-ev-zone="">
+      <HeroBackdrop>
+        <Confetti />
+      </HeroBackdrop>
       <div className="ev-container ev-hero-grid">
         <div className="relative grid justify-items-start gap-7">
-          <p className="ev-pastille">
+          <p className="ev-pastille ev-entree" style={delay(0)}>
             <Sparkles aria-hidden="true" className="h-4 w-4" />
             {upcoming ? t('events.hero.badgeUpcoming') : t('events.hero.badgePast')}
           </p>
-          <div id="ev-titre">
+          <div id="ev-titre" className="ev-entree-titre" style={delay(0.08)}>
             <AccentTitle title={event.titre} accent={event.motAccent} className="ev-h1" />
           </div>
-          {isShown(event.accroche) && <p className="ev-lead">{event.accroche}</p>}
-          <div className="flex flex-wrap items-center gap-4">
+          {isShown(event.accroche) && (
+            <p className="ev-lead ev-entree" style={delay(0.16)}>
+              {event.accroche}
+            </p>
+          )}
+          <div className="ev-entree flex flex-wrap items-center gap-4" style={delay(0.24)}>
             {register && (
               <EvButton to={register} variant="soleil" arrow className="ev-btn-reflet">
                 {t('events.hero.register')}
@@ -88,7 +98,7 @@ export default function Hero({
               </EvButton>
             )}
           </div>
-          <ul className="ev-infos">
+          <ul className="ev-infos ev-entree" style={delay(0.32)}>
             <li>
               <CalendarDays aria-hidden="true" />
               <span>
@@ -110,7 +120,7 @@ export default function Hero({
         </div>
 
         {photo && (
-          <div className="ev-visuel">
+          <div className="ev-visuel ev-entree" style={delay(0.1)}>
             <div className="ev-photo">
               <Photo photo={photo} sizes="(min-width: 1024px) 32rem, (min-width: 640px) 32rem, calc(100vw - 2.5rem)" priority fit="cover" radius="none" />
             </div>

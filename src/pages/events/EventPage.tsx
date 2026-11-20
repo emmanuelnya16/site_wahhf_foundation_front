@@ -1,5 +1,7 @@
 import './i18n';
 import '../../styles/events.css';
+import '../../styles/events-motion.css';
+import { useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import SEO from '../../components/wahhf/SEO';
@@ -11,6 +13,9 @@ import Countdown from './Countdown';
 import { Activities, Organizers, Schedule, Ticker, Why } from './Sections';
 import { Program, Support } from './Program';
 import { Faq, FinalCta, LatestNews, Parents } from './Families';
+import { PauseButton, useLoopControl } from './motion';
+import { AfterFirstDisplay, EventsFrise } from '../../effects/DeferredMotion';
+import { cn } from '../../lib/utils';
 
 /**
  * Fiche d'un événement (/evenements/:slug), lot 7.9 : reproduction de la structure de la référence
@@ -18,7 +23,9 @@ import { Faq, FinalCta, LatestNews, Parents } from './Families';
  * hero, compte à rebours (ou « C'était le … »), organisateurs, bandeau des six domaines, pourquoi venir, déroulé,
  * activités, programme en un coup d'œil, soutenir l'événement, pour les parents, FAQ, dernières actualités, appel final.
  * Chaque section ne s'affiche que si ses données existent (textes « TODO » masqués en ligne, src/lib/events.ts).
- * Mouvement : étape 3 (src/styles/events-motion.css).
+ * Mouvement (étape 3) : keyframes CSS (src/styles/events-motion.css), apparitions groupées (RevealBatch,
+ * data-reveal="ev"), frise remplie au défilement (EventsFrise) ; boucles arrêtées hors de l'écran, onglet caché ou par le
+ * bouton du hero (motion.tsx).
  */
 function EventSheet({ event }: { event: Event }) {
   const { t } = useTranslation();
@@ -27,11 +34,19 @@ function EventSheet({ event }: { event: Event }) {
   const scheduleShown = shownItems(event.deroule, (s) => [s.heure, s.titre, s.texte]).length > 0;
   const programShown = shownItems(event.tempsForts, (c) => [c.titre, c.texte]).length > 0;
   const programAnchor = scheduleShown ? '#deroule' : programShown ? '#programme' : null;
+  const root = useRef<HTMLDivElement>(null);
+  const loops = useLoopControl(root);
 
   return (
-    <div className="ev">
+    <div ref={root} className={cn('ev', loops.paused && 'ev-pause')}>
       <SEO title={event.titre} description={t('events.seo.eventDescription', { title: event.titre })} />
-      <Hero event={event} status={status} programAnchor={programAnchor} photosHref={photosHref} />
+      <Hero
+        event={event}
+        status={status}
+        programAnchor={programAnchor}
+        photosHref={photosHref}
+        controls={<PauseButton paused={loops.paused} onToggle={loops.toggle} />}
+      />
       <Countdown event={event} status={status} photosHref={photosHref} />
       <Organizers event={event} />
       <Ticker />
@@ -44,6 +59,11 @@ function EventSheet({ event }: { event: Event }) {
       <Faq event={event} />
       <LatestNews />
       <FinalCta event={event} status={status} photosHref={photosHref} />
+      {scheduleShown && (
+        <AfterFirstDisplay>
+          <EventsFrise scope={root} />
+        </AfterFirstDisplay>
+      )}
     </div>
   );
 }

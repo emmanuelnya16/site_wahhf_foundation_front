@@ -29,7 +29,7 @@ export function Program({ event, status, scheduleShown }: { event: Event; status
             {items.map((c, i) => {
               const Icon = ICONS[c.icon];
               return (
-                <li key={c.titre} className="ev-carte-sombre">
+                <li key={c.titre} className="ev-carte-sombre" data-reveal="ev">
                   <div className="ev-carte-haut">
                     <span className="ev-icone" aria-hidden="true">
                       <Icon />
@@ -46,7 +46,7 @@ export function Program({ event, status, scheduleShown }: { event: Event; status
           </ul>
         )}
         {showBar && (
-          <div className="ev-barre">
+          <div className="ev-barre" data-reveal="ev">
             <div className="grid gap-4">
               <p className="ev-barre-titre">
                 <span className="ev-rond" aria-hidden="true">
@@ -104,7 +104,7 @@ export function Support() {
   return (
     <section className="ev-section" aria-labelledby="ev-soutien">
       <div className="ev-container ev-soutien">
-        <div className="grid gap-5">
+        <div className="grid gap-5" data-reveal="ev">
           <p className="ev-eyebrow">{t('events.support.eyebrow')}</p>
           <h2 id="ev-soutien" className="ev-h2">
             {t('events.support.title')}
@@ -113,7 +113,7 @@ export function Support() {
         </div>
         <ul className="ev-soutien-cartes">
           {cards.map((c) => (
-            <li key={c.to} className={`ev-carte-couleur ev-carte-lien ev-carte-lift ${c.tone}`}>
+            <li key={c.to} className={`ev-carte-couleur ev-carte-lien ev-carte-lift ${c.tone}`} data-reveal="ev">
               <p className="ev-label">{c.eyebrow}</p>
               <h3 className="ev-h3">
                 <Link to={c.to} className="ev-lien-carte">

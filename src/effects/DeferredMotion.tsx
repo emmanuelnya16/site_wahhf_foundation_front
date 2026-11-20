@@ -44,3 +44,5 @@ export const RevealBatch = lazy(() => loadEffects().then((m) => ({ default: m.Re
 export const PhotoReveal = lazy(() => loadEffects().then((m) => ({ default: m.PhotoReveal })));
 // Groupe 7.4 : fil des étapes de l'accompagnement, dessiné au défilement (ordinateur)
 export const FilStepsScrub = lazy(() => loadEffects().then((m) => ({ default: m.FilStepsScrub })));
+// Lot 7.9 : frise du déroulé des pages Événements, remplie au défilement
+export const EventsFrise = lazy(() => loadEffects().then((m) => ({ default: m.EventsFrise })));

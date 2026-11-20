@@ -56,7 +56,7 @@ export function SectionHead({
   id?: string;
 }) {
   return (
-    <div className={cn('ev-head', center && 'ev-head-center')}>
+    <div className={cn('ev-head', center && 'ev-head-center')} data-reveal="ev">
       <Eyebrow>{eyebrow}</Eyebrow>
       <h2 id={id} className="ev-h2">
         {title}

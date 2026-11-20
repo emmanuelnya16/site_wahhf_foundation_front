@@ -7,6 +7,7 @@ import { imageSrcSet } from '../../services/api';
 import { PUBLISHED_NEWS, confirmedDate } from '../../lib/news';
 import { eventDate, eventPhoto, isShown, shownItems } from '../../lib/events';
 import { EvButton } from './ui';
+import { Confetti } from './motion';
 
 /**
  * Pour les parents (référence : rtg-09) : titre, phrase et photo à gauche ; à droite, « Nos engagements » (coches soleil)
@@ -21,7 +22,7 @@ export function Parents({ event }: { event: Event }) {
   return (
     <section className="ev-section" aria-labelledby="ev-parents">
       <div className="ev-container ev-parents">
-        <div className="grid gap-5">
+        <div className="grid gap-5" data-reveal="ev">
           <p className="ev-eyebrow">{t('events.parents.eyebrow')}</p>
           <h2 id="ev-parents" className="ev-h2 max-w-[14ch]">
             {t('events.parents.title')}
@@ -35,7 +36,7 @@ export function Parents({ event }: { event: Event }) {
         </div>
         <div className="ev-engagements">
           {promises.length > 0 && (
-            <div className="ev-engagement is-promesse">
+            <div className="ev-engagement is-promesse" data-reveal="ev">
               <h3>{t('events.parents.promises')}</h3>
               <ul>
                 {promises.map((p) => (
@@ -50,7 +51,7 @@ export function Parents({ event }: { event: Event }) {
             </div>
           )}
           {never.length > 0 && (
-            <div className="ev-engagement is-jamais">
+            <div className="ev-engagement is-jamais" data-reveal="ev">
               <h3>{t('events.parents.never')}</h3>
               <ul>
                 {never.map((p) => (
@@ -78,7 +79,7 @@ export function Faq({ event }: { event: Event }) {
   return (
     <section className="ev-section ev-alt" aria-labelledby="ev-faq">
       <div className="ev-container ev-faq">
-        <div className="grid justify-items-start gap-5">
+        <div className="grid justify-items-start gap-5" data-reveal="ev">
           <p className="ev-eyebrow">{t('events.faq.eyebrow')}</p>
           <h2 id="ev-faq" className="ev-h2 max-w-[12ch]">
             {t('events.faq.title')}
@@ -88,7 +89,7 @@ export function Faq({ event }: { event: Event }) {
             {t('events.faq.action')}
           </EvButton>
         </div>
-        <div className="ev-faq-carte">
+        <div className="ev-faq-carte" data-reveal="ev">
           {items.map((f) => (
             <details key={f.question}>
               <summary>
@@ -129,7 +130,7 @@ export function LatestNews() {
           {articles.map((a) => {
             const date = confirmedDate(a.date);
             return (
-              <li key={a.slug} className="ev-article ev-carte-lien ev-carte-lift">
+              <li key={a.slug} className="ev-article ev-carte-lien ev-carte-lift" data-reveal="ev">
                 <div className="ev-article-image">
                   <img src={a.image} srcSet={imageSrcSet(a.image)} sizes="(min-width: 768px) 24rem, 100vw" alt="" width={600} height={375} loading="lazy" decoding="async" />
                 </div>
@@ -158,17 +159,17 @@ export function LatestNews() {
  * Appel final (référence : rtg-11) : bloc soleil (rayon 40 px), date en surtitre, h2, phrase, bouton nuit plein et
  * bouton contour ; photo penchée de -2deg dans un cadre brume. Confettis à l'étape 3.
  */
-export function FinalCta({ event, status, photosHref, decor }: { event: Event; status: EventStatus; photosHref: string | null; decor?: React.ReactNode }) {
+export function FinalCta({ event, status, photosHref }: { event: Event; status: EventStatus; photosHref: string | null }) {
   const { t, i18n } = useTranslation();
   const upcoming = status === 'a-venir';
   const register = upcoming && isShown(event.lienInscription) ? event.lienInscription : null;
   const primary = upcoming ? register : photosHref;
   const photo = eventPhoto(event.photoFinale);
   return (
-    <section className="ev-section pt-0" aria-labelledby="ev-final">
+    <section className="ev-section pt-0" aria-labelledby="ev-final" data-ev-zone="">
       <div className="ev-container">
-        <div className="ev-final ev-on-soleil">
-          {decor}
+        <div className="ev-final ev-on-soleil" data-reveal="ev">
+          <Confetti />
           <div className="relative grid justify-items-start gap-6">
             <p className="ev-label">{eventDate(event, i18n.language)}</p>
             <h2 id="ev-final" className="ev-h2 max-w-[14ch]">

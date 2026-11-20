@@ -10,3 +10,5 @@ export { default as MapMotion } from './MapMotion';
 export { default as RevealBatch } from './RevealBatch';
 export { default as PhotoReveal } from './PhotoReveal';
 export { default as FilStepsScrub } from './FilStepsScrub';
+// Lot 7.9 : frise du déroulé des pages Événements
+export { default as EventsFrise } from './EventsFrise';
