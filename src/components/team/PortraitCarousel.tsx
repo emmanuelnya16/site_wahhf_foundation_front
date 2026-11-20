@@ -111,7 +111,7 @@ export default function PortraitCarousel({ members }: { members: TeamMember[] })
               />
               <div className="pc-caption">
                 <p className="pc-name">{displayName(member)}</p>
-                <p className="pc-role">{displayRole(member)}</p>
+                {displayRole(member) && <p className="pc-role">{displayRole(member)}</p>}
               </div>
             </div>
           );

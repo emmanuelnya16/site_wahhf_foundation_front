@@ -12,15 +12,19 @@ export function visibleMembers(): TeamMember[] {
   return TEAM.filter((m) => SHOW_PENDING || m.prenom !== null).sort((a, b) => a.niveau - b.niveau || a.ordre - b.ordre);
 }
 
+/** Pas de coupure de ligne après un trait d'union (« Dr.-Ing. », « Christian-Toralf ») : gluon invisible U+2060. */
+const keepHyphens = (text: string) => text.replace(/-/g, '-\u2060');
+
 /** « Ing. Pr. Christian Wilberg », « Wilfried » ; « Nom à confirmer » quand il est inconnu (développement seulement). */
 export function displayName(member: TeamMember): string {
   if (!member.prenom) return 'Nom à confirmer';
-  // « Ing. Pr. » ne se coupe pas en fin de ligne
-  return [member.titre?.replace(/ /g, '\u00a0'), member.prenom, member.nom].filter(Boolean).join(' ');
+  // Le titre (« Ing. Pr. », « Prof. Dr.-Ing. ») et un prénom composé ne se coupent pas en fin de ligne
+  const titre = member.titre && keepHyphens(member.titre.replace(/ /g, '\u00a0'));
+  return [titre, keepHyphens(member.prenom), member.nom].filter(Boolean).join(' ');
 }
 
-/** Rôle affiché ; « Rôle à confirmer » quand il est inconnu (développement seulement). */
-export const displayRole = (member: TeamMember) => member.role ?? 'Rôle à confirmer';
+/** Rôle affiché, ou null : la personne n'a pas de rôle affiché (seulement son nom). */
+export const displayRole = (member: TeamMember) => member.role;
 
 /** Portrait publiable (accord écrit reçu, ou développement), au format de <Photo>, ou null. */
 export function memberPortrait(member: TeamMember): PhotoLike | null {
@@ -33,7 +37,8 @@ export function memberPortrait(member: TeamMember): PhotoLike | null {
 
 export interface TeamLevel {
   niveau: number;
-  title: string;
+  /** null : niveau sans intitulé (le nom de la personne sert de titre) */
+  title: string | null;
   members: TeamMember[];
 }
 
@@ -43,6 +48,6 @@ export function teamLevels(): TeamLevel[] {
   const levels = [...new Set(members.map((m) => m.niveau))].sort((a, b) => a - b);
   return levels.map((niveau) => {
     const inLevel = members.filter((m) => m.niveau === niveau);
-    return { niveau, title: TEAM_LEVEL_TITLES[niveau] ?? 'Rôle à confirmer', members: inLevel };
+    return { niveau, title: TEAM_LEVEL_TITLES[niveau] ?? null, members: inLevel };
   });
 }

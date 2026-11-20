@@ -6,9 +6,14 @@ import type { TeamMember } from '../../data/team';
 import { displayName, displayRole, memberPortrait, teamLevels } from '../../lib/team';
 import { cn } from '../../lib/utils';
 
-/** Carte d'une personne : portrait 4:5 (s'il est publiable), nom, rôle, bio de deux phrases si elle existe, liens fournis. */
-function PersonCard({ member, top }: { member: TeamMember; top: boolean }) {
+/**
+ * Carte d'une personne : portrait 4:5 (s'il est publiable), nom, rôle s'il y en a un, bio de deux phrases si elle
+ * existe, liens fournis. Dans un niveau sans intitulé, le nom est le titre (h3) du niveau.
+ */
+function PersonCard({ member, top, nameIsHeading }: { member: TeamMember; top: boolean; nameIsHeading: boolean }) {
   const portrait = memberPortrait(member);
+  const role = displayRole(member);
+  const Name = nameIsHeading ? 'h3' : 'p';
   return (
     <div className={cn('org-card', top && 'org-card-top')}>
       {portrait && (
@@ -17,8 +22,8 @@ function PersonCard({ member, top }: { member: TeamMember; top: boolean }) {
           <Photo photo={portrait} sizes={top ? '(min-width: 768px) 18rem, 15rem' : '(min-width: 768px) 13rem, 12rem'} fit="cover" radius="none" decorative />
         </div>
       )}
-      <p className="org-name">{displayName(member)}</p>
-      <p className="org-role">{displayRole(member)}</p>
+      <Name className="org-name">{displayName(member)}</Name>
+      {role && <p className="org-role">{role}</p>}
       {member.bio && <p className="org-bio">{member.bio}</p>}
       {member.liens.length > 0 && (
         <ul className="org-links">
@@ -37,8 +42,9 @@ function PersonCard({ member, top }: { member: TeamMember; top: boolean }) {
 
 /**
  * Organigramme de « Qui sommes-nous » (lot 7.7), piloté par src/data/team.ts : un bloc par niveau, du plus haut au plus
- * bas, avec son titre (h3) et ses personnes en liste. Niveau 1 : une grande carte centrée ; niveaux suivants : cartes
- * plus petites, en ligne, ou en grille quand plusieurs personnes partagent un niveau (Bureau, Coordinateurs).
+ * bas, avec son titre (h3) et ses personnes en liste ; un niveau sans intitulé (personne sans rôle affiché) n'a pas de
+ * titre au-dessus des cartes, le nom de la personne sert de h3. Niveau 1 : une grande carte centrée ; niveaux suivants :
+ * cartes plus petites, en ligne, ou en grille quand plusieurs personnes partagent un niveau (Bureau, Coordinateurs).
  * Le fil (signature du site, contrat §6) relie les niveaux en trait vertical, depuis la carte du niveau 1 ; décoratif.
  * Ordinateur à souris : il se dessine au défilement (FilStepsScrub) et les cartes apparaissent (montée de 16 px et
  * fondu, data-reveal="soft") ; ailleurs et en mouvement réduit, tout est en place.
@@ -55,11 +61,11 @@ export default function OrgChart() {
           {levels.map((level, i) => (
             <div key={level.niveau} className="org-level">
               {i > 0 && <span data-fil-steps-dot="" aria-hidden="true" className="org-dot" />}
-              <h3 className="org-title">{level.title}</h3>
+              {level.title && <h3 className="org-title">{level.title}</h3>}
               <ul className={cn('org-people', level.members.length > 1 && 'org-people-many')}>
                 {level.members.map((member) => (
                   <li key={member.id} data-reveal="soft">
-                    <PersonCard member={member} top={level.niveau === levels[0].niveau} />
+                    <PersonCard member={member} top={level.niveau === levels[0].niveau} nameIsHeading={!level.title} />
                   </li>
                 ))}
               </ul>

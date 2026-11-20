@@ -1594,6 +1594,8 @@ html.vt-galerie::view-transition-new(root) {
 .pc-name {
   font-weight: 600;
   line-height: 1.3;
+  /* Deux lignes de longueur proche (« Prof. Dr.-Ing. » / « Christian-Toralf Weber ») plutôt qu'un mot seul */
+  text-wrap: balance;
 }
 .pc-role {
   font-size: 0.875rem;
@@ -1704,6 +1706,7 @@ html.vt-galerie::view-transition-new(root) {
 .org-name {
   font-weight: 600;
   color: var(--color-text);
+  text-wrap: balance;
 }
 .org-card-top .org-name {
   font-size: 1.25rem;
