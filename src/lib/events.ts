@@ -40,8 +40,9 @@ const NB = ' ';
 const locale = (lang: string) => (lang.startsWith('en') ? 'en-GB' : 'fr-FR');
 const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
-/** « Samedi 25 avril 2026 » (heure de Douala), insécable entre le jour, le mois et l'année. */
-export function eventDate(event: Event, lang: string, withWeekday = true): string {
+/** « Samedi 25 avril 2026 » (heure de Douala), insécable entre le jour, le mois et l'année ; en milieu de phrase,
+ *  capital = false garde la minuscule française (« le mardi 19 janvier »). */
+export function eventDate(event: Event, lang: string, withWeekday = true, capital = true): string {
   const text = new Intl.DateTimeFormat(locale(lang), {
     weekday: withWeekday ? 'long' : undefined,
     day: 'numeric',
@@ -49,7 +50,7 @@ export function eventDate(event: Event, lang: string, withWeekday = true): strin
     year: 'numeric',
     timeZone: event.fuseau,
   }).format(new Date(event.date));
-  return capitalize(text).replace(/(\d+) (\p{L}+) (\d{4})/u, `$1${NB}$2${NB}$3`);
+  return (capital ? capitalize(text) : text).replace(/(\d+) (\p{L}+) (\d{4})/u, `$1${NB}$2${NB}$3`);
 }
 
 /** « 8 h – 21 h » en français, « 8:00 – 21:00 » en anglais (heure de Douala). */

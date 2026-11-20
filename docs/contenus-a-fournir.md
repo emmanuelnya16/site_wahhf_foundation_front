@@ -397,3 +397,29 @@ Pour les photos « à vérifier », il suffit de nous dire si toutes les personn
 153. Le formulaire de candidature ne demande pas quelle langue la personne veut apprendre. Faut-il ajouter un choix « allemand » ou « anglais » ?
 154. « WAHHF Institute » apparaît désormais dans le titre de l’Académie. Est-ce le nom de l’Académie de langues ? Faut-il le présenter ailleurs (Partenaires, Qui sommes-nous), ou remplacer « Académie WAHHF » dans les autres textes ?
 155. La frise « Les grandes étapes » (Qui sommes-nous) dit « Ouverture de l’Académie d’allemand gratuite (A1 à C1) ». L’anglais était-il proposé dès l’ouverture, ou faut-il ajouter une étape ?
+
+---
+
+## Questions ajoutées avec la page Événements (lot 7.9)
+
+### Journée du 25 avril 2026 (fiche /evenements/journee-2026-04-25)
+
+Seuls les faits de la banderole (photo A02) sont affichés en ligne : WAHHF Foundation, Albatros Hotel, 25 avril 2026, 8 h à 21 h, « Bâtir l’Afrique qui nourrit, soigne et instruit sa jeunesse ». Tant que les réponses manquent, les sections concernées restent masquées sur le site en ligne.
+
+156. Quel est le nom exact de la journée ? Aujourd’hui, le titre est « Journée du 25 avril 2026 à l’Albatros Hotel ».
+157. Dans quelle ville se trouve l’Albatros Hotel ? Le panneau « L’événement a eu lieu à » affiche le nom de l’hôtel faute de ville.
+158. Qui a organisé la journée avec la fondation (partenaires, logos à nous envoyer) ?
+159. Quel était le déroulé de la journée (heures, titres, une phrase par moment) ?
+160. Quelles activités voulez-vous montrer (quatre au plus : titre, une phrase, une étiquette) ? Photos prévues : A53, A48, A41 et A85 (A48 et A85 attendent l’accord des parents ; en ligne, A63 et A34 les remplacent).
+161. Pourquoi venir : quatre raisons, avec un titre et une phrase chacune.
+162. Le programme en un coup d’œil : quatre temps forts (titre et phrase).
+163. Qui a pris la parole ce jour-là (personnes de l’organigramme ou invités) ?
+164. Pour les parents, ces engagements sont-ils exacts ? « Une autorisation écrite des parents pour chaque mineur », « Des jeunes encadrés par l’équipe de la fondation pendant toute la journée », « Une entrée gratuite, ou un prix clair annoncé à l’avance » ; et ce que la fondation ne promettra jamais : « Une promesse de visa », « Une promesse d’emploi », « Des frais cachés ou payés à un intermédiaire ».
+165. Les six questions de la FAQ et leurs réponses (lieu et date, public, prix, mineurs, prochaine édition, partenariat).
+166. Photo de l’appel final : votre brief demande B26 (photo de groupe en gilets), qui vient de l’album « Terrain agricole », pas du 25 avril, et attend l’accord des parents ; en ligne, A61 la remplace. Gardez-vous B26 ?
+
+### Prochains événements
+
+167. Y a-t-il un prochain événement à annoncer (date, heures, lieu, ville, lien d’inscription, nombre de places si vous le suivez) ? La page /evenements dit aujourd’hui qu’aucun événement n’est annoncé.
+168. Le nombre de places restantes ne s’affiche que s’il vient d’une vraie source (votre billetterie ou votre liste d’inscrits) : comment le tiendrez-vous à jour ?
+169. Les textes anglais des pages Événements (src/locales/events/en.json) sont des propositions, à valider.

@@ -1,0 +1,143 @@
+import type { ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
+import { CalendarDays, MapPin, Sparkles, Ticket } from 'lucide-react';
+import type { Event, EventStatus } from '../../data/events';
+import Photo from '../../components/wahhf/Photo';
+import { WAHHF_LOGO_URL } from '../../services/api';
+import { eventDate, eventHours, eventPhoto, isShown, splitAccent } from '../../lib/events';
+import { CameroonFlag, EvButton } from './ui';
+
+/** Fond commun aux heros des pages Événements : grille de 56 px masquée et trois taches (soleil, forêt, sauge) */
+export function HeroBackdrop({ children }: { children?: ReactNode }) {
+  return (
+    <div aria-hidden="true">
+      <div className="ev-grille" />
+      <div className="ev-tache ev-tache-soleil" />
+      <div className="ev-tache ev-tache-foret" />
+      <div className="ev-tache ev-tache-sauge" />
+      {children}
+    </div>
+  );
+}
+
+/** Titre avec le mot accent souligné d'un trait soleil (animé à l'étape 3) */
+export function AccentTitle({ title, accent, className }: { title: string; accent: string; className: string }) {
+  const [before, word, after] = splitAccent(title, accent);
+  return (
+    <h1 className={className}>
+      {before}
+      {word && <span className="ev-accent">{word}</span>}
+      {after}
+    </h1>
+  );
+}
+
+/**
+ * Hero de la fiche (référence : rtg-01) : pastille, h1 avec mot accent, accroche, deux boutons, ligne d'infos ; à
+ * droite, photo 512 × 640 (rayon 40 px) avec pastille logo, panneau lieu penché et liseré bicolore forêt / soleil.
+ */
+export default function Hero({
+  event,
+  status,
+  programAnchor,
+  photosHref,
+  controls,
+}: {
+  event: Event;
+  status: EventStatus;
+  programAnchor: string | null;
+  photosHref: string | null;
+  /** Bouton « Mettre les animations en pause » (étape 3) */
+  controls?: ReactNode;
+}) {
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language;
+  const photo = eventPhoto(event.photoHero);
+  const upcoming = status === 'a-venir';
+  const city = isShown(event.ville) ? event.ville : null;
+  const place = [event.lieu, city, event.pays].filter(Boolean).join(', ');
+  const register = upcoming && isShown(event.lienInscription) ? event.lienInscription : null;
+
+  return (
+    <section className="ev-hero" aria-labelledby="ev-titre">
+      <HeroBackdrop />
+      <div className="ev-container ev-hero-grid">
+        <div className="relative grid justify-items-start gap-7">
+          <p className="ev-pastille">
+            <Sparkles aria-hidden="true" className="h-4 w-4" />
+            {upcoming ? t('events.hero.badgeUpcoming') : t('events.hero.badgePast')}
+          </p>
+          <div id="ev-titre">
+            <AccentTitle title={event.titre} accent={event.motAccent} className="ev-h1" />
+          </div>
+          {isShown(event.accroche) && <p className="ev-lead">{event.accroche}</p>}
+          <div className="flex flex-wrap items-center gap-4">
+            {register && (
+              <EvButton to={register} variant="soleil" arrow className="ev-btn-reflet">
+                {t('events.hero.register')}
+              </EvButton>
+            )}
+            {!upcoming && photosHref && (
+              <EvButton to={photosHref} variant="soleil" arrow className="ev-btn-reflet">
+                {t('events.hero.photos')}
+              </EvButton>
+            )}
+            {programAnchor && (
+              <EvButton to={programAnchor} variant="contour">
+                {t('events.hero.program')}
+              </EvButton>
+            )}
+          </div>
+          <ul className="ev-infos">
+            <li>
+              <CalendarDays aria-hidden="true" />
+              <span>
+                {eventDate(event, lang)} · {eventHours(event, lang)}
+              </span>
+            </li>
+            <li>
+              <MapPin aria-hidden="true" />
+              <span>{place}</span>
+            </li>
+            {upcoming && event.placesRestantes !== null && (
+              <li className="ev-places">
+                <Ticket aria-hidden="true" />
+                <span>{t('events.hero.placesLeft', { count: event.placesRestantes })}</span>
+              </li>
+            )}
+          </ul>
+          {controls}
+        </div>
+
+        {photo && (
+          <div className="ev-visuel">
+            <div className="ev-photo">
+              <Photo photo={photo} sizes="(min-width: 1024px) 32rem, (min-width: 640px) 32rem, calc(100vw - 2.5rem)" priority fit="cover" radius="none" />
+            </div>
+            <span className="ev-lisere" aria-hidden="true">
+              <span />
+              <span />
+            </span>
+            <span className="ev-logo-rond ev-flotte">
+              <img src={WAHHF_LOGO_URL} alt="" width={68} height={68} />
+            </span>
+            {/* Panneau lieu : la ville si elle est confirmée, sinon le lieu ; le pays avec son drapeau */}
+            <p className="ev-panneau">
+              <span className="ev-panneau-epingle" aria-hidden="true">
+                <MapPin className="h-6 w-6" />
+              </span>
+              <span>
+                <span className="ev-panneau-label">{upcoming ? t('events.hero.venueUpcoming') : t('events.hero.venuePast')}</span>
+                <span className="ev-panneau-ville">{city ?? event.lieu}</span>
+                <span className="ev-panneau-pays">
+                  <CameroonFlag />
+                  {event.pays}
+                </span>
+              </span>
+            </p>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}

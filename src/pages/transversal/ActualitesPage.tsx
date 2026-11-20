@@ -9,7 +9,8 @@ import FieldAlbums from './FieldAlbums';
 import PageHeader, { PageBreadcrumb, PageMeta, PageTitle, PageIntro } from '../../components/wahhf/PageHeader';
 import { PrimaryButton } from '../../components/wahhf/Buttons';
 import NotFoundPage, { NotFoundLinks } from '../NotFoundPage';
-import { DOMAINS_DATA, NEWS_DATA, NewsArticle, imageSrcSet } from '../../services/api';
+import { DOMAINS_DATA, NewsArticle, imageSrcSet } from '../../services/api';
+import { EXAMPLE_NEWS_SLUGS, PUBLISHED_NEWS, confirmedDate } from '../../lib/news';
 
 /*
  * Actualités et article (groupe 7.3 : contrat validé, audit ACTU-01, ART-01 à ART-03, T-03, T-04, T-15, A11Y-10).
@@ -29,17 +30,9 @@ import { DOMAINS_DATA, NEWS_DATA, NewsArticle, imageSrcSet } from '../../service
  * VITE_APERCU_ACTUALITES=1 (jamais pour la mise en ligne).
  */
 
-/** Articles d'exemple non confirmés (T-03) : jamais affichés en ligne (questions 55 à 57 de docs/contenus-a-fournir.md). */
-export const EXAMPLE_NEWS_SLUGS = new Set([
-  'ouverture-inscriptions-academie-allemand-2026',
-  'campagne-sante-prevention-communautaire',
-  'reboisement-jeunesse-engagement-ecologique',
-]);
-const PREVIEW_EXAMPLES = import.meta.env.VITE_APERCU_ACTUALITES === '1';
-const PUBLISHED = NEWS_DATA.filter((a) => PREVIEW_EXAMPLES || !EXAMPLE_NEWS_SLUGS.has(a.slug));
-
-/** Date seulement si elle est confirmée (« 12 Mai 2026 (TODO) » n'est pas affichée). */
-const confirmedDate = (date: string) => (/TODO/.test(date) ? null : date);
+/** Articles publiés et dates confirmées : src/lib/news.ts (déplacés au lot 7.9, partagés avec la page Événements). */
+export { EXAMPLE_NEWS_SLUGS };
+const PUBLISHED = PUBLISHED_NEWS;
 
 /** Domaine d'un article (sa rubrique), pour son action principale. */
 const domainOf = (article: NewsArticle) => DOMAINS_DATA.find((d) => d.title === article.category);

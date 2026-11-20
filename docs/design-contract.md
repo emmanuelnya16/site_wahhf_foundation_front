@@ -818,6 +818,36 @@ Contrat validé le 16/11/2026, avec les ajustements du §13.
 
 ---
 
+## 15. Pages Événements (lot 7.9)
+
+*Votre brief du 20 novembre 2026 : « reproduction du design de roadtogermany.org/fr aux couleurs WAHHF ». Référence : `docs/references/evenement/` (analyse et captures rtg-01 à rtg-11). Code : `src/pages/events/`, `src/styles/events.css`, données `src/data/events.ts`.*
+
+**Correspondance des couleurs** (tokens de la page, `.ev` dans `events.css`, rebranchés en sombre sous `.dark .ev`) :
+
+| Référence | Clair | Sombre |
+|---|---|---|
+| jaune (boutons, bandeau, panneau lieu, cercles, bloc final) | soleil, texte encre | soleil, texte encre |
+| rouge (surtitres, mot accent, liens, icônes) | forêt | soleil |
+| rouge des places restantes | miel | soleil |
+| noir (cartes, section programme, boutons pleins) | nuit, texte brume | nuit, texte brume (cerclé de filet-nuit) |
+| texte | encre, encre douce | brume voilée, lichen |
+| fond crème, sections alternées | brume, sauge | humus, sous-bois |
+| cartes blanches | papier | canopée |
+| taches floues jaune / rouge / pêche | soleil / forêt / sauge, opacité basse | mêmes, plus basses |
+| dégradé de la frise | aplat forêt (le contrat interdit les dégradés) | aplat feuille |
+
+**Écarts au contrat voulus par le brief, réservés à ces deux pages** :
+- soleil sur fond clair (boutons, bandeau, panneau lieu, cercles, bloc final) : son texte est toujours l'encre (7,8:1) ;
+- surtitres et libellés en capitales 600 espacées (0,16 à 0,22 em), au lieu de la casse de phrase (§4.3) ;
+- titres de 72 px (h1) et 48 px (h2), au-dessus de l'échelle nommée (§4.3) ;
+- conteneur de 1 232 px (77 rem) au lieu de 72 rem (§5) : à 1 440 px, le bord gauche de la page est 40 px plus à gauche que celui de l'en-tête ;
+- taches, grille masquée et halos en dégradés radiaux (§3.5 : pas de dégradé) ; la frise, elle, reste en aplat ;
+- grands rayons (40, 32, 28 et 24 px) et ombres portées de la référence (§9).
+
+**Menu** : avec une 7e entrée, le menu chevauchait le nom « WAHHF Foundation » (mesuré à 1 280 et 1 440 px ; le menu complet n'apparaît qu'à partir de 1 280 px). « Événements » est donc dans un sous-menu d'Actualités (bouton, Échap, clic extérieur), comme le prévoit le brief ; dans le menu mobile, en retrait sous Actualités.
+
+**Contenu** : une section ne s'affiche que si ses données existent ; un texte « TODO » s'affiche en développement et dans l'aperçu `VITE_APERCU_EVENEMENTS=1`, jamais en ligne. Questions 156 et suivantes de `docs/contenus-a-fournir.md`.
+
 ## Annexe A : tableau des contrastes
 
 Calcul WCAG 2.x sur fond uni ; ratios tronqués à une décimale. Seuils : 4,5:1 pour le texte, 3:1 pour les composants et le fil.
