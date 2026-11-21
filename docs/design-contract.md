@@ -843,6 +843,7 @@ Contrat validé le 16/11/2026, avec les ajustements du §13.
 - ~~conteneur de 1 232 px (77 rem)~~ : retiré le 20 novembre 2026, les pages Événements utilisent le conteneur du site (72 rem, §5), aligné sur l'en-tête ;
 - taches, grille masquée et halos en dégradés radiaux (§3.5 : pas de dégradé) ; la frise, elle, reste en aplat ;
 - grands rayons (40, 32, 28 et 24 px) et ombres portées de la référence (§9).
+- italique 600 (§4.1 : seulement 400 et 600 droits) pour un mot sur deux du bandeau : le vrai italique du paquet @fontsource 5.3.0 (latin, 14 Ko), déclaré dans le CSS des pages Événements seulement, sans préchargement ; aucun faux italique (`font-synthesis: none`) : avant son chargement, le mot reste droit.
 
 **Activités** (retours du 20 novembre 2026) : 4 cartes (une ligne de 4) ou 6 (deux lignes de 3 à partir de 1 024 px) ; une carte sans photo montre une grande icône sur aplat ; une carte sans texte n’a pas de paragraphe ; l’étiquette peut être le nom d’un domaine, la carte mène alors à sa page. Pastille du hero : texte propre à l’événement possible, avec sa langue (`lang`).
 
