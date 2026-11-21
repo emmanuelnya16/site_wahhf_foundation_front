@@ -4,7 +4,6 @@ import { initReactI18next } from 'react-i18next';
 // lng: 'fr' l'empêchait de choisir la langue au chargement ; il ne faisait qu'écrire le choix FR / EN dans le
 // navigateur, sans que rien ne le relise. Retiré du JS initial (environ 6 Ko), sans changement visible.
 import frLocale from './locales/fr.json';
-import enLocale from './locales/en.json';
 
 const resources = {
   fr: {
@@ -74,74 +73,66 @@ const resources = {
       },
     },
   },
-  en: {
-    translation: {
-      ...enLocale,
-      common: {
-        operational: 'Active',
-        upcoming: 'Upcoming',
-        seeAll: 'See all',
-        contactUs: 'Contact us',
-        learnMore: 'Learn more',
-        discoverFamily: 'Explore domain',
-        close: 'Close',
-      },
-      group: {
-        badge: 'FOUNDATION & VALUES',
-        title: 'WAHHF Foundation',
-        subtitle: 'Cameroonian-German social and philanthropic branch of the IROKO Group.',
-      },
-      structure: {
-        badge: 'GOVERNANCE & ORGANIZATION',
-        title: 'Our Governance',
-        subtitle: 'A transparent structure backed by IROKO Group and overseen by an ethics committee.',
-      },
-      poles: {
-        badge: 'OUR ACTION DOMAINS',
-        title: 'Our 6 Action Domains',
-        subtitle: 'Explore each pillar of our social and educational commitment.',
-      },
-      method: {
-        badge: 'OUR FIELD APPROACH',
-        title: 'Our Approach',
-        subtitle: 'Five structured steps to support every beneficiary with dignity and transparency.',
-        step1Title: '1. Listening & Assessment',
-        step1Desc: 'Understanding the real needs of youth and communities.',
-        step2Title: '2. Guidance & Co-construction',
-        step2Desc: 'Building tailored pathways with local and educational partners.',
-        step3Title: '3. Training & Support',
-        step3Desc: 'Delivering language courses and field programs.',
-        step4Title: '4. Follow-up & Empowerment',
-        step4Desc: 'Long-term support completely free of charge.',
-        step5Title: '5. Evaluation & Transparency',
-        step5Desc: 'Measuring social impact and publishing annual reports.',
-        guaranteesTitle: 'Our Ethical Commitments',
-        g1Title: '100% Free for beneficiaries',
-        g1Desc: 'Zero fees charged to applicants or supported families.',
-        g2Title: 'Financial Transparency',
-        g2Desc: 'Funded by IROKO Group and our committed donors.',
-        g3Title: 'Human-Centered Support',
-        g3Desc: 'Respect for dignity, attentive listening, and verified guidance.',
-      },
-      founders: {
-        badge: 'LEADERSHIP & BOARD',
-        title: 'Founders & Governance',
-        subtitle: 'The leaders behind WAHHF Foundation’s social mission.',
-        f1Name: 'Marrion Watio',
-        f1Role: 'Co-Founder — IROKO Group & WAHHF Foundation',
-        f1Bio: 'Committed to education, youth autonomy, and solidarity between Africa and Europe.',
-        f2Name: 'NYA NANA Emmanuel',
-        f2Role: 'Co-Founder — IROKO Group & WAHHF Foundation',
-        f2Bio: 'Overseeing operational structure, transparency, and free program delivery.',
-      },
-      contact: {
-        badge: 'CONTACT & SUPPORT',
-        title: 'Contact Us',
-        subtitle: 'Have a question about our programs, volunteering, or partnerships? Our team is here to help.',
-      },
-    },
-  },
+
 };
+
+/**
+ * Langues du site (lot 7.10) : le français est dans le chargement initial ; l'anglais et l'allemand arrivent à la
+ * demande, quand on les choisit (ou au démarrage, si le visiteur les avait choisis). Le choix est mémorisé
+ * (localStorage, clé wahhf_langue) et met à jour <html lang>. Pas d'URL par langue pour l'instant (voir le compte rendu
+ * du lot 7.10).
+ */
+export const LANGUAGES = ['fr', 'en', 'de'] as const;
+export type Language = (typeof LANGUAGES)[number];
+const STORAGE_KEY = 'wahhf_langue';
+
+const LOADERS: Record<Exclude<Language, 'fr'>, () => Promise<Record<string, unknown>>> = {
+  en: () => Promise.all([import('./locales/en.json'), import('./locales/legacy-en')]).then(([main, legacy]) => ({ ...main.default, ...legacy.default })),
+  de: () => import('./locales/de.json').then((m) => m.default),
+};
+const loaded = new Set<Language>(['fr']);
+
+/** Charge les textes d'une langue (une seule fois). */
+export async function loadLanguage(lng: Language) {
+  if (loaded.has(lng)) return;
+  const resources = await LOADERS[lng as Exclude<Language, 'fr'>]();
+  i18n.addResourceBundle(lng, 'translation', resources, true, false);
+  loaded.add(lng);
+}
+
+export const isLanguage = (value: unknown): value is Language => LANGUAGES.includes(value as Language);
+
+/** Change de langue : charge ses textes, l'applique, la mémorise. */
+export async function setLanguage(lng: Language) {
+  await loadLanguage(lng);
+  await i18n.changeLanguage(lng);
+  try {
+    localStorage.setItem(STORAGE_KEY, lng);
+  } catch {
+    // stockage indisponible (navigation privée) : le choix vaut pour la visite
+  }
+}
+
+/** Au démarrage : la langue mémorisée, chargée avant le premier rendu (le français ne demande rien). */
+export async function initLanguage() {
+  let stored: string | null = null;
+  try {
+    stored = localStorage.getItem(STORAGE_KEY);
+  } catch {
+    stored = null;
+  }
+  if (isLanguage(stored) && stored !== 'fr') {
+    try {
+      await setLanguage(stored);
+    } catch {
+      // fichier de langue introuvable (hors ligne) : on reste en français
+    }
+  }
+}
+
+i18n.on('languageChanged', (lng) => {
+  if (typeof document !== 'undefined') document.documentElement.lang = lng;
+});
 
 i18n
   .use(initReactI18next)

@@ -14,6 +14,7 @@ import { useMotionEngineReady } from '../lib/motionEngine';
 import { switchTheme } from '../effects/themeTransition';
 import { EASE_OUT, EASE_SCREEN, DURATION } from '../lib/motionTokens';
 import { cn } from '../lib/utils';
+import { setLanguage, type Language } from '../i18n';
 
 /*
  * En-tête du site (contrat §8, ajout du 16/11 ; §9, §10) : barre opaque pleine largeur fixée en haut, contenu dans le
@@ -31,10 +32,11 @@ const PANEL_LINK = 'text-meta text-link underline underline-offset-4 decoration-
 const MOBILE_LINK =
   'block py-2 text-section-title text-text-on-inverse hover:text-link-on-inverse underline-offset-8 decoration-2 transition-colors duration-(--dur-fast)';
 const MOBILE_LINK_CURRENT = 'underline';
-/** Langues proposées, chacune écrite dans sa propre langue */
+/** Langues proposées, chacune écrite dans sa propre langue (pas de drapeau : une langue n'est pas un pays) */
 const LANGUAGES = [
   { code: 'fr', name: 'Français' },
   { code: 'en', name: 'English' },
+  { code: 'de', name: 'Deutsch' },
 ] as const;
 const INVERSE_CHIP =
   'inline-flex items-center gap-1.5 min-h-11 px-4 rounded-pill text-meta font-bold border transition-colors duration-(--dur-fast)';
@@ -206,9 +208,24 @@ export default function Navbar() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const currentLang: 'fr' | 'en' = i18n.language.startsWith('en') ? 'en' : 'fr';
-  const switchLanguage = (lang: 'fr' | 'en') => {
-    i18n.changeLanguage(lang);
+  const currentLang: Language = i18n.language.startsWith('en') ? 'en' : i18n.language.startsWith('de') ? 'de' : 'fr';
+  // Lot 7.10 : la langue est chargée à la demande, puis mémorisée ; la page en cours ne change pas
+  const switchLanguage = (lang: Language) => {
+    void setLanguage(lang);
+  };
+  // Liste des langues : flèches haut et bas d'une option à l'autre, Début et Fin
+  const onLangKeyDown = (event: React.KeyboardEvent<HTMLUListElement>) => {
+    const options = [...event.currentTarget.querySelectorAll<HTMLButtonElement>('button')];
+    const index = options.indexOf(document.activeElement as HTMLButtonElement);
+    const next =
+      event.key === 'ArrowDown' ? (index + 1) % options.length
+      : event.key === 'ArrowUp' ? (index - 1 + options.length) % options.length
+      : event.key === 'Home' ? 0
+      : event.key === 'End' ? options.length - 1
+      : -1;
+    if (next < 0) return;
+    event.preventDefault();
+    options[next].focus();
   };
 
   // Résultats de recherche rapide
@@ -256,7 +273,8 @@ export default function Navbar() {
             />
             {/* Étape d (lot 7.9, votre choix du 20 novembre 2026) : en français, le menu complet ne laisse pas la place du
                 nom (le conteneur fait 1 152 px à toutes ces largeurs) : logo seul dès 1 280 px ; en anglais, le nom tient. */}
-            <div className={cn('flex flex-col min-w-0', currentLang === 'fr' && 'xl:hidden')}>
+            {/* Lot 7.10 : en allemand non plus, le nom ne tient pas à côté du menu complet (mesuré : −27 px) : logo seul */}
+            <div className={cn('flex flex-col min-w-0', currentLang !== 'en' && 'xl:hidden')}>
               <span className="text-body font-bold leading-none text-text whitespace-nowrap">
                 WAHHF<span className="hidden min-[360px]:inline"> Foundation</span>
               </span>
@@ -327,7 +345,7 @@ export default function Navbar() {
                 <ChevronDown aria-hidden="true" className={cn('w-3.5 h-3.5 transition-transform duration-(--dur-fast)', langOpen && 'rotate-180')} />
               </button>
               {langOpen && (
-                <ul id="choix-langue" className={cn(PANEL, 'absolute right-0 top-full z-10 mt-2 min-w-40 p-2')}>
+                <ul id="choix-langue" onKeyDown={onLangKeyDown} className={cn(PANEL, 'absolute right-0 top-full z-10 mt-2 min-w-40 p-2')}>
                   {LANGUAGES.map((l) => (
                     <li key={l.code}>
                       <button
@@ -664,20 +682,19 @@ export default function Navbar() {
           <div className="pt-6 border-t border-border-subtle-on-inverse space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div className="flex flex-wrap items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => switchLanguage('fr')}
-                  className={cn(INVERSE_CHIP, i18n.language.startsWith('fr') ? INVERSE_CHIP_ON : INVERSE_CHIP_OFF)}
-                >
-                  Français (FR)
-                </button>
-                <button
-                  type="button"
-                  onClick={() => switchLanguage('en')}
-                  className={cn(INVERSE_CHIP, i18n.language.startsWith('en') ? INVERSE_CHIP_ON : INVERSE_CHIP_OFF)}
-                >
-                  English (EN)
-                </button>
+                {/* Langues (lot 7.10) : trois boutons visibles, chacun dans sa langue ; la langue en cours est signalée */}
+                {LANGUAGES.map((l) => (
+                  <button
+                    key={l.code}
+                    type="button"
+                    lang={l.code}
+                    aria-current={currentLang === l.code ? 'true' : undefined}
+                    onClick={() => switchLanguage(l.code)}
+                    className={cn(INVERSE_CHIP, currentLang === l.code ? INVERSE_CHIP_ON : INVERSE_CHIP_OFF)}
+                  >
+                    {l.name} ({l.code.toUpperCase()})
+                  </button>
+                ))}
                 <button
                   type="button"
                   onClick={toggleTheme}

@@ -1,0 +1,176 @@
+{
+  "brand": {
+    "name": "WAHHF Foundation",
+    "fullName": "We Are Here Help Foundation",
+    "branch": "Sozialer Zweig der IROKO-Gruppe",
+    "tagline": "Gemeinnützige kamerunisch-deutsche Stiftung"
+  },
+  "nav": {
+    "about": "Über uns",
+    "actions": "Unsere Arbeit",
+    "impact": "Unsere Wirkung",
+    "news": "Aktuelles",
+    "events": "Veranstaltungen",
+    "changeLanguage": "Sprache ändern ({{lang}})",
+    "homeLink": "WAHHF Foundation, Startseite",
+    "act": "Mitmachen",
+    "donate": "Spenden",
+    "apply": "Bewerben",
+    "partners": "Partner",
+    "contact": "Kontakt",
+    "searchPlaceholder": "Programm, Deutsch- oder Englischkurs, Land suchen …",
+    "themeLight": "Heller Modus",
+    "themeDark": "Dunkler Modus",
+    "domains": {
+      "education": "Bildung",
+      "health": "Gesundheit",
+      "entrepreneurship": "Unternehmertum junger Menschen",
+      "environment": "Umwelt",
+      "rights": "Rechte und Teilhabe",
+      "mobility": "Mobilität & Sprachen"
+    }
+  },
+  "disclaimer": {
+    "title": "Was wir nie von Ihnen verlangen",
+    "text": "Unsere Kurse und unsere Begleitung sind kostenlos. Wir verkaufen weder Visa noch Arbeitsplätze und garantieren kein Ergebnis. Wir verlangen nie Geld von Ihnen. Entscheidungen treffen die zuständigen Behörden und Einrichtungen. Prüfen Sie Informationen immer auf den offiziellen Websites."
+  },
+  "hero": {
+    "kicker": "KAMERUNISCH-DEUTSCHE STIFTUNG · SOZIALER ZWEIG DER IROKO-GRUPPE",
+    "title": "Junge Menschen stärken, Gemeinschaften verändern",
+    "subtitle": "Wir sind in Kamerun aktiv und begleiten junge Menschen in Afrika mit Würde, Transparenz und Solidarität: Bildung, Gesundheit, Unternehmertum, Umwelt und Sprachmobilität – zu 100 % kostenlos.",
+    "ctaPrimary": "Unsere Arbeit unterstützen",
+    "ctaSecondary": "Unsere Programme entdecken",
+    "scrollHint": "Zum Entdecken scrollen",
+    "videoPause": "Video anhalten",
+    "videoPlay": "Video abspielen",
+    "headline": "Deutsch- und Englischkurse, um Europa gut vorbereitet anzugehen",
+    "lead": "Eine kamerunisch-deutsche Stiftung in Yaoundé und Douala: Niveaus A1 bis C1, Online-Test und Orientierung für 10 europäische Länder – ohne bezahlte Vermittler.",
+    "ctaTest": "Kostenlosen Deutschtest machen",
+    "filmLink": "Film mit Ton ansehen (1 Min.)",
+    "filStart": "Kamerun",
+    "filEnd": "Europa",
+    "videoConsent": "Video aktivieren",
+    "videoConsentNote": "Es wird über YouTube abgespielt; YouTube erhält dabei Ihre IP-Adresse.",
+    "filmTitle": "Film der WAHHF Foundation",
+    "filmPlay": "Film auf YouTube abspielen",
+    "filmNote": "Der Film wird über YouTube abgespielt; YouTube erhält dabei Ihre IP-Adresse.",
+    "filmClose": "Film schließen"
+  },
+  "home": {
+    "mission": {
+      "kicker": "Über uns",
+      "title": "Eine menschliche Brücke zwischen Kamerun und Deutschland",
+      "p1": "Aus einer kamerunisch-deutschen Doppelkultur entstanden, ist die WAHHF Foundation (We Are Here Help Foundation) der soziale und gemeinnützige Zweig der IROKO-Gruppe.",
+      "p2": "Wir sind überzeugt, dass Würde durch Wissen, Gesundheit und Selbstständigkeit entsteht. Darum entwickeln wir nachhaltige Programme vor Ort und ein kostenloses Angebot, um Deutsch oder Englisch zu lernen und sich in Richtung Europa zu orientieren.",
+      "link": "Mehr über unsere Geschichte und unsere Organisation"
+    },
+    "stats": {
+      "kicker": "Unsere Wirkung in Zahlen",
+      "title": "Konkrete und messbare Arbeit",
+      "subtitle": "Jedes Programm wird sorgfältig und finanziell transparent begleitet. (Zahlen noch zu bestätigen — TODO)",
+      "s1Label": "Begleitete junge Menschen und Familien (TODO: bestätigen)",
+      "s2Label": "Sich ergänzende Arbeitsbereiche",
+      "s3Label": "Abgedeckte Regionen Kameruns",
+      "s4Label": "Dokumentierte europäische Zielländer"
+    },
+    "domains": {
+      "kicker": "Unsere 6 Arbeitsbereiche",
+      "title": "Sechs Säulen für mehr Selbstständigkeit",
+      "subtitle": "Vom Zugang zur Grundschule bis zur internationalen Studien- und Sprachmobilität."
+    },
+    "mobilitySpot": {
+      "title": "Deutsch oder Englisch lernen, den Weg nach Europa finden",
+      "subtitle": "Kostenlose Deutsch- und Englischkurse und Orientierung – ohne Anmeldegebühren und ohne kommerzielle Vermittler.",
+      "card1Title": "Sprachakademie A1 bis C1",
+      "card1Desc": "Strukturierte Begleitung der Deutsch- und Englischkurse vom Anfängerniveau A1 bis zum fortgeschrittenen Niveau C1, mit Online-Einstufungstest.",
+      "card2Title": "Begleitung nach Europa",
+      "card2Desc": "Klare und geprüfte Informationen in 4 Schritten: Studien-, Ausbildungs- und Arbeitswege verstehen und die Unterlagen vorbereiten.",
+      "card3Title": "10 begleitete Länder",
+      "card3Desc": "Luxemburg, Deutschland, Slowenien, Italien, Griechenland, Portugal, Spanien, Dänemark, Polen und Albanien.",
+      "cta": "Programm entdecken",
+      "filLabel": "Die fünf Sprachniveaus von A1 bis C1, dann Europa",
+      "filEnd": "Europa",
+      "levels": {
+        "a1": "Einstieg",
+        "a2": "Alltagsgespräche",
+        "b1": "Selbstständigkeit",
+        "b2": "Unabhängigkeit",
+        "c1": "Beherrschung"
+      }
+    },
+    "video": {
+      "kicker": "Mitten im Geschehen",
+      "title": "Unsere Arbeit und unsere Vision in Bildern",
+      "subtitle": "Sehen Sie im Video das Engagement der Stiftung und das Umfeld der IROKO-Gruppe, das unsere Angebote kostenlos macht.",
+      "playLabel": "Vorstellungsfilm ansehen"
+    },
+    "approach": {
+      "kicker": "Unser Ansatz",
+      "title": "Fünf Grundsätze für jedes Projekt",
+      "subtitle": "Eine bescheidene, sorgfältige und in der Wirklichkeit vor Ort verankerte Arbeitsweise."
+    },
+    "timeline": {
+      "kicker": "Unser Weg",
+      "title": "Die wichtigsten Etappen der WAHHF Foundation",
+      "subtitle": "Schritt für Schritt aufgebaut, im Dienst der Gemeinschaften. (Daten und Etappen noch zu bestätigen — TODO)"
+    },
+    "presence": {
+      "kicker": "Präsenz & Reichweite",
+      "title": "In Yaoundé und Douala zu Hause, offen für 10 europäische Länder",
+      "subtitle": "Unsere Teams sind in Yaoundé und Douala; Ansprechpartner in anderen Regionen werden noch bestätigt. Für Europa: geprüfte Informationen zu 10 Ländern."
+    },
+    "testimonials": {
+      "kicker": "Erfahrungsberichte",
+      "title": "Stimmen von Teilnehmenden und Ehrenamtlichen",
+      "subtitle": "Auszüge aus Erfahrungen in unseren Programmen (Beispiele mit TODO markiert, noch zu bestätigen)."
+    },
+    "news": {
+      "kicker": "Aktuelles & vor Ort",
+      "title": "Unsere neuesten Aktionen und Beiträge",
+      "subtitle": "Verfolgen Sie das Leben der Stiftung, neue Sprachkurse und Solidaritätsaktionen.",
+      "allLink": "Alle Neuigkeiten"
+    },
+    "gallery": {
+      "kicker": "In Bildern",
+      "title": "Die Stiftung vor Ort",
+      "subtitle": "Fotos vom First Open Day & Boot Camp am 25. April 2026 in Yaoundé.",
+      "link": "Ganze Galerie ansehen",
+      "expandCaption": "Yaoundé, 25. April 2026"
+    },
+    "partners": {
+      "kicker": "Partner und Förderer",
+      "title": "Getragen von der IROKO Group und einem engagierten Netzwerk",
+      "subtitle": "Dass unsere Programme kostenlos sind, verdanken wir dem dauerhaften Engagement der IROKO-Gruppe und der Großzügigkeit unserer Spenderinnen und Spender.",
+      "link": "Alle unsere Partner entdecken"
+    },
+    "act": {
+      "kicker": "Mit uns aktiv werden",
+      "title": "Jede Geste stärkt einen Lebensweg",
+      "subtitle": "Unterstützen Sie die Mission als Ehrenamtliche oder als Partner – oder verfolgen Sie unsere Arbeit über den Newsletter."
+    },
+    "newsletter": {
+      "kicker": "In Verbindung bleiben",
+      "title": "Neuigkeiten und Termine der nächsten Kurse erhalten",
+      "subtitle": "Ihre Adresse dient nur dazu, Ihnen diesen Newsletter zu senden. Die Website speichert sie noch nicht: Sie bereitet eine Anmeldenachricht vor, die Sie uns per WhatsApp oder E-Mail schicken.",
+      "placeholder": "Ihre E-Mail-Adresse",
+      "button": "Anmeldung vorbereiten",
+      "privacyLink": "Datenschutz",
+      "donateBannerTitle": "Unterstützen Sie unsere kostenlosen Bildungs- und Sozialprogramme",
+      "donateBannerSub": "100 % der Spenden fließen direkt in Sprachkurse, die Begleitung junger Menschen und die Arbeit vor Ort.",
+      "donateBannerBtn": "Spenden"
+    }
+  },
+  "footer": {
+    "description": "Gemeinnützige kamerunisch-deutsche Stiftung für Bildung, Gesundheit, die Selbstständigkeit junger Menschen und solidarische Mobilität.",
+    "irokoBadge": "Sozialer Zweig der IROKO-Gruppe",
+    "colAbout": "Über uns",
+    "colActions": "Unsere Arbeit",
+    "colAct": "Mitmachen und spenden",
+    "colContact": "Kontakt und Adresse",
+    "legal": "Impressum",
+    "privacy": "Datenschutz",
+    "transparency": "Finanzielle Transparenz",
+    "backToTop": "Nach oben",
+    "rights": "Alle Rechte vorbehalten."
+  }
+}
