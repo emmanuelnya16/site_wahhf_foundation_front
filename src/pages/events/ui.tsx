@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { Fragment, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowRight,
@@ -61,6 +61,20 @@ export const ICONS: Record<EventIcon, LucideIcon> = {
 
 export const pad2 = (n: number) => String(n).padStart(2, '0');
 
+/** Texte avec des retours à la ligne voulus (\n), comme les titres de la référence sur 2 ou 3 lignes */
+export function Lines({ text }: { text: string }) {
+  return (
+    <>
+      {text.split('\n').map((part, i) => (
+        <Fragment key={i}>
+          {i > 0 && <br />}
+          {part}
+        </Fragment>
+      ))}
+    </>
+  );
+}
+
 /** Surtitre : trait de 32 px + capitales espacées (rouge de la référence → forêt ; soleil sur fond sombre) */
 export function Eyebrow({ children }: { children: ReactNode }) {
   return <p className="ev-eyebrow">{children}</p>;
@@ -84,7 +98,7 @@ export function SectionHead({
     <div className={cn('ev-head', center && 'ev-head-center')} data-reveal="ev">
       <Eyebrow>{eyebrow}</Eyebrow>
       <h2 id={id} className="ev-h2">
-        {title}
+        <Lines text={title} />
       </h2>
       {lead && <p className="ev-lead">{lead}</p>}
     </div>

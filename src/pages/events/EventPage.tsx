@@ -33,13 +33,15 @@ function EventSheet({ event }: { event: Event }) {
   const photosHref = status === 'passe' && event.galerieAlbum ? `/galerie?album=${event.galerieAlbum}` : null;
   const scheduleShown = shownItems(event.deroule, (s) => [s.heure, s.titre, s.texte]).length > 0;
   const programShown = shownItems(event.tempsForts, (c) => [c.titre, c.texte]).length > 0;
-  const programAnchor = scheduleShown ? '#deroule' : programShown ? '#programme' : null;
+  // « Voir le programme » mène au programme en un coup d'œil (votre brief), à défaut au déroulé
+  const programAnchor = programShown ? '#programme' : scheduleShown ? '#deroule' : null;
+  const plainTitle = event.nom ?? event.titre.replace(/\n/g, ' ');
   const root = useRef<HTMLDivElement>(null);
   const loops = useLoopControl(root);
 
   return (
     <div ref={root} className={cn('ev', loops.paused && 'ev-pause')}>
-      <SEO title={event.titre} description={t('events.seo.eventDescription', { title: event.titre })} />
+      <SEO title={plainTitle} description={t('events.seo.eventDescription', { title: plainTitle })} />
       <Hero
         event={event}
         status={status}
@@ -49,15 +51,15 @@ function EventSheet({ event }: { event: Event }) {
       />
       <Countdown event={event} status={status} photosHref={photosHref} />
       <Organizers event={event} />
-      <Ticker />
+      <Ticker words={event.bandeau} />
       <Why event={event} />
       <Schedule event={event} />
       <Activities event={event} />
       <Program event={event} status={status} scheduleShown={scheduleShown} />
-      <Support />
+      <Support event={event} />
       <Parents event={event} />
       <Faq event={event} />
-      <LatestNews />
+      <LatestNews event={event} />
       <FinalCta event={event} status={status} photosHref={photosHref} />
       {scheduleShown && (
         <AfterFirstDisplay>
@@ -78,7 +80,7 @@ export default function EventPage() {
       <NotFoundPage title={t('events.notFound.title')} message={t('events.notFound.text')}>
         <NotFoundLinks
           heading={t('events.list.title')}
-          links={[{ to: '/evenements', label: t('events.list.title') }, ...EVENTS.map((e) => ({ to: `/evenements/${e.slug}`, label: e.titre }))]}
+          links={[{ to: '/evenements', label: t('events.list.title') }, ...EVENTS.map((e) => ({ to: `/evenements/${e.slug}`, label: e.titre.replace(/\n/g, ' ') }))]}
         />
       </NotFoundPage>
     );

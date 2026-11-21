@@ -1,11 +1,11 @@
 import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-import { CalendarDays, MapPin, Sparkles, Ticket } from 'lucide-react';
+import { CalendarDays, Clock, MapPin, Sparkles, Ticket } from 'lucide-react';
 import type { Event, EventStatus } from '../../data/events';
 import Photo from '../../components/wahhf/Photo';
 import { WAHHF_LOGO_URL } from '../../services/api';
 import { eventDate, eventHours, eventPhoto, isShown, splitAccent } from '../../lib/events';
-import { CameroonFlag, EvButton } from './ui';
+import { CameroonFlag, EvButton, Lines } from './ui';
 import { Confetti } from './motion';
 
 /** Décalage d'entrée d'un bloc du hero (keyframes « entree », src/styles/events-motion.css) */
@@ -29,10 +29,31 @@ export function AccentTitle({ title, accent, className }: { title: string; accen
   const [before, word, after] = splitAccent(title, accent);
   return (
     <h1 className={className}>
-      {before}
+      <Lines text={before} />
       {word && <span className="ev-accent">{word}</span>}
-      {after}
+      <Lines text={after} />
     </h1>
+  );
+}
+
+/**
+ * Bouton d'inscription : un lien quand l'adresse est connue ; sinon, une pastille soleil (sans flèche ni reflet) qui
+ * dit « Inscriptions annoncées très bientôt » : jamais un lien vers nulle part.
+ */
+export function RegisterAction({ href, label, variant, className }: { href: string | null; label: string; variant: 'soleil' | 'nuit'; className?: string }) {
+  const { t } = useTranslation();
+  if (href) {
+    return (
+      <EvButton to={href} variant={variant} arrow className={className}>
+        {label}
+      </EvButton>
+    );
+  }
+  return (
+    <p className={`ev-btn ev-btn-${variant} ev-btn-bientot`}>
+      <Clock aria-hidden="true" className="ev-btn-fleche" />
+      <span>{t('events.faits.inscriptionBientot')}</span>
+    </p>
   );
 }
 
@@ -62,6 +83,7 @@ export default function Hero({
   const place = [event.lieu, city ?? (event.lieu ? null : t('events.faits.villeBientot')), event.pays].filter(Boolean).join(', ');
   const hours = eventHours(event, lang);
   const register = upcoming && isShown(event.lienInscription) ? event.lienInscription : null;
+  const hero = event.sections?.hero;
 
   return (
     <section className="ev-hero" aria-labelledby="ev-titre" data-ev-zone="">
@@ -89,11 +111,7 @@ export default function Hero({
             </p>
           )}
           <div className="ev-entree flex flex-wrap items-center gap-4" style={delay(0.24)}>
-            {register && (
-              <EvButton to={register} variant="soleil" arrow className="ev-btn-reflet">
-                {t('events.hero.register')}
-              </EvButton>
-            )}
+            {upcoming && <RegisterAction href={register} label={hero?.action ?? t('events.hero.register')} variant="soleil" className="ev-btn-reflet" />}
             {!upcoming && photosHref && (
               <EvButton to={photosHref} variant="soleil" arrow className="ev-btn-reflet">
                 {t('events.hero.photos')}
@@ -101,7 +119,7 @@ export default function Hero({
             )}
             {programAnchor && (
               <EvButton to={programAnchor} variant="contour">
-                {t('events.hero.program')}
+                {hero?.action2 ?? t('events.hero.program')}
               </EvButton>
             )}
           </div>
@@ -145,7 +163,7 @@ export default function Hero({
                 <MapPin className="h-6 w-6" />
               </span>
               <span>
-                <span className="ev-panneau-label">{upcoming ? t('events.hero.venueUpcoming') : t('events.hero.venuePast')}</span>
+                <span className="ev-panneau-label">{hero?.etiquette ?? (upcoming ? t('events.hero.venueUpcoming') : t('events.hero.venuePast'))}</span>
                 {city ?? event.lieu ? (
                   <span className="ev-panneau-ville">{city ?? event.lieu}</span>
                 ) : (

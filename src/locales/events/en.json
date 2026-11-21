@@ -300,6 +300,8 @@
         }
       ],
       "parents": {
+        "titrePromesses": "What we promise",
+        "titreJamais": "What we will never promise",
         "promesses": [
           "Verified information, with its official sources",
           "Identified organisers and partners",

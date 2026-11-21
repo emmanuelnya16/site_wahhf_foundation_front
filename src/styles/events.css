@@ -10,19 +10,61 @@
    Mouvement : src/styles/events-motion.css (étape 3).
    ========================================================================== */
 
-/* Italique 600 d'Atkinson Hyperlegible Next (paquet @fontsource 5.3.0, latin, licence OFL dans public/fonts) :
-   déclaré seulement dans le CSS des pages Événements, sans préchargement, pour les mots en italique du bandeau. */
+/* Polices de la référence (lot 7.9 bis), seulement dans le CSS des pages Événements, sans préchargement :
+   Jost 700 (titres h1, h2, h3, mots du bandeau ; vrai italique pour un mot sur deux) et Barlow 600 (surtitres,
+   étiquettes, libellés, chiffres du compte à rebours). Paquets @fontsource 5.3.0, sous-ensemble latin, licences OFL
+   (public/fonts/LICENSE-jost.txt, LICENSE-barlow.txt). Le texte courant garde la police du site.
+   Polices de secours aux mêmes encombrements (Arial Bold mesurée contre Jost et Barlow dans Chrome) : pas de saut de
+   mise en page quand la vraie police arrive (font-display: swap). */
 @font-face {
-  font-family: 'Atkinson Hyperlegible Next';
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/jost-latin-700.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Jost';
   font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/jost-latin-700-italic.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Barlow';
+  font-style: normal;
   font-weight: 600;
   font-display: swap;
-  src: url('/fonts/atkinson-hyperlegible-next-latin-600-italic.woff2') format('woff2');
+  src: url('/fonts/barlow-latin-600.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Jost Fallback';
+  font-weight: 700;
+  src: local('Arial Bold'), local('Arial-BoldMT'), local('Arial');
+  /* Mesuré dans Chrome (texte des titres, 100 px) : largeur, puis hauteurs ramenées à cette largeur */
+  size-adjust: 98.14%;
+  ascent-override: 109.03%;
+  descent-override: 38.72%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Barlow Fallback';
+  font-weight: 600;
+  src: local('Arial Bold'), local('Arial-BoldMT'), local('Arial');
+  /* Mesuré dans Chrome (surtitres et chiffres, 100 px) */
+  size-adjust: 87.36%;
+  ascent-override: 114.47%;
+  descent-override: 22.89%;
+  line-gap-override: 0%;
 }
 
 /* --- Tokens de la page (clair) --- */
 .ev {
+  --ev-titre: 'Jost', 'Jost Fallback', var(--font-sans, sans-serif);
+  --ev-libelle: 'Barlow', 'Barlow Fallback', var(--font-sans, sans-serif);
   --ev-fond: var(--color-brume);
   --ev-fond-alt: var(--color-sauge);
   --ev-carte: var(--color-papier);
@@ -249,11 +291,12 @@
 .ev-hero {
   position: relative;
   overflow: clip;
-  padding-block: 2.5rem 4rem;
+  /* L'en-tête est fixe et <main> ne réserve pas sa hauteur : chaque page la réserve (lot 7.9 bis, correctif) */
+  padding-block: calc(var(--header-height) + 2.5rem) 4rem;
 }
 @media (min-width: 1024px) {
   .ev-hero {
-    padding-block: 3rem 5rem;
+    padding-block: calc(var(--header-height) + 3rem) 5rem;
   }
 }
 .ev-grille {
@@ -659,7 +702,7 @@
 .ev-bandeau-mot:nth-child(even) {
   font-style: italic;
 }
-/* Jamais de faux italique : tant que l'italique n'est pas chargé, le mot reste droit */
+/* Jamais de faux italique : le vrai italique de Jost ; tant qu'il n'est pas chargé, le mot reste droit */
 .ev-bandeau-mot {
   font-synthesis: none;
 }
@@ -1433,7 +1476,7 @@ details[open] .ev-plus {
 .ev-hero-court {
   position: relative;
   overflow: clip;
-  padding-block: 4rem 4.5rem;
+  padding-block: calc(var(--header-height) + 4rem) 4.5rem;
 }
 .ev-a-venir {
   display: grid;
@@ -1517,4 +1560,111 @@ details[open] .ev-plus {
   .ev-etape:nth-child(odd of .ev-etape) .ev-link svg {
     transform: scaleX(-1);
   }
+}
+
+/* =========================================================================
+   Lot 7.9 bis : typographie de la référence (Jost 700 pour les titres, Barlow 600 pour les libellés)
+   ========================================================================= */
+.ev :is(h1, h2, h3),
+.ev-h1,
+.ev-h2,
+.ev-h3,
+.ev-bandeau-mot,
+.ev-compte-titre,
+.ev-panneau-ville,
+.ev-faq-carte summary {
+  font-family: var(--ev-titre);
+  font-weight: 700;
+}
+.ev-h1,
+.ev-h2 {
+  letter-spacing: -0.01em;
+}
+.ev-eyebrow,
+.ev-label,
+.ev-carte-num,
+.ev-chiffre,
+.ev-etape-heure,
+.ev-panneau-label,
+.ev-panneau-pays,
+.ev-orga .ev-label,
+.ev-voie-etiquette {
+  font-family: var(--ev-libelle);
+  font-weight: 600;
+}
+
+/* --- Lot 7.9 bis : proportions de la référence --- */
+/* En-têtes alignés à gauche : titre sur deux lignes (≈ 720 px) et phrase sur deux lignes (≈ 900 px), comme rtg-03 */
+.ev-head:not(.ev-head-center) .ev-h2 {
+  max-width: 15em;
+}
+.ev-head .ev-lead {
+  max-width: 56rem;
+}
+/* Inscription pas encore ouverte : pastille soleil, sans flèche ni reflet, qui n'est pas un lien */
+.ev-btn-bientot {
+  cursor: default;
+  box-shadow: none;
+}
+.ev-btn-bientot:hover {
+  translate: none;
+}
+/* Ville inconnue dans le panneau lieu : plus petite que le nom d'une ville */
+.ev-panneau-ville.is-bientot {
+  font-size: 1.125rem;
+  line-height: 1.2;
+}
+/* Cartes « Sponsors et partenaires » : flèche seule, comme la référence */
+.ev-fleche-simple {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-top: 1.25rem;
+}
+/* « À lire avant de partir » : guide sans photo, grande icône sur aplat */
+.ev-article-aplat {
+  display: grid;
+  place-items: center;
+}
+.ev-article-aplat svg {
+  width: 5rem;
+  height: 5rem;
+}
+.ev-article-guide.is-nuit .ev-article-aplat {
+  background: var(--color-nuit);
+  color: var(--color-soleil);
+}
+.ev-article-guide.is-foret .ev-article-aplat {
+  background: var(--color-foret);
+  color: var(--color-brume);
+}
+.ev-article-guide.is-soleil .ev-article-aplat {
+  background: var(--color-soleil);
+  color: var(--color-nuit);
+}
+.ev-article .ev-link {
+  margin-top: 0.25rem;
+}
+/* Hero (rtg-01) : la photo part du haut, le texte est centré à côté */
+@media (min-width: 1024px) {
+  .ev-hero {
+    padding-top: calc(var(--header-height) + 2rem);
+  }
+  .ev-hero-grid {
+    align-items: start;
+  }
+  .ev-hero-grid > :first-child {
+    align-self: center;
+  }
+}
+/* Texte des cartes à 16 px, comme la référence (rtg-03, rtg-07, rtg-09) */
+.ev-carte .ev-text,
+.ev-carte-sombre .ev-text,
+.ev-engagement li {
+  font-size: 1rem;
+}
+/* Rond du mégaphone (barre des intervenants) : soleil, comme les carrés d'icône de la section nuit */
+.ev-programme .ev-rond {
+  background: var(--color-soleil);
+  color: var(--color-encre);
+  box-shadow: none;
 }

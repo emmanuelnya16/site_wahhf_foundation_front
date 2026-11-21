@@ -126,6 +126,8 @@ export interface EventGuideCard {
 
 export interface Event {
   slug: string;
+  /** Nom court de l'événement (liste, titre de l'onglet) ; à défaut, le titre */
+  nom?: string;
   /** Texte de la pastille du hero (à la place du libellé par défaut), et sa langue s'il n'est pas en français */
   pastille?: { texte: string; lang?: string };
   /** Statut saisi ; un événement « à venir » dont la fin est passée est traité comme passé (src/lib/events.ts) */
@@ -167,7 +169,8 @@ export interface Event {
   tempsForts: EventCard[];
   /** Identifiants de src/data/team.ts */
   intervenants: string[];
-  parents: { promesses: string[]; jamais: string[] };
+  /** Listes des parents ; titrePromesses / titreJamais remplacent les intitulés par défaut de l'i18n */
+  parents: { promesses: string[]; jamais: string[]; titrePromesses?: string; titreJamais?: string };
   photoParents: readonly string[];
   faq: EventFaq[];
   photoFinale: readonly string[];
@@ -326,6 +329,7 @@ export const ROAD_TO_EUROPE_FAITS = {
  */
 const ROAD_TO_EUROPE: Event = frAll({
   slug: 'road-to-europe',
+  nom: 'Road to Europe',
   statut: 'a-venir',
   pastille: { texte: 'Le rendez-vous qui lance votre projet européen' },
   titre: "Votre route vers\nl'Europe\ncommence ici.",
@@ -436,6 +440,8 @@ const ROAD_TO_EUROPE: Event = frAll({
     { ton: 'nuit', surtitre: 'Pour les écoles, institutions, médias', titre: 'Devenir partenaire', texte: 'Formez, informez et accompagnez avec nous.', to: '/agir#partenaire' },
   ],
   parents: {
+    titrePromesses: 'Ce que nous promettons',
+    titreJamais: 'Ce que nous ne promettrons jamais',
     promesses: [
       'Des informations vérifiées, avec leurs sources officielles',
       'Des organisateurs et des partenaires identifiés',

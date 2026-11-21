@@ -5,7 +5,7 @@ import type { Event, EventStatus } from '../../data/events';
 import Photo from '../../components/wahhf/Photo';
 import { displayName, displayRole, memberPortrait, visibleMembers } from '../../lib/team';
 import { shownItems } from '../../lib/events';
-import { EvButton, ICONS, SectionHead, pad2 } from './ui';
+import { EvButton, ICONS, Lines, SectionHead, pad2 } from './ui';
 
 /**
  * Le programme en un coup d'œil (référence : rtg-07) : section nuit avec halos soleil et forêt, 4 cartes sombres, barre
@@ -17,13 +17,19 @@ export function Program({ event, status, scheduleShown }: { event: Event; status
   const items = shownItems(event.tempsForts, (c) => [c.titre, c.texte]);
   const speakers = visibleMembers().filter((m) => event.intervenants.includes(m.id));
   const showBar = speakers.length > 0 || status === 'a-venir';
+  const head = event.sections?.programme;
   if (!items.length && !showBar) return null;
   return (
     <section id="programme" className="ev-section ev-programme ev-on-nuit scroll-mt-24" aria-labelledby="ev-programme">
       <div className="ev-halo ev-halo-soleil" aria-hidden="true" />
       <div className="ev-halo ev-halo-foret" aria-hidden="true" />
       <div className="ev-container relative">
-        <SectionHead id="ev-programme" eyebrow={t('events.program.eyebrow')} title={t('events.program.title')} />
+        <SectionHead
+          id="ev-programme"
+          eyebrow={head?.surtitre ?? t('events.program.eyebrow')}
+          title={head?.titre ?? t('events.program.title')}
+          lead={head?.intro}
+        />
         {items.length > 0 && (
           <ul className="ev-grille-4">
             {items.map((c, i) => {
@@ -80,11 +86,11 @@ export function Program({ event, status, scheduleShown }: { event: Event; status
             <div className="flex flex-wrap gap-3">
               {scheduleShown && (
                 <EvButton to="#deroule" variant="soleil" arrow>
-                  {t('events.program.schedule')}
+                  {head?.action ?? t('events.program.schedule')}
                 </EvButton>
               )}
               <EvButton to="/qui-sommes-nous#organigramme" variant="contour">
-                {t('events.program.team')}
+                {head?.action2 ?? t('events.program.team')}
               </EvButton>
             </div>
           </div>
@@ -94,26 +100,32 @@ export function Program({ event, status, scheduleShown }: { event: Event; status
   );
 }
 
-/** Soutenir l'événement (référence : rtg-08) : texte à gauche, deux cartes couleur vers la page Agir */
-export function Support() {
+/**
+ * Sponsors et partenaires (référence : rtg-08) : texte à gauche, deux cartes couleur (soleil, nuit) ; cartes propres à
+ * l'événement, sinon celles de l'i18n vers la page Agir.
+ */
+export function Support({ event }: { event: Event }) {
   const { t } = useTranslation();
-  const cards = [
-    { tone: 'is-soleil', to: '/agir#partenaire', eyebrow: t('events.support.partnerEyebrow'), title: t('events.support.partnerTitle'), text: t('events.support.partnerText') },
-    { tone: 'is-nuit', to: '/agir#benevole', eyebrow: t('events.support.giveEyebrow'), title: t('events.support.giveTitle'), text: t('events.support.giveText') },
-  ];
+  const head = event.sections?.partenaires;
+  const cards = event.soutien
+    ? event.soutien.map((c) => ({ tone: `is-${c.ton}`, to: c.to, eyebrow: c.surtitre, title: c.titre, text: c.texte }))
+    : [
+        { tone: 'is-soleil', to: '/agir#partenaire', eyebrow: t('events.support.partnerEyebrow'), title: t('events.support.partnerTitle'), text: t('events.support.partnerText') },
+        { tone: 'is-nuit', to: '/agir#benevole', eyebrow: t('events.support.giveEyebrow'), title: t('events.support.giveTitle'), text: t('events.support.giveText') },
+      ];
   return (
     <section className="ev-section" aria-labelledby="ev-soutien">
       <div className="ev-container ev-soutien">
         <div className="grid gap-5" data-reveal="ev">
-          <p className="ev-eyebrow">{t('events.support.eyebrow')}</p>
+          <p className="ev-eyebrow">{head?.surtitre ?? t('events.support.eyebrow')}</p>
           <h2 id="ev-soutien" className="ev-h2">
-            {t('events.support.title')}
+            <Lines text={head?.titre ?? t('events.support.title')} />
           </h2>
-          <p className="ev-lead">{t('events.support.text')}</p>
+          <p className="ev-lead">{head?.intro ?? t('events.support.text')}</p>
         </div>
         <ul className="ev-soutien-cartes">
           {cards.map((c) => (
-            <li key={c.to} className={`ev-carte-couleur ev-carte-lien ev-carte-lift ${c.tone}`} data-reveal="ev">
+            <li key={c.title} className={`ev-carte-couleur ev-carte-lien ev-carte-lift ${c.tone}`} data-reveal="ev">
               <p className="ev-label">{c.eyebrow}</p>
               <h3 className="ev-h3">
                 <Link to={c.to} className="ev-lien-carte">
@@ -121,9 +133,7 @@ export function Support() {
                 </Link>
               </h3>
               <p className="leading-relaxed">{c.text}</p>
-              <span className="ev-rond-fleche" aria-hidden="true">
-                <ArrowUpRight className="h-5 w-5" />
-              </span>
+              <ArrowUpRight aria-hidden="true" className="ev-fleche-simple" />
             </li>
           ))}
         </ul>

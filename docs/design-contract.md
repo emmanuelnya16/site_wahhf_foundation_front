@@ -906,6 +906,12 @@ Contrat validé le 16/11/2026, avec les ajustements du §13.
 
 **Vérifié le 20 novembre 2026** (build de production et aperçu) : JS initial 167,9 Ko (pages chargées à la demande : 4,2 + 1,6 Ko pour les deux pages, 9,7 Ko de code commun, 6,0 Ko de CSS) ; défilement sans tâche longue (processeur ralenti × 4) ; interaction la plus lente 160 ms (× 4) ; Lighthouse mobile : CLS 0, accessibilité 100, LCP 4,3 s (le titre h1 sur téléphone ; 4,1 s pour Actualités et 3,8 s pour Qui sommes-nous dans les mêmes conditions) ; clavier complet, anneau de focus partout, un seul h1, aucun niveau sauté ; aucun texte provisoire en ligne ; aucun défilement horizontal de 320 à 1 440 px.
 
+**Lot 7.9 bis, Road to Europe (brief du 21 novembre 2026)** : la fiche doit ressembler exactement à la référence ; les 13 sections sont visibles en ligne, avec les textes de la fondation.
+- *Typographie, écart voulu au §4.1, réservé aux pages Événements* : titres (h1, h2, h3), mots du bandeau, titre du compte à rebours, ville du panneau et questions de la FAQ en **Jost 700** (vrai italique pour un mot sur deux du bandeau) ; surtitres, étiquettes, libellés et chiffres en **Barlow 600** ; texte courant dans la police du site. WOFF2 auto-hébergés (latin, 45 Ko pour les trois fichiers), déclarés dans le CSS des pages Événements, `font-display: swap`, polices de secours Arial Bold calées dans Chrome (Jost : 98,14 %, Barlow : 87,36 %). L'italique d'Atkinson du lot précédent est retiré. Jost n'a pas de grec : « Ελλάδα » s'écrit dans la police de secours du système.
+- *Faits inconnus* : « annoncé(e) très bientôt » à leur place (date, ville, prix, inscription) ; compte à rebours à cases « – » ; bouton d'inscription remplacé par une pastille sans lien.
+- *Hero* : l'en-tête étant fixe, le hero réserve sa hauteur (`--header-height`) ; correctif d'un défaut du lot 7.9, où la pastille passait sous l'en-tête.
+- *Couleurs* : celles du tableau ci-dessus ; le rouge de la référence n'est pas utilisé (le rond du mégaphone est soleil, comme les carrés d'icône de la section nuit).
+
 **Contenu** : une section ne s'affiche que si ses données existent ; un texte « TODO » s'affiche en développement et dans l'aperçu `VITE_APERCU_EVENEMENTS=1`, jamais en ligne. Questions 156 et suivantes de `docs/contenus-a-fournir.md`.
 
 ## Annexe A : tableau des contrastes

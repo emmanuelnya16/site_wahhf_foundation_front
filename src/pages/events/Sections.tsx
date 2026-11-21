@@ -39,12 +39,12 @@ export function Organizers({ event }: { event: Event }) {
 /** Les six domaines de la fondation, en allemand (bandeau, référence : rtg-02) */
 export const DOMAINS_DE = ['Bildung', 'Gesundheit', 'Unternehmertum', 'Umwelt', 'Teilhabe', 'Sprache & Mobilität'];
 
-function TickerWords({ hidden = false }: { hidden?: boolean }) {
+function TickerWords({ words, hidden = false }: { words: { mot: string; lang: string }[]; hidden?: boolean }) {
   return (
-    <ul lang="de" aria-hidden={hidden || undefined}>
-      {DOMAINS_DE.map((word) => (
-        <li key={word} className="ev-bandeau-mot">
-          {word}
+    <ul aria-hidden={hidden || undefined}>
+      {words.map((word) => (
+        <li key={word.mot} lang={word.lang} className="ev-bandeau-mot">
+          {word.mot}
           <span className="ev-points" aria-hidden="true">
             <i />
             <i />
@@ -60,16 +60,17 @@ function TickerWords({ hidden = false }: { hidden?: boolean }) {
  * Bandeau soleil penché de -1,5deg : la liste est doublée (la copie est masquée aux lecteurs d'écran) pour défiler
  * sans trou (étape 3) ; contrôles fournis par la page (bouton pause).
  */
-export function Ticker() {
+export function Ticker({ words }: { words?: { mot: string; lang: string }[] }) {
   const { t } = useTranslation();
   const [stopped, setStopped] = useState(false);
+  const list = words ?? DOMAINS_DE.map((mot) => ({ mot, lang: 'de' }));
   return (
     <section className="ev-bandeau-zone" aria-label={t('events.ticker.label')} data-ev-zone="">
       <div className={cn('ev-bandeau', stopped && 'is-arrete')}>
         <div className="ev-bandeau-piste">
           <div className="ev-bandeau-liste ev-defile">
-            <TickerWords />
-            <TickerWords hidden />
+            <TickerWords words={list} />
+            <TickerWords words={list} hidden />
           </div>
         </div>
         <TickerPause pressed={stopped} onToggle={() => setStopped((s) => !s)} />
@@ -86,7 +87,12 @@ export function Why({ event }: { event: Event }) {
   return (
     <section className="ev-section" aria-labelledby="ev-pourquoi">
       <div className="ev-container">
-        <SectionHead id="ev-pourquoi" eyebrow={t('events.why.eyebrow')} title={t('events.why.title')} />
+        <SectionHead
+          id="ev-pourquoi"
+          eyebrow={event.sections?.pourquoi?.surtitre ?? t('events.why.eyebrow')}
+          title={event.sections?.pourquoi?.titre ?? t('events.why.title')}
+          lead={event.sections?.pourquoi?.intro}
+        />
         <ul className="ev-grille-4">
           {items.map((c, i) => {
             const Icon = ICONS[c.icon];
@@ -118,11 +124,18 @@ export function Why({ event }: { event: Event }) {
 export function Schedule({ event }: { event: Event }) {
   const { t } = useTranslation();
   const steps = shownItems(event.deroule, (s) => [s.heure, s.titre, s.texte, s.lien?.libelle]);
+  const head = event.sections?.route;
   if (!steps.length) return null;
   return (
     <section id="deroule" className="ev-section ev-alt scroll-mt-24" aria-labelledby="ev-deroule">
       <div className="ev-container">
-        <SectionHead id="ev-deroule" eyebrow={t('events.schedule.eyebrow')} title={t('events.schedule.title')} center />
+        <SectionHead
+          id="ev-deroule"
+          eyebrow={head?.surtitre ?? t('events.schedule.eyebrow')}
+          title={head?.titre ?? t('events.schedule.title')}
+          lead={head?.intro}
+          center
+        />
         <div className="ev-frise">
           <div className="ev-frise-piste" aria-hidden="true">
             <span className="ev-frise-rempli" />
@@ -134,7 +147,7 @@ export function Schedule({ event }: { event: Event }) {
                 {i + 1}
               </span>
               <div className="ev-etape-carte">
-                <p className="ev-etape-heure">{s.heure}</p>
+                {s.heure && <p className="ev-etape-heure">{s.heure}</p>}
                 <h3 className="ev-h3">{s.titre}</h3>
                 <p className="ev-text">{s.texte}</p>
                 {s.lien && (
@@ -167,7 +180,13 @@ export function Activities({ event }: { event: Event }) {
   return (
     <section className="ev-section" aria-labelledby="ev-activites">
       <div className="ev-container">
-        <SectionHead id="ev-activites" eyebrow={t('events.activities.eyebrow')} title={t('events.activities.title')} center />
+        <SectionHead
+          id="ev-activites"
+          eyebrow={event.sections?.voies?.surtitre ?? t('events.activities.eyebrow')}
+          title={event.sections?.voies?.titre ?? t('events.activities.title')}
+          lead={event.sections?.voies?.intro}
+          center
+        />
         <ul className={items.length > 4 ? 'ev-grille-voies-3' : 'ev-grille-4'}>
           {items.map((a, i) => {
             const Icon = ICONS[a.icon];

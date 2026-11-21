@@ -33,7 +33,7 @@ function UpcomingCard({ event }: { event: Event }) {
       <div className="ev-a-venir-corps">
         <h3 className="ev-h2">
           <Link to={`/evenements/${event.slug}`} className="ev-lien-carte">
-            {event.titre}
+            {event.nom ?? event.titre.replace(/\n/g, ' ')}
           </Link>
         </h3>
         <ul className="ev-infos">
@@ -152,7 +152,7 @@ export default function EventsListPage() {
                       </span>
                       <h3 className="ev-h3">
                         <Link to={`/evenements/${e.slug}`} className="ev-voie-lien">
-                          {e.titre}
+                          {e.nom ?? e.titre.replace(/\n/g, ' ')}
                         </Link>
                       </h3>
                       <p className="ev-voie-texte">{place(e, t('events.faits.villeBientot'))}</p>
