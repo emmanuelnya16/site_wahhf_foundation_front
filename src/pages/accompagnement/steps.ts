@@ -1,3 +1,6 @@
+import { localizedList } from '../../lib/localize';
+import './i18n';
+
 /**
  * Les 5 étapes de l'accompagnement vers l'Europe (groupe 7.4, audit ACCO-01 et ACCO-02) : les 4 étapes et les 5 guides
  * de la page Accompagnement ne font plus qu'une seule suite, chaque étape menant à son guide.
@@ -42,6 +45,12 @@ export const ACCOMPANIMENT_STEPS: AccompanimentStep[] = [
   },
 ];
 
+/**
+ * Les étapes dans la langue en cours (lot 7.10) : surcouches accompagnement.contenu.etapes.<slug> (titre, description).
+ * Appelée pendant le rendu d'un composant qui utilise useLocalize ou useTranslation.
+ */
+export const localizedSteps = () => localizedList(ACCOMPANIMENT_STEPS, 'accompagnement.contenu.etapes', (s) => s.slug);
+
 /** Étapes au format de FilSteps (le titre mène au guide). */
 export const filSteps = (withDesc = true) =>
-  ACCOMPANIMENT_STEPS.map((s) => ({ id: s.slug, title: s.title, to: `/accompagnement/${s.slug}`, desc: withDesc ? s.desc : undefined }));
+  localizedSteps().map((s) => ({ id: s.slug, title: s.title, to: `/accompagnement/${s.slug}`, desc: withDesc ? s.desc : undefined }));

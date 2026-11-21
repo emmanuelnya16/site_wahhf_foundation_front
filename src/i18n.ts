@@ -92,12 +92,55 @@ const LOADERS: Record<Exclude<Language, 'fr'>, () => Promise<Record<string, unkn
 };
 const loaded = new Set<Language>(['fr']);
 
-/** Charge les textes d'une langue (une seule fois). */
+/**
+ * Paquets de textes propres à une page ou à un groupe de pages (src/locales/<paquet>/fr.json, en.json, de.json) :
+ * le français est importé par la page (il part avec son JS) ; l'anglais et l'allemand sont téléchargés seulement quand
+ * la langue est choisie. Hors du JS initial.
+ */
+type BundleLoader = () => Promise<{ default: Record<string, unknown> }>;
+const bundles = new Map<string, Record<Exclude<Language, 'fr'>, BundleLoader>>();
+const bundleLoads = new Map<string, Promise<void>>();
+
+function loadBundle(ns: string, lng: Exclude<Language, 'fr'>) {
+  const id = `${ns}:${lng}`;
+  let p = bundleLoads.get(id);
+  if (!p) {
+    p = bundles.get(ns)![lng]()
+      .then((m) => {
+        i18n.addResourceBundle(lng, 'translation', { [ns]: m.default }, true, false);
+      })
+      .catch(() => {
+        // hors ligne : le texte reste en français (langue de repli), on retentera au prochain choix
+        bundleLoads.delete(id);
+      });
+    bundleLoads.set(id, p);
+  }
+  return p;
+}
+
+/** Enregistre le paquet d'une page : à appeler une fois, au niveau du module de la page. */
+export function registerBundle(ns: string, fr: Record<string, unknown>, loaders: Record<Exclude<Language, 'fr'>, BundleLoader>) {
+  if (bundles.has(ns)) return;
+  i18n.addResourceBundle('fr', 'translation', { [ns]: fr }, true, false);
+  bundles.set(ns, loaders);
+  const lng = i18n.language as Language;
+  if (lng === 'en' || lng === 'de') void loadBundle(ns, lng);
+}
+
+/** Attend les paquets en cours de téléchargement (une page ne s'affiche pas en français avant de passer en allemand). */
+export function bundlesReady() {
+  return Promise.all(bundleLoads.values()).then(() => undefined);
+}
+
+/** Charge les textes d'une langue (une seule fois), avec les paquets des pages déjà ouvertes. */
 export async function loadLanguage(lng: Language) {
-  if (loaded.has(lng)) return;
-  const resources = await LOADERS[lng as Exclude<Language, 'fr'>]();
-  i18n.addResourceBundle(lng, 'translation', resources, true, false);
-  loaded.add(lng);
+  if (lng === 'fr') return;
+  if (!loaded.has(lng)) {
+    const resources = await LOADERS[lng]();
+    i18n.addResourceBundle(lng, 'translation', resources, true, false);
+    loaded.add(lng);
+  }
+  await Promise.all([...bundles.keys()].map((ns) => loadBundle(ns, lng)));
 }
 
 export const isLanguage = (value: unknown): value is Language => LANGUAGES.includes(value as Language);
@@ -142,6 +185,10 @@ i18n
     fallbackLng: 'fr',
     interpolation: {
       escapeValue: false,
+    },
+    // Un paquet de page arrivé après le changement de langue met aussi l'affichage à jour
+    react: {
+      bindI18nStore: 'added',
     },
   });
 

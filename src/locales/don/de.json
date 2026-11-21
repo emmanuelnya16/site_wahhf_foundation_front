@@ -1,0 +1,126 @@
+{
+  "_relire": [
+    "don.allocation.general",
+    "don.impact.general",
+    "don.privacy",
+    "don.officialChannels",
+    "don.draft.allocation",
+    "don.contenu.impactDomaines.mobilite-langues.what",
+    "don.contenu.impactDomaines.droits-inclusion.what",
+    "don.contenu.exemplesImpact.EUR-250.text"
+  ],
+  "seo": {
+    "title": "Spenden — Deutsch- und Englischkurse und unsere Arbeit in Kamerun unterstützen",
+    "description": "Unterstützen Sie die WAHHF Foundation: Ihre Spenden finanzieren Deutsch- und Englischkurse (A1 bis C1), die Begleitung junger Menschen nach Europa und unsere Arbeit in Bildung, Gesundheit und Umwelt in Kamerun."
+  },
+  "header": {
+    "title": "Ihre Spende finanziert Deutsch- und Englischkurse und unsere Arbeit in Kamerun",
+    "intro": "Die Deutsch- und Englischkurse (A1 bis C1) und die Begleitung nach Europa sind für junge Menschen kostenlos: Unsere Partner sowie unsere Spenderinnen und Spender finanzieren sie. Ihre Spenden unterstützen auch unsere Arbeit in Bildung, Gesundheit und Umwelt."
+  },
+  "status": {
+    "ready": "Ihre Nachricht ist bereit: Senden Sie sie per WhatsApp oder per E-Mail."
+  },
+  "handoff": {
+    "title": "Letzter Schritt: Senden Sie Ihre Spendennachricht",
+    "edit": "Meine Spende ändern",
+    "text": "In Ihrer Nachricht fragen Sie die Stiftung, wie Sie Ihre Spende von <v>{{amount}}</v> bezahlen können. Auf dieser Website wird keine Zahlung verlangt."
+  },
+  "officialChannels": "Zu Ihrer Sicherheit antwortet Ihnen die Stiftung nur per WhatsApp unter <tel>{{phone}}</tel> oder per E-Mail von <mail>{{email}}</mail>. Wenn Ihnen jemand von einer anderen Nummer oder Adresse wegen Ihrer Spende schreibt, zahlen Sie nichts und informieren Sie uns.",
+  "section": {
+    "title": "So spenden Sie heute",
+    "subtitle": "Online-Zahlungen sind auf dieser Website noch nicht möglich. Wählen Sie einen Betrag: Eine Nachricht wird vorbereitet, Sie senden sie per WhatsApp oder per E-Mail, und die Stiftung teilt Ihnen mit, wie Sie Ihre Spende bezahlen können."
+  },
+  "allocation": {
+    "label": "Ihre Spende unterstützt",
+    "general": "Dort, wo der Bedarf am dringendsten ist"
+  },
+  "currency": {
+    "legend": "Währung",
+    "tile": {
+      "EUR": "Euro (€)",
+      "XAF": "CFA-Franc"
+    },
+    "word": {
+      "EUR": "Euro",
+      "XAF": "CFA-Franc"
+    },
+    "example": {
+      "EUR": "75",
+      "XAF": "15.000"
+    }
+  },
+  "amount": {
+    "legend": "Betrag",
+    "other": "Anderer Betrag in <v>{{devise}}</v>",
+    "placeholder": "z. B. {{example}}",
+    "range": "Zwischen <v>{{min}}</v> und <v>{{max}}</v>."
+  },
+  "impact": {
+    "title": "Wofür Ihre Spende eingesetzt wird",
+    "noAmount": "Wählen Sie einen Betrag oder geben Sie einen Betrag zwischen {{min}} und {{max}} ein.",
+    "approx": "{{amount}} (etwa {{converted}})",
+    "domain": "{{money}} für {{for}}: {{what}}.",
+    "domainTitle": "{{money}} für den Bereich „{{title}}“.",
+    "general": "{{money}} dort, wo der Bedarf am dringendsten ist.",
+    "example": "Zum Beispiel: {{text}}"
+  },
+  "donor": {
+    "label": "Ihr Name oder der Name Ihrer Organisation (optional)"
+  },
+  "privacy": "Diese Website speichert nichts: Die Nachricht wird aus Ihrem eigenen Messenger oder E-Mail-Programm gesendet. Mehr dazu in unserer <lien>Datenschutzerklärung<sr> (neuer Tab)</sr></lien>.",
+  "submit": "Meine Nachricht vorbereiten",
+  "errors": {
+    "digits": "Geben Sie den Betrag in Ziffern ein, zum Beispiel {{example}}.",
+    "min": "Der Mindestbetrag beträgt {{min}}.",
+    "max": "Für eine Spende über {{max}} schreiben Sie uns bitte direkt per WhatsApp oder per E-Mail (Kontaktdaten unten auf der Seite)."
+  },
+  "draft": {
+    "subject": "Spende an die WAHHF Foundation — {{amount}}",
+    "intro": "Ich möchte der WAHHF Foundation spenden. Können Sie mir sagen, wie ich die Spende bezahlen kann?",
+    "amount": "Betrag",
+    "allocation": "Gewünschter Verwendungszweck",
+    "name": "Name oder Organisation"
+  },
+  "contenu": {
+    "impactDomaines": {
+      "mobilite-langues": {
+        "for": "Mobilität und Sprachen",
+        "what": "Deutsch- und Englischkurse von Niveau A1 bis C1 und Orientierung für 10 europäische Zielländer"
+      },
+      "education": {
+        "for": "Bildung",
+        "what": "Schulsets und Lehrbücher, Gemeinschaftsbibliotheken, Mentoring und Orientierung für Schülerinnen und Schüler"
+      },
+      "sante": {
+        "for": "Gesundheit",
+        "what": "Vorsorgeuntersuchungen, Gesundheit von Müttern und Kindern, Trinkwasser und Hygiene in der Schule"
+      },
+      "entrepreneuriat": {
+        "for": "Unternehmertum junger Menschen",
+        "what": "Workshops zu Betriebsführung und Buchhaltung, Einführung in digitale Werkzeuge, Mentoring für Gründerinnen und Gründer"
+      },
+      "environnement": {
+        "for": "die Umwelt",
+        "what": "Baumschulen und Aufforstung, Sensibilisierung für Mülltrennung, Schulungen in Agrarökologie"
+      },
+      "droits-inclusion": {
+        "for": "Rechte und Teilhabe",
+        "what": "Selbstständigkeit junger Frauen, Schulbildung junger Menschen mit Behinderung, Zuhören und soziale Beratung"
+      }
+    },
+    "exemplesImpact": {
+      "EUR-25": {
+        "text": "Finanziert Lehrbücher und Übungsmaterial für Deutsch/Englisch A1 für eine junge lernende Person (Beispiel — TODO)"
+      },
+      "EUR-50": {
+        "text": "Unterstützt einen Monat Sprachbegleitung und digitalen Zugang für eine Studentin oder einen Studenten (Beispiel — TODO)"
+      },
+      "EUR-100": {
+        "text": "Trägt zu einem Präventionstag für die Gesundheit von Müttern und Kindern in einer ländlichen Region bei (Beispiel — TODO)"
+      },
+      "EUR-250": {
+        "text": "Finanziert eine vollständige sprachliche Begleitung und Unterstützung bei den Unterlagen für eine Gruppe (Beispiel — TODO)"
+      }
+    }
+  }
+}

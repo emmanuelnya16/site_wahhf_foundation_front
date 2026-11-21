@@ -11,6 +11,19 @@ import { photoCaption, photoOrFallback } from '../../lib/photos';
 import { scrollToElement, scrollToHash } from '../../lib/scroll';
 import { DOMAIN_PHOTO_IDS } from '../../config/domainPhotos';
 import { AfterFirstDisplay, PhotoReveal } from '../../effects/DeferredMotion';
+import { registerBundle } from '../../i18n';
+import { useLocalize } from '../../lib/localize';
+import nosActionsFr from '../../locales/nos-actions/fr.json';
+
+/**
+ * Textes de la page (lot 7.10) : src/locales/nos-actions/ (espace de noms nosActions). Les domaines (DOMAINS_DATA,
+ * src/services/api.ts) restent en français dans leur fichier ; leurs surcouches anglaise et allemande sont dans les
+ * textes communs (contenu.domaines.<id> : title, shortDesc, fullDesc, programs).
+ */
+registerBundle('nosActions', nosActionsFr, {
+  en: () => import('../../locales/nos-actions/en.json'),
+  de: () => import('../../locales/nos-actions/de.json'),
+});
 
 /*
  * Nos actions (groupe 7.3 : contrat validé, audit ACT-01, ACT-02, T-04, T-10, A11Y-09, A11Y-10).
@@ -49,6 +62,8 @@ export function NosActionsPage() {
   const { hash } = useLocation();
   const asked = searchParams.get('domaine');
   const listRef = useRef<HTMLDivElement>(null);
+  const { t, localizedList } = useLocalize();
+  const domains = localizedList(DOMAINS_DATA, 'contenu.domaines', (d) => d.id);
 
   // ?domaine=education (méga-menu, footer, recherche) : la page s'ouvre sur le domaine, comme avec l'ancre #education
   // (Layout fait défiler jusqu'à l'ancre) ; dans les deux cas, le titre du domaine reçoit le focus
@@ -79,21 +94,15 @@ export function NosActionsPage() {
 
   return (
     <>
-      <SEO
-        title="Nos 6 domaines d'action — Éducation, santé, entrepreneuriat, environnement, droits, mobilité"
-        description="Découvrez les 6 domaines d'intervention de WAHHF Foundation au Cameroun et vers l'Europe, et soutenez celui de votre choix."
-      />
+      <SEO title={t('nosActions.seo.title')} description={t('nosActions.seo.description')} />
 
       <PageHeader reveal catalogPhoto={HEADER_PHOTO} photoCaption={HEADER_PHOTO ? photoCaption(HEADER_PHOTO) : undefined}>
-        <PageTitle>Agir sur tous les leviers de l’autonomie humaine</PageTitle>
-        <PageIntro>
-          Éducation, santé, entrepreneuriat des jeunes, environnement, droits et inclusion, Mobilité & Langues : les six
-          domaines où la fondation agit. Vous pouvez soutenir celui de votre choix.
-        </PageIntro>
+        <PageTitle>{t('nosActions.title')}</PageTitle>
+        <PageIntro>{t('nosActions.intro')}</PageIntro>
         {/* Sommaire : liens d'ancre, sans photo (ACT-01) */}
-        <nav aria-label="Les six domaines" className="hero-fade [--hero-fade-delay:0.55s]">
+        <nav aria-label={t('nosActions.navLabel')} className="hero-fade [--hero-fade-delay:0.55s]">
           <ul className="flex flex-wrap gap-x-5">
-            {DOMAINS_DATA.map((d) => (
+            {domains.map((d) => (
               <li key={d.id}>
                 <Link to={`#${d.slug}`} replace onClick={goTo(d.slug)} className={TEXT_LINK_CLASS}>
                   {d.title}
@@ -106,7 +115,7 @@ export function NosActionsPage() {
 
       <Section>
         <div ref={listRef} className="container-page">
-          {DOMAINS_DATA.map((dom) => {
+          {domains.map((dom) => {
             const [photoId, ...fallbacks] = DOMAIN_PHOTO_IDS[dom.slug] ?? [];
             const photo = photoId ? photoOrFallback(photoId, ...fallbacks) : null;
             const titleId = `domaine-${dom.slug}`;
@@ -131,10 +140,13 @@ export function NosActionsPage() {
                   </ul>
                   <div className="flex flex-wrap items-center gap-3 pt-2">
                     {dom.slug === 'mobilite-langues' && (
-                      <PrimaryButton to="/mobilite-langues">Découvrir Mobilité & Langues</PrimaryButton>
+                      <PrimaryButton to="/mobilite-langues">{t('nosActions.discoverMobility')}</PrimaryButton>
                     )}
-                    <SecondaryButton to={`/faire-un-don?affectation=${dom.slug}`} ariaLabel={`Soutenir ce domaine : ${dom.title}`}>
-                      Soutenir ce domaine
+                    <SecondaryButton
+                      to={`/faire-un-don?affectation=${dom.slug}`}
+                      ariaLabel={t('nosActions.supportLabel', { domain: dom.title })}
+                    >
+                      {t('nosActions.support')}
                     </SecondaryButton>
                   </div>
                 </div>

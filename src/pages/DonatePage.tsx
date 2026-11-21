@@ -1,5 +1,10 @@
 import { useEffect, useId, useRef, useState, FormEvent } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
+import { Trans } from 'react-i18next';
+import type { TFunction } from 'i18next';
+import { registerBundle, type Language } from '../i18n';
+import { INTL_LOCALE, localized, useLocalize } from '../lib/localize';
+import donFr from '../locales/don/fr.json';
 import SEO from '../components/wahhf/SEO';
 import SectionHeader from '../components/wahhf/SectionHeader';
 import { LABEL_CLASS, FIELD_CLASS, FieldError, fieldErrorId } from '../components/wahhf/FormField';
@@ -41,7 +46,15 @@ import { cn } from '../lib/utils';
  * - Un seul style d'option choisie (DON-06, ChoiceTile) ; le rouge reste au seul bouton de don.
  * - Mouvement (groupe 7.2, contrat §10) : en-tête révélé comme le hero ; choix d'une option en 150 ms ; ligne d'impact
  *   en fondu croisé de 0,3 s. Rien au défilement (formulaire). Tout est immédiat en mouvement réduit.
+ * - Langues (lot 7.10) : textes dans src/locales/don (fr, en, de), espace de noms « don ». Les programmes des domaines
+ *   et les exemples chiffrés restent en français ci-dessous ; leurs surcouches anglaise et allemande sont sous
+ *   don.contenu (impactDomaines.<slug>, exemplesImpact.<devise>-<montant>). Montants mis en forme selon la langue
+ *   (50 €, €50, 15 000 FCFA, 15,000 FCFA, 15.000 FCFA), mêmes valeurs.
  */
+registerBundle('don', donFr, {
+  en: () => import('../locales/don/en.json'),
+  de: () => import('../locales/don/de.json'),
+});
 
 /**
  * Programmes des cinq domaines autres que Mobilité & Langues, résumés de DOMAINS_DATA : NON CONFIRMÉS (audit T-13 et
@@ -69,22 +82,25 @@ const DOMAIN_IMPACT: Record<string, { for: string; what: string }> = {
 
 const GENERAL = 'general';
 /** Affectations proposées : la valeur est le slug du domaine (ACT-02), « general » pour le besoin le plus urgent. */
-const ALLOCATIONS = [
-  { id: GENERAL, label: 'Là où le besoin est le plus urgent' },
-  ...DOMAINS_DATA.map((d) => ({ id: d.slug, label: d.title })),
-];
-const isAllocation = (v: string | null | undefined): v is string => !!v && ALLOCATIONS.some((a) => a.id === v);
+const ALLOCATION_IDS = [GENERAL, ...DOMAINS_DATA.map((d) => d.slug)];
+const isAllocation = (v: string | null | undefined): v is string => !!v && ALLOCATION_IDS.includes(v);
+/** Nom d'un domaine dans la langue de la page (surcouche commune contenu.domaines.<id>). */
+const domainTitle = (slug: string, lang: Language) => {
+  const domain = DOMAINS_DATA.find((d) => d.slug === slug);
+  return domain ? localized(domain, `contenu.domaines.${domain.id}`, lang).title : undefined;
+};
 
 /** Parité fixe euro – franc CFA (BEAC) : 1 € = 655,957 FCFA. */
 const EUR_TO_XAF = 655.957;
 type Currency = 'EUR' | 'XAF';
 /**
  * Montants proposés et limites du montant libre, par devise (à valider : docs/design-contract.md, §13, groupe 7.2).
- * Au-delà du maximum, la personne est invitée à écrire directement à la fondation.
+ * Au-delà du maximum, la personne est invitée à écrire directement à la fondation. Libellé de la tuile et exemple de
+ * saisie : don.currency.tile.<devise> et don.currency.example.<devise>.
  */
-const CURRENCIES: Record<Currency, { tile: string; presets: number[]; min: number; max: number; example: string }> = {
-  EUR: { tile: 'Euros (€)', presets: [25, 50, 100, 250], min: 5, max: 10000, example: '75' },
-  XAF: { tile: 'Francs CFA', presets: [5000, 10000, 25000, 50000], min: 3000, max: 6500000, example: '15 000' },
+const CURRENCIES: Record<Currency, { presets: number[]; min: number; max: number }> = {
+  EUR: { presets: [25, 50, 100, 250], min: 5, max: 10000 },
+  XAF: { presets: [5000, 10000, 25000, 50000], min: 3000, max: 6500000 },
 };
 
 /**
@@ -101,32 +117,42 @@ export const EXAMPLE_IMPACTS_NOT_VALIDATED = [
 const CONFIRMED_IMPACTS: { amount: number; currency: Currency; text: string }[] = [];
 
 const NBSP = ' ';
-const formatNumber = (n: number, decimals = 0) =>
-  new Intl.NumberFormat('fr-FR', { minimumFractionDigits: decimals, maximumFractionDigits: decimals }).format(n);
-/** « 50 € », « 7,62 € », « 15 000 FCFA » : chiffres groupés, espace insécable avant la devise. */
-const formatAmount = (n: number, currency: Currency) =>
-  currency === 'EUR' ? `${formatNumber(n, Number.isInteger(n) ? 0 : 2)}${NBSP}€` : `${formatNumber(n)}${NBSP}FCFA`;
+const formatNumber = (n: number, lang: Language, decimals = 0) =>
+  new Intl.NumberFormat(INTL_LOCALE[lang], { minimumFractionDigits: decimals, maximumFractionDigits: decimals }).format(n);
+/** Euros : « 7,62 € » (français, allemand), « €7.62 » (anglais). */
+const euros = (value: string, lang: Language) => (lang === 'en' ? `€${value}` : `${value}${NBSP}€`);
+/** « 50 € », « 7,62 € », « 15 000 FCFA » (« €50 », « 15,000 FCFA » en anglais ; « 15.000 FCFA » en allemand) : chiffres groupés, espace insécable avant la devise. */
+const formatAmount = (n: number, currency: Currency, lang: Language) =>
+  currency === 'EUR' ? euros(formatNumber(n, lang, Number.isInteger(n) ? 0 : 2), lang) : `${formatNumber(n, lang)}${NBSP}FCFA`;
 /** Le même montant dans l'autre devise, arrondi (à l'euro près en centimes, au franc CFA près). */
-const convertedAmount = (n: number, currency: Currency) =>
-  currency === 'EUR' ? `${formatNumber(Math.round(n * EUR_TO_XAF))}${NBSP}FCFA` : `${formatNumber(n / EUR_TO_XAF, 2)}${NBSP}€`;
+const convertedAmount = (n: number, currency: Currency, lang: Language) =>
+  currency === 'EUR' ? `${formatNumber(Math.round(n * EUR_TO_XAF), lang)}${NBSP}FCFA` : euros(formatNumber(n / EUR_TO_XAF, lang, 2), lang);
 
-/** Montant libre saisi : chiffres, espaces de groupement ; décimales (virgule ou point) en euros seulement. */
-function parseAmount(raw: string, currency: Currency): number | null {
-  const cleaned = raw.replace(/[\s  ]/g, '').replace(/(€|eur|euros?|fcfa|xaf|f)$/i, '');
+/**
+ * Montant libre saisi : chiffres, espaces de groupement ; décimales (virgule ou point) en euros seulement. En anglais,
+ * la virgule de groupement (15,000) et le symbole € devant sont acceptés ; en allemand, le point de groupement (15.000).
+ */
+function parseAmount(raw: string, currency: Currency, lang: Language): number | null {
+  let cleaned = raw.replace(/[\s  ]/g, '').replace(/(€|eur|euros?|fcfa|xaf|f)$/i, '');
+  if (lang === 'en') {
+    cleaned = cleaned.replace(/^€/, '');
+    if (/^\d{1,3}(,\d{3})+(\.\d{1,2})?$/.test(cleaned)) cleaned = cleaned.replace(/,/g, '');
+  } else if (lang === 'de' && /^\d{1,3}(\.\d{3})+(,\d{1,2})?$/.test(cleaned)) {
+    cleaned = cleaned.replace(/\./g, '');
+  }
   if (!cleaned) return null;
   const re = currency === 'EUR' ? /^\d+([.,]\d{1,2})?$/ : /^\d+$/;
   if (!re.test(cleaned)) return Number.NaN;
   return Number(cleaned.replace(',', '.'));
 }
 
-function amountError(raw: string, currency: Currency): string | undefined {
+function amountError(raw: string, currency: Currency, lang: Language, t: TFunction): string | undefined {
   const c = CURRENCIES[currency];
-  const value = parseAmount(raw, currency);
+  const value = parseAmount(raw, currency, lang);
   if (value === null) return undefined;
-  if (Number.isNaN(value)) return `Saisissez le montant en chiffres, par exemple ${c.example}.`;
-  if (value < c.min) return `Le montant minimum est de ${formatAmount(c.min, currency)}.`;
-  if (value > c.max)
-    return `Pour un don de plus de ${formatAmount(c.max, currency)}, écrivez-nous directement par WhatsApp ou par e-mail (coordonnées en bas de page).`;
+  if (Number.isNaN(value)) return t('don.errors.digits', { example: t(`don.currency.example.${currency}`) });
+  if (value < c.min) return t('don.errors.min', { min: formatAmount(c.min, currency, lang) });
+  if (value > c.max) return t('don.errors.max', { max: formatAmount(c.max, currency, lang) });
   return undefined;
 }
 
@@ -134,17 +160,20 @@ function amountError(raw: string, currency: Currency): string | undefined {
  * Ligne d'impact : le montant, sa conversion, puis l'affectation choisie ; le programme n'est décrit que s'il est
  * confirmé (DOMAIN_IMPACT), et l'exemple chiffré seulement s'il est confirmé (CONFIRMED_IMPACTS).
  */
-function impactSentence(amount: number, currency: Currency, allocation: string): string {
-  const money = `${formatAmount(amount, currency)} (environ ${convertedAmount(amount, currency)})`;
-  const domain = DOMAIN_IMPACT[allocation];
-  const title = allocation === GENERAL ? undefined : DOMAINS_DATA.find((d) => d.slug === allocation)?.title;
+function impactSentence(amount: number, currency: Currency, allocation: string, lang: Language, t: TFunction): string {
+  const money = t('don.impact.approx', { amount: formatAmount(amount, currency, lang), converted: convertedAmount(amount, currency, lang) });
+  const domain = DOMAIN_IMPACT[allocation] && localized(DOMAIN_IMPACT[allocation], `don.contenu.impactDomaines.${allocation}`, lang);
+  const title = allocation === GENERAL ? undefined : domainTitle(allocation, lang);
   let sentence = domain
-    ? `${money} pour ${domain.for}${NBSP}: ${domain.what}.`
+    ? t('don.impact.domain', { money, for: domain.for, what: domain.what })
     : title
-    ? `${money} pour le domaine «${NBSP}${title}${NBSP}».`
-    : `${money}, là où le besoin est le plus urgent.`;
+    ? t('don.impact.domainTitle', { money, title })
+    : t('don.impact.general', { money });
   const example = CONFIRMED_IMPACTS.find((e) => e.currency === currency && e.amount === amount);
-  if (example) sentence += ` Par exemple${NBSP}: ${example.text}`;
+  if (example) {
+    const text = localized(example, `don.contenu.exemplesImpact.${example.currency}-${example.amount}`, lang).text;
+    sentence += ` ${t('don.impact.example', { text })}`;
+  }
   return sentence;
 }
 
@@ -183,15 +212,17 @@ function CrossfadeText({ text, className }: { text: string; className?: string }
 function OfficialChannelsNote() {
   return (
     <p className="text-body text-text max-w-[65ch]">
-      Pour votre sécurité, la fondation vous répond seulement par WhatsApp au{' '}
-      <span className="whitespace-nowrap tabular-nums">{CONTACT.whatsappDisplay}</span> ou par e-mail depuis{' '}
-      <span className="break-all">{CONTACT.email}</span>. Si quelqu’un vous écrit d’un autre numéro ou d’une autre
-      adresse au sujet de votre don, ne payez rien et prévenez-nous.
+      <Trans
+        i18nKey="don.officialChannels"
+        values={{ phone: CONTACT.whatsappDisplay, email: CONTACT.email }}
+        components={{ tel: <span className="whitespace-nowrap tabular-nums" />, mail: <span className="break-all" /> }}
+      />
     </p>
   );
 }
 
 export default function DonatePage() {
+  const { t, lang } = useLocalize();
   // Affectation : lue dans l'adresse (?affectation=sante), qui suit ensuite le choix (ACT-02)
   const [searchParams, setSearchParams] = useSearchParams();
   const asked = searchParams.get('affectation');
@@ -211,6 +242,11 @@ export default function DonatePage() {
     if (asked !== null && (asked === GENERAL || !isAllocation(asked))) setAllocation(GENERAL);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [asked]);
+  // Libellés des affectations : le besoin le plus urgent, puis les 6 domaines, dans la langue de la page
+  const allocations = ALLOCATION_IDS.map((id) => ({
+    id,
+    label: id === GENERAL ? t('don.allocation.general') : domainTitle(id, lang) ?? id,
+  }));
 
   const [currency, setCurrency] = useState<Currency>('EUR');
   const [presetIndex, setPresetIndex] = useState(1);
@@ -221,16 +257,22 @@ export default function DonatePage() {
   const [prepared, setPrepared] = useState(false);
 
   const c = CURRENCIES[currency];
-  const customValue = parseAmount(custom, currency);
-  const customValid = customValue !== null && !Number.isNaN(customValue) && !amountError(custom, currency);
+  const customValue = parseAmount(custom, currency, lang);
+  const customValid = customValue !== null && !Number.isNaN(customValue) && !amountError(custom, currency, lang, t);
   const amount = custom.trim() ? (customValid ? customValue : null) : c.presets[presetIndex];
+
+  // Changement de langue : une erreur déjà affichée passe dans la nouvelle langue
+  useEffect(() => {
+    setCustomError((prev) => prev && amountError(custom, currency, lang, t));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lang]);
 
   // Ligne d'impact : immédiate après un choix ; pendant la frappe d'un montant libre, mise à jour après une pause
   // (pas de fondu ni d'annonce à chaque chiffre)
   const impact =
     amount !== null
-      ? impactSentence(amount, currency, allocation)
-      : `Choisissez un montant, ou saisissez un montant entre ${formatAmount(c.min, currency)} et ${formatAmount(c.max, currency)}.`;
+      ? impactSentence(amount, currency, allocation, lang, t)
+      : t('don.impact.noAmount', { min: formatAmount(c.min, currency, lang), max: formatAmount(c.max, currency, lang) });
   const [shownImpact, setShownImpact] = useState(impact);
   const typing = useRef(false);
   useEffect(() => {
@@ -254,12 +296,12 @@ export default function DonatePage() {
     typing.current = false;
     setCurrency(next);
     // Montant libre déjà saisi : gardé, relu dans la nouvelle devise (5000 tapé en euros pour 5 000 FCFA, DON-07)
-    if (customError) setCustomError(amountError(custom, next));
+    if (customError) setCustomError(amountError(custom, next, lang, t));
   };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    const error = amountError(custom, currency);
+    const error = amountError(custom, currency, lang, t);
     setCustomError(error);
     if (error || amount === null) {
       requestAnimationFrame(() => document.getElementById(customId)?.focus());
@@ -268,67 +310,61 @@ export default function DonatePage() {
     setPrepared(true);
   };
 
-  const allocationLabel = ALLOCATIONS.find((a) => a.id === allocation)?.label ?? ALLOCATIONS[0].label;
-  const amountLabel = amount !== null ? formatAmount(amount, currency) : '';
+  // Message préparé : libellés dans la langue de la page, réponses telles que saisies
+  const allocationLabel = allocations.find((a) => a.id === allocation)?.label ?? allocations[0].label;
+  const amountLabel = amount !== null ? formatAmount(amount, currency, lang) : '';
   const draft = buildDraft(
-    `Don à WAHHF Foundation — ${amountLabel}${donorName.trim() ? ` — ${donorName.trim()}` : ''}`,
-    'Je souhaite faire un don à WAHHF Foundation. Pouvez-vous m’indiquer comment le régler ?',
+    `${t('don.draft.subject', { amount: amountLabel })}${donorName.trim() ? ` — ${donorName.trim()}` : ''}`,
+    t('don.draft.intro'),
     [
-      ['Montant', amount !== null ? `${amountLabel} (environ ${convertedAmount(amount, currency)})` : undefined],
-      ['Affectation souhaitée', allocationLabel],
-      ['Nom ou organisation', donorName],
+      [
+        t('don.draft.amount'),
+        amount !== null ? t('don.impact.approx', { amount: amountLabel, converted: convertedAmount(amount, currency, lang) }) : undefined,
+      ],
+      [t('don.draft.allocation'), allocationLabel],
+      [t('don.draft.name'), donorName],
     ]
   );
 
   return (
     <>
-      <SEO
-        title="Faire un don — Soutenir les cours d’allemand /anglais et nos actions au Cameroun"
-        description="Soutenez WAHHF Foundation : vos dons financent les cours d'allemand /anglais (A1 à C1), l'accompagnement des jeunes vers l'Europe et nos actions d'éducation, de santé et d'environnement au Cameroun."
-      />
+      <SEO title={t('don.seo.title')} description={t('don.seo.description')} />
 
       <PageHeader reveal catalogPhoto={HEADER_PHOTO} photoCaption={HEADER_PHOTO ? photoCaption(HEADER_PHOTO) : undefined}>
-        <PageTitle>Votre don finance des cours d’allemand /anglais et nos actions au Cameroun</PageTitle>
+        <PageTitle>{t('don.header.title')}</PageTitle>
         <PageIntro>
-          Les cours d’allemand /anglais (A1 à C1) et l’accompagnement vers l’Europe sont gratuits pour les jeunes{NBSP}: ils
-          sont financés par nos partenaires et nos donateurs. Vos dons soutiennent aussi nos actions d’éducation, de santé et
-          d’environnement.
+          <Trans i18nKey="don.header.intro" components={{ nb: <></> }} />
         </PageIntro>
       </PageHeader>
 
       <section ref={formSectionRef} className="container-page section-space *:max-w-4xl">
         <p role="status" className="sr-only">
-          {prepared ? 'Votre message est prêt : envoyez-le par WhatsApp ou par e-mail.' : ''}
+          {prepared ? t('don.status.ready') : ''}
         </p>
         {prepared ? (
           <ContactHandoff
-            title={`Dernière étape${NBSP}: envoyez votre message de don`}
+            title={t('don.handoff.title')}
             draft={draft}
             titleRef={titleRef}
             onEdit={() => setPrepared(false)}
-            editLabel="Modifier mon don"
+            editLabel={t('don.handoff.edit')}
           >
             <p className="text-body text-text max-w-[65ch]">
-              Votre message demande à la fondation comment régler votre don de {amountLabel}. Aucun paiement n’est
-              demandé sur ce site.
+              <Trans i18nKey="don.handoff.text" values={{ amount: amountLabel }} components={{ v: <></> }} />
             </p>
             <OfficialChannelsNote />
           </ContactHandoff>
         ) : (
           // Panneau de formulaire sur sauge (contrat §8) ; rien n'y apparaît au défilement (contrat §10)
           <div className="rounded-card bg-surface-section p-6 sm:p-10 space-y-8">
-            <SectionHeader
-              titleRef={titleRef}
-              title="Comment donner aujourd’hui"
-              subtitle={`Le paiement en ligne n’est pas encore ouvert sur ce site. Choisissez un montant${NBSP}: un message est préparé, vous l’envoyez par WhatsApp ou par e-mail, et la fondation vous indique comment régler votre don.`}
-            />
+            <SectionHeader titleRef={titleRef} title={t('don.section.title')} subtitle={t('don.section.subtitle')} />
             <OfficialChannelsNote />
 
             <form onSubmit={handleSubmit} noValidate className="space-y-7">
               {/* Affectation (ACT-02, DON-08) : libellés courts, le détail est dans la ligne d'impact */}
               <div>
                 <label htmlFor="don-affectation" className={LABEL_CLASS}>
-                  Votre don soutient
+                  {t('don.allocation.label')}
                 </label>
                 <select
                   id="don-affectation"
@@ -339,7 +375,7 @@ export default function DonatePage() {
                   }}
                   className={cn(FIELD_CLASS, 'max-w-xl')}
                 >
-                  {ALLOCATIONS.map((a) => (
+                  {allocations.map((a) => (
                     <option key={a.id} value={a.id}>
                       {a.label}
                     </option>
@@ -349,7 +385,7 @@ export default function DonatePage() {
 
               {/* Devise (DON-07) */}
               <fieldset>
-                <legend className={LABEL_CLASS}>Devise</legend>
+                <legend className={LABEL_CLASS}>{t('don.currency.legend')}</legend>
                 <div className="grid grid-cols-2 gap-3 max-w-md">
                   {(Object.keys(CURRENCIES) as Currency[]).map((id) => (
                     <ChoiceTile
@@ -360,7 +396,7 @@ export default function DonatePage() {
                       onChange={() => chooseCurrency(id)}
                       className="choice-150 py-2.5 px-3 rounded-pill text-center"
                     >
-                      {CURRENCIES[id].tile}
+                      {t(`don.currency.tile.${id}`)}
                     </ChoiceTile>
                   ))}
                 </div>
@@ -368,7 +404,7 @@ export default function DonatePage() {
 
               {/* Montant : montants proposés, ou montant libre avec ses limites */}
               <fieldset className="space-y-4">
-                <legend className={LABEL_CLASS}>Montant</legend>
+                <legend className={LABEL_CLASS}>{t('don.amount.legend')}</legend>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                   {c.presets.map((value, i) => (
                     <ChoiceTile
@@ -384,14 +420,14 @@ export default function DonatePage() {
                       }}
                       className="choice-150 py-3.5 px-3 text-center font-semibold tabular-nums"
                     >
-                      {formatAmount(value, currency)}
+                      {formatAmount(value, currency, lang)}
                     </ChoiceTile>
                   ))}
                 </div>
 
                 <div>
                   <label htmlFor={customId} className={LABEL_CLASS}>
-                    Autre montant, en {currency === 'EUR' ? 'euros' : 'francs CFA'}
+                    <Trans i18nKey="don.amount.other" values={{ devise: t(`don.currency.word.${currency}`) }} components={{ v: <></> }} />
                   </label>
                   <div className="relative max-w-xs">
                     <input
@@ -400,14 +436,14 @@ export default function DonatePage() {
                       inputMode={currency === 'EUR' ? 'decimal' : 'numeric'}
                       autoComplete="transaction-amount"
                       maxLength={12}
-                      placeholder={`Ex. ${c.example}`}
+                      placeholder={t('don.amount.placeholder', { example: t(`don.currency.example.${currency}`) })}
                       value={custom}
                       onChange={(e) => {
                         typing.current = true;
                         setCustom(e.target.value);
-                        if (customError) setCustomError(amountError(e.target.value, currency));
+                        if (customError) setCustomError(amountError(e.target.value, currency, lang, t));
                       }}
-                      onBlur={(e) => setCustomError(amountError(e.target.value, currency))}
+                      onBlur={(e) => setCustomError(amountError(e.target.value, currency, lang, t))}
                       aria-invalid={customError ? true : undefined}
                       aria-describedby={customError ? `${customHelpId} ${fieldErrorId(customId)}` : customHelpId}
                       className={cn(FIELD_CLASS, 'pr-20 tabular-nums')}
@@ -417,7 +453,11 @@ export default function DonatePage() {
                     </span>
                   </div>
                   <p id={customHelpId} className="mt-2 text-meta text-text-secondary tabular-nums">
-                    Entre {formatAmount(c.min, currency)} et {formatAmount(c.max, currency)}.
+                    <Trans
+                      i18nKey="don.amount.range"
+                      values={{ min: formatAmount(c.min, currency, lang), max: formatAmount(c.max, currency, lang) }}
+                      components={{ v: <></> }}
+                    />
                   </p>
                   <FieldError id={fieldErrorId(customId)} message={customError} />
                 </div>
@@ -425,7 +465,7 @@ export default function DonatePage() {
 
               {/* Ligne d'impact (DON-05) : suit le montant et l'affectation ; fondu croisé de 0,3 s, annoncée poliment */}
               <div className="border-t border-border-subtle pt-5 space-y-1">
-                <p className="text-meta font-semibold text-text">À quoi servira votre don</p>
+                <p className="text-meta font-semibold text-text">{t('don.impact.title')}</p>
                 <CrossfadeText text={shownImpact} className="text-body text-text max-w-[65ch] tabular-nums" />
                 <p aria-live="polite" className="sr-only">
                   {shownImpact}
@@ -434,7 +474,7 @@ export default function DonatePage() {
 
               <div>
                 <label htmlFor="don-nom" className={LABEL_CLASS}>
-                  Votre nom, ou celui de votre organisation (facultatif)
+                  {t('don.donor.label')}
                 </label>
                 <input
                   id="don-nom"
@@ -450,16 +490,18 @@ export default function DonatePage() {
               {/* Plus de case de consentement obligatoire (DON-04) : le site ne garde rien, une phrase d'information suffit.
                   La politique s'ouvre dans un nouvel onglet : montant, devise et nom saisis ne sont jamais perdus. */}
               <p className="text-meta text-text-secondary max-w-[65ch]">
-                Ce site n’enregistre rien{NBSP}: le message part de votre propre messagerie. Voir notre{' '}
-                <Link to="/confidentialite" target="_blank" rel="noopener" className="text-link underline underline-offset-4">
-                  politique de confidentialité
-                  <span className="sr-only"> (nouvel onglet)</span>
-                </Link>
-                .
+                <Trans
+                  i18nKey="don.privacy"
+                  components={{
+                    nb: <></>,
+                    lien: <Link to="/confidentialite" target="_blank" rel="noopener" className="text-link underline underline-offset-4" />,
+                    sr: <span className="sr-only" />,
+                  }}
+                />
               </p>
 
               <DonateButton type="submit" size="lg" className="w-full sm:w-auto">
-                Préparer mon message
+                {t('don.submit')}
               </DonateButton>
             </form>
           </div>

@@ -1,5 +1,10 @@
 import { useState, useId, useRef, useEffect, FormEvent, ReactNode } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { Trans } from 'react-i18next';
+import type { TFunction } from 'i18next';
+import { registerBundle } from '../../i18n';
+import { useLocalize } from '../../lib/localize';
+import agirFr from '../../locales/agir/fr.json';
 import SEO from '../../components/wahhf/SEO';
 import SectionHeader from '../../components/wahhf/SectionHeader';
 import { TextList, TextListItem } from '../../components/wahhf/TextList';
@@ -30,22 +35,23 @@ import { buildDraft } from '../../lib/contactDraft';
  * - Contenu concret des voies (AGIR-04) : missions, durées, lieux, contact partenariats et délai de réponse ne sont pas
  *   fournis ; ils ne sont ni inventés ni affichés (docs/contenus-a-fournir.md, questions du groupe 7.2).
  * - Le site n'envoie rien encore : un message est préparé, que la personne envoie par WhatsApp ou par e-mail.
+ * - Textes (lot 7.10) : src/locales/agir (fr, en, de), espace de noms « agir ».
  */
+registerBundle('agir', agirFr, {
+  en: () => import('../../locales/agir/en.json'),
+  de: () => import('../../locales/agir/de.json'),
+});
+
 type Role = 'benevole' | 'partenaire';
 const ROLE_FROM_HASH: Record<string, Role> = { '#benevole': 'benevole', '#partenaire': 'partenaire' };
-const FORM_TITLE: Record<Role, string> = { benevole: 'Proposer votre aide comme bénévole', partenaire: 'Proposer un partenariat' };
 
-/** Types de structure (repris des textes du site : écoles, universités, centres de formation, ONG, entreprises, santé). */
-const ORG_TYPES = [
-  'École, université ou centre de formation',
-  'ONG ou association',
-  'Entreprise',
-  'Établissement de santé',
-  'Institution publique',
-  'Autre',
-] as const;
-/** Ce qu'un partenaire peut envisager (AGIR-02) : des cases à cocher, sans engagement. */
-const SUPPORT_KINDS = ['Financement d’un programme', 'Accueil de stagiaires ou d’étudiants', 'Expertise ou enseignement', 'Matériel ou équipement'] as const;
+/**
+ * Types de structure (repris des textes du site : écoles, universités, centres de formation, ONG, entreprises, santé).
+ * La valeur est un identifiant ; le libellé est dans agir.orgTypes.<id>.
+ */
+const ORG_TYPES = ['ecole', 'ong', 'entreprise', 'sante', 'public', 'autre'] as const;
+/** Ce qu'un partenaire peut envisager (AGIR-02) : des cases à cocher, sans engagement. Libellés : agir.support.<id>. */
+const SUPPORT_KINDS = ['financement', 'stagiaires', 'expertise', 'materiel'] as const;
 
 /**
  * Délai de réponse : non confirmé, donc masqué (groupe 7.2 ; docs/contenus-a-fournir.md). Le texte de l'ancienne page
@@ -60,37 +66,30 @@ const FIELDS: Record<Role, readonly AgirField[]> = {
   partenaire: ['org', 'orgType', 'country', 'name', 'email', 'phone', 'details', 'consent'],
 };
 
-function checkAgirField(key: AgirField, value: string | boolean, role: Role): string | undefined {
+function checkAgirField(key: AgirField, value: string | boolean, role: Role, t: TFunction): string | undefined {
   switch (key) {
     case 'name':
-      return requiredError(
-        String(value),
-        role === 'benevole' ? 'Saisissez votre prénom et votre nom.' : 'Saisissez le nom et la fonction de la personne à contacter.'
-      );
+      return requiredError(String(value), t(`agir.errors.name.${role}`));
     case 'org':
-      return requiredError(String(value), 'Saisissez le nom de votre structure.');
+      return requiredError(String(value), t('agir.errors.org'));
     case 'orgType':
-      return requiredError(String(value), 'Choisissez le type de votre structure.');
+      return requiredError(String(value), t('agir.errors.orgType'));
     case 'country':
-      return requiredError(String(value), 'Indiquez le pays de votre structure, par exemple Allemagne ou Cameroun.');
+      return requiredError(String(value), t('agir.errors.country'));
     case 'email':
       return emailError(String(value));
     case 'phone':
       // Facultatif : vérifié seulement s'il est rempli
       return String(value).trim() ? phoneError(String(value)) : undefined;
     case 'details':
-      return requiredError(
-        String(value),
-        role === 'benevole'
-          ? 'Décrivez en quelques lignes vos compétences et vos disponibilités.'
-          : 'Décrivez en quelques lignes votre projet de partenariat.'
-      );
+      return requiredError(String(value), t(`agir.errors.details.${role}`));
     case 'consent':
-      return value ? undefined : 'Cochez cette case pour que nous puissions étudier votre proposition et vous répondre.';
+      return value ? undefined : t('agir.errors.consent');
   }
 }
 
 export function AgirPage() {
+  const { t, lang } = useLocalize();
   // Parcours choisi par l'adresse (#partenaire, #benevole), puis dans la page
   const { hash } = useLocation();
   const [roleType, setRoleType] = useState<Role>(ROLE_FROM_HASH[hash] ?? 'benevole');
@@ -133,11 +132,20 @@ export function AgirPage() {
   const [errors, setErrors] = useState<Partial<Record<AgirField, string>>>({});
   const values: Record<AgirField, string | boolean> = { name, org, orgType, country, email, phone, details, consent };
   const recheck = (key: AgirField, value: string | boolean) => {
-    if (errors[key]) setErrors((prev) => ({ ...prev, [key]: checkAgirField(key, value, roleType) }));
+    if (errors[key]) setErrors((prev) => ({ ...prev, [key]: checkAgirField(key, value, roleType, t) }));
   };
   const checkOnBlur = (key: AgirField, value: string) => {
-    if (value.trim()) setErrors((prev) => ({ ...prev, [key]: checkAgirField(key, value, roleType) }));
+    if (value.trim()) setErrors((prev) => ({ ...prev, [key]: checkAgirField(key, value, roleType, t) }));
   };
+  // Changement de langue : les erreurs déjà affichées passent dans la nouvelle langue
+  useEffect(() => {
+    setErrors((prev) => {
+      const next: Partial<Record<AgirField, string>> = {};
+      for (const key of Object.keys(prev) as AgirField[]) next[key] = prev[key] && checkAgirField(key, values[key], roleType, t);
+      return next;
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lang]);
 
   // Message prêt ou retour au formulaire : défilement jusqu'au bloc, focus sur son titre (useFocusOnChange)
   const formBlockRef = useRef<HTMLDivElement>(null);
@@ -172,49 +180,46 @@ export function AgirPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formRequest]);
 
-  const statusMessage = prepared
-    ? 'Votre message est prêt : envoyez-le par WhatsApp ou par e-mail.'
-    : formRequest > 0
-    ? `Formulaire : ${FORM_TITLE[roleType].toLowerCase()}.`
-    : '';
+  const statusMessage = prepared ? t('agir.status.ready') : formRequest > 0 ? t(`agir.status.form.${roleType}`) : '';
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     const keys = FIELDS[roleType];
     const found: Partial<Record<AgirField, string>> = {};
-    for (const key of keys) found[key] = checkAgirField(key, values[key], roleType);
+    for (const key of keys) found[key] = checkAgirField(key, values[key], roleType, t);
     setErrors(found);
     if (focusFirstError(keys, found, fieldId)) return;
     setPrepared(true);
   };
 
+  // Message préparé : libellés dans la langue de la page, réponses telles que saisies
   const draft =
     roleType === 'benevole'
       ? buildDraft(
-          `Proposition de bénévolat — ${name.trim()}`,
-          'Je souhaite devenir bénévole pour WAHHF Foundation. Voici ma proposition, saisie sur le site :',
+          t('agir.draft.benevole.subject', { name: name.trim() }),
+          t('agir.draft.benevole.intro'),
           [
-            ['Nom complet', name],
-            ['E-mail', email],
-            ['Téléphone / WhatsApp', phone],
-            ['Compétences et disponibilités', details],
+            [t('agir.draft.benevole.name'), name],
+            [t('agir.draft.benevole.email'), email],
+            [t('agir.draft.benevole.phone'), phone],
+            [t('agir.draft.benevole.details'), details],
           ],
-          'J’accepte que mes données soient traitées par WAHHF Foundation pour étudier ma proposition d’engagement.'
+          t('agir.draft.consent')
         )
       : buildDraft(
-          `Proposition de partenariat — ${org.trim()}`,
-          'Je souhaite proposer un partenariat à WAHHF Foundation. Voici notre proposition, saisie sur le site :',
+          t('agir.draft.partenaire.subject', { org: org.trim() }),
+          t('agir.draft.partenaire.intro'),
           [
-            ['Structure', org],
-            ['Type de structure', orgType],
-            ['Pays', country],
-            ['Contact (nom et fonction)', name],
-            ['E-mail', email],
-            ['Téléphone', phone],
-            ['Soutien envisagé', support.join(', ')],
-            ['Projet de partenariat', details],
+            [t('agir.draft.partenaire.org'), org],
+            [t('agir.draft.partenaire.orgType'), orgType ? t(`agir.orgTypes.${orgType}`) : ''],
+            [t('agir.draft.partenaire.country'), country],
+            [t('agir.draft.partenaire.name'), name],
+            [t('agir.draft.partenaire.email'), email],
+            [t('agir.draft.partenaire.phone'), phone],
+            [t('agir.draft.partenaire.support'), support.map((kind) => t(`agir.support.${kind}`)).join(', ')],
+            [t('agir.draft.partenaire.details'), details],
           ],
-          'J’accepte que mes données soient traitées par WAHHF Foundation pour étudier ma proposition d’engagement.'
+          t('agir.draft.consent')
         );
 
   /** Champ texte relié à son label, vérifié à la sortie et pendant la correction. */
@@ -249,16 +254,12 @@ export function AgirPage() {
 
   return (
     <>
-      <SEO
-        title="Agir avec WAHHF Foundation — Don, Bénévolat, Partenariat"
-        description="Rejoignez l'engagement de WAHHF Foundation : faire un don, devenir formateur ou bénévole, ou bâtir un partenariat institutionnel."
-      />
+      <SEO title={t('agir.seo.title')} description={t('agir.seo.description')} />
 
       <PageHeader reveal catalogPhoto={HEADER_PHOTO} photoCaption={HEADER_PHOTO ? photoCaption(HEADER_PHOTO) : undefined}>
-        <PageTitle>Trois manières concrètes de soutenir la jeunesse</PageTitle>
+        <PageTitle>{t('agir.header.title')}</PageTitle>
         <PageIntro>
-          Donner, partager vos compétences ou engager votre structure{' '}: voici comment agir avec WAHHF Foundation,
-          au Cameroun comme en Europe.
+          <Trans i18nKey="agir.header.intro" components={{ nb: <></> }} />
         </PageIntro>
       </PageHeader>
 
@@ -266,26 +267,26 @@ export function AgirPage() {
         {/* Trois voies en liste typographique (contrat §8, T-15) ; ancres #benevole et #partenaire. Apparition en groupe :
             en CSS juste après l'en-tête quand elles sont déjà à l'écran (.arrive-rise), sinon au défilement (RevealBatch). */}
         <TextList columns={3}>
-          <TextListItem title="Faire un don" titleAs="h2" actions={<DonateButton />} className="arrive-rise [--arrive-delay:0.6s]">
-            <p>Financez les cours d’allemand /anglais gratuits et les actions sociales de terrain.</p>
+          <TextListItem title={t('agir.ways.donate.title')} titleAs="h2" actions={<DonateButton />} className="arrive-rise [--arrive-delay:0.6s]">
+            <p>{t('agir.ways.donate.text')}</p>
           </TextListItem>
           <TextListItem
             id="benevole"
-            title="Devenir bénévole"
+            title={t('agir.ways.volunteer.title')}
             titleAs="h2"
             className="arrive-rise [--arrive-delay:0.68s]"
-            actions={<PrimaryButton onClick={() => goToForm('benevole')}>Remplir le formulaire bénévole</PrimaryButton>}
+            actions={<PrimaryButton onClick={() => goToForm('benevole')}>{t('agir.ways.volunteer.action')}</PrimaryButton>}
           >
-            <p>Enseignants d’allemand /anglais, médecins, mentors ou coordinateurs locaux au Cameroun et en Europe.</p>
+            <p>{t('agir.ways.volunteer.text')}</p>
           </TextListItem>
           <TextListItem
             id="partenaire"
-            title="Devenir partenaire"
+            title={t('agir.ways.partner.title')}
             titleAs="h2"
             className="arrive-rise [--arrive-delay:0.76s]"
-            actions={<PrimaryButton onClick={() => goToForm('partenaire')}>Proposer un partenariat</PrimaryButton>}
+            actions={<PrimaryButton onClick={() => goToForm('partenaire')}>{t('agir.ways.partner.action')}</PrimaryButton>}
           >
-            <p>Écoles, universités, ONG et entreprises souhaitant co-financer ou appuyer un programme.</p>
+            <p>{t('agir.ways.partner.text')}</p>
           </TextListItem>
         </TextList>
 
@@ -296,20 +297,21 @@ export function AgirPage() {
           </p>
           {prepared ? (
             <ContactHandoff
-              title={roleType === 'benevole' ? 'Dernière étape : envoyez votre proposition de bénévolat' : 'Dernière étape : envoyez votre proposition de partenariat'}
+              title={t(`agir.handoff.title.${roleType}`)}
               draft={draft}
               titleRef={formTitleRef}
               onEdit={() => setPrepared(false)}
+              editLabel={t('agir.handoff.edit')}
             >
               {RESPONSE_DELAY && <p className="text-body text-text max-w-[65ch]">{RESPONSE_DELAY}</p>}
             </ContactHandoff>
           ) : (
             <div className="rounded-card bg-surface-section p-6 sm:p-10 space-y-8">
-              <SectionHeader titleRef={formTitleRef} title={FORM_TITLE[roleType]} />
+              <SectionHeader titleRef={formTitleRef} title={t(`agir.form.title.${roleType}`)} />
 
               <form onSubmit={handleSubmit} noValidate className="space-y-6">
                 <fieldset>
-                  <legend className={LABEL_CLASS}>Vous nous écrivez</legend>
+                  <legend className={LABEL_CLASS}>{t('agir.form.role.legend')}</legend>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {(['benevole', 'partenaire'] as const).map((role) => (
                       <ChoiceTile
@@ -324,7 +326,7 @@ export function AgirPage() {
                         showCheck
                         className="p-4 text-left"
                       >
-                        {role === 'benevole' ? 'Pour devenir bénévole' : 'Pour proposer un partenariat'}
+                        {t(`agir.form.role.${role}`)}
                       </ChoiceTile>
                     ))}
                   </div>
@@ -332,22 +334,25 @@ export function AgirPage() {
 
                 {roleType === 'benevole' ? (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    {textField('name', 'Nom complet *', name, setName, { autoComplete: 'name', placeholder: 'Ex. Marie Nguenang' })}
-                    {textField('email', 'Adresse e-mail *', email, setEmail, { type: 'email', autoComplete: 'email', maxLength: 254 })}
+                    {textField('name', t('agir.form.name.benevole'), name, setName, {
+                      autoComplete: 'name',
+                      placeholder: t('agir.form.namePlaceholder.benevole'),
+                    })}
+                    {textField('email', t('agir.form.email'), email, setEmail, { type: 'email', autoComplete: 'email', maxLength: 254 })}
                     {textField(
                       'phone',
-                      'Téléphone / WhatsApp (facultatif)',
+                      t('agir.form.phone.benevole'),
                       phone,
                       setPhone,
-                      { type: 'tel', autoComplete: 'tel', inputMode: 'tel', placeholder: 'Ex. +237 6...', maxLength: 30 },
+                      { type: 'tel', autoComplete: 'tel', inputMode: 'tel', placeholder: t('agir.form.phonePlaceholder.benevole'), maxLength: 30 },
                       'sm:col-span-2'
                     )}
                   </div>
                 ) : (
                   <div className="space-y-5">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      {textField('org', 'Nom de votre structure *', org, setOrg, { autoComplete: 'organization' })}
-                      <FormField id={fieldId('orgType')} label="Type de structure *" error={errors.orgType}>
+                      {textField('org', t('agir.form.org'), org, setOrg, { autoComplete: 'organization' })}
+                      <FormField id={fieldId('orgType')} label={t('agir.form.orgType')} error={errors.orgType}>
                         {(a11y) => (
                           <select
                             {...a11y}
@@ -358,30 +363,36 @@ export function AgirPage() {
                             }}
                             className={FIELD_CLASS}
                           >
-                            <option value="">Choisissez</option>
-                            {ORG_TYPES.map((t) => (
-                              <option key={t} value={t}>
-                                {t}
+                            <option value="">{t('agir.form.orgTypeChoose')}</option>
+                            {ORG_TYPES.map((type) => (
+                              <option key={type} value={type}>
+                                {t(`agir.orgTypes.${type}`)}
                               </option>
                             ))}
                           </select>
                         )}
                       </FormField>
-                      {textField('country', 'Pays *', country, setCountry, { autoComplete: 'country-name', placeholder: 'Ex. Allemagne' })}
-                      {textField('name', 'Votre nom et votre fonction *', name, setName, { autoComplete: 'name', placeholder: 'Ex. Anna Weber, directrice' })}
-                      {textField('email', 'Adresse e-mail *', email, setEmail, { type: 'email', autoComplete: 'email', maxLength: 254 })}
-                      {textField('phone', 'Téléphone (facultatif)', phone, setPhone, {
+                      {textField('country', t('agir.form.country'), country, setCountry, {
+                        autoComplete: 'country-name',
+                        placeholder: t('agir.form.countryPlaceholder'),
+                      })}
+                      {textField('name', t('agir.form.name.partenaire'), name, setName, {
+                        autoComplete: 'name',
+                        placeholder: t('agir.form.namePlaceholder.partenaire'),
+                      })}
+                      {textField('email', t('agir.form.email'), email, setEmail, { type: 'email', autoComplete: 'email', maxLength: 254 })}
+                      {textField('phone', t('agir.form.phone.partenaire'), phone, setPhone, {
                         type: 'tel',
                         autoComplete: 'tel',
                         inputMode: 'tel',
-                        placeholder: 'Ex. +49 30...',
+                        placeholder: t('agir.form.phonePlaceholder.partenaire'),
                         maxLength: 30,
                       })}
                     </div>
 
                     {/* Nature du soutien : cases à cocher natives, facultatives */}
                     <fieldset>
-                      <legend className={LABEL_CLASS}>Ce que vous envisagez (facultatif)</legend>
+                      <legend className={LABEL_CLASS}>{t('agir.form.supportLegend')}</legend>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-3">
                         {SUPPORT_KINDS.map((kind) => (
                           <label key={kind} className={CHECK_LABEL_CLASS}>
@@ -393,7 +404,7 @@ export function AgirPage() {
                               }
                               className={CHECKBOX_CLASS}
                             />
-                            <span>{kind}</span>
+                            <span>{t(`agir.support.${kind}`)}</span>
                           </label>
                         ))}
                       </div>
@@ -401,22 +412,14 @@ export function AgirPage() {
                   </div>
                 )}
 
-                <FormField
-                  id={fieldId('details')}
-                  label={roleType === 'benevole' ? 'Vos compétences et vos disponibilités *' : 'Votre projet de partenariat *'}
-                  error={errors.details}
-                >
+                <FormField id={fieldId('details')} label={t(`agir.form.details.${roleType}`)} error={errors.details}>
                   {(a11y) => (
                     <textarea
                       {...a11y}
                       rows={4}
                       required
                       maxLength={2000}
-                      placeholder={
-                        roleType === 'benevole'
-                          ? 'Ex. enseignante d’allemand /anglais, disponible le samedi, en ligne ou à Douala.'
-                          : 'Quel programme souhaitez-vous soutenir, et comment ?'
-                      }
+                      placeholder={t(`agir.form.detailsPlaceholder.${roleType}`)}
                       value={details}
                       onChange={(e) => {
                         setDetails(e.target.value);
@@ -445,19 +448,19 @@ export function AgirPage() {
                       className={CHECKBOX_CLASS}
                     />
                     <span>
-                      J’accepte que mes données soient traitées par WAHHF Foundation pour étudier ma proposition
-                      d’engagement, conformément à la{' '}
-                      <Link to="/confidentialite" target="_blank" rel="noopener" className="text-link underline underline-offset-4">
-                        politique de confidentialité
-                        <span className="sr-only"> (nouvel onglet)</span>
-                      </Link>
-                      . *
+                      <Trans
+                        i18nKey="agir.form.consent"
+                        components={{
+                          lien: <Link to="/confidentialite" target="_blank" rel="noopener" className="text-link underline underline-offset-4" />,
+                          sr: <span className="sr-only" />,
+                        }}
+                      />
                     </span>
                   </label>
                   <FieldError id={fieldErrorId(fieldId('consent'))} message={errors.consent} />
                 </div>
 
-                <PrimaryButton type="submit">Préparer l’envoi de ma proposition</PrimaryButton>
+                <PrimaryButton type="submit">{t('agir.form.submit')}</PrimaryButton>
               </form>
             </div>
           )}

@@ -1,0 +1,17 @@
+{
+  "seo": {
+    "title": "Galerie — La fondation en images",
+    "description": "Photos de WAHHF Foundation : la journée du 25 avril 2026 à l’Albatros Hotel, une visite de plantation, des sorties à Nkongsamba, au mont et au lac, et une randonnée avec les jeunes."
+  },
+  "title": "La fondation en images",
+  "intro": "Retour en photos sur nos actions : la journée du 25 avril 2026 à l’Albatros Hotel, une visite de plantation, des sorties à Nkongsamba, au mont et au lac, et une randonnée avec les jeunes.",
+  "filterLabel": "Filtrer par album",
+  "allAlbums": "Tous les albums",
+  "photoCount_one": "{{count}} photo",
+  "photoCount_other": "{{count}} photos",
+  "end": {
+    "title": "Participer à la suite",
+    "subtitle": "Un don soutient les actions de la fondation. Les jeunes peuvent candidater aux cours d’allemand /anglais et à l’orientation vers l’Europe.",
+    "apply": "Candidater au programme"
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "seo": {
+    "title": "News and field activities",
+    "description": "WAHHF Foundation news, and in pictures the first open day and the Yaoundé Boot Camp."
+  },
+  "title": "News and field activities",
+  "intro": "News of the foundation and its work, in Cameroon and towards Europe.",
+  "empty": {
+    "title": "No articles published yet",
+    "text": "In the meantime, see the foundation's first open day and the Yaoundé Boot Camp in photos and videos."
+  },
+  "inPictures": "In pictures",
+  "seeGallery": "See the full gallery",
+  "albums": {
+    "inGallery_one": "{{count}} photo, in the gallery.",
+    "inGallery_other": "{{count}} photos, in the gallery.",
+    "photoCount_one": "{{count}} photo",
+    "photoCount_other": "{{count}} photos",
+    "seeAlbum": "See the album"
+  },
+  "article": {
+    "breadcrumb": "News",
+    "published": "Published on {{date}}",
+    "apply": "Apply",
+    "donate": "Donate",
+    "support": "Support this area",
+    "all": "All news"
+  },
+  "notFound": {
+    "title": "This article cannot be found",
+    "message": "It may have been moved or removed, or the link was copied incorrectly. Here is the published news.",
+    "newsPage": "News page",
+    "gallery": "Photo and video gallery"
+  },
+  "contenu": {
+    "news": {
+      "ouverture-inscriptions-academie-allemand-2026": {
+        "title": "Applications open for the new free German/English cohort (A1 to B2)",
+        "category": "Mobility & Languages",
+        "readTime": "3 min read",
+        "excerpt": "Thanks to the support of the IROKO Group and our donors, new free language support sessions are opening online and in Cameroon.",
+        "content": [
+          "WAHHF Foundation announces that applications are open for its next support session for German/English language courses, available free of charge from level A1 to level B2.",
+          "This solidarity scheme is aimed at anyone motivated who wishes to build a study or vocational training plan with seriousness and method.",
+          "To join a cohort, we invite applicants to first take the free online orientation test, then fill in the single application form."
+        ]
+      },
+      "campagne-sante-prevention-communautaire": {
+        "title": "Health prevention and listening days with rural families",
+        "category": "Health",
+        "readTime": "4 min read",
+        "excerpt": "A look back at our mobile outreach for health awareness, free screening and support for mothers.",
+        "content": [
+          "In partnership with local health professionals, WAHHF Foundation volunteers ran a prevention campaign focused on maternal and child health.",
+          "Beyond guidance consultations, these meetings give families lasting information on nutrition-related prevention and water hygiene."
+        ]
+      },
+      "reboisement-jeunesse-engagement-ecologique": {
+        "title": "Young volunteers commit to reforestation and agroecology",
+        "category": "Environment",
+        "readTime": "3 min read",
+        "excerpt": "Planting young seedlings of local species and hands-on soil conservation workshops with partner schools.",
+        "content": [
+          "Because protecting the environment is inseparable from the well-being of communities, WAHHF involves pupils and students in creating local tree nurseries.",
+          "Each tree planted is followed up by a group of pupils, combining ecological responsibility with learning about agronomy."
+        ]
+      }
+    }
+  }
+}

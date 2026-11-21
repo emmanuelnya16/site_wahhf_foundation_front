@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { useLocalize } from '../lib/localize';
 import { ArrowUp, Mail, MapPin, Phone } from 'lucide-react';
 import { DOMAINS_DATA, WAHHF_LOGO_URL } from '../services/api';
 import { CONTACT } from '../config/contact';
@@ -27,7 +27,9 @@ const LIST = 'space-y-2.5 text-meta text-text-secondary-on-inverse';
 const ICON = 'w-4 h-4 shrink-0 text-text-secondary-on-inverse';
 
 export default function Footer() {
-  const { t } = useTranslation();
+  const { t, localized, localizedList } = useLocalize();
+  const domains = localizedList(DOMAINS_DATA, 'contenu.domaines', (d) => d.id);
+  const contact = localized(CONTACT, 'contenu.contact');
 
   // Passe par Lenis quand il est actif (défilement fluide), sinon remontée instantanée.
   const handleBackToTop = () => {
@@ -46,7 +48,7 @@ export default function Footer() {
             <Link to="/" className="inline-flex items-center gap-3">
               <img
                 src={WAHHF_LOGO_URL}
-                alt="Logo WAHHF Foundation"
+                alt={t('ui.logoAlt')}
                 width={52}
                 height={52}
                 loading="lazy"
@@ -88,35 +90,35 @@ export default function Footer() {
             <ul className={LIST}>
               <li>
                 <Link to="/qui-sommes-nous" className={LINK}>
-                  Notre histoire & mission
+                  {t('footer.story')}
                 </Link>
               </li>
               {/* Groupe 7.3 (QSN-01) : masqué tant qu'aucun nom n'est publié ; lot 7.7 : vers l'organigramme */}
               {GOVERNANCE_PUBLISHED && (
                 <li>
                   <Link to="/qui-sommes-nous#organigramme" className={LINK}>
-                    Équipe & Gouvernance
+                    {t('footer.team')}
                   </Link>
                 </li>
               )}
               <li>
                 <Link to="/notre-impact" className={LINK}>
-                  Notre impact
+                  {t('nav.impact')}
                 </Link>
               </li>
               <li>
                 <Link to="/galerie" className={LINK}>
-                  Galerie photo & vidéo
+                  {t('footer.gallery')}
                 </Link>
               </li>
               <li>
                 <Link to="/partenaires" className={LINK}>
-                  Partenaires & Groupe IROKO
+                  {t('footer.partners')}
                 </Link>
               </li>
               <li>
                 <Link to="/actualites" className={LINK}>
-                  Actualités & Terrain
+                  {t('footer.news')}
                 </Link>
               </li>
             </ul>
@@ -126,7 +128,7 @@ export default function Footer() {
           <div className="space-y-3">
             <h3 className={HEADING}>{t('footer.colActions')}</h3>
             <ul className={LIST}>
-              {DOMAINS_DATA.map((dom) => (
+              {domains.map((dom) => (
                 <li key={dom.id}>
                   <Link to={dom.link} className={LINK}>
                     {dom.title}
@@ -138,7 +140,7 @@ export default function Footer() {
                   to="/mobilite-langues/academie"
                   className="text-link-on-inverse underline underline-offset-4 decoration-1 hover:decoration-2"
                 >
-                  Académie d’allemand /anglais A1–C1 (Gratuit)
+                  {t('footer.academy')}
                 </Link>
               </li>
             </ul>
@@ -153,22 +155,22 @@ export default function Footer() {
               </li>
               <li>
                 <Link to="/candidater" className={LINK}>
-                  Candidater à un programme
+                  {t('footer.apply')}
                 </Link>
               </li>
               <li>
                 <Link to="/agir#benevole" className={LINK}>
-                  Devenir bénévole
+                  {t('footer.volunteer')}
                 </Link>
               </li>
               <li>
                 <Link to="/agir#partenaire" className={LINK}>
-                  Devenir partenaire
+                  {t('footer.partner')}
                 </Link>
               </li>
               <li>
                 <Link to="/accompagnement/eviter-les-arnaques" className={LINK}>
-                  Prévention des arnaques
+                  {t('footer.scams')}
                 </Link>
               </li>
             </ul>
@@ -180,13 +182,13 @@ export default function Footer() {
             <ul className={cn(LIST, 'space-y-3')}>
               <li>
                 <Link to="/contact" className={LINK}>
-                  Formulaire de contact
+                  {t('footer.contactForm')}
                 </Link>
               </li>
               <li className="flex items-start gap-2.5">
                 <MapPin aria-hidden="true" className={cn(ICON, 'mt-1')} />
                 <span>
-                  {CONTACT.place} <span>(TODO : adresse exacte)</span>
+                  {contact.place} <span>{t('footer.addressTodo')}</span>
                 </span>
               </li>
               <li className="flex items-center gap-2.5">

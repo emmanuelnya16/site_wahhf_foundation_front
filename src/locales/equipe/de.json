@@ -1,0 +1,43 @@
+{
+  "_relire": [
+    "equipe.hero.join",
+    "equipe.contenu.niveaux.1",
+    "equipe.contenu.niveaux.2",
+    "equipe.contenu.niveaux.5",
+    "equipe.contenu.membres.marrion-watio-notesse.role",
+    "equipe.contenu.membres.wilfried.role"
+  ],
+  "nameTbc": "Name noch zu bestätigen",
+  "portraitAlt": "Porträt von {{name}}",
+  "hero": {
+    "title": "Die Menschen hinter der Stiftung.",
+    "intro": "Ein Team zwischen Kamerun und Deutschland, im Dienst der Jugend.",
+    "join": "Bei der Stiftung mitmachen",
+    "orgChart": "Zum Organigramm"
+  },
+  "carousel": {
+    "roleDescription": "Karussell",
+    "label": "Porträts der Leitung",
+    "previous": "Vorheriges Porträt",
+    "next": "Nächstes Porträt",
+    "pause": "Anhalten",
+    "resume": "Fortsetzen"
+  },
+  "orgChart": {
+    "title": "Unsere Organisation"
+  },
+  "contenu": {
+    "niveaux": {
+      "1": "Präsidentschaft",
+      "2": "Vizepräsidentschaft",
+      "4": "Generalsekretariat",
+      "5": "Vorstand",
+      "6": "Koordination"
+    },
+    "membres": {
+      "marrion-watio-notesse": { "role": "Präsident" },
+      "christian-wilberg": { "role": "Vizepräsident" },
+      "wilfried": { "role": "Generalsekretär" }
+    }
+  }
+}

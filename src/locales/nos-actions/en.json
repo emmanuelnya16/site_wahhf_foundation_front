@@ -1,0 +1,12 @@
+{
+  "seo": {
+    "title": "Our 6 action domains — Education, health, entrepreneurship, environment, rights, mobility",
+    "description": "Discover the 6 domains in which WAHHF Foundation works in Cameroon and towards Europe, and support the one of your choice."
+  },
+  "title": "Acting on every lever of human autonomy",
+  "intro": "Education, health, youth entrepreneurship, environment, rights and inclusion, Mobility & Languages: the six domains in which the foundation works. You can support the one of your choice.",
+  "navLabel": "The six domains",
+  "discoverMobility": "Discover Mobility & Languages",
+  "support": "Support this domain",
+  "supportLabel": "Support this domain: {{domain}}"
+}

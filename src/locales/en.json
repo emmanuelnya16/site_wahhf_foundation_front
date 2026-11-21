@@ -28,6 +28,30 @@
       "environment": "Environment",
       "rights": "Rights & Inclusion",
       "mobility": "Mobility & Languages"
+    },
+    "mainNav": "Main navigation",
+    "mainNavMobile": "Main navigation (mobile)",
+    "searchOpen": "Search the site",
+    "searchClose": "Close search",
+    "menuOpen": "Open the main menu",
+    "menuClose": "Close the menu",
+    "mobileMenu": "WAHHF Foundation mobile menu",
+    "actionsMobile": "Our actions (6 areas)",
+    "applyMobile": "Apply (courses & Europe — free)",
+    "search": {
+      "domain": "Area: {{title}}",
+      "level": "German course: {{title}}",
+      "country": "Supported country: {{flag}} {{name}}"
+    },
+    "mega": {
+      "domainsTitle": "The 6 areas of action of WAHHF Foundation",
+      "overview": "See the overview",
+      "mobilityTitle": "Mobility & Languages: German/English (A1–C1) & Europe",
+      "mobilityText": "Free support for German/English courses and verified guidance towards 10 European countries, funded by IROKO and our donors.",
+      "academy": "Language Academy (A1 to C1)",
+      "support": "Support towards 10 countries",
+      "scams": "Stay alert: avoiding scams",
+      "apply": "Apply for free"
     }
   },
   "disclaimer": {
@@ -171,6 +195,174 @@
     "privacy": "Privacy policy",
     "transparency": "Financial transparency",
     "backToTop": "Back to top",
-    "rights": "All rights reserved."
+    "rights": "All rights reserved.",
+    "story": "Our story & mission",
+    "team": "Team & governance",
+    "gallery": "Photo & video gallery",
+    "partners": "Partners & IROKO Group",
+    "news": "News & fieldwork",
+    "academy": "German/English Academy A1–C1 (free)",
+    "apply": "Apply for a program",
+    "volunteer": "Become a volunteer",
+    "partner": "Become a partner",
+    "scams": "Scam prevention",
+    "contactForm": "Contact form",
+    "addressTodo": "(TODO: exact address)"
+  },
+  "ui": {
+    "logoAlt": "WAHHF Foundation logo",
+    "newTab": " (new tab)",
+    "skipLink": "Skip to content",
+    "whatsapp": {
+      "message": "Hello WAHHF Foundation, I would like information about your free programs...",
+      "label": "Write to WAHHF Foundation on WhatsApp (new tab)"
+    },
+    "cookies": {
+      "label": "Cookie and privacy settings",
+      "title": "Respecting your privacy (GDPR)",
+      "text": "WAHHF Foundation only uses the technical cookies the site needs to work (language and theme choice). No advertising tracker is enabled.",
+      "privacy": "Privacy policy",
+      "refuse": "Refuse non-essential",
+      "accept": "Accept"
+    },
+    "chunkError": {
+      "page": "This page could not load. Please check your connection.",
+      "block": "This content could not load.",
+      "retry": "Try again"
+    },
+    "handoff": {
+      "info": "The site cannot send forms yet. Your message is ready with your answers: send it by WhatsApp or by email. The foundation only receives it once you have sent it.",
+      "whatsapp": "Send by WhatsApp",
+      "email": "Send by email",
+      "fallback": "If no app opens, write directly to <mail>{{email}}</mail> or on WhatsApp to {{phone}}, copying the message below.",
+      "preview": "See the prepared message",
+      "edit": "Edit my answers"
+    },
+    "draft": {
+      "greeting": "Hello WAHHF Foundation,",
+      "row": "{{label}}: {{value}}"
+    },
+    "validation": {
+      "emailEmpty": "Enter your email address, for example name@example.com.",
+      "emailInvalid": "Incomplete email address: it should look like name@example.com.",
+      "phoneEmpty": "Enter your phone or WhatsApp number, with the country code (e.g. +237 6 90 00 00 00).",
+      "phoneInvalid": "Incomplete number: include the country code and at least 8 digits (e.g. +237 6 90 00 00 00)."
+    }
+  },
+  "contenu": {
+    "domaines": {
+      "education": {
+        "title": "Education",
+        "shortDesc": "Tutoring, classroom renovation, scholarships and community libraries.",
+        "fullDesc": "We work so that every child and young person has school supplies, teaching support and a decent place to learn.",
+        "programs": [
+          "School kits and textbooks for pupils in rural areas",
+          "Community libraries and reading spaces",
+          "Academic mentoring and guidance after the baccalaureate"
+        ]
+      },
+      "sante": {
+        "title": "Health",
+        "shortDesc": "Prevention campaigns, maternal and child health, access to basic care and awareness-raising.",
+        "fullDesc": "Working with local health centres, our volunteer teams organise free screening days, health education and support for mothers.",
+        "programs": [
+          "Preventive consultations and community awareness",
+          "Support for maternal and child health",
+          "Access to drinking water and hygiene in schools"
+        ]
+      },
+      "entrepreneuriat": {
+        "title": "Youth entrepreneurship",
+        "shortDesc": "Solidarity-based incubation, digital literacy, micro-project management and mentoring by professionals.",
+        "fullDesc": "Supporting young people with local initiatives to build sustainable, ethical income-generating activities.",
+        "programs": [
+          "Workshops on management and simple bookkeeping",
+          "Introduction to digital tools and office software",
+          "Networking with volunteer experts from the IROKO Group"
+        ]
+      },
+      "environnement": {
+        "title": "Environment",
+        "shortDesc": "Community reforestation, agroecology, waste management and climate education for young people.",
+        "fullDesc": "Protecting local ecosystems and passing on to younger generations the practices of sustainable, soil-friendly farming.",
+        "programs": [
+          "Village tree nurseries and reforestation campaigns",
+          "Awareness of waste sorting and urban sanitation",
+          "Training in sustainable agroecological practices"
+        ]
+      },
+      "droits-inclusion": {
+        "title": "Rights and inclusion",
+        "shortDesc": "Promoting equal opportunities, including vulnerable people and giving access to civic information.",
+        "fullDesc": "Defending human dignity by fighting every form of exclusion, whether social, economic or linked to disability.",
+        "programs": [
+          "Empowering young women and community leadership",
+          "Helping young people with disabilities go to school",
+          "Listening sessions and social guidance"
+        ]
+      },
+      "mobilite-langues": {
+        "title": "Mobility & Languages",
+        "shortDesc": "Free German/English academy (A1 to C1) and transparent support towards 10 European countries.",
+        "fullDesc": "A program funded by our partners and donors, to learn German/English and prepare a study, training or mobility project safely.",
+        "programs": [
+          "Support for German/English language courses from level A1 to C1",
+          "Documented guidance towards 10 European countries",
+          "Active prevention of scams and false visa promises"
+        ]
+      }
+    },
+    "pays": {
+      "allemagne": {
+        "name": "Germany"
+      },
+      "luxembourg": {
+        "name": "Luxembourg"
+      },
+      "slovenie": {
+        "name": "Slovenia"
+      },
+      "italie": {
+        "name": "Italy"
+      },
+      "grece": {
+        "name": "Greece"
+      },
+      "portugal": {
+        "name": "Portugal"
+      },
+      "espagne": {
+        "name": "Spain"
+      },
+      "danemark": {
+        "name": "Denmark"
+      },
+      "pologne": {
+        "name": "Poland"
+      },
+      "albanie": {
+        "name": "Albania"
+      }
+    },
+    "niveaux": {
+      "a1": {
+        "title": "Level A1 — Discovery & basics"
+      },
+      "a2": {
+        "title": "Level A2 — Survival & everyday exchanges"
+      },
+      "b1": {
+        "title": "Level B1 — Threshold of independence"
+      },
+      "b2": {
+        "title": "Level B2 — Independence & fluency"
+      },
+      "c1": {
+        "title": "Level C1 — Academic & professional mastery"
+      }
+    },
+    "contact": {
+      "place": "Cameroon (Douala, Yaoundé) and coordination in Germany"
+    }
   }
 }

@@ -5,10 +5,11 @@ import { SecondaryButton } from '../../components/wahhf/Buttons';
 import { COURSE_SESSIONS_DATA } from '../../services/api';
 import { upcomingSessions } from '../../lib/sessions';
 import { FIELD_CLASS, LABEL_CLASS } from '../../components/wahhf/FormField';
+import { useLocalize } from '../../lib/localize';
+import '../../locales/mobilite';
 
-const WHATSAPP_ALERT = `https://wa.me/237693129205?text=${encodeURIComponent(
-  'Bonjour WAHHF Foundation, je souhaite être prévenu(e) de la prochaine session de cours d’allemand /anglais.'
-)}`;
+/** Demande d'alerte préparée sur WhatsApp, rédigée dans la langue de la personne (lot 7.10). */
+const whatsappAlert = (text: string) => `https://wa.me/237693129205?text=${encodeURIComponent(text)}`;
 
 /**
  * Calendrier des prochaines sessions (Académie et pages de niveau ; groupe 7.1 : T-05, ACAD-03).
@@ -19,6 +20,7 @@ const WHATSAPP_ALERT = `https://wa.me/237693129205?text=${encodeURIComponent(
  * - `level` : page d'un niveau, le filtre de niveau est fixé.
  */
 export default function SessionsCalendar({ level, tone = 'sauge' }: { level?: 'A1' | 'A2' | 'B1' | 'B2' | 'C1'; tone?: 'brume' | 'sauge' }) {
+  const { t } = useLocalize();
   const [filterLevel, setFilterLevel] = useState<string>(level ?? 'ALL');
   const [filterFormat, setFilterFormat] = useState<'ALL' | 'ONLINE' | 'PRESENTIEL'>('ALL');
   const upcoming = upcomingSessions(COURSE_SESSIONS_DATA);
@@ -27,7 +29,7 @@ export default function SessionsCalendar({ level, tone = 'sauge' }: { level?: 'A
       (filterLevel === 'ALL' || s.level === filterLevel) &&
       (filterFormat === 'ALL' || (filterFormat === 'ONLINE' ? s.format === 'En ligne' : s.format !== 'En ligne'))
   );
-  const count = sessions.length === 0 ? 'Aucune session' : sessions.length === 1 ? '1 session' : `${sessions.length} sessions`;
+  const count = sessions.length === 0 ? t('mobilite.sessions.aucune') : t('mobilite.sessions.nombre', { count: sessions.length });
   // Filtres seulement quand ils ont au moins deux choix réels parmi les sessions à venir (ACAD-03)
   const levelsAhead = new Set(upcoming.map((s) => s.level));
   const formatsAhead = new Set(upcoming.filter((s) => !level || s.level === level).map((s) => (s.format === 'En ligne' ? 'ONLINE' : 'PRESENTIEL')));
@@ -39,21 +41,21 @@ export default function SessionsCalendar({ level, tone = 'sauge' }: { level?: 'A
       <div className="container-page space-y-10">
       <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
         <SectionHeader
-          title={level ? `Prochaines sessions de niveau ${level}` : 'Calendrier des prochaines sessions'}
-          subtitle="Toutes les sessions sont gratuites. En ligne ou en présentiel à Douala et à Yaoundé ; celles déjà commencées n’apparaissent plus."
+          title={level ? t('mobilite.sessions.titleNiveau', { level }) : t('mobilite.sessions.titleTout')}
+          subtitle={t('mobilite.sessions.subtitle')}
         />
 
         <div className="flex flex-wrap items-end gap-4">
           {showLevelFilter && (
             <div>
               <label htmlFor="filtre-niveau" className={LABEL_CLASS}>
-                Niveau
+                {t('mobilite.sessions.filtreNiveau')}
               </label>
               <select id="filtre-niveau" value={filterLevel} onChange={(e) => setFilterLevel(e.target.value)} className={FIELD_CLASS}>
-                <option value="ALL">Tous les niveaux</option>
+                <option value="ALL">{t('mobilite.sessions.tousNiveaux')}</option>
                 {['A1', 'A2', 'B1', 'B2', 'C1'].map((l) => (
                   <option key={l} value={l}>
-                    Niveau {l}
+                    {t('mobilite.commun.niveau', { level: l })}
                   </option>
                 ))}
               </select>
@@ -62,7 +64,7 @@ export default function SessionsCalendar({ level, tone = 'sauge' }: { level?: 'A
           {showFormatFilter && (
           <div>
             <label htmlFor="filtre-format" className={LABEL_CLASS}>
-              Format
+              {t('mobilite.sessions.filtreFormat')}
             </label>
             <select
               id="filtre-format"
@@ -70,9 +72,9 @@ export default function SessionsCalendar({ level, tone = 'sauge' }: { level?: 'A
               onChange={(e) => setFilterFormat(e.target.value as typeof filterFormat)}
               className={FIELD_CLASS}
             >
-              <option value="ALL">Tous les formats</option>
-              <option value="ONLINE">En ligne</option>
-              <option value="PRESENTIEL">En présentiel (Douala, Yaoundé)</option>
+              <option value="ALL">{t('mobilite.sessions.tousFormats')}</option>
+              <option value="ONLINE">{t('mobilite.formats.enLigne')}</option>
+              <option value="PRESENTIEL">{t('mobilite.sessions.presentiel')}</option>
             </select>
           </div>
           )}
@@ -95,20 +97,20 @@ export default function SessionsCalendar({ level, tone = 'sauge' }: { level?: 'A
         <div className="border-t border-border-subtle pt-6 space-y-4 max-w-[65ch]">
           <p className="text-body font-semibold text-text">
             {showFormatFilter && filterFormat === 'PRESENTIEL'
-              ? 'Pas de session en présentiel annoncée pour ce choix pour l’instant.'
+              ? t('mobilite.sessions.videPresentiel')
               : showLevelFilter || showFormatFilter
-              ? 'Pas de session annoncée pour ce choix pour l’instant.'
+              ? t('mobilite.sessions.videChoix')
               : level
-              ? `Pas de session de niveau ${level} annoncée pour l’instant.`
-              : 'Pas de session annoncée pour l’instant.'}
+              ? t('mobilite.sessions.videNiveau', { level })
+              : t('mobilite.sessions.videTout')}
           </p>
-          <p className="text-body text-text-secondary">Vous pouvez demander à être prévenu de la prochaine session.</p>
+          <p className="text-body text-text-secondary">{t('mobilite.sessions.prevenir')}</p>
           <div className="flex flex-wrap gap-3">
             {showFormatFilter && filterFormat === 'PRESENTIEL' && (
-              <SecondaryButton onClick={() => setFilterFormat('ONLINE')}>Voir les sessions en ligne</SecondaryButton>
+              <SecondaryButton onClick={() => setFilterFormat('ONLINE')}>{t('mobilite.sessions.voirEnLigne')}</SecondaryButton>
             )}
-            {level && <SecondaryButton to="/mobilite-langues/academie#calendrier-sessions">Voir toutes les sessions</SecondaryButton>}
-            <SecondaryButton href={WHATSAPP_ALERT}>Être prévenu sur WhatsApp</SecondaryButton>
+            {level && <SecondaryButton to="/mobilite-langues/academie#calendrier-sessions">{t('mobilite.sessions.voirToutes')}</SecondaryButton>}
+            <SecondaryButton href={whatsappAlert(t('mobilite.sessions.whatsapp'))}>{t('mobilite.sessions.prevenirWhatsapp')}</SecondaryButton>
           </div>
         </div>
       )}

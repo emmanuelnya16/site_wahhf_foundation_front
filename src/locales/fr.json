@@ -28,6 +28,30 @@
       "environment": "Environnement",
       "rights": "Droits et inclusion",
       "mobility": "Mobilité & Langues"
+    },
+    "mainNav": "Navigation principale",
+    "mainNavMobile": "Navigation principale (mobile)",
+    "searchOpen": "Rechercher sur le site",
+    "searchClose": "Fermer la recherche",
+    "menuOpen": "Ouvrir le menu principal",
+    "menuClose": "Fermer le menu",
+    "mobileMenu": "Menu mobile WAHHF Foundation",
+    "actionsMobile": "Nos actions (6 domaines)",
+    "applyMobile": "Candidater (Cours & Europe — Gratuit)",
+    "search": {
+      "domain": "Domaine : {{title}}",
+      "level": "Cours d'allemand : {{title}}",
+      "country": "Pays accompagné : {{flag}} {{name}}"
+    },
+    "mega": {
+      "domainsTitle": "Les 6 domaines d’action de WAHHF Foundation",
+      "overview": "Voir la vue d’ensemble",
+      "mobilityTitle": "Mobilité & Langues : Allemand /anglais (A1–C1) & Europe",
+      "mobilityText": "Accompagnement gratuit aux cours d’allemand /anglais et orientation vérifiée vers 10 pays européens, financé par IROKO et nos donateurs.",
+      "academy": "Académie de langues (A1 à C1)",
+      "support": "Accompagnement vers 10 pays",
+      "scams": "Vigilance : Éviter les arnaques",
+      "apply": "Candidater gratuitement"
     }
   },
   "disclaimer": {
@@ -171,6 +195,58 @@
     "privacy": "Politique de confidentialité",
     "transparency": "Transparence financière",
     "backToTop": "Retour en haut",
-    "rights": "Tous droits réservés."
+    "rights": "Tous droits réservés.",
+    "story": "Notre histoire & mission",
+    "team": "Équipe & Gouvernance",
+    "gallery": "Galerie photo & vidéo",
+    "partners": "Partenaires & Groupe IROKO",
+    "news": "Actualités & Terrain",
+    "academy": "Académie d’allemand /anglais A1–C1 (Gratuit)",
+    "apply": "Candidater à un programme",
+    "volunteer": "Devenir bénévole",
+    "partner": "Devenir partenaire",
+    "scams": "Prévention des arnaques",
+    "contactForm": "Formulaire de contact",
+    "addressTodo": "(TODO : adresse exacte)"
+  },
+  "ui": {
+    "logoAlt": "Logo WAHHF Foundation",
+    "newTab": " (nouvel onglet)",
+    "skipLink": "Aller au contenu",
+    "whatsapp": {
+      "message": "Bonjour WAHHF Foundation, je souhaite des informations sur vos programmes d’accompagnement gratuits...",
+      "label": "Écrire à WAHHF Foundation sur WhatsApp (nouvel onglet)"
+    },
+    "cookies": {
+      "label": "Gestion des cookies et de la vie privée",
+      "title": "Respect de votre vie privée (RGPD)",
+      "text": "WAHHF Foundation utilise uniquement des cookies techniques nécessaires au bon fonctionnement du site (choix de langue et de thème). Aucun traceur publicitaire n’est activé.",
+      "privacy": "Politique de confidentialité",
+      "refuse": "Refuser le non-essentiel",
+      "accept": "Accepter"
+    },
+    "chunkError": {
+      "page": "Cette page n’a pas pu se charger. Vérifiez votre connexion.",
+      "block": "Le contenu n’a pas pu se charger.",
+      "retry": "Réessayer"
+    },
+    "handoff": {
+      "info": "Le site ne transmet pas encore les formulaires. Votre message est prêt avec vos réponses : envoyez-le par WhatsApp ou par e-mail. La fondation ne le reçoit qu’une fois que vous l’avez envoyé.",
+      "whatsapp": "Envoyer par WhatsApp",
+      "email": "Envoyer par e-mail",
+      "fallback": "Si aucune application ne s’ouvre, écrivez directement à <mail>{{email}}</mail> ou sur WhatsApp au {{phone}}, en copiant le message ci-dessous.",
+      "preview": "Voir le message préparé",
+      "edit": "Modifier mes réponses"
+    },
+    "draft": {
+      "greeting": "Bonjour WAHHF Foundation,",
+      "row": "{{label}} : {{value}}"
+    },
+    "validation": {
+      "emailEmpty": "Saisissez votre adresse e-mail, par exemple nom@exemple.com.",
+      "emailInvalid": "Adresse e-mail incomplète : elle doit ressembler à nom@exemple.com.",
+      "phoneEmpty": "Saisissez votre numéro de téléphone ou WhatsApp, avec l’indicatif (ex. +237 6 90 00 00 00).",
+      "phoneInvalid": "Numéro incomplet : indiquez l’indicatif du pays et au moins 8 chiffres (ex. +237 6 90 00 00 00)."
+    }
   }
 }

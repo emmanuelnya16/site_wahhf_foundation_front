@@ -1,0 +1,458 @@
+{
+  "_relire": [
+    "commun.cohorte",
+    "hub.portesSubtitle",
+    "hub.pourquoiText",
+    "hub.raisons.frais.title",
+    "hub.faq.identite.a",
+    "test.resultatKicker",
+    "cours.places",
+    "candidature.rappel",
+    "candidature.accord",
+    "candidature.message.accord",
+    "contenu.niveaux.a1.shortTitle",
+    "contenu.niveaux.c1.shortTitle",
+    "contenu.niveaux.a1.hours",
+    "contenu.niveaux.b1.objectives[1]",
+    "contenu.sessions.sess-b1-online.title"
+  ],
+  "commun": {
+    "europe": "Europa",
+    "mobilite": "Mobilität & Sprachen",
+    "academie": "Sprachakademie",
+    "niveau": "Niveau {{level}}",
+    "candidater": "Bewerben",
+    "candidaterNiveau": "Für Niveau {{level}} bewerben",
+    "filAria": "Die fünf Niveaus Deutsch/Englisch, von A1 bis C1, dann Europa",
+    "niveauAffiche": "angezeigtes Niveau",
+    "nomNiveau": "Deutsch {{level}}: {{short}}",
+    "cohorte": "In die nächste Kursgruppe einsteigen"
+  },
+  "formats": {
+    "enLigne": "Online",
+    "douala": "Vor Ort in Douala",
+    "yaounde": "Vor Ort in Yaoundé"
+  },
+  "formatsPhrase": {
+    "enLigne": "online",
+    "douala": "vor Ort in Douala",
+    "yaounde": "vor Ort in Yaoundé"
+  },
+  "formatsChoix": {
+    "enLigne": "Online (überall zugänglich)",
+    "douala": "Vor Ort in Douala",
+    "yaounde": "Vor Ort in Yaoundé"
+  },
+  "hub": {
+    "seoTitle": "Mobilität & Sprachen — kostenlos lernen, sich vorbereiten und orientieren",
+    "seoDescription": "WAHHF Foundation: kostenlose Sprachakademie für Deutsch/Englisch (A1 bis C1) und transparente Begleitung in 10 europäische Länder, finanziert von unseren Partnern und Spendern.",
+    "title": "Deutsch/Englisch lernen, sich vorbereiten, den Weg nach Europa finden",
+    "intro": "Deutsch- und Englischkurse von Niveau A1 bis Niveau C1 und verlässliche Informationen zu Studium, Ausbildung und Arbeit in 10 europäischen Ländern.",
+    "ctaCandidater": "Für das Programm bewerben",
+    "ctaAcademie": "Die Sprachakademie entdecken",
+    "portesTitle": "Wählen Sie Ihren Einstieg",
+    "portesSubtitle": "Sie können sich nur für die Deutsch- und Englischkurse bewerben, nur für die Begleitung bei den Unterlagen oder für beides.",
+    "academieTitle": "Sprachakademie (Deutsch/Englisch A1 bis C1)",
+    "academieText": "Deutsch/Englisch Schritt für Schritt lernen: Verstehen, Sprechen und Schreiben, ein Online-Einstufungstest und eine methodische Vorbereitung auf die Zertifikate.",
+    "academieBouton": "Zur Sprachakademie",
+    "academieTest": "Einstufungstest machen (20 Fragen)",
+    "europeTitle": "Begleitung nach Europa",
+    "europeText": "Ein Lernweg in 4 Schritten: die legalen Wege verstehen (Studium, Berufsausbildung, Arbeit), die Bewerbungsunterlagen vorbereiten und jeden Schritt auf den offiziellen Portalen prüfen.",
+    "europeBouton": "Begleitung nach Europa ansehen",
+    "europeArnaques": "Ratgeber: Betrug vermeiden",
+    "pourquoiTitle": "Junge Menschen vor Desinformation schützen und den Zugang zu Wissen öffnen",
+    "pourquoiSubtitle": "Zu viele junge Menschen und Familien verschulden sich bei betrügerischen Vermittlern, die falsche Versprechen verkaufen. WAHHF Foundation setzt dem sprachliche Gründlichkeit und Transparenz entgegen.",
+    "pourquoiText": "Ein Studium oder eine Berufsausbildung im Ausland kann man nicht kaufen. Man erarbeitet es sich: durch anspruchsvolles Sprachenlernen, Abschlüsse, die den Anforderungen entsprechen, und die strikte Einhaltung der offiziellen konsularischen Verfahren.",
+    "raisons": {
+      "frais": {
+        "title": "Keine Kosten für Teilnehmende",
+        "desc": "Keine Anmeldegebühr, keine Bearbeitungsgebühr, keine Provision – zu keinem Zeitpunkt."
+      },
+      "arnaques": {
+        "title": "Aktiv gegen Betrug",
+        "desc": "Ein Ratgeber, mit dem Sie gefälschte Verträge und gefälschte Visa erkennen und jede Information bei offiziellen Quellen prüfen."
+      },
+      "exigence": {
+        "title": "Akademischer und sprachlicher Anspruch",
+        "desc": "Schrittweise Begleitung vom Anfängerniveau A1 bis zur Studierfähigkeit auf Niveau C1."
+      }
+    },
+    "temoignagesTitle": "Das sagen unsere Lernenden",
+    "faqTitle": "Häufige Fragen",
+    "faq": {
+      "gratuit": {
+        "q": "Sind die Deutsch- und Englischkurse und die Begleitung wirklich zu 100 % kostenlos?",
+        "a": "Ja, für alle Teilnehmenden: die Deutsch- und Englischkurse von Niveau A1 bis Niveau C1 ebenso wie die Orientierungstermine zu Europa. Das Programm wird von unseren Partnern und Spendern finanziert."
+      },
+      "visas": {
+        "q": "Stellt die WAHHF Foundation Visa oder Arbeitsverträge aus?",
+        "a": "Nein, niemals. Die WAHHF Foundation ist eine gemeinnützige Stiftung. Wir verkaufen weder Visa noch Studienplätze noch Arbeitsverträge, und wir garantieren kein Ergebnis. Die Entscheidungen liegen allein bei Botschaften, Konsulaten und offiziellen Einrichtungen."
+      },
+      "identite": {
+        "q": "Muss ich für die Bewerbung meinen Reisepass oder Personalausweis schicken?",
+        "a": "Nein. Für Ihre Online-Bewerbung auf dieser Website verlangen wir kein Ausweisdokument (keinen Reisepass, keinen Personalausweis) und kein Geld."
+      },
+      "niveau": {
+        "q": "Wie finde ich heraus, mit welchem Niveau ich in Deutsch/Englisch beginne?",
+        "a": "Wenn Sie ganz ohne Vorkenntnisse starten, wählen Sie Niveau A1. Wenn Sie schon Grundkenntnisse haben, machen Sie unseren Einstufungstest mit 20 Fragen auf der Seite der Sprachakademie."
+      }
+    },
+    "finSubtitle": "Ein einziges Formular für die Deutsch- und Englischkurse und die Orientierung nach Europa. Es dauert etwa 5 Minuten. Wir verlangen weder ein Ausweisdokument noch eine Zahlung."
+  },
+  "academie": {
+    "seoTitle": "Sprachakademie — Deutsch/Englisch A1 bis C1 kostenlos",
+    "seoDescription": "Kostenlose Begleitung der Deutsch- und Englischkurse von Niveau A1 bis Niveau C1 durch die WAHHF Foundation: Einstufungstest mit 20 Fragen, Programm für jedes Niveau und Kurstermine.",
+    "title": "Sprachakademie: Deutsch/Englisch von Niveau A1 bis Niveau C1 mit dem WAHHF Institute",
+    "intro": "Deutsch- und Englischkurse vom Anfängerniveau bis zur akademischen Sprachbeherrschung, online oder vor Ort in Douala und Yaoundé. Beginnen Sie mit dem Test: Er zeigt Ihnen, mit welchem Niveau Sie starten.",
+    "ctaTest": "Mein Niveau finden (5 Minuten)",
+    "ctaCandidater": "Bewerben (Niveau selbst wählen)",
+    "niveauxTitle": "Die 5 Niveaus, von A1 bis C1",
+    "niveauxSubtitle": "Jedes Niveau hat eine eigene Seite: Ziele, Kompetenzen, Stundenumfang und nächste Kurse.",
+    "pageNiveau": "Zur Seite von Niveau {{level}}",
+    "examensTitle": "Vorbereitung auf offizielle Prüfungen",
+    "examensText": "Unsere Kurse umfassen Probeprüfungen in Lesen, Hören, Schreiben und Sprechen nach den Standards anerkannter Prüfungen: Goethe-Zertifikat, telc Deutsch und TestDaF."
+  },
+  "niveauPage": {
+    "seoTitle": "Deutsch Niveau {{level}} — kostenlose Sprachakademie",
+    "seoDescription": "Deutsch auf Niveau {{level}} an der WAHHF-Akademie: {{subtitle}} Ziele, Kompetenzen, Stundenumfang und nächste Kurse.",
+    "verifier": "Mein Niveau prüfen (Test)",
+    "filAria": "Die fünf Deutsch-Niveaus; angezeigtes Niveau: {{level}}",
+    "programme": "Programm für Niveau {{level}}",
+    "introuvableTitle": "Dieses Deutsch-Niveau gibt es nicht",
+    "introuvableMessage": "Die Sprachakademie bietet 5 Niveaus von A1 bis C1 an. Wählen Sie unten Ihr Niveau oder machen Sie den Einstufungstest.",
+    "introuvableListe": "Die Niveaus der Akademie",
+    "introuvableTest": "Einstufungstest (20 Fragen)"
+  },
+  "cohorte": {
+    "subtitle": "Ein einziges Formular, etwa 5 Minuten. Wir verlangen weder ein Ausweisdokument noch eine Zahlung."
+  },
+  "fiche": {
+    "volume": "Stundenumfang",
+    "prerequis": "Voraussetzungen",
+    "duree": "Dauer",
+    "prochaine": "Nächster Kursbeginn",
+    "pasAnnoncee": "Noch nicht bekannt gegeben",
+    "format": "Format",
+    "formatValeur": "Online oder vor Ort in Douala und Yaoundé, je nach Kurs",
+    "objectifs": "Ziele von Niveau {{level}}",
+    "saurezFaire": "Das können Sie am Ende von Niveau {{level}}"
+  },
+  "test": {
+    "blanc": "(Lücke)",
+    "statutFini": "Test beendet. Ergebnis: {{score}} von {{total}}. Empfohlenes Niveau: {{level}}.",
+    "statutFiche": "Die Übersicht zu Niveau {{level}} finden Sie weiter unten.",
+    "statutQuestion": "Frage {{n}} von {{total}}.",
+    "title": "Mein Deutsch-Niveau finden",
+    "subtitle": "20 Multiple-Choice-Fragen von A1 bis C1, etwa 5 Minuten. Das Ergebnis zeigt Ihnen, mit welchem Niveau Sie beginnen.",
+    "intro": "Die Fragen werden nach und nach schwieriger: 4 Fragen pro Niveau. Sie können jederzeit zur vorherigen Frage zurückgehen.",
+    "commencer": "Test starten",
+    "resultatKicker": "Ihr Testergebnis (zur Orientierung)",
+    "niveauConseille": "Empfohlenes Niveau: {{level}}",
+    "score_one": "{{count}} richtige Antwort von {{total}}",
+    "score_other": "{{count}} richtige Antworten von {{total}}",
+    "niveauConseilleCourt": "empfohlenes Niveau",
+    "resultatText": "Dieses Ergebnis dient Ihrer Orientierung. Bei der Prüfung Ihrer Bewerbung legt eine Lehrkraft gemeinsam mit Ihnen die Gruppe fest, in der Sie am besten vorankommen.",
+    "recommencer": "Test neu starten",
+    "position": "Frage {{n}} von {{total}}",
+    "niveauTeste": "Geprüftes Niveau: {{level}}",
+    "avancement": "Testfortschritt",
+    "manque": "Wählen Sie eine Antwort, um zur nächsten Frage zu gelangen.",
+    "precedente": "Vorherige Frage",
+    "voirResultat": "Mein empfohlenes Niveau ansehen",
+    "suivante": "Nächste Frage"
+  },
+  "sessions": {
+    "moisAConfirmer": "{{month}} (Datum noch nicht bestätigt)",
+    "whatsapp": "Hallo WAHHF Foundation, ich möchte über den nächsten Termin der Deutsch- und Englischkurse informiert werden.",
+    "titleNiveau": "Nächste Kurse auf Niveau {{level}}",
+    "titleTout": "Kalender der nächsten Kurse",
+    "subtitle": "Alle Kurse sind kostenlos. Online oder vor Ort in Douala und Yaoundé; bereits begonnene Kurse werden nicht mehr angezeigt.",
+    "filtreNiveau": "Niveau",
+    "tousNiveaux": "Alle Niveaus",
+    "filtreFormat": "Format",
+    "tousFormats": "Alle Formate",
+    "presentiel": "Vor Ort (Douala, Yaoundé)",
+    "aucune": "Keine Kurse",
+    "nombre_one": "{{count}} Kurs",
+    "nombre_other": "{{count}} Kurse",
+    "videPresentiel": "Für diese Auswahl ist noch kein Kurs vor Ort angekündigt.",
+    "videChoix": "Für diese Auswahl ist noch kein Kurs angekündigt.",
+    "videNiveau": "Für Niveau {{level}} ist noch kein Kurs angekündigt.",
+    "videTout": "Noch ist kein Kurs angekündigt.",
+    "prevenir": "Sie können sich über den nächsten Kurs informieren lassen.",
+    "voirEnLigne": "Online-Kurse ansehen",
+    "voirToutes": "Alle Kurse ansehen",
+    "prevenirWhatsapp": "Per WhatsApp informiert werden"
+  },
+  "cours": {
+    "programme": "Programm {{level}}",
+    "format": "Format:",
+    "rythme": "Kurszeiten und Dauer:",
+    "debut": "Kursbeginn:",
+    "places": "Geplante Plätze:",
+    "indicatif": "(Richtwert)",
+    "srSession": "für diesen Kurs ({{level}}, {{format}})"
+  },
+  "apres": {
+    "title": "Nach Ihrer Bewerbung",
+    "etape": "Schritt {{n}}:",
+    "etapes": {
+      "envoi": {
+        "title": "Sie senden Ihre Anfrage",
+        "text": "Das Formular bereitet eine Nachricht mit Ihren Antworten vor. Sie senden sie per WhatsApp oder per E-Mail."
+      },
+      "etude": {
+        "title": "Das Team prüft Ihre Anfrage",
+        "text": "Es antwortet Ihnen per WhatsApp oder per E-Mail, über die Kontaktdaten, die Sie angegeben haben."
+      },
+      "niveau": {
+        "title": "Ihr Niveau wird bestätigt",
+        "text": "Eine Lehrkraft legt mit Ihnen die passende Gruppe fest, auf Grundlage des Einstufungstests, wenn Sie ihn gemacht haben."
+      },
+      "cohorte": {
+        "title": "Sie steigen in eine Kursgruppe ein",
+        "text": "Online oder vor Ort, je nach offenen Kursen und freien Plätzen."
+      }
+    },
+    "quiTitle": "Wer sich bewerben kann",
+    "qui": {
+      "niveaux": {
+        "title": "Anfänger wie Fortgeschrittene",
+        "text": "Von Niveau A1 (ohne Vorkenntnisse) bis Niveau C1. Der Online-Einstufungstest hilft Ihnen, Ihr Niveau einzuschätzen."
+      },
+      "lieu": {
+        "title": "Wo auch immer Sie leben",
+        "text": "Die Online-Kurse sind überall zugänglich. Kursgruppen vor Ort sind in Douala und Yaoundé geplant."
+      },
+      "pieces": {
+        "title": "Ohne Ausweis und ohne Zahlung",
+        "text": "Für die Bewerbung verlangen wir weder ein Ausweisdokument noch eine Zahlung."
+      }
+    }
+  },
+  "candidature": {
+    "seoTitle": "Kostenlos bewerben — Deutsch- und Englischkurse & Begleitung nach Europa",
+    "seoDescription": "Ein einziges, zu 100 % kostenloses Formular für die Anfrage nach Begleitung und die Anmeldung zu den Deutsch- und Englischkursen der WAHHF Foundation. Kein Ausweisdokument und keine Zahlung nötig.",
+    "title": "Für eine Begleitung bewerben",
+    "intro": "Ein einziges Formular, um an der Sprachakademie für Deutsch/Englisch (A1 bis C1) teilzunehmen, Orientierung für Europa zu erhalten oder beides. Es dauert etwa 5 Minuten.",
+    "avant": "Bevor Sie beginnen",
+    "souhaits": {
+      "cours_allemand": "Deutsch- und Englischkurse (A1 bis C1)",
+      "accompagnement_europe": "Begleitung nach Europa",
+      "les_deux": "Beides: Kurse und Orientierung"
+    },
+    "etapes": {
+      "1": "Ihre Kontaktdaten",
+      "2": "Ihr Wunsch nach Begleitung",
+      "3": "Ihre Motivation und Ihre Einwilligung"
+    },
+    "erreurs": {
+      "nom": "Geben Sie Ihren Vor- und Nachnamen ein.",
+      "pays": "Geben Sie Ihr Wohnsitzland an, zum Beispiel Kamerun.",
+      "ville": "Geben Sie Ihren Wohnort an, zum Beispiel Douala.",
+      "accord": "Kreuzen Sie dieses Feld an, damit wir Ihre Bewerbung prüfen und Sie kontaktieren können."
+    },
+    "paysDefaut": "Kamerun",
+    "statutPret": "Ihre Nachricht ist fertig: Senden Sie sie per WhatsApp oder per E-Mail.",
+    "statutEtape": "Schritt {{step}} von 3: {{label}}.",
+    "message": {
+      "objet": "Bewerbung WAHHF — {{name}}",
+      "intro": "Ich möchte mich für eine Begleitung der WAHHF Foundation bewerben. Hier sind meine Antworten aus dem Formular auf der Website:",
+      "nom": "Vollständiger Name",
+      "email": "E-Mail",
+      "telephone": "Telefon / WhatsApp",
+      "pays": "Wohnsitzland",
+      "ville": "Wohnort",
+      "souhait": "Wunsch",
+      "session": "Gewählter Kurs",
+      "paysInteret": "Interessensland",
+      "niveau": "Niveau Deutsch/Englisch",
+      "format": "Gewünschtes Format",
+      "message": "Nachricht",
+      "accord": "Ich bin damit einverstanden, dass die WAHHF Foundation meine Kontaktdaten ausschließlich zur Beantwortung meiner Anfrage nach Begleitung verarbeitet."
+    },
+    "envoiTitle": "Letzter Schritt: Senden Sie Ihre Bewerbung",
+    "modifier": "Meine Antworten ändern",
+    "rappel": "Zur Erinnerung: Niemand von WAHHF wird Sie per Telefon, E-Mail oder WhatsApp um Geld bitten, um Ihre Bewerbungsunterlagen zu bearbeiten.",
+    "conservees": "Ihre Antworten bleiben in diesem Browser, bis Sie den Tab schließen.",
+    "effacer": "Meine Antworten jetzt löschen",
+    "effacerConseil": "(empfohlen auf einem gemeinsam genutzten Telefon oder Computer).",
+    "formTitle": "Ihre Bewerbung",
+    "garderTitle": "Wir haben Ihre Antworten gespeichert",
+    "garderText": "Ihre Antworten wurden in diesem Browser gespeichert. Sie werden gelöscht, wenn Sie den Tab schließen.",
+    "garderEffacer": "Meine Antworten löschen und neu beginnen",
+    "sessionTitle": "Sie bewerben sich für diesen Kurs",
+    "sessionText": "Niveau {{level}}, {{format}}: {{title}}.",
+    "sessionChanger": "Anderen Kurs wählen",
+    "sessionNote": "(Niveau und Format können Sie in Schritt 2 wählen)",
+    "position": "Schritt {{step}} von 3",
+    "etape1Text": "Diese Angaben dienen nur dazu, Sie zu kontaktieren.",
+    "nomLabel": "Vollständiger Name (Vor- und Nachname) *",
+    "nomExemple": "z. B. Marie Nguenang",
+    "emailLabel": "E-Mail-Adresse *",
+    "emailExemple": "beispiel@domain.com",
+    "telephoneLabel": "Telefon / WhatsApp *",
+    "telephoneExemple": "z. B. +237 6...",
+    "paysLabel": "Aktuelles Wohnsitzland *",
+    "villeLabel": "Wohnort *",
+    "villeExemple": "z. B. Douala, Yaoundé, Bafoussam, Garoua...",
+    "versEtape2": "Weiter zu Schritt 2",
+    "etape2Text": "Geben Sie an, welcher Bereich Sie interessiert und welches Sprachniveau Sie zurzeit haben.",
+    "souhaitLegend": "Was wünschen Sie sich? *",
+    "paysInteretLabel": "Wichtigstes Interessensland unter den 10 begleiteten Ländern",
+    "horsUE": "(außerhalb der Europäischen Union)",
+    "niveauLabel": "Aktuelles / angestrebtes Niveau Deutsch/Englisch",
+    "niveaux": {
+      "A1": "A1 — Absolute Anfänger",
+      "A2": "A2 — Elementare Grundkenntnisse",
+      "B1": "B1 — Mittelstufe",
+      "B2": "B2 — Fortgeschrittenes Niveau",
+      "C1": "C1 — Akademisches Niveau"
+    },
+    "formatLabel": "Gewünschtes Format",
+    "precedente": "Vorheriger Schritt",
+    "versEtape3": "Weiter zu Schritt 3",
+    "etape3Text": "Beschreiben Sie kurz Ihren Werdegang und bestätigen Sie dann Ihre Anfrage.",
+    "messageLabel": "Ihre Nachricht (aktuelles Studium, Ziele, zeitliche Verfügbarkeit)",
+    "messageExemple": "Beschreiben Sie in wenigen Zeilen Ihre Motivation und Ihr Vorhaben...",
+    "aucunDocument": "In diesem Schritt verlangen wir weder ein Ausweisdokument noch eine Zahlung.",
+    "accord": "Ich bin damit einverstanden, dass die WAHHF Foundation meine Kontaktdaten streng vertraulich und ausschließlich zur Beantwortung meiner Anfrage nach Begleitung verarbeitet, gemäß der <lien>Datenschutzerklärung<nouvel> (neuer Tab)</nouvel></lien>. *",
+    "preparer": "Versand meiner Bewerbung vorbereiten"
+  },
+  "contenu": {
+    "niveaux": {
+      "a1": {
+        "shortTitle": "Einstieg",
+        "subtitle": "Vertraute, alltägliche Ausdrücke verstehen und verwenden.",
+        "duration": "10 bis 12 Wochen (Richtwert — TODO)",
+        "hours": "80 Stunden Lernbegleitung",
+        "prerequisites": "Keine Deutschkenntnisse nötig. Offen für absolute Anfänger.",
+        "nextSession": "September 2026 (TODO: Datum bestätigen)",
+        "objectives": [
+          "Alphabet, Aussprache und einfache Satzstrukturen beherrschen",
+          "Sich vorstellen und einfache Fragen zum direkten Umfeld stellen",
+          "Den Wortschatz des Alltags lernen (Familie, Wohnen, Einkaufen, Uhrzeiten)"
+        ],
+        "canDo": [
+          "Sich selbst und andere auf Deutsch vorstellen",
+          "Ein einfaches Formular mit den eigenen Angaben ausfüllen",
+          "Kurze Durchsagen und einfache Hinweise verstehen"
+        ],
+        "examTarget": "Vorbereitung auf das Goethe-Zertifikat A1: Start Deutsch 1 / telc Deutsch A1 (TODO: zu prüfen)"
+      },
+      "a2": {
+        "shortTitle": "Alltagsgespräche",
+        "subtitle": "In einfachen, routinemäßigen Alltagssituationen kommunizieren.",
+        "duration": "10 bis 12 Wochen (Richtwert — TODO)",
+        "hours": "90 Stunden Lernbegleitung",
+        "prerequisites": "Niveau A1 abgeschlossen oder den kostenlosen Einstufungstest bestanden.",
+        "nextSession": "Oktober 2026 (TODO: Datum bestätigen)",
+        "objectives": [
+          "Über die eigene Schulzeit, das Umfeld und unmittelbare Bedürfnisse sprechen",
+          "Das Perfekt, Modalverben und einfache Nebensätze beherrschen",
+          "Kurze E-Mails, Informationsangebote und alltägliche Dokumente lesen"
+        ],
+        "canDo": [
+          "Die eigene Ausbildung und Erfahrungen einfach beschreiben",
+          "Sich über vertraute Themen austauschen (Gesundheit, Arbeit, Reisen)",
+          "Kurze, klar gegliederte Nachrichten schreiben"
+        ],
+        "examTarget": "Vorbereitung auf das Goethe-Zertifikat A2 / telc Deutsch A2 (TODO: zu prüfen)"
+      },
+      "b1": {
+        "shortTitle": "Selbstständigkeit",
+        "subtitle": "In den meisten Situationen auf Reisen, im Studium oder in der Ausbildung selbstständig zurechtkommen.",
+        "duration": "12 bis 14 Wochen (Richtwert — TODO)",
+        "hours": "120 Stunden Lernbegleitung",
+        "prerequisites": "Niveau A2 abgeschlossen.",
+        "nextSession": "Oktober 2026 (TODO: Datum bestätigen)",
+        "objectives": [
+          "Die Hauptpunkte eines klaren Gesprächs über Arbeit, Schule oder Freizeit verstehen",
+          "Ein Ereignis erzählen, ein Vorhaben für Studium oder Ausbildung erklären",
+          "Ein Anschreiben und einen Lebenslauf nach deutschsprachigen Standards verfassen"
+        ],
+        "canDo": [
+          "Ohne Vorbereitung an einem Gespräch über vertraute Themen teilnehmen",
+          "Kurz eine Meinung vertreten oder die Wahl des eigenen Bildungswegs erklären",
+          "Alltägliche Behördengänge auf Deutsch bewältigen"
+        ],
+        "examTarget": "Vorbereitung auf das Goethe-Zertifikat B1 / telc Deutsch B1 (TODO: zu prüfen)"
+      },
+      "b2": {
+        "shortTitle": "Unabhängigkeit",
+        "subtitle": "Spontan kommunizieren und komplexe Texte verstehen.",
+        "duration": "14 bis 16 Wochen (Richtwert — TODO)",
+        "hours": "140 Stunden Lernbegleitung",
+        "prerequisites": "Niveau B1 abgeschlossen.",
+        "nextSession": "November 2026 (TODO: Datum bestätigen)",
+        "objectives": [
+          "Die Hauptinhalte konkreter oder abstrakter Themen in einem komplexen Text verstehen",
+          "An Fachdiskussionen im eigenen Fachgebiet teilnehmen",
+          "Sich mündlich wie schriftlich klar, ausführlich und differenziert ausdrücken"
+        ],
+        "canDo": [
+          "Vorbereitungskurse oder eine anspruchsvolle Berufsausbildung auf Deutsch absolvieren",
+          "In einem akademischen oder beruflichen Gespräch strukturiert argumentieren",
+          "Präzise Zusammenfassungen und formelle Schreiben verfassen"
+        ],
+        "examTarget": "Vorbereitung auf das Goethe-Zertifikat B2 / telc Deutsch B2 (TODO: zu prüfen)"
+      },
+      "c1": {
+        "shortTitle": "Sprachbeherrschung",
+        "subtitle": "Die Sprache im Studium und im gesellschaftlichen Leben flexibel und wirksam einsetzen.",
+        "duration": "16 Wochen (Richtwert — TODO)",
+        "hours": "160 Stunden Lernbegleitung",
+        "prerequisites": "Niveau B2 abgeschlossen.",
+        "nextSession": "Januar 2027 (TODO: Datum bestätigen)",
+        "objectives": [
+          "Ein breites Spektrum langer, anspruchsvoller Texte verstehen und implizite Bedeutungen erfassen",
+          "Sich spontan und fließend ausdrücken, ohne erkennbar nach Worten zu suchen",
+          "Die Methodik des wissenschaftlichen und akademischen Schreibens an der Universität beherrschen"
+        ],
+        "canDo": [
+          "Ein komplettes Studium auf Deutsch absolvieren",
+          "Komplexe Referate halten und auf anspruchsvolle Fragen antworten",
+          "Gut strukturierte Texte zu komplexen akademischen Themen verfassen"
+        ],
+        "examTarget": "Vorbereitung auf den TestDaF / das Goethe-Zertifikat C1 / telc Deutsch C1 Hochschule (TODO: zu prüfen)"
+      }
+    },
+    "sessions": {
+      "sess-a1-online": {
+        "title": "Deutsch A1: Grundlagen und Alltagskommunikation",
+        "days": "Montag, Mittwoch, Freitag (18:00–20:00 Uhr)",
+        "duration": "12 Wochen"
+      },
+      "sess-a1-dla": {
+        "title": "Deutsch A1: Kursgruppe vor Ort in Douala",
+        "days": "Dienstag, Donnerstag (16:00–18:30 Uhr) und Samstagvormittag",
+        "duration": "12 Wochen"
+      },
+      "sess-a2-online": {
+        "title": "Deutsch A2: Festigung und Selbstständigkeit im Alltag",
+        "days": "Dienstag, Donnerstag (18:30–20:30 Uhr) und Samstag (10:00–12:00 Uhr)",
+        "duration": "12 Wochen"
+      },
+      "sess-b1-online": {
+        "title": "Deutsch B1: Kurs für Studium und Ausbildung",
+        "days": "Montag, Mittwoch, Freitag (18:30–21:00 Uhr)",
+        "duration": "14 Wochen"
+      },
+      "sess-b1-yde": {
+        "title": "Deutsch B1: Intensivworkshop in Yaoundé",
+        "days": "Mittwoch, Freitag (16:00–18:30 Uhr) und Samstag",
+        "duration": "14 Wochen"
+      },
+      "sess-b2-online": {
+        "title": "Deutsch B2: fortgeschrittener Ausdruck und Fachthemen",
+        "days": "Dienstag, Donnerstag (18:30–21:00 Uhr) und Samstag (14:00–16:30 Uhr)",
+        "duration": "15 Wochen"
+      },
+      "sess-c1-online": {
+        "title": "Deutsch C1: Studienvorbereitung und TestDaF",
+        "days": "Montag, Donnerstag (19:00–21:30 Uhr) und Samstag (9:00–12:00 Uhr)",
+        "duration": "16 Wochen"
+      }
+    }
+  }
+}

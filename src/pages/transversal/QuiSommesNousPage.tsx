@@ -1,4 +1,5 @@
 import { ReactNode, useRef } from 'react';
+import type { TFunction } from 'i18next';
 import SEO from '../../components/wahhf/SEO';
 import Section from '../../components/wahhf/Section';
 import SectionHeader from '../../components/wahhf/SectionHeader';
@@ -11,10 +12,24 @@ import { TIMELINE_MILESTONES } from '../../services/api';
 import OrgChart from '../../components/team/OrgChart';
 import PrinciplesSection from '../../components/principles/PrinciplesSection';
 import { TEAM } from '../../data/team';
-import { displayName } from '../../lib/team';
+import { displayName, displayRole } from '../../lib/team';
 import Photo from '../../components/wahhf/Photo';
 import { cn } from '../../lib/utils';
 import { photoCaption, photoOrFallback } from '../../lib/photos';
+import { registerBundle } from '../../i18n';
+import { useLocalize } from '../../lib/localize';
+import qsnFr from '../../locales/qui-sommes-nous/fr.json';
+
+/**
+ * Textes de la page (lot 7.10) : src/locales/qui-sommes-nous/ (espace de noms quiSommesNous). Les étapes de la frise
+ * (TIMELINE_MILESTONES, src/services/api.ts) restent en français dans leur fichier ; l'anglais et l'allemand sont des
+ * surcouches (quiSommesNous.contenu.etapes, case par case). Hero, organigramme et rôles : src/locales/equipe/
+ * (src/lib/team.ts) ; les cinq principes : src/locales/principles/.
+ */
+registerBundle('quiSommesNous', qsnFr, {
+  en: () => import('../../locales/qui-sommes-nous/en.json'),
+  de: () => import('../../locales/qui-sommes-nous/de.json'),
+});
 
 /**
  * Photos de la fondation (lot 7.6, catalogue : « À propos ») : la banderole dans l'en-tête ; le kakémono des domaines
@@ -47,20 +62,15 @@ const NB = ' ';
 
 // Revue du groupe 7.3 : la valeur « Aucun frais pour les familles » (ex-« Gratuité Totale ») est retirée : c'était une
 // gratuité dans un titre, la troisième du premier écran. La gratuité reste dite dans le paragraphe de la mission.
-const VALUES = [
-  {
-    title: 'Dignité et respect',
-    desc: 'Chaque bénéficiaire est accueilli comme un acteur de son propre parcours, jamais comme un client.',
-  },
-  {
-    title: 'Intégrité et vérité',
-    desc: 'Nous combattons les fausses promesses migratoires par une information rigoureuse et vérifiable.',
-  },
-];
+// Les deux valeurs : quiSommesNous.values (lot 7.10).
+interface Value {
+  title: string;
+  desc: string;
+}
 
 /*
  * Notre approche : les cinq principes de l'ancienne section de l'accueil, déplacés mot pour mot dans les fichiers de
- * langue (principles.items de src/locales/fr.json et en.json) au lot 7.8 : src/components/principles/.
+ * langue au lot 7.8 (principles.items, src/locales/principles/) : src/components/principles/.
  */
 
 /**
@@ -69,40 +79,44 @@ const VALUES = [
  */
 const IROKO_FACTS: { title: string; text: string }[] = [];
 
-/** Année d'une étape, seulement si elle est confirmée (« 2021 (TODO) » n'est pas affichée). */
 /** Texte alternatif de la photo du président : son nom seulement s'il est confirmé (src/data/team.ts, nomConfirme). */
-function presidentAlt(catalogueAlt: string) {
+function presidentAlt(catalogueAlt: string, t: TFunction) {
   const president = TEAM.find((m) => m.niveau === 1);
-  return president?.nomConfirme ? `${displayName(president)}, ${president.role ?? ''}, pendant sa présentation` : catalogueAlt;
+  return president?.nomConfirme
+    ? t('quiSommesNous.presidentAlt', { name: displayName(president), role: displayRole(president) ?? '' })
+    : catalogueAlt;
 }
 
+/** Année d'une étape, seulement si elle est confirmée (« 2021 (TODO) » n'est pas affichée). */
 const confirmedYear = (year: string) => (/TODO/.test(year) ? null : year);
 
 /**
  * Étapes de la frise : titre en 600 (aligné sur le point), année confirmée dessous, puis la phrase ; largeur bornée
- * pour la dernière colonne. Espace insécable avant les deux-points des titres (T-19).
+ * pour la dernière colonne. Espace insécable avant les deux-points des titres (T-19, en français).
  */
-const milestones: FilPoint[] = TIMELINE_MILESTONES.map((m, i) => {
-  const year = confirmedYear(m.year);
-  const label: ReactNode = (
-    <span className="flex flex-col gap-1 lg:max-w-[16rem]">
-      <span className="font-semibold">{m.title.replace(' : ', `${NB}: `)}</span>
-      {year && <span className="text-meta text-text-secondary tabular-nums">{year}</span>}
-      <span className="text-text-secondary">{m.desc}</span>
-    </span>
-  );
-  return { id: `etape-${i + 1}`, label };
-});
+function milestonePoints(items: typeof TIMELINE_MILESTONES): FilPoint[] {
+  return items.map((m, i) => {
+    const year = confirmedYear(m.year);
+    const label: ReactNode = (
+      <span className="flex flex-col gap-1 lg:max-w-[16rem]">
+        <span className="font-semibold">{m.title.replace(' : ', `${NB}: `)}</span>
+        {year && <span className="text-meta text-text-secondary tabular-nums">{year}</span>}
+        <span className="text-text-secondary">{m.desc}</span>
+      </span>
+    );
+    return { id: `etape-${i + 1}`, label };
+  });
+}
 
 export function QuiSommesNousPage() {
   const filRef = useRef<HTMLDivElement>(null);
+  const { t, localized } = useLocalize();
+  const values = t('quiSommesNous.values', { returnObjects: true }) as Value[];
+  const milestones = milestonePoints(localized(TIMELINE_MILESTONES, 'quiSommesNous.contenu.etapes'));
 
   return (
     <>
-      <SEO
-        title="Qui sommes-nous — Fondation camerouno-allemande, branche sociale du groupe IROKO"
-        description="Découvrez l’histoire, la mission, les valeurs et l’approche de WAHHF Foundation, et son lien avec le groupe IROKO."
-      />
+      <SEO title={t('quiSommesNous.seo.title')} description={t('quiSommesNous.seo.description')} />
 
       {/* HERO : titre et portraits de l'équipe (lot 7.7) */}
       <TeamHero />
@@ -114,22 +128,15 @@ export function QuiSommesNousPage() {
       <Section tone="sauge">
         <div className="container-page grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           <div className="lg:col-span-7 space-y-5">
-            <SectionHeader title="Bâtir l’autonomie par l’éducation, la santé et l’accès au savoir" />
+            <SectionHeader title={t('quiSommesNous.mission.title')} />
             <div className="space-y-4 text-body text-text-secondary max-w-[65ch]">
-              <p className="text-text">
-                WAHHF Foundation part d’une conviction simple : chaque jeune mérite d’accéder à l’éducation, aux soins de
-                prévention, à l’apprentissage des langues et à une information vérifiée, sans que le manque de ressources
-                financières ou les réseaux de désinformation ne brisent son avenir.
-              </p>
-              <p>
-                Basée à Yaoundé et à Douala, avec une coordination en Allemagne, la fondation propose un programme gratuit
-                d’apprentissage de l’allemand /anglais (A1 à C1) et d’orientation vers 10 pays européens.
-              </p>
+              <p className="text-text">{t('quiSommesNous.mission.p1')}</p>
+              <p>{t('quiSommesNous.mission.p2')}</p>
             </div>
           </div>
 
           <TextList columns={1} className="lg:col-span-5">
-            {VALUES.map((val) => (
+            {values.map((val) => (
               <TextListItem key={val.title} title={val.title}>
                 <p>{val.desc}</p>
               </TextListItem>
@@ -156,10 +163,7 @@ export function QuiSommesNousPage() {
       {/* NOTRE PARCOURS : la frise, avec le fil (venue de l'accueil). Années non confirmées masquées. */}
       <Section tone="sauge" id="parcours">
         <div className="container-page space-y-10">
-          <SectionHeader
-            title="Les grandes étapes de WAHHF Foundation"
-            subtitle="Une construction progressive au service des communautés."
-          />
+          <SectionHeader title={t('quiSommesNous.timeline.title')} subtitle={t('quiSommesNous.timeline.subtitle')} />
           <div ref={filRef}>
             <Fil
               orientation="auto"
@@ -180,7 +184,7 @@ export function QuiSommesNousPage() {
             <div className="grid max-w-4xl grid-cols-[9fr_4fr] gap-2 sm:gap-3">
               <Photo photo={STORY_PHOTO} sizes="(min-width: 56rem) 38rem, 70vw" imgAttributes={{ 'data-reveal': '' }} />
               <Photo
-                photo={{ ...PRESIDENT_PHOTO, alt: presidentAlt(PRESIDENT_PHOTO.alt) }}
+                photo={{ ...PRESIDENT_PHOTO, alt: presidentAlt(PRESIDENT_PHOTO.alt, t) }}
                 sizes="(min-width: 56rem) 17rem, 30vw"
                 imgAttributes={{ 'data-reveal': '' }}
               />
@@ -194,11 +198,8 @@ export function QuiSommesNousPage() {
       <Section id="iroko">
         <div className="container-page space-y-8">
           <div className="max-w-[65ch] space-y-5">
-            <SectionHeader title="WAHHF Foundation, branche sociale du groupe IROKO" />
-            <p className="text-body text-text-secondary">
-              Le groupe multisectoriel camerouno-allemand IROKO a structuré WAHHF Foundation comme sa branche sociale et
-              philanthropique, à but non lucratif. Ce soutien couvre les frais de fonctionnement et d’enseignement.
-            </p>
+            <SectionHeader title={t('quiSommesNous.iroko.title')} />
+            <p className="text-body text-text-secondary">{t('quiSommesNous.iroko.text')}</p>
           </div>
           {IROKO_FACTS.length > 0 && (
             <TextList columns={3}>
@@ -209,7 +210,7 @@ export function QuiSommesNousPage() {
               ))}
             </TextList>
           )}
-          <SecondaryButton to="/partenaires">Découvrir nos partenaires</SecondaryButton>
+          <SecondaryButton to="/partenaires">{t('quiSommesNous.iroko.partners')}</SecondaryButton>
         </div>
       </Section>
 
@@ -217,14 +218,11 @@ export function QuiSommesNousPage() {
       <Section tone="sauge">
         <div className={cn('container-page', CLOSING_PHOTO && 'grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-12')}>
           <div className="max-w-[65ch] space-y-6">
-            <SectionHeader
-              title="Soutenir la fondation"
-              subtitle={`Vous pouvez soutenir nos actions par un don, ou proposer un partenariat à la fondation${NB}: école, association, entreprise ou institution.`}
-            />
+            <SectionHeader title={t('quiSommesNous.support.title')} subtitle={t('quiSommesNous.support.subtitle')} />
             <div className="flex flex-wrap items-center gap-3">
               <DonateButton size="lg" />
               <SecondaryButton to="/agir#partenaire" size="lg">
-                Devenir partenaire
+                {t('quiSommesNous.support.partner')}
               </SecondaryButton>
             </div>
           </div>

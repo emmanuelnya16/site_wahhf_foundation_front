@@ -13,9 +13,11 @@ import { AfterFirstDisplay, FilScrub } from '../effects/DeferredMotion';
 import PlacementTest from './academie/PlacementTest';
 import SessionsCalendar from './academie/SessionsCalendar';
 import LevelDetail from './academie/LevelDetail';
-import { FinalAction, levelName, levelSteps, useFocusTitleAfterNavigation } from './academie/shared';
+import { FinalAction, useFocusTitleAfterNavigation, useLevels } from './academie/shared';
 import { GERMAN_LEVELS_DATA } from '../services/api';
 import { photoCaption, photoOrFallback } from '../lib/photos';
+import { useLocalize } from '../lib/localize';
+import '../locales/mobilite';
 
 /*
  * Académie de langues (/mobilite-langues/academie), groupe 7.1 : contrat validé, audit ACAD-01 à ACAD-08, T-05, T-14.
@@ -26,20 +28,25 @@ import { photoCaption, photoOrFallback } from '../lib/photos';
  * Retouches du 19/11 (des images) : photo dans l'en-tête, des jeunes participantes attentives le 25 avril (A33), ou,
  * tant que l'accord parental manque (production), un participant qui prend des notes (A98) ; découverte du bas vers le
  * haut sur ordinateur, comme Mobilité.
+ * Lot 7.10 : textes du paquet « mobilite », niveaux traduits par leurs surcouches (useLevels).
  */
 
 const HEADER_PHOTO = photoOrFallback('A33', 'A98');
 
 export default function LanguageAcademy() {
   useFocusTitleAfterNavigation();
-  const [selected, setSelected] = useState(GERMAN_LEVELS_DATA[0]);
+  const { t } = useLocalize();
+  const levels = useLevels();
+  // Le niveau des données (en français) ; affiché traduit
+  const [selectedLevel, setSelected] = useState(GERMAN_LEVELS_DATA[0]);
+  const selected = levels.localize(selectedLevel);
   const filRef = useRef<HTMLDivElement>(null);
 
   return (
     <>
       <SEO
-        title="Académie de langues — Allemand /anglais A1 à C1 gratuit"
-        description="Accompagnement gratuit des cours de langue allemande /anglaise du niveau A1 au niveau C1 par WAHHF Foundation : test de niveau de 20 questions, programme par niveau et sessions."
+        title={t('mobilite.academie.seoTitle')}
+        description={t('mobilite.academie.seoDescription')}
         canonical="/mobilite-langues/academie"
       />
 
@@ -50,16 +57,13 @@ export default function LanguageAcademy() {
         photoCaption={HEADER_PHOTO ? photoCaption(HEADER_PHOTO) : undefined}
         notice={<DisclaimerBanner />}
       >
-        <PageBreadcrumb items={[{ label: 'Mobilité & Langues', to: '/mobilite-langues' }, { label: 'Académie de langues' }]} />
-        <PageTitle>Académie de langues : l’allemand /anglais, du niveau A1 au niveau C1 avec WAHHF Institute</PageTitle>
-        <PageIntro>
-          Des cours d’allemand /anglais du niveau débutant jusqu’à la maîtrise académique, en ligne ou en présentiel à Douala et à
-          Yaoundé. Commencez par le test : il vous dit par quel niveau commencer.
-        </PageIntro>
+        <PageBreadcrumb items={[{ label: t('mobilite.commun.mobilite'), to: '/mobilite-langues' }, { label: t('mobilite.commun.academie') }]} />
+        <PageTitle>{t('mobilite.academie.title')}</PageTitle>
+        <PageIntro>{t('mobilite.academie.intro')}</PageIntro>
         <PageActions>
           {/* ACAD-07 : le test est la porte principale ; la candidature ne choisit pas le niveau à votre place */}
-          <PrimaryButton href="#test-niveau">Trouver mon niveau (5 minutes)</PrimaryButton>
-          <SecondaryButton to="/candidater?souhait=cours_allemand">Candidater (choisir mon niveau)</SecondaryButton>
+          <PrimaryButton href="#test-niveau">{t('mobilite.academie.ctaTest')}</PrimaryButton>
+          <SecondaryButton to="/candidater?souhait=cours_allemand">{t('mobilite.academie.ctaCandidater')}</SecondaryButton>
         </PageActions>
       </PageHeader>
 
@@ -68,12 +72,15 @@ export default function LanguageAcademy() {
 
       {/* Les 5 niveaux : la frise (dessinée au défilement sur ordinateur) et la fiche du niveau affiché */}
       <section id="niveaux" className="container-page section-space space-y-10">
-        <SectionHeader
-          title="Les 5 niveaux, de A1 à C1"
-          subtitle="Chaque niveau mène à sa page : objectifs, compétences, volume horaire et prochaines sessions."
-        />
-        <div ref={filRef} role="group" aria-label="Les cinq niveaux d’allemand /anglais, de A1 à C1, puis l’Europe">
-          <Fil orientation="auto" steps={levelSteps} end={{ id: 'europe', label: 'Europe' }} currentId={selected.slug} />
+        <SectionHeader title={t('mobilite.academie.niveauxTitle')} subtitle={t('mobilite.academie.niveauxSubtitle')} />
+        <div ref={filRef} role="group" aria-label={t('mobilite.commun.filAria')}>
+          <Fil
+            orientation="auto"
+            steps={levels.steps}
+            end={{ id: 'europe', label: t('mobilite.commun.europe') }}
+            currentId={selected.slug}
+            currentLabel={t('mobilite.commun.niveauAffiche')}
+          />
         </div>
         <AfterFirstDisplay>
           <FilScrub scope={filRef} />
@@ -82,14 +89,14 @@ export default function LanguageAcademy() {
         <div className="space-y-6 border-t border-border-subtle pt-8">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
             <div className="space-y-2">
-              <h3 className="text-section-title text-text">{levelName(selected)}</h3>
+              <h3 className="text-section-title text-text">{levels.name(selectedLevel)}</h3>
               <p className="text-body text-text-secondary max-w-[65ch]">{selected.subtitle}</p>
             </div>
             <Link to={`/academie/${selected.slug}`} className={TEXT_LINK_CLASS}>
-              Toute la page du niveau {selected.level}
+              {t('mobilite.academie.pageNiveau', { level: selected.level })}
             </Link>
           </div>
-          <LevelDetail level={selected} headingLevel="h4" />
+          <LevelDetail level={selectedLevel} headingLevel="h4" />
         </div>
       </section>
 
@@ -99,17 +106,13 @@ export default function LanguageAcademy() {
         <div className="container-page grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-12">
           <AfterApplicationSteps headingLevel="h2" />
           <div className="space-y-4">
-            <h2 className="text-section-title text-text">Préparation aux examens officiels</h2>
-            <p className="text-body text-text-secondary max-w-[65ch]">
-              Nos parcours intègrent des entraînements blancs aux épreuves de compréhension écrite, d’écoute,
-              d’expression écrite et d’oral, selon les standards des examens reconnus : Goethe-Zertifikat, telc Deutsch
-              et TestDaF.
-            </p>
+            <h2 className="text-section-title text-text">{t('mobilite.academie.examensTitle')}</h2>
+            <p className="text-body text-text-secondary max-w-[65ch]">{t('mobilite.academie.examensText')}</p>
           </div>
         </div>
       </Section>
 
-      <FinalAction to="/candidater?souhait=cours_allemand" label="Candidater" tone="sauge" />
+      <FinalAction to="/candidater?souhait=cours_allemand" label={t('mobilite.commun.candidater')} tone="sauge" />
     </>
   );
 }

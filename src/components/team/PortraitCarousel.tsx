@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { ChevronDown, ChevronUp, Pause, Play } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import type { TeamMember } from '../../data/team';
 import { displayName, displayRole, memberPortrait } from '../../lib/team';
 import { useMediaQuery } from '../../lib/useMediaQuery';
@@ -36,6 +37,7 @@ function loop<T>(items: T[]): T[] {
  * - Mouvement réduit : ni défilement automatique ni bouton pause, trois cartes fixes, changement instantané.
  */
 export default function PortraitCarousel({ members }: { members: TeamMember[] }) {
+  const { t } = useTranslation();
   const reduce = useMediaQuery('(prefers-reduced-motion: reduce)');
   const cards = loop(members.filter((m) => memberPortrait(m)));
   const count = cards.length;
@@ -79,8 +81,8 @@ export default function PortraitCarousel({ members }: { members: TeamMember[] })
     <div
       ref={zoneRef}
       role="group"
-      aria-roledescription="carrousel"
-      aria-label="Portraits des dirigeants"
+      aria-roledescription={t('equipe.carousel.roleDescription')}
+      aria-label={t('equipe.carousel.label')}
       className="pc"
       // Focus au clavier dans la zone : pause (un clic de souris sur un bouton ne la déclenche pas)
       onFocus={(event) => setFocused((event.target as HTMLElement).matches(':focus-visible'))}
@@ -121,17 +123,17 @@ export default function PortraitCarousel({ members }: { members: TeamMember[] })
       <div className="pc-controls">
         <button type="button" className="pc-button" onClick={() => step(-1)}>
           <ChevronUp aria-hidden="true" className="h-5 w-5" />
-          <span className="sr-only">Portrait précédent</span>
+          <span className="sr-only">{t('equipe.carousel.previous')}</span>
         </button>
         {!reduce && (
           <button type="button" className="pc-button pc-button-text" onClick={() => setUserPaused((p) => !p)}>
             {userPaused ? <Play aria-hidden="true" className="h-4 w-4" /> : <Pause aria-hidden="true" className="h-4 w-4" />}
-            {userPaused ? 'Reprendre' : 'Mettre en pause'}
+            {userPaused ? t('equipe.carousel.resume') : t('equipe.carousel.pause')}
           </button>
         )}
         <button type="button" className="pc-button" onClick={() => step(1)}>
           <ChevronDown aria-hidden="true" className="h-5 w-5" />
-          <span className="sr-only">Portrait suivant</span>
+          <span className="sr-only">{t('equipe.carousel.next')}</span>
         </button>
       </div>
     </div>

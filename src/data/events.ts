@@ -325,7 +325,7 @@ export const ROAD_TO_EUROPE_FAITS = {
 
 /**
  * Road to Europe (brief du 21 novembre 2026) : le même rendez-vous que la référence, vers les 10 pays du site.
- * Textes français fournis par la fondation, mot pour mot ; anglais proposé dans src/locales/events/en.json (contenu).
+ * Textes français fournis par la fondation, mot pour mot ; anglais et allemand proposés dans src/locales/events/en.json et de.json (contenu).
  */
 const ROAD_TO_EUROPE: Event = frAll({
   slug: 'road-to-europe',

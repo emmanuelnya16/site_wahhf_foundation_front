@@ -80,7 +80,7 @@ export default function EventPage() {
       <NotFoundPage title={t('events.notFound.title')} message={t('events.notFound.text')}>
         <NotFoundLinks
           heading={t('events.list.title')}
-          links={[{ to: '/evenements', label: t('events.list.title') }, ...EVENTS.map((e) => ({ to: `/evenements/${e.slug}`, label: e.titre.replace(/\n/g, ' ') }))]}
+          links={[{ to: '/evenements', label: t('events.list.title') }, ...EVENTS.map((e) => ({ to: `/evenements/${e.slug}`, label: localizeEvent(e, i18n.language).titre.replace(/\n/g, ' ') }))]}
         />
       </NotFoundPage>
     );

@@ -1,0 +1,3 @@
+{
+  "_note": "Textes des photos (lot 7.10) : le français reste dans src/data/photos.ts (catalogue, généré : alt de chaque photo, PHOTO_ALBUMS) et src/data/gallery.ts (GALLERY_ITEMS : alt et caption ; GALLERY_ALBUMS : title, meta, story). en.json et de.json n'ont que des surcouches « contenu » : contenu.photos.<repère>.alt, contenu.albums.<id>.title et .note, contenu.galerie.<id> pour les éléments et les albums de gallery.ts (leurs id ne se recouvrent pas). Le titre « First Open Day & Boot Camp » est un nom propre : pas de surcouche."
+}

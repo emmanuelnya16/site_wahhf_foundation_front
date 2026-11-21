@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { ShieldCheck } from 'lucide-react';
 import { ConsentChoice, getConsent, setConsent } from '../../lib/consent';
 import { PrimaryButton, SecondaryButton } from './Buttons';
@@ -11,6 +12,7 @@ import { PrimaryButton, SecondaryButton } from './Buttons';
  */
 
 export default function CookieBanner() {
+  const { t } = useTranslation();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -28,25 +30,25 @@ export default function CookieBanner() {
   return (
     <div
       role="region"
-      aria-label="Gestion des cookies et de la vie privée"
+      aria-label={t('ui.cookies.label')}
       className="fixed bottom-4 left-4 right-4 md:left-6 md:right-auto md:max-w-md z-(--z-banner) rounded-card bg-surface-raised shadow-overlay dark:border dark:border-border-input p-5 text-text"
     >
       <div className="flex items-start gap-3">
         <ShieldCheck aria-hidden="true" className="w-5 h-5 text-link shrink-0 mt-0.5" />
         <div className="space-y-2">
-          <p className="text-body font-bold text-text">Respect de votre vie privée (RGPD)</p>
+          <p className="text-body font-bold text-text">{t('ui.cookies.title')}</p>
           <p className="text-meta text-text-secondary">
-            WAHHF Foundation utilise uniquement des cookies techniques nécessaires au bon fonctionnement du site (choix de langue et de thème). Aucun traceur publicitaire n’est activé.{' '}
+            {t('ui.cookies.text')}{' '}
             <Link to="/confidentialite" className="text-link underline underline-offset-4 decoration-1 hover:decoration-2">
-              Politique de confidentialité
+              {t('ui.cookies.privacy')}
             </Link>
           </p>
           <div className="pt-2 flex flex-wrap items-center gap-2.5">
             <SecondaryButton size="sm" onClick={() => handleChoice('essential')}>
-              Refuser le non-essentiel
+              {t('ui.cookies.refuse')}
             </SecondaryButton>
             <PrimaryButton size="sm" onClick={() => handleChoice('all')}>
-              Accepter
+              {t('ui.cookies.accept')}
             </PrimaryButton>
           </div>
         </div>

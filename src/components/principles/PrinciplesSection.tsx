@@ -6,17 +6,19 @@ import { cn } from '../../lib/utils';
 import { useMediaQuery } from '../../lib/useMediaQuery';
 import { AfterFirstDisplay } from '../../effects/DeferredMotion';
 import { drawFil } from './principlesFil';
-import i18n from '../../i18n';
+import { registerBundle } from '../../i18n';
 import principlesFr from '../../locales/principles/fr.json';
-import principlesEn from '../../locales/principles/en.json';
 
 /*
- * Textes de la section, en français et en anglais, ajoutés à l'i18n du site quand la page se charge : ils ne pèsent
- * pas dans le JavaScript initial (lot 7.8, JS initial inchangé). Anglais : traduction proposée, à valider
+ * Textes de la section, ajoutés à l'i18n du site quand la page se charge : ils ne pèsent pas dans le JavaScript
+ * initial (lot 7.8, JS initial inchangé). Le français part avec la page ; l'anglais et l'allemand sont téléchargés
+ * quand la langue est choisie (lot 7.10). Anglais et allemand : traductions proposées, à valider
  * (docs/contenus-a-fournir.md, question 151).
  */
-i18n.addResourceBundle('fr', 'translation', { principles: principlesFr }, true, false);
-i18n.addResourceBundle('en', 'translation', { principles: principlesEn }, true, false);
+registerBundle('principles', principlesFr, {
+  en: () => import('../../locales/principles/en.json'),
+  de: () => import('../../locales/principles/de.json'),
+});
 
 /** Le mouvement (GSAP, ScrollTrigger, DrawSVG, MotionPath, SplitText) : un fichier à part, chargé quand la section approche. */
 const PrinciplesMotion = lazy(() => import('../../effects/motion/PrinciplesMotion'));
@@ -70,7 +72,7 @@ function useNear(ref: RefObject<HTMLElement | null>) {
  *   l'arrivée de GSAP) : une colonne, fil entièrement tracé. Compteur, consigne, fil, nœuds et point : aria-hidden.
  * - Mouvement (src/effects/motion/PrinciplesMotion.tsx, chargé quand la section approche, jamais en mouvement
  *   réduit) : parcours épinglé sur ordinateur, fil tracé au défilement et cartes par lots ailleurs.
- * - Tous les textes passent par l'i18n (clés principles.*, src/locales/principles/fr.json et en.json). Les éléments découpés en
+ * - Tous les textes passent par l'i18n (clés principles.*, src/locales/principles/fr.json, en.json et de.json). Les éléments découpés en
  *   lignes portent la langue en clé : un changement de langue les remplace, puis le mouvement les redécoupe.
  */
 export default function PrinciplesSection() {

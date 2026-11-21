@@ -2,6 +2,7 @@ import type { TFunction } from 'i18next';
 import i18n from '../i18n';
 import { EVENTS, type Event, type EventDomain, type EventSectionKey, type EventSectionText, type EventStatus } from '../data/events';
 import { photoOrFallback } from './photos';
+import { INTL_LOCALE, langOf, merge } from './localize';
 import type { CatalogPhoto } from '../data/photos';
 
 /** Aperçu de production avec les textes provisoires (captures, Lighthouse) : VITE_APERCU_EVENEMENTS=1 au build. */
@@ -53,11 +54,13 @@ export function eventPhoto(ids: readonly string[]): CatalogPhoto | null {
 }
 
 const NB = ' ';
-const locale = (lang: string) => (lang.startsWith('en') ? 'en-GB' : 'fr-FR');
+/** fr-FR, en-GB ou de-DE (src/lib/localize.ts) */
+const locale = (lang: string) => INTL_LOCALE[langOf(lang)];
 const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
-/** « Samedi 25 avril 2026 » (heure de Douala), insécable entre le jour, le mois et l'année ; en milieu de phrase,
- *  capital = false garde la minuscule française (« le mardi 19 janvier »). */
+/** « Samedi 25 avril 2026 », « Saturday 25 April 2026 », « Samstag, 25. April 2026 » (heure de Douala), insécable
+ *  entre le jour, le mois et l'année ; en milieu de phrase, capital = false garde la minuscule française (« le mardi
+ *  19 janvier ») : en allemand, le jour garde sa majuscule. */
 export function eventDate(event: Event, lang: string, withWeekday = true, capital = true): string | null {
   if (!event.date) return null;
   const text = new Intl.DateTimeFormat(locale(lang), {
@@ -67,22 +70,34 @@ export function eventDate(event: Event, lang: string, withWeekday = true, capita
     year: 'numeric',
     timeZone: event.fuseau,
   }).format(new Date(event.date));
-  return (capital ? capitalize(text) : text).replace(/(\d+) (\p{L}+) (\d{4})/u, `$1${NB}$2${NB}$3`);
+  return (capital ? capitalize(text) : text).replace(/(\d+\.?) (\p{L}+) (\d{4})/u, `$1${NB}$2${NB}$3`);
 }
 
-/** « 8 h – 21 h » en français, « 8:00 – 21:00 » en anglais (heure de Douala) ; null sans date. */
+/** Une heure (heure de Douala) : « 8 h », « 8 h 30 » en français, « 8:00 » en anglais et en allemand. */
+function clock(iso: string, event: Event, lang: string): string {
+  const parts = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', hourCycle: 'h23', timeZone: event.fuseau })
+    .formatToParts(new Date(iso));
+  const h = Number(parts.find((p) => p.type === 'hour')?.value ?? 0);
+  const m = parts.find((p) => p.type === 'minute')?.value ?? '00';
+  if (langOf(lang) !== 'fr') return `${h}:${m}`;
+  return m === '00' ? `${h}${NB}h` : `${h}${NB}h${NB}${m}`;
+}
+
+/** « 8 h – 21 h » en français, « 8:00 – 21:00 » en anglais, « 8:00–21:00 Uhr » en allemand (heure de Douala) ; null
+ *  sans date. */
 export function eventHours(event: Event, lang: string): string | null {
   if (!event.date) return null;
-  const date = event.date;
-  const fmt = (iso: string) => {
-    const parts = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', hourCycle: 'h23', timeZone: event.fuseau })
-      .formatToParts(new Date(iso));
-    const h = Number(parts.find((p) => p.type === 'hour')?.value ?? 0);
-    const m = parts.find((p) => p.type === 'minute')?.value ?? '00';
-    if (lang.startsWith('en')) return `${h}:${m}`;
-    return m === '00' ? `${h}${NB}h` : `${h}${NB}h${NB}${m}`;
-  };
-  return event.fin ? `${fmt(date)} – ${fmt(event.fin)}` : fmt(date);
+  if (langOf(lang) === 'de') {
+    return `${event.fin ? `${clock(event.date, event, lang)}–${clock(event.fin, event, lang)}` : clock(event.date, event, lang)}${NB}Uhr`;
+  }
+  return event.fin ? `${clock(event.date, event, lang)} – ${clock(event.fin, event, lang)}` : clock(event.date, event, lang);
+}
+
+/** Heure de début seule : « 9 h », « 9:00 », « 9:00 Uhr » (compte à rebours) ; null sans date. */
+export function eventStartTime(event: Event, lang: string): string | null {
+  if (!event.date) return null;
+  const time = clock(event.date, event, lang);
+  return langOf(lang) === 'de' ? `${time}${NB}Uhr` : time;
 }
 
 /** Temps restant avant le début, en jours, heures, minutes et secondes (0 partout une fois commencé) ; null sans date. */
@@ -123,26 +138,23 @@ export function sectionText(event: Event, key: EventSectionKey, field: keyof Eve
   return event.sections?.[key]?.[field];
 }
 
-/** Fusion profonde : les objets champ par champ, les tableaux élément par élément ; le reste est remplacé. */
-function merge<T>(base: T, over: unknown): T {
-  if (over == null) return base;
-  if (Array.isArray(base) && Array.isArray(over)) return base.map((item, i) => merge(item, over[i])) as T;
-  if (base && typeof base === 'object' && typeof over === 'object' && !Array.isArray(over)) {
-    const out: Record<string, unknown> = { ...(base as Record<string, unknown>) };
-    for (const [k, v] of Object.entries(over as Record<string, unknown>)) out[k] = merge(out[k], v);
-    return out as T;
-  }
-  return over as T;
-}
+/** L'événement de démonstration reprend la journée du 25 avril (src/data/events.ts) : il part de sa surcouche. */
+const OVERLAY_BASE: Record<string, string> = { 'exemple-a-venir': 'journee-2026-04-25' };
 
 /**
- * Contenu dans la langue de l'interface : le français vient de src/data/events.ts ; l'anglais, quand il existe, de
- * events.contenu.<slug> dans src/locales/events/en.json (mêmes champs, fusionnés sur le français).
+ * Contenu dans la langue de l'interface : le français vient de src/data/events.ts ; l'anglais et l'allemand, de
+ * events.contenu.<slug> dans src/locales/events/en.json et de.json (mêmes champs, fusionnés sur le français).
  */
 export function localizeEvent(event: Event, lang: string): Event {
-  if (!lang.startsWith('en')) return event;
-  const over = i18n.getResource('en', 'translation', `events.contenu.${event.slug}`);
-  return over ? merge(event, over) : event;
+  const code = langOf(lang);
+  if (code === 'fr') return event;
+  let out = event;
+  for (const slug of [OVERLAY_BASE[event.slug], event.slug]) {
+    if (!slug) continue;
+    const over = i18n.getResource(code, 'translation', `events.contenu.${slug}`);
+    if (over) out = merge(out, over);
+  }
+  return out;
 }
 
 /** Le titre coupé autour du mot accent : [avant, accent, après] ; accent vide s'il n'est pas dans le titre. */

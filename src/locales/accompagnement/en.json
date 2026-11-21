@@ -1,0 +1,500 @@
+{
+  "commun": {
+    "mobilite": "Mobility & Languages",
+    "accompagnement": "Support towards Europe",
+    "etape": "Step {{n}} of {{total}} of the support process",
+    "etreAccompagne": "Get support",
+    "formulaire": "A single form for guidance towards Europe and for German/English courses. You will never be asked for an identity document or a payment.",
+    "nouvelOnglet": " (new tab)",
+    "dixPays": "The 10 supported countries",
+    "langues": "Languages: {{liste}}"
+  },
+  "badges": {
+    "membre": "Member of the European Union",
+    "membreCourt": "EU member",
+    "hors": "Outside the European Union",
+    "horsCourt": "Non-EU"
+  },
+  "etapes": {
+    "affichee": " (current step)"
+  },
+  "hub": {
+    "seoTitre": "Support towards Europe — 5 steps and 10 supported countries",
+    "seoDescription": "Free, transparent guidance towards 10 European countries ({{liste}}) from WAHHF Foundation.",
+    "chargementCarte": "Loading the map of Europe…",
+    "titre": "Transparent support, step by step",
+    "intro": "Understand the legal pathways, prepare an authentic application file, learn the language of the country and check every piece of information on the official portals of 10 European countries.",
+    "choisirPays": "Choose a country",
+    "etapesTitre": "Your journey in 5 steps",
+    "etapesSousTitre": "Each step leads to its practical guide.",
+    "paysSousTitre": "{{liste}}. For each country, a country page sets out the legal pathways and the official websites.",
+    "et": "and",
+    "demander": "Request support",
+    "signalerTitre": "Report a scam",
+    "signalerSousTitre": "Is someone asking you for money in the name of WAHHF Foundation? Stop all contact and let us know."
+  },
+  "pays": {
+    "seoTitre": "{{name}} — Free guidance page for Europe",
+    "seoDescription": "Free information on studies, training and work {{inside}}, from WAHHF Foundation.",
+    "precisionTitre": "Important legal note on {{name}} (not an EU member state)",
+    "titre": "Finding your way {{towards}}",
+    "cameroun": "Cameroon",
+    "verifies": "Official links checked on {{date}}",
+    "action": "Get support to go {{towards}}",
+    "voirPays": "See the 10 supported countries",
+    "voiesTitre": "The three main regulated mobility pathways",
+    "voiesSousTitre": "An overview for information only. Always check the latest criteria on the official portals below.",
+    "voieEtudes": "Higher education",
+    "voieFormation": "Vocational training",
+    "voieTravail": "Work and skilled mobility",
+    "etapesTitre": "The main steps to prepare your plans for {{name}}",
+    "sitesTitre": "The official websites",
+    "sitesSousTitre": "Never rely on unofficial pages. Go directly to the institutional portals:",
+    "lienVerifie": "Link checked on {{date}}",
+    "vigilance": "Read our guide to staying alert to fake offers",
+    "autresFiches": "See another country page among the 10 supported countries",
+    "introuvableTitre": "This country is not one of the 10 supported countries",
+    "introuvableMessage": "WAHHF Foundation provides free support towards 10 European countries. Choose one of them below to see its guidance page.",
+    "horsUe": " (outside the European Union)"
+  },
+  "guide": {
+    "introuvableTitre": "This support guide does not exist",
+    "introuvableMessage": "The link may have been copied incorrectly. Here are the guides available to prepare your plans for Europe.",
+    "introuvableListe": "The support guides",
+    "seoTitre": "{{title}} — Free support towards Europe",
+    "etapesTitre": "The 5 steps of the support process"
+  },
+  "arnaques": {
+    "signalementObjet": "Report of an attempted scam",
+    "signalementIntro": "I would like to report a person or a message using the name of WAHHF Foundation.",
+    "signalementFin": "What happened (date, number or profile, amount requested):\n\n(If possible, attach a screenshot of the message.)",
+    "signalerWhatsapp": "Report on WhatsApp",
+    "signalerEmail": "Report by email",
+    "seoTitre": "Avoiding scams and false promises — Free support towards Europe",
+    "seoDescription": "Recognise a fake visa, contract or admission offer, and report a scam to WAHHF Foundation through its only official channels.",
+    "filAriane": "Avoiding scams",
+    "titre": "Avoiding scams and false promises",
+    "intro": "How to recognise a fraudulent offer, protect your loved ones and check every piece of information.",
+    "canauxTitre": "Our only official channels",
+    "canauxSousTitre": "If someone claims to act on behalf of WAHHF Foundation or IROKO and asks you for money, stop all contact immediately and report it to us.",
+    "email": "Email",
+    "canauxNote": "Any other number or address presenting itself as WAHHF Foundation is not ours. If possible, attach a screenshot of the message.",
+    "signesTitre": "5 signs of a scam",
+    "signesSousTitre": "If you recognise any of these signs, stop the conversation and check.",
+    "exempleTitre": "What a fake message looks like",
+    "exempleSousTitre": "This message was made up as an example, based on the signs above. Each passage underlined in amber is a sign of a scam.",
+    "exempleEntete": "Message received on WhatsApp from an unknown number",
+    "exempleLegende": "Made-up example: this message does not come from WAHHF Foundation.",
+    "citation": "“{{texte}}”",
+    "avantNote": ": ",
+    "jamaisTitre": "WAHHF Foundation never asks for money",
+    "jamaisSousTitre": "WAHHF Foundation is a non-profit foundation, funded by its partners and donors. Our support and our German/English courses are free of charge.",
+    "reflexesTitre": "The right reflexes",
+    "voirFiches": "See the pages for the 10 countries and their official websites",
+    "suspectTitre": "Does an offer seem suspicious?",
+    "suspectSousTitre": "Stop all contact and let us know through one of our only official channels, with a screenshot of the message if possible.",
+    "retourEtapes": "Back to the 5 steps of the support process"
+  },
+  "contenu": {
+    "etapes": {
+      "comprendre-les-parcours": {
+        "title": "Understanding the pathways (studies, training, work)",
+        "desc": "Clearly distinguish the requirements for university studies, work-based vocational training (Ausbildung) and skilled mobility, according to your actual profile."
+      },
+      "preparer-son-dossier": {
+        "title": "Preparing your application file (CV, letter, diplomas, equivalences)",
+        "desc": "Gather 100% authentic documents, understand academic equivalence procedures and put together a clear file that meets European standards."
+      },
+      "apprendre-la-langue": {
+        "title": "Learning the language of the country",
+        "desc": "Reach the required language level (in particular German/English from A1 to C1 with the WAHHF Academy) before starting the procedures."
+      },
+      "eviter-les-arnaques": {
+        "title": "Knowing the official procedures and avoiding scams",
+        "desc": "Use only official government and consular portals, and refuse any paid intermediary."
+      },
+      "s-installer": {
+        "title": "Preparing your arrival and integration",
+        "desc": "Get ready for the practical realities of life in Europe: housing, insurance and formalities on arrival."
+      }
+    },
+    "guides": {
+      "comprendre-les-parcours": {
+        "title": "Understanding the pathways to Europe",
+        "subtitle": "Clearly distinguish between university studies, vocational training and work-related mobility.",
+        "sections": [
+          {
+            "heading": "Higher education (Bachelor’s, Master’s, Doctorate)",
+            "body": "The academic pathway is for holders of the baccalaureate or a university degree who wish to pursue theoretical and research-based education at an accredited public or private university.",
+            "bullets": [
+              "Requires official recognition of your secondary-school or higher-education diploma",
+              "Requires a certified language level (often B2 or C1 in the language of instruction)",
+              "Involves proof of funds in a blocked account or of an official scholarship, according to the regulations of the host country"
+            ]
+          },
+          {
+            "heading": "Vocational training (e.g. Ausbildung in Germany)",
+            "body": "Work-based vocational training combines classes at a vocational school with paid practical work in a company for 2 to 3 years.",
+            "bullets": [
+              "An excellent command of the country’s language is essential (at least a solid B1, or B2)",
+              "Apply directly to training companies, with no intermediary fees",
+              "An official training contract is required before any consular procedure"
+            ]
+          },
+          {
+            "heading": "Skilled professional mobility",
+            "body": "For professionals who already hold a recognised higher-education or technical qualification and verifiable experience.",
+            "bullets": [
+              "Prior equivalence or recognition procedure for professional qualifications",
+              "Strict compliance with the national rules of the labour and immigration ministries"
+            ]
+          }
+        ]
+      },
+      "preparer-son-dossier": {
+        "title": "Preparing your application file with care",
+        "subtitle": "Good document practices for putting together an authentic, clear and compliant file.",
+        "sections": [
+          {
+            "heading": "Absolute authenticity of documents",
+            "body": "Any forged or inaccurate document leads to immediate refusal and lasting bans with the consular authorities. WAHHF makes every applicant aware of the importance of a 100% authentic file.",
+            "bullets": [
+              "Gather your original transcripts and diplomas",
+              "Have documents legalised or authenticated only by official administrations",
+              "Have your documents translated by recognised sworn translators"
+            ]
+          },
+          {
+            "heading": "CV and cover letter",
+            "body": "Each European country has its own presentation conventions (for example the clear tabular format in Germany, or the Europass format).",
+            "bullets": [
+              "Present your real background honestly and clearly",
+              "Explain how your past studies fit with the project you are aiming for",
+              "Have your texts proofread during the WAHHF support workshops"
+            ]
+          }
+        ]
+      },
+      "apprendre-la-langue": {
+        "title": "Learning the language of the country: the key to independence",
+        "subtitle": "Why language skills always come before the administrative procedures.",
+        "sections": [
+          {
+            "heading": "Language protects you and makes you independent",
+            "body": "Leaving without mastering the language of the host country exposes you to isolation, academic failure and insecurity. That is why WAHHF puts language learning first and foremost.",
+            "bullets": [
+              "Regular practice of listening, writing and conversation",
+              "Structured progression according to the Common European Framework of Reference for Languages (A1 to C1)",
+              "Methodical preparation for internationally recognised official exams"
+            ]
+          }
+        ]
+      },
+      "s-installer": {
+        "title": "Preparing your arrival and integration",
+        "subtitle": "Get ready for the practical, cultural and administrative realities of life in Europe.",
+        "sections": [
+          {
+            "heading": "The first formalities on arrival",
+            "body": "A successful move is prepared several months before departure: student housing, health insurance, registration with the local authority and opening a bank account.",
+            "bullets": [
+              "Start looking for housing early through official university residences (e.g. Studierendenwerk)",
+              "Understand how residence registration (Anmeldung) and compulsory health insurance work",
+              "Know your rights and duties as a student or apprentice"
+            ]
+          }
+        ]
+      },
+      "eviter-les-arnaques": {
+        "title": "Avoiding scams and false promises",
+        "subtitle": "How to recognise a fraudulent offer, protect your loved ones and check every piece of information."
+      }
+    },
+    "arnaques": {
+      "signes": [
+        {
+          "title": "You are promised a guaranteed visa",
+          "text": "Be wary of anyone who promises a visa that is “100% guaranteed” or “fast, with no interview at the embassy”. Decisions belong to the relevant authorities and institutions."
+        },
+        {
+          "title": "Someone sells you a work or training contract",
+          "text": "A training (Ausbildung) or work contract in Europe can never be bought: it is the companies that pay the apprentice, never the other way round."
+        },
+        {
+          "title": "You are promised admission without a diploma or language skills",
+          "text": "Studies and vocational training in Europe require a certified language level and, for studies, official recognition of your diplomas."
+        },
+        {
+          "title": "You are asked to pay a private individual by mobile transfer",
+          "text": "No embassy or consulate asks for payment to a private individual by informal mobile transfer, and no member of WAHHF Foundation will ask you for money."
+        },
+        {
+          "title": "A profile uses an official logo on a messaging app",
+          "text": "Watch out for fake profiles using official logos on WhatsApp, Telegram or Facebook: compare the number with our only official channels, at the top of this page."
+        }
+      ],
+      "fauxMessage": [
+        "Hello! ",
+        {
+          "flag": "100% guaranteed visa for Germany, with no interview at the embassy.",
+          "note": "Be wary of any promise of a guaranteed visa or a visa without an interview: decisions belong to the relevant authorities and institutions."
+        },
+        null,
+        {
+          "flag": "A work contract is already waiting for you.",
+          "note": "A work or training contract can never be bought: it is the companies that recruit and pay."
+        },
+        " To book your place, ",
+        {
+          "flag": "send the application fee by mobile transfer",
+          "note": "Neither an embassy, nor a consulate, nor WAHHF Foundation asks for payment to a private individual."
+        },
+        " to this number. ",
+        {
+          "flag": "The WAHHF Foundation team",
+          "note": "A name or a logo proves nothing: compare the number with our only official channels."
+        }
+      ],
+      "promesses": [
+        {
+          "title": "A donation never gives access to a place",
+          "text": "Donations fund the foundation’s actions. Making a donation reserves neither a place in our courses nor support."
+        },
+        {
+          "text": "No member, volunteer or partner of WAHHF will ask you for application, registration or deposit fees, or for payment by Mobile Money."
+        },
+        {
+          "text": "We do not ask for any identity document (passport, national ID card) at the first online contact."
+        },
+        {
+          "text": "We do not sell visas, plane tickets or work contracts."
+        }
+      ],
+      "reflexes": [
+        {
+          "text": "Always check the procedures on the official website of the embassy of the country concerned."
+        },
+        {
+          "text": "Never rely on unofficial pages: go directly to the institutional portals, listed on each country page."
+        },
+        {
+          "text": "If in doubt, stop the conversation immediately and report it to us, with a screenshot of the message."
+        }
+      ]
+    },
+    "pays": {
+      "allemagne": {
+        "towards": "to Germany",
+        "inside": "in Germany",
+        "languages": ["German (official language)", "English (some international programmes)"],
+        "summary": "Germany offers structured pathways for university studies, dual vocational training (Ausbildung) and skilled mobility.",
+        "pathways": {
+          "studies": "University admission (Studienkolleg, Bachelor’s, Master’s) depends on recognition of your diploma (Anabin / uni-assist), a B2/C1 level of German (or English, depending on the programme) and proof of the required financial resources.",
+          "training": "Dual vocational training (Ausbildung), combining theory at school with an apprenticeship in a company, generally open from a B1/B2 level of German.",
+          "work": "Professional mobility governed by the Skilled Immigration Act (Fachkräfteeinwanderungsgesetz), with recognition of qualifications."
+        },
+        "steps": [
+          "Learning German and obtaining an official language certificate (B1 to C1 depending on the project)",
+          "Checking the equivalence of your diplomas and putting together your academic or professional file",
+          "Applying to the educational or training institution",
+          "Booking an appointment and officially submitting your application to the competent German Embassy"
+        ],
+        "officialLinks": [
+          { "label": "Make it in Germany (official portal of the German Federal Government)" },
+          { "label": "DAAD — German Academic Exchange Service" },
+          { "label": "German Embassy in Cameroon (Yaoundé)" }
+        ]
+      },
+      "luxembourg": {
+        "towards": "to Luxembourg",
+        "inside": "in Luxembourg",
+        "languages": ["French", "German", "Luxembourgish", "English"],
+        "summary": "In the heart of Europe, the Grand Duchy of Luxembourg offers a multilingual environment (French, German, English) for higher education and research.",
+        "pathways": {
+          "studies": "Bilingual or trilingual programmes at the University of Luxembourg, subject to academic admission requirements and student residence permit procedures.",
+          "training": "Continuing education and academic internships governed by university agreements.",
+          "work": "Residence permit for salaried workers issued by the Direction de l’immigration (Directorate of Immigration) before entering the country."
+        },
+        "steps": [
+          "Identifying the multilingual programme (French/German/English)",
+          "Submitting the university application within the official deadlines",
+          "Applying for a temporary authorisation to stay (ATS) from the competent ministry",
+          "Official consular formalities and preparing to settle in"
+        ],
+        "officialLinks": [
+          { "label": "Guichet.lu — Administrative portal of the Grand Duchy of Luxembourg" },
+          { "label": "University of Luxembourg" }
+        ]
+      },
+      "slovenie": {
+        "towards": "to Slovenia",
+        "inside": "in Slovenia",
+        "languages": ["Slovene", "English (international programmes)"],
+        "summary": "A Central European country and member of the European Union, known for its public universities (Ljubljana, Maribor, Primorska) and its quality of student life.",
+        "pathways": {
+          "studies": "National eVŠ portal for applications to Slovenian universities at bachelor’s, master’s and doctoral level.",
+          "training": "Academic exchanges, summer schools and technical internships.",
+          "work": "Single residence and work permit managed by the Slovenian administrative units."
+        },
+        "steps": [
+          "Choosing the programme on the national academic portal eVŠ",
+          "Recognition procedure for previous diplomas",
+          "Preparing the application for a temporary residence permit for studies",
+          "Consular validation at the competent diplomatic mission"
+        ],
+        "officialLinks": [
+          { "label": "Study in Slovenia — Official portal" },
+          { "label": "Government portal gov.si (Immigration)" }
+        ]
+      },
+      "italie": {
+        "towards": "to Italy",
+        "inside": "in Italy",
+        "languages": ["Italian", "English (international programmes)"],
+        "summary": "With a long university tradition and regional scholarship programmes (DSU), Italy welcomes international students every year.",
+        "pathways": {
+          "studies": "Compulsory pre-enrolment on the official Universitaly platform, declaration of value (Dichiarazione di Valore) or CIMEA statement.",
+          "training": "Higher technical training (ITS) and specialised schools.",
+          "work": "Schemes regulated by the annual flow decrees (Decreto Flussi)."
+        },
+        "steps": [
+          "Language preparation (Italian or English) and choosing a university",
+          "Pre-enrolment on the official Universitaly portal",
+          "Preparing academic and financial supporting documents",
+          "Submitting the study visa application to the Italian consular services"
+        ],
+        "officialLinks": [
+          { "label": "Universitaly — Official portal of the Italian Ministry" },
+          { "label": "Visto per l’Italia — Ministry of Foreign Affairs" }
+        ]
+      },
+      "grece": {
+        "towards": "to Greece",
+        "inside": "in Greece",
+        "languages": ["Modern Greek", "English (international programmes)"],
+        "summary": "A Mediterranean crossroads and EU member, Greece is developing English-taught university programmes and courses in science, engineering and maritime studies.",
+        "pathways": {
+          "studies": "Public university programmes and international programmes coordinated by Study in Greece.",
+          "training": "Vocational training in tourism, shipping and energy.",
+          "work": "Residence and work permits according to the applicable agreements and the needs of each sector."
+        },
+        "steps": [
+          "Academic guidance and checking the language requirements",
+          "Application for admission to the Greek institution",
+          "Legalisation / apostille of academic documents",
+          "Official consular procedure at the competent Greek Embassy"
+        ],
+        "officialLinks": [
+          { "label": "Study in Greece — Official portal" },
+          { "label": "Greek Ministry of Migration and Asylum" }
+        ]
+      },
+      "portugal": {
+        "towards": "to Portugal",
+        "inside": "in Portugal",
+        "languages": ["Portuguese", "English"],
+        "summary": "Portugal offers a network of universities and polytechnic institutes recognised across Europe, with structured support for international students.",
+        "pathways": {
+          "studies": "Application under the international student status (Estatuto do Estudante Internacional) at universities and polytechnic institutes.",
+          "training": "Practice-oriented Cursos Técnicos Superiores Profissionais (CTeSP).",
+          "work": "Work visa or job-seeker visa governed by AIMA and the Portuguese consular services."
+        },
+        "steps": [
+          "Learning basic Portuguese or obtaining an English certificate",
+          "Applying directly to the university or polytechnic institute",
+          "Obtaining the official letter of acceptance",
+          "Applying for a national study visa (D4) via the official Portuguese visa portal"
+        ],
+        "officialLinks": [
+          { "label": "Study & Research in Portugal — Official portal" },
+          { "label": "Visa portal — Ministry of Foreign Affairs of Portugal" }
+        ]
+      },
+      "espagne": {
+        "towards": "to Spain",
+        "inside": "in Spain",
+        "languages": ["Spanish (Castilian)", "English"],
+        "summary": "Spain has a vast network of public universities and higher vocational training centres (Formación Profesional de Grado Superior).",
+        "pathways": {
+          "studies": "University admission through homologation of your diploma or UNEDasiss accreditation.",
+          "training": "Higher vocational training cycles (FP), much sought after in the technical and health sectors.",
+          "work": "Procedures for an initial residence and salaried work authorisation."
+        },
+        "steps": [
+          "Academic homologation or accreditation procedure (UNEDasiss)",
+          "Pre-enrolment with the autonomous community or the chosen university",
+          "Putting together the complete consular file (insurance, financial resources, accommodation)",
+          "Submission to the competent Spanish Consulate"
+        ],
+        "officialLinks": [
+          { "label": "SEPIE — studying in Spain (Ministry of Universities)" },
+          { "label": "Immigration portal — Government of Spain" }
+        ]
+      },
+      "danemark": {
+        "towards": "to Denmark",
+        "inside": "in Denmark",
+        "languages": ["Danish", "English (very widespread at university)"],
+        "summary": "Known for its collaborative teaching and its English-taught programmes in engineering, renewable energy and life sciences.",
+        "pathways": {
+          "studies": "English-taught Bachelor’s and Master’s programmes, coordinated through the official Study in Denmark portal.",
+          "training": "Academic internships and applied research programmes.",
+          "work": "Schemes governed by the Danish Agency for International Recruitment and Integration (SIRI)."
+        },
+        "steps": [
+          "Proving a high level of English (IELTS / TOEFL) and meeting the academic prerequisites",
+          "Applying via the national portal Optagelse.dk or directly to the university",
+          "Opening the ST1 application with the host institution",
+          "Applying for a residence permit from the official SIRI agency (nyidanmark.dk)"
+        ],
+        "officialLinks": [
+          { "label": "Study in Denmark — Official portal of the Ministry" },
+          { "label": "New to Denmark (nyidanmark.dk) — Official SIRI portal" }
+        ]
+      },
+      "pologne": {
+        "towards": "to Poland",
+        "inside": "in Poland",
+        "languages": ["Polish", "English (many international programmes)"],
+        "summary": "A major academic and technological hub in Central Europe, Poland offers university programmes in English and Polish in science, medicine and computer science.",
+        "pathways": {
+          "studies": "Applications to public universities and technical universities, overseen by the national agency NAWA.",
+          "training": "Preparatory language years and technical schools.",
+          "work": "Work permit issued by the competent Voivodeship before applying for a national visa."
+        },
+        "steps": [
+          "Choosing an accredited institution on the government portal Study in Poland",
+          "Verification and apostille/legalisation of your secondary-school or higher-education diploma",
+          "Obtaining the official ministerial admission certificate",
+          "Consular registration via the official e-Konsulat system"
+        ],
+        "officialLinks": [
+          { "label": "Study in Poland — NAWA National Agency" },
+          { "label": "Office for Foreigners of Poland (Urząd do Spraw Cudzoziemców)" }
+        ]
+      },
+      "albanie": {
+        "towards": "to Albania",
+        "inside": "in Albania",
+        "euNote": "Albania is not a member of the European Union (it has candidate country status). Nor is it part of the Schengen Area. Albanian visas and residence permits do not allow you to travel or work in the European Union.",
+        "languages": ["Albanian", "English / Italian (in some university programmes)"],
+        "summary": "Located in the Western Balkans, Albania is developing accessible university programmes and regional exchange programmes, while falling under a national legal framework separate from that of the European Union.",
+        "pathways": {
+          "studies": "Enrolment at accredited public and private universities in Tirana and the country’s main cities.",
+          "training": "Vocational training in regional development, tourism and technology.",
+          "work": "Single permit applied for online via the government portal e-Albania."
+        },
+        "steps": [
+          "Understand that Albania is not a member of the EU",
+          "Obtain admission to an institution accredited by the ASCAL agency",
+          "Submit the type D visa application online on the official e-Visa portal of the Republic of Albania",
+          "Apply for a residence permit on e-Albania after your legal arrival"
+        ],
+        "officialLinks": [
+          { "label": "e-Visa Albania — Official online visa system" },
+          { "label": "e-Albania — Official public services portal" }
+        ]
+      }
+    }
+  }
+}

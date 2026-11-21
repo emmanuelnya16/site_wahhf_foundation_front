@@ -1,5 +1,6 @@
 import { ReactNode, Ref } from 'react';
 import { Mail, MessageCircle } from 'lucide-react';
+import { Trans, useTranslation } from 'react-i18next';
 import { CONTACT } from '../../config/contact';
 import { PrimaryButton, SecondaryButton } from './Buttons';
 import { ContactDraft, mailtoHref, whatsappHref } from '../../lib/contactDraft';
@@ -13,7 +14,7 @@ export default function ContactHandoff({
   title,
   draft,
   onEdit,
-  editLabel = 'Modifier mes réponses',
+  editLabel,
   titleRef,
   children,
   compact = false,
@@ -32,6 +33,7 @@ export default function ContactHandoff({
   headingLevel?: 'h2' | 'h3';
 }) {
   const Heading = headingLevel;
+  const { t } = useTranslation();
   return (
     <div
       className={
@@ -49,8 +51,7 @@ export default function ContactHandoff({
         {title}
       </Heading>
       <p className="text-body text-text max-w-[65ch]">
-        Le site ne transmet pas encore les formulaires. Votre message est prêt avec vos réponses : envoyez-le
-        par WhatsApp ou par e-mail. La fondation ne le reçoit qu’une fois que vous l’avez envoyé.
+        {t('ui.handoff.info')}
       </p>
 
       <div className="flex flex-wrap gap-3">
@@ -58,34 +59,34 @@ export default function ContactHandoff({
         <PrimaryButton href={whatsappHref(draft)}>
           <span className="inline-flex items-center gap-2">
             <MessageCircle aria-hidden="true" className="w-4 h-4 shrink-0" />
-            <span>Envoyer par WhatsApp</span>
+            <span>{t('ui.handoff.whatsapp')}</span>
           </span>
         </PrimaryButton>
         <SecondaryButton href={mailtoHref(draft)}>
           <span className="inline-flex items-center gap-2">
             <Mail aria-hidden="true" className="w-4 h-4 shrink-0" />
-            <span>Envoyer par e-mail</span>
+            <span>{t('ui.handoff.email')}</span>
           </span>
         </SecondaryButton>
       </div>
 
       <p className="text-meta text-text-secondary max-w-[65ch]">
-        Si aucune application ne s’ouvre, écrivez directement à{' '}
-        <a href={`mailto:${CONTACT.email}`} className="text-link underline underline-offset-4 break-all">
-          {CONTACT.email}
-        </a>{' '}
-        ou sur WhatsApp au {CONTACT.whatsappDisplay}, en copiant le message ci-dessous.
+        <Trans
+          i18nKey="ui.handoff.fallback"
+          values={{ email: CONTACT.email, phone: CONTACT.whatsappDisplay }}
+          components={{ mail: <a href={`mailto:${CONTACT.email}`} className="text-link underline underline-offset-4 break-all" /> }}
+        />
       </p>
 
       <details className="rounded-inner bg-surface-raised p-4 text-meta text-text">
-        <summary className="cursor-pointer font-semibold min-h-11 flex items-center">Voir le message préparé</summary>
+        <summary className="cursor-pointer font-semibold min-h-11 flex items-center">{t('ui.handoff.preview')}</summary>
         <p className="mt-3 font-semibold">{draft.subject}</p>
         <p className="mt-2 whitespace-pre-wrap break-words text-text-secondary">{draft.body}</p>
       </details>
 
       {children}
 
-      <SecondaryButton onClick={onEdit}>{editLabel}</SecondaryButton>
+      <SecondaryButton onClick={onEdit}>{editLabel ?? t('ui.handoff.edit')}</SecondaryButton>
     </div>
   );
 }

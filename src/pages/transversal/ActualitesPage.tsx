@@ -10,7 +10,8 @@ import PageHeader, { PageBreadcrumb, PageMeta, PageTitle, PageIntro } from '../.
 import { PrimaryButton } from '../../components/wahhf/Buttons';
 import NotFoundPage, { NotFoundLinks } from '../NotFoundPage';
 import { DOMAINS_DATA, NewsArticle, imageSrcSet } from '../../services/api';
-import { EXAMPLE_NEWS_SLUGS, PUBLISHED_NEWS, confirmedDate } from '../../lib/news';
+import { EXAMPLE_NEWS_SLUGS, PUBLISHED_NEWS, confirmedDate, localizedNews } from '../../lib/news';
+import { useLocalize } from '../../lib/localize';
 
 /*
  * Actualités et article (groupe 7.3 : contrat validé, audit ACTU-01, ART-01 à ART-03, T-03, T-04, T-15, A11Y-10).
@@ -44,18 +45,21 @@ const domainOf = (article: NewsArticle) => DOMAINS_DATA.find((d) => d.title === 
  */
 const HEADER_PHOTO = photoOrFallback('A41');
 
-function Article({ article }: { article: NewsArticle }) {
-  const date = confirmedDate(article.date);
-  const domain = domainOf(article);
+function Article({ article: source }: { article: NewsArticle }) {
+  const { t, lang } = useLocalize();
+  // Domaine : d'après la rubrique en français ; le texte affiché, dans la langue de l'interface (lot 7.10)
+  const domain = domainOf(source);
+  const article = localizedNews(source, lang);
+  const date = confirmedDate(article.date, lang);
   const isMobility = domain?.slug === 'mobilite-langues';
   return (
     <>
       <SEO title={article.title} description={article.excerpt} />
       <PageHeader reveal>
-        <PageBreadcrumb items={[{ label: 'Actualités', to: '/actualites' }, { label: article.title }]} />
+        <PageBreadcrumb items={[{ label: t('actualites.article.breadcrumb'), to: '/actualites' }, { label: article.title }]} />
         <PageMeta className="gap-x-4">
           <span>{article.category}</span>
-          {date && <span>Publié le {date}</span>}
+          {date && <span>{t('actualites.article.published', { date })}</span>}
         </PageMeta>
         <PageTitle>{article.title}</PageTitle>
       </PageHeader>
@@ -89,16 +93,18 @@ function Article({ article }: { article: NewsArticle }) {
           <div className="max-w-[65ch] mt-10 pt-8 border-t border-border-subtle flex flex-wrap items-center gap-x-6 gap-y-3">
             {isMobility ? (
               <>
-                <PrimaryButton to="/candidater">Candidater</PrimaryButton>
+                <PrimaryButton to="/candidater">{t('actualites.article.apply')}</PrimaryButton>
                 <Link to="/faire-un-don?affectation=mobilite-langues" className={TEXT_LINK_CLASS}>
-                  Faire un don
+                  {t('actualites.article.donate')}
                 </Link>
               </>
             ) : (
-              <PrimaryButton to={domain ? `/faire-un-don?affectation=${domain.slug}` : '/faire-un-don'}>Soutenir ce domaine</PrimaryButton>
+              <PrimaryButton to={domain ? `/faire-un-don?affectation=${domain.slug}` : '/faire-un-don'}>
+                {t('actualites.article.support')}
+              </PrimaryButton>
             )}
             <Link to="/actualites" className={TEXT_LINK_CLASS}>
-              Toutes les actualités
+              {t('actualites.article.all')}
             </Link>
           </div>
         </div>
@@ -109,22 +115,21 @@ function Article({ article }: { article: NewsArticle }) {
 
 export function ActualitesPage() {
   const { slug } = useParams<{ slug?: string }>();
+  const { t, lang } = useLocalize();
+  const published = PUBLISHED.map((a) => localizedNews(a, lang));
 
   if (slug) {
     const article = PUBLISHED.find((a) => a.slug === slug);
     // Article inconnu ou non publié : on le dit, au lieu d'afficher le premier article
     if (!article) {
       return (
-        <NotFoundPage
-          title="Cet article est introuvable"
-          message="Il a peut-être été déplacé ou retiré, ou le lien a été mal copié. Voici les actualités publiées."
-        >
+        <NotFoundPage title={t('actualites.notFound.title')} message={t('actualites.notFound.message')}>
           <NotFoundLinks
-            heading="Toutes les actualités"
+            heading={t('actualites.article.all')}
             links={[
-              { to: '/actualites', label: 'Page Actualités' },
-              ...PUBLISHED.map((a) => ({ to: `/actualites/${a.slug}`, label: a.title })),
-              { to: '/galerie', label: 'Galerie photo et vidéo' },
+              { to: '/actualites', label: t('actualites.notFound.newsPage') },
+              ...published.map((a) => ({ to: `/actualites/${a.slug}`, label: a.title })),
+              { to: '/galerie', label: t('actualites.notFound.gallery') },
             ]}
           />
         </NotFoundPage>
@@ -135,26 +140,23 @@ export function ActualitesPage() {
 
   return (
     <>
-      <SEO
-        title="Actualités et actions de terrain"
-        description="Les actualités de WAHHF Foundation, et en images la première journée portes ouvertes et le Boot Camp de Yaoundé."
-      />
+      <SEO title={t('actualites.seo.title')} description={t('actualites.seo.description')} />
       <PageHeader
         reveal
         revealPhoto
         catalogPhoto={HEADER_PHOTO}
         photoCaption={HEADER_PHOTO ? photoCaption(HEADER_PHOTO) : undefined}
       >
-        <PageTitle>Actualités et actions de terrain</PageTitle>
-        <PageIntro>Les nouvelles de la fondation et de ses actions, au Cameroun et vers l’Europe.</PageIntro>
+        <PageTitle>{t('actualites.title')}</PageTitle>
+        <PageIntro>{t('actualites.intro')}</PageIntro>
       </PageHeader>
 
       <Section tone="sauge">
         <div className="container-page space-y-14 lg:space-y-20">
-          {PUBLISHED.length > 0 ? (
+          {published.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {PUBLISHED.map((art) => {
-                const date = confirmedDate(art.date);
+              {published.map((art) => {
+                const date = confirmedDate(art.date, lang);
                 return (
                   <CardLink key={art.slug} to={`/actualites/${art.slug}`} surface="section">
                     <CardMedia
@@ -180,21 +182,18 @@ export function ActualitesPage() {
           ) : (
             // État vide (contrat §11) : on le dit, et on mène à la preuve qui existe (ACTU-01), juste dessous
             <div className="max-w-[65ch] space-y-3">
-              <h2 className="text-section-title text-text">Aucun article publié pour le moment</h2>
-              <p className="text-body text-text-secondary">
-                En attendant, retrouvez en photos et en vidéos la première journée portes ouvertes de la fondation et le Boot
-                Camp de Yaoundé.
-              </p>
+              <h2 className="text-section-title text-text">{t('actualites.empty.title')}</h2>
+              <p className="text-body text-text-secondary">{t('actualites.empty.text')}</p>
             </div>
           )}
 
           {/* EN IMAGES : les albums de la galerie (ACTU-01 ; retouches du 19/11). Pas « Sur le terrain », nom d'un autre
               album de la galerie (revue du groupe 7.3) */}
           <div className="space-y-8">
-            <SectionHeader title="En images" />
+            <SectionHeader title={t('actualites.inPictures')} />
             <FieldAlbums />
             <Link to="/galerie" className={TEXT_LINK_CLASS}>
-              Voir toute la galerie
+              {t('actualites.seeGallery')}
             </Link>
           </div>
         </div>

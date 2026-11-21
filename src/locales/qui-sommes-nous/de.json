@@ -1,0 +1,63 @@
+{
+  "_relire": [
+    "quiSommesNous.mission.p1",
+    "quiSommesNous.values[0].desc",
+    "quiSommesNous.iroko.text",
+    "quiSommesNous.contenu.etapes[0].desc",
+    "quiSommesNous.contenu.etapes[2].title"
+  ],
+  "seo": {
+    "title": "Über uns — Kamerunisch-deutsche Stiftung, sozialer Zweig der IROKO-Gruppe",
+    "description": "Erfahren Sie mehr über Geschichte, Auftrag, Werte und Ansatz der WAHHF Foundation und über ihre Verbindung zur IROKO-Gruppe."
+  },
+  "mission": {
+    "title": "Selbstständigkeit durch Bildung, Gesundheit und Zugang zu Wissen",
+    "p1": "Die WAHHF Foundation geht von einer einfachen Überzeugung aus: Jeder junge Mensch verdient Zugang zu Bildung, Gesundheitsvorsorge, Sprachunterricht und geprüften Informationen – ohne dass fehlendes Geld oder Netzwerke der Desinformation seine Zukunft zerstören.",
+    "p2": "Mit Sitz in Yaoundé und Douala und einer Koordination in Deutschland bietet die Stiftung ein kostenloses Programm zum Erlernen von Deutsch/Englisch (A1 bis C1) und zur Orientierung für 10 europäische Länder."
+  },
+  "values": [
+    {
+      "title": "Würde und Respekt",
+      "desc": "Alle Begünstigten werden als Gestalter ihres eigenen Weges aufgenommen, nie als Kunden."
+    },
+    {
+      "title": "Integrität und Wahrheit",
+      "desc": "Wir bekämpfen falsche Migrationsversprechen mit sorgfältigen und überprüfbaren Informationen."
+    }
+  ],
+  "presidentAlt": "{{name}}, {{role}}, während seines Vortrags",
+  "timeline": {
+    "title": "Die wichtigsten Etappen der WAHHF Foundation",
+    "subtitle": "Schritt für Schritt aufgebaut, im Dienst der Gemeinschaften."
+  },
+  "iroko": {
+    "title": "WAHHF Foundation, sozialer Zweig der IROKO-Gruppe",
+    "text": "Die kamerunisch-deutsche, branchenübergreifende IROKO-Gruppe hat die WAHHF Foundation als ihren gemeinnützigen sozialen und philanthropischen Zweig aufgebaut. Diese Unterstützung deckt die Betriebs- und Unterrichtskosten.",
+    "partners": "Unsere Partner entdecken"
+  },
+  "support": {
+    "title": "Die Stiftung unterstützen",
+    "subtitle": "Sie können unsere Arbeit mit einer Spende unterstützen oder der Stiftung eine Partnerschaft vorschlagen: als Schule, Verein, Unternehmen oder Institution.",
+    "partner": "Partner werden"
+  },
+  "contenu": {
+    "etapes": [
+      {
+        "title": "Die Anfänge der Solidaritätsinitiative",
+        "desc": "Erste Aktionen gegenseitiger Hilfe in der Bildung und materielle Unterstützung für Schülerinnen und Schüler, zwischen Kamerun und der Diaspora in Deutschland."
+      },
+      {
+        "title": "Aufbau der WAHHF Foundation",
+        "desc": "Ausrichtung der Programme auf die ersten fünf Säulen: Bildung, Gesundheit, Unternehmertum, Umwelt sowie Rechte & Teilhabe."
+      },
+      {
+        "title": "Anbindung als sozialer Zweig der IROKO-Gruppe",
+        "desc": "Die IROKO-Gruppe verpflichtet sich dauerhaft, den Betrieb der Stiftung zu finanzieren."
+      },
+      {
+        "title": "Start des 6. Arbeitsbereichs: Mobilität & Sprachen",
+        "desc": "Eröffnung der kostenlosen Deutschakademie (A1 bis C1) und Veröffentlichung geprüfter Orientierungsleitfäden für 10 europäische Länder."
+      }
+    ]
+  }
+}

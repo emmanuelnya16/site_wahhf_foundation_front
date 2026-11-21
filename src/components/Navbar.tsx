@@ -15,6 +15,7 @@ import { switchTheme } from '../effects/themeTransition';
 import { EASE_OUT, EASE_SCREEN, DURATION } from '../lib/motionTokens';
 import { cn } from '../lib/utils';
 import { setLanguage, type Language } from '../i18n';
+import { localized, localizedList } from '../lib/localize';
 
 /*
  * En-tête du site (contrat §8, ajout du 16/11 ; §9, §10) : barre opaque pleine largeur fixée en haut, contenu dans le
@@ -228,23 +229,25 @@ export default function Navbar() {
     options[next].focus();
   };
 
+  // Données dans la langue de l'interface (lot 7.10) : domaines, niveaux, pays
+  const domains = localizedList(DOMAINS_DATA, 'contenu.domaines', (d) => d.id, i18n.language);
   // Résultats de recherche rapide
   const searchResults = searchQuery.trim()
     ? [
-        ...DOMAINS_DATA.filter(
+        ...domains.filter(
           (d) =>
             d.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
             d.shortDesc.toLowerCase().includes(searchQuery.toLowerCase())
-        ).map((d) => ({ label: `Domaine : ${d.title}`, to: d.link })),
-        ...GERMAN_LEVELS_DATA.filter(
+        ).map((d) => ({ label: t('nav.search.domain', { title: d.title }), to: d.link })),
+        ...GERMAN_LEVELS_DATA.map((l) => localized(l, `contenu.niveaux.${l.slug}`, i18n.language)).filter(
           (l) =>
             l.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
             l.level.toLowerCase().includes(searchQuery.toLowerCase())
-        ).map((l) => ({ label: `Cours d'allemand : ${l.title}`, to: `/academie/${l.slug}` })),
-        ...COUNTRIES_DATA.filter((c) =>
+        ).map((l) => ({ label: t('nav.search.level', { title: l.title }), to: `/academie/${l.slug}` })),
+        ...COUNTRIES_DATA.map((c) => localized(c, `contenu.pays.${c.slug}`, i18n.language)).filter((c) =>
           c.name.toLowerCase().includes(searchQuery.toLowerCase())
-        ).map((c) => ({ label: `Pays accompagné : ${c.flag} ${c.name}`, to: `/accompagnement/pays/${c.slug}` })),
-        ...(/galer|photo|vid[ée]o|image/i.test(searchQuery) ? [{ label: 'Galerie photo & vidéo', to: '/galerie' }] : []),
+        ).map((c) => ({ label: t('nav.search.country', { flag: c.flag, name: c.name }), to: `/accompagnement/pays/${c.slug}` })),
+        ...(/galer|photo|foto|vid[ée]o|image|bild/i.test(searchQuery) ? [{ label: t('footer.gallery'), to: '/galerie' }] : []),
       ].slice(0, 6)
     : [];
 
@@ -266,7 +269,7 @@ export default function Navbar() {
           >
             <img
               src={WAHHF_LOGO_URL}
-              alt="Logo WAHHF Foundation"
+              alt={t('ui.logoAlt')}
               width={48}
               height={48}
               className="w-10 h-10 sm:w-11 sm:h-11 object-contain rounded-pill bg-white p-0.5"
@@ -285,7 +288,7 @@ export default function Navbar() {
           </Link>
 
           {/* Centre : Menu principal (7 entrées ; Événements ajouté au lot 7.9) */}
-          <nav aria-label="Navigation principale" className="hidden xl:flex items-center gap-1">
+          <nav aria-label={t('nav.mainNav')} className="hidden xl:flex items-center gap-1">
             <Link to="/qui-sommes-nous" aria-current={navState('/qui-sommes-nous')} className={cn(NAV_LINK, navState('/qui-sommes-nous') && NAV_LINK_CURRENT)}>
               {t('nav.about')}
             </Link>
@@ -377,7 +380,7 @@ export default function Navbar() {
               type="button"
               onClick={() => setSearchOpen((prev) => !prev)}
               aria-expanded={searchOpen}
-              aria-label="Rechercher sur le site"
+              aria-label={t('nav.searchOpen')}
               className={ICON_BUTTON}
             >
               <Search aria-hidden="true" className="w-4 h-4" />
@@ -404,7 +407,7 @@ export default function Navbar() {
               ref={burgerRef}
               type="button"
               onClick={() => setMobileOpen(true)}
-              aria-label="Ouvrir le menu principal"
+              aria-label={t('nav.menuOpen')}
               aria-expanded={mobileOpen}
               aria-controls="menu-mobile"
               className="xl:hidden w-11 h-11 shrink-0 rounded-pill bg-action text-on-action hover:bg-action-hover flex items-center justify-center cursor-pointer"
@@ -421,14 +424,14 @@ export default function Navbar() {
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                     <div className="lg:col-span-8">
                       <div className="flex items-center justify-between gap-4 mb-4">
-                        <span className="text-meta text-text-secondary">Les 6 domaines d’action de WAHHF Foundation</span>
+                        <span className="text-meta text-text-secondary">{t('nav.mega.domainsTitle')}</span>
                         <Link to="/nos-actions" className={PANEL_LINK}>
-                          Voir la vue d’ensemble
+                          {t('nav.mega.overview')}
                         </Link>
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-1">
-                        {DOMAINS_DATA.map((dom) => (
+                        {domains.map((dom) => (
                           <Link
                             key={dom.id}
                             to={dom.link}
@@ -444,30 +447,30 @@ export default function Navbar() {
                     {/* Encart Mobilité & Langues : sauge, sans cadre ni carte nuit */}
                     <div className="lg:col-span-4 rounded-inner bg-surface-section p-6 flex flex-col justify-between gap-4">
                       <div className="space-y-3">
-                        <h3 className="text-body font-semibold text-text">Mobilité & Langues : Allemand /anglais (A1–C1) & Europe</h3>
+                        <h3 className="text-body font-semibold text-text">{t('nav.mega.mobilityTitle')}</h3>
                         <p className="text-meta text-text-secondary">
-                          Accompagnement gratuit aux cours d’allemand /anglais et orientation vérifiée vers 10 pays européens, financé par IROKO et nos donateurs.
+                          {t('nav.mega.mobilityText')}
                         </p>
                         <ul className="pt-1 space-y-2">
                           <li>
                             <Link to="/mobilite-langues/academie" className={PANEL_LINK}>
-                              Académie de langues (A1 à C1)
+                              {t('nav.mega.academy')}
                             </Link>
                           </li>
                           <li>
                             <Link to="/mobilite-langues/accompagnement" className={PANEL_LINK}>
-                              Accompagnement vers 10 pays
+                              {t('nav.mega.support')}
                             </Link>
                           </li>
                           <li>
                             <Link to="/accompagnement/eviter-les-arnaques" className={PANEL_LINK}>
-                              Vigilance : Éviter les arnaques
+                              {t('nav.mega.scams')}
                             </Link>
                           </li>
                         </ul>
                       </div>
                       <Link to="/candidater" className={PANEL_LINK}>
-                        Candidater gratuitement
+                        {t('nav.mega.apply')}
                       </Link>
                     </div>
                   </div>
@@ -496,7 +499,7 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={() => setSearchOpen(false)}
-                aria-label="Fermer la recherche"
+                aria-label={t('nav.searchClose')}
                 className={ICON_BUTTON}
               >
                 <X className="w-4 h-4" />
@@ -548,7 +551,7 @@ export default function Navbar() {
             : {})}
           role="dialog"
           aria-modal="true"
-          aria-label="Menu mobile WAHHF Foundation"
+          aria-label={t('nav.mobileMenu')}
           tabIndex={-1}
           data-lenis-prevent
           onTouchStart={(e) => {
@@ -574,7 +577,7 @@ export default function Navbar() {
             <Link to="/" onClick={() => setMobileOpen(false)} className="flex items-center gap-3">
               <img
                 src={WAHHF_LOGO_URL}
-                alt="Logo WAHHF Foundation"
+                alt={t('ui.logoAlt')}
                 className="w-11 h-11 object-contain rounded-pill bg-white p-0.5"
               />
               <div>
@@ -587,7 +590,7 @@ export default function Navbar() {
               ref={mobileCloseRef}
               type="button"
               onClick={() => setMobileOpen(false)}
-              aria-label="Fermer le menu"
+              aria-label={t('nav.menuClose')}
               className="w-11 h-11 rounded-pill border border-border-on-inverse text-text-on-inverse flex items-center justify-center"
             >
               <X className="w-6 h-6" />
@@ -595,7 +598,7 @@ export default function Navbar() {
           </div>
 
           <m.nav
-            aria-label="Navigation principale (mobile)"
+            aria-label={t('nav.mainNavMobile')}
             className="py-6 space-y-4"
             initial={reduceMotion || !withMotion ? false : { opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.15, ease: EASE_OUT } }}
@@ -614,10 +617,10 @@ export default function Navbar() {
               aria-current={navState('/nos-actions', ACTIONS_SECTION)}
               className={cn(MOBILE_LINK, navState('/nos-actions', ACTIONS_SECTION) && MOBILE_LINK_CURRENT)}
               >
-                {t('nav.actions')} (6 domaines)
+                {t('nav.actionsMobile')}
               </Link>
               <div className="pl-4 border-l border-border-subtle-on-inverse grid grid-cols-1 sm:grid-cols-2 gap-x-4 pt-1">
-                {DOMAINS_DATA.map((d) => (
+                {domains.map((d) => (
                   <Link
                     key={d.id}
                     to={d.link}
@@ -675,7 +678,7 @@ export default function Navbar() {
               aria-current={navState('/candidater')}
               className={cn(MOBILE_LINK, 'text-link-on-inverse', navState('/candidater') && MOBILE_LINK_CURRENT)}
             >
-              Candidater (Cours & Europe — Gratuit)
+              {t('nav.applyMobile')}
             </Link>
           </m.nav>
 

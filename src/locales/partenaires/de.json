@@ -1,0 +1,25 @@
+{
+  "_relire": [
+    "partenaires.iroko.title",
+    "partenaires.iroko.p1"
+  ],
+  "seo": {
+    "title": "Partner — Die IROKO-Gruppe und die Förderer der WAHHF Foundation",
+    "description": "Erfahren Sie mehr über die Rolle der IROKO-Gruppe, Gründungspartner der WAHHF Foundation, und wie Sie Partner der Stiftung werden."
+  },
+  "title": "Unsere Partner und Förderer",
+  "intro": "Die WAHHF Foundation wird von der IROKO-Gruppe, deren sozialer Zweig sie ist, und von ihren Spenderinnen und Spendern unterstützt. Weitere Partner nennen wir nur mit ihrer schriftlichen Zustimmung.",
+  "iroko": {
+    "title": "Die IROKO-Gruppe, Gründungspartner",
+    "p1": "IROKO ist eine kamerunisch-deutsche Unternehmensgruppe aus einer Holding und neun Geschäftsbereichen in drei Familien: Business (Kommunikation und Veranstaltungen, Weiterbildung, Ingenieurwesen), Digital (Anwendungen, Verwaltungssoftware, Hosting) sowie Services und Support (Audiovisuelles, Cybersicherheit, Investitionen). Ihr Geschäftsbereich für Kommunikation und Veranstaltungen, IROKO Event, ist bereits tätig; die übrigen sind angekündigt.",
+    "p2": "Die WAHHF Foundation ist ihr sozialer Zweig. Die Gruppe finanziert die Sprachakademie (Deutsch/Englisch A1 bis C1) und die geprüften Orientierungsmaterialien für Europa."
+  },
+  "offers": {
+    "title": "Was wir anbieten"
+  },
+  "cta": {
+    "title": "Partner der WAHHF Foundation werden",
+    "subtitle": "Sie vertreten eine Universität, ein Ausbildungszentrum, eine NGO, eine medizinische Einrichtung oder ein engagiertes Unternehmen? Lassen Sie uns gemeinsam ein Programm mit messbarer Wirkung aufbauen.",
+    "button": "Partnerschaft vorschlagen"
+  }
+}

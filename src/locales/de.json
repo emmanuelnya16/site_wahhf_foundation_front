@@ -28,6 +28,30 @@
       "environment": "Umwelt",
       "rights": "Rechte und Teilhabe",
       "mobility": "Mobilität & Sprachen"
+    },
+    "mainNav": "Hauptnavigation",
+    "mainNavMobile": "Hauptnavigation (mobil)",
+    "searchOpen": "Website durchsuchen",
+    "searchClose": "Suche schließen",
+    "menuOpen": "Hauptmenü öffnen",
+    "menuClose": "Menü schließen",
+    "mobileMenu": "Mobiles Menü der WAHHF Foundation",
+    "actionsMobile": "Unsere Arbeit (6 Bereiche)",
+    "applyMobile": "Bewerben (Kurse & Europa – kostenlos)",
+    "search": {
+      "domain": "Bereich: {{title}}",
+      "level": "Deutschkurs: {{title}}",
+      "country": "Begleitetes Land: {{flag}} {{name}}"
+    },
+    "mega": {
+      "domainsTitle": "Die 6 Arbeitsbereiche der WAHHF Foundation",
+      "overview": "Zur Übersicht",
+      "mobilityTitle": "Mobilität & Sprachen: Deutsch/Englisch (A1–C1) & Europa",
+      "mobilityText": "Kostenlose Begleitung bei Deutsch- und Englischkursen und geprüfte Orientierung für 10 europäische Länder, finanziert von IROKO und unseren Spenderinnen und Spendern.",
+      "academy": "Sprachakademie (A1 bis C1)",
+      "support": "Begleitung in 10 Länder",
+      "scams": "Vorsicht: Betrug vermeiden",
+      "apply": "Kostenlos bewerben"
     }
   },
   "disclaimer": {
@@ -171,6 +195,174 @@
     "privacy": "Datenschutz",
     "transparency": "Finanzielle Transparenz",
     "backToTop": "Nach oben",
-    "rights": "Alle Rechte vorbehalten."
+    "rights": "Alle Rechte vorbehalten.",
+    "story": "Unsere Geschichte & Mission",
+    "team": "Team & Leitung",
+    "gallery": "Foto- & Videogalerie",
+    "partners": "Partner & IROKO-Gruppe",
+    "news": "Aktuelles & Einsätze vor Ort",
+    "academy": "Deutsch-/Englisch-Akademie A1–C1 (kostenlos)",
+    "apply": "Für ein Programm bewerben",
+    "volunteer": "Ehrenamtlich mitmachen",
+    "partner": "Partner werden",
+    "scams": "Schutz vor Betrug",
+    "contactForm": "Kontaktformular",
+    "addressTodo": "(TODO: genaue Adresse)"
+  },
+  "ui": {
+    "logoAlt": "Logo der WAHHF Foundation",
+    "newTab": " (neuer Tab)",
+    "skipLink": "Zum Inhalt springen",
+    "whatsapp": {
+      "message": "Guten Tag, liebes Team der WAHHF Foundation, ich möchte mich über Ihre kostenlosen Begleitprogramme informieren …",
+      "label": "Der WAHHF Foundation auf WhatsApp schreiben (neuer Tab)"
+    },
+    "cookies": {
+      "label": "Cookies und Datenschutz",
+      "title": "Ihre Privatsphäre ist uns wichtig (DSGVO)",
+      "text": "Die WAHHF Foundation verwendet nur technisch notwendige Cookies, damit die Website funktioniert (Wahl von Sprache und Darstellung). Es sind keine Werbe-Tracker aktiv.",
+      "privacy": "Datenschutzerklärung",
+      "refuse": "Nur notwendige Cookies",
+      "accept": "Akzeptieren"
+    },
+    "chunkError": {
+      "page": "Diese Seite konnte nicht geladen werden. Bitte prüfen Sie Ihre Verbindung.",
+      "block": "Dieser Inhalt konnte nicht geladen werden.",
+      "retry": "Erneut versuchen"
+    },
+    "handoff": {
+      "info": "Die Website kann Formulare noch nicht selbst übermitteln. Ihre Nachricht mit Ihren Antworten ist fertig: Senden Sie sie per WhatsApp oder per E-Mail. Die Stiftung erhält sie erst, wenn Sie sie abgeschickt haben.",
+      "whatsapp": "Per WhatsApp senden",
+      "email": "Per E-Mail senden",
+      "fallback": "Falls sich keine App öffnet, schreiben Sie direkt an <mail>{{email}}</mail> oder per WhatsApp an {{phone}} und kopieren Sie die Nachricht unten.",
+      "preview": "Vorbereitete Nachricht ansehen",
+      "edit": "Meine Antworten ändern"
+    },
+    "draft": {
+      "greeting": "Guten Tag, liebes Team der WAHHF Foundation,",
+      "row": "{{label}}: {{value}}"
+    },
+    "validation": {
+      "emailEmpty": "Bitte geben Sie Ihre E-Mail-Adresse ein, zum Beispiel name@beispiel.de.",
+      "emailInvalid": "Die E-Mail-Adresse ist unvollständig. Sie sollte so aussehen: name@beispiel.de.",
+      "phoneEmpty": "Bitte geben Sie Ihre Telefon- oder WhatsApp-Nummer mit Ländervorwahl ein (z. B. +237 6 90 00 00 00).",
+      "phoneInvalid": "Die Nummer ist unvollständig: Bitte geben Sie die Ländervorwahl und mindestens 8 Ziffern an (z. B. +237 6 90 00 00 00)."
+    }
+  },
+  "contenu": {
+    "domaines": {
+      "education": {
+        "title": "Bildung",
+        "shortDesc": "Nachhilfe, Renovierung von Klassenzimmern, Stipendien und Gemeinschaftsbibliotheken.",
+        "fullDesc": "Wir setzen uns dafür ein, dass jedes Kind und jeder junge Mensch Schulmaterial, pädagogische Begleitung und einen würdigen Lernort hat.",
+        "programs": [
+          "Schulsets und Lehrbücher für Schülerinnen und Schüler auf dem Land",
+          "Gemeinschaftsbibliotheken und Leseräume",
+          "Mentoring und Studienorientierung nach dem Abitur"
+        ]
+      },
+      "sante": {
+        "title": "Gesundheit",
+        "shortDesc": "Präventionskampagnen, Gesundheit von Müttern und Kindern, Zugang zur Grundversorgung und Aufklärung.",
+        "fullDesc": "Gemeinsam mit örtlichen Gesundheitszentren organisieren unsere ehrenamtlichen Teams kostenlose Vorsorgetage, Gesundheitsaufklärung und Unterstützung für Mütter.",
+        "programs": [
+          "Vorsorgeberatung und Aufklärung in den Gemeinden",
+          "Begleitung der Gesundheit von Müttern und Kindern",
+          "Zugang zu Trinkwasser und Hygiene an Schulen"
+        ]
+      },
+      "entrepreneuriat": {
+        "title": "Unternehmertum junger Menschen",
+        "shortDesc": "Solidarische Gründungsbegleitung, digitale Grundkompetenzen, Management von Kleinprojekten und Mentoring durch Fachleute.",
+        "fullDesc": "Wir begleiten junge Menschen mit lokalen Initiativen dabei, nachhaltige und ethische Einkommensquellen aufzubauen.",
+        "programs": [
+          "Workshops zu Betriebsführung und einfacher Buchhaltung",
+          "Einführung in digitale Werkzeuge und Büroanwendungen",
+          "Vernetzung mit engagierten Fachleuten der IROKO-Gruppe"
+        ]
+      },
+      "environnement": {
+        "title": "Umwelt",
+        "shortDesc": "Gemeinschaftliche Aufforstung, Agrarökologie, Abfallwirtschaft und Klimabildung für junge Menschen.",
+        "fullDesc": "Wir schützen lokale Ökosysteme und geben der jungen Generation das Wissen um eine nachhaltige, bodenschonende Landwirtschaft weiter.",
+        "programs": [
+          "Baumschulen in den Dörfern und Aufforstungskampagnen",
+          "Aufklärung über Mülltrennung und Hygiene in der Stadt",
+          "Schulungen zu nachhaltigen agrarökologischen Methoden"
+        ]
+      },
+      "droits-inclusion": {
+        "title": "Rechte und Teilhabe",
+        "shortDesc": "Förderung der Chancengleichheit, Teilhabe schutzbedürftiger Menschen und Zugang zu Informationen über Bürgerrechte.",
+        "fullDesc": "Wir verteidigen die Würde des Menschen und wenden uns gegen jede Form der Ausgrenzung – sozial, wirtschaftlich oder wegen einer Behinderung.",
+        "programs": [
+          "Stärkung junger Frauen und Führung in der Gemeinschaft",
+          "Unterstützung beim Schulbesuch junger Menschen mit Behinderung",
+          "Sprechstunden für ein offenes Ohr und soziale Beratung"
+        ]
+      },
+      "mobilite-langues": {
+        "title": "Mobilität & Sprachen",
+        "shortDesc": "Kostenlose Deutsch- und Englischakademie (A1 bis C1) und transparente Begleitung in 10 europäische Länder.",
+        "fullDesc": "Ein Programm, das unsere Partner und Spender finanzieren: Deutsch oder Englisch lernen und ein Studien-, Ausbildungs- oder Mobilitätsprojekt sicher vorbereiten.",
+        "programs": [
+          "Begleitung der Deutsch- und Englischkurse von Niveau A1 bis C1",
+          "Fundierte Orientierung für 10 europäische Länder",
+          "Aktiver Schutz vor Betrug und falschen Visaversprechen"
+        ]
+      }
+    },
+    "pays": {
+      "allemagne": {
+        "name": "Deutschland"
+      },
+      "luxembourg": {
+        "name": "Luxemburg"
+      },
+      "slovenie": {
+        "name": "Slowenien"
+      },
+      "italie": {
+        "name": "Italien"
+      },
+      "grece": {
+        "name": "Griechenland"
+      },
+      "portugal": {
+        "name": "Portugal"
+      },
+      "espagne": {
+        "name": "Spanien"
+      },
+      "danemark": {
+        "name": "Dänemark"
+      },
+      "pologne": {
+        "name": "Polen"
+      },
+      "albanie": {
+        "name": "Albanien"
+      }
+    },
+    "niveaux": {
+      "a1": {
+        "title": "Niveau A1 — Einstieg & Grundlagen"
+      },
+      "a2": {
+        "title": "Niveau A2 — Verständigung im Alltag"
+      },
+      "b1": {
+        "title": "Niveau B1 — Schwelle zur Selbstständigkeit"
+      },
+      "b2": {
+        "title": "Niveau B2 — Unabhängigkeit & Sprachfluss"
+      },
+      "c1": {
+        "title": "Niveau C1 — Sprachbeherrschung für Studium & Beruf"
+      }
+    },
+    "contact": {
+      "place": "Kamerun (Douala, Yaoundé) und Koordination in Deutschland"
+    }
   }
 }

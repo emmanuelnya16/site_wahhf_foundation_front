@@ -1,7 +1,9 @@
 import { ElementType, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import StepNumber from './StepNumber';
 import { cn } from '../../lib/utils';
+import '../../pages/accompagnement/i18n';
 
 /*
  * Étapes reliées par le fil (groupe 7.4, contrat §6 et §8 : page Accompagnement vers l'Europe).
@@ -14,6 +16,7 @@ import { cn } from '../../lib/utils';
  *   data-fil-steps-seg, data-fil-steps-dot).
  * - `currentId` (fin des guides) : l'étape affichée a son numéro plein et « étape affichée » pour les lecteurs d'écran.
  * - `withFil={false}` (fin des guides) : les numéros sans le trait ; le fil reste propre à la page Accompagnement.
+ * - « (étape affichée) » : paquet « accompagnement » (lot 7.10).
  *
  *   <FilSteps steps={[{ id: 'dossier', title: 'Préparer son dossier', to: '/accompagnement/preparer-son-dossier', desc: '…' }]} />
  */
@@ -38,6 +41,7 @@ export default function FilSteps({
   withFil?: boolean;
   className?: string;
 }) {
+  const { t } = useTranslation();
   return (
     <ol data-fil-steps={withFil ? '' : undefined} className={cn('max-w-[65ch]', className)}>
       {steps.map((step, i) => {
@@ -66,7 +70,7 @@ export default function FilSteps({
                   className={cn('py-[11px] text-link underline underline-offset-4 decoration-1 hover:decoration-2', current && 'decoration-2')}
                 >
                   {step.title}
-                  {current && <span className="sr-only"> (étape affichée)</span>}
+                  {current && <span className="sr-only">{t('accompagnement.etapes.affichee')}</span>}
                 </Link>
               </Title>
               {step.desc && <div className="text-body text-text-secondary">{step.desc}</div>}

@@ -1,0 +1,35 @@
+{
+  "seo": {
+    "title": "Actualités et actions de terrain",
+    "description": "Les actualités de WAHHF Foundation, et en images la première journée portes ouvertes et le Boot Camp de Yaoundé."
+  },
+  "title": "Actualités et actions de terrain",
+  "intro": "Les nouvelles de la fondation et de ses actions, au Cameroun et vers l’Europe.",
+  "empty": {
+    "title": "Aucun article publié pour le moment",
+    "text": "En attendant, retrouvez en photos et en vidéos la première journée portes ouvertes de la fondation et le Boot Camp de Yaoundé."
+  },
+  "inPictures": "En images",
+  "seeGallery": "Voir toute la galerie",
+  "albums": {
+    "inGallery_one": "{{count}} photo, dans la galerie.",
+    "inGallery_other": "{{count}} photos, dans la galerie.",
+    "photoCount_one": "{{count}} photo",
+    "photoCount_other": "{{count}} photos",
+    "seeAlbum": "Voir l’album"
+  },
+  "article": {
+    "breadcrumb": "Actualités",
+    "published": "Publié le {{date}}",
+    "apply": "Candidater",
+    "donate": "Faire un don",
+    "support": "Soutenir ce domaine",
+    "all": "Toutes les actualités"
+  },
+  "notFound": {
+    "title": "Cet article est introuvable",
+    "message": "Il a peut-être été déplacé ou retiré, ou le lien a été mal copié. Voici les actualités publiées.",
+    "newsPage": "Page Actualités",
+    "gallery": "Galerie photo et vidéo"
+  }
+}

@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import SectionHeader from '../wahhf/SectionHeader';
 import Photo from '../wahhf/Photo';
 import { AfterFirstDisplay, FilStepsScrub } from '../../effects/DeferredMotion';
@@ -50,13 +51,15 @@ function PersonCard({ member, top, nameIsHeading }: { member: TeamMember; top: b
  * fondu, data-reveal="soft") ; ailleurs et en mouvement réduit, tout est en place.
  */
 export default function OrgChart() {
+  // La langue en cours : intitulés de niveau, rôles et textes alternatifs se remettent à jour (src/lib/team.ts)
+  const { t } = useTranslation();
   const levels = teamLevels();
   const ref = useRef<HTMLDivElement>(null);
   if (levels.length === 0) return null;
   return (
     <section id="organigramme" aria-labelledby="organigramme-titre" className="section-space bg-surface">
       <div ref={ref} className="container-page space-y-12">
-        <SectionHeader title="Notre organisation" titleId="organigramme-titre" />
+        <SectionHeader title={t('equipe.orgChart.title')} titleId="organigramme-titre" />
         <div data-fil-steps="" className="org">
           {levels.map((level, i) => (
             <div key={level.niveau} className="org-level">

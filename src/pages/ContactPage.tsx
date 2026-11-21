@@ -1,6 +1,11 @@
-import { useState, useId, useRef, FormEvent } from 'react';
+import { useState, useId, useRef, useEffect, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
+import { Trans } from 'react-i18next';
+import type { TFunction } from 'i18next';
 import { Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
+import { registerBundle } from '../i18n';
+import { useLocalize } from '../lib/localize';
+import contactFr from '../locales/contact-page/fr.json';
 import SEO from '../components/wahhf/SEO';
 import SectionHeader from '../components/wahhf/SectionHeader';
 import PageHeader, { PageTitle, PageIntro } from '../components/wahhf/PageHeader';
@@ -18,35 +23,35 @@ import { buildDraft } from '../lib/contactDraft';
 import { emailError, phoneError, requiredError, focusFirstError } from '../lib/formValidation';
 import { useFocusOnChange } from '../lib/useFocusOnChange';
 
-/** Motifs du message : ils donnent l'objet du message préparé. */
-const MOTIFS = [
-  { id: 'candidat', label: 'Je suis candidat (cours d’allemand /anglais, accompagnement)' },
-  { id: 'benevole', label: 'Je souhaite devenir bénévole' },
-  { id: 'partenaire', label: 'Partenaire ou institution' },
-  { id: 'presse', label: 'Presse et médias' },
-  { id: 'autre', label: 'Autre demande' },
-] as const;
-type Motif = (typeof MOTIFS)[number]['id'];
+/** Textes de la page (lot 7.10) : src/locales/contact-page (fr, en, de), espace de noms « contactPage ». */
+registerBundle('contactPage', contactFr, {
+  en: () => import('../locales/contact-page/en.json'),
+  de: () => import('../locales/contact-page/de.json'),
+});
+
+/** Motifs du message : ils donnent l'objet du message préparé. Libellés : contactPage.motifs.<id>. */
+const MOTIFS = ['candidat', 'benevole', 'partenaire', 'presse', 'autre'] as const;
+type Motif = (typeof MOTIFS)[number];
 
 type ContactField = 'motif' | 'name' | 'email' | 'whatsapp' | 'message' | 'consent';
 const CONTACT_FIELDS = ['motif', 'name', 'email', 'whatsapp', 'message', 'consent'] as const;
 const INPUT_CLASS = FIELD_CLASS;
 
-function checkContactField(key: ContactField, value: string | boolean): string | undefined {
+function checkContactField(key: ContactField, value: string | boolean, t: TFunction): string | undefined {
   switch (key) {
     case 'motif':
-      return value ? undefined : 'Choisissez le motif de votre message.';
+      return value ? undefined : t('contactPage.errors.motif');
     case 'name':
-      return requiredError(String(value), 'Saisissez votre nom complet ou celui de votre structure.');
+      return requiredError(String(value), t('contactPage.errors.name'));
     case 'email':
       return emailError(String(value));
     case 'whatsapp':
       // Facultatif : vérifié seulement s'il est rempli
       return String(value).trim() ? phoneError(String(value)) : undefined;
     case 'message':
-      return requiredError(String(value), 'Écrivez votre message en quelques lignes.');
+      return requiredError(String(value), t('contactPage.errors.message'));
     case 'consent':
-      return value ? undefined : 'Cochez cette case pour que nous puissions lire votre message et vous répondre.';
+      return value ? undefined : t('contactPage.errors.consent');
   }
 }
 
@@ -65,6 +70,9 @@ function checkContactField(key: ContactField, value: string | boolean): string |
  * - Mouvement : seulement l'en-tête ; rien sur les champs.
  */
 export default function ContactPage() {
+  const { t, lang, localized } = useLocalize();
+  // Lieu de la fondation dans la langue de la page (surcouche commune contenu.contact)
+  const contact = localized(CONTACT, 'contenu.contact');
   const [motif, setMotif] = useState<Motif | ''>('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -78,11 +86,20 @@ export default function ContactPage() {
   const [errors, setErrors] = useState<Partial<Record<ContactField, string>>>({});
   const values: Record<ContactField, string | boolean> = { motif, name, email, whatsapp, message, consent };
   const recheck = (key: ContactField, value: string | boolean) => {
-    if (errors[key]) setErrors((prev) => ({ ...prev, [key]: checkContactField(key, value) }));
+    if (errors[key]) setErrors((prev) => ({ ...prev, [key]: checkContactField(key, value, t) }));
   };
   const checkOnBlur = (key: ContactField, value: string) => {
-    if (value.trim()) setErrors((prev) => ({ ...prev, [key]: checkContactField(key, value) }));
+    if (value.trim()) setErrors((prev) => ({ ...prev, [key]: checkContactField(key, value, t) }));
   };
+  // Changement de langue : les erreurs déjà affichées passent dans la nouvelle langue
+  useEffect(() => {
+    setErrors((prev) => {
+      const next: Partial<Record<ContactField, string>> = {};
+      for (const key of Object.keys(prev) as ContactField[]) next[key] = prev[key] && checkContactField(key, values[key], t);
+      return next;
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lang]);
 
   // Message prêt ou retour au formulaire : défilement jusqu'au bloc, focus sur son titre, annonce polie
   const formBlockRef = useRef<HTMLDivElement>(null);
@@ -91,32 +108,30 @@ export default function ContactPage() {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     const found: Partial<Record<ContactField, string>> = {};
-    for (const key of CONTACT_FIELDS) found[key] = checkContactField(key, values[key]);
+    for (const key of CONTACT_FIELDS) found[key] = checkContactField(key, values[key], t);
     setErrors(found);
     if (focusFirstError(CONTACT_FIELDS, found, fieldId)) return;
     setPrepared(true);
   };
 
-  const motifLabel = MOTIFS.find((m) => m.id === motif)?.label;
+  // Message préparé : libellés dans la langue de la page, réponses telles que saisies
+  const motifLabel = motif ? t(`contactPage.motifs.${motif}`) : undefined;
   const draft = buildDraft(
-    `Contact WAHHF — ${motifLabel ?? 'Message'} — ${name.trim()}`,
-    'Je vous écris depuis le formulaire de contact du site :',
+    t('contactPage.draft.subject', { motif: motifLabel ?? t('contactPage.draft.noMotif'), name: name.trim() }),
+    t('contactPage.draft.intro'),
     [
-      ['Motif', motifLabel],
-      ['Nom', name],
-      ['E-mail', email],
-      ['WhatsApp', whatsapp],
-      ['Message', message],
+      [t('contactPage.draft.motif'), motifLabel],
+      [t('contactPage.draft.name'), name],
+      [t('contactPage.draft.email'), email],
+      [t('contactPage.draft.whatsapp'), whatsapp],
+      [t('contactPage.draft.message'), message],
     ],
-    'J’accepte que mes coordonnées soient traitées par WAHHF Foundation pour répondre à mon message (RGPD).'
+    t('contactPage.draft.consent')
   );
 
   return (
     <>
-      <SEO
-        title="Contact — Écrire à WAHHF Foundation"
-        description="Contacter WAHHF Foundation par WhatsApp ou par e-mail : candidature, bénévolat, partenariat, presse ou toute autre demande."
-      />
+      <SEO title={t('contactPage.seo.title')} description={t('contactPage.seo.description')} />
 
       <PageHeader
         reveal
@@ -124,26 +139,22 @@ export default function ContactPage() {
         photoCaption={HEADER_PHOTO ? photoCaption(HEADER_PHOTO) : undefined}
         notice={
           // Alerte ambre (décision des groupes 7.1 et 7.2) : premier élément sous le titre, jamais repliée
-          <InfoBox tone="warning" title="Vigilance">
-            <p>
-              Aucun collaborateur de WAHHF ne vous demandera d’argent par téléphone, e-mail ou WhatsApp pour traiter
-              votre dossier.
-            </p>
+          <InfoBox tone="warning" title={t('contactPage.vigilance.title')}>
+            <p>{t('contactPage.vigilance.text')}</p>
             <p>
               <Link
                 to="/accompagnement/eviter-les-arnaques"
                 className="inline-flex min-h-11 items-center text-link underline underline-offset-4"
               >
-                Reconnaître une fausse offre
+                {t('contactPage.vigilance.link')}
               </Link>
             </p>
           </InfoBox>
         }
       >
-        <PageTitle>Écrire à WAHHF Foundation</PageTitle>
+        <PageTitle>{t('contactPage.header.title')}</PageTitle>
         <PageIntro>
-          Joignez-nous directement par WhatsApp ou par e-mail, ou utilisez le formulaire{' '}: il prépare votre
-          message selon son motif.
+          <Trans i18nKey="contactPage.header.intro" components={{ nb: <></> }} />
         </PageIntro>
       </PageHeader>
 
@@ -151,12 +162,12 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-12 gap-y-14">
           {/* Coordonnées directes : texte sur le fond de la page, sans carte (contrat §8, §12) */}
           <div className="lg:col-span-4 space-y-6">
-            <h2 className="text-section-title text-text">Nous joindre directement</h2>
+            <h2 className="text-section-title text-text">{t('contactPage.direct.title')}</h2>
             {/* Lien externe : PrimaryButton ajoute ↗ et « (nouvel onglet) » pour les lecteurs d'écran */}
-            <PrimaryButton href={`https://wa.me/${CONTACT.whatsappNumber}?text=${encodeURIComponent('Bonjour WAHHF Foundation, ')}`}>
+            <PrimaryButton href={`https://wa.me/${CONTACT.whatsappNumber}?text=${encodeURIComponent(t('contactPage.direct.greeting'))}`}>
               <span className="inline-flex items-center gap-2">
                 <MessageCircle aria-hidden="true" className="w-4 h-4 shrink-0" />
-                Écrire sur WhatsApp
+                {t('contactPage.direct.whatsapp')}
               </span>
             </PrimaryButton>
             {/* Liens d'au moins 44 px de haut (contrat §8, A11Y-07) : ce sont les actions directes sur téléphone */}
@@ -181,47 +192,48 @@ export default function ContactPage() {
               </li>
               <li className="flex items-start gap-3 pt-2">
                 <MapPin aria-hidden="true" className="w-5 h-5 mt-1 shrink-0 text-text-secondary" />
-                <span>{CONTACT.place}</span>
+                <span>{contact.place}</span>
               </li>
             </ul>
           </div>
 
           <div ref={formBlockRef} className="lg:col-span-8">
             <p role="status" className="sr-only">
-              {prepared ? 'Votre message est prêt : envoyez-le par WhatsApp ou par e-mail.' : ''}
+              {prepared ? t('contactPage.status.ready') : ''}
             </p>
             {prepared ? (
               <ContactHandoff
-                title={'Dernière étape : envoyez votre message'}
+                title={t('contactPage.handoff.title')}
                 draft={draft}
                 titleRef={titleRef}
                 onEdit={() => setPrepared(false)}
+                editLabel={t('contactPage.handoff.edit')}
               />
             ) : (
               <div className="rounded-card bg-surface-section p-6 sm:p-10 space-y-8">
-                <SectionHeader titleRef={titleRef} title="Votre message" />
+                <SectionHeader titleRef={titleRef} title={t('contactPage.form.title')} />
 
                 <form onSubmit={handleSubmit} noValidate className="space-y-6">
                   <fieldset>
-                    <legend className={LABEL_CLASS}>Motif de votre message *</legend>
+                    <legend className={LABEL_CLASS}>{t('contactPage.form.motifLegend')}</legend>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {MOTIFS.map((m, i) => (
                         <ChoiceTile
-                          key={m.id}
+                          key={m}
                           id={i === 0 ? fieldId('motif') : undefined}
                           name="contact-motif"
-                          value={m.id}
-                          checked={motif === m.id}
+                          value={m}
+                          checked={motif === m}
                           onChange={() => {
-                            setMotif(m.id);
-                            recheck('motif', m.id);
+                            setMotif(m);
+                            recheck('motif', m);
                           }}
                           invalid={!!errors.motif}
                           describedBy={errors.motif ? fieldErrorId(fieldId('motif')) : undefined}
                           showCheck
                           className="p-4 text-left"
                         >
-                          {m.label}
+                          {t(`contactPage.motifs.${m}`)}
                         </ChoiceTile>
                       ))}
                     </div>
@@ -229,7 +241,7 @@ export default function ContactPage() {
                   </fieldset>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <FormField id={fieldId('name')} label="Nom complet ou structure *" error={errors.name}>
+                    <FormField id={fieldId('name')} label={t('contactPage.form.name')} error={errors.name}>
                       {(a11y) => (
                         <input
                           {...a11y}
@@ -247,7 +259,7 @@ export default function ContactPage() {
                         />
                       )}
                     </FormField>
-                    <FormField id={fieldId('email')} label="Adresse e-mail *" error={errors.email}>
+                    <FormField id={fieldId('email')} label={t('contactPage.form.email')} error={errors.email}>
                       {(a11y) => (
                         <input
                           {...a11y}
@@ -269,7 +281,7 @@ export default function ContactPage() {
                     </FormField>
                     <FormField
                       id={fieldId('whatsapp')}
-                      label="Numéro WhatsApp (facultatif)"
+                      label={t('contactPage.form.whatsapp')}
                       error={errors.whatsapp}
                       className="sm:col-span-2"
                     >
@@ -280,7 +292,7 @@ export default function ContactPage() {
                           autoComplete="tel"
                           inputMode="tel"
                           maxLength={30}
-                          placeholder="Ex. +237 6..."
+                          placeholder={t('contactPage.form.whatsappPlaceholder')}
                           value={whatsapp}
                           onChange={(e) => {
                             setWhatsapp(e.target.value);
@@ -293,7 +305,7 @@ export default function ContactPage() {
                     </FormField>
                   </div>
 
-                  <FormField id={fieldId('message')} label="Votre message *" error={errors.message}>
+                  <FormField id={fieldId('message')} label={t('contactPage.form.message')} error={errors.message}>
                     {(a11y) => (
                       <textarea
                         {...a11y}
@@ -328,19 +340,19 @@ export default function ContactPage() {
                         className={CHECKBOX_CLASS}
                       />
                       <span>
-                        J’accepte que mes coordonnées soient traitées par WAHHF Foundation pour répondre à mon
-                        message, conformément à la{' '}
-                        <Link to="/confidentialite" target="_blank" rel="noopener" className="text-link underline underline-offset-4">
-                          politique de confidentialité
-                          <span className="sr-only"> (nouvel onglet)</span>
-                        </Link>
-                        . *
+                        <Trans
+                          i18nKey="contactPage.form.consent"
+                          components={{
+                            lien: <Link to="/confidentialite" target="_blank" rel="noopener" className="text-link underline underline-offset-4" />,
+                            sr: <span className="sr-only" />,
+                          }}
+                        />
                       </span>
                     </label>
                     <FieldError id={fieldErrorId(fieldId('consent'))} message={errors.consent} />
                   </div>
 
-                  <PrimaryButton type="submit">Préparer l’envoi de mon message</PrimaryButton>
+                  <PrimaryButton type="submit">{t('contactPage.form.submit')}</PrimaryButton>
                 </form>
               </div>
             )}

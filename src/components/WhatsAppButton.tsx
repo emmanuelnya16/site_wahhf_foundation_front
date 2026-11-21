@@ -11,14 +11,9 @@ import { CONTACT } from '../config/contact';
  * Numéro : celui de src/config/contact.ts, la seule source du site (CTC-03, groupe 7.2).
  */
 export default function WhatsAppButton() {
-  const { i18n } = useTranslation();
-  const en = i18n.language.startsWith('en');
+  const { t } = useTranslation();
   const phoneNumber = CONTACT.whatsappNumber;
-  const message = encodeURIComponent(
-    en
-      ? 'Hello WAHHF Foundation, I would like information about your free programs...'
-      : 'Bonjour WAHHF Foundation, je souhaite des informations sur vos programmes d’accompagnement gratuits...'
-  );
+  const message = encodeURIComponent(t('ui.whatsapp.message'));
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
 
   return (
@@ -26,7 +21,7 @@ export default function WhatsAppButton() {
       href={whatsappUrl}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={en ? 'Write to WAHHF Foundation on WhatsApp (new tab)' : 'Écrire à WAHHF Foundation sur WhatsApp (nouvel onglet)'}
+      aria-label={t('ui.whatsapp.label')}
       className="focus-ring-double fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-(--z-float) inline-flex h-12 items-center gap-2 rounded-pill bg-action pl-3.5 pr-4 text-on-action shadow-overlay transition-colors duration-(--dur-fast) hover:bg-action-hover active:bg-action-hover active:transition-none inset-ring inset-ring-border-on-inverse dark:inset-ring-0 dark:border dark:border-border-input cursor-pointer"
     >
       <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" className="h-5 w-5 shrink-0" fill="currentColor">

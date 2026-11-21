@@ -1,0 +1,116 @@
+{
+  "seo": {
+    "title": "Donate — Support German/English courses and our work in Cameroon",
+    "description": "Support WAHHF Foundation: your donations fund German/English courses (A1 to C1), support for young people towards Europe and our education, health and environmental work in Cameroon."
+  },
+  "header": {
+    "title": "Your donation funds German/English courses and our work in Cameroon",
+    "intro": "The German/English courses (A1 to C1) and the support towards Europe are free of charge for young people: they are funded by our partners and our donors. Your donations also support our education, health and environmental work."
+  },
+  "status": {
+    "ready": "Your message is ready: send it by WhatsApp or by email."
+  },
+  "handoff": {
+    "title": "Last step: send your donation message",
+    "edit": "Change my donation",
+    "text": "Your message asks the foundation how to pay your donation of <v>{{amount}}</v>. No payment is requested on this website."
+  },
+  "officialChannels": "For your safety, the foundation only replies by WhatsApp from <tel>{{phone}}</tel> or by email from <mail>{{email}}</mail>. If anyone writes to you from another number or another address about your donation, do not pay anything and let us know.",
+  "section": {
+    "title": "How to donate today",
+    "subtitle": "Online payment is not yet available on this website. Choose an amount: a message is prepared, you send it by WhatsApp or by email, and the foundation tells you how to pay your donation."
+  },
+  "allocation": {
+    "label": "Your donation supports",
+    "general": "Where the need is most urgent"
+  },
+  "currency": {
+    "legend": "Currency",
+    "tile": {
+      "EUR": "Euros (€)",
+      "XAF": "CFA francs"
+    },
+    "word": {
+      "EUR": "euros",
+      "XAF": "CFA francs"
+    },
+    "example": {
+      "EUR": "75",
+      "XAF": "15,000"
+    }
+  },
+  "amount": {
+    "legend": "Amount",
+    "other": "Other amount, in <v>{{devise}}</v>",
+    "placeholder": "E.g. {{example}}",
+    "range": "Between <v>{{min}}</v> and <v>{{max}}</v>."
+  },
+  "impact": {
+    "title": "What your donation will fund",
+    "noAmount": "Choose an amount, or enter an amount between {{min}} and {{max}}.",
+    "approx": "{{amount}} (about {{converted}})",
+    "domain": "{{money}} for {{for}}: {{what}}.",
+    "domainTitle": "{{money}} for the ‘{{title}}’ area.",
+    "general": "{{money}}, where the need is most urgent.",
+    "example": "For example: {{text}}"
+  },
+  "donor": {
+    "label": "Your name, or the name of your organisation (optional)"
+  },
+  "privacy": "This website stores nothing: the message is sent from your own messaging app. See our <lien>privacy policy<sr> (new tab)</sr></lien>.",
+  "submit": "Prepare my message",
+  "errors": {
+    "digits": "Enter the amount in figures, for example {{example}}.",
+    "min": "The minimum amount is {{min}}.",
+    "max": "For a donation of more than {{max}}, write to us directly by WhatsApp or by email (contact details at the bottom of the page)."
+  },
+  "draft": {
+    "subject": "Donation to WAHHF Foundation — {{amount}}",
+    "intro": "I would like to make a donation to WAHHF Foundation. Could you tell me how to pay it?",
+    "amount": "Amount",
+    "allocation": "Preferred allocation",
+    "name": "Name or organisation"
+  },
+  "contenu": {
+    "impactDomaines": {
+      "mobilite-langues": {
+        "for": "mobility and languages",
+        "what": "German/English courses from level A1 to C1 and guidance towards 10 European countries"
+      },
+      "education": {
+        "for": "education",
+        "what": "school kits and textbooks, community libraries, mentoring and guidance for pupils"
+      },
+      "sante": {
+        "for": "health",
+        "what": "preventive consultations, maternal and child health, drinking water and hygiene at school"
+      },
+      "entrepreneuriat": {
+        "for": "youth entrepreneurship",
+        "what": "management and accounting workshops, introduction to digital tools, mentoring for project leaders"
+      },
+      "environnement": {
+        "for": "the environment",
+        "what": "tree nurseries and reforestation, awareness of waste sorting, training in agroecology"
+      },
+      "droits-inclusion": {
+        "for": "rights and inclusion",
+        "what": "independence for young women, schooling for young people with disabilities, listening and social guidance"
+      }
+    },
+    "exemplesImpact": {
+      "EUR-25": {
+        "text": "Funds German/English A1 textbooks and exercise materials for one young learner (example — TODO)"
+      },
+      "EUR-50": {
+        "text": "Supports one month of language support and digital access for one student (example — TODO)"
+      },
+      "EUR-100": {
+        "text": "Contributes to a day of maternal and child health prevention in a rural area (example — TODO)"
+      },
+      "EUR-250": {
+        "text": "Funds a complete language and paperwork support programme for one cohort (example — TODO)"
+      }
+    }
+  }
+}

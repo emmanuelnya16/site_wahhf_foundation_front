@@ -1,0 +1,23 @@
+{
+  "_relire": [
+    "end.title",
+    "end.subtitle",
+    "seo.description",
+    "intro"
+  ],
+  "seo": {
+    "title": "Galerie — Die Stiftung in Bildern",
+    "description": "Fotos der WAHHF Foundation: die Veranstaltung vom 25. April 2026 im Albatros Hotel, ein Besuch in einer Plantage, Ausflüge nach Nkongsamba, zum Berg und zum See sowie eine Wanderung mit jungen Menschen."
+  },
+  "title": "Die Stiftung in Bildern",
+  "intro": "Ein Rückblick in Fotos auf unsere Arbeit: die Veranstaltung vom 25. April 2026 im Albatros Hotel, ein Besuch in einer Plantage, Ausflüge nach Nkongsamba, zum Berg und zum See sowie eine Wanderung mit jungen Menschen.",
+  "filterLabel": "Nach Album filtern",
+  "allAlbums": "Alle Alben",
+  "photoCount_one": "{{count}} Foto",
+  "photoCount_other": "{{count}} Fotos",
+  "end": {
+    "title": "Die Fortsetzung mitgestalten",
+    "subtitle": "Eine Spende unterstützt die Arbeit der Stiftung. Junge Menschen können sich für die Deutsch- und Englischkurse und für die Orientierungsberatung in Richtung Europa bewerben.",
+    "apply": "Für das Programm bewerben"
+  }
+}

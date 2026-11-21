@@ -69,6 +69,7 @@
     "eyebrow": "The programme at a glance",
     "title": "Four moments that matter.",
     "speakers": "Speakers",
+    "speakersSep": ": ",
     "speakersSoon": "to be announced very soon.",
     "schedule": "See the schedule",
     "team": "Our team"
@@ -365,6 +366,12 @@
       "motAccent": "25 April 2026",
       "accroche": "Building the Africa that feeds, cares for and educates its youth.",
       "pays": "Cameroon",
+      "organisateurs": [
+        {},
+        {
+          "nom": "Partner of the day (TODO)"
+        }
+      ],
       "pourquoi": [
         {
           "titre": "Free",
@@ -381,6 +388,39 @@
         {
           "titre": "Travel support",
           "texte": "Support to prepare a travel project."
+        }
+      ],
+      "deroule": [
+        {
+          "heure": "8:00",
+          "titre": "Welcoming participants (TODO)",
+          "texte": "Doors open at 8:00 (banner); schedule to be confirmed (TODO)."
+        },
+        {
+          "heure": "9:00 (TODO)",
+          "titre": "Presentation of the foundation (TODO)",
+          "texte": "The six fields of action presented to the public (TODO).",
+          "lien": {
+            "libelle": "Our actions"
+          }
+        },
+        {
+          "heure": "11:00 (TODO)",
+          "titre": "Studies and training in Europe (TODO)",
+          "texte": "Presentation on studying in Germany (TODO).",
+          "lien": {
+            "libelle": "Mobility & Languages"
+          }
+        },
+        {
+          "heure": "14:00 (TODO)",
+          "titre": "Discussion with the audience (TODO)",
+          "texte": "Questions from the floor at the microphone (TODO)."
+        },
+        {
+          "heure": "21:00",
+          "titre": "Closing (TODO)",
+          "texte": "End of the day at 21:00 (banner); content to be confirmed (TODO)."
         }
       ],
       "activites": [
@@ -402,7 +442,68 @@
         {
           "titre": "Germany–Cameroon technology transfer"
         }
+      ],
+      "tempsForts": [
+        {
+          "titre": "Understand (TODO)",
+          "texte": "First highlight of the day: to be provided (TODO)."
+        },
+        {
+          "titre": "Discuss (TODO)",
+          "texte": "Second highlight: to be provided (TODO)."
+        },
+        {
+          "titre": "Practise (TODO)",
+          "texte": "Third highlight: to be provided (TODO)."
+        },
+        {
+          "titre": "Meet (TODO)",
+          "texte": "Fourth highlight: to be provided (TODO)."
+        }
+      ],
+      "parents": {
+        "promesses": [
+          "Written permission from the parents for every minor (TODO: to be validated by the foundation)",
+          "Young people supervised by the foundation's team throughout the day (TODO: to be validated)",
+          "Free entry, or a clear price announced in advance (TODO: to be validated)"
+        ],
+        "jamais": [
+          "A promise of a visa (TODO: to be validated)",
+          "A promise of a job (TODO: to be validated)",
+          "Hidden fees, or fees paid to an intermediary (TODO: to be validated)"
+        ]
+      },
+      "faq": [
+        {
+          "question": "Where and when did the day take place? (TODO)",
+          "reponse": "At the Albatros Hotel, on 25 April 2026, from 8:00 to 21:00 (banner). City to be confirmed (TODO)."
+        },
+        {
+          "question": "Who was the day for? (TODO)",
+          "reponse": "Answer to be provided by the foundation (TODO)."
+        },
+        {
+          "question": "Was there an entry fee? (TODO)",
+          "reponse": "Answer to be provided by the foundation (TODO)."
+        },
+        {
+          "question": "Could minors come on their own? (TODO)",
+          "reponse": "Answer to be provided by the foundation (TODO)."
+        },
+        {
+          "question": "Is another edition planned? (TODO)",
+          "reponse": "Answer to be provided by the foundation (TODO)."
+        },
+        {
+          "question": "How can I propose a partnership? (TODO)",
+          "reponse": "Through the Take action page, partner section (TODO: to be confirmed)."
+        }
       ]
+    },
+    "exemple-a-venir": {
+      "titre": "Next foundation day (TODO)",
+      "motAccent": "day",
+      "accroche": "Sample event to test the page: texts, date and venue to be replaced (TODO)."
     }
   }
 }

@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, type ComponentType } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 // framer-motion : le même paquet que motion/react (14.14), importé sans passer par le fichier d'entrée de motion/react,
 // qui embarque toujours motion.div complet : le premier chargement n'a que m, AnimatePresence et LazyMotion (lot 7).
@@ -9,42 +9,55 @@ import PageTransition, { routeKey } from './effects/PageTransition';
 import ChunkErrorBoundary from './components/wahhf/ChunkErrorBoundary';
 // L'accueil reste dans le fichier principal (page d'entrée la plus fréquente : pas d'aller-retour réseau).
 import Home from './pages/Home';
+import { bundlesReady } from './i18n';
+
+/**
+ * Page chargée à la demande (lot 7.10) : son JS, puis, en anglais ou en allemand, son paquet de textes. Elle s'affiche
+ * directement dans la langue choisie, sans passer par le français.
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function page<P = any>(load: () => Promise<{ default: ComponentType<P> }>) {
+  return lazy(() => load().then(async (m) => {
+    await bundlesReady();
+    return m;
+  }));
+}
 
 // Toutes les autres pages sont chargées à la demande.
-const MobilityHub = lazy(() => import('./pages/MobilityHub'));
-const LanguageAcademy = lazy(() => import('./pages/LanguageAcademy'));
+const MobilityHub = page(() => import('./pages/MobilityHub'));
+const LanguageAcademy = page(() => import('./pages/LanguageAcademy'));
 // Pages de niveau : de vraies pages qui ouvrent sur le niveau (NIV-01, groupe 7.1)
-const LanguageLevelPage = lazy(() => import('./pages/LanguageLevelPage'));
+const LanguageLevelPage = page(() => import('./pages/LanguageLevelPage'));
 // Accompagnement vers l'Europe : un fichier par gabarit (page principale, fiche pays, guide), un morceau de JS chacun
-const AccompagnementPage = lazy(() => import('./pages/accompagnement/AccompagnementPage'));
-const CountryPage = lazy(() => import('./pages/accompagnement/CountryPage'));
-const GuidePage = lazy(() => import('./pages/accompagnement/GuidePage'));
+const AccompagnementPage = page(() => import('./pages/accompagnement/AccompagnementPage'));
+const CountryPage = page(() => import('./pages/accompagnement/CountryPage'));
+const GuidePage = page(() => import('./pages/accompagnement/GuidePage'));
 // « Éviter les arnaques » : une forme propre (groupe 7.4, ARN-04), plus le gabarit des guides
-const ArnaquesPage = lazy(() => import('./pages/accompagnement/ArnaquesPage'));
-const ApplyPage = lazy(() => import('./pages/ApplyPage'));
-const DonatePage = lazy(() => import('./pages/DonatePage'));
+const ArnaquesPage = page(() => import('./pages/accompagnement/ArnaquesPage'));
+const ApplyPage = page(() => import('./pages/ApplyPage'));
+const DonatePage = page(() => import('./pages/DonatePage'));
 // Une page par fichier (src/pages/transversal/), un morceau de JS par page
-const QuiSommesNousPage = lazy(() => import('./pages/transversal/QuiSommesNousPage'));
-const PartenairesPage = lazy(() => import('./pages/transversal/PartenairesPage'));
-const NosActionsPage = lazy(() => import('./pages/transversal/NosActionsPage'));
-const NotreImpactPage = lazy(() => import('./pages/transversal/NotreImpactPage'));
-const ActualitesPage = lazy(() => import('./pages/transversal/ActualitesPage'));
-const EventsListPage = lazy(() => import('./pages/events/EventsListPage'));
-const EventPage = lazy(() => import('./pages/events/EventPage'));
-const AgirPage = lazy(() => import('./pages/transversal/AgirPage'));
-const LegalTransparencyPage = lazy(() => import('./pages/transversal/LegalTransparencyPage'));
+const QuiSommesNousPage = page(() => import('./pages/transversal/QuiSommesNousPage'));
+const PartenairesPage = page(() => import('./pages/transversal/PartenairesPage'));
+const NosActionsPage = page(() => import('./pages/transversal/NosActionsPage'));
+const NotreImpactPage = page(() => import('./pages/transversal/NotreImpactPage'));
+const ActualitesPage = page(() => import('./pages/transversal/ActualitesPage'));
+const EventsListPage = page(() => import('./pages/events/EventsListPage'));
+const EventPage = page(() => import('./pages/events/EventPage'));
+const AgirPage = page(() => import('./pages/transversal/AgirPage'));
+const LegalTransparencyPage = page(() => import('./pages/transversal/LegalTransparencyPage'));
 
 // Pages existantes conservées intégralement (Règle générale : ne rien supprimer)
-const About = lazy(() => import('./pages/About'));
-const Structure = lazy(() => import('./pages/Structure'));
-const Catalogue = lazy(() => import('./pages/Catalogue'));
-const Tarifs = lazy(() => import('./pages/Tarifs'));
-const Realisation = lazy(() => import('./pages/Realisation'));
-const Founders = lazy(() => import('./pages/Founders'));
-const GalleryPage = lazy(() => import('./pages/GalleryPage'));
-const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
-const ContactPage = lazy(() => import('./pages/ContactPage'));
-const VkiBusiness = lazy(() => import('./pages/VkiBusiness'));
+const About = page(() => import('./pages/About'));
+const Structure = page(() => import('./pages/Structure'));
+const Catalogue = page(() => import('./pages/Catalogue'));
+const Tarifs = page(() => import('./pages/Tarifs'));
+const Realisation = page(() => import('./pages/Realisation'));
+const Founders = page(() => import('./pages/Founders'));
+const GalleryPage = page(() => import('./pages/GalleryPage'));
+const NotFoundPage = page(() => import('./pages/NotFoundPage'));
+const ContactPage = page(() => import('./pages/ContactPage'));
+const VkiBusiness = page(() => import('./pages/VkiBusiness'));
 
 /** Espace réservé pendant le chargement d'une page : garde la hauteur, aucun saut de mise en page. */
 function PageFallback() {

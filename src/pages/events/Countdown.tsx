@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Images } from 'lucide-react';
 import type { Event, EventStatus } from '../../data/events';
-import { eventDate, eventHours, timeLeft } from '../../lib/events';
+import { eventDate, eventStartTime, timeLeft } from '../../lib/events';
 import { EvButton, pad2 } from './ui';
 
 /**
@@ -63,7 +63,7 @@ function Live({ event }: { event: Event }) {
   const ref = useRef<HTMLDivElement>(null);
   const now = useNow(ref);
   const left = timeLeft(event, now);
-  const start = eventHours(event, i18n.language)?.split(' – ')[0];
+  const start = eventStartTime(event, i18n.language);
   const date = eventDate(event, i18n.language, true, false);
   return (
     <div ref={ref} className="ev-compte">

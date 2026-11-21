@@ -11,6 +11,14 @@ import Photo from '../../components/wahhf/Photo';
 import { TEXT_LINK_CLASS } from '../../components/wahhf/TextList';
 import type { CatalogPhoto } from '../../data/photos';
 import { photoCaption, photoOrFallback } from '../../lib/photos';
+import { registerBundle } from '../../i18n';
+import notreImpactFr from '../../locales/notre-impact/fr.json';
+
+/** Textes de la page (lot 7.10) : src/locales/notre-impact/ (espace de noms notreImpact). */
+registerBundle('notreImpact', notreImpactFr, {
+  en: () => import('../../locales/notre-impact/en.json'),
+  de: () => import('../../locales/notre-impact/de.json'),
+});
 
 /*
  * Notre impact (groupe 7.3 : contrat validé, audit IMP-01, T-11, A11Y-09).
@@ -53,10 +61,7 @@ export function NotreImpactPage() {
   const { t } = useTranslation();
   return (
     <>
-      <SEO
-        title="Notre impact — Présence au Cameroun et orientation vers 10 pays européens"
-        description="Où agit WAHHF Foundation : basée à Yaoundé et Douala, au Cameroun, elle informe les jeunes sur les études, la formation et le travail dans 10 pays européens."
-      />
+      <SEO title={t('notreImpact.seo.title')} description={t('notreImpact.seo.description')} />
 
       <PageHeader
         reveal
@@ -64,11 +69,8 @@ export function NotreImpactPage() {
         catalogPhoto={HEADER_PHOTO}
         photoCaption={HEADER_PHOTO ? photoCaption(HEADER_PHOTO) : undefined}
       >
-        <PageTitle>Un impact concret, mesuré avec humilité et transparence</PageTitle>
-        <PageIntro>
-          Voici où la fondation est présente au Cameroun, et les 10 pays européens sur lesquels elle informe les jeunes.
-          Les résultats chiffrés seront publiés ici quand ils seront datés et vérifiés.
-        </PageIntro>
+        <PageTitle>{t('notreImpact.title')}</PageTitle>
+        <PageIntro>{t('notreImpact.intro')}</PageIntro>
       </PageHeader>
 
       {/* Carte de présence : régions du Cameroun et pays européens, sans lignes provisoires */}
@@ -83,10 +85,7 @@ export function NotreImpactPage() {
       {FIELD_PHOTOS.length > 0 && (
         <Section tone="sauge">
           <div className="container-page space-y-8">
-            <SectionHeader
-              title="Nos actions, en images"
-              subtitle="Quelques moments de nos journées et de nos sorties. Les albums complets sont dans la galerie."
-            />
+            <SectionHeader title={t('notreImpact.field.title')} subtitle={t('notreImpact.field.subtitle')} />
             {/* Téléphone : la première en grand, les deux autres côte à côte ; ordinateur : trois colonnes (4:3) */}
             <div className="grid grid-cols-2 gap-x-3 gap-y-6 sm:gap-x-6 lg:grid-cols-3">
               {FIELD_PHOTOS.map((photo, i) => (
@@ -104,7 +103,7 @@ export function NotreImpactPage() {
               ))}
             </div>
             <Link to="/galerie" className={TEXT_LINK_CLASS}>
-              Voir la galerie
+              {t('notreImpact.field.gallery')}
             </Link>
           </div>
         </Section>
@@ -115,11 +114,8 @@ export function NotreImpactPage() {
         <Section>
           <div className="container-page">
             <div className="max-w-[65ch] space-y-5">
-              <SectionHeader
-                title="Consulter nos engagements de transparence financière"
-                subtitle="Découvrez comment les ressources du groupe IROKO et les dons sont affectés aux missions sociales."
-              />
-              <PrimaryButton to="/transparence">Voir la page Transparence</PrimaryButton>
+              <SectionHeader title={t('notreImpact.transparency.title')} subtitle={t('notreImpact.transparency.subtitle')} />
+              <PrimaryButton to="/transparence">{t('notreImpact.transparency.cta')}</PrimaryButton>
             </div>
           </div>
         </Section>
@@ -129,10 +125,7 @@ export function NotreImpactPage() {
       <Section tone={TRANSPARENCY_DATA_PUBLISHED ? 'sauge' : 'brume'}>
         <div className="container-page">
           <div className="max-w-[65ch] space-y-6">
-            <SectionHeader
-              title="Soutenir nos actions"
-              subtitle="Votre don finance des cours d’allemand /anglais et nos actions au Cameroun. Vous pouvez choisir le domaine qu’il soutient."
-            />
+            <SectionHeader title={t('notreImpact.support.title')} subtitle={t('notreImpact.support.subtitle')} />
             <DonateButton size="lg" />
           </div>
         </div>

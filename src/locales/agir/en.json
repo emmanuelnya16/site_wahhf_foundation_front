@@ -1,0 +1,135 @@
+{
+  "seo": {
+    "title": "Take action with WAHHF Foundation — Donations, Volunteering, Partnerships",
+    "description": "Join WAHHF Foundation’s commitment: make a donation, become a trainer or a volunteer, or build an institutional partnership."
+  },
+  "header": {
+    "title": "Three practical ways to support young people",
+    "intro": "Give, share your skills or involve your organisation: here is how to take action with WAHHF Foundation, in Cameroon and in Europe."
+  },
+  "ways": {
+    "donate": {
+      "title": "Donate",
+      "text": "Fund the free German/English courses and our social work on the ground."
+    },
+    "volunteer": {
+      "title": "Become a volunteer",
+      "text": "German/English teachers, doctors, mentors or local coordinators in Cameroon and in Europe.",
+      "action": "Fill in the volunteer form"
+    },
+    "partner": {
+      "title": "Become a partner",
+      "text": "Schools, universities, NGOs and companies wishing to co-fund or support a programme.",
+      "action": "Propose a partnership"
+    }
+  },
+  "status": {
+    "ready": "Your message is ready: send it by WhatsApp or by email.",
+    "form": {
+      "benevole": "Form: offer your help as a volunteer.",
+      "partenaire": "Form: propose a partnership."
+    }
+  },
+  "handoff": {
+    "title": {
+      "benevole": "Last step: send your volunteering proposal",
+      "partenaire": "Last step: send your partnership proposal"
+    },
+    "edit": "Edit my answers"
+  },
+  "form": {
+    "title": {
+      "benevole": "Offer your help as a volunteer",
+      "partenaire": "Propose a partnership"
+    },
+    "role": {
+      "legend": "You are writing to us",
+      "benevole": "To become a volunteer",
+      "partenaire": "To propose a partnership"
+    },
+    "name": {
+      "benevole": "Full name *",
+      "partenaire": "Your name and role *"
+    },
+    "namePlaceholder": {
+      "benevole": "E.g. Marie Nguenang",
+      "partenaire": "E.g. Anna Weber, director"
+    },
+    "email": "Email address *",
+    "phone": {
+      "benevole": "Phone / WhatsApp (optional)",
+      "partenaire": "Phone (optional)"
+    },
+    "phonePlaceholder": {
+      "benevole": "E.g. +237 6...",
+      "partenaire": "E.g. +49 30..."
+    },
+    "org": "Name of your organisation *",
+    "orgType": "Type of organisation *",
+    "orgTypeChoose": "Choose",
+    "country": "Country *",
+    "countryPlaceholder": "E.g. Germany",
+    "supportLegend": "What you have in mind (optional)",
+    "details": {
+      "benevole": "Your skills and availability *",
+      "partenaire": "Your partnership project *"
+    },
+    "detailsPlaceholder": {
+      "benevole": "E.g. German/English teacher, available on Saturdays, online or in Douala.",
+      "partenaire": "Which programme would you like to support, and how?"
+    },
+    "consent": "I agree to WAHHF Foundation processing my data to review my offer to get involved, in accordance with the <lien>privacy policy<sr> (new tab)</sr></lien>. *",
+    "submit": "Prepare to send my proposal"
+  },
+  "orgTypes": {
+    "ecole": "School, university or training centre",
+    "ong": "NGO or association",
+    "entreprise": "Company",
+    "sante": "Healthcare facility",
+    "public": "Public institution",
+    "autre": "Other"
+  },
+  "support": {
+    "financement": "Funding a programme",
+    "stagiaires": "Hosting interns or students",
+    "expertise": "Expertise or teaching",
+    "materiel": "Materials or equipment"
+  },
+  "errors": {
+    "name": {
+      "benevole": "Enter your first name and surname.",
+      "partenaire": "Enter the name and role of the contact person."
+    },
+    "org": "Enter the name of your organisation.",
+    "orgType": "Choose the type of your organisation.",
+    "country": "Enter your organisation’s country, for example Germany or Cameroon.",
+    "details": {
+      "benevole": "Describe your skills and availability in a few lines.",
+      "partenaire": "Describe your partnership project in a few lines."
+    },
+    "consent": "Tick this box so that we can review your proposal and reply to you."
+  },
+  "draft": {
+    "benevole": {
+      "subject": "Volunteering proposal — {{name}}",
+      "intro": "I would like to volunteer for WAHHF Foundation. Here is my proposal, entered on the website:",
+      "name": "Full name",
+      "email": "Email",
+      "phone": "Phone / WhatsApp",
+      "details": "Skills and availability"
+    },
+    "partenaire": {
+      "subject": "Partnership proposal — {{org}}",
+      "intro": "I would like to propose a partnership to WAHHF Foundation. Here is our proposal, entered on the website:",
+      "org": "Organisation",
+      "orgType": "Type of organisation",
+      "country": "Country",
+      "name": "Contact (name and role)",
+      "email": "Email",
+      "phone": "Phone",
+      "support": "Support considered",
+      "details": "Partnership project"
+    },
+    "consent": "I agree to WAHHF Foundation processing my data to review my offer to get involved."
+  }
+}

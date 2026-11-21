@@ -10,9 +10,19 @@ import PhotoGrid from '../components/gallery/PhotoGrid';
 import PhotoLightbox, { LIGHTBOX_SHARED_NAME } from '../components/gallery/PhotoLightbox';
 import { DonateButton, SecondaryButton } from '../components/wahhf/Buttons';
 import type { PhotoAlbumId } from '../data/photos';
-import { albumLabel, photoCount, visibleAlbums } from '../lib/photos';
+import { albumLabel, visibleAlbums } from '../lib/photos';
 import { requestScrollRefresh } from '../lib/afterFirstDisplay';
 import { cn } from '../lib/utils';
+import { useLocalize } from '../lib/localize';
+import { registerBundle } from '../i18n';
+import fr from '../locales/galerie/fr.json';
+
+// Textes de la page (lot 7.10) : paquet « galerie ». Titres et notes des albums : surcouches du paquet des photos
+// (photos.contenu.albums.<id>, src/locales/photos).
+registerBundle('galerie', fr, {
+  en: () => import('../locales/galerie/en.json'),
+  de: () => import('../locales/galerie/de.json'),
+});
 
 /**
  * Albums du catalogue (docs/photos-catalogue.md), dans son ordre ; en production, seules les photos dont l'accord est
@@ -37,6 +47,9 @@ type ViewTransitionDocument = Document & { startViewTransition?: (update: () => 
  *   (transition partagée, View Transitions API ; ouverture simple sans l'API et en mouvement réduit).
  */
 export default function GalleryPage() {
+  const { t, localized } = useLocalize();
+  /** Titre et note d'un album dans la langue de l'interface */
+  const albumText = (album: (typeof ALBUMS)[number]['album']) => localized(album, `photos.contenu.albums.${album.id}`);
   const [searchParams, setSearchParams] = useSearchParams();
   const requested = searchParams.get('album');
   const filter = requested && ALBUM_IDS.has(requested) ? (requested as PhotoAlbumId) : null;
@@ -112,29 +125,23 @@ export default function GalleryPage() {
     );
 
   const options: { id: PhotoAlbumId | null; label: string }[] = [
-    { id: null, label: 'Tous les albums' },
-    ...ALBUMS.map(({ album }) => ({ id: album.id, label: albumLabel(album) })),
+    { id: null, label: t('galerie.allAlbums') },
+    ...ALBUMS.map(({ album }) => ({ id: album.id, label: albumLabel(albumText(album)) })),
   ];
   const viewed = view ? ALBUMS.find(({ album }) => album.id === view.album) : undefined;
 
   return (
     <>
-      <SEO
-        title="Galerie — La fondation en images"
-        description="Photos de WAHHF Foundation : la journée du 25 avril 2026 à l’Albatros Hotel, une visite de plantation, des sorties à Nkongsamba, au mont et au lac, et une randonnée avec les jeunes."
-      />
+      <SEO title={t('galerie.seo.title')} description={t('galerie.seo.description')} />
 
       <PageHeader reveal>
-        <PageTitle>La fondation en images</PageTitle>
-        <PageIntro>
-          Retour en photos sur nos actions : la journée du 25&nbsp;avril&nbsp;2026 à l’Albatros Hotel, une visite de
-          plantation, des sorties à Nkongsamba, au mont et au lac, et une randonnée avec les jeunes.
-        </PageIntro>
+        <PageTitle>{t('galerie.title')}</PageTitle>
+        <PageIntro>{t('galerie.intro')}</PageIntro>
       </PageHeader>
 
       <Section>
         <div className="container-page space-y-14">
-          <div role="group" aria-label="Filtrer par album" className="flex flex-wrap gap-2">
+          <div role="group" aria-label={t('galerie.filterLabel')} className="flex flex-wrap gap-2">
             {options.map((o) => {
               const active = filter === o.id;
               return (
@@ -146,19 +153,22 @@ export default function GalleryPage() {
             })}
           </div>
 
-          {shown.map(({ album, photos }) => (
-            // Clé = album : changer de filtre ne rejoue pas les apparitions
-            <section key={album.id} id={album.id} aria-labelledby={`album-${album.id}`} className="space-y-6">
-              <div className="max-w-[65ch] space-y-2">
-                <h2 id={`album-${album.id}`} className="text-section-title text-text">
-                  {albumLabel(album)}
-                </h2>
-                {album.note && <p className="text-meta text-text-secondary">{album.note}</p>}
-                <p className="text-meta text-text-secondary">{photoCount(photos.length)}</p>
-              </div>
-              <PhotoGrid photos={photos} onOpen={open(album.id)} />
-            </section>
-          ))}
+          {shown.map(({ album, photos }) => {
+            const text = albumText(album);
+            return (
+              // Clé = album : changer de filtre ne rejoue pas les apparitions
+              <section key={album.id} id={album.id} aria-labelledby={`album-${album.id}`} className="space-y-6">
+                <div className="max-w-[65ch] space-y-2">
+                  <h2 id={`album-${album.id}`} className="text-section-title text-text">
+                    {albumLabel(text)}
+                  </h2>
+                  {text.note && <p className="text-meta text-text-secondary">{text.note}</p>}
+                  <p className="text-meta text-text-secondary">{t('galerie.photoCount', { count: photos.length })}</p>
+                </div>
+                <PhotoGrid photos={photos} onOpen={open(album.id)} />
+              </section>
+            );
+          })}
         </div>
       </Section>
 
@@ -175,14 +185,11 @@ export default function GalleryPage() {
       <Section tone="sauge">
         <div className="container-page">
           <div className="max-w-[65ch] space-y-6">
-            <SectionHeader
-              title="Participer à la suite"
-              subtitle="Un don soutient les actions de la fondation. Les jeunes peuvent candidater aux cours d’allemand /anglais et à l’orientation vers l’Europe."
-            />
+            <SectionHeader title={t('galerie.end.title')} subtitle={t('galerie.end.subtitle')} />
             <div className="flex flex-wrap items-center gap-3">
               <DonateButton size="lg" />
               <SecondaryButton to="/candidater" size="lg">
-                Candidater au programme
+                {t('galerie.end.apply')}
               </SecondaryButton>
             </div>
           </div>

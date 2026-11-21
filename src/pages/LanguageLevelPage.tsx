@@ -9,8 +9,10 @@ import { AfterApplicationSteps } from '../components/wahhf/AfterApplication';
 import NotFoundPage, { NotFoundLinks } from './NotFoundPage';
 import SessionsCalendar from './academie/SessionsCalendar';
 import LevelDetail from './academie/LevelDetail';
-import { FinalAction, levelName, levelSteps, useFocusTitleAfterNavigation } from './academie/shared';
+import { FinalAction, useFocusTitleAfterNavigation, useLevels } from './academie/shared';
 import { GERMAN_LEVELS_DATA, GermanLevelCourse } from '../services/api';
+import { useLocalize } from '../lib/localize';
+import '../locales/mobilite';
 
 /*
  * Page d'un niveau d'allemand (/academie/:niveau), groupe 7.1 : audit NIV-01, ACAD-02, ETA-06.
@@ -20,48 +22,54 @@ import { GERMAN_LEVELS_DATA, GermanLevelCourse } from '../services/api';
  * - Niveau écrit en majuscules (/academie/B1) : redirection vers l'adresse en minuscules.
  * - Niveau inconnu (/academie/z9) : page « introuvable » avec la liste des 5 niveaux.
  * - Passer d'un niveau à l'autre remonte la page (key) : l'en-tête et la frise rejouent leur arrivée.
+ * Lot 7.10 : textes du paquet « mobilite » ; `raw` est le niveau des données (en français), affiché traduit.
  */
-function LevelPage({ level }: { level: GermanLevelCourse }) {
+function LevelPage({ level: raw }: { level: GermanLevelCourse }) {
   useFocusTitleAfterNavigation();
+  const { t } = useLocalize();
+  const levels = useLevels();
+  const level = levels.localize(raw);
+  const apply = t('mobilite.commun.candidaterNiveau', { level: level.level });
   return (
     <>
       <SEO
-        title={`Allemand niveau ${level.level} — Académie de langues gratuite`}
-        description={`Niveau ${level.level} d'allemand à l'Académie WAHHF : ${level.subtitle} Objectifs, compétences, volume horaire et prochaines sessions.`}
+        title={t('mobilite.niveauPage.seoTitle', { level: level.level })}
+        description={t('mobilite.niveauPage.seoDescription', { level: level.level, subtitle: level.subtitle })}
         canonical={`/academie/${level.slug}`}
       />
 
       <PageHeader reveal notice={<DisclaimerBanner />}>
         <PageBreadcrumb
           items={[
-            { label: 'Mobilité & Langues', to: '/mobilite-langues' },
-            { label: 'Académie de langues', to: '/mobilite-langues/academie' },
-            { label: `Niveau ${level.level}` },
+            { label: t('mobilite.commun.mobilite'), to: '/mobilite-langues' },
+            { label: t('mobilite.commun.academie'), to: '/mobilite-langues/academie' },
+            { label: t('mobilite.commun.niveau', { level: level.level }) },
           ]}
         />
-        <PageTitle>{levelName(level)}</PageTitle>
+        <PageTitle>{levels.name(raw)}</PageTitle>
         <PageIntro>{level.subtitle}</PageIntro>
         <PageActions>
-          <PrimaryButton to={`/candidater?souhait=cours_allemand&niveau=${level.level}`}>Candidater au niveau {level.level}</PrimaryButton>
-          <SecondaryButton to="/mobilite-langues/academie#test-niveau">Vérifier mon niveau (test)</SecondaryButton>
+          <PrimaryButton to={`/candidater?souhait=cours_allemand&niveau=${level.level}`}>{apply}</PrimaryButton>
+          <SecondaryButton to="/mobilite-langues/academie#test-niveau">{t('mobilite.niveauPage.verifier')}</SecondaryButton>
         </PageActions>
       </PageHeader>
 
       {/* La frise se dessine jusqu'au niveau affiché, qui s'allume (CSS, à l'arrivée) ; puis la fiche */}
       <section className="container-page section-space pt-0! space-y-10">
-        <div role="group" aria-label={`Les cinq niveaux d’allemand ; niveau affiché : ${level.level}`}>
+        <div role="group" aria-label={t('mobilite.niveauPage.filAria', { level: level.level })}>
           <Fil
             orientation="auto"
-            steps={levelSteps}
-            end={{ id: 'europe', label: 'Europe' }}
+            steps={levels.steps}
+            end={{ id: 'europe', label: t('mobilite.commun.europe') }}
             currentId={level.slug}
+            currentLabel={t('mobilite.commun.niveauAffiche')}
             drawTo={level.slug}
             lightCurrent
           />
         </div>
         <div className="space-y-8">
-          <h2 className="text-section-title text-text">Programme du niveau {level.level}</h2>
-          <LevelDetail level={level} headingLevel="h3" />
+          <h2 className="text-section-title text-text">{t('mobilite.niveauPage.programme', { level: level.level })}</h2>
+          <LevelDetail level={raw} headingLevel="h3" />
         </div>
       </section>
 
@@ -73,26 +81,25 @@ function LevelPage({ level }: { level: GermanLevelCourse }) {
         </div>
       </Section>
 
-      <FinalAction to={`/candidater?souhait=cours_allemand&niveau=${level.level}`} label={`Candidater au niveau ${level.level}`} tone="sauge" />
+      <FinalAction to={`/candidater?souhait=cours_allemand&niveau=${level.level}`} label={apply} tone="sauge" />
     </>
   );
 }
 
 export default function LanguageLevelPage() {
   const { level: routeLevel = '' } = useParams<{ level?: string }>();
+  const { t } = useLocalize();
+  const levels = useLevels();
   const level = GERMAN_LEVELS_DATA.find((l) => l.slug === routeLevel.toLowerCase());
 
   if (!level) {
     return (
-      <NotFoundPage
-        title="Ce niveau d’allemand n’existe pas"
-        message="L’Académie de langues propose 5 niveaux, de A1 à C1. Choisissez le vôtre ci-dessous, ou faites le test de niveau."
-      >
+      <NotFoundPage title={t('mobilite.niveauPage.introuvableTitle')} message={t('mobilite.niveauPage.introuvableMessage')}>
         <NotFoundLinks
-          heading="Les niveaux de l’Académie"
+          heading={t('mobilite.niveauPage.introuvableListe')}
           links={[
-            ...GERMAN_LEVELS_DATA.map((l) => ({ to: `/academie/${l.slug}`, label: levelName(l) })),
-            { to: '/mobilite-langues/academie#test-niveau', label: 'Test de niveau (20 questions)' },
+            ...GERMAN_LEVELS_DATA.map((l) => ({ to: `/academie/${l.slug}`, label: levels.name(l) })),
+            { to: '/mobilite-langues/academie#test-niveau', label: t('mobilite.niveauPage.introuvableTest') },
           ]}
         />
       </NotFoundPage>

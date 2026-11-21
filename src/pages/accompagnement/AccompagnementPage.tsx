@@ -14,7 +14,9 @@ import { AfterFirstDisplay, FilStepsScrub } from '../../effects/DeferredMotion';
 import { fetchGeo, GEO_URLS } from '../../lib/geoData';
 import { followAnchorLink } from '../../lib/scroll';
 import { COUNTRIES_DATA } from '../../services/api';
+import { useLocalize } from '../../lib/localize';
 import { filSteps } from './steps';
+import { NB, pieces } from './i18n';
 import { photoCaption, photoOrFallback } from '../../lib/photos';
 
 /*
@@ -39,22 +41,29 @@ import { photoCaption, photoOrFallback } from '../../lib/photos';
  * - Retouches du 19/11 (des images) : photo dans l'en-tête, l'intervenant devant la diapositive de la fondation le
  *   25 avril (A59), ou, tant que l'accord parental manque (production), devant l'écran et le kakémono (A46) ;
  *   découverte du bas vers le haut sur ordinateur, comme Mobilité.
+ * - Lot 7.10 : textes du paquet « accompagnement » (FR / EN / DE) ; noms des pays dans la langue en cours
+ *   (contenu.pays.<slug> des textes communs, puis accompagnement.contenu.pays.<slug>).
  */
 
 const HEADER_PHOTO = photoOrFallback('A59', 'A46');
 
 const EuropeMiniMap = lazy(() => import('../../components/wahhf/EuropeMiniMap'));
 
-const NB = ' ';
-const names = COUNTRIES_DATA.map((c) => c.name);
-/** « Allemagne, Luxembourg, …, Pologne et Albanie », dans l'ordre des données */
-const COUNTRY_LIST = `${names.slice(0, -1).join(', ')} et ${names[names.length - 1]}`;
+/** Les 10 pays dans la langue en cours, dans l'ordre des données (nom : textes communs ; le reste : paquet de la page) */
+function useCountries() {
+  const { localized } = useLocalize();
+  return COUNTRIES_DATA.map((c) => localized(c, [`contenu.pays.${c.slug}`, `accompagnement.contenu.pays.${c.slug}`]));
+}
 
-const mapPlaceholder = (
-  <div role="status" aria-busy="true" className="absolute inset-0 rounded-inner bg-surface-raised flex items-center justify-center text-meta text-text-secondary">
-    Chargement de la carte Europe…
-  </div>
-);
+function MapPlaceholder() {
+  const { t } = useLocalize();
+  return (
+    <div role="status" aria-busy="true" className="absolute inset-0 rounded-inner bg-surface-raised flex items-center justify-center text-meta text-text-secondary">
+      {t('accompagnement.hub.chargementCarte')}
+    </div>
+  );
+}
+const mapPlaceholder = <MapPlaceholder />;
 
 /**
  * La liste des 10 pays et la mini-carte, synchronisées (survol ou focus d'un pays dans l'une, repère dans l'autre).
@@ -70,10 +79,12 @@ const mapPlaceholder = (
 const SHOW_COUNTRY_CARDS = false;
 
 function CountryCards() {
+  const { t } = useLocalize();
+  const countries = useCountries();
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {/* Collection cliquable : papier sur sauge, sans bordure, filigrane ni « Consulter » (contrat §8) */}
-      {COUNTRIES_DATA.map((country) => (
+      {countries.map((country) => (
         <CardLink key={country.slug} to={`/accompagnement/pays/${country.slug}`} surface="section">
           <CardBody>
             <CardTitle className="flex items-center gap-3">
@@ -82,7 +93,7 @@ function CountryCards() {
             </CardTitle>
             <CardMeta>
               <EuStatus isEU={country.isEU} short />
-              <span>Langues{NB}: {country.languages.join(', ')}</span>
+              <span>{pieces(t('accompagnement.commun.langues'), { nb: NB, liste: country.languages.join(', ') })}</span>
             </CardMeta>
             <p className="text-body text-text-secondary">{country.summary}</p>
           </CardBody>
@@ -148,12 +159,13 @@ function CountriesWithMap() {
 
 export default function AccompagnementPage() {
   const stepsRef = useRef<HTMLDivElement>(null);
+  const { t } = useLocalize();
+  const names = useCountries().map((c) => c.name);
+  // « Allemagne, Luxembourg, …, Pologne et Albanie », dans l'ordre des données
+  const countryList = `${names.slice(0, -1).join(', ')} ${t('accompagnement.hub.et')} ${names[names.length - 1]}`;
   return (
     <>
-      <SEO
-        title="Accompagnement vers l'Europe — 5 étapes et 10 pays accompagnés"
-        description={`Orientation gratuite et transparente vers 10 pays européens (${names.join(', ')}) par WAHHF Foundation.`}
-      />
+      <SEO title={t('accompagnement.hub.seoTitre')} description={t('accompagnement.hub.seoDescription', { liste: names.join(', ') })} />
 
       <PageHeader
         reveal
@@ -162,18 +174,18 @@ export default function AccompagnementPage() {
         photoCaption={HEADER_PHOTO ? photoCaption(HEADER_PHOTO) : undefined}
         notice={<DisclaimerBanner />}
       >
-        <PageBreadcrumb items={[{ label: 'Mobilité & Langues', to: '/mobilite-langues' }, { label: 'Accompagnement vers l’Europe' }]} />
+        <PageBreadcrumb
+          items={[{ label: t('accompagnement.commun.mobilite'), to: '/mobilite-langues' }, { label: t('accompagnement.commun.accompagnement') }]}
+        />
 
-        <PageTitle>Un accompagnement transparent, étape par étape</PageTitle>
+        <PageTitle>{t('accompagnement.hub.titre')}</PageTitle>
 
-        <PageIntro>
-          Comprendre les parcours légaux, préparer un dossier authentique, apprendre la langue du pays et vérifier chaque information sur les portails officiels de 10 pays européens.
-        </PageIntro>
+        <PageIntro>{t('accompagnement.hub.intro')}</PageIntro>
 
         <PageActions>
-          <PrimaryButton to="/candidater?souhait=accompagnement_europe">Être accompagné</PrimaryButton>
+          <PrimaryButton to="/candidater?souhait=accompagnement_europe">{t('accompagnement.commun.etreAccompagne')}</PrimaryButton>
           <SecondaryButton to="#pays" onClick={(event) => followAnchorLink(event, 'pays')}>
-            Choisir un pays
+            {t('accompagnement.hub.choisirPays')}
           </SecondaryButton>
         </PageActions>
       </PageHeader>
@@ -181,7 +193,7 @@ export default function AccompagnementPage() {
       {/* LES 5 ÉTAPES (étapes et guides fusionnés), reliées par le fil */}
       <Section>
         <div className="container-page space-y-10">
-          <SectionHeader title="Votre parcours en 5 étapes" subtitle="Chaque étape mène à son guide pratique." />
+          <SectionHeader title={t('accompagnement.hub.etapesTitre')} subtitle={t('accompagnement.hub.etapesSousTitre')} />
           <div ref={stepsRef}>
             <FilSteps steps={filSteps()} />
           </div>
@@ -194,10 +206,7 @@ export default function AccompagnementPage() {
       {/* LES 10 PAYS : liste et mini-carte en tête de section (les cartes des fiches ne sont plus affichées) */}
       <Section tone="sauge" id="pays">
         <div className="container-page space-y-12">
-          <SectionHeader
-            title="Les 10 pays accompagnés"
-            subtitle={`${COUNTRY_LIST}. Pour chaque pays, une fiche présente les voies légales et les sites officiels.`}
-          />
+          <SectionHeader title={t('accompagnement.commun.dixPays')} subtitle={t('accompagnement.hub.paysSousTitre', { liste: countryList })} />
 
           <CountriesWithMap />
 
@@ -210,24 +219,18 @@ export default function AccompagnementPage() {
       <Section>
         <div className="container-page grid gap-12 md:grid-cols-2">
           <div className="max-w-[65ch] flex flex-col gap-5">
-            <SectionHeader
-              title="Être accompagné"
-              subtitle="Un seul formulaire pour l’orientation vers l’Europe et les cours d’allemand /anglais. Aucun document d’identité ni paiement ne vous est demandé."
-            />
+            <SectionHeader title={t('accompagnement.commun.etreAccompagne')} subtitle={t('accompagnement.commun.formulaire')} />
             <div className="mt-auto">
               <PrimaryButton to="/candidater?souhait=accompagnement_europe" size="lg">
-                Demander un accompagnement
+                {t('accompagnement.hub.demander')}
               </PrimaryButton>
             </div>
           </div>
           <div className="max-w-[65ch] flex flex-col gap-5">
-            <SectionHeader
-              title="Signaler une arnaque"
-              subtitle={`Une personne vous demande de l’argent au nom de WAHHF Foundation${NB}? Interrompez tout échange et prévenez-nous.`}
-            />
+            <SectionHeader title={t('accompagnement.hub.signalerTitre')} subtitle={t('accompagnement.hub.signalerSousTitre')} />
             <div className="mt-auto">
               <SecondaryButton to="/accompagnement/eviter-les-arnaques#signaler" size="lg">
-                Signaler une arnaque
+                {t('accompagnement.hub.signalerTitre')}
               </SecondaryButton>
             </div>
           </div>

@@ -1,3 +1,4 @@
+import i18n from '../i18n';
 import { CONTACT } from '../config/contact';
 
 /** Message préparé à partir d'un formulaire : objet (e-mail) et corps (e-mail et WhatsApp). */
@@ -11,8 +12,11 @@ export interface ContactDraft {
  * Rien n'est stocké : le texte n'existe que dans la page et dans le lien ouvert par la personne.
  */
 export function buildDraft(subject: string, intro: string, rows: Array<[string, string | undefined]>, outro?: string): ContactDraft {
-  const lines = rows.filter(([, value]) => value && value.trim()).map(([label, value]) => `${label} : ${value!.trim()}`);
-  const body = ['Bonjour WAHHF Foundation,', '', intro, '', ...lines, ...(outro ? ['', outro] : [])].join('\n');
+  // Lot 7.10 : formule d'accueil et ponctuation de la langue (« Libellé : valeur » en français, « Label: value » sinon)
+  const lines = rows
+    .filter(([, value]) => value && value.trim())
+    .map(([label, value]) => i18n.t('ui.draft.row', { label, value: value!.trim() }));
+  const body = [i18n.t('ui.draft.greeting'), '', intro, '', ...lines, ...(outro ? ['', outro] : [])].join('\n');
   return { subject, body };
 }
 

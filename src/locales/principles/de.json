@@ -1,0 +1,44 @@
+{
+  "_relire": [
+    "principles.items[1].title",
+    "principles.items[2].desc",
+    "principles.final.title"
+  ],
+  "title": "Fünf Grundsätze für jedes Projekt",
+  "intro": "Eine bescheidene, sorgfältige und in der Wirklichkeit vor Ort verankerte Arbeitsweise.",
+  "counter": "Grundsatz",
+  "rubric": "Grundsatz {{n}}",
+  "hint": "Scrollen Sie, um die 5 Grundsätze zu entdecken · WAHHF Foundation",
+  "items": [
+    {
+      "title": "Zuhören",
+      "desc": "Von den Bedürfnissen ausgehen, die junge Menschen, Mütter und Akteure vor Ort äußern, ohne ein vorgefertigtes Modell aufzuzwingen.",
+      "label": "Junge Menschen · Mütter · Vor Ort"
+    },
+    {
+      "title": "Gemeinsam gestalten",
+      "desc": "Jede Maßnahme mit Lehrkräften, Gesundheitspersonal und Vereinen vor Ort aufbauen, für eine gemeinsame Wirkung.",
+      "label": "Lehrkräfte · Gesundheitspersonal · Vereine"
+    },
+    {
+      "title": "Nachhaltigkeit",
+      "desc": "Dauerhafte Kompetenzen weitergeben (Sprachen, Berufe, Ökologie), statt bloße Hilfe zu leisten.",
+      "label": "Sprachen · Berufe · Ökologie"
+    },
+    {
+      "title": "Transparenz",
+      "desc": "Offenlegen, wie die eingesetzten Mittel verwendet werden.",
+      "label": "Mittelverwendung"
+    },
+    {
+      "title": "Partnerschaften",
+      "desc": "Die Kompetenzen der IROKO-Gruppe und kamerunischer wie europäischer Institutionen einbinden.",
+      "label": "IROKO · Kamerun · Europa"
+    }
+  ],
+  "final": {
+    "rubric": "Vor Ort",
+    "title": "Diese Grundsätze in der Praxis",
+    "cta": "Unsere Arbeit ansehen"
+  }
+}

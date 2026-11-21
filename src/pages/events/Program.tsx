@@ -60,7 +60,7 @@ export function Program({ event, status, scheduleShown }: { event: Event; status
                 </span>
                 <span>
                   <strong className="font-semibold">{t('events.program.speakers')}</strong>
-                  {speakers.length === 0 && <> : {t('events.program.speakersSoon')}</>}
+                  {speakers.length === 0 && <>{t('events.program.speakersSep')}{t('events.program.speakersSoon')}</>}
                 </span>
               </p>
               {speakers.length > 0 && (

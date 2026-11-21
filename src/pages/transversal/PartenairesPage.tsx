@@ -4,6 +4,15 @@ import SectionHeader from '../../components/wahhf/SectionHeader';
 import { TextList, TextListItem } from '../../components/wahhf/TextList';
 import PageHeader, { PageTitle, PageIntro } from '../../components/wahhf/PageHeader';
 import { PrimaryButton } from '../../components/wahhf/Buttons';
+import { useTranslation } from 'react-i18next';
+import { registerBundle } from '../../i18n';
+import partenairesFr from '../../locales/partenaires/fr.json';
+
+/** Textes de la page (lot 7.10) : src/locales/partenaires/ (espace de noms partenaires). */
+registerBundle('partenaires', partenairesFr, {
+  en: () => import('../../locales/partenaires/en.json'),
+  de: () => import('../../locales/partenaires/de.json'),
+});
 
 /*
  * Partenaires (groupe 7.3 : contrat validé, audit PAR-01, T-11, T-15, T-17).
@@ -47,40 +56,25 @@ export const SUPPORTER_CATEGORIES_NOT_SHOWN = [
 /** Ce que la fondation propose à un partenaire (mécénat, stagiaires, enseignants, dossier) : à fournir (PAR-01). */
 const PARTNER_OFFERS: { title: string; desc: string }[] = [];
 
-const NB = ' ';
-
 export function PartenairesPage() {
+  const { t } = useTranslation();
   return (
     <>
-      <SEO
-        title="Partenaires — Le groupe IROKO et les soutiens de WAHHF Foundation"
-        description="Découvrez le rôle du groupe IROKO, partenaire fondateur de WAHHF Foundation, et comment devenir partenaire de la fondation."
-      />
+      <SEO title={t('partenaires.seo.title')} description={t('partenaires.seo.description')} />
 
       <PageHeader reveal>
-        <PageTitle>Nos partenaires et nos soutiens</PageTitle>
-        <PageIntro>
-          WAHHF Foundation est soutenue par le groupe IROKO, dont elle est la branche sociale, et par ses donateurs.
-          Aucun autre partenaire n’est nommé sans son accord écrit.
-        </PageIntro>
+        <PageTitle>{t('partenaires.title')}</PageTitle>
+        <PageIntro>{t('partenaires.intro')}</PageIntro>
       </PageHeader>
 
       {/* LE GROUPE IROKO (PAR-01) : une section, plus une carte nuit bordée d'or */}
       <Section id="iroko">
         <div className="container-page">
           <div className="max-w-[65ch] space-y-5">
-            <SectionHeader title="Le groupe IROKO, partenaire fondateur" />
+            <SectionHeader title={t('partenaires.iroko.title')} />
             <div className="space-y-4 text-body text-text-secondary">
-              <p>
-                IROKO est un groupe camerouno-allemand organisé autour d’une holding et de neuf pôles d’activité, en trois
-                familles&nbsp;: Business (communication et événementiel, formation, ingénierie), Digital (applications,
-                logiciels de gestion, hébergement) et Services et support (audiovisuel, cybersécurité, investissement). Son
-                pôle de communication et d’événementiel, IROKO Event, est en activité&nbsp;; les autres sont annoncés.
-              </p>
-              <p>
-                WAHHF Foundation est sa branche sociale. Le groupe finance l’Académie de langues (allemand /anglais A1 à C1) et les
-                supports d’orientation vérifiés vers l’Europe.
-              </p>
+              <p>{t('partenaires.iroko.p1')}</p>
+              <p>{t('partenaires.iroko.p2')}</p>
             </div>
           </div>
         </div>
@@ -90,7 +84,7 @@ export function PartenairesPage() {
       {PARTNER_OFFERS.length > 0 && (
         <Section tone="sauge">
           <div className="container-page space-y-8">
-            <SectionHeader title="Ce que nous proposons" />
+            <SectionHeader title={t('partenaires.offers.title')} />
             <TextList columns={2}>
               {PARTNER_OFFERS.map((o) => (
                 <TextListItem key={o.title} title={o.title}>
@@ -106,12 +100,9 @@ export function PartenairesPage() {
       <Section tone={PARTNER_OFFERS.length > 0 ? 'brume' : 'sauge'}>
         <div className="container-page">
           <div className="max-w-[65ch] space-y-5">
-            <SectionHeader
-              title="Devenir partenaire de WAHHF Foundation"
-              subtitle={`Vous représentez une université, un centre de formation, une ONG, un établissement médical ou une entreprise engagée${NB}? Construisons ensemble un programme à impact mesurable.`}
-            />
+            <SectionHeader title={t('partenaires.cta.title')} subtitle={t('partenaires.cta.subtitle')} />
             <PrimaryButton to="/agir#partenaire" size="lg">
-              Proposer un partenariat
+              {t('partenaires.cta.button')}
             </PrimaryButton>
           </div>
         </div>
