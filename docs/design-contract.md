@@ -840,7 +840,7 @@ Contrat validé le 16/11/2026, avec les ajustements du §13.
 - soleil sur fond clair (boutons, bandeau, panneau lieu, cercles, bloc final) : son texte est toujours l'encre (7,8:1) ;
 - surtitres et libellés en capitales 600 espacées (0,16 à 0,22 em), au lieu de la casse de phrase (§4.3) ;
 - titres de 72 px (h1) et 48 px (h2), au-dessus de l'échelle nommée (§4.3) ;
-- conteneur de 1 232 px (77 rem) au lieu de 72 rem (§5) : à 1 440 px, le bord gauche de la page est 40 px plus à gauche que celui de l'en-tête ;
+- ~~conteneur de 1 232 px (77 rem)~~ : retiré le 20 novembre 2026, les pages Événements utilisent le conteneur du site (72 rem, §5), aligné sur l'en-tête ;
 - taches, grille masquée et halos en dégradés radiaux (§3.5 : pas de dégradé) ; la frise, elle, reste en aplat ;
 - grands rayons (40, 32, 28 et 24 px) et ombres portées de la référence (§9).
 

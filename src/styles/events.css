@@ -5,7 +5,8 @@
    crème → brume, sections alternées → sauge. Le cœur du don n'apparaît pas ici.
    Écarts au contrat voulus par le brief, réservés à ces pages : soleil sur fond clair (boutons, bandeau, panneau,
    cercles, bloc final), surtitres en capitales espacées, taches et halos en dégradé radial, titres de 72 et 48 px,
-   conteneur de 1 232 px (77 rem). La frise reste en aplat forêt (pas de dégradé).
+   La frise reste en aplat forêt (pas de dégradé). Conteneur : celui du site (72 rem, le même que l'en-tête), à la
+   demande du 20 novembre 2026, et non les 1 232 px de la référence.
    Mouvement : src/styles/events-motion.css (étape 3).
    ========================================================================== */
 
@@ -37,7 +38,8 @@
   --ev-drapeau-vert: #007a5e;
   --ev-drapeau-rouge: #ce1126;
   --ev-drapeau-jaune: #fcd116;
-  --ev-container: 77rem;
+  /* Conteneur du site (container-page, §5 du contrat) : même bord gauche que l'en-tête */
+  --ev-container: var(--container-page);
   --ev-section: 6rem;
 
   background: var(--ev-fond);
