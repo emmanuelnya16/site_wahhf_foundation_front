@@ -2057,7 +2057,7 @@ html.vt-galerie::view-transition-new(root) {
   margin-top: clamp(0.75rem, 2vh, 1.25rem);
 }
 
-/* Lot 7.9 : entrée du sous-menu « Actualités » (Actualités, Événements), comme le menu de la référence (menu-entree) */
+/* Lot 7.9 : entrée du choix de la langue (en-tête), comme le menu de la référence (menu-entree) */
 @keyframes menu-entree {
   from {
     opacity: 0;
@@ -2069,7 +2069,7 @@ html.vt-galerie::view-transition-new(root) {
   }
 }
 @media (prefers-reduced-motion: no-preference) {
-  #sous-menu-actualites {
+  #choix-langue {
     animation: menu-entree 0.2s var(--ease-reveal) both;
   }
 }

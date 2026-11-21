@@ -20,8 +20,9 @@ import { cn } from '../lib/utils';
  * container, sans pilule ni verre dépoli, toujours visible ; ombre flottante seulement une fois la page défilée (en
  * sombre : une bordure basse trait-nuit à la place). Lien actif : souligné et aria-current (A11Y-11), pas la couleur seule.
  */
+// Étape a (lot 7.9, 20 novembre 2026) : 1,25 rem entre deux entrées du menu (8 + 4 + 8 px), au lieu de 1,5 rem
 const NAV_LINK =
-  'inline-flex items-center gap-1 min-h-11 px-2.5 text-meta text-text whitespace-nowrap underline-offset-[0.4em] decoration-2 transition-colors duration-(--dur-fast) hover:text-link hover:underline cursor-pointer';
+  'inline-flex items-center gap-1 min-h-11 px-2 text-meta text-text whitespace-nowrap underline-offset-[0.4em] decoration-2 transition-colors duration-(--dur-fast) hover:text-link hover:underline cursor-pointer';
 const NAV_LINK_CURRENT = 'underline';
 const ICON_BUTTON =
   'w-11 h-11 shrink-0 rounded-pill inline-flex items-center justify-center text-text hover:bg-surface-section transition-colors duration-(--dur-fast) cursor-pointer';
@@ -30,6 +31,11 @@ const PANEL_LINK = 'text-meta text-link underline underline-offset-4 decoration-
 const MOBILE_LINK =
   'block py-2 text-section-title text-text-on-inverse hover:text-link-on-inverse underline-offset-8 decoration-2 transition-colors duration-(--dur-fast)';
 const MOBILE_LINK_CURRENT = 'underline';
+/** Langues proposées, chacune écrite dans sa propre langue */
+const LANGUAGES = [
+  { code: 'fr', name: 'Français' },
+  { code: 'en', name: 'English' },
+] as const;
 const INVERSE_CHIP =
   'inline-flex items-center gap-1.5 min-h-11 px-4 rounded-pill text-meta font-bold border transition-colors duration-(--dur-fast)';
 const INVERSE_CHIP_ON = 'bg-action-on-inverse text-on-action-on-inverse border-transparent';
@@ -42,8 +48,8 @@ export default function Navbar() {
 
   const [scrolled, setScrolled] = useState(false);
   const [megaOpen, setMegaOpen] = useState(false);
-  // Lot 7.9 : sous-menu « Actualités » (Actualités, Événements)
-  const [newsOpen, setNewsOpen] = useState(false);
+  // Lot 7.9 (étape b) : choix de la langue dans un petit menu, ouvert par un bouton compact
+  const [langOpen, setLangOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -55,8 +61,8 @@ export default function Navbar() {
   const headerRef = useRef<HTMLElement>(null);
   const megaRef = useRef<HTMLDivElement>(null);
   const megaTriggerRef = useRef<HTMLButtonElement>(null);
-  const newsRef = useRef<HTMLDivElement>(null);
-  const newsTriggerRef = useRef<HTMLButtonElement>(null);
+  const langRef = useRef<HTMLDivElement>(null);
+  const langTriggerRef = useRef<HTMLButtonElement>(null);
   const reduceMotion = useReducedMotion();
   const touchStartY = useRef<number | null>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
@@ -98,18 +104,25 @@ export default function Navbar() {
     return () => document.removeEventListener('keydown', onKey);
   }, [megaOpen]);
 
-  // Sous-menu « Actualités » (lot 7.9) : Échap le ferme, comme le méga-menu
+  // Choix de la langue : Échap le ferme ; si le focus était dans la liste, il revient sur le bouton
   useEffect(() => {
-    if (!newsOpen) return;
+    if (!langOpen) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== 'Escape') return;
-      const focusInMenu = !!newsRef.current?.contains(document.activeElement) && document.activeElement !== newsTriggerRef.current;
-      setNewsOpen(false);
-      if (focusInMenu) newsTriggerRef.current?.focus();
+      const focusInMenu = !!langRef.current?.contains(document.activeElement);
+      setLangOpen(false);
+      if (focusInMenu) langTriggerRef.current?.focus();
+    };
+    const onClick = (e: MouseEvent) => {
+      if (langRef.current && !langRef.current.contains(e.target as Node)) setLangOpen(false);
     };
     document.addEventListener('keydown', onKey);
-    return () => document.removeEventListener('keydown', onKey);
-  }, [newsOpen]);
+    document.addEventListener('mousedown', onClick);
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.removeEventListener('mousedown', onClick);
+    };
+  }, [langOpen]);
 
   // Initialisation du thème : Clair par défaut, respecte prefers-color-scheme uniquement à la 1re visite
   useEffect(() => {
@@ -173,12 +186,11 @@ export default function Navbar() {
   const navState = (path: string, section: string[] = []): 'page' | 'true' | undefined =>
     location.pathname === path ? 'page' : section.some((x) => location.pathname.startsWith(x)) ? 'true' : undefined;
   const ACTIONS_SECTION = ['/nos-actions', '/mobilite-langues', '/academie', '/accompagnement'];
-  const NEWS_SECTION = ['/actualites', '/evenements'];
 
   // Fermer les menus au changement de route
   useEffect(() => {
     setMegaOpen(false);
-    setNewsOpen(false);
+    setLangOpen(false);
     setMobileOpen(false);
     setSearchOpen(false);
   }, [location.pathname, location.search]);
@@ -189,14 +201,12 @@ export default function Navbar() {
       if (megaRef.current && !megaRef.current.contains(e.target as Node)) {
         setMegaOpen(false);
       }
-      if (newsRef.current && !newsRef.current.contains(e.target as Node)) {
-        setNewsOpen(false);
-      }
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const currentLang: 'fr' | 'en' = i18n.language.startsWith('en') ? 'en' : 'fr';
   const switchLanguage = (lang: 'fr' | 'en') => {
     i18n.changeLanguage(lang);
   };
@@ -235,7 +245,7 @@ export default function Navbar() {
           <Link
             to="/"
             className="flex items-center gap-2.5 min-w-0 rounded-pill"
-            aria-label="WAHHF Foundation — Accueil"
+            aria-label={t('nav.homeLink')}
           >
             <img
               src={WAHHF_LOGO_URL}
@@ -244,7 +254,9 @@ export default function Navbar() {
               height={48}
               className="w-10 h-10 sm:w-11 sm:h-11 object-contain rounded-pill bg-white p-0.5"
             />
-            <div className="flex flex-col min-w-0">
+            {/* Étape d (lot 7.9, votre choix du 20 novembre 2026) : en français, le menu complet ne laisse pas la place du
+                nom (le conteneur fait 1 152 px à toutes ces largeurs) : logo seul dès 1 280 px ; en anglais, le nom tient. */}
+            <div className={cn('flex flex-col min-w-0', currentLang === 'fr' && 'xl:hidden')}>
               <span className="text-body font-bold leading-none text-text whitespace-nowrap">
                 WAHHF<span className="hidden min-[360px]:inline"> Foundation</span>
               </span>
@@ -254,7 +266,7 @@ export default function Navbar() {
             </div>
           </Link>
 
-          {/* Centre : Menu principal (6 entrées ; Événements dans le sous-menu d'Actualités, lot 7.9) */}
+          {/* Centre : Menu principal (7 entrées ; Événements ajouté au lot 7.9) */}
           <nav aria-label="Navigation principale" className="hidden xl:flex items-center gap-1">
             <Link to="/qui-sommes-nous" aria-current={navState('/qui-sommes-nous')} className={cn(NAV_LINK, navState('/qui-sommes-nous') && NAV_LINK_CURRENT)}>
               {t('nav.about')}
@@ -277,46 +289,14 @@ export default function Navbar() {
               {t('nav.impact')}
             </Link>
 
-            {/* Actualités (lot 7.9) : sous-menu Actualités et Événements. Avec une 7e entrée, le menu chevauchait le nom
-                « WAHHF Foundation » (mesuré à 1 280 et 1 440 px) : votre brief prévoit alors le sous-menu. */}
-            <div ref={newsRef} className="relative">
-              <button
-                ref={newsTriggerRef}
-                type="button"
-                onClick={() => setNewsOpen((prev) => !prev)}
-                aria-expanded={newsOpen}
-                aria-controls="sous-menu-actualites"
-                aria-current={navState('/actualites', NEWS_SECTION) ? 'true' : undefined}
-                className={cn(NAV_LINK, navState('/actualites', NEWS_SECTION) && NAV_LINK_CURRENT)}
-              >
-                <span>{t('nav.news')}</span>
-                <ChevronDown aria-hidden="true" className={cn('w-4 h-4 transition-transform duration-(--dur-fast)', newsOpen && 'rotate-180')} />
-              </button>
-              {newsOpen && (
-                <div id="sous-menu-actualites" className={cn(PANEL, 'absolute left-0 top-full z-10 mt-2 min-w-56 p-2')}>
-                  <ul>
-                    <li>
-                      <Link
-                        to="/actualites"
-                        aria-current={navState('/actualites', ['/actualites/'])}
-                        className={cn(NAV_LINK, 'w-full rounded-inner px-4 hover:bg-surface-section', navState('/actualites', ['/actualites/']) && NAV_LINK_CURRENT)}
-                      >
-                        {t('nav.news')}
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/evenements"
-                        aria-current={navState('/evenements', ['/evenements/'])}
-                        className={cn(NAV_LINK, 'w-full rounded-inner px-4 hover:bg-surface-section', navState('/evenements', ['/evenements/']) && NAV_LINK_CURRENT)}
-                      >
-                        {t('nav.events')}
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
-              )}
-            </div>
+            <Link to="/actualites" aria-current={navState('/actualites', ['/actualites/'])} className={cn(NAV_LINK, navState('/actualites', ['/actualites/']) && NAV_LINK_CURRENT)}>
+              {t('nav.news')}
+            </Link>
+
+            {/* Lot 7.9 (retours du 20 novembre 2026) : Événements directement dans le menu, entre Actualités et Agir */}
+            <Link to="/evenements" aria-current={navState('/evenements', ['/evenements/'])} className={cn(NAV_LINK, navState('/evenements', ['/evenements/']) && NAV_LINK_CURRENT)}>
+              {t('nav.events')}
+            </Link>
 
             <Link to="/agir" aria-current={navState('/agir')} className={cn(NAV_LINK, navState('/agir') && NAV_LINK_CURRENT)}>
               {t('nav.act')}
@@ -327,28 +307,50 @@ export default function Navbar() {
             </Link>
           </nav>
 
-          {/* Droite : Langue (FR / EN), Recherche, Thème, Bouton Faire un don (rouge), Burger */}
-          <div className="flex items-center gap-1.5 sm:gap-2 xl:gap-1 shrink-0">
-            {/* Sélecteur de langue FR / EN */}
-            <div
-              role="group"
-              aria-label="Sélecteur de langue"
-              className="hidden md:inline-flex items-center rounded-pill border border-border-input p-0.5 text-meta"
-            >
+          {/* Droite : Langue (bouton compact, lot 7.9), Recherche, Thème, Bouton Faire un don (rouge), Burger */}
+          {/* Étape c (lot 7.9) : groupe resserré sur ordinateur (aucun espace entre les cibles de 44 × 44 px) */}
+          <div className="flex items-center gap-1.5 sm:gap-2 xl:gap-0 shrink-0">
+            {/* Langue (lot 7.9, étape b) : un bouton compact qui affiche la langue en cours (nom accessible « Changer de
+                langue (FR) » : il contient le texte visible, WCAG 2.5.3) et ouvre le choix ; chaque option porte sa
+                langue (lang) ; Échap et clic extérieur ferment, le focus revient sur le bouton */}
+            <div ref={langRef} className="relative hidden md:block">
               <button
+                ref={langTriggerRef}
                 type="button"
-                onClick={() => switchLanguage('fr')}
-                className={cn('px-2.5 py-1 rounded-pill font-semibold transition-colors cursor-pointer', i18n.language.startsWith('fr') ? 'bg-action text-on-action' : 'text-text-secondary hover:text-link')}
+                onClick={() => setLangOpen((prev) => !prev)}
+                aria-expanded={langOpen}
+                aria-controls="choix-langue"
+                aria-label={t('nav.changeLanguage', { lang: currentLang.toUpperCase() })}
+                className="inline-flex min-h-11 min-w-11 items-center justify-center gap-0.5 rounded-pill border border-border-input px-2.5 text-meta font-semibold text-text hover:text-link cursor-pointer transition-colors duration-(--dur-fast)"
               >
-                FR
+                <span>{currentLang.toUpperCase()}</span>
+                <ChevronDown aria-hidden="true" className={cn('w-3.5 h-3.5 transition-transform duration-(--dur-fast)', langOpen && 'rotate-180')} />
               </button>
-              <button
-                type="button"
-                onClick={() => switchLanguage('en')}
-                className={cn('px-2.5 py-1 rounded-pill font-semibold transition-colors cursor-pointer', i18n.language.startsWith('en') ? 'bg-action text-on-action' : 'text-text-secondary hover:text-link')}
-              >
-                EN
-              </button>
+              {langOpen && (
+                <ul id="choix-langue" className={cn(PANEL, 'absolute right-0 top-full z-10 mt-2 min-w-40 p-2')}>
+                  {LANGUAGES.map((l) => (
+                    <li key={l.code}>
+                      <button
+                        type="button"
+                        lang={l.code}
+                        aria-current={currentLang === l.code ? 'true' : undefined}
+                        onClick={() => {
+                          switchLanguage(l.code);
+                          setLangOpen(false);
+                          langTriggerRef.current?.focus();
+                        }}
+                        className={cn(
+                          'flex w-full min-h-11 items-center justify-between gap-3 rounded-inner px-3 text-meta text-text hover:bg-surface-section cursor-pointer',
+                          currentLang === l.code && 'font-semibold underline underline-offset-4'
+                        )}
+                      >
+                        {l.name}
+                        <span aria-hidden="true" className="text-text-secondary">{l.code.toUpperCase()}</span>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
 
             {/* Recherche */}
@@ -376,7 +378,7 @@ export default function Navbar() {
 
             {/* 6e entrée / Bouton « Faire un don » (token rouge) */}
             <div className="hidden sm:block">
-              <DonateButton size="sm" className="whitespace-nowrap">{t('nav.donate')}</DonateButton>
+              <DonateButton size="sm" className="whitespace-nowrap xl:px-3.5">{t('nav.donate')}</DonateButton>
             </div>
 
             {/* Menu Burger (Mobile & Tablette) */}
@@ -618,25 +620,21 @@ export default function Navbar() {
               {t('nav.impact')}
             </Link>
 
-            {/* Actualités et son sous-menu (lot 7.9) : Événements en retrait, comme les domaines de « Nos actions » */}
-            <div className="space-y-2">
-              <Link
-                to="/actualites"
-                aria-current={navState('/actualites', ['/actualites/'])}
-                className={cn(MOBILE_LINK, navState('/actualites', ['/actualites/']) && MOBILE_LINK_CURRENT)}
-              >
-                {t('nav.news')}
-              </Link>
-              <div className="pl-4 border-l border-border-subtle-on-inverse pt-1">
-                <Link
-                  to="/evenements"
-                  aria-current={navState('/evenements', ['/evenements/'])}
-                  className={cn('block py-2 text-body text-text-secondary-on-inverse hover:text-link-on-inverse underline-offset-4 decoration-2', navState('/evenements', ['/evenements/']) && 'underline')}
-                >
-                  {t('nav.events')}
-                </Link>
-              </div>
-            </div>
+            <Link
+              to="/actualites"
+              aria-current={navState('/actualites', ['/actualites/'])}
+              className={cn(MOBILE_LINK, navState('/actualites', ['/actualites/']) && MOBILE_LINK_CURRENT)}
+            >
+              {t('nav.news')}
+            </Link>
+
+            <Link
+              to="/evenements"
+              aria-current={navState('/evenements', ['/evenements/'])}
+              className={cn(MOBILE_LINK, navState('/evenements', ['/evenements/']) && MOBILE_LINK_CURRENT)}
+            >
+              {t('nav.events')}
+            </Link>
 
             <Link
               to="/agir"
