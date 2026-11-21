@@ -17,6 +17,10 @@ export type EventStatus = 'a-venir' | 'passe';
 
 /** Icônes disponibles pour les cartes (associées à lucide-react dans src/pages/events/ui.tsx) */
 export type EventIcon =
+  | 'emploi'
+  | 'boussole'
+  | 'pays'
+  | 'alerte'
   | 'gratuit'
   | 'reseau'
   | 'professeur'
@@ -48,8 +52,8 @@ export interface EventCard {
 
 /** Un temps du déroulé de la journée */
 export interface EventStep {
-  /** « 8 h 00 » */
-  heure: string;
+  /** « 8 h 00 » ; absent pour une étape de parcours (Road to Europe) */
+  heure?: string;
   titre: string;
   texte: string;
   lien?: { libelle: string; to: string };
@@ -84,7 +88,40 @@ export interface EventOrganizer {
 
 export interface EventFaq {
   question: string;
+  /** Peut contenir {{quandOu}}, {{prix}} : remplacés par les faits, ou par « annoncé très bientôt » (src/lib/events.ts) */
   reponse: string;
+}
+
+/** Textes propres à une section (surtitre, titre, phrase, boutons) ; à défaut, ceux de src/locales/events/*.json */
+export interface EventSectionText {
+  surtitre?: string;
+  /** \n : retour à la ligne voulu (titres sur 2 ou 3 lignes, comme la référence) */
+  titre?: string;
+  intro?: string;
+  action?: string;
+  action2?: string;
+  /** Libellé du panneau lieu (hero) */
+  etiquette?: string;
+}
+export type EventSectionKey = 'hero' | 'compte' | 'pourquoi' | 'route' | 'voies' | 'programme' | 'partenaires' | 'parents' | 'faq' | 'blog' | 'final';
+
+/** Carte « Sponsors et partenaires » */
+export interface EventSupportCard {
+  ton: 'soleil' | 'nuit';
+  surtitre: string;
+  titre: string;
+  texte: string;
+  to: string;
+}
+
+/** Carte « À lire avant de partir » : complète les actualités publiées (moins de 3) avec les guides du site */
+export interface EventGuideCard {
+  icon: EventIcon;
+  surtitre: string;
+  titre: string;
+  texte: string;
+  lien: string;
+  to: string;
 }
 
 export interface Event {
@@ -95,15 +132,16 @@ export interface Event {
   statut: EventStatus;
   /** Titre (h1), écrit tel qu'il doit se lire */
   titre: string;
-  /** Partie du titre soulignée d'un trait soleil (mot accent) ; doit figurer telle quelle dans le titre */
+  /** Partie du titre soulignée d'un trait soleil (mot accent) ; doit figurer telle quelle dans le titre (\n : ligne) */
   motAccent: string;
   accroche: string;
-  /** Début, ISO 8601 avec le décalage du fuseau Africa/Douala (+01:00, pas d'heure d'été) */
-  date: string;
-  /** Fin, même format */
-  fin: string;
+  /** Début, ISO 8601 avec le décalage du fuseau Africa/Douala (+01:00, pas d'heure d'été) ; null : « annoncée très bientôt » */
+  date: string | null;
+  /** Fin, même format ; null si inconnue */
+  fin: string | null;
   fuseau: 'Africa/Douala';
-  lieu: string;
+  /** Nom de la salle ; null : inconnu */
+  lieu: string | null;
   /** null tant qu'elle n'est pas confirmée */
   ville: string | null;
   pays: string;
@@ -111,6 +149,16 @@ export interface Event {
   placesRestantes: number | null;
   /** Adresse du formulaire d'inscription, ou null */
   lienInscription: string | null;
+  /** Prix (« Gratuit », « 5 000 FCFA ») ; null : « annoncé très bientôt » */
+  prix?: string | null;
+  /** Textes propres aux sections */
+  sections?: Partial<Record<EventSectionKey, EventSectionText>>;
+  /** Mots du bandeau, chacun dans sa langue ; à défaut, les six domaines en allemand */
+  bandeau?: { mot: string; lang: string }[];
+  /** Cartes « Sponsors et partenaires » ; à défaut, celles de l'i18n (Agir) */
+  soutien?: EventSupportCard[];
+  /** « À lire avant de partir » : guides qui complètent les actualités publiées */
+  blog?: EventGuideCard[];
   photoHero: readonly string[];
   organisateurs: EventOrganizer[];
   pourquoi: EventCard[];
@@ -242,6 +290,181 @@ const DEMO: Event = {
   demo: true,
 };
 
-const SHOW_DEMO = !import.meta.env.PROD || import.meta.env.VITE_APERCU_EVENEMENTS === '1';
+const SHOW_DEMO = import.meta.env.DEV;
 
-export const EVENTS: Event[] = [...(SHOW_DEMO ? [DEMO] : []), JOURNEE_2026_04_25];
+/** Typographie française du site (contrat §4.1) : apostrophe ’ et espace insécable avant : ; ! ? » et après « */
+const fr = (text: string) =>
+  text.replace(/'/g, '’').replace(/ ([:;!?»])/g, '\u00a0$1').replace(/« /g, '«\u00a0');
+function frAll<T>(value: T): T {
+  if (typeof value === 'string') return fr(value) as T;
+  if (Array.isArray(value)) return value.map(frAll) as T;
+  if (value && typeof value === 'object') return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, k === 'to' || k === 'lang' || k === 'icon' || k === 'ton' ? v : frAll(v)])) as T;
+  return value;
+}
+
+/**
+ * Faits de Road to Europe (brief du 21 novembre 2026), à remplir par la fondation. null : la page affiche « annoncé(e)
+ * très bientôt » à la place, jamais un faux chiffre.
+ * - date / fin : ISO 8601 avec +01:00 (heure de Douala), par exemple '2027-01-16T08:00:00+01:00'
+ * - ville : 'Yaoundé' ; salle : nom de la salle ; prix : 'Gratuit' ou '5 000 FCFA'
+ * - placesRestantes : un nombre tenu à jour, ou null pour ne pas l'afficher
+ * - inscription : adresse du formulaire, lien WhatsApp ou '/candidater'
+ */
+export const ROAD_TO_EUROPE_FAITS = {
+  date: null as string | null,
+  fin: null as string | null,
+  ville: null as string | null,
+  salle: null as string | null,
+  prix: null as string | null,
+  placesRestantes: null as number | null,
+  inscription: null as string | null,
+};
+
+/**
+ * Road to Europe (brief du 21 novembre 2026) : le même rendez-vous que la référence, vers les 10 pays du site.
+ * Textes français fournis par la fondation, mot pour mot ; anglais proposé dans src/locales/events/en.json (contenu).
+ */
+const ROAD_TO_EUROPE: Event = frAll({
+  slug: 'road-to-europe',
+  statut: 'a-venir',
+  pastille: { texte: 'Le rendez-vous qui lance votre projet européen' },
+  titre: "Votre route vers\nl'Europe\ncommence ici.",
+  motAccent: "l'Europe",
+  accroche: "Études, formation, emploi qualifié : en une journée, comprenez les voies légales vers 10 pays d'Europe, rencontrez ceux qui forment et accompagnent, et repartez avec un plan clair.",
+  date: ROAD_TO_EUROPE_FAITS.date,
+  fin: ROAD_TO_EUROPE_FAITS.fin,
+  fuseau: 'Africa/Douala',
+  lieu: ROAD_TO_EUROPE_FAITS.salle,
+  ville: ROAD_TO_EUROPE_FAITS.ville,
+  pays: 'Cameroun',
+  placesRestantes: ROAD_TO_EUROPE_FAITS.placesRestantes,
+  lienInscription: ROAD_TO_EUROPE_FAITS.inscription,
+  prix: ROAD_TO_EUROPE_FAITS.prix,
+  // B73 (jeune au sommet) attend l'accord des parents ; en ligne, B85
+  photoHero: ['B73', 'B85'],
+  organisateurs: [{ nom: 'WAHHF Foundation', logo: 'wahhf' }],
+  sections: {
+    hero: { action: 'Réserver ma place', action2: 'Voir le programme', etiquette: 'La conférence a lieu à' },
+    compte: { titre: 'Le compte à rebours a commencé' },
+    pourquoi: {
+      surtitre: 'Pourquoi venir',
+      titre: 'Une journée pour changer de trajectoire.',
+      intro: "Beaucoup de jeunes perdent du temps et de l'argent faute d'informations fiables. Road to Europe vous donne les bonnes cartes, au bon moment.",
+    },
+    route: {
+      surtitre: 'Votre route',
+      titre: "Cinq étapes jusqu'en Europe.",
+      intro: "Le chemin demande des efforts, mais il est balisé. À Road to Europe, chaque étape est expliquée par des personnes qui l'ont vécue.",
+    },
+    voies: {
+      surtitre: "Les voies vers l'Europe",
+      titre: "Quatre voies légales vers l'Europe.",
+      intro: "Chaque voie a ses conditions, ses délais et ses chances, et elles changent d'un pays à l'autre. Découvrez celle qui vous ressemble.",
+    },
+    programme: {
+      surtitre: "Le programme en un coup d'œil",
+      titre: 'Une journée, quatre temps forts.',
+      intro: 'Comprendre, échanger, pratiquer, rencontrer : vous repartez avec des réponses claires et des contacts utiles.',
+      action: 'Programme complet',
+      action2: 'Les intervenants',
+    },
+    partenaires: {
+      surtitre: 'Sponsors et partenaires',
+      titre: "Faites partie de l'aventure.",
+      intro: 'Entreprises, écoles, institutions et médias : rejoignez Road to Europe et rencontrez une jeunesse motivée.',
+    },
+    parents: {
+      surtitre: 'Pour les parents',
+      titre: 'Votre confiance compte.\nVoici nos\nengagements.',
+      intro: "Road to Europe est organisé par WAHHF Foundation, une fondation identifiée et joignable, qui accompagne des jeunes dans leur projet vers l'Europe.",
+    },
+    faq: {
+      surtitre: 'Vos questions',
+      titre: 'Des réponses claires.',
+      intro: "Les questions que l'on nous pose le plus souvent.",
+      action: 'Nous écrire',
+    },
+    blog: { surtitre: 'Le blog', titre: 'À lire avant de partir.' },
+    final: {
+      titre: "Prenez la bonne route\nvers l'Europe.",
+      intro: 'Ne laissez pas votre projet attendre : réservez votre place et repartez{{deVille}} avec un plan.',
+      action: 'Réserver ma place',
+      action2: 'Nous écrire',
+    },
+  },
+  bandeau: [
+    { mot: 'Deutschland', lang: 'de' },
+    { mot: 'Lëtzebuerg', lang: 'lb' },
+    { mot: 'Slovenija', lang: 'sl' },
+    { mot: 'Italia', lang: 'it' },
+    { mot: 'Ελλάδα', lang: 'el' },
+    { mot: 'Portugal', lang: 'pt' },
+    { mot: 'España', lang: 'es' },
+    { mot: 'Danmark', lang: 'da' },
+    { mot: 'Polska', lang: 'pl' },
+    { mot: 'Shqipëria', lang: 'sq' },
+  ],
+  pourquoi: [
+    { icon: 'ecoute', titre: 'Des conseils honnêtes, pas des promesses', texte: "Des intervenants qui connaissent l'Europe de l'intérieur vous disent ce qui marche, ce que ça coûte et ce qui prend du temps." },
+    { icon: 'parcours', titre: 'Les bonnes démarches, étape par étape', texte: 'Langue, reconnaissance des diplômes, dossier, visa : vous repartez avec une feuille de route pour le pays qui vous correspond.' },
+    { icon: 'partenaires', titre: 'Des partenaires qui forment et accompagnent', texte: "Écoles de langue, établissements, structures d'accompagnement : rencontrez-les en personne et posez vos questions." },
+    { icon: 'temoignages', titre: 'Ceux qui sont partis témoignent', texte: 'Des jeunes déjà installés en Europe racontent leur parcours : les erreurs à éviter, les portes qui s’ouvrent.' },
+  ],
+  deroule: [
+    { titre: 'Choisir son pays et sa voie', texte: 'Études, formation ou emploi, parmi 10 pays : trouvez la combinaison qui correspond à votre profil, à votre niveau et à votre budget.', lien: { libelle: 'Voir les 10 pays', to: '/mobilite-langues/accompagnement#pays' } },
+    { titre: 'Apprendre la langue', texte: 'Allemand, italien, portugais, polonais… ou anglais selon le cursus : le niveau de langue ouvre ou ferme les portes. Visez le bon certificat.', lien: { libelle: 'Mobilité & Langues', to: '/mobilite-langues' } },
+    { titre: 'Préparer son dossier', texte: 'Diplômes reconnus, traductions officielles, CV et lettre au format du pays : un dossier complet fait gagner des mois.', lien: { libelle: 'Accompagnement', to: '/mobilite-langues/accompagnement' } },
+    { titre: 'Obtenir son visa', texte: "Rendez-vous à l'ambassade, pièces justificatives, entretien : préparez chaque détail et évitez les pièges.", lien: { libelle: 'Éviter les arnaques', to: '/accompagnement/eviter-les-arnaques' } },
+    { titre: "Partir et s'installer", texte: 'Logement, inscription, assurance, premiers mois : arriver préparé change tout.', lien: { libelle: 'Candidater', to: '/candidater' } },
+  ],
+  // Liens des cartes (ronds flèche) : le guide des parcours, et l'accompagnement pour la 4e voie
+  activites: [
+    { icon: 'education', titre: 'Études', texte: 'Des universités publiques reconnues dans 10 pays, avec des cursus parfois en anglais et une admission à préparer tôt.', etiquette: 'Universités publiques', photo: ['A53'], to: '/accompagnement/comprendre-les-parcours' },
+    { icon: 'atelier', titre: 'Formation professionnelle', texte: "Apprendre un métier en alternance, comme l'Ausbildung en Allemagne, dans les soins, l'artisanat, l'hôtellerie ou l'industrie.", etiquette: 'Formation en alternance', photo: ['A22'], to: '/accompagnement/comprendre-les-parcours' },
+    { icon: 'emploi', titre: 'Emploi qualifié', texte: 'Votre diplôme ou votre expérience reconnus dans le pays choisi, pour travailler dans votre métier.', etiquette: 'Diplôme reconnu', photo: ['A41'], to: '/accompagnement/comprendre-les-parcours' },
+    { icon: 'boussole', titre: 'Être accompagné', texte: 'La fondation vous aide à choisir le pays, préparer la langue et monter un dossier complet, sans intermédiaire inconnu.', etiquette: 'Accompagnement WAHHF', photo: ['A12'], to: '/mobilite-langues/accompagnement' },
+  ],
+  tempsForts: [
+    { icon: 'presentation', titre: 'Comprendre', texte: 'Les voies légales vers les 10 pays, leurs conditions et leurs délais, expliqués simplement.' },
+    { icon: 'echange', titre: 'Échanger', texte: 'Tables rondes avec des formateurs, des établissements et des jeunes déjà partis.' },
+    { icon: 'atelier', titre: 'Pratiquer', texte: 'Ateliers : dossier, CV au format européen, visa, langue.' },
+    { icon: 'partenaires', titre: 'Rencontrer', texte: 'Écoles, établissements et partenaires à leurs stands.' },
+  ],
+  intervenants: [],
+  soutien: [
+    { ton: 'soleil', surtitre: 'Pour les entreprises', titre: 'Devenir sponsor', texte: "Soutenez l'événement et gagnez en visibilité auprès de jeunes motivés.", to: '/agir#partenaire' },
+    { ton: 'nuit', surtitre: 'Pour les écoles, institutions, médias', titre: 'Devenir partenaire', texte: 'Formez, informez et accompagnez avec nous.', to: '/agir#partenaire' },
+  ],
+  parents: {
+    promesses: [
+      'Des informations vérifiées, avec leurs sources officielles',
+      'Des organisateurs et des partenaires identifiés',
+      'Des prix clairs, payés uniquement par les canaux officiels de la fondation',
+    ],
+    jamais: [
+      'Un visa « garanti »',
+      'Une admission ou un emploi sans démarches ni niveau de langue',
+      'Des frais cachés, ou payés à un intermédiaire inconnu',
+    ],
+  },
+  // A31 (parents et aînés au premier rang) ; A88 en remplacement
+  photoParents: ['A31', 'A88'],
+  faq: [
+    { question: 'Quand et où a lieu Road to Europe ?', reponse: "{{quandOu}} Le lieu exact et l'heure d'ouverture sont annoncés dès qu'ils sont confirmés." },
+    { question: "À qui s'adresse l'événement ?", reponse: "Aux jeunes qui préparent un projet d'études, de formation ou de travail en Europe, et à leurs parents. Aucun niveau de langue n'est exigé pour venir." },
+    { question: "Combien coûte l'entrée et comment s'inscrire ?", reponse: "{{prix}} L'inscription se fait uniquement par les canaux officiels de la fondation. Ne payez jamais une place à un intermédiaire inconnu." },
+    { question: 'Venir à Road to Europe me garantit-il un visa, une admission ou un emploi ?', reponse: 'Non. Les visas sont décidés par les ambassades, les admissions par les établissements et les embauches par les employeurs. Nous vous montrons les bonnes démarches et les bons contacts.' },
+    { question: 'Quel niveau de langue faut-il pour partir ?', reponse: 'Cela dépend du pays et de la voie : chaque fiche pays du site indique les langues et les niveaux demandés.' },
+    { question: "Mon entreprise peut-elle soutenir l'événement ?", reponse: 'Oui. Écrivez-nous depuis la page Agir ou le formulaire de contact.' },
+  ],
+  // Guides du site, en complément des actualités publiées (aucune aujourd'hui)
+  blog: [
+    { icon: 'pays', surtitre: 'Fiches pays', titre: 'Les 10 pays, un par un', texte: 'Langues demandées, études, formation et travail : ce qu’il faut savoir avant de choisir son pays.', lien: 'Voir les fiches pays', to: '/mobilite-langues/accompagnement#pays' },
+    { icon: 'langues', surtitre: 'Mobilité & Langues', titre: 'Apprendre la langue du pays', texte: 'Les cours de langue de la fondation, du niveau A1 au niveau C1, et l’orientation vers l’Europe.', lien: 'Découvrir Mobilité & Langues', to: '/mobilite-langues' },
+    { icon: 'alerte', surtitre: 'Éviter les arnaques', titre: 'Les signes qui doivent alerter', texte: 'Faux recruteurs, visas « garantis », frais cachés : comment les reconnaître avant de payer qui que ce soit.', lien: 'Lire le guide', to: '/accompagnement/eviter-les-arnaques' },
+  ],
+  photoFinale: ['A45', 'A99'],
+  galerieAlbum: null,
+});
+
+export const EVENTS: Event[] = [ROAD_TO_EUROPE, ...(SHOW_DEMO ? [DEMO] : []), JOURNEE_2026_04_25];

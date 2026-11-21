@@ -111,5 +111,17 @@
   "notFound": {
     "title": "Cet événement n’existe pas",
     "text": "Il a peut-être changé d’adresse. Voici les événements de la fondation."
+  },
+  "faits": {
+    "dateBientot": "Date annoncée très bientôt",
+    "villeBientot": "Ville annoncée très bientôt",
+    "inscriptionBientot": "Inscriptions annoncées très bientôt",
+    "quandOu": "Le {{date}} à {{ville}}, {{pays}}.",
+    "quandSansVille": "Le {{date}}, au {{pays}} ; la ville est annoncée très bientôt.",
+    "ouSansDate": "À {{ville}}, {{pays}} ; la date est annoncée très bientôt.",
+    "quandOuInconnus": "La date et la ville sont annoncées très bientôt ; l’événement a lieu au {{pays}}.",
+    "prix": "{{prix}}.",
+    "prixInconnu": "Le prix est annoncé très bientôt.",
+    "deVille": " de {{ville}}"
   }
 }

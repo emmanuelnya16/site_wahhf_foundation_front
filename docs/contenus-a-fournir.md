@@ -424,3 +424,18 @@ Seuls les faits de la banderole (photo A02) sont affichés en ligne : WAHHF Foun
 168. Le nombre de places restantes ne s’affiche que s’il vient d’une vraie source (votre billetterie ou votre liste d’inscrits) : comment le tiendrez-vous à jour ?
 169. Les textes anglais des pages Événements (src/locales/events/en.json) sont des propositions, à valider.
 170. La banderole du 25 avril (photo A02) développe le sigle en « Watio Hearts Humanitary Foundation », alors que le site écrit partout « WAHHF Foundation (We Are Here Help Foundation) ». Quel est le nom complet exact ? Le site n’a pas été modifié.
+
+---
+
+## Questions ajoutées avec Road to Europe (lot 7.9 bis, 21 novembre 2026)
+
+Fiche /evenements/road-to-europe. Les faits se remplissent en un seul endroit : `ROAD_TO_EUROPE_FAITS` en tête de src/data/events.ts. Tant qu’un fait manque, la page affiche « annoncé(e) très bientôt » à sa place (jamais un faux chiffre).
+
+171. Date de Road to Europe (samedi … 2027) et horaires (8 h – 18 h ?).
+172. Ville et nom de la salle (Yaoundé, Cameroun ?).
+173. Prix : gratuit, ou montant en FCFA.
+174. Places restantes : un nombre tenu à jour, ou ne pas l’afficher.
+175. Inscription : lien du formulaire, WhatsApp, ou la page Candidater. Tant qu’il manque, les boutons « Réserver ma place » affichent « Inscriptions annoncées très bientôt » et ne mènent nulle part.
+176. Organisateurs et partenaires (logos) : aujourd’hui, WAHHF Foundation seulement.
+177. Intervenants : la barre dit « annoncés très bientôt ».
+178. Les textes anglais de la fiche (src/locales/events/en.json, contenu) sont des propositions, à valider.

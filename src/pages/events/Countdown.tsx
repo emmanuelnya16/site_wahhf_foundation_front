@@ -44,8 +44,8 @@ export function useNow(ref: React.RefObject<HTMLElement | null>) {
 }
 
 /** Chiffre qui tombe à chaque changement (keyframes « tombe », étape 3) : la clé change, l'élément est recréé */
-function Digit({ value, label }: { value: number; label: string }) {
-  const text = pad2(value);
+function Digit({ value, label }: { value: number | undefined; label: string }) {
+  const text = value === undefined ? '–' : pad2(value);
   return (
     <div className="ev-case">
       <span className="ev-chiffre">
@@ -63,24 +63,26 @@ function Live({ event }: { event: Event }) {
   const ref = useRef<HTMLDivElement>(null);
   const now = useNow(ref);
   const left = timeLeft(event, now);
-  const start = eventHours(event, i18n.language).split(' – ')[0];
+  const start = eventHours(event, i18n.language)?.split(' – ')[0];
+  const date = eventDate(event, i18n.language, true, false);
   return (
     <div ref={ref} className="ev-compte">
       <div className="grid gap-2">
         <p className="ev-compte-titre">
-          <span className="ev-point ev-ping" aria-hidden="true" />
-          {t('events.countdown.label')}
+          <span className={left ? 'ev-point ev-ping' : 'ev-point'} aria-hidden="true" />
+          {left ? event.sections?.compte?.titre ?? t('events.countdown.label') : t('events.faits.dateBientot')}
         </p>
-        <p className="ev-text pl-[1.625rem] text-meta">
-          {t('events.countdown.when', { date: eventDate(event, i18n.language, true, false), time: start })}
-        </p>
+        {date && start && (
+          <p className="ev-text pl-[1.625rem] text-meta">{t('events.countdown.when', { date, time: start })}</p>
+        )}
       </div>
-      {/* Les chiffres changent chaque seconde : masqués aux lecteurs d'écran, qui lisent la date écrite à côté */}
+      {/* Les chiffres changent chaque seconde : masqués aux lecteurs d'écran, qui lisent la date écrite à côté. Sans
+          date : quatre cases vides (« – »), jamais un faux chiffre. */}
       <div className="ev-cases" aria-hidden="true">
-        <Digit value={left.days} label={t('events.countdown.days')} />
-        <Digit value={left.hours} label={t('events.countdown.hours')} />
-        <Digit value={left.minutes} label={t('events.countdown.minutes')} />
-        <Digit value={left.seconds} label={t('events.countdown.seconds')} />
+        <Digit value={left?.days} label={t('events.countdown.days')} />
+        <Digit value={left?.hours} label={t('events.countdown.hours')} />
+        <Digit value={left?.minutes} label={t('events.countdown.minutes')} />
+        <Digit value={left?.seconds} label={t('events.countdown.seconds')} />
       </div>
     </div>
   );
@@ -101,7 +103,7 @@ export default function Countdown({ event, status, photosHref }: { event: Event;
           <div className="grid gap-1">
             <p className="ev-compte-titre">
               <span className="ev-point" aria-hidden="true" />
-              {t('events.countdown.past', { date: eventDate(event, i18n.language, false) })}
+              {t('events.countdown.past', { date: eventDate(event, i18n.language, false) ?? '' })}
             </p>
             <p className="ev-text pl-[1.625rem]">{t('events.countdown.pastText')}</p>
           </div>

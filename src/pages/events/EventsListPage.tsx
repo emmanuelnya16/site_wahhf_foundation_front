@@ -8,20 +8,22 @@ import { ArrowUpRight, CalendarDays, MapPin, Sparkles } from 'lucide-react';
 import SEO from '../../components/wahhf/SEO';
 import Photo from '../../components/wahhf/Photo';
 import type { Event } from '../../data/events';
-import { eventDate, eventHours, eventPhoto, isShown, pastEvents, timeLeft, upcomingEvents } from '../../lib/events';
+import { eventDate, eventHours, eventPhoto, isShown, localizeEvent, pastEvents, timeLeft, upcomingEvents } from '../../lib/events';
 import { cn } from '../../lib/utils';
 import { AccentTitle, HeroBackdrop } from './Hero';
 import { useNow } from './Countdown';
 import { EvButton, pad2 } from './ui';
 import { PauseButton, useLoopControl } from './motion';
 
-const place = (e: Event) => [e.lieu, isShown(e.ville) ? e.ville : null, e.pays].filter(Boolean).join(', ');
+const place = (e: Event, soon: string) => [e.lieu, isShown(e.ville) ? e.ville : e.lieu ? null : soon, e.pays].filter(Boolean).join(', ');
 
 /** Grande carte de l'événement à venir, avec un mini compte à rebours (jours, heures, minutes) */
 function UpcomingCard({ event }: { event: Event }) {
   const { t, i18n } = useTranslation();
   const ref = useRef<HTMLDivElement>(null);
   const left = timeLeft(event, useNow(ref));
+  const hours = eventHours(event, i18n.language);
+  const dash = (n: number | undefined) => (n === undefined ? '–' : pad2(n));
   const photo = eventPhoto(event.photoHero);
   return (
     <article ref={ref} className="ev-a-venir ev-carte-lien ev-carte-lift">
@@ -38,27 +40,28 @@ function UpcomingCard({ event }: { event: Event }) {
           <li>
             <CalendarDays aria-hidden="true" />
             <span>
-              {eventDate(event, i18n.language)} · {eventHours(event, i18n.language)}
+              {eventDate(event, i18n.language) ?? t('events.faits.dateBientot')}
+              {hours && <> · {hours}</>}
             </span>
           </li>
           <li>
             <MapPin aria-hidden="true" />
-            <span>{place(event)}</span>
+            <span>{place(event, t('events.faits.villeBientot'))}</span>
           </li>
         </ul>
         <div className="grid gap-2">
           <p className="ev-label text-[var(--ev-texte-doux)]">{t('events.list.startsIn')}</p>
           <p className="ev-mini-compte" aria-hidden="true">
             <span>
-              <b>{pad2(left.days)}</b>
+              <b>{dash(left?.days)}</b>
               <span className="ev-label">{t('events.countdown.days')}</span>
             </span>
             <span>
-              <b>{pad2(left.hours)}</b>
+              <b>{dash(left?.hours)}</b>
               <span className="ev-label">{t('events.countdown.hours')}</span>
             </span>
             <span>
-              <b>{pad2(left.minutes)}</b>
+              <b>{dash(left?.minutes)}</b>
               <span className="ev-label">{t('events.countdown.minutes')}</span>
             </span>
           </p>
@@ -81,8 +84,8 @@ const VOIES = ['nuit', 'foret', 'soleil', 'papier'] as const;
  */
 export default function EventsListPage() {
   const { t, i18n } = useTranslation();
-  const upcoming = upcomingEvents();
-  const past = pastEvents();
+  const upcoming = upcomingEvents().map((e) => localizeEvent(e, i18n.language));
+  const past = pastEvents().map((e) => localizeEvent(e, i18n.language));
   const root = useRef<HTMLDivElement>(null);
   const loops = useLoopControl(root);
   return (
@@ -152,9 +155,9 @@ export default function EventsListPage() {
                           {e.titre}
                         </Link>
                       </h3>
-                      <p className="ev-voie-texte">{place(e)}</p>
+                      <p className="ev-voie-texte">{place(e, t('events.faits.villeBientot'))}</p>
                       <div className="ev-voie-pied">
-                        <span className="ev-voie-etiquette ev-label">{eventDate(e, i18n.language, false)}</span>
+                        <span className="ev-voie-etiquette ev-label">{eventDate(e, i18n.language, false) ?? t('events.faits.dateBientot')}</span>
                         <span className="ev-rond-fleche" aria-hidden="true">
                           <ArrowUpRight className="h-5 w-5" />
                         </span>

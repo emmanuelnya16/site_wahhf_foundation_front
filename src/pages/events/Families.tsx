@@ -171,7 +171,7 @@ export function FinalCta({ event, status, photosHref }: { event: Event; status: 
         <div className="ev-final ev-on-soleil" data-reveal="ev">
           <Confetti />
           <div className="relative grid justify-items-start gap-6">
-            <p className="ev-label">{eventDate(event, i18n.language)}</p>
+            <p className="ev-label">{eventDate(event, i18n.language) ?? t('events.faits.dateBientot')}</p>
             <h2 id="ev-final" className="ev-h2 max-w-[14ch]">
               {upcoming ? t('events.final.titleUpcoming') : t('events.final.titlePast')}
             </h2>

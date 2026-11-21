@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import SEO from '../../components/wahhf/SEO';
 import NotFoundPage, { NotFoundLinks } from '../NotFoundPage';
 import { EVENTS, type Event } from '../../data/events';
-import { eventBySlug, eventStatus, shownItems } from '../../lib/events';
+import { eventBySlug, eventStatus, localizeEvent, shownItems } from '../../lib/events';
 import Hero from './Hero';
 import Countdown from './Countdown';
 import { Activities, Organizers, Schedule, Ticker, Why } from './Sections';
@@ -70,7 +70,7 @@ function EventSheet({ event }: { event: Event }) {
 
 export default function EventPage() {
   const { slug } = useParams<{ slug: string }>();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const event = eventBySlug(slug);
 
   if (!event) {
@@ -83,5 +83,5 @@ export default function EventPage() {
       </NotFoundPage>
     );
   }
-  return <EventSheet key={event.slug} event={event} />;
+  return <EventSheet key={event.slug} event={localizeEvent(event, i18n.language)} />;
 }

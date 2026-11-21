@@ -59,7 +59,8 @@ export default function Hero({
   const photo = eventPhoto(event.photoHero);
   const upcoming = status === 'a-venir';
   const city = isShown(event.ville) ? event.ville : null;
-  const place = [event.lieu, city, event.pays].filter(Boolean).join(', ');
+  const place = [event.lieu, city ?? (event.lieu ? null : t('events.faits.villeBientot')), event.pays].filter(Boolean).join(', ');
+  const hours = eventHours(event, lang);
   const register = upcoming && isShown(event.lienInscription) ? event.lienInscription : null;
 
   return (
@@ -108,7 +109,8 @@ export default function Hero({
             <li>
               <CalendarDays aria-hidden="true" />
               <span>
-                {eventDate(event, lang)} · {eventHours(event, lang)}
+                {eventDate(event, lang) ?? t('events.faits.dateBientot')}
+                {hours && <> · {hours}</>}
               </span>
             </li>
             <li>
@@ -144,7 +146,11 @@ export default function Hero({
               </span>
               <span>
                 <span className="ev-panneau-label">{upcoming ? t('events.hero.venueUpcoming') : t('events.hero.venuePast')}</span>
-                <span className="ev-panneau-ville">{city ?? event.lieu}</span>
+                {city ?? event.lieu ? (
+                  <span className="ev-panneau-ville">{city ?? event.lieu}</span>
+                ) : (
+                  <span className="ev-panneau-ville is-bientot">{t('events.faits.villeBientot')}</span>
+                )}
                 <span className="ev-panneau-pays">
                   <CameroonFlag />
                   {event.pays}

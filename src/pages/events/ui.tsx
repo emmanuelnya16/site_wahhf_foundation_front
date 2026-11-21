@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 import {
   ArrowRight,
   ArrowRightLeft,
+  Briefcase,
+  Compass,
+  Globe,
+  ShieldAlert,
   Gift,
   GraduationCap,
   Hospital,
@@ -28,6 +32,10 @@ import { cn } from '../../lib/utils';
 
 /** Icônes des cartes (src/data/events.ts) */
 export const ICONS: Record<EventIcon, LucideIcon> = {
+  emploi: Briefcase,
+  boussole: Compass,
+  pays: Globe,
+  alerte: ShieldAlert,
   gratuit: Gift,
   reseau: Network,
   professeur: GraduationCap,
