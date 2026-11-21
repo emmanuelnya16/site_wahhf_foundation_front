@@ -6,6 +6,8 @@
  * nouveau sur la fondation, sauf ce que le brief demande d'écrire (« un don ne donne jamais accès à une place », ARN-02).
  * L'icône de chaque puce est lue dans son type par ArnaquesPage (revue du groupe 7.4) : un signe d'arnaque placé par
  * erreur parmi les bons réflexes garderait son triangle d'alerte, jamais la coche.
+ * Lot 7.10 : le français reste ici ; anglais et allemand en surcouches, case par case, sous
+ * accompagnement.contenu.arnaques (signes, fauxMessage, promesses, reflexes) de src/locales/accompagnement.
  * Espaces insécables (NB) après « et avant », avant « : » et « ! », dans « 100 % » (T-19, revue du groupe 7.4).
  */
 

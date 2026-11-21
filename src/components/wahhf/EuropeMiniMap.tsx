@@ -1,4 +1,5 @@
 import { FocusEvent, KeyboardEvent, use, useEffect, useId, useMemo, useRef, useState } from 'react';
+import { useLocalize } from '../../lib/localize';
 import { useNavigate } from 'react-router-dom';
 import { ComposableMap, Marker } from 'react-simple-maps';
 import { geoAzimuthalEqualArea, geoPath } from 'd3-geo';
@@ -80,6 +81,7 @@ interface EuropeMiniMapProps {
 export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry, redrawArc = false, keyboard = true }: EuropeMiniMapProps) {
   const geo = use(loadEuropeGeo());
   const navigate = useNavigate();
+  const { t, localized } = useLocalize();
   const reduce = useReducedMotion();
   const boxRef = useRef<HTMLDivElement>(null);
   const size = useElementSize(boxRef);
@@ -202,7 +204,7 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry, redra
     // Étiquette du pays (survol ou focus uniquement), gardée dans le cadre
     let label = null;
     if (active && activePoint) {
-      const text = `${active.code} · ${active.name}`;
+      const text = `${active.code} · ${localized(active, `contenu.pays.${active.slug}`).name}`;
       const lw = text.length * 6 + 18;
       const x = Math.min(Math.max(activePoint[0], lw / 2 + 4), w - lw / 2 - 4);
       const above = activePoint[1] - 30 > 4;
@@ -223,7 +225,7 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry, redra
         width={w}
         height={h}
         {...(keyboard
-          ? { role: 'group', 'aria-label': "Carte de l'Europe : les 10 pays accompagnés, chacun avec un lien vers sa fiche" }
+          ? { role: 'group', 'aria-label': t('ui.map.europeLabel') }
           : { 'aria-hidden': true })}
         className="absolute inset-0 w-full h-full select-none overflow-hidden"
       >
@@ -239,7 +241,7 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry, redra
               ? {
                   role: 'link',
                   tabIndex: 0,
-                  'aria-label': `${supported.name}${supported.isEU ? '' : ', hors Union européenne'} : ouvrir la fiche`,
+                  'aria-label': t(supported.isEU ? 'ui.map.countryLink' : 'ui.map.countryLinkNonEu', { name: localized(supported, `contenu.pays.${supported.slug}`).name }),
                   onFocus: (e: FocusEvent<SVGPathElement>) => handleFocus(e, supported.slug),
                   onBlur: handleBlur,
                   onKeyDown: (e: KeyboardEvent<SVGPathElement>) => handleKeyDown(e, supported.slug),
@@ -338,7 +340,7 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry, redra
             <circle r={4} className="fill-text stroke-surface-raised" strokeWidth={1.5} />
             <rect x={9} y={-9.5} width={106} height={19} rx={9.5} className="fill-text" />
             <text x={62} y={3.5} textAnchor="middle" fontSize={9.5} fontWeight={600} className="font-sans fill-surface-raised">
-              Depuis le Cameroun
+              {t('ui.map.fromCameroon')}
             </text>
           </g>
         </g>
@@ -353,7 +355,7 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry, redra
       {overlay ?? (
         // Pendant le calcul des tracés (quelques images) : le même message que pendant le chargement
         <div role="status" aria-busy="true" className="absolute inset-0 flex items-center justify-center text-meta text-text-secondary">
-          Chargement de la carte Europe…
+          {t('ui.map.loadingEurope')}
         </div>
       )}
     </div>

@@ -1,5 +1,8 @@
 import { lazy, Suspense, useState, useEffect, useRef } from 'react';
 import { AlertCircle, ArrowUpRight } from 'lucide-react';
+import { Trans } from 'react-i18next';
+import i18n from '../../i18n';
+import { useLocalize } from '../../lib/localize';
 import { CAMEROON_REGIONS_LIST, CameroonRegionData } from '../../data/regions';
 import { prefetchPresenceGeo } from '../../lib/geoData';
 import CountryList from './CountryList';
@@ -14,15 +17,16 @@ const EuropeMiniMap = lazy(() => import('./EuropeMiniMap'));
 /** Même format que la carte (480 × 560) : rien ne bouge quand elle arrive. */
 const CAMEROON_BOX = 'w-full max-w-[400px] mx-auto aspect-[480/560]';
 
-const cameroonPlaceholder = (
+// Fonctions (lot 7.10) : le texte est lu dans la langue au moment de l'affichage
+const cameroonPlaceholder = () => (
   <div role="status" aria-busy="true" className={`${CAMEROON_BOX} rounded-inner bg-surface-raised flex items-center justify-center text-meta text-text-secondary`}>
-    Chargement de la carte des 10 régions du Cameroun…
+    {i18n.t('ui.map.loadingCameroon')}
   </div>
 );
 
-const europePlaceholder = (
+const europePlaceholder = () => (
   <div role="status" aria-busy="true" className="absolute inset-0 rounded-inner bg-surface-raised flex items-center justify-center text-meta text-text-secondary">
-    Chargement de la carte Europe…
+    {i18n.t('ui.map.loadingEurope')}
   </div>
 );
 
@@ -44,8 +48,12 @@ export default function PresenceSection({
    */
   hidePending?: boolean;
 } = {}) {
+  const { t, lang, localized } = useLocalize();
   // Région par défaut : Littoral (Douala)
   const [selectedRegion, setSelectedRegion] = useState<CameroonRegionData>(CAMEROON_REGIONS_LIST[0]);
+  // Noms et textes des régions dans la langue (lot 7.10) ; l'état garde la donnée française
+  const regionText = (r: CameroonRegionData) => localized(r, `contenu.regions.${r.id}`);
+  const shownRegion = regionText(selectedRegion);
 
   // Pays européen survolé ou sélectionné (synchronisation bidirectionnelle carte <-> liste)
   const [activeCountrySlug, setActiveCountrySlug] = useState<string | null>(null);
@@ -90,12 +98,10 @@ export default function PresenceSection({
           <div>
 
             <h3 className="text-[1.375rem] font-semibold leading-tight text-text mb-2">
-              Présence terrain au Cameroun
+              {t('ui.presence.cameroonTitle')}
             </h3>
             <p className="text-body text-text-secondary mb-4">
-              {hidePending
-                ? 'Choisissez une région ou son chef-lieu sur la carte.'
-                : 'Choisissez une région ou son chef-lieu pour afficher nos relais locaux (éducation, santé, agroécologie et orientation).'}
+              {hidePending ? t('ui.presence.promptShort') : t('ui.presence.prompt')}
             </p>
           </div>
 
@@ -103,12 +109,12 @@ export default function PresenceSection({
           <div className="my-1" data-map="cameroun">
             {shouldLoadMaps ? (
               <ChunkErrorBoundary className={`${CAMEROON_BOX} text-text`}>
-                <Suspense fallback={cameroonPlaceholder}>
+                <Suspense fallback={cameroonPlaceholder()}>
                   <CameroonMap selectedRegion={selectedRegion} onSelectRegion={setSelectedRegion} />
                 </Suspense>
               </ChunkErrorBoundary>
             ) : (
-              cameroonPlaceholder
+              cameroonPlaceholder()
             )}
           </div>
 
@@ -119,11 +125,11 @@ export default function PresenceSection({
               className="rounded-inner bg-surface-raised p-4"
             >
               <div className="space-y-1">
-                <p className="text-meta text-text-secondary">Région sélectionnée</p>
+                <p className="text-meta text-text-secondary">{t('ui.map.selected')}</p>
                 <p className="text-body font-semibold text-text">
-                  {selectedRegion.name} ({selectedRegion.capital})
+                  {shownRegion.name} ({shownRegion.capital})
                 </p>
-                {[selectedRegion.antennaTodo, selectedRegion.actionsTodo]
+                {[shownRegion.antennaTodo, shownRegion.actionsTodo]
                   .filter((line) => !hidePending || !/TODO/.test(line))
                   .map((line) => (
                     <p key={line} className="text-meta text-text-secondary">
@@ -137,7 +143,7 @@ export default function PresenceSection({
             {/* Chips des 10 régions : défilement horizontal sur mobile, retour à la ligne sur desktop */}
             <div
               role="group"
-              aria-label="Sélection rapide des 10 régions du Cameroun"
+              aria-label={t('ui.map.quickSelect')}
               className="flex sm:flex-wrap gap-1.5 overflow-x-auto sm:overflow-visible pb-1.5 sm:pb-0 -mx-1 px-1"
             >
               {CAMEROON_REGIONS_LIST.map((reg) => {
@@ -146,7 +152,7 @@ export default function PresenceSection({
                   <button
                     key={reg.id}
                     type="button"
-                    aria-label={`Région ${reg.name}, chef-lieu ${reg.capital}`}
+                    aria-label={t('ui.map.regionLabel', { name: regionText(reg).name, capital: reg.capital })}
                     aria-pressed={isSelected}
                     onClick={() => setSelectedRegion(reg)}
                     className={`inline-flex min-h-11 items-center px-4 rounded-pill text-meta whitespace-nowrap transition-colors duration-(--dur-fast) cursor-pointer shrink-0 ${
@@ -171,10 +177,10 @@ export default function PresenceSection({
           <div>
 
             <h3 className="text-[1.375rem] font-semibold leading-tight text-text mb-2">
-              Les 10 pays d’orientation vers l’Europe
+              {t('ui.presence.europeTitle')}
             </h3>
             <p className="text-body text-text-secondary mb-5">
-              Fiches d’information vérifiées sur les voies d’études, de formation professionnelle et de travail, avec liens vers les portails officiels.
+              {t('ui.presence.europeText')}
             </p>
           </div>
 
@@ -184,12 +190,12 @@ export default function PresenceSection({
             <div data-map="europe" className="order-2 md:order-1 relative flex-1 min-h-[220px] sm:min-h-[250px]">
               {shouldLoadMaps ? (
                 <ChunkErrorBoundary className="absolute inset-0 text-text">
-                  <Suspense fallback={europePlaceholder}>
+                  <Suspense fallback={europePlaceholder()}>
                     <EuropeMiniMap activeCountrySlug={activeCountrySlug} onHoverCountry={setActiveCountrySlug} />
                   </Suspense>
                 </ChunkErrorBoundary>
               ) : (
-                europePlaceholder
+                europePlaceholder()
               )}
             </div>
 
@@ -202,7 +208,7 @@ export default function PresenceSection({
           <div className="mt-6 pt-4 border-t border-border-subtle flex items-start gap-2.5 text-meta text-text-secondary">
             <AlertCircle aria-hidden="true" className="w-4 h-4 text-warning shrink-0 mt-1" />
             <p>
-              Note : L’Albanie est un pays européen candidat mais <strong>non membre de l’Union européenne</strong>. Consultez chaque fiche pays pour connaître le cadre réglementaire officiel.
+              <Trans i18nKey="ui.presence.albaniaNote" components={{ b: <strong /> }} />
             </p>
           </div>
         </div>
@@ -210,7 +216,7 @@ export default function PresenceSection({
 
       {/* Crédits exigés par la licence CC BY des limites régionales */}
       <p className="text-meta text-text-secondary lg:text-right">
-        Fonds de carte : limites régionales{' '}
+        {t('ui.map.creditsPrefix')}{' '}
         <a
           href="https://www.geoboundaries.org"
           target="_blank"
@@ -219,20 +225,20 @@ export default function PresenceSection({
         >
           geoBoundaries
           <ArrowUpRight aria-hidden="true" className="w-3 h-3 shrink-0" />
-          <span className="sr-only"> (nouvel onglet)</span>
+          <span className="sr-only">{t('ui.newTab')}</span>
         </a>{' '}
         (
         <a
-          href="https://creativecommons.org/licenses/by/3.0/deed.fr"
+          href={`https://creativecommons.org/licenses/by/3.0/deed.${lang}`}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-0.5 underline underline-offset-2 hover:text-link"
         >
           CC BY 3.0
           <ArrowUpRight aria-hidden="true" className="w-3 h-3 shrink-0" />
-          <span className="sr-only"> (nouvel onglet)</span>
+          <span className="sr-only">{t('ui.newTab')}</span>
         </a>
-        ) · pays Natural Earth (domaine public).
+        {t('ui.map.creditsSuffix')}
       </p>
       {/* Cascade des régions, puis arc Cameroun → Europe (contrat §10, moment 5 ; GSAP après le premier affichage) */}
       <AfterFirstDisplay>

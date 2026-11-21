@@ -13,7 +13,9 @@ import { buildDraft, mailtoHref, whatsappHref } from '../../lib/contactDraft';
 import { useSequentialFade } from '../../effects/useSequentialFade';
 import { FAKE_MESSAGE, FakeMessageFlag, SCAM_PRACTICES, SCAM_PROMISES, SCAM_SIGNS, ScamItemType } from '../../data/arnaques';
 import { cn } from '../../lib/utils';
+import { useLocalize } from '../../lib/localize';
 import { ACCOMPANIMENT_STEPS } from './steps';
+import { NB, pieces } from './i18n';
 
 /*
  * Éviter les arnaques (/accompagnement/eviter-les-arnaques), groupe 7.4 : contrat validé, audit ARN-01 à ARN-04, T-14.
@@ -31,17 +33,13 @@ import { ACCOMPANIMENT_STEPS } from './steps';
  * - fin de page sur « Signaler » (et non plus « Demander un accompagnement »), sans carte nuit.
  * Aucune apparition groupée sur cette page (src/effects/motion/RevealBatch.tsx, EXCLUDED) ; aucun bouton de don.
  * Revue du groupe 7.4 : l'icône de chaque puce est lue dans son type (ScamIcon), et non plus choisie par section.
+ * Lot 7.10 : textes du paquet « accompagnement » ; contenu de data/arnaques.ts dans la langue en cours
+ * (accompagnement.contenu.arnaques : signes, fauxMessage, promesses, reflexes, surcouches case par case) ; message de
+ * signalement préparé dans la langue du visiteur.
  */
 
-const NB = ' ';
 const STEP = ACCOMPANIMENT_STEPS.findIndex((s) => s.slug === 'eviter-les-arnaques');
 
-const REPORT = buildDraft(
-  'Signalement d’une tentative d’arnaque',
-  'Je souhaite signaler une personne ou un message qui utilise le nom de WAHHF Foundation.',
-  [],
-  'Ce qui s’est passé (date, numéro ou profil, somme demandée) :\n\n(Joignez si possible une capture d’écran du message.)'
-);
 
 /**
  * Icône d'une puce, lue dans son type (ARN-03) : triangle d'alerte ambre pour un signe d'arnaque, coche pour un bon
@@ -58,11 +56,18 @@ const withIcon = (type: ScamItemType) => type !== 'promise' && 'grid grid-cols-[
 
 /** Les deux boutons de signalement (48 px de haut, au-delà des 44 px demandés par ARN-01). */
 function ReportButtons() {
+  const { t } = useLocalize();
+  const report = buildDraft(
+    t('accompagnement.arnaques.signalementObjet'),
+    t('accompagnement.arnaques.signalementIntro'),
+    [],
+    t('accompagnement.arnaques.signalementFin')
+  );
   return (
     <div className="flex flex-wrap items-center gap-3">
       {/* Lien externe : PrimaryButton ajoute ↗ et « (nouvel onglet) » pour les lecteurs d'écran */}
-      <PrimaryButton href={whatsappHref(REPORT)}>Signaler sur WhatsApp</PrimaryButton>
-      <SecondaryButton href={mailtoHref(REPORT)}>Signaler par e-mail</SecondaryButton>
+      <PrimaryButton href={whatsappHref(report)}>{t('accompagnement.arnaques.signalerWhatsapp')}</PrimaryButton>
+      <SecondaryButton href={mailtoHref(report)}>{t('accompagnement.arnaques.signalerEmail')}</SecondaryButton>
     </div>
   );
 }
@@ -70,45 +75,45 @@ function ReportButtons() {
 export default function ArnaquesPage() {
   const signsRef = useRef<HTMLOListElement>(null);
   const seq = useSequentialFade(signsRef);
+  const { t, localized } = useLocalize();
+  const content = 'accompagnement.contenu.arnaques';
+  const signs = localized(SCAM_SIGNS, `${content}.signes`);
+  const fakeMessage = localized(FAKE_MESSAGE, `${content}.fauxMessage`);
+  const promises = localized(SCAM_PROMISES, `${content}.promesses`);
+  const practices = localized(SCAM_PRACTICES, `${content}.reflexes`);
 
   return (
     <>
-      <SEO
-        title="Éviter les arnaques et les fausses promesses — Accompagnement gratuit vers l'Europe"
-        description="Reconnaître une fausse offre de visa, de contrat ou d'admission, et signaler une arnaque à WAHHF Foundation par ses seuls canaux officiels."
-      />
+      <SEO title={t('accompagnement.arnaques.seoTitre')} description={t('accompagnement.arnaques.seoDescription')} />
 
       <PageHeader reveal notice={<DisclaimerBanner compact />}>
         <PageBreadcrumb
           items={[
-            { label: 'Mobilité & Langues', to: '/mobilite-langues' },
-            { label: 'Accompagnement vers l’Europe', to: '/mobilite-langues/accompagnement' },
-            { label: 'Éviter les arnaques' },
+            { label: t('accompagnement.commun.mobilite'), to: '/mobilite-langues' },
+            { label: t('accompagnement.commun.accompagnement'), to: '/mobilite-langues/accompagnement' },
+            { label: t('accompagnement.arnaques.filAriane') },
           ]}
         />
         <p className="text-meta text-text-secondary">
-          Étape {STEP + 1} sur {ACCOMPANIMENT_STEPS.length} de l’accompagnement
+          {pieces(t('accompagnement.commun.etape'), { n: STEP + 1, total: ACCOMPANIMENT_STEPS.length })}
         </p>
-        <PageTitle>Éviter les arnaques et les fausses promesses</PageTitle>
-        <PageIntro>Comment reconnaître une offre frauduleuse, protéger vos proches et vérifier chaque information.</PageIntro>
+        <PageTitle>{t('accompagnement.arnaques.titre')}</PageTitle>
+        <PageIntro>{t('accompagnement.arnaques.intro')}</PageIntro>
       </PageHeader>
 
       {/* NOS SEULS CANAUX OFFICIELS (ARN-01), en haut de page ; ancre #signaler (fin de la page Accompagnement) */}
       <Section tone="sauge" id="signaler">
         <div className="container-page">
           <div className="max-w-[65ch] space-y-6">
-            <SectionHeader
-              title="Nos seuls canaux officiels"
-              subtitle="Si une personne prétend agir au nom de WAHHF Foundation ou d’IROKO en vous réclamant de l’argent, interrompez immédiatement tout échange et signalez-le-nous."
-            />
+            <SectionHeader title={t('accompagnement.arnaques.canauxTitre')} subtitle={t('accompagnement.arnaques.canauxSousTitre')} />
             <dl className="grid grid-cols-[auto_1fr] items-baseline gap-x-6 gap-y-3">
               <dt className="text-meta text-text-secondary">WhatsApp</dt>
               <dd className="text-body font-semibold text-text tabular-nums">{CONTACT.whatsappDisplay}</dd>
-              <dt className="text-meta text-text-secondary">E-mail</dt>
+              <dt className="text-meta text-text-secondary">{t('accompagnement.arnaques.email')}</dt>
               <dd className="text-body font-semibold text-text break-all">{CONTACT.email}</dd>
             </dl>
             <p className="text-body text-text-secondary">
-              Tout autre numéro ou adresse qui se présente comme WAHHF Foundation n’est pas le nôtre. Joignez si possible une capture d’écran du message.
+              {t('accompagnement.arnaques.canauxNote')}
             </p>
             <ReportButtons />
           </div>
@@ -118,9 +123,9 @@ export default function ArnaquesPage() {
       {/* 5 SIGNES D'ARNAQUE (ARN-04) : check-list, icônes d'alerte ambre (ARN-03), apparition élément par élément */}
       <Section>
         <div className="container-page space-y-10">
-          <SectionHeader title="5 signes d’arnaque" subtitle="Si vous reconnaissez l’un de ces signes, interrompez l’échange et vérifiez." />
+          <SectionHeader title={t('accompagnement.arnaques.signesTitre')} subtitle={t('accompagnement.arnaques.signesSousTitre')} />
           <ol ref={signsRef} {...seq} className={`${seq.className ?? ''} max-w-[65ch]`}>
-            {SCAM_SIGNS.map((sign, i) => (
+            {signs.map((sign, i) => (
               <li
                 key={sign.title}
                 style={{ '--seq-i': i } as CSSProperties}
@@ -140,16 +145,13 @@ export default function ArnaquesPage() {
       {/* EXEMPLE DE FAUX MESSAGE ANNOTÉ (ARN-04) */}
       <Section tone="sauge">
         <div className="container-page space-y-10">
-          <SectionHeader
-            title="À quoi ressemble un faux message"
-            subtitle="Ce message est inventé pour l’exemple, à partir des signes ci-dessus. Chaque passage souligné en ambre est un signe d’arnaque."
-          />
+          <SectionHeader title={t('accompagnement.arnaques.exempleTitre')} subtitle={t('accompagnement.arnaques.exempleSousTitre')} />
           <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
             <figure className="max-w-md space-y-3">
               <div className="rounded-card rounded-bl-inner bg-surface-raised p-5 sm:p-6 space-y-3">
-                <p className="text-meta text-text-secondary">Message reçu sur WhatsApp, d’un numéro inconnu</p>
+                <p className="text-meta text-text-secondary">{t('accompagnement.arnaques.exempleEntete')}</p>
                 <p className="text-body text-text">
-                  {FAKE_MESSAGE.map((part, i) =>
+                  {fakeMessage.map((part, i) =>
                     typeof part === 'string' ? (
                       <Fragment key={i}>{part}</Fragment>
                     ) : (
@@ -160,15 +162,20 @@ export default function ArnaquesPage() {
                   )}
                 </p>
               </div>
-              <figcaption className="text-meta text-text-secondary">Exemple inventé{NB}: ce message ne vient pas de WAHHF Foundation.</figcaption>
+              <figcaption className="text-meta text-text-secondary">
+                {pieces(t('accompagnement.arnaques.exempleLegende'), { nb: NB })}
+              </figcaption>
             </figure>
             <ul className="max-w-[65ch]">
-              {FAKE_MESSAGE.filter((p): p is FakeMessageFlag => typeof p !== 'string').map((p) => (
+              {fakeMessage.filter((p): p is FakeMessageFlag => typeof p !== 'string').map((p) => (
                 <li key={p.flag} className={cn(withIcon(p.type), 'border-t border-border-subtle py-4')}>
                   <ScamIcon type={p.type} />
                   <p className="text-body text-text-secondary">
-                    <span className="font-semibold text-text">«{NB}{p.flag.replace(/\.$/, '')}{NB}»</span>
-                    {NB}: {p.note}
+                    <span className="font-semibold text-text">
+                      {pieces(t('accompagnement.arnaques.citation'), { nb: NB, texte: p.flag.replace(/\.$/, '') })}
+                    </span>
+                    {pieces(t('accompagnement.arnaques.avantNote'), { nb: NB })}
+                    {p.note}
                   </p>
                 </li>
               ))}
@@ -181,12 +188,9 @@ export default function ArnaquesPage() {
       <Section>
         <div className="container-page grid gap-14 lg:grid-cols-2">
           <div className="space-y-6">
-            <SectionHeader
-              title="WAHHF Foundation ne demande jamais d’argent"
-              subtitle="WAHHF Foundation est une fondation à but non lucratif, financée par ses partenaires et ses donateurs. Notre accompagnement et nos cours d’allemand /anglais sont gratuits."
-            />
+            <SectionHeader title={t('accompagnement.arnaques.jamaisTitre')} subtitle={t('accompagnement.arnaques.jamaisSousTitre')} />
             <ul className="max-w-[65ch]">
-              {SCAM_PROMISES.map((item) => (
+              {promises.map((item) => (
                 <li key={item.text} className={cn(withIcon(item.type), 'border-t border-border-subtle py-4')}>
                   <ScamIcon type={item.type} />
                   <div className="space-y-1">
@@ -198,9 +202,9 @@ export default function ArnaquesPage() {
             </ul>
           </div>
           <div className="space-y-6">
-            <SectionHeader title="Les bons réflexes" />
+            <SectionHeader title={t('accompagnement.arnaques.reflexesTitre')} />
             <ul className="max-w-[65ch]">
-              {SCAM_PRACTICES.map((item) => (
+              {practices.map((item) => (
                 <li key={item.text} className={cn(withIcon(item.type), 'border-t border-border-subtle py-4')}>
                   <ScamIcon type={item.type} />
                   <p className="text-body text-text">{item.text}</p>
@@ -208,7 +212,7 @@ export default function ArnaquesPage() {
               ))}
             </ul>
             <Link to="/mobilite-langues/accompagnement#pays" className={TEXT_LINK_CLASS}>
-              Voir les fiches des 10 pays et leurs sites officiels
+              {t('accompagnement.arnaques.voirFiches')}
             </Link>
           </div>
         </div>
@@ -218,13 +222,10 @@ export default function ArnaquesPage() {
       <Section tone="sauge">
         <div className="container-page">
           <div className="max-w-[65ch] space-y-6">
-            <SectionHeader
-              title={`Une offre vous semble suspecte${NB}?`}
-              subtitle="Interrompez tout échange et prévenez-nous par l’un de nos seuls canaux officiels, avec une capture d’écran du message si possible."
-            />
+            <SectionHeader title={t('accompagnement.arnaques.suspectTitre')} subtitle={t('accompagnement.arnaques.suspectSousTitre')} />
             <ReportButtons />
             <Link to="/mobilite-langues/accompagnement" className={TEXT_LINK_CLASS}>
-              Revenir aux 5 étapes de l’accompagnement
+              {t('accompagnement.arnaques.retourEtapes')}
             </Link>
           </div>
         </div>

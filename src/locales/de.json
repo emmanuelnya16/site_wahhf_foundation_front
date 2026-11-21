@@ -247,6 +247,38 @@
       "emailInvalid": "Die E-Mail-Adresse ist unvollständig. Sie sollte so aussehen: name@beispiel.de.",
       "phoneEmpty": "Bitte geben Sie Ihre Telefon- oder WhatsApp-Nummer mit Ländervorwahl ein (z. B. +237 6 90 00 00 00).",
       "phoneInvalid": "Die Nummer ist unvollständig: Bitte geben Sie die Ländervorwahl und mindestens 8 Ziffern an (z. B. +237 6 90 00 00 00)."
+    },
+    "presence": {
+      "cameroonTitle": "Vor Ort in Kamerun",
+      "promptShort": "Wählen Sie auf der Karte eine Region oder ihre Hauptstadt.",
+      "prompt": "Wählen Sie eine Region oder ihre Hauptstadt, um unsere lokalen Ansprechpartner zu sehen (Bildung, Gesundheit, Agrarökologie und Orientierung).",
+      "europeTitle": "Die 10 Orientierungsländer in Europa",
+      "europeText": "Geprüfte Informationsseiten zu Studium, Berufsausbildung und Arbeit, mit Links zu den offiziellen Portalen.",
+      "albaniaNote": "Hinweis: Albanien ist ein europäisches Beitrittskandidatenland, aber <b>kein Mitglied der Europäischen Union</b>. Den offiziellen rechtlichen Rahmen finden Sie auf der jeweiligen Länderseite."
+    },
+    "map": {
+      "loadingCameroon": "Karte der 10 Regionen Kameruns wird geladen …",
+      "loadingEurope": "Europakarte wird geladen …",
+      "selected": "Ausgewählte Region",
+      "selectedTitle": "Ausgewählte Region: {{name}} ({{capital}})",
+      "capital": "Hauptstadt: {{capital}}",
+      "quickSelect": "Schnellauswahl der 10 Regionen Kameruns",
+      "regionLabel": "Region {{name}}, Hauptstadt {{capital}}",
+      "cameroonLabel": "Karte der 10 Regionen Kameruns; jede Region ist eine Schaltfläche",
+      "fullscreenOpen": "Karte von Kamerun im Vollbild anzeigen",
+      "fullscreen": "Vollbild",
+      "close": "Schließen",
+      "europeLabel": "Europakarte: die 10 begleiteten Länder, jeweils mit Link zur Länderseite",
+      "countryLink": "{{name}}: Länderseite öffnen",
+      "countryLinkNonEu": "{{name}}, nicht in der Europäischen Union: Länderseite öffnen",
+      "fromCameroon": "Aus Kamerun",
+      "creditsPrefix": "Kartengrundlage: Regionsgrenzen",
+      "creditsSuffix": ") · Länder: Natural Earth (gemeinfrei)."
+    },
+    "countries": {
+      "link": "{{name}} — Zur Länderseite",
+      "linkNonEu": "{{name}}, nicht in der Europäischen Union — Zur Länderseite",
+      "nonEu": "Nicht in der EU"
     }
   },
   "contenu": {
@@ -363,6 +395,81 @@
     },
     "contact": {
       "place": "Kamerun (Douala, Yaoundé) und Koordination in Deutschland"
+    },
+    "regions": {
+      "littoral": {
+        "antennaTodo": "Lokale Anlaufstelle: noch zu bestätigen (TODO)",
+        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)"
+      },
+      "centre": {
+        "antennaTodo": "Lokale Anlaufstelle: noch zu bestätigen (TODO)",
+        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)"
+      },
+      "ouest": {
+        "antennaTodo": "Lokale Anlaufstelle: noch zu bestätigen (TODO)",
+        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)"
+      },
+      "sud-ouest": {
+        "antennaTodo": "Lokale Anlaufstelle: noch zu bestätigen (TODO)",
+        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)"
+      },
+      "nord-ouest": {
+        "antennaTodo": "Lokale Anlaufstelle: noch zu bestätigen (TODO)",
+        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)"
+      },
+      "sud": {
+        "antennaTodo": "Lokale Anlaufstelle: noch zu bestätigen (TODO)",
+        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)"
+      },
+      "est": {
+        "antennaTodo": "Lokale Anlaufstelle: noch zu bestätigen (TODO)",
+        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)"
+      },
+      "adamaoua": {
+        "antennaTodo": "Lokale Anlaufstelle: noch zu bestätigen (TODO)",
+        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)"
+      },
+      "nord": {
+        "antennaTodo": "Lokale Anlaufstelle: noch zu bestätigen (TODO)",
+        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)"
+      },
+      "extreme-nord": {
+        "antennaTodo": "Lokale Anlaufstelle: noch zu bestätigen (TODO)",
+        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)"
+      }
+    },
+    "voisins": {
+      "Nigeria": {
+        "label": [
+          "NIGERIA"
+        ]
+      },
+      "Chad": {
+        "label": [
+          "TSCHAD"
+        ]
+      },
+      "CentralAfricanRep": {
+        "label": [
+          "ZENTRALAFRIK.",
+          "REPUBLIK"
+        ]
+      },
+      "Congo": {
+        "label": [
+          "KONGO"
+        ]
+      },
+      "Gabon": {
+        "label": [
+          "GABUN"
+        ]
+      },
+      "EqGuinea": {
+        "label": [
+          "ÄQUAT.-GUINEA"
+        ]
+      }
     }
   }
 }

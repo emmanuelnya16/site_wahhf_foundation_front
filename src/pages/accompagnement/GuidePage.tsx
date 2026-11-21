@@ -9,8 +9,10 @@ import DisclaimerBanner from '../../components/wahhf/DisclaimerBanner';
 import Section from '../../components/wahhf/Section';
 import FilSteps from '../../components/wahhf/FilSteps';
 import { THEMATIC_GUIDES } from '../../services/api';
+import { useLocalize } from '../../lib/localize';
 import NotFoundPage, { NotFoundLinks } from '../NotFoundPage';
 import { ACCOMPANIMENT_STEPS, filSteps } from './steps';
+import { pieces } from './i18n';
 
 /*
  * Guide d'une étape de l'accompagnement (/accompagnement/:topicSlug), groupe 7.4 : les guides sont les 5 étapes de la
@@ -20,46 +22,43 @@ import { ACCOMPANIMENT_STEPS, filSteps } from './steps';
  * - Fin de page sur sauge, sans carte nuit au-dessus du footer : les 5 étapes (l'étape affichée marquée, sans le fil :
  *   il reste propre à la page Accompagnement) et une seule action, « Être accompagné ».
  * Guide inconnu : page « introuvable » avec la liste des guides (ETA-06).
+ * Lot 7.10 : textes du paquet « accompagnement » ; le guide dans la langue en cours (accompagnement.contenu.guides.<slug>).
  */
 export default function GuidePage() {
   const { topicSlug = '' } = useParams<{ topicSlug?: string }>();
+  const { t, localized } = useLocalize();
+  const guideKey = (slug: string) => `accompagnement.contenu.guides.${slug}`;
 
   // Guide inconnu : message dédié et liste des guides, au lieu de la page générale
   if (!THEMATIC_GUIDES[topicSlug]) {
     return (
-      <NotFoundPage
-        title="Ce guide d’accompagnement n’existe pas"
-        message="Le lien a peut-être été mal copié. Voici les guides disponibles pour préparer votre projet vers l’Europe."
-      >
+      <NotFoundPage title={t('accompagnement.guide.introuvableTitre')} message={t('accompagnement.guide.introuvableMessage')}>
         <NotFoundLinks
-          heading="Les guides d’accompagnement"
-          links={Object.entries(THEMATIC_GUIDES).map(([slug, g]) => ({ to: `/accompagnement/${slug}`, label: g.title }))}
+          heading={t('accompagnement.guide.introuvableListe')}
+          links={Object.entries(THEMATIC_GUIDES).map(([slug, g]) => ({ to: `/accompagnement/${slug}`, label: localized(g, guideKey(slug)).title }))}
         />
       </NotFoundPage>
     );
   }
 
-  const guide = THEMATIC_GUIDES[topicSlug];
+  const guide = localized(THEMATIC_GUIDES[topicSlug], guideKey(topicSlug));
   const stepIndex = ACCOMPANIMENT_STEPS.findIndex((s) => s.slug === guide.slug);
 
   return (
     <Fragment key={guide.slug}>
-      <SEO
-        title={`${guide.title} — Accompagnement gratuit vers l'Europe`}
-        description={guide.subtitle}
-      />
+      <SEO title={t('accompagnement.guide.seoTitre', { title: guide.title })} description={guide.subtitle} />
 
       <PageHeader reveal notice={<DisclaimerBanner />}>
         <PageBreadcrumb
           items={[
-            { label: 'Mobilité & Langues', to: '/mobilite-langues' },
-            { label: 'Accompagnement vers l’Europe', to: '/mobilite-langues/accompagnement' },
+            { label: t('accompagnement.commun.mobilite'), to: '/mobilite-langues' },
+            { label: t('accompagnement.commun.accompagnement'), to: '/mobilite-langues/accompagnement' },
             { label: guide.title },
           ]}
         />
         {stepIndex >= 0 && (
           <p className="text-meta text-text-secondary">
-            Étape {stepIndex + 1} sur {ACCOMPANIMENT_STEPS.length} de l’accompagnement
+            {pieces(t('accompagnement.commun.etape'), { n: stepIndex + 1, total: ACCOMPANIMENT_STEPS.length })}
           </p>
         )}
         <PageTitle>{guide.title}</PageTitle>
@@ -90,10 +89,10 @@ export default function GuidePage() {
       {/* Fin de page : les 5 étapes, puis une seule action ; sur sauge, sans carte nuit au-dessus du footer */}
       <Section tone="sauge">
         <div className="container-page space-y-10">
-          <SectionHeader title="Les 5 étapes de l’accompagnement" />
+          <SectionHeader title={t('accompagnement.guide.etapesTitre')} />
           <FilSteps steps={filSteps(false)} currentId={guide.slug} withFil={false} />
           <PrimaryButton to="/candidater?souhait=accompagnement_europe" size="lg">
-            Être accompagné
+            {t('accompagnement.commun.etreAccompagne')}
           </PrimaryButton>
         </div>
       </Section>

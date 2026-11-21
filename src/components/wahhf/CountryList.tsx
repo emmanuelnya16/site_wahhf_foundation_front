@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { AlertTriangle } from 'lucide-react';
+import { useLocalize } from '../../lib/localize';
 import { EUROPE_SUPPORTED_COUNTRIES } from '../../data/countries';
 import { cn } from '../../lib/utils';
 
@@ -23,15 +24,16 @@ interface CountryListProps {
  * encre douce, filet, forêt) au lieu des tokens sémantiques, qui passeraient en clair sur blanc en thème sombre.
  */
 export default function CountryList({ activeCountrySlug, onHoverCountry, nonEuWarning = false }: CountryListProps) {
+  const { t, localizedList } = useLocalize();
   return (
     <ul className="grid grid-cols-2 gap-x-6">
-      {EUROPE_SUPPORTED_COUNTRIES.map((country) => {
+      {localizedList(EUROPE_SUPPORTED_COUNTRIES, 'contenu.pays', (c) => c.slug).map((country) => {
         const isHighlighted = activeCountrySlug === country.slug;
         return (
           <li key={country.slug} className="border-t border-border-subtle">
             <Link
               to={`/accompagnement/pays/${country.slug}`}
-              aria-label={`${country.name}${!country.isEU ? ', Hors Union européenne' : ''} — Voir la fiche`}
+              aria-label={t(country.isEU ? 'ui.countries.link' : 'ui.countries.linkNonEu', { name: country.name })}
               onMouseEnter={() => onHoverCountry(country.slug)}
               onMouseLeave={() => onHoverCountry(null)}
               onFocus={() => onHoverCountry(country.slug)}
@@ -52,7 +54,7 @@ export default function CountryList({ activeCountrySlug, onHoverCountry, nonEuWa
                 {!country.isEU && (
                   <span className={cn('inline-flex items-center gap-1 whitespace-nowrap text-meta', nonEuWarning ? 'font-semibold text-warning' : 'text-text-secondary')}>
                     {nonEuWarning && <AlertTriangle aria-hidden="true" className="w-4 h-4 shrink-0" />}
-                    Hors UE
+                    {t('ui.countries.nonEu')}
                   </span>
                 )}
               </span>

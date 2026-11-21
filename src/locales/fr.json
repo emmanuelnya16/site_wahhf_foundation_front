@@ -247,6 +247,38 @@
       "emailInvalid": "Adresse e-mail incomplète : elle doit ressembler à nom@exemple.com.",
       "phoneEmpty": "Saisissez votre numéro de téléphone ou WhatsApp, avec l’indicatif (ex. +237 6 90 00 00 00).",
       "phoneInvalid": "Numéro incomplet : indiquez l’indicatif du pays et au moins 8 chiffres (ex. +237 6 90 00 00 00)."
+    },
+    "presence": {
+      "cameroonTitle": "Présence terrain au Cameroun",
+      "promptShort": "Choisissez une région ou son chef-lieu sur la carte.",
+      "prompt": "Choisissez une région ou son chef-lieu pour afficher nos relais locaux (éducation, santé, agroécologie et orientation).",
+      "europeTitle": "Les 10 pays d’orientation vers l’Europe",
+      "europeText": "Fiches d’information vérifiées sur les voies d’études, de formation professionnelle et de travail, avec liens vers les portails officiels.",
+      "albaniaNote": "Note : L’Albanie est un pays européen candidat mais <b>non membre de l’Union européenne</b>. Consultez chaque fiche pays pour connaître le cadre réglementaire officiel."
+    },
+    "map": {
+      "loadingCameroon": "Chargement de la carte des 10 régions du Cameroun…",
+      "loadingEurope": "Chargement de la carte Europe…",
+      "selected": "Région sélectionnée",
+      "selectedTitle": "Région sélectionnée : {{name}} ({{capital}})",
+      "capital": "Chef-lieu : {{capital}}",
+      "quickSelect": "Sélection rapide des 10 régions du Cameroun",
+      "regionLabel": "Région {{name}}, chef-lieu {{capital}}",
+      "cameroonLabel": "Carte des 10 régions du Cameroun ; chaque région est un bouton",
+      "fullscreenOpen": "Afficher la carte du Cameroun en plein écran",
+      "fullscreen": "Plein écran",
+      "close": "Fermer",
+      "europeLabel": "Carte de l'Europe : les 10 pays accompagnés, chacun avec un lien vers sa fiche",
+      "countryLink": "{{name}} : ouvrir la fiche",
+      "countryLinkNonEu": "{{name}}, hors Union européenne : ouvrir la fiche",
+      "fromCameroon": "Depuis le Cameroun",
+      "creditsPrefix": "Fonds de carte : limites régionales",
+      "creditsSuffix": ") · pays Natural Earth (domaine public)."
+    },
+    "countries": {
+      "link": "{{name}} — Voir la fiche",
+      "linkNonEu": "{{name}}, Hors Union européenne — Voir la fiche",
+      "nonEu": "Hors UE"
     }
   }
 }

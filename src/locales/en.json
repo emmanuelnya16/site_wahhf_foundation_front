@@ -247,6 +247,38 @@
       "emailInvalid": "Incomplete email address: it should look like name@example.com.",
       "phoneEmpty": "Enter your phone or WhatsApp number, with the country code (e.g. +237 6 90 00 00 00).",
       "phoneInvalid": "Incomplete number: include the country code and at least 8 digits (e.g. +237 6 90 00 00 00)."
+    },
+    "presence": {
+      "cameroonTitle": "On the ground in Cameroon",
+      "promptShort": "Choose a region or its capital on the map.",
+      "prompt": "Choose a region or its capital to see our local contacts (education, health, agroecology and guidance).",
+      "europeTitle": "The 10 guidance countries in Europe",
+      "europeText": "Verified information pages on study, vocational training and work pathways, with links to the official portals.",
+      "albaniaNote": "Note: Albania is a European candidate country but <b>not a member of the European Union</b>. Check each country page for the official regulatory framework."
+    },
+    "map": {
+      "loadingCameroon": "Loading the map of Cameroon’s 10 regions…",
+      "loadingEurope": "Loading the map of Europe…",
+      "selected": "Selected region",
+      "selectedTitle": "Selected region: {{name}} ({{capital}})",
+      "capital": "Capital: {{capital}}",
+      "quickSelect": "Quick selection of Cameroon’s 10 regions",
+      "regionLabel": "{{name}} region, capital {{capital}}",
+      "cameroonLabel": "Map of Cameroon’s 10 regions; each region is a button",
+      "fullscreenOpen": "Show the map of Cameroon full screen",
+      "fullscreen": "Full screen",
+      "close": "Close",
+      "europeLabel": "Map of Europe: the 10 supported countries, each with a link to its page",
+      "countryLink": "{{name}}: open the country page",
+      "countryLinkNonEu": "{{name}}, outside the European Union: open the country page",
+      "fromCameroon": "From Cameroon",
+      "creditsPrefix": "Base map: regional boundaries",
+      "creditsSuffix": ") · countries from Natural Earth (public domain)."
+    },
+    "countries": {
+      "link": "{{name}} — See the country page",
+      "linkNonEu": "{{name}}, outside the European Union — See the country page",
+      "nonEu": "Non-EU"
     }
   },
   "contenu": {
@@ -363,6 +395,89 @@
     },
     "contact": {
       "place": "Cameroon (Douala, Yaoundé) and coordination in Germany"
+    },
+    "regions": {
+      "littoral": {
+        "antennaTodo": "Local office: to be confirmed (TODO)",
+        "actionsTodo": "Activities in the region: to be filled in (TODO)"
+      },
+      "centre": {
+        "antennaTodo": "Local office: to be confirmed (TODO)",
+        "actionsTodo": "Activities in the region: to be filled in (TODO)"
+      },
+      "ouest": {
+        "name": "West",
+        "antennaTodo": "Local office: to be confirmed (TODO)",
+        "actionsTodo": "Activities in the region: to be filled in (TODO)"
+      },
+      "sud-ouest": {
+        "name": "South-West",
+        "antennaTodo": "Local office: to be confirmed (TODO)",
+        "actionsTodo": "Activities in the region: to be filled in (TODO)"
+      },
+      "nord-ouest": {
+        "name": "North-West",
+        "antennaTodo": "Local office: to be confirmed (TODO)",
+        "actionsTodo": "Activities in the region: to be filled in (TODO)"
+      },
+      "sud": {
+        "name": "South",
+        "antennaTodo": "Local office: to be confirmed (TODO)",
+        "actionsTodo": "Activities in the region: to be filled in (TODO)"
+      },
+      "est": {
+        "name": "East",
+        "antennaTodo": "Local office: to be confirmed (TODO)",
+        "actionsTodo": "Activities in the region: to be filled in (TODO)"
+      },
+      "adamaoua": {
+        "name": "Adamawa",
+        "antennaTodo": "Local office: to be confirmed (TODO)",
+        "actionsTodo": "Activities in the region: to be filled in (TODO)"
+      },
+      "nord": {
+        "name": "North",
+        "antennaTodo": "Local office: to be confirmed (TODO)",
+        "actionsTodo": "Activities in the region: to be filled in (TODO)"
+      },
+      "extreme-nord": {
+        "name": "Far North",
+        "antennaTodo": "Local office: to be confirmed (TODO)",
+        "actionsTodo": "Activities in the region: to be filled in (TODO)"
+      }
+    },
+    "voisins": {
+      "Nigeria": {
+        "label": [
+          "NIGERIA"
+        ]
+      },
+      "Chad": {
+        "label": [
+          "CHAD"
+        ]
+      },
+      "CentralAfricanRep": {
+        "label": [
+          "CENTRAL",
+          "AFRICAN REP."
+        ]
+      },
+      "Congo": {
+        "label": [
+          "CONGO"
+        ]
+      },
+      "Gabon": {
+        "label": [
+          "GABON"
+        ]
+      },
+      "EqGuinea": {
+        "label": [
+          "EQ. GUINEA"
+        ]
+      }
     }
   }
 }

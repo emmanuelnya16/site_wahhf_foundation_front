@@ -3,6 +3,8 @@
 // Accompagnement, Candidater (choix du pays), la recherche de l'en-tête, Mobilité & Langues et la page « introuvable ».
 // Coordonnées réelles [longitude, latitude] utilisées pour la projection d3-geo et l'arc depuis le Cameroun.
 // Avant le groupe 7.4, les mêmes pays étaient décrits deux fois (ici pour la carte, dans services/api.ts pour les fiches).
+// Lot 7.10 : le français reste ici ; anglais et allemand en surcouches (nom : contenu.pays.<slug> de src/locales ;
+// fiche : accompagnement.contenu.pays.<slug> de src/locales/accompagnement), lues par useLocalize.
 
 export interface OfficialLink {
   label: string;
