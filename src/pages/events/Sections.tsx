@@ -193,7 +193,8 @@ export function Activities({ event }: { event: Event }) {
             const photo = a.photo.length ? eventPhoto(a.photo) : null;
             const label = a.etiquette ?? (a.domaine ? t(`nav.domains.${a.domaine}`) : null);
             const to = a.to ?? (a.domaine ? DOMAIN_LINKS[a.domaine] : undefined);
-            const name = label && a.domaine ? t('events.activities.domainLink', { title: a.titre, domain: label }) : t('events.activities.more', { title: a.titre });
+            // Carte liée à un domaine : le nom dit où mène le lien ; sinon, le titre visible suffit
+            const name = label && a.domaine ? t('events.activities.domainLink', { title: a.titre, domain: label }) : undefined;
             return (
               <li
                 key={a.titre}
@@ -217,7 +218,7 @@ export function Activities({ event }: { event: Event }) {
                   )}
                   <h3 className="ev-h3">
                     {to ? (
-                      <Link to={to} className="ev-voie-lien" aria-label={name}>
+                      <Link to={to} className="ev-voie-lien" aria-label={a.domaine ? name : undefined}>
                         {a.titre}
                       </Link>
                     ) : (
