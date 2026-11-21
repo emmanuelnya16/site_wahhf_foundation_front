@@ -13,7 +13,9 @@ import Section from '../../components/wahhf/Section';
 import { CountryCode, EuStatus } from '../../components/wahhf/CountryBadges';
 import { COUNTRIES_DATA, CountryGuide } from '../../services/api';
 import { cn } from '../../lib/utils';
-import NotFoundPage, { NotFoundLinks, COUNTRY_LINKS } from '../NotFoundPage';
+import { useLocalize } from '../../lib/localize';
+import { NB, pieces } from './i18n';
+import NotFoundPage, { NotFoundLinks } from '../NotFoundPage';
 
 /*
  * Fiche pays (/accompagnement/pays/:countrySlug), gabarit des 10 fiches, groupe 7.4 : contrat validé (§6 : le fil en
@@ -28,17 +30,23 @@ import NotFoundPage, { NotFoundLinks, COUNTRY_LINKS } from '../NotFoundPage';
  *   quand sa date est fournie ; la navigation vers les autres fiches.
  * - Une seule action en fin de page, « Être accompagné pour partir en Allemagne », sans carte nuit.
  * Adresse en majuscules : redirection vers l'adresse en minuscules ; pays inconnu : page « introuvable » (ETA-06).
+ * Lot 7.10 : textes du paquet « accompagnement » ; la fiche dans la langue en cours (nom : contenu.pays.<slug> des
+ * textes communs ; le reste : accompagnement.contenu.pays.<slug>) ; dates au format de la langue.
  */
 
-const NB = ' ';
-const DAY = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
-/** « 12 novembre 2026 » (date ISO AAAA-MM-JJ) */
-const formatDay = (iso: string) => DAY.format(new Date(`${iso}T00:00:00Z`));
+/** « 12 novembre 2026 », « 12 November 2026 », « 12. November 2026 » (date ISO AAAA-MM-JJ) */
+const formatDay = (iso: string, locale: string) =>
+  new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${iso}T00:00:00Z`));
 
 /** Fin de l'en-tête : le fil (fondu dès 0,45 s, trait dessiné de 0,75 à 1,95 s), puis la mention de vérification. */
 const VERIFIED_DELAY = '[--hero-fade-delay:1.95s]';
 
-function CountryFiche({ country }: { country: CountryGuide }) {
+/** Une fiche dans la langue en cours : nom dans les textes communs, le reste dans le paquet de la page */
+const countryKeys = (slug: string) => [`contenu.pays.${slug}`, `accompagnement.contenu.pays.${slug}`];
+
+function CountryFiche({ country: frCountry }: { country: CountryGuide }) {
+  const { t, locale, localized } = useLocalize();
+  const country = localized(frCountry, countryKeys(frCountry.slug));
   const links = country.officialLinks;
   // Toutes les dates fournies : la plus ancienne vaut pour la fiche ; sinon, aucune mention dans l'en-tête
   const allVerified = links.length > 0 && links.every((l) => l.verifiedOn);
@@ -46,13 +54,17 @@ function CountryFiche({ country }: { country: CountryGuide }) {
   const applyTo = `/candidater?souhait=accompagnement_europe&pays=${country.slug}`;
   // « en Allemagne », « au Luxembourg » insécables : sur téléphone, le bouton passe à la ligne avant la préposition,
   // et non entre elle et le pays (revue du groupe 7.4)
-  const actionLabel = `Être accompagné pour partir ${country.inside.replace(' ', NB)}`;
+  const actionLabel = t('accompagnement.pays.action', {
+    inside: country.inside.replace(' ', NB),
+    towards: country.towards.replace(' ', NB),
+    name: country.name,
+  });
 
   return (
     <>
       <SEO
-        title={`${country.name} — Fiche d'orientation gratuite vers l'Europe`}
-        description={`Information gratuite sur les études, la formation et le travail ${country.inside}, par WAHHF Foundation.`}
+        title={t('accompagnement.pays.seoTitre', { name: country.name })}
+        description={t('accompagnement.pays.seoDescription', { inside: country.inside, name: country.name })}
         canonical={`/accompagnement/pays/${country.slug}`}
       />
 
@@ -63,7 +75,10 @@ function CountryFiche({ country }: { country: CountryGuide }) {
             <DisclaimerBanner />
             {/* Mention explicite obligatoire si le pays n'est pas membre de l'UE (Albanie) */}
             {!country.isEU && country.euNote && (
-              <InfoBox tone="warning" title={`Précision juridique importante concernant ${country.towards.replace(/^vers /, '')} (État non membre de l’UE)`}>
+              <InfoBox
+                tone="warning"
+                title={t('accompagnement.pays.precisionTitre', { pays: country.towards.replace(/^vers /, ''), name: country.name })}
+              >
                 <p>{country.euNote}</p>
               </InfoBox>
             )}
@@ -72,8 +87,8 @@ function CountryFiche({ country }: { country: CountryGuide }) {
       >
         <PageBreadcrumb
           items={[
-            { label: 'Mobilité & Langues', to: '/mobilite-langues' },
-            { label: 'Accompagnement vers l’Europe', to: '/mobilite-langues/accompagnement' },
+            { label: t('accompagnement.commun.mobilite'), to: '/mobilite-langues' },
+            { label: t('accompagnement.commun.accompagnement'), to: '/mobilite-langues/accompagnement' },
             { label: country.name },
           ]}
         />
@@ -83,46 +98,45 @@ function CountryFiche({ country }: { country: CountryGuide }) {
           <EuStatus isEU={country.isEU} />
         </div>
 
-        <PageTitle>{`S’orienter ${country.towards}`}</PageTitle>
+        <PageTitle>{t('accompagnement.pays.titre', { towards: country.towards, inside: country.inside, name: country.name })}</PageTitle>
 
         <p className="hero-fade [--hero-fade-delay:0.4s] text-meta text-text-secondary">
-          Langues{NB}: {country.languages.join(', ')}
+          {pieces(t('accompagnement.commun.langues'), { nb: NB, liste: country.languages.join(', ') })}
         </p>
 
         {/* Le fil Cameroun → pays (contrat §6) : trait droit qui se dessine une fois, à l'arrivée, après le titre */}
         <div className="hero-fade [--hero-fade-delay:0.45s]">
           <Fil
-            start={{ id: 'cameroun', label: 'Cameroun' }}
+            start={{ id: 'cameroun', label: t('accompagnement.pays.cameroun') }}
             end={{ id: country.slug, label: country.name }}
             drawOnce
             className="max-w-[65ch] [--fil-draw-delay:0.75s]"
           />
         </div>
         {oldest && (
-          <p className={cn('hero-fade text-meta text-text-secondary', VERIFIED_DELAY)}>Liens officiels vérifiés le {formatDay(oldest)}</p>
+          <p className={cn('hero-fade text-meta text-text-secondary', VERIFIED_DELAY)}>
+            {pieces(t('accompagnement.pays.verifies'), { date: formatDay(oldest, locale) })}
+          </p>
         )}
 
         <PageIntro>{country.summary}</PageIntro>
 
         <PageActions>
           <PrimaryButton to={applyTo}>{actionLabel}</PrimaryButton>
-          <SecondaryButton to="/mobilite-langues/accompagnement#pays">Voir les 10 pays accompagnés</SecondaryButton>
+          <SecondaryButton to="/mobilite-langues/accompagnement#pays">{t('accompagnement.pays.voirPays')}</SecondaryButton>
         </PageActions>
       </PageHeader>
 
       {/* Les trois voies : études, formation, travail */}
       <Section>
         <div className="container-page space-y-10">
-          <SectionHeader
-            title="Les trois grandes voies de mobilité réglementaire"
-            subtitle="Aperçu informatif. Vérifiez toujours les critères à jour sur les portails officiels ci-dessous."
-          />
+          <SectionHeader title={t('accompagnement.pays.voiesTitre')} subtitle={t('accompagnement.pays.voiesSousTitre')} />
           {/* break-words : « Fachkräfteeinwanderungsgesetz » ne déborde plus de sa colonne (RESP-04) */}
           <TextList columns={3} className="break-words">
             {[
-              { title: 'Études supérieures', text: country.pathways.studies },
-              { title: 'Formation professionnelle', text: country.pathways.training },
-              { title: 'Travail et mobilité qualifiée', text: country.pathways.work },
+              { title: t('accompagnement.pays.voieEtudes'), text: country.pathways.studies },
+              { title: t('accompagnement.pays.voieFormation'), text: country.pathways.training },
+              { title: t('accompagnement.pays.voieTravail'), text: country.pathways.work },
             ].map((p) => (
               <TextListItem key={p.title} title={p.title}>
                 <p>{p.text}</p>
@@ -137,7 +151,9 @@ function CountryFiche({ country }: { country: CountryGuide }) {
         <div className="container-page space-y-14">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-start">
             <div className="lg:col-span-7 space-y-8">
-              <SectionHeader title={`Les grandes étapes pour préparer votre projet ${country.towards}`} />
+              <SectionHeader
+                title={t('accompagnement.pays.etapesTitre', { towards: country.towards, inside: country.inside, name: country.name })}
+              />
               <ol className="space-y-5 max-w-[65ch]">
                 {country.steps.map((st, i) => (
                   <li key={st} data-reveal="" className="flex items-start gap-4">
@@ -149,10 +165,7 @@ function CountryFiche({ country }: { country: CountryGuide }) {
             </div>
 
             <div className="lg:col-span-5 space-y-6">
-              <SectionHeader
-                title="Les sites officiels"
-                subtitle={`Ne vous fiez jamais à des pages non officielles. Consultez directement les portails institutionnels${NB}:`}
-              />
+              <SectionHeader title={t('accompagnement.pays.sitesTitre')} subtitle={t('accompagnement.pays.sitesSousTitre')} />
               {/* Lignes de liens (contrat §8), plus de carte nuit ; aucune note « à vérifier » (PAYS-01) */}
               <ul>
                 {links.map((lnk) => (
@@ -164,16 +177,20 @@ function CountryFiche({ country }: { country: CountryGuide }) {
                       className="inline-flex min-h-11 items-center gap-2 text-body font-semibold text-link underline underline-offset-4 decoration-1 hover:decoration-2"
                     >
                       <span>{lnk.label}</span>
-                      <span className="sr-only"> (nouvel onglet)</span>
+                      <span className="sr-only">{t('accompagnement.commun.nouvelOnglet')}</span>
                       <ArrowUpRight aria-hidden="true" className="w-4 h-4 shrink-0" />
                     </a>
                     <p className="text-meta text-text-secondary break-all">{lnk.url}</p>
-                    {lnk.verifiedOn && <p className="text-meta text-text-secondary">Lien vérifié le {formatDay(lnk.verifiedOn)}</p>}
+                    {lnk.verifiedOn && (
+                      <p className="text-meta text-text-secondary">
+                        {pieces(t('accompagnement.pays.lienVerifie'), { date: formatDay(lnk.verifiedOn, locale) })}
+                      </p>
+                    )}
                   </li>
                 ))}
               </ul>
               <Link to="/accompagnement/eviter-les-arnaques" className={TEXT_LINK_CLASS}>
-                Lire notre guide de vigilance contre les fausses offres
+                {t('accompagnement.pays.vigilance')}
               </Link>
             </div>
           </div>
@@ -181,10 +198,11 @@ function CountryFiche({ country }: { country: CountryGuide }) {
           {/* Navigation entre les 10 fiches : code (masqué aux lecteurs d'écran) et nom ; fiche affichée en aria-current */}
           <nav aria-labelledby="autres-pays" className="pt-8 border-t border-border-subtle space-y-4">
             <p id="autres-pays" className="text-body font-semibold text-text">
-              Consulter une autre fiche parmi les 10 pays accompagnés
+              {t('accompagnement.pays.autresFiches')}
             </p>
             <ul className="flex flex-wrap gap-2">
-              {COUNTRIES_DATA.map((c) => {
+              {COUNTRIES_DATA.map((frC) => {
+                const c = localized(frC, countryKeys(frC.slug));
                 const current = c.slug === country.slug;
                 return (
                   <li key={c.slug}>
@@ -215,10 +233,7 @@ function CountryFiche({ country }: { country: CountryGuide }) {
       <Section>
         <div className="container-page">
           <div className="max-w-[65ch] space-y-5">
-            <SectionHeader
-              title="Être accompagné"
-              subtitle="Un seul formulaire pour l’orientation vers l’Europe et les cours d’allemand /anglais. Aucun document d’identité ni paiement ne vous est demandé."
-            />
+            <SectionHeader title={t('accompagnement.commun.etreAccompagne')} subtitle={t('accompagnement.commun.formulaire')} />
             <PrimaryButton to={applyTo} size="lg">
               {actionLabel}
             </PrimaryButton>
@@ -231,16 +246,20 @@ function CountryFiche({ country }: { country: CountryGuide }) {
 
 export default function CountryPage() {
   const { countrySlug = '' } = useParams<{ countrySlug?: string }>();
+  const { t, localized } = useLocalize();
   const country = COUNTRIES_DATA.find((c) => c.slug === countrySlug.toLowerCase());
 
   // Pays inconnu : on le dit, au lieu d'afficher la fiche d'un autre pays
   if (!country) {
     return (
-      <NotFoundPage
-        title="Ce pays ne fait pas partie des 10 pays accompagnés"
-        message="WAHHF Foundation accompagne gratuitement vers 10 pays européens. Choisissez l’un d’eux ci-dessous pour consulter sa fiche d’orientation."
-      >
-        <NotFoundLinks heading="Les 10 pays accompagnés" links={COUNTRY_LINKS} />
+      <NotFoundPage title={t('accompagnement.pays.introuvableTitre')} message={t('accompagnement.pays.introuvableMessage')}>
+        <NotFoundLinks
+          heading={t('accompagnement.commun.dixPays')}
+          links={COUNTRIES_DATA.map((frC) => {
+            const c = localized(frC, countryKeys(frC.slug));
+            return { to: `/accompagnement/pays/${c.slug}`, label: `${c.name}${c.isEU ? '' : t('accompagnement.pays.horsUe')}` };
+          })}
+        />
       </NotFoundPage>
     );
   }
