@@ -426,9 +426,9 @@ export default function Navbar() {
                     {/* Encart Mobilité & Langues : sauge, sans cadre ni carte nuit */}
                     <div className="lg:col-span-4 rounded-inner bg-surface-section p-6 flex flex-col justify-between gap-4">
                       <div className="space-y-3">
-                        <h3 className="text-body font-semibold text-text">Mobilité & Langues : Allemand (A1–C1) & Europe</h3>
+                        <h3 className="text-body font-semibold text-text">Mobilité & Langues : Allemand /anglais (A1–C1) & Europe</h3>
                         <p className="text-meta text-text-secondary">
-                          Accompagnement gratuit aux cours d’allemand et orientation vérifiée vers 10 pays européens, financé par IROKO et nos donateurs.
+                          Accompagnement gratuit aux cours d’allemand /anglais et orientation vérifiée vers 10 pays européens, financé par IROKO et nos donateurs.
                         </p>
                         <ul className="pt-1 space-y-2">
                           <li>
