@@ -60,12 +60,12 @@ function TickerWords({ words, hidden = false }: { words: { mot: string; lang: st
  * Bandeau soleil penché de -1,5deg : la liste est doublée (la copie est masquée aux lecteurs d'écran) pour défiler
  * sans trou (étape 3) ; contrôles fournis par la page (bouton pause).
  */
-export function Ticker({ words }: { words?: { mot: string; lang: string }[] }) {
+export function Ticker({ words, label }: { words?: { mot: string; lang: string }[]; label?: string }) {
   const { t } = useTranslation();
   const [stopped, setStopped] = useState(false);
   const list = words ?? DOMAINS_DE.map((mot) => ({ mot, lang: 'de' }));
   return (
-    <section className="ev-bandeau-zone" aria-label={t('events.ticker.label')} data-ev-zone="">
+    <section className="ev-bandeau-zone" aria-label={label ?? t('events.ticker.label')} data-ev-zone="">
       <div className={cn('ev-bandeau', stopped && 'is-arrete')}>
         <div className="ev-bandeau-piste">
           <div className="ev-bandeau-liste ev-defile">

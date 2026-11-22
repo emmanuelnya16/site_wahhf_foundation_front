@@ -157,6 +157,8 @@ export interface Event {
   sections?: Partial<Record<EventSectionKey, EventSectionText>>;
   /** Mots du bandeau, chacun dans sa langue ; à défaut, les six domaines en allemand */
   bandeau?: { mot: string; lang: string }[];
+  /** Nom du bandeau pour les lecteurs d'écran, quand il a ses propres mots ; à défaut, events.ticker.label (six domaines) */
+  bandeauLabel?: string;
   /** Cartes « Sponsors et partenaires » ; à défaut, celles de l'i18n (Agir) */
   soutien?: EventSupportCard[];
   /** « À lire avant de partir » : guides qui complètent les actualités publiées */
@@ -396,6 +398,7 @@ const ROAD_TO_EUROPE: Event = frAll({
       action2: 'Nous écrire',
     },
   },
+  bandeauLabel: 'Les 10 pays de Road to Europe',
   bandeau: [
     { mot: 'Deutschland', lang: 'de' },
     { mot: 'Lëtzebuerg', lang: 'lb' },

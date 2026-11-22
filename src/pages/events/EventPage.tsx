@@ -51,7 +51,7 @@ function EventSheet({ event }: { event: Event }) {
       />
       <Countdown event={event} status={status} photosHref={photosHref} />
       <Organizers event={event} />
-      <Ticker words={event.bandeau} />
+      <Ticker words={event.bandeau} label={event.bandeauLabel} />
       <Why event={event} />
       <Schedule event={event} />
       <Activities event={event} />
