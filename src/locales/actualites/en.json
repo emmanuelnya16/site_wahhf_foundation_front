@@ -12,10 +12,7 @@
   "inPictures": "In pictures",
   "seeGallery": "See the full gallery",
   "albums": {
-    "inGallery_one": "{{count}} photo, in the gallery.",
-    "inGallery_other": "{{count}} photos, in the gallery.",
-    "photoCount_one": "{{count}} photo",
-    "photoCount_other": "{{count}} photos",
+    "inGallery": ", in the gallery.",
     "seeAlbum": "See the album"
   },
   "article": {

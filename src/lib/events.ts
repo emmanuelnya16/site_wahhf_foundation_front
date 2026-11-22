@@ -88,7 +88,8 @@ function clock(iso: string, event: Event, lang: string): string {
 export function eventHours(event: Event, lang: string): string | null {
   if (!event.date) return null;
   if (langOf(lang) === 'de') {
-    return `${event.fin ? `${clock(event.date, event, lang)}–${clock(event.fin, event, lang)}` : clock(event.date, event, lang)}${NB}Uhr`;
+    // U+2060 (gluon) : la plage ne se coupe pas au tiret (« 8:00– » en fin de ligne)
+    return `${event.fin ? `${clock(event.date, event, lang)}⁠–⁠${clock(event.fin, event, lang)}` : clock(event.date, event, lang)}${NB}Uhr`;
   }
   return event.fin ? `${clock(event.date, event, lang)} – ${clock(event.fin, event, lang)}` : clock(event.date, event, lang);
 }

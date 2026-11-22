@@ -2,7 +2,7 @@
   "_relire": [
     "seo.title",
     "intro",
-    "albums.inGallery_one",
+    "albums.inGallery",
     "notFound.message",
     "contenu.news.ouverture-inscriptions-academie-allemand-2026.title",
     "contenu.news.ouverture-inscriptions-academie-allemand-2026.content",
@@ -22,10 +22,7 @@
   "inPictures": "In Bildern",
   "seeGallery": "Ganze Galerie ansehen",
   "albums": {
-    "inGallery_one": "{{count}} Foto in der Galerie.",
-    "inGallery_other": "{{count}} Fotos in der Galerie.",
-    "photoCount_one": "{{count}} Foto",
-    "photoCount_other": "{{count}} Fotos",
+    "inGallery": " in der Galerie.",
     "seeAlbum": "Album ansehen"
   },
   "article": {

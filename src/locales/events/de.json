@@ -8,7 +8,8 @@
     "contenu.journee-2026-04-25.pourquoi[2] : « professeur » rendu par « Dozent » (masculin, comme le français ; genre et fonction à confirmer)",
     "contenu.journee-2026-04-25.pourquoi[3] : « Accompagnement voyage » rendu par « Begleitung bei Reiseplänen » (« Reisebegleitung » voudrait dire « accompagnateur de voyage »)",
     "contenu.road-to-europe.activites[2].titre : « Emploi qualifié » rendu par « Arbeit als Fachkraft » (terme de l'immigration qualifiée en Allemagne)",
-    "contenu.road-to-europe.parents.promesses[1] : « organisateurs identifiés » rendu par « namentlich bekannte Veranstalter »"
+    "contenu.road-to-europe.parents.promesses[1] : « organisateurs identifiés » rendu par « namentlich bekannte Veranstalter »",
+    "contenu.road-to-europe.sections.final.titre : « Prenez la bonne route vers l'Europe » rendu sans impératif (« Auf dem richtigen Weg nach Europa ») pour tenir sur deux lignes comme la référence ; « Gehen Sie den richtigen Weg » passait sur trois lignes à 1440 px"
   ],
   "_aValider": "TODO : traductions allemandes proposées (interface et contenu des événements), à faire valider par la fondation (docs/contenus-a-fournir.md).",
   "seo": {
@@ -198,7 +199,7 @@
           "titre": "Vor der Abreise lesen."
         },
         "final": {
-          "titre": "Gehen Sie den richtigen\nWeg nach Europa.",
+          "titre": "Auf dem richtigen Weg\nnach Europa.",
           "intro": "Schieben Sie Ihr Projekt nicht auf: Sichern Sie sich Ihren Platz und nehmen Sie{{deVille}} einen Plan mit nach Hause.",
           "action": "Meinen Platz reservieren",
           "action2": "Schreiben Sie uns"
@@ -474,7 +475,7 @@
       ],
       "parents": {
         "promesses": [
-          "Eine schriftliche Einverständniserklärung der Eltern für jeden Minderjährigen (TODO: von der Stiftung zu bestätigen)",
+          "Eine schriftliche Einwilligung der Eltern für jeden Minderjährigen (TODO: von der Stiftung zu bestätigen)",
           "Junge Menschen, die den ganzen Tag vom Team der Stiftung betreut werden (TODO: zu bestätigen)",
           "Kostenloser Eintritt oder ein klarer, vorab angekündigter Preis (TODO: zu bestätigen)"
         ],

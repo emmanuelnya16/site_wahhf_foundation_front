@@ -10,15 +10,16 @@ import PhotoGrid from '../components/gallery/PhotoGrid';
 import PhotoLightbox, { LIGHTBOX_SHARED_NAME } from '../components/gallery/PhotoLightbox';
 import { DonateButton, SecondaryButton } from '../components/wahhf/Buttons';
 import type { PhotoAlbumId } from '../data/photos';
-import { albumLabel, visibleAlbums } from '../lib/photos';
+import { albumLabel, photoCount, visibleAlbums } from '../lib/photos';
 import { requestScrollRefresh } from '../lib/afterFirstDisplay';
 import { cn } from '../lib/utils';
 import { useLocalize } from '../lib/localize';
+import { localizedAlbum } from '../lib/photoText';
 import { registerBundle } from '../i18n';
 import fr from '../locales/galerie/fr.json';
 
-// Textes de la page (lot 7.10) : paquet « galerie ». Titres et notes des albums : surcouches du paquet des photos
-// (photos.contenu.albums.<id>, src/locales/photos).
+// Textes de la page (lot 7.10) : paquet « galerie ». Noms des albums (albumLabel), nombre de photos (photoCount) et
+// notes des albums (localizedAlbum) : traduits par src/lib/photos.ts et src/lib/photoText.ts (paquet des photos).
 registerBundle('galerie', fr, {
   en: () => import('../locales/galerie/en.json'),
   de: () => import('../locales/galerie/de.json'),
@@ -47,9 +48,8 @@ type ViewTransitionDocument = Document & { startViewTransition?: (update: () => 
  *   (transition partagée, View Transitions API ; ouverture simple sans l'API et en mouvement réduit).
  */
 export default function GalleryPage() {
-  const { t, localized } = useLocalize();
-  /** Titre et note d'un album dans la langue de l'interface */
-  const albumText = (album: (typeof ALBUMS)[number]['album']) => localized(album, `photos.contenu.albums.${album.id}`);
+  // useLocalize : la page se remet à jour au changement de langue (noms, notes et nombres de photos des albums compris)
+  const { t } = useLocalize();
   const [searchParams, setSearchParams] = useSearchParams();
   const requested = searchParams.get('album');
   const filter = requested && ALBUM_IDS.has(requested) ? (requested as PhotoAlbumId) : null;
@@ -126,7 +126,7 @@ export default function GalleryPage() {
 
   const options: { id: PhotoAlbumId | null; label: string }[] = [
     { id: null, label: t('galerie.allAlbums') },
-    ...ALBUMS.map(({ album }) => ({ id: album.id, label: albumLabel(albumText(album)) })),
+    ...ALBUMS.map(({ album }) => ({ id: album.id, label: albumLabel(album) })),
   ];
   const viewed = view ? ALBUMS.find(({ album }) => album.id === view.album) : undefined;
 
@@ -154,16 +154,16 @@ export default function GalleryPage() {
           </div>
 
           {shown.map(({ album, photos }) => {
-            const text = albumText(album);
+            const { note } = localizedAlbum(album);
             return (
               // Clé = album : changer de filtre ne rejoue pas les apparitions
               <section key={album.id} id={album.id} aria-labelledby={`album-${album.id}`} className="space-y-6">
                 <div className="max-w-[65ch] space-y-2">
                   <h2 id={`album-${album.id}`} className="text-section-title text-text">
-                    {albumLabel(text)}
+                    {albumLabel(album)}
                   </h2>
-                  {text.note && <p className="text-meta text-text-secondary">{text.note}</p>}
-                  <p className="text-meta text-text-secondary">{t('galerie.photoCount', { count: photos.length })}</p>
+                  {note && <p className="text-meta text-text-secondary">{note}</p>}
+                  <p className="text-meta text-text-secondary">{photoCount(photos.length)}</p>
                 </div>
                 <PhotoGrid photos={photos} onOpen={open(album.id)} />
               </section>

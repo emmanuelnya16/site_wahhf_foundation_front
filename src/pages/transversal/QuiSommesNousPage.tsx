@@ -16,6 +16,7 @@ import { displayName, displayRole } from '../../lib/team';
 import Photo from '../../components/wahhf/Photo';
 import { cn } from '../../lib/utils';
 import { photoCaption, photoOrFallback } from '../../lib/photos';
+import { photoAlt } from '../../lib/photoText';
 import { registerBundle } from '../../i18n';
 import { useLocalize } from '../../lib/localize';
 import qsnFr from '../../locales/qui-sommes-nous/fr.json';
@@ -184,7 +185,7 @@ export function QuiSommesNousPage() {
             <div className="grid max-w-4xl grid-cols-[9fr_4fr] gap-2 sm:gap-3">
               <Photo photo={STORY_PHOTO} sizes="(min-width: 56rem) 38rem, 70vw" imgAttributes={{ 'data-reveal': '' }} />
               <Photo
-                photo={{ ...PRESIDENT_PHOTO, alt: presidentAlt(PRESIDENT_PHOTO.alt, t) }}
+                photo={{ ...PRESIDENT_PHOTO, alt: presidentAlt(photoAlt(PRESIDENT_PHOTO), t) }}
                 sizes="(min-width: 56rem) 17rem, 30vw"
                 imgAttributes={{ 'data-reveal': '' }}
               />

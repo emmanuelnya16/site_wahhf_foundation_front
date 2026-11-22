@@ -7,6 +7,7 @@
     "hub.faq.identite.a",
     "test.resultatKicker",
     "cours.places",
+    "sessions.titleTout",
     "candidature.rappel",
     "candidature.accord",
     "candidature.message.accord",
@@ -163,7 +164,7 @@
   },
   "sessions": {
     "moisAConfirmer": "{{month}} (Datum noch nicht bestätigt)",
-    "whatsapp": "Hallo WAHHF Foundation, ich möchte über den nächsten Termin der Deutsch- und Englischkurse informiert werden.",
+    "whatsapp": "Guten Tag, liebes Team der WAHHF Foundation, ich möchte über den nächsten Termin der Deutsch- und Englischkurse informiert werden.",
     "titleNiveau": "Nächste Kurse auf Niveau {{level}}",
     "titleTout": "Kalender der nächsten Kurse",
     "subtitle": "Alle Kurse sind kostenlos. Online oder vor Ort in Douala und Yaoundé; bereits begonnene Kurse werden nicht mehr angezeigt.",

@@ -4,7 +4,7 @@ import { ArrowRight, Check, Plus, X } from 'lucide-react';
 import type { Event, EventStatus } from '../../data/events';
 import Photo from '../../components/wahhf/Photo';
 import { imageSrcSet } from '../../services/api';
-import { PUBLISHED_NEWS, confirmedDate } from '../../lib/news';
+import { PUBLISHED_NEWS, confirmedDate, localizedNews } from '../../lib/news';
 import { eventDate, eventPhoto, fillFacts, isShown, shownItems } from '../../lib/events';
 import { EvButton, ICONS, Lines } from './ui';
 import { RegisterAction } from './Hero';
@@ -116,8 +116,9 @@ export function Faq({ event }: { event: Event }) {
  * Actualités, complétés jusqu'à 3 par les guides du site propres à l'événement (titre, une phrase, lien).
  */
 export function LatestNews({ event }: { event: Event }) {
-  const { t } = useTranslation();
-  const articles = PUBLISHED_NEWS.slice(0, 3);
+  const { t, i18n } = useTranslation();
+  // Lot 7.10 : articles dans la langue de l'interface (la rubrique française reste dans les données)
+  const articles = PUBLISHED_NEWS.slice(0, 3).map((a) => localizedNews(a, i18n.language));
   const guides = (event.blog ?? []).slice(0, Math.max(0, 3 - articles.length));
   if (!articles.length && !guides.length) return null;
   const head = event.sections?.blog;
@@ -137,7 +138,7 @@ export function LatestNews({ event }: { event: Event }) {
         </div>
         <ul className="ev-grille-3">
           {articles.map((a) => {
-            const date = confirmedDate(a.date);
+            const date = confirmedDate(a.date, i18n.language);
             return (
               <li key={a.slug} className="ev-article ev-carte-lien ev-carte-lift" data-reveal="ev">
                 <div className="ev-article-image">

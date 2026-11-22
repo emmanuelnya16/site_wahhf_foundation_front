@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 import Photo from '../../components/wahhf/Photo';
 import { CardBody, CardLink, CardTitle } from '../../components/wahhf/Card';
 import { TEXT_LINK_CLASS } from '../../components/wahhf/TextList';
-import type { CatalogPhoto, PhotoAlbum, PhotoAlbumId } from '../../data/photos';
-import { albumLabel, photoOrFallback, visibleAlbums } from '../../lib/photos';
+import type { CatalogPhoto, PhotoAlbumId } from '../../data/photos';
+import { albumLabel, photoCount, photoOrFallback, visibleAlbums } from '../../lib/photos';
 import { useLocalize } from '../../lib/localize';
 // Paquet « actualites » (textes de la page), enregistré par src/lib/news.ts
 import '../../lib/news';
@@ -48,9 +48,9 @@ function Tile({ photo, sizes, className }: { photo: CatalogPhoto; sizes: string;
 }
 
 export default function FieldAlbums() {
-  const { t, localized } = useLocalize();
-  /** Nom d'un album dans la langue de l'interface (surcouche du paquet des photos, src/locales/photos) */
-  const label = (album: PhotoAlbum) => albumLabel(localized(album, `photos.contenu.albums.${album.id}`));
+  // useLocalize : le composant se remet à jour au changement de langue (albumLabel et photoCount de src/lib/photos.ts
+  // donnent le nom des albums et le nombre de photos dans la langue de l'interface)
+  const { t } = useLocalize();
   const albums = visibleAlbums();
   const featured = albums.find(({ album }) => album.id === FEATURED);
   const featuredPhotos = FEATURED_PHOTOS.map(pick).filter((p): p is CatalogPhoto => !!p);
@@ -71,9 +71,12 @@ export default function FieldAlbums() {
           </div>
           <div data-reveal="" className="space-y-3 lg:col-span-4">
             <h3 id="album-a-la-une" className="text-section-title text-text">
-              {label(featured.album)}
+              {albumLabel(featured.album)}
             </h3>
-            <p className="text-body text-text-secondary">{t('actualites.albums.inGallery', { count: featured.photos.length })}</p>
+            <p className="text-body text-text-secondary">
+              {photoCount(featured.photos.length)}
+              {t('actualites.albums.inGallery')}
+            </p>
             <Link to={albumHref(featured.album.id)} className={TEXT_LINK_CLASS}>
               {t('actualites.albums.seeAlbum')}
             </Link>
@@ -91,8 +94,8 @@ export default function FieldAlbums() {
                   <Photo photo={cover!} sizes="(min-width: 1024px) 18rem, 50vw" fit="cover" radius="none" decorative />
                 </div>
                 <CardBody className="p-4 sm:p-6">
-                  <CardTitle as="h3">{label(album)}</CardTitle>
-                  <p className="text-meta text-text-secondary">{t('actualites.albums.photoCount', { count: photos.length })}</p>
+                  <CardTitle as="h3">{albumLabel(album)}</CardTitle>
+                  <p className="text-meta text-text-secondary">{photoCount(photos.length)}</p>
                 </CardBody>
               </CardLink>
             </li>
