@@ -124,6 +124,13 @@ export interface EventGuideCard {
   to: string;
 }
 
+/** Un texte écrit par la fondation dans les trois langues du site (prix d'un événement…) */
+export interface TexteTraduit {
+  fr: string;
+  en: string;
+  de: string;
+}
+
 export interface Event {
   slug: string;
   /** Nom court de l'événement (liste, titre de l'onglet) ; à défaut, le titre */
@@ -151,8 +158,11 @@ export interface Event {
   placesRestantes: number | null;
   /** Adresse du formulaire d'inscription, ou null */
   lienInscription: string | null;
-  /** Prix (« Gratuit », « 5 000 FCFA ») ; null : « annoncé très bientôt » */
-  prix?: string | null;
+  /**
+   * Prix dans les trois langues (lot 7.10 : jamais de français sur les pages anglaise et allemande) ; null, ou texte
+   * vide dans une langue : « annoncé très bientôt » dans cette langue.
+   */
+  prix?: TexteTraduit | null;
   /** Textes propres aux sections */
   sections?: Partial<Record<EventSectionKey, EventSectionText>>;
   /** Mots du bandeau, chacun dans sa langue ; à défaut, les six domaines en allemand */
@@ -303,7 +313,7 @@ const fr = (text: string) =>
 function frAll<T>(value: T): T {
   if (typeof value === 'string') return fr(value) as T;
   if (Array.isArray(value)) return value.map(frAll) as T;
-  if (value && typeof value === 'object') return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, k === 'to' || k === 'lang' || k === 'icon' || k === 'ton' ? v : frAll(v)])) as T;
+  if (value && typeof value === 'object') return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, k === 'to' || k === 'lang' || k === 'icon' || k === 'ton' || k === 'prix' ? v : frAll(v)])) as T;
   return value;
 }
 
@@ -311,7 +321,9 @@ function frAll<T>(value: T): T {
  * Faits de Road to Europe (brief du 21 novembre 2026), à remplir par la fondation. null : la page affiche « annoncé(e)
  * très bientôt » à la place, jamais un faux chiffre.
  * - date / fin : ISO 8601 avec +01:00 (heure de Douala), par exemple '2027-01-16T08:00:00+01:00'
- * - ville : 'Yaoundé' ; salle : nom de la salle ; prix : 'Gratuit' ou '5 000 FCFA'
+ * - ville : 'Yaoundé' ; salle : nom de la salle
+ * - prix : dans les trois langues, par exemple { fr: 'Gratuit', en: 'Free', de: 'Kostenlos' } ou
+ *   { fr: '5 000 FCFA', en: '5,000 FCFA', de: '5.000 FCFA' }
  * - placesRestantes : un nombre tenu à jour, ou null pour ne pas l'afficher
  * - inscription : adresse du formulaire, lien WhatsApp ou '/candidater'
  */
@@ -320,7 +332,7 @@ export const ROAD_TO_EUROPE_FAITS = {
   fin: null as string | null,
   ville: null as string | null,
   salle: null as string | null,
-  prix: null as string | null,
+  prix: null as TexteTraduit | null,
   placesRestantes: null as number | null,
   inscription: null as string | null,
 };

@@ -127,7 +127,9 @@ export function fillFacts(text: string, event: Event, t: TFunction, lang: string
       : ville
         ? t('events.faits.ouSansDate', { ville, pays: event.pays })
         : t('events.faits.quandOuInconnus', { pays: event.pays });
-  const prix = event.prix ? t('events.faits.prix', { prix: event.prix }) : t('events.faits.prixInconnu');
+  // Prix dans la langue de la page ; absent dans cette langue : « annoncé très bientôt », jamais le français
+  const prixTexte = event.prix?.[langOf(lang)]?.trim();
+  const prix = prixTexte ? t('events.faits.prix', { prix: prixTexte }) : t('events.faits.prixInconnu');
   return text
     .replace('{{quandOu}}', quandOu)
     .replace('{{prix}}', prix)

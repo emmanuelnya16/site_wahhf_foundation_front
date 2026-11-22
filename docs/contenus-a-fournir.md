@@ -433,7 +433,7 @@ Fiche /evenements/road-to-europe. Les faits se remplissent en un seul endroit : 
 
 171. Date de Road to Europe (samedi … 2027) et horaires (8 h – 18 h ?).
 172. Ville et nom de la salle (Yaoundé, Cameroun ?).
-173. Prix : gratuit, ou montant en FCFA.
+173. Prix : gratuit, ou montant en FCFA, écrit dans les trois langues du site (par exemple « Gratuit », « Free », « Kostenlos », ou « 5 000 FCFA », « 5,000 FCFA », « 5.000 FCFA ») : `prix` de `ROAD_TO_EUROPE_FAITS`. Une langue laissée vide affiche « annoncé très bientôt » dans cette langue.
 174. Places restantes : un nombre tenu à jour, ou ne pas l’afficher.
 175. Inscription : lien du formulaire, WhatsApp, ou la page Candidater. Tant qu’il manque, les boutons « Réserver ma place » affichent « Inscriptions annoncées très bientôt » et ne mènent nulle part.
 176. Organisateurs et partenaires (logos) : aujourd’hui, WAHHF Foundation seulement.
