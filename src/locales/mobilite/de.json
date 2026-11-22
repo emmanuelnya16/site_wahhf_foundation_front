@@ -62,7 +62,7 @@
     "europeBouton": "Begleitung nach Europa ansehen",
     "europeArnaques": "Ratgeber: Betrug vermeiden",
     "pourquoiTitle": "Junge Menschen vor Desinformation schützen und den Zugang zu Wissen öffnen",
-    "pourquoiSubtitle": "Zu viele junge Menschen und Familien verschulden sich bei betrügerischen Vermittlern, die falsche Versprechen verkaufen. WAHHF Foundation setzt dem sprachliche Gründlichkeit und Transparenz entgegen.",
+    "pourquoiSubtitle": "Zu viele junge Menschen und Familien verschulden sich bei betrügerischen Vermittlern, die falsche Versprechen verkaufen. Die WAHHF Foundation setzt dem sprachliche Gründlichkeit und Transparenz entgegen.",
     "pourquoiText": "Ein Studium oder eine Berufsausbildung im Ausland kann man nicht kaufen. Man erarbeitet es sich: durch anspruchsvolles Sprachenlernen, Abschlüsse, die den Anforderungen entsprechen, und die strikte Einhaltung der offiziellen konsularischen Verfahren.",
     "raisons": {
       "frais": {
@@ -266,7 +266,7 @@
       "ville": "Wohnort",
       "souhait": "Wunsch",
       "session": "Gewählter Kurs",
-      "paysInteret": "Interessensland",
+      "paysInteret": "Zielland",
       "niveau": "Niveau Deutsch/Englisch",
       "format": "Gewünschtes Format",
       "message": "Nachricht",
@@ -300,7 +300,7 @@
     "versEtape2": "Weiter zu Schritt 2",
     "etape2Text": "Geben Sie an, welcher Bereich Sie interessiert und welches Sprachniveau Sie zurzeit haben.",
     "souhaitLegend": "Was wünschen Sie sich? *",
-    "paysInteretLabel": "Wichtigstes Interessensland unter den 10 begleiteten Ländern",
+    "paysInteretLabel": "Wichtigstes Zielland unter den 10 begleiteten Ländern",
     "horsUE": "(außerhalb der Europäischen Union)",
     "niveauLabel": "Aktuelles / angestrebtes Niveau Deutsch/Englisch",
     "niveaux": {

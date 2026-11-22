@@ -2,7 +2,7 @@
 
 Généré par `npm run i18n:relire` (scripts/traductions-a-relire.mjs) le 2026-11-22. Ne pas modifier à la main : corriger les fichiers de langue, puis relancer.
 
-Chaque texte allemand du site, face à son français. **Un astérisque (\*) marque les 117 textes dont le traducteur n'était pas sûr** (sens du français ambigu, terme juridique, nom d'institution, ton) : à relire en priorité. 1739 textes allemands au total.
+Chaque texte allemand du site, face à son français. **Un astérisque (\*) marque les 157 textes dont le traducteur n'était pas sûr** (sens du français ambigu, terme juridique, nom d'institution, ton) : à relire en priorité. 1739 textes allemands au total.
 
 - Ton choisi : vouvoiement (« Sie »), simple et chaleureux, pas du mot à mot.
 - Ne sont pas traduits : les noms propres et officiels (WAHHF Foundation, IROKO, Albatros Hotel, Ausbildung, Studienkolleg…), les adresses, les liens.
@@ -12,7 +12,7 @@ Chaque texte allemand du site, face à son français. **Un astérisque (\*) marq
 
 ## Textes communs (en-tête, pied de page, accueil, composants)
 
-Fichier : `src/locales/de.json` (369 textes, dont 0 à relire).
+Fichier : `src/locales/de.json` (369 textes, dont 40 à relire).
 
 | | Clé | Français | Allemand |
 |---|---|---|---|
@@ -56,7 +56,7 @@ Fichier : `src/locales/de.json` (369 textes, dont 0 à relire).
 |  | `nav.mega.domainsTitle` | Les 6 domaines d’action de WAHHF Foundation | Die 6 Arbeitsbereiche der WAHHF Foundation |
 |  | `nav.mega.overview` | Voir la vue d’ensemble | Zur Übersicht |
 |  | `nav.mega.mobilityTitle` | Mobilité & Langues : Allemand /anglais (A1–C1) & Europe | Mobilität & Sprachen: Deutsch/Englisch (A1–C1) & Europa |
-|  | `nav.mega.mobilityText` | Accompagnement gratuit aux cours d’allemand /anglais et orientation vérifiée vers 10 pays européens, financé par IROKO et nos donateurs. | Kostenlose Begleitung bei Deutsch- und Englischkursen und geprüfte Orientierung für 10 europäische Länder, finanziert von IROKO und unseren Spenderinnen und Spendern. |
+| \* | `nav.mega.mobilityText` | Accompagnement gratuit aux cours d’allemand /anglais et orientation vérifiée vers 10 pays européens, financé par IROKO et nos donateurs. | Kostenlose Begleitung bei Deutsch- und Englischkursen und geprüfte Orientierung für 10 europäische Länder, finanziert von IROKO und unseren Spenderinnen und Spendern. <br>_Note : « nos donateurs » rendu par « unseren Spenderinnen und Spendern » (forme inclusive)_ |
 |  | `nav.mega.academy` | Académie de langues (A1 à C1) | Sprachakademie (A1 bis C1) |
 |  | `nav.mega.support` | Accompagnement vers 10 pays | Begleitung in 10 Länder |
 |  | `nav.mega.scams` | Vigilance : Éviter les arnaques | Vorsicht: Betrug vermeiden |
@@ -66,13 +66,13 @@ Fichier : `src/locales/de.json` (369 textes, dont 0 à relire).
 |  | `disclaimer.link` | Comment reconnaître une fausse offre et éviter les arnaques ? | Wie erkennt man ein falsches Angebot und vermeidet Betrug? |
 |  | `hero.kicker` | FONDATION CAMEROUNO-ALLEMANDE · BRANCHE SOCIALE DU GROUPE IROKO | KAMERUNISCH-DEUTSCHE STIFTUNG · SOZIALER ZWEIG DER IROKO-GRUPPE |
 |  | `hero.title` | Autonomiser la jeunesse, transformer les communautés | Junge Menschen stärken, Gemeinschaften verändern |
-|  | `hero.subtitle` | Nous agissons au Cameroun et accompagnons la jeunesse africaine avec dignité, transparence et solidarité : éducation, santé, entrepreneuriat, écologie et mobilité linguistique 100 % gratuite. | Wir sind in Kamerun aktiv und begleiten junge Menschen in Afrika mit Würde, Transparenz und Solidarität: Bildung, Gesundheit, Unternehmertum, Umwelt und Sprachmobilität – zu 100 % kostenlos. |
+|  | `hero.subtitle` | Nous agissons au Cameroun et accompagnons la jeunesse africaine avec dignité, transparence et solidarité : éducation, santé, entrepreneuriat, écologie et mobilité linguistique 100 % gratuite. | Wir sind in Kamerun aktiv und begleiten junge Menschen in Afrika mit Würde, Transparenz und Solidarität: Bildung, Gesundheit, Unternehmertum, Umwelt und zu 100 % kostenlose Sprachmobilität. |
 |  | `hero.ctaPrimary` | Soutenir nos actions | Unsere Arbeit unterstützen |
 |  | `hero.ctaSecondary` | Découvrir nos programmes | Unsere Programme entdecken |
 |  | `hero.scrollHint` | Défiler pour découvrir | Zum Entdecken scrollen |
 |  | `hero.videoPause` | Mettre la vidéo en pause | Video anhalten |
 |  | `hero.videoPlay` | Lire la vidéo | Video abspielen |
-|  | `hero.headline` | Des cours d'allemand /anglais pour préparer l'Europe en confiance | Deutsch- und Englischkurse, um Europa gut vorbereitet anzugehen |
+| \* | `hero.headline` | Des cours d'allemand /anglais pour préparer l'Europe en confiance | Deutsch- und Englischkurse, um Europa gut vorbereitet anzugehen <br>_Note : « préparer l'Europe en confiance » rendu par « um Europa gut vorbereitet anzugehen »_ |
 |  | `hero.lead` | Une fondation camerouno-allemande, à Yaoundé et Douala : niveaux A1 à C1, test en ligne et orientation vers 10 pays européens, sans intermédiaire payant. | Eine kamerunisch-deutsche Stiftung in Yaoundé und Douala: Niveaus A1 bis C1, Online-Test und Orientierung für 10 europäische Länder – ohne bezahlte Vermittler. |
 |  | `hero.ctaTest` | Passer le test d'allemand gratuit | Kostenlosen Deutschtest machen |
 |  | `hero.filmLink` | Regarder le film avec le son (1 min) | Film mit Ton ansehen (1 Min.) |
@@ -85,7 +85,7 @@ Fichier : `src/locales/de.json` (369 textes, dont 0 à relire).
 |  | `hero.filmNote` | Le film est diffusé par YouTube, qui reçoit alors votre adresse IP. | Der Film wird über YouTube abgespielt; YouTube erhält dabei Ihre IP-Adresse. |
 |  | `hero.filmClose` | Fermer le film | Film schließen |
 |  | `hero.loopTitle` | Vidéo de présentation de WAHHF Foundation (décorative, sans son) | Vorstellungsvideo der WAHHF Foundation (dekorativ, ohne Ton) |
-|  | `hero.filmFrameTitle` | Film WAHHF Foundation (1 min 10) | Film der WAHHF Foundation (1 Min. 10) |
+|  | `hero.filmFrameTitle` | Film WAHHF Foundation (1 min 10) | Film der WAHHF Foundation (1:10 Min.) |
 |  | `home.mission.kicker` | Qui sommes-nous | Über uns |
 |  | `home.mission.title` | Une passerelle humaine entre le Cameroun et l'Allemagne | Eine menschliche Brücke zwischen Kamerun und Deutschland |
 |  | `home.mission.p1` | Née d'une double culture camerounaise et allemande, WAHHF Foundation (We Are Here Help Foundation) est la branche sociale et philanthropique du groupe IROKO. | Aus einer kamerunisch-deutschen Doppelkultur entstanden, ist die WAHHF Foundation (We Are Here Help Foundation) der soziale und gemeinnützige Zweig der IROKO-Gruppe. |
@@ -116,7 +116,7 @@ Fichier : `src/locales/de.json` (369 textes, dont 0 à relire).
 |  | `home.mobilitySpot.levels.a2` | Échanges courants | Alltagsgespräche |
 |  | `home.mobilitySpot.levels.b1` | Autonomie | Selbstständigkeit |
 |  | `home.mobilitySpot.levels.b2` | Indépendance | Unabhängigkeit |
-|  | `home.mobilitySpot.levels.c1` | Maîtrise | Beherrschung |
+|  | `home.mobilitySpot.levels.c1` | Maîtrise | Sprachbeherrschung |
 |  | `home.video.kicker` | Au cœur du terrain | Mitten im Geschehen |
 |  | `home.video.title` | Voir nos actions et notre vision en images | Unsere Arbeit und unsere Vision in Bildern |
 |  | `home.video.subtitle` | Découvrez en vidéo l'engagement de la fondation et l'écosystème du groupe IROKO qui soutient la gratuité de nos actions. | Sehen Sie im Video das Engagement der Stiftung und das Umfeld der IROKO-Gruppe, das unsere Angebote kostenlos macht. |
@@ -150,7 +150,7 @@ Fichier : `src/locales/de.json` (369 textes, dont 0 à relire).
 |  | `home.act.title` | Chaque geste renforce un parcours de vie | Jede Geste stärkt einen Lebensweg |
 |  | `home.act.subtitle` | Rejoindre la mission comme bénévole ou comme partenaire, ou suivre nos actions par la lettre d'information. | Unterstützen Sie die Mission als Ehrenamtliche oder als Partner – oder verfolgen Sie unsere Arbeit über den Newsletter. |
 |  | `home.act.volunteerText` | Rejoignez nos équipes au Cameroun, en Allemagne ou à distance : enseignement des langues, mentorat, santé ou logistique. | Verstärken Sie unsere Teams in Kamerun, in Deutschland oder aus der Ferne: Sprachunterricht, Mentoring, Gesundheit oder Logistik. |
-|  | `home.act.partnerText` | Écoles, universités, ONG, fondations et entreprises : co-construisons des programmes d’intérêt général mesurables. | Schulen, Hochschulen, NGOs, Stiftungen und Unternehmen: Lassen Sie uns gemeinsam messbare gemeinnützige Programme gestalten. |
+| \* | `home.act.partnerText` | Écoles, universités, ONG, fondations et entreprises : co-construisons des programmes d’intérêt général mesurables. | Schulen, Hochschulen, NGOs, Stiftungen und Unternehmen: Lassen Sie uns gemeinsam messbare gemeinnützige Programme gestalten. <br>_Note : « co-construisons » rendu par « Lassen Sie uns gemeinsam … gestalten »_ |
 |  | `home.newsletter.kicker` | Restons en lien | In Verbindung bleiben |
 |  | `home.newsletter.title` | Recevoir nos actualités et les dates des prochaines sessions | Neuigkeiten und Termine der nächsten Kurse erhalten |
 |  | `home.newsletter.subtitle` | Votre adresse sert uniquement à vous envoyer cette lettre. Le site ne l'enregistre pas encore : il prépare un message d'inscription à nous envoyer par WhatsApp ou par e-mail. | Ihre Adresse dient nur dazu, Ihnen diesen Newsletter zu senden. Die Website speichert sie noch nicht: Sie bereitet eine Anmeldenachricht vor, die Sie uns per WhatsApp oder E-Mail schicken. |
@@ -201,7 +201,7 @@ Fichier : `src/locales/de.json` (369 textes, dont 0 à relire).
 |  | `ui.cookies.title` | Respect de votre vie privée (RGPD) | Ihre Privatsphäre ist uns wichtig (DSGVO) |
 |  | `ui.cookies.text` | WAHHF Foundation utilise uniquement des cookies techniques nécessaires au bon fonctionnement du site (choix de langue et de thème). Aucun traceur publicitaire n’est activé. | Die WAHHF Foundation verwendet nur technisch notwendige Cookies, damit die Website funktioniert (Wahl von Sprache und Darstellung). Es sind keine Werbe-Tracker aktiv. |
 |  | `ui.cookies.privacy` | Politique de confidentialité | Datenschutzerklärung |
-|  | `ui.cookies.refuse` | Refuser le non-essentiel | Nur notwendige Cookies |
+| \* | `ui.cookies.refuse` | Refuser le non-essentiel | Nur notwendige Cookies <br>_Note : « Refuser le non-essentiel » rendu par « Nur notwendige Cookies »_ |
 |  | `ui.cookies.accept` | Accepter | Akzeptieren |
 |  | `ui.chunkError.page` | Cette page n’a pas pu se charger. Vérifiez votre connexion. | Diese Seite konnte nicht geladen werden. Bitte prüfen Sie Ihre Verbindung. |
 |  | `ui.chunkError.block` | Le contenu n’a pas pu se charger. | Dieser Inhalt konnte nicht geladen werden. |
@@ -212,7 +212,7 @@ Fichier : `src/locales/de.json` (369 textes, dont 0 à relire).
 |  | `ui.handoff.fallback` | Si aucune application ne s’ouvre, écrivez directement à &lt;mail>{{email}}&lt;/mail> ou sur WhatsApp au {{phone}}, en copiant le message ci-dessous. | Falls sich keine App öffnet, schreiben Sie direkt an &lt;mail>{{email}}&lt;/mail> oder per WhatsApp an {{phone}} und kopieren Sie die Nachricht unten. |
 |  | `ui.handoff.preview` | Voir le message préparé | Vorbereitete Nachricht ansehen |
 |  | `ui.handoff.edit` | Modifier mes réponses | Meine Antworten ändern |
-|  | `ui.draft.greeting` | Bonjour WAHHF Foundation, | Guten Tag, liebes Team der WAHHF Foundation, |
+| \* | `ui.draft.greeting` | Bonjour WAHHF Foundation, | Guten Tag, liebes Team der WAHHF Foundation, <br>_Note : formule d'accueil des messages préparés (« Guten Tag, liebes Team der WAHHF Foundation, »)_ |
 |  | `ui.draft.row` | {{label}} : {{value}} | {{label}}: {{value}} |
 |  | `ui.validation.emailEmpty` | Saisissez votre adresse e-mail, par exemple nom@exemple.com. | Bitte geben Sie Ihre E-Mail-Adresse ein, zum Beispiel name@beispiel.de. |
 |  | `ui.validation.emailInvalid` | Adresse e-mail incomplète : elle doit ressembler à nom@exemple.com. | Die E-Mail-Adresse ist unvollständig. Sie sollte so aussehen: name@beispiel.de. |
@@ -244,7 +244,7 @@ Fichier : `src/locales/de.json` (369 textes, dont 0 à relire).
 |  | `ui.countries.link` | {{name}} — Voir la fiche | {{name}} — Zur Länderseite |
 |  | `ui.countries.linkNonEu` | {{name}}, Hors Union européenne — Voir la fiche | {{name}}, nicht in der Europäischen Union — Zur Länderseite |
 |  | `ui.countries.nonEu` | Hors UE | Nicht in der EU |
-|  | `ui.breadcrumb` | Fil d’Ariane | Pfadnavigation |
+| \* | `ui.breadcrumb` | Fil d’Ariane | Pfadnavigation <br>_Note : « Fil d'Ariane » rendu par « Pfadnavigation » (lu par les lecteurs d'écran)_ |
 |  | `ui.photos.enlarge` | Agrandir la photo : {{alt}} | Foto vergrößern: {{alt}} |
 |  | `ui.photos.loadError` | Cette photo n’a pas pu être chargée. Vérifiez votre connexion, puis rouvrez-la. | Dieses Foto konnte nicht geladen werden. Bitte prüfen Sie Ihre Verbindung und öffnen Sie es erneut. |
 |  | `ui.photos.viewer` | Visionneuse de photos | Fotoansicht |
@@ -272,7 +272,7 @@ Fichier : `src/locales/de.json` (369 textes, dont 0 à relire).
 |  | `contenu.domaines.education.fullDesc` | Nous œuvrons pour que chaque enfant et chaque jeune dispose des fournitures, de l’encadrement pédagogique et d’un cadre d’apprentissage digne. | Wir setzen uns dafür ein, dass jedes Kind und jeder junge Mensch Schulmaterial, pädagogische Begleitung und einen würdigen Lernort hat. |
 |  | `contenu.domaines.education.programs[0]` | Kits scolaires et manuels pour les élèves en zone rurale | Schulsets und Lehrbücher für Schülerinnen und Schüler auf dem Land |
 |  | `contenu.domaines.education.programs[1]` | Bibliothèques communautaires et espaces de lecture | Gemeinschaftsbibliotheken und Leseräume |
-|  | `contenu.domaines.education.programs[2]` | Mentorat académique et orientation post-baccalauréat | Mentoring und Studienorientierung nach dem Abitur |
+| \* | `contenu.domaines.education.programs[2]` | Mentorat académique et orientation post-baccalauréat | Mentoring und Studienorientierung nach dem Abitur <br>_Note : « post-baccalauréat » rendu par « nach dem Abitur »_ |
 |  | `contenu.domaines.sante.title` | Santé | Gesundheit |
 |  | `contenu.domaines.sante.shortDesc` | Campagnes de prévention, santé maternelle et infantile, accès aux soins de base et sensibilisation. | Präventionskampagnen, Gesundheit von Müttern und Kindern, Zugang zur Grundversorgung und Aufklärung. |
 |  | `contenu.domaines.sante.fullDesc` | En lien avec les centres de santé locaux, nos équipes bénévoles organisent des journées de dépistage gratuit, d’éducation sanitaire et de soutien aux mères. | Gemeinsam mit örtlichen Gesundheitszentren organisieren unsere ehrenamtlichen Teams kostenlose Vorsorgetage, Gesundheitsaufklärung und Unterstützung für Mütter. |
@@ -291,7 +291,7 @@ Fichier : `src/locales/de.json` (369 textes, dont 0 à relire).
 |  | `contenu.domaines.environnement.programs[0]` | Pépinières villageoises et campagnes de reboisement | Baumschulen in den Dörfern und Aufforstungskampagnen |
 |  | `contenu.domaines.environnement.programs[1]` | Sensibilisation au tri et à l’assainissement urbain | Aufklärung über Mülltrennung und Hygiene in der Stadt |
 |  | `contenu.domaines.environnement.programs[2]` | Formation aux pratiques agroécologiques durables | Schulungen zu nachhaltigen agrarökologischen Methoden |
-|  | `contenu.domaines.droits-inclusion.title` | Droits et inclusion | Rechte und Teilhabe |
+| \* | `contenu.domaines.droits-inclusion.title` | Droits et inclusion | Rechte und Teilhabe <br>_Note : « inclusion » rendu par « Teilhabe », comme le menu_ |
 |  | `contenu.domaines.droits-inclusion.shortDesc` | Promotion de l’égalité des chances, inclusion des personnes vulnérables et accès à l’information civique. | Förderung der Chancengleichheit, Teilhabe schutzbedürftiger Menschen und Zugang zu Informationen über Bürgerrechte. |
 |  | `contenu.domaines.droits-inclusion.fullDesc` | Défendre la dignité humaine en luttant contre toutes les formes d’exclusion sociale, économique ou liée au handicap. | Wir verteidigen die Würde des Menschen und wenden uns gegen jede Form der Ausgrenzung – sozial, wirtschaftlich oder wegen einer Behinderung. |
 |  | `contenu.domaines.droits-inclusion.programs[0]` | Autonomisation des jeunes femmes et leadership communautaire | Stärkung junger Frauen und Führung in der Gemeinschaft |
@@ -319,36 +319,36 @@ Fichier : `src/locales/de.json` (369 textes, dont 0 à relire).
 |  | `contenu.niveaux.b2.title` | Niveau B2 — Indépendance & Fluidité | Niveau B2 — Unabhängigkeit & Sprachfluss |
 |  | `contenu.niveaux.c1.title` | Niveau C1 — Maîtrise Académique & Professionnelle | Niveau C1 — Sprachbeherrschung für Studium & Beruf |
 |  | `contenu.contact.place` | Cameroun (Douala, Yaoundé) et coordination en Allemagne | Kamerun (Douala, Yaoundé) und Koordination in Deutschland |
-|  | `contenu.regions.littoral.antennaTodo` | Antenne locale : à confirmer (TODO) | Lokale Anlaufstelle: noch zu bestätigen (TODO) |
-|  | `contenu.regions.littoral.actionsTodo` | Actions dans la région : à renseigner (TODO) | Aktivitäten in der Region: noch einzutragen (TODO) |
-|  | `contenu.regions.littoral.name` | Littoral (Douala) | Littoral |
-|  | `contenu.regions.centre.antennaTodo` | Antenne locale : à confirmer (TODO) | Lokale Anlaufstelle: noch zu bestätigen (TODO) |
-|  | `contenu.regions.centre.actionsTodo` | Actions dans la région : à renseigner (TODO) | Aktivitäten in der Region: noch einzutragen (TODO) |
-|  | `contenu.regions.centre.name` | Centre (Yaoundé) | Centre |
-|  | `contenu.regions.ouest.antennaTodo` | Antenne locale : à confirmer (TODO) | Lokale Anlaufstelle: noch zu bestätigen (TODO) |
-|  | `contenu.regions.ouest.actionsTodo` | Actions dans la région : à renseigner (TODO) | Aktivitäten in der Region: noch einzutragen (TODO) |
-|  | `contenu.regions.ouest.name` | Ouest (Bafoussam) | Ouest |
-|  | `contenu.regions.sud-ouest.antennaTodo` | Antenne locale : à confirmer (TODO) | Lokale Anlaufstelle: noch zu bestätigen (TODO) |
-|  | `contenu.regions.sud-ouest.actionsTodo` | Actions dans la région : à renseigner (TODO) | Aktivitäten in der Region: noch einzutragen (TODO) |
-|  | `contenu.regions.sud-ouest.name` | Sud-Ouest (Buea) | Sud-Ouest |
-|  | `contenu.regions.nord-ouest.antennaTodo` | Antenne locale : à confirmer (TODO) | Lokale Anlaufstelle: noch zu bestätigen (TODO) |
-|  | `contenu.regions.nord-ouest.actionsTodo` | Actions dans la région : à renseigner (TODO) | Aktivitäten in der Region: noch einzutragen (TODO) |
-|  | `contenu.regions.nord-ouest.name` | Nord-Ouest (Bamenda) | Nord-Ouest |
-|  | `contenu.regions.sud.antennaTodo` | Antenne locale : à confirmer (TODO) | Lokale Anlaufstelle: noch zu bestätigen (TODO) |
-|  | `contenu.regions.sud.actionsTodo` | Actions dans la région : à renseigner (TODO) | Aktivitäten in der Region: noch einzutragen (TODO) |
-|  | `contenu.regions.sud.name` | Sud (Ebolowa) | Sud |
-|  | `contenu.regions.est.antennaTodo` | Antenne locale : à confirmer (TODO) | Lokale Anlaufstelle: noch zu bestätigen (TODO) |
-|  | `contenu.regions.est.actionsTodo` | Actions dans la région : à renseigner (TODO) | Aktivitäten in der Region: noch einzutragen (TODO) |
-|  | `contenu.regions.est.name` | Est (Bertoua) | Est |
-|  | `contenu.regions.adamaoua.antennaTodo` | Antenne locale : à confirmer (TODO) | Lokale Anlaufstelle: noch zu bestätigen (TODO) |
-|  | `contenu.regions.adamaoua.actionsTodo` | Actions dans la région : à renseigner (TODO) | Aktivitäten in der Region: noch einzutragen (TODO) |
-|  | `contenu.regions.adamaoua.name` | Adamaoua (Ngaoundéré) | Adamaoua |
-|  | `contenu.regions.nord.antennaTodo` | Antenne locale : à confirmer (TODO) | Lokale Anlaufstelle: noch zu bestätigen (TODO) |
-|  | `contenu.regions.nord.actionsTodo` | Actions dans la région : à renseigner (TODO) | Aktivitäten in der Region: noch einzutragen (TODO) |
-|  | `contenu.regions.nord.name` | Nord (Garoua) | Nord |
-|  | `contenu.regions.extreme-nord.antennaTodo` | Antenne locale : à confirmer (TODO) | Lokale Anlaufstelle: noch zu bestätigen (TODO) |
-|  | `contenu.regions.extreme-nord.actionsTodo` | Actions dans la région : à renseigner (TODO) | Aktivitäten in der Region: noch einzutragen (TODO) |
-|  | `contenu.regions.extreme-nord.name` | Extrême-Nord (Maroua) | Extrême-Nord |
+| \* | `contenu.regions.littoral.antennaTodo` | Antenne locale : à confirmer (TODO) | Lokale Anlaufstelle: noch zu bestätigen (TODO) <br>_Note : noms des régions du Cameroun gardés en français (noms officiels, usage des sources allemandes) ; question 181_ |
+| \* | `contenu.regions.littoral.actionsTodo` | Actions dans la région : à renseigner (TODO) | Aktivitäten in der Region: noch einzutragen (TODO) <br>_Note : noms des régions du Cameroun gardés en français (noms officiels, usage des sources allemandes) ; question 181_ |
+| \* | `contenu.regions.littoral.name` | Littoral (Douala) | Littoral <br>_Note : noms des régions du Cameroun gardés en français (noms officiels, usage des sources allemandes) ; question 181_ |
+| \* | `contenu.regions.centre.antennaTodo` | Antenne locale : à confirmer (TODO) | Lokale Anlaufstelle: noch zu bestätigen (TODO) <br>_Note : noms des régions du Cameroun gardés en français (noms officiels, usage des sources allemandes) ; question 181_ |
+| \* | `contenu.regions.centre.actionsTodo` | Actions dans la région : à renseigner (TODO) | Aktivitäten in der Region: noch einzutragen (TODO) <br>_Note : noms des régions du Cameroun gardés en français (noms officiels, usage des sources allemandes) ; question 181_ |
+| \* | `contenu.regions.centre.name` | Centre (Yaoundé) | Centre <br>_Note : noms des régions du Cameroun gardés en français (noms officiels, usage des sources allemandes) ; question 181_ |
+| \* | `contenu.regions.ouest.antennaTodo` | Antenne locale : à confirmer (TODO) | Lokale Anlaufstelle: noch zu bestätigen (TODO) <br>_Note : noms des régions du Cameroun gardés en français (noms officiels, usage des sources allemandes) ; question 181_ |
+| \* | `contenu.regions.ouest.actionsTodo` | Actions dans la région : à renseigner (TODO) | Aktivitäten in der Region: noch einzutragen (TODO) <br>_Note : noms des régions du Cameroun gardés en français (noms officiels, usage des sources allemandes) ; question 181_ |
+| \* | `contenu.regions.ouest.name` | Ouest (Bafoussam) | Ouest <br>_Note : noms des régions du Cameroun gardés en français (noms officiels, usage des sources allemandes) ; question 181_ |
+| \* | `contenu.regions.sud-ouest.antennaTodo` | Antenne locale : à confirmer (TODO) | Lokale Anlaufstelle: noch zu bestätigen (TODO) <br>_Note : noms des régions du Cameroun gardés en français (noms officiels, usage des sources allemandes) ; question 181_ |
+| \* | `contenu.regions.sud-ouest.actionsTodo` | Actions dans la région : à renseigner (TODO) | Aktivitäten in der Region: noch einzutragen (TODO) <br>_Note : noms des régions du Cameroun gardés en français (noms officiels, usage des sources allemandes) ; question 181_ |
+| \* | `contenu.regions.sud-ouest.name` | Sud-Ouest (Buea) | Sud-Ouest <br>_Note : noms des régions du Cameroun gardés en français (noms officiels, usage des sources allemandes) ; question 181_ |
+| \* | `contenu.regions.nord-ouest.antennaTodo` | Antenne locale : à confirmer (TODO) | Lokale Anlaufstelle: noch zu bestätigen (TODO) <br>_Note : noms des régions du Cameroun gardés en français (noms officiels, usage des sources allemandes) ; question 181_ |
+| \* | `contenu.regions.nord-ouest.actionsTodo` | Actions dans la région : à renseigner (TODO) | Aktivitäten in der Region: noch einzutragen (TODO) <br>_Note : noms des régions du Cameroun gardés en français (noms officiels, usage des sources allemandes) ; question 181_ |
+| \* | `contenu.regions.nord-ouest.name` | Nord-Ouest (Bamenda) | Nord-Ouest <br>_Note : noms des régions du Cameroun gardés en français (noms officiels, usage des sources allemandes) ; question 181_ |
+| \* | `contenu.regions.sud.antennaTodo` | Antenne locale : à confirmer (TODO) | Lokale Anlaufstelle: noch zu bestätigen (TODO) <br>_Note : noms des régions du Cameroun gardés en français (noms officiels, usage des sources allemandes) ; question 181_ |
+| \* | `contenu.regions.sud.actionsTodo` | Actions dans la région : à renseigner (TODO) | Aktivitäten in der Region: noch einzutragen (TODO) <br>_Note : noms des régions du Cameroun gardés en français (noms officiels, usage des sources allemandes) ; question 181_ |
+| \* | `contenu.regions.sud.name` | Sud (Ebolowa) | Sud <br>_Note : noms des régions du Cameroun gardés en français (noms officiels, usage des sources allemandes) ; question 181_ |
+| \* | `contenu.regions.est.antennaTodo` | Antenne locale : à confirmer (TODO) | Lokale Anlaufstelle: noch zu bestätigen (TODO) <br>_Note : noms des régions du Cameroun gardés en français (noms officiels, usage des sources allemandes) ; question 181_ |
+| \* | `contenu.regions.est.actionsTodo` | Actions dans la région : à renseigner (TODO) | Aktivitäten in der Region: noch einzutragen (TODO) <br>_Note : noms des régions du Cameroun gardés en français (noms officiels, usage des sources allemandes) ; question 181_ |
+| \* | `contenu.regions.est.name` | Est (Bertoua) | Est <br>_Note : noms des régions du Cameroun gardés en français (noms officiels, usage des sources allemandes) ; question 181_ |
+| \* | `contenu.regions.adamaoua.antennaTodo` | Antenne locale : à confirmer (TODO) | Lokale Anlaufstelle: noch zu bestätigen (TODO) <br>_Note : noms des régions du Cameroun gardés en français (noms officiels, usage des sources allemandes) ; question 181_ |
+| \* | `contenu.regions.adamaoua.actionsTodo` | Actions dans la région : à renseigner (TODO) | Aktivitäten in der Region: noch einzutragen (TODO) <br>_Note : noms des régions du Cameroun gardés en français (noms officiels, usage des sources allemandes) ; question 181_ |
+| \* | `contenu.regions.adamaoua.name` | Adamaoua (Ngaoundéré) | Adamaoua <br>_Note : noms des régions du Cameroun gardés en français (noms officiels, usage des sources allemandes) ; question 181_ |
+| \* | `contenu.regions.nord.antennaTodo` | Antenne locale : à confirmer (TODO) | Lokale Anlaufstelle: noch zu bestätigen (TODO) <br>_Note : noms des régions du Cameroun gardés en français (noms officiels, usage des sources allemandes) ; question 181_ |
+| \* | `contenu.regions.nord.actionsTodo` | Actions dans la région : à renseigner (TODO) | Aktivitäten in der Region: noch einzutragen (TODO) <br>_Note : noms des régions du Cameroun gardés en français (noms officiels, usage des sources allemandes) ; question 181_ |
+| \* | `contenu.regions.nord.name` | Nord (Garoua) | Nord <br>_Note : noms des régions du Cameroun gardés en français (noms officiels, usage des sources allemandes) ; question 181_ |
+| \* | `contenu.regions.extreme-nord.antennaTodo` | Antenne locale : à confirmer (TODO) | Lokale Anlaufstelle: noch zu bestätigen (TODO) <br>_Note : noms des régions du Cameroun gardés en français (noms officiels, usage des sources allemandes) ; question 181_ |
+| \* | `contenu.regions.extreme-nord.actionsTodo` | Actions dans la région : à renseigner (TODO) | Aktivitäten in der Region: noch einzutragen (TODO) <br>_Note : noms des régions du Cameroun gardés en français (noms officiels, usage des sources allemandes) ; question 181_ |
+| \* | `contenu.regions.extreme-nord.name` | Extrême-Nord (Maroua) | Extrême-Nord <br>_Note : noms des régions du Cameroun gardés en français (noms officiels, usage des sources allemandes) ; question 181_ |
 |  | `contenu.voisins.Nigeria.label[0]` | NIGERIA | NIGERIA |
 |  | `contenu.voisins.Chad.label[0]` | TCHAD | TSCHAD |
 |  | `contenu.voisins.CentralAfricanRep.label[0]` | RÉP. | ZENTRALAFRIK. |
@@ -356,7 +356,7 @@ Fichier : `src/locales/de.json` (369 textes, dont 0 à relire).
 |  | `contenu.voisins.Congo.label[0]` | CONGO | KONGO |
 |  | `contenu.voisins.Gabon.label[0]` | GABON | GABUN |
 |  | `contenu.voisins.EqGuinea.label[0]` | GUINÉE ÉQ. | ÄQUAT.-GUINEA |
-|  | `contenu.parcours.section.title` | Apprendre, cultiver, grandir | Lernen, anbauen, wachsen |
+| \* | `contenu.parcours.section.title` | Apprendre, cultiver, grandir | Lernen, anbauen, wachsen <br>_Note : « Apprendre, cultiver, grandir » rendu par « Lernen, anbauen, wachsen »_ |
 |  | `contenu.parcours.section.intro` | Des salles de formation aux champs, et jusqu’au sommet avec les jeunes. | Von den Schulungsräumen auf die Felder – und mit den jungen Menschen bis auf den Gipfel. |
 |  | `contenu.parcours.section.link` | Voir toutes les photos | Alle Fotos ansehen |
 |  | `contenu.parcours.panneaux.apprendre.title` | Apprendre | Lernen |
@@ -369,7 +369,7 @@ Fichier : `src/locales/de.json` (369 textes, dont 0 à relire).
 |  | `contenu.parcours.panneaux.cultiver.meta` | Visite de plantation | Besuch einer Plantage |
 |  | `contenu.parcours.panneaux.cultiver.description` | Sur le terrain pour comprendre l’agriculture et l’élevage durables. | Vor Ort, um nachhaltige Landwirtschaft und Tierhaltung zu verstehen. |
 |  | `contenu.parcours.panneaux.s-engager.title` | S’engager | Sich engagieren |
-|  | `contenu.parcours.panneaux.s-engager.meta` | Sorties de terrain | Exkursionen |
+| \* | `contenu.parcours.panneaux.s-engager.meta` | Sorties de terrain | Exkursionen <br>_Note : « Sorties de terrain » rendu par « Exkursionen »_ |
 |  | `contenu.parcours.panneaux.s-engager.description` | Encadrants et jeunes réunis sous les mêmes couleurs. | Betreuende und junge Menschen vereint in denselben Farben. |
 |  | `contenu.parcours.panneaux.grandir.title` | Grandir | Wachsen |
 |  | `contenu.parcours.panneaux.grandir.meta` | Randonnée avec les jeunes | Wanderung mit den jungen Menschen |
@@ -581,7 +581,7 @@ Fichier : `src/locales/accompagnement/de.json` (309 textes, dont 19 à relire).
 |  | `contenu.pays.luxembourg.summary` | Au cœur de l’Europe, le Grand-Duché de Luxembourg offre un environnement multilingue (français, allemand, anglais) pour les études supérieures et la recherche. | Im Herzen Europas bietet das Großherzogtum Luxemburg ein mehrsprachiges Umfeld (Französisch, Deutsch, Englisch) für Studium und Forschung. |
 |  | `contenu.pays.luxembourg.pathways.studies` | Cursus bilingues ou trilingues à l’Université du Luxembourg, soumis aux conditions d’admission académiques et aux procédures d’autorisation de séjour étudiant. | Zwei- oder dreisprachige Studiengänge an der Universität Luxemburg, abhängig von den akademischen Zulassungsvoraussetzungen und den Verfahren für den Aufenthaltstitel als Studierende. |
 |  | `contenu.pays.luxembourg.pathways.training` | Formations continues et stages académiques encadrés par les conventions universitaires. | Weiterbildungen und akademische Praktika im Rahmen von Hochschulvereinbarungen. |
-| \* | `contenu.pays.luxembourg.pathways.work` | Autorisation de séjour pour travailleur salarié délivrée par la Direction de l’immigration avant l’entrée sur le territoire. | Aufenthaltstitel für Arbeitnehmerinnen und Arbeitnehmer, ausgestellt von der Direction de l’immigration (Einwanderungsbehörde) vor der Einreise. |
+| \* | `contenu.pays.luxembourg.pathways.work` | Autorisation de séjour pour travailleur salarié délivrée par la Direction de l’immigration avant l’entrée sur le territoire. | Aufenthaltsgenehmigung für Arbeitnehmerinnen und Arbeitnehmer, ausgestellt von der Direction de l’immigration (Einwanderungsbehörde) vor der Einreise. |
 |  | `contenu.pays.luxembourg.steps[0]` | Identification du programme multilingue (français/allemand/anglais) | Den passenden mehrsprachigen Studiengang finden (Französisch/Deutsch/Englisch) |
 |  | `contenu.pays.luxembourg.steps[1]` | Dépôt du dossier d’admission universitaire dans les délais officiels | Die Bewerbung um einen Studienplatz fristgerecht einreichen |
 | \* | `contenu.pays.luxembourg.steps[2]` | Demande d’autorisation temporaire de séjour (ATS) auprès du ministère compétent | Die vorläufige Aufenthaltsgenehmigung (ATS) beim zuständigen Ministerium beantragen |
@@ -668,7 +668,7 @@ Fichier : `src/locales/accompagnement/de.json` (309 textes, dont 19 à relire).
 | \* | `contenu.pays.danemark.pathways.work` | Dispositifs encadrés par l’Agence danoise pour le recrutement international et l’intégration (SIRI). | Regelungen der Dänischen Agentur für internationale Rekrutierung und Integration (SIRI). |
 |  | `contenu.pays.danemark.steps[0]` | Validation d’un niveau élevé d’anglais (IELTS / TOEFL) et des prérequis académiques | Nachweis sehr guter Englischkenntnisse (IELTS / TOEFL) und der akademischen Voraussetzungen |
 |  | `contenu.pays.danemark.steps[1]` | Candidature via le portail national Optagelse.dk ou directement auprès de l’université | Bewerbung über das nationale Portal Optagelse.dk oder direkt bei der Universität |
-|  | `contenu.pays.danemark.steps[2]` | Ouverture du dossier ST1 avec l’établissement d’accueil | Den Antrag ST1 gemeinsam mit der aufnehmenden Hochschule eröffnen |
+|  | `contenu.pays.danemark.steps[2]` | Ouverture du dossier ST1 avec l’établissement d’accueil | Den Antrag ST1 gemeinsam mit der aufnehmenden Hochschule anlegen |
 |  | `contenu.pays.danemark.steps[3]` | Demande de permis de séjour auprès de l’agence officielle SIRI (nyidanmark.dk) | Die Aufenthaltserlaubnis bei der offiziellen Behörde SIRI beantragen (nyidanmark.dk) |
 |  | `contenu.pays.danemark.officialLinks[0].label` | Study in Denmark — Portail officiel du Ministère | Study in Denmark — Offizielles Portal des Ministeriums |
 |  | `contenu.pays.danemark.officialLinks[1].label` | New to Denmark (nyidanmark.dk) — Portail officiel SIRI | New to Denmark (nyidanmark.dk) — Offizielles Portal von SIRI |
@@ -1039,7 +1039,7 @@ Fichier : `src/locales/events/de.json` (277 textes, dont 19 à relire).
 |  | `support.text` | Écoles, associations, entreprises, institutions ou bénévoles : chacun peut aider la fondation à accueillir les jeunes. | Schulen, Vereine, Unternehmen, Institutionen oder Ehrenamtliche: Alle können der Stiftung helfen, die jungen Menschen zu empfangen. |
 |  | `support.partnerEyebrow` | Pour les structures | Für Organisationen |
 |  | `support.partnerTitle` | Devenir partenaire | Partner werden |
-|  | `support.partnerText` | Proposez un partenariat à la fondation pour cette journée ou les suivantes. | Schlagen Sie der Stiftung eine Partnerschaft für diesen oder die nächsten Aktionstage vor. |
+|  | `support.partnerText` | Proposez un partenariat à la fondation pour cette journée ou les suivantes. | Schlagen Sie der Stiftung eine Partnerschaft für diesen Aktionstag oder die nächsten vor. |
 |  | `support.giveEyebrow` | Pour chacun | Für alle |
 |  | `support.giveTitle` | Faire un don de matériel ou de temps | Material oder Zeit spenden |
 |  | `support.giveText` | Prêtez main-forte le jour J, ou apportez du matériel utile aux jeunes. | Packen Sie am Tag selbst mit an oder bringen Sie Material mit, das den jungen Menschen nützt. |
@@ -1265,9 +1265,9 @@ Fichier : `src/locales/galerie/de.json` (9 textes, dont 4 à relire).
 | | Clé | Français | Allemand |
 |---|---|---|---|
 |  | `seo.title` | Galerie — La fondation en images | Galerie — Die Stiftung in Bildern |
-| \* | `seo.description` | Photos de WAHHF Foundation : la journée du 25 avril 2026 à l’Albatros Hotel, une visite de plantation, des sorties à Nkongsamba, au mont et au lac, et une randonnée avec les jeunes. | Fotos der WAHHF Foundation: die Veranstaltung vom 25. April 2026 im Albatros Hotel, ein Besuch in einer Plantage, Ausflüge nach Nkongsamba, zum Berg und zum See sowie eine Wanderung mit jungen Menschen. |
+| \* | `seo.description` | Photos de WAHHF Foundation : la journée du 25 avril 2026 à l’Albatros Hotel, une visite de plantation, des sorties à Nkongsamba, au mont et au lac, et une randonnée avec les jeunes. | Fotos der WAHHF Foundation: die Veranstaltung vom 25. April 2026 im Albatros Hotel, ein Besuch auf einer Plantage, Ausflüge nach Nkongsamba, zum Berg und zum See sowie eine Wanderung mit jungen Menschen. |
 | \* | `title` | La fondation en images | Die Stiftung in Bildern |
-|  | `intro` | Retour en photos sur nos actions : la journée du 25 avril 2026 à l’Albatros Hotel, une visite de plantation, des sorties à Nkongsamba, au mont et au lac, et une randonnée avec les jeunes. | Ein Rückblick in Fotos auf unsere Arbeit: die Veranstaltung vom 25. April 2026 im Albatros Hotel, ein Besuch in einer Plantage, Ausflüge nach Nkongsamba, zum Berg und zum See sowie eine Wanderung mit jungen Menschen. |
+|  | `intro` | Retour en photos sur nos actions : la journée du 25 avril 2026 à l’Albatros Hotel, une visite de plantation, des sorties à Nkongsamba, au mont et au lac, et une randonnée avec les jeunes. | Ein Rückblick in Fotos auf unsere Arbeit: die Veranstaltung vom 25. April 2026 im Albatros Hotel, ein Besuch auf einer Plantage, Ausflüge nach Nkongsamba, zum Berg und zum See sowie eine Wanderung mit jungen Menschen. |
 |  | `filterLabel` | Filtrer par album | Nach Album filtern |
 |  | `allAlbums` | Tous les albums | Alle Alben |
 | \* | `end.title` | Participer à la suite | Die Fortsetzung mitgestalten |
@@ -1316,7 +1316,7 @@ Fichier : `src/locales/mobilite/de.json` (315 textes, dont 17 à relire).
 |  | `hub.europeBouton` | Explorer l’accompagnement Europe | Begleitung nach Europa ansehen |
 |  | `hub.europeArnaques` | Guide : éviter les arnaques | Ratgeber: Betrug vermeiden |
 |  | `hub.pourquoiTitle` | Protéger la jeunesse contre la désinformation et ouvrir l’accès au savoir | Junge Menschen vor Desinformation schützen und den Zugang zu Wissen öffnen |
-|  | `hub.pourquoiSubtitle` | Trop de jeunes et de familles s’endettent auprès d’intermédiaires frauduleux qui vendent de fausses promesses. WAHHF Foundation répond par la rigueur linguistique et la transparence. | Zu viele junge Menschen und Familien verschulden sich bei betrügerischen Vermittlern, die falsche Versprechen verkaufen. WAHHF Foundation setzt dem sprachliche Gründlichkeit und Transparenz entgegen. |
+|  | `hub.pourquoiSubtitle` | Trop de jeunes et de familles s’endettent auprès d’intermédiaires frauduleux qui vendent de fausses promesses. WAHHF Foundation répond par la rigueur linguistique et la transparence. | Zu viele junge Menschen und Familien verschulden sich bei betrügerischen Vermittlern, die falsche Versprechen verkaufen. Die WAHHF Foundation setzt dem sprachliche Gründlichkeit und Transparenz entgegen. |
 | \* | `hub.pourquoiText` | Un projet d’études ou de formation professionnelle à l’étranger ne s’achète pas : il se construit par l’apprentissage exigeant de la langue, la conformité des diplômes et le respect strict des procédures consulaires officielles. | Ein Studium oder eine Berufsausbildung im Ausland kann man nicht kaufen. Man erarbeitet es sich: durch anspruchsvolles Sprachenlernen, Abschlüsse, die den Anforderungen entsprechen, und die strikte Einhaltung der offiziellen konsularischen Verfahren. |
 | \* | `hub.raisons.frais.title` | Zéro frais pour le bénéficiaire | Keine Kosten für Teilnehmende |
 |  | `hub.raisons.frais.desc` | Aucun frais d’inscription, aucun frais de dossier, aucune commission à aucun moment du parcours. | Keine Anmeldegebühr, keine Bearbeitungsgebühr, keine Provision – zu keinem Zeitpunkt. |
@@ -1459,7 +1459,7 @@ Fichier : `src/locales/mobilite/de.json` (315 textes, dont 17 à relire).
 |  | `candidature.message.ville` | Ville | Wohnort |
 |  | `candidature.message.souhait` | Souhait | Wunsch |
 |  | `candidature.message.session` | Session choisie | Gewählter Kurs |
-|  | `candidature.message.paysInteret` | Pays d’intérêt | Interessensland |
+|  | `candidature.message.paysInteret` | Pays d’intérêt | Zielland |
 |  | `candidature.message.niveau` | Niveau d’allemand /anglais | Niveau Deutsch/Englisch |
 |  | `candidature.message.format` | Format souhaité | Gewünschtes Format |
 |  | `candidature.message.message` | Message | Nachricht |
@@ -1492,7 +1492,7 @@ Fichier : `src/locales/mobilite/de.json` (315 textes, dont 17 à relire).
 |  | `candidature.versEtape2` | Continuer vers l’étape 2 | Weiter zu Schritt 2 |
 |  | `candidature.etape2Text` | Précisez le volet qui vous intéresse ainsi que votre niveau linguistique actuel. | Geben Sie an, welcher Bereich Sie interessiert und welches Sprachniveau Sie zurzeit haben. |
 |  | `candidature.souhaitLegend` | Que souhaitez-vous ? * | Was wünschen Sie sich? * |
-|  | `candidature.paysInteretLabel` | Pays d’intérêt principal parmi les 10 pays accompagnés | Wichtigstes Interessensland unter den 10 begleiteten Ländern |
+|  | `candidature.paysInteretLabel` | Pays d’intérêt principal parmi les 10 pays accompagnés | Wichtigstes Zielland unter den 10 begleiteten Ländern |
 |  | `candidature.horsUE` | (hors Union européenne) | (außerhalb der Europäischen Union) |
 |  | `candidature.niveauLabel` | Niveau d’allemand /anglais actuel / visé | Aktuelles / angestrebtes Niveau Deutsch/Englisch |
 |  | `candidature.niveaux.A1` | A1 — Débutant complet | A1 — Absolute Anfänger |
@@ -1664,10 +1664,10 @@ Fichier : `src/locales/photos/de.json` (143 textes, dont 10 à relire).
 |  | `contenu.albums.mont-et-lac.note` | Lieu à confirmer (lac de cratère). | Ort noch zu bestätigen (Kratersee). |
 |  | `contenu.albums.randonnee-jeunesse.title` | Randonnée avec les jeunes | Wanderung mit jungen Menschen |
 |  | `contenu.albums.randonnee-jeunesse.note` | Lieu et date à confirmer. | Ort und Datum noch zu bestätigen. |
-| \* | `contenu.photos.A02.alt` | Banderole de la WAHHF Foundation sur la façade de l'Albatros Hotel : « Bâtir l'Afrique qui nourrit, soigne et instruit sa jeunesse » | Banner der WAHHF Foundation an der Fassade des Albatros Hotel: „Bâtir l'Afrique qui nourrit, soigne et instruit sa jeunesse“ (Das Afrika aufbauen, das seine Jugend ernährt, heilt und bildet) |
+| \* | `contenu.photos.A02.alt` | Banderole de la WAHHF Foundation sur la façade de l'Albatros Hotel : « Bâtir l'Afrique qui nourrit, soigne et instruit sa jeunesse » | Banner der WAHHF Foundation an der Fassade des Albatros Hotel: „Bâtir l'Afrique qui nourrit, soigne et instruit sa jeunesse“ |
 |  | `contenu.photos.A07.alt` | Participants rassemblés devant l'Albatros Hotel avant le début de la journée | Teilnehmende versammeln sich vor Beginn des Tages vor dem Albatros Hotel |
 | \* | `contenu.photos.A12.alt` | Un membre de l'équipe pose à côté du kakémono de la fondation | Ein Teammitglied posiert neben dem Roll-up der Stiftung |
-|  | `contenu.photos.A13.alt` | Kakémono orange de la fondation : « Showing hope, harvesting change » | Oranges Roll-up der Stiftung: „Showing hope, harvesting change“ |
+|  | `contenu.photos.A13.alt` | Kakémono orange de la fondation : « Showing hope, harvesting change » | Orangefarbenes Roll-up der Stiftung: „Showing hope, harvesting change“ |
 |  | `contenu.photos.A14.alt` | Kakémono de la fondation présentant ses domaines d'action | Roll-up der Stiftung mit ihren Handlungsfeldern |
 |  | `contenu.photos.A16.alt` | Jeunes participants vus de dos, en t-shirts « Bâtir l'Afrique qui nourrit, soigne et instruit sa jeunesse » | Junge Teilnehmende von hinten, in T-Shirts mit der Aufschrift „Bâtir l'Afrique qui nourrit, soigne et instruit sa jeunesse“ |
 |  | `contenu.photos.A17.alt` | Salle de conférence vue depuis le fond, participants assis face à l'écran | Konferenzsaal von hinten gesehen, die Teilnehmenden sitzen vor der Leinwand |
@@ -1717,7 +1717,7 @@ Fichier : `src/locales/photos/de.json` (143 textes, dont 10 à relire).
 |  | `contenu.photos.A98.alt` | Un participant prend des notes | Ein Teilnehmer macht sich Notizen |
 |  | `contenu.photos.A99.alt` | Membre de la fondation en polo rose, bras croisés | Mitglied der Stiftung im rosa Poloshirt, mit verschränkten Armen |
 |  | `contenu.photos.B03.alt` | Groupe en gilets réfléchissants avant le départ | Gruppe in Warnwesten vor dem Aufbruch |
-|  | `contenu.photos.B04.alt` | Jeunes en gilets orange écoutant un encadrant dans une plantation d'ananas | Junge Menschen in orangen Westen hören in einer Ananasplantage einem Betreuer zu |
+|  | `contenu.photos.B04.alt` | Jeunes en gilets orange écoutant un encadrant dans une plantation d'ananas | Junge Menschen in orangefarbenen Westen hören in einer Ananasplantage einem Betreuer zu |
 |  | `contenu.photos.B06.alt` | Deux encadrants échangent au bord d'un champ | Zwei Betreuer unterhalten sich am Rand eines Feldes |
 |  | `contenu.photos.B10.alt` | Groupe en gilets réfléchissants au milieu d'un champ d'ananas | Gruppe in Warnwesten mitten in einem Ananasfeld |
 |  | `contenu.photos.B13.alt` | Le groupe se répartit dans la plantation | Die Gruppe verteilt sich in der Plantage |
@@ -1761,15 +1761,15 @@ Fichier : `src/locales/photos/de.json` (143 textes, dont 10 à relire).
 |  | `contenu.galerie.terrain.meta` | Lieux, dates et projets à confirmer (TODO) | Orte, Daten und Projekte noch zu bestätigen (TODO) |
 |  | `contenu.galerie.open-day-jeunes.alt` | Des jeunes en t-shirts WAHHF rient et lèvent les bras autour de deux encadrants. | Junge Menschen in WAHHF-T-Shirts lachen und heben die Arme, in ihrer Mitte zwei Betreuer. |
 | \* | `contenu.galerie.open-day-jeunes.caption` | Les jeunes du Boot Camp et leurs encadrants. | Die jungen Menschen des Boot Camps und ihre Betreuer. |
-|  | `contenu.galerie.open-day-marche.alt` | Le cortège de WAHHF marche dans une rue de Yaoundé, entre les taxis jaunes. | Der Zug von WAHHF geht durch eine Straße in Yaoundé, zwischen gelben Taxis. |
+|  | `contenu.galerie.open-day-marche.alt` | Le cortège de WAHHF marche dans une rue de Yaoundé, entre les taxis jaunes. | Der WAHHF-Marsch zieht durch eine Straße in Yaoundé, zwischen gelben Taxis. |
 |  | `contenu.galerie.open-day-marche.caption` | La marche dans les rues de Yaoundé. | Der Marsch durch die Straßen von Yaoundé. |
 |  | `contenu.galerie.open-day-marche-slogan.alt` | Vus de dos, des participants marchent en t-shirts portant le slogan « Bâtir l’Afrique qui nourrit, soigne et instruit sa jeunesse ». | Von hinten gesehen: Teilnehmende gehen in T-Shirts mit dem Slogan „Bâtir l’Afrique qui nourrit, soigne et instruit sa jeunesse“. |
-| \* | `contenu.galerie.open-day-marche-slogan.caption` | « Bâtir l’Afrique qui nourrit, soigne et instruit sa jeunesse » : le slogan porté dans la rue. | „Bâtir l’Afrique qui nourrit, soigne et instruit sa jeunesse“ (Das Afrika aufbauen, das seine Jugend ernährt, heilt und bildet): der Slogan, auf die Straße getragen. |
-|  | `contenu.galerie.open-day-rassemblement.alt` | Des participants en gilets orange et t-shirts blancs rassemblés sur une pelouse au centre de Yaoundé. | Teilnehmende in orangen Westen und weißen T-Shirts, versammelt auf einer Rasenfläche im Zentrum von Yaoundé. |
+| \* | `contenu.galerie.open-day-marche-slogan.caption` | « Bâtir l’Afrique qui nourrit, soigne et instruit sa jeunesse » : le slogan porté dans la rue. | „Bâtir l’Afrique qui nourrit, soigne et instruit sa jeunesse“: der Slogan, auf die Straße getragen. |
+|  | `contenu.galerie.open-day-rassemblement.alt` | Des participants en gilets orange et t-shirts blancs rassemblés sur une pelouse au centre de Yaoundé. | Teilnehmende in orangefarbenen Westen und weißen T-Shirts, versammelt auf einer Rasenfläche im Zentrum von Yaoundé. |
 |  | `contenu.galerie.open-day-rassemblement.caption` | Rassemblement des participants au centre de Yaoundé. | Versammlung der Teilnehmenden im Zentrum von Yaoundé. |
 |  | `contenu.galerie.open-day-interview.alt` | Un responsable de WAHHF, en casquette blanche, répond à une interview télévisée en plein air. | Ein Verantwortlicher von WAHHF mit weißer Kappe gibt im Freien ein Fernsehinterview. |
 |  | `contenu.galerie.open-day-interview.caption` | Interview accordée à la presse. | Interview für die Presse. |
-|  | `contenu.galerie.open-day-accueil.alt` | Des participants en gilets orange dans le hall de l’hôtel. | Teilnehmende in orangen Westen in der Hotellobby. |
+|  | `contenu.galerie.open-day-accueil.alt` | Des participants en gilets orange dans le hall de l’hôtel. | Teilnehmende in orangefarbenen Westen in der Hotellobby. |
 |  | `contenu.galerie.open-day-accueil.caption` | Dans le hall de l’Hôtel Albatros Premium. | In der Lobby des Hotels Albatros Premium. |
 |  | `contenu.galerie.open-day-visioconference.alt` | Dans une salle de conférence, le public suit un intervenant projeté en visioconférence, à côté d’un kakémono WAHHF. | In einem Konferenzsaal verfolgt das Publikum einen per Videokonferenz zugeschalteten Redner auf der Leinwand, neben einem WAHHF-Roll-up. |
 |  | `contenu.galerie.open-day-visioconference.caption` | Intervention en visioconférence. | Beitrag per Videokonferenz. |

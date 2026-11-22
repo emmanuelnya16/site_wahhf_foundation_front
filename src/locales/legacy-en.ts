@@ -35,7 +35,7 @@ const legacyEn = {
     step2Title: '2. Guidance & Co-construction',
     step2Desc: 'Building tailored pathways with local and educational partners.',
     step3Title: '3. Training & Support',
-    step3Desc: 'Delivering language courses and field programs.',
+    step3Desc: 'Delivering language courses and field programmes.',
     step4Title: '4. Follow-up & Empowerment',
     step4Desc: 'Long-term support completely free of charge.',
     step5Title: '5. Evaluation & Transparency',
@@ -57,12 +57,12 @@ const legacyEn = {
     f1Bio: 'Committed to education, youth autonomy, and solidarity between Africa and Europe.',
     f2Name: 'NYA NANA Emmanuel',
     f2Role: 'Co-Founder — IROKO Group & WAHHF Foundation',
-    f2Bio: 'Overseeing operational structure, transparency, and free program delivery.',
+    f2Bio: 'Overseeing operational structure, transparency, and free programme delivery.',
   },
   contact: {
     badge: 'CONTACT & SUPPORT',
     title: 'Contact Us',
-    subtitle: 'Have a question about our programs, volunteering, or partnerships? Our team is here to help.',
+    subtitle: 'Have a question about our programmes, volunteering, or partnerships? Our team is here to help.',
   },
 };
 

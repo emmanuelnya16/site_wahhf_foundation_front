@@ -75,7 +75,7 @@
   "hero": {
     "kicker": "KAMERUNISCH-DEUTSCHE STIFTUNG · SOZIALER ZWEIG DER IROKO-GRUPPE",
     "title": "Junge Menschen stärken, Gemeinschaften verändern",
-    "subtitle": "Wir sind in Kamerun aktiv und begleiten junge Menschen in Afrika mit Würde, Transparenz und Solidarität: Bildung, Gesundheit, Unternehmertum, Umwelt und Sprachmobilität – zu 100 % kostenlos.",
+    "subtitle": "Wir sind in Kamerun aktiv und begleiten junge Menschen in Afrika mit Würde, Transparenz und Solidarität: Bildung, Gesundheit, Unternehmertum, Umwelt und zu 100 % kostenlose Sprachmobilität.",
     "ctaPrimary": "Unsere Arbeit unterstützen",
     "ctaSecondary": "Unsere Programme entdecken",
     "scrollHint": "Zum Entdecken scrollen",
@@ -94,7 +94,7 @@
     "filmNote": "Der Film wird über YouTube abgespielt; YouTube erhält dabei Ihre IP-Adresse.",
     "filmClose": "Film schließen",
     "loopTitle": "Vorstellungsvideo der WAHHF Foundation (dekorativ, ohne Ton)",
-    "filmFrameTitle": "Film der WAHHF Foundation (1 Min. 10)"
+    "filmFrameTitle": "Film der WAHHF Foundation (1:10 Min.)"
   },
   "home": {
     "mission": {
@@ -135,7 +135,7 @@
         "a2": "Alltagsgespräche",
         "b1": "Selbstständigkeit",
         "b2": "Unabhängigkeit",
-        "c1": "Beherrschung"
+        "c1": "Sprachbeherrschung"
       }
     },
     "video": {

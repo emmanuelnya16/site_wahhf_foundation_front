@@ -104,7 +104,7 @@
     "all": "All the news"
   },
   "final": {
-    "titleUpcoming": "Save your day.",
+    "titleUpcoming": "Save the date.",
     "textUpcoming": "Register, then come with your questions: the foundation's team is waiting for you.",
     "titlePast": "Relive the day in pictures.",
     "textPast": "The photos of the day are in the foundation's gallery.",
@@ -310,7 +310,7 @@
         ],
         "jamais": [
           "A “guaranteed” visa",
-          "An admission or a job without steps or language level",
+          "An admission or a job without any formalities or language level",
           "Hidden fees, or fees paid to an unknown intermediary"
         ]
       },

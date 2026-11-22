@@ -18,7 +18,7 @@
     "apply": "Apply",
     "partners": "Partners",
     "contact": "Contact",
-    "searchPlaceholder": "Search a program, German/English course, country...",
+    "searchPlaceholder": "Search a programme, German/English course, country...",
     "themeLight": "Light mode",
     "themeDark": "Dark mode",
     "domains": {
@@ -64,7 +64,7 @@
     "title": "Empowering youth, transforming communities",
     "subtitle": "We act in Cameroon and support African youth with dignity, transparency, and solidarity: education, health, entrepreneurship, ecology, and 100% free language & mobility support.",
     "ctaPrimary": "Support our actions",
-    "ctaSecondary": "Explore our programs",
+    "ctaSecondary": "Explore our programmes",
     "scrollHint": "Scroll to explore",
     "videoPause": "Pause the video",
     "videoPlay": "Play the video",
@@ -81,20 +81,20 @@
     "filmNote": "The film is streamed by YouTube, which then receives your IP address.",
     "filmClose": "Close the film",
     "loopTitle": "WAHHF Foundation presentation video (decorative, no sound)",
-    "filmFrameTitle": "WAHHF Foundation film (1 min 10)"
+    "filmFrameTitle": "WAHHF Foundation film (1 min 10 s)"
   },
   "home": {
     "mission": {
       "kicker": "Who we are",
       "title": "A human bridge between Cameroon and Germany",
       "p1": "Born from a dual Cameroonian and German heritage, WAHHF Foundation (We Are Here Help Foundation) is the social and philanthropic branch of the IROKO Group.",
-      "p2": "Convinced that dignity comes through knowledge, health, and autonomy, we develop sustainable field programs alongside a free German/English language and European orientation initiative.",
+      "p2": "Convinced that dignity comes through knowledge, health, and autonomy, we develop sustainable field programmes alongside a free German/English language and European orientation initiative.",
       "link": "Learn more about our history and governance"
     },
     "stats": {
       "kicker": "Our impact in numbers",
       "title": "Concrete and measurable actions",
-      "subtitle": "Every program is monitored with rigor and financial transparency. (Figures to be confirmed — TODO)",
+      "subtitle": "Every programme is monitored with rigour and financial transparency. (Figures to be confirmed — TODO)",
       "s1Label": "Youth and families supported (TODO: confirm)",
       "s2Label": "Complementary action domains",
       "s3Label": "Regions of Cameroon covered",
@@ -114,7 +114,7 @@
       "card2Desc": "Clear, verified 4-step guidance: understanding study, vocational training, or work pathways and preparing your file.",
       "card3Title": "10 supported countries",
       "card3Desc": "Luxembourg, Germany, Slovenia, Italy, Greece, Portugal, Spain, Denmark, Poland, and Albania.",
-      "cta": "Discover the program",
+      "cta": "Discover the programme",
       "filLabel": "The five German/English levels, from A1 to C1, then Europe",
       "filEnd": "Europe",
       "levels": {
@@ -128,7 +128,7 @@
     "video": {
       "kicker": "In the field",
       "title": "Watch our mission and vision in motion",
-      "subtitle": "Discover the foundation's commitment and the IROKO Group ecosystem that funds our free programs.",
+      "subtitle": "Discover the foundation's commitment and the IROKO Group ecosystem that funds our free programmes.",
       "playLabel": "Watch presentation film"
     },
     "approach": {
@@ -144,12 +144,12 @@
     "presence": {
       "kicker": "Presence & reach",
       "title": "Based in Yaoundé and Douala, looking towards 10 European countries",
-      "subtitle": "Our teams are in Yaoundé and Douala; relays in the other regions are still to be confirmed. In Europe, verified guides for 10 countries."
+      "subtitle": "Our teams are in Yaoundé and Douala; local contacts in the other regions are still to be confirmed. In Europe, verified guides for 10 countries."
     },
     "testimonials": {
       "kicker": "Testimonials",
       "title": "Voices of beneficiaries and volunteers",
-      "subtitle": "Stories from our programs (Sample testimonials marked TODO for validation)."
+      "subtitle": "Stories from our programmes (Sample testimonials marked TODO for validation)."
     },
     "news": {
       "kicker": "News & field updates",
@@ -167,7 +167,7 @@
     "partners": {
       "kicker": "Partners and funders",
       "title": "Backed by IROKO Group and an engaged network",
-      "subtitle": "Our free programs are made possible by the structural commitment of IROKO Group and our generous donors.",
+      "subtitle": "Our free programmes are made possible by the structural commitment of IROKO Group and our generous donors.",
       "link": "Meet all our partners"
     },
     "act": {
@@ -175,16 +175,16 @@
       "title": "Every gesture strengthens a life journey",
       "subtitle": "Join the mission as a volunteer or a partner, or follow our work through the newsletter.",
       "volunteerText": "Join our teams in Cameroon, in Germany or remotely: language teaching, mentoring, health or logistics.",
-      "partnerText": "Schools, universities, NGOs, foundations and companies: let’s build measurable public-interest programs together."
+      "partnerText": "Schools, universities, NGOs, foundations and companies: let’s build measurable public-interest programmes together."
     },
     "newsletter": {
       "kicker": "Stay connected",
       "title": "Receive our news and upcoming session dates",
-      "subtitle": "Your address is only used to send you this newsletter. The site does not store it yet: it prepares a sign-up message for you to send us by WhatsApp or e-mail.",
+      "subtitle": "Your address is only used to send you this newsletter. The site does not store it yet: it prepares a sign-up message for you to send us by WhatsApp or email.",
       "placeholder": "Your email address",
       "button": "Prepare my sign-up",
       "privacyLink": "Privacy policy",
-      "donateBannerTitle": "Support the free access to our educational and social programs",
+      "donateBannerTitle": "Support free access to our educational and social programmes",
       "donateBannerSub": "100% of donations directly fund language courses, youth guidance, and field initiatives.",
       "donateBannerBtn": "Donate",
       "draftSubject": "WAHHF newsletter sign-up",
@@ -220,7 +220,7 @@
     "partners": "Partners & IROKO Group",
     "news": "News & fieldwork",
     "academy": "German/English Academy A1–C1 (free)",
-    "apply": "Apply for a program",
+    "apply": "Apply for a programme",
     "volunteer": "Become a volunteer",
     "partner": "Become a partner",
     "scams": "Scam prevention",
@@ -232,7 +232,7 @@
     "newTab": " (new tab)",
     "skipLink": "Skip to content",
     "whatsapp": {
-      "message": "Hello WAHHF Foundation, I would like information about your free programs...",
+      "message": "Hello WAHHF Foundation, I would like information about your free support programmes...",
       "label": "Write to WAHHF Foundation on WhatsApp (new tab)"
     },
     "cookies": {
@@ -357,7 +357,7 @@
         "programs": [
           "Workshops on management and simple bookkeeping",
           "Introduction to digital tools and office software",
-          "Networking with volunteer experts from the IROKO Group"
+          "Networking with committed experts from the IROKO Group"
         ]
       },
       "environnement": {
@@ -372,7 +372,7 @@
       },
       "droits-inclusion": {
         "title": "Rights and inclusion",
-        "shortDesc": "Promoting equal opportunities, including vulnerable people and giving access to civic information.",
+        "shortDesc": "Promoting equal opportunities, the inclusion of vulnerable people and access to civic information.",
         "fullDesc": "Defending human dignity by fighting every form of exclusion, whether social, economic or linked to disability.",
         "programs": [
           "Empowering young women and community leadership",
@@ -383,7 +383,7 @@
       "mobilite-langues": {
         "title": "Mobility & Languages",
         "shortDesc": "Free German/English academy (A1 to C1) and transparent support towards 10 European countries.",
-        "fullDesc": "A program funded by our partners and donors, to learn German/English and prepare a study, training or mobility project safely.",
+        "fullDesc": "A programme funded by our partners and donors, to learn German/English and prepare a study, training or mobility project safely.",
         "programs": [
           "Support for German/English language courses from level A1 to C1",
           "Documented guidance towards 10 European countries",
@@ -538,7 +538,7 @@
         "apprendre": {
           "title": "Learn",
           "meta": "Albatros Hotel, 25 April 2026",
-          "description": "A packed room to discover the foundation’s programs."
+          "description": "A packed room to discover the foundation’s programmes."
         },
         "chanter-ensemble": {
           "title": "Singing together",

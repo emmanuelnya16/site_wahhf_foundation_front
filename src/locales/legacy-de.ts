@@ -20,7 +20,7 @@ const legacyDe = {
   structure: {
     badge: 'LEITUNG & ORGANISATION',
     title: 'Unsere Leitung',
-    subtitle: 'Eine transparente Struktur, getragen von der IROKO-Gruppe und begleitet von einem Ethikkomitee.',
+    subtitle: 'Eine transparente Struktur, getragen von der IROKO-Gruppe und beaufsichtigt von einem Ethikkomitee.',
   },
   poles: {
     badge: 'UNSERE ARBEITSBEREICHE',
@@ -35,7 +35,7 @@ const legacyDe = {
     step1Desc: 'Die tatsächlichen Bedürfnisse junger Menschen und Gemeinschaften verstehen.',
     step2Title: '2. Orientierung & gemeinsame Planung',
     step2Desc: 'Mit lokalen und pädagogischen Partnern einen passenden Weg entwickeln.',
-    step3Title: '3. Ausbildung & Begleitung',
+    step3Title: '3. Schulung & Begleitung',
     step3Desc: 'Sprachkurse und Programme vor Ort umsetzen.',
     step4Title: '4. Nachbetreuung & Selbstständigkeit',
     step4Desc: 'Die Schritte langfristig und kostenlos begleiten.',
