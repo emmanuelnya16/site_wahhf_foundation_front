@@ -424,6 +424,7 @@ Seuls les faits de la banderole (photo A02) sont affichés en ligne : WAHHF Foun
 168. Le nombre de places restantes ne s’affiche que s’il vient d’une vraie source (votre billetterie ou votre liste d’inscrits) : comment le tiendrez-vous à jour ?
 169. Les textes anglais des pages Événements (src/locales/events/en.json) sont des propositions, à valider.
 170. La banderole du 25 avril (photo A02) développe le sigle en « Watio Hearts Humanitary Foundation », alors que le site écrit partout « WAHHF Foundation (We Are Here Help Foundation) ». Quel est le nom complet exact ? Le site n’a pas été modifié.
+    - Constat (22 novembre 2026) : la banderole de l’événement du 25 avril (photo A02) écrit « WAHHF Foundation – Watio Hearts Humanitary Foundation », alors que le titre des pages du site dit « WAHHF Foundation — We Are Here Help Foundation » (dans les trois langues). Rien ne sera changé sur le site tant que la fondation n’aura pas répondu.
 
 ---
 
