@@ -185,12 +185,19 @@ export default function Footer() {
                   {t('footer.contactForm')}
                 </Link>
               </li>
-              <li className="flex items-start gap-2.5">
-                <MapPin aria-hidden="true" className={cn(ICON, 'mt-1')} />
-                <span>
-                  {contact.place} <span>{t('footer.addressTodo')}</span>
-                </span>
-              </li>
+              {/* Adresse : jamais de TODO en production ; la ligne attend l'adresse exacte (CONTACT.address) */}
+              {(CONTACT.address || import.meta.env.DEV) && (
+                <li className="flex items-start gap-2.5">
+                  <MapPin aria-hidden="true" className={cn(ICON, 'mt-1')} />
+                  <span>
+                    {CONTACT.address ?? (
+                      <>
+                        {contact.place} <span>{t('footer.addressTodo')}</span>
+                      </>
+                    )}
+                  </span>
+                </li>
+              )}
               <li className="flex items-center gap-2.5">
                 <Phone aria-hidden="true" className={ICON} />
                 <a href={`tel:+${CONTACT.whatsappNumber}`} className={LINK}>

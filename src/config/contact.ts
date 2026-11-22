@@ -13,4 +13,9 @@ export const CONTACT = {
   email: 'contact@wahhf-foundation.org',
   /** Où se trouve la fondation, en attendant les adresses postales exactes. */
   place: 'Cameroun (Douala, Yaoundé) et coordination en Allemagne',
+  /**
+   * Adresse postale exacte (une ligne, non traduite). null tant que la fondation ne l'a pas donnée : le pied de page
+   * masque alors la ligne d'adresse en production (en développement, elle reste visible avec son TODO).
+   */
+  address: null as string | null,
 } as const;
