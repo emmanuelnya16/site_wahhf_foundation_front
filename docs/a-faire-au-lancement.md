@@ -64,7 +64,9 @@ Ce qu'il faut changer le jour où le site devient public. Prévu au **Lot 9**. C
 
 ## 3. Autres points à vérifier le même jour
 
-- **`public/.htaccess`** : les routes `/evenements` et `/evenements/<slug>`, ajoutées au lot 7.9, ne sont pas dans la liste des réécritures. Les pages s'affichent, mais avec le statut 404. Il faut ajouter `evenements` à la première règle et à la règle des routes à paramètre.
+- **`public/.htaccess`** : corrigé le 22 novembre 2026. `/evenements` et `/evenements/<slug>` sont servies en 200. `npm run check` (scripts/check-routes.mjs) échoue désormais si une route du routeur manque dans le .htaccess. Le jour du lancement, vérifier sur l'hébergement réel :
+  - `curl -I https://<domaine>/evenements` et `curl -I https://<domaine>/accompagnement/pays/allemagne` : statut 200 ;
+  - `curl -I https://<domaine>/page-inexistante` : statut 404.
 - **Adresse exacte de la fondation** : `CONTACT.address` dans `src/config/contact.ts`. Tant qu'elle manque, la ligne d'adresse du pied de page reste masquée en production.
 - **Traductions à relire** : docs/traductions-de-a-relire.md (astérisques en priorité).
 - **Faits de Road to Europe** : date, lieu, prix dans les trois langues, inscription (`ROAD_TO_EUROPE_FAITS`, questions 171 à 178).
