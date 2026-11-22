@@ -439,3 +439,13 @@ Fiche /evenements/road-to-europe. Les faits se remplissent en un seul endroit : 
 176. Organisateurs et partenaires (logos) : aujourd’hui, WAHHF Foundation seulement.
 177. Intervenants : la barre dit « annoncés très bientôt ».
 178. Les textes anglais de la fiche (src/locales/events/en.json, contenu) sont des propositions, à valider.
+
+---
+
+## Questions ajoutées avec l'allemand (lot 7.10, 22 novembre 2026)
+
+Le site existe maintenant en français, en anglais et en allemand (sélecteur FR / EN / DE dans l'en-tête). Les textes anglais et allemands sont des traductions proposées : la liste à relire est dans docs/traductions-de-a-relire.md.
+
+179. La fondation est-elle enregistrée en Allemagne (e.V. ou autre) ? Si oui, il faut un Impressum et une Datenschutzerklärung en allemand rédigés par un juriste. Aujourd'hui, en allemand, les pages Mentions légales, Confidentialité et Transparence affichent la version française avec la mention « Diese Seite ist derzeit nur auf Französisch verfügbar. », et le lien du pied de page s'appelle « Impressum ».
+180. Qui relira l'allemand ? Les chaînes marquées d'un astérisque dans docs/traductions-de-a-relire.md sont celles dont le sens ou le terme est incertain (noms d'institutions, termes juridiques, ton).
+181. Les noms des régions du Cameroun restent en français dans la version allemande (Littoral, Centre, Ouest…), comme dans la plupart des sources allemandes ; en anglais, ils prennent leurs noms officiels anglais (West, South-West, Far North…). Ce choix vous convient-il ?

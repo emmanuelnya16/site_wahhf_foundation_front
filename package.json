@@ -11,6 +11,7 @@
     "lint": "tsc --noEmit",
     "check": "tsc --noEmit && node scripts/check-i18n.mjs",
     "check:i18n": "node scripts/check-i18n.mjs",
+    "i18n:relire": "node scripts/traductions-a-relire.mjs",
     "photos": "node scripts/optimize-photos.mjs",
     "check:todo": "vite build && node scripts/check-textes-provisoires.mjs --out rapport-textes-provisoires.md"
   },

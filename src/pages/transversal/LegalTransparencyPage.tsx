@@ -8,6 +8,7 @@ import { PrimaryButton } from '../../components/wahhf/Buttons';
 import { CONTACT } from '../../config/contact';
 import { followAnchorLink } from '../../lib/scroll';
 import { cn } from '../../lib/utils';
+import { useLocalize } from '../../lib/localize';
 
 /** « 15 novembre 2026 », insécable (T-19) : la date ne se coupe jamais en fin de ligne. */
 const DAY = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
@@ -117,11 +118,23 @@ export function LegalTransparencyPage({
   }[type];
   // Sommaire, ancres et date : Mentions légales et Confidentialité seulement (Transparence a sa fin de page, groupe 7.2)
   const legal = type !== 'transparence';
+  // Lot 7.10 : les pages légales ne sont pas traduites. En anglais et en allemand, la version française s'affiche,
+  // marquée lang="fr" (lecteurs d'écran, césure), sous une mention dans la langue choisie.
+  const { t, lang } = useLocalize();
+  const translated = lang !== 'fr';
+  const Content = translated ? 'div' : Fragment;
+  const contentProps = translated ? { lang: 'fr' } : {};
 
   return (
     <>
       <SEO title={content.title} description={content.blocks[0].p} />
+      <Content {...contentProps}>
       <PageHeader reveal={type === 'transparence'}>
+        {translated && (
+          <p lang={lang} role="note" className="w-fit rounded-inner border border-info/40 bg-info-bg px-4 py-2 text-meta font-semibold text-text">
+            {t('legal.onlyFrench')}
+          </p>
+        )}
         {'kicker' in content && (
           <PageMeta>
             <content.icon aria-hidden="true" className="w-4 h-4" />
@@ -192,6 +205,7 @@ export function LegalTransparencyPage({
           </div>
         </section>
       )}
+      </Content>
     </>
   );
 }
