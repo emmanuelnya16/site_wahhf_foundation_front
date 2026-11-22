@@ -1,6 +1,7 @@
 import { ReactNode, Ref } from 'react';
 import { Mail, MessageCircle } from 'lucide-react';
-import { Trans, useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
+import { richText } from '../../lib/richText';
 import { CONTACT } from '../../config/contact';
 import { PrimaryButton, SecondaryButton } from './Buttons';
 import { ContactDraft, mailtoHref, whatsappHref } from '../../lib/contactDraft';
@@ -71,11 +72,13 @@ export default function ContactHandoff({
       </div>
 
       <p className="text-meta text-text-secondary max-w-[65ch]">
-        <Trans
-          i18nKey="ui.handoff.fallback"
-          values={{ email: CONTACT.email, phone: CONTACT.whatsappDisplay }}
-          components={{ mail: <a href={`mailto:${CONTACT.email}`} className="text-link underline underline-offset-4 break-all" /> }}
-        />
+        {richText(t('ui.handoff.fallback', { email: CONTACT.email, phone: CONTACT.whatsappDisplay }), {
+          mail: (text) => (
+            <a href={`mailto:${CONTACT.email}`} className="text-link underline underline-offset-4 break-all">
+              {text}
+            </a>
+          ),
+        })}
       </p>
 
       <details className="rounded-inner bg-surface-raised p-4 text-meta text-text">

@@ -1,6 +1,8 @@
 import type { CSSProperties } from 'react';
 import type { CatalogPhoto } from '../../data/photos';
+import { useTranslation } from 'react-i18next';
 import { cn } from '../../lib/utils';
+import { photoAlt } from '../../lib/photoText';
 
 /** Rayons du contrat (§9) : 20 px pour une photo, 12 px pour une vignette ou une petite image, aucun dans un cadre déjà arrondi. */
 const RADIUS = { card: 'rounded-card', inner: 'rounded-inner', none: '' } as const;
@@ -39,6 +41,7 @@ type PhotoProps = {
  * alternatif vient du catalogue.
  */
 export default function Photo({ photo, sizes, priority = false, fit = 'intrinsic', radius = 'card', decorative = false, className, style, imgAttributes, onError }: PhotoProps) {
+  useTranslation();
   return (
     // <picture> en bloc (et non display: contents) : dans une grille, ses <source> occuperaient sinon des cases
     <picture className={fit === 'cover' ? 'block h-full w-full' : 'block'}>
@@ -49,7 +52,7 @@ export default function Photo({ photo, sizes, priority = false, fit = 'intrinsic
         src={photo.sources.jpeg}
         width={photo.width}
         height={photo.height}
-        alt={decorative ? '' : photo.alt}
+        alt={decorative ? '' : photoAlt(photo)}
         loading={priority ? 'eager' : 'lazy'}
         decoding={priority ? 'auto' : 'async'}
         fetchPriority={priority ? 'high' : undefined}

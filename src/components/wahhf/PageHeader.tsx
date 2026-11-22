@@ -6,6 +6,8 @@ import { albumPlaceDate, GALLERY_ALBUMS, galleryItem } from '../../data/gallery'
 import LineReveal from '../../effects/LineReveal';
 import type { CatalogPhoto } from '../../data/photos';
 import Photo from './Photo';
+import { useTranslation } from 'react-i18next';
+import { localizedGallery } from '../../lib/photoText';
 
 /** Arrivée de l'en-tête (groupe 7.1, contrat §10) : activée page par page avec <PageHeader reveal>. */
 const RevealContext = createContext(false);
@@ -63,9 +65,13 @@ export default function PageHeader({
   notice?: ReactNode;
   className?: string;
 }) {
-  const photo = !catalogPhoto && photoId ? galleryItem(photoId) : undefined;
+  useTranslation();
+  // Lot 7.10 : légende, texte alternatif et album dans la langue de l'interface
+  const galleryPhoto = !catalogPhoto && photoId ? galleryItem(photoId) : undefined;
+  const photo = galleryPhoto ? localizedGallery(galleryPhoto) : undefined;
   const hasPhoto = !!catalogPhoto || !!photo;
-  const album = photo ? GALLERY_ALBUMS.find((a) => a.id === photo.album) : undefined;
+  const albumFr = photo ? GALLERY_ALBUMS.find((a) => a.id === photo.album) : undefined;
+  const album = albumFr ? localizedGallery(albumFr) : undefined;
   const placeDate = albumPlaceDate(album);
   return (
     <RevealContext.Provider value={reveal}>
@@ -133,8 +139,9 @@ export default function PageHeader({
  * d'écran, page courante en aria-current. Même apparence que PageMeta.
  */
 export function PageBreadcrumb({ items }: { items: { label: string; to?: string }[] }) {
+  const { t } = useTranslation();
   return (
-    <nav aria-label="Fil d’Ariane">
+    <nav aria-label={t('ui.breadcrumb')}>
       <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-meta text-text-secondary">
         {items.map((item, i) => (
           <li key={item.label} className="flex items-center gap-x-2">

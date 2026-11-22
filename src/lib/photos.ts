@@ -1,4 +1,9 @@
 import { PHOTOS, PHOTO_ALBUMS, type CatalogPhoto, type PhotoAlbum } from '../data/photos';
+import i18n from '../i18n';
+import { localizedAlbum, markCatalog } from './photoText';
+
+// Lot 7.10 : les photos du catalogue reçoivent la traduction de leur texte alternatif (Photo, visionneuse)
+markCatalog(PHOTOS);
 
 /**
  * Consentement (GAL-01, lot 7.6) : une photo marquée « mineurs : oui » ou « ? » au catalogue est 'pending' tant que la
@@ -46,11 +51,13 @@ export function photoCaption(photo: CatalogPhoto): string {
 
 /** Nom d'un album pour le texte courant : « Journée du 25 avril 2026, Albatros Hotel » (date insécable, T-19). */
 export function albumLabel(album: PhotoAlbum): string {
-  return album.title.replace(/\s+—\s+/, ', ').replace(/(\d+) (\p{L}+) (\d{4})/u, `$1${NB}$2${NB}$3`);
+  // Lot 7.10 : titre dans la langue de l'interface ; date insécable en français, en anglais (« 25 April 2026 ») et en
+  // allemand (« 25. April 2026 »)
+  return localizedAlbum(album).title.replace(/\s+—\s+/, ', ').replace(/(\d+\.?) (\p{L}+) (\d{4})/u, `$1${NB}$2${NB}$3`);
 }
 
 /** « 13 photos », « 1 photo » (nombre et mot insécables). */
-export const photoCount = (n: number) => `${n}${NB}photo${n > 1 ? 's' : ''}`;
+export const photoCount = (n: number) => i18n.t('ui.photos.count', { count: n });
 
 /** Albums qui ont au moins une photo affichable, dans l'ordre du catalogue. */
 export function visibleAlbums(): { album: PhotoAlbum; photos: CatalogPhoto[] }[] {

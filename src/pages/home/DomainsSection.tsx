@@ -4,6 +4,7 @@ import Section from '../../components/wahhf/Section';
 import SectionHeader from '../../components/wahhf/SectionHeader';
 import Photo from '../../components/wahhf/Photo';
 import { DOMAINS_DATA } from '../../services/api';
+import { localizedList } from '../../lib/localize';
 import { DOMAIN_PHOTO_IDS } from '../../config/domainPhotos';
 import { useCatalogPhotos } from '../../lib/useCatalogPhoto';
 
@@ -20,14 +21,15 @@ const SPECS = DOMAINS_DATA.map((domain) => DOMAIN_PHOTO_IDS[domain.slug] ?? []);
  * Mouvement : les lignes apparaissent (fondu et montée, RevealBatch) ; pas de zoom au survol (contrat, annexe B, 12).
  */
 export default function DomainsSection() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const domains = localizedList(DOMAINS_DATA, 'contenu.domaines', (d) => d.id, i18n.language);
   const photos = useCatalogPhotos(SPECS);
   return (
     <Section tone="sauge" id="domaines">
       <div className="container-page space-y-10">
         <SectionHeader title={t('home.domains.title')} subtitle={t('home.domains.subtitle')} />
         <ul className="grid gap-x-10 md:grid-cols-2">
-          {DOMAINS_DATA.map((domain, i) => {
+          {domains.map((domain, i) => {
             const photo = photos[i]?.photo;
             return (
               <li

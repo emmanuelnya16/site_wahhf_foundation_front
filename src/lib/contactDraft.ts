@@ -16,8 +16,17 @@ export function buildDraft(subject: string, intro: string, rows: Array<[string, 
   const lines = rows
     .filter(([, value]) => value && value.trim())
     .map(([label, value]) => i18n.t('ui.draft.row', { label, value: value!.trim() }));
-  const body = [i18n.t('ui.draft.greeting'), '', intro, '', ...lines, ...(outro ? ['', outro] : [])].join('\n');
+  const body = [i18n.t('ui.draft.greeting'), '', afterGreeting(intro), '', ...lines, ...(outro ? ['', outro] : [])].join('\n');
   return { subject, body };
+}
+
+/**
+ * En allemand, la formule d'accueil se termine par une virgule : la phrase suivante commence par une minuscule, sauf un
+ * nom (« ich möchte… », mais « Bewerbung … »). Seuls les pronoms et mots-outils courants d'une première phrase changent.
+ */
+function afterGreeting(intro: string): string {
+  if (!i18n.language.startsWith('de')) return intro;
+  return intro.replace(/^(Ich|Wir|Mein\p{L}*|Unser\p{L}*|Hiermit|Bitte|Gern|Gerne|Hier)(?=\s)/u, (word) => word.toLowerCase());
 }
 
 /** Lien WhatsApp (wa.me) qui ouvre une conversation avec le message déjà écrit. */

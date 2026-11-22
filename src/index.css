@@ -2073,3 +2073,16 @@ html.vt-galerie::view-transition-new(root) {
     animation: menu-entree 0.2s var(--ease-reveal) both;
   }
 }
+
+/*
+ * Lot 7.10 : césure automatique en allemand (mots composés longs : « Berufsausbildung », « Einstufungstest »…), sur les
+ * paragraphes, les titres et les listes de contenu. Jamais dans l'en-tête, les menus (pied de page compris), les liens,
+ * les boutons (y compris les liens en forme de bouton) ni les libellés de contrôle : ils gardent leurs mots entiers.
+ */
+:lang(de) :is(p, h1, h2, h3, h4, h5, h6, li, dd, dt, blockquote, figcaption, td, th, legend) {
+  hyphens: auto;
+}
+:lang(de) :is(header, nav, footer, a, button, summary, label, [role='button'], [role='tab']),
+:lang(de) :is(header, nav, footer, a, button, summary, label, [role='button'], [role='tab']) * {
+  hyphens: manual;
+}

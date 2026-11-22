@@ -1,7 +1,9 @@
 import { ComponentType, startTransition, useLayoutEffect, useRef, useState } from 'react';
 import { Play } from 'lucide-react';
 import { formatDuration, GalleryItem } from '../../data/gallery';
+import { useTranslation } from 'react-i18next';
 import ChunkErrorBoundary from './ChunkErrorBoundary';
+import { localizedGallery } from '../../lib/photoText';
 import { cn } from '../../lib/utils';
 import type { FillLayout } from './galleryLayout';
 import type { GalleryLightboxProps } from './GalleryLightbox';
@@ -71,6 +73,7 @@ export default function GalleryGrid({
   fill,
   openFromThumb = false,
 }: GalleryGridProps) {
+  const { t } = useTranslation();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   // La visionneuse reste montée après sa première ouverture (fondu de fermeture)
   const [LightboxView, setLightboxView] = useState<{ Component: Lightbox } | null>(null);
@@ -178,7 +181,7 @@ export default function GalleryGrid({
                       : 'aspect-[4/3]'
                 )}
               >
-                <span className="sr-only">{item.kind === 'video' ? 'Lire la vidéo : ' : 'Agrandir la photo : '}</span>
+                <span className="sr-only">{item.kind === 'video' ? t('ui.gallery.playVideo') : t('ui.gallery.enlarge')}</span>
                 <img
                   src={thumb}
                   srcSet={item.kind === 'photo' ? item.srcSet : undefined}
@@ -187,7 +190,7 @@ export default function GalleryGrid({
                       ? '(min-width: 1024px) 610px, (min-width: 768px) 66vw, 100vw'
                       : '(min-width: 1024px) 300px, (min-width: 768px) 33vw, 50vw'
                   }
-                  alt={item.alt}
+                  alt={localizedGallery(item).alt}
                   width={item.w}
                   height={item.h}
                   loading="lazy"

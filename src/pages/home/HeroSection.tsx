@@ -157,7 +157,7 @@ export default function HeroSection() {
             ref={filmDialogRef}
             role="dialog"
             aria-modal="true"
-            aria-label={HERO_FILM.title}
+            aria-label={t('hero.filmFrameTitle')}
             tabIndex={-1}
             data-lenis-prevent
             className={`fixed inset-0 z-(--z-modal) flex items-center justify-center p-4 sm:p-8${withMotion ? '' : ' dialog-fallback'}`}
@@ -187,7 +187,7 @@ export default function HeroSection() {
                 {filmLoaded ? (
                   <iframe
                     src={heroFilmUrl()}
-                    title={HERO_FILM.title}
+                    title={t('hero.filmFrameTitle')}
                     allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
                     allowFullScreen
                     referrerPolicy="strict-origin-when-cross-origin"

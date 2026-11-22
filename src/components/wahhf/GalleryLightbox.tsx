@@ -4,6 +4,9 @@ import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { useDialog } from '../../lib/useDialog';
 import { albumPlaceDate, GALLERY_ALBUMS, GalleryItem, GalleryPhoto } from '../../data/gallery';
 import { EASE_SCREEN } from '../../lib/motionTokens';
+import { useTranslation } from 'react-i18next';
+import i18n from '../../i18n';
+import { localizedGallery } from '../../lib/photoText';
 
 /**
  * Fenêtre et changement d'élément : fondu de 0,3 s, sans glissement (contrat, annexe B, ligne 38). Le geste
@@ -32,7 +35,8 @@ export interface GalleryLightboxProps {
 }
 
 /** Libellé exact du bouton précédent ou suivant (GAL-07) : « Photo suivante », « Vidéo précédente »… */
-const navLabel = (item: GalleryItem | undefined, dir: 'précédente' | 'suivante') => `${item?.kind === 'video' ? 'Vidéo' : 'Photo'} ${dir}`;
+const navLabel = (item: GalleryItem | undefined, dir: 'prev' | 'next') =>
+  i18n.t(`ui.gallery.${dir}${item?.kind === 'video' ? 'Video' : 'Photo'}`);
 
 /** Taille réservée avant le chargement : la photo tient dans l'écran, à ses proportions (rien ne saute à l'arrivée). */
 const photoBox = (item: GalleryPhoto): CSSProperties => ({
@@ -45,6 +49,7 @@ const photoBox = (item: GalleryPhoto): CSSProperties => ({
  * téléchargement ; en cas d'échec, un message le dit, la légende reste.
  */
 function LightboxPhoto({ item, sharedName }: { item: GalleryPhoto; sharedName?: string }) {
+  const { t } = useTranslation();
   const [failed, setFailed] = useState(false);
   return (
     <div className="relative" style={photoBox(item)}>
@@ -65,7 +70,7 @@ function LightboxPhoto({ item, sharedName }: { item: GalleryPhoto; sharedName?: 
       />
       {failed && (
         <p role="status" className="absolute inset-0 flex items-center justify-center p-6 text-center text-body text-text-on-inverse bg-humus rounded-inner">
-          Cette photo n’a pas pu être chargée. Vérifiez votre connexion, puis rouvrez-la.
+          {t('ui.photos.loadError')}
         </p>
       )}
     </div>
@@ -79,6 +84,7 @@ function LightboxPhoto({ item, sharedName }: { item: GalleryPhoto; sharedName?: 
  * réelle (GAL-04, en attendant les originaux). Couleurs du contrat sur nuit (on-inverse), sur un voile humus.
  */
 export default function GalleryLightbox({ items, index, onChange, returnFocusRef, sharedName, appear = true }: GalleryLightboxProps) {
+  const { t } = useTranslation();
   const open = index !== null;
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -119,8 +125,10 @@ export default function GalleryLightbox({ items, index, onChange, returnFocusRef
     }
   };
 
-  const item = index !== null ? items[index] : null;
-  const album = item ? GALLERY_ALBUMS.find((a) => a.id === item.album) : undefined;
+  // Lot 7.10 : textes de l'élément et de l'album dans la langue de l'interface
+  const item = index !== null ? localizedGallery(items[index]) : null;
+  const albumFr = item ? GALLERY_ALBUMS.find((a) => a.id === item.album) : undefined;
+  const album = albumFr ? localizedGallery(albumFr) : undefined;
   const placeDate = albumPlaceDate(album);
   const prev = index !== null ? items[(index - 1 + items.length) % items.length] : undefined;
   const next = index !== null ? items[(index + 1) % items.length] : undefined;
@@ -159,7 +167,7 @@ export default function GalleryLightbox({ items, index, onChange, returnFocusRef
                 ref={closeRef}
                 type="button"
                 onClick={() => onChange(null)}
-                aria-label="Fermer la galerie"
+                aria-label={t('ui.gallery.close')}
                 className="w-11 h-11 rounded-pill bg-action-on-inverse text-on-action-on-inverse hover:bg-action-on-inverse-hover flex items-center justify-center cursor-pointer transition-colors duration-(--dur-fast) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-action-on-inverse"
               >
                 <X className="w-5 h-5" aria-hidden="true" />
@@ -206,10 +214,10 @@ export default function GalleryLightbox({ items, index, onChange, returnFocusRef
 
             {items.length > 1 && (
               <>
-                <button type="button" onClick={() => go(-1)} aria-label={navLabel(prev, 'précédente')} className={`${navButton} left-2 sm:left-6`}>
+                <button type="button" onClick={() => go(-1)} aria-label={navLabel(prev, 'prev')} className={`${navButton} left-2 sm:left-6`}>
                   <ChevronLeft className="w-5 h-5" aria-hidden="true" />
                 </button>
-                <button type="button" onClick={() => go(1)} aria-label={navLabel(next, 'suivante')} className={`${navButton} right-2 sm:right-6`}>
+                <button type="button" onClick={() => go(1)} aria-label={navLabel(next, 'next')} className={`${navButton} right-2 sm:right-6`}>
                   <ChevronRight className="w-5 h-5" aria-hidden="true" />
                 </button>
               </>
@@ -218,7 +226,7 @@ export default function GalleryLightbox({ items, index, onChange, returnFocusRef
 
           <p aria-live="polite" className="px-4 sm:px-8 pb-5 sm:pb-8 text-center text-meta text-text-on-inverse min-h-[3.5rem]">
             <span className="sr-only">
-              {index + 1} sur {items.length} :{' '}
+              {t('ui.gallery.position', { n: index + 1, total: items.length })}{' '}
             </span>
             {item.caption}
           </p>

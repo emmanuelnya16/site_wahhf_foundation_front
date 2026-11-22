@@ -1,4 +1,5 @@
 import { CSSProperties, RefObject, useCallback, useEffect, useRef, useState } from 'react';
+import i18n from '../../i18n';
 import { Pause, Play } from 'lucide-react';
 import { HERO_LOOP, HERO_VIDEO, YOUTUBE_ORIGIN, heroVideoUrl } from '../../config/heroVideo';
 import { onReducedMotionChange, prefersReducedMotion } from '../../lib/reducedMotion';
@@ -458,7 +459,7 @@ export function HeroVideoBackground({ video }: { video: HeroVideoState }) {
         <iframe
           ref={video.iframeRef}
           src={heroVideoUrl(window.location.origin)}
-          title={HERO_VIDEO.title}
+          title={i18n.t('hero.loopTitle')}
           tabIndex={-1}
           aria-hidden="true"
           allow="autoplay; encrypted-media"

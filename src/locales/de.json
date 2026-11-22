@@ -1,4 +1,17 @@
 {
+  "_relire": [
+    "contenu.regions : noms des régions du Cameroun gardés en français (noms officiels, usage des sources allemandes) ; question 181",
+    "contenu.domaines.education.programs[2] : « post-baccalauréat » rendu par « nach dem Abitur »",
+    "contenu.domaines.droits-inclusion.title : « inclusion » rendu par « Teilhabe », comme le menu",
+    "ui.draft.greeting : formule d'accueil des messages préparés (« Guten Tag, liebes Team der WAHHF Foundation, »)",
+    "ui.cookies.refuse : « Refuser le non-essentiel » rendu par « Nur notwendige Cookies »",
+    "ui.breadcrumb : « Fil d'Ariane » rendu par « Pfadnavigation » (lu par les lecteurs d'écran)",
+    "contenu.parcours.section.title : « Apprendre, cultiver, grandir » rendu par « Lernen, anbauen, wachsen »",
+    "contenu.parcours.panneaux.s-engager.meta : « Sorties de terrain » rendu par « Exkursionen »",
+    "hero.headline : « préparer l'Europe en confiance » rendu par « um Europa gut vorbereitet anzugehen »",
+    "nav.mega.mobilityText : « nos donateurs » rendu par « unseren Spenderinnen und Spendern » (forme inclusive)",
+    "home.act.partnerText : « co-construisons » rendu par « Lassen Sie uns gemeinsam … gestalten »"
+  ],
   "brand": {
     "name": "WAHHF Foundation",
     "fullName": "We Are Here Help Foundation",
@@ -56,7 +69,8 @@
   },
   "disclaimer": {
     "title": "Was wir nie von Ihnen verlangen",
-    "text": "Unsere Kurse und unsere Begleitung sind kostenlos. Wir verkaufen weder Visa noch Arbeitsplätze und garantieren kein Ergebnis. Wir verlangen nie Geld von Ihnen. Entscheidungen treffen die zuständigen Behörden und Einrichtungen. Prüfen Sie Informationen immer auf den offiziellen Websites."
+    "text": "Unsere Kurse und unsere Begleitung sind kostenlos. Wir verkaufen weder Visa noch Arbeitsplätze und garantieren kein Ergebnis. Wir verlangen nie Geld von Ihnen. Entscheidungen treffen die zuständigen Behörden und Einrichtungen. Prüfen Sie Informationen immer auf den offiziellen Websites.",
+    "link": "Wie erkennt man ein falsches Angebot und vermeidet Betrug?"
   },
   "hero": {
     "kicker": "KAMERUNISCH-DEUTSCHE STIFTUNG · SOZIALER ZWEIG DER IROKO-GRUPPE",
@@ -78,7 +92,9 @@
     "filmTitle": "Film der WAHHF Foundation",
     "filmPlay": "Film auf YouTube abspielen",
     "filmNote": "Der Film wird über YouTube abgespielt; YouTube erhält dabei Ihre IP-Adresse.",
-    "filmClose": "Film schließen"
+    "filmClose": "Film schließen",
+    "loopTitle": "Vorstellungsvideo der WAHHF Foundation (dekorativ, ohne Ton)",
+    "filmFrameTitle": "Film der WAHHF Foundation (1 Min. 10)"
   },
   "home": {
     "mission": {
@@ -170,7 +186,9 @@
     "act": {
       "kicker": "Mit uns aktiv werden",
       "title": "Jede Geste stärkt einen Lebensweg",
-      "subtitle": "Unterstützen Sie die Mission als Ehrenamtliche oder als Partner – oder verfolgen Sie unsere Arbeit über den Newsletter."
+      "subtitle": "Unterstützen Sie die Mission als Ehrenamtliche oder als Partner – oder verfolgen Sie unsere Arbeit über den Newsletter.",
+      "volunteerText": "Verstärken Sie unsere Teams in Kamerun, in Deutschland oder aus der Ferne: Sprachunterricht, Mentoring, Gesundheit oder Logistik.",
+      "partnerText": "Schulen, Hochschulen, NGOs, Stiftungen und Unternehmen: Lassen Sie uns gemeinsam messbare gemeinnützige Programme gestalten."
     },
     "newsletter": {
       "kicker": "In Verbindung bleiben",
@@ -181,7 +199,20 @@
       "privacyLink": "Datenschutz",
       "donateBannerTitle": "Unterstützen Sie unsere kostenlosen Bildungs- und Sozialprogramme",
       "donateBannerSub": "100 % der Spenden fließen direkt in Sprachkurse, die Begleitung junger Menschen und die Arbeit vor Ort.",
-      "donateBannerBtn": "Spenden"
+      "donateBannerBtn": "Spenden",
+      "draftSubject": "Anmeldung zum WAHHF-Newsletter",
+      "draftIntro": "Ich möchte den Newsletter der WAHHF Foundation erhalten.",
+      "draftEmail": "E-Mail-Adresse",
+      "ready": "Ihre Nachricht ist fertig: Senden Sie sie per WhatsApp oder per E-Mail.",
+      "handoffTitle": "Letzter Schritt: Senden Sie Ihre Anmeldung ab",
+      "editAddress": "Meine Adresse ändern"
+    },
+    "seo": {
+      "title": "Startseite — Junge Menschen stärken, Gemeinschaften verändern",
+      "description": "WAHHF Foundation (We Are Here Help Foundation), gemeinnützige kamerunisch-deutsche Stiftung und sozialer Zweig der IROKO-Gruppe: 6 Arbeitsbereiche und kostenlose Deutsch- und Englischkurse."
+    },
+    "journey": {
+      "albumLink": "Zum Album"
     }
   },
   "footer": {
@@ -279,6 +310,35 @@
       "link": "{{name}} — Zur Länderseite",
       "linkNonEu": "{{name}}, nicht in der Europäischen Union — Zur Länderseite",
       "nonEu": "Nicht in der EU"
+    },
+    "breadcrumb": "Pfadnavigation",
+    "photos": {
+      "enlarge": "Foto vergrößern: {{alt}}",
+      "loadError": "Dieses Foto konnte nicht geladen werden. Bitte prüfen Sie Ihre Verbindung und öffnen Sie es erneut.",
+      "viewer": "Fotoansicht",
+      "closeViewer": "Ansicht schließen",
+      "prev": "Vorheriges Foto",
+      "next": "Nächstes Foto",
+      "position": "Foto {{n}} von {{total}}.",
+      "count_one": "{{count}} Foto",
+      "count_other": "{{count}} Fotos"
+    },
+    "gallery": {
+      "playVideo": "Video abspielen: ",
+      "enlarge": "Foto vergrößern: ",
+      "close": "Galerie schließen",
+      "prevPhoto": "Vorheriges Foto",
+      "prevVideo": "Vorheriges Video",
+      "nextPhoto": "Nächstes Foto",
+      "nextVideo": "Nächstes Video",
+      "position": "{{n}} von {{total}}:",
+      "placeDate": "{{place}}, {{date}}",
+      "videoCount_one": "{{count}} Video",
+      "videoCount_other": "{{count}} Videos",
+      "and": " und "
+    },
+    "fil": {
+      "current": "angezeigtes Niveau"
     }
   },
   "contenu": {
@@ -399,43 +459,53 @@
     "regions": {
       "littoral": {
         "antennaTodo": "Lokale Anlaufstelle: noch zu bestätigen (TODO)",
-        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)"
+        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)",
+        "name": "Littoral"
       },
       "centre": {
         "antennaTodo": "Lokale Anlaufstelle: noch zu bestätigen (TODO)",
-        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)"
+        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)",
+        "name": "Centre"
       },
       "ouest": {
         "antennaTodo": "Lokale Anlaufstelle: noch zu bestätigen (TODO)",
-        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)"
+        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)",
+        "name": "Ouest"
       },
       "sud-ouest": {
         "antennaTodo": "Lokale Anlaufstelle: noch zu bestätigen (TODO)",
-        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)"
+        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)",
+        "name": "Sud-Ouest"
       },
       "nord-ouest": {
         "antennaTodo": "Lokale Anlaufstelle: noch zu bestätigen (TODO)",
-        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)"
+        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)",
+        "name": "Nord-Ouest"
       },
       "sud": {
         "antennaTodo": "Lokale Anlaufstelle: noch zu bestätigen (TODO)",
-        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)"
+        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)",
+        "name": "Sud"
       },
       "est": {
         "antennaTodo": "Lokale Anlaufstelle: noch zu bestätigen (TODO)",
-        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)"
+        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)",
+        "name": "Est"
       },
       "adamaoua": {
         "antennaTodo": "Lokale Anlaufstelle: noch zu bestätigen (TODO)",
-        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)"
+        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)",
+        "name": "Adamaoua"
       },
       "nord": {
         "antennaTodo": "Lokale Anlaufstelle: noch zu bestätigen (TODO)",
-        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)"
+        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)",
+        "name": "Nord"
       },
       "extreme-nord": {
         "antennaTodo": "Lokale Anlaufstelle: noch zu bestätigen (TODO)",
-        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)"
+        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)",
+        "name": "Extrême-Nord"
       }
     },
     "voisins": {
@@ -470,6 +540,55 @@
           "ÄQUAT.-GUINEA"
         ]
       }
+    },
+    "parcours": {
+      "section": {
+        "title": "Lernen, anbauen, wachsen",
+        "intro": "Von den Schulungsräumen auf die Felder – und mit den jungen Menschen bis auf den Gipfel.",
+        "link": "Alle Fotos ansehen"
+      },
+      "panneaux": {
+        "apprendre": {
+          "title": "Lernen",
+          "meta": "Albatros Hotel, 25. April 2026",
+          "description": "Ein voller Saal, um die Programme der Stiftung kennenzulernen."
+        },
+        "chanter-ensemble": {
+          "title": "Gemeinsam singen",
+          "meta": "25. April 2026",
+          "description": "Die jungen Menschen singen gemeinsam die Hymne der Stiftung."
+        },
+        "cultiver": {
+          "title": "Anbauen",
+          "meta": "Besuch einer Plantage",
+          "description": "Vor Ort, um nachhaltige Landwirtschaft und Tierhaltung zu verstehen."
+        },
+        "s-engager": {
+          "title": "Sich engagieren",
+          "meta": "Exkursionen",
+          "description": "Betreuende und junge Menschen vereint in denselben Farben."
+        },
+        "grandir": {
+          "title": "Wachsen",
+          "meta": "Wanderung mit den jungen Menschen",
+          "description": "Ein gemeinsamer Aufstieg, die Stadt tief unten."
+        }
+      }
     }
+  },
+  "notFound": {
+    "title": "Diese Seite gibt es nicht oder sie ist umgezogen",
+    "seoTitle": "Seite nicht gefunden",
+    "seoDescription": "Diese Adresse entspricht keiner Seite der Website der WAHHF Foundation.",
+    "lost": "Wir haben uns unterwegs verlaufen.",
+    "meta": "Seite nicht gefunden (Fehler 404)",
+    "message": "Die Adresse „{{path}}“ entspricht keiner Seite dieser Website. Vielleicht wurde der Link falsch kopiert oder die Seite wurde verschoben.",
+    "countries": "Die 10 begleiteten Länder",
+    "countryNonEu": "{{name}} (nicht in der Europäischen Union)",
+    "where": "Wohin jetzt?",
+    "home": "Zurück zur Startseite"
+  },
+  "legal": {
+    "onlyFrench": "Diese Seite ist derzeit nur auf Französisch verfügbar."
   }
 }

@@ -1,6 +1,6 @@
 import { lazy, Suspense, useState, useEffect, useRef } from 'react';
 import { AlertCircle, ArrowUpRight } from 'lucide-react';
-import { Trans } from 'react-i18next';
+import { richText } from '../../lib/richText';
 import i18n from '../../i18n';
 import { useLocalize } from '../../lib/localize';
 import { CAMEROON_REGIONS_LIST, CameroonRegionData } from '../../data/regions';
@@ -161,7 +161,7 @@ export default function PresenceSection({
                         : 'border border-border-input text-text hover:bg-surface-raised'
                     }`}
                   >
-                    {reg.name}
+                    {regionText(reg).name}
                   </button>
                 );
               })}
@@ -208,7 +208,7 @@ export default function PresenceSection({
           <div className="mt-6 pt-4 border-t border-border-subtle flex items-start gap-2.5 text-meta text-text-secondary">
             <AlertCircle aria-hidden="true" className="w-4 h-4 text-warning shrink-0 mt-1" />
             <p>
-              <Trans i18nKey="ui.presence.albaniaNote" components={{ b: <strong /> }} />
+              {richText(t('ui.presence.albaniaNote'), { b: (text) => <strong>{text}</strong> })}
             </p>
           </div>
         </div>

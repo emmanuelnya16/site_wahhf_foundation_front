@@ -2,7 +2,9 @@ import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type 
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import type { CatalogPhoto } from '../../data/photos';
 import { lockScroll, unlockScroll } from '../../lib/scrollLock';
+import { useTranslation } from 'react-i18next';
 import Photo from '../wahhf/Photo';
+import { photoAlt } from '../../lib/photoText';
 
 /** Nom de la transition partagée vignette → visionneuse (mêmes règles CSS que la galerie du groupe 7.3). */
 export const LIGHTBOX_SHARED_NAME = 'galerie-media';
@@ -24,6 +26,7 @@ function preload(photo: CatalogPhoto | undefined) {
 }
 
 function LightboxImage({ photo, shared }: { photo: CatalogPhoto; shared: boolean }) {
+  const { t } = useTranslation();
   const [failed, setFailed] = useState(false);
   useEffect(() => setFailed(false), [photo.id]);
   return (
@@ -42,7 +45,7 @@ function LightboxImage({ photo, shared }: { photo: CatalogPhoto; shared: boolean
       />
       {failed && (
         <p role="status" className="absolute inset-0 flex items-center justify-center rounded-inner bg-humus p-6 text-center text-body text-text-on-inverse">
-          Cette photo n’a pas pu être chargée. Vérifiez votre connexion, puis rouvrez-la.
+          {t('ui.photos.loadError')}
         </p>
       )}
     </div>
@@ -73,6 +76,7 @@ export default function PhotoLightbox({
   /** Pendant l'ouverture depuis la vignette : la photo porte le nom de la transition partagée */
   shared?: boolean;
 }) {
+  const { t } = useTranslation();
   const dialogRef = useRef<HTMLDialogElement>(null);
   const swipe = useRef<{ x: number; y: number } | null>(null);
   const open = index !== null;
@@ -129,7 +133,7 @@ export default function PhotoLightbox({
   return (
     <dialog
       ref={dialogRef}
-      aria-label="Visionneuse de photos"
+      aria-label={t('ui.photos.viewer')}
       data-lenis-prevent
       className="photo-lightbox"
       onKeyDown={onKeyDown}
@@ -151,7 +155,7 @@ export default function PhotoLightbox({
               className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-pill border border-border-on-inverse text-text-on-inverse transition-colors duration-(--dur-fast) hover:bg-action-on-inverse hover:text-on-action-on-inverse focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-action-on-inverse"
             >
               <X aria-hidden="true" className="h-5 w-5" />
-              <span className="sr-only">Fermer la visionneuse</span>
+              <span className="sr-only">{t('ui.photos.closeViewer')}</span>
             </button>
           </div>
 
@@ -162,11 +166,11 @@ export default function PhotoLightbox({
                 <>
                   <button type="button" onClick={() => go(-1)} className={`${navButton} left-0`}>
                     <ChevronLeft aria-hidden="true" className="h-5 w-5" />
-                    <span className="sr-only">Photo précédente</span>
+                    <span className="sr-only">{t('ui.photos.prev')}</span>
                   </button>
                   <button type="button" onClick={() => go(1)} className={`${navButton} right-0`}>
                     <ChevronRight aria-hidden="true" className="h-5 w-5" />
-                    <span className="sr-only">Photo suivante</span>
+                    <span className="sr-only">{t('ui.photos.next')}</span>
                   </button>
                 </>
               )}
@@ -174,9 +178,9 @@ export default function PhotoLightbox({
             {/* Légende = texte alternatif ; annoncée à chaque changement, avec la position dans l'album */}
             <figcaption aria-live="polite" className="max-w-[65ch] text-center text-body text-text-on-inverse">
               <span className="sr-only">
-                Photo {index + 1} sur {photos.length}.{' '}
+                {t('ui.photos.position', { n: index + 1, total: photos.length })}{' '}
               </span>
-              {photo.alt}
+              {photoAlt(photo)}
             </figcaption>
           </figure>
         </div>

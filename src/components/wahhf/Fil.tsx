@@ -1,4 +1,5 @@
 import { CSSProperties, ReactNode } from 'react';
+import i18n from '../../i18n';
 import { Link } from 'react-router-dom';
 import { cn } from '../../lib/utils';
 
@@ -182,7 +183,7 @@ export default function Fil({
   steps = [],
   end,
   currentId,
-  currentLabel = 'niveau affiché',
+  currentLabel = i18n.t('ui.fil.current'),
   orientation = 'horizontal',
   drawOnce = false,
   drawTo,

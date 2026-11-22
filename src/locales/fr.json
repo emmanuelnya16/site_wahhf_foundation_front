@@ -56,7 +56,8 @@
   },
   "disclaimer": {
     "title": "Ce que nous ne vous demanderons jamais",
-    "text": "Nos cours et notre accompagnement sont gratuits. Nous ne vendons ni visa ni emploi et ne garantissons aucun résultat. Nous ne vous demandons jamais d’argent. Les décisions appartiennent aux autorités et aux établissements concernés. Vérifiez toujours les informations sur les sites officiels."
+    "text": "Nos cours et notre accompagnement sont gratuits. Nous ne vendons ni visa ni emploi et ne garantissons aucun résultat. Nous ne vous demandons jamais d’argent. Les décisions appartiennent aux autorités et aux établissements concernés. Vérifiez toujours les informations sur les sites officiels.",
+    "link": "Comment reconnaître une fausse offre et éviter les arnaques ?"
   },
   "hero": {
     "kicker": "FONDATION CAMEROUNO-ALLEMANDE · BRANCHE SOCIALE DU GROUPE IROKO",
@@ -78,7 +79,9 @@
     "filmTitle": "Film WAHHF Foundation",
     "filmPlay": "Lire le film sur YouTube",
     "filmNote": "Le film est diffusé par YouTube, qui reçoit alors votre adresse IP.",
-    "filmClose": "Fermer le film"
+    "filmClose": "Fermer le film",
+    "loopTitle": "Vidéo de présentation de WAHHF Foundation (décorative, sans son)",
+    "filmFrameTitle": "Film WAHHF Foundation (1 min 10)"
   },
   "home": {
     "mission": {
@@ -170,7 +173,9 @@
     "act": {
       "kicker": "Agir avec nous",
       "title": "Chaque geste renforce un parcours de vie",
-      "subtitle": "Rejoindre la mission comme bénévole ou comme partenaire, ou suivre nos actions par la lettre d'information."
+      "subtitle": "Rejoindre la mission comme bénévole ou comme partenaire, ou suivre nos actions par la lettre d'information.",
+      "volunteerText": "Rejoignez nos équipes au Cameroun, en Allemagne ou à distance : enseignement des langues, mentorat, santé ou logistique.",
+      "partnerText": "Écoles, universités, ONG, fondations et entreprises : co-construisons des programmes d’intérêt général mesurables."
     },
     "newsletter": {
       "kicker": "Restons en lien",
@@ -181,7 +186,20 @@
       "privacyLink": "Politique de confidentialité",
       "donateBannerTitle": "Soutenez la gratuité de nos programmes éducatifs et sociaux",
       "donateBannerSub": "100 % des dons financent directement les cours de langue, l'accompagnement des jeunes et les actions de terrain.",
-      "donateBannerBtn": "Faire un don"
+      "donateBannerBtn": "Faire un don",
+      "draftSubject": "Inscription à la lettre d’information WAHHF",
+      "draftIntro": "Je souhaite recevoir la lettre d’information de WAHHF Foundation.",
+      "draftEmail": "Adresse e-mail",
+      "ready": "Votre message est prêt : envoyez-le par WhatsApp ou par e-mail.",
+      "handoffTitle": "Dernière étape : envoyez votre demande d’inscription",
+      "editAddress": "Modifier mon adresse"
+    },
+    "seo": {
+      "title": "Accueil — Autonomiser la jeunesse, transformer les communautés",
+      "description": "WAHHF Foundation (We Are Here Help Foundation), fondation camerouno-allemande à but non lucratif et branche sociale du groupe IROKO : 6 domaines d'action et cours d'allemand /anglais gratuits."
+    },
+    "journey": {
+      "albumLink": "Voir l’album"
     }
   },
   "footer": {
@@ -279,6 +297,50 @@
       "link": "{{name}} — Voir la fiche",
       "linkNonEu": "{{name}}, Hors Union européenne — Voir la fiche",
       "nonEu": "Hors UE"
+    },
+    "breadcrumb": "Fil d’Ariane",
+    "photos": {
+      "enlarge": "Agrandir la photo : {{alt}}",
+      "loadError": "Cette photo n’a pas pu être chargée. Vérifiez votre connexion, puis rouvrez-la.",
+      "viewer": "Visionneuse de photos",
+      "closeViewer": "Fermer la visionneuse",
+      "prev": "Photo précédente",
+      "next": "Photo suivante",
+      "position": "Photo {{n}} sur {{total}}.",
+      "count_one": "{{count}} photo",
+      "count_other": "{{count}} photos"
+    },
+    "gallery": {
+      "playVideo": "Lire la vidéo : ",
+      "enlarge": "Agrandir la photo : ",
+      "close": "Fermer la galerie",
+      "prevPhoto": "Photo précédente",
+      "prevVideo": "Vidéo précédente",
+      "nextPhoto": "Photo suivante",
+      "nextVideo": "Vidéo suivante",
+      "position": "{{n}} sur {{total}} :",
+      "placeDate": "{{place}}, le {{date}}",
+      "videoCount_one": "{{count}} vidéo",
+      "videoCount_other": "{{count}} vidéos",
+      "and": " et "
+    },
+    "fil": {
+      "current": "niveau affiché"
     }
+  },
+  "notFound": {
+    "title": "Cette page n’existe pas ou a changé d’adresse",
+    "seoTitle": "Page introuvable",
+    "seoDescription": "Cette adresse ne correspond à aucune page du site WAHHF Foundation.",
+    "lost": "On s’est perdus en route.",
+    "meta": "Page introuvable (erreur 404)",
+    "message": "L’adresse « {{path}} » ne correspond à aucune page du site. Le lien a peut-être été mal copié ou la page a été déplacée.",
+    "countries": "Les 10 pays accompagnés",
+    "countryNonEu": "{{name}} (hors Union européenne)",
+    "where": "Où aller maintenant ?",
+    "home": "Retour à l’accueil"
+  },
+  "legal": {
+    "onlyFrench": "Cette page n’existe pour l’instant qu’en français."
   }
 }

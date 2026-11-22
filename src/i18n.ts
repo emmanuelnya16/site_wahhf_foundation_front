@@ -88,7 +88,7 @@ const STORAGE_KEY = 'wahhf_langue';
 
 const LOADERS: Record<Exclude<Language, 'fr'>, () => Promise<Record<string, unknown>>> = {
   en: () => Promise.all([import('./locales/en.json'), import('./locales/legacy-en')]).then(([main, legacy]) => ({ ...main.default, ...legacy.default })),
-  de: () => import('./locales/de.json').then((m) => m.default),
+  de: () => Promise.all([import('./locales/de.json'), import('./locales/legacy-de')]).then(([main, legacy]) => ({ ...main.default, ...legacy.default })),
 };
 const loaded = new Set<Language>(['fr']);
 

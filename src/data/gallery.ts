@@ -6,6 +6,8 @@
 // autorisations de diffusion (droit à l'image, autorisations parentales pour les mineurs) à vérifier
 // avant la mise en ligne.
 import manifest from './galleryManifest.json';
+import i18n from '../i18n';
+import { localizedGallery } from '../lib/photoText';
 
 const files = import.meta.glob<string>('../assets/gallery/*.{webp,mp4}', {
   eager: true,
@@ -153,9 +155,10 @@ export function galleryPhoto(id: string): { src: string; srcSet: string } {
 /** Lieu et date d'un album, sans « A · B » (contrat §12) ; null tant qu'ils ne sont pas confirmés (TODO). */
 export function albumPlaceDate(album: GalleryAlbum | undefined): string | null {
   if (!album || /TODO/.test(album.meta)) return null;
-  const [place, date] = album.meta.split(' · ');
+  // Lot 7.10 : lieu et date dans la langue de l'interface (« Yaoundé, le 25 avril 2026 », « Yaoundé, 25. April 2026 »)
+  const [place, date] = localizedGallery(album).meta.split(' · ');
   // La date ne se coupe pas en fin de ligne (« 25 avril 2026 » reste d'un bloc)
-  return date ? `${place}, le ${date.replace(/ /g, ' ')}` : place;
+  return date ? i18n.t('ui.gallery.placeDate', { place, date: date.replace(/ /g, ' ') }) : place;
 }
 
 /** « 13 photos et 1 vidéo » (GAL-08) : les mots du visiteur, pas « 14 éléments ». */
@@ -163,9 +166,9 @@ export function countLabel(items: GalleryItem[]): string {
   const photos = items.filter((it) => it.kind === 'photo').length;
   const videos = items.length - photos;
   const parts: string[] = [];
-  if (photos) parts.push(`${photos}\u00a0photo${photos > 1 ? 's' : ''}`);
-  if (videos) parts.push(`${videos}\u00a0vidéo${videos > 1 ? 's' : ''}`);
-  return parts.join(' et ');
+  if (photos) parts.push(i18n.t('ui.photos.count', { count: photos }));
+  if (videos) parts.push(i18n.t('ui.gallery.videoCount', { count: videos }));
+  return parts.join(i18n.t('ui.gallery.and'));
 }
 
 export const formatDuration = (s: number) => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, '0')}`;

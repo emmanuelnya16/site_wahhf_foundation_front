@@ -56,7 +56,8 @@
   },
   "disclaimer": {
     "title": "What we will never ask of you",
-    "text": "Our courses and our support are free. We do not sell visas or jobs and do not guarantee any outcome. We never ask you for money. Decisions belong to the relevant authorities and institutions. Always verify information on official websites."
+    "text": "Our courses and our support are free. We do not sell visas or jobs and do not guarantee any outcome. We never ask you for money. Decisions belong to the relevant authorities and institutions. Always verify information on official websites.",
+    "link": "How to recognise a fake offer and avoid scams?"
   },
   "hero": {
     "kicker": "CAMEROONIAN-GERMAN FOUNDATION · SOCIAL BRANCH OF IROKO GROUP",
@@ -78,7 +79,9 @@
     "filmTitle": "WAHHF Foundation film",
     "filmPlay": "Play the film on YouTube",
     "filmNote": "The film is streamed by YouTube, which then receives your IP address.",
-    "filmClose": "Close the film"
+    "filmClose": "Close the film",
+    "loopTitle": "WAHHF Foundation presentation video (decorative, no sound)",
+    "filmFrameTitle": "WAHHF Foundation film (1 min 10)"
   },
   "home": {
     "mission": {
@@ -170,7 +173,9 @@
     "act": {
       "kicker": "Take action with us",
       "title": "Every gesture strengthens a life journey",
-      "subtitle": "Join the mission as a volunteer or a partner, or follow our work through the newsletter."
+      "subtitle": "Join the mission as a volunteer or a partner, or follow our work through the newsletter.",
+      "volunteerText": "Join our teams in Cameroon, in Germany or remotely: language teaching, mentoring, health or logistics.",
+      "partnerText": "Schools, universities, NGOs, foundations and companies: let’s build measurable public-interest programs together."
     },
     "newsletter": {
       "kicker": "Stay connected",
@@ -181,7 +186,20 @@
       "privacyLink": "Privacy policy",
       "donateBannerTitle": "Support the free access to our educational and social programs",
       "donateBannerSub": "100% of donations directly fund language courses, youth guidance, and field initiatives.",
-      "donateBannerBtn": "Donate"
+      "donateBannerBtn": "Donate",
+      "draftSubject": "WAHHF newsletter sign-up",
+      "draftIntro": "I would like to receive the WAHHF Foundation newsletter.",
+      "draftEmail": "Email address",
+      "ready": "Your message is ready: send it by WhatsApp or by email.",
+      "handoffTitle": "Last step: send your sign-up request",
+      "editAddress": "Change my address"
+    },
+    "seo": {
+      "title": "Home — Empowering youth, transforming communities",
+      "description": "WAHHF Foundation (We Are Here Help Foundation), a Cameroonian-German non-profit foundation and the social branch of the IROKO Group: 6 areas of action and free German/English courses."
+    },
+    "journey": {
+      "albumLink": "See the album"
     }
   },
   "footer": {
@@ -279,6 +297,35 @@
       "link": "{{name}} — See the country page",
       "linkNonEu": "{{name}}, outside the European Union — See the country page",
       "nonEu": "Non-EU"
+    },
+    "breadcrumb": "Breadcrumb",
+    "photos": {
+      "enlarge": "Enlarge photo: {{alt}}",
+      "loadError": "This photo could not load. Check your connection, then open it again.",
+      "viewer": "Photo viewer",
+      "closeViewer": "Close the viewer",
+      "prev": "Previous photo",
+      "next": "Next photo",
+      "position": "Photo {{n}} of {{total}}.",
+      "count_one": "{{count}} photo",
+      "count_other": "{{count}} photos"
+    },
+    "gallery": {
+      "playVideo": "Play video: ",
+      "enlarge": "Enlarge photo: ",
+      "close": "Close the gallery",
+      "prevPhoto": "Previous photo",
+      "prevVideo": "Previous video",
+      "nextPhoto": "Next photo",
+      "nextVideo": "Next video",
+      "position": "{{n}} of {{total}}:",
+      "placeDate": "{{place}}, {{date}}",
+      "videoCount_one": "{{count}} video",
+      "videoCount_other": "{{count}} videos",
+      "and": " and "
+    },
+    "fil": {
+      "current": "level shown"
     }
   },
   "contenu": {
@@ -399,11 +446,13 @@
     "regions": {
       "littoral": {
         "antennaTodo": "Local office: to be confirmed (TODO)",
-        "actionsTodo": "Activities in the region: to be filled in (TODO)"
+        "actionsTodo": "Activities in the region: to be filled in (TODO)",
+        "name": "Littoral"
       },
       "centre": {
         "antennaTodo": "Local office: to be confirmed (TODO)",
-        "actionsTodo": "Activities in the region: to be filled in (TODO)"
+        "actionsTodo": "Activities in the region: to be filled in (TODO)",
+        "name": "Centre"
       },
       "ouest": {
         "name": "West",
@@ -478,6 +527,55 @@
           "EQ. GUINEA"
         ]
       }
+    },
+    "parcours": {
+      "section": {
+        "title": "Learn, cultivate, grow",
+        "intro": "From training rooms to the fields, and all the way to the summit with young people.",
+        "link": "See all photos"
+      },
+      "panneaux": {
+        "apprendre": {
+          "title": "Learn",
+          "meta": "Albatros Hotel, 25 April 2026",
+          "description": "A packed room to discover the foundation’s programs."
+        },
+        "chanter-ensemble": {
+          "title": "Singing together",
+          "meta": "25 April 2026",
+          "description": "The young people sing the foundation’s anthem together."
+        },
+        "cultiver": {
+          "title": "Cultivate",
+          "meta": "Plantation visit",
+          "description": "In the field to understand sustainable farming and livestock rearing."
+        },
+        "s-engager": {
+          "title": "Get involved",
+          "meta": "Field trips",
+          "description": "Mentors and young people united under the same colours."
+        },
+        "grandir": {
+          "title": "Grow",
+          "meta": "Hike with the young people",
+          "description": "Climbing together, with the town below."
+        }
+      }
     }
+  },
+  "notFound": {
+    "title": "This page does not exist or has moved",
+    "seoTitle": "Page not found",
+    "seoDescription": "This address does not match any page on the WAHHF Foundation website.",
+    "lost": "We got lost on the way.",
+    "meta": "Page not found (error 404)",
+    "message": "The address “{{path}}” does not match any page on the site. The link may have been copied incorrectly, or the page may have moved.",
+    "countries": "The 10 supported countries",
+    "countryNonEu": "{{name}} (outside the European Union)",
+    "where": "Where to go now?",
+    "home": "Back to the home page"
+  },
+  "legal": {
+    "onlyFrench": "This page is currently only available in French."
   }
 }

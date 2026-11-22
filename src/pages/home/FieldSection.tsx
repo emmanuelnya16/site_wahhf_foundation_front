@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { localizedGallery, photoAlt } from '../../lib/photoText';
 import Section from '../../components/wahhf/Section';
 import SectionHeader from '../../components/wahhf/SectionHeader';
 import GalleryGrid from '../../components/wahhf/GalleryGrid';
@@ -58,7 +59,7 @@ export default function FieldSection() {
           sizes="100vw"
           width={fieldPhoto ? fieldPhoto.width : expandPhoto?.w}
           height={fieldPhoto ? fieldPhoto.height : expandPhoto?.h}
-          alt={fieldPhoto ? fieldPhoto.alt : expandPhoto?.alt}
+          alt={fieldPhoto ? photoAlt(fieldPhoto) : expandPhoto && localizedGallery(expandPhoto).alt}
           loading="lazy"
           decoding="async"
           style={fieldPhoto ? { objectPosition: fieldPhoto.focus, backgroundColor: fieldPhoto.dominantColor } : undefined}

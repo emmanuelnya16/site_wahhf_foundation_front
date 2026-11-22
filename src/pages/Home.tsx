@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import SEO from '../components/wahhf/SEO';
 import HeroSection from './home/HeroSection';
 import MobilitySection from './home/MobilitySection';
@@ -16,11 +17,12 @@ import ActSection from './home/ActSection';
  * dans src/pages/home/archive/.
  */
 export default function Home() {
+  const { t } = useTranslation();
   return (
     <>
       <SEO
-        title="Accueil — Autonomiser la jeunesse, transformer les communautés"
-        description="WAHHF Foundation (We Are Here Help Foundation), fondation camerouno-allemande à but non lucratif et branche sociale du groupe IROKO : 6 domaines d'action et cours d'allemand /anglais gratuits."
+        title={t('home.seo.title')}
+        description={t('home.seo.description')}
       />
 
       {/* 1. HERO (décision du 16/11 : vidéo en fond) : src/pages/home/HeroSection.tsx */}

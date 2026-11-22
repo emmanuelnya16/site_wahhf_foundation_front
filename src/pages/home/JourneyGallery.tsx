@@ -2,6 +2,7 @@ import ExpandingGallery from '../../components/gallery/ExpandingGallery';
 import type { GalleryPanelData } from '../../components/gallery/GalleryPanel';
 import { JOURNEY_PANELS } from '../../data/journey';
 import { photoOrFallback } from '../../lib/photos';
+import { useLocalize } from '../../lib/localize';
 
 /**
  * Partie chargée à la demande de la section « Apprendre, cultiver, grandir » (lot 7.6) : les données des photos
@@ -9,7 +10,8 @@ import { photoOrFallback } from '../../lib/photos';
  * Chaque panneau prend sa photo si elle est publiable, sinon sa remplaçante (photoOrFallback).
  */
 export default function JourneyGallery() {
-  const panels = JOURNEY_PANELS.flatMap((panel): GalleryPanelData[] => {
+  const { t, localizedList } = useLocalize();
+  const panels = localizedList(JOURNEY_PANELS, 'contenu.parcours.panneaux', (p) => p.id).flatMap((panel): GalleryPanelData[] => {
     const photo = photoOrFallback(panel.photoId, panel.fallbackId);
     if (!photo) return [];
     return [
@@ -19,7 +21,7 @@ export default function JourneyGallery() {
         meta: panel.meta,
         description: panel.description,
         photo,
-        link: { to: `/galerie?album=${panel.album}`, label: 'Voir l’album' },
+        link: { to: `/galerie?album=${panel.album}`, label: t('home.journey.albumLink') },
       },
     ];
   });

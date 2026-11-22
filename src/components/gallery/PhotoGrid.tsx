@@ -1,6 +1,8 @@
 import type { CSSProperties } from 'react';
 import type { CatalogPhoto } from '../../data/photos';
+import { useTranslation } from 'react-i18next';
 import Photo from '../wahhf/Photo';
+import { photoAlt } from '../../lib/photoText';
 
 /**
  * Vignettes d'un album (lot 7.6) en rangées justifiées : chaque photo garde son vrai format (aucun recadrage, les
@@ -15,6 +17,7 @@ export default function PhotoGrid({
   photos: CatalogPhoto[];
   onOpen: (index: number, button: HTMLButtonElement) => void;
 }) {
+  const { t } = useTranslation();
   return (
     <ul className="photo-rows">
       {photos.map((photo, index) => {
@@ -23,7 +26,7 @@ export default function PhotoGrid({
           <li key={photo.id} data-reveal="" style={{ '--r': ratio.toFixed(4) } as CSSProperties}>
             <button
               type="button"
-              aria-label={`Agrandir la photo : ${photo.alt}`}
+              aria-label={t('ui.photos.enlarge', { alt: photoAlt(photo) })}
               onClick={(event) => onOpen(index, event.currentTarget)}
               className="block h-full w-full cursor-pointer rounded-inner focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
             >
