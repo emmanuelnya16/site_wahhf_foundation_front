@@ -1,0 +1,441 @@
+{
+  "commun": {
+    "europe": "Europe",
+    "mobilite": "Mobility & Languages",
+    "academie": "Language Academy",
+    "niveau": "Level {{level}}",
+    "candidater": "Apply",
+    "candidaterNiveau": "Apply for level {{level}}",
+    "filAria": "The five German/English levels, from A1 to C1, then Europe",
+    "niveauAffiche": "level shown",
+    "nomNiveau": "German {{level}}: {{short}}",
+    "cohorte": "Join the next cohort"
+  },
+  "formats": {
+    "enLigne": "Online",
+    "douala": "In person in Douala",
+    "yaounde": "In person in Yaoundé"
+  },
+  "formatsPhrase": {
+    "enLigne": "online",
+    "douala": "in person in Douala",
+    "yaounde": "in person in Yaoundé"
+  },
+  "formatsChoix": {
+    "enLigne": "Online (accessible anywhere)",
+    "douala": "In person in Douala",
+    "yaounde": "In person in Yaoundé"
+  },
+  "hub": {
+    "seoTitle": "Mobility & Languages — Learn, prepare and find your way, free of charge",
+    "seoDescription": "WAHHF Foundation: a free German/English Language Academy (A1 to C1) and transparent support towards 10 European countries, funded by our partners and donors.",
+    "title": "Learn German/English, prepare and find your way to Europe",
+    "intro": "German/English courses from level A1 to level C1 and reliable information on studies, training and work in 10 European countries.",
+    "ctaCandidater": "Apply to the programme",
+    "ctaAcademie": "Discover the German/English Academy",
+    "portesTitle": "Choose your way in",
+    "portesSubtitle": "You can apply for the German/English language courses only, for the support with your documents only, or for both.",
+    "academieTitle": "Language Academy (German/English A1 to C1)",
+    "academieText": "Learn German/English step by step: comprehension, speaking and writing, an online placement test and methodical preparation for certificates.",
+    "academieBouton": "Go to the Language Academy",
+    "academieTest": "Take the placement test (20 questions)",
+    "europeTitle": "Support towards Europe",
+    "europeText": "A 4-step learning path to understand the legal routes (studies, vocational training, work), prepare your application file and check every step on the official portals.",
+    "europeBouton": "Explore support towards Europe",
+    "europeArnaques": "Guide: avoiding scams",
+    "pourquoiTitle": "Protecting young people from misinformation and opening up access to knowledge",
+    "pourquoiSubtitle": "Too many young people and families get into debt with fraudulent middlemen who sell false promises. WAHHF Foundation responds with linguistic rigour and transparency.",
+    "pourquoiText": "A plan to study or train abroad cannot be bought: it is built through demanding language learning, qualifications that meet the requirements and strict compliance with official consular procedures.",
+    "raisons": {
+      "frais": {
+        "title": "No fees for beneficiaries",
+        "desc": "No registration fees, no application fees, no commission at any stage."
+      },
+      "arnaques": {
+        "title": "Actively fighting scams",
+        "desc": "A guide to spotting fake contracts and fake visas, and to checking every piece of information against official sources."
+      },
+      "exigence": {
+        "title": "Academic and language standards",
+        "desc": "Step-by-step support from beginner level A1 to university-level independence at C1."
+      }
+    },
+    "temoignagesTitle": "What our learners say",
+    "faqTitle": "Frequently asked questions",
+    "faq": {
+      "gratuit": {
+        "q": "Are the German/English courses and the support really 100% free?",
+        "a": "Yes, for all beneficiaries: the German/English courses, from level A1 to level C1, as well as the guidance sessions on Europe. The programme is funded by our partners and donors."
+      },
+      "visas": {
+        "q": "Does WAHHF Foundation issue visas or employment contracts?",
+        "a": "No, never. WAHHF Foundation is a non-profit foundation. We do not sell visas, university places or employment contracts, and we guarantee no outcome. Decisions rest solely with embassies, consulates and official institutions."
+      },
+      "identite": {
+        "q": "Do I need to send my passport or ID card to apply?",
+        "a": "No. When you apply online on this site, you are not asked for any identity document (no passport, no national ID card) or any money."
+      },
+      "niveau": {
+        "q": "How do I know which German/English level to start at?",
+        "a": "If you are a complete beginner, choose level A1. If you already know the basics, take our 20-question placement test on the Language Academy page."
+      }
+    },
+    "finSubtitle": "One form for the German/English courses and guidance towards Europe. It takes about 5 minutes; you will not be asked for any identity document or payment."
+  },
+  "academie": {
+    "seoTitle": "Language Academy — German/English A1 to C1, free of charge",
+    "seoDescription": "Free support for German/English language courses from level A1 to level C1 by WAHHF Foundation: a 20-question placement test, a programme for each level and sessions.",
+    "title": "Language Academy: German/English, from level A1 to level C1 with WAHHF Institute",
+    "intro": "German/English courses from beginner level to academic mastery, online or in person in Douala and Yaoundé. Start with the test: it tells you which level to start at.",
+    "ctaTest": "Find my level (5 minutes)",
+    "ctaCandidater": "Apply (choose my level)",
+    "niveauxTitle": "The 5 levels, from A1 to C1",
+    "niveauxSubtitle": "Each level has its own page: objectives, skills, number of hours and upcoming sessions.",
+    "pageNiveau": "Full page for level {{level}}",
+    "examensTitle": "Preparing for official exams",
+    "examensText": "Our courses include mock tests in reading, listening, writing and speaking, following the standards of recognised exams: Goethe-Zertifikat, telc Deutsch and TestDaF."
+  },
+  "niveauPage": {
+    "seoTitle": "German level {{level}} — free Language Academy",
+    "seoDescription": "German level {{level}} at the WAHHF Academy: {{subtitle}} Objectives, skills, number of hours and upcoming sessions.",
+    "verifier": "Check my level (test)",
+    "filAria": "The five German levels; level shown: {{level}}",
+    "programme": "Level {{level}} programme",
+    "introuvableTitle": "This German level does not exist",
+    "introuvableMessage": "The Language Academy offers 5 levels, from A1 to C1. Choose yours below, or take the placement test.",
+    "introuvableListe": "The Academy's levels",
+    "introuvableTest": "Placement test (20 questions)"
+  },
+  "cohorte": {
+    "subtitle": "One form, about 5 minutes; you will not be asked for any identity document or payment."
+  },
+  "fiche": {
+    "volume": "Number of hours",
+    "prerequis": "Prerequisites",
+    "duree": "Duration",
+    "prochaine": "Next session",
+    "pasAnnoncee": "Not announced yet",
+    "format": "Format",
+    "formatValeur": "Online, or in person in Douala and Yaoundé depending on the session",
+    "objectifs": "Level {{level}} objectives",
+    "saurezFaire": "What you will be able to do at the end of level {{level}}"
+  },
+  "test": {
+    "blanc": "(blank)",
+    "statutFini": "Test complete. Score: {{score}} out of {{total}}. Recommended level: {{level}}.",
+    "statutFiche": "The level {{level}} overview is shown below.",
+    "statutQuestion": "Question {{n}} of {{total}}.",
+    "title": "Find my German level",
+    "subtitle": "20 multiple-choice questions, from A1 to C1, about 5 minutes. The result tells you which level to start at.",
+    "intro": "The questions get harder as you go: 4 questions per level. You can go back to the previous question at any time.",
+    "commencer": "Start the test",
+    "resultatKicker": "Your indicative test result",
+    "niveauConseille": "Recommended level: {{level}}",
+    "score_one": "{{count}} correct answer out of {{total}}",
+    "score_other": "{{count}} correct answers out of {{total}}",
+    "niveauConseilleCourt": "recommended level",
+    "resultatText": "This result is a guide. When your application is reviewed, a trainer will confirm with you the group in which you can make the best progress.",
+    "recommencer": "Retake the test",
+    "position": "Question {{n}} of {{total}}",
+    "niveauTeste": "Level tested: {{level}}",
+    "avancement": "Test progress",
+    "manque": "Choose an answer to go on to the next question.",
+    "precedente": "Previous question",
+    "voirResultat": "See my recommended level",
+    "suivante": "Next question"
+  },
+  "sessions": {
+    "moisAConfirmer": "{{month}} (date to be confirmed)",
+    "whatsapp": "Hello WAHHF Foundation, I would like to be told about the next German/English course session.",
+    "titleNiveau": "Upcoming level {{level}} sessions",
+    "titleTout": "Calendar of upcoming sessions",
+    "subtitle": "All sessions are free of charge. Online or in person in Douala and Yaoundé; sessions that have already started are no longer shown.",
+    "filtreNiveau": "Level",
+    "tousNiveaux": "All levels",
+    "filtreFormat": "Format",
+    "tousFormats": "All formats",
+    "presentiel": "In person (Douala, Yaoundé)",
+    "aucune": "No sessions",
+    "nombre_one": "{{count}} session",
+    "nombre_other": "{{count}} sessions",
+    "videPresentiel": "No in-person session has been announced for this choice yet.",
+    "videChoix": "No session has been announced for this choice yet.",
+    "videNiveau": "No level {{level}} session has been announced yet.",
+    "videTout": "No session has been announced yet.",
+    "prevenir": "You can ask to be told about the next session.",
+    "voirEnLigne": "See online sessions",
+    "voirToutes": "See all sessions",
+    "prevenirWhatsapp": "Get notified on WhatsApp"
+  },
+  "cours": {
+    "programme": "Level {{level}} programme",
+    "format": "Format:",
+    "rythme": "Schedule and duration:",
+    "debut": "Start date:",
+    "places": "Planned places:",
+    "indicatif": "(indicative)",
+    "srSession": "for this session ({{level}}, {{format}})"
+  },
+  "apres": {
+    "title": "After you apply",
+    "etape": "Step {{n}}:",
+    "etapes": {
+      "envoi": {
+        "title": "You send your application",
+        "text": "The form prepares a message with your answers; you send it by WhatsApp or by email."
+      },
+      "etude": {
+        "title": "The team reviews your application",
+        "text": "They reply by WhatsApp or by email, using the contact details you gave."
+      },
+      "niveau": {
+        "title": "Your level is confirmed",
+        "text": "A trainer confirms with you the group that suits you, based on the placement test if you have taken it."
+      },
+      "cohorte": {
+        "title": "You join a cohort",
+        "text": "Online or in person, depending on the sessions open and the places available."
+      }
+    },
+    "quiTitle": "Who can apply",
+    "qui": {
+      "niveaux": {
+        "title": "Beginners and advanced learners alike",
+        "text": "From level A1 (no prior knowledge) to level C1. The online placement test helps you find your level."
+      },
+      "lieu": {
+        "title": "Wherever you live",
+        "text": "The online courses are accessible anywhere; in-person cohorts are planned in Douala and Yaoundé."
+      },
+      "pieces": {
+        "title": "No ID or payment",
+        "text": "You are not asked for any identity document or any payment to apply."
+      }
+    }
+  },
+  "candidature": {
+    "seoTitle": "Apply free of charge — German/English courses & Support towards Europe",
+    "seoDescription": "A single, 100% free form to request support and enrol in WAHHF Foundation's German/English courses. No identity document or payment required.",
+    "title": "Apply for a support programme",
+    "intro": "One form to join the German/English Academy (A1 to C1), get guidance towards Europe, or both. It takes about 5 minutes.",
+    "avant": "Before you start",
+    "souhaits": {
+      "cours_allemand": "German/English courses (A1 to C1)",
+      "accompagnement_europe": "Support towards Europe",
+      "les_deux": "Both: courses and guidance"
+    },
+    "etapes": {
+      "1": "Your contact details",
+      "2": "The support you would like",
+      "3": "Your motivation and consent"
+    },
+    "erreurs": {
+      "nom": "Enter your first name and surname.",
+      "pays": "Enter your country of residence, for example Cameroon.",
+      "ville": "Enter your town or city of residence, for example Douala.",
+      "accord": "Tick this box so that we can review your application and get back to you."
+    },
+    "paysDefaut": "Cameroon",
+    "statutPret": "Your message is ready: send it by WhatsApp or by email.",
+    "statutEtape": "Step {{step}} of 3: {{label}}.",
+    "message": {
+      "objet": "WAHHF application — {{name}}",
+      "intro": "I would like to apply for a WAHHF Foundation support programme. Here are my answers to the form on the website:",
+      "nom": "Full name",
+      "email": "Email",
+      "telephone": "Phone / WhatsApp",
+      "pays": "Country of residence",
+      "ville": "Town or city",
+      "souhait": "Request",
+      "session": "Chosen session",
+      "paysInteret": "Country of interest",
+      "niveau": "German/English level",
+      "format": "Preferred format",
+      "message": "Message",
+      "accord": "I agree that my contact details may be processed by WAHHF Foundation for the sole purpose of responding to my request for support."
+    },
+    "envoiTitle": "Last step: send your application",
+    "modifier": "Edit my answers",
+    "rappel": "Reminder: no WAHHF staff member will ever ask you for money by phone, email or WhatsApp to process your application file.",
+    "conservees": "Your answers stay in this browser until you close the tab.",
+    "effacer": "Delete my answers now",
+    "effacerConseil": "(recommended on a shared phone or computer).",
+    "formTitle": "Your application",
+    "garderTitle": "We have kept your answers",
+    "garderText": "Your answers have been kept in this browser. They will be deleted when you close the tab.",
+    "garderEffacer": "Delete my answers and start again",
+    "sessionTitle": "You are applying for this session",
+    "sessionText": "Level {{level}}, {{format}}: {{title}}.",
+    "sessionChanger": "Change session",
+    "sessionNote": "(you can choose your level and format in step 2)",
+    "position": "Step {{step}} of 3",
+    "etape1Text": "This information is used only to contact you again.",
+    "nomLabel": "Full name (first name and surname) *",
+    "nomExemple": "e.g. Marie Nguenang",
+    "emailLabel": "Email address *",
+    "emailExemple": "example@domain.com",
+    "telephoneLabel": "Phone / WhatsApp *",
+    "telephoneExemple": "e.g. +237 6...",
+    "paysLabel": "Current country of residence *",
+    "villeLabel": "Town or city of residence *",
+    "villeExemple": "e.g. Douala, Yaoundé, Bafoussam, Garoua...",
+    "versEtape2": "Continue to step 2",
+    "etape2Text": "Tell us which part interests you and your current language level.",
+    "souhaitLegend": "What would you like? *",
+    "paysInteretLabel": "Main country of interest among the 10 countries we cover",
+    "horsUE": "(outside the European Union)",
+    "niveauLabel": "Current / target German/English level",
+    "niveaux": {
+      "A1": "A1 — Complete beginner",
+      "A2": "A2 — Elementary basics",
+      "B1": "B1 — Intermediate level",
+      "B2": "B2 — Advanced level",
+      "C1": "C1 — Academic level"
+    },
+    "formatLabel": "Preferred format",
+    "precedente": "Previous step",
+    "versEtape3": "Continue to step 3",
+    "etape3Text": "Briefly describe your background, then confirm your request.",
+    "messageLabel": "Your message (current studies, goals, availability)",
+    "messageExemple": "Explain your motivation and your plans in a few lines...",
+    "aucunDocument": "You are not asked for any identity document or any payment at this stage.",
+    "accord": "I agree that my contact details may be processed in strict confidence by WAHHF Foundation for the sole purpose of responding to my request for support, in accordance with the <lien>privacy policy<nouvel> (new tab)</nouvel></lien>. *",
+    "preparer": "Prepare my application for sending"
+  },
+  "contenu": {
+    "niveaux": {
+      "a1": {
+        "shortTitle": "Discovery",
+        "subtitle": "Understand and use familiar, everyday expressions.",
+        "duration": "10 to 12 weeks (indicative — TODO)",
+        "hours": "80 hours of guided learning",
+        "prerequisites": "No prior German required. Open to complete beginners.",
+        "nextSession": "September 2026 (TODO: confirm date)",
+        "objectives": [
+          "Master the alphabet, pronunciation and simple sentence structures",
+          "Introduce yourself and ask simple questions about your immediate surroundings",
+          "Learn everyday vocabulary (family, housing, shopping, times)"
+        ],
+        "canDo": [
+          "Introduce yourself and someone else in German",
+          "Fill in a simple form with your personal details",
+          "Understand short announcements and simple directions"
+        ],
+        "examTarget": "Preparation for the Goethe-Zertifikat A1: Start Deutsch 1 / telc Deutsch A1 (TODO: to be checked)"
+      },
+      "a2": {
+        "shortTitle": "Everyday exchanges",
+        "subtitle": "Communicate in simple, routine everyday tasks.",
+        "duration": "10 to 12 weeks (indicative — TODO)",
+        "hours": "90 hours of guided learning",
+        "prerequisites": "Have completed level A1 or passed the free placement test.",
+        "nextSession": "October 2026 (TODO: confirm date)",
+        "objectives": [
+          "Talk about your schooling, your surroundings and your immediate needs",
+          "Master the perfect tense (Perfekt), modal verbs and basic subordinate clauses",
+          "Read short emails, information notices and everyday documents"
+        ],
+        "canDo": [
+          "Describe your education and experience in simple terms",
+          "Talk about familiar topics (health, work, travel)",
+          "Write short, well-structured messages"
+        ],
+        "examTarget": "Preparation for the Goethe-Zertifikat A2 / telc Deutsch A2 (TODO: to be checked)"
+      },
+      "b1": {
+        "shortTitle": "Autonomy",
+        "subtitle": "Cope independently in most travel, study or training situations.",
+        "duration": "12 to 14 weeks (indicative — TODO)",
+        "hours": "120 hours of guided learning",
+        "prerequisites": "Have completed level A2.",
+        "nextSession": "October 2026 (TODO: confirm date)",
+        "objectives": [
+          "Understand the main points of a clear discussion about work, school or leisure",
+          "Recount an event, explain a plan for studies or vocational training (Ausbildung)",
+          "Write a cover letter and a CV to German-speaking standards"
+        ],
+        "canDo": [
+          "Join a conversation on familiar topics without preparation",
+          "Briefly defend an opinion or explain the path you have chosen",
+          "Manage everyday administrative procedures in German"
+        ],
+        "examTarget": "Preparation for the Goethe-Zertifikat B1 / telc Deutsch B1 (TODO: to be checked)"
+      },
+      "b2": {
+        "shortTitle": "Independence",
+        "subtitle": "Communicate spontaneously and understand complex texts.",
+        "duration": "14 to 16 weeks (indicative — TODO)",
+        "hours": "140 hours of guided learning",
+        "prerequisites": "Have completed level B1.",
+        "nextSession": "November 2026 (TODO: confirm date)",
+        "objectives": [
+          "Understand the main content of concrete or abstract topics in a complex text",
+          "Take part in technical discussions in your field",
+          "Express yourself clearly, in detail and with nuance, both orally and in writing"
+        ],
+        "canDo": [
+          "Follow preparatory courses or demanding vocational training in German",
+          "Argue in a structured way in an academic or job interview",
+          "Write precise summaries and formal letters"
+        ],
+        "examTarget": "Preparation for the Goethe-Zertifikat B2 / telc Deutsch B2 (TODO: to be checked)"
+      },
+      "c1": {
+        "shortTitle": "Mastery",
+        "subtitle": "Use the language flexibly and effectively in university and social life.",
+        "duration": "16 weeks (indicative — TODO)",
+        "hours": "160 hours of guided learning",
+        "prerequisites": "Have completed level B2.",
+        "nextSession": "January 2027 (TODO: confirm date)",
+        "objectives": [
+          "Understand a wide range of long, demanding texts and grasp implicit meaning",
+          "Express yourself fluently and spontaneously without obviously searching for words",
+          "Master the methods of scientific and academic writing at university"
+        ],
+        "canDo": [
+          "Follow a full university degree programme in German",
+          "Give complex presentations and answer detailed questions",
+          "Write well-structured texts on complex academic topics"
+        ],
+        "examTarget": "Preparation for the TestDaF / Goethe-Zertifikat C1 / telc Deutsch C1 Hochschule (TODO: to be checked)"
+      }
+    },
+    "sessions": {
+      "sess-a1-online": {
+        "title": "German A1: foundations and everyday communication",
+        "days": "Monday, Wednesday, Friday (18:00–20:00)",
+        "duration": "12 weeks"
+      },
+      "sess-a1-dla": {
+        "title": "German A1: in-person cohort in Douala",
+        "days": "Tuesday, Thursday (16:00–18:30) & Saturday morning",
+        "duration": "12 weeks"
+      },
+      "sess-a2-online": {
+        "title": "German A2: consolidation and everyday independence",
+        "days": "Tuesday, Thursday (18:30–20:30) & Saturday (10:00–12:00)",
+        "duration": "12 weeks"
+      },
+      "sess-b1-online": {
+        "title": "German B1: studies and vocational training track (Ausbildung)",
+        "days": "Monday, Wednesday, Friday (18:30–21:00)",
+        "duration": "14 weeks"
+      },
+      "sess-b1-yde": {
+        "title": "German B1: intensive workshop in Yaoundé",
+        "days": "Wednesday, Friday (16:00–18:30) & Saturday",
+        "duration": "14 weeks"
+      },
+      "sess-b2-online": {
+        "title": "German B2: advanced expression and technical topics",
+        "days": "Tuesday, Thursday (18:30–21:00) & Saturday (14:00–16:30)",
+        "duration": "15 weeks"
+      },
+      "sess-c1-online": {
+        "title": "German C1: university preparation and TestDaF",
+        "days": "Monday, Thursday (19:00–21:30) & Saturday (09:00–12:00)",
+        "duration": "16 weeks"
+      }
+    }
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "_note": "Textes fixes de la page /faire-un-don (lot 7.10). <nb> garde l'espace insécable devant « : » à part, <v> une valeur (montant, devise) : même rendu qu'avant. <lien> est le lien vers la politique de confidentialité, <sr> le texte réservé aux lecteurs d'écran, <tel> et <mail> les coordonnées officielles. Les montants sont mis en forme par la page selon la langue. Les programmes des domaines et les exemples chiffrés (DOMAIN_IMPACT, DOMAIN_IMPACT_NOT_VALIDATED, EXAMPLE_IMPACTS_NOT_VALIDATED) restent en français dans la page : leurs surcouches sont sous contenu dans en.json et de.json.",
+  "seo": {
+    "title": "Faire un don — Soutenir les cours d’allemand /anglais et nos actions au Cameroun",
+    "description": "Soutenez WAHHF Foundation : vos dons financent les cours d'allemand /anglais (A1 à C1), l'accompagnement des jeunes vers l'Europe et nos actions d'éducation, de santé et d'environnement au Cameroun."
+  },
+  "header": {
+    "title": "Votre don finance des cours d’allemand /anglais et nos actions au Cameroun",
+    "intro": "Les cours d’allemand /anglais (A1 à C1) et l’accompagnement vers l’Europe sont gratuits pour les jeunes<nb> </nb>: ils sont financés par nos partenaires et nos donateurs. Vos dons soutiennent aussi nos actions d’éducation, de santé et d’environnement."
+  },
+  "status": {
+    "ready": "Votre message est prêt : envoyez-le par WhatsApp ou par e-mail."
+  },
+  "handoff": {
+    "title": "Dernière étape : envoyez votre message de don",
+    "edit": "Modifier mon don",
+    "text": "Votre message demande à la fondation comment régler votre don de <v>{{amount}}</v>. Aucun paiement n’est demandé sur ce site."
+  },
+  "officialChannels": "Pour votre sécurité, la fondation vous répond seulement par WhatsApp au <tel>{{phone}}</tel> ou par e-mail depuis <mail>{{email}}</mail>. Si quelqu’un vous écrit d’un autre numéro ou d’une autre adresse au sujet de votre don, ne payez rien et prévenez-nous.",
+  "section": {
+    "title": "Comment donner aujourd’hui",
+    "subtitle": "Le paiement en ligne n’est pas encore ouvert sur ce site. Choisissez un montant : un message est préparé, vous l’envoyez par WhatsApp ou par e-mail, et la fondation vous indique comment régler votre don."
+  },
+  "allocation": {
+    "label": "Votre don soutient",
+    "general": "Là où le besoin est le plus urgent"
+  },
+  "currency": {
+    "legend": "Devise",
+    "tile": {
+      "EUR": "Euros (€)",
+      "XAF": "Francs CFA"
+    },
+    "word": {
+      "EUR": "euros",
+      "XAF": "francs CFA"
+    },
+    "example": {
+      "EUR": "75",
+      "XAF": "15 000"
+    }
+  },
+  "amount": {
+    "legend": "Montant",
+    "other": "Autre montant, en <v>{{devise}}</v>",
+    "placeholder": "Ex. {{example}}",
+    "range": "Entre <v>{{min}}</v> et <v>{{max}}</v>."
+  },
+  "impact": {
+    "title": "À quoi servira votre don",
+    "noAmount": "Choisissez un montant, ou saisissez un montant entre {{min}} et {{max}}.",
+    "approx": "{{amount}} (environ {{converted}})",
+    "domain": "{{money}} pour {{for}} : {{what}}.",
+    "domainTitle": "{{money}} pour le domaine « {{title}} ».",
+    "general": "{{money}}, là où le besoin est le plus urgent.",
+    "example": "Par exemple : {{text}}"
+  },
+  "donor": {
+    "label": "Votre nom, ou celui de votre organisation (facultatif)"
+  },
+  "privacy": "Ce site n’enregistre rien<nb> </nb>: le message part de votre propre messagerie. Voir notre <lien>politique de confidentialité<sr> (nouvel onglet)</sr></lien>.",
+  "submit": "Préparer mon message",
+  "errors": {
+    "digits": "Saisissez le montant en chiffres, par exemple {{example}}.",
+    "min": "Le montant minimum est de {{min}}.",
+    "max": "Pour un don de plus de {{max}}, écrivez-nous directement par WhatsApp ou par e-mail (coordonnées en bas de page)."
+  },
+  "draft": {
+    "subject": "Don à WAHHF Foundation — {{amount}}",
+    "intro": "Je souhaite faire un don à WAHHF Foundation. Pouvez-vous m’indiquer comment le régler ?",
+    "amount": "Montant",
+    "allocation": "Affectation souhaitée",
+    "name": "Nom ou organisation"
+  }
+}

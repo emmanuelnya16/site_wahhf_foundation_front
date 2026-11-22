@@ -17,14 +17,15 @@ export default function DisclaimerBanner({ compact = false, className = '' }: Di
 
   return (
     <InfoBox title={t('disclaimer.title')} className={className}>
-      <p>
-        Nos cours et notre accompagnement sont gratuits. Nous ne vendons ni visa ni emploi et ne garantissons aucun résultat. Nous ne vous demandons jamais d’argent. Les décisions appartiennent aux autorités et aux établissements concernés. Vérifiez toujours les informations sur les sites officiels.
-      </p>
+      {/* Texte validé (contrat §13). En français même sur le site anglais : les pages qui l'affichent ne sont pas encore
+          traduites, l'encadré ne doit pas être la seule partie en anglais (T-08, à traiter avec la traduction). */}
+      <p>{t('disclaimer.text')}</p>
 
+      {/* Espace insécable avant « ? » (T-19, revue du groupe 7.4) : le point d'interrogation ne passe jamais seul à la ligne */}
       {!compact && (
         <p>
           <Link to="/accompagnement/eviter-les-arnaques" className="text-link underline underline-offset-4">
-            Comment reconnaître une fausse offre et éviter les arnaques ?
+            {t('disclaimer.link')}
           </Link>
         </p>
       )}

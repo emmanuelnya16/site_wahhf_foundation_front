@@ -9,3 +9,6 @@ coverage/
 
 # Rapport du contrôle des textes provisoires (npm run check:todo)
 rapport-textes-provisoires.md
+
+# Originaux des photos (lot 7.6) : copiés depuis le dossier de la fondation, hors du dépôt (npm run photos)
+photos-src/

@@ -1,3 +1,4 @@
+import i18n from '../i18n';
 import { CONTACT } from '../config/contact';
 
 /** Message préparé à partir d'un formulaire : objet (e-mail) et corps (e-mail et WhatsApp). */
@@ -11,9 +12,21 @@ export interface ContactDraft {
  * Rien n'est stocké : le texte n'existe que dans la page et dans le lien ouvert par la personne.
  */
 export function buildDraft(subject: string, intro: string, rows: Array<[string, string | undefined]>, outro?: string): ContactDraft {
-  const lines = rows.filter(([, value]) => value && value.trim()).map(([label, value]) => `${label} : ${value!.trim()}`);
-  const body = ['Bonjour WAHHF Foundation,', '', intro, '', ...lines, ...(outro ? ['', outro] : [])].join('\n');
+  // Lot 7.10 : formule d'accueil et ponctuation de la langue (« Libellé : valeur » en français, « Label: value » sinon)
+  const lines = rows
+    .filter(([, value]) => value && value.trim())
+    .map(([label, value]) => i18n.t('ui.draft.row', { label, value: value!.trim() }));
+  const body = [i18n.t('ui.draft.greeting'), '', afterGreeting(intro), '', ...lines, ...(outro ? ['', outro] : [])].join('\n');
   return { subject, body };
+}
+
+/**
+ * En allemand, la formule d'accueil se termine par une virgule : la phrase suivante commence par une minuscule, sauf un
+ * nom (« ich möchte… », mais « Bewerbung … »). Seuls les pronoms et mots-outils courants d'une première phrase changent.
+ */
+function afterGreeting(intro: string): string {
+  if (!i18n.language.startsWith('de')) return intro;
+  return intro.replace(/^(Ich|Wir|Mein\p{L}*|Unser\p{L}*|Hiermit|Bitte|Gern|Gerne|Hier)(?=\s)/u, (word) => word.toLowerCase());
 }
 
 /** Lien WhatsApp (wa.me) qui ouvre une conversation avec le message déjà écrit. */

@@ -4,6 +4,7 @@ import { geoMercator, geoPath, GeoProjection } from 'd3-geo';
 import { AnimatePresence, motion, useAnimate, useInView, useReducedMotion } from 'motion/react';
 import { Maximize2, Minimize2 } from 'lucide-react';
 import { useDialog } from '../../lib/useDialog';
+import { useLocalize } from '../../lib/localize';
 import { useElementSize } from '../../lib/useElementSize';
 import { useSlicedWork } from '../../lib/useSlicedWork';
 import { prefersReducedMotion } from '../../lib/reducedMotion';
@@ -45,6 +46,8 @@ interface CameroonMapProps {
  */
 export default function CameroonMap({ selectedRegion, onSelectRegion }: CameroonMapProps) {
   const geo = use(loadCameroonGeo());
+  const { t, localized } = useLocalize();
+  const regionText = (r: CameroonRegionData) => localized(r, `contenu.regions.${r.id}`);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [focusId, setFocusId] = useState<string | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -135,7 +138,7 @@ export default function CameroonMap({ selectedRegion, onSelectRegion }: Cameroon
         ) : (
           // Même format que la carte (480 × 560) pendant le calcul des tracés : rien ne bouge à l'arrivée
           <div role="status" aria-busy="true" className="w-full aspect-[480/560] rounded-inner bg-surface-raised flex items-center justify-center text-meta text-text-secondary">
-            Chargement de la carte des 10 régions du Cameroun…
+            {t('ui.map.loadingCameroon')}
           </div>
         )}
 
@@ -145,7 +148,7 @@ export default function CameroonMap({ selectedRegion, onSelectRegion }: Cameroon
             aria-hidden="true"
             className="pointer-events-none absolute top-1 left-1 px-3 py-1.5 rounded-pill bg-surface-raised text-meta text-text shadow-overlay dark:border dark:border-border-input"
           >
-            <span className="font-semibold">{hoveredRegion.name}</span> · Chef-lieu : {hoveredRegion.capital}
+            <span className="font-semibold">{regionText(hoveredRegion).name}</span> · {t('ui.map.capital', { capital: hoveredRegion.capital })}
           </div>
         )}
 
@@ -154,8 +157,8 @@ export default function CameroonMap({ selectedRegion, onSelectRegion }: Cameroon
           ref={openFullscreenRef}
           type="button"
           onClick={() => setIsFullscreen(true)}
-          aria-label="Afficher la carte du Cameroun en plein écran"
-          title="Plein écran"
+          aria-label={t('ui.map.fullscreenOpen')}
+          title={t('ui.map.fullscreen')}
           className="absolute top-0 right-0 w-11 h-11 [@media(pointer:fine)]:w-9 [@media(pointer:fine)]:h-9 rounded-pill bg-surface-raised hover:bg-action text-text hover:text-on-action border border-border-input flex items-center justify-center transition-colors duration-(--dur-fast) cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-creme"
         >
           <Maximize2 className="w-4 h-4" />
@@ -181,9 +184,9 @@ export default function CameroonMap({ selectedRegion, onSelectRegion }: Cameroon
             <div className="max-w-5xl w-full mx-auto flex items-start justify-between gap-4 border-b border-border-subtle pb-4">
               <div>
                 <h2 id={titleId} className="text-section-title text-text">
-                  Région sélectionnée : {selectedRegion.name} ({selectedRegion.capital})
+                  {t('ui.map.selectedTitle', { name: regionText(selectedRegion).name, capital: selectedRegion.capital })}
                 </h2>
-                <p className="mt-1 text-meta text-text-secondary">{selectedRegion.antennaTodo}</p>
+                <p className="mt-1 text-meta text-text-secondary">{regionText(selectedRegion).antennaTodo}</p>
               </div>
               <button
                 ref={closeFullscreenRef}
@@ -192,7 +195,7 @@ export default function CameroonMap({ selectedRegion, onSelectRegion }: Cameroon
                 className="inline-flex items-center gap-2 px-4 py-2.5 rounded-pill bg-action text-on-action text-meta font-semibold cursor-pointer shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-creme"
               >
                 <Minimize2 className="w-4 h-4" aria-hidden="true" />
-                <span>Fermer</span>
+                <span>{t('ui.map.close')}</span>
               </button>
             </div>
 
@@ -202,7 +205,7 @@ export default function CameroonMap({ selectedRegion, onSelectRegion }: Cameroon
 
             <div
               role="group"
-              aria-label="Sélection rapide des 10 régions du Cameroun"
+              aria-label={t('ui.map.quickSelect')}
               className="max-w-5xl w-full mx-auto pt-3 border-t border-border-subtle flex sm:flex-wrap sm:justify-center gap-1.5 overflow-x-auto pb-1"
             >
               {CAMEROON_REGIONS_LIST.map((reg) => {
@@ -217,7 +220,7 @@ export default function CameroonMap({ selectedRegion, onSelectRegion }: Cameroon
                       isSelected ? 'bg-action text-on-action font-semibold' : 'border border-border-input text-text hover:bg-surface-section'
                     }`}
                   >
-                    {reg.name}
+                    {regionText(reg).name}
                   </button>
                 );
               })}
@@ -260,6 +263,7 @@ function RegionMap({
   inModal,
 }: RegionMapProps) {
   const reduce = useReducedMotion();
+  const { t, localized } = useLocalize();
   const boxRef = useRef<HTMLDivElement>(null);
   const box = useElementSize(boxRef);
 
@@ -299,7 +303,7 @@ function RegionMap({
         width={W}
         height={H}
         role="group"
-        aria-label="Carte des 10 régions du Cameroun ; chaque région est un bouton"
+        aria-label={t('ui.map.cameroonLabel')}
         className={`block overflow-hidden select-none ${inModal ? 'max-h-full max-w-full h-full w-auto' : 'w-full h-auto'}`}
       >
         {/* 1. Contexte : les 6 voisins, contours très discrets sans remplissage ; le golfe de Guinée reste vide */}
@@ -309,7 +313,7 @@ function RegionMap({
             CAMEROON_NEIGHBORS.map((n) => (
               <Marker key={n.neName} coordinates={n.labelCoords}>
                 <text textAnchor="middle" fillOpacity={0.45} fontSize={8 * u} style={{ letterSpacing: '0.14em' }} className="font-sans fill-text-secondary">
-                  {n.label.map((line, i) => (
+                  {localized(n, `contenu.voisins.${n.neName.replace(/\W/g, '')}`).label.map((line, i) => (
                     <tspan key={line} x={0} dy={i === 0 ? 0 : 10 * u}>
                       {line}
                     </tspan>
@@ -331,7 +335,7 @@ function RegionMap({
                 data-cascade={cascadeId(region.id)}
                 role="button"
                 tabIndex={0}
-                aria-label={`Région ${region.name}, chef-lieu ${region.capital}`}
+                aria-label={t('ui.map.regionLabel', { name: localized(region, `contenu.regions.${region.id}`).name, capital: region.capital })}
                 aria-pressed={isSelected}
                 onClick={() => onSelectRegion(region)}
                 onPointerEnter={() => onHover(region.id)}

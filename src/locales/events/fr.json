@@ -1,0 +1,128 @@
+{
+  "seo": {
+    "listTitle": "Événements — Les journées de la fondation",
+    "listDescription": "Les journées et rencontres de WAHHF Foundation : prochains rendez-vous, programme et éditions passées en images.",
+    "eventDescription": "{{title}} : programme, lieu et informations pratiques de cette journée de WAHHF Foundation."
+  },
+  "list": {
+    "badge": "Les rendez-vous de la fondation",
+    "title": "Nos événements",
+    "accent": "événements",
+    "intro": "Des journées pour rencontrer la fondation, ses équipes et ses partenaires, et poser toutes vos questions.",
+    "upcoming": "À venir",
+    "past": "Éditions passées",
+    "none": "Aucun événement n’est annoncé pour le moment.",
+    "noneAction": "Écrivez-nous pour être prévenu du prochain",
+    "seeEvent": "Voir l’événement",
+    "startsIn": "Commence dans"
+  },
+  "hero": {
+    "badgeUpcoming": "Prochain rendez-vous de la fondation",
+    "badgePast": "Retour sur une journée de la fondation",
+    "register": "S’inscrire",
+    "program": "Voir le programme",
+    "photos": "Voir les photos",
+    "placesLeft_one": "Il reste {{count}} place",
+    "placesLeft_other": "Il reste {{count}} places",
+    "venueUpcoming": "L’événement a lieu à",
+    "venuePast": "L’événement a eu lieu à",
+    "flag": "Drapeau du Cameroun",
+    "pause": "Mettre les animations en pause",
+    "play": "Relancer les animations",
+    "breadcrumb": "Événements"
+  },
+  "countdown": {
+    "label": "Rendez-vous dans",
+    "days": "Jours",
+    "hours": "Heures",
+    "minutes": "Minutes",
+    "seconds": "Secondes",
+    "when": "L’événement commence le {{date}} à {{time}}, heure de Douala.",
+    "past": "C’était le {{date}}",
+    "pastText": "Merci à toutes celles et tous ceux qui étaient là.",
+    "photos": "Voir les photos"
+  },
+  "organizers": {
+    "label": "Organisé par"
+  },
+  "ticker": {
+    "label": "Les six domaines de la fondation, en allemand",
+    "pause": "Mettre le bandeau en pause",
+    "play": "Relancer le bandeau"
+  },
+  "why": {
+    "eyebrow": "Pourquoi venir",
+    "title": "Quatre raisons d’être là."
+  },
+  "schedule": {
+    "eyebrow": "Le déroulé",
+    "title": "Le fil de la journée, heure par heure."
+  },
+  "activities": {
+    "eyebrow": "Les activités",
+    "title": "Ce qui se passe pendant la journée.",
+    "more": "En savoir plus : {{title}}",
+    "domainLink": "{{title}}, domaine {{domain}}"
+  },
+  "program": {
+    "eyebrow": "Le programme en un coup d’œil",
+    "title": "Quatre moments pour retenir l’essentiel.",
+    "speakers": "Intervenants",
+    "speakersSep": " : ",
+    "speakersSoon": "annoncés très bientôt.",
+    "schedule": "Voir le déroulé",
+    "team": "Notre équipe"
+  },
+  "support": {
+    "eyebrow": "Soutenir l’événement",
+    "title": "Faites partie de la journée.",
+    "text": "Écoles, associations, entreprises, institutions ou bénévoles : chacun peut aider la fondation à accueillir les jeunes.",
+    "partnerEyebrow": "Pour les structures",
+    "partnerTitle": "Devenir partenaire",
+    "partnerText": "Proposez un partenariat à la fondation pour cette journée ou les suivantes.",
+    "giveEyebrow": "Pour chacun",
+    "giveTitle": "Faire un don de matériel ou de temps",
+    "giveText": "Prêtez main-forte le jour J, ou apportez du matériel utile aux jeunes."
+  },
+  "parents": {
+    "eyebrow": "Pour les parents",
+    "title": "Ce que nous devons aux familles.",
+    "text": "Avant de confier un jeune à la fondation, vous avez le droit de savoir comment la journée est encadrée.",
+    "promises": "Nos engagements",
+    "never": "Ce que nous ne promettrons jamais"
+  },
+  "faq": {
+    "eyebrow": "Questions fréquentes",
+    "title": "Les réponses, avant de venir.",
+    "text": "Les questions que les familles et les jeunes nous posent le plus souvent.",
+    "action": "Nous écrire"
+  },
+  "news": {
+    "eyebrow": "Actualités",
+    "title": "Les dernières nouvelles de la fondation.",
+    "all": "Toutes les actualités"
+  },
+  "final": {
+    "titleUpcoming": "Réservez votre journée.",
+    "textUpcoming": "Inscrivez-vous, puis venez avec vos questions : l’équipe de la fondation vous attend.",
+    "titlePast": "Revivez la journée en images.",
+    "textPast": "Les photos de la journée sont dans la galerie de la fondation.",
+    "write": "Nous écrire"
+  },
+  "notFound": {
+    "title": "Cet événement n’existe pas",
+    "text": "Il a peut-être changé d’adresse. Voici les événements de la fondation."
+  },
+  "faits": {
+    "dateBientot": "Date annoncée très bientôt",
+    "villeBientot": "Ville annoncée très bientôt",
+    "inscriptionBientot": "Inscriptions annoncées très bientôt",
+    "quandOu": "Le {{date}} à {{ville}}, {{pays}}.",
+    "quandSansVille": "Le {{date}}, au {{pays}} ; la ville est annoncée très bientôt.",
+    "ouSansDate": "À {{ville}}, {{pays}} ; la date est annoncée très bientôt.",
+    "quandOuInconnus": "La date et la ville sont annoncées très bientôt ; l’événement a lieu au {{pays}}.",
+    "prix": "{{prix}}.",
+    "prixInconnu": "Le prix est annoncé très bientôt.",
+    "deVille": " de {{ville}}"
+  }
+}

@@ -1,5 +1,7 @@
-import { useState, useId, useRef, useEffect, FormEvent } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
+import { useState, useId, useRef, useEffect, FormEvent, Ref } from 'react';
+import { useSearchParams, useLocation, useNavigate, Link } from 'react-router-dom';
+import { Trans } from 'react-i18next';
+import type { TFunction } from 'i18next';
 import SEO from '../components/wahhf/SEO';
 import { PrimaryButton, SecondaryButton } from '../components/wahhf/Buttons';
 import SectionHeader from '../components/wahhf/SectionHeader';
@@ -14,7 +16,10 @@ import { emailError, phoneError, requiredError, focusFirstError } from '../lib/f
 import { useFocusOnChange } from '../lib/useFocusOnChange';
 import ContactHandoff from '../components/wahhf/ContactHandoff';
 import { COUNTRIES_DATA, COURSE_SESSIONS_DATA } from '../services/api';
+import { formatKey, localizedSession, upcomingSessions } from '../lib/sessions';
 import { buildDraft } from '../lib/contactDraft';
+import { useLocalize } from '../lib/localize';
+import '../locales/mobilite';
 
 /**
  * Page /candidater (groupe 7.1 : contrat validé, audit CAND-01 à CAND-04, ACAD-01, ACAD-06, T-14).
@@ -29,39 +34,38 @@ import { buildDraft } from '../lib/contactDraft';
  * - Avant le formulaire : qui peut candidater, et ce qui se passe ensuite (ACAD-06).
  * - Mouvement (contrat §10, groupe 7.1) : en-tête révélé ; changement d'étape en fondu et glissement de 16 px (0,3 s),
  *   focus placé sur le titre de l'étape une fois l'animation finie ; barre qui avance en 0,3 s.
+ * - Lot 7.10 : textes du paquet « mobilite » (mobilite.candidature.*) ; les valeurs du formulaire (souhait, format,
+ *   niveau) restent les mêmes dans toutes les langues, seuls leurs libellés sont traduits. Le message préparé est
+ *   rédigé dans la langue de la personne (libellés traduits, mêmes réponses).
  */
-const WISH_LABELS = {
-  cours_allemand: 'Cours d’allemand (A1 à C1)',
-  accompagnement_europe: 'Accompagnement vers l’Europe',
-  les_deux: 'Les deux (Cours + Orientation)',
-} as const;
-type Wish = keyof typeof WISH_LABELS;
+/** Souhaits (libellés : mobilite.candidature.souhaits.<id>). */
+const WISHES = ['cours_allemand', 'accompagnement_europe', 'les_deux'] as const;
+type Wish = (typeof WISHES)[number];
 const LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1'] as const;
-const FORMATS = [
-  { value: 'En ligne', label: 'En ligne (accessible partout)' },
-  { value: 'Présentiel à Douala', label: 'Présentiel à Douala' },
-  { value: 'Présentiel à Yaoundé', label: 'Présentiel à Yaoundé' },
-] as const;
-const STEP_LABELS = { 1: 'Identité et coordonnées', 2: 'Souhait, pays et niveau d’allemand', 3: 'Projet et consentement' } as const;
+/** Formats : valeurs du formulaire (libellés : mobilite.formatsChoix.<clé>, message : mobilite.formats.<clé>). */
+const FORMATS = ['En ligne', 'Présentiel à Douala', 'Présentiel à Yaoundé'] as const;
+/** Titres des étapes : affichés en h3 et annoncés à chaque changement (un seul libellé par étape, critique 7.1) ;
+ *  textes : mobilite.candidature.etapes.<n>. */
+const stepLabel = (t: TFunction, step: 1 | 2 | 3) => t(`mobilite.candidature.etapes.${step}`);
 
 type ApplyField = 'fullName' | 'email' | 'phone' | 'residenceCountry' | 'city' | 'gdprConsent';
 const STEP1_FIELDS = ['fullName', 'email', 'phone', 'residenceCountry', 'city'] as const;
 const INPUT_CLASS = FIELD_CLASS;
 
-function checkField(key: ApplyField, value: string | boolean): string | undefined {
+function checkField(key: ApplyField, value: string | boolean, t: TFunction): string | undefined {
   switch (key) {
     case 'fullName':
-      return requiredError(String(value), 'Saisissez votre prénom et votre nom.');
+      return requiredError(String(value), t('mobilite.candidature.erreurs.nom'));
     case 'email':
       return emailError(String(value));
     case 'phone':
       return phoneError(String(value));
     case 'residenceCountry':
-      return requiredError(String(value), 'Indiquez votre pays de résidence, par exemple Cameroun.');
+      return requiredError(String(value), t('mobilite.candidature.erreurs.pays'));
     case 'city':
-      return requiredError(String(value), 'Indiquez votre ville de résidence, par exemple Douala.');
+      return requiredError(String(value), t('mobilite.candidature.erreurs.ville'));
     case 'gdprConsent':
-      return value ? undefined : 'Cochez cette case pour que nous puissions étudier votre candidature et vous recontacter.';
+      return value ? undefined : t('mobilite.candidature.erreurs.accord');
   }
 }
 
@@ -87,16 +91,35 @@ function readDraft(): Partial<Draft> | null {
     return null;
   }
 }
-const isWish = (v: unknown): v is Wish => typeof v === 'string' && v in WISH_LABELS;
+/** Le brouillon contient-il une saisie de la personne (et pas seulement les valeurs par défaut) ? */
+const hasTyped = (d: Partial<Draft> | null | undefined) =>
+  !!d && [d.fullName, d.email, d.phone, d.city, d.message].some((v) => typeof v === 'string' && v.trim() !== '');
+
+const isWish = (v: unknown): v is Wish => typeof v === 'string' && (WISHES as readonly string[]).includes(v);
 const isLevel = (v: unknown): v is (typeof LEVELS)[number] => typeof v === 'string' && (LEVELS as readonly string[]).includes(v);
 const isCountry = (v: unknown): v is string => typeof v === 'string' && COUNTRIES_DATA.some((c) => c.slug === v);
-const isFormat = (v: unknown): v is string => typeof v === 'string' && FORMATS.some((f) => f.value === v);
+const isFormat = (v: unknown): v is string => typeof v === 'string' && (FORMATS as readonly string[]).includes(v);
 /** Format d'une session de l'Académie, dans les valeurs du formulaire. */
 const sessionFormat = (format: string) =>
   format.includes('Douala') ? 'Présentiel à Douala' : format.includes('Yaoundé') ? 'Présentiel à Yaoundé' : 'En ligne';
 
+/** Titre d'une étape (h3 sous le h2 « Votre candidature », T-19), qui reçoit le focus au changement d'étape. */
+function StepTitle({ title, text, titleRef }: { title: string; text: string; titleRef: Ref<HTMLHeadingElement> }) {
+  return (
+    <div className="space-y-2">
+      <h3 ref={titleRef} tabIndex={-1} className="text-body font-semibold text-text">
+        {title}
+      </h3>
+      <p className="text-body text-text-secondary max-w-[65ch]">{text}</p>
+    </div>
+  );
+}
+
 export default function ApplyPage() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const { t, lang, localized } = useLocalize();
+  /** Pays de résidence proposé d'avance : « Cameroun », « Cameroon » ou « Kamerun » selon la langue. */
+  const defaultCountry = t('mobilite.candidature.paysDefaut');
 
   // Valeurs de départ : le brouillon gardé, puis les paramètres de l'adresse s'ils sont valides (CAND-04)
   const [initial] = useState(() => {
@@ -104,13 +127,13 @@ export default function ApplyPage() {
     const wish = searchParams.get('souhait');
     const level = searchParams.get('niveau')?.toUpperCase();
     const country = searchParams.get('pays');
-    const session = COURSE_SESSIONS_DATA.find((s) => s.id === searchParams.get('session'));
+    const session = upcomingSessions(COURSE_SESSIONS_DATA).find((s) => s.id === searchParams.get('session'));
     return {
-      restored: !!draft && Object.values(draft).some((v) => typeof v === 'string' && v.trim() !== '' && v !== 'Cameroun'),
+      restored: hasTyped(draft),
       fullName: draft?.fullName ?? '',
       email: draft?.email ?? '',
       phone: draft?.phone ?? '',
-      residenceCountry: draft?.residenceCountry ?? 'Cameroun',
+      residenceCountry: draft?.residenceCountry ?? defaultCountry,
       city: draft?.city ?? '',
       wishType: isWish(wish) ? wish : session ? 'cours_allemand' : isWish(draft?.wishType) ? draft.wishType : 'les_deux',
       targetCountry: isCountry(country) ? country : isCountry(draft?.targetCountry) ? draft.targetCountry : 'allemagne',
@@ -133,13 +156,24 @@ export default function ApplyPage() {
   const [gdprConsent, setGdprConsent] = useState(false);
   const [restored, setRestored] = useState(initial.restored);
 
-  // Session choisie sur l'Académie (ACAD-01), affichée en tête du formulaire
-  const session = COURSE_SESSIONS_DATA.find((s) => s.id === searchParams.get('session'));
+  // Changement de langue : le pays proposé d'avance suit la langue, s'il n'a pas été modifié
+  const shownDefaultCountry = useRef(defaultCountry);
+  useEffect(() => {
+    if (shownDefaultCountry.current === defaultCountry) return;
+    setResidenceCountry((current) => (current === shownDefaultCountry.current ? defaultCountry : current));
+    shownDefaultCountry.current = defaultCountry;
+  }, [defaultCountry]);
+
+  // Session choisie sur l'Académie (ACAD-01), affichée en tête du formulaire ; une session commencée est ignorée
+  const session = upcomingSessions(COURSE_SESSIONS_DATA).find((s) => s.id === searchParams.get('session'));
 
   // Étape dans l'adresse (CAND-02) : 1, 2, 3, ou « envoi » (message prêt)
   const etape = searchParams.get('etape');
   const prepared = etape === 'envoi';
   const step: 1 | 2 | 3 = etape === '2' ? 2 : etape === '3' || prepared ? 3 : 1;
+  const location = useLocation();
+  const navigate = useNavigate();
+  // Avancer : nouvelle entrée d'historique, marquée (le bouton retour du téléphone revient à l'étape d'avant)
   const goTo = (next: '2' | '3' | 'envoi' | null, replace = false) =>
     setSearchParams(
       (prev) => {
@@ -148,27 +182,71 @@ export default function ApplyPage() {
         else params.delete('etape');
         return params;
       },
-      { replace }
+      { replace, state: replace ? location.state : { candidatureStep: true } }
     );
+  // Revenir (« Étape précédente », « Modifier mes réponses ») : on remonte l'historique si l'on y est arrivé en
+  // avançant, sinon on remplace l'adresse ; jamais de boucle entre deux étapes avec le bouton retour
+  const goBack = (to: '2' | '3' | null) => {
+    if ((location.state as { candidatureStep?: boolean } | null)?.candidatureStep) navigate(-1);
+    else goTo(to, true);
+  };
 
   // Champs reliés à leur label par un id unique (useId) ; erreurs affichées sous chaque champ
   const uid = useId();
   const fieldId = (key: ApplyField) => `apply-${key}-${uid}`;
   const [errors, setErrors] = useState<Partial<Record<ApplyField, string>>>({});
   const values: Record<ApplyField, string | boolean> = { fullName, email, phone, residenceCountry, city, gdprConsent };
-  const step1Valid = STEP1_FIELDS.every((key) => !checkField(key, values[key]));
+  const step1Valid = STEP1_FIELDS.every((key) => !checkField(key, values[key], t));
 
-  // Adresse d'une étape plus loin sans coordonnées valides (lien partagé, brouillon effacé) : retour à l'étape 1
+  // Changement de langue : les messages d'erreur affichés passent dans la nouvelle langue
   useEffect(() => {
-    if (step > 1 && !step1Valid) goTo(null, true);
+    setErrors((prev) => {
+      const shown = (Object.keys(prev) as ApplyField[]).filter((key) => prev[key]);
+      if (!shown.length) return prev;
+      const next = { ...prev };
+      for (const key of shown) next[key] = checkField(key, values[key], t);
+      return next;
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [step]);
+  }, [lang]);
+
+  // Adresse corrigée en une seule fois (deux appels à setSearchParams dans le même rendu s'écraseraient) :
+  // - souhait, niveau et pays de l'adresse : appliqués à l'arrivée, puis retirés (un rechargement garde ensuite les
+  //   choix faits dans le formulaire, gardés en brouillon) ;
+  // - étape plus loin sans coordonnées valides (lien partagé, brouillon effacé) : retour à l'étape 1 ;
+  // - message prêt sans la case d'accord cochée (rechargement, lien direct) : retour à l'étape 3 pour la cocher.
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams);
+    ['souhait', 'niveau', 'pays'].forEach((k) => params.delete(k));
+    if (step > 1 && !step1Valid) params.delete('etape');
+    else if (prepared && !gdprConsent) params.set('etape', '3');
+    if (params.toString() !== searchParams.toString()) setSearchParams(params, { replace: true, state: location.state });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [step, prepared]);
+
+  // Un autre niveau ou un autre format que ceux de la session choisie : la session n'est plus retenue
+  useEffect(() => {
+    if (!session) return;
+    if (currentGermanLevel !== session.level || preferredFormat !== sessionFormat(session.format)) {
+      setSearchParams(
+        (prev) => {
+          const params = new URLSearchParams(prev);
+          params.delete('session');
+          return params;
+        },
+        { replace: true, state: location.state }
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentGermanLevel, preferredFormat]);
 
   // Brouillon : enregistré à chaque modification (le consentement n'est jamais gardé)
   useEffect(() => {
     const draft: Draft = { fullName, email, phone, residenceCountry, city, wishType, targetCountry, currentGermanLevel, preferredFormat, message };
     try {
-      sessionStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
+      // Rien de saisi : pas de brouillon (les valeurs par défaut ne sont pas des réponses)
+      if (hasTyped(draft)) sessionStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
+      else sessionStorage.removeItem(DRAFT_KEY);
     } catch {
       /* stockage indisponible : le formulaire marche sans brouillon */
     }
@@ -183,7 +261,7 @@ export default function ApplyPage() {
     setFullName('');
     setEmail('');
     setPhone('');
-    setResidenceCountry('Cameroun');
+    setResidenceCountry(defaultCountry);
     setCity('');
     setMessage('');
     setErrors({});
@@ -194,16 +272,16 @@ export default function ApplyPage() {
   /** Vérifie les champs donnés ; en cas d'erreur, place le focus sur le premier champ fautif. */
   const validate = (keys: readonly ApplyField[]) => {
     const found: Partial<Record<ApplyField, string>> = {};
-    for (const key of keys) found[key] = checkField(key, values[key]);
+    for (const key of keys) found[key] = checkField(key, values[key], t);
     setErrors((prev) => ({ ...prev, ...found }));
     return !focusFirstError(keys, found, fieldId);
   };
   // Un message affiché suit la correction en direct ; un champ rempli est vérifié quand on le quitte.
   const recheck = (key: ApplyField, value: string | boolean) => {
-    if (errors[key]) setErrors((prev) => ({ ...prev, [key]: checkField(key, value) }));
+    if (errors[key]) setErrors((prev) => ({ ...prev, [key]: checkField(key, value, t) }));
   };
   const checkOnBlur = (key: ApplyField, value: string) => {
-    if (value.trim()) setErrors((prev) => ({ ...prev, [key]: checkField(key, value) }));
+    if (value.trim()) setErrors((prev) => ({ ...prev, [key]: checkField(key, value, t) }));
   };
 
   // Après chaque étape ou envoi : défilement en haut du formulaire, puis focus sur le titre une fois l'entrée animée
@@ -213,8 +291,8 @@ export default function ApplyPage() {
     afterMs: 300,
   });
   const statusMessage = prepared
-    ? 'Votre message est prêt : envoyez-le par WhatsApp ou par e-mail.'
-    : `Étape ${step} sur 3 : ${STEP_LABELS[step]}.`;
+    ? t('mobilite.candidature.statutPret')
+    : t('mobilite.candidature.statutEtape', { step, label: stepLabel(t, step) });
 
   // Chaque étape est validée à l'envoi du formulaire (bouton ou touche Entrée)
   const handleSubmit = (e: FormEvent) => {
@@ -232,44 +310,48 @@ export default function ApplyPage() {
   };
 
   // Message préparé avec les réponses : rien n'est envoyé par le site
-  const targetCountryName = COUNTRIES_DATA.find((c) => c.slug === targetCountry)?.name;
+  const countryName = (slug: string) => {
+    const country = COUNTRIES_DATA.find((c) => c.slug === slug);
+    return country && localized(country, `contenu.pays.${country.slug}`).name;
+  };
+  const targetCountryName = countryName(targetCountry);
+  const m = (key: string) => t(`mobilite.candidature.message.${key}`);
   const draft = buildDraft(
-    `Candidature WAHHF — ${fullName.trim()}`,
-    'Je souhaite candidater à un parcours d’accompagnement de WAHHF Foundation. Voici mes réponses au formulaire du site :',
+    t('mobilite.candidature.message.objet', { name: fullName.trim() }),
+    m('intro'),
     [
-      ['Nom complet', fullName],
-      ['E-mail', email],
-      ['Téléphone / WhatsApp', phone],
-      ['Pays de résidence', residenceCountry],
-      ['Ville', city],
-      ['Souhait', WISH_LABELS[wishType]],
-      ['Session choisie', session ? `${session.title} (${session.id})` : undefined],
-      ['Pays d’intérêt', wishType === 'cours_allemand' ? undefined : targetCountryName],
-      ['Niveau d’allemand', currentGermanLevel],
-      ['Format souhaité', preferredFormat],
-      ['Message', message],
+      [m('nom'), fullName],
+      [m('email'), email],
+      [m('telephone'), phone],
+      [m('pays'), residenceCountry],
+      [m('ville'), city],
+      [m('souhait'), t(`mobilite.candidature.souhaits.${wishType}`)],
+      [m('session'), session ? `${localizedSession(session, lang).title} (${session.id})` : undefined],
+      [m('paysInteret'), wishType === 'cours_allemand' ? undefined : targetCountryName],
+      [m('niveau'), currentGermanLevel],
+      [m('format'), t(`mobilite.formats.${formatKey(preferredFormat)}`)],
+      [m('message'), message],
     ],
-    'J’accepte que mes coordonnées soient traitées par WAHHF Foundation dans le seul but de répondre à ma demande d’accompagnement.'
+    m('accord')
   );
 
   return (
     <>
       <SEO
-        title="Candidater gratuitement — Cours d'allemand & Accompagnement Europe"
-        description="Formulaire unique et 100 % gratuit de demande d'accompagnement et d'inscription aux cours d'allemand WAHHF Foundation. Aucun document d'identité ni paiement demandé."
+        title={t('mobilite.candidature.seoTitle')}
+        description={t('mobilite.candidature.seoDescription')}
+        canonical="/candidater"
       />
 
       {/* En-tête : titre, avertissement complet juste dessous (T-14), vraie photo d'accompagnement de l'Open Day */}
       <PageHeader reveal photoId="open-day-accompagnement" notice={<DisclaimerBanner />}>
-        <PageTitle>Candidater à un parcours d’accompagnement</PageTitle>
-        <PageIntro>
-          Un seul formulaire pour rejoindre l’Académie d’allemand (A1 à C1), être orienté vers l’Europe, ou les deux. Il
-          se remplit en 5 minutes environ.
-        </PageIntro>
+        <PageTitle>{t('mobilite.candidature.title')}</PageTitle>
+        <PageIntro>{t('mobilite.candidature.intro')}</PageIntro>
       </PageHeader>
 
       {/* Avant le formulaire : qui peut candidater, et ce qui se passe ensuite (ACAD-06) */}
-      <section className="container-page section-space pt-0!">
+      <section className="container-page section-space pt-0! space-y-8">
+        <SectionHeader title={t('mobilite.candidature.avant')} />
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-12">
           <WhoCanApply />
           <AfterApplicationSteps />
@@ -283,28 +365,33 @@ export default function ApplyPage() {
         </p>
         {prepared ? (
           <ContactHandoff
-            title="Dernière étape : envoyez votre candidature"
+            title={t('mobilite.candidature.envoiTitle')}
+            editLabel={t('mobilite.candidature.modifier')}
             draft={draft}
             titleRef={stepTitleRef}
-            onEdit={() => goTo('3')}
+            onEdit={() => goBack('3')}
           >
-            <InfoBox>
-              <p>
-                Rappel : aucun collaborateur de WAHHF ne vous demandera d’argent par téléphone, e-mail ou WhatsApp pour traiter votre dossier.
-              </p>
-            </InfoBox>
+            <p className="text-body text-text max-w-[65ch]">{t('mobilite.candidature.rappel')}</p>
+            <p className="text-meta text-text-secondary max-w-[65ch]">
+              {t('mobilite.candidature.conservees')}{' '}
+              <button type="button" onClick={clearDraft} className="text-link underline underline-offset-4 decoration-1 hover:decoration-2 cursor-pointer">
+                {t('mobilite.candidature.effacer')}
+              </button>{' '}
+              {t('mobilite.candidature.effacerConseil')}
+            </p>
           </ContactHandoff>
         ) : (
-          <div className="rounded-card bg-surface-section p-6 sm:p-10 space-y-8">
-            <SectionHeader title="Formulaire de candidature" />
+          // data-no-reveal : rien n'apparaît au défilement dans le formulaire (seulement ses changements d'étape)
+          <div data-no-reveal="" className="rounded-card bg-surface-section p-6 sm:p-10 space-y-8">
+            <SectionHeader title={t('mobilite.candidature.formTitle')} />
 
             {/* Réponses gardées dans l'onglet (CAND-02) */}
             {restored && (
-              <InfoBox title="Nous avons gardé vos réponses">
-                <p>Vos réponses ont été conservées dans ce navigateur. Elles seront effacées à la fermeture de l’onglet.</p>
+              <InfoBox title={t('mobilite.candidature.garderTitle')}>
+                <p>{t('mobilite.candidature.garderText')}</p>
                 <p>
                   <button type="button" onClick={clearDraft} className="text-link underline underline-offset-4 decoration-1 hover:decoration-2 cursor-pointer">
-                    Effacer mes réponses et recommencer
+                    {t('mobilite.candidature.garderEffacer')}
                   </button>
                 </p>
               </InfoBox>
@@ -312,9 +399,13 @@ export default function ApplyPage() {
 
             {/* Session choisie sur l'Académie (ACAD-01) */}
             {session && (
-              <InfoBox title="Vous candidatez à cette session">
+              <InfoBox title={t('mobilite.candidature.sessionTitle')}>
                 <p>
-                  Niveau {session.level}, {sessionFormat(session.format).replace(/^P/, 'p').replace(/^E/, 'e')} : {session.title}.
+                  {t('mobilite.candidature.sessionText', {
+                    level: session.level,
+                    format: t(`mobilite.formatsPhrase.${formatKey(session.format)}`),
+                    title: localizedSession(session, lang).title,
+                  })}
                 </p>
                 <p>
                   <button
@@ -328,19 +419,16 @@ export default function ApplyPage() {
                     }
                     className="text-link underline underline-offset-4 decoration-1 hover:decoration-2 cursor-pointer"
                   >
-                    Changer de session
+                    {t('mobilite.candidature.sessionChanger')}
                   </button>
-                  <span className="text-text-secondary"> (vous pourrez choisir votre niveau et votre format à l’étape 2)</span>
+                  <span className="text-text-secondary"> {t('mobilite.candidature.sessionNote')}</span>
                 </p>
               </InfoBox>
             )}
 
             {/* Un seul indicateur d'étape : la position en texte et la barre de progression */}
             <div className="space-y-3">
-              <p className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 text-meta text-text-secondary">
-                <span className="font-bold text-text">Étape {step} sur 3</span>
-                <span>{STEP_LABELS[step]}</span>
-              </p>
+              <p className="text-meta font-bold text-text">{t('mobilite.candidature.position', { step })}</p>
               <ProgressBar value={step} max={3} />
             </div>
 
@@ -349,21 +437,19 @@ export default function ApplyPage() {
               <div key={step} className="step-enter">
                 {step === 1 && (
                   <div className="space-y-5">
-                    <SectionHeader
-                      titleRef={stepTitleRef}
-                      title="Vos coordonnées de contact"
-                      subtitle="Ces informations servent uniquement à vous recontacter."
-                    />
+                    <StepTitle titleRef={stepTitleRef} title={stepLabel(t, 1)} text={t('mobilite.candidature.etape1Text')} />
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      <FormField id={fieldId('fullName')} label="Nom complet (Prénom & Nom) *" error={errors.fullName}>
+                      <FormField id={fieldId('fullName')} label={t('mobilite.candidature.nomLabel')} error={errors.fullName}>
                         {(a11y) => (
                           <input
                             {...a11y}
                             type="text"
                             required
                             autoComplete="name"
-                            placeholder="Ex. Marie Nguenang"
+                            autoCapitalize="words"
+                            maxLength={100}
+                            placeholder={t('mobilite.candidature.nomExemple')}
                             value={fullName}
                             onChange={(e) => {
                               setFullName(e.target.value);
@@ -375,14 +461,17 @@ export default function ApplyPage() {
                         )}
                       </FormField>
 
-                      <FormField id={fieldId('email')} label="Adresse e-mail *" error={errors.email}>
+                      <FormField id={fieldId('email')} label={t('mobilite.candidature.emailLabel')} error={errors.email}>
                         {(a11y) => (
                           <input
                             {...a11y}
                             type="email"
                             required
                             autoComplete="email"
-                            placeholder="exemple@domaine.com"
+                            autoCapitalize="none"
+                            spellCheck={false}
+                            maxLength={254}
+                            placeholder={t('mobilite.candidature.emailExemple')}
                             value={email}
                             onChange={(e) => {
                               setEmail(e.target.value);
@@ -394,7 +483,7 @@ export default function ApplyPage() {
                         )}
                       </FormField>
 
-                      <FormField id={fieldId('phone')} label="Téléphone / WhatsApp *" error={errors.phone}>
+                      <FormField id={fieldId('phone')} label={t('mobilite.candidature.telephoneLabel')} error={errors.phone}>
                         {(a11y) => (
                           <input
                             {...a11y}
@@ -402,7 +491,8 @@ export default function ApplyPage() {
                             required
                             autoComplete="tel"
                             inputMode="tel"
-                            placeholder="Ex. +237 6..."
+                            maxLength={30}
+                            placeholder={t('mobilite.candidature.telephoneExemple')}
                             value={phone}
                             onChange={(e) => {
                               setPhone(e.target.value);
@@ -414,13 +504,14 @@ export default function ApplyPage() {
                         )}
                       </FormField>
 
-                      <FormField id={fieldId('residenceCountry')} label="Pays de résidence actuel *" error={errors.residenceCountry}>
+                      <FormField id={fieldId('residenceCountry')} label={t('mobilite.candidature.paysLabel')} error={errors.residenceCountry}>
                         {(a11y) => (
                           <input
                             {...a11y}
                             type="text"
                             required
                             autoComplete="country-name"
+                            maxLength={100}
                             value={residenceCountry}
                             onChange={(e) => {
                               setResidenceCountry(e.target.value);
@@ -432,14 +523,15 @@ export default function ApplyPage() {
                         )}
                       </FormField>
 
-                      <FormField id={fieldId('city')} label="Ville de résidence *" error={errors.city} className="sm:col-span-2">
+                      <FormField id={fieldId('city')} label={t('mobilite.candidature.villeLabel')} error={errors.city} className="sm:col-span-2">
                         {(a11y) => (
                           <input
                             {...a11y}
                             type="text"
                             required
                             autoComplete="address-level2"
-                            placeholder="Ex. Douala, Yaoundé, Bafoussam, Garoua..."
+                            maxLength={100}
+                            placeholder={t('mobilite.candidature.villeExemple')}
                             value={city}
                             onChange={(e) => {
                               setCity(e.target.value);
@@ -452,24 +544,24 @@ export default function ApplyPage() {
                       </FormField>
                     </div>
 
-                    <div className="pt-4 flex justify-end">
-                      <PrimaryButton type="submit">Continuer vers l’étape 2</PrimaryButton>
+                    <div className="pt-4 flex">
+                      <PrimaryButton type="submit">{t('mobilite.candidature.versEtape2')}</PrimaryButton>
                     </div>
                   </div>
                 )}
 
                 {step === 2 && (
                   <div className="space-y-6">
-                    <SectionHeader
+                    <StepTitle
                       titleRef={stepTitleRef}
-                      title="Votre souhait d’accompagnement"
-                      subtitle="Précisez le volet qui vous intéresse ainsi que votre niveau linguistique actuel."
+                      title={stepLabel(t, 2)}
+                      text={t('mobilite.candidature.etape2Text')}
                     />
 
                     <fieldset>
-                      <legend className={LABEL_CLASS}>Que souhaitez-vous ? *</legend>
+                      <legend className={LABEL_CLASS}>{t('mobilite.candidature.souhaitLegend')}</legend>
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        {(Object.keys(WISH_LABELS) as Wish[]).map((id) => (
+                        {WISHES.map((id) => (
                           <ChoiceTile
                             key={id}
                             name="apply-wish"
@@ -477,9 +569,9 @@ export default function ApplyPage() {
                             checked={wishType === id}
                             onChange={() => setWishType(id)}
                             showCheck
-                            className="p-4 rounded-2xl text-left font-medium"
+                            className="p-4 text-left"
                           >
-                            {WISH_LABELS[id]}
+                            {t(`mobilite.candidature.souhaits.${id}`)}
                           </ChoiceTile>
                         ))}
                       </div>
@@ -488,7 +580,7 @@ export default function ApplyPage() {
                     {(wishType === 'accompagnement_europe' || wishType === 'les_deux') && (
                       <div>
                         <label htmlFor="apply-target-country" className={LABEL_CLASS}>
-                          Pays d’intérêt principal parmi les 10 pays accompagnés
+                          {t('mobilite.candidature.paysInteretLabel')}
                         </label>
                         <select
                           id="apply-target-country"
@@ -498,7 +590,8 @@ export default function ApplyPage() {
                         >
                           {COUNTRIES_DATA.map((c) => (
                             <option key={c.slug} value={c.slug}>
-                              {c.flag} {c.name} {!c.isEU ? '(Hors Union européenne)' : ''}
+                              {localized(c, `contenu.pays.${c.slug}`).name}
+                              {!c.isEU ? ` ${t('mobilite.candidature.horsUE')}` : ''}
                             </option>
                           ))}
                         </select>
@@ -508,7 +601,7 @@ export default function ApplyPage() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                       <div>
                         <label htmlFor="apply-german-level" className={LABEL_CLASS}>
-                          Niveau d’allemand actuel / visé
+                          {t('mobilite.candidature.niveauLabel')}
                         </label>
                         <select
                           id="apply-german-level"
@@ -516,17 +609,17 @@ export default function ApplyPage() {
                           onChange={(e) => setCurrentGermanLevel(e.target.value)}
                           className={FIELD_CLASS}
                         >
-                          <option value="A1">A1 — Débutant complet</option>
-                          <option value="A2">A2 — Bases élémentaires</option>
-                          <option value="B1">B1 — Niveau intermédiaire</option>
-                          <option value="B2">B2 — Niveau avancé</option>
-                          <option value="C1">C1 — Niveau académique</option>
+                          {LEVELS.map((l) => (
+                            <option key={l} value={l}>
+                              {t(`mobilite.candidature.niveaux.${l}`)}
+                            </option>
+                          ))}
                         </select>
                       </div>
 
                       <div>
                         <label htmlFor="apply-format" className={LABEL_CLASS}>
-                          Format souhaité
+                          {t('mobilite.candidature.formatLabel')}
                         </label>
                         <select
                           id="apply-format"
@@ -535,46 +628,47 @@ export default function ApplyPage() {
                           className={FIELD_CLASS}
                         >
                           {FORMATS.map((f) => (
-                            <option key={f.value} value={f.value}>
-                              {f.label}
+                            <option key={f} value={f}>
+                              {t(`mobilite.formatsChoix.${formatKey(f)}`)}
                             </option>
                           ))}
                         </select>
                       </div>
                     </div>
 
-                    <div className="pt-4 flex flex-wrap items-center justify-between gap-3">
-                      <SecondaryButton onClick={() => goTo(null)}>Étape précédente</SecondaryButton>
-                      <PrimaryButton type="submit">Continuer vers l’étape 3</PrimaryButton>
+                    <div className="pt-4 flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
+                      <SecondaryButton onClick={() => goBack(null)}>{t('mobilite.candidature.precedente')}</SecondaryButton>
+                      <PrimaryButton type="submit">{t('mobilite.candidature.versEtape3')}</PrimaryButton>
                     </div>
                   </div>
                 )}
 
                 {step === 3 && (
                   <div className="space-y-6">
-                    <SectionHeader
+                    <StepTitle
                       titleRef={stepTitleRef}
-                      title="Votre motivation et votre accord"
-                      subtitle="Présentez brièvement votre parcours, puis validez votre demande."
+                      title={stepLabel(t, 3)}
+                      text={t('mobilite.candidature.etape3Text')}
                     />
 
                     <div>
                       <label htmlFor="apply-message" className={LABEL_CLASS}>
-                        Message libre (études actuelles, objectifs, disponibilités)
+                        {t('mobilite.candidature.messageLabel')}
                       </label>
                       <textarea
                         id="apply-message"
                         rows={4}
+                        maxLength={2000}
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
-                        placeholder="Expliquez en quelques lignes votre motivation et votre projet..."
+                        placeholder={t('mobilite.candidature.messageExemple')}
                         className={FIELD_CLASS}
                       />
                     </div>
 
                     {/* Rappel clair obligatoire : aucun document d'identité ni paiement demandé */}
                     <InfoBox>
-                      <p>Aucun document d’identité ni aucun paiement ne vous est demandé à cette étape.</p>
+                      <p>{t('mobilite.candidature.aucunDocument')}</p>
                     </InfoBox>
 
                     {/* Consentement : la politique s'ouvre dans un nouvel onglet, la saisie n'est jamais perdue (CAND-02) */}
@@ -594,20 +688,21 @@ export default function ApplyPage() {
                           className={CHECKBOX_CLASS}
                         />
                         <span>
-                          J’accepte que mes coordonnées soient traitées de manière strictement confidentielle par WAHHF Foundation dans le seul but de répondre à ma demande d’accompagnement, conformément à la{' '}
-                          <Link to="/confidentialite" target="_blank" rel="noopener" className="text-link underline underline-offset-4">
-                            politique de confidentialité
-                            <span className="sr-only"> (nouvel onglet)</span>
-                          </Link>
-                          . *
+                          <Trans
+                            i18nKey="mobilite.candidature.accord"
+                            components={{
+                              lien: <Link to="/confidentialite" target="_blank" rel="noopener" className="text-link underline underline-offset-4" />,
+                              nouvel: <span className="sr-only" />,
+                            }}
+                          />
                         </span>
                       </label>
                       <FieldError id={fieldErrorId(fieldId('gdprConsent'))} message={errors.gdprConsent} />
                     </div>
 
-                    <div className="pt-4 flex flex-wrap items-center justify-between gap-3">
-                      <SecondaryButton onClick={() => goTo('2')}>Étape précédente</SecondaryButton>
-                      <PrimaryButton type="submit">Préparer l’envoi de ma candidature</PrimaryButton>
+                    <div className="pt-4 flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
+                      <SecondaryButton onClick={() => goBack('2')}>{t('mobilite.candidature.precedente')}</SecondaryButton>
+                      <PrimaryButton type="submit">{t('mobilite.candidature.preparer')}</PrimaryButton>
                     </div>
                   </div>
                 )}

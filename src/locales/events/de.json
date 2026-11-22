@@ -1,0 +1,522 @@
+{
+  "_relire": [
+    "list.title, seo.listTitle, contenu.journee-2026-04-25.titre : « journée » rendu par « Aktionstag » (pas de mot allemand court pour « journée de la fondation »)",
+    "hero.venueUpcoming, hero.venuePast, contenu.road-to-europe.sections.hero.etiquette : « L'événement a lieu à » rendu par « Hier findet … statt » (au-dessus du nom du lieu)",
+    "program.speakers, contenu.road-to-europe.sections.programme.action2, contenu.road-to-europe.pourquoi[0].texte : « intervenants » au masculin générique (Referenten), comme Ausbilder, Vermittler, Partner ; forme inclusive à décider",
+    "faits.deVille, contenu.road-to-europe.sections.final.intro : « repartez de {{ville}} avec un plan » rendu par « nehmen Sie aus {{ville}} einen Plan mit nach Hause »",
+    "contenu.journee-2026-04-25.accroche : phrase de la banderole (non citée entre guillemets), traduite comme en anglais ; « soigne » rendu par « heilt »",
+    "contenu.journee-2026-04-25.pourquoi[2] : « professeur » rendu par « Dozent » (masculin, comme le français ; genre et fonction à confirmer)",
+    "contenu.journee-2026-04-25.pourquoi[3] : « Accompagnement voyage » rendu par « Begleitung bei Reiseplänen » (« Reisebegleitung » voudrait dire « accompagnateur de voyage »)",
+    "contenu.road-to-europe.activites[2].titre : « Emploi qualifié » rendu par « Arbeit als Fachkraft » (terme de l'immigration qualifiée en Allemagne)",
+    "contenu.road-to-europe.parents.promesses[1] : « organisateurs identifiés » rendu par « namentlich bekannte Veranstalter »",
+    "contenu.road-to-europe.sections.final.titre : « Prenez la bonne route vers l'Europe » rendu sans impératif (« Auf dem richtigen Weg nach Europa ») pour tenir sur deux lignes comme la référence ; « Gehen Sie den richtigen Weg » passait sur trois lignes à 1440 px"
+  ],
+  "_aValider": "TODO : traductions allemandes proposées (interface et contenu des événements), à faire valider par la fondation (docs/contenus-a-fournir.md).",
+  "seo": {
+    "listTitle": "Veranstaltungen — Die Aktionstage der Stiftung",
+    "listDescription": "Die Aktionstage und Begegnungen der WAHHF Foundation: kommende Termine, Programm und vergangene Ausgaben in Bildern.",
+    "eventDescription": "{{title}}: Programm, Ort und praktische Informationen zu diesem Aktionstag der WAHHF Foundation."
+  },
+  "list": {
+    "badge": "Die Termine der Stiftung",
+    "title": "Unsere Veranstaltungen",
+    "accent": "Veranstaltungen",
+    "intro": "Tage, an denen Sie die Stiftung, ihre Teams und ihre Partner kennenlernen und all Ihre Fragen stellen können.",
+    "upcoming": "Demnächst",
+    "past": "Vergangene Ausgaben",
+    "none": "Derzeit ist keine Veranstaltung angekündigt.",
+    "noneAction": "Schreiben Sie uns, um von der nächsten zu erfahren",
+    "seeEvent": "Zur Veranstaltung",
+    "startsIn": "Beginnt in"
+  },
+  "hero": {
+    "badgeUpcoming": "Der nächste Termin der Stiftung",
+    "badgePast": "Rückblick auf einen Aktionstag der Stiftung",
+    "register": "Anmelden",
+    "program": "Zum Programm",
+    "photos": "Zu den Fotos",
+    "placesLeft_one": "Noch {{count}} Platz frei",
+    "placesLeft_other": "Noch {{count}} Plätze frei",
+    "venueUpcoming": "Hier findet die Veranstaltung statt",
+    "venuePast": "Hier fand die Veranstaltung statt",
+    "flag": "Flagge Kameruns",
+    "pause": "Animationen pausieren",
+    "play": "Animationen fortsetzen",
+    "breadcrumb": "Veranstaltungen"
+  },
+  "countdown": {
+    "label": "Wir sehen uns in",
+    "days": "Tage",
+    "hours": "Stunden",
+    "minutes": "Minuten",
+    "seconds": "Sekunden",
+    "when": "Die Veranstaltung beginnt am {{date}} um {{time}} Ortszeit Douala.",
+    "past": "Das war am {{date}}",
+    "pastText": "Danke an alle, die dabei waren.",
+    "photos": "Zu den Fotos"
+  },
+  "organizers": {
+    "label": "Veranstaltet von"
+  },
+  "ticker": {
+    "label": "Die sechs Bereiche der Stiftung, auf Deutsch",
+    "pause": "Laufband pausieren",
+    "play": "Laufband fortsetzen"
+  },
+  "why": {
+    "eyebrow": "Warum Sie kommen sollten",
+    "title": "Vier Gründe, dabei zu sein."
+  },
+  "schedule": {
+    "eyebrow": "Der Ablauf",
+    "title": "Der Tagesablauf, Stunde für Stunde."
+  },
+  "activities": {
+    "eyebrow": "Die Aktivitäten",
+    "title": "Was im Laufe des Tages passiert.",
+    "more": "Mehr erfahren: {{title}}",
+    "domainLink": "{{title}}, Bereich {{domain}}"
+  },
+  "program": {
+    "eyebrow": "Das Programm auf einen Blick",
+    "title": "Vier Momente für das Wesentliche.",
+    "speakers": "Referenten",
+    "speakersSep": ": ",
+    "speakersSoon": "werden in Kürze bekannt gegeben.",
+    "schedule": "Zum Ablauf",
+    "team": "Unser Team"
+  },
+  "support": {
+    "eyebrow": "Die Veranstaltung unterstützen",
+    "title": "Seien Sie Teil des Tages.",
+    "text": "Schulen, Vereine, Unternehmen, Institutionen oder Ehrenamtliche: Alle können der Stiftung helfen, die jungen Menschen zu empfangen.",
+    "partnerEyebrow": "Für Organisationen",
+    "partnerTitle": "Partner werden",
+    "partnerText": "Schlagen Sie der Stiftung eine Partnerschaft für diesen Aktionstag oder die nächsten vor.",
+    "giveEyebrow": "Für alle",
+    "giveTitle": "Material oder Zeit spenden",
+    "giveText": "Packen Sie am Tag selbst mit an oder bringen Sie Material mit, das den jungen Menschen nützt."
+  },
+  "parents": {
+    "eyebrow": "Für Eltern",
+    "title": "Was wir den Familien schuldig sind.",
+    "text": "Bevor Sie der Stiftung einen jungen Menschen anvertrauen, haben Sie das Recht zu erfahren, wie er an diesem Tag betreut wird.",
+    "promises": "Unsere Zusagen",
+    "never": "Was wir niemals versprechen werden"
+  },
+  "faq": {
+    "eyebrow": "Häufige Fragen",
+    "title": "Die Antworten, bevor Sie kommen.",
+    "text": "Die Fragen, die uns Familien und junge Menschen am häufigsten stellen.",
+    "action": "Schreiben Sie uns"
+  },
+  "news": {
+    "eyebrow": "Aktuelles",
+    "title": "Die neuesten Nachrichten der Stiftung.",
+    "all": "Alle Neuigkeiten"
+  },
+  "final": {
+    "titleUpcoming": "Merken Sie sich den Tag vor.",
+    "textUpcoming": "Melden Sie sich an und bringen Sie Ihre Fragen mit: Das Team der Stiftung erwartet Sie.",
+    "titlePast": "Erleben Sie den Tag noch einmal in Bildern.",
+    "textPast": "Die Fotos des Tages finden Sie in der Galerie der Stiftung.",
+    "write": "Schreiben Sie uns"
+  },
+  "notFound": {
+    "title": "Diese Veranstaltung gibt es nicht",
+    "text": "Vielleicht hat sich ihre Adresse geändert. Hier sind die Veranstaltungen der Stiftung."
+  },
+  "faits": {
+    "dateBientot": "Datum folgt in Kürze",
+    "villeBientot": "Stadt folgt in Kürze",
+    "inscriptionBientot": "Anmeldung folgt in Kürze",
+    "quandOu": "Am {{date}} in {{ville}}, {{pays}}.",
+    "quandSansVille": "Am {{date}} in {{pays}}; die Stadt wird in Kürze bekannt gegeben.",
+    "ouSansDate": "In {{ville}}, {{pays}}; das Datum wird in Kürze bekannt gegeben.",
+    "quandOuInconnus": "Datum und Stadt werden in Kürze bekannt gegeben; die Veranstaltung findet in {{pays}} statt.",
+    "prix": "{{prix}}.",
+    "prixInconnu": "Der Preis wird in Kürze bekannt gegeben.",
+    "deVille": " aus {{ville}}"
+  },
+  "contenu": {
+    "road-to-europe": {
+      "bandeauLabel": "Die 10 Länder von Road to Europe",
+      "pastille": {
+        "texte": "Der Termin, der Ihr Europa-Projekt ins Rollen bringt"
+      },
+      "titre": "Ihr Weg nach\nEuropa\nbeginnt hier.",
+      "motAccent": "Europa",
+      "accroche": "Studium, Ausbildung, Arbeit als Fachkraft: Verstehen Sie an einem Tag die legalen Wege in 10 Länder Europas, treffen Sie die Menschen, die ausbilden und begleiten, und gehen Sie mit einem klaren Plan nach Hause.",
+      "pays": "Kamerun",
+      "sections": {
+        "hero": {
+          "action": "Meinen Platz reservieren",
+          "action2": "Zum Programm",
+          "etiquette": "Hier findet die Konferenz statt"
+        },
+        "compte": {
+          "titre": "Der Countdown läuft"
+        },
+        "pourquoi": {
+          "surtitre": "Warum Sie kommen sollten",
+          "titre": "Ein Tag, um den Kurs zu ändern.",
+          "intro": "Viele junge Menschen verlieren Zeit und Geld, weil ihnen verlässliche Informationen fehlen. Road to Europe gibt Ihnen die richtigen Karten in die Hand, zum richtigen Zeitpunkt."
+        },
+        "route": {
+          "surtitre": "Ihr Weg",
+          "titre": "Fünf Schritte bis nach Europa.",
+          "intro": "Der Weg verlangt Einsatz, aber er ist ausgeschildert. Bei Road to Europe wird jeder Schritt von Menschen erklärt, die ihn selbst gegangen sind."
+        },
+        "voies": {
+          "surtitre": "Die Wege nach Europa",
+          "titre": "Vier legale Wege nach Europa.",
+          "intro": "Jeder Weg hat seine Voraussetzungen, Fristen und Chancen, und sie unterscheiden sich von Land zu Land. Finden Sie den Weg, der zu Ihnen passt."
+        },
+        "programme": {
+          "surtitre": "Das Programm auf einen Blick",
+          "titre": "Ein Tag, vier Höhepunkte.",
+          "intro": "Verstehen, austauschen, üben, begegnen: Sie gehen mit klaren Antworten und nützlichen Kontakten nach Hause.",
+          "action": "Vollständiges Programm",
+          "action2": "Die Referenten"
+        },
+        "partenaires": {
+          "surtitre": "Sponsoren und Partner",
+          "titre": "Werden Sie Teil des Abenteuers.",
+          "intro": "Unternehmen, Schulen, Institutionen und Medien: Machen Sie bei Road to Europe mit und begegnen Sie einer motivierten Jugend."
+        },
+        "parents": {
+          "surtitre": "Für Eltern",
+          "titre": "Ihr Vertrauen zählt.\nHier sind unsere\nZusagen.",
+          "intro": "Road to Europe wird von der WAHHF Foundation organisiert, einer klar erkennbaren und erreichbaren Stiftung, die junge Menschen auf ihrem Weg nach Europa begleitet."
+        },
+        "faq": {
+          "surtitre": "Ihre Fragen",
+          "titre": "Klare Antworten.",
+          "intro": "Die Fragen, die uns am häufigsten gestellt werden.",
+          "action": "Schreiben Sie uns"
+        },
+        "blog": {
+          "surtitre": "Der Blog",
+          "titre": "Vor der Abreise lesen."
+        },
+        "final": {
+          "titre": "Auf dem richtigen Weg\nnach Europa.",
+          "intro": "Schieben Sie Ihr Projekt nicht auf: Sichern Sie sich Ihren Platz und nehmen Sie{{deVille}} einen Plan mit nach Hause.",
+          "action": "Meinen Platz reservieren",
+          "action2": "Schreiben Sie uns"
+        }
+      },
+      "pourquoi": [
+        {
+          "titre": "Ehrliche Ratschläge statt Versprechen",
+          "texte": "Referenten, die Europa von innen kennen, sagen Ihnen, was funktioniert, was es kostet und was Zeit braucht."
+        },
+        {
+          "titre": "Die richtigen Schritte, einer nach dem anderen",
+          "texte": "Sprache, Anerkennung der Abschlüsse, Bewerbungsunterlagen, Visum: Sie gehen mit einem Fahrplan für das Land nach Hause, das zu Ihnen passt."
+        },
+        {
+          "titre": "Partner, die ausbilden und begleiten",
+          "texte": "Sprachschulen, Bildungseinrichtungen, Beratungsstellen: Lernen Sie sie persönlich kennen und stellen Sie Ihre Fragen."
+        },
+        {
+          "titre": "Wer schon gegangen ist, erzählt",
+          "texte": "Junge Menschen, die bereits in Europa leben, erzählen von ihrem Weg: welche Fehler Sie vermeiden sollten und welche Türen sich öffnen."
+        }
+      ],
+      "deroule": [
+        {
+          "titre": "Land und Weg wählen",
+          "texte": "Studium, Ausbildung oder Arbeit, in 10 Ländern: Finden Sie die Kombination, die zu Ihrem Profil, Ihrem Niveau und Ihrem Budget passt.",
+          "lien": {
+            "libelle": "Die 10 Länder ansehen"
+          }
+        },
+        {
+          "titre": "Die Sprache lernen",
+          "texte": "Deutsch, Italienisch, Portugiesisch, Polnisch … oder Englisch, je nach Studiengang: Das Sprachniveau öffnet oder schließt Türen. Streben Sie das richtige Zertifikat an.",
+          "lien": {
+            "libelle": "Mobilität & Sprachen"
+          }
+        },
+        {
+          "titre": "Die Unterlagen vorbereiten",
+          "texte": "Anerkannte Abschlüsse, amtliche Übersetzungen, Lebenslauf und Anschreiben im Format des Landes: Vollständige Bewerbungsunterlagen sparen Monate.",
+          "lien": {
+            "libelle": "Begleitung"
+          }
+        },
+        {
+          "titre": "Das Visum erhalten",
+          "texte": "Termin bei der Botschaft, Nachweise, Gespräch: Bereiten Sie jedes Detail vor und vermeiden Sie die Fallen.",
+          "lien": {
+            "libelle": "Betrug vermeiden"
+          }
+        },
+        {
+          "titre": "Aufbrechen und sich einleben",
+          "texte": "Wohnung, Einschreibung, Versicherung, die ersten Monate: Vorbereitet anzukommen macht den entscheidenden Unterschied.",
+          "lien": {
+            "libelle": "Bewerben"
+          }
+        }
+      ],
+      "activites": [
+        {
+          "titre": "Studium",
+          "texte": "Anerkannte staatliche Universitäten in 10 Ländern, mit Studiengängen, die teils auf Englisch angeboten werden, und einer Zulassung, die Sie früh vorbereiten sollten.",
+          "etiquette": "Staatliche Universitäten"
+        },
+        {
+          "titre": "Berufsausbildung",
+          "texte": "Einen Beruf im dualen System lernen, wie in der Ausbildung in Deutschland, in Pflege, Handwerk, Hotellerie oder Industrie.",
+          "etiquette": "Duale Ausbildung"
+        },
+        {
+          "titre": "Arbeit als Fachkraft",
+          "texte": "Ihr Abschluss oder Ihre Berufserfahrung, anerkannt im gewählten Land, damit Sie in Ihrem Beruf arbeiten können.",
+          "etiquette": "Anerkannter Abschluss"
+        },
+        {
+          "titre": "Begleitet werden",
+          "texte": "Die Stiftung hilft Ihnen, das Land zu wählen, sich sprachlich vorzubereiten und vollständige Bewerbungsunterlagen zusammenzustellen, ohne unbekannte Vermittler.",
+          "etiquette": "Begleitung durch WAHHF"
+        }
+      ],
+      "tempsForts": [
+        {
+          "titre": "Verstehen",
+          "texte": "Die legalen Wege in die 10 Länder, ihre Voraussetzungen und Fristen, einfach erklärt."
+        },
+        {
+          "titre": "Austauschen",
+          "texte": "Gesprächsrunden mit Ausbildern, Bildungseinrichtungen und jungen Menschen, die schon gegangen sind."
+        },
+        {
+          "titre": "Üben",
+          "texte": "Workshops: Bewerbungsunterlagen, Lebenslauf im europäischen Format, Visum, Sprache."
+        },
+        {
+          "titre": "Begegnen",
+          "texte": "Schulen, Bildungseinrichtungen und Partner an ihren Ständen."
+        }
+      ],
+      "soutien": [
+        {
+          "surtitre": "Für Unternehmen",
+          "titre": "Sponsor werden",
+          "texte": "Unterstützen Sie die Veranstaltung und gewinnen Sie Sichtbarkeit bei motivierten jungen Menschen."
+        },
+        {
+          "surtitre": "Für Schulen, Institutionen, Medien",
+          "titre": "Partner werden",
+          "texte": "Bilden, informieren und begleiten Sie mit uns."
+        }
+      ],
+      "parents": {
+        "titrePromesses": "Was wir versprechen",
+        "titreJamais": "Was wir niemals versprechen werden",
+        "promesses": [
+          "Geprüfte Informationen mit ihren offiziellen Quellen",
+          "Namentlich bekannte Veranstalter und Partner",
+          "Klare Preise, bezahlt ausschließlich über die offiziellen Kanäle der Stiftung"
+        ],
+        "jamais": [
+          "Ein „garantiertes“ Visum",
+          "Eine Zulassung oder eine Stelle ohne Formalitäten und ohne Sprachniveau",
+          "Versteckte Kosten oder Zahlungen an einen unbekannten Vermittler"
+        ]
+      },
+      "faq": [
+        {
+          "question": "Wann und wo findet Road to Europe statt?",
+          "reponse": "{{quandOu}} Der genaue Ort und die Einlasszeit werden bekannt gegeben, sobald sie feststehen."
+        },
+        {
+          "question": "Für wen ist die Veranstaltung gedacht?",
+          "reponse": "Für junge Menschen, die ein Studium, eine Ausbildung oder eine Arbeit in Europa planen, und für ihre Eltern. Für die Teilnahme ist kein bestimmtes Sprachniveau erforderlich."
+        },
+        {
+          "question": "Was kostet der Eintritt und wie melde ich mich an?",
+          "reponse": "{{prix}} Die Anmeldung erfolgt ausschließlich über die offiziellen Kanäle der Stiftung. Bezahlen Sie niemals einen unbekannten Vermittler für einen Platz."
+        },
+        {
+          "question": "Garantiert mir die Teilnahme an Road to Europe ein Visum, eine Zulassung oder eine Stelle?",
+          "reponse": "Nein. Über Visa entscheiden die Botschaften, über Zulassungen die Bildungseinrichtungen und über Einstellungen die Arbeitgeber. Wir zeigen Ihnen die richtigen Schritte und die richtigen Ansprechpartner."
+        },
+        {
+          "question": "Welches Sprachniveau brauche ich für die Ausreise?",
+          "reponse": "Das hängt vom Land und vom Weg ab: Jede Länderseite der Website nennt die geforderten Sprachen und Niveaus."
+        },
+        {
+          "question": "Kann mein Unternehmen die Veranstaltung unterstützen?",
+          "reponse": "Ja. Schreiben Sie uns über die Seite Mitmachen oder das Kontaktformular."
+        }
+      ],
+      "blog": [
+        {
+          "surtitre": "Länderseiten",
+          "titre": "Die 10 Länder im Einzelnen",
+          "texte": "Geforderte Sprachen, Studium, Ausbildung und Arbeit: Was Sie wissen sollten, bevor Sie Ihr Land wählen.",
+          "lien": "Zu den Länderseiten"
+        },
+        {
+          "surtitre": "Mobilität & Sprachen",
+          "titre": "Die Sprache des Landes lernen",
+          "texte": "Die Sprachkurse der Stiftung, von Niveau A1 bis Niveau C1, und die Orientierung in Richtung Europa.",
+          "lien": "Mobilität & Sprachen entdecken"
+        },
+        {
+          "surtitre": "Betrug vermeiden",
+          "titre": "Die Warnsignale",
+          "texte": "Falsche Anwerber, „garantierte“ Visa, versteckte Kosten: So erkennen Sie sie, bevor Sie irgendjemanden bezahlen.",
+          "lien": "Zum Leitfaden"
+        }
+      ]
+    },
+    "journee-2026-04-25": {
+      "titre": "Aktionstag am 25. April 2026 im Albatros Hotel",
+      "motAccent": "25. April 2026",
+      "accroche": "Ein Afrika aufbauen, das seine Jugend ernährt, heilt und bildet.",
+      "pays": "Kamerun",
+      "organisateurs": [
+        {},
+        {
+          "nom": "Partner des Tages (TODO)"
+        }
+      ],
+      "pourquoi": [
+        {
+          "titre": "Kostenlos",
+          "texte": "Eintritt und Schulungen sind kostenlos."
+        },
+        {
+          "titre": "Professionelles Networking",
+          "texte": "Fachleute treffen und das eigene Netzwerk erweitern."
+        },
+        {
+          "titre": "Ein Dozent aus Deutschland",
+          "texte": "Ein Dozent aus Deutschland ist vor Ort."
+        },
+        {
+          "titre": "Begleitung bei Reiseplänen",
+          "texte": "Begleitung bei der Vorbereitung eines Reisevorhabens."
+        }
+      ],
+      "deroule": [
+        {
+          "heure": "8:00 Uhr",
+          "titre": "Empfang der Teilnehmenden (TODO)",
+          "texte": "Einlass um 8:00 Uhr (Banner); Ablauf noch zu bestätigen (TODO)."
+        },
+        {
+          "heure": "9:00 Uhr (TODO)",
+          "titre": "Vorstellung der Stiftung (TODO)",
+          "texte": "Die sechs Arbeitsbereiche werden dem Publikum vorgestellt (TODO).",
+          "lien": {
+            "libelle": "Unsere Arbeit"
+          }
+        },
+        {
+          "heure": "11:00 Uhr (TODO)",
+          "titre": "Studium und Ausbildung in Europa (TODO)",
+          "texte": "Vortrag über das Studium in Deutschland (TODO).",
+          "lien": {
+            "libelle": "Mobilität & Sprachen"
+          }
+        },
+        {
+          "heure": "14:00 Uhr (TODO)",
+          "titre": "Austausch mit dem Publikum (TODO)",
+          "texte": "Fragen aus dem Saal am Mikrofon (TODO)."
+        },
+        {
+          "heure": "21:00 Uhr",
+          "titre": "Abschluss (TODO)",
+          "texte": "Ende des Tages um 21:00 Uhr (Banner); Inhalt noch zu bestätigen (TODO)."
+        }
+      ],
+      "activites": [
+        {
+          "titre": "Kostenlose Schulungen"
+        },
+        {
+          "titre": "Kostenlose Software"
+        },
+        {
+          "titre": "Begleitung von Start-ups"
+        },
+        {
+          "titre": "Ausstattung von Krankenhäusern"
+        },
+        {
+          "titre": "Zuschuss für das beste Projekt"
+        },
+        {
+          "titre": "Technologietransfer Deutschland–Kamerun"
+        }
+      ],
+      "tempsForts": [
+        {
+          "titre": "Verstehen (TODO)",
+          "texte": "Erster Höhepunkt des Tages: noch ausstehend (TODO)."
+        },
+        {
+          "titre": "Austauschen (TODO)",
+          "texte": "Zweiter Höhepunkt: noch ausstehend (TODO)."
+        },
+        {
+          "titre": "Üben (TODO)",
+          "texte": "Dritter Höhepunkt: noch ausstehend (TODO)."
+        },
+        {
+          "titre": "Begegnen (TODO)",
+          "texte": "Vierter Höhepunkt: noch ausstehend (TODO)."
+        }
+      ],
+      "parents": {
+        "promesses": [
+          "Eine schriftliche Einwilligung der Eltern für jeden Minderjährigen (TODO: von der Stiftung zu bestätigen)",
+          "Junge Menschen, die den ganzen Tag vom Team der Stiftung betreut werden (TODO: zu bestätigen)",
+          "Kostenloser Eintritt oder ein klarer, vorab angekündigter Preis (TODO: zu bestätigen)"
+        ],
+        "jamais": [
+          "Ein Visumversprechen (TODO: zu bestätigen)",
+          "Ein Jobversprechen (TODO: zu bestätigen)",
+          "Versteckte Kosten oder Zahlungen an einen Vermittler (TODO: zu bestätigen)"
+        ]
+      },
+      "faq": [
+        {
+          "question": "Wo und wann fand der Aktionstag statt? (TODO)",
+          "reponse": "Im Albatros Hotel, am 25. April 2026, von 8:00 bis 21:00 Uhr (Banner). Stadt noch zu bestätigen (TODO)."
+        },
+        {
+          "question": "Für wen war der Aktionstag gedacht? (TODO)",
+          "reponse": "Antwort der Stiftung steht noch aus (TODO)."
+        },
+        {
+          "question": "Musste man Eintritt zahlen? (TODO)",
+          "reponse": "Antwort der Stiftung steht noch aus (TODO)."
+        },
+        {
+          "question": "Durften Minderjährige allein kommen? (TODO)",
+          "reponse": "Antwort der Stiftung steht noch aus (TODO)."
+        },
+        {
+          "question": "Ist eine nächste Ausgabe geplant? (TODO)",
+          "reponse": "Antwort der Stiftung steht noch aus (TODO)."
+        },
+        {
+          "question": "Wie kann man eine Partnerschaft vorschlagen? (TODO)",
+          "reponse": "Über die Seite Mitmachen, Rubrik Partner (TODO: zu bestätigen)."
+        }
+      ]
+    },
+    "exemple-a-venir": {
+      "titre": "Nächster Aktionstag der Stiftung (TODO)",
+      "motAccent": "Aktionstag",
+      "accroche": "Beispielveranstaltung zum Testen der Seite: Texte, Datum und Ort werden noch ersetzt (TODO)."
+    }
+  }
+}

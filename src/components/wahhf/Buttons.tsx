@@ -1,5 +1,6 @@
-import { ReactNode } from 'react';
+import { MouseEvent, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { ArrowUpRight, Heart } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
@@ -17,7 +18,8 @@ interface ButtonBaseProps {
   children: ReactNode;
   to?: string;
   href?: string;
-  onClick?: () => void;
+  /** Bouton, ou lien (to, href) : appelé avant la navigation, qu'il peut empêcher (ancre de la même page, groupe 7.4). */
+  onClick?: (event: MouseEvent<HTMLElement>) => void;
   type?: 'button' | 'submit';
   className?: string;
   disabled?: boolean;
@@ -46,13 +48,14 @@ const isExternal = (href?: string) => !!href && /^https?:\/\//.test(href);
 
 /** Contenu commun : libellé, puis ↗ et « (nouvel onglet) » si le lien sort du site. */
 function Label({ children, external }: { children: ReactNode; external: boolean }) {
+  const { t } = useTranslation();
   return (
     <>
       <span>{children}</span>
       {external && (
         <>
           <ArrowUpRight aria-hidden="true" className="w-4 h-4 shrink-0" />
-          <span className="sr-only"> (nouvel onglet)</span>
+          <span className="sr-only">{t('ui.newTab')}</span>
         </>
       )}
     </>
@@ -64,7 +67,7 @@ function ButtonOrLink({ to, href, onClick, type = 'button', disabled, ariaLabel,
   const external = isExternal(href);
   if (to) {
     return (
-      <Link to={to} className={className} aria-label={ariaLabel}>
+      <Link to={to} onClick={onClick} className={className} aria-label={ariaLabel}>
         <Label external={false}>{children}</Label>
       </Link>
     );
@@ -73,6 +76,7 @@ function ButtonOrLink({ to, href, onClick, type = 'button', disabled, ariaLabel,
     return (
       <a
         href={href}
+        onClick={onClick}
         className={className}
         aria-label={ariaLabel}
         {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
@@ -120,7 +124,7 @@ export function SecondaryButton({ onInverse = false, size = 'md', className = ''
  * couleur du texte ; survol et appui : fond cœur, libellé blanc.
  */
 export function DonateButton({
-  children = 'Faire un don',
+  children,
   to = '/faire-un-don',
   onClick,
   type,
@@ -141,6 +145,7 @@ export function DonateButton({
   /** Variante « outline » posée sur nuit : libellé brume (le contour prend déjà corail via surface-green). */
   onInverse?: boolean;
 }) {
+  const { t } = useTranslation();
   const classes = cn(
     BASE,
     SIZES[size],
@@ -162,7 +167,7 @@ export function DonateButton({
           variant === 'outline' && 'text-donate-outline group-hover:text-on-donate group-active:text-on-donate'
         )}
       />
-      <span>{children}</span>
+      <span>{children ?? t('nav.donate')}</span>
     </>
   );
 

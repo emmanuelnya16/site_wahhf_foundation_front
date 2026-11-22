@@ -1,0 +1,21 @@
+{
+  "nameTbc": "Nom à confirmer",
+  "portraitAlt": "Portrait de {{name}}",
+  "hero": {
+    "title": "Ceux qui portent la fondation.",
+    "intro": "Une équipe entre le Cameroun et l’Allemagne, au service de la jeunesse.",
+    "join": "Rejoindre la fondation",
+    "orgChart": "Voir l’organigramme"
+  },
+  "carousel": {
+    "roleDescription": "carrousel",
+    "label": "Portraits des dirigeants",
+    "previous": "Portrait précédent",
+    "next": "Portrait suivant",
+    "pause": "Mettre en pause",
+    "resume": "Reprendre"
+  },
+  "orgChart": {
+    "title": "Notre organisation"
+  }
+}

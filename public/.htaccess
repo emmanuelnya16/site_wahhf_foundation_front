@@ -33,11 +33,12 @@ DirectoryIndex index.html
 
   # Routes de l'application (src/App.tsx) : index.html avec le statut 200.
   # À mettre à jour quand une route est ajoutée ; sinon elle s'affiche quand même, mais avec le statut 404.
-  RewriteRule ^(qui-sommes-nous|nos-actions|notre-impact|galerie|actualites|partenaires|agir|faire-un-don|contact|candidater|mobilite-langues|mobilite-langues/academie|mobilite-langues/accompagnement|mentions-legales|confidentialite|transparence|le-groupe|structure|poles|tarifs|methode|fondateurs|a-propos|catalogue|realisations|vkibusiness)/?$ index.html [L]
+  # npm run check le vérifie (scripts/check-routes.mjs) : il échoue si une route du routeur manque ici.
+  RewriteRule ^(qui-sommes-nous|nos-actions|notre-impact|galerie|actualites|evenements|partenaires|agir|faire-un-don|contact|candidater|mobilite-langues|mobilite-langues/academie|mobilite-langues/accompagnement|mentions-legales|confidentialite|transparence|le-groupe|structure|poles|tarifs|methode|fondateurs|a-propos|catalogue|realisations|vkibusiness)/?$ index.html [L]
 
-  # Routes à paramètre (article, niveau, guide, pays) : statut 200 ; si le paramètre est inconnu,
+  # Routes à paramètre (article, événement, niveau, guide, pays) : statut 200 ; si le paramètre est inconnu,
   # la page affiche elle-même « introuvable » avec une balise noindex.
-  RewriteRule ^(actualites|academie|accompagnement|accompagnement/pays)/[A-Za-z0-9_-]+/?$ index.html [L]
+  RewriteRule ^(actualites|evenements|academie|accompagnement|accompagnement/pays)/[A-Za-z0-9_-]+/?$ index.html [L]
 </IfModule>
 
 # Toute autre adresse : statut 404, et index.html affiche la page « introuvable » (noindex)

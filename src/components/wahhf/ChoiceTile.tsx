@@ -67,7 +67,7 @@ export default function ChoiceTile({
   return (
     <label
       className={cn(
-        'relative cursor-pointer border transition-colors duration-(--dur-fast) has-[:focus-visible]:[outline:2px_solid_var(--focus)] has-[:focus-visible]:[outline-offset:2px]',
+        'relative cursor-pointer rounded-inner border transition-colors duration-(--dur-fast) has-[:focus-visible]:[outline:2px_solid_var(--focus)] has-[:focus-visible]:[outline-offset:2px]',
         s.base,
         checked ? s.on : s.off,
         className,

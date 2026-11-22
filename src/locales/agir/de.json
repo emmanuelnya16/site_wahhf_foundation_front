@@ -1,0 +1,143 @@
+{
+  "_relire": [
+    "agir.ways.volunteer.text",
+    "agir.form.title.benevole",
+    "agir.form.consent",
+    "agir.draft.consent",
+    "agir.support.stagiaires",
+    "agir.form.namePlaceholder.partenaire"
+  ],
+  "seo": {
+    "title": "Mitmachen bei der WAHHF Foundation — Spenden, Ehrenamt, Partnerschaft",
+    "description": "Engagieren Sie sich mit der WAHHF Foundation: spenden, als Lehrkraft oder ehrenamtlich mitarbeiten oder eine institutionelle Partnerschaft aufbauen."
+  },
+  "header": {
+    "title": "Drei konkrete Wege, junge Menschen zu unterstützen",
+    "intro": "Spenden, Ihr Wissen teilen oder Ihre Organisation einbringen: So werden Sie mit der WAHHF Foundation aktiv, in Kamerun wie in Europa."
+  },
+  "ways": {
+    "donate": {
+      "title": "Spenden",
+      "text": "Finanzieren Sie die kostenlosen Deutsch- und Englischkurse und unsere soziale Arbeit vor Ort."
+    },
+    "volunteer": {
+      "title": "Ehrenamtlich helfen",
+      "text": "Lehrkräfte für Deutsch und Englisch, Ärztinnen und Ärzte, Mentorinnen und Mentoren oder lokale Koordinatorinnen und Koordinatoren in Kamerun und in Europa.",
+      "action": "Formular für Ehrenamtliche ausfüllen"
+    },
+    "partner": {
+      "title": "Partner werden",
+      "text": "Schulen, Hochschulen, NGOs und Unternehmen, die ein Programm mitfinanzieren oder unterstützen möchten.",
+      "action": "Partnerschaft vorschlagen"
+    }
+  },
+  "status": {
+    "ready": "Ihre Nachricht ist bereit: Senden Sie sie per WhatsApp oder per E-Mail.",
+    "form": {
+      "benevole": "Formular: ehrenamtliche Mitarbeit anbieten.",
+      "partenaire": "Formular: eine Partnerschaft vorschlagen."
+    }
+  },
+  "handoff": {
+    "title": {
+      "benevole": "Letzter Schritt: Senden Sie Ihr Angebot zur ehrenamtlichen Mitarbeit",
+      "partenaire": "Letzter Schritt: Senden Sie Ihren Partnerschaftsvorschlag"
+    },
+    "edit": "Meine Angaben ändern"
+  },
+  "form": {
+    "title": {
+      "benevole": "Ehrenamtliche Mitarbeit anbieten",
+      "partenaire": "Eine Partnerschaft vorschlagen"
+    },
+    "role": {
+      "legend": "Sie schreiben uns",
+      "benevole": "Um ehrenamtlich zu helfen",
+      "partenaire": "Um eine Partnerschaft vorzuschlagen"
+    },
+    "name": {
+      "benevole": "Vollständiger Name *",
+      "partenaire": "Ihr Name und Ihre Funktion *"
+    },
+    "namePlaceholder": {
+      "benevole": "z. B. Marie Nguenang",
+      "partenaire": "z. B. Anna Weber, Leiterin"
+    },
+    "email": "E-Mail-Adresse *",
+    "phone": {
+      "benevole": "Telefon / WhatsApp (optional)",
+      "partenaire": "Telefon (optional)"
+    },
+    "phonePlaceholder": {
+      "benevole": "z. B. +237 6...",
+      "partenaire": "z. B. +49 30..."
+    },
+    "org": "Name Ihrer Organisation *",
+    "orgType": "Art der Organisation *",
+    "orgTypeChoose": "Bitte wählen",
+    "country": "Land *",
+    "countryPlaceholder": "z. B. Deutschland",
+    "supportLegend": "Was Sie sich vorstellen können (optional)",
+    "details": {
+      "benevole": "Ihre Fähigkeiten und Ihre Verfügbarkeit *",
+      "partenaire": "Ihr Partnerschaftsprojekt *"
+    },
+    "detailsPlaceholder": {
+      "benevole": "z. B. Lehrerin für Deutsch/Englisch, samstags verfügbar, online oder in Douala.",
+      "partenaire": "Welches Programm möchten Sie unterstützen, und wie?"
+    },
+    "consent": "Ich bin damit einverstanden, dass die WAHHF Foundation meine Daten gemäß der <lien>Datenschutzerklärung<sr> (neuer Tab)</sr></lien> verarbeitet, um meinen Vorschlag für ein Engagement zu prüfen. *",
+    "submit": "Meinen Vorschlag zum Senden vorbereiten"
+  },
+  "orgTypes": {
+    "ecole": "Schule, Hochschule oder Bildungseinrichtung",
+    "ong": "NGO oder Verein",
+    "entreprise": "Unternehmen",
+    "sante": "Gesundheitseinrichtung",
+    "public": "Öffentliche Einrichtung",
+    "autre": "Sonstige"
+  },
+  "support": {
+    "financement": "Finanzierung eines Programms",
+    "stagiaires": "Praktikumsplätze oder Aufnahme von Studierenden",
+    "expertise": "Fachwissen oder Unterricht",
+    "materiel": "Material oder Ausstattung"
+  },
+  "errors": {
+    "name": {
+      "benevole": "Geben Sie Ihren Vor- und Nachnamen ein.",
+      "partenaire": "Geben Sie Name und Funktion der Ansprechperson ein."
+    },
+    "org": "Geben Sie den Namen Ihrer Organisation ein.",
+    "orgType": "Wählen Sie die Art Ihrer Organisation.",
+    "country": "Geben Sie das Land Ihrer Organisation an, zum Beispiel Deutschland oder Kamerun.",
+    "details": {
+      "benevole": "Beschreiben Sie in wenigen Zeilen Ihre Fähigkeiten und Ihre Verfügbarkeit.",
+      "partenaire": "Beschreiben Sie Ihr Partnerschaftsprojekt in wenigen Zeilen."
+    },
+    "consent": "Kreuzen Sie dieses Feld an, damit wir Ihren Vorschlag prüfen und Ihnen antworten können."
+  },
+  "draft": {
+    "benevole": {
+      "subject": "Angebot zur ehrenamtlichen Mitarbeit — {{name}}",
+      "intro": "Ich möchte mich ehrenamtlich für die WAHHF Foundation engagieren. Hier ist mein Angebot, eingegeben auf der Website:",
+      "name": "Vollständiger Name",
+      "email": "E-Mail",
+      "phone": "Telefon / WhatsApp",
+      "details": "Fähigkeiten und Verfügbarkeit"
+    },
+    "partenaire": {
+      "subject": "Partnerschaftsvorschlag — {{org}}",
+      "intro": "Ich möchte der WAHHF Foundation eine Partnerschaft vorschlagen. Hier ist unser Vorschlag, eingegeben auf der Website:",
+      "org": "Organisation",
+      "orgType": "Art der Organisation",
+      "country": "Land",
+      "name": "Ansprechperson (Name und Funktion)",
+      "email": "E-Mail",
+      "phone": "Telefon",
+      "support": "Mögliche Unterstützung",
+      "details": "Partnerschaftsprojekt"
+    },
+    "consent": "Ich bin damit einverstanden, dass die WAHHF Foundation meine Daten verarbeitet, um meinen Vorschlag für ein Engagement zu prüfen."
+  }
+}

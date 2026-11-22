@@ -1,3 +1,4 @@
+import type { MouseEvent as ReactMouseEvent } from 'react';
 import type Lenis from 'lenis';
 
 /**
@@ -60,8 +61,42 @@ export function scrollToPosition(y: number, { immediate = false }: { immediate?:
 }
 
 /**
- * Fait défiler jusqu'à l'élément #id. Les pages étant chargées à la demande, l'élément peut
- * apparaître quelques images plus tard : on le cherche pendant ~1,5 s au maximum.
+ * Le focus suit le défilement vers une ancre (revue du groupe 7.4) : sans cela, la touche Tab suivante repartait du
+ * lien activé, ou du haut de la page, loin de l'endroit où le lien avait mené. Le focus va au premier titre de la cible
+ * (h1 à h3 ; la cible elle-même si c'est un titre), sinon à la cible, avec tabIndex -1 si elle n'est pas focalisable,
+ * sans défilement de plus. Rien si le focus est déjà dans la cible (Nos actions le donne lui-même au titre du domaine).
+ */
+export function focusAnchorTarget(el: HTMLElement) {
+  const current = document.activeElement;
+  if (current && current !== document.body && el.contains(current)) return;
+  const target = el.matches('h1, h2, h3') ? el : (el.querySelector<HTMLElement>('h1, h2, h3') ?? el);
+  if (!target.hasAttribute('tabindex') && !target.matches('a[href], button, input, select, textarea, summary')) target.tabIndex = -1;
+  target.focus({ preventScroll: true });
+}
+
+/**
+ * Lien vers une ancre de la même page (bouton « Choisir un pays » de la page Accompagnement, groupe 7.4) : défilement
+ * jusqu'à l'ancre (fluide avec Lenis, qui a déjà pris le clic), focus sur son titre, adresse en #id sans nouvelle entrée
+ * d'historique. Sans lui, sur téléphone, un second appui sur le même lien ne faisait plus défiler (l'adresse ne changeait
+ * plus, Layout ne voyait aucune navigation).
+ *   <SecondaryButton to="#pays" onClick={(e) => followAnchorLink(e, 'pays')}>Choisir un pays</SecondaryButton>
+ */
+export function followAnchorLink(event: ReactMouseEvent<HTMLElement>, id: string) {
+  if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  const target = document.getElementById(id);
+  if (!target) return;
+  if (!event.defaultPrevented) {
+    event.preventDefault();
+    scrollToElement(target);
+  }
+  focusAnchorTarget(target);
+  const { pathname, search } = window.location;
+  window.history.replaceState(window.history.state, '', `${pathname}${search}#${id}`);
+}
+
+/**
+ * Fait défiler jusqu'à l'élément #id, puis lui donne le focus (focusAnchorTarget). Les pages étant chargées à la
+ * demande, l'élément peut apparaître quelques images plus tard : on le cherche pendant ~1,5 s au maximum.
  */
 export function scrollToHash(hash: string, { immediate = true }: { immediate?: boolean } = {}) {
   const id = decodeURIComponent(hash.replace(/^#/, ''));
@@ -72,6 +107,10 @@ export function scrollToHash(hash: string, { immediate = true }: { immediate?: b
     const el = document.getElementById(id);
     if (el) {
       scrollToElement(el, { immediate });
+      // Focus à l'image suivante : après une navigation native vers l'ancre (lien <a href="#…"> sans Lenis, adresse
+      // modifiée à la main), le navigateur retire le focus juste après l'événement popstate ; donné plus tôt, il serait
+      // perdu (constaté sous Chrome, Académie #test-niveau sur téléphone).
+      frame = requestAnimationFrame(() => focusAnchorTarget(el));
       return;
     }
     if (tries++ < 90) frame = requestAnimationFrame(attempt);

@@ -1,0 +1,77 @@
+{
+  "_relire": [
+    "seo.title",
+    "intro",
+    "albums.inGallery",
+    "notFound.message",
+    "contenu.news.ouverture-inscriptions-academie-allemand-2026.title",
+    "contenu.news.ouverture-inscriptions-academie-allemand-2026.content",
+    "contenu.news.campagne-sante-prevention-communautaire.title",
+    "contenu.news.campagne-sante-prevention-communautaire.content"
+  ],
+  "seo": {
+    "title": "Aktuelles und Arbeit vor Ort",
+    "description": "Aktuelles der WAHHF Foundation und in Bildern der erste Tag der offenen Tür und das Boot Camp in Yaoundé."
+  },
+  "title": "Aktuelles und Arbeit vor Ort",
+  "intro": "Neuigkeiten der Stiftung und ihrer Arbeit, in Kamerun und auf dem Weg nach Europa.",
+  "empty": {
+    "title": "Noch keine Beiträge veröffentlicht",
+    "text": "Bis dahin finden Sie den ersten Tag der offenen Tür der Stiftung und das Boot Camp in Yaoundé in Fotos und Videos."
+  },
+  "inPictures": "In Bildern",
+  "seeGallery": "Ganze Galerie ansehen",
+  "albums": {
+    "inGallery": " in der Galerie.",
+    "seeAlbum": "Album ansehen"
+  },
+  "article": {
+    "breadcrumb": "Aktuelles",
+    "published": "Veröffentlicht am {{date}}",
+    "apply": "Bewerben",
+    "donate": "Spenden",
+    "support": "Diesen Bereich unterstützen",
+    "all": "Alle Neuigkeiten"
+  },
+  "notFound": {
+    "title": "Dieser Beitrag wurde nicht gefunden",
+    "message": "Vielleicht wurde er verschoben oder entfernt, oder der Link wurde falsch kopiert. Hier finden Sie die veröffentlichten Beiträge.",
+    "newsPage": "Seite Aktuelles",
+    "gallery": "Foto- und Videogalerie"
+  },
+  "contenu": {
+    "news": {
+      "ouverture-inscriptions-academie-allemand-2026": {
+        "title": "Bewerbungsstart für die neue kostenlose Kohorte Deutsch/Englisch (A1 bis B2)",
+        "category": "Mobilität & Sprachen",
+        "readTime": "3 Min. Lesezeit",
+        "excerpt": "Dank der Unterstützung der IROKO-Gruppe und unserer Spenderinnen und Spender starten online und in Kamerun neue kostenlose Kurse zur Sprachbegleitung.",
+        "content": [
+          "Die WAHHF Foundation gibt den Bewerbungsstart für ihre nächste Begleitung der Deutsch- und Englischkurse bekannt, kostenlos von Niveau A1 bis Niveau B2.",
+          "Dieses solidarische Angebot richtet sich an alle motivierten Menschen, die ernsthaft und methodisch ein Studium oder eine Berufsausbildung planen möchten.",
+          "Um einer Kohorte beizutreten, machen Bewerberinnen und Bewerber zuerst den kostenlosen Online-Orientierungstest und füllen dann das einheitliche Bewerbungsformular aus."
+        ]
+      },
+      "campagne-sante-prevention-communautaire": {
+        "title": "Tage der Gesundheitsvorsorge und des Zuhörens bei Familien auf dem Land",
+        "category": "Gesundheit",
+        "readTime": "4 Min. Lesezeit",
+        "excerpt": "Rückblick auf unseren mobilen Einsatz für Gesundheitsaufklärung, kostenlose Vorsorgeuntersuchungen und die Begleitung von Müttern.",
+        "content": [
+          "Gemeinsam mit örtlichen Gesundheitsfachkräften haben die Ehrenamtlichen der WAHHF Foundation eine Präventionskampagne zur Gesundheit von Müttern und Kindern durchgeführt.",
+          "Über die Beratungsgespräche hinaus informieren diese Begegnungen die Familien nachhaltig über Prävention durch Ernährung und über Wasserhygiene."
+        ]
+      },
+      "reboisement-jeunesse-engagement-ecologique": {
+        "title": "Junge Ehrenamtliche engagieren sich für Wiederaufforstung und Agrarökologie",
+        "category": "Umwelt",
+        "readTime": "3 Min. Lesezeit",
+        "excerpt": "Pflanzung junger Setzlinge heimischer Baumarten und praktische Workshops zum Bodenschutz mit Partnerschulen.",
+        "content": [
+          "Weil Umweltschutz untrennbar mit dem Wohl der Gemeinschaften verbunden ist, bezieht WAHHF Schülerinnen, Schüler und Studierende in den Aufbau örtlicher Baumschulen ein.",
+          "Jeder gepflanzte Baum wird von einer Schülergruppe betreut. So verbinden sich ökologische Verantwortung und agronomisches Lernen."
+        ]
+      }
+    }
+  }
+}

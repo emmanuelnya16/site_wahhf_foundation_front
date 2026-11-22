@@ -1,9 +1,17 @@
 import { Link } from 'react-router-dom';
+import { AlertTriangle } from 'lucide-react';
+import { useLocalize } from '../../lib/localize';
 import { EUROPE_SUPPORTED_COUNTRIES } from '../../data/countries';
+import { cn } from '../../lib/utils';
 
 interface CountryListProps {
   activeCountrySlug: string | null;
   onHoverCountry: (slug: string | null) => void;
+  /**
+   * Groupe 7.4 (page Accompagnement) : « Hors UE » en couleur d'alerte (ambre, avec le triangle), comme le badge des
+   * fiches pays. Par défaut (accueil, Notre impact) : encre douce, inchangé.
+   */
+  nonEuWarning?: boolean;
 }
 
 /**
@@ -15,29 +23,41 @@ interface CountryListProps {
  * dans les deux thèmes jusqu'à l'étape de l'accueil. Elle garde donc des couleurs fixes de la palette claire (encre,
  * encre douce, filet, forêt) au lieu des tokens sémantiques, qui passeraient en clair sur blanc en thème sombre.
  */
-export default function CountryList({ activeCountrySlug, onHoverCountry }: CountryListProps) {
+export default function CountryList({ activeCountrySlug, onHoverCountry, nonEuWarning = false }: CountryListProps) {
+  const { t, localizedList } = useLocalize();
   return (
     <ul className="grid grid-cols-2 gap-x-6">
-      {EUROPE_SUPPORTED_COUNTRIES.map((country) => {
+      {localizedList(EUROPE_SUPPORTED_COUNTRIES, 'contenu.pays', (c) => c.slug).map((country) => {
         const isHighlighted = activeCountrySlug === country.slug;
         return (
           <li key={country.slug} className="border-t border-border-subtle">
             <Link
               to={`/accompagnement/pays/${country.slug}`}
-              aria-label={`${country.nameFr}${!country.isEU ? ', Hors Union européenne' : ''} — Voir la fiche`}
+              aria-label={t(country.isEU ? 'ui.countries.link' : 'ui.countries.linkNonEu', { name: country.name })}
               onMouseEnter={() => onHoverCountry(country.slug)}
               onMouseLeave={() => onHoverCountry(null)}
               onFocus={() => onHoverCountry(country.slug)}
               onBlur={() => onHoverCountry(null)}
-              className={`flex min-h-11 items-center gap-3 py-2.5 transition-colors duration-(--dur-fast) ${
+              className={`flex min-h-11 items-start gap-3 py-2.5 transition-colors duration-(--dur-fast) ${
                 isHighlighted ? 'text-link underline underline-offset-4 decoration-2' : 'text-text hover:text-link'
               }`}
             >
-              <span aria-hidden="true" className="w-7 shrink-0 text-meta text-text-secondary tabular-nums">
+              {/* Code aligné sur la ligne du nom (revue du groupe 7.4) : même hauteur de ligne que le nom (text-body, 1,6) et
+                  ligne alignée en haut ; quand « Hors UE » passe sous le nom (390 px), le code reste face au nom. Une ligne
+                  seule rend comme avant (code centré sur le nom). */}
+              <span aria-hidden="true" className="w-7 shrink-0 text-meta leading-[calc(var(--body-size)*1.6)] text-text-secondary tabular-nums">
                 {country.code}
               </span>
-              <span className="text-body min-w-0">{country.nameFr}</span>
-              {!country.isEU && <span className="text-meta text-text-secondary">Hors UE</span>}
+              {/* Nom et « Hors UE » : le repère passe d'un bloc sous le nom quand la colonne est étroite (390 px) */}
+              <span className="flex min-w-0 flex-wrap items-center gap-x-3">
+                <span className="text-body">{country.name}</span>
+                {!country.isEU && (
+                  <span className={cn('inline-flex items-center gap-1 whitespace-nowrap text-meta', nonEuWarning ? 'font-semibold text-warning' : 'text-text-secondary')}>
+                    {nonEuWarning && <AlertTriangle aria-hidden="true" className="w-4 h-4 shrink-0" />}
+                    {t('ui.countries.nonEu')}
+                  </span>
+                )}
+              </span>
             </Link>
           </li>
         );

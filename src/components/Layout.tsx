@@ -28,6 +28,9 @@ export default function Layout({ children }: LayoutProps) {
   const isLegacyPage = LEGACY_PATHS.has(pathname);
   // Article d'actualité (/actualites/:slug) : seule page qui garde la barre de lecture
   const isArticlePage = /^\/actualites\/[^/]+\/?$/.test(pathname);
+  // Bulle WhatsApp : pas sur /contact, qui a son propre bouton « Écrire sur WhatsApp » en tête des coordonnées (la bulle
+  // le doublait et le recouvrait à l'arrivée sur téléphone ; revue du groupe 7.2, à valider au contrat §13)
+  const showWhatsAppBubble = !isVkiPage && pathname.replace(/\/+$/, '') !== '/contact';
   const mainRef = useRef<HTMLElement>(null);
 
   // Défilement fluide : Lenis (et GSAP) chargés après le premier affichage, seulement sur ordinateur à souris ;
@@ -64,7 +67,7 @@ export default function Layout({ children }: LayoutProps) {
   }, []);
 
   // Bascule FR/EN : les textes changent de hauteur, les positions ScrollTrigger sont recalculées (si GSAP est chargé).
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   useEffect(() => {
     const frame = requestAnimationFrame(requestScrollRefresh);
     return () => cancelAnimationFrame(frame);
@@ -97,7 +100,7 @@ export default function Layout({ children }: LayoutProps) {
         }}
         className="focus-ring-double sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:top-4 focus-visible:left-4 focus-visible:z-(--z-skip) focus-visible:px-5 focus-visible:py-3 focus-visible:rounded-pill focus-visible:bg-nuit focus-visible:text-creme focus-visible:font-semibold"
       >
-        Aller au contenu
+        {t('ui.skipLink')}
       </a>
 
       {/* Rideau de chargement retiré (PERF-01) : il retardait l'affichage du hero d'environ 1,4 s sur mobile.
@@ -118,7 +121,7 @@ export default function Layout({ children }: LayoutProps) {
         <RevealBatch scope={mainRef} pathname={pathname} />
       </AfterFirstDisplay>
       {!isVkiPage && <Footer />}
-      {!isVkiPage && <WhatsAppButton />}
+      {showWhatsAppBubble && <WhatsAppButton />}
       {!isVkiPage && <CookieBanner />}
     </div>
   );

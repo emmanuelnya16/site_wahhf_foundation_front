@@ -21,6 +21,7 @@ import environment1200 from '../assets/images/environment-1200.webp';
 import environment800 from '../assets/images/environment-800.webp';
 import environment480 from '../assets/images/environment-480.webp';
 import { galleryPhoto } from '../data/gallery';
+import { EUROPE_COUNTRIES, EuropeCountry } from '../data/countries';
 
 // Vraies photos WAHHF (First Open Day & Boot Camp, Yaoundé), utilisées là où le sujet correspond.
 const openDayAccompagnement = galleryPhoto('open-day-accompagnement');
@@ -104,22 +105,8 @@ export interface CourseSession {
   costLabel: 'Gratuit';
 }
 
-export interface CountryGuide {
-  slug: string;
-  name: string;
-  flag: string;
-  isEU: boolean;
-  euNote?: string;
-  languages: string[];
-  summary: string;
-  pathways: {
-    studies: string;
-    training: string;
-    work: string;
-  };
-  steps: string[];
-  officialLinks: { label: string; url: string; todoNote: string }[];
-}
+/** Fiche pays (accompagnement vers l'Europe) : le type de la source unique, src/data/countries.ts (PAYS-05). */
+export type CountryGuide = EuropeCountry;
 
 export interface PlacementQuestion {
   id: number;
@@ -137,6 +124,8 @@ export interface NewsArticle {
   excerpt: string;
   content: string[];
   image: string;
+  /** Ce que montre l'image (A11Y-10) ; vide : image décorative, le titre suffit */
+  imageAlt?: string;
   readTime: string;
 }
 
@@ -206,7 +195,7 @@ export const DOMAINS_DATA: DomainItem[] = [
     image: WAHHF_IMAGES.entrepreneurship,
     link: '/nos-actions?domaine=entrepreneuriat',
     programs: [
-      'Ateliers gratuits de gestion et de comptabilité simplifiée',
+      'Ateliers de gestion et de comptabilité simplifiée',
       'Initiation aux outils numériques et à la bureautique',
       'Mise en réseau avec les experts solidaires du groupe IROKO',
     ],
@@ -238,7 +227,7 @@ export const DOMAINS_DATA: DomainItem[] = [
     programs: [
       'Autonomisation des jeunes femmes et leadership communautaire',
       'Soutien à la scolarisation des jeunes en situation de handicap',
-      'Permanences d’écoute et d’orientation sociale gratuite',
+      'Permanences d’écoute et d’orientation sociale',
     ],
   },
   {
@@ -246,12 +235,13 @@ export const DOMAINS_DATA: DomainItem[] = [
     number: '06',
     slug: 'mobilite-langues',
     title: 'Mobilité & Langues',
-    shortDesc: 'Académie d’allemand gratuite (A1 à C1) et accompagnement transparent vers 10 pays européens.',
-    fullDesc: 'Un programme 100 % gratuit, financé par IROKO et nos donateurs, pour apprendre l’allemand et préparer un projet d’études, de formation ou de mobilité en toute sécurité.',
+    shortDesc: 'Académie d’allemand /anglais gratuite (A1 à C1) et accompagnement transparent vers 10 pays européens.',
+    // Groupe 7.3 : sans « 100 % gratuit » (déjà dit juste au-dessus) ni financeur nommé, comme la FAQ de Mobilité (contrat §13)
+    fullDesc: 'Un programme financé par nos partenaires et nos donateurs, pour apprendre l’allemand /anglais et préparer un projet d’études, de formation ou de mobilité en toute sécurité.',
     image: WAHHF_IMAGES.openDayVisioconference,
     link: '/mobilite-langues',
     programs: [
-      'Accompagnement des cours de langue allemande du niveau A1 au C1',
+      'Accompagnement des cours de langue allemande /anglaise du niveau A1 au C1',
       'Orientation documentée vers 10 pays européens',
       'Prévention active contre les arnaques et fausses promesses de visa',
     ],
@@ -458,240 +448,8 @@ export const COURSE_SESSIONS_DATA: CourseSession[] = [
   },
 ];
 
-export const COUNTRIES_DATA: CountryGuide[] = [
-  {
-    slug: 'allemagne',
-    name: 'Allemagne',
-    flag: '🇩🇪',
-    isEU: true,
-    languages: ['Allemand (langue officielle)', 'Anglais (certains cursus internationaux)'],
-    summary: 'Pays partenaire historique de la fondation, l’Allemagne propose des voies structurées pour les études universitaires, la formation professionnelle duale (Ausbildung) et la mobilité qualifiée.',
-    pathways: {
-      studies: 'Admission universitaire (Studienkolleg, Bachelor, Master) soumise à la reconnaissance du diplôme (Anabin / uni-assist), à un niveau d’allemand B2/C1 (ou anglais selon cursus) et à la preuve de ressources financières réglementaires.',
-      training: 'Formation professionnelle duale (Ausbildung) alliant école théorique et apprentissage en entreprise, généralement accessible à partir du niveau B1/B2 d’allemand.',
-      work: 'Mobilité professionnelle encadrée par la loi sur l’immigration qualifiée (Fachkräfteeinwanderungsgesetz) avec reconnaissance des diplômes.',
-    },
-    steps: [
-      'Apprentissage et certification officielle de la langue allemande (B1 à C1 selon le projet)',
-      'Vérification de l’équivalence des diplômes et constitution du dossier académique ou professionnel',
-      'Candidature auprès de l’établissement d’enseignement ou de formation',
-      'Demande de rendez-vous et dépôt officiel du dossier auprès de l’Ambassade d’Allemagne compétente',
-    ],
-    officialLinks: [
-      { label: 'Make it in Germany (Portail officiel du gouvernement fédéral)', url: 'https://www.make-it-in-germany.com', todoNote: 'TODO : vérifier lien officiel' },
-      { label: 'DAAD — Office allemand d’échanges universitaires', url: 'https://www.daad.de', todoNote: 'TODO : vérifier lien officiel' },
-      { label: 'Ambassade d’Allemagne au Cameroun (Yaoundé)', url: 'https://jaunde.diplo.de', todoNote: 'TODO : vérifier lien officiel' },
-    ],
-  },
-  {
-    slug: 'luxembourg',
-    name: 'Luxembourg',
-    flag: '🇱🇺',
-    isEU: true,
-    languages: ['Français', 'Allemand', 'Luxembourgeois', 'Anglais'],
-    summary: 'Au cœur de l’Europe, le Grand-Duché de Luxembourg offre un environnement multilingue (français, allemand, anglais) pour les études supérieures et la recherche.',
-    pathways: {
-      studies: 'Cursus bilingues ou trilingues à l’Université du Luxembourg, soumis aux conditions d’admission académiques et aux procédures d’autorisation de séjour étudiant.',
-      training: 'Formations continues et stages académiques encadrés par les conventions universitaires.',
-      work: 'Autorisation de séjour pour travailleur salarié délivrée par la Direction de l’immigration avant l’entrée sur le territoire.',
-    },
-    steps: [
-      'Identification du programme multilingue (français/allemand/anglais)',
-      'Dépôt du dossier d’admission universitaire dans les délais officiels',
-      'Demande d’autorisation temporaire de séjour (ATS) auprès du ministère compétent',
-      'Démarches consulaires officielles et préparation à l’installation',
-    ],
-    officialLinks: [
-      { label: 'Guichet.lu — Portail administratif du Grand-Duché de Luxembourg', url: 'https://guichet.public.lu', todoNote: 'TODO : vérifier lien officiel' },
-      { label: 'Université du Luxembourg', url: 'https://www.uni.lu', todoNote: 'TODO : vérifier lien officiel' },
-    ],
-  },
-  {
-    slug: 'slovenie',
-    name: 'Slovénie',
-    flag: '🇸🇮',
-    isEU: true,
-    languages: ['Slovène', 'Anglais (programmes internationaux)'],
-    summary: 'Pays d’Europe centrale membre de l’Union européenne, reconnu pour ses universités publiques (Ljubljana, Maribor, Primorska) et sa qualité de vie étudiante.',
-    pathways: {
-      studies: 'Portail national eVŠ pour les candidatures aux universités slovènes en licence, master et doctorat.',
-      training: 'Échanges académiques, écoles d’été et stages techniques.',
-      work: 'Permis unique de séjour et de travail géré par les unités administratives slovènes.',
-    },
-    steps: [
-      'Choix du programme via le portail académique national eVŠ',
-      'Procédure de reconnaissance des diplômes antérieurs',
-      'Constitution du dossier de permis de séjour temporaire pour études',
-      'Validation consulaire auprès de la représentation diplomatique compétente',
-    ],
-    officialLinks: [
-      { label: 'Study in Slovenia — Portail officiel', url: 'https://studyinslovenia.si', todoNote: 'TODO : vérifier lien officiel' },
-      { label: 'Portail gouvernemental gov.si (Immigration)', url: 'https://www.gov.si', todoNote: 'TODO : vérifier lien officiel' },
-    ],
-  },
-  {
-    slug: 'italie',
-    name: 'Italie',
-    flag: '🇮🇹',
-    isEU: true,
-    languages: ['Italien', 'Anglais (cursus internationaux)'],
-    summary: 'Dotée d’une longue tradition universitaire et de programmes de bourses régionales (DSU), l’Italie accueille chaque année des étudiants internationaux.',
-    pathways: {
-      studies: 'Pré-inscription obligatoire sur la plateforme officielle Universitaly, déclaration de valeur (Dichiarazione di Valore) ou attestation CIMEA.',
-      training: 'Formations techniques supérieures (ITS) et écoles spécialisées.',
-      work: 'Dispositifs réglementés par les décrets annuels de flux (Decreto Flussi).',
-    },
-    steps: [
-      'Préparation linguistique (italien ou anglais) et sélection de l’université',
-      'Pré-inscription sur le portail officiel Universitaly',
-      'Préparation des pièces justificatives académiques et financières',
-      'Dépôt de la demande de visa d’études auprès des services consulaires italiens',
-    ],
-    officialLinks: [
-      { label: 'Universitaly — Portail officiel du Ministère italien', url: 'https://www.universitaly.it', todoNote: 'TODO : vérifier lien officiel' },
-      { label: 'Visto per l’Italia — Ministère des Affaires Étrangères', url: 'https://vistoperitalia.esteri.it', todoNote: 'TODO : vérifier lien officiel' },
-    ],
-  },
-  {
-    slug: 'grece',
-    name: 'Grèce',
-    flag: '🇬🇷',
-    isEU: true,
-    languages: ['Grec moderne', 'Anglais (programmes internationaux)'],
-    summary: 'Carrefour méditerranéen membre de l’UE, la Grèce développe des programmes universitaires anglophones et des filières en sciences, ingénierie et études maritimes.',
-    pathways: {
-      studies: 'Cursus universitaires publics et programmes internationaux encadrés par Study in Greece.',
-      training: 'Formations professionnelles dans les secteurs du tourisme, du transport maritime et de l’énergie.',
-      work: 'Autorisations de séjour et de travail selon les accords et besoins sectoriels réglementaires.',
-    },
-    steps: [
-      'Orientation académique et vérification des prérequis linguistiques',
-      'Dossier d’admission auprès de l’établissement hellénique',
-      'Légalisation / apostille des documents académiques',
-      'Procédure consulaire officielle auprès de l’Ambassade de Grèce compétente',
-    ],
-    officialLinks: [
-      { label: 'Study in Greece — Portail officiel', url: 'https://studyingreece.edu.gr', todoNote: 'TODO : vérifier lien officiel' },
-      { label: 'Ministère grec de la Migration et de l’Asile', url: 'https://migration.gov.gr', todoNote: 'TODO : vérifier lien officiel' },
-    ],
-  },
-  {
-    slug: 'portugal',
-    name: 'Portugal',
-    flag: '🇵🇹',
-    isEU: true,
-    languages: ['Portugais', 'Anglais'],
-    summary: 'Le Portugal propose un réseau d’universités et d’instituts polytechniques reconnus en Europe, avec un accueil structuré pour les étudiants internationaux.',
-    pathways: {
-      studies: 'Candidature sous le statut d’étudiant international (Estatuto do Estudante Internacional) dans les universités et instituts polytechniques.',
-      training: 'Cursos Técnicos Superiores Profissionais (CTeSP) axés sur la pratique.',
-      work: 'Visa de travail ou de recherche d’emploi encadré par l’AIMA et les services consulaires portugais.',
-    },
-    steps: [
-      'Apprentissage des bases du portugais ou certification d’anglais',
-      'Candidature directe auprès de l’université ou de l’institut polytechnique',
-      'Obtention de la lettre d’acceptation officielle',
-      'Demande de visa national d’études (D4) via le portail officiel des visas portugais',
-    ],
-    officialLinks: [
-      { label: 'Study & Research in Portugal — Portail officiel', url: 'https://www.study-research.pt', todoNote: 'TODO : vérifier lien officiel' },
-      { label: 'Portail des Visas — Ministère des Affaires Étrangères du Portugal', url: 'https://vistos.mne.gov.pt', todoNote: 'TODO : vérifier lien officiel' },
-    ],
-  },
-  {
-    slug: 'espagne',
-    name: 'Espagne',
-    flag: '🇪🇸',
-    isEU: true,
-    languages: ['Espagnol (Castillan)', 'Anglais'],
-    summary: 'L’Espagne dispose d’un vaste réseau d’universités publiques et de centres de formation professionnelle supérieure (Formación Profesional de Grado Superior).',
-    pathways: {
-      studies: 'Admission universitaire via l’homologation du diplôme ou l’accréditation UNEDasiss.',
-      training: 'Cycles de formation professionnelle supérieure (FP) très recherchés dans les secteurs techniques et sanitaires.',
-      work: 'Procédures d’autorisation initiale de résidence et de travail salarié.',
-    },
-    steps: [
-      'Démarche d’homologation ou d’accréditation académique (UNEDasiss)',
-      'Pré-inscription auprès de la communauté autonome ou de l’université choisie',
-      'Constitution du dossier consulaire complet (assurance, ressources, hébergement)',
-      'Dépôt auprès du Consulat d’Espagne compétent',
-    ],
-    officialLinks: [
-      { label: 'SEPIE — étudier en Espagne (Ministère des Universités)', url: 'https://sepie.es', todoNote: 'TODO : vérifier lien officiel' },
-      { label: 'Portail de l’Immigration — Gouvernement d’Espagne', url: 'https://extranjeros.inclusion.gob.es', todoNote: 'TODO : vérifier lien officiel' },
-    ],
-  },
-  {
-    slug: 'danemark',
-    name: 'Danemark',
-    flag: '🇩🇰',
-    isEU: true,
-    languages: ['Danois', 'Anglais (très répandu à l’université)'],
-    summary: 'Réputé pour sa pédagogie collaborative et ses cursus en ingénierie, énergies renouvelables et sciences de la vie enseignés en anglais.',
-    pathways: {
-      studies: 'Programmes de Bachelor et Master enseignés en anglais, coordonnés via le portail officiel Study in Denmark.',
-      training: 'Stages académiques et programmes de recherche appliquée.',
-      work: 'Dispositifs encadrés par l’Agence danoise pour le recrutement international et l’intégration (SIRI).',
-    },
-    steps: [
-      'Validation d’un niveau élevé d’anglais (IELTS / TOEFL) et des prérequis académiques',
-      'Candidature via le portail national Optagelse.dk ou directement auprès de l’université',
-      'Ouverture du dossier ST1 avec l’établissement d’accueil',
-      'Demande de permis de séjour auprès de l’agence officielle SIRI (nyidanmark.dk)',
-    ],
-    officialLinks: [
-      { label: 'Study in Denmark — Portail officiel du Ministère', url: 'https://studyindenmark.dk', todoNote: 'TODO : vérifier lien officiel' },
-      { label: 'New to Denmark (nyidanmark.dk) — Portail officiel SIRI', url: 'https://www.nyidanmark.dk', todoNote: 'TODO : vérifier lien officiel' },
-    ],
-  },
-  {
-    slug: 'pologne',
-    name: 'Pologne',
-    flag: '🇵🇱',
-    isEU: true,
-    languages: ['Polonais', 'Anglais (nombreux cursus internationaux)'],
-    summary: 'Pôle académique et technologique majeur d’Europe centrale, la Pologne propose des cursus universitaires en anglais et en polonais dans les sciences, la médecine et l’informatique.',
-    pathways: {
-      studies: 'Candidature aux universités publiques et écoles polytechniques, encadrée par l’agence nationale NAWA.',
-      training: 'Années préparatoires linguistiques et écoles techniques.',
-      work: 'Autorisation de travail délivrée par la Voïvodie compétente avant la demande de visa national.',
-    },
-    steps: [
-      'Sélection d’un établissement accrédité sur le portail gouvernemental Study in Poland',
-      'Vérification et apostille/légalisation du diplôme de fin d’études secondaires ou supérieures',
-      'Obtention de l’attestation officielle d’admission ministérielle',
-      'Enregistrement consulaire via le système officiel e-Konsulat',
-    ],
-    officialLinks: [
-      { label: 'Study in Poland — Agence Nationale NAWA', url: 'https://study.gov.pl', todoNote: 'TODO : vérifier lien officiel' },
-      { label: 'Office des Étrangers de Pologne (Urząd do Spraw Cudzoziemców)', url: 'https://www.gov.pl/web/udsc', todoNote: 'TODO : vérifier lien officiel' },
-    ],
-  },
-  {
-    slug: 'albanie',
-    name: 'Albanie',
-    flag: '🇦🇱',
-    isEU: false,
-    euNote: 'Information essentielle : L’Albanie n’est PAS membre de l’Union européenne (elle possède le statut de pays candidat). Elle ne fait pas non plus partie de l’espace Schengen. Les visas et titres de séjour albanais ne permettent pas de circuler ou de travailler dans l’Union européenne.',
-    languages: ['Albanais', 'Anglais / Italien (dans certains cursus universitaires)'],
-    summary: 'Située dans les Balkans occidentaux, l’Albanie développe des filières universitaires accessibles et des programmes d’échanges régionaux, tout en relevant d’un cadre juridique national distinct de l’Union européenne.',
-    pathways: {
-      studies: 'Inscriptions dans les universités publiques et privées accréditées à Tirana et dans les principales villes du pays.',
-      training: 'Formations professionnelles en développement territorial, tourisme et technologies.',
-      work: 'Permis unique demandé en ligne via le portail gouvernemental e-Albania.',
-    },
-    steps: [
-      'Prendre connaissance du statut non-membre de l’UE de l’Albanie',
-      'Obtenir une admission auprès d’un établissement accrédité par l’agence ASCAL',
-      'Déposer la demande de visa de type D en ligne sur le portail officiel e-Visa de la République d’Albanie',
-      'Effectuer la demande de permis de séjour sur e-Albania après l’arrivée légale',
-    ],
-    officialLinks: [
-      { label: 'e-Visa Albania — Système officiel de visa en ligne', url: 'https://e-visa.al', todoNote: 'TODO : vérifier lien officiel' },
-      { label: 'e-Albania — Portail officiel des services publics', url: 'https://e-albania.al', todoNote: 'TODO : vérifier lien officiel' },
-    ],
-  },
-];
+/** Les 10 pays accompagnés : la même liste que la mini-carte (src/data/countries.ts, source unique, PAYS-05). */
+export const COUNTRIES_DATA: CountryGuide[] = EUROPE_COUNTRIES;
 
 export const PLACEMENT_QUESTIONS: PlacementQuestion[] = [
   { id: 1, level: 'A1', question: 'Wie ______ Sie? — Ich heiße Marie.', options: ['heißen', 'heißt', 'heiße', 'sein'], correctIndex: 0 },
@@ -762,7 +520,7 @@ export const THEMATIC_GUIDES: Record<string, {
     sections: [
       {
         heading: 'Authenticité absolue des documents',
-        body: 'Tout document falsifié ou inexact entraîne un refus immédiat et des interdictions durables auprès des autorités consulaires. WAHHF sensibilise chaque candidat à l’importance d’un dossier 100 % authentique.',
+        body: 'Tout document falsifié ou inexact entraîne un refus immédiat et des interdictions durables auprès des autorités consulaires. WAHHF sensibilise chaque candidat à l’importance d’un dossier 100 % authentique.',
         bullets: [
           'Rassembler les relevés de notes et diplômes originaux',
           'Effectuer les démarches de légalisation ou d’authentification uniquement auprès des administrations officielles',
@@ -775,14 +533,15 @@ export const THEMATIC_GUIDES: Record<string, {
         bullets: [
           'Mettre en valeur son parcours réel avec honnêteté et clarté',
           'Expliquer la cohérence entre ses études passées et le projet visé',
-          'Faire relire ses textes lors des ateliers gratuits d’accompagnement WAHHF',
+          // Groupe 7.4 : « gratuits » retiré (la gratuité est déjà dite par l'avertissement, au même écran)
+          'Faire relire ses textes lors des ateliers d’accompagnement WAHHF',
         ],
       },
     ],
   },
   'apprendre-la-langue': {
     slug: 'apprendre-la-langue',
-    title: 'Apprendre la langue du pays : la clé de l’autonomie',
+    title: 'Apprendre la langue du pays : la clé de l’autonomie',
     subtitle: 'Pourquoi la maîtrise linguistique précède toujours les démarches administratives.',
     sections: [
       {
@@ -803,7 +562,7 @@ export const THEMATIC_GUIDES: Record<string, {
     sections: [
       {
         heading: 'Les premières démarches à l’arrivée',
-        body: 'Une installation réussie se prépare plusieurs mois avant le départ : logement étudiant, assurance maladie, inscription municipale et ouverture de compte.',
+        body: 'Une installation réussie se prépare plusieurs mois avant le départ : logement étudiant, assurance maladie, inscription municipale et ouverture de compte.',
         bullets: [
           'Anticiper la recherche de logement via les résidences universitaires officielles (ex. Studierendenwerk)',
           'Comprendre le fonctionnement de l’enregistrement de domicile (Anmeldung) et de l’assurance santé obligatoire',
@@ -812,6 +571,9 @@ export const THEMATIC_GUIDES: Record<string, {
       },
     ],
   },
+  // Groupe 7.4 : la page /accompagnement/eviter-les-arnaques a sa propre forme (src/pages/accompagnement/ArnaquesPage.tsx)
+  // et lit src/data/arnaques.ts. Ce guide d'origine reste ici pour mémoire (titre lu par la liste des guides) ; son adresse
+  // integrite@… (TODO) n'est plus affichée nulle part.
   'eviter-les-arnaques': {
     slug: 'eviter-les-arnaques',
     title: 'Éviter les arnaques et les fausses promesses',
@@ -829,7 +591,7 @@ export const THEMATIC_GUIDES: Record<string, {
       },
       {
         heading: 'Rappel fondamental : WAHHF ne demande jamais d’argent',
-        body: 'WAHHF Foundation est une fondation à but non lucratif financée par le groupe IROKO et ses donateurs. L’intégralité de notre accompagnement et de nos cours d’allemand est 100 % gratuite.',
+        body: 'WAHHF Foundation est une fondation à but non lucratif financée par le groupe IROKO et ses donateurs. L’intégralité de notre accompagnement et de nos cours d’allemand /anglais est 100 % gratuite.',
         bullets: [
           'Aucun membre, bénévole ou partenaire de WAHHF ne vous demandera jamais de frais de dossier, d’inscription ou de caution',
           'Nous ne demandons aucun document d’identité (passeport, CNI) lors du premier contact en ligne',
@@ -851,14 +613,14 @@ export const THEMATIC_GUIDES: Record<string, {
 export const NEWS_DATA: NewsArticle[] = [
   {
     slug: 'ouverture-inscriptions-academie-allemand-2026',
-    title: 'Ouverture des candidatures pour la nouvelle cohorte gratuite d’allemand (A1 à B2)',
+    title: 'Ouverture des candidatures pour la nouvelle cohorte gratuite d’allemand /anglais (A1 à B2)',
     date: '12 Mai 2026 (TODO)',
     category: 'Mobilité & Langues',
     readTime: '3 min de lecture',
     image: WAHHF_IMAGES.education,
     excerpt: 'Grâce au soutien du groupe IROKO et de nos donateurs, de nouvelles sessions gratuites d’accompagnement linguistique ouvrent en ligne et au Cameroun.',
     content: [
-      'WAHHF Foundation annonce l’ouverture des candidatures pour sa prochaine session d’accompagnement des cours de langue allemande, accessible gratuitement du niveau A1 au niveau B2.',
+      'WAHHF Foundation annonce l’ouverture des candidatures pour sa prochaine session d’accompagnement des cours de langue allemande /anglaise, accessible gratuitement du niveau A1 au niveau B2.',
       'Ce dispositif solidaire s’adresse à toute personne motivée souhaitant construire un projet d’études ou de formation professionnelle avec sérieux et méthode.',
       'Pour rejoindre une cohorte, nous invitons les candidats à passer d’abord le test d’orientation gratuit en ligne puis à remplir le formulaire unique de candidature.',
     ],
@@ -905,7 +667,9 @@ export const TIMELINE_MILESTONES = [
   {
     year: '2025 (TODO)',
     title: 'Adossement comme branche sociale du groupe IROKO',
-    desc: 'Le groupe IROKO s’engage structurellement à financer le fonctionnement de la fondation pour garantir la gratuité totale pour les bénéficiaires.',
+    // Groupe 7.3 : « pour garantir la gratuité totale pour les bénéficiaires » retiré (la gratuité est dite une fois par
+    // écran, à l'étape suivante de la frise)
+    desc: 'Le groupe IROKO s’engage structurellement à financer le fonctionnement de la fondation.',
   },
   {
     year: '2026',

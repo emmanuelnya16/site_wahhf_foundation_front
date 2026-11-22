@@ -9,6 +9,11 @@
     "preview": "vite preview",
     "clean": "rm -rf dist",
     "lint": "tsc --noEmit",
+    "check": "tsc --noEmit && node scripts/check-i18n.mjs && node scripts/check-routes.mjs",
+    "check:routes": "node scripts/check-routes.mjs",
+    "check:i18n": "node scripts/check-i18n.mjs",
+    "i18n:relire": "node scripts/traductions-a-relire.mjs",
+    "photos": "node scripts/optimize-photos.mjs",
     "check:todo": "vite build && node scripts/check-textes-provisoires.mjs --out rapport-textes-provisoires.md"
   },
   "dependencies": {
@@ -43,6 +48,7 @@
     "@types/express": "^4.17.21",
     "@types/node": "^22.14.0",
     "autoprefixer": "^10.4.21",
+    "sharp": "^0.35.5",
     "tailwindcss": "^4.1.14",
     "tsx": "^4.21.0",
     "typescript": "~5.8.2",

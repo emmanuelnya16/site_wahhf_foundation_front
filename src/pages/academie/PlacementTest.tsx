@@ -6,14 +6,21 @@ import { ProgressBar } from '../../components/wahhf/StepNumber';
 import ChoiceTile from '../../components/wahhf/ChoiceTile';
 import Fil from '../../components/wahhf/Fil';
 import { useFocusOnChange } from '../../lib/useFocusOnChange';
-import { GERMAN_LEVELS_DATA, PLACEMENT_QUESTIONS } from '../../services/api';
+import { PLACEMENT_QUESTIONS } from '../../services/api';
+import { useLocalize } from '../../lib/localize';
+import { useLevels } from './shared';
 
 type Level = 'A1' | 'A2' | 'B1' | 'B2' | 'C1';
 
 const recommendedFor = (pts: number): Level => (pts <= 5 ? 'A1' : pts <= 9 ? 'A2' : pts <= 14 ? 'B1' : pts <= 17 ? 'B2' : 'C1');
 
-/** Énoncé en allemand : le trou « ______ » devient un blanc visuel, lu « (blanc) » par les lecteurs d'écran (ACAD-05). */
+/**
+ * Énoncé en allemand : le trou « ______ » devient un blanc visuel, lu « (blanc) » par les lecteurs d'écran (ACAD-05).
+ * Lot 7.10 : le test est un test d'allemand, énoncés et réponses restent en allemand dans toutes les langues ; seul
+ * « (blanc) » suit la langue de l'interface (et son attribut lang).
+ */
 function GermanText({ text }: { text: string }) {
+  const { t, lang } = useLocalize();
   const parts = text.split(/_{3,}/);
   return (
     <>
@@ -23,7 +30,7 @@ function GermanText({ text }: { text: string }) {
           {i < parts.length - 1 && (
             <>
               <span aria-hidden="true" className="inline-block w-16 border-b-2 border-current align-baseline mx-1" />
-              <span className="sr-only">(blanc)</span>
+              <span lang={lang} className="sr-only">{t('mobilite.test.blanc')}</span>
             </>
           )}
         </Fragment>
@@ -43,6 +50,8 @@ function GermanText({ text }: { text: string }) {
  * - onResult : la page affiche ensuite la fiche du niveau conseillé.
  */
 export default function PlacementTest({ onResult }: { onResult?: (level: Level) => void }) {
+  const { t } = useLocalize();
+  const { steps: levelSteps } = useLevels();
   const [started, setStarted] = useState(false);
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<number, number>>({});
@@ -60,7 +69,11 @@ export default function PlacementTest({ onResult }: { onResult?: (level: Level) 
   const view = !started ? 'accueil' : finished ? 'resultat' : `question-${index}`;
   const boxRef = useRef<HTMLDivElement>(null);
   const focusRef = useFocusOnChange<HTMLElement>(view, { scrollRef: boxRef, afterMs: 300 });
-  const status = !started ? '' : finished ? `Test terminé. Score : ${score} sur ${total}. Niveau conseillé : ${recommended}.` : `Question ${index + 1} sur ${total}.`;
+  const status = !started
+    ? ''
+    : finished
+    ? `${t('mobilite.test.statutFini', { score, total, level: recommended })}${onResult ? ` ${t('mobilite.test.statutFiche', { level: recommended })}` : ''}`
+    : t('mobilite.test.statutQuestion', { n: index + 1, total });
 
   const next = () => {
     if (answers[question.id] === undefined) {
@@ -86,11 +99,7 @@ export default function PlacementTest({ onResult }: { onResult?: (level: Level) 
   return (
     <section id="test-niveau" data-no-reveal="" className="surface-green bg-surface-inverse text-text-on-inverse section-space">
       <div className="container-page *:max-w-4xl space-y-10">
-        <SectionHeader
-          title="Trouver mon niveau d’allemand"
-          subtitle="20 questions à choix multiples, de A1 à C1, environ 5 minutes. Le résultat vous indique le niveau par lequel commencer."
-          onInverse
-        />
+        <SectionHeader title={t('mobilite.test.title')} subtitle={t('mobilite.test.subtitle')} onInverse />
 
         <div ref={boxRef} className="rounded-card border border-border-subtle-on-inverse p-6 sm:p-10">
           <p role="status" className="sr-only">
@@ -99,21 +108,18 @@ export default function PlacementTest({ onResult }: { onResult?: (level: Level) 
 
           {!started ? (
             <div className="space-y-6">
-              <p className="text-body text-text-on-inverse max-w-[60ch]">
-                Les questions sont classées par difficulté croissante : 4 questions par niveau. Vous pouvez revenir à la
-                question précédente à tout moment.
-              </p>
+              <p className="text-body text-text-on-inverse max-w-[60ch]">{t('mobilite.test.intro')}</p>
               <PrimaryButton onInverse onClick={() => setStarted(true)}>
-                Commencer le test
+                {t('mobilite.test.commencer')}
               </PrimaryButton>
             </div>
           ) : finished ? (
             <div key="resultat" className="step-enter space-y-6">
-              <p className="text-meta text-text-secondary-on-inverse">Résultat indicatif de votre test</p>
+              <p className="text-meta text-text-secondary-on-inverse">{t('mobilite.test.resultatKicker')}</p>
               <h3 ref={focusRef as Ref<HTMLHeadingElement>} tabIndex={-1} className="text-section-title text-text-on-inverse">
-                Niveau conseillé : {recommended}
+                {t('mobilite.test.niveauConseille', { level: recommended })}{' '}
                 <span className="block mt-1 text-body text-text-secondary-on-inverse">
-                  {score} bonnes réponses sur {total}
+                  {t('mobilite.test.score', { count: score, total })}
                 </span>
               </h3>
 
@@ -121,26 +127,23 @@ export default function PlacementTest({ onResult }: { onResult?: (level: Level) 
               <Fil
                 orientation="auto"
                 onInverse
-                steps={GERMAN_LEVELS_DATA.map((lvl) => ({ id: lvl.slug, label: lvl.level, sublabel: lvl.shortTitle, to: `/academie/${lvl.slug}` }))}
-                end={{ id: 'europe', label: 'Europe' }}
+                steps={levelSteps}
+                end={{ id: 'europe', label: t('mobilite.commun.europe') }}
                 currentId={recommendedSlug}
-                currentLabel="niveau conseillé"
+                currentLabel={t('mobilite.test.niveauConseilleCourt')}
                 drawTo={recommendedSlug}
                 lightCurrent
               />
 
-              <p className="text-body text-text-on-inverse max-w-[60ch]">
-                Ce résultat sert à vous orienter. Lors de l’étude de votre candidature, un formateur confirmera avec vous le
-                groupe qui vous permettra de progresser dans les meilleures conditions.
-              </p>
+              <p className="text-body text-text-on-inverse max-w-[60ch]">{t('mobilite.test.resultatText')}</p>
 
               <div className="flex flex-wrap items-center gap-4">
                 <PrimaryButton to={`/candidater?souhait=cours_allemand&niveau=${recommended}`} onInverse>
-                  Candidater au niveau {recommended}
+                  {t('mobilite.commun.candidaterNiveau', { level: recommended })}
                 </PrimaryButton>
                 <SecondaryButton onInverse onClick={restart}>
                   <RotateCcw aria-hidden="true" className="inline w-4 h-4 mr-2" />
-                  Recommencer le test
+                  {t('mobilite.test.recommencer')}
                 </SecondaryButton>
               </div>
             </div>
@@ -149,12 +152,10 @@ export default function PlacementTest({ onResult }: { onResult?: (level: Level) 
               {/* Position : texte visible (contraste du texte sur nuit) et barre de progression qui se remplit */}
               <div className="space-y-2">
                 <p className="flex flex-wrap items-center justify-between gap-x-4 text-meta font-semibold text-text-on-inverse">
-                  <span>
-                    Question {index + 1} sur {total}
-                  </span>
-                  <span className="text-text-secondary-on-inverse font-normal">Niveau testé : {question.level}</span>
+                  <span>{t('mobilite.test.position', { n: index + 1, total })}</span>
+                  <span className="text-text-secondary-on-inverse font-normal">{t('mobilite.test.niveauTeste', { level: question.level })}</span>
                 </p>
-                <ProgressBar value={index + 1} max={total} onInverse label="Avancement du test" />
+                <ProgressBar value={index + 1} max={total} onInverse label={t('mobilite.test.avancement')} />
               </div>
 
               {/* Nouvelle question : fondu et glissement de 16 px (0,3 s), focus sur l'énoncé une fois l'entrée finie */}
@@ -180,6 +181,8 @@ export default function PlacementTest({ onResult }: { onResult?: (level: Level) 
                       }}
                       showCheck
                       onInverse
+                      invalid={missing}
+                      describedBy={missing ? errorId : undefined}
                       className="p-4 text-left"
                     >
                       <span lang="de">{opt}</span>
@@ -187,8 +190,8 @@ export default function PlacementTest({ onResult }: { onResult?: (level: Level) 
                   ))}
                 </div>
                 {missing && (
-                  <p id={errorId} className="mt-3 text-body font-semibold text-text-on-inverse">
-                    Choisissez une réponse pour passer à la question suivante.
+                  <p id={errorId} role="alert" className="mt-3 text-body font-semibold text-text-on-inverse">
+                    {t('mobilite.test.manque')}
                   </p>
                 )}
               </fieldset>
@@ -202,13 +205,13 @@ export default function PlacementTest({ onResult }: { onResult?: (level: Level) 
                       setIndex((i) => Math.max(0, i - 1));
                     }}
                   >
-                    Question précédente
+                    {t('mobilite.test.precedente')}
                   </SecondaryButton>
                 ) : (
                   <span />
                 )}
                 <PrimaryButton onInverse onClick={next}>
-                  {index === total - 1 ? 'Voir mon niveau conseillé' : 'Question suivante'}
+                  {index === total - 1 ? t('mobilite.test.voirResultat') : t('mobilite.test.suivante')}
                 </PrimaryButton>
               </div>
             </div>

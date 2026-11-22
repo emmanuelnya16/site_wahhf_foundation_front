@@ -1,0 +1,68 @@
+{
+  "_relire": [
+    "contactPage.vigilance.title",
+    "contactPage.vigilance.text",
+    "contactPage.form.consent",
+    "contactPage.draft.consent"
+  ],
+  "seo": {
+    "title": "Kontakt — Schreiben Sie der WAHHF Foundation",
+    "description": "Kontaktieren Sie die WAHHF Foundation per WhatsApp oder per E-Mail: Bewerbung, Ehrenamt, Partnerschaft, Presse oder jedes andere Anliegen."
+  },
+  "vigilance": {
+    "title": "Vorsicht",
+    "text": "Niemand von WAHHF wird Sie per Telefon, E-Mail oder WhatsApp um Geld bitten, um Ihre Bewerbungsunterlagen zu bearbeiten.",
+    "link": "Falsche Angebote erkennen"
+  },
+  "header": {
+    "title": "Schreiben Sie der WAHHF Foundation",
+    "intro": "Erreichen Sie uns direkt per WhatsApp oder per E-Mail, oder nutzen Sie das Formular: Es bereitet Ihre Nachricht passend zu Ihrem Anliegen vor."
+  },
+  "direct": {
+    "title": "Direkter Kontakt",
+    "whatsapp": "Auf WhatsApp schreiben",
+    "greeting": "Guten Tag, liebes Team der WAHHF Foundation, "
+  },
+  "status": {
+    "ready": "Ihre Nachricht ist bereit: Senden Sie sie per WhatsApp oder per E-Mail."
+  },
+  "handoff": {
+    "title": "Letzter Schritt: Senden Sie Ihre Nachricht",
+    "edit": "Meine Angaben ändern"
+  },
+  "form": {
+    "title": "Ihre Nachricht",
+    "motifLegend": "Ihr Anliegen *",
+    "name": "Vollständiger Name oder Organisation *",
+    "email": "E-Mail-Adresse *",
+    "whatsapp": "WhatsApp-Nummer (optional)",
+    "whatsappPlaceholder": "z. B. +237 6...",
+    "message": "Ihre Nachricht *",
+    "consent": "Ich bin damit einverstanden, dass die WAHHF Foundation meine Kontaktdaten gemäß der <lien>Datenschutzerklärung<sr> (neuer Tab)</sr></lien> verarbeitet, um auf meine Nachricht zu antworten. *",
+    "submit": "Meine Nachricht zum Senden vorbereiten"
+  },
+  "motifs": {
+    "candidat": "Ich bewerbe mich (Deutsch- und Englischkurse, Begleitung)",
+    "benevole": "Ich möchte mich ehrenamtlich engagieren",
+    "partenaire": "Partner oder Institution",
+    "presse": "Presse und Medien",
+    "autre": "Anderes Anliegen"
+  },
+  "errors": {
+    "motif": "Wählen Sie das Anliegen Ihrer Nachricht.",
+    "name": "Geben Sie Ihren vollständigen Namen oder den Namen Ihrer Organisation ein.",
+    "message": "Schreiben Sie Ihre Nachricht in wenigen Zeilen.",
+    "consent": "Kreuzen Sie dieses Feld an, damit wir Ihre Nachricht lesen und Ihnen antworten können."
+  },
+  "draft": {
+    "subject": "Kontakt WAHHF — {{motif}} — {{name}}",
+    "noMotif": "Nachricht",
+    "intro": "Ich schreibe Ihnen über das Kontaktformular der Website:",
+    "motif": "Anliegen",
+    "name": "Name",
+    "email": "E-Mail",
+    "whatsapp": "WhatsApp",
+    "message": "Nachricht",
+    "consent": "Ich bin damit einverstanden, dass die WAHHF Foundation meine Kontaktdaten verarbeitet, um auf meine Nachricht zu antworten (DSGVO)."
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "_relire": [
+    "notreImpact.title",
+    "notreImpact.field.subtitle"
+  ],
+  "seo": {
+    "title": "Unsere Wirkung — Präsenz in Kamerun und Orientierung für 10 europäische Länder",
+    "description": "Wo die WAHHF Foundation arbeitet: Mit Sitz in Yaoundé und Douala in Kamerun informiert sie junge Menschen über Studium, Ausbildung und Arbeit in 10 europäischen Ländern."
+  },
+  "title": "Konkrete Wirkung, mit Bescheidenheit und Transparenz gemessen",
+  "intro": "Hier sehen Sie, wo die Stiftung in Kamerun präsent ist und über welche 10 europäischen Länder sie junge Menschen informiert. Ergebnisse in Zahlen veröffentlichen wir hier, sobald sie datiert und geprüft sind.",
+  "field": {
+    "title": "Unsere Arbeit in Bildern",
+    "subtitle": "Einige Momente von unseren Veranstaltungstagen und Ausflügen. Die vollständigen Alben finden Sie in der Galerie.",
+    "gallery": "Zur Galerie"
+  },
+  "transparency": {
+    "title": "Unsere Verpflichtungen zur finanziellen Transparenz",
+    "subtitle": "Erfahren Sie, wie die Mittel der IROKO-Gruppe und die Spenden für die sozialen Aufgaben eingesetzt werden.",
+    "cta": "Zur Seite Transparenz"
+  },
+  "support": {
+    "title": "Unsere Arbeit unterstützen",
+    "subtitle": "Ihre Spende finanziert Deutsch- und Englischkurse und unsere Arbeit in Kamerun. Sie können wählen, welchen Bereich sie unterstützt."
+  }
+}

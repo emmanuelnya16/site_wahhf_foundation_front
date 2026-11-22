@@ -1,0 +1,9 @@
+{
+  "_lisez-moi": "Portraits de l'équipe (lot 7.7), traités par scripts/optimize-photos.mjs : slug (repris dans src/data/team.ts, champ photo), fichier source (dossier des portraits de la fondation, --team-source), centre du visage en fractions de la largeur et de la hauteur (recadrage 4:5 autour de lui).",
+  "portraits": [
+    { "slug": "marrion-watio-notesse", "fichier": "Marrion wation notesse (president).jpeg", "visage": [0.33, 0.35] },
+    { "slug": "christian-wilberg", "fichier": "Ing Pr.Christian wilberg (Vice President).jpg", "visage": [0.44, 0.35] },
+    { "slug": "personne-niveau-3", "fichier": "3 eme personne ilfluente de la fondation.webp", "visage": [0.48, 0.24] },
+    { "slug": "wilfried", "fichier": "Wilfried (Secretaire General).png", "visage": [0.52, 0.35] }
+  ]
+}

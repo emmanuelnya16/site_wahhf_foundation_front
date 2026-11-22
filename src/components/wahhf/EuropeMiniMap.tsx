@@ -1,4 +1,5 @@
-import { FocusEvent, KeyboardEvent, use, useId, useMemo, useRef, useState } from 'react';
+import { FocusEvent, KeyboardEvent, use, useEffect, useId, useMemo, useRef, useState } from 'react';
+import { useLocalize } from '../../lib/localize';
 import { useNavigate } from 'react-router-dom';
 import { ComposableMap, Marker } from 'react-simple-maps';
 import { geoAzimuthalEqualArea, geoPath } from 'd3-geo';
@@ -54,6 +55,21 @@ const overlaps = (a: Box, b: Box) => a[0] <= b[2] && a[2] >= b[0] && a[1] <= b[3
 interface EuropeMiniMapProps {
   activeCountrySlug: string | null;
   onHoverCountry: (slug: string | null) => void;
+  /**
+   * Groupe 7.4 (page Accompagnement vers l'Europe) : l'arc se trace quand la carte entre à l'écran (son haut à 75 %),
+   * puis se retrace à chaque changement de pays. Un masque circulaire centré sur le départ grandit (transform seulement,
+   * CSS .arc-redraw : 1,2 s la première fois, 0,8 s ensuite, power3.inOut). Ordinateur à souris, mouvement autorisé ;
+   * ailleurs, l'arc est en place et change de pays d'un coup. Sans ce réglage (accueil, Notre impact), rien ne change :
+   * l'arc est tracé une fois par MapMotion, puis change de pays d'un coup (contrat §6).
+   */
+  redrawArc?: boolean;
+  /**
+   * Revue du groupe 7.4 (page Accompagnement) : `keyboard={false}` retire les 10 pays de la carte de l'ordre de tabulation
+   * et des lecteurs d'écran (carte aria-hidden) ; ils restent cliquables à la souris. La liste synchronisée posée à côté
+   * mène déjà à chaque fiche et, au clavier, montre le pays sur la carte : les 10 mêmes liens n'étaient plus qu'une
+   * redite. Par défaut (accueil, Notre impact) : pays focalisables, inchangé.
+   */
+  keyboard?: boolean;
 }
 
 /**
@@ -62,9 +78,10 @@ interface EuropeMiniMapProps {
  * recalcule à chaque redimensionnement (ResizeObserver), pixel pour pixel : textes nets.
  * Les 10 pays accompagnés (or doux) sont des liens vers leur fiche, synchronisés avec la liste.
  */
-export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: EuropeMiniMapProps) {
+export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry, redrawArc = false, keyboard = true }: EuropeMiniMapProps) {
   const geo = use(loadEuropeGeo());
   const navigate = useNavigate();
+  const { t, localized } = useLocalize();
   const reduce = useReducedMotion();
   const boxRef = useRef<HTMLDivElement>(null);
   const size = useElementSize(boxRef);
@@ -75,6 +92,33 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
   // Cible de l'arc : le pays survolé ou sélectionné ; l'arc reste sur le dernier pays visé (Allemagne au départ)
   const [arcSlug, setArcSlug] = useState(EUROPE_SUPPORTED_COUNTRIES[0].slug);
   if (activeCountrySlug && activeCountrySlug !== arcSlug) setArcSlug(activeCountrySlug);
+
+  // redrawArc : l'arc attend que la carte entre à l'écran (ou qu'un pays soit visé avant, au clavier), puis se trace ;
+  // chaque nouveau pays visé le retrace (le masque est remonté, son animation CSS repart)
+  const [arcEntered, setArcEntered] = useState(!redrawArc);
+  if (redrawArc && !arcEntered && activeCountrySlug) setArcEntered(true);
+  // Numéro du tracé : 0 pour le premier (1,2 s), puis +1 à chaque nouveau pays (0,8 s)
+  const [trace, setTrace] = useState({ slug: arcSlug, n: 0 });
+  if (redrawArc && arcEntered && trace.slug !== arcSlug) setTrace({ slug: arcSlug, n: trace.n + 1 });
+  useEffect(() => {
+    if (arcEntered) return;
+    const el = boxRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') {
+      setArcEntered(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setArcEntered(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '0px 0px -25% 0px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [arcEntered]);
 
   // Emprise de chaque partie de chaque pays : calculée une fois par chargement des données
   const parts = useMemo(() => geo.countries.map((f) => ({ f, parts: countryParts(f) })), [geo]);
@@ -160,7 +204,7 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
     // Étiquette du pays (survol ou focus uniquement), gardée dans le cadre
     let label = null;
     if (active && activePoint) {
-      const text = `${active.code} · ${active.nameFr}`;
+      const text = `${active.code} · ${localized(active, `contenu.pays.${active.slug}`).name}`;
       const lw = text.length * 6 + 18;
       const x = Math.min(Math.max(activePoint[0], lw / 2 + 4), w - lw / 2 - 4);
       const above = activePoint[1] - 30 > 4;
@@ -180,8 +224,9 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
         projection={projection}
         width={w}
         height={h}
-        role="group"
-        aria-label="Carte de l'Europe : les 10 pays accompagnés, chacun avec un lien vers sa fiche"
+        {...(keyboard
+          ? { role: 'group', 'aria-label': t('ui.map.europeLabel') }
+          : { 'aria-hidden': true })}
         className="absolute inset-0 w-full h-full select-none overflow-hidden"
       >
         {/* Pays : les 10 accompagnés en or doux (liens), les autres en gris très clair */}
@@ -191,19 +236,25 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
               return <path key={key} d={d} className="fill-surface-section stroke-surface-raised" strokeWidth={0.6} aria-hidden="true" pointerEvents="none" />;
             }
             const isActive = supported.slug === activeCountrySlug;
+            // Lien au clavier et pour les lecteurs d'écran, sauf keyboard={false} (souris seulement)
+            const linkProps = keyboard
+              ? {
+                  role: 'link',
+                  tabIndex: 0,
+                  'aria-label': t(supported.isEU ? 'ui.map.countryLink' : 'ui.map.countryLinkNonEu', { name: localized(supported, `contenu.pays.${supported.slug}`).name }),
+                  onFocus: (e: FocusEvent<SVGPathElement>) => handleFocus(e, supported.slug),
+                  onBlur: handleBlur,
+                  onKeyDown: (e: KeyboardEvent<SVGPathElement>) => handleKeyDown(e, supported.slug),
+                }
+              : {};
             return (
               <path
                 key={key}
                 d={d}
-                role="link"
-                tabIndex={0}
-                aria-label={`${supported.nameFr}${supported.isEU ? '' : ', hors Union européenne'} : ouvrir la fiche`}
+                {...linkProps}
                 onClick={() => open(supported.slug)}
                 onPointerEnter={() => onHoverCountry(supported.slug)}
                 onPointerLeave={() => onHoverCountry(null)}
-                onFocus={(e) => handleFocus(e, supported.slug)}
-                onBlur={handleBlur}
-                onKeyDown={(e) => handleKeyDown(e, supported.slug)}
                 strokeWidth={isActive ? 1 : 0.7}
                 strokeLinejoin="round"
                 className={`cursor-pointer outline-none transition-[fill] duration-(--dur-fast) ease-out ${isActive ? 'fill-foret stroke-foret dark:fill-feuille dark:stroke-feuille' : 'fill-border-subtle stroke-border-input'}`}
@@ -249,7 +300,12 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
               <defs>
                 <mask id={arcMaskId} maskUnits="userSpaceOnUse" x={0} y={0} width={w} height={h}>
                   <circle
+                    key={redrawArc ? (arcEntered ? `trace-${trace.n}` : 'attente') : undefined}
                     data-arc-mask=""
+                    // Tracé à l'entrée, puis à chaque pays (redrawArc) : premier tracé en 1,2 s, les suivants en 0,8 s
+                    className={redrawArc ? (arcEntered ? 'arc-redraw' : 'arc-wait') : undefined}
+                    data-first={redrawArc && arcEntered && trace.n === 0 ? '' : undefined}
+                    style={redrawArc ? { transformOrigin: `${origin[0]}px ${origin[1]}px` } : undefined}
                     cx={origin[0]}
                     cy={origin[1]}
                     r={Math.hypot(arcEnd[0] - origin[0], arcEnd[1] - origin[1]) + 16}
@@ -284,7 +340,7 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
             <circle r={4} className="fill-text stroke-surface-raised" strokeWidth={1.5} />
             <rect x={9} y={-9.5} width={106} height={19} rx={9.5} className="fill-text" />
             <text x={62} y={3.5} textAnchor="middle" fontSize={9.5} fontWeight={600} className="font-sans fill-surface-raised">
-              Depuis le Cameroun
+              {t('ui.map.fromCameroon')}
             </text>
           </g>
         </g>
@@ -299,7 +355,7 @@ export default function EuropeMiniMap({ activeCountrySlug, onHoverCountry }: Eur
       {overlay ?? (
         // Pendant le calcul des tracés (quelques images) : le même message que pendant le chargement
         <div role="status" aria-busy="true" className="absolute inset-0 flex items-center justify-center text-meta text-text-secondary">
-          Chargement de la carte Europe…
+          {t('ui.map.loadingEurope')}
         </div>
       )}
     </div>

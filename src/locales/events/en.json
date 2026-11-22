@@ -1,0 +1,510 @@
+{
+  "_aValider": "TODO : traductions anglaises proposées (interface et contenu des événements), à faire valider par la fondation (docs/contenus-a-fournir.md).",
+  "seo": {
+    "listTitle": "Events — The foundation's days",
+    "listDescription": "WAHHF Foundation's days and gatherings: upcoming events, programme and past editions in pictures.",
+    "eventDescription": "{{title}}: programme, venue and practical information for this WAHHF Foundation day."
+  },
+  "list": {
+    "badge": "The foundation's gatherings",
+    "title": "Our events",
+    "accent": "events",
+    "intro": "Days to meet the foundation, its teams and partners, and ask all your questions.",
+    "upcoming": "Upcoming",
+    "past": "Past editions",
+    "none": "No event has been announced yet.",
+    "noneAction": "Write to us to hear about the next one",
+    "seeEvent": "See the event",
+    "startsIn": "Starts in"
+  },
+  "hero": {
+    "badgeUpcoming": "The foundation's next gathering",
+    "badgePast": "Looking back on a foundation day",
+    "register": "Register",
+    "program": "See the programme",
+    "photos": "See the photos",
+    "placesLeft_one": "{{count}} place left",
+    "placesLeft_other": "{{count}} places left",
+    "venueUpcoming": "The event takes place in",
+    "venuePast": "The event took place in",
+    "flag": "Flag of Cameroon",
+    "pause": "Pause the animations",
+    "play": "Play the animations",
+    "breadcrumb": "Events"
+  },
+  "countdown": {
+    "label": "See you in",
+    "days": "Days",
+    "hours": "Hours",
+    "minutes": "Minutes",
+    "seconds": "Seconds",
+    "when": "The event starts on {{date}} at {{time}}, Douala time.",
+    "past": "It was on {{date}}",
+    "pastText": "Thank you to everyone who came.",
+    "photos": "See the photos"
+  },
+  "organizers": {
+    "label": "Organised by"
+  },
+  "ticker": {
+    "label": "The foundation's six fields, in German",
+    "pause": "Pause the banner",
+    "play": "Play the banner"
+  },
+  "why": {
+    "eyebrow": "Why come",
+    "title": "Four reasons to be there."
+  },
+  "schedule": {
+    "eyebrow": "The schedule",
+    "title": "The day, hour by hour."
+  },
+  "activities": {
+    "eyebrow": "Activities",
+    "title": "What happens during the day.",
+    "more": "Learn more: {{title}}",
+    "domainLink": "{{title}}, {{domain}} field"
+  },
+  "program": {
+    "eyebrow": "The programme at a glance",
+    "title": "Four moments that matter.",
+    "speakers": "Speakers",
+    "speakersSep": ": ",
+    "speakersSoon": "to be announced very soon.",
+    "schedule": "See the schedule",
+    "team": "Our team"
+  },
+  "support": {
+    "eyebrow": "Support the event",
+    "title": "Be part of the day.",
+    "text": "Schools, associations, companies, institutions or volunteers: everyone can help the foundation welcome young people.",
+    "partnerEyebrow": "For organisations",
+    "partnerTitle": "Become a partner",
+    "partnerText": "Offer the foundation a partnership for this day or the next ones.",
+    "giveEyebrow": "For everyone",
+    "giveTitle": "Give equipment or time",
+    "giveText": "Lend a hand on the day, or bring equipment that is useful to young people."
+  },
+  "parents": {
+    "eyebrow": "For parents",
+    "title": "What we owe families.",
+    "text": "Before entrusting a young person to the foundation, you have the right to know how the day is supervised.",
+    "promises": "Our commitments",
+    "never": "What we will never promise"
+  },
+  "faq": {
+    "eyebrow": "Frequently asked",
+    "title": "The answers, before you come.",
+    "text": "The questions families and young people ask us most often.",
+    "action": "Write to us"
+  },
+  "news": {
+    "eyebrow": "News",
+    "title": "The foundation's latest news.",
+    "all": "All the news"
+  },
+  "final": {
+    "titleUpcoming": "Save the date.",
+    "textUpcoming": "Register, then come with your questions: the foundation's team is waiting for you.",
+    "titlePast": "Relive the day in pictures.",
+    "textPast": "The photos of the day are in the foundation's gallery.",
+    "write": "Write to us"
+  },
+  "notFound": {
+    "title": "This event does not exist",
+    "text": "It may have moved. Here are the foundation's events."
+  },
+  "faits": {
+    "dateBientot": "Date to be announced very soon",
+    "villeBientot": "City to be announced very soon",
+    "inscriptionBientot": "Registration opens very soon",
+    "quandOu": "On {{date}} in {{ville}}, {{pays}}.",
+    "quandSansVille": "On {{date}}, in {{pays}}; the city will be announced very soon.",
+    "ouSansDate": "In {{ville}}, {{pays}}; the date will be announced very soon.",
+    "quandOuInconnus": "The date and the city will be announced very soon; the event takes place in {{pays}}.",
+    "prix": "{{prix}}.",
+    "prixInconnu": "The price will be announced very soon.",
+    "deVille": " {{ville}}"
+  },
+  "contenu": {
+    "road-to-europe": {
+      "bandeauLabel": "The 10 countries of Road to Europe",
+      "pastille": {
+        "texte": "The event that launches your European project"
+      },
+      "titre": "Your road to\nEurope\nstarts here.",
+      "motAccent": "Europe",
+      "accroche": "Studies, training, skilled work: in one day, understand the legal pathways to 10 European countries, meet those who train and support, and leave with a clear plan.",
+      "pays": "Cameroon",
+      "sections": {
+        "hero": {
+          "action": "Book my place",
+          "action2": "See the programme",
+          "etiquette": "The conference takes place in"
+        },
+        "compte": {
+          "titre": "The countdown has started"
+        },
+        "pourquoi": {
+          "surtitre": "Why come",
+          "titre": "A day to change course.",
+          "intro": "Many young people lose time and money for lack of reliable information. Road to Europe gives you the right cards, at the right time."
+        },
+        "route": {
+          "surtitre": "Your road",
+          "titre": "Five steps to Europe.",
+          "intro": "The road takes effort, but it is signposted. At Road to Europe, each step is explained by people who have lived it."
+        },
+        "voies": {
+          "surtitre": "The pathways to Europe",
+          "titre": "Four legal pathways to Europe.",
+          "intro": "Each pathway has its own conditions, timelines and chances, and they vary from one country to another. Find the one that suits you."
+        },
+        "programme": {
+          "surtitre": "The programme at a glance",
+          "titre": "One day, four highlights.",
+          "intro": "Understand, discuss, practise, meet: you leave with clear answers and useful contacts.",
+          "action": "Full programme",
+          "action2": "The speakers"
+        },
+        "partenaires": {
+          "surtitre": "Sponsors and partners",
+          "titre": "Be part of the adventure.",
+          "intro": "Companies, schools, institutions and media: join Road to Europe and meet motivated young people."
+        },
+        "parents": {
+          "surtitre": "For parents",
+          "titre": "Your trust matters.\nHere are our\ncommitments.",
+          "intro": "Road to Europe is organised by WAHHF Foundation, an identified and reachable foundation that supports young people in their projects towards Europe."
+        },
+        "faq": {
+          "surtitre": "Your questions",
+          "titre": "Clear answers.",
+          "intro": "The questions we are asked most often.",
+          "action": "Write to us"
+        },
+        "blog": {
+          "surtitre": "The blog",
+          "titre": "Read before you go."
+        },
+        "final": {
+          "titre": "Take the right road\nto Europe.",
+          "intro": "Don't let your project wait: book your place and leave{{deVille}} with a plan.",
+          "action": "Book my place",
+          "action2": "Write to us"
+        }
+      },
+      "pourquoi": [
+        {
+          "titre": "Honest advice, not promises",
+          "texte": "Speakers who know Europe from the inside tell you what works, what it costs and what takes time."
+        },
+        {
+          "titre": "The right steps, one by one",
+          "texte": "Language, recognition of qualifications, application, visa: you leave with a roadmap for the country that suits you."
+        },
+        {
+          "titre": "Partners who train and support",
+          "texte": "Language schools, institutions, support organisations: meet them in person and ask your questions."
+        },
+        {
+          "titre": "Those who left share their stories",
+          "texte": "Young people already settled in Europe tell their story: the mistakes to avoid, the doors that open."
+        }
+      ],
+      "deroule": [
+        {
+          "titre": "Choose your country and pathway",
+          "texte": "Studies, training or work, among 10 countries: find the combination that matches your profile, your level and your budget.",
+          "lien": {
+            "libelle": "See the 10 countries"
+          }
+        },
+        {
+          "titre": "Learn the language",
+          "texte": "German, Italian, Portuguese, Polish… or English depending on the programme: the language level opens or closes doors. Aim for the right certificate.",
+          "lien": {
+            "libelle": "Mobility & Languages"
+          }
+        },
+        {
+          "titre": "Prepare your application",
+          "texte": "Recognised qualifications, official translations, CV and letter in the country's format: a complete file saves months.",
+          "lien": {
+            "libelle": "Support"
+          }
+        },
+        {
+          "titre": "Get your visa",
+          "texte": "Embassy appointment, supporting documents, interview: prepare every detail and avoid the traps.",
+          "lien": {
+            "libelle": "Avoid scams"
+          }
+        },
+        {
+          "titre": "Leave and settle in",
+          "texte": "Housing, enrolment, insurance, the first months: arriving prepared changes everything.",
+          "lien": {
+            "libelle": "Apply"
+          }
+        }
+      ],
+      "activites": [
+        {
+          "titre": "Studies",
+          "texte": "Recognised public universities in 10 countries, with programmes sometimes taught in English and an admission to prepare early.",
+          "etiquette": "Public universities"
+        },
+        {
+          "titre": "Vocational training",
+          "texte": "Learn a trade through work-study, like the Ausbildung in Germany, in care, crafts, hospitality or industry.",
+          "etiquette": "Work-study training"
+        },
+        {
+          "titre": "Skilled work",
+          "texte": "Your qualification or experience recognised in the chosen country, so you can work in your field.",
+          "etiquette": "Recognised qualification"
+        },
+        {
+          "titre": "Getting support",
+          "texte": "The foundation helps you choose the country, prepare the language and build a complete application, with no unknown intermediary.",
+          "etiquette": "WAHHF support"
+        }
+      ],
+      "tempsForts": [
+        {
+          "titre": "Understand",
+          "texte": "The legal pathways to the 10 countries, their conditions and timelines, explained simply."
+        },
+        {
+          "titre": "Discuss",
+          "texte": "Round tables with trainers, institutions and young people who have already left."
+        },
+        {
+          "titre": "Practise",
+          "texte": "Workshops: application, European-format CV, visa, language."
+        },
+        {
+          "titre": "Meet",
+          "texte": "Schools, institutions and partners at their stands."
+        }
+      ],
+      "soutien": [
+        {
+          "surtitre": "For companies",
+          "titre": "Become a sponsor",
+          "texte": "Support the event and gain visibility with motivated young people."
+        },
+        {
+          "surtitre": "For schools, institutions, media",
+          "titre": "Become a partner",
+          "texte": "Train, inform and support with us."
+        }
+      ],
+      "parents": {
+        "titrePromesses": "What we promise",
+        "titreJamais": "What we will never promise",
+        "promesses": [
+          "Verified information, with its official sources",
+          "Identified organisers and partners",
+          "Clear prices, paid only through the foundation's official channels"
+        ],
+        "jamais": [
+          "A “guaranteed” visa",
+          "An admission or a job without any formalities or language level",
+          "Hidden fees, or fees paid to an unknown intermediary"
+        ]
+      },
+      "faq": [
+        {
+          "question": "When and where does Road to Europe take place?",
+          "reponse": "{{quandOu}} The exact venue and opening time will be announced as soon as they are confirmed."
+        },
+        {
+          "question": "Who is the event for?",
+          "reponse": "Young people preparing a study, training or work project in Europe, and their parents. No language level is required to attend."
+        },
+        {
+          "question": "How much does entry cost and how do I register?",
+          "reponse": "{{prix}} Registration is only through the foundation's official channels. Never pay an unknown intermediary for a place."
+        },
+        {
+          "question": "Does attending Road to Europe guarantee me a visa, an admission or a job?",
+          "reponse": "No. Visas are decided by embassies, admissions by institutions and hiring by employers. We show you the right steps and the right contacts."
+        },
+        {
+          "question": "What language level do I need to leave?",
+          "reponse": "It depends on the country and the pathway: each country page on the site lists the languages and levels required."
+        },
+        {
+          "question": "Can my company support the event?",
+          "reponse": "Yes. Write to us from the Take action page or the contact form."
+        }
+      ],
+      "blog": [
+        {
+          "surtitre": "Country guides",
+          "titre": "The 10 countries, one by one",
+          "texte": "Languages required, studies, training and work: what to know before choosing your country.",
+          "lien": "See the country guides"
+        },
+        {
+          "surtitre": "Mobility & Languages",
+          "titre": "Learn the country's language",
+          "texte": "The foundation's language courses, from level A1 to C1, and guidance towards Europe.",
+          "lien": "Discover Mobility & Languages"
+        },
+        {
+          "surtitre": "Avoid scams",
+          "titre": "The warning signs",
+          "texte": "Fake recruiters, “guaranteed” visas, hidden fees: how to spot them before paying anyone.",
+          "lien": "Read the guide"
+        }
+      ]
+    },
+    "journee-2026-04-25": {
+      "titre": "Day of 25 April 2026 at the Albatros Hotel",
+      "motAccent": "25 April 2026",
+      "accroche": "Building the Africa that feeds, cares for and educates its youth.",
+      "pays": "Cameroon",
+      "organisateurs": [
+        {},
+        {
+          "nom": "Partner of the day (TODO)"
+        }
+      ],
+      "pourquoi": [
+        {
+          "titre": "Free",
+          "texte": "Entry and training are free."
+        },
+        {
+          "titre": "Professional networking",
+          "texte": "Meet professionals and grow your network."
+        },
+        {
+          "titre": "A teacher from Germany",
+          "texte": "A teacher from Germany on site."
+        },
+        {
+          "titre": "Travel support",
+          "texte": "Support to prepare a travel project."
+        }
+      ],
+      "deroule": [
+        {
+          "heure": "8:00",
+          "titre": "Welcoming participants (TODO)",
+          "texte": "Doors open at 8:00 (banner); schedule to be confirmed (TODO)."
+        },
+        {
+          "heure": "9:00 (TODO)",
+          "titre": "Presentation of the foundation (TODO)",
+          "texte": "The six fields of action presented to the public (TODO).",
+          "lien": {
+            "libelle": "Our actions"
+          }
+        },
+        {
+          "heure": "11:00 (TODO)",
+          "titre": "Studies and training in Europe (TODO)",
+          "texte": "Presentation on studying in Germany (TODO).",
+          "lien": {
+            "libelle": "Mobility & Languages"
+          }
+        },
+        {
+          "heure": "14:00 (TODO)",
+          "titre": "Discussion with the audience (TODO)",
+          "texte": "Questions from the floor at the microphone (TODO)."
+        },
+        {
+          "heure": "21:00",
+          "titre": "Closing (TODO)",
+          "texte": "End of the day at 21:00 (banner); content to be confirmed (TODO)."
+        }
+      ],
+      "activites": [
+        {
+          "titre": "Free training"
+        },
+        {
+          "titre": "Free software"
+        },
+        {
+          "titre": "Start-up support"
+        },
+        {
+          "titre": "Equipment for hospitals"
+        },
+        {
+          "titre": "Grant for the best project"
+        },
+        {
+          "titre": "Germany–Cameroon technology transfer"
+        }
+      ],
+      "tempsForts": [
+        {
+          "titre": "Understand (TODO)",
+          "texte": "First highlight of the day: to be provided (TODO)."
+        },
+        {
+          "titre": "Discuss (TODO)",
+          "texte": "Second highlight: to be provided (TODO)."
+        },
+        {
+          "titre": "Practise (TODO)",
+          "texte": "Third highlight: to be provided (TODO)."
+        },
+        {
+          "titre": "Meet (TODO)",
+          "texte": "Fourth highlight: to be provided (TODO)."
+        }
+      ],
+      "parents": {
+        "promesses": [
+          "Written permission from the parents for every minor (TODO: to be validated by the foundation)",
+          "Young people supervised by the foundation's team throughout the day (TODO: to be validated)",
+          "Free entry, or a clear price announced in advance (TODO: to be validated)"
+        ],
+        "jamais": [
+          "A promise of a visa (TODO: to be validated)",
+          "A promise of a job (TODO: to be validated)",
+          "Hidden fees, or fees paid to an intermediary (TODO: to be validated)"
+        ]
+      },
+      "faq": [
+        {
+          "question": "Where and when did the day take place? (TODO)",
+          "reponse": "At the Albatros Hotel, on 25 April 2026, from 8:00 to 21:00 (banner). City to be confirmed (TODO)."
+        },
+        {
+          "question": "Who was the day for? (TODO)",
+          "reponse": "Answer to be provided by the foundation (TODO)."
+        },
+        {
+          "question": "Was there an entry fee? (TODO)",
+          "reponse": "Answer to be provided by the foundation (TODO)."
+        },
+        {
+          "question": "Could minors come on their own? (TODO)",
+          "reponse": "Answer to be provided by the foundation (TODO)."
+        },
+        {
+          "question": "Is another edition planned? (TODO)",
+          "reponse": "Answer to be provided by the foundation (TODO)."
+        },
+        {
+          "question": "How can I propose a partnership? (TODO)",
+          "reponse": "Through the Take action page, partner section (TODO: to be confirmed)."
+        }
+      ]
+    },
+    "exemple-a-venir": {
+      "titre": "Next foundation day (TODO)",
+      "motAccent": "day",
+      "accroche": "Sample event to test the page: texts, date and venue to be replaced (TODO)."
+    }
+  }
+}

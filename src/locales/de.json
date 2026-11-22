@@ -1,0 +1,594 @@
+{
+  "_relire": [
+    "contenu.regions : noms des régions du Cameroun gardés en français (noms officiels, usage des sources allemandes) ; question 181",
+    "contenu.domaines.education.programs[2] : « post-baccalauréat » rendu par « nach dem Abitur »",
+    "contenu.domaines.droits-inclusion.title : « inclusion » rendu par « Teilhabe », comme le menu",
+    "ui.draft.greeting : formule d'accueil des messages préparés (« Guten Tag, liebes Team der WAHHF Foundation, »)",
+    "ui.cookies.refuse : « Refuser le non-essentiel » rendu par « Nur notwendige Cookies »",
+    "ui.breadcrumb : « Fil d'Ariane » rendu par « Pfadnavigation » (lu par les lecteurs d'écran)",
+    "contenu.parcours.section.title : « Apprendre, cultiver, grandir » rendu par « Lernen, anbauen, wachsen »",
+    "contenu.parcours.panneaux.s-engager.meta : « Sorties de terrain » rendu par « Exkursionen »",
+    "hero.headline : « préparer l'Europe en confiance » rendu par « um Europa gut vorbereitet anzugehen »",
+    "nav.mega.mobilityText : « nos donateurs » rendu par « unseren Spenderinnen und Spendern » (forme inclusive)",
+    "home.act.partnerText : « co-construisons » rendu par « Lassen Sie uns gemeinsam … gestalten »"
+  ],
+  "brand": {
+    "name": "WAHHF Foundation",
+    "fullName": "We Are Here Help Foundation",
+    "branch": "Sozialer Zweig der IROKO-Gruppe",
+    "tagline": "Gemeinnützige kamerunisch-deutsche Stiftung"
+  },
+  "nav": {
+    "about": "Über uns",
+    "actions": "Unsere Arbeit",
+    "impact": "Unsere Wirkung",
+    "news": "Aktuelles",
+    "events": "Veranstaltungen",
+    "changeLanguage": "Sprache ändern ({{lang}})",
+    "homeLink": "WAHHF Foundation, Startseite",
+    "act": "Mitmachen",
+    "donate": "Spenden",
+    "apply": "Bewerben",
+    "partners": "Partner",
+    "contact": "Kontakt",
+    "searchPlaceholder": "Programm, Deutsch- oder Englischkurs, Land suchen …",
+    "themeLight": "Heller Modus",
+    "themeDark": "Dunkler Modus",
+    "domains": {
+      "education": "Bildung",
+      "health": "Gesundheit",
+      "entrepreneurship": "Unternehmertum junger Menschen",
+      "environment": "Umwelt",
+      "rights": "Rechte und Teilhabe",
+      "mobility": "Mobilität & Sprachen"
+    },
+    "mainNav": "Hauptnavigation",
+    "mainNavMobile": "Hauptnavigation (mobil)",
+    "searchOpen": "Website durchsuchen",
+    "searchClose": "Suche schließen",
+    "menuOpen": "Hauptmenü öffnen",
+    "menuClose": "Menü schließen",
+    "mobileMenu": "Mobiles Menü der WAHHF Foundation",
+    "actionsMobile": "Unsere Arbeit (6 Bereiche)",
+    "applyMobile": "Bewerben (Kurse & Europa – kostenlos)",
+    "search": {
+      "domain": "Bereich: {{title}}",
+      "level": "Deutschkurs: {{title}}",
+      "country": "Begleitetes Land: {{flag}} {{name}}"
+    },
+    "mega": {
+      "domainsTitle": "Die 6 Arbeitsbereiche der WAHHF Foundation",
+      "overview": "Zur Übersicht",
+      "mobilityTitle": "Mobilität & Sprachen: Deutsch/Englisch (A1–C1) & Europa",
+      "mobilityText": "Kostenlose Begleitung bei Deutsch- und Englischkursen und geprüfte Orientierung für 10 europäische Länder, finanziert von IROKO und unseren Spenderinnen und Spendern.",
+      "academy": "Sprachakademie (A1 bis C1)",
+      "support": "Begleitung in 10 Länder",
+      "scams": "Vorsicht: Betrug vermeiden",
+      "apply": "Kostenlos bewerben"
+    }
+  },
+  "disclaimer": {
+    "title": "Was wir nie von Ihnen verlangen",
+    "text": "Unsere Kurse und unsere Begleitung sind kostenlos. Wir verkaufen weder Visa noch Arbeitsplätze und garantieren kein Ergebnis. Wir verlangen nie Geld von Ihnen. Entscheidungen treffen die zuständigen Behörden und Einrichtungen. Prüfen Sie Informationen immer auf den offiziellen Websites.",
+    "link": "Wie erkennt man ein falsches Angebot und vermeidet Betrug?"
+  },
+  "hero": {
+    "kicker": "KAMERUNISCH-DEUTSCHE STIFTUNG · SOZIALER ZWEIG DER IROKO-GRUPPE",
+    "title": "Junge Menschen stärken, Gemeinschaften verändern",
+    "subtitle": "Wir sind in Kamerun aktiv und begleiten junge Menschen in Afrika mit Würde, Transparenz und Solidarität: Bildung, Gesundheit, Unternehmertum, Umwelt und zu 100 % kostenlose Sprachmobilität.",
+    "ctaPrimary": "Unsere Arbeit unterstützen",
+    "ctaSecondary": "Unsere Programme entdecken",
+    "scrollHint": "Zum Entdecken scrollen",
+    "videoPause": "Video anhalten",
+    "videoPlay": "Video abspielen",
+    "headline": "Deutsch- und Englischkurse, um Europa gut vorbereitet anzugehen",
+    "lead": "Eine kamerunisch-deutsche Stiftung in Yaoundé und Douala: Niveaus A1 bis C1, Online-Test und Orientierung für 10 europäische Länder – ohne bezahlte Vermittler.",
+    "ctaTest": "Kostenlosen Deutschtest machen",
+    "filmLink": "Film mit Ton ansehen (1 Min.)",
+    "filStart": "Kamerun",
+    "filEnd": "Europa",
+    "videoConsent": "Video aktivieren",
+    "videoConsentNote": "Es wird über YouTube abgespielt; YouTube erhält dabei Ihre IP-Adresse.",
+    "filmTitle": "Film der WAHHF Foundation",
+    "filmPlay": "Film auf YouTube abspielen",
+    "filmNote": "Der Film wird über YouTube abgespielt; YouTube erhält dabei Ihre IP-Adresse.",
+    "filmClose": "Film schließen",
+    "loopTitle": "Vorstellungsvideo der WAHHF Foundation (dekorativ, ohne Ton)",
+    "filmFrameTitle": "Film der WAHHF Foundation (1:10 Min.)"
+  },
+  "home": {
+    "mission": {
+      "kicker": "Über uns",
+      "title": "Eine menschliche Brücke zwischen Kamerun und Deutschland",
+      "p1": "Aus einer kamerunisch-deutschen Doppelkultur entstanden, ist die WAHHF Foundation (We Are Here Help Foundation) der soziale und gemeinnützige Zweig der IROKO-Gruppe.",
+      "p2": "Wir sind überzeugt, dass Würde durch Wissen, Gesundheit und Selbstständigkeit entsteht. Darum entwickeln wir nachhaltige Programme vor Ort und ein kostenloses Angebot, um Deutsch oder Englisch zu lernen und sich in Richtung Europa zu orientieren.",
+      "link": "Mehr über unsere Geschichte und unsere Organisation"
+    },
+    "stats": {
+      "kicker": "Unsere Wirkung in Zahlen",
+      "title": "Konkrete und messbare Arbeit",
+      "subtitle": "Jedes Programm wird sorgfältig und finanziell transparent begleitet. (Zahlen noch zu bestätigen — TODO)",
+      "s1Label": "Begleitete junge Menschen und Familien (TODO: bestätigen)",
+      "s2Label": "Sich ergänzende Arbeitsbereiche",
+      "s3Label": "Abgedeckte Regionen Kameruns",
+      "s4Label": "Dokumentierte europäische Zielländer"
+    },
+    "domains": {
+      "kicker": "Unsere 6 Arbeitsbereiche",
+      "title": "Sechs Säulen für mehr Selbstständigkeit",
+      "subtitle": "Vom Zugang zur Grundschule bis zur internationalen Studien- und Sprachmobilität."
+    },
+    "mobilitySpot": {
+      "title": "Deutsch oder Englisch lernen, den Weg nach Europa finden",
+      "subtitle": "Kostenlose Deutsch- und Englischkurse und Orientierung – ohne Anmeldegebühren und ohne kommerzielle Vermittler.",
+      "card1Title": "Sprachakademie A1 bis C1",
+      "card1Desc": "Strukturierte Begleitung der Deutsch- und Englischkurse vom Anfängerniveau A1 bis zum fortgeschrittenen Niveau C1, mit Online-Einstufungstest.",
+      "card2Title": "Begleitung nach Europa",
+      "card2Desc": "Klare und geprüfte Informationen in 4 Schritten: Studien-, Ausbildungs- und Arbeitswege verstehen und die Unterlagen vorbereiten.",
+      "card3Title": "10 begleitete Länder",
+      "card3Desc": "Luxemburg, Deutschland, Slowenien, Italien, Griechenland, Portugal, Spanien, Dänemark, Polen und Albanien.",
+      "cta": "Programm entdecken",
+      "filLabel": "Die fünf Sprachniveaus von A1 bis C1, dann Europa",
+      "filEnd": "Europa",
+      "levels": {
+        "a1": "Einstieg",
+        "a2": "Alltagsgespräche",
+        "b1": "Selbstständigkeit",
+        "b2": "Unabhängigkeit",
+        "c1": "Sprachbeherrschung"
+      }
+    },
+    "video": {
+      "kicker": "Mitten im Geschehen",
+      "title": "Unsere Arbeit und unsere Vision in Bildern",
+      "subtitle": "Sehen Sie im Video das Engagement der Stiftung und das Umfeld der IROKO-Gruppe, das unsere Angebote kostenlos macht.",
+      "playLabel": "Vorstellungsfilm ansehen"
+    },
+    "approach": {
+      "kicker": "Unser Ansatz",
+      "title": "Fünf Grundsätze für jedes Projekt",
+      "subtitle": "Eine bescheidene, sorgfältige und in der Wirklichkeit vor Ort verankerte Arbeitsweise."
+    },
+    "timeline": {
+      "kicker": "Unser Weg",
+      "title": "Die wichtigsten Etappen der WAHHF Foundation",
+      "subtitle": "Schritt für Schritt aufgebaut, im Dienst der Gemeinschaften. (Daten und Etappen noch zu bestätigen — TODO)"
+    },
+    "presence": {
+      "kicker": "Präsenz & Reichweite",
+      "title": "In Yaoundé und Douala zu Hause, offen für 10 europäische Länder",
+      "subtitle": "Unsere Teams sind in Yaoundé und Douala; Ansprechpartner in anderen Regionen werden noch bestätigt. Für Europa: geprüfte Informationen zu 10 Ländern."
+    },
+    "testimonials": {
+      "kicker": "Erfahrungsberichte",
+      "title": "Stimmen von Teilnehmenden und Ehrenamtlichen",
+      "subtitle": "Auszüge aus Erfahrungen in unseren Programmen (Beispiele mit TODO markiert, noch zu bestätigen)."
+    },
+    "news": {
+      "kicker": "Aktuelles & vor Ort",
+      "title": "Unsere neuesten Aktionen und Beiträge",
+      "subtitle": "Verfolgen Sie das Leben der Stiftung, neue Sprachkurse und Solidaritätsaktionen.",
+      "allLink": "Alle Neuigkeiten"
+    },
+    "gallery": {
+      "kicker": "In Bildern",
+      "title": "Die Stiftung vor Ort",
+      "subtitle": "Fotos vom First Open Day & Boot Camp am 25. April 2026 in Yaoundé.",
+      "link": "Ganze Galerie ansehen",
+      "expandCaption": "Yaoundé, 25. April 2026"
+    },
+    "partners": {
+      "kicker": "Partner und Förderer",
+      "title": "Getragen von der IROKO Group und einem engagierten Netzwerk",
+      "subtitle": "Dass unsere Programme kostenlos sind, verdanken wir dem dauerhaften Engagement der IROKO-Gruppe und der Großzügigkeit unserer Spenderinnen und Spender.",
+      "link": "Alle unsere Partner entdecken"
+    },
+    "act": {
+      "kicker": "Mit uns aktiv werden",
+      "title": "Jede Geste stärkt einen Lebensweg",
+      "subtitle": "Unterstützen Sie die Mission als Ehrenamtliche oder als Partner – oder verfolgen Sie unsere Arbeit über den Newsletter.",
+      "volunteerText": "Verstärken Sie unsere Teams in Kamerun, in Deutschland oder aus der Ferne: Sprachunterricht, Mentoring, Gesundheit oder Logistik.",
+      "partnerText": "Schulen, Hochschulen, NGOs, Stiftungen und Unternehmen: Lassen Sie uns gemeinsam messbare gemeinnützige Programme gestalten."
+    },
+    "newsletter": {
+      "kicker": "In Verbindung bleiben",
+      "title": "Neuigkeiten und Termine der nächsten Kurse erhalten",
+      "subtitle": "Ihre Adresse dient nur dazu, Ihnen diesen Newsletter zu senden. Die Website speichert sie noch nicht: Sie bereitet eine Anmeldenachricht vor, die Sie uns per WhatsApp oder E-Mail schicken.",
+      "placeholder": "Ihre E-Mail-Adresse",
+      "button": "Anmeldung vorbereiten",
+      "privacyLink": "Datenschutz",
+      "donateBannerTitle": "Unterstützen Sie unsere kostenlosen Bildungs- und Sozialprogramme",
+      "donateBannerSub": "100 % der Spenden fließen direkt in Sprachkurse, die Begleitung junger Menschen und die Arbeit vor Ort.",
+      "donateBannerBtn": "Spenden",
+      "draftSubject": "Anmeldung zum WAHHF-Newsletter",
+      "draftIntro": "Ich möchte den Newsletter der WAHHF Foundation erhalten.",
+      "draftEmail": "E-Mail-Adresse",
+      "ready": "Ihre Nachricht ist fertig: Senden Sie sie per WhatsApp oder per E-Mail.",
+      "handoffTitle": "Letzter Schritt: Senden Sie Ihre Anmeldung ab",
+      "editAddress": "Meine Adresse ändern"
+    },
+    "seo": {
+      "title": "Startseite — Junge Menschen stärken, Gemeinschaften verändern",
+      "description": "WAHHF Foundation (We Are Here Help Foundation), gemeinnützige kamerunisch-deutsche Stiftung und sozialer Zweig der IROKO-Gruppe: 6 Arbeitsbereiche und kostenlose Deutsch- und Englischkurse."
+    },
+    "journey": {
+      "albumLink": "Zum Album"
+    }
+  },
+  "footer": {
+    "description": "Gemeinnützige kamerunisch-deutsche Stiftung für Bildung, Gesundheit, die Selbstständigkeit junger Menschen und solidarische Mobilität.",
+    "irokoBadge": "Sozialer Zweig der IROKO-Gruppe",
+    "colAbout": "Über uns",
+    "colActions": "Unsere Arbeit",
+    "colAct": "Mitmachen und spenden",
+    "colContact": "Kontakt und Adresse",
+    "legal": "Impressum",
+    "privacy": "Datenschutz",
+    "transparency": "Finanzielle Transparenz",
+    "backToTop": "Nach oben",
+    "rights": "Alle Rechte vorbehalten.",
+    "story": "Unsere Geschichte & Mission",
+    "team": "Team & Leitung",
+    "gallery": "Foto- & Videogalerie",
+    "partners": "Partner & IROKO-Gruppe",
+    "news": "Aktuelles & Einsätze vor Ort",
+    "academy": "Deutsch-/Englisch-Akademie A1–C1 (kostenlos)",
+    "apply": "Für ein Programm bewerben",
+    "volunteer": "Ehrenamtlich mitmachen",
+    "partner": "Partner werden",
+    "scams": "Schutz vor Betrug",
+    "contactForm": "Kontaktformular",
+    "addressTodo": "(TODO: genaue Adresse)"
+  },
+  "ui": {
+    "logoAlt": "Logo der WAHHF Foundation",
+    "newTab": " (neuer Tab)",
+    "skipLink": "Zum Inhalt springen",
+    "whatsapp": {
+      "message": "Guten Tag, liebes Team der WAHHF Foundation, ich möchte mich über Ihre kostenlosen Begleitprogramme informieren …",
+      "label": "Der WAHHF Foundation auf WhatsApp schreiben (neuer Tab)"
+    },
+    "cookies": {
+      "label": "Cookies und Datenschutz",
+      "title": "Ihre Privatsphäre ist uns wichtig (DSGVO)",
+      "text": "Die WAHHF Foundation verwendet nur technisch notwendige Cookies, damit die Website funktioniert (Wahl von Sprache und Darstellung). Es sind keine Werbe-Tracker aktiv.",
+      "privacy": "Datenschutzerklärung",
+      "refuse": "Nur notwendige Cookies",
+      "accept": "Akzeptieren"
+    },
+    "chunkError": {
+      "page": "Diese Seite konnte nicht geladen werden. Bitte prüfen Sie Ihre Verbindung.",
+      "block": "Dieser Inhalt konnte nicht geladen werden.",
+      "retry": "Erneut versuchen"
+    },
+    "handoff": {
+      "info": "Die Website kann Formulare noch nicht selbst übermitteln. Ihre Nachricht mit Ihren Antworten ist fertig: Senden Sie sie per WhatsApp oder per E-Mail. Die Stiftung erhält sie erst, wenn Sie sie abgeschickt haben.",
+      "whatsapp": "Per WhatsApp senden",
+      "email": "Per E-Mail senden",
+      "fallback": "Falls sich keine App öffnet, schreiben Sie direkt an <mail>{{email}}</mail> oder per WhatsApp an {{phone}} und kopieren Sie die Nachricht unten.",
+      "preview": "Vorbereitete Nachricht ansehen",
+      "edit": "Meine Antworten ändern"
+    },
+    "draft": {
+      "greeting": "Guten Tag, liebes Team der WAHHF Foundation,",
+      "row": "{{label}}: {{value}}"
+    },
+    "validation": {
+      "emailEmpty": "Bitte geben Sie Ihre E-Mail-Adresse ein, zum Beispiel name@beispiel.de.",
+      "emailInvalid": "Die E-Mail-Adresse ist unvollständig. Sie sollte so aussehen: name@beispiel.de.",
+      "phoneEmpty": "Bitte geben Sie Ihre Telefon- oder WhatsApp-Nummer mit Ländervorwahl ein (z. B. +237 6 90 00 00 00).",
+      "phoneInvalid": "Die Nummer ist unvollständig: Bitte geben Sie die Ländervorwahl und mindestens 8 Ziffern an (z. B. +237 6 90 00 00 00)."
+    },
+    "presence": {
+      "cameroonTitle": "Vor Ort in Kamerun",
+      "promptShort": "Wählen Sie auf der Karte eine Region oder ihre Hauptstadt.",
+      "prompt": "Wählen Sie eine Region oder ihre Hauptstadt, um unsere lokalen Ansprechpartner zu sehen (Bildung, Gesundheit, Agrarökologie und Orientierung).",
+      "europeTitle": "Die 10 Orientierungsländer in Europa",
+      "europeText": "Geprüfte Informationsseiten zu Studium, Berufsausbildung und Arbeit, mit Links zu den offiziellen Portalen.",
+      "albaniaNote": "Hinweis: Albanien ist ein europäisches Beitrittskandidatenland, aber <b>kein Mitglied der Europäischen Union</b>. Den offiziellen rechtlichen Rahmen finden Sie auf der jeweiligen Länderseite."
+    },
+    "map": {
+      "loadingCameroon": "Karte der 10 Regionen Kameruns wird geladen …",
+      "loadingEurope": "Europakarte wird geladen …",
+      "selected": "Ausgewählte Region",
+      "selectedTitle": "Ausgewählte Region: {{name}} ({{capital}})",
+      "capital": "Hauptstadt: {{capital}}",
+      "quickSelect": "Schnellauswahl der 10 Regionen Kameruns",
+      "regionLabel": "Region {{name}}, Hauptstadt {{capital}}",
+      "cameroonLabel": "Karte der 10 Regionen Kameruns; jede Region ist eine Schaltfläche",
+      "fullscreenOpen": "Karte von Kamerun im Vollbild anzeigen",
+      "fullscreen": "Vollbild",
+      "close": "Schließen",
+      "europeLabel": "Europakarte: die 10 begleiteten Länder, jeweils mit Link zur Länderseite",
+      "countryLink": "{{name}}: Länderseite öffnen",
+      "countryLinkNonEu": "{{name}}, nicht in der Europäischen Union: Länderseite öffnen",
+      "fromCameroon": "Aus Kamerun",
+      "creditsPrefix": "Kartengrundlage: Regionsgrenzen",
+      "creditsSuffix": ") · Länder: Natural Earth (gemeinfrei)."
+    },
+    "countries": {
+      "link": "{{name}} — Zur Länderseite",
+      "linkNonEu": "{{name}}, nicht in der Europäischen Union — Zur Länderseite",
+      "nonEu": "Nicht in der EU"
+    },
+    "breadcrumb": "Pfadnavigation",
+    "photos": {
+      "enlarge": "Foto vergrößern: {{alt}}",
+      "loadError": "Dieses Foto konnte nicht geladen werden. Bitte prüfen Sie Ihre Verbindung und öffnen Sie es erneut.",
+      "viewer": "Fotoansicht",
+      "closeViewer": "Ansicht schließen",
+      "prev": "Vorheriges Foto",
+      "next": "Nächstes Foto",
+      "position": "Foto {{n}} von {{total}}.",
+      "count_one": "{{count}} Foto",
+      "count_other": "{{count}} Fotos"
+    },
+    "gallery": {
+      "playVideo": "Video abspielen: ",
+      "enlarge": "Foto vergrößern: ",
+      "close": "Galerie schließen",
+      "prevPhoto": "Vorheriges Foto",
+      "prevVideo": "Vorheriges Video",
+      "nextPhoto": "Nächstes Foto",
+      "nextVideo": "Nächstes Video",
+      "position": "{{n}} von {{total}}:",
+      "placeDate": "{{place}}, {{date}}",
+      "videoCount_one": "{{count}} Video",
+      "videoCount_other": "{{count}} Videos",
+      "and": " und "
+    },
+    "fil": {
+      "current": "angezeigtes Niveau"
+    }
+  },
+  "contenu": {
+    "domaines": {
+      "education": {
+        "title": "Bildung",
+        "shortDesc": "Nachhilfe, Renovierung von Klassenzimmern, Stipendien und Gemeinschaftsbibliotheken.",
+        "fullDesc": "Wir setzen uns dafür ein, dass jedes Kind und jeder junge Mensch Schulmaterial, pädagogische Begleitung und einen würdigen Lernort hat.",
+        "programs": [
+          "Schulsets und Lehrbücher für Schülerinnen und Schüler auf dem Land",
+          "Gemeinschaftsbibliotheken und Leseräume",
+          "Mentoring und Studienorientierung nach dem Abitur"
+        ]
+      },
+      "sante": {
+        "title": "Gesundheit",
+        "shortDesc": "Präventionskampagnen, Gesundheit von Müttern und Kindern, Zugang zur Grundversorgung und Aufklärung.",
+        "fullDesc": "Gemeinsam mit örtlichen Gesundheitszentren organisieren unsere ehrenamtlichen Teams kostenlose Vorsorgetage, Gesundheitsaufklärung und Unterstützung für Mütter.",
+        "programs": [
+          "Vorsorgeberatung und Aufklärung in den Gemeinden",
+          "Begleitung der Gesundheit von Müttern und Kindern",
+          "Zugang zu Trinkwasser und Hygiene an Schulen"
+        ]
+      },
+      "entrepreneuriat": {
+        "title": "Unternehmertum junger Menschen",
+        "shortDesc": "Solidarische Gründungsbegleitung, digitale Grundkompetenzen, Management von Kleinprojekten und Mentoring durch Fachleute.",
+        "fullDesc": "Wir begleiten junge Menschen mit lokalen Initiativen dabei, nachhaltige und ethische Einkommensquellen aufzubauen.",
+        "programs": [
+          "Workshops zu Betriebsführung und einfacher Buchhaltung",
+          "Einführung in digitale Werkzeuge und Büroanwendungen",
+          "Vernetzung mit engagierten Fachleuten der IROKO-Gruppe"
+        ]
+      },
+      "environnement": {
+        "title": "Umwelt",
+        "shortDesc": "Gemeinschaftliche Aufforstung, Agrarökologie, Abfallwirtschaft und Klimabildung für junge Menschen.",
+        "fullDesc": "Wir schützen lokale Ökosysteme und geben der jungen Generation das Wissen um eine nachhaltige, bodenschonende Landwirtschaft weiter.",
+        "programs": [
+          "Baumschulen in den Dörfern und Aufforstungskampagnen",
+          "Aufklärung über Mülltrennung und Hygiene in der Stadt",
+          "Schulungen zu nachhaltigen agrarökologischen Methoden"
+        ]
+      },
+      "droits-inclusion": {
+        "title": "Rechte und Teilhabe",
+        "shortDesc": "Förderung der Chancengleichheit, Teilhabe schutzbedürftiger Menschen und Zugang zu Informationen über Bürgerrechte.",
+        "fullDesc": "Wir verteidigen die Würde des Menschen und wenden uns gegen jede Form der Ausgrenzung – sozial, wirtschaftlich oder wegen einer Behinderung.",
+        "programs": [
+          "Stärkung junger Frauen und Führung in der Gemeinschaft",
+          "Unterstützung beim Schulbesuch junger Menschen mit Behinderung",
+          "Sprechstunden für ein offenes Ohr und soziale Beratung"
+        ]
+      },
+      "mobilite-langues": {
+        "title": "Mobilität & Sprachen",
+        "shortDesc": "Kostenlose Deutsch- und Englischakademie (A1 bis C1) und transparente Begleitung in 10 europäische Länder.",
+        "fullDesc": "Ein Programm, das unsere Partner und Spender finanzieren: Deutsch oder Englisch lernen und ein Studien-, Ausbildungs- oder Mobilitätsprojekt sicher vorbereiten.",
+        "programs": [
+          "Begleitung der Deutsch- und Englischkurse von Niveau A1 bis C1",
+          "Fundierte Orientierung für 10 europäische Länder",
+          "Aktiver Schutz vor Betrug und falschen Visaversprechen"
+        ]
+      }
+    },
+    "pays": {
+      "allemagne": {
+        "name": "Deutschland"
+      },
+      "luxembourg": {
+        "name": "Luxemburg"
+      },
+      "slovenie": {
+        "name": "Slowenien"
+      },
+      "italie": {
+        "name": "Italien"
+      },
+      "grece": {
+        "name": "Griechenland"
+      },
+      "portugal": {
+        "name": "Portugal"
+      },
+      "espagne": {
+        "name": "Spanien"
+      },
+      "danemark": {
+        "name": "Dänemark"
+      },
+      "pologne": {
+        "name": "Polen"
+      },
+      "albanie": {
+        "name": "Albanien"
+      }
+    },
+    "niveaux": {
+      "a1": {
+        "title": "Niveau A1 — Einstieg & Grundlagen"
+      },
+      "a2": {
+        "title": "Niveau A2 — Verständigung im Alltag"
+      },
+      "b1": {
+        "title": "Niveau B1 — Schwelle zur Selbstständigkeit"
+      },
+      "b2": {
+        "title": "Niveau B2 — Unabhängigkeit & Sprachfluss"
+      },
+      "c1": {
+        "title": "Niveau C1 — Sprachbeherrschung für Studium & Beruf"
+      }
+    },
+    "contact": {
+      "place": "Kamerun (Douala, Yaoundé) und Koordination in Deutschland"
+    },
+    "regions": {
+      "littoral": {
+        "antennaTodo": "Lokale Anlaufstelle: noch zu bestätigen (TODO)",
+        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)",
+        "name": "Littoral"
+      },
+      "centre": {
+        "antennaTodo": "Lokale Anlaufstelle: noch zu bestätigen (TODO)",
+        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)",
+        "name": "Centre"
+      },
+      "ouest": {
+        "antennaTodo": "Lokale Anlaufstelle: noch zu bestätigen (TODO)",
+        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)",
+        "name": "Ouest"
+      },
+      "sud-ouest": {
+        "antennaTodo": "Lokale Anlaufstelle: noch zu bestätigen (TODO)",
+        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)",
+        "name": "Sud-Ouest"
+      },
+      "nord-ouest": {
+        "antennaTodo": "Lokale Anlaufstelle: noch zu bestätigen (TODO)",
+        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)",
+        "name": "Nord-Ouest"
+      },
+      "sud": {
+        "antennaTodo": "Lokale Anlaufstelle: noch zu bestätigen (TODO)",
+        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)",
+        "name": "Sud"
+      },
+      "est": {
+        "antennaTodo": "Lokale Anlaufstelle: noch zu bestätigen (TODO)",
+        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)",
+        "name": "Est"
+      },
+      "adamaoua": {
+        "antennaTodo": "Lokale Anlaufstelle: noch zu bestätigen (TODO)",
+        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)",
+        "name": "Adamaoua"
+      },
+      "nord": {
+        "antennaTodo": "Lokale Anlaufstelle: noch zu bestätigen (TODO)",
+        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)",
+        "name": "Nord"
+      },
+      "extreme-nord": {
+        "antennaTodo": "Lokale Anlaufstelle: noch zu bestätigen (TODO)",
+        "actionsTodo": "Aktivitäten in der Region: noch einzutragen (TODO)",
+        "name": "Extrême-Nord"
+      }
+    },
+    "voisins": {
+      "Nigeria": {
+        "label": [
+          "NIGERIA"
+        ]
+      },
+      "Chad": {
+        "label": [
+          "TSCHAD"
+        ]
+      },
+      "CentralAfricanRep": {
+        "label": [
+          "ZENTRALAFRIK.",
+          "REPUBLIK"
+        ]
+      },
+      "Congo": {
+        "label": [
+          "KONGO"
+        ]
+      },
+      "Gabon": {
+        "label": [
+          "GABUN"
+        ]
+      },
+      "EqGuinea": {
+        "label": [
+          "ÄQUAT.-GUINEA"
+        ]
+      }
+    },
+    "parcours": {
+      "section": {
+        "title": "Lernen, anbauen, wachsen",
+        "intro": "Von den Schulungsräumen auf die Felder – und mit den jungen Menschen bis auf den Gipfel.",
+        "link": "Alle Fotos ansehen"
+      },
+      "panneaux": {
+        "apprendre": {
+          "title": "Lernen",
+          "meta": "Albatros Hotel, 25. April 2026",
+          "description": "Ein voller Saal, um die Programme der Stiftung kennenzulernen."
+        },
+        "chanter-ensemble": {
+          "title": "Gemeinsam singen",
+          "meta": "25. April 2026",
+          "description": "Die jungen Menschen singen gemeinsam die Hymne der Stiftung."
+        },
+        "cultiver": {
+          "title": "Anbauen",
+          "meta": "Besuch einer Plantage",
+          "description": "Vor Ort, um nachhaltige Landwirtschaft und Tierhaltung zu verstehen."
+        },
+        "s-engager": {
+          "title": "Sich engagieren",
+          "meta": "Exkursionen",
+          "description": "Betreuende und junge Menschen vereint in denselben Farben."
+        },
+        "grandir": {
+          "title": "Wachsen",
+          "meta": "Wanderung mit den jungen Menschen",
+          "description": "Ein gemeinsamer Aufstieg, die Stadt tief unten."
+        }
+      }
+    }
+  },
+  "notFound": {
+    "title": "Diese Seite gibt es nicht oder sie ist umgezogen",
+    "seoTitle": "Seite nicht gefunden",
+    "seoDescription": "Diese Adresse entspricht keiner Seite der Website der WAHHF Foundation.",
+    "lost": "Wir haben uns unterwegs verlaufen.",
+    "meta": "Seite nicht gefunden (Fehler 404)",
+    "message": "Die Adresse „{{path}}“ entspricht keiner Seite dieser Website. Vielleicht wurde der Link falsch kopiert oder die Seite wurde verschoben.",
+    "countries": "Die 10 begleiteten Länder",
+    "countryNonEu": "{{name}} (nicht in der Europäischen Union)",
+    "where": "Wohin jetzt?",
+    "home": "Zurück zur Startseite"
+  },
+  "legal": {
+    "onlyFrench": "Diese Seite ist derzeit nur auf Französisch verfügbar."
+  }
+}

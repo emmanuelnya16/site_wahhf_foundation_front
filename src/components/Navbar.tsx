@@ -14,14 +14,17 @@ import { useMotionEngineReady } from '../lib/motionEngine';
 import { switchTheme } from '../effects/themeTransition';
 import { EASE_OUT, EASE_SCREEN, DURATION } from '../lib/motionTokens';
 import { cn } from '../lib/utils';
+import { setLanguage, type Language } from '../i18n';
+import { localized, localizedList } from '../lib/localize';
 
 /*
  * En-tête du site (contrat §8, ajout du 16/11 ; §9, §10) : barre opaque pleine largeur fixée en haut, contenu dans le
  * container, sans pilule ni verre dépoli, toujours visible ; ombre flottante seulement une fois la page défilée (en
  * sombre : une bordure basse trait-nuit à la place). Lien actif : souligné et aria-current (A11Y-11), pas la couleur seule.
  */
+// Étape a (lot 7.9, 20 novembre 2026) : 1,25 rem entre deux entrées du menu (8 + 4 + 8 px), au lieu de 1,5 rem
 const NAV_LINK =
-  'inline-flex items-center gap-1 min-h-11 px-2.5 text-meta text-text whitespace-nowrap underline-offset-[0.4em] decoration-2 transition-colors duration-(--dur-fast) hover:text-link hover:underline cursor-pointer';
+  'inline-flex items-center gap-1 min-h-11 px-2 text-meta text-text whitespace-nowrap underline-offset-[0.4em] decoration-2 transition-colors duration-(--dur-fast) hover:text-link hover:underline cursor-pointer';
 const NAV_LINK_CURRENT = 'underline';
 const ICON_BUTTON =
   'w-11 h-11 shrink-0 rounded-pill inline-flex items-center justify-center text-text hover:bg-surface-section transition-colors duration-(--dur-fast) cursor-pointer';
@@ -30,6 +33,12 @@ const PANEL_LINK = 'text-meta text-link underline underline-offset-4 decoration-
 const MOBILE_LINK =
   'block py-2 text-section-title text-text-on-inverse hover:text-link-on-inverse underline-offset-8 decoration-2 transition-colors duration-(--dur-fast)';
 const MOBILE_LINK_CURRENT = 'underline';
+/** Langues proposées, chacune écrite dans sa propre langue (pas de drapeau : une langue n'est pas un pays) */
+const LANGUAGES = [
+  { code: 'fr', name: 'Français' },
+  { code: 'en', name: 'English' },
+  { code: 'de', name: 'Deutsch' },
+] as const;
 const INVERSE_CHIP =
   'inline-flex items-center gap-1.5 min-h-11 px-4 rounded-pill text-meta font-bold border transition-colors duration-(--dur-fast)';
 const INVERSE_CHIP_ON = 'bg-action-on-inverse text-on-action-on-inverse border-transparent';
@@ -42,6 +51,8 @@ export default function Navbar() {
 
   const [scrolled, setScrolled] = useState(false);
   const [megaOpen, setMegaOpen] = useState(false);
+  // Lot 7.9 (étape b) : choix de la langue dans un petit menu, ouvert par un bouton compact
+  const [langOpen, setLangOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -53,6 +64,8 @@ export default function Navbar() {
   const headerRef = useRef<HTMLElement>(null);
   const megaRef = useRef<HTMLDivElement>(null);
   const megaTriggerRef = useRef<HTMLButtonElement>(null);
+  const langRef = useRef<HTMLDivElement>(null);
+  const langTriggerRef = useRef<HTMLButtonElement>(null);
   const reduceMotion = useReducedMotion();
   const touchStartY = useRef<number | null>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
@@ -93,6 +106,26 @@ export default function Navbar() {
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
   }, [megaOpen]);
+
+  // Choix de la langue : Échap le ferme ; si le focus était dans la liste, il revient sur le bouton
+  useEffect(() => {
+    if (!langOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return;
+      const focusInMenu = !!langRef.current?.contains(document.activeElement);
+      setLangOpen(false);
+      if (focusInMenu) langTriggerRef.current?.focus();
+    };
+    const onClick = (e: MouseEvent) => {
+      if (langRef.current && !langRef.current.contains(e.target as Node)) setLangOpen(false);
+    };
+    document.addEventListener('keydown', onKey);
+    document.addEventListener('mousedown', onClick);
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.removeEventListener('mousedown', onClick);
+    };
+  }, [langOpen]);
 
   // Initialisation du thème : Clair par défaut, respecte prefers-color-scheme uniquement à la 1re visite
   useEffect(() => {
@@ -160,6 +193,7 @@ export default function Navbar() {
   // Fermer les menus au changement de route
   useEffect(() => {
     setMegaOpen(false);
+    setLangOpen(false);
     setMobileOpen(false);
     setSearchOpen(false);
   }, [location.pathname, location.search]);
@@ -175,27 +209,45 @@ export default function Navbar() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const switchLanguage = (lang: 'fr' | 'en') => {
-    i18n.changeLanguage(lang);
+  const currentLang: Language = i18n.language.startsWith('en') ? 'en' : i18n.language.startsWith('de') ? 'de' : 'fr';
+  // Lot 7.10 : la langue est chargée à la demande, puis mémorisée ; la page en cours ne change pas
+  const switchLanguage = (lang: Language) => {
+    void setLanguage(lang);
+  };
+  // Liste des langues : flèches haut et bas d'une option à l'autre, Début et Fin
+  const onLangKeyDown = (event: React.KeyboardEvent<HTMLUListElement>) => {
+    const options = [...event.currentTarget.querySelectorAll<HTMLButtonElement>('button')];
+    const index = options.indexOf(document.activeElement as HTMLButtonElement);
+    const next =
+      event.key === 'ArrowDown' ? (index + 1) % options.length
+      : event.key === 'ArrowUp' ? (index - 1 + options.length) % options.length
+      : event.key === 'Home' ? 0
+      : event.key === 'End' ? options.length - 1
+      : -1;
+    if (next < 0) return;
+    event.preventDefault();
+    options[next].focus();
   };
 
+  // Données dans la langue de l'interface (lot 7.10) : domaines, niveaux, pays
+  const domains = localizedList(DOMAINS_DATA, 'contenu.domaines', (d) => d.id, i18n.language);
   // Résultats de recherche rapide
   const searchResults = searchQuery.trim()
     ? [
-        ...DOMAINS_DATA.filter(
+        ...domains.filter(
           (d) =>
             d.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
             d.shortDesc.toLowerCase().includes(searchQuery.toLowerCase())
-        ).map((d) => ({ label: `Domaine : ${d.title}`, to: d.link })),
-        ...GERMAN_LEVELS_DATA.filter(
+        ).map((d) => ({ label: t('nav.search.domain', { title: d.title }), to: d.link })),
+        ...GERMAN_LEVELS_DATA.map((l) => localized(l, `contenu.niveaux.${l.slug}`, i18n.language)).filter(
           (l) =>
             l.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
             l.level.toLowerCase().includes(searchQuery.toLowerCase())
-        ).map((l) => ({ label: `Cours d'allemand : ${l.title}`, to: `/academie/${l.slug}` })),
-        ...COUNTRIES_DATA.filter((c) =>
+        ).map((l) => ({ label: t('nav.search.level', { title: l.title }), to: `/academie/${l.slug}` })),
+        ...COUNTRIES_DATA.map((c) => localized(c, `contenu.pays.${c.slug}`, i18n.language)).filter((c) =>
           c.name.toLowerCase().includes(searchQuery.toLowerCase())
-        ).map((c) => ({ label: `Pays accompagné : ${c.flag} ${c.name}`, to: `/accompagnement/pays/${c.slug}` })),
-        ...(/galer|photo|vid[ée]o|image/i.test(searchQuery) ? [{ label: 'Galerie photo & vidéo', to: '/galerie' }] : []),
+        ).map((c) => ({ label: t('nav.search.country', { flag: c.flag, name: c.name }), to: `/accompagnement/pays/${c.slug}` })),
+        ...(/galer|photo|foto|vid[ée]o|image|bild/i.test(searchQuery) ? [{ label: t('footer.gallery'), to: '/galerie' }] : []),
       ].slice(0, 6)
     : [];
 
@@ -213,16 +265,19 @@ export default function Navbar() {
           <Link
             to="/"
             className="flex items-center gap-2.5 min-w-0 rounded-pill"
-            aria-label="WAHHF Foundation — Accueil"
+            aria-label={t('nav.homeLink')}
           >
             <img
               src={WAHHF_LOGO_URL}
-              alt="Logo WAHHF Foundation"
+              alt={t('ui.logoAlt')}
               width={48}
               height={48}
               className="w-10 h-10 sm:w-11 sm:h-11 object-contain rounded-pill bg-white p-0.5"
             />
-            <div className="flex flex-col min-w-0">
+            {/* Étape d (lot 7.9, votre choix du 20 novembre 2026) : en français, le menu complet ne laisse pas la place du
+                nom (le conteneur fait 1 152 px à toutes ces largeurs) : logo seul dès 1 280 px ; en anglais, le nom tient. */}
+            {/* Lot 7.10 : en allemand non plus, le nom ne tient pas à côté du menu complet (mesuré : −27 px) : logo seul */}
+            <div className={cn('flex flex-col min-w-0', currentLang !== 'en' && 'xl:hidden')}>
               <span className="text-body font-bold leading-none text-text whitespace-nowrap">
                 WAHHF<span className="hidden min-[360px]:inline"> Foundation</span>
               </span>
@@ -232,8 +287,8 @@ export default function Navbar() {
             </div>
           </Link>
 
-          {/* Centre : Menu principal (6 entrées) */}
-          <nav aria-label="Navigation principale" className="hidden xl:flex items-center gap-1">
+          {/* Centre : Menu principal (7 entrées ; Événements ajouté au lot 7.9) */}
+          <nav aria-label={t('nav.mainNav')} className="hidden xl:flex items-center gap-1">
             <Link to="/qui-sommes-nous" aria-current={navState('/qui-sommes-nous')} className={cn(NAV_LINK, navState('/qui-sommes-nous') && NAV_LINK_CURRENT)}>
               {t('nav.about')}
             </Link>
@@ -259,6 +314,11 @@ export default function Navbar() {
               {t('nav.news')}
             </Link>
 
+            {/* Lot 7.9 (retours du 20 novembre 2026) : Événements directement dans le menu, entre Actualités et Agir */}
+            <Link to="/evenements" aria-current={navState('/evenements', ['/evenements/'])} className={cn(NAV_LINK, navState('/evenements', ['/evenements/']) && NAV_LINK_CURRENT)}>
+              {t('nav.events')}
+            </Link>
+
             <Link to="/agir" aria-current={navState('/agir')} className={cn(NAV_LINK, navState('/agir') && NAV_LINK_CURRENT)}>
               {t('nav.act')}
             </Link>
@@ -268,28 +328,50 @@ export default function Navbar() {
             </Link>
           </nav>
 
-          {/* Droite : Langue (FR / EN), Recherche, Thème, Bouton Faire un don (rouge), Burger */}
-          <div className="flex items-center gap-1.5 sm:gap-2 xl:gap-1 shrink-0">
-            {/* Sélecteur de langue FR / EN */}
-            <div
-              role="group"
-              aria-label="Sélecteur de langue"
-              className="hidden md:inline-flex items-center rounded-pill border border-border-input p-0.5 text-meta"
-            >
+          {/* Droite : Langue (bouton compact, lot 7.9), Recherche, Thème, Bouton Faire un don (rouge), Burger */}
+          {/* Étape c (lot 7.9) : groupe resserré sur ordinateur (aucun espace entre les cibles de 44 × 44 px) */}
+          <div className="flex items-center gap-1.5 sm:gap-2 xl:gap-0 shrink-0">
+            {/* Langue (lot 7.9, étape b) : un bouton compact qui affiche la langue en cours (nom accessible « Changer de
+                langue (FR) » : il contient le texte visible, WCAG 2.5.3) et ouvre le choix ; chaque option porte sa
+                langue (lang) ; Échap et clic extérieur ferment, le focus revient sur le bouton */}
+            <div ref={langRef} className="relative hidden md:block">
               <button
+                ref={langTriggerRef}
                 type="button"
-                onClick={() => switchLanguage('fr')}
-                className={cn('px-2.5 py-1 rounded-pill font-semibold transition-colors cursor-pointer', i18n.language.startsWith('fr') ? 'bg-action text-on-action' : 'text-text-secondary hover:text-link')}
+                onClick={() => setLangOpen((prev) => !prev)}
+                aria-expanded={langOpen}
+                aria-controls="choix-langue"
+                aria-label={t('nav.changeLanguage', { lang: currentLang.toUpperCase() })}
+                className="inline-flex min-h-11 min-w-11 items-center justify-center gap-0.5 rounded-pill border border-border-input px-2.5 text-meta font-semibold text-text hover:text-link cursor-pointer transition-colors duration-(--dur-fast)"
               >
-                FR
+                <span>{currentLang.toUpperCase()}</span>
+                <ChevronDown aria-hidden="true" className={cn('w-3.5 h-3.5 transition-transform duration-(--dur-fast)', langOpen && 'rotate-180')} />
               </button>
-              <button
-                type="button"
-                onClick={() => switchLanguage('en')}
-                className={cn('px-2.5 py-1 rounded-pill font-semibold transition-colors cursor-pointer', i18n.language.startsWith('en') ? 'bg-action text-on-action' : 'text-text-secondary hover:text-link')}
-              >
-                EN
-              </button>
+              {langOpen && (
+                <ul id="choix-langue" onKeyDown={onLangKeyDown} className={cn(PANEL, 'absolute right-0 top-full z-10 mt-2 min-w-40 p-2')}>
+                  {LANGUAGES.map((l) => (
+                    <li key={l.code}>
+                      <button
+                        type="button"
+                        lang={l.code}
+                        aria-current={currentLang === l.code ? 'true' : undefined}
+                        onClick={() => {
+                          switchLanguage(l.code);
+                          setLangOpen(false);
+                          langTriggerRef.current?.focus();
+                        }}
+                        className={cn(
+                          'flex w-full min-h-11 items-center justify-between gap-3 rounded-inner px-3 text-meta text-text hover:bg-surface-section cursor-pointer',
+                          currentLang === l.code && 'font-semibold underline underline-offset-4'
+                        )}
+                      >
+                        {l.name}
+                        <span aria-hidden="true" className="text-text-secondary">{l.code.toUpperCase()}</span>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
 
             {/* Recherche */}
@@ -298,7 +380,7 @@ export default function Navbar() {
               type="button"
               onClick={() => setSearchOpen((prev) => !prev)}
               aria-expanded={searchOpen}
-              aria-label="Rechercher sur le site"
+              aria-label={t('nav.searchOpen')}
               className={ICON_BUTTON}
             >
               <Search aria-hidden="true" className="w-4 h-4" />
@@ -317,7 +399,7 @@ export default function Navbar() {
 
             {/* 6e entrée / Bouton « Faire un don » (token rouge) */}
             <div className="hidden sm:block">
-              <DonateButton size="sm" className="whitespace-nowrap">{t('nav.donate')}</DonateButton>
+              <DonateButton size="sm" className="whitespace-nowrap xl:px-3.5">{t('nav.donate')}</DonateButton>
             </div>
 
             {/* Menu Burger (Mobile & Tablette) */}
@@ -325,7 +407,7 @@ export default function Navbar() {
               ref={burgerRef}
               type="button"
               onClick={() => setMobileOpen(true)}
-              aria-label="Ouvrir le menu principal"
+              aria-label={t('nav.menuOpen')}
               aria-expanded={mobileOpen}
               aria-controls="menu-mobile"
               className="xl:hidden w-11 h-11 shrink-0 rounded-pill bg-action text-on-action hover:bg-action-hover flex items-center justify-center cursor-pointer"
@@ -342,14 +424,14 @@ export default function Navbar() {
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                     <div className="lg:col-span-8">
                       <div className="flex items-center justify-between gap-4 mb-4">
-                        <span className="text-meta text-text-secondary">Les 6 domaines d’action de WAHHF Foundation</span>
+                        <span className="text-meta text-text-secondary">{t('nav.mega.domainsTitle')}</span>
                         <Link to="/nos-actions" className={PANEL_LINK}>
-                          Voir la vue d’ensemble
+                          {t('nav.mega.overview')}
                         </Link>
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-1">
-                        {DOMAINS_DATA.map((dom) => (
+                        {domains.map((dom) => (
                           <Link
                             key={dom.id}
                             to={dom.link}
@@ -365,30 +447,30 @@ export default function Navbar() {
                     {/* Encart Mobilité & Langues : sauge, sans cadre ni carte nuit */}
                     <div className="lg:col-span-4 rounded-inner bg-surface-section p-6 flex flex-col justify-between gap-4">
                       <div className="space-y-3">
-                        <h3 className="text-body font-semibold text-text">Mobilité & Langues : Allemand (A1–C1) & Europe</h3>
+                        <h3 className="text-body font-semibold text-text">{t('nav.mega.mobilityTitle')}</h3>
                         <p className="text-meta text-text-secondary">
-                          Accompagnement gratuit aux cours d’allemand et orientation vérifiée vers 10 pays européens, financé par IROKO et nos donateurs.
+                          {t('nav.mega.mobilityText')}
                         </p>
                         <ul className="pt-1 space-y-2">
                           <li>
                             <Link to="/mobilite-langues/academie" className={PANEL_LINK}>
-                              Académie de langues (A1 à C1)
+                              {t('nav.mega.academy')}
                             </Link>
                           </li>
                           <li>
                             <Link to="/mobilite-langues/accompagnement" className={PANEL_LINK}>
-                              Accompagnement vers 10 pays
+                              {t('nav.mega.support')}
                             </Link>
                           </li>
                           <li>
                             <Link to="/accompagnement/eviter-les-arnaques" className={PANEL_LINK}>
-                              Vigilance : Éviter les arnaques
+                              {t('nav.mega.scams')}
                             </Link>
                           </li>
                         </ul>
                       </div>
                       <Link to="/candidater" className={PANEL_LINK}>
-                        Candidater gratuitement
+                        {t('nav.mega.apply')}
                       </Link>
                     </div>
                   </div>
@@ -417,7 +499,7 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={() => setSearchOpen(false)}
-                aria-label="Fermer la recherche"
+                aria-label={t('nav.searchClose')}
                 className={ICON_BUTTON}
               >
                 <X className="w-4 h-4" />
@@ -469,7 +551,7 @@ export default function Navbar() {
             : {})}
           role="dialog"
           aria-modal="true"
-          aria-label="Menu mobile WAHHF Foundation"
+          aria-label={t('nav.mobileMenu')}
           tabIndex={-1}
           data-lenis-prevent
           onTouchStart={(e) => {
@@ -495,7 +577,7 @@ export default function Navbar() {
             <Link to="/" onClick={() => setMobileOpen(false)} className="flex items-center gap-3">
               <img
                 src={WAHHF_LOGO_URL}
-                alt="Logo WAHHF Foundation"
+                alt={t('ui.logoAlt')}
                 className="w-11 h-11 object-contain rounded-pill bg-white p-0.5"
               />
               <div>
@@ -508,7 +590,7 @@ export default function Navbar() {
               ref={mobileCloseRef}
               type="button"
               onClick={() => setMobileOpen(false)}
-              aria-label="Fermer le menu"
+              aria-label={t('nav.menuClose')}
               className="w-11 h-11 rounded-pill border border-border-on-inverse text-text-on-inverse flex items-center justify-center"
             >
               <X className="w-6 h-6" />
@@ -516,7 +598,7 @@ export default function Navbar() {
           </div>
 
           <m.nav
-            aria-label="Navigation principale (mobile)"
+            aria-label={t('nav.mainNavMobile')}
             className="py-6 space-y-4"
             initial={reduceMotion || !withMotion ? false : { opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.15, ease: EASE_OUT } }}
@@ -535,10 +617,10 @@ export default function Navbar() {
               aria-current={navState('/nos-actions', ACTIONS_SECTION)}
               className={cn(MOBILE_LINK, navState('/nos-actions', ACTIONS_SECTION) && MOBILE_LINK_CURRENT)}
               >
-                {t('nav.actions')} (6 domaines)
+                {t('nav.actionsMobile')}
               </Link>
               <div className="pl-4 border-l border-border-subtle-on-inverse grid grid-cols-1 sm:grid-cols-2 gap-x-4 pt-1">
-                {DOMAINS_DATA.map((d) => (
+                {domains.map((d) => (
                   <Link
                     key={d.id}
                     to={d.link}
@@ -568,6 +650,14 @@ export default function Navbar() {
             </Link>
 
             <Link
+              to="/evenements"
+              aria-current={navState('/evenements', ['/evenements/'])}
+              className={cn(MOBILE_LINK, navState('/evenements', ['/evenements/']) && MOBILE_LINK_CURRENT)}
+            >
+              {t('nav.events')}
+            </Link>
+
+            <Link
               to="/agir"
               aria-current={navState('/agir')}
               className={cn(MOBILE_LINK, navState('/agir') && MOBILE_LINK_CURRENT)}
@@ -588,27 +678,26 @@ export default function Navbar() {
               aria-current={navState('/candidater')}
               className={cn(MOBILE_LINK, 'text-link-on-inverse', navState('/candidater') && MOBILE_LINK_CURRENT)}
             >
-              Candidater (Cours & Europe — Gratuit)
+              {t('nav.applyMobile')}
             </Link>
           </m.nav>
 
           <div className="pt-6 border-t border-border-subtle-on-inverse space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div className="flex flex-wrap items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => switchLanguage('fr')}
-                  className={cn(INVERSE_CHIP, i18n.language.startsWith('fr') ? INVERSE_CHIP_ON : INVERSE_CHIP_OFF)}
-                >
-                  Français (FR)
-                </button>
-                <button
-                  type="button"
-                  onClick={() => switchLanguage('en')}
-                  className={cn(INVERSE_CHIP, i18n.language.startsWith('en') ? INVERSE_CHIP_ON : INVERSE_CHIP_OFF)}
-                >
-                  English (EN)
-                </button>
+                {/* Langues (lot 7.10) : trois boutons visibles, chacun dans sa langue ; la langue en cours est signalée */}
+                {LANGUAGES.map((l) => (
+                  <button
+                    key={l.code}
+                    type="button"
+                    lang={l.code}
+                    aria-current={currentLang === l.code ? 'true' : undefined}
+                    onClick={() => switchLanguage(l.code)}
+                    className={cn(INVERSE_CHIP, currentLang === l.code ? INVERSE_CHIP_ON : INVERSE_CHIP_OFF)}
+                  >
+                    {l.name} ({l.code.toUpperCase()})
+                  </button>
+                ))}
                 <button
                   type="button"
                   onClick={toggleTheme}

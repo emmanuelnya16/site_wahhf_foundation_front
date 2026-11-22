@@ -3,17 +3,28 @@
  * On valide à l'envoi ou au changement d'étape, et à la sortie d'un champ déjà rempli ; jamais pendant la frappe.
  */
 
+import i18n from '../i18n';
+
 export const isEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value.trim());
 
 /** Numéro international ou local : chiffres, espaces, +, points, tirets, parenthèses ; au moins 8 chiffres. */
 export const isPhone = (value: string) =>
   /^\+?[\d\s().-]+$/.test(value.trim()) && value.replace(/\D/g, '').length >= 8;
 
+/** Lot 7.10 : textes dans src/locales (ui.validation), lus dans la langue en cours à chaque affichage */
 export const MESSAGES = {
-  emailEmpty: 'Saisissez votre adresse e-mail, par exemple nom@exemple.com.',
-  emailInvalid: 'Adresse e-mail incomplète : elle doit ressembler à nom@exemple.com.',
-  phoneEmpty: 'Saisissez votre numéro de téléphone ou WhatsApp, avec l’indicatif (ex. +237 6 90 00 00 00).',
-  phoneInvalid: 'Numéro incomplet : indiquez l’indicatif du pays et au moins 8 chiffres (ex. +237 6 90 00 00 00).',
+  get emailEmpty() {
+    return i18n.t('ui.validation.emailEmpty');
+  },
+  get emailInvalid() {
+    return i18n.t('ui.validation.emailInvalid');
+  },
+  get phoneEmpty() {
+    return i18n.t('ui.validation.phoneEmpty');
+  },
+  get phoneInvalid() {
+    return i18n.t('ui.validation.phoneInvalid');
+  },
 };
 
 export function emailError(value: string): string | undefined {

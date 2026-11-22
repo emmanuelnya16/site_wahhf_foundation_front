@@ -1,0 +1,397 @@
+{
+  "_relire": [
+    "contenu.albums.journee-2026-04-25.title",
+    "contenu.photos.A02.alt",
+    "contenu.galerie.open-day-marche-slogan.caption",
+    "contenu.photos.A63.alt",
+    "contenu.photos.A12.alt",
+    "contenu.photos.B85.alt",
+    "contenu.photos.A31.alt",
+    "contenu.galerie.open-day-jeunes.caption",
+    "contenu.galerie.communaute.title",
+    "contenu.galerie.open-day.meta"
+  ],
+  "contenu": {
+    "albums": {
+      "journee-2026-04-25": {
+        "title": "Veranstaltung vom 25. April 2026 — Albatros Hotel",
+        "note": "Genauer Name der Veranstaltung noch zu bestätigen (auf dem Banner steht: Albatros Hotel, 25. April 2026, 8:00–21:00 Uhr)."
+      },
+      "terrain-agricole": {
+        "title": "Exkursion in eine Plantage",
+        "note": "Ort und Datum noch zu bestätigen."
+      },
+      "nkongsamba": {
+        "title": "Ausflug nach Nkongsamba",
+        "note": "Datum und Kontext noch zu bestätigen."
+      },
+      "mont-et-lac": {
+        "title": "Ausflug zum Berg und zum See",
+        "note": "Ort noch zu bestätigen (Kratersee)."
+      },
+      "randonnee-jeunesse": {
+        "title": "Wanderung mit jungen Menschen",
+        "note": "Ort und Datum noch zu bestätigen."
+      }
+    },
+    "photos": {
+      "A02": {
+        "alt": "Banner der WAHHF Foundation an der Fassade des Albatros Hotel: „Bâtir l'Afrique qui nourrit, soigne et instruit sa jeunesse“"
+      },
+      "A07": {
+        "alt": "Teilnehmende versammeln sich vor Beginn des Tages vor dem Albatros Hotel"
+      },
+      "A12": {
+        "alt": "Ein Teammitglied posiert neben dem Roll-up der Stiftung"
+      },
+      "A13": {
+        "alt": "Orangefarbenes Roll-up der Stiftung: „Showing hope, harvesting change“"
+      },
+      "A14": {
+        "alt": "Roll-up der Stiftung mit ihren Handlungsfeldern"
+      },
+      "A16": {
+        "alt": "Junge Teilnehmende von hinten, in T-Shirts mit der Aufschrift „Bâtir l'Afrique qui nourrit, soigne et instruit sa jeunesse“"
+      },
+      "A17": {
+        "alt": "Konferenzsaal von hinten gesehen, die Teilnehmenden sitzen vor der Leinwand"
+      },
+      "A18": {
+        "alt": "Empfang und Anmeldung der Teilnehmenden neben dem Roll-up"
+      },
+      "A22": {
+        "alt": "Vorbereitung der Computer vor den Präsentationen"
+      },
+      "A23": {
+        "alt": "Voller Saal, im Hintergrund das Roll-up der Stiftung"
+      },
+      "A26": {
+        "alt": "Gesamtansicht des Saals während des Aufbaus"
+      },
+      "A27": {
+        "alt": "Vollbesetzter Saal während einer Präsentation, links und rechts der Leinwand die Roll-ups der Stiftung"
+      },
+      "A29": {
+        "alt": "Das Logo der Stiftung auf der Leinwand im Saal"
+      },
+      "A30": {
+        "alt": "Teilnehmende von hinten, vor dem Roll-up der Stiftung"
+      },
+      "A31": {
+        "alt": "Eltern und ältere Menschen sitzen in der ersten Reihe"
+      },
+      "A33": {
+        "alt": "Junge Teilnehmerinnen folgen aufmerksam einer Präsentation"
+      },
+      "A34": {
+        "alt": "Ein Teilnehmer spricht während der Diskussion ins Mikrofon"
+      },
+      "A36": {
+        "alt": "Junge Teilnehmende stehen im Saal"
+      },
+      "A37": {
+        "alt": "Ein junger Mann hört einer Präsentation zu"
+      },
+      "A38": {
+        "alt": "Junger Teilnehmer im Poloshirt der Stiftung"
+      },
+      "A41": {
+        "alt": "Redner im rosa Poloshirt am Rednerpult, Mikrofon in der Hand"
+      },
+      "A42": {
+        "alt": "Redner sitzt am Technikpult"
+      },
+      "A44": {
+        "alt": "Zwei Redner am Rednerpult"
+      },
+      "A45": {
+        "alt": "Redner in blauer Jacke, Mikrofon in der Hand"
+      },
+      "A46": {
+        "alt": "Redner präsentiert vor der Leinwand und dem Roll-up"
+      },
+      "A48": {
+        "alt": "Fotos aus der Arbeit vor Ort werden während einer Präsentation gezeigt"
+      },
+      "A51": {
+        "alt": "Präsentation vor dem Saal, Fotos von Aktionen auf der Leinwand"
+      },
+      "A53": {
+        "alt": "Präsentation „Der Hochschulvergleich“ über das Studium in Deutschland"
+      },
+      "A56": {
+        "alt": "Redner präsentiert vor dem Publikum"
+      },
+      "A57": {
+        "alt": "Fotos von Aktionen werden vor dem Publikum gezeigt"
+      },
+      "A59": {
+        "alt": "Redner vor der Folie, die die Stiftung vorstellt"
+      },
+      "A60": {
+        "alt": "Folie mit den Handlungsfeldern der Stiftung"
+      },
+      "A61": {
+        "alt": "Redner am Rednerpult in einem lichtdurchfluteten Saal"
+      },
+      "A63": {
+        "alt": "Redner vor den Piktogrammen Bildung, Gesundheit und Lebensgrundlagen"
+      },
+      "A66": {
+        "alt": "Redner stellt die Handlungsfelder der Stiftung vor"
+      },
+      "A68": {
+        "alt": "Redner auf der Bühne, vor dem Roll-up"
+      },
+      "A71": {
+        "alt": "Porträt eines Redners während seiner Präsentation"
+      },
+      "A74": {
+        "alt": "Redner wendet sich mit offenen Armen an den Saal"
+      },
+      "A77": {
+        "alt": "Redner spricht ins Mikrofon"
+      },
+      "A80": {
+        "alt": "Das Publikum steht im Saal"
+      },
+      "A81": {
+        "alt": "Die jungen Menschen singen auf der Bühne die Hymne der WAHHF Foundation"
+      },
+      "A83": {
+        "alt": "Die Hymne der Stiftung, vom Publikum aus gesehen"
+      },
+      "A85": {
+        "alt": "Die Hymne der Stiftung wird mit erhobenen Armen gesungen"
+      },
+      "A87": {
+        "alt": "Gesamtansicht der Bühne während der Hymne"
+      },
+      "A88": {
+        "alt": "Drei ältere Menschen sitzen da und hören aufmerksam zu"
+      },
+      "A89": {
+        "alt": "Lächelnde junge Teilnehmerinnen"
+      },
+      "A90": {
+        "alt": "Teilnehmerin im rosa Poloshirt der Stiftung"
+      },
+      "A92": {
+        "alt": "Junge Teilnehmerinnen hören zu"
+      },
+      "A95": {
+        "alt": "Nachdenklicher junger Teilnehmer"
+      },
+      "A97": {
+        "alt": "Drei junge Teilnehmende"
+      },
+      "A98": {
+        "alt": "Ein Teilnehmer macht sich Notizen"
+      },
+      "A99": {
+        "alt": "Mitglied der Stiftung im rosa Poloshirt, mit verschränkten Armen"
+      },
+      "B03": {
+        "alt": "Gruppe in Warnwesten vor dem Aufbruch"
+      },
+      "B04": {
+        "alt": "Junge Menschen in orangefarbenen Westen hören in einer Ananasplantage einem Betreuer zu"
+      },
+      "B06": {
+        "alt": "Zwei Betreuer unterhalten sich am Rand eines Feldes"
+      },
+      "B10": {
+        "alt": "Gruppe in Warnwesten mitten in einem Ananasfeld"
+      },
+      "B13": {
+        "alt": "Die Gruppe verteilt sich in der Plantage"
+      },
+      "B16": {
+        "alt": "Teilnehmende betrachten die Ananaspflanzen"
+      },
+      "B17": {
+        "alt": "Die Besuchsgruppe mitten in der Plantage, unter weitem Himmel"
+      },
+      "B20": {
+        "alt": "Gesamtansicht der Gruppe in der Plantage"
+      },
+      "B21": {
+        "alt": "Ein Betreuer untersucht in der Hocke eine Pflanze"
+      },
+      "B23": {
+        "alt": "Zwei Betreuer im Gespräch neben hohem Gras"
+      },
+      "B24": {
+        "alt": "Betreuer im Gespräch vor Ort"
+      },
+      "B26": {
+        "alt": "Gruppenfoto der Teilnehmenden in Warnwesten"
+      },
+      "B27": {
+        "alt": "Junge Menschen in Westen hören vor Ort einer Erklärung zu"
+      },
+      "B01": {
+        "alt": "Aufgeweichte unbefestigte Straße mit Bauarbeiten"
+      },
+      "B02": {
+        "alt": "Bagger auf einer Straßenbaustelle, im Hintergrund Hügel"
+      },
+      "B09": {
+        "alt": "Bagger bei der Arbeit auf einer Straße"
+      },
+      "B51": {
+        "alt": "Teilnehmende unter dem Bogen „I love my town Nkongsamba 1er – Ville propre“"
+      },
+      "B53": {
+        "alt": "Drei Teilnehmende posieren unter dem Bogen von Nkongsamba"
+      },
+      "B56": {
+        "alt": "Ein Teilnehmer posiert unter dem Bogen von Nkongsamba"
+      },
+      "B30": {
+        "alt": "Ein Teammitglied zu Pferd an grünen Hängen"
+      },
+      "B35": {
+        "alt": "Zwei Teammitglieder posieren mit ausgebreiteten Armen neben einem Pferd"
+      },
+      "B40": {
+        "alt": "Blick auf einen Kratersee, umgeben von Hügeln"
+      },
+      "B41": {
+        "alt": "Teammitglied am Ufer eines Kratersees"
+      },
+      "B44": {
+        "alt": "Teammitglied blickt auf den See"
+      },
+      "B60": {
+        "alt": "Eine junge Teilnehmerin auf einem Waldweg"
+      },
+      "B62": {
+        "alt": "Zwei Teilnehmerinnen auf einem Felsen am Gipfel"
+      },
+      "B63": {
+        "alt": "Gemeinsames Aufwärmen vor der Wanderung"
+      },
+      "B65": {
+        "alt": "Aufwärmen im Kreis unter den Bäumen"
+      },
+      "B68": {
+        "alt": "Die Teilnehmenden machen eine Pause auf dem Felsen"
+      },
+      "B69": {
+        "alt": "Dehnübungen am Gipfel"
+      },
+      "B73": {
+        "alt": "Ein junger Mann blickt vom Gipfel auf die Stadt"
+      },
+      "B75": {
+        "alt": "Die Gruppe feiert mit erhobenen Armen die Ankunft am Gipfel"
+      },
+      "B77": {
+        "alt": "Gruppenfoto am Gipfel, unten die Stadt"
+      },
+      "B80": {
+        "alt": "Ein junger Mann lehnt sich auf dem Weg an einen Baum"
+      },
+      "B82": {
+        "alt": "Die Gruppe geht im Gänsemarsch einen Waldweg entlang"
+      },
+      "B84": {
+        "alt": "Die Gruppe am Gipfel mit Blick auf die Stadt"
+      },
+      "B85": {
+        "alt": "Teilnehmer von hinten, in grünem Leibchen im Wald"
+      }
+    },
+    "galerie": {
+      "open-day": {
+        "meta": "Hotel Albatros Premium, Yaoundé · 25. April 2026",
+        "story": "Der erste Tag der offenen Tür der Stiftung, mit den jungen Menschen des Boot Camps und ihren Betreuern: ein Marsch durch die Straßen von Yaoundé, eine Versammlung im Stadtzentrum, Redebeiträge vor Ort und per Videokonferenz, Begleitung am Computer und Lieder auf der Bühne."
+      },
+      "communaute": {
+        "title": "Begegnungen der Gemeinschaft",
+        "meta": "Ort und Datum noch zu bestätigen (TODO)"
+      },
+      "terrain": {
+        "title": "Vor Ort",
+        "meta": "Orte, Daten und Projekte noch zu bestätigen (TODO)"
+      },
+      "open-day-jeunes": {
+        "alt": "Junge Menschen in WAHHF-T-Shirts lachen und heben die Arme, in ihrer Mitte zwei Betreuer.",
+        "caption": "Die jungen Menschen des Boot Camps und ihre Betreuer."
+      },
+      "open-day-marche": {
+        "alt": "Der WAHHF-Marsch zieht durch eine Straße in Yaoundé, zwischen gelben Taxis.",
+        "caption": "Der Marsch durch die Straßen von Yaoundé."
+      },
+      "open-day-marche-slogan": {
+        "alt": "Von hinten gesehen: Teilnehmende gehen in T-Shirts mit dem Slogan „Bâtir l’Afrique qui nourrit, soigne et instruit sa jeunesse“.",
+        "caption": "„Bâtir l’Afrique qui nourrit, soigne et instruit sa jeunesse“: der Slogan, auf die Straße getragen."
+      },
+      "open-day-rassemblement": {
+        "alt": "Teilnehmende in orangefarbenen Westen und weißen T-Shirts, versammelt auf einer Rasenfläche im Zentrum von Yaoundé.",
+        "caption": "Versammlung der Teilnehmenden im Zentrum von Yaoundé."
+      },
+      "open-day-interview": {
+        "alt": "Ein Verantwortlicher von WAHHF mit weißer Kappe gibt im Freien ein Fernsehinterview.",
+        "caption": "Interview für die Presse."
+      },
+      "open-day-accueil": {
+        "alt": "Teilnehmende in orangefarbenen Westen in der Hotellobby.",
+        "caption": "In der Lobby des Hotels Albatros Premium."
+      },
+      "open-day-visioconference": {
+        "alt": "In einem Konferenzsaal verfolgt das Publikum einen per Videokonferenz zugeschalteten Redner auf der Leinwand, neben einem WAHHF-Roll-up.",
+        "caption": "Beitrag per Videokonferenz."
+      },
+      "open-day-prise-de-parole": {
+        "alt": "Ein Redner in blauer Jacke spricht vor dem Roll-up der WAHHF Foundation ins Mikrofon.",
+        "caption": "Ansprache vor den Teilnehmenden."
+      },
+      "open-day-accompagnement": {
+        "alt": "Ein Betreuer leitet eine junge Teilnehmerin am Laptop an.",
+        "caption": "Begleitung einer Teilnehmerin am Computer."
+      },
+      "open-day-chorale": {
+        "alt": "Junge Menschen in WAHHF-T-Shirts singen auf der Bühne.",
+        "caption": "Die jungen Menschen singen auf der Bühne."
+      },
+      "video-chorale": {
+        "alt": "Videoausschnitt: Junge Menschen in WAHHF-T-Shirts singen auf der Bühne.",
+        "caption": "Der Chor der jungen Menschen (Videoausschnitt, 18 s)."
+      },
+      "open-day-trophee": {
+        "alt": "Drei Verantwortliche posieren vor den WAHHF-Roll-ups; eine Frau hält eine Glastrophäe.",
+        "caption": "Erinnerungsfoto vor den WAHHF-Roll-ups."
+      },
+      "open-day-groupe": {
+        "alt": "Gruppenfoto der jungen Menschen des Boot Camps in WAHHF-T-Shirts vor den Roll-ups der Stiftung.",
+        "caption": "Gruppenfoto der Teilnehmenden des Boot Camps."
+      },
+      "open-day-slogan": {
+        "alt": "Rückseite eines WAHHF-Poloshirts: „Bâtir l’Afrique qui nourrit, soigne et instruit sa jeunesse“, daneben Kameraleute.",
+        "caption": "Der Slogan der Stiftung auf dem Rücken der Poloshirts."
+      },
+      "communaute-masque": {
+        "alt": "Ein WAHHF-Mitglied im weißen Poloshirt begrüßt auf einer Wiese einen maskierten Tänzer im Kostüm aus Raffiabast.",
+        "caption": "Begegnung mit einem traditionellen Maskentänzer."
+      },
+      "communaute-rencontre": {
+        "alt": "Drei Männer, darunter ein WAHHF-Mitglied im weißen Poloshirt, posieren bei einem Picknick der Gemeinschaft in einem Park.",
+        "caption": "Picknick der Gemeinschaft."
+      },
+      "video-car": {
+        "alt": "Videoausschnitt: Junge Menschen in WAHHF-Westen fahren im Reisebus über eine unbefestigte Piste.",
+        "caption": "Unterwegs: die jungen Menschen im Reisebus (Videoausschnitt, ohne Ton)."
+      },
+      "video-pepiniere": {
+        "alt": "Videoausschnitt: eine Baumschule mit jungen Palmen, dann ein mit Setzlingen beladener Lastwagen.",
+        "caption": "Baumschule mit jungen Palmen (Videoausschnitt, ohne Ton)."
+      },
+      "video-bananeraie": {
+        "alt": "Videoausschnitt: Bananenbüschel in einer Plantage.",
+        "caption": "Bananenbüschel in einer Plantage (Videoausschnitt, ohne Ton)."
+      }
+    }
+  }
+}

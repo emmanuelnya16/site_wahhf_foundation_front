@@ -10,12 +10,15 @@
     "actions": "Nos actions",
     "impact": "Notre impact",
     "news": "Actualités",
+    "events": "Événements",
+    "changeLanguage": "Changer de langue ({{lang}})",
+    "homeLink": "WAHHF Foundation, accueil",
     "act": "Agir",
     "donate": "Faire un don",
     "apply": "Candidater",
     "partners": "Partenaires",
     "contact": "Contact",
-    "searchPlaceholder": "Rechercher un programme, un cours d'allemand, un pays...",
+    "searchPlaceholder": "Rechercher un programme, un cours d'allemand /anglais, un pays...",
     "themeLight": "Mode clair",
     "themeDark": "Mode sombre",
     "domains": {
@@ -25,11 +28,36 @@
       "environment": "Environnement",
       "rights": "Droits et inclusion",
       "mobility": "Mobilité & Langues"
+    },
+    "mainNav": "Navigation principale",
+    "mainNavMobile": "Navigation principale (mobile)",
+    "searchOpen": "Rechercher sur le site",
+    "searchClose": "Fermer la recherche",
+    "menuOpen": "Ouvrir le menu principal",
+    "menuClose": "Fermer le menu",
+    "mobileMenu": "Menu mobile WAHHF Foundation",
+    "actionsMobile": "Nos actions (6 domaines)",
+    "applyMobile": "Candidater (Cours & Europe — Gratuit)",
+    "search": {
+      "domain": "Domaine : {{title}}",
+      "level": "Cours d'allemand : {{title}}",
+      "country": "Pays accompagné : {{flag}} {{name}}"
+    },
+    "mega": {
+      "domainsTitle": "Les 6 domaines d’action de WAHHF Foundation",
+      "overview": "Voir la vue d’ensemble",
+      "mobilityTitle": "Mobilité & Langues : Allemand /anglais (A1–C1) & Europe",
+      "mobilityText": "Accompagnement gratuit aux cours d’allemand /anglais et orientation vérifiée vers 10 pays européens, financé par IROKO et nos donateurs.",
+      "academy": "Académie de langues (A1 à C1)",
+      "support": "Accompagnement vers 10 pays",
+      "scams": "Vigilance : Éviter les arnaques",
+      "apply": "Candidater gratuitement"
     }
   },
   "disclaimer": {
     "title": "Ce que nous ne vous demanderons jamais",
-    "text": "WAHHF vous accompagne gratuitement. Nous ne vendons ni visa ni emploi et ne garantissons aucun résultat. Nous ne vous demandons jamais d'argent. Les décisions appartiennent aux autorités et aux établissements concernés. Vérifiez toujours les informations sur les sites officiels."
+    "text": "Nos cours et notre accompagnement sont gratuits. Nous ne vendons ni visa ni emploi et ne garantissons aucun résultat. Nous ne vous demandons jamais d’argent. Les décisions appartiennent aux autorités et aux établissements concernés. Vérifiez toujours les informations sur les sites officiels.",
+    "link": "Comment reconnaître une fausse offre et éviter les arnaques ?"
   },
   "hero": {
     "kicker": "FONDATION CAMEROUNO-ALLEMANDE · BRANCHE SOCIALE DU GROUPE IROKO",
@@ -40,7 +68,7 @@
     "scrollHint": "Défiler pour découvrir",
     "videoPause": "Mettre la vidéo en pause",
     "videoPlay": "Lire la vidéo",
-    "headline": "Des cours d'allemand pour préparer l'Europe en confiance",
+    "headline": "Des cours d'allemand /anglais pour préparer l'Europe en confiance",
     "lead": "Une fondation camerouno-allemande, à Yaoundé et Douala : niveaux A1 à C1, test en ligne et orientation vers 10 pays européens, sans intermédiaire payant.",
     "ctaTest": "Passer le test d'allemand gratuit",
     "filmLink": "Regarder le film avec le son (1 min)",
@@ -51,14 +79,16 @@
     "filmTitle": "Film WAHHF Foundation",
     "filmPlay": "Lire le film sur YouTube",
     "filmNote": "Le film est diffusé par YouTube, qui reçoit alors votre adresse IP.",
-    "filmClose": "Fermer le film"
+    "filmClose": "Fermer le film",
+    "loopTitle": "Vidéo de présentation de WAHHF Foundation (décorative, sans son)",
+    "filmFrameTitle": "Film WAHHF Foundation (1 min 10)"
   },
   "home": {
     "mission": {
       "kicker": "Qui sommes-nous",
       "title": "Une passerelle humaine entre le Cameroun et l'Allemagne",
       "p1": "Née d'une double culture camerounaise et allemande, WAHHF Foundation (We Are Here Help Foundation) est la branche sociale et philanthropique du groupe IROKO.",
-      "p2": "Convaincus que la dignité passe par le savoir, la santé et l'autonomie, nous développons des programmes de terrain durables et un dispositif gratuit d'apprentissage de l'allemand et d'orientation vers l'Europe.",
+      "p2": "Convaincus que la dignité passe par le savoir, la santé et l'autonomie, nous développons des programmes de terrain durables et un dispositif gratuit d'apprentissage de l'allemand /anglais et d'orientation vers l'Europe.",
       "link": "En savoir plus sur notre histoire et notre gouvernance"
     },
     "stats": {
@@ -76,16 +106,16 @@
       "subtitle": "De l'accès à l'école primaire jusqu'à la mobilité académique et linguistique internationale."
     },
     "mobilitySpot": {
-      "title": "Apprendre l'allemand, s'orienter vers l'Europe",
-      "subtitle": "Cours d'allemand et orientation gratuits, sans frais d'inscription ni intermédiaire commercial.",
+      "title": "Apprendre l'allemand /anglais, s'orienter vers l'Europe",
+      "subtitle": "Cours d'allemand /anglais et orientation gratuits, sans frais d'inscription ni intermédiaire commercial.",
       "card1Title": "Académie de langues A1 à C1",
-      "card1Desc": "Accompagnement des cours de langue allemande structuré du niveau débutant A1 au niveau avancé C1, avec un test de niveau en ligne.",
+      "card1Desc": "Accompagnement des cours de langue allemande /anglaise structuré du niveau débutant A1 au niveau avancé C1, avec un test de niveau en ligne.",
       "card2Title": "Accompagnement vers l'Europe",
       "card2Desc": "Information claire et vérifiée en 4 étapes : compréhension des parcours d'études, de formation ou de travail, et préparation de dossier.",
       "card3Title": "10 pays accompagnés",
       "card3Desc": "Luxembourg, Allemagne, Slovénie, Italie, Grèce, Portugal, Espagne, Danemark, Pologne et Albanie.",
       "cta": "Découvrir le programme",
-      "filLabel": "Les cinq niveaux d'allemand, de A1 à C1, puis l'Europe",
+      "filLabel": "Les cinq niveaux d'allemand /anglais, de A1 à C1, puis l'Europe",
       "filEnd": "Europe",
       "levels": {
         "a1": "Découverte",
@@ -143,7 +173,9 @@
     "act": {
       "kicker": "Agir avec nous",
       "title": "Chaque geste renforce un parcours de vie",
-      "subtitle": "Rejoindre la mission comme bénévole ou comme partenaire, ou suivre nos actions par la lettre d'information."
+      "subtitle": "Rejoindre la mission comme bénévole ou comme partenaire, ou suivre nos actions par la lettre d'information.",
+      "volunteerText": "Rejoignez nos équipes au Cameroun, en Allemagne ou à distance : enseignement des langues, mentorat, santé ou logistique.",
+      "partnerText": "Écoles, universités, ONG, fondations et entreprises : co-construisons des programmes d’intérêt général mesurables."
     },
     "newsletter": {
       "kicker": "Restons en lien",
@@ -154,7 +186,20 @@
       "privacyLink": "Politique de confidentialité",
       "donateBannerTitle": "Soutenez la gratuité de nos programmes éducatifs et sociaux",
       "donateBannerSub": "100 % des dons financent directement les cours de langue, l'accompagnement des jeunes et les actions de terrain.",
-      "donateBannerBtn": "Faire un don"
+      "donateBannerBtn": "Faire un don",
+      "draftSubject": "Inscription à la lettre d’information WAHHF",
+      "draftIntro": "Je souhaite recevoir la lettre d’information de WAHHF Foundation.",
+      "draftEmail": "Adresse e-mail",
+      "ready": "Votre message est prêt : envoyez-le par WhatsApp ou par e-mail.",
+      "handoffTitle": "Dernière étape : envoyez votre demande d’inscription",
+      "editAddress": "Modifier mon adresse"
+    },
+    "seo": {
+      "title": "Accueil — Autonomiser la jeunesse, transformer les communautés",
+      "description": "WAHHF Foundation (We Are Here Help Foundation), fondation camerouno-allemande à but non lucratif et branche sociale du groupe IROKO : 6 domaines d'action et cours d'allemand /anglais gratuits."
+    },
+    "journey": {
+      "albumLink": "Voir l’album"
     }
   },
   "footer": {
@@ -168,6 +213,134 @@
     "privacy": "Politique de confidentialité",
     "transparency": "Transparence financière",
     "backToTop": "Retour en haut",
-    "rights": "Tous droits réservés."
+    "rights": "Tous droits réservés.",
+    "story": "Notre histoire & mission",
+    "team": "Équipe & Gouvernance",
+    "gallery": "Galerie photo & vidéo",
+    "partners": "Partenaires & Groupe IROKO",
+    "news": "Actualités & Terrain",
+    "academy": "Académie d’allemand /anglais A1–C1 (Gratuit)",
+    "apply": "Candidater à un programme",
+    "volunteer": "Devenir bénévole",
+    "partner": "Devenir partenaire",
+    "scams": "Prévention des arnaques",
+    "contactForm": "Formulaire de contact",
+    "addressTodo": "(TODO : adresse exacte)"
+  },
+  "ui": {
+    "logoAlt": "Logo WAHHF Foundation",
+    "newTab": " (nouvel onglet)",
+    "skipLink": "Aller au contenu",
+    "whatsapp": {
+      "message": "Bonjour WAHHF Foundation, je souhaite des informations sur vos programmes d’accompagnement gratuits...",
+      "label": "Écrire à WAHHF Foundation sur WhatsApp (nouvel onglet)"
+    },
+    "cookies": {
+      "label": "Gestion des cookies et de la vie privée",
+      "title": "Respect de votre vie privée (RGPD)",
+      "text": "WAHHF Foundation utilise uniquement des cookies techniques nécessaires au bon fonctionnement du site (choix de langue et de thème). Aucun traceur publicitaire n’est activé.",
+      "privacy": "Politique de confidentialité",
+      "refuse": "Refuser le non-essentiel",
+      "accept": "Accepter"
+    },
+    "chunkError": {
+      "page": "Cette page n’a pas pu se charger. Vérifiez votre connexion.",
+      "block": "Le contenu n’a pas pu se charger.",
+      "retry": "Réessayer"
+    },
+    "handoff": {
+      "info": "Le site ne transmet pas encore les formulaires. Votre message est prêt avec vos réponses : envoyez-le par WhatsApp ou par e-mail. La fondation ne le reçoit qu’une fois que vous l’avez envoyé.",
+      "whatsapp": "Envoyer par WhatsApp",
+      "email": "Envoyer par e-mail",
+      "fallback": "Si aucune application ne s’ouvre, écrivez directement à <mail>{{email}}</mail> ou sur WhatsApp au {{phone}}, en copiant le message ci-dessous.",
+      "preview": "Voir le message préparé",
+      "edit": "Modifier mes réponses"
+    },
+    "draft": {
+      "greeting": "Bonjour WAHHF Foundation,",
+      "row": "{{label}} : {{value}}"
+    },
+    "validation": {
+      "emailEmpty": "Saisissez votre adresse e-mail, par exemple nom@exemple.com.",
+      "emailInvalid": "Adresse e-mail incomplète : elle doit ressembler à nom@exemple.com.",
+      "phoneEmpty": "Saisissez votre numéro de téléphone ou WhatsApp, avec l’indicatif (ex. +237 6 90 00 00 00).",
+      "phoneInvalid": "Numéro incomplet : indiquez l’indicatif du pays et au moins 8 chiffres (ex. +237 6 90 00 00 00)."
+    },
+    "presence": {
+      "cameroonTitle": "Présence terrain au Cameroun",
+      "promptShort": "Choisissez une région ou son chef-lieu sur la carte.",
+      "prompt": "Choisissez une région ou son chef-lieu pour afficher nos relais locaux (éducation, santé, agroécologie et orientation).",
+      "europeTitle": "Les 10 pays d’orientation vers l’Europe",
+      "europeText": "Fiches d’information vérifiées sur les voies d’études, de formation professionnelle et de travail, avec liens vers les portails officiels.",
+      "albaniaNote": "Note : L’Albanie est un pays européen candidat mais <b>non membre de l’Union européenne</b>. Consultez chaque fiche pays pour connaître le cadre réglementaire officiel."
+    },
+    "map": {
+      "loadingCameroon": "Chargement de la carte des 10 régions du Cameroun…",
+      "loadingEurope": "Chargement de la carte Europe…",
+      "selected": "Région sélectionnée",
+      "selectedTitle": "Région sélectionnée : {{name}} ({{capital}})",
+      "capital": "Chef-lieu : {{capital}}",
+      "quickSelect": "Sélection rapide des 10 régions du Cameroun",
+      "regionLabel": "Région {{name}}, chef-lieu {{capital}}",
+      "cameroonLabel": "Carte des 10 régions du Cameroun ; chaque région est un bouton",
+      "fullscreenOpen": "Afficher la carte du Cameroun en plein écran",
+      "fullscreen": "Plein écran",
+      "close": "Fermer",
+      "europeLabel": "Carte de l'Europe : les 10 pays accompagnés, chacun avec un lien vers sa fiche",
+      "countryLink": "{{name}} : ouvrir la fiche",
+      "countryLinkNonEu": "{{name}}, hors Union européenne : ouvrir la fiche",
+      "fromCameroon": "Depuis le Cameroun",
+      "creditsPrefix": "Fonds de carte : limites régionales",
+      "creditsSuffix": ") · pays Natural Earth (domaine public)."
+    },
+    "countries": {
+      "link": "{{name}} — Voir la fiche",
+      "linkNonEu": "{{name}}, Hors Union européenne — Voir la fiche",
+      "nonEu": "Hors UE"
+    },
+    "breadcrumb": "Fil d’Ariane",
+    "photos": {
+      "enlarge": "Agrandir la photo : {{alt}}",
+      "loadError": "Cette photo n’a pas pu être chargée. Vérifiez votre connexion, puis rouvrez-la.",
+      "viewer": "Visionneuse de photos",
+      "closeViewer": "Fermer la visionneuse",
+      "prev": "Photo précédente",
+      "next": "Photo suivante",
+      "position": "Photo {{n}} sur {{total}}.",
+      "count_one": "{{count}} photo",
+      "count_other": "{{count}} photos"
+    },
+    "gallery": {
+      "playVideo": "Lire la vidéo : ",
+      "enlarge": "Agrandir la photo : ",
+      "close": "Fermer la galerie",
+      "prevPhoto": "Photo précédente",
+      "prevVideo": "Vidéo précédente",
+      "nextPhoto": "Photo suivante",
+      "nextVideo": "Vidéo suivante",
+      "position": "{{n}} sur {{total}} :",
+      "placeDate": "{{place}}, le {{date}}",
+      "videoCount_one": "{{count}} vidéo",
+      "videoCount_other": "{{count}} vidéos",
+      "and": " et "
+    },
+    "fil": {
+      "current": "niveau affiché"
+    }
+  },
+  "notFound": {
+    "title": "Cette page n’existe pas ou a changé d’adresse",
+    "seoTitle": "Page introuvable",
+    "seoDescription": "Cette adresse ne correspond à aucune page du site WAHHF Foundation.",
+    "lost": "On s’est perdus en route.",
+    "meta": "Page introuvable (erreur 404)",
+    "message": "L’adresse « {{path}} » ne correspond à aucune page du site. Le lien a peut-être été mal copié ou la page a été déplacée.",
+    "countries": "Les 10 pays accompagnés",
+    "countryNonEu": "{{name}} (hors Union européenne)",
+    "where": "Où aller maintenant ?",
+    "home": "Retour à l’accueil"
+  },
+  "legal": {
+    "onlyFrench": "Cette page n’existe pour l’instant qu’en français."
   }
 }

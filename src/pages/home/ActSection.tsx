@@ -29,11 +29,7 @@ export default function ActSection() {
     if (!email.trim()) return;
     setPrepared(true);
   };
-  const draft = buildDraft(
-    'Inscription à la lettre d’information WAHHF',
-    'Je souhaite recevoir la lettre d’information de WAHHF Foundation.',
-    [['Adresse e-mail', email]]
-  );
+  const draft = buildDraft(t('home.newsletter.draftSubject'), t('home.newsletter.draftIntro'), [[t('home.newsletter.draftEmail'), email]]);
 
   return (
     <Section tone="sauge" id="agir">
@@ -41,11 +37,11 @@ export default function ActSection() {
         <div className="space-y-8">
           <SectionHeader title={t('home.act.title')} subtitle={t('home.act.subtitle')} />
           <TextList>
-            <TextListItem title="Devenir bénévole" to="/agir#benevole">
-              <p>Rejoignez nos équipes au Cameroun, en Allemagne ou à distance : enseignement des langues, mentorat, santé ou logistique.</p>
+            <TextListItem title={t('footer.volunteer')} to="/agir#benevole">
+              <p>{t('home.act.volunteerText')}</p>
             </TextListItem>
-            <TextListItem title="Devenir partenaire" to="/agir#partenaire">
-              <p>Écoles, universités, ONG, fondations et entreprises : co-construisons des programmes d’intérêt général mesurables.</p>
+            <TextListItem title={t('footer.partner')} to="/agir#partenaire">
+              <p>{t('home.act.partnerText')}</p>
             </TextListItem>
           </TextList>
         </div>
@@ -59,17 +55,17 @@ export default function ActSection() {
             </Link>
           </p>
           <p role="status" className="sr-only">
-            {prepared ? 'Votre message est prêt : envoyez-le par WhatsApp ou par e-mail.' : ''}
+            {prepared ? t('home.newsletter.ready') : ''}
           </p>
           {prepared ? (
             <ContactHandoff
               compact
               headingLevel="h3"
-              title="Dernière étape : envoyez votre demande d’inscription"
+              title={t('home.newsletter.handoffTitle')}
               draft={draft}
               titleRef={focusRef as Ref<HTMLHeadingElement>}
               onEdit={() => setPrepared(false)}
-              editLabel="Modifier mon adresse"
+              editLabel={t('home.newsletter.editAddress')}
             />
           ) : (
             <form onSubmit={onSubmit} className="pt-2">

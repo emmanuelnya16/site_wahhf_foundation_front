@@ -1,0 +1,35 @@
+{
+  "nameTbc": "Name to be confirmed",
+  "portraitAlt": "Portrait of {{name}}",
+  "hero": {
+    "title": "The people behind the foundation.",
+    "intro": "A team between Cameroon and Germany, serving young people.",
+    "join": "Join the foundation",
+    "orgChart": "See the organisation chart"
+  },
+  "carousel": {
+    "roleDescription": "carousel",
+    "label": "Portraits of the leadership",
+    "previous": "Previous portrait",
+    "next": "Next portrait",
+    "pause": "Pause",
+    "resume": "Resume"
+  },
+  "orgChart": {
+    "title": "Our organisation"
+  },
+  "contenu": {
+    "niveaux": {
+      "1": "Presidency",
+      "2": "Vice-presidency",
+      "4": "General Secretariat",
+      "5": "Executive board",
+      "6": "Coordinators"
+    },
+    "membres": {
+      "marrion-watio-notesse": { "role": "President" },
+      "christian-wilberg": { "role": "Vice-president" },
+      "wilfried": { "role": "Secretary General" }
+    }
+  }
+}

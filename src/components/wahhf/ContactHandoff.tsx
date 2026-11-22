@@ -1,5 +1,7 @@
 import { ReactNode, Ref } from 'react';
 import { Mail, MessageCircle } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { richText } from '../../lib/richText';
 import { CONTACT } from '../../config/contact';
 import { PrimaryButton, SecondaryButton } from './Buttons';
 import { ContactDraft, mailtoHref, whatsappHref } from '../../lib/contactDraft';
@@ -13,7 +15,7 @@ export default function ContactHandoff({
   title,
   draft,
   onEdit,
-  editLabel = 'Modifier mes réponses',
+  editLabel,
   titleRef,
   children,
   compact = false,
@@ -32,24 +34,25 @@ export default function ContactHandoff({
   headingLevel?: 'h2' | 'h3';
 }) {
   const Heading = headingLevel;
+  const { t } = useTranslation();
   return (
     <div
       className={
         compact
           ? 'space-y-4'
-          : 'rounded-card bg-surface-raised border-2 border-or p-7 sm:p-10 space-y-6 shadow-md text-left'
+          : // Encadré d'information (contrat §8 ; décision des groupes 7.1 et 7.2) : ni or, ni ombre, ni serif
+            'rounded-inner border border-info/40 bg-info-bg p-5 sm:p-8 space-y-5 text-left text-text'
       }
     >
       <Heading
         ref={titleRef}
         tabIndex={-1}
-        className={`font-serif font-normal text-text ${compact ? 'text-xl' : 'text-2xl sm:text-3xl'}`}
+        className={compact ? 'text-[1.375rem] font-semibold leading-tight text-text' : 'text-section-title text-text'}
       >
         {title}
       </Heading>
-      <p className="text-sm sm:text-base text-text-secondary leading-relaxed">
-        Le site ne transmet pas encore les formulaires. Votre message est prêt avec vos réponses : envoyez-le
-        par WhatsApp ou par e-mail. La fondation ne le reçoit qu’une fois que vous l’avez envoyé.
+      <p className="text-body text-text max-w-[65ch]">
+        {t('ui.handoff.info')}
       </p>
 
       <div className="flex flex-wrap gap-3">
@@ -57,34 +60,36 @@ export default function ContactHandoff({
         <PrimaryButton href={whatsappHref(draft)}>
           <span className="inline-flex items-center gap-2">
             <MessageCircle aria-hidden="true" className="w-4 h-4 shrink-0" />
-            <span>Envoyer par WhatsApp</span>
+            <span>{t('ui.handoff.whatsapp')}</span>
           </span>
         </PrimaryButton>
         <SecondaryButton href={mailtoHref(draft)}>
           <span className="inline-flex items-center gap-2">
             <Mail aria-hidden="true" className="w-4 h-4 shrink-0" />
-            <span>Envoyer par e-mail</span>
+            <span>{t('ui.handoff.email')}</span>
           </span>
         </SecondaryButton>
       </div>
 
-      <p className="text-xs sm:text-sm text-v1-encre/70 dark:text-creme/70">
-        Si aucune application ne s’ouvre, écrivez directement à{' '}
-        <a href={`mailto:${CONTACT.email}`} className="underline underline-offset-2 text-accent break-all">
-          {CONTACT.email}
-        </a>{' '}
-        ou sur WhatsApp au {CONTACT.whatsappDisplay}, en copiant le message ci-dessous.
+      <p className="text-meta text-text-secondary max-w-[65ch]">
+        {richText(t('ui.handoff.fallback', { email: CONTACT.email, phone: CONTACT.whatsappDisplay }), {
+          mail: (text) => (
+            <a href={`mailto:${CONTACT.email}`} className="text-link underline underline-offset-4 break-all">
+              {text}
+            </a>
+          ),
+        })}
       </p>
 
-      <details className="rounded-2xl bg-surface-inset p-4 text-sm text-text">
-        <summary className="cursor-pointer font-semibold">Voir le message préparé</summary>
+      <details className="rounded-inner bg-surface-raised p-4 text-meta text-text">
+        <summary className="cursor-pointer font-semibold min-h-11 flex items-center">{t('ui.handoff.preview')}</summary>
         <p className="mt-3 font-semibold">{draft.subject}</p>
-        <p className="mt-2 whitespace-pre-wrap break-words text-xs sm:text-sm opacity-90">{draft.body}</p>
+        <p className="mt-2 whitespace-pre-wrap break-words text-text-secondary">{draft.body}</p>
       </details>
 
       {children}
 
-      <SecondaryButton onClick={onEdit}>{editLabel}</SecondaryButton>
+      <SecondaryButton onClick={onEdit}>{editLabel ?? t('ui.handoff.edit')}</SecondaryButton>
     </div>
   );
 }

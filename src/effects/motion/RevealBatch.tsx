@@ -29,8 +29,38 @@ const EXCLUDED = [
  * - Tout ce qui est créé plus tard (masquages, déclencheurs, fondus) passe par le contexte de gsap.matchMedia
  *   (self.add) : un changement de page ou le passage en mouvement réduit les annule et rend tout visible.
  * - Mouvement réduit : rien n'est masqué. Téléphone : apparitions gardées (légères).
+ * - data-reveal="clip" (lot 7.6, panneaux de l'accordéon de l'accueil) : découverte du bas vers le haut par clip-path
+ *   au lieu du fondu, 0,9 s, 0,08 s de décalage, même déclenchement ; ordinateur à souris seulement.
+ * - data-reveal="soft" (lot 7.7, cartes de l'organigramme) : fondu et montée de 16 px ; ordinateur à souris seulement.
+ * - data-reveal="ev" (lot 7.9, pages Événements) : réglé comme la référence (docs/references/evenement/) : le haut de
+ *   l'élément atteint 92 % de l'écran, montée de 28 px, 0,8 s, cubic-bezier(.2,.7,.2,1), 80 ms entre deux cartes ;
+ *   toutes tailles d'écran.
  * Monté une fois dans Layout, sur <main> ; relancé à chaque page.
  */
+/** Montée des apparitions « soft » (cartes de l'organigramme, lot 7.7) */
+const SOFT_RISE = 16;
+
+/** Courbe de Bézier cubique CSS en fonction GSAP (sans plugin) : x → y, résolue par Newton. */
+function cubicBezier(x1: number, y1: number, x2: number, y2: number) {
+  const cx = 3 * x1, bx = 3 * (x2 - x1) - cx, ax = 1 - cx - bx;
+  const cy = 3 * y1, by = 3 * (y2 - y1) - cy, ay = 1 - cy - by;
+  const sx = (t: number) => ((ax * t + bx) * t + cx) * t;
+  const sy = (t: number) => ((ay * t + by) * t + cy) * t;
+  const dx = (t: number) => (3 * ax * t + 2 * bx) * t + cx;
+  return (x: number) => {
+    let t = x;
+    for (let i = 0; i < 8; i++) {
+      const err = sx(t) - x;
+      const d = dx(t);
+      if (Math.abs(err) < 1e-5 || Math.abs(d) < 1e-6) break;
+      t -= err / d;
+    }
+    return sy(Math.min(1, Math.max(0, t)));
+  };
+}
+/** Pages Événements (lot 7.9) : réglages de la référence */
+const EV = { rise: 28, duration: 0.8, ease: cubicBezier(0.2, 0.7, 0.2, 1), start: 'top 92%', stagger: 0.08 };
+
 export default function RevealBatch({ scope, pathname }: { scope: RefObject<HTMLElement | null>; pathname: string }) {
   useGSAP(
     () => {
@@ -55,6 +85,36 @@ export default function RevealBatch({ scope, pathname }: { scope: RefObject<HTML
           });
         }) as unknown as (els: Element[]) => void;
 
+        // Découverte du bas vers le haut (data-reveal="clip", panneaux de l'accordéon de l'accueil, lot 7.6) :
+        // clip-path inset(100 % 0 0 0) → inset(0), au rayon du panneau (data-reveal-radius), 0,08 s de décalage
+        const clip = (el: Element, top: number) =>
+          `inset(${top}% 0% 0% 0% round ${(el as HTMLElement).dataset.revealRadius ?? '0px'})`;
+        const showClip = self.add('showClip', (els: Element[]) => {
+          els.forEach((el) => hidden.delete(el));
+          gsap.to(els, {
+            clipPath: (_: number, el: Element) => clip(el, 0),
+            duration: DURATION.reveal,
+            ease: GSAP_EASE.glide,
+            stagger: 0.08,
+            overwrite: true,
+            clearProps: 'clipPath',
+          });
+        }) as unknown as (els: Element[]) => void;
+
+        // Pages Événements (lot 7.9) : montée de 28 px, 0,8 s, courbe de la référence
+        const showEv = self.add('showEv', (els: Element[]) => {
+          els.forEach((el) => hidden.delete(el));
+          gsap.to(els, {
+            opacity: 1,
+            y: 0,
+            duration: EV.duration,
+            ease: EV.ease,
+            stagger: EV.stagger,
+            overwrite: true,
+            clearProps: 'opacity,transform',
+          });
+        }) as unknown as (els: Element[]) => void;
+
         const scan = self.add('scan', () => {
           const fresh = gsap.utils.toArray<HTMLElement>('[data-reveal]', main).filter((el) => {
             if (seen.has(el)) return false;
@@ -64,9 +124,27 @@ export default function RevealBatch({ scope, pathname }: { scope: RefObject<HTML
             return el.getBoundingClientRect().top >= window.innerHeight;
           });
           if (!fresh.length) return;
-          gsap.set(fresh, { opacity: 0, y: APPEAR_RISE });
-          fresh.forEach((el) => hidden.add(el));
-          ScrollTrigger.batch(fresh, { start: APPEAR_START, once: true, onEnter: (batch) => show(batch as Element[]) });
+          // Découvertes : ordinateur à souris seulement (votre brief) ; ailleurs, ces éléments sont déjà en place
+          const computer = window.matchMedia(MQ.computer).matches;
+          const clipEls = computer ? fresh.filter((el) => el.dataset.reveal === 'clip') : [];
+          // « soft » (cartes de l'organigramme, lot 7.7) : montée de 16 px, ordinateur seulement
+          const evEls = fresh.filter((el) => el.dataset.reveal === 'ev');
+          if (evEls.length) {
+            gsap.set(evEls, { opacity: 0, y: EV.rise });
+            evEls.forEach((el) => hidden.add(el));
+            ScrollTrigger.batch(evEls, { start: EV.start, once: true, onEnter: (batch) => showEv(batch as Element[]) });
+          }
+          const fadeEls = fresh.filter((el) => el.dataset.reveal !== 'clip' && el.dataset.reveal !== 'ev' && (computer || el.dataset.reveal !== 'soft'));
+          if (fadeEls.length) {
+            gsap.set(fadeEls, { opacity: 0, y: (_: number, el: HTMLElement) => (el.dataset.reveal === 'soft' ? SOFT_RISE : APPEAR_RISE) });
+            fadeEls.forEach((el) => hidden.add(el));
+            ScrollTrigger.batch(fadeEls, { start: APPEAR_START, once: true, onEnter: (batch) => show(batch as Element[]) });
+          }
+          if (clipEls.length) {
+            gsap.set(clipEls, { clipPath: (_: number, el: Element) => clip(el, 100) });
+            clipEls.forEach((el) => hidden.add(el));
+            ScrollTrigger.batch(clipEls, { start: APPEAR_START, once: true, onEnter: (batch) => showClip(batch as Element[]) });
+          }
         }) as unknown as () => void;
 
         // Après le défilement en haut de la nouvelle page (Layout) : deux images plus tard
@@ -83,11 +161,12 @@ export default function RevealBatch({ scope, pathname }: { scope: RefObject<HTML
         const reveal = self.add('reveal', (el: Element) => {
           hidden.delete(el);
           gsap.killTweensOf(el);
-          gsap.set(el, { opacity: 1, y: 0, clearProps: 'opacity,transform' });
+          gsap.set(el, { opacity: 1, y: 0, clearProps: 'opacity,transform,clipPath' });
         }) as unknown as (el: Element) => void;
         const onFocus = (event: FocusEvent) => {
           const el = (event.target as Element | null)?.closest?.('[data-reveal]');
-          if (el && hidden.has(el)) reveal(el);
+          // Masqué, ou en train d'apparaître (lot 7.9 : un Tab rapide peut tomber sur une carte encore transparente)
+          if (el && (hidden.has(el) || gsap.isTweening(el))) reveal(el);
         };
         main.addEventListener('focusin', onFocus);
 

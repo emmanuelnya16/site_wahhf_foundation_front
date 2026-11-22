@@ -1,0 +1,15 @@
+{
+  "_relire": [
+    "nosActions.title"
+  ],
+  "seo": {
+    "title": "Unsere 6 Arbeitsbereiche — Bildung, Gesundheit, Unternehmertum, Umwelt, Rechte, Mobilität",
+    "description": "Entdecken Sie die 6 Arbeitsbereiche der WAHHF Foundation in Kamerun und in Richtung Europa – und unterstützen Sie den Bereich Ihrer Wahl."
+  },
+  "title": "An allen Hebeln menschlicher Selbstständigkeit ansetzen",
+  "intro": "Bildung, Gesundheit, Unternehmertum junger Menschen, Umwelt, Rechte und Teilhabe, Mobilität & Sprachen: die sechs Bereiche, in denen die Stiftung arbeitet. Sie können den Bereich Ihrer Wahl unterstützen.",
+  "navLabel": "Die sechs Bereiche",
+  "discoverMobility": "Mobilität & Sprachen entdecken",
+  "support": "Diesen Bereich unterstützen",
+  "supportLabel": "Diesen Bereich unterstützen: {{domain}}"
+}

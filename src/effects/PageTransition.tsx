@@ -17,6 +17,8 @@ export function routeKey(pathname: string): string {
 }
 
 let firstPageShown = false;
+/** Une page a-t-elle déjà été affichée avant celle qui se monte ? (à lire pendant le rendu ; false au premier chargement) */
+export const pageShownBefore = () => firstPageShown;
 
 /**
  * Transition entre pages (contrat §10, ANIM-03, lot 7) : fondu d'entrée de 0,3 s, sans fondu de sortie ni attente.

@@ -1,0 +1,305 @@
+{
+  "commun": {
+    "europe": "Europe",
+    "mobilite": "Mobilité & Langues",
+    "academie": "Académie de langues",
+    "niveau": "Niveau {{level}}",
+    "candidater": "Candidater",
+    "candidaterNiveau": "Candidater au niveau {{level}}",
+    "filAria": "Les cinq niveaux d’allemand /anglais, de A1 à C1, puis l’Europe",
+    "niveauAffiche": "niveau affiché",
+    "nomNiveau": "Allemand {{level}} : {{short}}",
+    "cohorte": "Rejoindre la prochaine cohorte"
+  },
+  "formats": {
+    "enLigne": "En ligne",
+    "douala": "Présentiel à Douala",
+    "yaounde": "Présentiel à Yaoundé"
+  },
+  "formatsPhrase": {
+    "enLigne": "en ligne",
+    "douala": "présentiel à Douala",
+    "yaounde": "présentiel à Yaoundé"
+  },
+  "formatsChoix": {
+    "enLigne": "En ligne (accessible partout)",
+    "douala": "Présentiel à Douala",
+    "yaounde": "Présentiel à Yaoundé"
+  },
+  "hub": {
+    "seoTitle": "Mobilité & Langues — Apprendre, se préparer, s'orienter gratuitement",
+    "seoDescription": "WAHHF Foundation : Académie de langue allemande /anglaise gratuite (A1 à C1) et accompagnement transparent vers 10 pays européens, financé par nos partenaires et nos donateurs.",
+    "title": "Apprendre l’allemand /anglais, se préparer, s’orienter vers l’Europe",
+    "intro": "Des cours d’allemand /anglais du niveau A1 au niveau C1 et une information fiable sur les études, la formation et le travail dans 10 pays européens.",
+    "ctaCandidater": "Candidater au programme",
+    "ctaAcademie": "Découvrir l’Académie d’allemand /anglais",
+    "portesTitle": "Choisissez votre porte d’entrée",
+    "portesSubtitle": "Vous pouvez candidater uniquement aux cours de langue allemande /anglaise, uniquement à l’accompagnement documentaire, ou aux deux.",
+    "academieTitle": "Académie de langues (allemand /anglais A1 à C1)",
+    "academieText": "Apprendre l’allemand /anglais étape par étape : compréhension, expression orale et écrite, test de niveau en ligne et préparation méthodique aux certifications.",
+    "academieBouton": "Accéder à l’Académie de langues",
+    "academieTest": "Passer le test de niveau (20 questions)",
+    "europeTitle": "Accompagnement vers l’Europe",
+    "europeText": "Un parcours pédagogique en 4 étapes pour comprendre les voies légales (études, formation professionnelle, travail), préparer son dossier et vérifier chaque démarche sur les portails officiels.",
+    "europeBouton": "Explorer l’accompagnement Europe",
+    "europeArnaques": "Guide : éviter les arnaques",
+    "pourquoiTitle": "Protéger la jeunesse contre la désinformation et ouvrir l’accès au savoir",
+    "pourquoiSubtitle": "Trop de jeunes et de familles s’endettent auprès d’intermédiaires frauduleux qui vendent de fausses promesses. WAHHF Foundation répond par la rigueur linguistique et la transparence.",
+    "pourquoiText": "Un projet d’études ou de formation professionnelle à l’étranger ne s’achète pas : il se construit par l’apprentissage exigeant de la langue, la conformité des diplômes et le respect strict des procédures consulaires officielles.",
+    "raisons": {
+      "frais": {
+        "title": "Zéro frais pour le bénéficiaire",
+        "desc": "Aucun frais d’inscription, aucun frais de dossier, aucune commission à aucun moment du parcours."
+      },
+      "arnaques": {
+        "title": "Lutte active contre les arnaques",
+        "desc": "Un guide pour reconnaître les faux contrats et les faux visas, et vérifier chaque information sur les sources officielles."
+      },
+      "exigence": {
+        "title": "Exigence académique et linguistique",
+        "desc": "Accompagnement progressif du niveau débutant A1 jusqu’à l’autonomie universitaire C1."
+      }
+    },
+    "temoignagesTitle": "Ce que disent nos apprenants",
+    "faqTitle": "Questions fréquentes",
+    "faq": {
+      "gratuit": {
+        "q": "Les cours d’allemand /anglais et l’accompagnement sont-ils vraiment 100 % gratuits ?",
+        "a": "Oui, pour tous les bénéficiaires : les cours d’allemand /anglais, du niveau A1 au niveau C1, comme les séances d’orientation vers l’Europe. Le programme est financé par nos partenaires et nos donateurs."
+      },
+      "visas": {
+        "q": "WAHHF Foundation délivre-t-elle des visas ou des contrats de travail ?",
+        "a": "Non, jamais. WAHHF Foundation est une fondation à but non lucratif. Nous ne vendons ni visa, ni admission universitaire, ni contrat de travail, et nous ne garantissons aucun résultat. Les décisions appartiennent exclusivement aux ambassades, consulats et établissements officiels."
+      },
+      "identite": {
+        "q": "Faut-il envoyer son passeport ou sa carte d’identité pour candidater ?",
+        "a": "Non. Lors de votre candidature en ligne sur ce site, aucun document d’identité (ni passeport, ni CNI) et aucune somme d’argent ne vous sont demandés."
+      },
+      "niveau": {
+        "q": "Comment savoir par quel niveau d’allemand /anglais commencer ?",
+        "a": "Si vous débutez totalement, choisissez le niveau A1. Si vous avez déjà des bases, passez notre test d’orientation de 20 questions sur la page Académie de langues."
+      }
+    },
+    "finSubtitle": "Un seul formulaire pour les cours d’allemand /anglais et l’orientation vers l’Europe. Il se remplit en 5 minutes environ ; aucun document d’identité ni paiement ne vous est demandé."
+  },
+  "academie": {
+    "seoTitle": "Académie de langues — Allemand /anglais A1 à C1 gratuit",
+    "seoDescription": "Accompagnement gratuit des cours de langue allemande /anglaise du niveau A1 au niveau C1 par WAHHF Foundation : test de niveau de 20 questions, programme par niveau et sessions.",
+    "title": "Académie de langues : l’allemand /anglais, du niveau A1 au niveau C1 avec WAHHF Institute",
+    "intro": "Des cours d’allemand /anglais du niveau débutant jusqu’à la maîtrise académique, en ligne ou en présentiel à Douala et à Yaoundé. Commencez par le test : il vous dit par quel niveau commencer.",
+    "ctaTest": "Trouver mon niveau (5 minutes)",
+    "ctaCandidater": "Candidater (choisir mon niveau)",
+    "niveauxTitle": "Les 5 niveaux, de A1 à C1",
+    "niveauxSubtitle": "Chaque niveau mène à sa page : objectifs, compétences, volume horaire et prochaines sessions.",
+    "pageNiveau": "Toute la page du niveau {{level}}",
+    "examensTitle": "Préparation aux examens officiels",
+    "examensText": "Nos parcours intègrent des entraînements blancs aux épreuves de compréhension écrite, d’écoute, d’expression écrite et d’oral, selon les standards des examens reconnus : Goethe-Zertifikat, telc Deutsch et TestDaF."
+  },
+  "niveauPage": {
+    "seoTitle": "Allemand niveau {{level}} — Académie de langues gratuite",
+    "seoDescription": "Niveau {{level}} d'allemand à l'Académie WAHHF : {{subtitle}} Objectifs, compétences, volume horaire et prochaines sessions.",
+    "verifier": "Vérifier mon niveau (test)",
+    "filAria": "Les cinq niveaux d’allemand ; niveau affiché : {{level}}",
+    "programme": "Programme du niveau {{level}}",
+    "introuvableTitle": "Ce niveau d’allemand n’existe pas",
+    "introuvableMessage": "L’Académie de langues propose 5 niveaux, de A1 à C1. Choisissez le vôtre ci-dessous, ou faites le test de niveau.",
+    "introuvableListe": "Les niveaux de l’Académie",
+    "introuvableTest": "Test de niveau (20 questions)"
+  },
+  "cohorte": {
+    "subtitle": "Un seul formulaire, 5 minutes environ ; aucun document d’identité ni paiement ne vous est demandé."
+  },
+  "fiche": {
+    "volume": "Volume horaire",
+    "prerequis": "Prérequis",
+    "duree": "Durée",
+    "prochaine": "Prochaine session",
+    "pasAnnoncee": "Pas encore annoncée",
+    "format": "Format",
+    "formatValeur": "En ligne, ou en présentiel à Douala et à Yaoundé selon les sessions",
+    "objectifs": "Objectifs du niveau {{level}}",
+    "saurezFaire": "Ce que vous saurez faire à la fin du niveau {{level}}"
+  },
+  "test": {
+    "blanc": "(blanc)",
+    "statutFini": "Test terminé. Score : {{score}} sur {{total}}. Niveau conseillé : {{level}}.",
+    "statutFiche": "La fiche du niveau {{level}} est affichée plus bas.",
+    "statutQuestion": "Question {{n}} sur {{total}}.",
+    "title": "Trouver mon niveau d’allemand",
+    "subtitle": "20 questions à choix multiples, de A1 à C1, environ 5 minutes. Le résultat vous indique le niveau par lequel commencer.",
+    "intro": "Les questions sont classées par difficulté croissante : 4 questions par niveau. Vous pouvez revenir à la question précédente à tout moment.",
+    "commencer": "Commencer le test",
+    "resultatKicker": "Résultat indicatif de votre test",
+    "niveauConseille": "Niveau conseillé : {{level}}",
+    "score_one": "{{count}} bonnes réponses sur {{total}}",
+    "score_other": "{{count}} bonnes réponses sur {{total}}",
+    "niveauConseilleCourt": "niveau conseillé",
+    "resultatText": "Ce résultat sert à vous orienter. Lors de l’étude de votre candidature, un formateur confirmera avec vous le groupe qui vous permettra de progresser dans les meilleures conditions.",
+    "recommencer": "Recommencer le test",
+    "position": "Question {{n}} sur {{total}}",
+    "niveauTeste": "Niveau testé : {{level}}",
+    "avancement": "Avancement du test",
+    "manque": "Choisissez une réponse pour passer à la question suivante.",
+    "precedente": "Question précédente",
+    "voirResultat": "Voir mon niveau conseillé",
+    "suivante": "Question suivante"
+  },
+  "sessions": {
+    "moisAConfirmer": "{{month}} (date à confirmer)",
+    "whatsapp": "Bonjour WAHHF Foundation, je souhaite être prévenu(e) de la prochaine session de cours d’allemand /anglais.",
+    "titleNiveau": "Prochaines sessions de niveau {{level}}",
+    "titleTout": "Calendrier des prochaines sessions",
+    "subtitle": "Toutes les sessions sont gratuites. En ligne ou en présentiel à Douala et à Yaoundé ; celles déjà commencées n’apparaissent plus.",
+    "filtreNiveau": "Niveau",
+    "tousNiveaux": "Tous les niveaux",
+    "filtreFormat": "Format",
+    "tousFormats": "Tous les formats",
+    "presentiel": "En présentiel (Douala, Yaoundé)",
+    "aucune": "Aucune session",
+    "nombre_one": "{{count}} session",
+    "nombre_other": "{{count}} sessions",
+    "videPresentiel": "Pas de session en présentiel annoncée pour ce choix pour l’instant.",
+    "videChoix": "Pas de session annoncée pour ce choix pour l’instant.",
+    "videNiveau": "Pas de session de niveau {{level}} annoncée pour l’instant.",
+    "videTout": "Pas de session annoncée pour l’instant.",
+    "prevenir": "Vous pouvez demander à être prévenu de la prochaine session.",
+    "voirEnLigne": "Voir les sessions en ligne",
+    "voirToutes": "Voir toutes les sessions",
+    "prevenirWhatsapp": "Être prévenu sur WhatsApp"
+  },
+  "cours": {
+    "programme": "Programme {{level}}",
+    "format": "Format :",
+    "rythme": "Rythme et durée :",
+    "debut": "Début de session :",
+    "places": "Places prévues :",
+    "indicatif": "(indicatif)",
+    "srSession": "à cette session ({{level}}, {{format}})"
+  },
+  "apres": {
+    "title": "Après votre candidature",
+    "etape": "Étape {{n}} :",
+    "etapes": {
+      "envoi": {
+        "title": "Vous envoyez votre demande",
+        "text": "Le formulaire prépare un message avec vos réponses ; vous l’envoyez par WhatsApp ou par e-mail."
+      },
+      "etude": {
+        "title": "L’équipe étudie votre demande",
+        "text": "Elle vous répond par WhatsApp ou par e-mail, aux coordonnées que vous avez données."
+      },
+      "niveau": {
+        "title": "Votre niveau est confirmé",
+        "text": "Un formateur confirme avec vous le groupe qui vous convient, à partir du test de niveau si vous l’avez passé."
+      },
+      "cohorte": {
+        "title": "Vous rejoignez une cohorte",
+        "text": "En ligne ou en présentiel, selon les sessions ouvertes et les places disponibles."
+      }
+    },
+    "quiTitle": "Qui peut candidater",
+    "qui": {
+      "niveaux": {
+        "title": "Débutants comme confirmés",
+        "text": "Du niveau A1 (aucune base) au niveau C1. Le test de niveau en ligne vous aide à vous situer."
+      },
+      "lieu": {
+        "title": "Où que vous viviez",
+        "text": "Les cours en ligne sont accessibles partout ; des cohortes en présentiel sont prévues à Douala et à Yaoundé."
+      },
+      "pieces": {
+        "title": "Sans pièce d’identité ni paiement",
+        "text": "Aucun document d’identité ni aucun paiement ne vous sont demandés pour candidater."
+      }
+    }
+  },
+  "candidature": {
+    "seoTitle": "Candidater gratuitement — Cours d'allemand /anglais & Accompagnement Europe",
+    "seoDescription": "Formulaire unique et 100 % gratuit de demande d'accompagnement et d'inscription aux cours d'allemand /anglais WAHHF Foundation. Aucun document d'identité ni paiement demandé.",
+    "title": "Candidater à un parcours d’accompagnement",
+    "intro": "Un seul formulaire pour rejoindre l’Académie d’allemand /anglais (A1 à C1), être orienté vers l’Europe, ou les deux. Il se remplit en 5 minutes environ.",
+    "avant": "Avant de commencer",
+    "souhaits": {
+      "cours_allemand": "Cours d’allemand /anglais (A1 à C1)",
+      "accompagnement_europe": "Accompagnement vers l’Europe",
+      "les_deux": "Les deux : cours et orientation"
+    },
+    "etapes": {
+      "1": "Vos coordonnées de contact",
+      "2": "Votre souhait d’accompagnement",
+      "3": "Votre motivation et votre accord"
+    },
+    "erreurs": {
+      "nom": "Saisissez votre prénom et votre nom.",
+      "pays": "Indiquez votre pays de résidence, par exemple Cameroun.",
+      "ville": "Indiquez votre ville de résidence, par exemple Douala.",
+      "accord": "Cochez cette case pour que nous puissions étudier votre candidature et vous recontacter."
+    },
+    "paysDefaut": "Cameroun",
+    "statutPret": "Votre message est prêt : envoyez-le par WhatsApp ou par e-mail.",
+    "statutEtape": "Étape {{step}} sur 3 : {{label}}.",
+    "message": {
+      "objet": "Candidature WAHHF — {{name}}",
+      "intro": "Je souhaite candidater à un parcours d’accompagnement de WAHHF Foundation. Voici mes réponses au formulaire du site :",
+      "nom": "Nom complet",
+      "email": "E-mail",
+      "telephone": "Téléphone / WhatsApp",
+      "pays": "Pays de résidence",
+      "ville": "Ville",
+      "souhait": "Souhait",
+      "session": "Session choisie",
+      "paysInteret": "Pays d’intérêt",
+      "niveau": "Niveau d’allemand /anglais",
+      "format": "Format souhaité",
+      "message": "Message",
+      "accord": "J’accepte que mes coordonnées soient traitées par WAHHF Foundation dans le seul but de répondre à ma demande d’accompagnement."
+    },
+    "envoiTitle": "Dernière étape : envoyez votre candidature",
+    "modifier": "Modifier mes réponses",
+    "rappel": "Rappel : aucun collaborateur de WAHHF ne vous demandera d’argent par téléphone, e-mail ou WhatsApp pour traiter votre dossier.",
+    "conservees": "Vos réponses restent dans ce navigateur jusqu’à la fermeture de l’onglet.",
+    "effacer": "Effacer mes réponses maintenant",
+    "effacerConseil": "(conseillé sur un téléphone ou un ordinateur partagé).",
+    "formTitle": "Votre candidature",
+    "garderTitle": "Nous avons gardé vos réponses",
+    "garderText": "Vos réponses ont été conservées dans ce navigateur. Elles seront effacées à la fermeture de l’onglet.",
+    "garderEffacer": "Effacer mes réponses et recommencer",
+    "sessionTitle": "Vous candidatez à cette session",
+    "sessionText": "Niveau {{level}}, {{format}} : {{title}}.",
+    "sessionChanger": "Changer de session",
+    "sessionNote": "(vous pourrez choisir votre niveau et votre format à l’étape 2)",
+    "position": "Étape {{step}} sur 3",
+    "etape1Text": "Ces informations servent uniquement à vous recontacter.",
+    "nomLabel": "Nom complet (prénom et nom) *",
+    "nomExemple": "Ex. Marie Nguenang",
+    "emailLabel": "Adresse e-mail *",
+    "emailExemple": "exemple@domaine.com",
+    "telephoneLabel": "Téléphone / WhatsApp *",
+    "telephoneExemple": "Ex. +237 6...",
+    "paysLabel": "Pays de résidence actuel *",
+    "villeLabel": "Ville de résidence *",
+    "villeExemple": "Ex. Douala, Yaoundé, Bafoussam, Garoua...",
+    "versEtape2": "Continuer vers l’étape 2",
+    "etape2Text": "Précisez le volet qui vous intéresse ainsi que votre niveau linguistique actuel.",
+    "souhaitLegend": "Que souhaitez-vous ? *",
+    "paysInteretLabel": "Pays d’intérêt principal parmi les 10 pays accompagnés",
+    "horsUE": "(hors Union européenne)",
+    "niveauLabel": "Niveau d’allemand /anglais actuel / visé",
+    "niveaux": {
+      "A1": "A1 — Débutant complet",
+      "A2": "A2 — Bases élémentaires",
+      "B1": "B1 — Niveau intermédiaire",
+      "B2": "B2 — Niveau avancé",
+      "C1": "C1 — Niveau académique"
+    },
+    "formatLabel": "Format souhaité",
+    "precedente": "Étape précédente",
+    "versEtape3": "Continuer vers l’étape 3",
+    "etape3Text": "Présentez brièvement votre parcours, puis validez votre demande.",
+    "messageLabel": "Message libre (études actuelles, objectifs, disponibilités)",
+    "messageExemple": "Expliquez en quelques lignes votre motivation et votre projet...",
+    "aucunDocument": "Aucun document d’identité ni aucun paiement ne vous est demandé à cette étape.",
+    "accord": "J’accepte que mes coordonnées soient traitées de manière strictement confidentielle par WAHHF Foundation dans le seul but de répondre à ma demande d’accompagnement, conformément à la <lien>politique de confidentialité<nouvel> (nouvel onglet)</nouvel></lien>. *",
+    "preparer": "Préparer l’envoi de ma candidature"
+  }
+}

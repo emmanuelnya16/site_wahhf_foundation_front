@@ -50,7 +50,7 @@ Les 89 textes encore provisoires sur le site, chacun avec sa question. Entre gui
 
 ### Sur toutes les pages (bas de page)
 
-1. Quelle adresse exacte afficher pour la fondation au Cameroun (Douala, Yaoundé) et pour la coordination en Allemagne ? Aujourd'hui : « Cameroun (Douala / Yaoundé) & Coordination Allemagne ».
+1. Quelle adresse exacte afficher pour la fondation au Cameroun (Douala, Yaoundé) et pour la coordination en Allemagne ? Aujourd'hui : « Cameroun (Douala, Yaoundé) et coordination en Allemagne ».
 2. Quelle est l'adresse de la page LinkedIn officielle de la fondation ? (Si elle n'existe pas, le lien sera retiré.)
 3. Quelle est l'adresse de la page Facebook officielle de la fondation ?
 4. Quelle est l'adresse du compte Instagram officiel de la fondation ?
@@ -188,3 +188,265 @@ Pour chaque lien, la question est la même : est-ce bien le site officiel à rec
 
 88. À quelle date le premier rapport annuel sera-t-il publié ?
 89. Pouvez-vous nous envoyer le rapport d'activité et le bilan financier dès qu'ils seront validés (fichier PDF), pour qu'ils soient publiés sur cette page ?
+
+---
+
+## Questions ajoutées par la refonte des pages Mobilité, Académie et Candidater
+
+Ces informations n'étaient pas encore sur le site. Les nouvelles pages en ont besoin pour expliquer aux jeunes ce qui se passe après leur candidature. En attendant, elles ne sont pas affichées.
+
+90. Qui peut candidater ? Y a-t-il un âge minimum ou maximum, un diplôme ou un niveau d'études demandé ?
+91. Comment les places sont-elles attribuées quand il y a plus de candidats que de places (ordre d'arrivée, test, entretien, autre) ?
+92. Sous quel délai l'équipe répond-elle à une candidature ?
+93. Y a-t-il une date limite pour candidater à chaque session ?
+94. Que se passe-t-il quand une session est complète : liste d'attente, report à la session suivante ?
+95. Reste-t-il des frais à la charge du jeune (par exemple les frais d'inscription aux examens officiels, les manuels, le transport) ? Si oui, lesquels et combien ?
+96. Pouvez-vous nous envoyer des photos de vrais cours d'allemand (salle, formateurs, apprenants), avec l'accord des personnes photographiées ? La page de l'Académie n'a aujourd'hui aucune photo.
+
+---
+
+## Questions ajoutées par la refonte des pages Faire un don, Agir, Contact et Transparence
+
+Le site ne présente plus de faux paiement : en attendant vos moyens de don (demande D), le donateur choisit un montant et vous envoie un message par WhatsApp ou par e-mail, et c'est vous qui lui indiquez comment régler. Les informations ci-dessous manquent encore ; en attendant, elles ne sont pas affichées.
+
+### Page « Faire un don »
+
+Les questions 63 à 71 restent valables. Les exemples de la question 67 (« 25 € = manuels A1 »…) ne sont plus affichés, et la case à cocher de la question 66 a été remplacée par une phrase d'information. La ligne « À quoi servira votre don » ne décrit le programme que pour Mobilité & Langues : pour les autres domaines, elle attend la réponse à la question 117. Voir aussi la question 138, à la fin de ce document.
+
+97. Quand un donateur choisit un domaine (par exemple la santé), son don sert-il uniquement à ce domaine ?
+98. Faut-il un montant minimum ou maximum pour un don ? Aujourd'hui : « entre 5 € et 10 000 € » et « entre 3 000 FCFA et 6 500 000 FCFA ».
+99. Les donateurs peuvent-ils donner chaque mois ? Si oui, à quelle date le don est-il pris, et comment le donateur peut-il l'arrêter ?
+100. Les noms des donateurs sont-ils publiés quelque part (liste, rapport) ? Si oui, un donateur peut-il demander à rester anonyme ?
+101. Qui répond aux questions des donateurs (nom, fonction, e-mail ou téléphone) ?
+
+### Page « Agir »
+
+102. Que fait concrètement un bénévole (par exemple donner des cours d'allemand, aider aux journées de santé) ? Combien d'heures par semaine, et où (en ligne, à Douala, à Yaoundé, en Allemagne) ?
+103. Quel profil recherchez-vous pour les bénévoles (compétences, niveau d'allemand, âge minimum) ?
+104. Que proposez-vous aux écoles, universités, associations et entreprises qui veulent devenir partenaires (financer un programme, accueillir des stagiaires, envoyer des enseignants, donner du matériel) ?
+105. Qui est la personne à contacter pour les partenariats (nom, fonction, e-mail) ?
+106. Sous quel délai répondez-vous à une proposition de bénévolat ou de partenariat ? Ce délai n'est plus affiché ; avant : « sous 7 à 14 jours ouvrés ».
+107. Avez-vous des photos de bénévoles au travail, avec leur accord, pour la page « Agir » ?
+
+### Page « Contact »
+
+Le numéro, l'e-mail et l'adresse sont ceux de la demande E et de la question 1 : ils sont maintenant écrits à un seul endroit du site, et la page Contact, le bas de page et le bouton WhatsApp les affichent tous de la même façon.
+
+### Page « Transparence »
+
+Tant que ces informations manquent, la page reste en ligne mais aucun lien n'y mène (ni le bas de page, ni « Notre impact », ni la page de don). Les questions 88 et 89 restent valables.
+
+108. Quelle part du budget de la fondation vient de son financeur principal, et quelle part vient des dons ?
+109. Comment les dons sont-ils répartis entre les domaines d'action (cours d'allemand, éducation, santé, autres) ?
+110. Les comptes de la fondation sont-ils vérifiés par un expert-comptable ou un commissaire aux comptes ?
+111. À qui un donateur ou une institution peut-il poser une question sur les finances de la fondation (nom, e-mail) ?
+
+---
+
+## Questions ajoutées par la refonte des pages Qui sommes-nous, Nos actions, Notre impact, Partenaires, Galerie et Actualités
+
+Sur ces pages, ce qui n'est pas encore confirmé n'est plus affiché : la partie « Gouvernance », les années de la frise, les chiffres d'exemple, les catégories de partenaires « à confirmer », les lieux et dates « à confirmer » des albums et les trois articles d'exemple. Vos réponses permettront de les remettre en ligne.
+
+### Page « Qui sommes-nous »
+
+Les questions 84 à 87 restent valables : la partie « Gouvernance » et le lien « Équipe & Gouvernance » du bas de page reviendront avec les noms. Les questions 101 et 105 (personnes à contacter) valent aussi pour la fin de cette page.
+
+112. En quelle année l'initiative solidaire a-t-elle commencé ? L'année « 2021 », non confirmée, n'est plus affichée.
+113. En quelle année WAHHF Foundation a-t-elle été organisée en fondation ? L'année « 2023 », non confirmée, n'est plus affichée.
+114. En quelle année la fondation est-elle devenue la branche sociale du groupe IROKO ? L'année « 2025 », non confirmée, n'est plus affichée.
+115. Les quatre grandes étapes de la frise sont-elles exactes : les premières actions d'entraide entre le Cameroun et la diaspora en Allemagne, l'organisation en fondation, le rattachement au groupe IROKO, puis l'ouverture de l'Académie d'allemand en 2026 ? Faut-il ajouter le First Open Day du 25 avril 2026 ?
+116. Qui décide des programmes de la fondation (un conseil, un comité, la direction) ? Qu'est-ce qui garantit son indépendance vis-à-vis du groupe IROKO ? En attendant, le site ne dit plus « indépendante ».
+
+### Page « Nos actions »
+
+117. Pour chaque programme des six domaines (par exemple « Kits scolaires et manuels pour les élèves en zone rurale »), est-il déjà réalisé, en cours ou seulement prévu ? Si possible, dites où, quand et pour combien de personnes.
+118. Avez-vous de vraies photos des actions Santé, Entrepreneuriat des jeunes et Environnement ? En attendant, ces trois domaines s'affichent sans photo (les images précédentes avaient été créées par ordinateur).
+119. Les six domaines du site (éducation, santé, entrepreneuriat des jeunes, environnement, droits et inclusion, Mobilité & Langues) sont-ils bien ceux de la fondation ? Les kakémonos de l'Open Day en citent d'autres (moyens de subsistance, agriculture et élevage…).
+
+### Page « Notre impact »
+
+Les questions 6, 7, 79 et 80 restent valables : les chiffres d'exemple et les lignes « à confirmer » de la carte ne sont plus affichés sur cette page. Les chiffres reviendront dès que vous en aurez fourni au moins deux, chacun avec sa date et sa source.
+
+### Page « Partenaires »
+
+Les questions 81 à 83, 104, 105 et 108 restent valables. La partie « Ce que nous proposons » s'affichera dès la réponse à la question 104.
+
+120. La description du groupe IROKO est-elle juste et à jour ? Aujourd'hui : « un groupe camerouno-allemand organisé autour d'une holding et de neuf pôles d'activité, en trois familles ; son pôle de communication et d'événementiel, IROKO Event, est en activité, les autres sont annoncés ».
+121. Dans quelles villes et dans quels pays le groupe IROKO est-il installé ?
+122. Le groupe IROKO a-t-il un site internet que nous pouvons indiquer ? Si oui, à quelle adresse ?
+
+### Page « Galerie »
+
+Les questions 72 et 73 restent valables, ainsi que la demande B (autorisations de publication des photos).
+
+123. Combien de jeunes et combien d'encadrants ont participé au First Open Day & Boot Camp du 25 avril 2026 ?
+124. Qu'a apporté le Boot Camp (par exemple : nombre de jeunes inscrits ensuite aux cours, nombre de candidatures) ?
+125. Pour les albums « Rencontres de la communauté » et « Sur le terrain », pouvez-vous écrire deux ou trois phrases : ce qui s'est passé, avec qui, et pour quel projet ?
+126. La musique de l'extrait vidéo de la chorale peut-elle être diffusée sur le site (droits d'auteur) ?
+
+### Page « Actualités »
+
+Les questions 55 à 57 restent valables : les trois articles d'exemple ne sont plus affichés.
+
+127. Souhaitez-vous publier un premier article sur le First Open Day & Boot Camp du 25 avril 2026 ? Si oui, envoyez un court texte (ce qui s'est passé, le nombre de participants, la suite) et dites quelles photos utiliser.
+128. Si l'annonce de l'ouverture des candidatures doit revenir, quelles informations y mettre : date limite, date de début des cours, en ligne ou sur place, nombre de places ?
+
+---
+
+## Questions ajoutées par la refonte des pages Accompagnement vers l'Europe, fiches pays et Éviter les arnaques
+
+Sur ces pages, ce qui n'est pas encore confirmé n'est plus affiché : les mentions « à vérifier » des liens officiels, l'adresse de signalement « integrite@wahhf-foundation.org » et la phrase « pays partenaire historique de la fondation » de la fiche Allemagne. Vos réponses permettront d'afficher la date de vérification des fiches et de compléter la page des arnaques.
+
+### Fiches pays
+
+Les questions 34 à 54 (chaque lien officiel est-il le bon ?) restent valables.
+
+129. À quelle date avez-vous vérifié les liens officiels de chaque fiche pays ? Dès que vous nous donnez la date d'un lien, la fiche affiche « Lien vérifié le … » sous ce lien ; quand tous les liens d'une fiche sont datés, elle l'écrit aussi sous son titre.
+130. Qui vérifie les fiches pays dans la fondation (fonction) ? Faut-il l'écrire sur la fiche (« Vérifié le … par … ») ?
+131. L'Allemagne est-elle un « pays partenaire historique » de la fondation ? Si oui, en quoi (partenaires, depuis quand) ? Cette phrase n'est plus affichée.
+132. Souhaitez-vous que la fiche Allemagne parle aussi de la carte d'opportunité (Chancenkarte), de la carte bleue européenne et du compte bloqué demandé pour un visa d'études ? Si oui, pouvez-vous nous envoyer le texte, ou relire celui que nous vous proposerons ?
+133. Pour chaque pays, combien de temps faut-il prévoir pour les démarches, et combien coûtent-elles (visa, traductions, légalisations) ?
+
+### Page « Éviter les arnaques »
+
+La question 33 (l'adresse « integrite@wahhf-foundation.org » existe-t-elle ?) reste valable. En attendant, la page renvoie au numéro WhatsApp et à l'adresse de contact.
+
+134. Le numéro WhatsApp +237 693 12 92 05 et l'adresse contact@wahhf-foundation.org sont-ils les seuls moyens officiels de joindre la fondation ? La page dit : « Tout autre numéro ou adresse qui se présente comme WAHHF Foundation n'est pas le nôtre. » Est-ce exact ?
+135. Qui lit les signalements d'arnaque envoyés sur WhatsApp ou par e-mail, et sous quel délai répondez-vous ?
+136. Comment une personne peut-elle vérifier qu'un interlocuteur fait vraiment partie de WAHHF Foundation ?
+137. Que conseillez-vous à une personne qui a déjà payé un faux intermédiaire (porter plainte, et auprès de qui au Cameroun) ?
+
+---
+
+## Question ajoutée après la relecture des pages Faire un don, Agir, Contact et Transparence
+
+### Page « Faire un don »
+
+138. Quand un donateur vous écrit pour faire un don, qui lui répond, et depuis quel numéro ou quelle adresse ? La page de don dit aujourd'hui : « la fondation vous répond seulement par WhatsApp au +237 693 12 92 05 ou par e-mail depuis contact@wahhf-foundation.org. Si quelqu'un vous écrit d'un autre numéro ou d'une autre adresse au sujet de votre don, ne payez rien et prévenez-nous. » Est-ce exact ?
+
+---
+
+## Question ajoutée après la relecture des pages Qui sommes-nous, Nos actions, Notre impact, Partenaires, Galerie et Actualités
+
+### Page « Qui sommes-nous »
+
+Le statut juridique de la fondation, attendu aussi sur cette page, est demandé plus haut (demande A).
+
+139. Quel slogan voulez-vous afficher en tête de la page « Qui sommes-nous » ? Sur les t-shirts de l'Open Day, on lit : « Bâtir l'Afrique qui nourrit, soigne et instruit sa jeunesse ». Est-ce le slogan officiel de la fondation ?
+
+---
+
+## Question ajoutée avec la mise en page des pages légales
+
+### Pages « Mentions légales » et « Confidentialité »
+
+140. Quand le juriste vous remettra les textes des mentions légales et de la politique de confidentialité, de quelle date faudra-t-il les dater ? Aujourd'hui, les deux pages affichent « Mise à jour le 15 novembre 2026 » : c'est la date à laquelle les textes actuels figurent déjà dans le projet, pas celle d'une relecture juridique.
+
+---
+
+## Question ajoutée avec les photos de la fondation (lot 7.6)
+
+### Toutes les pages qui montrent des photos
+
+141. Avez-vous l'autorisation écrite des parents pour les photos de mineurs du 25 avril et des sorties ? Liste des photos concernées (51, repères de docs/photos-catalogue.md) :
+
+- Journée du 25 avril 2026 — Albatros Hotel : mineurs identifiables : A33, A36, A80, A81, A83, A85, A87, A89, A90, A92, A95, A97 ; à vérifier : A17, A18, A23, A26, A27, A29, A37, A38, A48, A51, A56, A57, A59, A60.
+- Visite de terrain dans une plantation : à vérifier : B03, B04, B10, B13, B16, B17, B20, B21, B26, B27.
+- Sortie à Nkongsamba : à vérifier : B51, B53, B56.
+- Randonnée avec les jeunes : mineurs identifiables : B60, B62, B63, B65, B68, B69, B73, B75, B77, B80, B82, B84.
+
+Pour les photos « à vérifier », il suffit de nous dire si toutes les personnes reconnaissables sont majeures. Tant que l'accord n'est pas confirmé, ces photos ne s'affichent pas sur le site en ligne ; des photos d'adultes ou de personnes vues de dos les remplacent.
+
+### Page « Nos actions »
+
+142. Avez-vous des photos d’une action de santé de la fondation (consultation, prévention, sensibilisation), avec l’accord des personnes visibles ? Aujourd’hui, faute de mieux, le domaine Santé est illustré par l’intervenant devant le pictogramme « Santé » de vos domaines (A63, journée du 25 avril), sur l’accueil et sur Nos actions.
+
+### Page introuvable (erreur 404)
+
+143. Sous la photo du lac de cratère, la page introuvable dit : « On s’est perdus en route. » Ce clin d’œil vous convient-il, ou préférez-vous une phrase plus sobre ?
+
+---
+
+## Questions ajoutées avec les portraits de l’équipe (lot 7.7)
+
+### Page « Qui sommes-nous » (portraits et organigramme)
+
+144. Pouvez-vous nous envoyer des portraits en meilleure définition, idéalement 1 200 px de haut, sur un fond simple ? Deux des portraits reçus font environ 500 px de large (Ing. Pr. Christian Wilberg et Prof. Dr.-Ing. Christian-Toralf Weber) : ils restent petits à l’écran.
+145. Quels sont les noms complets exacts, avec leur orthographe ? Aujourd’hui : « Marrion Watio Notesse » (le fichier reçu écrit « wation »), « Ing. Pr. Christian Wilberg », « Prof. Dr.-Ing. Christian-Toralf Weber » (écrit « Prof Dr ing » dans votre message du 20 novembre 2026 ; nous l’écrivons à l’allemande) et « Wilfried » (nom de famille à nous donner).
+146. Dans quel ordre hiérarchique faut-il les présenter ? Aujourd’hui : Président, Vice-président, Prof. Dr.-Ing. Christian-Toralf Weber, Secrétaire général.
+147. Qui est la 3e personne (photo « 3 eme personne ilfluente de la fondation ») : son nom et son rôle dans la fondation ? **Réponse du 20 novembre 2026** : Prof. Dr.-Ing. Christian-Toralf Weber, sans rôle (« juste son nom »). L’organigramme affiche son nom seul, avec le portrait « 3 eme personne ilfluente de la fondation » : dites-nous si ce portrait n’est pas le sien.
+148. Pouvez-vous écrire deux phrases sur chaque personne (son parcours, ce qu’elle fait pour la fondation) ? Sans elles, l’organigramme n’affiche que le nom et le rôle (le nom seul pour Prof. Dr.-Ing. Christian-Toralf Weber).
+149. Avez-vous l’accord écrit de chacun pour publier son portrait sur le site ? Tant qu’il manque, les portraits ne s’affichent pas sur le site en ligne (les noms et les rôles, si).
+
+---
+
+## Questions ajoutées avec les cinq principes (lot 7.8)
+
+### Page « Qui sommes-nous » (section « Cinq principes qui guident chaque projet »)
+
+150. La carte qui termine le parcours s’intitule « Ces principes, sur le terrain », sous la rubrique « Sur le terrain », avec le bouton « Voir nos actions ». Ce titre vous convient-il ?
+151. Les traductions anglaises de la section sont des propositions, à valider : « Principle 01 / 05 » (compteur), « Scroll to go through the 5 principles · WAHHF Foundation » (consigne), les cinq principes (« Listening », « Co-construction », « Sustainability », « Transparency », « Partnerships », avec leur phrase), les étiquettes (« Youth · Mothers · Field », « Teachers · Health workers · Associations », « Languages · Trades · Ecology », « Use of funds », « IROKO · Cameroon · Europe ») et la carte finale (« On the ground », « These principles, on the ground », « See our actions »). Le texte complet est dans src/locales/principles/en.json.
+
+---
+
+## Questions ajoutées avec l’anglais à l’Académie (20 novembre 2026)
+
+### Académie de langues (allemand et anglais)
+
+152. Le test de niveau (20 questions) et les pages de niveau A1 à C1 décrivent l’allemand : questions en allemand, objectifs « en allemand », sessions, préparation au TestDaF et à l’Ausbildung. Existe-t-il un test et un programme d’anglais par niveau ? Tant que nous ne les avons pas, le test, son bouton sur l’accueil (« Passer le test d’allemand gratuit ») et les pages de niveau restent consacrés à l’allemand.
+153. Le formulaire de candidature ne demande pas quelle langue la personne veut apprendre. Faut-il ajouter un choix « allemand » ou « anglais » ?
+154. « WAHHF Institute » apparaît désormais dans le titre de l’Académie. Est-ce le nom de l’Académie de langues ? Faut-il le présenter ailleurs (Partenaires, Qui sommes-nous), ou remplacer « Académie WAHHF » dans les autres textes ?
+155. La frise « Les grandes étapes » (Qui sommes-nous) dit « Ouverture de l’Académie d’allemand gratuite (A1 à C1) ». L’anglais était-il proposé dès l’ouverture, ou faut-il ajouter une étape ?
+
+---
+
+## Questions ajoutées avec la page Événements (lot 7.9)
+
+### Journée du 25 avril 2026 (fiche /evenements/journee-2026-04-25)
+
+Seuls les faits de la banderole (photo A02) sont affichés en ligne : WAHHF Foundation, Albatros Hotel, 25 avril 2026, 8 h à 21 h, « Bâtir l’Afrique qui nourrit, soigne et instruit sa jeunesse ». Tant que les réponses manquent, les sections concernées restent masquées sur le site en ligne.
+
+156. Quel est le nom exact de la journée ? Aujourd’hui, le titre est « Journée du 25 avril 2026 à l’Albatros Hotel ».
+157. Dans quelle ville se trouve l’Albatros Hotel ? Le panneau « L’événement a eu lieu à » affiche le nom de l’hôtel faute de ville.
+158. Qui a organisé la journée avec la fondation (partenaires, logos à nous envoyer) ?
+159. Quel était le déroulé de la journée (heures, titres, une phrase par moment) ?
+160. Quelles activités voulez-vous montrer ? **Réponse du 20 novembre 2026** : les six « Activités » de la banderole (formations gratuites, logiciels gratuits, accompagnement des startups, équipement des hôpitaux, subvention du meilleur projet, transfert technologique Allemagne–Cameroun), titre et domaine seulement ; photos A17 (en ligne, A30 la remplace tant que l’accord des parents manque), A22, A41, A53 ; hôpitaux et subvention sans photo. Une phrase par activité reste possible : elle s’afficherait sous le titre.
+161. Pourquoi venir : quatre raisons, avec un titre et une phrase chacune. **Réponse du 20 novembre 2026** : les quatre « Points forts » de la banderole (gratuit, networking professionnel, un professeur venu d’Allemagne, accompagnement voyage), avec vos phrases.
+162. Le programme en un coup d’œil : quatre temps forts (titre et phrase).
+163. Qui a pris la parole ce jour-là (personnes de l’organigramme ou invités) ?
+164. Pour les parents, ces engagements sont-ils exacts ? « Une autorisation écrite des parents pour chaque mineur », « Des jeunes encadrés par l’équipe de la fondation pendant toute la journée », « Une entrée gratuite, ou un prix clair annoncé à l’avance » ; et ce que la fondation ne promettra jamais : « Une promesse de visa », « Une promesse d’emploi », « Des frais cachés ou payés à un intermédiaire ».
+165. Les six questions de la FAQ et leurs réponses (lieu et date, public, prix, mineurs, prochaine édition, partenariat).
+166. Photo de l’appel final : votre brief demande B26 (photo de groupe en gilets), qui vient de l’album « Terrain agricole », pas du 25 avril, et attend l’accord des parents ; en ligne, A61 la remplace. Gardez-vous B26 ?
+
+### Prochains événements
+
+167. Y a-t-il un prochain événement à annoncer (date, heures, lieu, ville, lien d’inscription, nombre de places si vous le suivez) ? La page /evenements dit aujourd’hui qu’aucun événement n’est annoncé.
+168. Le nombre de places restantes ne s’affiche que s’il vient d’une vraie source (votre billetterie ou votre liste d’inscrits) : comment le tiendrez-vous à jour ?
+169. Les textes anglais des pages Événements (src/locales/events/en.json) sont des propositions, à valider.
+170. La banderole du 25 avril (photo A02) développe le sigle en « Watio Hearts Humanitary Foundation », alors que le site écrit partout « WAHHF Foundation (We Are Here Help Foundation) ». Quel est le nom complet exact ? Le site n’a pas été modifié.
+    - Constat (22 novembre 2026) : la banderole de l’événement du 25 avril (photo A02) écrit « WAHHF Foundation – Watio Hearts Humanitary Foundation », alors que le titre des pages du site dit « WAHHF Foundation — We Are Here Help Foundation » (dans les trois langues). Rien ne sera changé sur le site tant que la fondation n’aura pas répondu.
+
+---
+
+## Questions ajoutées avec Road to Europe (lot 7.9 bis, 21 novembre 2026)
+
+Fiche /evenements/road-to-europe. Les faits se remplissent en un seul endroit : `ROAD_TO_EUROPE_FAITS` en tête de src/data/events.ts. Tant qu’un fait manque, la page affiche « annoncé(e) très bientôt » à sa place (jamais un faux chiffre).
+
+171. Date de Road to Europe (samedi … 2027) et horaires (8 h – 18 h ?).
+172. Ville et nom de la salle (Yaoundé, Cameroun ?).
+173. Prix : gratuit, ou montant en FCFA, écrit dans les trois langues du site (par exemple « Gratuit », « Free », « Kostenlos », ou « 5 000 FCFA », « 5,000 FCFA », « 5.000 FCFA ») : `prix` de `ROAD_TO_EUROPE_FAITS`. Une langue laissée vide affiche « annoncé très bientôt » dans cette langue.
+174. Places restantes : un nombre tenu à jour, ou ne pas l’afficher.
+175. Inscription : lien du formulaire, WhatsApp, ou la page Candidater. Tant qu’il manque, les boutons « Réserver ma place » affichent « Inscriptions annoncées très bientôt » et ne mènent nulle part.
+176. Organisateurs et partenaires (logos) : aujourd’hui, WAHHF Foundation seulement.
+177. Intervenants : la barre dit « annoncés très bientôt ».
+178. Les textes anglais de la fiche (src/locales/events/en.json, contenu) sont des propositions, à valider.
+
+---
+
+## Questions ajoutées avec l'allemand (lot 7.10, 22 novembre 2026)
+
+Le site existe maintenant en français, en anglais et en allemand (sélecteur FR / EN / DE dans l'en-tête). Les textes anglais et allemands sont des traductions proposées : la liste à relire est dans docs/traductions-de-a-relire.md.
+
+179. La fondation est-elle enregistrée en Allemagne (e.V. ou autre) ? Si oui, il faut un Impressum et une Datenschutzerklärung en allemand rédigés par un juriste. Aujourd'hui, en allemand, les pages Mentions légales, Confidentialité et Transparence affichent la version française avec la mention « Diese Seite ist derzeit nur auf Französisch verfügbar. », et le lien du pied de page s'appelle « Impressum ».
+180. Qui relira l'allemand ? Les chaînes marquées d'un astérisque dans docs/traductions-de-a-relire.md sont celles dont le sens ou le terme est incertain (noms d'institutions, termes juridiques, ton).
+181. Les noms des régions du Cameroun restent en français dans la version allemande (Littoral, Centre, Ouest…), comme dans la plupart des sources allemandes ; en anglais, ils prennent leurs noms officiels anglais (West, South-West, Far North…). Ce choix vous convient-il ?

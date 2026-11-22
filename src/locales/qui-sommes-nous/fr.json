@@ -1,0 +1,36 @@
+{
+  "seo": {
+    "title": "Qui sommes-nous — Fondation camerouno-allemande, branche sociale du groupe IROKO",
+    "description": "Découvrez l’histoire, la mission, les valeurs et l’approche de WAHHF Foundation, et son lien avec le groupe IROKO."
+  },
+  "mission": {
+    "title": "Bâtir l’autonomie par l’éducation, la santé et l’accès au savoir",
+    "p1": "WAHHF Foundation part d’une conviction simple : chaque jeune mérite d’accéder à l’éducation, aux soins de prévention, à l’apprentissage des langues et à une information vérifiée, sans que le manque de ressources financières ou les réseaux de désinformation ne brisent son avenir.",
+    "p2": "Basée à Yaoundé et à Douala, avec une coordination en Allemagne, la fondation propose un programme gratuit d’apprentissage de l’allemand /anglais (A1 à C1) et d’orientation vers 10 pays européens."
+  },
+  "values": [
+    {
+      "title": "Dignité et respect",
+      "desc": "Chaque bénéficiaire est accueilli comme un acteur de son propre parcours, jamais comme un client."
+    },
+    {
+      "title": "Intégrité et vérité",
+      "desc": "Nous combattons les fausses promesses migratoires par une information rigoureuse et vérifiable."
+    }
+  ],
+  "presidentAlt": "{{name}}, {{role}}, pendant sa présentation",
+  "timeline": {
+    "title": "Les grandes étapes de WAHHF Foundation",
+    "subtitle": "Une construction progressive au service des communautés."
+  },
+  "iroko": {
+    "title": "WAHHF Foundation, branche sociale du groupe IROKO",
+    "text": "Le groupe multisectoriel camerouno-allemand IROKO a structuré WAHHF Foundation comme sa branche sociale et philanthropique, à but non lucratif. Ce soutien couvre les frais de fonctionnement et d’enseignement.",
+    "partners": "Découvrir nos partenaires"
+  },
+  "support": {
+    "title": "Soutenir la fondation",
+    "subtitle": "Vous pouvez soutenir nos actions par un don, ou proposer un partenariat à la fondation : école, association, entreprise ou institution.",
+    "partner": "Devenir partenaire"
+  }
+}

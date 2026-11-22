@@ -1,4 +1,5 @@
 import { Component, ErrorInfo, ReactNode } from 'react';
+import i18n from '../../i18n';
 
 interface ChunkErrorBoundaryProps {
   children: ReactNode;
@@ -40,16 +41,14 @@ export default class ChunkErrorBoundary extends Component<ChunkErrorBoundaryProp
         } ${className}`}
       >
         <p className={isPage ? 'font-serif text-2xl' : 'text-sm'}>
-          {isPage
-            ? 'Cette page n’a pas pu se charger. Vérifiez votre connexion.'
-            : 'Le contenu n’a pas pu se charger.'}
+          {isPage ? i18n.t('ui.chunkError.page') : i18n.t('ui.chunkError.block')}
         </p>
         <button
           type="button"
           onClick={() => window.location.reload()}
           className="px-5 py-2.5 rounded-pill bg-action text-on-action text-sm font-semibold cursor-pointer"
         >
-          Réessayer
+          {i18n.t('ui.chunkError.retry')}
         </button>
       </div>
     );

@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, type ComponentType } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 // framer-motion : le même paquet que motion/react (14.14), importé sans passer par le fichier d'entrée de motion/react,
 // qui embarque toujours motion.div complet : le premier chargement n'a que m, AnimatePresence et LazyMotion (lot 7).
@@ -9,35 +9,55 @@ import PageTransition, { routeKey } from './effects/PageTransition';
 import ChunkErrorBoundary from './components/wahhf/ChunkErrorBoundary';
 // L'accueil reste dans le fichier principal (page d'entrée la plus fréquente : pas d'aller-retour réseau).
 import Home from './pages/Home';
+import { bundlesReady } from './i18n';
+
+/**
+ * Page chargée à la demande (lot 7.10) : son JS, puis, en anglais ou en allemand, son paquet de textes. Elle s'affiche
+ * directement dans la langue choisie, sans passer par le français.
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function page<P = any>(load: () => Promise<{ default: ComponentType<P> }>) {
+  return lazy(() => load().then(async (m) => {
+    await bundlesReady();
+    return m;
+  }));
+}
 
 // Toutes les autres pages sont chargées à la demande.
-const MobilityHub = lazy(() => import('./pages/MobilityHub'));
-const LanguageAcademy = lazy(() => import('./pages/LanguageAcademy'));
-const EuropeSupport = lazy(() => import('./pages/EuropeSupport'));
-const ApplyPage = lazy(() => import('./pages/ApplyPage'));
-const DonatePage = lazy(() => import('./pages/DonatePage'));
-const transversal = () => import('./pages/TransversalPages');
-const QuiSommesNousPage = lazy(() => transversal().then((m) => ({ default: m.QuiSommesNousPage })));
-const PartenairesPage = lazy(() => transversal().then((m) => ({ default: m.PartenairesPage })));
-const NosActionsPage = lazy(() => transversal().then((m) => ({ default: m.NosActionsPage })));
-const NotreImpactPage = lazy(() => transversal().then((m) => ({ default: m.NotreImpactPage })));
-const ActualitesPage = lazy(() => transversal().then((m) => ({ default: m.ActualitesPage })));
-const AgirPage = lazy(() => transversal().then((m) => ({ default: m.AgirPage })));
-const LegalTransparencyPage = lazy(() =>
-  transversal().then((m) => ({ default: m.LegalTransparencyPage }))
-);
+const MobilityHub = page(() => import('./pages/MobilityHub'));
+const LanguageAcademy = page(() => import('./pages/LanguageAcademy'));
+// Pages de niveau : de vraies pages qui ouvrent sur le niveau (NIV-01, groupe 7.1)
+const LanguageLevelPage = page(() => import('./pages/LanguageLevelPage'));
+// Accompagnement vers l'Europe : un fichier par gabarit (page principale, fiche pays, guide), un morceau de JS chacun
+const AccompagnementPage = page(() => import('./pages/accompagnement/AccompagnementPage'));
+const CountryPage = page(() => import('./pages/accompagnement/CountryPage'));
+const GuidePage = page(() => import('./pages/accompagnement/GuidePage'));
+// « Éviter les arnaques » : une forme propre (groupe 7.4, ARN-04), plus le gabarit des guides
+const ArnaquesPage = page(() => import('./pages/accompagnement/ArnaquesPage'));
+const ApplyPage = page(() => import('./pages/ApplyPage'));
+const DonatePage = page(() => import('./pages/DonatePage'));
+// Une page par fichier (src/pages/transversal/), un morceau de JS par page
+const QuiSommesNousPage = page(() => import('./pages/transversal/QuiSommesNousPage'));
+const PartenairesPage = page(() => import('./pages/transversal/PartenairesPage'));
+const NosActionsPage = page(() => import('./pages/transversal/NosActionsPage'));
+const NotreImpactPage = page(() => import('./pages/transversal/NotreImpactPage'));
+const ActualitesPage = page(() => import('./pages/transversal/ActualitesPage'));
+const EventsListPage = page(() => import('./pages/events/EventsListPage'));
+const EventPage = page(() => import('./pages/events/EventPage'));
+const AgirPage = page(() => import('./pages/transversal/AgirPage'));
+const LegalTransparencyPage = page(() => import('./pages/transversal/LegalTransparencyPage'));
 
 // Pages existantes conservées intégralement (Règle générale : ne rien supprimer)
-const About = lazy(() => import('./pages/About'));
-const Structure = lazy(() => import('./pages/Structure'));
-const Catalogue = lazy(() => import('./pages/Catalogue'));
-const Tarifs = lazy(() => import('./pages/Tarifs'));
-const Realisation = lazy(() => import('./pages/Realisation'));
-const Founders = lazy(() => import('./pages/Founders'));
-const GalleryPage = lazy(() => import('./pages/GalleryPage'));
-const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
-const ContactPage = lazy(() => import('./pages/ContactPage'));
-const VkiBusiness = lazy(() => import('./pages/VkiBusiness'));
+const About = page(() => import('./pages/About'));
+const Structure = page(() => import('./pages/Structure'));
+const Catalogue = page(() => import('./pages/Catalogue'));
+const Tarifs = page(() => import('./pages/Tarifs'));
+const Realisation = page(() => import('./pages/Realisation'));
+const Founders = page(() => import('./pages/Founders'));
+const GalleryPage = page(() => import('./pages/GalleryPage'));
+const NotFoundPage = page(() => import('./pages/NotFoundPage'));
+const ContactPage = page(() => import('./pages/ContactPage'));
+const VkiBusiness = page(() => import('./pages/VkiBusiness'));
 
 /** Espace réservé pendant le chargement d'une page : garde la hauteur, aucun saut de mise en page. */
 function PageFallback() {
@@ -66,6 +86,9 @@ function AppRoutes() {
         <Route path="/galerie" element={<GalleryPage />} />
         <Route path="/actualites" element={<ActualitesPage />} />
         <Route path="/actualites/:slug" element={<ActualitesPage />} />
+        {/* Lot 7.9 : événements (liste et fiche) */}
+        <Route path="/evenements" element={<EventsListPage />} />
+        <Route path="/evenements/:slug" element={<EventPage />} />
         <Route path="/partenaires" element={<PartenairesPage />} />
         <Route path="/agir" element={<AgirPage />} />
         <Route path="/faire-un-don" element={<DonatePage />} />
@@ -74,10 +97,11 @@ function AppRoutes() {
         {/* DOMAINE 06 : MOBILITÉ & LANGUES (ACADÉMIE D'ALLEMAND A1–C1 & EUROPE) */}
         <Route path="/mobilite-langues" element={<MobilityHub />} />
         <Route path="/mobilite-langues/academie" element={<LanguageAcademy />} />
-        <Route path="/academie/:level" element={<LanguageAcademy />} />
-        <Route path="/mobilite-langues/accompagnement" element={<EuropeSupport />} />
-        <Route path="/accompagnement/pays/:countrySlug" element={<EuropeSupport />} />
-        <Route path="/accompagnement/:topicSlug" element={<EuropeSupport />} />
+        <Route path="/academie/:level" element={<LanguageLevelPage />} />
+        <Route path="/mobilite-langues/accompagnement" element={<AccompagnementPage />} />
+        <Route path="/accompagnement/pays/:countrySlug" element={<CountryPage />} />
+        <Route path="/accompagnement/eviter-les-arnaques" element={<ArnaquesPage />} />
+        <Route path="/accompagnement/:topicSlug" element={<GuidePage />} />
         <Route path="/candidater" element={<ApplyPage />} />
 
         {/* PAGES TRANSVERSALES & RGPD */}

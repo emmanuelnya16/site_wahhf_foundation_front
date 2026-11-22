@@ -1,0 +1,12 @@
+{
+  "seo": {
+    "title": "Nos 6 domaines d'action — Éducation, santé, entrepreneuriat, environnement, droits, mobilité",
+    "description": "Découvrez les 6 domaines d'intervention de WAHHF Foundation au Cameroun et vers l'Europe, et soutenez celui de votre choix."
+  },
+  "title": "Agir sur tous les leviers de l’autonomie humaine",
+  "intro": "Éducation, santé, entrepreneuriat des jeunes, environnement, droits et inclusion, Mobilité & Langues : les six domaines où la fondation agit. Vous pouvez soutenir celui de votre choix.",
+  "navLabel": "Les six domaines",
+  "discoverMobility": "Découvrir Mobilité & Langues",
+  "support": "Soutenir ce domaine",
+  "supportLabel": "Soutenir ce domaine : {{domain}}"
+}

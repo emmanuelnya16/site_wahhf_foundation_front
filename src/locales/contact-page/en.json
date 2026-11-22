@@ -1,0 +1,62 @@
+{
+  "seo": {
+    "title": "Contact — Write to WAHHF Foundation",
+    "description": "Contact WAHHF Foundation by WhatsApp or by email: applications, volunteering, partnerships, press or any other request."
+  },
+  "vigilance": {
+    "title": "Stay alert",
+    "text": "No WAHHF staff member will ask you for money by phone, email or WhatsApp to process your application file.",
+    "link": "Spot a fake offer"
+  },
+  "header": {
+    "title": "Write to WAHHF Foundation",
+    "intro": "Reach us directly by WhatsApp or by email, or use the form: it prepares your message according to its purpose."
+  },
+  "direct": {
+    "title": "Reach us directly",
+    "whatsapp": "Write on WhatsApp",
+    "greeting": "Hello WAHHF Foundation, "
+  },
+  "status": {
+    "ready": "Your message is ready: send it by WhatsApp or by email."
+  },
+  "handoff": {
+    "title": "Last step: send your message",
+    "edit": "Edit my answers"
+  },
+  "form": {
+    "title": "Your message",
+    "motifLegend": "Purpose of your message *",
+    "name": "Full name or organisation *",
+    "email": "Email address *",
+    "whatsapp": "WhatsApp number (optional)",
+    "whatsappPlaceholder": "E.g. +237 6...",
+    "message": "Your message *",
+    "consent": "I agree to WAHHF Foundation processing my contact details to reply to my message, in accordance with the <lien>privacy policy<sr> (new tab)</sr></lien>. *",
+    "submit": "Prepare to send my message"
+  },
+  "motifs": {
+    "candidat": "I am an applicant (German/English courses, support)",
+    "benevole": "I would like to become a volunteer",
+    "partenaire": "Partner or institution",
+    "presse": "Press and media",
+    "autre": "Other request"
+  },
+  "errors": {
+    "motif": "Choose the purpose of your message.",
+    "name": "Enter your full name or the name of your organisation.",
+    "message": "Write your message in a few lines.",
+    "consent": "Tick this box so that we can read your message and reply to you."
+  },
+  "draft": {
+    "subject": "Contact WAHHF — {{motif}} — {{name}}",
+    "noMotif": "Message",
+    "intro": "I am writing to you from the contact form on the website:",
+    "motif": "Purpose",
+    "name": "Name",
+    "email": "Email",
+    "whatsapp": "WhatsApp",
+    "message": "Message",
+    "consent": "I agree to WAHHF Foundation processing my contact details to reply to my message (GDPR)."
+  }
+}

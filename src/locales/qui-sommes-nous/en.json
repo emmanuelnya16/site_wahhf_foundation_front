@@ -1,0 +1,56 @@
+{
+  "seo": {
+    "title": "Who we are — Cameroonian-German foundation, social branch of the IROKO Group",
+    "description": "Discover the history, mission, values and approach of WAHHF Foundation, and its link with the IROKO Group."
+  },
+  "mission": {
+    "title": "Building autonomy through education, health and access to knowledge",
+    "p1": "WAHHF Foundation starts from a simple conviction: every young person deserves access to education, preventive care, language learning and verified information, without a lack of financial resources or disinformation networks shattering their future.",
+    "p2": "Based in Yaoundé and Douala, with coordination in Germany, the foundation offers a free programme to learn German/English (A1 to C1) and guidance towards 10 European countries."
+  },
+  "values": [
+    {
+      "title": "Dignity and respect",
+      "desc": "Every beneficiary is welcomed as an actor in their own journey, never as a customer."
+    },
+    {
+      "title": "Integrity and truth",
+      "desc": "We fight false migration promises with rigorous, verifiable information."
+    }
+  ],
+  "presidentAlt": "{{name}}, {{role}}, during his presentation",
+  "timeline": {
+    "title": "Key milestones of WAHHF Foundation",
+    "subtitle": "Step-by-step growth in the service of communities."
+  },
+  "iroko": {
+    "title": "WAHHF Foundation, social branch of the IROKO Group",
+    "text": "The Cameroonian-German multi-sector IROKO Group set up WAHHF Foundation as its non-profit social and philanthropic branch. This support covers running and teaching costs.",
+    "partners": "Discover our partners"
+  },
+  "support": {
+    "title": "Support the foundation",
+    "subtitle": "You can support our actions with a donation, or offer the foundation a partnership: school, association, company or institution.",
+    "partner": "Become a partner"
+  },
+  "contenu": {
+    "etapes": [
+      {
+        "title": "Origins of the solidarity initiative",
+        "desc": "First actions of educational mutual aid and material support for pupils, between Cameroon and the diaspora in Germany."
+      },
+      {
+        "title": "Structuring WAHHF Foundation",
+        "desc": "Programmes organised around the first five pillars: Education, Health, Entrepreneurship, Environment and Rights & Inclusion."
+      },
+      {
+        "title": "Becoming the social branch of the IROKO Group",
+        "desc": "The IROKO Group makes a structural commitment to fund the running of the foundation."
+      },
+      {
+        "title": "Launch of the 6th domain: Mobility & Languages",
+        "desc": "Opening of the free German Academy (A1 to C1) and publication of verified guidance guides for 10 European countries."
+      }
+    ]
+  }
+}

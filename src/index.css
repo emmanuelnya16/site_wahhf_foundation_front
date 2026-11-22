@@ -593,7 +593,7 @@
 /* Juste après l'en-tête de page (PageHeader), une section sur le même fond ne rajoute pas une respiration complète :
    la marge basse de l'en-tête suffit presque (48 + 32 px à 1 440, au lieu de 48 + 120). Une section sauge garde la sienne,
    qui est à l'intérieur de son fond. Hors couche, pour passer devant l'utilitaire section-space. */
-.page-header + .section-space:not(.bg-surface-section) {
+.page-header + .section-space:not(.bg-surface-section):not(.bg-surface-inverse) {
   padding-top: clamp(1rem, 2.5vw, 2rem);
 }
 
@@ -705,11 +705,30 @@
     transform: none !important;
   }
   [data-arc-mask],
-  [data-expand-media] {
+  [data-expand-media],
+  [data-fil-steps-seg] {
     transform: none !important;
   }
-  .expand-frame {
+  [data-fil-steps-dot],
+  [data-seq] > li {
+    opacity: 1 !important;
+  }
+  .expand-frame,
+  .photo-rise {
     clip-path: none !important;
+  }
+  .step-enter,
+  .crossfade-in,
+  .arrive-rise,
+  .arc-redraw,
+  .seq-play > li,
+  .line-rise,
+  .hero-fade,
+  .fil-draw-to-x,
+  .fil-draw-to-y,
+  .fil-lit,
+  .fil-lit-label {
+    animation: none !important;
   }
 }
 
@@ -800,19 +819,18 @@
 @keyframes fil-lit-label {
   from { opacity: 0.35; }
 }
-.fil-draw-to-x {
-  transform-origin: left center;
-  animation: fil-draw 0.45s linear var(--fil-d, 0s) both;
-}
-.fil-draw-to-y {
-  transform-origin: center top;
-  animation: fil-draw-y 0.22s linear var(--fil-d, 0s) both;
-}
-.fil-lit {
-  animation: fil-lit 0.6s var(--ease-power3-out) var(--fil-d, 0s) backwards;
-}
-.fil-lit-label {
-  animation: fil-lit-label 0.6s var(--ease-power2-out) var(--fil-d, 0s) backwards;
+/* Ordinateur seulement : sur téléphone la frise (verticale) reste fixe (contrat §6, §10 : pas d'autre tracé que le hero) */
+@media (min-width: 1024px) {
+  .fil-draw-to-x {
+    transform-origin: left center;
+    animation: fil-draw 0.3s linear var(--fil-d, 0s) backwards;
+  }
+  .fil-lit {
+    animation: fil-lit 0.6s var(--ease-power3-out) var(--fil-d, 0s) backwards;
+  }
+  .fil-lit-label {
+    animation: fil-lit-label 0.6s var(--ease-power2-out) var(--fil-d, 0s) backwards;
+  }
 }
 .fil-lit-label:focus-within {
   opacity: 1 !important;
@@ -834,6 +852,10 @@
 .step-enter {
   animation: step-enter 0.3s var(--ease-power2-out) backwards;
 }
+.step-enter:focus-within {
+  opacity: 1 !important;
+  transform: none !important;
+}
 @media (prefers-reduced-motion: reduce) {
   .step-enter {
     animation: none !important;
@@ -843,6 +865,128 @@
 /* En-têtes de page (groupe 7.1, PageHeader reveal) : titre en 0,8 s */
 .reveal-08 .line-rise {
   animation-duration: 0.8s;
+}
+
+/* Faire un don (groupe 7.2) : retours d'action seulement, rien au défilement dans le formulaire.
+   1. Choix d'une devise ou d'un montant (ChoiceTile className="choice-150" ; l'affectation est un menu natif) : le
+      contour de 2 px de l'option choisie apparaît en fondu de 150 ms, dessiné en ::after (opacité seulement : revue du
+      groupe 7.2, rien d'autre que transform, opacity et clip-path n'est animé) ; la coche apparaît en fondu et en
+      échelle (150 ms). Le contour 1 px de la tuile ne change pas. Sans :has(), style choisi de ChoiceTile, immédiat.
+   2. Ligne d'impact (DonatePage) : l'ancienne phrase s'efface pendant que la nouvelle apparaît, fondu croisé de 0,3 s
+      (deux couches superposées ; l'ancienne est retirée à la fin). Opacité et transform seulement.
+   Mouvement réduit : tout change d'un coup, l'ancienne phrase n'est jamais affichée. */
+.choice-150 {
+  transition: none;
+}
+.choice-150:has(:checked) {
+  border-color: var(--border-input);
+  box-shadow: none;
+}
+.choice-150::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border: 2px solid var(--action);
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 150ms var(--ease-power2-out);
+}
+.choice-150:has(:checked)::after {
+  opacity: 1;
+}
+@keyframes choice-check {
+  from { opacity: 0; transform: scale(0.6); }
+}
+.choice-150 svg {
+  animation: choice-check 150ms var(--ease-power2-out) backwards;
+}
+@keyframes crossfade-in {
+  from { opacity: 0; }
+}
+@keyframes crossfade-out {
+  to { opacity: 0; }
+}
+.crossfade-in {
+  animation: crossfade-in 0.3s var(--ease-power2-out) backwards;
+}
+.crossfade-out {
+  animation: crossfade-out 0.3s var(--ease-power2-out) forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .choice-150::after {
+    transition: none;
+  }
+  .choice-150 svg,
+  .crossfade-in {
+    animation: none !important;
+  }
+  .crossfade-out {
+    display: none;
+  }
+}
+
+/* Agir (groupe 7.2) : les trois voies, déjà à l'écran à l'arrivée (RevealBatch ne masque jamais ce qui est visible),
+   apparaissent en groupe juste après l'en-tête, comme les apparitions du contrat §10 : fondu et montée de 24 px, 0,7 s,
+   power2.out, 0,08 s de décalage (--arrive-delay). En CSS, pour jouer avant GSAP ; une voie qui reçoit le focus
+   s'affiche aussitôt ; tout est en place en mouvement réduit. Plus bas dans l'écran, RevealBatch prend le relais. */
+@keyframes arrive-rise {
+  from { opacity: 0; transform: translateY(24px); }
+}
+.arrive-rise {
+  animation: arrive-rise 0.7s var(--ease-power2-out) var(--arrive-delay, 0.6s) backwards;
+}
+.arrive-rise:focus-within {
+  opacity: 1 !important;
+  transform: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .arrive-rise {
+    animation: none !important;
+  }
+}
+
+/* Mini-carte de la page Accompagnement (groupe 7.4, EuropeMiniMap redrawArc) : l'arc se trace quand la carte entre à
+   l'écran (1,2 s), puis se retrace à chaque changement de pays (0,8 s), power3.inOut : le masque circulaire centré sur
+   le départ grandit (transform seulement). Ordinateur à souris seulement ; ailleurs et en mouvement réduit, l'arc est
+   en place et change de pays d'un coup. */
+@keyframes arc-redraw {
+  from { transform: scale(0); }
+}
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .arc-wait {
+    transform: scale(0);
+  }
+  .arc-redraw {
+    animation: arc-redraw 0.8s var(--ease-power3-inout) backwards;
+  }
+  .arc-redraw[data-first] {
+    animation-duration: 1.2s;
+  }
+}
+
+/* Check-list « 5 signes d'arnaque » (groupe 7.4, useSequentialFade) : sobre, les signes apparaissent l'un après
+   l'autre, en fondu seul (0,6 s, power2.out, 0,08 s de décalage, --seq-i), une seule fois : à l'arrivée si la liste est
+   déjà à l'écran, sinon quand son haut atteint 85 % de l'écran. Rien n'est lié à la position du défilement (ni scrub,
+   ni épinglage). data-seq="armed" : la liste attend, sous l'écran ; un signe qui reçoit le focus s'affiche aussitôt.
+   Mouvement réduit : tout est en place. */
+@keyframes seq-fade {
+  from { opacity: 0; }
+}
+[data-seq='armed'] > li {
+  opacity: 0;
+}
+.seq-play > li {
+  animation: seq-fade 0.6s var(--ease-power2-out) calc(var(--seq-start, 0s) + var(--seq-i, 0) * 0.08s) backwards;
+}
+[data-seq] > li:focus-within {
+  opacity: 1 !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-seq] > li {
+    opacity: 1 !important;
+    animation: none !important;
+  }
 }
 /* Photo d'en-tête découverte du bas vers le haut (Mobilité, groupe 7.1) : ordinateur à souris seulement, une fois.
    Clip-path toléré ici comme pour « Sur le terrain » (contrat §10) ; ailleurs la photo est simplement en place. */
@@ -859,6 +1003,82 @@
   .line-rise,
   .hero-fade,
   .photo-rise {
+    animation: none !important;
+  }
+}
+
+/*
+ * Galerie sans trou (groupe 7.3, audit GAL-03 ; GalleryGrid fill, src/components/wahhf/galleryLayout.ts) : cases 4:3
+ * de même taille (hauteur de rangée = largeur d'une colonne × 0,75, mesurée sur le bloc parent, container query),
+ * placement « dense ». Colonnes et taille de chaque vignette par palier (2, 3 puis 4 colonnes), posées en variables par
+ * le composant : chaque rangée est complète. 12 rem de haut si le navigateur ne connaît pas les unités cqi.
+ */
+.gallery-fill {
+  --cols: var(--cols-base, 2);
+  --gap: 0.75rem;
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  grid-auto-rows: 12rem;
+  grid-auto-rows: calc((100cqi - (var(--cols) - 1) * var(--gap)) / var(--cols) * 0.75);
+  grid-auto-flow: dense;
+  gap: var(--gap);
+}
+.gallery-fill > * {
+  grid-column: var(--c-base, auto) / span var(--w-base, 1);
+  grid-row: span var(--h-base, 1);
+}
+@media (min-width: 640px) {
+  .gallery-fill {
+    --gap: 1rem;
+  }
+}
+@media (min-width: 768px) {
+  .gallery-fill {
+    --cols: var(--cols-md, 3);
+  }
+  .gallery-fill > * {
+    grid-column: var(--c-md, auto) / span var(--w-md, 1);
+    grid-row: span var(--h-md, 1);
+  }
+}
+@media (min-width: 1024px) {
+  .gallery-fill {
+    --cols: var(--cols-lg, 4);
+  }
+  .gallery-fill > * {
+    grid-column: var(--c-lg, auto) / span var(--w-lg, 1);
+    grid-row: span var(--h-lg, 1);
+  }
+}
+
+/*
+ * Visionneuse de la galerie ouverte depuis la vignette cliquée (groupe 7.3, GalleryGrid openFromThumb) : View
+ * Transitions API. La photo passe de sa place dans la grille à la visionneuse en 0,6 s (power3.inOut), recadrée en
+ * douceur (les deux images couvrent la forme qui change) ; le fond apparaît en fondu de 0,3 s (classe vt-galerie posée
+ * le temps de la transition : la bascule de thème garde ses 0,5 s). Navigateur sans View Transitions ou mouvement
+ * réduit : ouverture simple, sans transition partagée (GalleryGrid ne la lance pas).
+ */
+html.vt-galerie::view-transition-old(root),
+html.vt-galerie::view-transition-new(root) {
+  animation-duration: 0.3s;
+  animation-timing-function: var(--ease-power2-out);
+}
+::view-transition-group(galerie-media) {
+  animation-duration: 0.6s;
+  animation-timing-function: var(--ease-power3-inout);
+}
+::view-transition-old(galerie-media),
+::view-transition-new(galerie-media) {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation-duration: 0.6s;
+  animation-timing-function: var(--ease-power3-inout);
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(galerie-media),
+  ::view-transition-old(galerie-media),
+  ::view-transition-new(galerie-media) {
     animation: none !important;
   }
 }
@@ -1043,4 +1263,826 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* =============================================================================
+   Accordéon d'images (lot 7.6) : src/components/gallery/ExpandingGallery.tsx
+   Toujours un panneau ouvert. Bureau (1 024 px et souris) : rangée de bandes, l'ouverte vaut 7 bandes (~60 % de la
+   largeur, comme flex-grow 7 contre 1). Téléphone et tablette : bandes empilées de 4,5 rem, l'ouverte fait 22 rem.
+   Positions calculées en CSS (--i : rang du panneau, --after : 1 s'il suit le panneau ouvert) et appliquées par
+   transform, pas par le flux : quand un panneau s'ouvre au survol, rien ne « se décale » au sens du CLS (le survol
+   n'est pas une saisie, Chrome compterait chaque déplacement de bande). La photo garde la taille du panneau ouvert :
+   la bande en montre une tranche, centrée sur le cadrage du catalogue (--fx, --fy) ; ni zoom ni saut.
+   Coins de 1,5 rem (votre brief, au-dessus des 20 px du contrat §9, pour ces seuls panneaux).
+   ============================================================================= */
+.xg {
+  --xg-radius: 1.5rem;
+  --xg-duration: 650ms;
+  --xg-gap: 8px;
+  --xg-strip: 4.5rem;
+  --xg-open: 22rem;
+  position: relative;
+  container-type: inline-size;
+  height: calc((var(--xg-n) - 1) * (var(--xg-strip) + var(--xg-gap)) + var(--xg-open));
+}
+.xg-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--xg-strip);
+  border-radius: var(--xg-radius);
+  transform: translateY(calc(var(--i) * (var(--xg-strip) + var(--xg-gap)) + var(--after) * (var(--xg-open) - var(--xg-strip))));
+  transition: transform var(--xg-duration) var(--ease-reveal), height var(--xg-duration) var(--ease-reveal);
+}
+.xg-panel[data-open] {
+  height: var(--xg-open);
+}
+/* Focus très net sur les bandes, qui n'ont pas de texte : anneau soleil de 3 px, décalé de 3 px, sur le panneau */
+.xg-panel:has(.xg-button:focus-visible) {
+  outline: 3px solid var(--color-soleil);
+  outline-offset: 3px;
+}
+.xg-button:focus-visible {
+  outline: none;
+}
+.xg-frame {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  background: var(--color-filet-nuit);
+}
+/* La photo, à la taille du panneau ouvert ; sur une bande, décalée pour en montrer la tranche du cadrage */
+.xg-media {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--xg-open);
+  transform: translateY(calc((var(--xg-strip) - var(--xg-open)) * var(--fy)));
+  transition: transform var(--xg-duration) var(--ease-reveal);
+}
+.xg-panel[data-open] .xg-media {
+  transform: none;
+}
+/* Dégradé sombre qui monte du bas, sous le texte du panneau ouvert seulement (pas de voile sur le reste) */
+.xg-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* Mesuré en hauteur absolue : le titre (~10 rem au-dessus du bas) reste sur un fond assez sombre pour 4,5:1 */
+  background: linear-gradient(to top, rgb(4 18 13 / 0.9) 0, rgb(4 18 13 / 0.74) 10rem, rgb(4 18 13 / 0) 16rem);
+  opacity: 0;
+  transition: opacity 120ms linear;
+  pointer-events: none;
+}
+.xg-panel[data-open] .xg-frame::after {
+  opacity: 1;
+  transition: opacity 300ms linear 250ms;
+}
+.xg-button {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  cursor: pointer;
+}
+/* Titre en petit des bandes réduites (téléphone seulement), sur un léger dégradé, dans une boîte de la hauteur d'une bande */
+.xg-strip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--xg-strip);
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 1rem 0.75rem;
+  background: linear-gradient(to top, rgb(4 18 13 / 0.8), rgb(4 18 13 / 0) 75%);
+  color: var(--color-brume);
+  font-size: 0.875rem;
+  font-weight: 600;
+  pointer-events: none;
+  transition: opacity 120ms linear;
+}
+.xg-panel[data-open] .xg-strip {
+  opacity: 0;
+}
+/* Texte du panneau ouvert, dans une boîte à la taille du panneau ouvert (il ne bouge pas pendant l'ouverture) ;
+   il arrive quand l'élargissement est presque fini, et part tout de suite à la fermeture */
+.xg-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  width: 100%;
+  height: var(--xg-open);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 1.25rem;
+  color: var(--color-brume);
+  pointer-events: none;
+}
+.xg-text > * {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 120ms linear, transform 120ms linear;
+}
+.xg-panel[data-open] .xg-text > * {
+  opacity: 1;
+  transform: none;
+  transition: opacity 300ms var(--ease-reveal) 350ms, transform 300ms var(--ease-reveal) 350ms;
+}
+.xg-text a {
+  pointer-events: auto;
+}
+.xg-title {
+  font-size: 1.25rem;
+  line-height: 1.3;
+  font-weight: 600;
+}
+.xg-meta {
+  margin-top: 0.125rem;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+.xg-description {
+  margin-top: 0.5rem;
+  max-width: 28ch;
+  font-size: 1rem;
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@media (min-width: 1024px) and (pointer: fine) {
+  .xg {
+    /* Une bande = 1 unité, le panneau ouvert = 7 : n - 1 + 7 unités et n - 1 espaces sur la largeur du conteneur */
+    --xg-unit: calc((100cqw - (var(--xg-n) - 1) * var(--xg-gap)) / (var(--xg-n) + 6));
+    height: clamp(26rem, 58vh, 34rem);
+  }
+  .xg-panel {
+    width: var(--xg-unit);
+    height: 100%;
+    transform: translateX(calc(var(--i) * (var(--xg-unit) + var(--xg-gap)) + var(--after) * 6 * var(--xg-unit)));
+    transition: transform var(--xg-duration) var(--ease-reveal), width var(--xg-duration) var(--ease-reveal);
+  }
+  .xg-panel[data-open] {
+    width: calc(7 * var(--xg-unit));
+    height: 100%;
+  }
+  .xg-media {
+    width: calc(7 * var(--xg-unit));
+    height: 100%;
+    transform: translateX(calc(-6 * var(--xg-unit) * var(--fx)));
+  }
+  .xg-text {
+    width: calc(7 * var(--xg-unit));
+    height: 100%;
+    padding: 1.75rem;
+  }
+  .xg-strip {
+    display: none;
+  }
+  .xg-frame::after {
+    background: linear-gradient(to top, rgb(4 18 13 / 0.9) 0, rgb(4 18 13 / 0.74) 11rem, rgb(4 18 13 / 0) 19rem);
+  }
+}
+
+/* Mouvement réduit : changement de panneau instantané, texte affiché directement (les délais aussi sont retirés) */
+@media (prefers-reduced-motion: reduce) {
+  .xg-panel,
+  .xg-media,
+  .xg-strip,
+  .xg-frame::after,
+  .xg-text > *,
+  .xg-panel[data-open] .xg-frame::after,
+  .xg-panel[data-open] .xg-text > * {
+    transition: none !important;
+  }
+}
+
+/* =============================================================================
+   Galerie (lot 7.6) : vignettes en rangées justifiées (src/components/gallery/PhotoGrid.tsx) et visionneuse <dialog>
+   ============================================================================= */
+.photo-rows {
+  --row: 8.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+/* Largeur proportionnelle au format (--r = largeur / hauteur) : même hauteur pour toute la rangée */
+.photo-rows > li {
+  flex-grow: var(--r);
+  flex-basis: calc(var(--r) * var(--row));
+}
+/* La dernière rangée ne s'étire pas (une verticale seule y deviendrait immense) */
+.photo-rows::after {
+  content: '';
+  flex-grow: 1000;
+}
+.photo-rows-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+@media (min-width: 768px) {
+  .photo-rows {
+    --row: 12rem;
+    gap: 0.75rem;
+  }
+}
+@media (min-width: 1280px) {
+  .photo-rows {
+    --row: 14rem;
+  }
+}
+.photo-lightbox {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  /* Nuit profonde (#081C15), opaque : rien de la page ne transparaît derrière la photo */
+  background: rgb(8 28 21);
+  color: var(--color-brume);
+}
+.photo-lightbox::backdrop {
+  background: transparent;
+}
+
+/* =============================================================================
+   Portraits de l'équipe (lot 7.7) : src/components/team/PortraitCarousel.tsx
+   Colonne de cartes 4:5 ; la carte du centre en grand, ses voisines à 0,75, décalées vers la droite, un peu derrière
+   elle ; la zone s'efface en haut et en bas dans le fond. Position de chaque carte : --d (-2 à 2, rang par rapport au
+   centre), --side (0 au centre, 1 sinon), --s (échelle). Transform et opacité seulement, 700 ms, --ease-reveal.
+   Coins de 1,5 rem, comme l'accordéon (lot 7.6).
+   ============================================================================= */
+.pc {
+  --pc-w: 14rem;
+  --pc-h: calc(var(--pc-w) * 1.25);
+  /* Pas vertical : moitié de la carte du centre + moitié d'une voisine (0,75), moins un recouvrement */
+  --pc-step: calc(var(--pc-h) * 0.875 - 1.25rem);
+  --pc-x: calc(var(--pc-w) * 0.16);
+  --pc-zone: 26rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+@media (min-width: 768px) {
+  .pc {
+    --pc-w: 17rem;
+    --pc-zone: clamp(30rem, 68vh, 38rem);
+  }
+}
+.pc-stage {
+  position: relative;
+  width: 100%;
+  height: var(--pc-zone);
+  overflow: hidden;
+  /* Les cartes voisines s'effacent dans la couleur du fond, en haut et en bas */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 16%, #000 84%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 16%, #000 84%, transparent 100%);
+}
+.pc-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--pc-w);
+  height: var(--pc-h);
+  margin: calc(var(--pc-h) / -2) 0 0 calc(var(--pc-w) / -2);
+  overflow: hidden;
+  border-radius: 1.5rem;
+  background: var(--color-filet-nuit);
+  transform: translate(calc(var(--pc-x) * var(--side)), calc(var(--pc-step) * var(--d))) scale(var(--s));
+  z-index: 1;
+  opacity: 0;
+  transition: transform 700ms var(--ease-reveal), opacity 700ms var(--ease-reveal);
+}
+.pc-card[data-pos='0'] {
+  z-index: 3;
+  opacity: 1;
+}
+.pc-card[data-pos='1'],
+.pc-card[data-pos='-1'] {
+  z-index: 2;
+  opacity: 1;
+}
+/* Nom et rôle, sur un dégradé sombre en bas de la carte du centre ; ils arrivent une fois la carte en place */
+.pc-caption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 3rem 1rem 1rem;
+  background: linear-gradient(to top, rgb(4 18 13 / 0.88), rgb(4 18 13 / 0.6) 55%, rgb(4 18 13 / 0));
+  color: var(--color-brume);
+  opacity: 0;
+  transition: opacity 150ms linear;
+}
+.pc-card[data-pos='0'] .pc-caption {
+  opacity: 1;
+  transition: opacity 300ms var(--ease-reveal) 600ms;
+}
+.pc-name {
+  font-weight: 600;
+  line-height: 1.3;
+  /* Deux lignes de longueur proche (« Prof. Dr.-Ing. » / « Christian-Toralf Weber ») plutôt qu'un mot seul */
+  text-wrap: balance;
+}
+.pc-role {
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+.pc-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.pc-button {
+  display: inline-flex;
+  min-height: 2.75rem;
+  min-width: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-trait-nuit);
+  color: var(--color-brume);
+  cursor: pointer;
+  transition: background-color var(--dur-fast) linear, color var(--dur-fast) linear;
+}
+.pc-button-text {
+  /* Largeur fixe : « Mettre en pause » et « Reprendre » ne font pas glisser les boutons voisins */
+  min-width: 11rem;
+  padding: 0 1.125rem;
+  font-size: 0.9375rem;
+}
+@media (hover: hover) {
+  .pc-button:hover {
+    background: var(--color-soleil);
+    border-color: var(--color-soleil);
+    color: var(--color-encre);
+  }
+}
+.pc-button:focus-visible {
+  outline: 2px solid var(--color-soleil);
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pc-card,
+  .pc-caption,
+  .pc-card[data-pos='0'] .pc-caption {
+    transition: none !important;
+  }
+}
+
+/* =============================================================================
+   Organigramme (lot 7.7) : src/components/team/OrgChart.tsx
+   Niveaux empilés et centrés, reliés par le fil (trait vertical de 1,5 px, couleur du fil) : carte(s) → trait → point
+   → titre du niveau suivant → cartes… Portraits 4:5, coins 1,5 rem.
+   ============================================================================= */
+.org {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.org-level {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.org-dot {
+  display: block;
+  width: 0.625rem;
+  height: 0.625rem;
+  margin-bottom: 1rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-fil);
+}
+.org-title {
+  margin-bottom: 1.25rem;
+  font-size: var(--text-body);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+.org-people {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem 2.5rem;
+}
+.org-card {
+  width: 12rem;
+  text-align: center;
+}
+.org-card-top {
+  width: 15rem;
+}
+@media (min-width: 768px) {
+  .org-card {
+    width: 13rem;
+  }
+  .org-card-top {
+    width: 18rem;
+  }
+}
+.org-portrait {
+  aspect-ratio: 4 / 5;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  background: var(--color-surface-section);
+}
+.org-name {
+  font-weight: 600;
+  color: var(--color-text);
+  text-wrap: balance;
+}
+.org-card-top .org-name {
+  font-size: 1.25rem;
+}
+.org-role {
+  margin-top: 0.125rem;
+  font-size: var(--text-meta);
+  color: var(--color-text-secondary);
+}
+.org-bio {
+  margin-top: 0.75rem;
+  font-size: var(--text-body);
+  color: var(--color-text-secondary);
+}
+.org-links {
+  margin-top: 0.5rem;
+}
+/* Le fil entre deux niveaux : il part du bas des cartes et descend jusqu'au point du niveau suivant */
+.org-seg {
+  display: block;
+  width: 1.5px;
+  height: 4rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  background: var(--color-fil);
+  transform-origin: center top;
+}
+
+/* ==========================================================================
+   Lot 7.8 : « Cinq principes qui guident chaque projet » (Qui sommes-nous), src/components/principles/
+   Cartes en aplats pleins, identiques en clair et en sombre (ces tokens ne sont pas redéfinis sous .dark).
+   Contrastes mesurés (annexe A du contrat) : texte 9,15 / 11,90 / 7,84 / 12,16 / 5,93:1 ; accent 5,00 / 7,59 /
+   7,84 / 6,64 / 4,78:1 (cartes 01 à 05).
+   ========================================================================== */
+:root {
+  --principle-1-bg: var(--color-foret);
+  --principle-1-text: var(--color-blanc);
+  --principle-1-accent: var(--color-soleil);
+  --principle-2-bg: var(--color-sauge);
+  --principle-2-text: var(--color-encre);
+  --principle-2-accent: var(--color-foret);
+  --principle-3-bg: var(--color-soleil);
+  --principle-3-text: var(--color-encre);
+  --principle-3-accent: var(--color-encre);
+  --principle-4-bg: var(--color-nuit);
+  --principle-4-text: var(--color-blanc);
+  --principle-4-accent: var(--color-soleil);
+  --principle-5-bg: var(--color-miel);
+  --principle-5-text: var(--color-blanc);
+  /* blanc à 85 % sur miel : #EDE6D9, 4,78:1 */
+  --principle-5-accent: color-mix(in srgb, var(--color-blanc) 85%, transparent);
+  --principle-final-bg: var(--color-blanc);
+  --principle-final-text: var(--color-encre);
+  --principle-final-accent: var(--color-foret);
+  --principle-final-border: var(--color-foret);
+  --principle-final-action: var(--color-foret);
+  --principle-final-action-hover: var(--color-nuit);
+  --principle-final-action-text: var(--color-blanc);
+  /* Le point qui parcourt le fil (ordinateur) */
+  --principle-dot: var(--color-soleil);
+  --principle-dot-ring: var(--color-nuit);
+}
+
+/* La piste : une colonne (téléphone, tablette, mouvement réduit) ; sur tablette, les cartes alternent à gauche et à
+   droite. Le parcours épinglé (ordinateur) la met en ligne avec .is-pinned. */
+.principles-track {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+.principles-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+.principles-item {
+  position: relative;
+  width: min(100%, 30rem);
+}
+@media (min-width: 768px) {
+  .principles-item[data-side='end'] {
+    align-self: flex-end;
+  }
+  /* Plus d'espace entre deux cartes : le fil y ondule d'un côté à l'autre */
+  .principles-track,
+  .principles-list {
+    gap: 6rem;
+  }
+}
+
+/* La carte : aplat plein, marges intérieures de 2,5 rem (un peu moins sur un petit téléphone) */
+.principle-card {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.75rem, 6vw, 2.5rem);
+  border-radius: 0.75rem;
+  background: var(--pc-bg);
+  color: var(--pc-text);
+}
+/* Hauteur selon le contenu, 26 rem au moins dès la tablette (cartes alignées) ; sur téléphone, sans minimum */
+@media (min-width: 768px) {
+  .principle-card {
+    min-height: 26rem;
+  }
+}
+.principle-card-1 { --pc-bg: var(--principle-1-bg); --pc-text: var(--principle-1-text); --pc-accent: var(--principle-1-accent); }
+.principle-card-2 { --pc-bg: var(--principle-2-bg); --pc-text: var(--principle-2-text); --pc-accent: var(--principle-2-accent); }
+.principle-card-3 { --pc-bg: var(--principle-3-bg); --pc-text: var(--principle-3-text); --pc-accent: var(--principle-3-accent); }
+.principle-card-4 { --pc-bg: var(--principle-4-bg); --pc-text: var(--principle-4-text); --pc-accent: var(--principle-4-accent); }
+.principle-card-5 { --pc-bg: var(--principle-5-bg); --pc-text: var(--principle-5-text); --pc-accent: var(--principle-5-accent); }
+.principle-card-final {
+  --pc-bg: var(--principle-final-bg);
+  --pc-text: var(--principle-final-text);
+  --pc-accent: var(--principle-final-accent);
+  min-height: 0;
+  border: 1.5px solid var(--principle-final-border);
+}
+
+/* Coin feuille (forme signature de cette section, exception au §9 du contrat) : 0,75 rem sur trois coins, 3 rem sur
+   un seul, qui change d'une carte à l'autre comme une feuille qui pousse */
+.principle-leaf-tr { border-top-right-radius: 3rem; }
+.principle-leaf-bl { border-bottom-left-radius: 3rem; }
+.principle-leaf-tl { border-top-left-radius: 3rem; }
+.principle-leaf-br { border-bottom-right-radius: 3rem; }
+
+/* Encoche en demi-cercle de 12 px de rayon : l'entrée du fil. Une découpe nette (masque, sans fondu), qui laisse voir
+   le fond de la section et le nœud du fil. En colonne, en haut de la carte, à 70 px du bord (gauche ou droit selon le
+   côté) ; sur le parcours épinglé, sur le bord gauche, à 70 px du haut. */
+.principle-notch {
+  --notch-r: 12px;
+  --notch-x: 70px;
+  --notch-y: 0px;
+  -webkit-mask: radial-gradient(circle var(--notch-r) at var(--notch-x) var(--notch-y), transparent calc(var(--notch-r) - 0.5px), #000 var(--notch-r));
+  mask: radial-gradient(circle var(--notch-r) at var(--notch-x) var(--notch-y), transparent calc(var(--notch-r) - 0.5px), #000 var(--notch-r));
+}
+.principles-item[data-side='end'] .principle-notch {
+  --notch-x: calc(100% - 70px);
+}
+
+/* Contenu, de haut en bas : grand numéro, rubrique, titre, description, filet, étiquette */
+.principle-number {
+  font-size: 4.25rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  color: var(--pc-accent);
+}
+.principle-rubric {
+  margin-top: 1.25rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pc-accent);
+}
+.principle-card-final .principle-rubric {
+  margin-top: 0;
+}
+.principle-title {
+  margin-top: 0.5rem;
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+.principle-desc {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  max-width: 36ch;
+  font-size: var(--text-body);
+  line-height: 1.6;
+}
+.principle-label {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid color-mix(in srgb, var(--pc-text) 30%, transparent);
+  font-size: var(--text-meta);
+  font-weight: 600;
+  color: var(--pc-accent);
+}
+/* Bouton de la carte finale : forêt plein, pleine largeur, identique en clair et en sombre */
+.principle-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 3.5rem;
+  margin-top: 2rem;
+  padding: 0.875rem 1.5rem;
+  border-radius: var(--radius-pill);
+  background: var(--principle-final-action);
+  color: var(--principle-final-action-text);
+  font-weight: 600;
+  transition: background-color var(--dur-fast) var(--ease-reveal);
+}
+.principle-action:hover {
+  background: var(--principle-final-action-hover);
+}
+.principle-action:focus-visible {
+  outline: 3px solid var(--principle-final-border);
+  outline-offset: 3px;
+}
+
+/* Le fil des principes (lot 7.8) : 2,5 px, couleur du fil (forêt ; feuille en sombre), derrière les cartes */
+.principles-fil {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+.principles-fil-path {
+  fill: none;
+  stroke: var(--color-fil);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* Nœud de chaque encoche : fond de la section, cerclé du fil ; visible avant que sa carte n'apparaisse */
+.principles-node {
+  fill: var(--color-surface);
+  stroke: var(--color-fil);
+  stroke-width: 2.5;
+}
+/* Le point qui avance (parcours épinglé seulement) : soleil cerclé de nuit, 14 px */
+.principles-dot {
+  display: none;
+}
+.principles-dot circle {
+  fill: var(--principle-dot);
+  stroke: var(--principle-dot-ring);
+  stroke-width: 2;
+}
+/* Compteur et consigne : seulement sur le parcours épinglé */
+.principles-counter,
+.principles-hint {
+  display: none;
+}
+.principles-counter {
+  flex: none;
+  align-items: center;
+  gap: 0.4em;
+  min-height: 2.75rem;
+  padding: 0.5rem 1.25rem;
+  border: 1.5px solid var(--color-fil);
+  border-radius: var(--radius-pill);
+  color: var(--color-text);
+  font-size: var(--text-meta);
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+/* Chiffres du compteur : une colonne de 01 à 05 qui roule dans un masque d'une ligne */
+.principles-counter-mask {
+  display: inline-block;
+  height: 1.5em;
+  overflow: hidden;
+}
+.principles-counter-roll {
+  display: flex;
+  flex-direction: column;
+}
+.principles-counter-roll > span {
+  display: block;
+  height: 1.5em;
+}
+
+/* Parcours épinglé (ordinateur, PrinciplesMotion) : la scène occupe l'écran sous l'en-tête ; la piste est une ligne
+   qui glisse sous un cadre plein écran ; la carte paire descend de 4 rem. */
+.principles.is-pinned {
+  padding-block: 0;
+}
+.principles.is-pinned .principles-pin {
+  display: flex;
+  flex-direction: column;
+  height: calc(100svh - var(--header-height));
+  padding-block: clamp(1.25rem, 3.5vh, 2.5rem) clamp(1rem, 2.5vh, 1.5rem);
+  overflow: clip;
+}
+/* Dans la colonne flex de la scène, une marge automatique empêcherait l'étirement : largeur du container fixée */
+.principles.is-pinned .principles-head,
+.principles.is-pinned .principles-hint {
+  width: calc(100% - 2 * var(--gutter));
+}
+.principles.is-pinned .principles-viewport {
+  width: 100%;
+}
+.principles.is-pinned .principles-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.principles.is-pinned .principles-counter {
+  display: inline-flex;
+}
+.principles.is-pinned .principles-viewport {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  max-width: none;
+  margin: clamp(1rem, 3vh, 2rem) 0 0;
+  padding: 0;
+  /* clip et non hidden : le focus du bouton final ne fait pas défiler ce cadre (la caméra garde la main) */
+  overflow: clip;
+}
+.principles.is-pinned .principles-track {
+  position: absolute;
+  left: 0;
+  top: 0;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 7rem;
+  width: max-content;
+  padding-inline: var(--principles-lead, 5rem);
+}
+.principles.is-pinned .principles-list {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 7rem;
+}
+.principles.is-pinned .principles-item {
+  flex: none;
+  width: 30rem;
+}
+.principles.is-pinned .principles-item[data-side='end'] {
+  align-self: auto;
+  margin-top: 4rem;
+}
+.principles.is-pinned .principle-notch,
+.principles.is-pinned .principles-item[data-side='end'] .principle-notch {
+  --notch-x: 0px;
+  --notch-y: 70px;
+}
+.principles.is-pinned .principles-dot {
+  display: inline;
+}
+.principles.is-pinned .principles-hint {
+  display: block;
+  margin-top: clamp(0.75rem, 2vh, 1.25rem);
+}
+
+/* Lot 7.9 : entrée du choix de la langue (en-tête), comme le menu de la référence (menu-entree) */
+@keyframes menu-entree {
+  from {
+    opacity: 0;
+    translate: 0 -6px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  #choix-langue {
+    animation: menu-entree 0.2s var(--ease-reveal) both;
+  }
+}
+
+/*
+ * Lot 7.10 : césure automatique en allemand (mots composés longs : « Berufsausbildung », « Einstufungstest »…), sur les
+ * paragraphes, les titres et les listes de contenu. Jamais dans l'en-tête, les menus (pied de page compris), les liens,
+ * les boutons (y compris les liens en forme de bouton) ni les libellés de contrôle : ils gardent leurs mots entiers.
+ */
+:lang(de) :is(p, h1, h2, h3, h4, h5, h6, li, dd, dt, blockquote, figcaption, td, th, legend) {
+  hyphens: auto;
+}
+:lang(de) :is(header, nav, footer, a, button, summary, label, [role='button'], [role='tab']),
+:lang(de) :is(header, nav, footer, a, button, summary, label, [role='button'], [role='tab']) * {
+  hyphens: manual;
 }
