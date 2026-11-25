@@ -1,8 +1,8 @@
 # Traductions allemandes à relire
 
-Généré par `npm run i18n:relire` (scripts/traductions-a-relire.mjs) le 2026-11-22. Ne pas modifier à la main : corriger les fichiers de langue, puis relancer.
+Généré par `npm run i18n:relire` (scripts/traductions-a-relire.mjs) le 2026-11-25. Ne pas modifier à la main : corriger les fichiers de langue, puis relancer.
 
-Chaque texte allemand du site, face à son français. **Un astérisque (\*) marque les 157 textes dont le traducteur n'était pas sûr** (sens du français ambigu, terme juridique, nom d'institution, ton) : à relire en priorité. 1739 textes allemands au total.
+Chaque texte allemand du site, face à son français. **Un astérisque (\*) marque les 159 textes dont le traducteur n'était pas sûr** (sens du français ambigu, terme juridique, nom d'institution, ton) : à relire en priorité. 1755 textes allemands au total.
 
 - Ton choisi : vouvoiement (« Sie »), simple et chaleureux, pas du mot à mot.
 - Ne sont pas traduits : les noms propres et officiels (WAHHF Foundation, IROKO, Albatros Hotel, Ausbildung, Studienkolleg…), les adresses, les liens.
@@ -12,7 +12,7 @@ Chaque texte allemand du site, face à son français. **Un astérisque (\*) marq
 
 ## Textes communs (en-tête, pied de page, accueil, composants)
 
-Fichier : `src/locales/de.json` (369 textes, dont 40 à relire).
+Fichier : `src/locales/de.json` (370 textes, dont 40 à relire).
 
 | | Clé | Français | Allemand |
 |---|---|---|---|
@@ -20,6 +20,7 @@ Fichier : `src/locales/de.json` (369 textes, dont 40 à relire).
 |  | `brand.fullName` | We Are Here Help Foundation | We Are Here Help Foundation |
 |  | `brand.branch` | Branche sociale du groupe IROKO | Sozialer Zweig der IROKO-Gruppe |
 |  | `brand.tagline` | Fondation camerouno-allemande à but non lucratif | Gemeinnützige kamerunisch-deutsche Stiftung |
+|  | `nav.home` | Accueil | Startseite |
 |  | `nav.about` | Qui sommes-nous | Über uns |
 |  | `nav.actions` | Nos actions | Unsere Arbeit |
 |  | `nav.impact` | Notre impact | Unsere Wirkung |
@@ -702,6 +703,27 @@ Fichier : `src/locales/accompagnement/de.json` (309 textes, dont 19 à relire).
 |  | `contenu.pays.albanie.officialLinks[0].label` | e-Visa Albania — Système officiel de visa en ligne | e-Visa Albania — Offizielles Online-Visasystem |
 |  | `contenu.pays.albanie.officialLinks[1].label` | e-Albania — Portail officiel des services publics | e-Albania — Offizielles Portal für öffentliche Dienstleistungen |
 
+## accueil
+
+Fichier : `src/locales/accueil/de.json` (14 textes, dont 2 à relire).
+
+| | Clé | Français | Allemand |
+|---|---|---|---|
+|  | `seo.title` | Accueil — Autonomiser la jeunesse, transformer les communautés | Startseite — Junge Menschen stärken, Gemeinschaften verändern |
+|  | `seo.description` | WAHHF Foundation accompagne les jeunes et les communautés vulnérables du Cameroun : éducation, santé, entrepreneuriat, environnement et mobilité vers l’Europe. | Die WAHHF Foundation begleitet junge Menschen und benachteiligte Gemeinschaften in Kamerun: Bildung, Gesundheit, Unternehmertum, Umwelt und Mobilität nach Europa. |
+|  | `hero.titre[0]` | Autonomiser | &lt;accent>Junge Menschen&lt;/accent> |
+|  | `hero.titre[1]` | &lt;accent>la jeunesse&lt;/accent>, | stärken, |
+|  | `hero.titre[2]` | transformer les | Gemeinschaften |
+|  | `hero.titre[3]` | communautés. | verändern. |
+| \* | `hero.intro` | WAHHF Foundation accompagne les jeunes et les communautés vulnérables du Cameroun : éducation, santé, entrepreneuriat, environnement et mobilité vers l’Europe. | Die WAHHF Foundation begleitet junge Menschen und benachteiligte Gemeinschaften in Kamerun: Bildung, Gesundheit, Unternehmertum, Umwelt und Mobilität nach Europa. <br>_Note : « communautés vulnérables » rendu par « benachteiligte Gemeinschaften »_ |
+|  | `hero.actions` | Découvrir nos actions | Unsere Arbeit entdecken |
+|  | `hero.rejoindre` | Nous rejoindre | Mitmachen |
+|  | `hero.equipe` | Une équipe entre le Cameroun et l’Allemagne | Ein Team zwischen Kamerun und Deutschland |
+|  | `hero.equipeSuite` | au service de la jeunesse | im Dienst der Jugend |
+| \* | `hero.pays` | pays d’Europe où nous orientons les jeunes | Länder Europas, für die wir jungen Menschen Orientierung geben <br>_Note : « pays d’Europe où nous orientons les jeunes » rendu par « Länder Europas, für die wir jungen Menschen Orientierung geben »_ |
+|  | `hero.domaines` | domaines d’action | Arbeitsbereiche |
+|  | `hero.evenement` | Prochain événement | Nächste Veranstaltung |
+
 ## actualites
 
 Fichier : `src/locales/actualites/de.json` (39 textes, dont 11 à relire).
@@ -976,7 +998,7 @@ Fichier : `src/locales/equipe/de.json` (21 textes, dont 6 à relire).
 
 ## events
 
-Fichier : `src/locales/events/de.json` (277 textes, dont 19 à relire).
+Fichier : `src/locales/events/de.json` (278 textes, dont 19 à relire).
 
 | | Clé | Français | Allemand |
 |---|---|---|---|
@@ -1072,6 +1094,7 @@ Fichier : `src/locales/events/de.json` (277 textes, dont 19 à relire).
 |  | `faits.prix` | {{prix}}. | {{prix}}. |
 |  | `faits.prixInconnu` | Le prix est annoncé très bientôt. | Der Preis wird in Kürze bekannt gegeben. |
 | \* | `faits.deVille` |  de {{ville}} |  aus {{ville}} <br>_Note : « repartez de {{ville}} avec un plan » rendu par « nehmen Sie aus {{ville}} einen Plan mit nach Hause »_ |
+|  | `contenu.road-to-europe.bandeauLabel` | Les 10 pays de Road to Europe | Die 10 Länder von Road to Europe |
 |  | `contenu.road-to-europe.pastille.texte` | Le rendez-vous qui lance votre projet européen | Der Termin, der Ihr Europa-Projekt ins Rollen bringt |
 |  | `contenu.road-to-europe.titre` | Votre route vers<br>l’Europe<br>commence ici. | Ihr Weg nach<br>Europa<br>beginnt hier. |
 |  | `contenu.road-to-europe.motAccent` | l’Europe | Europa |

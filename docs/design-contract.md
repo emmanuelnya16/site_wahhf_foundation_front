@@ -914,6 +914,52 @@ Contrat validé le 16/11/2026, avec les ajustements du §13.
 
 **Contenu** : une section ne s'affiche que si ses données existent ; un texte « TODO » s'affiche en développement et dans l'aperçu `VITE_APERCU_EVENEMENTS=1`, jamais en ligne. Questions 156 et suivantes de `docs/contenus-a-fournir.md`.
 
+## 16. Page Accueil, /accueil (lot 11.1)
+
+*Votre brief du 25 novembre 2026. Référence : `docs/references/accueil/hero-apercu.jpg` et `inspirations/`. Code : `src/pages/accueil/`, `src/styles/accueil.css`, textes `src/locales/accueil/`. L'accueil actuel (/) et ses composants ne changent pas ; le logo y mène toujours.*
+
+**Écarts au contrat voulus par le brief, réservés à cette page** :
+- Jost 700 (celle des pages Événements, même fichier, même police de secours) pour le titre et les chiffres ; titre de 72 px sur ordinateur, interligne 1,05 ;
+- soleil sur fond clair : badge (texte encre), contour de l'arche, trait sous « la jeunesse », étoile de la pastille ;
+- un mot du titre en forêt (soleil en sombre), au lieu d'une seule couleur (§12) ;
+- deux taches en dégradé radial (sauge, et soleil à 25 %) ;
+- flèche sur le bouton plein et la carte de l'événement (T-20) ; nom de l'événement en petites capitales espacées ;
+- plusieurs boucles lentes au lieu d'un seul effet (§10) : cartes qui flottent (±8 px, 6 à 8 s), badge (24 s), étoile, point. Elles s'arrêtent hors de l'écran, onglet caché et au bouton pause des pages Événements ; en mouvement réduit, rien ne bouge.
+
+**Inchangé** : conteneur de 72 rem (même bord gauche que l'en-tête ; l'aperçu en montre 80), palette, une seule ombre (`--ombre-flottante`, remplacée par un filet en sombre), rayon de 20 px, texte courant en Atkinson.
+
+**En-tête** : 8 entrées (« Accueil » en premier), texte à 16 px ; logo seul dès 1 280 px dans les trois langues (étape d) ; langue et don resserrés (étape c). Marges mesurées autour du menu : 41 px en français, 105 px en anglais, 24 px en allemand.
+
+**LCP** : la photo sur ordinateur, l'intro sur téléphone. L'intro monte donc sans fondu : partie en opacité 0, elle retardait le LCP réel de 1,4 s.
+
+**Contrastes** (23 paires ; seuil 4,5:1 pour le texte, 3:1 pour les contours ; aucun échec) :
+
+| Thème | Usage | Ratio |
+|---|---|---|
+| clair | Titre sur brume | 13,47:1 |
+| clair | Titre, pire cas sur la tache soleil | 11,75:1 |
+| clair | « la jeunesse » (forêt) sur brume | 8,59:1 |
+| clair | Intro, seconde ligne, bouton pause sur brume | 6,84:1 |
+| clair | Intro, pire cas sur sauge | 6,05:1 |
+| clair | Bouton pause, pire cas sur la tache soleil | 5,97:1 |
+| clair | Pastille (forêt sur papier) | 9,15:1 |
+| clair | Carte papier : chiffre, nom de l'événement | 9,15:1 |
+| clair | Carte papier : texte | 7,30:1 |
+| les deux | Bouton et carte nuit : texte (brume) | 11,41:1 |
+| les deux | Carte nuit : chiffre (soleil) | 6,64:1 |
+| les deux | Badge : encre sur soleil | 7,84:1 |
+| clair | Contour du bouton | 13,47:1 |
+| clair | Anneau de focus, pire cas sur la tache soleil | 7,49:1 |
+| sombre | Titre | 15,04:1 |
+| sombre | « la jeunesse » (soleil) | 9,66:1 |
+| sombre | Intro | 8,72:1 |
+| sombre | Intro, pire cas sur sous-bois | 7,80:1 |
+| sombre | Bouton pause, pire cas sur la tache soleil | 7,26:1 |
+| sombre | Pastille et chiffre (soleil sur canopée) | 7,56:1 |
+| sombre | Carte canopée : texte | 6,82:1 |
+| sombre | Carte et bouton nuit : texte | 10,33:1 |
+| sombre | Contour du bouton | 15,04:1 |
+
 ## Annexe A : tableau des contrastes
 
 Calcul WCAG 2.x sur fond uni ; ratios tronqués à une décimale. Seuils : 4,5:1 pour le texte, 3:1 pour les composants et le fil.

@@ -450,3 +450,17 @@ Le site existe maintenant en français, en anglais et en allemand (sélecteur FR
 179. La fondation est-elle enregistrée en Allemagne (e.V. ou autre) ? Si oui, il faut un Impressum et une Datenschutzerklärung en allemand rédigés par un juriste. Aujourd'hui, en allemand, les pages Mentions légales, Confidentialité et Transparence affichent la version française avec la mention « Diese Seite ist derzeit nur auf Französisch verfügbar. », et le lien du pied de page s'appelle « Impressum ».
 180. Qui relira l'allemand ? Les chaînes marquées d'un astérisque dans docs/traductions-de-a-relire.md sont celles dont le sens ou le terme est incertain (noms d'institutions, termes juridiques, ton).
 181. Les noms des régions du Cameroun restent en français dans la version allemande (Littoral, Centre, Ouest…), comme dans la plupart des sources allemandes ; en anglais, ils prennent leurs noms officiels anglais (West, South-West, Far North…). Ce choix vous convient-il ?
+
+---
+
+## Questions ajoutées avec la nouvelle page Accueil (lot 11.1, 25 novembre 2026)
+
+Page /accueil (hero). Textes : src/locales/accueil/.
+
+182. Intro du hero, à valider : « WAHHF Foundation accompagne les jeunes et les communautés vulnérables du Cameroun : éducation, santé, entrepreneuriat, environnement et mobilité vers l'Europe. » Elle cite cinq domaines sur les six (pas « Droits et inclusion »).
+183. Seconde ligne sous « Une équipe entre le Cameroun et l'Allemagne » : « au service de la jeunesse », reprise du hero de Qui sommes-nous. À confirmer ou à remplacer.
+184. Le slogan de la pastille et du badge est « Sowing hope, harvesting change » (semer), mais le kakémono orange (photo A13) est décrit « Showing hope, harvesting change » (montrer). Laquelle des deux formes est la bonne ?
+185. Photo A16, dans l'arche : le catalogue la dit « sans mineur » et « aucun visage », mais plusieurs jeunes y sont reconnaissables de profil ou de face. Sont-ils mineurs ? Si oui, il faut l'accord écrit des parents. Passer A16 en « pending » suffit : A30 la remplacera en production. Un numéro de téléphone et une adresse de site sont aussi lisibles sur un t-shirt : est-ce voulu ?
+186. Visages de l'équipe : en production, aucun portrait ne s'affiche aujourd'hui. Trois noms ne sont pas confirmés, et les quatre portraits attendent l'accord écrit (questions 144 à 149). Les deux lignes de texte s'affichent seules.
+187. La carte « 6 domaines d'action » mène à Nos actions. Elle mènera à la section Domaines de la page quand celle-ci existera.
+188. Les deux pages / et /accueil ont presque le même titre. Laquelle restera, et quand /accueil prendra-t-elle la place de / ?
