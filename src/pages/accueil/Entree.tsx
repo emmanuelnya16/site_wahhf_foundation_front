@@ -1,6 +1,12 @@
-import { useLayoutEffect, useRef, type ReactNode } from 'react';
+import { useLayoutEffect, useRef, type CSSProperties, type ReactNode, type Ref } from 'react';
 import { prefersReducedMotion } from '../../lib/reducedMotion';
-import { cn } from '../../lib/utils';
+
+interface EntreeProps {
+  children: ReactNode;
+  className?: string;
+  style?: CSSProperties;
+  as?: 'div' | 'li';
+}
 
 /**
  * Bloc qui joue son entrée une seule fois, quand il arrive à l'écran (src/styles/accueil.css) :
@@ -9,8 +15,8 @@ import { cn } from '../../lib/utils';
  * Rien n'est masqué pour un bloc déjà à l'écran à l'arrivée sur la page, ni en mouvement réduit : sans classe, tout est
  * en place.
  */
-export default function Entree({ children, className }: { children: ReactNode; className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
+export default function Entree({ children, className, style, as: Balise = 'div' }: EntreeProps) {
+  const ref = useRef<HTMLElement>(null);
   useLayoutEffect(() => {
     const el = ref.current;
     if (!el || typeof IntersectionObserver === 'undefined' || prefersReducedMotion()) return;
@@ -31,8 +37,8 @@ export default function Entree({ children, className }: { children: ReactNode; c
     };
   }, []);
   return (
-    <div ref={ref} className={cn(className)}>
+    <Balise ref={ref as Ref<HTMLDivElement & HTMLLIElement>} className={className} style={style}>
       {children}
-    </div>
+    </Balise>
   );
 }

@@ -470,3 +470,6 @@ Page /accueil (hero). Textes : src/locales/accueil/.
 
 190. « Le changement doit venir de nous-mêmes. » : est-ce la devise de la fondation ? Qui la signe (fondation, fondatrice, équipe) ? En attendant, la phrase s'affiche entre guillemets, sans signature. Ses versions anglaise (« Change must come from ourselves. ») et allemande (« Der Wandel muss von uns selbst ausgehen. ») sont à valider avec elle.
 191. Photo A88 (cercle de la section « Qui sommes-nous en bref ») : derrière les trois aînés, un jeune est reconnaissable. Le catalogue la donne sans mineur ; est-il bien majeur, ou faut-il l'accord de ses parents ? Si oui, passer A88 en « pending » dans le catalogue : A34 la remplace toute seule.
+192. Bandeau des chiffres : les chiffres d'impact attendent leur date et leur source (voir aussi les questions 79 et 80). Pour chacun : le nombre, la date d'arrêt, le document d'où il vient, et l'accord pour le publier. La petite note sous les chiffres restera-t-elle une fois le premier publié ?
+193. « 2 villes au Cameroun » compte Yaoundé et Douala. Y a-t-il des bureaux ouverts au public dans les deux, ou seulement des équipes ? Le lien mène à Contact.
+194. Le chiffre « 10 pays d'Europe » mène à Notre impact, comme demandé. La carte « 10 pays » du haut de page mène, elle, aux fiches pays de l'Accompagnement. Faut-il la même destination ?

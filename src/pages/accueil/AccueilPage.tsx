@@ -10,6 +10,7 @@ import { useLoopControl } from '../events/motion';
 import { cn } from '../../lib/utils';
 import Hero from './Hero';
 import QuiSommesNous from './QuiSommesNous';
+import Chiffres from './Chiffres';
 
 /** Mouvement au défilement (GSAP), chargé après le premier affichage */
 const AccueilMotion = lazy(() => import('./AccueilMotion'));
@@ -34,7 +35,7 @@ export default function AccueilPage() {
       <SEO title={title} description={t('accueil.seo.description')} />
       <Hero paused={loops.paused} onTogglePause={loops.toggle} />
       <QuiSommesNous />
-      {/* 3. Les chiffres (à venir) */}
+      <Chiffres />
       {/* 4. Les 6 domaines : design et animation des « Cinq principes », une photo par domaine (à venir) */}
       {/* 5. Projet phare (à venir) */}
       {/* 6. Des parcours qui inspirent (à venir) */}

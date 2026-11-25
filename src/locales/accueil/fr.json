@@ -42,5 +42,14 @@
       }
     },
     "lien": "Découvrir la fondation"
+  },
+  "chiffres": {
+    "surtitre": "La fondation en chiffres",
+    "titre": [
+      "Ce qui est",
+      "déjà en place"
+    ],
+    "note": "Les chiffres d’impact (jeunes accompagnés, actions menées) seront publiés ici dès qu’ils seront datés et vérifiés.",
+    "source": "Au {{date}}. Source : {{source}}"
   }
 }

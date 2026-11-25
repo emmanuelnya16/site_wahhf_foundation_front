@@ -960,6 +960,36 @@ Contrat validé le 16/11/2026, avec les ajustements du §13.
 | sombre | Carte et bouton nuit : texte | 10,33:1 |
 | sombre | Contour du bouton | 15,04:1 |
 
+### 16.2 Sections « Qui sommes-nous en bref » et « Les chiffres » (lot 11.2)
+
+*Votre brief du 25 novembre 2026. Contenu : `docs/references/accueil/sections/` (2 et 3), limité à ce que le site dit déjà.*
+
+**Écarts voulus par le brief** :
+- surtitres et libellés en capitales Barlow 600 espacées de 0,16 em (comme les pages Événements) ;
+- soleil sur fond clair : l'étiquette de la citation (texte encre) ;
+- rayons hors système pour la photo « feuille » : 8 rem en haut à gauche et en bas à droite, 1 rem aux deux autres coins ;
+- « Gratuité » en intertitre d'un point, et « groupe IROKO » dans le texte de présentation.
+
+**Choix** :
+- étiquette en Jost 700 : la graisse 600 n'est pas hébergée, et un fichier de plus ne se justifiait pas pour une phrase ;
+- le fil en pointillés et les parallaxes n'existent que sur ordinateur (souris, 1 024 px au moins, mouvement autorisé) ; parallaxe : 40 px de course au plus dans la section 2, 30 px pour le motif de la section 3 ; le bouton pause les fige ;
+- entrées en CSS, une seule fois, quand le bloc arrive à l'écran (`Entree.tsx`) ; un bloc déjà visible à l'arrivée ne s'anime pas ;
+- chiffres en liste alignée à gauche, comme le reste du site ; une flèche reste visible au repos, car rien ne signale le lien sur un écran tactile ;
+- contours d'Europe et du Cameroun réels (Natural Earth 1:110 m, domaine public).
+
+**Chiffres** : `src/data/accueil-chiffres.ts`. Un chiffre d'impact s'affiche seulement avec sa date et sa source, en petit dessous. Pays, domaines et niveaux se comptent sur les données du site.
+
+**Contrastes** (seuil 4,5:1 ; aucun échec ; « motif » : pire cas, texte sur un trait du fond) :
+
+| Usage | Ratio |
+|---|---|
+| Citation : encre sur soleil | 7,83:1 |
+| Surtitre, lien, icône (clair) : forêt sur brume, sur sauge | 8,58:1, 7,58:1 |
+| Texte des points (clair) : encre douce sur brume, sur la tache sauge | 6,84:1, 6,04:1 |
+| Bandeau nuit : titre et libellés (brume), sur motif | 11,40:1, 9,80:1 |
+| Bandeau nuit : sous-textes, note, source (brume douce), sur motif | 7,85:1, 6,75:1 |
+| Bandeau nuit : chiffres, surtitre, flèches (soleil), sur motif | 6,63:1, 5,70:1 |
+
 ## Annexe A : tableau des contrastes
 
 Calcul WCAG 2.x sur fond uni ; ratios tronqués à une décimale. Seuils : 4,5:1 pour le texte, 3:1 pour les composants et le fil.

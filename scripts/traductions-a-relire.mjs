@@ -28,7 +28,7 @@ const get = (obj, segs) => segs.reduce((o, s) => (o == null ? undefined : o[/^\d
 // ---------- Données françaises, chargées par Vite (import.meta.glob, alias, JSON…) ----------
 const vite = await createServer({ root: ROOT, logLevel: 'silent', server: { middlewareMode: true, hmr: false }, appType: 'custom', optimizeDeps: { noDiscovery: true, include: [] } });
 const DATA_MODULES = [
-  'src/services/api.ts', 'src/data/countries.ts', 'src/data/arnaques.ts', 'src/data/events.ts', 'src/data/gallery.ts',
+  'src/services/api.ts', 'src/data/accueil-chiffres.ts', 'src/data/countries.ts', 'src/data/arnaques.ts', 'src/data/events.ts', 'src/data/gallery.ts',
   'src/data/journey.ts', 'src/data/photos.ts', 'src/data/regions.ts', 'src/data/team.ts', 'src/data/teamPortraits.ts',
   'src/config/contact.ts', 'src/pages/accompagnement/steps.ts',
 ];

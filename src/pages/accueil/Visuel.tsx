@@ -4,6 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import Photo from '../../components/wahhf/Photo';
 import { photoOrFallback } from '../../lib/photos';
 import { localizeEvent, upcomingEvents } from '../../lib/events';
+import { LIEN_DOMAINES } from '../../data/accueil-chiffres';
 import { COUNTRIES_DATA, DOMAINS_DATA, WAHHF_LOGO_URL } from '../../services/api';
 
 /**
@@ -11,12 +12,6 @@ import { COUNTRIES_DATA, DOMAINS_DATA, WAHHF_LOGO_URL } from '../../services/api
  * l'accord des parents (lot 11.2) : en ligne, A30 (public de dos, devant le kakémono) la remplace.
  */
 const PHOTO = photoOrFallback('A16', 'A30');
-
-/**
- * Carte « 6 domaines » : le brief prévoit une ancre vers la section Domaines de cette page (#domaines). Elle n'existe pas
- * encore (section 4, lot à venir) : jusque-là, la carte mène à Nos actions plutôt qu'à une ancre vide.
- */
-const DOMAINS_HREF = '/nos-actions';
 
 /** Arche de 470 × 640 : demi-cercle en haut, coins de 36 px en bas ; tracée depuis le bas à gauche */
 const ARCHE = 'M36 640 A36 36 0 0 1 0 604 V235 A235 235 0 0 1 470 235 V604 A36 36 0 0 1 434 640 Z';
@@ -72,7 +67,7 @@ export default function Visuel() {
           </Link>
         </div>
         <div className="ac-carte-place ac-place-domaines" data-parallaxe="8">
-          <Link to={DOMAINS_HREF} className="ac-carte ac-carte-nuit focus-ring-double">
+          <Link to={LIEN_DOMAINES} className="ac-carte ac-carte-nuit focus-ring-double">
             <span className="ac-nombre">{DOMAINS_DATA.length}</span>{' '}
             <span className="ac-carte-texte">{t('accueil.hero.domaines')}</span>
           </Link>

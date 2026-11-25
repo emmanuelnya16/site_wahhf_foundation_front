@@ -42,5 +42,34 @@
       }
     },
     "lien": "Discover the foundation"
+  },
+  "chiffres": {
+    "surtitre": "The foundation in figures",
+    "titre": [
+      "What is",
+      "already in place"
+    ],
+    "note": "Impact figures (young people supported, activities carried out) will be published here as soon as they are dated and verified.",
+    "source": "As of {{date}}. Source: {{source}}"
+  },
+  "contenu": {
+    "chiffres": {
+      "pays": {
+        "libelle": "European countries",
+        "sousTexte": "Verified country pages"
+      },
+      "domaines": {
+        "libelle": "Fields of action",
+        "sousTexte": "From education to mobility"
+      },
+      "niveaux": {
+        "libelle": "Levels of German and English",
+        "sousTexte": "From A1 to C1, free of charge"
+      },
+      "villes": {
+        "libelle": "Cities in Cameroon",
+        "sousTexte": "Yaoundé and Douala, with coordination in Germany"
+      }
+    }
   }
 }
