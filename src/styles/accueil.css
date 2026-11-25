@@ -996,6 +996,10 @@
   .ac-chiffres {
     contain-intrinsic-size: auto 900px;
   }
+  .ac-domaines {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 4050px;
+  }
 }
 
 /* --- 3. Les chiffres (lot 11.2) : bandeau nuit dans les deux thèmes --- */
@@ -1247,13 +1251,14 @@
 /* --- 4. Les 6 domaines (lot 11.3) : les classes des Cinq principes (src/index.css, inchangées), plus la photo, le lien
    et la sixième couleur. Cartes identiques en clair et en sombre. --- */
 .ac-domaines-tete {
-  max-width: 48rem;
+  max-width: 58rem;
 }
 .ac-domaines .principles-title {
   display: block;
   color: var(--ac-texte);
 }
 .ac-domaines .principles-intro {
+  max-width: 48rem;
   margin-top: 1rem;
 }
 .ac-domaine-6 {
@@ -1266,16 +1271,20 @@
   --marge: clamp(1.5rem, 6vw, 2.25rem);
   --photo: 11rem;
   min-height: 0;
+  max-height: min(36rem, var(--ac-carte-max, 36rem));
   padding: 0 var(--marge) 1rem;
 }
 .ac-domaines .principle-card > * {
   flex: none;
 }
+.ac-domaines .principle-card > .ac-domaine-photo {
+  flex: 0 1 var(--photo);
+  min-height: 5.5rem;
+}
 .ac-domaine-photo {
   position: relative;
   display: grid;
   place-items: center;
-  height: var(--photo);
   margin-inline: calc(var(--marge) * -1);
   overflow: hidden;
   border-radius: inherit;
@@ -1334,6 +1343,62 @@
 .ac-domaine-lien:focus-visible {
   outline: 3px solid var(--pc-accent);
   outline-offset: 4px;
+}
+/* Parcours épinglé : les cartes paires descendent un peu moins que celles des principes (les photos les allongent) */
+.ac-domaines.is-pinned .principles-item[data-side='end'] {
+  margin-top: 2.5rem;
+}
+/* La section est plus haute que l'écran de la longueur du parcours ; la scène y reste collée sous l'en-tête */
+.ac-domaines.is-pinned {
+  height: calc(100svh - var(--header-height) + var(--ac-parcours));
+}
+.ac-domaines.is-pinned .principles-pin {
+  position: sticky;
+  top: var(--header-height);
+}
+.ac-domaines.is-pinned .principles-intro {
+  margin-top: 0.75rem;
+}
+.ac-domaines.is-pinned .principles-viewport {
+  margin-top: clamp(0.75rem, 2.2vh, 1.5rem);
+}
+.ac-domaines.is-pinned .principle-number {
+  margin-top: 1rem;
+}
+/* Écran d'ordinateur portable : tout se resserre un peu avant que la piste ne soit réduite */
+@media (max-height: 880px) {
+  .ac-domaines.is-pinned .principles-item[data-side='end'] {
+    margin-top: 1.5rem;
+  }
+  .ac-domaines.is-pinned .principles-title {
+    margin-top: 0.5rem;
+    font-size: 2.25rem;
+  }
+  .ac-domaines.is-pinned .principles-intro {
+    margin-top: 0.5rem;
+  }
+  .ac-domaines.is-pinned .principle-card:not(.principle-card-final) {
+    padding-bottom: 0.5rem;
+  }
+  .ac-domaines.is-pinned .principle-number {
+    margin-top: 0.75rem;
+    font-size: 3.25rem;
+  }
+  .ac-domaines.is-pinned .principle-card:not(.principle-card-final) .principle-rubric {
+    margin-top: 0.5rem;
+  }
+  .ac-domaines.is-pinned .principle-title {
+    margin-top: 0.375rem;
+    font-size: 1.5rem;
+  }
+  .ac-domaines.is-pinned .principle-desc {
+    margin-top: 0.5rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.5;
+  }
+  .ac-domaines.is-pinned .principle-label {
+    padding-top: 0;
+  }
 }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .ac-domaines .principle-card:hover .ac-domaine-media img {

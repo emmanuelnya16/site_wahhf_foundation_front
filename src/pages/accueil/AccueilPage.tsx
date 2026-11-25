@@ -40,7 +40,7 @@ export default function AccueilPage() {
       <Hero paused={loops.paused} onTogglePause={loops.toggle} />
       <QuiSommesNous />
       <Chiffres />
-      <DomainesParcours />
+      <DomainesParcours paused={loops.paused} />
       {/* 5. Projet phare (à venir) */}
       {/* 6. Des parcours qui inspirent (à venir) */}
       {/* 7. Les 10 régions : section existante de Notre impact (à venir) */}

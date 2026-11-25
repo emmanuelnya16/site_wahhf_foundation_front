@@ -1,12 +1,17 @@
-import { useEffect, useRef, useState, type RefObject } from 'react';
+import { lazy, useEffect, useRef, useState, type RefObject } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, HeartPulse } from 'lucide-react';
 import Photo, { type PhotoLike } from '../../components/wahhf/Photo';
 import { drawFil } from '../../components/principles/principlesFil';
+import { AfterFirstDisplay } from '../../effects/DeferredMotion';
 import { photoOrFallback } from '../../lib/photos';
 import { useLocalize } from '../../lib/localize';
+import { useMediaQuery } from '../../lib/useMediaQuery';
 import { cn } from '../../lib/utils';
 import { DOMAINS_DATA } from '../../services/api';
+
+/** Le mouvement (GSAP, ScrollTrigger, DrawSVG, MotionPath, SplitText), chargé quand la section approche */
+const DomainesMotion = lazy(() => import('./DomainesMotion'));
 
 /** Le grand coin de chaque carte : le même enchaînement que les Cinq principes, jusqu'à la carte de fin */
 const LEAVES = ['tr', 'bl', 'tl', 'br', 'tr', 'bl', 'tl'] as const;
@@ -41,8 +46,8 @@ const VISUELS = new Map(
   })
 );
 
-/** Vrai quand la section approche (une hauteur et demie d'écran) : le fil se dessine, et le mouvement se charge */
-export function useApproche(ref: RefObject<HTMLElement | null>) {
+/** Vrai quand la section approche (une hauteur et demie d'écran, ou un lien vers elle sous la souris) : le fil se dessine, et le mouvement se charge */
+function useApproche(ref: RefObject<HTMLElement | null>) {
   const [proche, setProche] = useState(false);
   useEffect(() => {
     const el = ref.current;
@@ -51,6 +56,13 @@ export function useApproche(ref: RefObject<HTMLElement | null>) {
       setProche(true);
       return;
     }
+    // Un lien vers la section, survolé ou au clavier : le mouvement est prêt avant que le défilement n'arrive
+    const annonce = () => setProche(true);
+    const liens = document.querySelectorAll(`a[href$="#${el.id}"]`);
+    liens.forEach((lien) => {
+      lien.addEventListener('pointerenter', annonce);
+      lien.addEventListener('focus', annonce);
+    });
     const observer = new IntersectionObserver(
       (entries) => {
         if (!entries.some((e) => e.isIntersecting)) return;
@@ -60,7 +72,13 @@ export function useApproche(ref: RefObject<HTMLElement | null>) {
       { rootMargin: '150% 0px' }
     );
     observer.observe(el);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      liens.forEach((lien) => {
+        lien.removeEventListener('pointerenter', annonce);
+        lien.removeEventListener('focus', annonce);
+      });
+    };
   }, [ref, proche]);
   return proche;
 }
@@ -73,13 +91,15 @@ export function useApproche(ref: RefObject<HTMLElement | null>) {
  * - Une liste ordonnée de 6 articles (h3), puis la carte de fin. Compteur, consigne, fil et point : décor.
  * - Sans mouvement (et avant l'arrivée de GSAP) : une colonne, fil entièrement tracé. Le fil attend que la section
  *   approche : le mesurer plus tôt forcerait la mise en page de toute la page au chargement.
+ * - Mouvement : DomainesMotion.tsx (parcours épinglé sur ordinateur ; fil tracé au défilement et cartes par lots ailleurs).
  * Styles propres : src/styles/accueil.css (.ac-domaines).
  */
-export default function DomainesParcours() {
+export default function DomainesParcours({ paused }: { paused: boolean }) {
   const { t, lang, localizedList } = useLocalize();
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const proche = useApproche(sectionRef);
+  const reduit = useMediaQuery('(prefers-reduced-motion: reduce)');
   const domaines = localizedList(DOMAINS_DATA, 'contenu.domaines', (d) => d.id);
   const total = domaines.length;
 
@@ -197,6 +217,12 @@ export default function DomainesParcours() {
           {t('accueil.domaines.consigne')}
         </p>
       </div>
+
+      {proche && !reduit && (
+        <AfterFirstDisplay>
+          <DomainesMotion scope={sectionRef} lang={lang} paused={paused} />
+        </AfterFirstDisplay>
+      )}
     </section>
   );
 }
