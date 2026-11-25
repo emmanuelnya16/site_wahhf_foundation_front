@@ -2,7 +2,7 @@
 
 Généré par `npm run i18n:relire` (scripts/traductions-a-relire.mjs) le 2026-11-25. Ne pas modifier à la main : corriger les fichiers de langue, puis relancer.
 
-Chaque texte allemand du site, face à son français. **Un astérisque (\*) marque les 159 textes dont le traducteur n'était pas sûr** (sens du français ambigu, terme juridique, nom d'institution, ton) : à relire en priorité. 1755 textes allemands au total.
+Chaque texte allemand du site, face à son français. **Un astérisque (\*) marque les 160 textes dont le traducteur n'était pas sûr** (sens du français ambigu, terme juridique, nom d'institution, ton) : à relire en priorité. 1767 textes allemands au total.
 
 - Ton choisi : vouvoiement (« Sie »), simple et chaleureux, pas du mot à mot.
 - Ne sont pas traduits : les noms propres et officiels (WAHHF Foundation, IROKO, Albatros Hotel, Ausbildung, Studienkolleg…), les adresses, les liens.
@@ -705,7 +705,7 @@ Fichier : `src/locales/accompagnement/de.json` (309 textes, dont 19 à relire).
 
 ## accueil
 
-Fichier : `src/locales/accueil/de.json` (14 textes, dont 2 à relire).
+Fichier : `src/locales/accueil/de.json` (26 textes, dont 3 à relire).
 
 | | Clé | Français | Allemand |
 |---|---|---|---|
@@ -723,6 +723,18 @@ Fichier : `src/locales/accueil/de.json` (14 textes, dont 2 à relire).
 | \* | `hero.pays` | pays d’Europe où nous orientons les jeunes | Länder Europas, für die wir jungen Menschen Orientierung geben <br>_Note : « pays d’Europe où nous orientons les jeunes » rendu par « Länder Europas, für die wir jungen Menschen Orientierung geben »_ |
 |  | `hero.domaines` | domaines d’action | Arbeitsbereiche |
 |  | `hero.evenement` | Prochain événement | Nächste Veranstaltung |
+|  | `qsn.surtitre` | Qui sommes-nous | Über uns |
+|  | `qsn.titre[0]` | Une fondation engagée | Eine Stiftung für |
+|  | `qsn.titre[1]` | pour un avenir digne | eine Zukunft in Würde |
+|  | `qsn.texte` | WAHHF Foundation est la branche sociale du groupe IROKO. Basée à Yaoundé et à Douala, avec une coordination en Allemagne, elle accompagne les jeunes vers l’autonomie : éducation, santé, entrepreneuriat, environnement, droits et inclusion, et mobilité vers l’Europe. | Die WAHHF Foundation ist der soziale Zweig der IROKO-Gruppe. Mit Sitz in Yaoundé und Douala und einer Koordination in Deutschland begleitet sie junge Menschen in die Selbstständigkeit: Bildung, Gesundheit, Unternehmertum, Umwelt, Rechte und Teilhabe sowie Mobilität nach Europa. |
+| \* | `qsn.citation` | « Le changement doit venir de nous-⁠mêmes. » | „Der Wandel muss von uns selbst ausgehen.“ <br>_Note : « Le changement doit venir de nous-mêmes » rendu par « Der Wandel muss von uns selbst ausgehen » (devise à valider, question 190)_ |
+|  | `qsn.points.dignite.titre` | Dignité et respect | Würde und Respekt |
+|  | `qsn.points.dignite.texte` | Chaque jeune est acteur de son parcours. | Jeder junge Mensch gestaltet seinen Weg selbst. |
+|  | `qsn.points.integrite.titre` | Intégrité et vérité | Integrität und Wahrheit |
+|  | `qsn.points.integrite.texte` | Une information vérifiée, jamais de fausses promesses. | Geprüfte Informationen, niemals falsche Versprechen. |
+|  | `qsn.points.gratuite.titre` | Gratuité | Kostenlos |
+|  | `qsn.points.gratuite.texte` | L’académie d’allemand et d’anglais, de A1 à C1, sans frais. | Die Deutsch- und Englischakademie, von A1 bis C1, ohne Gebühren. |
+|  | `qsn.lien` | Découvrir la fondation | Die Stiftung kennenlernen |
 
 ## actualites
 

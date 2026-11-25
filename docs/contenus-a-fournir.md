@@ -465,3 +465,8 @@ Page /accueil (hero). Textes : src/locales/accueil/.
 187. La carte « 6 domaines d'action » mène à Nos actions. Elle mènera à la section Domaines de la page quand celle-ci existera.
 188. Les deux pages / et /accueil ont presque le même titre. Laquelle restera, et quand /accueil prendra-t-elle la place de / ?
 189. A16 en « pending » a trois effets en ligne, hors de /accueil : sur l'accueil actuel (/), le panneau « Chanter ensemble » disparaît (A85, sa photo, attend aussi l'accord) ; sur Faire un don, l'en-tête n'a plus de photo ; sur Actualités, le bloc de la journée du 25 avril se masque (il lui faut trois photos). Faut-il une autre remplaçante (A30, public de dos, convient à Faire un don et à Actualités) ? Aucune photo publiable ne montre les jeunes qui chantent.
+
+## Questions ajoutées avec les sections « Qui sommes-nous en bref » et « Les chiffres » (lot 11.2, 25 novembre 2026)
+
+190. « Le changement doit venir de nous-mêmes. » : est-ce la devise de la fondation ? Qui la signe (fondation, fondatrice, équipe) ? En attendant, la phrase s'affiche entre guillemets, sans signature. Ses versions anglaise (« Change must come from ourselves. ») et allemande (« Der Wandel muss von uns selbst ausgehen. ») sont à valider avec elle.
+191. Photo A88 (cercle de la section « Qui sommes-nous en bref ») : derrière les trois aînés, un jeune est reconnaissable. Le catalogue la donne sans mineur ; est-il bien majeur, ou faut-il l'accord de ses parents ? Si oui, passer A88 en « pending » dans le catalogue : A34 la remplace toute seule.

@@ -1,7 +1,8 @@
 {
   "_relire": [
     "hero.intro : « communautés vulnérables » rendu par « benachteiligte Gemeinschaften »",
-    "hero.pays : « pays d’Europe où nous orientons les jeunes » rendu par « Länder Europas, für die wir jungen Menschen Orientierung geben »"
+    "hero.pays : « pays d’Europe où nous orientons les jeunes » rendu par « Länder Europas, für die wir jungen Menschen Orientierung geben »",
+    "qsn.citation : « Le changement doit venir de nous-mêmes » rendu par « Der Wandel muss von uns selbst ausgehen » (devise à valider, question 190)"
   ],
   "seo": {
     "title": "Startseite — Junge Menschen stärken, Gemeinschaften verändern",
@@ -22,5 +23,29 @@
     "pays": "Länder Europas, für die wir jungen Menschen Orientierung geben",
     "domaines": "Arbeitsbereiche",
     "evenement": "Nächste Veranstaltung"
+  },
+  "qsn": {
+    "surtitre": "Über uns",
+    "titre": [
+      "Eine Stiftung für",
+      "eine Zukunft in Würde"
+    ],
+    "texte": "Die WAHHF Foundation ist der soziale Zweig der IROKO-Gruppe. Mit Sitz in Yaoundé und Douala und einer Koordination in Deutschland begleitet sie junge Menschen in die Selbstständigkeit: Bildung, Gesundheit, Unternehmertum, Umwelt, Rechte und Teilhabe sowie Mobilität nach Europa.",
+    "citation": "„Der Wandel muss von uns selbst ausgehen.“",
+    "points": {
+      "dignite": {
+        "titre": "Würde und Respekt",
+        "texte": "Jeder junge Mensch gestaltet seinen Weg selbst."
+      },
+      "integrite": {
+        "titre": "Integrität und Wahrheit",
+        "texte": "Geprüfte Informationen, niemals falsche Versprechen."
+      },
+      "gratuite": {
+        "titre": "Kostenlos",
+        "texte": "Die Deutsch- und Englischakademie, von A1 bis C1, ohne Gebühren."
+      }
+    },
+    "lien": "Die Stiftung kennenlernen"
   }
 }

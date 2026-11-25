@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ArrowRight, Sparkle } from 'lucide-react';
 import { PauseButton } from '../events/motion';
-import { richText } from '../../lib/richText';
 import Equipe from './Equipe';
+import Lignes from './Lignes';
 import Visuel from './Visuel';
 import { useParallaxe } from './useParallaxe';
 
@@ -22,7 +22,6 @@ export default function Hero({ paused, onTogglePause }: { paused: boolean; onTog
   const { t } = useTranslation();
   const zone = useRef<HTMLElement>(null);
   useParallaxe(zone, !paused);
-  const lignes = t('accueil.hero.titre', { returnObjects: true }) as string[];
 
   return (
     <section ref={zone} className="ac-hero" aria-labelledby="ac-titre" data-ev-zone="">
@@ -37,11 +36,7 @@ export default function Hero({ paused, onTogglePause }: { paused: boolean; onTog
             <span lang="en">{SLOGAN}</span>
           </p>
           <h1 id="ac-titre" className="ac-h1">
-            {lignes.map((ligne, i) => (
-              <span key={ligne} className="ac-ligne" style={{ '--rang': i } as CSSProperties}>
-                <span>{richText(ligne, { accent: (mot) => <span className="ac-accent">{mot}</span> })} </span>
-              </span>
-            ))}
+            <Lignes lignes={t('accueil.hero.titre', { returnObjects: true }) as string[]} />
           </h1>
           <p className="ac-intro ac-entree" style={delai(0.4)}>
             {t('accueil.hero.intro')}

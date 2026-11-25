@@ -18,5 +18,29 @@
     "pays": "European countries we guide young people towards",
     "domaines": "areas of action",
     "evenement": "Next event"
+  },
+  "qsn": {
+    "surtitre": "Who we are",
+    "titre": [
+      "A foundation committed",
+      "to a dignified future"
+    ],
+    "texte": "WAHHF Foundation is the social branch of the IROKO Group. Based in Yaoundé and Douala, with coordination in Germany, it supports young people towards autonomy: education, health, entrepreneurship, environment, rights and inclusion, and mobility towards Europe.",
+    "citation": "“Change must come from ourselves.”",
+    "points": {
+      "dignite": {
+        "titre": "Dignity and respect",
+        "texte": "Every young person shapes their own path."
+      },
+      "integrite": {
+        "titre": "Integrity and truth",
+        "texte": "Verified information, never false promises."
+      },
+      "gratuite": {
+        "titre": "Free of charge",
+        "texte": "The German and English academy, from A1 to C1, at no cost."
+      }
+    },
+    "lien": "Discover the foundation"
   }
 }
