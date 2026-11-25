@@ -66,6 +66,11 @@
       "lien": "See all our actions"
     }
   },
+  "projet": {
+    "soutenir": "Support this project",
+    "enSavoirPlus": "Find out more",
+    "tampon": "Free"
+  },
   "contenu": {
     "chiffres": {
       "pays": {
@@ -83,6 +88,48 @@
       "villes": {
         "libelle": "Cities in Cameroon",
         "sousTexte": "Our teams in Yaoundé and Douala, with coordination in Germany"
+      }
+    },
+    "projets": {
+      "wahhf-on-wheel": {
+        "surtitre": "Flagship project",
+        "accroche": "healthcare closer\nto the villages",
+        "texte": "Our mobile clinic travels through the most remote areas of Cameroon to offer free primary care: consultations, vaccinations, screenings and hygiene awareness.",
+        "jalons": [
+          {
+            "libelle": "villages visited every month"
+          },
+          {
+            "valeur": "2,000+",
+            "libelle": "patients cared for"
+          },
+          {
+            "libelle": "young people trained in community health"
+          }
+        ]
+      },
+      "academie": {
+        "surtitre": "Flagship project",
+        "titre": "The Language Academy",
+        "accroche": "where Europe begins",
+        "texte": "A free programme for learning German and English, from level A1 to level C1, with verified guidance pages for 10 European countries.",
+        "jalons": [
+          {
+            "libelle": "Discovery"
+          },
+          {
+            "libelle": "Everyday exchanges"
+          },
+          {
+            "libelle": "Autonomy"
+          },
+          {
+            "libelle": "Independence"
+          },
+          {
+            "libelle": "Mastery"
+          }
+        ]
       }
     }
   }

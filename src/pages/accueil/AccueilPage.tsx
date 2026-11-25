@@ -13,6 +13,7 @@ import Hero from './Hero';
 import QuiSommesNous from './QuiSommesNous';
 import Chiffres from './Chiffres';
 import DomainesParcours from './DomainesParcours';
+import ProjetPhare from './ProjetPhare';
 
 /** Parallaxes et fil (GSAP), chargés après le premier affichage, seulement là où ils existent (MQ.computer, src/lib/gsap.ts) */
 const AccueilMotion = lazy(() => import('./AccueilMotion'));
@@ -41,7 +42,7 @@ export default function AccueilPage() {
       <QuiSommesNous />
       <Chiffres />
       <DomainesParcours paused={loops.paused} />
-      {/* 5. Projet phare (à venir) */}
+      <ProjetPhare paused={loops.paused} />
       {/* 6. Des parcours qui inspirent (à venir) */}
       {/* 7. Les 10 régions : section existante de Notre impact (à venir) */}
       {/* 8. Apprendre, cultiver, grandir : section existante (à venir) */}

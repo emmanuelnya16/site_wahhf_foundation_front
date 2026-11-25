@@ -9,6 +9,7 @@ import { useLocalize } from '../../lib/localize';
 import { useMediaQuery } from '../../lib/useMediaQuery';
 import { cn } from '../../lib/utils';
 import { DOMAINS_DATA } from '../../services/api';
+import { useApproche } from './useApproche';
 
 /**
  * Parcours horizontal épinglé : 1 024 × 600 px au moins, souris, animations autorisées. 600 px (700 pour les Cinq
@@ -66,46 +67,6 @@ const VISUELS = new Map(
     return photo ? [[slug, { photo: jusqua800(photo), cadrage }] as const] : [];
   })
 );
-
-/**
- * Vrai quand la section approche, ou qu'un lien vers elle est sous la souris : le fil se dessine, et le mouvement se
- * charge. Sur le parcours, de plus loin (trois hauteurs d'écran) : il doit être prêt quand la section arrive.
- */
-function useApproche(ref: RefObject<HTMLElement | null>, marge: string) {
-  const [proche, setProche] = useState(false);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el || proche) return;
-    if (typeof IntersectionObserver === 'undefined') {
-      setProche(true);
-      return;
-    }
-    // Un lien vers la section, survolé ou au clavier : le mouvement est prêt avant que le défilement n'arrive
-    const annonce = () => setProche(true);
-    const liens = document.querySelectorAll(`a[href$="#${el.id}"]`);
-    liens.forEach((lien) => {
-      lien.addEventListener('pointerenter', annonce);
-      lien.addEventListener('focus', annonce);
-    });
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (!entries.some((e) => e.isIntersecting)) return;
-        setProche(true);
-        observer.disconnect();
-      },
-      { rootMargin: `${marge} 0px` }
-    );
-    observer.observe(el);
-    return () => {
-      observer.disconnect();
-      liens.forEach((lien) => {
-        lien.removeEventListener('pointerenter', annonce);
-        lien.removeEventListener('focus', annonce);
-      });
-    };
-  }, [ref, proche, marge]);
-  return proche;
-}
 
 /**
  * 4. Les 6 domaines (lot 11.3) : la mise en page, les formes et les classes des « Cinq principes » (src/components/

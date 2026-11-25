@@ -65,5 +65,10 @@
       "titre": "Six domaines, un même cap",
       "lien": "Voir toutes nos actions"
     }
+  },
+  "projet": {
+    "soutenir": "Soutenir ce projet",
+    "enSavoirPlus": "En savoir plus",
+    "tampon": "Gratuit"
   }
 }

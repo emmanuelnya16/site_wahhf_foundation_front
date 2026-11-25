@@ -2,7 +2,7 @@
 
 Généré par `npm run i18n:relire` (scripts/traductions-a-relire.mjs) le 2026-11-25. Ne pas modifier à la main : corriger les fichiers de langue, puis relancer.
 
-Chaque texte allemand du site, face à son français. **Un astérisque (\*) marque les 162 textes dont le traducteur n'était pas sûr** (sens du français ambigu, terme juridique, nom d'institution, ton) : à relire en priorité. 1790 textes allemands au total.
+Chaque texte allemand du site, face à son français. **Un astérisque (\*) marque les 166 textes dont le traducteur n'était pas sûr** (sens du français ambigu, terme juridique, nom d'institution, ton) : à relire en priorité. 1809 textes allemands au total.
 
 - Ton choisi : vouvoiement (« Sie »), simple et chaleureux, pas du mot à mot.
 - Ne sont pas traduits : les noms propres et officiels (WAHHF Foundation, IROKO, Albatros Hotel, Ausbildung, Studienkolleg…), les adresses, les liens.
@@ -705,7 +705,7 @@ Fichier : `src/locales/accompagnement/de.json` (309 textes, dont 19 à relire).
 
 ## accueil
 
-Fichier : `src/locales/accueil/de.json` (49 textes, dont 5 à relire).
+Fichier : `src/locales/accueil/de.json` (68 textes, dont 9 à relire).
 
 | | Clé | Français | Allemand |
 |---|---|---|---|
@@ -750,6 +750,9 @@ Fichier : `src/locales/accueil/de.json` (49 textes, dont 5 à relire).
 |  | `domaines.fin.rubrique` | Tous nos domaines | Alle unsere Bereiche |
 | \* | `domaines.fin.titre` | Six domaines, un même cap | Sechs Bereiche, ein Kurs <br>_Note : « Six domaines, un même cap » rendu par « Sechs Bereiche, ein Kurs »_ |
 |  | `domaines.fin.lien` | Voir toutes nos actions | Unsere gesamte Arbeit ansehen |
+|  | `projet.soutenir` | Soutenir ce projet | Dieses Projekt unterstützen |
+|  | `projet.enSavoirPlus` | En savoir plus | Mehr erfahren |
+|  | `projet.tampon` | Gratuit | Kostenlos |
 |  | `contenu.chiffres.pays.libelle` | Pays d’Europe | Länder Europas |
 |  | `contenu.chiffres.pays.sousTexte` | Fiches d’orientation vérifiées | Geprüfte Länderseiten |
 |  | `contenu.chiffres.domaines.libelle` | Domaines d’action | Arbeits­bereiche |
@@ -758,6 +761,22 @@ Fichier : `src/locales/accueil/de.json` (49 textes, dont 5 à relire).
 |  | `contenu.chiffres.niveaux.sousTexte` | De A1 à C1, gratuits | Von A1 bis C1, kostenlos |
 |  | `contenu.chiffres.villes.libelle` | Villes au Cameroun | Städte in Kamerun |
 |  | `contenu.chiffres.villes.sousTexte` | Nos équipes à Yaoundé et Douala, coordination en Allemagne | Unsere Teams in Yaoundé und Douala, Koordination in Deutschland |
+|  | `contenu.projets.wahhf-on-wheel.surtitre` | Projet phare | Leuchtturmprojekt |
+|  | `contenu.projets.wahhf-on-wheel.accroche` | la santé au plus<br>près des villages | Gesundheit ganz nah<br>an den Dörfern |
+|  | `contenu.projets.wahhf-on-wheel.texte` | Notre clinique mobile parcourt les zones les plus reculées du Cameroun pour offrir des soins primaires gratuits : consultations, vaccinations, dépistages et sensibilisation à l’hygiène. | Unsere mobile Klinik fährt in die entlegensten Gebiete Kameruns und bietet kostenlose Grundversorgung: Sprechstunden, Impfungen, Vorsorgeuntersuchungen und Hygieneaufklärung. |
+| \* | `contenu.projets.wahhf-on-wheel.jalons[0].libelle` | villages visités chaque mois | besuchte Dörfer pro Monat <br>_Note : « santé communautaire » rendu par « Gemeindegesundheit » (exemple, non confirmé)_ |
+| \* | `contenu.projets.wahhf-on-wheel.jalons[1].valeur` | 2 000+ | 2.000+ <br>_Note : « santé communautaire » rendu par « Gemeindegesundheit » (exemple, non confirmé)_ |
+| \* | `contenu.projets.wahhf-on-wheel.jalons[1].libelle` | patients pris en charge | versorgte Patienten <br>_Note : « santé communautaire » rendu par « Gemeindegesundheit » (exemple, non confirmé)_ |
+| \* | `contenu.projets.wahhf-on-wheel.jalons[2].libelle` | jeunes formés en santé communautaire | in Gemeindegesundheit geschulte junge Menschen <br>_Note : « santé communautaire » rendu par « Gemeindegesundheit » (exemple, non confirmé)_ |
+|  | `contenu.projets.academie.surtitre` | Projet phare | Leuchtturmprojekt |
+|  | `contenu.projets.academie.titre` | L’Académie de langues | Die Sprachakademie |
+|  | `contenu.projets.academie.accroche` | l’Europe se prépare ici | der Weg nach Europa<br>beginnt hier |
+|  | `contenu.projets.academie.texte` | Un programme gratuit d’apprentissage de l’allemand et de l’anglais, du niveau A1 au niveau C1, avec des guides d’orientation vérifiés vers 10 pays européens. | Ein kostenloses Programm zum Lernen von Deutsch und Englisch, von Niveau A1 bis Niveau C1, mit geprüften Länderseiten zu 10 europäischen Ländern. |
+|  | `contenu.projets.academie.jalons[0].libelle` | Découverte | Einstieg |
+|  | `contenu.projets.academie.jalons[1].libelle` | Échanges courants | Alltags­gespräche |
+|  | `contenu.projets.academie.jalons[2].libelle` | Autonomie | Selbst­ständigkeit |
+|  | `contenu.projets.academie.jalons[3].libelle` | Indépendance | Unabhängigkeit |
+|  | `contenu.projets.academie.jalons[4].libelle` | Maîtrise | Sprach­beherrschung |
 
 ## actualites
 
