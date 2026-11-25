@@ -9,10 +9,9 @@ import Lignes from './Lignes';
 
 /** A07 : participants devant l'Albatros Hotel ; A88 : trois aînés. Remplaçantes si l'une passe en attente d'accord. */
 const FEUILLE = photoOrFallback('A07', 'A30');
-const CERCLE = photoOrFallback('A88', 'A34');
-/** A34 dans le cercle : serrée sur l'homme au micro, pour laisser hors cadre les jeunes assis derrière lui (question 195) */
-const CADRAGE_CERCLE: CSSProperties | undefined =
-  CERCLE?.id === 'A34' ? { objectPosition: '100% 0', scale: '1.96', transformOrigin: '69.4% 20.4%' } : undefined;
+const CERCLE = photoOrFallback('A88', 'A99');
+/** A99 dans le cercle : serrée sur le visage et le haut du polo */
+const CADRAGE_CERCLE: CSSProperties | undefined = CERCLE?.id === 'A99' ? { objectPosition: '42% 0', scale: '1.5', transformOrigin: '48% 12%' } : undefined;
 /** A07 dans la feuille : un peu à gauche, pour garder l'enseigne entière et le groupe */
 const CADRAGE_FEUILLE = '30% 70%';
 

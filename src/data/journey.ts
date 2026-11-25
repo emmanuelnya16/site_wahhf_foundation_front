@@ -73,7 +73,8 @@ export const JOURNEY_PANELS: JourneyPanel[] = [
     meta: 'Randonnée avec les jeunes',
     description: 'Une montée à plusieurs, la ville en contrebas.',
     photoId: 'B77',
-    fallbackId: 'B85',
+    // Plus aucune photo publiable de la randonnée (règle des mineurs) : deux membres de l'équipe sur les pentes
+    fallbackId: 'B35',
     album: 'randonnee-jeunesse',
   },
 ];

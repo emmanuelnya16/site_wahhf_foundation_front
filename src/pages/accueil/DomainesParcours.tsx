@@ -38,15 +38,16 @@ const LEAVES = ['tr', 'bl', 'tl', 'br', 'tr', 'bl', 'tl'] as const;
 const pad = (n: number) => String(n).padStart(2, '0');
 
 /**
- * La photo de chaque domaine (brief du lot 11.3) et son cadrage dans la bande de 11 rem : les visages restent entiers.
+ * La photo de chaque domaine et son cadrage dans la bande de 11 rem : les visages restent entiers. Lot 11.4 : A98 et A31
+ * attendent l'accord, B23, B40 et A53 dépassaient trois affichages sur le site (réponses 195 et 196).
  * Santé : aucune photo publiable (question 197), une icône au trait à la place.
  */
 const PHOTOS: Record<string, { id: string; cadrage: string }> = {
-  education: { id: 'A98', cadrage: '50% 4%' },
-  entrepreneuriat: { id: 'B23', cadrage: '50% 0%' },
-  environnement: { id: 'B40', cadrage: '50% 58%' },
-  'droits-inclusion': { id: 'A31', cadrage: '50% 20%' },
-  'mobilite-langues': { id: 'A53', cadrage: '50% 40%' },
+  education: { id: 'A22', cadrage: '50% 22%' },
+  entrepreneuriat: { id: 'B06', cadrage: '50% 0%' },
+  environnement: { id: 'B44', cadrage: '50% 12%' },
+  'droits-inclusion': { id: 'A45', cadrage: '50% 11%' },
+  'mobilite-langues': { id: 'A46', cadrage: '50% 36%' },
 };
 
 /** 800 px de large au plus : la carte en fait 480 */

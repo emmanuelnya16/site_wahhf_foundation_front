@@ -86,9 +86,9 @@ export const PHOTOS: CatalogPhoto[] = [
   photo('A27', 'journee-2026-04-25', 'journee-2026-04-25-salle-comble', 'Salle comble pendant une présentation, kakémonos de la fondation de chaque côté de l\'écran', 1600, 1066, 'center 55%', '#c8c8c8', 'pending', [480, 800, 1200, 1600], 800),
   photo('A29', 'journee-2026-04-25', 'journee-2026-04-25-logo-projete', 'Logo de la fondation projeté sur l\'écran de la salle', 1066, 1600, 'center 30%', '#9898a8', 'pending', [480, 800, 1066], 800),
   photo('A30', 'journee-2026-04-25', 'journee-2026-04-25-public-de-dos', 'Participants de dos face au kakémono de la fondation', 1600, 1066, 'center', '#a8a8b8', 'ok', [480, 800, 1200, 1600], 800),
-  photo('A31', 'journee-2026-04-25', 'journee-2026-04-25-parents-aines', 'Parents et aînés assis au premier rang', 1600, 1066, 'center', '#b8b8b8', 'ok', [480, 800, 1200, 1600], 800),
+  photo('A31', 'journee-2026-04-25', 'journee-2026-04-25-parents-aines', 'Parents et aînés assis au premier rang', 1600, 1066, 'center', '#b8b8b8', 'pending', [480, 800, 1200, 1600], 800),
   photo('A33', 'journee-2026-04-25', 'journee-2026-04-25-jeunes-attentives', 'Jeunes participantes attentives pendant une présentation', 1600, 1066, 'center', '#b8b8b8', 'pending', [480, 800, 1200, 1600], 800),
-  photo('A34', 'journee-2026-04-25', 'journee-2026-04-25-question-au-micro', 'Un participant prend la parole au micro pendant les échanges', 1600, 1066, '65% 40%', '#b8b8b8', 'ok', [480, 800, 1200, 1600], 800),
+  photo('A34', 'journee-2026-04-25', 'journee-2026-04-25-question-au-micro', 'Un participant prend la parole au micro pendant les échanges', 1600, 1066, '65% 40%', '#b8b8b8', 'pending', [480, 800, 1200, 1600], 800),
   photo('A36', 'journee-2026-04-25', 'journee-2026-04-25-jeunes-debout', 'Jeunes participants debout dans la salle', 1600, 1066, 'center', '#a8a8b8', 'pending', [480, 800, 1200, 1600], 800),
   photo('A37', 'journee-2026-04-25', 'journee-2026-04-25-jeune-homme-ecoute', 'Un jeune homme écoute une présentation', 1600, 1066, 'center 40%', '#a8a8b8', 'pending', [480, 800, 1200, 1600], 800),
   photo('A38', 'journee-2026-04-25', 'journee-2026-04-25-jeune-polo-fondation', 'Jeune participant en polo de la fondation', 1066, 1600, 'center 35%', '#989898', 'pending', [480, 800, 1066], 800),
@@ -122,7 +122,7 @@ export const PHOTOS: CatalogPhoto[] = [
   photo('A92', 'journee-2026-04-25', 'journee-2026-04-25-jeunes-ecoutent', 'Jeunes participantes à l\'écoute', 1600, 1066, 'center', '#b8b8b8', 'pending', [480, 800, 1200, 1600], 800),
   photo('A95', 'journee-2026-04-25', 'journee-2026-04-25-jeune-reflechit', 'Jeune participant pensif', 1600, 1066, 'center', '#b8b8b8', 'pending', [480, 800, 1200, 1600], 800),
   photo('A97', 'journee-2026-04-25', 'journee-2026-04-25-trois-jeunes', 'Trois jeunes participants', 1600, 1066, 'center', '#b8b8b8', 'pending', [480, 800, 1200, 1600], 800),
-  photo('A98', 'journee-2026-04-25', 'journee-2026-04-25-prise-de-notes', 'Un participant prend des notes', 1600, 1066, 'center', '#b8b8c8', 'ok', [480, 800, 1200, 1600], 800),
+  photo('A98', 'journee-2026-04-25', 'journee-2026-04-25-prise-de-notes', 'Un participant prend des notes', 1600, 1066, 'center', '#b8b8c8', 'pending', [480, 800, 1200, 1600], 800),
   photo('A99', 'journee-2026-04-25', 'journee-2026-04-25-polo-rose-bras-croises', 'Membre de la fondation en polo rose, bras croisés', 1600, 1066, 'center 35%', '#b8b8b8', 'ok', [480, 800, 1200, 1600], 800),
   photo('B03', 'terrain-agricole', 'terrain-agricole-groupe-avant-depart', 'Groupe en gilets réfléchissants avant le départ', 1080, 607, 'center 40%', '#d8a888', 'pending', [480, 800, 1080], 800),
   photo('B04', 'terrain-agricole', 'terrain-agricole-explication-plantation', 'Jeunes en gilets orange écoutant un encadrant dans une plantation d\'ananas', 1080, 607, 'center 45%', '#a8c8d8', 'pending', [480, 800, 1080], 800),
@@ -160,12 +160,18 @@ export const PHOTOS: CatalogPhoto[] = [
   photo('B80', 'randonnee-jeunesse', 'randonnee-jeunesse-arbre-sentier', 'Un jeune s\'appuie à un arbre sur le sentier', 1080, 607, 'center', '#384828', 'pending', [480, 800, 1080], 800),
   photo('B82', 'randonnee-jeunesse', 'randonnee-jeunesse-file-en-foret', 'Le groupe progresse en file sur un sentier forestier', 1080, 607, 'center', '#384828', 'pending', [480, 800, 1080], 800),
   photo('B84', 'randonnee-jeunesse', 'randonnee-jeunesse-sommet-vue-large', 'Le groupe au sommet, vue sur la ville', 1080, 607, 'center 45%', '#b8c8d8', 'pending', [480, 800, 1080], 800),
-  photo('B85', 'randonnee-jeunesse', 'randonnee-jeunesse-chasuble-de-dos', 'Participant de dos en chasuble verte dans la forêt', 1080, 607, 'center', '#88e868', 'ok', [480, 800, 1080], 800),
+  photo('B85', 'randonnee-jeunesse', 'randonnee-jeunesse-chasuble-de-dos', 'Participant de dos en chasuble verte dans la forêt', 1080, 607, 'center', '#88e868', 'pending', [480, 800, 1080], 800),
 ];
 
 /** Remplaçantes d'une photo en attente d'accord, quand la page n'en donne pas de publiable (table du catalogue). */
 export const PHOTO_FALLBACKS: Record<string, readonly string[]> = {
-  A16: ['A31'],
+  A16: ['A44'],
+  A31: ['A74'],
+  A33: ['A63'],
+  A34: ['A46'],
+  A81: ['A12'],
   A85: ['A44'],
-  A88: ['A34'],
+  A88: ['A99'],
+  A98: ['A66'],
+  B75: ['B41'],
 };
