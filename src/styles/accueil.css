@@ -797,7 +797,7 @@
 
 /* ==========================================================================
    Mouvement : keyframes CSS, comme les pages Événements. Seuls translate, scale, rotate, opacity, clip-path (une fois) et
-   le tracé du contour s'animent. La parallaxe (transform, useParallaxe.ts) est sur des enveloppes à part.
+   le tracé du contour s'animent. La parallaxe (transform, AccueilMotion.tsx) est sur des enveloppes à part.
    Entrées en « backwards » : une fois finies, l'élément reprend son style normal (les survols restent libres).
    ========================================================================== */
 @keyframes ac-entree {
@@ -982,6 +982,19 @@
   .ac.ev-onglet-cache,
   .ac .is-hors-ecran {
     --ac-lecture: paused;
+  }
+}
+
+/* Téléphone et tablette (lot 11.3) : le navigateur ne met en page une section sous l'écran qu'à son approche. Pas sur
+   ordinateur, où le parcours épinglé a besoin des vraies hauteurs. Hauteur d'attente : mesurée à 390 px. */
+@media (max-width: 1023.98px) {
+  .ac-qsn,
+  .ac-chiffres {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 1380px;
+  }
+  .ac-chiffres {
+    contain-intrinsic-size: auto 900px;
   }
 }
 

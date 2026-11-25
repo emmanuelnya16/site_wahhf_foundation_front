@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, type CSSProperties, type ReactNode, type Ref } from 'react';
+import { useEffect, useRef, type CSSProperties, type ReactNode, type Ref } from 'react';
 import { prefersReducedMotion } from '../../lib/reducedMotion';
 
 interface EntreeProps {
@@ -6,6 +6,33 @@ interface EntreeProps {
   className?: string;
   style?: CSSProperties;
   as?: 'div' | 'li';
+}
+
+/** Un bloc est « arrivé » quand il entre dans les 78 premiers % de la hauteur de l'écran */
+const PART_VUE = 0.78;
+/** Un seul observateur pour toute la page, et aucune mesure pendant le rendu (lot 11.3 : elles forçaient la mise en page) */
+let observateur: IntersectionObserver | null = null;
+const suivis = new WeakSet<Element>();
+
+function surveiller() {
+  return (observateur ??= new IntersectionObserver(
+    (entries) => {
+      for (const { target, isIntersecting, boundingClientRect: b, rootBounds } of entries) {
+        if (!suivis.has(target)) {
+          // Premier relevé : un bloc déjà à l'écran reste en place, un bloc plus bas (ou pas encore mis en page) attend
+          suivis.add(target);
+          const limite = rootBounds ? (rootBounds.height / PART_VUE) * 0.9 : 0;
+          const plusBas = (!b.width && !b.height) || b.top >= limite;
+          if (plusBas) target.classList.add('ac-attend');
+          else observateur?.unobserve(target);
+        } else if (isIntersecting) {
+          target.classList.replace('ac-attend', 'ac-vue');
+          observateur?.unobserve(target);
+        }
+      }
+    },
+    { rootMargin: `0px 0px -${Math.round((1 - PART_VUE) * 100)}% 0px` }
+  ));
 }
 
 /**
@@ -17,22 +44,13 @@ interface EntreeProps {
  */
 export default function Entree({ children, className, style, as: Balise = 'div' }: EntreeProps) {
   const ref = useRef<HTMLElement>(null);
-  useLayoutEffect(() => {
+  useEffect(() => {
     const el = ref.current;
     if (!el || typeof IntersectionObserver === 'undefined' || prefersReducedMotion()) return;
-    if (el.getBoundingClientRect().top < window.innerHeight * 0.9) return;
-    el.classList.add('ac-attend');
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) return;
-        el.classList.replace('ac-attend', 'ac-vue');
-        io.disconnect();
-      },
-      { rootMargin: '0px 0px -22% 0px' }
-    );
-    io.observe(el);
+    surveiller().observe(el);
     return () => {
-      io.disconnect();
+      observateur?.unobserve(el);
+      suivis.delete(el);
       el.classList.remove('ac-attend', 'ac-vue');
     };
   }, []);

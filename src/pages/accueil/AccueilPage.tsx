@@ -7,13 +7,15 @@ import { useTranslation } from 'react-i18next';
 import SEO from '../../components/wahhf/SEO';
 import { AfterFirstDisplay } from '../../effects/DeferredMotion';
 import { useLoopControl } from '../events/motion';
+import { useMediaQuery } from '../../lib/useMediaQuery';
 import { cn } from '../../lib/utils';
 import Hero from './Hero';
 import QuiSommesNous from './QuiSommesNous';
 import Chiffres from './Chiffres';
 
-/** Mouvement au défilement (GSAP), chargé après le premier affichage */
+/** Parallaxes et fil (GSAP), chargés après le premier affichage, seulement là où ils existent (MQ.computer, src/lib/gsap.ts) */
 const AccueilMotion = lazy(() => import('./AccueilMotion'));
+const ORDINATEUR = '(min-width: 1024px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)';
 
 /**
  * Nouvelle page « Accueil » (/accueil), lot 11.1 : construite à côté de l'accueil actuel (/), qui ne change pas.
@@ -24,6 +26,7 @@ export default function AccueilPage() {
   const title = t('accueil.seo.title');
   const root = useRef<HTMLDivElement>(null);
   const loops = useLoopControl(root);
+  const ordinateur = useMediaQuery(ORDINATEUR);
 
   // Titre exact du brief (« … | WAHHF Foundation ») : <SEO> ajoute le nom développé, il est repris ici après elle
   useEffect(() => {
@@ -42,9 +45,11 @@ export default function AccueilPage() {
       {/* 7. Les 10 régions : section existante de Notre impact (à venir) */}
       {/* 8. Apprendre, cultiver, grandir : section existante (à venir) */}
       {/* 9. Quelques événements (à venir) */}
-      <AfterFirstDisplay>
-        <AccueilMotion scope={root} paused={loops.paused} />
-      </AfterFirstDisplay>
+      {ordinateur && (
+        <AfterFirstDisplay>
+          <AccueilMotion scope={root} paused={loops.paused} />
+        </AfterFirstDisplay>
+      )}
     </div>
   );
 }
