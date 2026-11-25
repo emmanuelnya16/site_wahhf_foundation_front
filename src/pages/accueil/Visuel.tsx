@@ -6,7 +6,10 @@ import { photoOrFallback } from '../../lib/photos';
 import { localizeEvent, upcomingEvents } from '../../lib/events';
 import { COUNTRIES_DATA, DOMAINS_DATA, WAHHF_LOGO_URL } from '../../services/api';
 
-/** A16 : jeunes de dos, en t-shirts « Bâtir l'Afrique qui nourrit, soigne et instruit sa jeunesse » (25 avril 2026) */
+/**
+ * A16 : jeunes en t-shirts « Bâtir l'Afrique qui nourrit, soigne et instruit sa jeunesse » (25 avril 2026). Elle attend
+ * l'accord des parents (lot 11.2) : en ligne, A30 (public de dos, devant le kakémono) la remplace.
+ */
 const PHOTO = photoOrFallback('A16', 'A30');
 
 /**
