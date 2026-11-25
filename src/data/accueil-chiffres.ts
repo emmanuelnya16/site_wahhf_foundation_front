@@ -46,6 +46,9 @@ export interface ChiffreAccueil {
 /** Les 6 domaines : l'ancre de leur section de /accueil quand elle existera (lot à venir) ; d'ici là, Nos actions */
 export const LIEN_DOMAINES = '/nos-actions';
 
+/** Les 10 pays : la liste des fiches, la même destination dans le hero et dans les chiffres (réponse 194) */
+export const LIEN_PAYS = '/mobilite-langues/accompagnement#pays';
+
 export const CHIFFRES: ChiffreAccueil[] = [
   {
     id: 'pays',
@@ -53,7 +56,7 @@ export const CHIFFRES: ChiffreAccueil[] = [
     valeur: COUNTRIES_DATA.length,
     libelle: 'Pays d’Europe',
     sousTexte: 'Fiches d’orientation vérifiées',
-    lien: '/notre-impact',
+    lien: LIEN_PAYS,
     date: null,
     source: null,
   },
@@ -82,7 +85,7 @@ export const CHIFFRES: ChiffreAccueil[] = [
     nature: 'en-place',
     valeur: 2,
     libelle: 'Villes au Cameroun',
-    sousTexte: 'Yaoundé et Douala, coordination en Allemagne',
+    sousTexte: 'Nos équipes à Yaoundé et Douala, coordination en Allemagne',
     lien: '/contact',
     date: null,
     source: null,

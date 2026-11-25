@@ -116,7 +116,7 @@ export const PHOTOS: CatalogPhoto[] = [
   photo('A83', 'journee-2026-04-25', 'journee-2026-04-25-hymne-depuis-public', 'L\'hymne de la fondation vu depuis le public', 1600, 1066, 'center 40%', '#080808', 'pending', [480, 800, 1200, 1600], 800),
   photo('A85', 'journee-2026-04-25', 'journee-2026-04-25-hymne-bras-leves', 'Chant de l\'hymne de la fondation, bras levés', 1600, 1066, 'center 40%', '#080808', 'pending', [480, 800, 1200, 1600], 800),
   photo('A87', 'journee-2026-04-25', 'journee-2026-04-25-hymne-vue-large', 'Vue large de la scène pendant l\'hymne', 1600, 1066, 'center', '#c8c8d8', 'pending', [480, 800, 1200, 1600], 800),
-  photo('A88', 'journee-2026-04-25', 'journee-2026-04-25-trois-aines', 'Trois aînés assis, attentifs', 1600, 1066, 'center 40%', '#b8c8c8', 'ok', [480, 800, 1200, 1600], 800),
+  photo('A88', 'journee-2026-04-25', 'journee-2026-04-25-trois-aines', 'Trois aînés assis, attentifs', 1600, 1066, 'center 40%', '#b8c8c8', 'pending', [480, 800, 1200, 1600], 800),
   photo('A89', 'journee-2026-04-25', 'journee-2026-04-25-jeunes-sourires', 'Jeunes participantes souriantes', 1600, 1066, 'center', '#a8a8a8', 'pending', [480, 800, 1200, 1600], 800),
   photo('A90', 'journee-2026-04-25', 'journee-2026-04-25-participante-polo-rose', 'Participante en polo rose de la fondation', 1600, 1066, 'center 35%', '#080808', 'pending', [480, 800, 1200, 1600], 800),
   photo('A92', 'journee-2026-04-25', 'journee-2026-04-25-jeunes-ecoutent', 'Jeunes participantes à l\'écoute', 1600, 1066, 'center', '#b8b8b8', 'pending', [480, 800, 1200, 1600], 800),
@@ -162,3 +162,10 @@ export const PHOTOS: CatalogPhoto[] = [
   photo('B84', 'randonnee-jeunesse', 'randonnee-jeunesse-sommet-vue-large', 'Le groupe au sommet, vue sur la ville', 1080, 607, 'center 45%', '#b8c8d8', 'pending', [480, 800, 1080], 800),
   photo('B85', 'randonnee-jeunesse', 'randonnee-jeunesse-chasuble-de-dos', 'Participant de dos en chasuble verte dans la forêt', 1080, 607, 'center', '#88e868', 'ok', [480, 800, 1080], 800),
 ];
+
+/** Remplaçantes d'une photo en attente d'accord, quand la page n'en donne pas de publiable (table du catalogue). */
+export const PHOTO_FALLBACKS: Record<string, readonly string[]> = {
+  A16: ['A31'],
+  A85: ['A44'],
+  A88: ['A34'],
+};

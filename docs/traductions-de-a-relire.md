@@ -747,7 +747,7 @@ Fichier : `src/locales/accueil/de.json` (39 textes, dont 4 à relire).
 |  | `contenu.chiffres.niveaux.libelle` | Niveaux d’allemand et d’anglais | Niveaus in Deutsch und Englisch |
 |  | `contenu.chiffres.niveaux.sousTexte` | De A1 à C1, gratuits | Von A1 bis C1, kostenlos |
 |  | `contenu.chiffres.villes.libelle` | Villes au Cameroun | Städte in Kamerun |
-|  | `contenu.chiffres.villes.sousTexte` | Yaoundé et Douala, coordination en Allemagne | Yaoundé und Douala, Koordination in Deutschland |
+|  | `contenu.chiffres.villes.sousTexte` | Nos équipes à Yaoundé et Douala, coordination en Allemagne | Unsere Teams in Yaoundé und Douala, Koordination in Deutschland |
 
 ## actualites
 

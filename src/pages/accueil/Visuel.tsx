@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import Photo from '../../components/wahhf/Photo';
 import { photoOrFallback } from '../../lib/photos';
 import { localizeEvent, upcomingEvents } from '../../lib/events';
-import { LIEN_DOMAINES } from '../../data/accueil-chiffres';
+import { LIEN_DOMAINES, LIEN_PAYS } from '../../data/accueil-chiffres';
 import { COUNTRIES_DATA, DOMAINS_DATA, WAHHF_LOGO_URL } from '../../services/api';
 
 /**
@@ -61,7 +61,7 @@ export default function Visuel() {
 
       <div className="ac-cartes">
         <div className="ac-carte-place ac-place-pays" data-parallaxe="10">
-          <Link to="/mobilite-langues/accompagnement#pays" className="ac-carte focus-ring-double">
+          <Link to={LIEN_PAYS} className="ac-carte focus-ring-double">
             <span className="ac-nombre">{COUNTRIES_DATA.length}</span>{' '}
             <span className="ac-carte-texte">{t('accueil.hero.pays')}</span>
           </Link>

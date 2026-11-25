@@ -10,6 +10,9 @@ import Lignes from './Lignes';
 /** A07 : participants devant l'Albatros Hotel ; A88 : trois aînés. Remplaçantes si l'une passe en attente d'accord. */
 const FEUILLE = photoOrFallback('A07', 'A30');
 const CERCLE = photoOrFallback('A88', 'A34');
+/** A34 dans le cercle : serrée sur l'homme au micro, pour laisser hors cadre les jeunes assis derrière lui (question 195) */
+const CADRAGE_CERCLE: CSSProperties | undefined =
+  CERCLE?.id === 'A34' ? { objectPosition: '100% 0', scale: '1.96', transformOrigin: '69.4% 20.4%' } : undefined;
 /** A07 dans la feuille : un peu à gauche, pour garder l'enseigne entière et le groupe */
 const CADRAGE_FEUILLE = '30% 70%';
 
@@ -57,7 +60,7 @@ export default function QuiSommesNous() {
               </div>
             </div>
             <div className="ac-cercle-place" data-ac-defile="20">
-              <div className="ac-cercle">{CERCLE && <Photo photo={CERCLE} sizes="(min-width: 1024px) 19rem, 14rem" fit="cover" radius="none" />}</div>
+              <div className="ac-cercle">{CERCLE && <Photo photo={CERCLE} sizes="(min-width: 1024px) 37rem, 26rem" fit="cover" radius="none" style={CADRAGE_CERCLE} />}</div>
             </div>
           </div>
           <blockquote className="ac-etiquette">

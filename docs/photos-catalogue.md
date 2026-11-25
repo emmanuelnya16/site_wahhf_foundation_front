@@ -10,6 +10,16 @@ Colonnes : **id** (repère), **fichier source**, **taille**, **slug** (nom de so
 
 Règle : toute photo marquée `oui` ou `?` reçoit `consent: 'pending'` tant que la fondation n'a pas confirmé les autorisations parentales (GAL-01). Les photos `pending` s'affichent en développement, jamais dans le build de production.
 
+## Remplaçantes des photos en attente d'accord
+
+Réponses du 25 novembre 2026 (questions 189 et 191). Quand une page ne donne pas elle-même de remplaçante publiable, le site prend celle de cette table (`photoOrFallback`, src/lib/photos.ts). Les remplaçantes propres à une section restent dans ses données (accordéon : src/data/journey.ts ; événements : src/data/events.ts ; domaines : src/config/domainPhotos.ts).
+
+| photo en attente | remplaçantes | où |
+|---|---|---|
+| A16 | A31 | Faire un don (en-tête) |
+| A85 | A44 | Actualités, mosaïque du 25 avril (A07 y est déjà, à la troisième place) |
+| A88 | A34 | partout |
+
 ## Journée du 25 avril 2026 — Albatros Hotel  (`journee-2026-04-25`)
 
 _Nom exact de l'événement à confirmer (la banderole indique : Albatros Hotel, 25 avril 2026, 8 h–21 h)._
@@ -60,7 +70,7 @@ _Nom exact de l'événement à confirmer (la banderole indique : Albatros Hotel,
 | A83 | `WhatsApp Image 2026-11-18 at 12.38.49 (19).jpeg` | 1600x1066 | `journee-2026-04-25-hymne-depuis-public` | L'hymne de la fondation vu depuis le public | oui | `center 40%` | Galerie |
 | A85 | `WhatsApp Image 2026-11-18 at 12.38.49 (21).jpeg` | 1600x1066 | `journee-2026-04-25-hymne-bras-leves` | Chant de l'hymne de la fondation, bras levés | oui | `center 40%` | ACCORDÉON panneau 2 |
 | A87 | `WhatsApp Image 2026-11-18 at 12.38.49 (23).jpeg` | 1600x1066 | `journee-2026-04-25-hymne-vue-large` | Vue large de la scène pendant l'hymne | oui | `center` | Galerie |
-| A88 | `WhatsApp Image 2026-11-18 at 12.38.49 (24).jpeg` | 1600x1066 | `journee-2026-04-25-trois-aines` | Trois aînés assis, attentifs | non | `center 40%` | À propos, Don |
+| A88 | `WhatsApp Image 2026-11-18 at 12.38.49 (24).jpeg` | 1600x1066 | `journee-2026-04-25-trois-aines` | Trois aînés assis, attentifs | ? | `center 40%` | À propos, Don |
 | A89 | `WhatsApp Image 2026-11-18 at 12.38.49 (25).jpeg` | 1600x1066 | `journee-2026-04-25-jeunes-sourires` | Jeunes participantes souriantes | oui | `center` | Galerie (après accord) |
 | A90 | `WhatsApp Image 2026-11-18 at 12.38.49 (26).jpeg` | 1600x1066 | `journee-2026-04-25-participante-polo-rose` | Participante en polo rose de la fondation | oui | `center 35%` | Galerie (après accord) |
 | A92 | `WhatsApp Image 2026-11-18 at 12.38.50 (1).jpeg` | 1600x1066 | `journee-2026-04-25-jeunes-ecoutent` | Jeunes participantes à l'écoute | oui | `center` | Galerie (après accord) |

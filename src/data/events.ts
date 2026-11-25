@@ -263,7 +263,8 @@ const JOURNEE_2026_04_25: Event = {
       'Des frais cachés ou payés à un intermédiaire (TODO : à faire valider)',
     ],
   },
-  photoParents: ['A88', 'A31'],
+  // A88 attend l'accord (un jeune reconnaissable) : A34 (réponse 191)
+  photoParents: ['A88', 'A34', 'A31'],
   faq: [
     { question: 'Où et quand la journée a-t-elle eu lieu ? (TODO)', reponse: 'À l’Albatros Hotel, le 25 avril 2026, de 8 h à 21 h (banderole). Ville à confirmer (TODO).' },
     { question: 'À qui s’adressait la journée ? (TODO)', reponse: 'Réponse à fournir par la fondation (TODO).' },

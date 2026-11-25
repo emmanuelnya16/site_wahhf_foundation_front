@@ -42,7 +42,8 @@ export const JOURNEY_PANELS: JourneyPanel[] = [
     meta: `25${NB}avril${NB}2026`,
     description: 'Les jeunes reprennent en chœur l’hymne de la fondation.',
     photoId: 'A85',
-    fallbackId: 'A16',
+    // A16 attend aussi l'accord : l'intervenant qui s'adresse à la salle (réponse 189)
+    fallbackId: 'A74',
     album: 'journee-2026-04-25',
   },
   {
