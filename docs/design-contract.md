@@ -1000,7 +1000,7 @@ Contrat validé le 16/11/2026, avec les ajustements du §13.
 - titre en Jost 700 avec surtitre, comme les autres sections de /accueil ;
 - photo en haut de carte (11 rem, cadrage propre à chaque photo), ligne d'accent de 3 px, lien à la place de l'étiquette ; Santé : icône au trait, aucune photo publiable (question 197) ;
 - carte de 36 rem au plus ; sur un écran bas, les marges et le numéro se resserrent, puis la photo rétrécit, et la piste n'est réduite qu'en dernier ; le texte n'est jamais coupé ;
-- épinglage en `position: sticky` au lieu du « pin » de ScrollTrigger : Chrome compte un décalage de mise en page de 0,92 à l'entrée et à la sortie d'un « pin » (c'est le cas sur Qui sommes-nous) ; avec sticky, CLS 0 ;
+- épinglage en `position: sticky` au lieu du « pin » de ScrollTrigger : Chrome compte un décalage de mise en page de 0,92 à l'entrée et à la sortie d'un « pin » (c'était le cas sur Qui sommes-nous, corrigé de la même façon au lot 11.4, animation inchangée) ; avec sticky, CLS 0 ;
 - dévoilement de la photo en 0,6 s au passage du repère (il se referme en remontant) ; au bouton pause, la photo est là d'emblée ;
 - clavier : le focus d'un lien amène sa carte à l'écran ; à la souris, la page ne bouge pas ;
 - le parcours horizontal est la mise en page de départ sur ordinateur (correctif du 25 novembre 2026), sans attendre GSAP : défilement rapide, rechargement au milieu de la page, adresse en #domaines, il est toujours là ; si le fichier du mouvement ne se charge pas, la section passe en colonne, tout visible ;

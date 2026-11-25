@@ -143,15 +143,13 @@ function pinned(section: HTMLElement) {
     defaults: { ease: GSAP_EASE.scrub },
     onUpdate: camera,
     scrollTrigger: {
-      trigger: pinEl,
+      // Épinglage en position sticky (src/index.css, lot 11.4) : le « pin » de ScrollTrigger passait la scène en position
+      // fixed, ce que Chrome comptait comme un décalage de mise en page (CLS 0,92 à l'entrée et à la sortie)
+      trigger: section,
       start: () => `top ${headerHeight()}px`,
-      end: () => `+=${window.innerHeight * 3.5}`,
-      pin: true,
+      end: () => `+=${section.offsetHeight - pinEl.offsetHeight}`,
       scrub: 0.6,
-      anticipatePin: 1,
       invalidateOnRefresh: true,
-      // Recalculé avant les déclencheurs plus bas (frise « Notre parcours », apparitions)
-      refreshPriority: 1,
       onToggle: (self) => {
         track.style.willChange = self.isActive ? 'transform' : '';
       },
