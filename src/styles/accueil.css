@@ -1348,9 +1348,13 @@
 .ac-domaines.is-pinned .principles-item[data-side='end'] {
   margin-top: 2.5rem;
 }
-/* La section est plus haute que l'écran de la longueur du parcours ; la scène y reste collée sous l'en-tête */
+/* La section est plus haute que l'écran de la longueur du parcours (4 écrans) ; la scène y reste collée sous l'en-tête.
+   Les cartes attendent que le mouvement soit prêt (data-pret) : seuls les nœuds du fil les annoncent. */
 .ac-domaines.is-pinned {
-  height: calc(100svh - var(--header-height) + var(--ac-parcours));
+  height: calc(100svh - var(--header-height) + 400vh);
+}
+.ac-domaines.is-pinned:not([data-pret]) .principle-card {
+  opacity: 0;
 }
 .ac-domaines.is-pinned .principles-pin {
   position: sticky;
@@ -1398,6 +1402,26 @@
   }
   .ac-domaines.is-pinned .principle-label {
     padding-top: 0;
+  }
+}
+/* Fenêtre basse (600 à 720 px) : encore un cran */
+@media (max-height: 720px) {
+  .ac-domaines.is-pinned .principles-pin {
+    padding-block: 1rem 0.75rem;
+  }
+  .ac-domaines.is-pinned .principles-title {
+    margin-top: 0.25rem;
+    font-size: 2rem;
+  }
+  .ac-domaines.is-pinned .principles-intro {
+    margin-top: 0.25rem;
+  }
+  .ac-domaines.is-pinned .principle-number {
+    margin-top: 0.5rem;
+    font-size: 2.5rem;
+  }
+  .ac-domaines.is-pinned .principle-card:not(.principle-card-final) .principle-rubric {
+    margin-top: 0.25rem;
   }
 }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {

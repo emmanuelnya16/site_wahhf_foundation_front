@@ -10,10 +10,6 @@ import { requestScrollRefresh } from '../../lib/afterFirstDisplay';
 // Les mêmes plugins que les Cinq principes, chargés à l'approche de la section (DomainesParcours)
 gsap.registerPlugin(DrawSVGPlugin, MotionPathPlugin, SplitText);
 
-/** Parcours épinglé : 1 024 × 700 px au moins, souris, animations autorisées (comme les Cinq principes) */
-const PIN = '(min-width: 1024px) and (min-height: 700px) and (pointer: fine) and (prefers-reduced-motion: no-preference)';
-/** Durée de l'épinglage, en hauteurs d'écran (7 cartes) */
-const ECRANS = 4;
 /** Part de la timeline consacrée au trajet du point ; le reste : la carte finale reste à l'écran avant la sortie */
 const TRAVEL = 0.92;
 /** Le point reste à 40 % de la largeur de l'écran (caméra) */
@@ -31,10 +27,11 @@ function headerHeight() {
 
 /**
  * Les 6 domaines en mouvement (lot 11.3) : le travelling des Cinq principes (src/effects/motion/PrinciplesMotion.tsx,
- * qui ne change pas), recopié ici pour 6 cartes et leurs photos. Mêmes réglages, sauf 4 hauteurs d'écran et
- * l'épinglage : position sticky (accueil.css) au lieu du « pin » de ScrollTrigger, qui passe la scène en position fixed ;
+ * qui ne change pas), recopié ici pour 6 cartes et leurs photos. Mêmes réglages, sauf 4 hauteurs d'écran (la hauteur de
+ * la section, accueil.css) et l'épinglage : position sticky (accueil.css) au lieu du « pin » de ScrollTrigger, qui passe la scène en position fixed ;
  * Chrome y compte un décalage de mise en page de 0,92 à l'entrée et à la sortie. Avec sticky, CLS 0 et aucun saut.
- * Ordinateur (PIN), en plus :
+ * La mise en page (colonne ou parcours) est celle de DomainesParcours ; ce fichier l'anime, où que l'on soit dans la page.
+ * Ordinateur, en plus :
  * - à chaque repère, la photo se dévoile depuis l'encoche (clip-path, de gauche à droite, 0,6 s) et dézoome de 1,1 à 1 ;
  *   en remontant, elle se referme. Au bouton pause, elle est là d'emblée : seul le défilement pilote encore la scène ;
  * - la photo suivante commence à se charger quand une carte apparaît ;
@@ -43,9 +40,8 @@ function headerHeight() {
  * Téléphone, tablette, écran bas : la colonne, fil tracé au défilement, cartes par lots.
  * Mouvement réduit : ce fichier n'est pas chargé.
  */
-export default function DomainesMotion({ scope, lang, paused }: { scope: RefObject<HTMLElement | null>; lang: string; paused: boolean }) {
+export default function DomainesMotion({ scope, lang, paused, epingle }: { scope: RefObject<HTMLElement | null>; lang: string; paused: boolean; epingle: boolean }) {
   const [version, setVersion] = useState(0);
-  const reachedAtLoad = useRef<boolean | null>(null);
   const pausedRef = useRef(paused);
 
   useEffect(() => {
@@ -82,17 +78,11 @@ export default function DomainesMotion({ scope, lang, paused }: { scope: RefObje
     () => {
       const section = scope.current;
       if (!section) return;
-      if (reachedAtLoad.current === null) reachedAtLoad.current = section.getBoundingClientRect().top < window.innerHeight;
       const mm = gsap.matchMedia();
-      mm.add({ pin: PIN, motion: MQ.motionOk }, (context) => {
-        const { pin, motion } = context.conditions as { pin: boolean; motion: boolean };
-        if (!motion) return;
-        if (pin && !reachedAtLoad.current) return pinned(section, pausedRef);
-        return column(section);
-      });
+      mm.add(MQ.motionOk, () => (epingle ? pinned(section, pausedRef) : column(section)));
       return () => mm.revert();
     },
-    { scope, dependencies: [lang, version], revertOnUpdate: true }
+    { scope, dependencies: [lang, version, epingle], revertOnUpdate: true }
   );
   return null;
 }
@@ -113,8 +103,6 @@ function pinned(section: HTMLElement, pausedRef: RefObject<boolean>) {
   const total = cards.length - 1;
   const titleBelow = section.getBoundingClientRect().top >= window.innerHeight;
 
-  section.style.setProperty('--ac-parcours', `${window.innerHeight * ECRANS}px`);
-  section.classList.add('is-pinned');
   const lead = title.getBoundingClientRect().left - section.getBoundingClientRect().left;
   track.style.setProperty('--principles-lead', `${Math.round(lead)}px`);
   // Écran bas : la bande de la photo rétrécit d'abord (accueil.css), mais une carte garde toujours son texte entier
@@ -125,11 +113,7 @@ function pinned(section: HTMLElement, pausedRef: RefObject<boolean>) {
   const needed = textCards.map((card) => card.scrollHeight);
   textCards.forEach((card, i) => card.style.setProperty('--ac-carte-max', `${Math.max(avail - decalage, needed[i])}px`));
   const geo = drawFil(track, 'row');
-  if (!geo || !geo.length) {
-    section.style.removeProperty('--ac-parcours');
-    section.classList.remove('is-pinned');
-    return;
-  }
+  if (!geo || !geo.length) return;
 
   const scale = Math.min(1, avail / geo.height);
   gsap.set(track, { transformOrigin: '0 0', scale, x: 0, y: Math.max(0, (avail - geo.height * scale) / 2) });
@@ -185,7 +169,7 @@ function pinned(section: HTMLElement, pausedRef: RefObject<boolean>) {
     scrollTrigger: {
       trigger: section,
       start: () => `top ${headerHeight()}px`,
-      end: () => `+=${window.innerHeight * ECRANS}`,
+      end: () => `+=${section.offsetHeight - pinEl.offsetHeight}`,
       scrub: 0.6,
       invalidateOnRefresh: true,
       onToggle: (self) => {
@@ -213,6 +197,8 @@ function pinned(section: HTMLElement, pausedRef: RefObject<boolean>) {
   // Temps d'arrêt sur la carte finale avant la sortie
   tl.set({}, {}, 1);
   camera();
+  // Tout est en place : les cartes, masquées jusque-là, n'obéissent plus qu'au parcours
+  section.setAttribute('data-pret', '');
 
   // Titre et introduction : ligne par ligne à l'arrivée de la section (une fois)
   let headSplit: SplitText | null = null;
@@ -248,8 +234,7 @@ function pinned(section: HTMLElement, pausedRef: RefObject<boolean>) {
     track.style.removeProperty('--principles-lead');
     textCards.forEach((card) => card.style.removeProperty('--ac-carte-max'));
     track.style.willChange = '';
-    section.style.removeProperty('--ac-parcours');
-    section.classList.remove('is-pinned');
+    section.removeAttribute('data-pret');
   };
 }
 

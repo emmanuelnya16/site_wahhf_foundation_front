@@ -1003,7 +1003,8 @@ Contrat validé le 16/11/2026, avec les ajustements du §13.
 - épinglage en `position: sticky` au lieu du « pin » de ScrollTrigger : Chrome compte un décalage de mise en page de 0,92 à l'entrée et à la sortie d'un « pin » (c'est le cas sur Qui sommes-nous) ; avec sticky, CLS 0 ;
 - dévoilement de la photo en 0,6 s au passage du repère (il se referme en remontant) ; au bouton pause, la photo est là d'emblée ;
 - clavier : le focus d'un lien amène sa carte à l'écran ; à la souris, la page ne bouge pas ;
-- un lien vers #domaines, survolé ou au clavier, charge le mouvement d'avance ; sans cela, un clic arrivait avant lui et donnait la colonne.
+- le parcours horizontal est la mise en page de départ sur ordinateur (correctif du 25 novembre 2026), sans attendre GSAP : défilement rapide, rechargement au milieu de la page, adresse en #domaines, il est toujours là ; si le fichier du mouvement ne se charge pas, la section passe en colonne, tout visible ;
+- dès 600 px de haut (700 pour les Cinq principes) : une fenêtre d'ordinateur portable fait souvent 600 à 700 px une fois les barres retirées.
 
 **Contrastes** (texte, puis accent : numéro, rubrique, lien ; seuil 4,5:1 ; aucun échec ; mêmes couleurs en clair et en sombre) :
 

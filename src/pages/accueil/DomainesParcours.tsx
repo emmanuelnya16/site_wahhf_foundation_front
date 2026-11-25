@@ -1,4 +1,4 @@
-import { lazy, useEffect, useRef, useState, type RefObject } from 'react';
+import { lazy, useCallback, useEffect, useRef, useState, type ComponentType, type RefObject } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, HeartPulse } from 'lucide-react';
 import Photo, { type PhotoLike } from '../../components/wahhf/Photo';
@@ -10,8 +10,28 @@ import { useMediaQuery } from '../../lib/useMediaQuery';
 import { cn } from '../../lib/utils';
 import { DOMAINS_DATA } from '../../services/api';
 
+/**
+ * Parcours horizontal épinglé : 1 024 × 600 px au moins, souris, animations autorisées. 600 px (700 pour les Cinq
+ * principes) : la fenêtre d'un ordinateur portable fait souvent 600 à 700 px de haut une fois les barres retirées.
+ */
+const PARCOURS = '(min-width: 1024px) and (min-height: 600px) and (pointer: fine) and (prefers-reduced-motion: no-preference)';
+
+interface MotionProps {
+  scope: RefObject<HTMLElement | null>;
+  lang: string;
+  paused: boolean;
+  epingle: boolean;
+  onEchec: () => void;
+}
+
+/** Le fichier du mouvement n'arrive pas (hors ligne) : la section repasse en colonne, tout visible */
+function SansMouvement({ onEchec }: MotionProps) {
+  useEffect(onEchec, [onEchec]);
+  return null;
+}
+
 /** Le mouvement (GSAP, ScrollTrigger, DrawSVG, MotionPath, SplitText), chargé quand la section approche */
-const DomainesMotion = lazy(() => import('./DomainesMotion'));
+const DomainesMotion = lazy<ComponentType<MotionProps>>(() => import('./DomainesMotion').catch(() => ({ default: SansMouvement })));
 
 /** Le grand coin de chaque carte : le même enchaînement que les Cinq principes, jusqu'à la carte de fin */
 const LEAVES = ['tr', 'bl', 'tl', 'br', 'tr', 'bl', 'tl'] as const;
@@ -46,8 +66,11 @@ const VISUELS = new Map(
   })
 );
 
-/** Vrai quand la section approche (une hauteur et demie d'écran, ou un lien vers elle sous la souris) : le fil se dessine, et le mouvement se charge */
-function useApproche(ref: RefObject<HTMLElement | null>) {
+/**
+ * Vrai quand la section approche, ou qu'un lien vers elle est sous la souris : le fil se dessine, et le mouvement se
+ * charge. Sur le parcours, de plus loin (trois hauteurs d'écran) : il doit être prêt quand la section arrive.
+ */
+function useApproche(ref: RefObject<HTMLElement | null>, marge: string) {
   const [proche, setProche] = useState(false);
   useEffect(() => {
     const el = ref.current;
@@ -69,7 +92,7 @@ function useApproche(ref: RefObject<HTMLElement | null>) {
         setProche(true);
         observer.disconnect();
       },
-      { rootMargin: '150% 0px' }
+      { rootMargin: `${marge} 0px` }
     );
     observer.observe(el);
     return () => {
@@ -79,7 +102,7 @@ function useApproche(ref: RefObject<HTMLElement | null>) {
         lien.removeEventListener('focus', annonce);
       });
     };
-  }, [ref, proche]);
+  }, [ref, proche, marge]);
   return proche;
 }
 
@@ -89,8 +112,11 @@ function useApproche(ref: RefObject<HTMLElement | null>) {
  * - Textes des cartes : le titre, la phrase et le lien de chaque domaine (DOMAINS_DATA), rien de plus ; l'introduction
  *   est celle des « Six piliers » de l'accueil.
  * - Une liste ordonnée de 6 articles (h3), puis la carte de fin. Compteur, consigne, fil et point : décor.
- * - Sans mouvement (et avant l'arrivée de GSAP) : une colonne, fil entièrement tracé. Le fil attend que la section
- *   approche : le mesurer plus tôt forcerait la mise en page de toute la page au chargement.
+ * - Ordinateur (PARCOURS) : la mise en page du parcours (.is-pinned) est là dès le premier rendu, sans attendre GSAP :
+ *   défilement rapide, rechargement au milieu, lien vers #domaines, le parcours horizontal est toujours là. Ses cartes
+ *   attendent le mouvement ; s'il ne peut pas se charger, la section repasse en colonne.
+ * - Ailleurs : une colonne, fil entièrement tracé. Le fil attend que la section approche : le mesurer plus tôt forcerait
+ *   la mise en page de toute la page au chargement.
  * - Mouvement : DomainesMotion.tsx (parcours épinglé sur ordinateur ; fil tracé au défilement et cartes par lots ailleurs).
  * Styles propres : src/styles/accueil.css (.ac-domaines).
  */
@@ -98,18 +124,22 @@ export default function DomainesParcours({ paused }: { paused: boolean }) {
   const { t, lang, localizedList } = useLocalize();
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-  const proche = useApproche(sectionRef);
+  const parcours = useMediaQuery(PARCOURS);
+  const [echec, setEchec] = useState(false);
+  const signalerEchec = useCallback(() => setEchec(true), []);
+  const epingle = parcours && !echec;
+  const proche = useApproche(sectionRef, epingle ? '300%' : '150%');
   const reduit = useMediaQuery('(prefers-reduced-motion: reduce)');
   const domaines = localizedList(DOMAINS_DATA, 'contenu.domaines', (d) => d.id);
   const total = domaines.length;
 
-  // Le fil de la colonne, d'après les cartes réelles, à chaque changement de taille (le parcours épinglé dessine le sien)
+  // Le fil, d'après les cartes réelles, à chaque changement de taille (une fois prêt, le parcours dessine le sien)
   useEffect(() => {
     const section = sectionRef.current;
     const track = trackRef.current;
     if (!proche || !section || !track) return;
     const draw = () => {
-      if (!section.classList.contains('is-pinned')) drawFil(track, 'column');
+      if (!section.hasAttribute('data-pret')) drawFil(track, epingle ? 'row' : 'column');
     };
     if (typeof ResizeObserver === 'undefined') {
       draw();
@@ -118,10 +148,10 @@ export default function DomainesParcours({ paused }: { paused: boolean }) {
     const observer = new ResizeObserver(draw);
     observer.observe(track);
     return () => observer.disconnect();
-  }, [lang, proche]);
+  }, [lang, proche, epingle]);
 
   return (
-    <section ref={sectionRef} id="domaines" aria-labelledby="ac-domaines-titre" className="principles ac-domaines section-space bg-surface">
+    <section ref={sectionRef} id="domaines" aria-labelledby="ac-domaines-titre" className={cn('principles ac-domaines section-space bg-surface', epingle && 'is-pinned')}>
       <div className="principles-pin">
         <div className="container-page principles-head">
           <div className="ac-domaines-tete">
@@ -220,7 +250,7 @@ export default function DomainesParcours({ paused }: { paused: boolean }) {
 
       {proche && !reduit && (
         <AfterFirstDisplay>
-          <DomainesMotion scope={sectionRef} lang={lang} paused={paused} />
+          <DomainesMotion scope={sectionRef} lang={lang} paused={paused} epingle={epingle} onEchec={signalerEchec} />
         </AfterFirstDisplay>
       )}
     </section>
