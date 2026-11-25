@@ -990,6 +990,39 @@ Contrat validé le 16/11/2026, avec les ajustements du §13.
 | Bandeau nuit : sous-textes, note, source (brume douce), sur motif | 7,85:1, 6,75:1 |
 | Bandeau nuit : chiffres, surtitre, flèches (soleil), sur motif | 6,63:1, 5,70:1 |
 
+### 16.3 Section « Les 6 domaines » (lot 11.3)
+
+*Votre brief du 25 novembre 2026. Modèle : les « Cinq principes » (lot 7.8), dont le composant, les styles et la page ne changent pas. Code : `DomainesParcours.tsx`, `DomainesMotion.tsx`, `.ac-domaines` dans `src/styles/accueil.css`.*
+
+**Repris tel quel** : classes `.principles*` et `.principle-*`, tracé du fil (`principlesFil.ts`), plugins GSAP (même fichier que Qui sommes-nous). **Recopié** : la mise en scène, pour 6 cartes, 4 hauteurs d'écran et les photos.
+
+**Écarts aux Cinq principes** :
+- titre en Jost 700 avec surtitre, comme les autres sections de /accueil ;
+- photo en haut de carte (11 rem, cadrage propre à chaque photo), ligne d'accent de 3 px, lien à la place de l'étiquette ; Santé : icône au trait, aucune photo publiable (question 197) ;
+- carte de 36 rem au plus ; sur un écran bas, les marges et le numéro se resserrent, puis la photo rétrécit, et la piste n'est réduite qu'en dernier ; le texte n'est jamais coupé ;
+- épinglage en `position: sticky` au lieu du « pin » de ScrollTrigger : Chrome compte un décalage de mise en page de 0,92 à l'entrée et à la sortie d'un « pin » (c'est le cas sur Qui sommes-nous) ; avec sticky, CLS 0 ;
+- dévoilement de la photo en 0,6 s au passage du repère (il se referme en remontant) ; au bouton pause, la photo est là d'emblée ;
+- clavier : le focus d'un lien amène sa carte à l'écran ; à la souris, la page ne bouge pas ;
+- un lien vers #domaines, survolé ou au clavier, charge le mouvement d'avance ; sans cela, un clic arrivait avant lui et donnait la colonne.
+
+**Contrastes** (texte, puis accent : numéro, rubrique, lien ; seuil 4,5:1 ; aucun échec ; mêmes couleurs en clair et en sombre) :
+
+| Carte | Fond | Texte | Accent |
+|---|---|---|---|
+| 01 Éducation | forêt | 9,15:1 | 4,99:1 (soleil) |
+| 02 Santé | sauge | 11,89:1 | 7,58:1 (forêt) |
+| 03 Entrepreneuriat des jeunes | soleil | 7,83:1 | 7,83:1 (encre) |
+| 04 Environnement | nuit | 12,15:1 | 6,63:1 (soleil) |
+| 05 Droits et inclusion | miel | 5,92:1 | 4,77:1 (blanc 85 %) |
+| 06 Mobilité & Langues | encre | 14,35:1 | 7,83:1 (soleil) |
+| Carte de fin | blanc | 14,35:1 | 9,15:1 (forêt) ; bouton 9,15:1 |
+| Compteur, consigne (clair ; sombre) | fond de page | 13,46:1, 6,84:1 ; 15,03:1, 8,72:1 | — |
+
+### 16.4 Temps de blocage au chargement (lot 11.3)
+
+Cause (profil Performance, mobile, CPU ×4) : chaque bloc animé mesurait sa position pendant le rendu, ce qui forçait la mise en page de toute la page dans la même tâche que React (256 ms) ; GSAP se chargeait sur téléphone pour des parallaxes qui n'y existent pas (50 ms) ; les sections sous l'écran étaient mises en page au chargement. Le compteur et le motif n'y étaient pour rien.
+Corrections : un seul IntersectionObserver, sans mesure ; `AccueilMotion` chargé seulement sur ordinateur à la souris ; une timeline de parallaxe par section ; souris suivie par l'Observer de ScrollTrigger (plus d'écouteur brut) ; `content-visibility: auto` sous 1 024 px. Mesures finales (Lighthouse mobile, 3 passages) : TBT 120, 150 et 100 ms, CLS 0.
+
 ## Annexe A : tableau des contrastes
 
 Calcul WCAG 2.x sur fond uni ; ratios tronqués à une décimale. Seuils : 4,5:1 pour le texte, 3:1 pour les composants et le fil.
