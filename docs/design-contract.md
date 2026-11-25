@@ -1024,6 +1024,32 @@ Contrat validé le 16/11/2026, avec les ajustements du §13.
 Cause (profil Performance, mobile, CPU ×4) : chaque bloc animé mesurait sa position pendant le rendu, ce qui forçait la mise en page de toute la page dans la même tâche que React (256 ms) ; GSAP se chargeait sur téléphone pour des parallaxes qui n'y existent pas (50 ms) ; les sections sous l'écran étaient mises en page au chargement. Le compteur et le motif n'y étaient pour rien.
 Corrections : un seul IntersectionObserver, sans mesure ; `AccueilMotion` chargé seulement sur ordinateur à la souris ; une timeline de parallaxe par section ; souris suivie par l'Observer de ScrollTrigger (plus d'écouteur brut) ; `content-visibility: auto` sous 1 024 px. Mesures finales (Lighthouse mobile, 3 passages) : TBT 120, 150 et 100 ms, CLS 0.
 
+### 16.5 Sections « Projet phare » et « Des parcours qui inspirent » (lot 11.4)
+
+*Votre brief du 25 novembre 2026. Contenu : `docs/references/accueil/sections/` (5 et 6). Code : `ProjetPhare.tsx`, `route.ts`, `ProjetMotion.tsx`, `Parcours.tsx`, `Paquet.tsx`, `CarteTemoignage.tsx`, `CitationMotion.tsx`.*
+
+**Faits** : `src/data/accueil-projets.ts` et `src/data/accueil-temoignages.ts`. En ligne, seul ce qui porte `confirme: true` s'affiche ; sans témoignage confirmé, la section invite à raconter son parcours (trois cartes vierges, aucun nom).
+
+**Projet phare** : fond sauge, trois plans de collines (`--colline-1` à `-3`), ticket penché de 2° (perforation, deux encoches, la légende sur la souche), tampon soleil. La route est tracée d'après la taille de la scène (horizontale dès 1 024 px, verticale en dessous) ; les panneaux gardent leurs couleurs dans les deux thèmes. Le véhicule suit la route (MotionPath, scrub 0,8) ; roues et ailes tournent ou battent selon la distance, sans boucle. Mouvement réduit ou fichier absent : véhicule au bout, panneaux levés.
+
+**Parcours** : paquet de cartes en CSS (coin feuille, −4° et +5° derrière), glisser à partir de 80 px, flèches, clavier ; région « carrousel », seule la carte du dessus est lisible. Moins de trois témoignages : le paquet se complète de cartes qui invitent à raconter le sien. La citation se révèle ligne par ligne (SplitText), le reste est en CSS.
+
+**Recalculs** : pendant un `ScrollTrigger.refresh`, les timelines repassent par zéro ; `recalcul.ts` évite que les panneaux et les photos des domaines se rejouent.
+
+**Contrastes** (seuil 4,5:1 ; aucun échec) :
+
+| Usage | Ratio |
+|---|---|
+| Projet, clair : titre (encre), suite du titre et lien (forêt) sur sauge | 11,89:1, 7,58:1 |
+| Projet, clair : texte (encre douce) sur sauge | 6,04:1 |
+| Projet, sombre : titre, suite et lien (soleil), texte sur sous-bois | 13,45:1, 8,64:1, 7,80:1 |
+| Souche du ticket : clair (encre douce sur blanc), sombre (lichen sur canopée) | 7,29:1, 6,82:1 |
+| Tampon : encre sur soleil | 7,83:1 |
+| Panneaux, les deux thèmes : valeur (forêt) et libellé (encre douce) sur blanc | 9,15:1, 7,29:1 |
+| Parcours, clair : citation et nom (encre), résumé (encre douce), domaine (forêt) sur blanc | 14,35:1, 7,29:1, 9,15:1 |
+| Parcours, sombre : citation et nom, résumé, domaine (soleil) sur canopée | 11,75:1, 6,82:1, 7,55:1 |
+| Flèches et indicateur : clair sur brume, sombre sur humus | 13,46:1, 15,03:1 |
+
 ## Annexe A : tableau des contrastes
 
 Calcul WCAG 2.x sur fond uni ; ratios tronqués à une décimale. Seuils : 4,5:1 pour le texte, 3:1 pour les composants et le fil.

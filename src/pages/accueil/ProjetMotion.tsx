@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type RefObject } from 'react';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
 import { gsap, MQ, useGSAP } from '../../lib/gsap';
 import { requestScrollRefresh } from '../../lib/afterFirstDisplay';
+import { suivreRecalculs } from './recalcul';
 import { tracerRoute } from './route';
 
 // Le même plugin que les parcours épinglés (Cinq principes, domaines), chargé à l'approche de la section
@@ -114,15 +115,18 @@ function animer(scene: HTMLElement, pausedRef: RefObject<boolean>) {
     }
   };
 
-  const tl = gsap.timeline({
-    onUpdate: () => {
-      const part = geo.depart + (geo.arrivee - geo.depart) * tl.progress();
-      tourner(part);
-      geo.jalons.forEach((t, i) => {
-        const leve = part >= t - 0.004;
-        if (leve !== leves[i]) passer(i, leve);
-      });
-    },
+  const recalculs = suivreRecalculs(() => suivre());
+  const suivre = () => {
+    if (recalculs.enCours()) return;
+    const part = geo.depart + (geo.arrivee - geo.depart) * tl.progress();
+    tourner(part);
+    geo.jalons.forEach((t, i) => {
+      const leve = part >= t - 0.004;
+      if (leve !== leves[i]) passer(i, leve);
+    });
+  };
+  const tl: gsap.core.Timeline = gsap.timeline({
+    onUpdate: suivre,
     scrollTrigger: {
       trigger: scene,
       // Ordinateur : la route est au bas de la scène, le trajet commence quand elle est entière à l'écran
@@ -139,6 +143,7 @@ function animer(scene: HTMLElement, pausedRef: RefObject<boolean>) {
   requestScrollRefresh();
 
   return () => {
+    recalculs.arreter();
     gsap.killTweensOf(panneaux);
     scene.removeAttribute('data-pret');
     tracerRoute(scene);

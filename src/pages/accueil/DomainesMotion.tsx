@@ -6,6 +6,7 @@ import { gsap, ScrollTrigger, useGSAP, MQ, GSAP_EASE, DURATION, APPEAR_START } f
 import { drawFil } from '../../components/principles/principlesFil';
 import { scrollToPosition } from '../../lib/scroll';
 import { requestScrollRefresh } from '../../lib/afterFirstDisplay';
+import { suivreRecalculs } from './recalcul';
 
 // Les mêmes plugins que les Cinq principes, chargés à l'approche de la section (DomainesParcours)
 gsap.registerPlugin(DrawSVGPlugin, MotionPathPlugin, SplitText);
@@ -160,12 +161,15 @@ function pinned(section: HTMLElement, pausedRef: RefObject<boolean>) {
     }
   };
 
-  const tl = gsap.timeline({
+  const recalculs = suivreRecalculs(() => suivre());
+  const suivre = () => {
+    if (recalculs.enCours()) return;
+    camera();
+    photos(tl.time());
+  };
+  const tl: gsap.core.Timeline = gsap.timeline({
     defaults: { ease: GSAP_EASE.scrub },
-    onUpdate: () => {
-      camera();
-      photos(tl.time());
-    },
+    onUpdate: suivre,
     scrollTrigger: {
       trigger: section,
       start: () => `top ${headerHeight()}px`,
@@ -228,6 +232,7 @@ function pinned(section: HTMLElement, pausedRef: RefObject<boolean>) {
 
   return () => {
     track.removeEventListener('focusin', onFocus);
+    recalculs.arreter();
     reveals.forEach((reveal) => reveal?.kill());
     splits.forEach((s) => s.revert());
     headSplit?.revert();

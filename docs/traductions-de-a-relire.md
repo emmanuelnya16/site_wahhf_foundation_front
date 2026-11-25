@@ -786,7 +786,7 @@ Fichier : `src/locales/accueil/de.json` (91 textes, dont 9 à relire).
 | \* | `contenu.projets.wahhf-on-wheel.jalons[0].libelle` | villages visités chaque mois | besuchte Dörfer pro Monat <br>_Note : « santé communautaire » rendu par « Gemeindegesundheit » (exemple, non confirmé)_ |
 | \* | `contenu.projets.wahhf-on-wheel.jalons[1].valeur` | 2 000+ | 2.000+ <br>_Note : « santé communautaire » rendu par « Gemeindegesundheit » (exemple, non confirmé)_ |
 | \* | `contenu.projets.wahhf-on-wheel.jalons[1].libelle` | patients pris en charge | versorgte Patienten <br>_Note : « santé communautaire » rendu par « Gemeindegesundheit » (exemple, non confirmé)_ |
-| \* | `contenu.projets.wahhf-on-wheel.jalons[2].libelle` | jeunes formés en santé communautaire | in Gemeindegesundheit geschulte junge Menschen <br>_Note : « santé communautaire » rendu par « Gemeindegesundheit » (exemple, non confirmé)_ |
+| \* | `contenu.projets.wahhf-on-wheel.jalons[2].libelle` | jeunes formés en santé communautaire | junge Menschen in Gemeinde­gesundheit geschult <br>_Note : « santé communautaire » rendu par « Gemeindegesundheit » (exemple, non confirmé)_ |
 |  | `contenu.projets.academie.surtitre` | Projet phare | Leuchtturmprojekt |
 |  | `contenu.projets.academie.titre` | L’Académie de langues | Die Sprachakademie |
 |  | `contenu.projets.academie.accroche` | l’Europe se prépare ici | der Weg nach Europa<br>beginnt hier |

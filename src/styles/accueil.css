@@ -1922,6 +1922,9 @@
   border-radius: 999px;
   background: var(--ac-sauge-plein);
 }
+.dark :is(.ac-traits i, .ac-temoin-photo) {
+  background: var(--color-filet-nuit);
+}
 .ac-traits i:nth-child(2) {
   width: 88%;
 }
