@@ -2,7 +2,7 @@
 
 Généré par `npm run i18n:relire` (scripts/traductions-a-relire.mjs) le 2026-11-25. Ne pas modifier à la main : corriger les fichiers de langue, puis relancer.
 
-Chaque texte allemand du site, face à son français. **Un astérisque (\*) marque les 166 textes dont le traducteur n'était pas sûr** (sens du français ambigu, terme juridique, nom d'institution, ton) : à relire en priorité. 1809 textes allemands au total.
+Chaque texte allemand du site, face à son français. **Un astérisque (\*) marque les 166 textes dont le traducteur n'était pas sûr** (sens du français ambigu, terme juridique, nom d'institution, ton) : à relire en priorité. 1832 textes allemands au total.
 
 - Ton choisi : vouvoiement (« Sie »), simple et chaleureux, pas du mot à mot.
 - Ne sont pas traduits : les noms propres et officiels (WAHHF Foundation, IROKO, Albatros Hotel, Ausbildung, Studienkolleg…), les adresses, les liens.
@@ -705,7 +705,7 @@ Fichier : `src/locales/accompagnement/de.json` (309 textes, dont 19 à relire).
 
 ## accueil
 
-Fichier : `src/locales/accueil/de.json` (68 textes, dont 9 à relire).
+Fichier : `src/locales/accueil/de.json` (91 textes, dont 9 à relire).
 
 | | Clé | Français | Allemand |
 |---|---|---|---|
@@ -753,6 +753,25 @@ Fichier : `src/locales/accueil/de.json` (68 textes, dont 9 à relire).
 |  | `projet.soutenir` | Soutenir ce projet | Dieses Projekt unterstützen |
 |  | `projet.enSavoirPlus` | En savoir plus | Mehr erfahren |
 |  | `projet.tampon` | Gratuit | Kostenlos |
+|  | `parcours.surtitre` | Témoignages | Erfahrungsberichte |
+|  | `parcours.titre[0]` | Des parcours | Wege, |
+|  | `parcours.titre[1]` | qui inspirent | die inspirieren |
+|  | `parcours.texte` | Des jeunes racontent, avec leurs mots, ce qu’ils ont construit avec la fondation. | Junge Menschen erzählen mit ihren eigenen Worten, was sie mit der Stiftung aufgebaut haben. |
+|  | `parcours.lien` | Découvrir d’autres histoires | Weitere Geschichten entdecken |
+|  | `parcours.raconter` | Raconter mon parcours | Meinen Weg erzählen |
+|  | `parcours.vierge` | Et vous ? Votre parcours peut encourager d’autres jeunes. | Und Sie? Ihr Weg kann andere junge Menschen ermutigen. |
+|  | `parcours.citation` | « {{citation}} » | „{{citation}}“ |
+|  | `parcours.age` | {{age}} ans | {{age}} Jahre |
+|  | `parcours.role` | carrousel | Karussell |
+|  | `parcours.region` | Témoignages | Erfahrungsberichte |
+|  | `parcours.position` | {{n}} sur {{total}} | {{n}} von {{total}} |
+|  | `parcours.precedent` | Témoignage précédent | Vorheriger Bericht |
+|  | `parcours.suivant` | Témoignage suivant | Nächster Bericht |
+|  | `parcours.annonce` | Témoignage {{n}} sur {{total}} | Bericht {{n}} von {{total}} |
+|  | `parcours.appel.surtitre` | Des parcours qui inspirent | Wege, die inspirieren |
+|  | `parcours.appel.titre[0]` | Votre histoire peut | Ihre Geschichte kann |
+|  | `parcours.appel.titre[1]` | en inspirer d’autres | andere inspirieren |
+|  | `parcours.appel.texte` | Vous avez suivi un programme de la fondation ? Racontez-nous votre parcours : avec votre accord, il pourra encourager d’autres jeunes. | Haben Sie an einem Programm der Stiftung teilgenommen? Erzählen Sie uns Ihren Weg: Mit Ihrer Einwilligung kann er andere junge Menschen ermutigen. |
 |  | `contenu.chiffres.pays.libelle` | Pays d’Europe | Länder Europas |
 |  | `contenu.chiffres.pays.sousTexte` | Fiches d’orientation vérifiées | Geprüfte Länderseiten |
 |  | `contenu.chiffres.domaines.libelle` | Domaines d’action | Arbeits­bereiche |
@@ -777,6 +796,10 @@ Fichier : `src/locales/accueil/de.json` (68 textes, dont 9 à relire).
 |  | `contenu.projets.academie.jalons[2].libelle` | Autonomie | Selbst­ständigkeit |
 |  | `contenu.projets.academie.jalons[3].libelle` | Indépendance | Unabhängigkeit |
 |  | `contenu.projets.academie.jalons[4].libelle` | Maîtrise | Sprach­beherrschung |
+|  | `contenu.temoignages.marie.citation` | Le mentorat de WAHHF m’a donné la confiance et les outils pour lancer mon activité de transformation agroalimentaire. | Das Mentoring von WAHHF hat mir das Vertrauen und die Werkzeuge gegeben, um meinen Betrieb für Lebensmittelverarbeitung zu starten. |
+|  | `contenu.temoignages.marie.domaine` | Jeunesse & entrepreneuriat | Jugend & Unternehmertum |
+|  | `contenu.temoignages.marie.resume` | De l’agriculture urbaine à la création de sa micro-entreprise, Marie a suivi le programme de mentorat pendant 12 mois. | Von der städtischen Landwirtschaft bis zur Gründung ihres Kleinbetriebs hat Marie 12 Monate lang am Mentoring-Programm teilgenommen. |
+|  | `contenu.temoignages.marie.resultat` | Entreprise lancée, 3 emplois créés | Betrieb gegründet, 3 Arbeitsplätze geschaffen |
 
 ## actualites
 

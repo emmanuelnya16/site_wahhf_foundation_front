@@ -71,6 +71,33 @@
     "enSavoirPlus": "Find out more",
     "tampon": "Free"
   },
+  "parcours": {
+    "surtitre": "Testimonials",
+    "titre": [
+      "Journeys",
+      "that inspire"
+    ],
+    "texte": "Young people tell, in their own words, what they have built with the foundation.",
+    "lien": "Discover more stories",
+    "raconter": "Tell my story",
+    "vierge": "And you? Your journey can encourage other young people.",
+    "citation": "“{{citation}}”",
+    "age": "aged {{age}}",
+    "role": "carousel",
+    "region": "Testimonials",
+    "position": "{{n}} of {{total}}",
+    "precedent": "Previous testimonial",
+    "suivant": "Next testimonial",
+    "annonce": "Testimonial {{n}} of {{total}}",
+    "appel": {
+      "surtitre": "Journeys that inspire",
+      "titre": [
+        "Your story can",
+        "inspire others"
+      ],
+      "texte": "Have you taken part in one of the foundation’s programmes? Tell us about your journey: with your consent, it can encourage other young people."
+    }
+  },
   "contenu": {
     "chiffres": {
       "pays": {
@@ -130,6 +157,14 @@
             "libelle": "Mastery"
           }
         ]
+      }
+    },
+    "temoignages": {
+      "marie": {
+        "citation": "WAHHF’s mentoring gave me the confidence and the tools to start my food-processing business.",
+        "domaine": "Youth & entrepreneurship",
+        "resume": "From urban farming to setting up her micro-business, Marie followed the mentoring programme for 12 months.",
+        "resultat": "Business launched, 3 jobs created"
       }
     }
   }

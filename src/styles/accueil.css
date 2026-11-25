@@ -1004,6 +1004,10 @@
     content-visibility: auto;
     contain-intrinsic-size: auto 1750px;
   }
+  .ac-parcours {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 1000px;
+  }
 }
 
 /* --- 3. Les chiffres (lot 11.2) : bandeau nuit dans les deux thèmes --- */
@@ -1765,6 +1769,227 @@
   }
 }
 
+/* --- 6. Des parcours qui inspirent (lot 11.4) : un paquet de cartes --- */
+.ac-parcours {
+  position: relative;
+  overflow: clip;
+  padding-block: var(--section-space);
+}
+.ac-parcours-grille {
+  display: grid;
+  gap: 4rem;
+}
+.ac-parcours-texte {
+  display: grid;
+  justify-items: start;
+  align-content: center;
+  min-width: 0;
+}
+.ac-parcours-bouton {
+  margin-top: 2rem;
+}
+.ac-paquet-place {
+  justify-self: center;
+  width: min(100%, 33rem);
+  min-width: 0;
+}
+.ac-paquet {
+  display: grid;
+  border-radius: 1rem;
+}
+.ac-paquet:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 1.25rem;
+}
+/* Toutes les cartes dans la même case : la plus haute donne la hauteur du paquet */
+.ac-temoin {
+  --rebond: cubic-bezier(0.34, 1.5, 0.64, 1);
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.5rem, 5vw, 2.25rem);
+  border: 1px solid var(--ac-carte-bord);
+  border-radius: 0.75rem 3rem 0.75rem 0.75rem;
+  background: var(--ac-carte);
+  box-shadow: 0 16px 36px -20px rgb(31 45 39 / 0.34);
+  transform: translateX(var(--dx, 0)) rotate(var(--dr, 0deg));
+  touch-action: pan-y;
+  user-select: none;
+}
+.ac-temoin[data-pos='0'] {
+  cursor: grab;
+}
+.ac-temoin.is-tiree {
+  cursor: grabbing;
+}
+.ac-temoin-vierge[data-pos='0'] {
+  cursor: default;
+}
+.ac-temoin[data-pos='1'] {
+  rotate: -4deg;
+  translate: -0.75rem 0.625rem;
+}
+.ac-temoin[data-pos='2'] {
+  rotate: 5deg;
+  translate: 0.875rem 1rem;
+}
+.ac-temoin[data-pos='3'] {
+  opacity: 0;
+  scale: 0.96;
+}
+.ac-guillemets {
+  flex: none;
+  width: 3.75rem;
+  height: auto;
+  fill: var(--ac-soleil);
+}
+.ac-citation {
+  margin-top: 1.25rem;
+}
+.ac-citation-texte {
+  font-size: clamp(1.25rem, 5vw, 1.5rem);
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.005em;
+  color: var(--ac-texte);
+  text-wrap: pretty;
+}
+.ac-temoin-resume {
+  line-height: 1.55;
+  color: var(--ac-texte-doux);
+}
+.ac-temoin-personne {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: auto;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--ac-bord);
+}
+/* Écart minimal au-dessus de la ligne, quelle que soit la hauteur de la carte */
+:is(.ac-temoin-resume, .ac-temoin > .ac-citation, .ac-temoin > .ac-traits) {
+  margin-bottom: 1.25rem;
+}
+.ac-temoin-photo {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 4rem;
+  height: 4rem;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--ac-sauge-plein);
+  color: var(--ac-accent);
+}
+.ac-temoin-photo svg {
+  width: 2.25rem;
+  height: 2.25rem;
+}
+.ac-temoin-nom {
+  font-weight: 700;
+  line-height: 1.3;
+}
+.ac-temoin-lieu {
+  color: var(--ac-texte-doux);
+}
+.ac-temoin-domaine {
+  margin-top: 1.125rem;
+  font-family: var(--ac-libelle);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ac-accent);
+}
+.ac-temoin-resultat {
+  margin-top: 0.25rem;
+  color: var(--ac-texte-doux);
+}
+.ac-temoin-lien {
+  margin-top: 0;
+}
+/* Carte vierge : des traits à la place des mots */
+.ac-temoin-vierge {
+  min-height: 24rem;
+}
+.ac-traits {
+  display: grid;
+  gap: 0.875rem;
+  margin-top: 1.5rem;
+}
+.ac-traits i {
+  height: 0.875rem;
+  border-radius: 999px;
+  background: var(--ac-sauge-plein);
+}
+.ac-traits i:nth-child(2) {
+  width: 88%;
+}
+.ac-traits i:nth-child(3) {
+  width: 62%;
+}
+.ac-traits-nom {
+  flex: 1;
+  gap: 0.5rem;
+  margin-top: 0;
+}
+.ac-traits-nom i:nth-child(1) {
+  width: 42%;
+}
+.ac-traits-nom i:nth-child(2) {
+  width: 26%;
+}
+.ac-paquet-commandes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-top: 3.75rem;
+}
+.ac-rond-bouton {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1.6px var(--ac-contour);
+  color: var(--ac-texte);
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease-reveal), color var(--dur-fast) var(--ease-reveal);
+}
+.ac-rond-bouton svg {
+  width: 1.375rem;
+  height: 1.375rem;
+}
+.ac-rond-bouton:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+.ac-paquet-indicateur {
+  min-width: 3.5rem;
+  font-family: var(--ac-titre);
+  font-size: 1.125rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+@media (hover: hover) {
+  .ac-rond-bouton:hover {
+    background: var(--ac-nuit);
+    color: var(--ac-sur-nuit);
+  }
+}
+@media (min-width: 1024px) {
+  .ac-parcours-grille {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr);
+    gap: 5rem;
+    align-items: center;
+  }
+  .ac-paquet-place {
+    justify-self: end;
+  }
+}
+
 /* --- Sections (lot 11.2) : entrées jouées une fois, quand le bloc arrive à l'écran (Entree.tsx) --- */
 @keyframes ac-feuille {
   from {
@@ -1822,6 +2047,23 @@
   }
   75% {
     scale: 0.94 1;
+  }
+}
+@keyframes ac-temoin-depart {
+  to {
+    transform: translateX(-118%) rotate(-18deg);
+    opacity: 0;
+  }
+}
+@keyframes ac-temoin-arrivee {
+  from {
+    transform: translateX(-118%) rotate(-18deg);
+    opacity: 0;
+  }
+}
+@keyframes ac-temoin-fond {
+  from {
+    opacity: 0;
   }
 }
 @keyframes ac-tour {
@@ -1899,6 +2141,48 @@
   }
   .ac-vue .ac-tampon {
     animation: ac-tampon 0.6s ease-out 0.85s backwards;
+  }
+  /* Paquet : il s'éventaille à l'arrivée, puis chaque carte glisse vers sa place (--pos) */
+  .ac-temoin {
+    transition:
+      rotate 0.5s var(--ac-courbe),
+      translate 0.5s var(--ac-courbe),
+      scale 0.5s var(--ac-courbe),
+      opacity 0.4s ease-out,
+      transform 0.45s var(--rebond);
+  }
+  .ac-temoin.is-tiree {
+    transition: none;
+  }
+  .ac-attend .ac-temoin {
+    rotate: 0deg;
+    translate: 0 0;
+  }
+  .ac-vue .ac-paquet:not(.is-joue) .ac-temoin {
+    transition-duration: 0.8s, 0.8s, 0.5s, 0.4s, 0.45s;
+    transition-delay: calc(var(--pos, 0) * 100ms), calc(var(--pos, 0) * 100ms), 0s, 0s, 0s;
+  }
+  .ac-temoin.is-depart {
+    rotate: 0deg;
+    translate: 0 0;
+    opacity: 1;
+    transition: none;
+    animation: ac-temoin-depart 0.45s cubic-bezier(0.5, 0, 0.75, 0.6) forwards;
+  }
+  .ac-temoin.is-fond {
+    transition: none;
+    animation: ac-temoin-fond 0.35s ease-out;
+  }
+  .ac-temoin.is-arrivee {
+    transition: none;
+    animation: ac-temoin-arrivee 0.55s var(--ac-courbe);
+  }
+  /* Bouton pause : plus de rebond */
+  .ac.ev-pause .ac-temoin {
+    --rebond: ease-out;
+  }
+  .ac.ev-pause :is(.ac-ticket, .ac-tampon) {
+    animation: none;
   }
 }
 

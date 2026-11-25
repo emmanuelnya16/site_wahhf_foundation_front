@@ -79,6 +79,33 @@
     "enSavoirPlus": "Mehr erfahren",
     "tampon": "Kostenlos"
   },
+  "parcours": {
+    "surtitre": "Erfahrungsberichte",
+    "titre": [
+      "Wege,",
+      "die inspirieren"
+    ],
+    "texte": "Junge Menschen erzählen mit ihren eigenen Worten, was sie mit der Stiftung aufgebaut haben.",
+    "lien": "Weitere Geschichten entdecken",
+    "raconter": "Meinen Weg erzählen",
+    "vierge": "Und Sie? Ihr Weg kann andere junge Menschen ermutigen.",
+    "citation": "„{{citation}}“",
+    "age": "{{age}} Jahre",
+    "role": "Karussell",
+    "region": "Erfahrungsberichte",
+    "position": "{{n}} von {{total}}",
+    "precedent": "Vorheriger Bericht",
+    "suivant": "Nächster Bericht",
+    "annonce": "Bericht {{n}} von {{total}}",
+    "appel": {
+      "surtitre": "Wege, die inspirieren",
+      "titre": [
+        "Ihre Geschichte kann",
+        "andere inspirieren"
+      ],
+      "texte": "Haben Sie an einem Programm der Stiftung teilgenommen? Erzählen Sie uns Ihren Weg: Mit Ihrer Einwilligung kann er andere junge Menschen ermutigen."
+    }
+  },
   "contenu": {
     "chiffres": {
       "pays": {
@@ -138,6 +165,14 @@
             "libelle": "Sprach­beherrschung"
           }
         ]
+      }
+    },
+    "temoignages": {
+      "marie": {
+        "citation": "Das Mentoring von WAHHF hat mir das Vertrauen und die Werkzeuge gegeben, um meinen Betrieb für Lebensmittelverarbeitung zu starten.",
+        "domaine": "Jugend & Unternehmertum",
+        "resume": "Von der städtischen Landwirtschaft bis zur Gründung ihres Kleinbetriebs hat Marie 12 Monate lang am Mentoring-Programm teilgenommen.",
+        "resultat": "Betrieb gegründet, 3 Arbeitsplätze geschaffen"
       }
     }
   }
