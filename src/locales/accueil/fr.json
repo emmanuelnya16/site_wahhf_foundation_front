@@ -51,5 +51,19 @@
     ],
     "note": "Les chiffres d’impact (jeunes accompagnés, actions menées) seront publiés ici dès qu’ils seront datés et vérifiés.",
     "source": "Au {{date}}. Source : {{source}}"
+  },
+  "domaines": {
+    "surtitre": "Nos domaines d’action",
+    "titre": "Six domaines pour bâtir l’autonomie",
+    "compteur": "Domaine",
+    "rubrique": "Domaine {{n}}",
+    "lien": "Découvrir le domaine",
+    "lienDe": "Découvrir le domaine : {{titre}}",
+    "consigne": "Faites défiler pour parcourir les 6 domaines · WAHHF Foundation",
+    "fin": {
+      "rubrique": "Tous nos domaines",
+      "titre": "Six domaines, un même cap",
+      "lien": "Voir toutes nos actions"
+    }
   }
 }

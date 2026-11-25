@@ -52,6 +52,20 @@
     "note": "Impact figures (young people supported, activities carried out) will be published here as soon as they are dated and verified.",
     "source": "As of {{date}}. Source: {{source}}"
   },
+  "domaines": {
+    "surtitre": "Our areas of action",
+    "titre": "Six areas to build autonomy",
+    "compteur": "Area",
+    "rubrique": "Area {{n}}",
+    "lien": "Discover this area",
+    "lienDe": "Discover this area: {{titre}}",
+    "consigne": "Scroll to explore the 6 areas · WAHHF Foundation",
+    "fin": {
+      "rubrique": "All our areas",
+      "titre": "Six areas, one course",
+      "lien": "See all our actions"
+    }
+  },
   "contenu": {
     "chiffres": {
       "pays": {
@@ -59,7 +73,7 @@
         "sousTexte": "Verified country pages"
       },
       "domaines": {
-        "libelle": "Fields of action",
+        "libelle": "Areas of action",
         "sousTexte": "From education to mobility"
       },
       "niveaux": {

@@ -1244,6 +1244,107 @@
   }
 }
 
+/* --- 4. Les 6 domaines (lot 11.3) : les classes des Cinq principes (src/index.css, inchangées), plus la photo, le lien
+   et la sixième couleur. Cartes identiques en clair et en sombre. --- */
+.ac-domaines-tete {
+  max-width: 48rem;
+}
+.ac-domaines .principles-title {
+  display: block;
+  color: var(--ac-texte);
+}
+.ac-domaines .principles-intro {
+  margin-top: 1rem;
+}
+.ac-domaine-6 {
+  --pc-bg: var(--color-encre);
+  --pc-text: var(--color-blanc);
+  --pc-accent: var(--color-soleil);
+}
+/* Au plus 36 rem : seule la bande de la photo rétrécit, jamais le texte */
+.ac-domaines .principle-card:not(.principle-card-final) {
+  --marge: clamp(1.5rem, 6vw, 2.25rem);
+  --photo: 11rem;
+  min-height: 0;
+  padding: 0 var(--marge) 1rem;
+}
+.ac-domaines .principle-card > * {
+  flex: none;
+}
+.ac-domaine-photo {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: var(--photo);
+  margin-inline: calc(var(--marge) * -1);
+  overflow: hidden;
+  border-radius: inherit;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+/* Ligne d'accent entre la photo et le texte : par-dessus, pour rester nette pendant le dévoilement */
+.ac-domaine-photo::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 3px;
+  background: var(--pc-accent);
+}
+.ac-domaine-media {
+  position: absolute;
+  inset: 0;
+}
+.ac-domaine-media img {
+  transition: scale 0.5s var(--ac-courbe);
+}
+.ac-domaine-icone {
+  width: auto;
+  height: 62%;
+  max-height: 7rem;
+  aspect-ratio: 1;
+  color: var(--pc-accent);
+}
+.ac-domaines .principle-number {
+  margin-top: 1.25rem;
+}
+.ac-domaines .principle-card:not(.principle-card-final) .principle-rubric {
+  margin-top: 0.75rem;
+}
+.ac-domaines .principle-desc {
+  margin-top: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+.ac-domaines .principle-label {
+  padding-top: 0.25rem;
+}
+.ac-domaine-lien {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  color: var(--pc-accent);
+}
+.ac-domaine-lien > span {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+}
+.ac-domaine-lien:focus-visible {
+  outline: 3px solid var(--pc-accent);
+  outline-offset: 4px;
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .ac-domaines .principle-card:hover .ac-domaine-media img {
+    scale: 1.04;
+  }
+  .ac-domaine-lien:hover .ac-fleche,
+  .ac-domaines .principle-action:hover .ac-fleche {
+    translate: 5px 0;
+  }
+}
+
 /* --- Sections (lot 11.2) : entrées jouées une fois, quand le bloc arrive à l'écran (Entree.tsx) --- */
 @keyframes ac-feuille {
   from {

@@ -3,7 +3,8 @@
     "hero.intro : « communautés vulnérables » rendu par « benachteiligte Gemeinschaften »",
     "hero.pays : « pays d’Europe où nous orientons les jeunes » rendu par « Länder Europas, für die wir jungen Menschen Orientierung geben »",
     "qsn.citation : « Le changement doit venir de nous-mêmes » rendu par « Der Wandel muss von uns selbst ausgehen » (devise à valider, question 190)",
-    "chiffres.note : « chiffres d’impact » rendu par « Wirkungszahlen », « actions menées » par « durchgeführte Aktionen »"
+    "chiffres.note : « chiffres d’impact » rendu par « Wirkungszahlen », « actions menées » par « durchgeführte Aktionen »",
+    "domaines.fin.titre : « Six domaines, un même cap » rendu par « Sechs Bereiche, ein Kurs »"
   ],
   "seo": {
     "title": "Startseite — Junge Menschen stärken, Gemeinschaften verändern",
@@ -57,6 +58,20 @@
     ],
     "note": "Wirkungszahlen (begleitete junge Menschen, durchgeführte Aktionen) werden hier veröffentlicht, sobald sie datiert und geprüft sind.",
     "source": "Stand: {{date}}. Quelle: {{source}}"
+  },
+  "domaines": {
+    "surtitre": "Unsere Arbeitsbereiche",
+    "titre": "Sechs Bereiche für mehr Selbstständigkeit",
+    "compteur": "Bereich",
+    "rubrique": "Bereich {{n}}",
+    "lien": "Bereich entdecken",
+    "lienDe": "Bereich entdecken: {{titre}}",
+    "consigne": "Scrollen Sie durch die 6 Bereiche · WAHHF Foundation",
+    "fin": {
+      "rubrique": "Alle unsere Bereiche",
+      "titre": "Sechs Bereiche, ein Kurs",
+      "lien": "Unsere gesamte Arbeit ansehen"
+    }
   },
   "contenu": {
     "chiffres": {

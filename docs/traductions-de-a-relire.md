@@ -2,7 +2,7 @@
 
 Généré par `npm run i18n:relire` (scripts/traductions-a-relire.mjs) le 2026-11-25. Ne pas modifier à la main : corriger les fichiers de langue, puis relancer.
 
-Chaque texte allemand du site, face à son français. **Un astérisque (\*) marque les 161 textes dont le traducteur n'était pas sûr** (sens du français ambigu, terme juridique, nom d'institution, ton) : à relire en priorité. 1780 textes allemands au total.
+Chaque texte allemand du site, face à son français. **Un astérisque (\*) marque les 162 textes dont le traducteur n'était pas sûr** (sens du français ambigu, terme juridique, nom d'institution, ton) : à relire en priorité. 1790 textes allemands au total.
 
 - Ton choisi : vouvoiement (« Sie »), simple et chaleureux, pas du mot à mot.
 - Ne sont pas traduits : les noms propres et officiels (WAHHF Foundation, IROKO, Albatros Hotel, Ausbildung, Studienkolleg…), les adresses, les liens.
@@ -705,7 +705,7 @@ Fichier : `src/locales/accompagnement/de.json` (309 textes, dont 19 à relire).
 
 ## accueil
 
-Fichier : `src/locales/accueil/de.json` (39 textes, dont 4 à relire).
+Fichier : `src/locales/accueil/de.json` (49 textes, dont 5 à relire).
 
 | | Clé | Français | Allemand |
 |---|---|---|---|
@@ -740,6 +740,16 @@ Fichier : `src/locales/accueil/de.json` (39 textes, dont 4 à relire).
 |  | `chiffres.titre[1]` | déjà en place | aufgebaut ist |
 | \* | `chiffres.note` | Les chiffres d’impact (jeunes accompagnés, actions menées) seront publiés ici dès qu’ils seront datés et vérifiés. | Wirkungszahlen (begleitete junge Menschen, durchgeführte Aktionen) werden hier veröffentlicht, sobald sie datiert und geprüft sind. <br>_Note : « chiffres d’impact » rendu par « Wirkungszahlen », « actions menées » par « durchgeführte Aktionen »_ |
 |  | `chiffres.source` | Au {{date}}. Source : {{source}} | Stand: {{date}}. Quelle: {{source}} |
+|  | `domaines.surtitre` | Nos domaines d’action | Unsere Arbeitsbereiche |
+|  | `domaines.titre` | Six domaines pour bâtir l’autonomie | Sechs Bereiche für mehr Selbstständigkeit |
+|  | `domaines.compteur` | Domaine | Bereich |
+|  | `domaines.rubrique` | Domaine {{n}} | Bereich {{n}} |
+|  | `domaines.lien` | Découvrir le domaine | Bereich entdecken |
+|  | `domaines.lienDe` | Découvrir le domaine : {{titre}} | Bereich entdecken: {{titre}} |
+|  | `domaines.consigne` | Faites défiler pour parcourir les 6 domaines · WAHHF Foundation | Scrollen Sie durch die 6 Bereiche · WAHHF Foundation |
+|  | `domaines.fin.rubrique` | Tous nos domaines | Alle unsere Bereiche |
+| \* | `domaines.fin.titre` | Six domaines, un même cap | Sechs Bereiche, ein Kurs <br>_Note : « Six domaines, un même cap » rendu par « Sechs Bereiche, ein Kurs »_ |
+|  | `domaines.fin.lien` | Voir toutes nos actions | Unsere gesamte Arbeit ansehen |
 |  | `contenu.chiffres.pays.libelle` | Pays d’Europe | Länder Europas |
 |  | `contenu.chiffres.pays.sousTexte` | Fiches d’orientation vérifiées | Geprüfte Länderseiten |
 |  | `contenu.chiffres.domaines.libelle` | Domaines d’action | Arbeits­bereiche |

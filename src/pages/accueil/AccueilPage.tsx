@@ -12,6 +12,7 @@ import { cn } from '../../lib/utils';
 import Hero from './Hero';
 import QuiSommesNous from './QuiSommesNous';
 import Chiffres from './Chiffres';
+import DomainesParcours from './DomainesParcours';
 
 /** Parallaxes et fil (GSAP), chargés après le premier affichage, seulement là où ils existent (MQ.computer, src/lib/gsap.ts) */
 const AccueilMotion = lazy(() => import('./AccueilMotion'));
@@ -39,7 +40,7 @@ export default function AccueilPage() {
       <Hero paused={loops.paused} onTogglePause={loops.toggle} />
       <QuiSommesNous />
       <Chiffres />
-      {/* 4. Les 6 domaines : design et animation des « Cinq principes », une photo par domaine (à venir) */}
+      <DomainesParcours />
       {/* 5. Projet phare (à venir) */}
       {/* 6. Des parcours qui inspirent (à venir) */}
       {/* 7. Les 10 régions : section existante de Notre impact (à venir) */}

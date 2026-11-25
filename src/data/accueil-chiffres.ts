@@ -35,7 +35,7 @@ export interface ChiffreAccueil {
   suffixe?: string;
   libelle: TexteChiffre;
   sousTexte: TexteChiffre;
-  /** Page du site où mène toute la colonne */
+  /** Page du site, ou ancre de la page (« #domaines »), où mène toute la colonne */
   lien: string;
   /** Date du chiffre (AAAA-MM-JJ) ; null pour ce qui est en place */
   date: string | null;
@@ -43,8 +43,8 @@ export interface ChiffreAccueil {
   source: TexteChiffre | null;
 }
 
-/** Les 6 domaines : l'ancre de leur section de /accueil quand elle existera (lot à venir) ; d'ici là, Nos actions */
-export const LIEN_DOMAINES = '/nos-actions';
+/** Les 6 domaines : leur section, sur la même page (hero et chiffres) */
+export const LIEN_DOMAINES = '#domaines';
 
 /** Les 10 pays : la liste des fiches, la même destination dans le hero et dans les chiffres (réponse 194) */
 export const LIEN_PAYS = '/mobilite-langues/accompagnement#pays';
