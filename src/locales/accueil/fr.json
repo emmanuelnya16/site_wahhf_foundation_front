@@ -2,5 +2,21 @@
   "seo": {
     "title": "Accueil — Autonomiser la jeunesse, transformer les communautés",
     "description": "WAHHF Foundation accompagne les jeunes et les communautés vulnérables du Cameroun : éducation, santé, entrepreneuriat, environnement et mobilité vers l’Europe."
+  },
+  "hero": {
+    "titre": [
+      "Autonomiser",
+      "<accent>la jeunesse</accent>,",
+      "transformer les",
+      "communautés."
+    ],
+    "intro": "WAHHF Foundation accompagne les jeunes et les communautés vulnérables du Cameroun : éducation, santé, entrepreneuriat, environnement et mobilité vers l’Europe.",
+    "actions": "Découvrir nos actions",
+    "rejoindre": "Nous rejoindre",
+    "equipe": "Une équipe entre le Cameroun et l’Allemagne",
+    "equipeSuite": "au service de la jeunesse",
+    "pays": "pays d’Europe où nous orientons les jeunes",
+    "domaines": "domaines d’action",
+    "evenement": "Prochain événement"
   }
 }

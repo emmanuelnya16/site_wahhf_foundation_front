@@ -2,5 +2,21 @@
   "seo": {
     "title": "Home — Empowering youth, transforming communities",
     "description": "WAHHF Foundation supports young people and vulnerable communities in Cameroon: education, health, entrepreneurship, environment and mobility towards Europe."
+  },
+  "hero": {
+    "titre": [
+      "Empowering",
+      "<accent>youth</accent>,",
+      "transforming",
+      "communities."
+    ],
+    "intro": "WAHHF Foundation supports young people and vulnerable communities in Cameroon: education, health, entrepreneurship, environment and mobility towards Europe.",
+    "actions": "Discover our actions",
+    "rejoindre": "Join us",
+    "equipe": "A team between Cameroon and Germany",
+    "equipeSuite": "serving young people",
+    "pays": "European countries we guide young people towards",
+    "domaines": "areas of action",
+    "evenement": "Next event"
   }
 }
