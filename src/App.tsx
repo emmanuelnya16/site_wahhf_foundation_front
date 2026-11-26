@@ -7,8 +7,7 @@ import { loadMotionFeatures } from './lib/motionEngine';
 import Layout from './components/Layout';
 import PageTransition, { routeKey } from './effects/PageTransition';
 import ChunkErrorBoundary from './components/wahhf/ChunkErrorBoundary';
-// L'accueil reste dans le fichier principal (page d'entrée la plus fréquente : pas d'aller-retour réseau).
-import Home from './pages/Home';
+// L'ancien accueil (src/pages/Home.tsx) reste dans le code, mais / mène désormais à /accueil (26 novembre 2026).
 import { bundlesReady } from './i18n';
 
 /**
@@ -81,7 +80,7 @@ function AppRoutes() {
         {/* =================================================================
             ROUTES PRINCIPALES WAHHF FOUNDATION (PROMPT 1 & PROMPT 2)
            ================================================================= */}
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Navigate to="/accueil" replace />} />
         <Route path="/accueil" element={<AccueilPage />} />
         <Route path="/qui-sommes-nous" element={<QuiSommesNousPage />} />
         <Route path="/nos-actions" element={<NosActionsPage />} />
