@@ -1023,7 +1023,7 @@ Contrat validé le 16/11/2026, avec les ajustements du §13.
 
 Cause (profil Performance, mobile, CPU ×4) : chaque bloc animé mesurait sa position pendant le rendu, ce qui forçait la mise en page de toute la page dans la même tâche que React (256 ms) ; GSAP se chargeait sur téléphone pour des parallaxes qui n'y existent pas (50 ms) ; les sections sous l'écran étaient mises en page au chargement. Le compteur et le motif n'y étaient pour rien.
 Corrections : un seul IntersectionObserver, sans mesure ; `AccueilMotion` chargé seulement sur ordinateur à la souris ; une timeline de parallaxe par section ; souris suivie par l'Observer de ScrollTrigger (plus d'écouteur brut) ; `content-visibility: auto` sous 1 024 px. Mesures finales (Lighthouse mobile, 3 passages) : TBT 120, 150 et 100 ms, CLS 0.
-Lot 11.5 : `content-visibility: auto` sur toutes les sections sous le premier écran (ordinateur aussi), avec une hauteur d'attente mesurée pour chacune ; le contenu reste dans la page (recherche, titres). Profil mobile (CPU ×4, 5 passages, médiane) : 805 ms de blocage sans, 420 à 490 ms avec. Pour aller à une ancre (#domaines), tout est dessiné le temps du trajet (`ancre.ts`), sinon la position calculée au départ était fausse de 350 px.
+Lot 11.5 : `content-visibility: auto` retiré, téléphone compris (voir §16.6, « Rendu différé »).
 
 ### 16.5 Sections « Projet phare » et « Des parcours qui inspirent » (lot 11.4)
 
@@ -1060,6 +1060,8 @@ Lot 11.5 : `content-visibility: auto` sur toutes les sections sous le premier é
 **Apprendre, cultiver, grandir** : la section de `/`, inchangée (bande nuit, accordéon de 5 photos, mêmes données), dans une enveloppe `.ac-accordeon`. Tant qu'elle est la dernière de la page, le fond de la page la sépare du pied de page, nuit lui aussi. Styles calculés identiques sur `/` et `/accueil`.
 
 **Fonds, dans l'ordre** : hero et « Qui sommes-nous » brume (déjà ainsi), chiffres nuit, domaines brume, projet sauge, parcours brume, régions sauge, accordéon nuit, puis le pied de page.
+
+**Rendu différé (essayé, puis retiré)** : `content-visibility: auto` sur chaque section sous le premier écran, avec une hauteur d'attente mesurée pour chacune. Gain réel sur téléphone : Lighthouse avec un vrai ralentissement (`--throttling-method=devtools`, 3 passages) donne un TBT médian de 930 ms sans, 510 ms avec (performance 51 → 61) ; la simulation par défaut de Lighthouse ne voit aucune différence (340 et 330 ms). Mais Chrome retire de l'arbre d'accessibilité ce qu'il n'a pas encore dessiné : sans défilement, seuls le h1 et les deux premiers h2 y restaient (les autres « ignorés : notRendered », 457 nœuds au lieu de 890). Un lecteur d'écran ne pouvait ni lire les sections plus bas ni y aller par les titres. Le plancher d'accessibilité passe avant : rendu différé retiré partout sur l'accueil (il était déjà, depuis le lot 11.3, sur téléphone, avec le même défaut). À ne pas remettre sans vérifier l'arbre d'accessibilité.
 
 **Photos** : l'accordéon garde les siennes ; ce sont celles de l'accueil qui changent quand elles se répètent. En ligne, l'arche du hero passe de A30 (« Apprendre » dans l'accordéon) à A12, et la carte Entrepreneuriat de B06 (« Cultiver ») à B24. A12 et B24 : trois affichages chacune sur le site.
 

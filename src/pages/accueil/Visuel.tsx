@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { ArrowRight } from 'lucide-react';
 import Photo from '../../components/wahhf/Photo';
 import { photoOrFallback } from '../../lib/photos';
-import { versAncre } from './ancre';
+import { followAnchorLink } from '../../lib/scroll';
 import { localizeEvent, upcomingEvents } from '../../lib/events';
 import { LIEN_DOMAINES, LIEN_PAYS } from '../../data/accueil-chiffres';
 import { COUNTRIES_DATA, DOMAINS_DATA, WAHHF_LOGO_URL } from '../../services/api';
@@ -77,7 +77,7 @@ export default function Visuel() {
           </Link>
         </div>
         <div className="ac-carte-place ac-place-domaines" data-parallaxe="8">
-          <Link to={LIEN_DOMAINES} onClick={(e) => versAncre(e, LIEN_DOMAINES.slice(1))} className="ac-carte ac-carte-nuit focus-ring-double">
+          <Link to={LIEN_DOMAINES} onClick={(e) => followAnchorLink(e, LIEN_DOMAINES.slice(1))} className="ac-carte ac-carte-nuit focus-ring-double">
             <span className="ac-nombre">{DOMAINS_DATA.length}</span>{' '}
             <span className="ac-carte-texte">{t('accueil.hero.domaines')}</span>
           </Link>

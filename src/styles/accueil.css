@@ -985,62 +985,9 @@
   }
 }
 
-/* Rendu différé (lot 11.5) : le navigateur ne met en page et ne dessine une section sous le premier écran qu'à son
-   approche. Son contenu reste dans la page (recherche, titres, lecteurs d'écran). Hauteur d'attente : mesurée pour
-   chaque section (moyenne FR, EN, DE ; « auto » retient ensuite la vraie), pour que rien ne bouge (CLS 0). Le parcours
-   des domaines, épinglé sur ordinateur, a sa hauteur propre (accueil.css, .is-pinned). */
-:is(.ac-qsn, .ac-chiffres, .ac-domaines, .ac-projet, .ac-parcours, .ac-regions, .ac-accordeon) {
-  content-visibility: auto;
-  contain-intrinsic-size: auto var(--ac-hauteur, 900px);
-}
-.ac-qsn {
-  --ac-hauteur: 1360px;
-}
-.ac-chiffres {
-  --ac-hauteur: 920px;
-}
-.ac-domaines {
-  --ac-hauteur: 4150px;
-}
-.ac-projet {
-  --ac-hauteur: 1640px;
-}
-.ac-parcours {
-  --ac-hauteur: 890px;
-}
-.ac-regions {
-  --ac-hauteur: 1230px;
-}
-.ac-accordeon {
-  --ac-hauteur: 1060px;
-}
-/* Le temps d'aller à une ancre : tout est dessiné (ancre.ts) */
-.ac-tout-dessine :is(.ac-qsn, .ac-chiffres, .ac-domaines, .ac-projet, .ac-parcours, .ac-regions, .ac-accordeon) {
-  content-visibility: visible;
-}
-@media (min-width: 1024px) {
-  .ac-qsn {
-    --ac-hauteur: 850px;
-  }
-  .ac-chiffres {
-    --ac-hauteur: 760px;
-  }
-  .ac-domaines {
-    --ac-hauteur: 4300px;
-  }
-  .ac-projet {
-    --ac-hauteur: 1000px;
-  }
-  .ac-parcours {
-    --ac-hauteur: 600px;
-  }
-  .ac-regions {
-    --ac-hauteur: 1070px;
-  }
-  .ac-accordeon {
-    --ac-hauteur: 1040px;
-  }
-}
+/* Pas de rendu différé (content-visibility: auto) sur l'accueil, lot 11.5 : il réduisait de 45 % le temps de blocage
+   sur téléphone, mais Chrome retire de l'arbre d'accessibilité ce qu'il n'a pas encore dessiné, titres compris. Un
+   lecteur d'écran ne trouvait plus les sections sous l'écran : à ne pas remettre (docs/design-contract.md, §16.6). */
 
 /* --- 3. Les chiffres (lot 11.2) : bandeau nuit dans les deux thèmes --- */
 .ac-chiffres {
