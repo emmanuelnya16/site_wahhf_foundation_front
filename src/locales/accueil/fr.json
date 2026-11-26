@@ -41,7 +41,11 @@
         "texte": "L’académie d’allemand et d’anglais, de A1 à C1, sans frais."
       }
     },
-    "lien": "Découvrir la fondation"
+    "lien": "Découvrir la fondation",
+    "direction": {
+      "titre": "La direction",
+      "lien": "Voir toute l’équipe"
+    }
   },
   "chiffres": {
     "surtitre": "La fondation en chiffres",

@@ -49,7 +49,11 @@
         "texte": "Die Deutsch- und Englischakademie, von A1 bis C1, ohne Gebühren."
       }
     },
-    "lien": "Die Stiftung kennenlernen"
+    "lien": "Die Stiftung kennenlernen",
+    "direction": {
+      "titre": "Die Leitung",
+      "lien": "Das ganze Team ansehen"
+    }
   },
   "chiffres": {
     "surtitre": "Die Stiftung in Zahlen",

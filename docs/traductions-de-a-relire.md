@@ -2,7 +2,7 @@
 
 Généré par `npm run i18n:relire` (scripts/traductions-a-relire.mjs) le 2026-11-26. Ne pas modifier à la main : corriger les fichiers de langue, puis relancer.
 
-Chaque texte allemand du site, face à son français. **Un astérisque (\*) marque les 166 textes dont le traducteur n'était pas sûr** (sens du français ambigu, terme juridique, nom d'institution, ton) : à relire en priorité. 1864 textes allemands au total.
+Chaque texte allemand du site, face à son français. **Un astérisque (\*) marque les 166 textes dont le traducteur n'était pas sûr** (sens du français ambigu, terme juridique, nom d'institution, ton) : à relire en priorité. 1866 textes allemands au total.
 
 - Ton choisi : vouvoiement (« Sie »), simple et chaleureux, pas du mot à mot.
 - Ne sont pas traduits : les noms propres et officiels (WAHHF Foundation, IROKO, Albatros Hotel, Ausbildung, Studienkolleg…), les adresses, les liens.
@@ -704,7 +704,7 @@ Fichier : `src/locales/accompagnement/de.json` (309 textes, dont 19 à relire).
 
 ## accueil
 
-Fichier : `src/locales/accueil/de.json` (123 textes, dont 9 à relire).
+Fichier : `src/locales/accueil/de.json` (125 textes, dont 9 à relire).
 
 | | Clé | Français | Allemand |
 |---|---|---|---|
@@ -734,6 +734,8 @@ Fichier : `src/locales/accueil/de.json` (123 textes, dont 9 à relire).
 |  | `qsn.points.gratuite.titre` | Gratuité | Kostenlos |
 |  | `qsn.points.gratuite.texte` | L’académie d’allemand et d’anglais, de A1 à C1, sans frais. | Die Deutsch- und Englischakademie, von A1 bis C1, ohne Gebühren. |
 |  | `qsn.lien` | Découvrir la fondation | Die Stiftung kennenlernen |
+|  | `qsn.direction.titre` | La direction | Die Leitung |
+|  | `qsn.direction.lien` | Voir toute l’équipe | Das ganze Team ansehen |
 |  | `chiffres.surtitre` | La fondation en chiffres | Die Stiftung in Zahlen |
 |  | `chiffres.titre[0]` | Ce qui est | Was bereits |
 |  | `chiffres.titre[1]` | déjà en place | aufgebaut ist |

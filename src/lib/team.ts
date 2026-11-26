@@ -8,7 +8,7 @@ import equipeFr from '../locales/equipe/fr.json';
 /**
  * Textes de l'équipe (lot 7.10, src/locales/equipe/) : ceux du hero, du carrousel et de l'organigramme, et les
  * surcouches anglaise et allemande des rôles et des intitulés de niveau (equipe.contenu). Les noms et les titres
- * (« Ing. Pr. », « Prof. Dr.-Ing. ») ne se traduisent pas. Paquet enregistré ici : Qui sommes-nous et les pages
+ * (« Prof. Dr.-Ing. ») ne se traduisent pas. Paquet enregistré ici : Qui sommes-nous et les pages
  * Événements (intervenants) en profitent. Les fonctions ci-dessous lisent la langue en cours : le composant appelant
  * utilise useTranslation() pour se remettre à jour au changement de langue.
  */
@@ -30,10 +30,10 @@ export function visibleMembers(): TeamMember[] {
 /** Pas de coupure de ligne après un trait d'union (« Dr.-Ing. », « Christian-Toralf ») : gluon invisible U+2060. */
 const keepHyphens = (text: string) => text.replace(/-/g, '-\u2060');
 
-/** « Ing. Pr. Christian Wilberg », « Wilfried » ; « Nom à confirmer » quand il est inconnu (développement seulement). */
+/** « Prof. Dr.-Ing. Christian Willberg », « Wilfried » ; « Nom à confirmer » quand il est inconnu (développement seulement). */
 export function displayName(member: TeamMember): string {
   if (!member.prenom) return i18n.t('equipe.nameTbc');
-  // Le titre (« Ing. Pr. », « Prof. Dr.-Ing. ») et un prénom composé ne se coupent pas en fin de ligne
+  // Le titre (« Prof. Dr.-Ing. ») et un prénom composé ne se coupent pas en fin de ligne
   const titre = member.titre && keepHyphens(member.titre.replace(/ /g, '\u00a0'));
   return [titre, keepHyphens(member.prenom), member.nom].filter(Boolean).join(' ');
 }

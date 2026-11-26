@@ -23,7 +23,7 @@ export interface TeamMember {
   /** true quand la fondation a confirmé l'orthographe exacte du nom (sinon il n'apparaît dans aucun texte alternatif) */
   nomConfirme: boolean;
   nom: string | null;
-  /** Civilité ou titre devant le nom (« Ing. Pr. », « Prof. Dr.-Ing. ») */
+  /** Civilité ou titre devant le nom (« Prof. Dr.-Ing. ») */
   titre?: string;
   /** null : pas de rôle affiché, seulement le nom (Prof. Dr.-Ing. Christian-Toralf Weber, à la demande de la fondation) */
   role: string | null;
@@ -60,8 +60,10 @@ export const TEAM_LEVEL_TITLES: Record<number, string> = {
 export const TEAM: TeamMember[] = [
   // TODO (fondation) : orthographe du nom et ordre à confirmer ; bio et accord écrit à fournir
   { id: 'marrion-watio-notesse', prenom: 'Marrion', nomConfirme: false, nom: 'Watio Notesse', role: 'Président', niveau: 1, ordre: 1, photo: 'marrion-watio-notesse', focus: '50% 35%', bio: null, liens: [], consent: 'pending' },
-  // TODO (fondation) : orthographe du nom et ordre à confirmer ; bio et accord écrit à fournir
-  { id: 'christian-wilberg', titre: 'Ing. Pr.', prenom: 'Christian', nomConfirme: false, nom: 'Wilberg', role: 'Vice-président', niveau: 2, ordre: 1, photo: 'christian-wilberg', focus: '50% 35%', bio: null, liens: [], consent: 'pending' },
+  // Lot 12 (retours de la fondation, 26 novembre 2026) : « Prof. Dr.-Ing. Christian Willberg », sur le modèle de
+  // Christian-Toralf Weber. L'identifiant garde l'ancienne orthographe (portrait, intervenants). TODO (fondation) : ordre
+  // à confirmer ; bio et accord écrit à fournir
+  { id: 'christian-wilberg', titre: 'Prof. Dr.-Ing.', prenom: 'Christian', nomConfirme: true, nom: 'Willberg', role: 'Vice-président', niveau: 2, ordre: 1, photo: 'christian-wilberg', focus: '50% 35%', bio: null, liens: [], consent: 'pending' },
   // Nom donné par la fondation le 20 novembre 2026 (« Prof Dr ing Christian-Toralf Weber »), sans rôle : seulement
   // son nom. TODO (fondation) : ordre à confirmer ; bio et accord écrit à fournir
   { id: 'christian-toralf-weber', titre: 'Prof. Dr.-Ing.', prenom: 'Christian-Toralf', nomConfirme: true, nom: 'Weber', role: null, niveau: 3, ordre: 1, photo: 'personne-niveau-3', focus: '50% 25%', bio: null, liens: [], consent: 'pending' },

@@ -998,6 +998,85 @@
    sur téléphone, mais Chrome retire de l'arbre d'accessibilité ce qu'il n'a pas encore dessiné, titres compris. Un
    lecteur d'écran ne trouvait plus les sections sous l'écran : à ne pas remettre (docs/design-contract.md, §16.6). */
 
+/* --- 2 bis. La direction (lot 12), dans « Qui sommes-nous en bref » : sous la grille, après un filet. Une personne :
+   un rond de 72 px (portrait avec l'accord écrit, sinon les initiales sur sauge), le nom et la fonction de team.ts. --- */
+.ac-direction {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: clamp(3.5rem, 7vw, 5.5rem);
+  padding-top: 2.25rem;
+  border-top: 1px solid var(--ac-bord);
+}
+.ac-direction-titre {
+  font-family: var(--ac-libelle);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ac-accent);
+}
+.ac-direction-liste {
+  display: grid;
+  gap: 1.25rem 2.5rem;
+}
+.ac-direction-personne {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.ac-direction-rond {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--ac-sauge-plein);
+  font-family: var(--ac-titre);
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--ac-accent);
+}
+.ac-direction-texte {
+  display: grid;
+  gap: 0.125rem;
+}
+.ac-direction-nom {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.ac-direction-role {
+  line-height: 1.45;
+  color: var(--ac-texte-doux);
+}
+.ac-direction .ac-lien {
+  justify-self: start;
+}
+@media (min-width: 640px) {
+  .ac-direction-liste {
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  }
+}
+/* Ordinateur : le titre et le lien sur une ligne, les personnes en rangée dessous, sur toute la largeur */
+@media (min-width: 1024px) {
+  .ac-direction {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    row-gap: 1.75rem;
+  }
+  .ac-direction-titre {
+    grid-area: 1 / 1;
+  }
+  .ac-direction .ac-lien {
+    grid-area: 1 / 2;
+  }
+  .ac-direction-liste {
+    grid-column: 1 / -1;
+  }
+}
+
 /* --- 3. Les chiffres (lot 11.2) : bandeau nuit dans les deux thèmes --- */
 .ac-chiffres {
   position: relative;

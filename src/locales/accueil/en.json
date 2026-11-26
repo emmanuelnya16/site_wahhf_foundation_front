@@ -41,7 +41,11 @@
         "texte": "The German and English academy, from A1 to C1, at no cost."
       }
     },
-    "lien": "Discover the foundation"
+    "lien": "Discover the foundation",
+    "direction": {
+      "titre": "Leadership",
+      "lien": "See the whole team"
+    }
   },
   "chiffres": {
     "surtitre": "The foundation in figures",

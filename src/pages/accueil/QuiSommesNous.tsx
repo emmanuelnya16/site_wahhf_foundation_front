@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { ArrowRight, GraduationCap, HeartHandshake, ShieldCheck, type LucideIcon } from 'lucide-react';
 import Photo from '../../components/wahhf/Photo';
 import { photoOrFallback } from '../../lib/photos';
+import { displayName, displayRole, memberPortrait, visibleMembers } from '../../lib/team';
+import type { TeamMember } from '../../data/team';
 import Entree from './Entree';
 import Lignes from './Lignes';
 
@@ -30,6 +32,15 @@ const POINTS: { id: 'dignite' | 'integrite' | 'gratuite'; icon: LucideIcon }[] =
 ];
 
 const delai = (s: number) => ({ '--delai': `${s}s` }) as CSSProperties;
+
+/**
+ * La direction (lot 12) : un partenaire européen doit voir qui dirige la fondation. Les trois premiers niveaux de
+ * l'organigramme (src/data/team.ts : présidence, vice-présidence, puis le niveau sans intitulé), quatre personnes au
+ * plus, avec leur nom connu. Fonctions de team.ts, jamais inventées ; pas de fonction affichée quand team.ts n'en a pas.
+ */
+const NIVEAUX_DIRECTION = 3;
+const direction = () => visibleMembers().filter((m) => m.niveau <= NIVEAUX_DIRECTION && m.prenom && m.nom).slice(0, 4);
+const initiales = (m: TeamMember) => `${m.prenom?.[0] ?? ''}${m.nom?.[0] ?? ''}`.toUpperCase();
 
 /**
  * Le fil en pointillés : il part de l'étiquette, fait une boucle et va vers le texte (bureau). Le tracé visible est
@@ -100,6 +111,40 @@ export default function QuiSommesNous() {
           </ul>
           <Link to="/qui-sommes-nous" className="ac-lien ac-app" style={delai(0.85)}>
             <span>{t('accueil.qsn.lien')}</span>
+            <ArrowRight aria-hidden="true" className="ac-fleche" />
+          </Link>
+        </Entree>
+      </div>
+
+      {/* La direction : portrait rond seulement avec l'accord écrit (memberPortrait), sinon les initiales sur sauge */}
+      <div className="container-page">
+        <Entree className="ac-direction">
+          <h3 className="ac-direction-titre ac-app" style={delai(0)}>
+            {t('accueil.qsn.direction.titre')}
+          </h3>
+          <ul className="ac-direction-liste">
+            {direction().map((membre, i) => {
+              const portrait = memberPortrait(membre);
+              const role = displayRole(membre);
+              return (
+                <li key={membre.id} className="ac-direction-personne ac-app" style={delai(0.1 + i * 0.08)}>
+                  <span className="ac-direction-rond" aria-hidden="true">
+                    {portrait ? (
+                      <Photo photo={portrait} sizes="4.5rem" fit="cover" radius="none" decorative />
+                    ) : (
+                      initiales(membre)
+                    )}
+                  </span>
+                  <span className="ac-direction-texte">
+                    <span className="ac-direction-nom">{displayName(membre)}</span>
+                    {role && <span className="ac-direction-role">{role}</span>}
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+          <Link to="/qui-sommes-nous#organigramme" className="ac-lien ac-app" style={delai(0.4)}>
+            <span>{t('accueil.qsn.direction.lien')}</span>
             <ArrowRight aria-hidden="true" className="ac-fleche" />
           </Link>
         </Entree>
