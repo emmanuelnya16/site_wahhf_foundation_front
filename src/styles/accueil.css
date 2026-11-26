@@ -3528,22 +3528,27 @@
 .ac-partenaire {
   display: grid;
   place-items: center;
-  width: 14rem;
+  width: 10.5rem;
   max-width: 100%;
   height: 7rem;
-  padding: 1.25rem 1.75rem;
+  padding: 1rem 1.25rem;
   border: 1px solid var(--ac-carte-bord);
   border-radius: 0.75rem 3rem 0.75rem 0.75rem;
   background: var(--ac-carte);
   box-shadow: 0 10px 26px -20px color-mix(in srgb, var(--color-encre) 45%, transparent);
 }
 .ac-partenaire-logo {
+  width: auto;
   max-width: 100%;
-  max-height: 3.5rem;
+  height: 4.5rem;
   object-fit: contain;
   filter: grayscale(1);
   opacity: 0.8;
   transition: filter var(--dur-fast) var(--ease-reveal), opacity var(--dur-fast) var(--ease-reveal);
+}
+/* Les logos gardent une plaque claire en sombre : plusieurs ont un fond blanc */
+.dark .ac-partenaire:has(.ac-partenaire-logo) {
+  background: var(--color-papier);
 }
 .ac-partenaire-nom {
   font-family: var(--ac-titre);
@@ -3573,6 +3578,17 @@ a.ac-partenaire:focus-visible .ac-partenaire-nom {
   }
   .ac-partenaire:hover .ac-partenaire-nom {
     color: var(--ac-texte);
+  }
+}
+/* Téléphone : deux cartes par ligne */
+@media (max-width: 639px) {
+  .ac-partenaires-logos:not(.is-bande) .ac-partenaires-liste {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ac-partenaires-logos:not(.is-bande) .ac-partenaire {
+    width: 100%;
+    height: 6.5rem;
   }
 }
 /* L'encadré « Devenir partenaire » */

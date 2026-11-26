@@ -16,7 +16,7 @@ const delai = (i: number) => ({ '--delai': `${(i * 0.06).toFixed(2)}s` }) as CSS
 function Carte({ partenaire, decor = false }: { partenaire: Partenaire; decor?: boolean }) {
   const { t } = useTranslation();
   const contenu = partenaire.logo ? (
-    <img src={partenaire.logo} alt={decor ? '' : partenaire.nom} loading="lazy" decoding="async" className="ac-partenaire-logo" />
+    <img src={partenaire.logo} alt={decor ? '' : partenaire.nom} height={80} loading="lazy" decoding="async" className="ac-partenaire-logo" />
   ) : (
     <span className="ac-partenaire-nom">{partenaire.nom}</span>
   );
