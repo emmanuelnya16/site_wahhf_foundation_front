@@ -106,5 +106,14 @@
       "vers l’Europe"
     ],
     "lien": "Voir notre impact"
+  },
+  "evenements": {
+    "titre": [
+      "Rencontrons-nous"
+    ],
+    "intro": "Des journées pour rencontrer la fondation, ses équipes et ses partenaires.",
+    "lien": "Tous les événements",
+    "bientot": "Le prochain rendez-vous sera annoncé très bientôt",
+    "voir": "{{titre}}, voir l’événement"
   }
 }

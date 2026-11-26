@@ -17,6 +17,7 @@ import ProjetPhare from './ProjetPhare';
 import Parcours from './Parcours';
 import Regions from './Regions';
 import JourneySection from '../home/JourneySection';
+import Evenements from './Evenements';
 
 /** Parallaxes et fil (GSAP), chargés après le premier affichage, seulement là où ils existent (MQ.computer, src/lib/gsap.ts) */
 const AccueilMotion = lazy(() => import('./AccueilMotion'));
@@ -52,7 +53,7 @@ export default function AccueilPage() {
       <div className="ac-accordeon">
         <JourneySection />
       </div>
-      {/* 9. Quelques événements (à venir) */}
+      <Evenements paused={loops.paused} />
       {ordinateur && (
         <AfterFirstDisplay>
           <AccueilMotion scope={root} paused={loops.paused} />

@@ -2,7 +2,7 @@
 
 Généré par `npm run i18n:relire` (scripts/traductions-a-relire.mjs) le 2026-11-26. Ne pas modifier à la main : corriger les fichiers de langue, puis relancer.
 
-Chaque texte allemand du site, face à son français. **Un astérisque (\*) marque les 166 textes dont le traducteur n'était pas sûr** (sens du français ambigu, terme juridique, nom d'institution, ton) : à relire en priorité. 1838 textes allemands au total.
+Chaque texte allemand du site, face à son français. **Un astérisque (\*) marque les 166 textes dont le traducteur n'était pas sûr** (sens du français ambigu, terme juridique, nom d'institution, ton) : à relire en priorité. 1843 textes allemands au total.
 
 - Ton choisi : vouvoiement (« Sie »), simple et chaleureux, pas du mot à mot.
 - Ne sont pas traduits : les noms propres et officiels (WAHHF Foundation, IROKO, Albatros Hotel, Ausbildung, Studienkolleg…), les adresses, les liens.
@@ -705,7 +705,7 @@ Fichier : `src/locales/accompagnement/de.json` (309 textes, dont 19 à relire).
 
 ## accueil
 
-Fichier : `src/locales/accueil/de.json` (96 textes, dont 9 à relire).
+Fichier : `src/locales/accueil/de.json` (101 textes, dont 9 à relire).
 
 | | Clé | Français | Allemand |
 |---|---|---|---|
@@ -805,6 +805,11 @@ Fichier : `src/locales/accueil/de.json` (96 textes, dont 9 à relire).
 |  | `regions.titre[1]` | et Douala, tournée | Douala zu Hause, |
 |  | `regions.titre[2]` | vers l’Europe | offen für Europa |
 |  | `regions.lien` | Voir notre impact | Unsere Wirkung ansehen |
+|  | `evenements.titre[0]` | Rencontrons-nous | Lernen wir uns kennen |
+|  | `evenements.intro` | Des journées pour rencontrer la fondation, ses équipes et ses partenaires. | Tage, an denen Sie die Stiftung, ihre Teams und ihre Partner kennenlernen können. |
+|  | `evenements.lien` | Tous les événements | Alle Veranstaltungen |
+|  | `evenements.bientot` | Le prochain rendez-vous sera annoncé très bientôt | Der nächste Termin wird in Kürze bekannt gegeben |
+|  | `evenements.voir` | {{titre}}, voir l’événement | {{titre}}, zur Veranstaltung |
 
 ## actualites
 

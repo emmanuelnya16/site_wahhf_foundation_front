@@ -2013,10 +2013,369 @@
   }
 }
 
-/* --- 8. Apprendre, cultiver, grandir (lot 11.5) : la section de / (JourneySection), inchangée, sur sa bande nuit.
-   Dernière de la page, elle toucherait le pied de page, nuit lui aussi : le fond de la page les sépare. --- */
-.ac-accordeon:last-child {
-  padding-bottom: clamp(3.5rem, 9vw, 6rem);
+/* --- 8. Apprendre, cultiver, grandir (lot 11.5) : la section de / (JourneySection), inchangée, sur sa bande nuit --- */
+
+/* --- 9. Événements (lot 11.6) : la grande carte du prochain rendez-vous et sa page d'éphéméride, les éditions passées
+   en tickets (le motif du projet phare), sur brume après la bande nuit de l'accordéon --- */
+.ac-evenements {
+  padding-block: var(--section-space);
+  background: var(--ac-fond);
+}
+.ac-ev-entete {
+  display: grid;
+  justify-items: start;
+}
+.ac-ev-grille {
+  display: grid;
+  align-items: start;
+  gap: 2.5rem;
+  margin-top: 3rem;
+}
+.ac-ev-carte {
+  overflow: hidden;
+  border: 1px solid var(--ac-carte-bord);
+  border-radius: 1.5rem;
+  background: var(--ac-carte);
+  box-shadow: 0 22px 44px -30px rgb(31 45 39 / 0.45);
+}
+.dark .ac-ev-carte {
+  box-shadow: none;
+}
+.ac-ev-visuel {
+  position: relative;
+  padding: 0.75rem 0.75rem 0;
+}
+/* Coin feuille : le grand arrondi en haut à droite */
+.ac-ev-photo {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 1rem 4.5rem 1rem 1rem;
+  background: var(--ac-tache-sauge);
+}
+/* Page d'éphéméride : bandeau nuit et deux trous de reliure, le numéro du jour en grand sur soleil */
+.ac-ephemeride {
+  position: absolute;
+  top: 1.75rem;
+  left: 1.75rem;
+  display: grid;
+  justify-items: center;
+  width: 5.75rem;
+  padding-bottom: 0.625rem;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  background: var(--ac-soleil);
+  box-shadow: 0 14px 24px -14px rgb(31 45 39 / 0.6);
+  color: var(--ac-sur-soleil);
+  text-align: center;
+  transform-origin: 50% 0;
+}
+.ac-ephemeride::before,
+.ac-ephemeride::after {
+  content: '';
+  position: absolute;
+  top: 0.3125rem;
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 50%;
+  background: var(--color-brume);
+}
+.ac-ephemeride::before {
+  left: 30%;
+}
+.ac-ephemeride::after {
+  right: 30%;
+}
+.ac-eph-haut {
+  justify-self: stretch;
+  padding: 0.875rem 0.25rem 0.375rem;
+  background: var(--color-nuit);
+  color: var(--color-soleil);
+  font-family: var(--ac-libelle);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.ac-eph-numero {
+  margin-top: 0.375rem;
+  font-family: var(--ac-titre);
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.ac-eph-mois {
+  margin-top: 0.125rem;
+  font-family: var(--ac-libelle);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.ac-ev-corps {
+  display: grid;
+  justify-items: start;
+  padding: 1.5rem clamp(1.25rem, 4vw, 2rem) clamp(1.5rem, 4vw, 2rem);
+}
+.ac-ev-titre {
+  font-family: var(--ac-titre);
+  font-size: clamp(1.5rem, 5.5vw, 2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+.ac-ev-lieu {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  color: var(--ac-texte-doux);
+}
+.ac-ev-lieu svg {
+  flex: none;
+  width: 1.125rem;
+  height: 1.125rem;
+  color: var(--ac-accent);
+}
+.ac-ev-compte {
+  justify-self: stretch;
+  margin-top: 1.5rem;
+}
+.ac-ev-compte-titre {
+  font-weight: 600;
+}
+.ac-ev-cases {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.5rem;
+  max-width: 24rem;
+  margin-top: 0.625rem;
+}
+.ac-ev-case {
+  display: grid;
+  justify-items: center;
+  gap: 0.125rem;
+  padding: 0.625rem 0.25rem 0.5rem;
+  border-radius: 0.75rem;
+  background: var(--ac-tache-sauge);
+}
+.ac-ev-chiffre {
+  display: block;
+  overflow: hidden;
+  font-family: var(--ac-titre);
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+}
+.ac-ev-chiffre > span {
+  display: inline-block;
+}
+.ac-ev-unite {
+  font-size: 0.75rem;
+  color: var(--ac-texte-doux);
+}
+.ac-ev-quand {
+  margin-top: 0.75rem;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--ac-texte-doux);
+}
+.ac-ev-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+/* Inscriptions pas encore ouvertes : une pastille en pointillés, pas un lien */
+.ac-ev-bientot {
+  border: 1.6px dashed var(--ac-texte-doux);
+  color: var(--ac-texte-doux);
+  font-weight: 500;
+}
+.ac-ev-carte-vide .ac-ephemeride {
+  position: relative;
+  top: 0;
+  left: 0;
+  margin-bottom: 1.5rem;
+}
+/* Éditions passées : tickets, bord gauche perforé, date en colonne derrière un pointillé */
+.ac-ev-passes-titre {
+  font-family: var(--ac-titre);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+.ac-ev-tickets {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.ac-ev-ticket {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 7rem;
+  padding: 1rem 1rem 1rem 1.375rem;
+  border-radius: 1rem;
+  filter: drop-shadow(0 10px 14px rgb(31 45 39 / 0.12));
+}
+.dark .ac-ev-ticket {
+  filter: none;
+}
+.ac-ev-ticket::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border: 1px solid var(--ac-carte-bord);
+  border-radius: inherit;
+  background: var(--ac-carte);
+  -webkit-mask: radial-gradient(circle 0.375rem at 0 50%, transparent 96%, #000) 0 0 / 100% 1.25rem repeat-y;
+  mask: radial-gradient(circle 0.375rem at 0 50%, transparent 96%, #000) 0 0 / 100% 1.25rem repeat-y;
+}
+.ac-ev-ticket:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+.ac-ev-ticket-date {
+  display: grid;
+  align-self: stretch;
+  align-content: center;
+  justify-items: center;
+  min-width: 3.25rem;
+  padding-right: 0.75rem;
+  border-right: 2px dotted var(--ac-bord);
+  font-family: var(--ac-libelle);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ac-texte-doux);
+}
+.ac-ev-ticket-date b {
+  font-family: var(--ac-titre);
+  font-size: 1.875rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0;
+  color: var(--ac-texte);
+}
+.ac-ev-ticket-corps {
+  display: grid;
+  justify-items: start;
+  gap: 0.25rem;
+  min-width: 0;
+}
+.ac-ev-ticket-titre {
+  font-weight: 600;
+  line-height: 1.35;
+}
+.ac-ev-ticket-lieu {
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--ac-texte-doux);
+}
+.ac-ev-ticket .ac-fleche {
+  margin-top: 0.25rem;
+  color: var(--ac-accent);
+}
+.ac-ev-ticket-photo {
+  width: 3.25rem;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--ac-tache-sauge);
+}
+.ac-ev-tous {
+  margin-top: 2.5rem;
+}
+@media (min-width: 480px) {
+  .ac-ev-ticket {
+    gap: 1rem;
+    padding-left: 1.625rem;
+  }
+  .ac-ev-ticket-photo {
+    width: 4.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .ac-ev-grille {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    gap: 3rem;
+  }
+  .ac-ev-grille-seule {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  }
+  .ac-ev-photo {
+    aspect-ratio: 16 / 9;
+    border-radius: 1rem 6rem 1rem 1rem;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  /* La carte se pose, puis sa page d'éphéméride se rabat ; les tickets arrivent de la droite, l'un après l'autre */
+  .ac-attend :is(.ac-ev-carte, .ac-ev-passes-titre, .ac-ev-ticket-place) {
+    opacity: 0;
+  }
+  .ac-vue .ac-ev-carte {
+    animation: ac-pose 0.8s var(--ac-courbe) backwards;
+  }
+  .ac-vue .ac-ephemeride {
+    animation: ac-page 0.7s cubic-bezier(0.3, 1.25, 0.5, 1) 0.55s backwards;
+  }
+  .ac-vue .ac-ev-passes-titre {
+    animation: ac-fondu 0.6s ease-out 0.25s backwards;
+  }
+  .ac-vue .ac-ev-ticket-place {
+    animation: ac-arrive 0.7s var(--ac-courbe) calc(0.35s + var(--rang, 0) * 120ms) backwards;
+  }
+  /* Le nouveau chiffre tombe (comme sur la fiche : keyframes « tombe », src/styles/events-motion.css) */
+  .ac-ev-chiffre > span {
+    animation: ac-chiffre-tombe 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .ac-ev-ticket {
+    transition: translate 0.3s var(--ac-courbe);
+  }
+  .ac-ev-ticket:hover {
+    translate: 6px 0;
+  }
+  .ac-ev-ticket:hover .ac-fleche {
+    translate: 5px 0;
+  }
+}
+@keyframes ac-pose {
+  from {
+    opacity: 0;
+    translate: 0 24px;
+  }
+}
+@keyframes ac-page {
+  from {
+    transform: perspective(30rem) rotateX(-90deg);
+  }
+  to {
+    transform: perspective(30rem) rotateX(0deg);
+  }
+}
+@keyframes ac-arrive {
+  from {
+    opacity: 0;
+    translate: 40px 0;
+  }
+}
+@keyframes ac-chiffre-tombe {
+  from {
+    opacity: 0;
+    translate: 0 -60%;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
 }
 
 /* --- Sections (lot 11.2) : entrées jouées une fois, quand le bloc arrive à l'écran (Entree.tsx) --- */

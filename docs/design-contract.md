@@ -1080,6 +1080,22 @@ Lot 11.5 : `content-visibility: auto` retiré, téléphone compris (voir §16.6,
 | Sombre : titre (brume voilée), texte (lichen), surtitre et lien (soleil) sur canopée | 11,76:1, 6,82:1, 7,56:1 |
 | Sombre : icône (soleil) sur pastille filet-nuit | 5,82:1 |
 
+**Événements** (`Evenements.tsx`, `CarteEvenement.tsx`) : sur brume, après la bande nuit de l'accordéon. Données : `src/data/events.ts` par `src/lib/events.ts` (rien n'est recopié). Au plus trois rendez-vous : le prochain à venir en grande carte (environ 60 %), puis les plus récents des passés en tickets (environ 40 %) ; sur téléphone, la carte puis les tickets.
+- Grande carte : photo du hero de l'événement (coin feuille en haut à droite), page d'éphéméride soleil en surimpression (bandeau nuit avec le jour, numéro en Jost, mois), titre, lieu, compte à rebours de 4 cases, « S'inscrire » et « Voir l'événement ». Date inconnue : « Date annoncée très bientôt », cases « – », éphéméride « À venir » et « ? » ; inscription inconnue : une pastille en pointillés « Inscriptions annoncées très bientôt », pas un lien. Jamais un faux chiffre.
+- Aucun événement à venir : « Le prochain rendez-vous sera annoncé très bientôt » et un lien vers Contact, sans compte à rebours.
+- Tickets (le motif du projet phare) : bord gauche perforé (masque CSS sur un pseudo-élément, pour que l'anneau de focus reste entier), date en colonne derrière un pointillé, titre, lieu, flèche, photo ronde. Nom du lien : « {titre}, voir l'événement ».
+- Mouvement (CSS, à l'entrée du bloc) : la carte se pose (fondu et 24 px), puis la page d'éphéméride se rabat (rotateX de −90° à 0 autour de son bord haut, 0,7 s) ; les tickets arrivent de la droite (fondu et 40 px, 120 ms d'écart) ; au survol, un ticket glisse de 6 px et sa flèche suit. Les chiffres tombent comme sur la fiche ; l'heure n'avance plus hors de l'écran, onglet caché et avec le bouton pause. Mouvement réduit : tout est en place, les chiffres changent sans tomber.
+- Lecteurs d'écran : éphéméride et chiffres masqués ; la date est écrite en toutes lettres sous les cases (« L'événement commence le … à … , heure de Douala ») ou « Date annoncée très bientôt ».
+- Photos : en ligne, la grande carte montre B44 (Road to Europe) : la carte Environnement des domaines passe de B44 à B41, le même lac de cratère.
+
+| Usage | Ratio |
+|---|---|
+| Éphéméride : numéro et mois (encre) sur soleil ; jour (soleil) sur bandeau nuit | 7,84:1 ; 6,64:1 |
+| Clair : titre (encre) sur papier ; chiffres (encre) et unités (encre douce) sur case sauge | 14,35:1 ; 11,90:1 et 6,05:1 |
+| Clair : lieu, phrase de date, pastille (encre douce) et icônes (forêt) sur papier | 7,30:1 ; 9,15:1 |
+| Sombre : titre (brume voilée) et lieu (lichen) sur canopée ; chiffres et unités sur case sous-bois | 11,76:1 et 6,82:1 ; 13,45:1 et 7,80:1 |
+| Sombre : icônes, flèches et lien (soleil) sur canopée et sur humus | 7,56:1 ; 9,66:1 |
+
 ## Annexe A : tableau des contrastes
 
 Calcul WCAG 2.x sur fond uni ; ratios tronqués à une décimale. Seuils : 4,5:1 pour le texte, 3:1 pour les composants et le fil.

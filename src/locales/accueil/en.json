@@ -176,5 +176,14 @@
       "towards Europe"
     ],
     "lien": "See our impact"
+  },
+  "evenements": {
+    "titre": [
+      "Let’s meet"
+    ],
+    "intro": "Days to meet the foundation, its teams and partners.",
+    "lien": "All events",
+    "bientot": "The next event will be announced very soon",
+    "voir": "{{titre}}, see the event"
   }
 }

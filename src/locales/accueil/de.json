@@ -184,5 +184,14 @@
       "offen für Europa"
     ],
     "lien": "Unsere Wirkung ansehen"
+  },
+  "evenements": {
+    "titre": [
+      "Lernen wir uns kennen"
+    ],
+    "intro": "Tage, an denen Sie die Stiftung, ihre Teams und ihre Partner kennenlernen können.",
+    "lien": "Alle Veranstaltungen",
+    "bientot": "Der nächste Termin wird in Kürze bekannt gegeben",
+    "voir": "{{titre}}, zur Veranstaltung"
   }
 }
