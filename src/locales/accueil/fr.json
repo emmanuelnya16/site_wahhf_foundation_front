@@ -135,5 +135,17 @@
       "s-engager": "S’engager",
       "grandir": "Grandir"
     }
+  },
+  "film": {
+    "surtitre": "En vidéo",
+    "titre": "Le film de la fondation",
+    "phrase": "Une minute pour découvrir la WAHHF Foundation, ses jeunes et ses actions au Cameroun.",
+    "video": "Extrait du film WAHHF Foundation, sans le son",
+    "pause": "Pause",
+    "lecture": "Lecture",
+    "lireExtrait": "Lire l’extrait, sans le son",
+    "son": "Regarder avec le son",
+    "film": "Regarder le film",
+    "duree": "1 min 10"
   }
 }

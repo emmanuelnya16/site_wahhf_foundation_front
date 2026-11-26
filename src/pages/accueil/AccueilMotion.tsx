@@ -39,7 +39,8 @@ export default function AccueilMotion({ scope, paused }: { scope: RefObject<HTML
           });
           const trace = section.querySelector<SVGPathElement>('.ac-fil-trace');
           if (trace) {
-            fil = gsap.fromTo(trace, { strokeDashoffset: 1 }, { strokeDashoffset: 0, ease: 'none', duration: FIL[1] - FIL[0] });
+            // Longueur ramenée à 1 000 (QuiSommesNous) : GSAP arrondit au pixel ; à 1, le fil sautait d'un coup (lot 11.9)
+            fil = gsap.fromTo(trace, { strokeDashoffset: 1000 }, { strokeDashoffset: 0, ease: 'none', duration: FIL[1] - FIL[0] });
             tl.add(fil, FIL[0]);
           }
           if (tl.scrollTrigger) triggers.push(tl.scrollTrigger);

@@ -205,5 +205,17 @@
       "s-engager": "Get involved",
       "grandir": "Grow"
     }
+  },
+  "film": {
+    "surtitre": "In video",
+    "titre": "The foundation’s film",
+    "phrase": "One minute to discover WAHHF Foundation, its young people and its work in Cameroon.",
+    "video": "Excerpt from the WAHHF Foundation film, without sound",
+    "pause": "Pause",
+    "lecture": "Play",
+    "lireExtrait": "Play the excerpt, without sound",
+    "son": "Watch with sound",
+    "film": "Watch the film",
+    "duree": "1 min 10 s"
   }
 }

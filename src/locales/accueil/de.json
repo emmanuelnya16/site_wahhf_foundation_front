@@ -213,5 +213,17 @@
       "s-engager": "Engagieren",
       "grandir": "Wachsen"
     }
+  },
+  "film": {
+    "surtitre": "Im Video",
+    "titre": "Der Film der Stiftung",
+    "phrase": "Eine Minute, um die WAHHF Foundation, ihre jungen Menschen und ihre Arbeit in Kamerun kennenzulernen.",
+    "video": "Ausschnitt aus dem Film der WAHHF Foundation, ohne Ton",
+    "pause": "Pause",
+    "lecture": "Abspielen",
+    "lireExtrait": "Ausschnitt abspielen, ohne Ton",
+    "son": "Mit Ton ansehen",
+    "film": "Film ansehen",
+    "duree": "1:10 Min."
   }
 }

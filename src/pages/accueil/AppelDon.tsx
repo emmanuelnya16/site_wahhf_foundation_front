@@ -25,7 +25,7 @@ const COEUR =
 export const lienDon = (slug?: string) => (slug ? `/faire-un-don?affectation=${slug}` : '/faire-un-don');
 
 /**
- * 10. Appel au don (lot 11.7), dernière section : un grand bloc cœur. Seulement des faits déjà sur le site : le titre de la
+ * 11. Appel au don (lot 11.7), dernière section : un grand bloc cœur. Seulement des faits déjà sur le site : le titre de la
  * section « Agir » de /, les six domaines, l'affectation au choix ou là où le besoin est le plus urgent (Faire un don),
  * le soutien du groupe IROKO (Qui sommes-nous). Aucun montant, aucune équivalence, aucun chiffre d'impact (question 206).
  */

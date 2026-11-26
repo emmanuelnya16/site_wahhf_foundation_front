@@ -800,7 +800,7 @@
     fill: var(--ac-fil);
   }
   .ac-fil-trace {
-    stroke-dasharray: 1;
+    stroke-dasharray: 1000;
   }
 }
 
@@ -2915,7 +2915,226 @@
   }
 }
 
-/* --- 10. Appel au don (lot 11.7) : sur sauge (les événements sont sur brume), un grand bloc cœur, la seule section de
+/* --- 10. Le film (lot 11.9), sur nuit entre les événements (brume) et l'appel au don (sauge). Cadre ouvert par défaut
+   (mouvement réduit, pause, économie de données) ; au défilement (.is-scrub), la scène est collée (sticky), la carte
+   s'ouvre en plein écran par clip-path (FilmMotion). La carte est posée en CSS sur un repère (.ac-film-place) que la
+   timeline mesure : une seule géométrie. --- */
+.ac-film {
+  position: relative;
+  padding-block: var(--section-space);
+  background: var(--color-nuit);
+  color: var(--color-brume);
+}
+.ac-film .ac-surtitre {
+  color: var(--color-soleil);
+}
+.ac-film .ac-paragraphe {
+  max-width: 34rem;
+  color: var(--color-brume-douce);
+}
+.ac-film-entete {
+  position: relative;
+}
+.ac-film-cadre {
+  display: grid;
+  width: min(100% - 2 * var(--gutter), var(--container-page));
+  margin: 2.5rem auto 0;
+}
+.ac-film-media {
+  position: relative;
+  grid-area: 1 / 1;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 2.5rem;
+  background: var(--color-filet-nuit);
+}
+.ac-film-media :is(picture, img, video) {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* Gros bouton Lecture, au centre du cadre ouvert */
+.ac-film-grand {
+  z-index: 1;
+  grid-area: 1 / 1;
+  place-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 3.75rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-soleil);
+  box-shadow: 0 16px 34px -18px color-mix(in srgb, var(--color-humus) 80%, transparent);
+  color: var(--color-encre);
+  font-family: var(--ac-titre);
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+.ac-film-grand svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.ac-film-barre {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+  margin-top: 1.25rem;
+}
+.ac-film-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.5rem 1.125rem;
+  border: 1.5px solid color-mix(in srgb, var(--color-brume) 45%, transparent);
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--color-nuit) 72%, transparent);
+  color: var(--color-brume);
+  font-weight: 600;
+  line-height: 1.2;
+}
+.ac-film-btn svg {
+  flex: none;
+  width: 1.125rem;
+  height: 1.125rem;
+}
+.ac-film-btn-son {
+  border-color: var(--color-soleil);
+  background: var(--color-soleil);
+  color: var(--color-encre);
+}
+:is(.ac-film-btn, .ac-film-grand):focus-visible {
+  outline: 3px solid var(--color-soleil);
+  outline-offset: 3px;
+}
+.ac-film-duree {
+  font-family: var(--ac-libelle);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--color-brume-douce);
+}
+@media (hover: hover) {
+  .ac-film-btn:hover {
+    border-color: var(--color-brume);
+  }
+  .ac-film-btn-son:hover {
+    border-color: var(--color-soleil-pale);
+    background: var(--color-soleil-pale);
+  }
+}
+/* Au défilement : la section est haute, la scène collée ; la carte est posée sur son repère */
+.ac-film.is-scrub {
+  height: 260svh;
+  padding-block: 0;
+}
+.ac-film.is-scrub .ac-film-scene {
+  --film-entete: 15rem;
+  --film-bas: 1.5rem;
+  --film-l: min(62cqw, (100svh - var(--film-entete) - var(--film-bas)) * 16 / 9);
+  --film-h: calc(var(--film-l) * 9 / 16);
+  --film-y: calc(var(--film-entete) + (100svh - var(--film-entete) - var(--film-bas) - var(--film-h)) / 2);
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: clip;
+  container-type: inline-size;
+}
+.ac-film.is-scrub .ac-film-entete {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  padding-top: calc(var(--header-height) + 1.75rem);
+}
+.ac-film.is-scrub :is(.ac-film-place, .ac-film-ombre) {
+  position: absolute;
+  top: var(--film-y);
+  left: calc((100cqw - var(--film-l)) / 2);
+  width: var(--film-l);
+  height: var(--film-h);
+  pointer-events: none;
+}
+.ac-film-place {
+  visibility: hidden;
+}
+.ac-film-ombre {
+  border-radius: 2.5rem;
+  box-shadow: 0 34px 70px -34px color-mix(in srgb, var(--color-humus) 90%, transparent);
+  rotate: 2deg;
+}
+/* Le fil et le titre restent sous le cadre : en grandissant, il les recouvre */
+.ac-film-fil {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.ac-film-fil path {
+  fill: none;
+  stroke: var(--color-feuille);
+  stroke-width: 2;
+  stroke-linecap: round;
+  /* Longueur ramenée à 1 000 : GSAP arrondit au pixel, le tracé avance par millièmes */
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+}
+.ac-film.is-scrub .ac-film-cadre {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: block;
+  width: auto;
+  margin: 0;
+  clip-path: inset(var(--film-y) calc((100cqw - var(--film-l)) / 2) calc(100svh - var(--film-y) - var(--film-h)) round 2.5rem);
+  transform: rotate(2deg);
+}
+.ac-film.is-scrub .ac-film-media {
+  position: absolute;
+  inset: 0;
+  aspect-ratio: auto;
+  border-radius: 0;
+  /* Comme au départ de la timeline : l'image centrée sur la carte, agrandie de 8 % */
+  transform: translateY(calc(var(--film-y) + var(--film-h) / 2 - 50svh)) scale(1.08);
+}
+/* La barre, en bas du cadre plein écran : elle paraît sur le plateau (FilmMotion) */
+.ac-film.is-scrub .ac-film-barre {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  justify-content: center;
+  margin: 0;
+  padding: 5rem var(--gutter) max(1.75rem, env(safe-area-inset-bottom));
+  background: linear-gradient(to top, color-mix(in srgb, var(--color-nuit) 85%, transparent), transparent);
+  opacity: 0;
+}
+.ac-film.is-actif .ac-film-cadre {
+  will-change: transform, clip-path;
+}
+.ac-film.is-actif .ac-film-media {
+  will-change: transform;
+}
+@media (max-width: 767px) {
+  .ac-film.is-scrub {
+    height: 200svh;
+  }
+  .ac-film.is-scrub .ac-film-scene {
+    --film-entete: 17rem;
+    --film-l: min(86cqw, (100svh - var(--film-entete) - var(--film-bas)) * 4 / 5);
+    --film-h: calc(var(--film-l) * 5 / 4);
+  }
+}
+
+/* --- 11. Appel au don (lot 11.7) : sur sauge (les événements sont sur brume), un grand bloc cœur, la seule section de
    la page dans la couleur du don. Le fil du site y dessine un cœur ; la photo est en goutte. Texte blanc partout :
    5,88:1 sur cœur ; aucun blanc adouci. --- */
 .ac-don {

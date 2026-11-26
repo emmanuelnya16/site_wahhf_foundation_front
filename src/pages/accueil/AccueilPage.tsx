@@ -19,6 +19,7 @@ import Regions from './Regions';
 import AccueilEnImages from './AccueilEnImages';
 import Evenements from './Evenements';
 import AppelDon from './AppelDon';
+import Film from './Film';
 
 /** Parallaxes et fil (GSAP), chargés après le premier affichage, seulement là où ils existent (MQ.computer, src/lib/gsap.ts) */
 const AccueilMotion = lazy(() => import('./AccueilMotion'));
@@ -26,8 +27,8 @@ const ORDINATEUR = '(min-width: 1024px) and (hover: hover) and (pointer: fine) a
 
 /**
  * Nouvelle page « Accueil » (/accueil), lots 11.1 à 11.6 : construite à côté de l'accueil actuel (/), qui ne change pas.
- * Dix sections : hero, qui sommes-nous en bref, chiffres, domaines, projet phare, parcours, régions, en images
- * (variante de l'accordéon de /, mêmes données), événements, appel au don. Guide : docs/page-accueil.md.
+ * Onze sections : hero, qui sommes-nous en bref, chiffres, domaines, projet phare, parcours, régions, en images
+ * (variante de l'accordéon de /, mêmes données), événements, le film, appel au don. Guide : docs/page-accueil.md.
  */
 export default function AccueilPage() {
   const { t } = useTranslation();
@@ -54,6 +55,7 @@ export default function AccueilPage() {
       {/* Apprendre, cultiver, grandir : variante propre à /accueil (lot 11.8), mêmes données que l'accordéon de / */}
       <AccueilEnImages />
       <Evenements paused={loops.paused} />
+      <Film paused={loops.paused} />
       <AppelDon />
       {ordinateur && (
         <AfterFirstDisplay>

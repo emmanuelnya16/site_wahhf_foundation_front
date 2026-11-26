@@ -52,7 +52,7 @@ export default function QuiSommesNous() {
           <svg className="ac-fil" viewBox="0 0 680 260" fill="none" aria-hidden="true" focusable="false">
             <defs>
               <mask id="ac-fil-masque" maskUnits="userSpaceOnUse" x="0" y="0" width="680" height="260">
-                <path className="ac-fil-trace" d={FIL} pathLength={1} stroke="#fff" strokeWidth={14} strokeLinecap="round" />
+                <path className="ac-fil-trace" d={FIL} pathLength={1000} stroke="#fff" strokeWidth={14} strokeLinecap="round" />
               </mask>
             </defs>
             <g mask="url(#ac-fil-masque)">
