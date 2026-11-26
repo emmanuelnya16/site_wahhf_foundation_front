@@ -331,9 +331,9 @@
  */
 :root {
   color-scheme: light;
-  --header-offset: 6rem;
-  /* Hauteur réelle de l'en-tête fixe (barre + filet de 1 px) : 65 px, 73 px dès 640 px. */
-  --header-height: 4.0625rem;
+  --header-offset: 6.5rem;
+  /* Hauteur réelle de l'en-tête fixe (barre + filet de 1 px) : 69 px, 81 px dès 640 px (logo agrandi, lot 12). */
+  --header-height: 4.3125rem;
   /* Colonne de texte du hero (contrat §6) : le voile reste dense jusqu'à sa fin. */
   --hero-text-width: 34rem;
   --body-size: 1.0625rem; /* 17 px ; 18 px dès 768 px (plus bas) */
@@ -498,7 +498,7 @@
 
 @media (min-width: 40rem) {
   :root {
-    --header-height: 4.5625rem;
+    --header-height: 5.0625rem;
   }
 }
 @media (min-width: 64rem) {

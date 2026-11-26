@@ -24,8 +24,9 @@ import { localized, localizedList } from '../lib/localize';
  */
 // Étape a (lot 7.9, 20 novembre 2026) : 1,25 rem entre deux entrées du menu (8 + 4 + 8 px), au lieu de 1,5 rem
 // Lot 11.1 : entrées à 16 px (« pas de texte sous 16 px » dans l'en-tête), 8 entrées depuis l'ajout d'Accueil
+// Lot 12 : logo agrandi ; pour garder la marge en allemand, 6 px de chaque côté d'une entrée au lieu de 8 (texte à 16 px)
 const NAV_LINK =
-  'inline-flex items-center gap-1 min-h-11 px-2 text-base text-text whitespace-nowrap underline-offset-[0.4em] decoration-2 transition-colors duration-(--dur-fast) hover:text-link hover:underline cursor-pointer';
+  'inline-flex items-center gap-1 min-h-11 px-1.5 text-base text-text whitespace-nowrap underline-offset-[0.4em] decoration-2 transition-colors duration-(--dur-fast) hover:text-link hover:underline cursor-pointer';
 const NAV_LINK_CURRENT = 'underline';
 const ICON_BUTTON =
   'w-11 h-11 shrink-0 rounded-pill inline-flex items-center justify-center text-text hover:bg-surface-section transition-colors duration-(--dur-fast) cursor-pointer';
@@ -261,7 +262,8 @@ export default function Navbar() {
           scrolled && 'shadow-overlay dark:border-border-input',
         )}
       >
-        <div ref={megaRef} className="container-page flex h-16 sm:h-18 items-center justify-between gap-3">
+        {/* Lot 12 : barre de 68 px (80 px dès 640 px) pour le logo agrandi ; --header-height suit (index.css) */}
+        <div ref={megaRef} className="container-page flex h-17 sm:h-20 items-center justify-between gap-3">
           {/* Gauche : Logo WAHHF */}
           <Link
             to="/"
@@ -271,9 +273,9 @@ export default function Navbar() {
             <img
               src={WAHHF_LOGO_URL}
               alt={t('ui.logoAlt')}
-              width={48}
-              height={48}
-              className="w-10 h-10 sm:w-11 sm:h-11 object-contain rounded-pill bg-white p-0.5"
+              width={60}
+              height={60}
+              className="w-13 h-13 sm:w-15 sm:h-15 object-contain rounded-pill bg-white p-0.5"
             />
             {/* Étape d (lot 7.9, votre choix du 20 novembre 2026) : le menu complet ne laisse pas la place du nom (le
                 conteneur fait 1 152 px à toutes ces largeurs) : logo seul dès 1 280 px. Lot 11.1 : en anglais aussi, avec 8
@@ -584,7 +586,9 @@ export default function Navbar() {
               <img
                 src={WAHHF_LOGO_URL}
                 alt={t('ui.logoAlt')}
-                className="w-11 h-11 object-contain rounded-pill bg-white p-0.5"
+                width={52}
+                height={52}
+                className="w-13 h-13 object-contain rounded-pill bg-white p-0.5"
               />
               <div>
                 <p className="text-body font-bold text-text-on-inverse">WAHHF Foundation</p>
