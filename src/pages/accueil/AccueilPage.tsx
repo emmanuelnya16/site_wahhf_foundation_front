@@ -17,6 +17,7 @@ import Chiffres from './Chiffres';
 import DomainesParcours from './DomainesParcours';
 import ProjetPhare from './ProjetPhare';
 import Parcours from './Parcours';
+import Regions from './Regions';
 
 /** Parallaxes et fil (GSAP), chargés après le premier affichage, seulement là où ils existent (MQ.computer, src/lib/gsap.ts) */
 const AccueilMotion = lazy(() => import('./AccueilMotion'));
@@ -52,7 +53,7 @@ export default function AccueilPage() {
       <DomainesParcours paused={loops.paused} />
       <ProjetPhare paused={loops.paused} />
       <Parcours />
-      {/* 7. Les 10 régions : section existante de Notre impact (à venir) */}
+      <Regions />
       {/* 8. Apprendre, cultiver, grandir : section existante (à venir) */}
       {/* 9. Quelques événements (à venir) */}
       {ordinateur && (

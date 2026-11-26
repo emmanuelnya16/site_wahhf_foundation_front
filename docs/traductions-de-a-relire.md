@@ -1,8 +1,8 @@
 # Traductions allemandes à relire
 
-Généré par `npm run i18n:relire` (scripts/traductions-a-relire.mjs) le 2026-11-25. Ne pas modifier à la main : corriger les fichiers de langue, puis relancer.
+Généré par `npm run i18n:relire` (scripts/traductions-a-relire.mjs) le 2026-11-26. Ne pas modifier à la main : corriger les fichiers de langue, puis relancer.
 
-Chaque texte allemand du site, face à son français. **Un astérisque (\*) marque les 166 textes dont le traducteur n'était pas sûr** (sens du français ambigu, terme juridique, nom d'institution, ton) : à relire en priorité. 1832 textes allemands au total.
+Chaque texte allemand du site, face à son français. **Un astérisque (\*) marque les 166 textes dont le traducteur n'était pas sûr** (sens du français ambigu, terme juridique, nom d'institution, ton) : à relire en priorité. 1838 textes allemands au total.
 
 - Ton choisi : vouvoiement (« Sie »), simple et chaleureux, pas du mot à mot.
 - Ne sont pas traduits : les noms propres et officiels (WAHHF Foundation, IROKO, Albatros Hotel, Ausbildung, Studienkolleg…), les adresses, les liens.
@@ -705,7 +705,7 @@ Fichier : `src/locales/accompagnement/de.json` (309 textes, dont 19 à relire).
 
 ## accueil
 
-Fichier : `src/locales/accueil/de.json` (91 textes, dont 9 à relire).
+Fichier : `src/locales/accueil/de.json` (96 textes, dont 9 à relire).
 
 | | Clé | Français | Allemand |
 |---|---|---|---|
@@ -800,6 +800,11 @@ Fichier : `src/locales/accueil/de.json` (91 textes, dont 9 à relire).
 |  | `contenu.temoignages.marie.domaine` | Jeunesse & entrepreneuriat | Jugend & Unternehmertum |
 |  | `contenu.temoignages.marie.resume` | De l’agriculture urbaine à la création de sa micro-entreprise, Marie a suivi le programme de mentorat pendant 12 mois. | Von der städtischen Landwirtschaft bis zur Gründung ihres Kleinbetriebs hat Marie 12 Monate lang am Mentoring-Programm teilgenommen. |
 |  | `contenu.temoignages.marie.resultat` | Entreprise lancée, 3 emplois créés | Betrieb gegründet, 3 Arbeitsplätze geschaffen |
+|  | `regions.surtitre` | Notre présence | Unsere Präsenz |
+|  | `regions.titre[0]` | Basée à Yaoundé | In Yaoundé und |
+|  | `regions.titre[1]` | et Douala, tournée | Douala zu Hause, |
+|  | `regions.titre[2]` | vers l’Europe | offen für Europa |
+|  | `regions.lien` | Voir notre impact | Unsere Wirkung ansehen |
 
 ## actualites
 
@@ -935,7 +940,7 @@ Fichier : `src/locales/agir/de.json` (79 textes, dont 6 à relire).
 
 ## contact-page
 
-Fichier : `src/locales/contact-page/de.json` (40 textes, dont 4 à relire).
+Fichier : `src/locales/contact-page/de.json` (41 textes, dont 4 à relire).
 
 | | Clé | Français | Allemand |
 |---|---|---|---|
@@ -965,6 +970,7 @@ Fichier : `src/locales/contact-page/de.json` (40 textes, dont 4 à relire).
 |  | `motifs.benevole` | Je souhaite devenir bénévole | Ich möchte mich ehrenamtlich engagieren |
 |  | `motifs.partenaire` | Partenaire ou institution | Partner oder Institution |
 |  | `motifs.presse` | Presse et médias | Presse und Medien |
+|  | `motifs.parcours` | Partager mon parcours | Meine Geschichte teilen |
 |  | `motifs.autre` | Autre demande | Anderes Anliegen |
 |  | `errors.motif` | Choisissez le motif de votre message. | Wählen Sie das Anliegen Ihrer Nachricht. |
 |  | `errors.name` | Saisissez votre nom complet ou celui de votre structure. | Geben Sie Ihren vollständigen Namen oder den Namen Ihrer Organisation ein. |

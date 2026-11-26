@@ -1008,6 +1008,9 @@
 .ac-parcours {
   --ac-hauteur: 890px;
 }
+.ac-regions {
+  --ac-hauteur: 1230px;
+}
 /* Le temps d'aller à une ancre : tout est dessiné (ancre.ts) */
 .ac-tout-dessine :is(.ac-qsn, .ac-chiffres, .ac-domaines, .ac-projet, .ac-parcours, .ac-regions, .ac-accordeon) {
   content-visibility: visible;
@@ -1027,6 +1030,9 @@
   }
   .ac-parcours {
     --ac-hauteur: 600px;
+  }
+  .ac-regions {
+    --ac-hauteur: 1070px;
   }
 }
 
@@ -2016,6 +2022,32 @@
   }
   .ac-paquet-place {
     justify-self: end;
+  }
+}
+
+/* --- 7. Les 10 régions (lot 11.5) : la carte du Cameroun de Notre impact, sur sauge (le fond de sa carte d'origine) --- */
+.ac-regions {
+  padding-block: var(--section-space);
+  background: var(--ac-tache-sauge);
+}
+.ac-regions-grille {
+  display: grid;
+  gap: 3rem;
+}
+.ac-regions-texte {
+  display: grid;
+  justify-items: start;
+  align-content: center;
+  min-width: 0;
+}
+.ac-regions-carte {
+  min-width: 0;
+}
+@media (min-width: 1024px) {
+  .ac-regions-grille {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr);
+    gap: 5rem;
+    align-items: center;
   }
 }
 

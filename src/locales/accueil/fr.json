@@ -97,5 +97,14 @@
       ],
       "texte": "Vous avez suivi un programme de la fondation ? Racontez-nous votre parcours : avec votre accord, il pourra encourager d’autres jeunes."
     }
+  },
+  "regions": {
+    "surtitre": "Notre présence",
+    "titre": [
+      "Basée à Yaoundé",
+      "et Douala, tournée",
+      "vers l’Europe"
+    ],
+    "lien": "Voir notre impact"
   }
 }

@@ -167,5 +167,14 @@
         "resultat": "Business launched, 3 jobs created"
       }
     }
+  },
+  "regions": {
+    "surtitre": "Our presence",
+    "titre": [
+      "Based in Yaoundé",
+      "and Douala, looking",
+      "towards Europe"
+    ],
+    "lien": "See our impact"
   }
 }

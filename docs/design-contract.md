@@ -1051,6 +1051,12 @@ Lot 11.5 : `content-visibility: auto` sur toutes les sections sous le premier é
 | Parcours, sombre : citation et nom, résumé, domaine (soleil) sur canopée | 11,75:1, 6,82:1, 7,55:1 |
 | Flèches et indicateur : clair sur brume, sombre sur humus | 13,46:1, 15,03:1 |
 
+### 16.6 Sections « Les 10 régions » et « Apprendre, cultiver, grandir » (lot 11.5)
+
+*Votre brief du 26 novembre 2026. Code : `Regions.tsx`, `CarteRegions.tsx`.*
+
+**Les 10 régions** : fond sauge (sous-bois en sombre), le fond de la carte d'origine. À gauche, l'en-tête propre à l'accueil (surtitre, titre révélé ligne par ligne, la première phrase du sous-titre de Notre impact dans chaque langue, lien vers /notre-impact) ; à droite, la carte « Présence terrain au Cameroun » de Notre impact, en variante (`CarteRegions.tsx`) : mêmes éléments, mêmes textes, lignes provisoires masquées, sans la carte de l'Europe ni la liste des pays. `PresenceSection.tsx` ne change pas. La cascade des régions reste celle de `MapMotion` ; un repère caché tient la place de la mini-carte d'Europe qu'il attend. Contrastes : les mêmes paires que le Projet phare (§16.5).
+
 ## Annexe A : tableau des contrastes
 
 Calcul WCAG 2.x sur fond uni ; ratios tronqués à une décimale. Seuils : 4,5:1 pour le texte, 3:1 pour les composants et le fil.

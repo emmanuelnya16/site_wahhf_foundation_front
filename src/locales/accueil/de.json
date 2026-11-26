@@ -175,5 +175,14 @@
         "resultat": "Betrieb gegründet, 3 Arbeitsplätze geschaffen"
       }
     }
+  },
+  "regions": {
+    "surtitre": "Unsere Präsenz",
+    "titre": [
+      "In Yaoundé und",
+      "Douala zu Hause,",
+      "offen für Europa"
+    ],
+    "lien": "Unsere Wirkung ansehen"
   }
 }
