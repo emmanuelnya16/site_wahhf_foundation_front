@@ -2,7 +2,7 @@
 
 Généré par `npm run i18n:relire` (scripts/traductions-a-relire.mjs) le 2026-11-26. Ne pas modifier à la main : corriger les fichiers de langue, puis relancer.
 
-Chaque texte allemand du site, face à son français. **Un astérisque (\*) marque les 166 textes dont le traducteur n'était pas sûr** (sens du français ambigu, terme juridique, nom d'institution, ton) : à relire en priorité. 1849 textes allemands au total.
+Chaque texte allemand du site, face à son français. **Un astérisque (\*) marque les 166 textes dont le traducteur n'était pas sûr** (sens du français ambigu, terme juridique, nom d'institution, ton) : à relire en priorité. 1855 textes allemands au total.
 
 - Ton choisi : vouvoiement (« Sie »), simple et chaleureux, pas du mot à mot.
 - Ne sont pas traduits : les noms propres et officiels (WAHHF Foundation, IROKO, Albatros Hotel, Ausbildung, Studienkolleg…), les adresses, les liens.
@@ -705,7 +705,7 @@ Fichier : `src/locales/accompagnement/de.json` (309 textes, dont 19 à relire).
 
 ## accueil
 
-Fichier : `src/locales/accueil/de.json` (107 textes, dont 9 à relire).
+Fichier : `src/locales/accueil/de.json` (113 textes, dont 9 à relire).
 
 | | Clé | Français | Allemand |
 |---|---|---|---|
@@ -816,6 +816,12 @@ Fichier : `src/locales/accueil/de.json` (107 textes, dont 9 à relire).
 |  | `don.texte` | Votre don soutient nos actions au Cameroun dans nos six domaines : éducation, santé, entrepreneuriat des jeunes, environnement, droits et inclusion, mobilité et langues. Vous choisissez le domaine que vous voulez soutenir, ou vous laissez la fondation l’affecter là où le besoin est le plus urgent. | Ihre Spende unterstützt unsere Arbeit in Kamerun in unseren sechs Bereichen: Bildung, Gesundheit, Unternehmertum junger Menschen, Umwelt, Rechte und Teilhabe, Mobilität und Sprachen. Sie wählen den Bereich, den Sie unterstützen möchten, oder Sie überlassen es der Stiftung, Ihre Spende dort einzusetzen, wo der Bedarf am dringendsten ist. |
 |  | `don.confiance` | Le groupe IROKO couvre nos frais de fonctionnement et d’enseignement. | Die IROKO-Gruppe deckt unsere Betriebs- und Unterrichtskosten. |
 |  | `don.domaine` | Soutenir ce domaine : {{domaine}} | Diesen Bereich unterstützen: {{domaine}} |
+|  | `images.surtitre` | En images | In Bildern |
+|  | `images.courts.apprendre` | Apprendre | Lernen |
+|  | `images.courts.chanter-ensemble` | Chanter | Singen |
+|  | `images.courts.cultiver` | Cultiver | Anbauen |
+|  | `images.courts.s-engager` | S’engager | Engagieren |
+|  | `images.courts.grandir` | Grandir | Wachsen |
 
 ## actualites
 

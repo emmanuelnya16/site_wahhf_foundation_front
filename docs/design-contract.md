@@ -1118,6 +1118,28 @@ Lot 11.5 : `content-visibility: auto` retiré, téléphone compris (voir §16.6,
 | Bouton « Faire un don » et pastille survolée : cœur sur blanc | 5,88:1 |
 | Contour des pastilles (blanc à 70 %) sur cœur ; contour de « Devenir partenaire » (blanc plein) | 3,42:1 ; 5,88:1 |
 
+### 16.9 Section « En images » (lot 11.8)
+
+*Votre brief du 26 novembre 2026. Code : `AccueilEnImages.tsx`, `PanneauImage.tsx`. L'accordéon de / (`JourneySection`, `ExpandingGallery`, `GalleryPanel`, règles `.xg` de `src/index.css`) ne change pas.*
+
+**Données** : celles de l'accordéon de / (`src/data/journey.ts` : cinq panneaux, photos et remplaçantes, textes, albums ; leurs traductions). En plus, dans les textes de /accueil : le surtitre et les titres courts du fil. Les photos restent celles de l'accordéon : la section compte comme reprise pour la règle des trois affichages.
+
+**Accessibilité** : celle de l'accordéon, gardée. Un bouton par panneau (nom = titre, `aria-expanded`, `aria-controls`), ouverture au survol (100 ms), au clic et au focus clavier ; flèches, Début et Fin passent d'un panneau à l'autre ; la légende d'un panneau réduit est `inert`. Le fil est un décor (`aria-hidden`, aucun arrêt de tabulation) ; ses points ouvrent leur panneau au clic et au toucher. Le compteur « 01 / 05 » est masqué aux lecteurs d'écran.
+
+**En-tête** : surtitre « En images », titre en Jost dont les trois verbes répondent aux panneaux (Apprendre, Cultiver, Grandir : surlignés en soleil, texte encre ; rien pour Chanter ensemble et S'engager) ; sur ordinateur, à droite, le sous-titre, « Voir toutes les photos » et le compteur.
+
+**Panneaux** : la géométrie de l'accordéon (positions par transform, CLS 0 ; mêmes hauteurs et coins). Sur ordinateur, chaque bande fermée a un dégradé nuit, son numéro (Barlow, soleil) et son titre lu de bas en haut (Jost, blanc). Le panneau ouvert a sa légende dans une carte coin feuille (nuit à 75 %, fond flouté, encoche du fil en haut) : numéro et lieu ou date, titre, texte, « Voir l'album » (contour soleil). Le fil relie cinq points sous les panneaux (un sommet pour Grandir) ; il est tracé en soleil jusqu'au panneau ouvert. Sur téléphone : la pile de l'accordéon, le fil à gauche avec les numéros.
+
+**Mouvement** (CSS) : les bandes montent l'une après l'autre (80 ms), puis le fil paraît ; à l'ouverture, un lent zoom unique de la photo (1 → 1,05 en 6 s), la carte monte de 16 px en fondu, le titre vertical s'efface, le fil se trace jusqu'au point ouvert (0,6 s). Aucun défilement automatique. Bouton pause et mouvement réduit : ni zoom ni tracé, changement de panneau instantané.
+
+| Usage | Ratio |
+|---|---|
+| Carte légende : textes (brume) sur nuit à 75 %, au pire sur du blanc pur | 5,32:1 |
+| Carte légende : numéro (soleil, 24 px, grand texte) et contour de « Voir l'album » | 3,09:1 |
+| Bande fermée : titre (blanc, 20 px gras) sur le dégradé, au pire sur du blanc ; numéro (soleil) | 5,23:1 ; 5,21:1 |
+| Verbe surligné : encre sur soleil ; titre (brume) et sous-titre (brume douce) sur nuit | 7,84:1 ; 11,41:1 et 7,85:1 |
+| Surtitre, lien et point ouvert (soleil) sur nuit | 6,64:1 |
+
 ## Annexe A : tableau des contrastes
 
 Calcul WCAG 2.x sur fond uni ; ratios tronqués à une décimale. Seuils : 4,5:1 pour le texte, 3:1 pour les composants et le fil.

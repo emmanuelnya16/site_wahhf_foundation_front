@@ -15,7 +15,7 @@ Composants dans `src/pages/accueil/`, sauf mention contraire. Styles : `src/styl
 | 5 | Projet phare | `ProjetPhare.tsx`, `ProjetMotion.tsx`, `route.ts` | `src/data/accueil-projets.ts` |
 | 6 | Des parcours qui inspirent | `Parcours.tsx`, `Paquet.tsx`, `CarteTemoignage.tsx` | `src/data/accueil-temoignages.ts` |
 | 7 | Les 10 régions | `Regions.tsx`, `CarteRegions.tsx` | `src/data/regions.ts`. Textes repris de Notre impact |
-| 8 | Apprendre, cultiver, grandir | `src/pages/home/JourneySection.tsx` (la section de /, telle quelle) | `src/data/journey.ts` |
+| 8 | En images (Apprendre, cultiver, grandir) | `AccueilEnImages.tsx`, `PanneauImage.tsx` : variante de l'accordéon de /, qui ne change pas | `src/data/journey.ts`, les mêmes données que /. Surtitre et titres courts du fil : `src/locales/accueil` (`images`) |
 | 9 | Événements | `Evenements.tsx`, `CarteEvenement.tsx` | `src/data/events.ts` |
 | 10 | Appel au don | `AppelDon.tsx` | Textes : `src/locales/accueil` (`don`). Domaines : `src/services/api.ts`. Chaque pastille ouvre Faire un don avec son domaine choisi (`/faire-un-don?affectation=sante`) |
 
