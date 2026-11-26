@@ -2991,7 +2991,8 @@
   gap: 0.5rem;
   min-height: 2.75rem;
   padding: 0.5rem 1.125rem;
-  border: 1.5px solid color-mix(in srgb, var(--color-brume) 45%, transparent);
+  /* Brume à 60 % : 5,16:1 sur nuit, 3,72:1 sur le voile du plateau posé sur une image blanche */
+  border: 1.5px solid var(--ac-nuit-bord);
   border-radius: var(--radius-pill);
   background: color-mix(in srgb, var(--color-nuit) 72%, transparent);
   color: var(--color-brume);
@@ -3114,7 +3115,8 @@
   justify-content: center;
   margin: 0;
   padding: 5rem var(--gutter) max(1.75rem, env(safe-area-inset-bottom));
-  background: linear-gradient(to top, color-mix(in srgb, var(--color-nuit) 85%, transparent), transparent);
+  /* Voile nuit à 88 % sous les contrôles, fondu au-dessus : la durée (brume douce) garde 5,5:1 sur une image blanche */
+  background: linear-gradient(to top, color-mix(in srgb, var(--color-nuit) 88%, transparent) calc(100% - 4.5rem), transparent);
   opacity: 0;
 }
 .ac-film.is-actif .ac-film-cadre {
