@@ -1,15 +1,15 @@
 # Page Accueil (/accueil)
 
-La nouvelle page d'accueil, construite à côté de l'accueil actuel (/), qui ne change pas. Ce guide dit où se trouve chaque section et comment mettre à jour ce qui dépend de la fondation. Le détail du design est dans `docs/design-contract.md` (§16).
+La nouvelle page d'accueil, construite à côté de l'ancien accueil. Depuis le 26 novembre 2026, / mène à /accueil (redirection dans `src/App.tsx`) ; l'ancien accueil reste dans le code (`src/pages/Home.tsx`), il n'est plus affiché. Ce guide dit où se trouve chaque section et comment mettre à jour ce qui dépend de la fondation. Le détail du design est dans `docs/design-contract.md` (§16).
 
-## Les 11 sections
+## Les 12 sections
 
 Composants dans `src/pages/accueil/`, sauf mention contraire. Styles : `src/styles/accueil.css`. Textes en anglais et en allemand : `src/locales/accueil/en.json` et `de.json`.
 
 | # | Section | Composant | Données |
 |---|---|---|---|
 | 1 | Hero | `Hero.tsx`, `Visuel.tsx` | Textes : `src/locales/accueil` (`hero`). Carte « Prochain événement » : `src/data/events.ts` |
-| 2 | Qui sommes-nous en bref | `QuiSommesNous.tsx` | Textes : `src/locales/accueil` (`qsn`) |
+| 2 | Qui sommes-nous en bref, et la direction (lot 12) | `QuiSommesNous.tsx` | Textes : `src/locales/accueil` (`qsn`). La direction : les trois premiers niveaux de `src/data/team.ts` (noms, titres, fonctions, accord des portraits), lus par `src/lib/team.ts`, comme l'organigramme de Qui sommes-nous |
 | 3 | Les chiffres | `Chiffres.tsx`, `Compteur.tsx` | `src/data/accueil-chiffres.ts` |
 | 4 | Les 6 domaines | `DomainesParcours.tsx`, `DomainesMotion.tsx` | Domaines : `src/services/api.ts` (`DOMAINS_DATA`). Photos : `PHOTOS` dans `DomainesParcours.tsx` |
 | 5 | Projet phare | `ProjetPhare.tsx`, `ProjetMotion.tsx`, `route.ts` | `src/data/accueil-projets.ts` |
@@ -19,6 +19,7 @@ Composants dans `src/pages/accueil/`, sauf mention contraire. Styles : `src/styl
 | 9 | Événements | `Evenements.tsx`, `CarteEvenement.tsx` | `src/data/events.ts` |
 | 10 | Le film | `Film.tsx`, `FilmMotion.tsx` (le défilement, fichier à part), `FilmFenetre.tsx` : variante de la fenêtre du film du hero de /, qui ne change pas | `filmExtrait.ts`, écrit par `scripts/encode-film.mjs` (voir « Mettre le film en ligne »). Textes : `src/locales/accueil` (`film`) |
 | 11 | Appel au don | `AppelDon.tsx` | Textes : `src/locales/accueil` (`don`). Domaines : `src/services/api.ts`. Chaque pastille ouvre Faire un don avec son domaine choisi (`/faire-un-don?affectation=sante`) |
+| 12 | Nos partenaires (lot 12) | `Partenaires.tsx` | `src/data/partners.ts` (voir « Ajouter un partenaire »). Textes : `src/locales/accueil` (`partenaires`) |
 
 L'assemblage et le bouton pause sont dans `AccueilPage.tsx`. Les photos viennent du catalogue : on modifie `docs/photos-catalogue.md`, puis on lance `npm run photos`.
 
@@ -79,6 +80,17 @@ Fichier : `src/data/events.ts`. La section Événements se remplit seule. Elle m
 
 Le compte à rebours, la page d'éphéméride et les liens se mettent à jour seuls.
 
+## Ajouter un partenaire
+
+Fichier : `src/data/partners.ts`. Aujourd'hui, quatre partenaires s'affichent : IROKO Group, CRTV, L'Eldorado Digital Academy et Wahhf bio délices (logos donnés le 26 novembre 2026), sans lien ni pays tant qu'ils ne sont pas confirmés (question 212).
+
+1. Ajoutez une ligne : `{ id: 'goethe', nom: 'Goethe-Institut', logo: '/logos-partenaires/goethe.webp', lien: 'https://…', pays: 'Allemagne', confirme: false }`.
+2. Logo : à partir du fichier fourni (SVG, ou PNG d'au moins 400 px de large sur fond transparent), un WebP de 160 px de haut dans `public/logos-partenaires/`. Il s'affiche en niveaux de gris, en couleur au survol. Sans logo (`logo: null`), la carte montre le nom en texte.
+3. Lien : seulement le site officiel confirmé ; sinon `lien: null`, et la carte n'est pas un lien.
+4. Passez `confirme: true` quand la fondation a confirmé le partenariat et l'accord pour l'afficher. Avant, il ne s'affiche qu'en développement.
+
+Moins de 6 partenaires : une grille fixe centrée. À partir de 6, les logos défilent sur deux rangées en sens opposés ; la bande s'arrête au survol, au focus, au bouton pause du site, hors de l'écran et en mouvement réduit.
+
 ## Mettre le film en ligne
 
 La section « Le film » attend le fichier vidéo du film (question 207). En attendant, elle montre l'affiche et le bouton « Regarder le film », qui ouvre la fenêtre YouTube de / après accord. YouTube ne se charge jamais sans un clic.
@@ -128,4 +140,7 @@ Numéros de `docs/contenus-a-fournir.md` :
   - 157 : la ville de l'Albatros Hotel, sur le ticket de la journée du 25 avril.
 - **Appel au don :** 206 : des exemples de montants, et ce qu'ils financent réellement.
 - **Film :** 207 : le fichier vidéo du film, et l'accord des personnes qu'on y voit (voir aussi 201).
-- **Mise en ligne :** 188 : laquelle des deux pages, / ou /accueil, restera l'accueil, et quand.
+- **Direction :** 145 : l'orthographe des noms (celle de Christian Willberg est confirmée) ; 144 et 149 : portraits et accords écrits (en attendant, les initiales).
+- **Partenaires :** 212 : la liste, les logos, les liens, les pays et l'accord pour les afficher.
+- **Nom de la fondation :** 170 : le nom complet officiel derrière WAHHF (en attendant, « WAHHF Foundation » seulement).
+- **Mise en ligne :** 188 : / mène à /accueil depuis le 26 novembre 2026 ; reste à décider quand retirer l'ancien accueil du code.

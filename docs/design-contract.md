@@ -1213,6 +1213,45 @@ Lot 11.5 : `content-visibility: auto` retiré, téléphone compris (voir §16.6,
 - Débordement : 0 de 320 à 1 440 px.
 - CLS : 0 sur toute la page.
 
+### 16.11 Retours de la fondation (lot 12)
+
+*Votre brief du 26 novembre 2026. Ces corrections valent pour tout le site.*
+
+**Coordonnées** : un seul numéro, +49 1521 8956743 (téléphone et WhatsApp), et deux adresses toujours affichées ensemble (Markt 25, 39288 Burg, Germany ; Bépanda, BP 4048 Douala, Cameroon), dans `src/config/contact.ts`. Le nom long est retiré partout : le site écrit « WAHHF Foundation » (question 170).
+
+**Pied de page**
+- Bloc « Adresses » dans la colonne Contact : une icône lieu par ligne.
+- Rangée de 7 réseaux (`SOCIAL`), dans l'ordre Facebook, Instagram, TikTok, YouTube, LinkedIn, Snapchat, WhatsApp. Tracés Simple Icons (CC0) de 24 px dans des pastilles rondes de 44 px, nouvel onglet dit dans le nom du lien.
+- « Mentions légales » et « Confidentialité » en 16 px dans la dernière ligne.
+
+**En-tête** : logo de 60 px (52 px sur téléphone), barre de 80 px (68 px). Entrées du menu à 6 px de chaque côté ; texte à 16 px ; en allemand, 24 px entre le logo et le menu.
+
+**Légendes** : plus aucune date sous une photo (`photoCaption`, `albumPlace`, panneaux « Apprendre, cultiver, grandir »).
+
+**/accueil**
+- La direction, dans « Qui sommes-nous en bref » : les trois premiers niveaux de l'organigramme, rond de 72 px. Portrait avec l'accord écrit, sinon les initiales sur sauge.
+- Nos partenaires, dernière section, sur brume (humus en sombre) entre l'appel au don (sauge) et le pied de page (nuit).
+  - Cartes coin feuille de 10,5 rem ; logos en niveaux de gris, en couleur au survol et au focus ; plaque claire en sombre.
+  - Moins de 6 partenaires : grille fixe centrée. À partir de 6 : deux rangées qui défilent en sens opposés, arrêtées au survol, au focus, au bouton pause, hors de l'écran et en mouvement réduit.
+  - Encadré « Devenir partenaire ».
+  - Seul mouvement : les logos arrivent l'un après l'autre (60 ms).
+
+| Usage | Ratio |
+|---|---|
+| Icônes des réseaux et liens légaux (brume douce) sur nuit ; au survol (soleil) | 7,85:1 ; 6,64:1 |
+| Contour des pastilles des réseaux (brume à 60 %) sur nuit | 5,16:1 |
+| Initiales de la direction : forêt sur sauge ; en sombre, soleil sur filet-nuit | 7,59:1 ; 5,82:1 |
+| Nom (encre) et fonction (encre douce) de la direction sur papier | 14,35:1 ; 7,3:1 |
+| Encadré « Devenir partenaire » : encre sur sauge ; en sombre, brume voilée sur canopée | 11,9:1 ; 11,76:1 |
+
+**Vérifié le 26 novembre 2026** (build de production)
+- /accueil : 1 h1 et 11 h2, sans saut ; débordement 0 et CLS 0 de 320 à 1 440 px ; aucune tâche longue au défilement.
+- Langues : FR, EN, DE sans clé brute.
+- Clavier : 71 arrêts, chacun avec un anneau visible ; restent les faux positifs connus de la carte des régions et d'En images.
+- Performance : JS initial 156,7 Ko.
+- Lighthouse mobile, 2 passages : accessibilité 100, CLS 0, LCP 4,6 à 4,7 s.
+- Les 7 liens des réseaux mènent au bon compte, sur ordinateur et sur téléphone.
+
 ## Annexe A : tableau des contrastes
 
 Calcul WCAG 2.x sur fond uni ; ratios tronqués à une décimale. Seuils : 4,5:1 pour le texte, 3:1 pour les composants et le fil.

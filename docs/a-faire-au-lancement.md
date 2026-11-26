@@ -67,6 +67,11 @@ Ce qu'il faut changer le jour où le site devient public. Prévu au **Lot 9**. C
 - **`public/.htaccess`** : corrigé le 22 novembre 2026. `/evenements` et `/evenements/<slug>` sont servies en 200. `npm run check` (scripts/check-routes.mjs) échoue désormais si une route du routeur manque dans le .htaccess. Le jour du lancement, vérifier sur l'hébergement réel :
   - `curl -I https://<domaine>/evenements` et `curl -I https://<domaine>/accompagnement/pays/allemagne` : statut 200 ;
   - `curl -I https://<domaine>/page-inexistante` : statut 404.
-- **Adresse exacte de la fondation** : `CONTACT.address` dans `src/config/contact.ts`. Tant qu'elle manque, la ligne d'adresse du pied de page reste masquée en production.
+- **Coordonnées** (lot 12, fait) : le seul numéro officiel (+49 1521 8956743) et les deux adresses sont dans `src/config/contact.ts` (`CONTACT`), les réseaux dans `SOCIAL`. Facebook et LinkedIn mènent aux profils personnels de la présidence, à la demande de la fondation : à remplacer par des pages de la fondation si elle en crée. L'e-mail reste à confirmer (question 211).
+- **Impressum** : forme juridique, représentant légal, registre et numéro d'inscription, e-mail officiel (questions 208 à 211), puis le texte du juriste (questions 140 et 179).
+- **Nom complet officiel** : question 170. En attendant, le site écrit seulement « WAHHF Foundation » ; ne jamais remettre la forme longue retirée au lot 12.
+- **Vercel** : `vercel.json` renvoie toutes les adresses de l'application vers `index.html` (sans lui, /accueil et les autres pages répondaient 404 en accès direct). Vérifier `curl -I https://<domaine>/accueil` : statut 200.
+- **Ancien accueil** : / redirige vers /accueil. Les deux scripts de `index.html` qui ne servent qu'à l'ancien accueil (image du hero préchargée et posée avant React, quand l'adresse est /) téléchargent encore cette image et l'affichent un instant avant la redirection : à retirer quand l'ancien accueil sera abandonné (question 188).
+- **Partenaires** : logos, liens et accords (question 212), dans `src/data/partners.ts`.
 - **Traductions à relire** : docs/traductions-de-a-relire.md (astérisques en priorité).
 - **Faits de Road to Europe** : date, lieu, prix dans les trois langues, inscription (`ROAD_TO_EUROPE_FAITS`, questions 171 à 178).

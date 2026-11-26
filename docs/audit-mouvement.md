@@ -513,7 +513,7 @@ Non modifiés, comme demandé. Environ 140 marqueurs « TODO », dont la plupart
 - **Données** ([api.ts](../src/services/api.ts), 51) : dates d'actualités « (TODO) », durées de cours « (indicatif — TODO) », dates de sessions « (TODO : confirmer date) », étapes de la frise « 2021 (TODO) », etc.
 - **Régions** ([regions.ts](../src/data/regions.ts)) : pour chacune des 10 régions, « Antenne locale : à confirmer (TODO) » et « Actions dans la région : à renseigner (TODO) » (voir la section Prompt 3 pour les anciens textes).
 - **Pages** : [TransversalPages.tsx](../src/pages/TransversalPages.tsx) (17, dont noms de la gouvernance), [LanguageAcademy.tsx](../src/pages/LanguageAcademy.tsx) (5, certifications), [DonatePage.tsx](../src/pages/DonatePage.tsx) (5), [ApplyPage.tsx](../src/pages/ApplyPage.tsx) (5), [MobilityHub.tsx](../src/pages/MobilityHub.tsx) (4), [Contact.tsx](../src/pages/Contact.tsx) (1), traductions `fr.json`/`en.json` (4 chacune).
-- **Footer** ([Footer.tsx](../src/components/Footer.tsx)) : liens réseaux sociaux `#linkedin-todo`… et « (TODO : adresse exacte) ».
+- **Footer** ([Footer.tsx](../src/components/Footer.tsx)) : liens réseaux sociaux provisoires (ancres mortes, remplacées au lot 12) et « (TODO : adresse exacte) ».
 - **Galerie** ([gallery.ts](../src/data/gallery.ts)) :
   - lieu et date des « Rencontres de la communauté » ;
   - lieux, dates et projets des vidéos « Sur le terrain » ;
