@@ -1,7 +1,6 @@
 {
   "brand": {
     "name": "WAHHF Foundation",
-    "fullName": "We Are Here Help Foundation",
     "branch": "Social branch of the IROKO Group",
     "tagline": "Cameroonian-German non-profit foundation"
   },
@@ -88,7 +87,7 @@
     "mission": {
       "kicker": "Who we are",
       "title": "A human bridge between Cameroon and Germany",
-      "p1": "Born from a dual Cameroonian and German heritage, WAHHF Foundation (We Are Here Help Foundation) is the social and philanthropic branch of the IROKO Group.",
+      "p1": "Born from a dual Cameroonian and German heritage, WAHHF Foundation is the social and philanthropic branch of the IROKO Group.",
       "p2": "Convinced that dignity comes through knowledge, health, and autonomy, we develop sustainable field programmes alongside a free German/English language and European orientation initiative.",
       "link": "Learn more about our history and governance"
     },
@@ -197,7 +196,7 @@
     },
     "seo": {
       "title": "Home — Empowering youth, transforming communities",
-      "description": "WAHHF Foundation (We Are Here Help Foundation), a Cameroonian-German non-profit foundation and the social branch of the IROKO Group: 6 areas of action and free German/English courses."
+      "description": "WAHHF Foundation, a Cameroonian-German non-profit foundation and the social branch of the IROKO Group: 6 areas of action and free German/English courses."
     },
     "journey": {
       "albumLink": "See the album"
@@ -226,7 +225,7 @@
     "partner": "Become a partner",
     "scams": "Scam prevention",
     "contactForm": "Contact form",
-    "addressTodo": "(TODO: exact address)"
+    "addresses": "Addresses"
   },
   "ui": {
     "logoAlt": "WAHHF Foundation logo",
@@ -440,9 +439,6 @@
       "c1": {
         "title": "Level C1 — Academic & professional mastery"
       }
-    },
-    "contact": {
-      "place": "Cameroon (Douala, Yaoundé) and coordination in Germany"
     },
     "regions": {
       "littoral": {

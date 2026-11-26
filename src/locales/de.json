@@ -14,7 +14,6 @@
   ],
   "brand": {
     "name": "WAHHF Foundation",
-    "fullName": "We Are Here Help Foundation",
     "branch": "Sozialer Zweig der IROKO-Gruppe",
     "tagline": "Gemeinnützige kamerunisch-deutsche Stiftung"
   },
@@ -101,7 +100,7 @@
     "mission": {
       "kicker": "Über uns",
       "title": "Eine menschliche Brücke zwischen Kamerun und Deutschland",
-      "p1": "Aus einer kamerunisch-deutschen Doppelkultur entstanden, ist die WAHHF Foundation (We Are Here Help Foundation) der soziale und gemeinnützige Zweig der IROKO-Gruppe.",
+      "p1": "Aus einer kamerunisch-deutschen Doppelkultur entstanden, ist die WAHHF Foundation der soziale und gemeinnützige Zweig der IROKO-Gruppe.",
       "p2": "Wir sind überzeugt, dass Würde durch Wissen, Gesundheit und Selbstständigkeit entsteht. Darum entwickeln wir nachhaltige Programme vor Ort und ein kostenloses Angebot, um Deutsch oder Englisch zu lernen und sich in Richtung Europa zu orientieren.",
       "link": "Mehr über unsere Geschichte und unsere Organisation"
     },
@@ -210,7 +209,7 @@
     },
     "seo": {
       "title": "Startseite — Junge Menschen stärken, Gemeinschaften verändern",
-      "description": "WAHHF Foundation (We Are Here Help Foundation), gemeinnützige kamerunisch-deutsche Stiftung und sozialer Zweig der IROKO-Gruppe: 6 Arbeitsbereiche und kostenlose Deutsch- und Englischkurse."
+      "description": "WAHHF Foundation, gemeinnützige kamerunisch-deutsche Stiftung und sozialer Zweig der IROKO-Gruppe: 6 Arbeitsbereiche und kostenlose Deutsch- und Englischkurse."
     },
     "journey": {
       "albumLink": "Zum Album"
@@ -239,7 +238,7 @@
     "partner": "Partner werden",
     "scams": "Schutz vor Betrug",
     "contactForm": "Kontaktformular",
-    "addressTodo": "(TODO: genaue Adresse)"
+    "addresses": "Adressen"
   },
   "ui": {
     "logoAlt": "Logo der WAHHF Foundation",
@@ -453,9 +452,6 @@
       "c1": {
         "title": "Niveau C1 — Sprachbeherrschung für Studium & Beruf"
       }
-    },
-    "contact": {
-      "place": "Kamerun (Douala, Yaoundé) und Koordination in Deutschland"
     },
     "regions": {
       "littoral": {

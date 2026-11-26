@@ -729,7 +729,7 @@ Après la revue indépendante (19 novembre 2026) :
 - Affectation par défaut : « Là où le besoin est le plus urgent » (avant : l'Académie d'allemand).
 - Contact : sur téléphone, les coordonnées directes passent avant le formulaire, pour que la page finisse sur une seule action.
 - Agir : arrivée en CSS des voies déjà à l'écran (fondu et montée de 24 px, juste après l'en-tête), plutôt que rien.
-- Précaution de la page Don : « Pour votre sécurité, la fondation vous répond seulement par WhatsApp au +237 693 12 92 05 ou par e-mail depuis contact@wahhf-foundation.org. Si quelqu'un vous écrit d'un autre numéro ou d'une autre adresse au sujet de votre don, ne payez rien et prévenez-nous. »
+- Précaution de la page Don : « Pour votre sécurité, la fondation vous répond seulement par WhatsApp au +49 1521 8956743 (le numéro officiel depuis le lot 12) ou par e-mail depuis contact@wahhf-foundation.org. Si quelqu'un vous écrit d'un autre numéro ou d'une autre adresse au sujet de votre don, ne payez rien et prévenez-nous. »
 - Pas de bulle WhatsApp sur la page Contact.
 - Bulle WhatsApp sur téléphone, à l'arrivée : elle recouvre en partie le bouton « Remplir le formulaire bénévole » d'Agir jusqu'au premier défilement. Deux choix, communs à toutes les pages : l'accepter, ou réduire la bulle à son seul glyphe (48 px) tant que la page n'a pas défilé.
 - Page Arnaques (groupe 7.4) : à côté du parcours de don, où la fondation indique comment régler le don qu'on lui propose, le titre « WAHHF Foundation ne demande jamais d'argent » pourrait devenir « WAHHF Foundation ne demande jamais d'argent aux jeunes ni aux candidats ».

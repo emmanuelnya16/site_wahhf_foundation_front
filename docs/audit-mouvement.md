@@ -435,7 +435,7 @@ Points préexistants **non corrigés** (hors périmètre, à décider) :
 
 **Relevé dans les photos, à vérifier (rien n'a été changé).**
 
-- **Nom de la fondation.** Les kakémonos portent « Watio Hearts Humanitarian Foundation » et le slogan « Sowing hope, harvesting change ». Le site développe WAHHF en « We Are Here Help Foundation ».
+- **Nom de la fondation.** Les kakémonos portent « Watio Hearts Humanitarian Foundation » et le slogan « Sowing hope, harvesting change ». Le site développe WAHHF en « [forme longue retirée au lot 12 : fausse selon la fondation] ».
 - **Coordonnées.** Le dos du polo affiche un numéro allemand (+49…) et un site « wahhf-fondation.com » (lecture sur une capture basse définition). Le footer indique un numéro camerounais et « wahhf-foundation.org ».
 - **Domaines.** Les kakémonos citent éducation, santé, moyens de subsistance, autonomisation des jeunes, agriculture et élevage, pas exactement les 6 domaines du site.
 

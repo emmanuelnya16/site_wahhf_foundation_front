@@ -72,9 +72,7 @@ function checkContactField(key: ContactField, value: string | boolean, t: TFunct
  * - Mouvement : seulement l'en-tête ; rien sur les champs.
  */
 export default function ContactPage() {
-  const { t, lang, localized } = useLocalize();
-  // Lieu de la fondation dans la langue de la page (surcouche commune contenu.contact)
-  const contact = localized(CONTACT, 'contenu.contact');
+  const { t, lang } = useLocalize();
   const [searchParams] = useSearchParams();
   const [motif, setMotif] = useState<Motif | ''>(() => {
     const asked = searchParams.get('motif');
@@ -196,9 +194,17 @@ export default function ContactPage() {
                   {CONTACT.email}
                 </a>
               </li>
-              <li className="flex items-start gap-3 pt-2">
-                <MapPin aria-hidden="true" className="w-5 h-5 mt-1 shrink-0 text-text-secondary" />
-                <span>{contact.place}</span>
+              {/* Les deux adresses de la fondation, toujours ensemble (lot 12) */}
+              <li className="pt-2">
+                <p className="font-semibold">{t('footer.addresses')}</p>
+                <address className="mt-2 space-y-2 not-italic">
+                  {CONTACT.address.map((ligne) => (
+                    <span key={ligne} className="flex items-start gap-3">
+                      <MapPin aria-hidden="true" className="w-5 h-5 mt-1 shrink-0 text-text-secondary" />
+                      <span>{ligne}</span>
+                    </span>
+                  ))}
+                </address>
               </li>
             </ul>
           </div>

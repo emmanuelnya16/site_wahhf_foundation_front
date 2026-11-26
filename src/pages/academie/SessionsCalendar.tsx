@@ -6,10 +6,11 @@ import { COURSE_SESSIONS_DATA } from '../../services/api';
 import { upcomingSessions } from '../../lib/sessions';
 import { FIELD_CLASS, LABEL_CLASS } from '../../components/wahhf/FormField';
 import { useLocalize } from '../../lib/localize';
+import { CONTACT } from '../../config/contact';
 import '../../locales/mobilite';
 
 /** Demande d'alerte préparée sur WhatsApp, rédigée dans la langue de la personne (lot 7.10). */
-const whatsappAlert = (text: string) => `https://wa.me/237693129205?text=${encodeURIComponent(text)}`;
+const whatsappAlert = (text: string) => `https://wa.me/${CONTACT.whatsappNumber}?text=${encodeURIComponent(text)}`;
 
 /**
  * Calendrier des prochaines sessions (Académie et pages de niveau ; groupe 7.1 : T-05, ACAD-03).

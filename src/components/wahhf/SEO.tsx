@@ -29,7 +29,7 @@ export default function SEO({ title, description, canonical }: SEOProps) {
   }, [canonical, pathname]);
 
   useEffect(() => {
-    const fullTitle = `${title} | WAHHF Foundation — We Are Here Help Foundation`;
+    const fullTitle = `${title} | WAHHF Foundation`;
     document.title = fullTitle;
 
     const metaDesc = document.querySelector('meta[name="description"]');

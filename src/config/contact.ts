@@ -1,21 +1,16 @@
 /**
- * Coordonnées de WAHHF Foundation : la seule source du site (audit CTC-03, groupe 7.2). Lues par la page Contact, le
- * footer, la bulle WhatsApp et les messages préparés des formulaires (WhatsApp ou e-mail), en attendant l'API Symfony :
- * le site ne transmet encore aucun formulaire lui-même.
+ * Coordonnées de WAHHF Foundation : la seule source du site (audit CTC-03, groupe 7.2). Lues par la page Contact, les
+ * mentions légales, le footer, la bulle WhatsApp et les messages préparés des formulaires (WhatsApp ou e-mail), en
+ * attendant l'API Symfony : le site ne transmet encore aucun formulaire lui-même.
  *
- * TODO : confirmer avant la mise en ligne que ce numéro et cette adresse sont réellement suivis, et donner l'adresse
- * postale exacte (docs/contenus-a-fournir.md, demande E et question 1).
+ * Lot 12 (retours de la fondation, 26 novembre 2026) : le seul numéro officiel est le +49 1521 8956743 (téléphone et
+ * WhatsApp), et la fondation a deux adresses, toujours affichées ensemble.
  */
 export const CONTACT = {
-  /** Numéro WhatsApp au format international, sans + ni espaces (wa.me, tel:). */
-  whatsappNumber: '237693129205',
-  whatsappDisplay: '+237 693 12 92 05',
+  /** Numéro au format international, sans + ni espaces (wa.me, tel:). */
+  whatsappNumber: '4915218956743',
+  whatsappDisplay: '+49 1521 8956743',
   email: 'contact@wahhf-foundation.org',
-  /** Où se trouve la fondation, en attendant les adresses postales exactes. */
-  place: 'Cameroun (Douala, Yaoundé) et coordination en Allemagne',
-  /**
-   * Adresse postale exacte (une ligne, non traduite). null tant que la fondation ne l'a pas donnée : le pied de page
-   * masque alors la ligne d'adresse en production (en développement, elle reste visible avec son TODO).
-   */
-  address: null as string | null,
+  /** Les deux adresses postales, dans cet ordre, toujours affichées ensemble (non traduites : adresses postales). */
+  address: ['Markt 25, 39288 Burg, Germany', 'Bépanda, BP 4048 Douala, Cameroon'],
 } as const;

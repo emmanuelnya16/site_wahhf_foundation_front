@@ -311,7 +311,7 @@ Les questions 34 à 54 (chaque lien officiel est-il le bon ?) restent valables.
 
 La question 33 (l'adresse « integrite@wahhf-foundation.org » existe-t-elle ?) reste valable. En attendant, la page renvoie au numéro WhatsApp et à l'adresse de contact.
 
-134. Le numéro WhatsApp +237 693 12 92 05 et l'adresse contact@wahhf-foundation.org sont-ils les seuls moyens officiels de joindre la fondation ? La page dit : « Tout autre numéro ou adresse qui se présente comme WAHHF Foundation n'est pas le nôtre. » Est-ce exact ?
+134. Le numéro WhatsApp camerounais d’alors et l'adresse contact@wahhf-foundation.org sont-ils les seuls moyens officiels de joindre la fondation ? La page dit : « Tout autre numéro ou adresse qui se présente comme WAHHF Foundation n'est pas le nôtre. » Est-ce exact ? **Réponse du 26 novembre 2026** : le seul numéro officiel est le +49 1521 8956743 (téléphone et WhatsApp) ; il remplace l’ancien partout (lot 12). L’adresse e-mail reste à confirmer (question 211).
 135. Qui lit les signalements d'arnaque envoyés sur WhatsApp ou par e-mail, et sous quel délai répondez-vous ?
 136. Comment une personne peut-elle vérifier qu'un interlocuteur fait vraiment partie de WAHHF Foundation ?
 137. Que conseillez-vous à une personne qui a déjà payé un faux intermédiaire (porter plainte, et auprès de qui au Cameroun) ?
@@ -322,7 +322,7 @@ La question 33 (l'adresse « integrite@wahhf-foundation.org » existe-t-elle ?) 
 
 ### Page « Faire un don »
 
-138. Quand un donateur vous écrit pour faire un don, qui lui répond, et depuis quel numéro ou quelle adresse ? La page de don dit aujourd'hui : « la fondation vous répond seulement par WhatsApp au +237 693 12 92 05 ou par e-mail depuis contact@wahhf-foundation.org. Si quelqu'un vous écrit d'un autre numéro ou d'une autre adresse au sujet de votre don, ne payez rien et prévenez-nous. » Est-ce exact ?
+138. Quand un donateur vous écrit pour faire un don, qui lui répond, et depuis quel numéro ou quelle adresse ? La page de don dit aujourd'hui : « la fondation vous répond seulement par WhatsApp au [numéro officiel] ou par e-mail depuis contact@wahhf-foundation.org. Si quelqu'un vous écrit d'un autre numéro ou d'une autre adresse au sujet de votre don, ne payez rien et prévenez-nous. » Est-ce exact ?
 
 ---
 
@@ -423,8 +423,8 @@ Seuls les faits de la banderole (photo A02) sont affichés en ligne : WAHHF Foun
 167. Y a-t-il un prochain événement à annoncer (date, heures, lieu, ville, lien d’inscription, nombre de places si vous le suivez) ? La page /evenements dit aujourd’hui qu’aucun événement n’est annoncé.
 168. Le nombre de places restantes ne s’affiche que s’il vient d’une vraie source (votre billetterie ou votre liste d’inscrits) : comment le tiendrez-vous à jour ?
 169. Les textes anglais des pages Événements (src/locales/events/en.json) sont des propositions, à valider.
-170. La banderole du 25 avril (photo A02) développe le sigle en « Watio Hearts Humanitary Foundation », alors que le site écrit partout « WAHHF Foundation (We Are Here Help Foundation) ». Quel est le nom complet exact ? Le site n’a pas été modifié.
-    - Constat (22 novembre 2026) : la banderole de l’événement du 25 avril (photo A02) écrit « WAHHF Foundation – Watio Hearts Humanitary Foundation », alors que le titre des pages du site dit « WAHHF Foundation — We Are Here Help Foundation » (dans les trois langues). Rien ne sera changé sur le site tant que la fondation n’aura pas répondu.
+170. Quel est le nom complet officiel derrière WAHHF ?
+    - Lot 12 (26 novembre 2026) : la forme longue qu’écrivait le site est fausse, selon la fondation. Elle est retirée partout (titres des pages, balises meta, données structurées, pied de page, traductions). En attendant le nom complet officiel, le site écrit seulement « WAHHF Foundation ». Pour mémoire, la banderole du 25 avril (photo A02) écrit « Watio Hearts Humanitary Foundation ».
 
 ---
 

@@ -28,15 +28,31 @@ const anchorId = (title: string) =>
  * qu'il contiendra sera cliquable d'elle-même.
  */
 const EMAIL = /([\w.+-]+@[\w-]+(?:\.[\w-]+)+)/g;
+const LINK = 'text-link underline underline-offset-4 decoration-1 hover:decoration-2';
 function withEmailLinks(text: string) {
   return text.split(EMAIL).map((part, i) =>
     i % 2 === 1 ? (
-      <a key={i} href={`mailto:${part}`} className="text-link underline underline-offset-4 decoration-1 hover:decoration-2">
+      <a key={i} href={`mailto:${part}`} className={LINK}>
         {part}
       </a>
     ) : (
       part
     ),
+  );
+}
+
+/** Le numéro officiel (src/config/contact.ts) en lien tel:, les e-mails en liens mailto (lot 12). */
+function withContactLinks(text: string) {
+  const [avant, ...apres] = text.split(CONTACT.whatsappDisplay);
+  if (!apres.length) return withEmailLinks(text);
+  return (
+    <>
+      {withEmailLinks(avant)}
+      <a href={`tel:+${CONTACT.whatsappNumber}`} className={cn(LINK, 'whitespace-nowrap')}>
+        {CONTACT.whatsappDisplay}
+      </a>
+      {withEmailLinks(apres.join(CONTACT.whatsappDisplay))}
+    </>
   );
 }
 
@@ -76,7 +92,18 @@ export function LegalTransparencyPage({
       blocks: [
         {
           h: 'Éditeur du site',
-          p: 'WAHHF Foundation (We Are Here Help Foundation), fondation camerouno-allemande à but non lucratif, branche sociale du groupe IROKO. Siège et antennes : Cameroun & Allemagne (TODO : adresses postales et numéros d’enregistrement officiels à compléter).',
+          p: 'WAHHF Foundation, fondation camerouno-allemande à but non lucratif, branche sociale du groupe IROKO (TODO : forme juridique, représentant légal, registre et numéro d’enregistrement à compléter).',
+        },
+        {
+          // Lot 12 : les deux adresses, toujours ensemble, et le seul numéro officiel (src/config/contact.ts)
+          h: 'Adresses et contact',
+          p: 'La fondation a deux adresses :',
+          lignes: [
+            `Allemagne : ${CONTACT.address[0]}`,
+            `Cameroun : ${CONTACT.address[1]}`,
+            `Téléphone et WhatsApp : ${CONTACT.whatsappDisplay}`,
+            `E-mail : ${CONTACT.email}`,
+          ],
         },
         {
           h: 'Caractère non commercial du site',
@@ -183,6 +210,15 @@ export function LegalTransparencyPage({
               <Fragment key={b.h}>
                 <h2 id={legal ? anchorId(b.h) : undefined}>{b.h}</h2>
                 <p>{withEmailLinks(b.p)}</p>
+                {'lignes' in b && (
+                  <address className="not-italic">
+                    {b.lignes.map((ligne) => (
+                      <span key={ligne} className="block">
+                        {withContactLinks(ligne)}
+                      </span>
+                    ))}
+                  </address>
+                )}
               </Fragment>
             ))}
           </ReadingColumn>

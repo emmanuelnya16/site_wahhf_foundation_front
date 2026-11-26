@@ -2,7 +2,7 @@
 
 Généré par `npm run i18n:relire` (scripts/traductions-a-relire.mjs) le 2026-11-26. Ne pas modifier à la main : corriger les fichiers de langue, puis relancer.
 
-Chaque texte allemand du site, face à son français. **Un astérisque (\*) marque les 166 textes dont le traducteur n'était pas sûr** (sens du français ambigu, terme juridique, nom d'institution, ton) : à relire en priorité. 1865 textes allemands au total.
+Chaque texte allemand du site, face à son français. **Un astérisque (\*) marque les 166 textes dont le traducteur n'était pas sûr** (sens du français ambigu, terme juridique, nom d'institution, ton) : à relire en priorité. 1863 textes allemands au total.
 
 - Ton choisi : vouvoiement (« Sie »), simple et chaleureux, pas du mot à mot.
 - Ne sont pas traduits : les noms propres et officiels (WAHHF Foundation, IROKO, Albatros Hotel, Ausbildung, Studienkolleg…), les adresses, les liens.
@@ -12,12 +12,11 @@ Chaque texte allemand du site, face à son français. **Un astérisque (\*) marq
 
 ## Textes communs (en-tête, pied de page, accueil, composants)
 
-Fichier : `src/locales/de.json` (370 textes, dont 40 à relire).
+Fichier : `src/locales/de.json` (368 textes, dont 40 à relire).
 
 | | Clé | Français | Allemand |
 |---|---|---|---|
 |  | `brand.name` | WAHHF Foundation | WAHHF Foundation |
-|  | `brand.fullName` | We Are Here Help Foundation | We Are Here Help Foundation |
 |  | `brand.branch` | Branche sociale du groupe IROKO | Sozialer Zweig der IROKO-Gruppe |
 |  | `brand.tagline` | Fondation camerouno-allemande à but non lucratif | Gemeinnützige kamerunisch-deutsche Stiftung |
 |  | `nav.home` | Accueil | Startseite |
@@ -89,7 +88,7 @@ Fichier : `src/locales/de.json` (370 textes, dont 40 à relire).
 |  | `hero.filmFrameTitle` | Film WAHHF Foundation (1 min 10) | Film der WAHHF Foundation (1:10 Min.) |
 |  | `home.mission.kicker` | Qui sommes-nous | Über uns |
 |  | `home.mission.title` | Une passerelle humaine entre le Cameroun et l'Allemagne | Eine menschliche Brücke zwischen Kamerun und Deutschland |
-|  | `home.mission.p1` | Née d'une double culture camerounaise et allemande, WAHHF Foundation (We Are Here Help Foundation) est la branche sociale et philanthropique du groupe IROKO. | Aus einer kamerunisch-deutschen Doppelkultur entstanden, ist die WAHHF Foundation (We Are Here Help Foundation) der soziale und gemeinnützige Zweig der IROKO-Gruppe. |
+|  | `home.mission.p1` | Née d'une double culture camerounaise et allemande, WAHHF Foundation est la branche sociale et philanthropique du groupe IROKO. | Aus einer kamerunisch-deutschen Doppelkultur entstanden, ist die WAHHF Foundation der soziale und gemeinnützige Zweig der IROKO-Gruppe. |
 |  | `home.mission.p2` | Convaincus que la dignité passe par le savoir, la santé et l'autonomie, nous développons des programmes de terrain durables et un dispositif gratuit d'apprentissage de l'allemand /anglais et d'orientation vers l'Europe. | Wir sind überzeugt, dass Würde durch Wissen, Gesundheit und Selbstständigkeit entsteht. Darum entwickeln wir nachhaltige Programme vor Ort und ein kostenloses Angebot, um Deutsch oder Englisch zu lernen und sich in Richtung Europa zu orientieren. |
 |  | `home.mission.link` | En savoir plus sur notre histoire et notre gouvernance | Mehr über unsere Geschichte und unsere Organisation |
 |  | `home.stats.kicker` | Notre impact en chiffres | Unsere Wirkung in Zahlen |
@@ -168,7 +167,7 @@ Fichier : `src/locales/de.json` (370 textes, dont 40 à relire).
 |  | `home.newsletter.handoffTitle` | Dernière étape : envoyez votre demande d’inscription | Letzter Schritt: Senden Sie Ihre Anmeldung ab |
 |  | `home.newsletter.editAddress` | Modifier mon adresse | Meine Adresse ändern |
 |  | `home.seo.title` | Accueil — Autonomiser la jeunesse, transformer les communautés | Startseite — Junge Menschen stärken, Gemeinschaften verändern |
-|  | `home.seo.description` | WAHHF Foundation (We Are Here Help Foundation), fondation camerouno-allemande à but non lucratif et branche sociale du groupe IROKO : 6 domaines d'action et cours d'allemand /anglais gratuits. | WAHHF Foundation (We Are Here Help Foundation), gemeinnützige kamerunisch-deutsche Stiftung und sozialer Zweig der IROKO-Gruppe: 6 Arbeitsbereiche und kostenlose Deutsch- und Englischkurse. |
+|  | `home.seo.description` | WAHHF Foundation, fondation camerouno-allemande à but non lucratif et branche sociale du groupe IROKO : 6 domaines d'action et cours d'allemand /anglais gratuits. | WAHHF Foundation, gemeinnützige kamerunisch-deutsche Stiftung und sozialer Zweig der IROKO-Gruppe: 6 Arbeitsbereiche und kostenlose Deutsch- und Englischkurse. |
 |  | `home.journey.albumLink` | Voir l’album | Zum Album |
 |  | `footer.description` | Fondation camerouno-allemande à but non lucratif œuvrant pour l'éducation, la santé, l'autonomie des jeunes et la mobilité solidaire. | Gemeinnützige kamerunisch-deutsche Stiftung für Bildung, Gesundheit, die Selbstständigkeit junger Menschen und solidarische Mobilität. |
 |  | `footer.irokoBadge` | Branche sociale du groupe IROKO | Sozialer Zweig der IROKO-Gruppe |
@@ -192,7 +191,7 @@ Fichier : `src/locales/de.json` (370 textes, dont 40 à relire).
 |  | `footer.partner` | Devenir partenaire | Partner werden |
 |  | `footer.scams` | Prévention des arnaques | Schutz vor Betrug |
 |  | `footer.contactForm` | Formulaire de contact | Kontaktformular |
-|  | `footer.addressTodo` | (TODO : adresse exacte) | (TODO: genaue Adresse) |
+|  | `footer.addresses` | Adresses | Adressen |
 |  | `ui.logoAlt` | Logo WAHHF Foundation | Logo der WAHHF Foundation |
 |  | `ui.newTab` |  (nouvel onglet) |  (neuer Tab) |
 |  | `ui.skipLink` | Aller au contenu | Zum Inhalt springen |
@@ -319,7 +318,6 @@ Fichier : `src/locales/de.json` (370 textes, dont 40 à relire).
 |  | `contenu.niveaux.b1.title` | Niveau B1 — Seuil d’Autonomie | Niveau B1 — Schwelle zur Selbstständigkeit |
 |  | `contenu.niveaux.b2.title` | Niveau B2 — Indépendance & Fluidité | Niveau B2 — Unabhängigkeit & Sprachfluss |
 |  | `contenu.niveaux.c1.title` | Niveau C1 — Maîtrise Académique & Professionnelle | Niveau C1 — Sprachbeherrschung für Studium & Beruf |
-|  | `contenu.contact.place` | Cameroun (Douala, Yaoundé) et coordination en Allemagne | Kamerun (Douala, Yaoundé) und Koordination in Deutschland |
 | \* | `contenu.regions.littoral.antennaTodo` | Antenne locale : à confirmer (TODO) | Lokale Anlaufstelle: noch zu bestätigen (TODO) <br>_Note : noms des régions du Cameroun gardés en français (noms officiels, usage des sources allemandes) ; question 181_ |
 | \* | `contenu.regions.littoral.actionsTodo` | Actions dans la région : à renseigner (TODO) | Aktivitäten in der Region: noch einzutragen (TODO) <br>_Note : noms des régions du Cameroun gardés en français (noms officiels, usage des sources allemandes) ; question 181_ |
 | \* | `contenu.regions.littoral.name` | Littoral (Douala) | Littoral <br>_Note : noms des régions du Cameroun gardés en français (noms officiels, usage des sources allemandes) ; question 181_ |

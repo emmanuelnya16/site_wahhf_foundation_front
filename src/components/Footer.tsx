@@ -16,7 +16,8 @@ import { cn } from '../lib/utils';
  * don, Contact et adresse) ; barre du bas : © 2026, mentions légales, confidentialité, retour en haut ; le lien vers la
  * transparence revient quand ses données sont publiées (TRA-01, src/config/transparency.ts).
  * `surface-green` donne l'anneau de focus soleil et le liseré du bouton de don.
- * Coordonnées : celles de src/config/contact.ts, la seule source du site (CTC-03, groupe 7.2).
+ * Coordonnées : celles de src/config/contact.ts, la seule source du site (CTC-03, groupe 7.2) ; lot 12 : le numéro
+ * officiel et les deux adresses, toujours ensemble (bloc « Adresses »).
  */
 const LINK =
   'transition-colors duration-(--dur-fast) underline-offset-4 hover:text-link-on-inverse hover:underline active:text-link-on-inverse';
@@ -27,9 +28,8 @@ const LIST = 'space-y-2.5 text-meta text-text-secondary-on-inverse';
 const ICON = 'w-4 h-4 shrink-0 text-text-secondary-on-inverse';
 
 export default function Footer() {
-  const { t, localized, localizedList } = useLocalize();
+  const { t, localizedList } = useLocalize();
   const domains = localizedList(DOMAINS_DATA, 'contenu.domaines', (d) => d.id);
-  const contact = localized(CONTACT, 'contenu.contact');
 
   // Passe par Lenis quand il est actif (défilement fluide), sinon remontée instantanée.
   const handleBackToTop = () => {
@@ -54,10 +54,7 @@ export default function Footer() {
                 loading="lazy"
                 className="w-12 h-12 object-contain rounded-pill bg-white p-1"
               />
-              <div>
-                <p className="text-body font-bold text-text-on-inverse">WAHHF Foundation</p>
-                <p className="text-meta text-text-secondary-on-inverse">We Are Here Help Foundation</p>
-              </div>
+              <p className="text-body font-bold text-text-on-inverse">WAHHF Foundation</p>
             </Link>
 
             <p className="text-meta text-text-secondary-on-inverse">{t('footer.description')}</p>
@@ -185,19 +182,6 @@ export default function Footer() {
                   {t('footer.contactForm')}
                 </Link>
               </li>
-              {/* Adresse : jamais de TODO en production ; la ligne attend l'adresse exacte (CONTACT.address) */}
-              {(CONTACT.address || import.meta.env.DEV) && (
-                <li className="flex items-start gap-2.5">
-                  <MapPin aria-hidden="true" className={cn(ICON, 'mt-1')} />
-                  <span>
-                    {CONTACT.address ?? (
-                      <>
-                        {contact.place} <span>{t('footer.addressTodo')}</span>
-                      </>
-                    )}
-                  </span>
-                </li>
-              )}
               <li className="flex items-center gap-2.5">
                 <Phone aria-hidden="true" className={ICON} />
                 <a href={`tel:+${CONTACT.whatsappNumber}`} className={LINK}>
@@ -210,6 +194,18 @@ export default function Footer() {
                   {CONTACT.email}
                 </a>
               </li>
+              {/* Les deux adresses, toujours ensemble, une par ligne (lot 12) */}
+              <li className="pt-1">
+                <p className="font-semibold text-text-on-inverse">{t('footer.addresses')}</p>
+                <address className="mt-2 space-y-2 not-italic">
+                  {CONTACT.address.map((ligne) => (
+                    <span key={ligne} className="flex items-start gap-2.5">
+                      <MapPin aria-hidden="true" className={cn(ICON, 'mt-1')} />
+                      <span>{ligne}</span>
+                    </span>
+                  ))}
+                </address>
+              </li>
             </ul>
           </div>
         </div>
@@ -217,7 +213,7 @@ export default function Footer() {
         {/* Barre du bas : © 2026, mentions légales, confidentialité, transparence, bouton rond retour en haut */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-meta text-text-secondary-on-inverse">
           <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-6 gap-y-2">
-            <span>© 2026 WAHHF Foundation (We Are Here Help Foundation). {t('footer.rights')}</span>
+            <span>© 2026 WAHHF Foundation. {t('footer.rights')}</span>
             <Link to="/mentions-legales" className={LINK}>
               {t('footer.legal')}
             </Link>

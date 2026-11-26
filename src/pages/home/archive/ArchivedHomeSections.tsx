@@ -154,7 +154,7 @@ export function ArchivedHomeSections() {
                     Identité & Lien IROKO
                   </span>
                   <h3 className="font-serif font-normal text-2xl text-text">
-                    We Are Here Help Foundation
+                    WAHHF Foundation
                   </h3>
                 </div>
               </div>

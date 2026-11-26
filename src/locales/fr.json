@@ -1,7 +1,6 @@
 {
   "brand": {
     "name": "WAHHF Foundation",
-    "fullName": "We Are Here Help Foundation",
     "branch": "Branche sociale du groupe IROKO",
     "tagline": "Fondation camerouno-allemande à but non lucratif"
   },
@@ -88,7 +87,7 @@
     "mission": {
       "kicker": "Qui sommes-nous",
       "title": "Une passerelle humaine entre le Cameroun et l'Allemagne",
-      "p1": "Née d'une double culture camerounaise et allemande, WAHHF Foundation (We Are Here Help Foundation) est la branche sociale et philanthropique du groupe IROKO.",
+      "p1": "Née d'une double culture camerounaise et allemande, WAHHF Foundation est la branche sociale et philanthropique du groupe IROKO.",
       "p2": "Convaincus que la dignité passe par le savoir, la santé et l'autonomie, nous développons des programmes de terrain durables et un dispositif gratuit d'apprentissage de l'allemand /anglais et d'orientation vers l'Europe.",
       "link": "En savoir plus sur notre histoire et notre gouvernance"
     },
@@ -197,7 +196,7 @@
     },
     "seo": {
       "title": "Accueil — Autonomiser la jeunesse, transformer les communautés",
-      "description": "WAHHF Foundation (We Are Here Help Foundation), fondation camerouno-allemande à but non lucratif et branche sociale du groupe IROKO : 6 domaines d'action et cours d'allemand /anglais gratuits."
+      "description": "WAHHF Foundation, fondation camerouno-allemande à but non lucratif et branche sociale du groupe IROKO : 6 domaines d'action et cours d'allemand /anglais gratuits."
     },
     "journey": {
       "albumLink": "Voir l’album"
@@ -226,7 +225,7 @@
     "partner": "Devenir partenaire",
     "scams": "Prévention des arnaques",
     "contactForm": "Formulaire de contact",
-    "addressTodo": "(TODO : adresse exacte)"
+    "addresses": "Adresses"
   },
   "ui": {
     "logoAlt": "Logo WAHHF Foundation",

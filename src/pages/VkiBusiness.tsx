@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Globe, Phone, Mail, Instagram, MessageCircle, Smartphone, 
+  Globe, Mail, Instagram, MessageCircle, Smartphone, 
   Camera, Languages, Copy, Check, ExternalLink, ChevronRight
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useNoIndex } from '@/src/lib/useNoIndex';
+import { CONTACT } from '@/src/config/contact';
 
 export default function VkiBusiness() {
   useNoIndex();
@@ -36,8 +37,8 @@ export default function VkiBusiness() {
 
   const contacts = [
     { icon: Globe, labelKey: 'website', value: "irokogroup.com", href: "https://irokogroup.com" },
-    { icon: Smartphone, labelKey: 'mobile', value: "+237 693 129 205", href: "tel:+237693129205" },
-    { icon: Phone, labelKey: 'phone', value: "+49 30 1234567", href: "tel:+49301234567" },
+    // Lot 12 : le seul numéro officiel (src/config/contact.ts) ; le second numéro (un numéro fictif à Berlin) est retiré
+    { icon: Smartphone, labelKey: 'mobile', value: CONTACT.whatsappDisplay, href: `tel:+${CONTACT.whatsappNumber}` },
     { icon: Mail, labelKey: 'email', value: "contact@irokogroup.com", href: "mailto:contact@irokogroup.com" },
   ];
 
@@ -53,10 +54,10 @@ export default function VkiBusiness() {
     { 
       icon: MessageCircle, 
       label: "WhatsApp", 
-      value: "+237 693 129 205", 
-      href: "https://wa.me/237693129205", 
+      value: CONTACT.whatsappDisplay,
+      href: `https://wa.me/${CONTACT.whatsappNumber}`,
       bg: "bg-[#0A0B14]",
-      tag: "+237 693 129 205"
+      tag: CONTACT.whatsappDisplay
     },
   ];
 
