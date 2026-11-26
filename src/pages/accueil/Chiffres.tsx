@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { chiffresPublies, type ChiffreAccueil, type TexteChiffre } from '../../data/accueil-chiffres';
 import { useLocalize } from '../../lib/localize';
-import { followAnchorLink } from '../../lib/scroll';
+import { versAncre } from './ancre';
 import Compteur from './Compteur';
 import Entree from './Entree';
 import Lignes from './Lignes';
@@ -38,7 +38,7 @@ export default function Chiffres() {
             const valeur = `${new Intl.NumberFormat(locale).format(c.valeur)}${c.suffixe ?? ''}`;
             return (
               <Entree as="li" key={c.id} className="ac-chiffre" style={{ '--rang': i } as CSSProperties}>
-                <Link to={c.lien} onClick={c.lien.startsWith('#') ? (e) => followAnchorLink(e, c.lien.slice(1)) : undefined} className="ac-chiffre-lien">
+                <Link to={c.lien} onClick={c.lien.startsWith('#') ? (e) => versAncre(e, c.lien.slice(1)) : undefined} className="ac-chiffre-lien">
                   <span className="ac-anneau">
                     <svg viewBox="0 0 150 150" fill="none" aria-hidden="true" focusable="false">
                       <circle cx="75" cy="75" r="73.5" pathLength={1} />

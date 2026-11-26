@@ -5,8 +5,8 @@ import type { Temoignage } from '../../data/accueil-temoignages';
 import { useLocalize } from '../../lib/localize';
 import { photoOrFallback } from '../../lib/photos';
 
-/** Où raconter son parcours : le formulaire de contact (il ne se préremplit pas aujourd'hui, question 205) */
-export const LIEN_RACONTER = '/contact';
+/** Où raconter son parcours : le formulaire de contact, motif « Partager mon parcours » déjà choisi (réponse 205) */
+export const LIEN_RACONTER = '/contact?motif=parcours';
 
 /** Grands guillemets soleil (décor) */
 function Guillemets() {
@@ -32,7 +32,13 @@ export function CarteTemoignage({ temoignage }: { temoignage: Temoignage }) {
       <p className="ac-temoin-resume">{temoignage.resume}</p>
       <div className="ac-temoin-personne">
         <span className="ac-temoin-photo">
-          {photo ? <Photo photo={photo} sizes="10rem" fit="cover" radius="none" decorative style={temoignage.cadrage ? { objectPosition: temoignage.cadrage } : undefined} /> : <User aria-hidden="true" />}
+          {photo ? (
+            <Photo photo={photo} sizes="10rem" fit="cover" radius="none" decorative style={temoignage.cadrage ? { objectPosition: temoignage.cadrage } : undefined} />
+          ) : (
+            <span className="ac-temoin-initiale" aria-hidden="true">
+              {temoignage.nom.charAt(0)}
+            </span>
+          )}
         </span>
         <div>
           <p className="ac-temoin-nom">{temoignage.nom}</p>

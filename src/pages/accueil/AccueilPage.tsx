@@ -2,12 +2,14 @@ import './i18n';
 // Le bouton pause et le prochain événement viennent des pages Événements : leurs textes aussi
 import '../events/i18n';
 import '../../styles/accueil.css';
-import { lazy, useEffect, useRef } from 'react';
+import { lazy, useEffect, useLayoutEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import SEO from '../../components/wahhf/SEO';
 import { AfterFirstDisplay } from '../../effects/DeferredMotion';
 import { useLoopControl } from '../events/motion';
 import { useMediaQuery } from '../../lib/useMediaQuery';
+import { useLocation } from 'react-router-dom';
+import { toutDessiner } from './ancre';
 import { cn } from '../../lib/utils';
 import Hero from './Hero';
 import QuiSommesNous from './QuiSommesNous';
@@ -29,6 +31,11 @@ export default function AccueilPage() {
   const title = t('accueil.seo.title');
   const root = useRef<HTMLDivElement>(null);
   const loops = useLoopControl(root);
+  // Arrivée par une ancre (/accueil#domaines) : tout est dessiné le temps d'y aller (ancre.ts)
+  const { hash } = useLocation();
+  useLayoutEffect(() => {
+    if (hash) toutDessiner();
+  }, [hash]);
   const ordinateur = useMediaQuery(ORDINATEUR);
 
   // Titre exact du brief (« … | WAHHF Foundation ») : <SEO> ajoute le nom développé, il est repris ici après elle

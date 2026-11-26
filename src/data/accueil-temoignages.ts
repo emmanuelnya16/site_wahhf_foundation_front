@@ -18,7 +18,7 @@ export interface Temoignage {
   /** Le parcours en une phrase */
   resume: string;
   resultat?: string;
-  /** Repère du catalogue ; null : une silhouette */
+  /** Repère du catalogue, seulement la photo de cette personne, avec son accord ; null : l'initiale de son prénom */
   photo: string | null;
   /** object-position de la photo dans son rond */
   cadrage?: string;
@@ -36,8 +36,8 @@ export const TEMOIGNAGES: Temoignage[] = [
     domaine: 'Jeunesse & entrepreneuriat',
     resume: 'De l’agriculture urbaine à la création de sa micro-entreprise, Marie a suivi le programme de mentorat pendant 12 mois.',
     resultat: 'Entreprise lancée, 3 emplois créés',
-    photo: 'A41',
-    cadrage: '66% 12%',
+    // Jamais le visage d'une autre personne : en attendant sa photo, l'initiale de son prénom
+    photo: null,
   },
 ];
 
