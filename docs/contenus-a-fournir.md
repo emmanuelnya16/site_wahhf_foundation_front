@@ -494,3 +494,7 @@ Page /accueil (hero). Textes : src/locales/accueil/.
 ## Questions ajoutées avec l'appel au don (lot 11.7, 26 novembre 2026)
 
 206. Appel au don de /accueil : voulez-vous afficher des exemples de montants, par exemple « 10 000 FCFA = … » ? Si oui, pour chaque exemple : le montant, ce qu'il finance réellement (le programme, la quantité), la date et la source. Aujourd'hui, la section n'affiche aucun montant, aucune équivalence et aucun chiffre d'impact.
+
+## Questions ajoutées avec la section « Le film » (lot 11.9, 26 novembre 2026)
+
+207. Section « Le film » de /accueil : il manque le fichier vidéo du film (celui de YouTube, e-zT1lNANC0, 1 min 10), dans sa meilleure qualité. Aucune copie n'a été trouvée dans le projet. Déposez-le dans docs/references/video/film-wahhf.mp4, puis lancez `node scripts/encode-film.mjs` (voir docs/page-accueil.md, « Mettre le film en ligne »). Le site jouera alors un extrait sans le son, tout seul, quand le cadre est plein écran. En attendant, la section montre l'affiche et « Regarder le film », qui ouvre YouTube après accord. La question 201 vaut aussi pour le film : les personnes qu'on y voit de face, les jeunes surtout, ont-elles donné leur accord ?

@@ -1140,6 +1140,79 @@ Lot 11.5 : `content-visibility: auto` retiré, téléphone compris (voir §16.6,
 | Verbe surligné : encre sur soleil ; titre (brume) et sous-titre (brume douce) sur nuit | 7,84:1 ; 11,41:1 et 7,85:1 |
 | Surtitre, lien et point ouvert (soleil) sur nuit | 6,64:1 |
 
+### 16.10 Section « Le film » (lot 11.9)
+
+*Votre brief du 26 novembre 2026. Code : `Film.tsx`, `FilmMotion.tsx` (fichier à part, 1,2 Ko compressé, chargé à l'approche), `FilmFenetre.tsx`, `filmExtrait.ts`. Encodage : `scripts/encode-film.mjs`. Le hero de / et sa fenêtre du film ne changent pas.*
+
+**Contenu** : surtitre « En vidéo », titre « Le film de la fondation » et une seule phrase. La section est sur nuit, entre les événements (brume) et l'appel au don (sauge).
+
+**Vidéo**
+- Extrait sans le son, hébergé sur le site : `<video muted playsinline loop>`, WebM VP9 puis MP4 H.264. 1 280 px sur ordinateur, 720 px sur téléphone.
+- Affiche : celle du hero de /, en AVIF et en WebP, en portrait sur téléphone.
+- Le fichier ne se charge qu'à un écran de la section, ou après un clic.
+- Le son et le film entier passent par la fenêtre YouTube. C'est une variante de celle du hero de / : mêmes textes, même accord, sous-titres dans la langue de la page s'ils existent. YouTube ne se charge jamais sans clic.
+- Tant que le fichier manque (question 207) : l'affiche et « Regarder le film ».
+
+**Mouvement** : GSAP, une seule timeline en scrub 0,6. La scène est collée en CSS (sticky), sans pin. La section fait 260 svh, 200 sur téléphone.
+- 0 → 35 % : ouverture. Le fil fait le tour de la carte (62 % de large, 16/9, coins de 2,5 rem, inclinée de 2°, ombre douce ; sur téléphone, 86 % en 4/5). La carte s'ouvre ensuite en plein écran par clip-path et rotation ; le titre monte et s'efface.
+- 35 → 70 % : plateau. L'extrait joue, l'image passe de 1,08 à 1, la barre paraît sur un voile nuit.
+- 70 → 100 % : le chemin inverse. Le titre revient, la vidéo se met en pause.
+- Lecture entre 0,34 et 0,71 de la progression ; elle ne s'arrête qu'en sortant de 0,32–0,73. Elle reprend là où elle s'était arrêtée.
+- Pause quand la personne l'a demandée, quand l'onglet est caché et quand la fenêtre YouTube est ouverte.
+- Seulement transform, opacity et clip-path ; will-change pendant la section seulement.
+- Mouvement réduit, bouton pause du site, économie de données ou réseau 2G / 3G : hauteur normale, cadre ouvert en 16/9, coins de 2,5 rem, affiche et gros bouton « Lire l'extrait, sans le son ».
+
+**Accessibilité**
+- La vidéo a un nom : « Extrait du film WAHHF Foundation, sans le son ». « Regarder avec le son » est le chemin principal.
+- Boutons de 44 px au moins, anneau soleil.
+- Au clavier, un bouton de la barre qui reçoit le focus hors du plateau y fait défiler la page, pour qu'il soit visible.
+
+**Au passage** : le fil de « Qui sommes-nous en bref » se dessinait d'un coup. GSAP arrondit `strokeDashoffset` au pixel, et la longueur du tracé était ramenée à 1. Elle est maintenant ramenée à 1 000 : le fil avance de nouveau au défilement. Le fil du film suit la même règle.
+
+| Usage | Ratio |
+|---|---|
+| Titre (brume) et phrase (brume douce) sur nuit ; surtitre (soleil) | 11,41:1 et 7,85:1 ; 6,64:1 |
+| « Regarder avec le son » et gros bouton Lecture : encre sur soleil | 7,84:1 |
+| Plateau : durée (brume douce) sur le voile nuit à 88 %, au pire sur une image blanche | 5,48:1 |
+| Plateau : « Pause » (brume) sur son fond (nuit à 72 %) posé sur le voile, au pire | 10,35:1 |
+| Contour des boutons (brume à 60 %) : sur nuit ; sur le voile, au pire | 5,16:1 ; 3,72:1 |
+| Anneau de focus (soleil) sur le voile, au pire ; sur nuit | 4,64:1 ; 6,64:1 |
+
+**Vérifié le 26 novembre 2026** (build de production ; lecture testée sur un build d'essai avec un fichier provisoire, le vrai manquant)
+
+*Chargement et lecture*
+- Au chargement : aucune vidéo, aucune affiche du film, aucune requête YouTube.
+- À un écran de la section, le fichier se charge : 1280 sur ordinateur, 720 sur téléphone.
+- La vidéo est en pause sur la carte, joue sur le plateau et se met en pause à la fermeture. Au retour, elle reprend sans recommencer.
+- Une pause demandée tient. L'onglet caché ou la fenêtre ouverte mettent la vidéo en pause.
+- Échap ferme la fenêtre et rend le focus au bouton.
+- YouTube ne se charge qu'après le clic dans la fenêtre (iframe youtube-nocookie, sous-titres demandés).
+- Mouvement réduit, pause du site, économie de données : rien n'est téléchargé avant le clic.
+
+*Performance*
+- Tâches longues pendant la traversée :
+  - aucune à 1 440 ni à 1 024 px (3 passages chacun) ;
+  - à 390 px, processeur ralenti × 4 : 0 ou 1 tâche de 53 à 56 ms par passage, du rendu. La section Événements, mesurée de la même façon, en montre autant.
+- JS initial : 168,9 Ko (168,8 avant le lot).
+- Lighthouse mobile, 3 passages, avant → après :
+
+| Mesure | Avant | Après |
+|---|---|---|
+| LCP | 4,3 à 4,4 s | 4,3 à 4,6 s |
+| TBT médian | 330 ms | 280 ms |
+| CLS | 0 | 0 |
+| Accessibilité | 100 | 100 |
+| Poids total | 713 Kio | 716 Kio |
+
+*Reprise de la vérification du lot 11.6*
+- Fonds : alternance tenue.
+- Titres : 1 h1 et 10 h2, sans saut.
+- Langues : FR, EN, DE, sans clé brute.
+- Mouvement : vérifié.
+- Clavier : le bouton du film a son anneau.
+- Débordement : 0 de 320 à 1 440 px.
+- CLS : 0 sur toute la page.
+
 ## Annexe A : tableau des contrastes
 
 Calcul WCAG 2.x sur fond uni ; ratios tronqués à une décimale. Seuils : 4,5:1 pour le texte, 3:1 pour les composants et le fil.

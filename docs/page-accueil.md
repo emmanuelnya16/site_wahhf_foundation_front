@@ -2,7 +2,7 @@
 
 La nouvelle page d'accueil, construite à côté de l'accueil actuel (/), qui ne change pas. Ce guide dit où se trouve chaque section et comment mettre à jour ce qui dépend de la fondation. Le détail du design est dans `docs/design-contract.md` (§16).
 
-## Les 10 sections
+## Les 11 sections
 
 Composants dans `src/pages/accueil/`, sauf mention contraire. Styles : `src/styles/accueil.css`. Textes en anglais et en allemand : `src/locales/accueil/en.json` et `de.json`.
 
@@ -17,7 +17,8 @@ Composants dans `src/pages/accueil/`, sauf mention contraire. Styles : `src/styl
 | 7 | Les 10 régions | `Regions.tsx`, `CarteRegions.tsx` | `src/data/regions.ts`. Textes repris de Notre impact |
 | 8 | En images (Apprendre, cultiver, grandir) | `AccueilEnImages.tsx`, `PanneauImage.tsx` : variante de l'accordéon de /, qui ne change pas | `src/data/journey.ts`, les mêmes données que /. Surtitre et titres courts du fil : `src/locales/accueil` (`images`) |
 | 9 | Événements | `Evenements.tsx`, `CarteEvenement.tsx` | `src/data/events.ts` |
-| 10 | Appel au don | `AppelDon.tsx` | Textes : `src/locales/accueil` (`don`). Domaines : `src/services/api.ts`. Chaque pastille ouvre Faire un don avec son domaine choisi (`/faire-un-don?affectation=sante`) |
+| 10 | Le film | `Film.tsx`, `FilmMotion.tsx` (le défilement, fichier à part), `FilmFenetre.tsx` : variante de la fenêtre du film du hero de /, qui ne change pas | `filmExtrait.ts`, écrit par `scripts/encode-film.mjs` (voir « Mettre le film en ligne »). Textes : `src/locales/accueil` (`film`) |
+| 11 | Appel au don | `AppelDon.tsx` | Textes : `src/locales/accueil` (`don`). Domaines : `src/services/api.ts`. Chaque pastille ouvre Faire un don avec son domaine choisi (`/faire-un-don?affectation=sante`) |
 
 L'assemblage et le bouton pause sont dans `AccueilPage.tsx`. Les photos viennent du catalogue : on modifie `docs/photos-catalogue.md`, puis on lance `npm run photos`.
 
@@ -78,6 +79,27 @@ Fichier : `src/data/events.ts`. La section Événements se remplit seule. Elle m
 
 Le compte à rebours, la page d'éphéméride et les liens se mettent à jour seuls.
 
+## Mettre le film en ligne
+
+La section « Le film » attend le fichier vidéo du film (question 207). En attendant, elle montre l'affiche et le bouton « Regarder le film », qui ouvre la fenêtre YouTube de / après accord. YouTube ne se charge jamais sans un clic.
+
+1. Déposez le film dans sa meilleure qualité : `docs/references/video/film-wahhf.mp4`.
+2. Lancez `node scripts/encode-film.mjs`. Il faut ffmpeg et ffprobe. Le script écrit :
+   - dans `public/film/`, quatre fichiers sans le son :
+     - `film-wahhf-1280.mp4` et `.webm` (ordinateur), 6 Mo au plus chacun ;
+     - `film-wahhf-720.mp4` et `.webm` (téléphone), 3 Mo au plus chacun ;
+   - `src/pages/accueil/filmExtrait.ts`, que la section lit.
+3. Le script garde le film entier, jusqu'à 64 s (avant le générique, comme le hero de /), si l'image reste nette dans ces poids. Sinon, il coupe 30 s à partir de 4 s. Pour choisir les 30 secondes : `--debut=12`. Le script affiche ce qu'il a fait et le poids de chaque fichier.
+4. `npm run check`, puis `npm run build`.
+
+Ce que fait la section avec ces fichiers :
+
+- **Au défilement :** l'extrait se charge à un écran de distance, joue quand le cadre est plein écran, puis se met en pause en se refermant.
+- **Sans défilement :** mouvement réduit, bouton pause du site, économie de données ou réseau 2G / 3G. Le cadre est ouvert et rien ne se télécharge avant un clic sur Lecture.
+- **Le son et le film entier :** toujours la fenêtre YouTube, avec les sous-titres dans la langue de la page s'ils existent.
+
+Pour refaire seulement les affiches AVIF, à partir des WebP du hero de / : `node scripts/encode-film.mjs --affiches-seulement`.
+
 ## Questions encore ouvertes pour cette page
 
 Numéros de `docs/contenus-a-fournir.md` :
@@ -105,4 +127,5 @@ Numéros de `docs/contenus-a-fournir.md` :
   - 175 : son lien d'inscription ;
   - 157 : la ville de l'Albatros Hotel, sur le ticket de la journée du 25 avril.
 - **Appel au don :** 206 : des exemples de montants, et ce qu'ils financent réellement.
+- **Film :** 207 : le fichier vidéo du film, et l'accord des personnes qu'on y voit (voir aussi 201).
 - **Mise en ligne :** 188 : laquelle des deux pages, / ou /accueil, restera l'accueil, et quand.

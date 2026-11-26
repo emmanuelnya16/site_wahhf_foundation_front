@@ -2,7 +2,7 @@
 
 Généré par `npm run i18n:relire` (scripts/traductions-a-relire.mjs) le 2026-11-26. Ne pas modifier à la main : corriger les fichiers de langue, puis relancer.
 
-Chaque texte allemand du site, face à son français. **Un astérisque (\*) marque les 166 textes dont le traducteur n'était pas sûr** (sens du français ambigu, terme juridique, nom d'institution, ton) : à relire en priorité. 1855 textes allemands au total.
+Chaque texte allemand du site, face à son français. **Un astérisque (\*) marque les 166 textes dont le traducteur n'était pas sûr** (sens du français ambigu, terme juridique, nom d'institution, ton) : à relire en priorité. 1865 textes allemands au total.
 
 - Ton choisi : vouvoiement (« Sie »), simple et chaleureux, pas du mot à mot.
 - Ne sont pas traduits : les noms propres et officiels (WAHHF Foundation, IROKO, Albatros Hotel, Ausbildung, Studienkolleg…), les adresses, les liens.
@@ -705,7 +705,7 @@ Fichier : `src/locales/accompagnement/de.json` (309 textes, dont 19 à relire).
 
 ## accueil
 
-Fichier : `src/locales/accueil/de.json` (113 textes, dont 9 à relire).
+Fichier : `src/locales/accueil/de.json` (123 textes, dont 9 à relire).
 
 | | Clé | Français | Allemand |
 |---|---|---|---|
@@ -822,6 +822,16 @@ Fichier : `src/locales/accueil/de.json` (113 textes, dont 9 à relire).
 |  | `images.courts.cultiver` | Cultiver | Anbauen |
 |  | `images.courts.s-engager` | S’engager | Engagieren |
 |  | `images.courts.grandir` | Grandir | Wachsen |
+|  | `film.surtitre` | En vidéo | Im Video |
+|  | `film.titre` | Le film de la fondation | Der Film der Stiftung |
+|  | `film.phrase` | Une minute pour découvrir la WAHHF Foundation, ses jeunes et ses actions au Cameroun. | Eine Minute, um die WAHHF Foundation, ihre jungen Menschen und ihre Arbeit in Kamerun kennenzulernen. |
+|  | `film.video` | Extrait du film WAHHF Foundation, sans le son | Ausschnitt aus dem Film der WAHHF Foundation, ohne Ton |
+|  | `film.pause` | Pause | Pause |
+|  | `film.lecture` | Lecture | Abspielen |
+|  | `film.lireExtrait` | Lire l’extrait, sans le son | Ausschnitt abspielen, ohne Ton |
+|  | `film.son` | Regarder avec le son | Mit Ton ansehen |
+|  | `film.film` | Regarder le film | Film ansehen |
+|  | `film.duree` | 1 min 10 | 1:10 Min. |
 
 ## actualites
 
