@@ -1065,6 +1065,21 @@ Lot 11.5 : `content-visibility: auto` retiré, téléphone compris (voir §16.6,
 
 **Photos** : l'accordéon garde les siennes ; ce sont celles de l'accueil qui changent quand elles se répètent. En ligne, l'arche du hero passe de A30 (« Apprendre » dans l'accordéon) à A12, et la carte Entrepreneuriat de B06 (« Cultiver ») à B24. A12 et B24 : trois affichages chacune sur le site.
 
+### 16.7 Retouches du lot 11.5 et section « Événements » (lot 11.6)
+
+*Votre brief du 26 novembre 2026.*
+
+**Photos du haut de page** (en ligne) : l'arche du hero prend A07 (les participants devant l'Albatros Hotel, recadrée sur l'enseigne et le groupe de gauche) ; A12, en portrait, passe dans la feuille de « Qui sommes-nous en bref ». Comparées côte à côte à 1 440 et 390 px avec l'inverse (A12 dans l'arche, A07 dans la feuille) : A07 donne au hero le lieu et la foule de la journée, A12 remplit la feuille sans perte. La taille d'image demandée suit l'orientation de la photo (arche et feuille).
+
+**Fond de « Qui sommes-nous en bref »** : la surface claire du thème (`--surface-raised` : papier en clair, canopée en sombre) ; le hero reste brume (humus en sombre). En sombre, les pastilles des icônes et la tache passent sur filet-nuit, un cran plus clair que la section.
+
+| Usage | Ratio |
+|---|---|
+| Clair : titre et noms des points (encre), texte (encre douce), surtitre et lien (forêt) sur papier | 14,35:1, 7,30:1, 9,15:1 |
+| Clair : icône (forêt) sur pastille sauge | 7,59:1 |
+| Sombre : titre (brume voilée), texte (lichen), surtitre et lien (soleil) sur canopée | 11,76:1, 6,82:1, 7,56:1 |
+| Sombre : icône (soleil) sur pastille filet-nuit | 5,82:1 |
+
 ## Annexe A : tableau des contrastes
 
 Calcul WCAG 2.x sur fond uni ; ratios tronqués à une décimale. Seuils : 4,5:1 pour le texte, 3:1 pour les composants et le fil.

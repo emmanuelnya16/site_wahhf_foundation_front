@@ -645,10 +645,19 @@
    2. Qui sommes-nous en bref
    ========================================================================== */
 .ac-qsn {
+  /* Lot 11.6 : la surface claire du thème (papier ; canopée en sombre), pour que la limite avec le hero (brume) se voie.
+     --ac-fond suit : le liseré du cercle reste de la couleur de la section. */
+  --ac-fond: var(--surface-raised);
   position: relative;
   isolation: isolate;
   overflow: clip;
   padding-block: clamp(3.5rem, 9vw, 7.5rem);
+  background: var(--ac-fond);
+}
+/* En sombre, la section est canopée : les pastilles des icônes et la tache passent un cran plus clair */
+.dark .ac-qsn {
+  --ac-sauge-plein: var(--color-filet-nuit);
+  --ac-tache-sauge: var(--color-filet-nuit);
 }
 .ac-qsn-grille {
   display: grid;

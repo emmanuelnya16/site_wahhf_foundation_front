@@ -7,13 +7,21 @@ import { photoOrFallback } from '../../lib/photos';
 import Entree from './Entree';
 import Lignes from './Lignes';
 
-/** A07 : participants devant l'Albatros Hotel ; A88 : trois aînés. Remplaçantes si l'une passe en attente d'accord. */
-const FEUILLE = photoOrFallback('A07', 'A30');
+/**
+ * A12 : un membre de l'équipe à côté du kakémono, en portrait (lot 11.6 ; A07 passe dans l'arche du hero) ; A88 : trois
+ * aînés. Remplaçantes si l'une passe en attente d'accord.
+ */
+const FEUILLE = photoOrFallback('A12', 'A13');
 const CERCLE = photoOrFallback('A88', 'A99');
 /** A99 dans le cercle : serrée sur le visage et le haut du polo */
 const CADRAGE_CERCLE: CSSProperties | undefined = CERCLE?.id === 'A99' ? { objectPosition: '42% 0', scale: '1.5', transformOrigin: '48% 12%' } : undefined;
-/** A07 dans la feuille : un peu à gauche, pour garder l'enseigne entière et le groupe */
-const CADRAGE_FEUILLE = '30% 70%';
+/** A12 dans la feuille : le visage et le kakémono en entier */
+const CADRAGE_FEUILLE = FEUILLE?.id === 'A12' ? '60% 30%' : 'center';
+/** Largeur affichée : une photo en hauteur remplit la feuille juste (32,5 rem au plus), une photo en largeur la déborde */
+const TAILLES_FEUILLE =
+  FEUILLE && FEUILLE.height > FEUILLE.width
+    ? '(min-width: 1024px) 34vw, (min-width: 600px) 32.5rem, 92vw'
+    : '(min-width: 1280px) 53rem, (min-width: 1024px) 60vw, (min-width: 36rem) 53rem, 162vw';
 
 const POINTS: { id: 'dignite' | 'integrite' | 'gratuite'; icon: LucideIcon }[] = [
   { id: 'dignite', icon: HeartHandshake },
@@ -55,7 +63,7 @@ export default function QuiSommesNous() {
           <div className="ac-qsn-photos">
             <div className="ac-feuille-place" data-ac-defile="8">
               <div className="ac-feuille">
-                {FEUILLE && <Photo photo={FEUILLE} sizes="(min-width: 1280px) 53rem, (min-width: 1024px) 60vw, (min-width: 36rem) 53rem, 162vw" fit="cover" radius="none" style={{ objectPosition: CADRAGE_FEUILLE }} />}
+                {FEUILLE && <Photo photo={FEUILLE} sizes={TAILLES_FEUILLE} fit="cover" radius="none" style={{ objectPosition: CADRAGE_FEUILLE }} />}
               </div>
             </div>
             <div className="ac-cercle-place" data-ac-defile="20">
