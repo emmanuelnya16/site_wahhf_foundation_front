@@ -2,7 +2,7 @@
 
 Généré par `npm run i18n:relire` (scripts/traductions-a-relire.mjs) le 2026-11-26. Ne pas modifier à la main : corriger les fichiers de langue, puis relancer.
 
-Chaque texte allemand du site, face à son français. **Un astérisque (\*) marque les 166 textes dont le traducteur n'était pas sûr** (sens du français ambigu, terme juridique, nom d'institution, ton) : à relire en priorité. 1866 textes allemands au total.
+Chaque texte allemand du site, face à son français. **Un astérisque (\*) marque les 166 textes dont le traducteur n'était pas sûr** (sens du français ambigu, terme juridique, nom d'institution, ton) : à relire en priorité. 1872 textes allemands au total.
 
 - Ton choisi : vouvoiement (« Sie »), simple et chaleureux, pas du mot à mot.
 - Ne sont pas traduits : les noms propres et officiels (WAHHF Foundation, IROKO, Albatros Hotel, Ausbildung, Studienkolleg…), les adresses, les liens.
@@ -704,7 +704,7 @@ Fichier : `src/locales/accompagnement/de.json` (309 textes, dont 19 à relire).
 
 ## accueil
 
-Fichier : `src/locales/accueil/de.json` (125 textes, dont 9 à relire).
+Fichier : `src/locales/accueil/de.json` (131 textes, dont 9 à relire).
 
 | | Clé | Français | Allemand |
 |---|---|---|---|
@@ -833,6 +833,12 @@ Fichier : `src/locales/accueil/de.json` (125 textes, dont 9 à relire).
 |  | `film.son` | Regarder avec le son | Mit Ton ansehen |
 |  | `film.film` | Regarder le film | Film ansehen |
 |  | `film.duree` | 1 min 10 | 1:10 Min. |
+|  | `partenaires.surtitre` | Ils nous font confiance | Sie vertrauen uns |
+|  | `partenaires.titre` | Nos partenaires | Unsere Partner |
+|  | `partenaires.lienExterne` | {{nom}} (nouvel onglet) | {{nom}} (neuer Tab) |
+|  | `partenaires.devenir.titre` | Devenir partenaire | Partner werden |
+|  | `partenaires.devenir.texte` | Entreprises, écoles, associations, collectivités : construisons ensemble des parcours pour les jeunes du Cameroun. | Unternehmen, Schulen, Vereine, Kommunen: Gestalten wir gemeinsam Wege für junge Menschen in Kamerun. |
+|  | `partenaires.devenir.bouton` | Proposer un partenariat | Partnerschaft vorschlagen |
 
 ## actualites
 

@@ -3508,6 +3508,166 @@
   }
 }
 
+/* --- 12. Nos partenaires (lot 12) : tout à la fin, sur brume (humus en sombre) entre l'appel au don (sauge) et le pied de
+   page (nuit). Cartes coin feuille ; logos en niveaux de gris, en couleur au survol ; sans logo, le nom en texte. Moins
+   de 6 partenaires : grille fixe centrée ; à partir de 6 (.is-bande) : deux rangées qui défilent en sens opposés. --- */
+.ac-partenaires {
+  padding-block: clamp(3.5rem, 9vw, 7.5rem);
+  background: var(--ac-fond);
+}
+.ac-partenaires-grille {
+  display: grid;
+  gap: 2.5rem;
+}
+.ac-partenaires-liste {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+.ac-partenaire {
+  display: grid;
+  place-items: center;
+  width: 14rem;
+  max-width: 100%;
+  height: 7rem;
+  padding: 1.25rem 1.75rem;
+  border: 1px solid var(--ac-carte-bord);
+  border-radius: 0.75rem 3rem 0.75rem 0.75rem;
+  background: var(--ac-carte);
+  box-shadow: 0 10px 26px -20px color-mix(in srgb, var(--color-encre) 45%, transparent);
+}
+.ac-partenaire-logo {
+  max-width: 100%;
+  max-height: 3.5rem;
+  object-fit: contain;
+  filter: grayscale(1);
+  opacity: 0.8;
+  transition: filter var(--dur-fast) var(--ease-reveal), opacity var(--dur-fast) var(--ease-reveal);
+}
+.ac-partenaire-nom {
+  font-family: var(--ac-titre);
+  font-size: 1.375rem;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: var(--ac-texte-doux);
+  transition: color var(--dur-fast) var(--ease-reveal);
+}
+a.ac-partenaire:focus-visible {
+  outline: 3px solid var(--ac-accent);
+  outline-offset: 3px;
+}
+a.ac-partenaire:focus-visible .ac-partenaire-logo {
+  filter: none;
+  opacity: 1;
+}
+a.ac-partenaire:focus-visible .ac-partenaire-nom {
+  color: var(--ac-texte);
+}
+@media (hover: hover) {
+  .ac-partenaire:hover .ac-partenaire-logo {
+    filter: none;
+    opacity: 1;
+  }
+  .ac-partenaire:hover .ac-partenaire-nom {
+    color: var(--ac-texte);
+  }
+}
+/* L'encadré « Devenir partenaire » */
+.ac-partenaires-encadre {
+  display: grid;
+  justify-items: start;
+  gap: 1rem;
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  border-radius: 0.75rem 3rem 0.75rem 0.75rem;
+  background: var(--ac-sauge-plein);
+}
+.ac-partenaires-encadre-titre {
+  font-family: var(--ac-titre);
+  font-size: 1.375rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.ac-partenaires-encadre-texte {
+  max-width: 34rem;
+  line-height: 1.6;
+}
+/* Ordinateur : le titre, puis les logos, à gauche ; l'encadré à droite */
+@media (min-width: 1024px) {
+  .ac-partenaires-grille {
+    grid-template-columns: minmax(0, 1fr) 22rem;
+    grid-template-areas: 'entete encadre' 'logos encadre';
+    align-items: center;
+    column-gap: 3.5rem;
+  }
+  .ac-partenaires-entete {
+    grid-area: entete;
+    align-self: end;
+  }
+  .ac-partenaires-logos {
+    grid-area: logos;
+    align-self: start;
+    min-width: 0;
+  }
+  .ac-partenaires-encadre {
+    grid-area: encadre;
+  }
+}
+/* À partir de 6 partenaires : chaque rangée est une piste de deux copies qui glisse de la moitié de sa largeur */
+.ac-partenaires-logos.is-bande {
+  display: grid;
+  gap: 1rem;
+}
+.is-bande .ac-partenaires-rangee {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+.is-bande .ac-partenaires-piste {
+  display: flex;
+  width: max-content;
+}
+.is-bande .ac-partenaires-liste {
+  flex-wrap: nowrap;
+  padding-right: 1rem;
+}
+@keyframes ac-partenaires-defile {
+  to {
+    translate: -50% 0;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .is-bande .ac-partenaires-piste {
+    animation: ac-partenaires-defile 55s linear infinite;
+    /* Bouton pause du site, onglet caché, section hors de l'écran (--ac-lecture) */
+    animation-play-state: var(--ac-lecture);
+  }
+  .is-bande .is-inverse .ac-partenaires-piste {
+    animation-direction: reverse;
+  }
+  .is-bande .ac-partenaires-rangee:is(:hover, :focus-within) .ac-partenaires-piste {
+    animation-play-state: paused;
+  }
+}
+/* Mouvement réduit : la bande devient une grille fixe centrée */
+@media (prefers-reduced-motion: reduce) {
+  .is-bande .ac-partenaires-rangee {
+    overflow: visible;
+    mask-image: none;
+  }
+  .is-bande .ac-partenaires-piste {
+    width: auto;
+  }
+  .is-bande .ac-partenaires-liste {
+    flex-wrap: wrap;
+    padding-right: 0;
+  }
+  .is-bande .is-copie {
+    display: none;
+  }
+}
+
 /* --- Sections (lot 11.2) : entrées jouées une fois, quand le bloc arrive à l'écran (Entree.tsx) --- */
 @keyframes ac-feuille {
   from {

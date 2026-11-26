@@ -229,5 +229,15 @@
     "son": "Mit Ton ansehen",
     "film": "Film ansehen",
     "duree": "1:10 Min."
+  },
+  "partenaires": {
+    "surtitre": "Sie vertrauen uns",
+    "titre": "Unsere Partner",
+    "lienExterne": "{{nom}} (neuer Tab)",
+    "devenir": {
+      "titre": "Partner werden",
+      "texte": "Unternehmen, Schulen, Vereine, Kommunen: Gestalten wir gemeinsam Wege für junge Menschen in Kamerun.",
+      "bouton": "Partnerschaft vorschlagen"
+    }
   }
 }

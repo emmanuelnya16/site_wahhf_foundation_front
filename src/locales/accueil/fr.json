@@ -151,5 +151,15 @@
     "son": "Regarder avec le son",
     "film": "Regarder le film",
     "duree": "1 min 10"
+  },
+  "partenaires": {
+    "surtitre": "Ils nous font confiance",
+    "titre": "Nos partenaires",
+    "lienExterne": "{{nom}} (nouvel onglet)",
+    "devenir": {
+      "titre": "Devenir partenaire",
+      "texte": "Entreprises, écoles, associations, collectivités : construisons ensemble des parcours pour les jeunes du Cameroun.",
+      "bouton": "Proposer un partenariat"
+    }
   }
 }

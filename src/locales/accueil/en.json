@@ -221,5 +221,15 @@
     "son": "Watch with sound",
     "film": "Watch the film",
     "duree": "1 min 10 s"
+  },
+  "partenaires": {
+    "surtitre": "They trust us",
+    "titre": "Our partners",
+    "lienExterne": "{{nom}} (new tab)",
+    "devenir": {
+      "titre": "Become a partner",
+      "texte": "Companies, schools, associations, local authorities: let’s build pathways together for young people in Cameroon.",
+      "bouton": "Propose a partnership"
+    }
   }
 }
