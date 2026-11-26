@@ -1,8 +1,8 @@
 # Traductions allemandes à relire
 
-Généré par `npm run i18n:relire` (scripts/traductions-a-relire.mjs) le 2026-11-22. Ne pas modifier à la main : corriger les fichiers de langue, puis relancer.
+Généré par `npm run i18n:relire` (scripts/traductions-a-relire.mjs) le 2026-11-26. Ne pas modifier à la main : corriger les fichiers de langue, puis relancer.
 
-Chaque texte allemand du site, face à son français. **Un astérisque (\*) marque les 157 textes dont le traducteur n'était pas sûr** (sens du français ambigu, terme juridique, nom d'institution, ton) : à relire en priorité. 1739 textes allemands au total.
+Chaque texte allemand du site, face à son français. **Un astérisque (\*) marque les 166 textes dont le traducteur n'était pas sûr** (sens du français ambigu, terme juridique, nom d'institution, ton) : à relire en priorité. 1855 textes allemands au total.
 
 - Ton choisi : vouvoiement (« Sie »), simple et chaleureux, pas du mot à mot.
 - Ne sont pas traduits : les noms propres et officiels (WAHHF Foundation, IROKO, Albatros Hotel, Ausbildung, Studienkolleg…), les adresses, les liens.
@@ -12,7 +12,7 @@ Chaque texte allemand du site, face à son français. **Un astérisque (\*) marq
 
 ## Textes communs (en-tête, pied de page, accueil, composants)
 
-Fichier : `src/locales/de.json` (369 textes, dont 40 à relire).
+Fichier : `src/locales/de.json` (370 textes, dont 40 à relire).
 
 | | Clé | Français | Allemand |
 |---|---|---|---|
@@ -20,6 +20,7 @@ Fichier : `src/locales/de.json` (369 textes, dont 40 à relire).
 |  | `brand.fullName` | We Are Here Help Foundation | We Are Here Help Foundation |
 |  | `brand.branch` | Branche sociale du groupe IROKO | Sozialer Zweig der IROKO-Gruppe |
 |  | `brand.tagline` | Fondation camerouno-allemande à but non lucratif | Gemeinnützige kamerunisch-deutsche Stiftung |
+|  | `nav.home` | Accueil | Startseite |
 |  | `nav.about` | Qui sommes-nous | Über uns |
 |  | `nav.actions` | Nos actions | Unsere Arbeit |
 |  | `nav.impact` | Notre impact | Unsere Wirkung |
@@ -702,6 +703,126 @@ Fichier : `src/locales/accompagnement/de.json` (309 textes, dont 19 à relire).
 |  | `contenu.pays.albanie.officialLinks[0].label` | e-Visa Albania — Système officiel de visa en ligne | e-Visa Albania — Offizielles Online-Visasystem |
 |  | `contenu.pays.albanie.officialLinks[1].label` | e-Albania — Portail officiel des services publics | e-Albania — Offizielles Portal für öffentliche Dienstleistungen |
 
+## accueil
+
+Fichier : `src/locales/accueil/de.json` (113 textes, dont 9 à relire).
+
+| | Clé | Français | Allemand |
+|---|---|---|---|
+|  | `seo.title` | Accueil — Autonomiser la jeunesse, transformer les communautés | Startseite — Junge Menschen stärken, Gemeinschaften verändern |
+|  | `seo.description` | WAHHF Foundation accompagne les jeunes et les communautés vulnérables du Cameroun : éducation, santé, entrepreneuriat, environnement et mobilité vers l’Europe. | Die WAHHF Foundation begleitet junge Menschen und benachteiligte Gemeinschaften in Kamerun: Bildung, Gesundheit, Unternehmertum, Umwelt und Mobilität nach Europa. |
+|  | `hero.titre[0]` | Autonomiser | &lt;accent>Junge Menschen&lt;/accent> |
+|  | `hero.titre[1]` | &lt;accent>la jeunesse&lt;/accent>, | stärken, |
+|  | `hero.titre[2]` | transformer les | Gemeinschaften |
+|  | `hero.titre[3]` | communautés. | verändern. |
+| \* | `hero.intro` | WAHHF Foundation accompagne les jeunes et les communautés vulnérables du Cameroun : éducation, santé, entrepreneuriat, environnement et mobilité vers l’Europe. | Die WAHHF Foundation begleitet junge Menschen und benachteiligte Gemeinschaften in Kamerun: Bildung, Gesundheit, Unternehmertum, Umwelt und Mobilität nach Europa. <br>_Note : « communautés vulnérables » rendu par « benachteiligte Gemeinschaften »_ |
+|  | `hero.actions` | Découvrir nos actions | Unsere Arbeit entdecken |
+|  | `hero.rejoindre` | Nous rejoindre | Mitmachen |
+|  | `hero.equipe` | Une équipe entre le Cameroun et l’Allemagne | Ein Team zwischen Kamerun und Deutschland |
+|  | `hero.equipeSuite` | au service de la jeunesse | im Dienst der Jugend |
+| \* | `hero.pays` | pays d’Europe où nous orientons les jeunes | Länder Europas, für die wir jungen Menschen Orientierung geben <br>_Note : « pays d’Europe où nous orientons les jeunes » rendu par « Länder Europas, für die wir jungen Menschen Orientierung geben »_ |
+|  | `hero.domaines` | domaines d’action | Arbeitsbereiche |
+|  | `hero.evenement` | Prochain événement | Nächste Veranstaltung |
+|  | `qsn.surtitre` | Qui sommes-nous | Über uns |
+|  | `qsn.titre[0]` | Une fondation engagée | Eine Stiftung für |
+|  | `qsn.titre[1]` | pour un avenir digne | eine Zukunft in Würde |
+|  | `qsn.texte` | WAHHF Foundation est la branche sociale du groupe IROKO. Basée à Yaoundé et à Douala, avec une coordination en Allemagne, elle accompagne les jeunes vers l’autonomie : éducation, santé, entrepreneuriat, environnement, droits et inclusion, et mobilité vers l’Europe. | Die WAHHF Foundation ist der soziale Zweig der IROKO-Gruppe. Mit Sitz in Yaoundé und Douala und einer Koordination in Deutschland begleitet sie junge Menschen in die Selbstständigkeit: Bildung, Gesundheit, Unternehmertum, Umwelt, Rechte und Teilhabe sowie Mobilität nach Europa. |
+| \* | `qsn.citation` | « Le changement doit venir de nous-⁠mêmes. » | „Der Wandel muss von uns selbst ausgehen.“ <br>_Note : « Le changement doit venir de nous-mêmes » rendu par « Der Wandel muss von uns selbst ausgehen » (devise à valider, question 190)_ |
+|  | `qsn.points.dignite.titre` | Dignité et respect | Würde und Respekt |
+|  | `qsn.points.dignite.texte` | Chaque jeune est acteur de son parcours. | Jeder junge Mensch gestaltet seinen Weg selbst. |
+|  | `qsn.points.integrite.titre` | Intégrité et vérité | Integrität und Wahrheit |
+|  | `qsn.points.integrite.texte` | Une information vérifiée, jamais de fausses promesses. | Geprüfte Informationen, niemals falsche Versprechen. |
+|  | `qsn.points.gratuite.titre` | Gratuité | Kostenlos |
+|  | `qsn.points.gratuite.texte` | L’académie d’allemand et d’anglais, de A1 à C1, sans frais. | Die Deutsch- und Englischakademie, von A1 bis C1, ohne Gebühren. |
+|  | `qsn.lien` | Découvrir la fondation | Die Stiftung kennenlernen |
+|  | `chiffres.surtitre` | La fondation en chiffres | Die Stiftung in Zahlen |
+|  | `chiffres.titre[0]` | Ce qui est | Was bereits |
+|  | `chiffres.titre[1]` | déjà en place | aufgebaut ist |
+| \* | `chiffres.note` | Les chiffres d’impact (jeunes accompagnés, actions menées) seront publiés ici dès qu’ils seront datés et vérifiés. | Wirkungszahlen (begleitete junge Menschen, durchgeführte Aktionen) werden hier veröffentlicht, sobald sie datiert und geprüft sind. <br>_Note : « chiffres d’impact » rendu par « Wirkungszahlen », « actions menées » par « durchgeführte Aktionen »_ |
+|  | `chiffres.source` | Au {{date}}. Source : {{source}} | Stand: {{date}}. Quelle: {{source}} |
+|  | `domaines.surtitre` | Nos domaines d’action | Unsere Arbeitsbereiche |
+|  | `domaines.titre` | Six domaines pour bâtir l’autonomie | Sechs Bereiche für mehr Selbstständigkeit |
+|  | `domaines.compteur` | Domaine | Bereich |
+|  | `domaines.rubrique` | Domaine {{n}} | Bereich {{n}} |
+|  | `domaines.lien` | Découvrir le domaine | Bereich entdecken |
+|  | `domaines.lienDe` | Découvrir le domaine : {{titre}} | Bereich entdecken: {{titre}} |
+|  | `domaines.consigne` | Faites défiler pour parcourir les 6 domaines · WAHHF Foundation | Scrollen Sie durch die 6 Bereiche · WAHHF Foundation |
+|  | `domaines.fin.rubrique` | Tous nos domaines | Alle unsere Bereiche |
+| \* | `domaines.fin.titre` | Six domaines, un même cap | Sechs Bereiche, ein Kurs <br>_Note : « Six domaines, un même cap » rendu par « Sechs Bereiche, ein Kurs »_ |
+|  | `domaines.fin.lien` | Voir toutes nos actions | Unsere gesamte Arbeit ansehen |
+|  | `projet.soutenir` | Soutenir ce projet | Dieses Projekt unterstützen |
+|  | `projet.enSavoirPlus` | En savoir plus | Mehr erfahren |
+|  | `projet.tampon` | Gratuit | Kostenlos |
+|  | `parcours.surtitre` | Témoignages | Erfahrungsberichte |
+|  | `parcours.titre[0]` | Des parcours | Wege, |
+|  | `parcours.titre[1]` | qui inspirent | die inspirieren |
+|  | `parcours.texte` | Des jeunes racontent, avec leurs mots, ce qu’ils ont construit avec la fondation. | Junge Menschen erzählen mit ihren eigenen Worten, was sie mit der Stiftung aufgebaut haben. |
+|  | `parcours.lien` | Découvrir d’autres histoires | Weitere Geschichten entdecken |
+|  | `parcours.raconter` | Raconter mon parcours | Meinen Weg erzählen |
+|  | `parcours.vierge` | Et vous ? Votre parcours peut encourager d’autres jeunes. | Und Sie? Ihr Weg kann andere junge Menschen ermutigen. |
+|  | `parcours.citation` | « {{citation}} » | „{{citation}}“ |
+|  | `parcours.age` | {{age}} ans | {{age}} Jahre |
+|  | `parcours.role` | carrousel | Karussell |
+|  | `parcours.region` | Témoignages | Erfahrungsberichte |
+|  | `parcours.position` | {{n}} sur {{total}} | {{n}} von {{total}} |
+|  | `parcours.precedent` | Témoignage précédent | Vorheriger Bericht |
+|  | `parcours.suivant` | Témoignage suivant | Nächster Bericht |
+|  | `parcours.annonce` | Témoignage {{n}} sur {{total}} | Bericht {{n}} von {{total}} |
+|  | `parcours.appel.surtitre` | Des parcours qui inspirent | Wege, die inspirieren |
+|  | `parcours.appel.titre[0]` | Votre histoire peut | Ihre Geschichte kann |
+|  | `parcours.appel.titre[1]` | en inspirer d’autres | andere inspirieren |
+|  | `parcours.appel.texte` | Vous avez suivi un programme de la fondation ? Racontez-nous votre parcours : avec votre accord, il pourra encourager d’autres jeunes. | Haben Sie an einem Programm der Stiftung teilgenommen? Erzählen Sie uns Ihren Weg: Mit Ihrer Einwilligung kann er andere junge Menschen ermutigen. |
+|  | `contenu.chiffres.pays.libelle` | Pays d’Europe | Länder Europas |
+|  | `contenu.chiffres.pays.sousTexte` | Fiches d’orientation vérifiées | Geprüfte Länderseiten |
+|  | `contenu.chiffres.domaines.libelle` | Domaines d’action | Arbeits­bereiche |
+|  | `contenu.chiffres.domaines.sousTexte` | De l’éducation à la mobilité | Von der Bildung bis zur Mobilität |
+|  | `contenu.chiffres.niveaux.libelle` | Niveaux d’allemand et d’anglais | Niveaus in Deutsch und Englisch |
+|  | `contenu.chiffres.niveaux.sousTexte` | De A1 à C1, gratuits | Von A1 bis C1, kostenlos |
+|  | `contenu.chiffres.villes.libelle` | Villes au Cameroun | Städte in Kamerun |
+|  | `contenu.chiffres.villes.sousTexte` | Nos équipes à Yaoundé et Douala, coordination en Allemagne | Unsere Teams in Yaoundé und Douala, Koordination in Deutschland |
+|  | `contenu.projets.wahhf-on-wheel.surtitre` | Projet phare | Leuchtturmprojekt |
+|  | `contenu.projets.wahhf-on-wheel.accroche` | la santé au plus<br>près des villages | Gesundheit ganz nah<br>an den Dörfern |
+|  | `contenu.projets.wahhf-on-wheel.texte` | Notre clinique mobile parcourt les zones les plus reculées du Cameroun pour offrir des soins primaires gratuits : consultations, vaccinations, dépistages et sensibilisation à l’hygiène. | Unsere mobile Klinik fährt in die entlegensten Gebiete Kameruns und bietet kostenlose Grundversorgung: Sprechstunden, Impfungen, Vorsorgeuntersuchungen und Hygieneaufklärung. |
+| \* | `contenu.projets.wahhf-on-wheel.jalons[0].libelle` | villages visités chaque mois | besuchte Dörfer pro Monat <br>_Note : « santé communautaire » rendu par « Gemeindegesundheit » (exemple, non confirmé)_ |
+| \* | `contenu.projets.wahhf-on-wheel.jalons[1].valeur` | 2 000+ | 2.000+ <br>_Note : « santé communautaire » rendu par « Gemeindegesundheit » (exemple, non confirmé)_ |
+| \* | `contenu.projets.wahhf-on-wheel.jalons[1].libelle` | patients pris en charge | versorgte Patienten <br>_Note : « santé communautaire » rendu par « Gemeindegesundheit » (exemple, non confirmé)_ |
+| \* | `contenu.projets.wahhf-on-wheel.jalons[2].libelle` | jeunes formés en santé communautaire | junge Menschen in Gemeinde­gesundheit geschult <br>_Note : « santé communautaire » rendu par « Gemeindegesundheit » (exemple, non confirmé)_ |
+|  | `contenu.projets.academie.surtitre` | Projet phare | Leuchtturmprojekt |
+|  | `contenu.projets.academie.titre` | L’Académie de langues | Die Sprachakademie |
+|  | `contenu.projets.academie.accroche` | l’Europe se prépare ici | der Weg nach Europa<br>beginnt hier |
+|  | `contenu.projets.academie.texte` | Un programme gratuit d’apprentissage de l’allemand et de l’anglais, du niveau A1 au niveau C1, avec des guides d’orientation vérifiés vers 10 pays européens. | Ein kostenloses Programm zum Lernen von Deutsch und Englisch, von Niveau A1 bis Niveau C1, mit geprüften Länderseiten zu 10 europäischen Ländern. |
+|  | `contenu.projets.academie.jalons[0].libelle` | Découverte | Einstieg |
+|  | `contenu.projets.academie.jalons[1].libelle` | Échanges courants | Alltags­gespräche |
+|  | `contenu.projets.academie.jalons[2].libelle` | Autonomie | Selbst­ständigkeit |
+|  | `contenu.projets.academie.jalons[3].libelle` | Indépendance | Unabhängigkeit |
+|  | `contenu.projets.academie.jalons[4].libelle` | Maîtrise | Sprach­beherrschung |
+|  | `contenu.temoignages.marie.citation` | Le mentorat de WAHHF m’a donné la confiance et les outils pour lancer mon activité de transformation agroalimentaire. | Das Mentoring von WAHHF hat mir das Vertrauen und die Werkzeuge gegeben, um meinen Betrieb für Lebensmittelverarbeitung zu starten. |
+|  | `contenu.temoignages.marie.domaine` | Jeunesse & entrepreneuriat | Jugend & Unternehmertum |
+|  | `contenu.temoignages.marie.resume` | De l’agriculture urbaine à la création de sa micro-entreprise, Marie a suivi le programme de mentorat pendant 12 mois. | Von der städtischen Landwirtschaft bis zur Gründung ihres Kleinbetriebs hat Marie 12 Monate lang am Mentoring-Programm teilgenommen. |
+|  | `contenu.temoignages.marie.resultat` | Entreprise lancée, 3 emplois créés | Betrieb gegründet, 3 Arbeitsplätze geschaffen |
+|  | `regions.surtitre` | Notre présence | Unsere Präsenz |
+|  | `regions.titre[0]` | Basée à Yaoundé | In Yaoundé und |
+|  | `regions.titre[1]` | et Douala, tournée | Douala zu Hause, |
+|  | `regions.titre[2]` | vers l’Europe | offen für Europa |
+|  | `regions.lien` | Voir notre impact | Unsere Wirkung ansehen |
+|  | `evenements.titre[0]` | Rencontrons-nous | Lernen wir uns kennen |
+|  | `evenements.intro` | Des journées pour rencontrer la fondation, ses équipes et ses partenaires. | Tage, an denen Sie die Stiftung, ihre Teams und ihre Partner kennenlernen können. |
+|  | `evenements.lien` | Tous les événements | Alle Veranstaltungen |
+|  | `evenements.bientot` | Le prochain rendez-vous sera annoncé très bientôt | Der nächste Termin wird in Kürze bekannt gegeben |
+|  | `evenements.voir` | {{titre}}, voir l’événement | {{titre}}, zur Veranstaltung |
+|  | `don.surtitre` | Soutenir la fondation | Die Stiftung unterstützen |
+|  | `don.titre[0]` | Chaque geste renforce | Jede Geste stärkt |
+|  | `don.titre[1]` | un parcours de vie | einen Lebensweg |
+|  | `don.texte` | Votre don soutient nos actions au Cameroun dans nos six domaines : éducation, santé, entrepreneuriat des jeunes, environnement, droits et inclusion, mobilité et langues. Vous choisissez le domaine que vous voulez soutenir, ou vous laissez la fondation l’affecter là où le besoin est le plus urgent. | Ihre Spende unterstützt unsere Arbeit in Kamerun in unseren sechs Bereichen: Bildung, Gesundheit, Unternehmertum junger Menschen, Umwelt, Rechte und Teilhabe, Mobilität und Sprachen. Sie wählen den Bereich, den Sie unterstützen möchten, oder Sie überlassen es der Stiftung, Ihre Spende dort einzusetzen, wo der Bedarf am dringendsten ist. |
+|  | `don.confiance` | Le groupe IROKO couvre nos frais de fonctionnement et d’enseignement. | Die IROKO-Gruppe deckt unsere Betriebs- und Unterrichtskosten. |
+|  | `don.domaine` | Soutenir ce domaine : {{domaine}} | Diesen Bereich unterstützen: {{domaine}} |
+|  | `images.surtitre` | En images | In Bildern |
+|  | `images.courts.apprendre` | Apprendre | Lernen |
+|  | `images.courts.chanter-ensemble` | Chanter | Singen |
+|  | `images.courts.cultiver` | Cultiver | Anbauen |
+|  | `images.courts.s-engager` | S’engager | Engagieren |
+|  | `images.courts.grandir` | Grandir | Wachsen |
+
 ## actualites
 
 Fichier : `src/locales/actualites/de.json` (39 textes, dont 11 à relire).
@@ -836,7 +957,7 @@ Fichier : `src/locales/agir/de.json` (79 textes, dont 6 à relire).
 
 ## contact-page
 
-Fichier : `src/locales/contact-page/de.json` (40 textes, dont 4 à relire).
+Fichier : `src/locales/contact-page/de.json` (41 textes, dont 4 à relire).
 
 | | Clé | Français | Allemand |
 |---|---|---|---|
@@ -866,6 +987,7 @@ Fichier : `src/locales/contact-page/de.json` (40 textes, dont 4 à relire).
 |  | `motifs.benevole` | Je souhaite devenir bénévole | Ich möchte mich ehrenamtlich engagieren |
 |  | `motifs.partenaire` | Partenaire ou institution | Partner oder Institution |
 |  | `motifs.presse` | Presse et médias | Presse und Medien |
+|  | `motifs.parcours` | Partager mon parcours | Meine Geschichte teilen |
 |  | `motifs.autre` | Autre demande | Anderes Anliegen |
 |  | `errors.motif` | Choisissez le motif de votre message. | Wählen Sie das Anliegen Ihrer Nachricht. |
 |  | `errors.name` | Saisissez votre nom complet ou celui de votre structure. | Geben Sie Ihren vollständigen Namen oder den Namen Ihrer Organisation ein. |
@@ -976,7 +1098,7 @@ Fichier : `src/locales/equipe/de.json` (21 textes, dont 6 à relire).
 
 ## events
 
-Fichier : `src/locales/events/de.json` (277 textes, dont 19 à relire).
+Fichier : `src/locales/events/de.json` (278 textes, dont 19 à relire).
 
 | | Clé | Français | Allemand |
 |---|---|---|---|
@@ -1072,6 +1194,7 @@ Fichier : `src/locales/events/de.json` (277 textes, dont 19 à relire).
 |  | `faits.prix` | {{prix}}. | {{prix}}. |
 |  | `faits.prixInconnu` | Le prix est annoncé très bientôt. | Der Preis wird in Kürze bekannt gegeben. |
 | \* | `faits.deVille` |  de {{ville}} |  aus {{ville}} <br>_Note : « repartez de {{ville}} avec un plan » rendu par « nehmen Sie aus {{ville}} einen Plan mit nach Hause »_ |
+|  | `contenu.road-to-europe.bandeauLabel` | Les 10 pays de Road to Europe | Die 10 Länder von Road to Europe |
 |  | `contenu.road-to-europe.pastille.texte` | Le rendez-vous qui lance votre projet européen | Der Termin, der Ihr Europa-Projekt ins Rollen bringt |
 |  | `contenu.road-to-europe.titre` | Votre route vers<br>l’Europe<br>commence ici. | Ihr Weg nach<br>Europa<br>beginnt hier. |
 |  | `contenu.road-to-europe.motAccent` | l’Europe | Europa |
@@ -1628,7 +1751,7 @@ Fichier : `src/locales/notre-impact/de.json` (12 textes, dont 2 à relire).
 |  | `transparency.subtitle` | Découvrez comment les ressources du groupe IROKO et les dons sont affectés aux missions sociales. | Erfahren Sie, wie die Mittel der IROKO-Gruppe und die Spenden für die sozialen Aufgaben eingesetzt werden. |
 |  | `transparency.cta` | Voir la page Transparence | Zur Seite Transparenz |
 |  | `support.title` | Soutenir nos actions | Unsere Arbeit unterstützen |
-|  | `support.subtitle` | Votre don finance des cours d’allemand /anglais et nos actions au Cameroun. Vous pouvez choisir le domaine qu’il soutient. | Ihre Spende finanziert Deutsch- und Englischkurse und unsere Arbeit in Kamerun. Sie können wählen, welchen Bereich sie unterstützt. |
+|  | `support.subtitle` | Votre don soutient nos actions au Cameroun dans nos six domaines : éducation, santé, entrepreneuriat des jeunes, environnement, droits et inclusion, mobilité et langues. Vous choisissez le domaine que vous voulez soutenir, ou vous laissez la fondation l’affecter là où le besoin est le plus urgent. | Ihre Spende unterstützt unsere Arbeit in Kamerun in unseren sechs Bereichen: Bildung, Gesundheit, Unternehmertum junger Menschen, Umwelt, Rechte und Teilhabe, Mobilität und Sprachen. Sie wählen den Bereich, den Sie unterstützen möchten, oder Sie überlassen es der Stiftung, Ihre Spende dort einzusetzen, wo der Bedarf am dringendsten ist. |
 
 ## partenaires
 

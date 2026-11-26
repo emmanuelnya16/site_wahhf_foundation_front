@@ -1,0 +1,151 @@
+{
+  "seo": {
+    "title": "Accueil — Autonomiser la jeunesse, transformer les communautés",
+    "description": "WAHHF Foundation accompagne les jeunes et les communautés vulnérables du Cameroun : éducation, santé, entrepreneuriat, environnement et mobilité vers l’Europe."
+  },
+  "hero": {
+    "titre": [
+      "Autonomiser",
+      "<accent>la jeunesse</accent>,",
+      "transformer les",
+      "communautés."
+    ],
+    "intro": "WAHHF Foundation accompagne les jeunes et les communautés vulnérables du Cameroun : éducation, santé, entrepreneuriat, environnement et mobilité vers l’Europe.",
+    "actions": "Découvrir nos actions",
+    "rejoindre": "Nous rejoindre",
+    "equipe": "Une équipe entre le Cameroun et l’Allemagne",
+    "equipeSuite": "au service de la jeunesse",
+    "pays": "pays d’Europe où nous orientons les jeunes",
+    "domaines": "domaines d’action",
+    "evenement": "Prochain événement"
+  },
+  "qsn": {
+    "surtitre": "Qui sommes-nous",
+    "titre": [
+      "Une fondation engagée",
+      "pour un avenir digne"
+    ],
+    "texte": "WAHHF Foundation est la branche sociale du groupe IROKO. Basée à Yaoundé et à Douala, avec une coordination en Allemagne, elle accompagne les jeunes vers l’autonomie : éducation, santé, entrepreneuriat, environnement, droits et inclusion, et mobilité vers l’Europe.",
+    "citation": "« Le changement doit venir de nous-⁠mêmes. »",
+    "points": {
+      "dignite": {
+        "titre": "Dignité et respect",
+        "texte": "Chaque jeune est acteur de son parcours."
+      },
+      "integrite": {
+        "titre": "Intégrité et vérité",
+        "texte": "Une information vérifiée, jamais de fausses promesses."
+      },
+      "gratuite": {
+        "titre": "Gratuité",
+        "texte": "L’académie d’allemand et d’anglais, de A1 à C1, sans frais."
+      }
+    },
+    "lien": "Découvrir la fondation"
+  },
+  "chiffres": {
+    "surtitre": "La fondation en chiffres",
+    "titre": [
+      "Ce qui est",
+      "déjà en place"
+    ],
+    "note": "Les chiffres d’impact (jeunes accompagnés, actions menées) seront publiés ici dès qu’ils seront datés et vérifiés.",
+    "source": "Au {{date}}. Source : {{source}}"
+  },
+  "domaines": {
+    "surtitre": "Nos domaines d’action",
+    "titre": "Six domaines pour bâtir l’autonomie",
+    "compteur": "Domaine",
+    "rubrique": "Domaine {{n}}",
+    "lien": "Découvrir le domaine",
+    "lienDe": "Découvrir le domaine : {{titre}}",
+    "consigne": "Faites défiler pour parcourir les 6 domaines · WAHHF Foundation",
+    "fin": {
+      "rubrique": "Tous nos domaines",
+      "titre": "Six domaines, un même cap",
+      "lien": "Voir toutes nos actions"
+    }
+  },
+  "projet": {
+    "soutenir": "Soutenir ce projet",
+    "enSavoirPlus": "En savoir plus",
+    "tampon": "Gratuit"
+  },
+  "parcours": {
+    "surtitre": "Témoignages",
+    "titre": [
+      "Des parcours",
+      "qui inspirent"
+    ],
+    "texte": "Des jeunes racontent, avec leurs mots, ce qu’ils ont construit avec la fondation.",
+    "lien": "Découvrir d’autres histoires",
+    "raconter": "Raconter mon parcours",
+    "vierge": "Et vous ? Votre parcours peut encourager d’autres jeunes.",
+    "citation": "« {{citation}} »",
+    "age": "{{age}} ans",
+    "role": "carrousel",
+    "region": "Témoignages",
+    "position": "{{n}} sur {{total}}",
+    "precedent": "Témoignage précédent",
+    "suivant": "Témoignage suivant",
+    "annonce": "Témoignage {{n}} sur {{total}}",
+    "appel": {
+      "surtitre": "Des parcours qui inspirent",
+      "titre": [
+        "Votre histoire peut",
+        "en inspirer d’autres"
+      ],
+      "texte": "Vous avez suivi un programme de la fondation ? Racontez-nous votre parcours : avec votre accord, il pourra encourager d’autres jeunes."
+    }
+  },
+  "regions": {
+    "surtitre": "Notre présence",
+    "titre": [
+      "Basée à Yaoundé",
+      "et Douala, tournée",
+      "vers l’Europe"
+    ],
+    "lien": "Voir notre impact"
+  },
+  "evenements": {
+    "titre": [
+      "Rencontrons-nous"
+    ],
+    "intro": "Des journées pour rencontrer la fondation, ses équipes et ses partenaires.",
+    "lien": "Tous les événements",
+    "bientot": "Le prochain rendez-vous sera annoncé très bientôt",
+    "voir": "{{titre}}, voir l’événement"
+  },
+  "don": {
+    "surtitre": "Soutenir la fondation",
+    "titre": [
+      "Chaque geste renforce",
+      "un parcours de vie"
+    ],
+    "texte": "Votre don soutient nos actions au Cameroun dans nos six domaines : éducation, santé, entrepreneuriat des jeunes, environnement, droits et inclusion, mobilité et langues. Vous choisissez le domaine que vous voulez soutenir, ou vous laissez la fondation l’affecter là où le besoin est le plus urgent.",
+    "confiance": "Le groupe IROKO couvre nos frais de fonctionnement et d’enseignement.",
+    "domaine": "Soutenir ce domaine : {{domaine}}"
+  },
+  "images": {
+    "surtitre": "En images",
+    "courts": {
+      "apprendre": "Apprendre",
+      "chanter-ensemble": "Chanter",
+      "cultiver": "Cultiver",
+      "s-engager": "S’engager",
+      "grandir": "Grandir"
+    }
+  },
+  "film": {
+    "surtitre": "En vidéo",
+    "titre": "Le film de la fondation",
+    "phrase": "Une minute pour découvrir la WAHHF Foundation, ses jeunes et ses actions au Cameroun.",
+    "video": "Extrait du film WAHHF Foundation, sans le son",
+    "pause": "Pause",
+    "lecture": "Lecture",
+    "lireExtrait": "Lire l’extrait, sans le son",
+    "son": "Regarder avec le son",
+    "film": "Regarder le film",
+    "duree": "1 min 10"
+  }
+}

@@ -10,6 +10,24 @@ Colonnes : **id** (repère), **fichier source**, **taille**, **slug** (nom de so
 
 Règle : toute photo marquée `oui` ou `?` reçoit `consent: 'pending'` tant que la fondation n'a pas confirmé les autorisations parentales (GAL-01). Les photos `pending` s'affichent en développement, jamais dans le build de production.
 
+Règle des mineurs (25 novembre 2026) : un jeune **reconnaissable** (visage net, de face ou de profil, à n'importe quel plan) met la photo en `pending`. Un jeune flou, de dos ou trop petit pour être reconnu la laisse `ok`. Vérifiées une à une avec cette règle : les 36 photos alors publiables ; A31, A34, A98 et B85 passent en `?`. Même règle pour l'ancienne galerie (src/data/gallery.ts).
+
+## Remplaçantes des photos en attente d'accord
+
+Quand une page ne donne pas elle-même de remplaçante publiable, le site prend celle de cette table (`photoOrFallback`, src/lib/photos.ts). Les remplaçantes propres à une section restent dans ses données (accordéon : src/data/journey.ts ; événements : src/data/events.ts ; domaines : src/config/domainPhotos.ts ; cartes de /accueil : src/pages/accueil/DomainesParcours.tsx). Règle du 25 novembre 2026 : jamais deux fois sur la même page, et au plus 3 fois sur tout le site (galerie non comptée).
+
+| photo en attente | remplaçantes | où |
+|---|---|---|
+| A16 | A44 | Faire un don (en-tête) |
+| A31 | A74 | Qui sommes-nous (mission) |
+| A33 | A63 | Académie de langues (en-tête) |
+| A34 | A46 | Mobilité & Langues (Europe) |
+| A81 | A12 | Notre impact (troisième photo) |
+| A85 | A44 | Actualités, mosaïque du 25 avril (A07 y est déjà, à la troisième place) |
+| A88 | A99 | Qui sommes-nous (fin de page), cercle de /accueil |
+| A98 | A66 | Mobilité & Langues (Académie) |
+| B75 | B41 | Notre impact (deuxième photo) |
+
 ## Journée du 25 avril 2026 — Albatros Hotel  (`journee-2026-04-25`)
 
 _Nom exact de l'événement à confirmer (la banderole indique : Albatros Hotel, 25 avril 2026, 8 h–21 h)._
@@ -21,7 +39,7 @@ _Nom exact de l'événement à confirmer (la banderole indique : Albatros Hotel,
 | A12 | `WhatsApp Image 2026-11-18 at 12.38.46 (11).jpeg` | 1066x1600 | `journee-2026-04-25-membre-equipe-kakemono` | Un membre de l'équipe pose à côté du kakémono de la fondation | non | `60% 40%` | Galerie (pas de page Équipe) |
 | A13 | `WhatsApp Image 2026-11-18 at 12.38.47.jpeg` | 1066x1600 | `journee-2026-04-25-kakemono-orange` | Kakémono orange de la fondation : « Showing hope, harvesting change » | non | `center` | Galerie |
 | A14 | `WhatsApp Image 2026-11-18 at 12.38.47 (1).jpeg` | 1066x1600 | `journee-2026-04-25-kakemono-domaines` | Kakémono de la fondation présentant ses domaines d'action | non | `center` | À propos |
-| A16 | `WhatsApp Image 2026-11-18 at 12.38.47 (3).jpeg` | 1600x1066 | `journee-2026-04-25-jeunes-de-dos-tshirts` | Jeunes participants vus de dos, en t-shirts « Bâtir l'Afrique qui nourrit, soigne et instruit sa jeunesse » | non | `center 60%` | Don (aucun visage) |
+| A16 | `WhatsApp Image 2026-11-18 at 12.38.47 (3).jpeg` | 1600x1066 | `journee-2026-04-25-jeunes-de-dos-tshirts` | Jeunes participants vus de dos, en t-shirts « Bâtir l'Afrique qui nourrit, soigne et instruit sa jeunesse » | oui | `center 60%` | Don, Accueil : après l'accord des parents (visages reconnaissables de profil, numéro de téléphone lisible) |
 | A17 | `WhatsApp Image 2026-11-18 at 12.38.47 (4).jpeg` | 1600x1066 | `journee-2026-04-25-salle-vue-du-fond` | Salle de conférence vue depuis le fond, participants assis face à l'écran | ? | `center` | Galerie |
 | A18 | `WhatsApp Image 2026-11-18 at 12.38.47 (5).jpeg` | 1600x1066 | `journee-2026-04-25-inscriptions` | Accueil et inscription des participants près du kakémono | ? | `center` | Galerie |
 | A22 | `WhatsApp Image 2026-11-18 at 12.38.47 (9).jpeg` | 1600x1066 | `journee-2026-04-25-preparation-technique` | Préparation des ordinateurs avant les présentations | non | `center` | Galerie (coulisses) |
@@ -30,9 +48,9 @@ _Nom exact de l'événement à confirmer (la banderole indique : Albatros Hotel,
 | A27 | `WhatsApp Image 2026-11-18 at 12.38.47 (14).jpeg` | 1600x1066 | `journee-2026-04-25-salle-comble` | Salle comble pendant une présentation, kakémonos de la fondation de chaque côté de l'écran | ? | `center 55%` | ACCORDÉON panneau 1, poster du hero (option), domaine Éducation |
 | A29 | `WhatsApp Image 2026-11-18 at 12.38.47 (16).jpeg` | 1066x1600 | `journee-2026-04-25-logo-projete` | Logo de la fondation projeté sur l'écran de la salle | ? | `center 30%` | Galerie |
 | A30 | `WhatsApp Image 2026-11-18 at 12.38.47 (17).jpeg` | 1600x1066 | `journee-2026-04-25-public-de-dos` | Participants de dos face au kakémono de la fondation | non | `center` | Galerie |
-| A31 | `WhatsApp Image 2026-11-18 at 12.38.47 (18).jpeg` | 1600x1066 | `journee-2026-04-25-parents-aines` | Parents et aînés assis au premier rang | non | `center` | À propos (familles), domaine Droits et inclusion |
+| A31 | `WhatsApp Image 2026-11-18 at 12.38.47 (18).jpeg` | 1600x1066 | `journee-2026-04-25-parents-aines` | Parents et aînés assis au premier rang | ? | `center` | À propos (familles), domaine Droits et inclusion |
 | A33 | `WhatsApp Image 2026-11-18 at 12.38.47 (20).jpeg` | 1600x1066 | `journee-2026-04-25-jeunes-attentives` | Jeunes participantes attentives pendant une présentation | oui | `center` | Galerie (après accord) |
-| A34 | `WhatsApp Image 2026-11-18 at 12.38.47 (21).jpeg` | 1600x1066 | `journee-2026-04-25-question-au-micro` | Un participant prend la parole au micro pendant les échanges | non | `65% 40%` | Galerie, Actualités |
+| A34 | `WhatsApp Image 2026-11-18 at 12.38.47 (21).jpeg` | 1600x1066 | `journee-2026-04-25-question-au-micro` | Un participant prend la parole au micro pendant les échanges | ? | `65% 40%` | Galerie, Actualités |
 | A36 | `WhatsApp Image 2026-11-18 at 12.38.47 (23).jpeg` | 1600x1066 | `journee-2026-04-25-jeunes-debout` | Jeunes participants debout dans la salle | oui | `center` | Galerie (après accord) |
 | A37 | `WhatsApp Image 2026-11-18 at 12.38.47 (24).jpeg` | 1600x1066 | `journee-2026-04-25-jeune-homme-ecoute` | Un jeune homme écoute une présentation | ? | `center 40%` | Galerie |
 | A38 | `WhatsApp Image 2026-11-18 at 12.38.48.jpeg` | 1066x1600 | `journee-2026-04-25-jeune-polo-fondation` | Jeune participant en polo de la fondation | ? | `center 35%` | Galerie |
@@ -52,7 +70,7 @@ _Nom exact de l'événement à confirmer (la banderole indique : Albatros Hotel,
 | A63 | `WhatsApp Image 2026-11-18 at 12.38.48 (25).jpeg` | 1600x1066 | `journee-2026-04-25-pictogrammes-domaines` | Intervenant devant les pictogrammes Éducation, Santé et Moyens de subsistance | non | `35% center` | Galerie |
 | A66 | `WhatsApp Image 2026-11-18 at 12.38.49 (2).jpeg` | 1600x1066 | `journee-2026-04-25-cinq-domaines` | Intervenant présentant les domaines d'action de la fondation | non | `center` | Galerie |
 | A68 | `WhatsApp Image 2026-11-18 at 12.38.49 (4).jpeg` | 1066x1600 | `journee-2026-04-25-intervenant-scene` | Intervenant sur la scène, devant le kakémono | non | `center 30%` | Galerie |
-| A71 | `WhatsApp Image 2026-11-18 at 12.38.49 (7).jpeg` | 1066x1600 | `journee-2026-04-25-portrait-intervenant` | Portrait d'un intervenant pendant sa présentation | non | `center 25%` | Galerie (pas de page Équipe) |
+| A71 | `WhatsApp Image 2026-11-18 at 12.38.49 (7).jpeg` | 1066x1600 | `journee-2026-04-25-portrait-intervenant` | Portrait d'un intervenant pendant sa présentation | non | `center 25%` | Qui sommes-nous, journée du 25 avril, appel au don de /accueil : 3 affichages, le maximum. Ne plus la proposer ailleurs (lot 11.7) |
 | A74 | `WhatsApp Image 2026-11-18 at 12.38.49 (10).jpeg` | 1600x1066 | `journee-2026-04-25-intervenant-geste` | Intervenant s'adressant à la salle, bras ouverts | non | `center 40%` | Galerie |
 | A77 | `WhatsApp Image 2026-11-18 at 12.38.49 (13).jpeg` | 1066x1600 | `journee-2026-04-25-intervenant-micro` | Intervenant parlant au micro | non | `center 25%` | Galerie |
 | A80 | `WhatsApp Image 2026-11-18 at 12.38.49 (16).jpeg` | 1600x1066 | `journee-2026-04-25-public-debout` | Le public debout dans la salle | oui | `center` | Galerie (après accord) |
@@ -60,13 +78,13 @@ _Nom exact de l'événement à confirmer (la banderole indique : Albatros Hotel,
 | A83 | `WhatsApp Image 2026-11-18 at 12.38.49 (19).jpeg` | 1600x1066 | `journee-2026-04-25-hymne-depuis-public` | L'hymne de la fondation vu depuis le public | oui | `center 40%` | Galerie |
 | A85 | `WhatsApp Image 2026-11-18 at 12.38.49 (21).jpeg` | 1600x1066 | `journee-2026-04-25-hymne-bras-leves` | Chant de l'hymne de la fondation, bras levés | oui | `center 40%` | ACCORDÉON panneau 2 |
 | A87 | `WhatsApp Image 2026-11-18 at 12.38.49 (23).jpeg` | 1600x1066 | `journee-2026-04-25-hymne-vue-large` | Vue large de la scène pendant l'hymne | oui | `center` | Galerie |
-| A88 | `WhatsApp Image 2026-11-18 at 12.38.49 (24).jpeg` | 1600x1066 | `journee-2026-04-25-trois-aines` | Trois aînés assis, attentifs | non | `center 40%` | À propos, Don |
+| A88 | `WhatsApp Image 2026-11-18 at 12.38.49 (24).jpeg` | 1600x1066 | `journee-2026-04-25-trois-aines` | Trois aînés assis, attentifs | ? | `center 40%` | À propos, Don |
 | A89 | `WhatsApp Image 2026-11-18 at 12.38.49 (25).jpeg` | 1600x1066 | `journee-2026-04-25-jeunes-sourires` | Jeunes participantes souriantes | oui | `center` | Galerie (après accord) |
 | A90 | `WhatsApp Image 2026-11-18 at 12.38.49 (26).jpeg` | 1600x1066 | `journee-2026-04-25-participante-polo-rose` | Participante en polo rose de la fondation | oui | `center 35%` | Galerie (après accord) |
 | A92 | `WhatsApp Image 2026-11-18 at 12.38.50 (1).jpeg` | 1600x1066 | `journee-2026-04-25-jeunes-ecoutent` | Jeunes participantes à l'écoute | oui | `center` | Galerie (après accord) |
 | A95 | `WhatsApp Image 2026-11-18 at 12.38.50 (4).jpeg` | 1600x1066 | `journee-2026-04-25-jeune-reflechit` | Jeune participant pensif | oui | `center` | Galerie (après accord) |
 | A97 | `WhatsApp Image 2026-11-18 at 12.38.50 (6).jpeg` | 1600x1066 | `journee-2026-04-25-trois-jeunes` | Trois jeunes participants | oui | `center` | Galerie (après accord) |
-| A98 | `WhatsApp Image 2026-11-18 at 12.38.50 (7).jpeg` | 1600x1066 | `journee-2026-04-25-prise-de-notes` | Un participant prend des notes | non | `center` | Galerie |
+| A98 | `WhatsApp Image 2026-11-18 at 12.38.50 (7).jpeg` | 1600x1066 | `journee-2026-04-25-prise-de-notes` | Un participant prend des notes | ? | `center` | Galerie |
 | A99 | `WhatsApp Image 2026-11-18 at 12.38.50 (8).jpeg` | 1600x1066 | `journee-2026-04-25-polo-rose-bras-croises` | Membre de la fondation en polo rose, bras croisés | non | `center 35%` | Galerie (pas de page Équipe) |
 
 ## Visite de terrain dans une plantation  (`terrain-agricole`)
@@ -132,4 +150,4 @@ _Lieu et date à confirmer._
 | B80 | `WhatsApp Image 2026-11-19 at 15.03.29 (1).jpeg` | 1080x607 | `randonnee-jeunesse-arbre-sentier` | Un jeune s'appuie à un arbre sur le sentier | oui | `center` | Galerie (après accord) |
 | B82 | `WhatsApp Image 2026-11-19 at 15.03.30.jpeg` | 1080x607 | `randonnee-jeunesse-file-en-foret` | Le groupe progresse en file sur un sentier forestier | oui | `center` | Galerie (après accord) |
 | B84 | `WhatsApp Image 2026-11-19 at 15.03.30 (2).jpeg` | 1080x607 | `randonnee-jeunesse-sommet-vue-large` | Le groupe au sommet, vue sur la ville | oui | `center 45%` | Galerie (après accord) |
-| B85 | `WhatsApp Image 2026-11-19 at 15.03.31.jpeg` | 1080x607 | `randonnee-jeunesse-chasuble-de-dos` | Participant de dos en chasuble verte dans la forêt | non | `center` | Galerie, page 404 (option) |
+| B85 | `WhatsApp Image 2026-11-19 at 15.03.31.jpeg` | 1080x607 | `randonnee-jeunesse-chasuble-de-dos` | Participant de dos en chasuble verte dans la forêt | ? | `center` | Galerie, page 404 (option) |

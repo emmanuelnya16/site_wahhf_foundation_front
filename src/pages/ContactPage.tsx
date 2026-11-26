@@ -1,5 +1,5 @@
 import { useState, useId, useRef, useEffect, FormEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { Trans } from 'react-i18next';
 import type { TFunction } from 'i18next';
 import { Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
@@ -30,8 +30,10 @@ registerBundle('contactPage', contactFr, {
 });
 
 /** Motifs du message : ils donnent l'objet du message préparé. Libellés : contactPage.motifs.<id>. */
-const MOTIFS = ['candidat', 'benevole', 'partenaire', 'presse', 'autre'] as const;
+const MOTIFS = ['candidat', 'benevole', 'partenaire', 'presse', 'parcours', 'autre'] as const;
 type Motif = (typeof MOTIFS)[number];
+/** Motif choisi d'avance par l'adresse (lot 11.5) : /contact?motif=parcours depuis « Raconter mon parcours » de /accueil */
+const isMotif = (value: string | null): value is Motif => !!value && (MOTIFS as readonly string[]).includes(value);
 
 type ContactField = 'motif' | 'name' | 'email' | 'whatsapp' | 'message' | 'consent';
 const CONTACT_FIELDS = ['motif', 'name', 'email', 'whatsapp', 'message', 'consent'] as const;
@@ -73,7 +75,11 @@ export default function ContactPage() {
   const { t, lang, localized } = useLocalize();
   // Lieu de la fondation dans la langue de la page (surcouche commune contenu.contact)
   const contact = localized(CONTACT, 'contenu.contact');
-  const [motif, setMotif] = useState<Motif | ''>('');
+  const [searchParams] = useSearchParams();
+  const [motif, setMotif] = useState<Motif | ''>(() => {
+    const asked = searchParams.get('motif');
+    return isMotif(asked) ? asked : '';
+  });
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [whatsapp, setWhatsapp] = useState('');

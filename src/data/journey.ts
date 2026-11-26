@@ -42,7 +42,8 @@ export const JOURNEY_PANELS: JourneyPanel[] = [
     meta: `25${NB}avril${NB}2026`,
     description: 'Les jeunes reprennent en chœur l’hymne de la fondation.',
     photoId: 'A85',
-    fallbackId: 'A16',
+    // A16 attend aussi l'accord : l'intervenant qui s'adresse à la salle (réponse 189)
+    fallbackId: 'A74',
     album: 'journee-2026-04-25',
   },
   {
@@ -72,7 +73,8 @@ export const JOURNEY_PANELS: JourneyPanel[] = [
     meta: 'Randonnée avec les jeunes',
     description: 'Une montée à plusieurs, la ville en contrebas.',
     photoId: 'B77',
-    fallbackId: 'B85',
+    // Plus aucune photo publiable de la randonnée (règle des mineurs) : deux membres de l'équipe sur les pentes
+    fallbackId: 'B35',
     album: 'randonnee-jeunesse',
   },
 ];

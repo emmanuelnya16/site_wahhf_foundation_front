@@ -914,6 +914,232 @@ Contrat validé le 16/11/2026, avec les ajustements du §13.
 
 **Contenu** : une section ne s'affiche que si ses données existent ; un texte « TODO » s'affiche en développement et dans l'aperçu `VITE_APERCU_EVENEMENTS=1`, jamais en ligne. Questions 156 et suivantes de `docs/contenus-a-fournir.md`.
 
+## 16. Page Accueil, /accueil (lot 11.1)
+
+*Votre brief du 25 novembre 2026. Référence : `docs/references/accueil/hero-apercu.jpg` et `inspirations/`. Code : `src/pages/accueil/`, `src/styles/accueil.css`, textes `src/locales/accueil/`. L'accueil actuel (/) et ses composants ne changent pas ; le logo y mène toujours.*
+
+**Écarts au contrat voulus par le brief, réservés à cette page** :
+- Jost 700 (celle des pages Événements, même fichier, même police de secours) pour le titre et les chiffres ; titre de 72 px sur ordinateur, interligne 1,05 ;
+- soleil sur fond clair : badge (texte encre), contour de l'arche, trait sous « la jeunesse », étoile de la pastille ;
+- un mot du titre en forêt (soleil en sombre), au lieu d'une seule couleur (§12) ;
+- deux taches en dégradé radial (sauge, et soleil à 25 %) ;
+- flèche sur le bouton plein et la carte de l'événement (T-20) ; nom de l'événement en petites capitales espacées ;
+- plusieurs boucles lentes au lieu d'un seul effet (§10) : cartes qui flottent (±8 px, 6 à 8 s), badge (24 s), étoile, point. Elles s'arrêtent hors de l'écran, onglet caché et au bouton pause des pages Événements ; en mouvement réduit, rien ne bouge.
+
+**Inchangé** : conteneur de 72 rem (même bord gauche que l'en-tête ; l'aperçu en montre 80), palette, une seule ombre (`--ombre-flottante`, remplacée par un filet en sombre), rayon de 20 px, texte courant en Atkinson.
+
+**En-tête** : 8 entrées (« Accueil » en premier), texte à 16 px ; logo seul dès 1 280 px dans les trois langues (étape d) ; langue et don resserrés (étape c). Marges mesurées autour du menu : 41 px en français, 105 px en anglais, 24 px en allemand.
+
+**LCP** : la photo sur ordinateur, l'intro sur téléphone. L'intro monte donc sans fondu : partie en opacité 0, elle retardait le LCP réel de 1,4 s.
+
+**Contrastes** (23 paires ; seuil 4,5:1 pour le texte, 3:1 pour les contours ; aucun échec) :
+
+| Thème | Usage | Ratio |
+|---|---|---|
+| clair | Titre sur brume | 13,47:1 |
+| clair | Titre, pire cas sur la tache soleil | 11,75:1 |
+| clair | « la jeunesse » (forêt) sur brume | 8,59:1 |
+| clair | Intro, seconde ligne, bouton pause sur brume | 6,84:1 |
+| clair | Intro, pire cas sur sauge | 6,05:1 |
+| clair | Bouton pause, pire cas sur la tache soleil | 5,97:1 |
+| clair | Pastille (forêt sur papier) | 9,15:1 |
+| clair | Carte papier : chiffre, nom de l'événement | 9,15:1 |
+| clair | Carte papier : texte | 7,30:1 |
+| les deux | Bouton et carte nuit : texte (brume) | 11,41:1 |
+| les deux | Carte nuit : chiffre (soleil) | 6,64:1 |
+| les deux | Badge : encre sur soleil | 7,84:1 |
+| clair | Contour du bouton | 13,47:1 |
+| clair | Anneau de focus, pire cas sur la tache soleil | 7,49:1 |
+| sombre | Titre | 15,04:1 |
+| sombre | « la jeunesse » (soleil) | 9,66:1 |
+| sombre | Intro | 8,72:1 |
+| sombre | Intro, pire cas sur sous-bois | 7,80:1 |
+| sombre | Bouton pause, pire cas sur la tache soleil | 7,26:1 |
+| sombre | Pastille et chiffre (soleil sur canopée) | 7,56:1 |
+| sombre | Carte canopée : texte | 6,82:1 |
+| sombre | Carte et bouton nuit : texte | 10,33:1 |
+| sombre | Contour du bouton | 15,04:1 |
+
+### 16.2 Sections « Qui sommes-nous en bref » et « Les chiffres » (lot 11.2)
+
+*Votre brief du 25 novembre 2026. Contenu : `docs/references/accueil/sections/` (2 et 3), limité à ce que le site dit déjà.*
+
+**Écarts voulus par le brief** :
+- surtitres et libellés en capitales Barlow 600 espacées de 0,16 em (comme les pages Événements) ;
+- soleil sur fond clair : l'étiquette de la citation (texte encre) ;
+- rayons hors système pour la photo « feuille » : 8 rem en haut à gauche et en bas à droite, 1 rem aux deux autres coins ;
+- « Gratuité » en intertitre d'un point, et « groupe IROKO » dans le texte de présentation.
+
+**Choix** :
+- étiquette en Jost 700 : la graisse 600 n'est pas hébergée, et un fichier de plus ne se justifiait pas pour une phrase ;
+- le fil en pointillés et les parallaxes n'existent que sur ordinateur (souris, 1 024 px au moins, mouvement autorisé) ; parallaxe : 40 px de course au plus dans la section 2, 30 px pour le motif de la section 3 ; le bouton pause les fige ;
+- entrées en CSS, une seule fois, quand le bloc arrive à l'écran (`Entree.tsx`) ; un bloc déjà visible à l'arrivée ne s'anime pas ;
+- chiffres en liste alignée à gauche, comme le reste du site ; une flèche reste visible au repos, car rien ne signale le lien sur un écran tactile ;
+- contours d'Europe et du Cameroun réels (Natural Earth 1:110 m, domaine public).
+
+**Chiffres** : `src/data/accueil-chiffres.ts`. Un chiffre d'impact s'affiche seulement avec sa date et sa source, en petit dessous. Pays, domaines et niveaux se comptent sur les données du site.
+
+**Contrastes** (seuil 4,5:1 ; aucun échec ; « motif » : pire cas, texte sur un trait du fond) :
+
+| Usage | Ratio |
+|---|---|
+| Citation : encre sur soleil | 7,83:1 |
+| Surtitre, lien, icône (clair) : forêt sur brume, sur sauge | 8,58:1, 7,58:1 |
+| Texte des points (clair) : encre douce sur brume, sur la tache sauge | 6,84:1, 6,04:1 |
+| Bandeau nuit : titre et libellés (brume), sur motif | 11,40:1, 9,80:1 |
+| Bandeau nuit : sous-textes, note, source (brume douce), sur motif | 7,85:1, 6,75:1 |
+| Bandeau nuit : chiffres, surtitre, flèches (soleil), sur motif | 6,63:1, 5,70:1 |
+
+### 16.3 Section « Les 6 domaines » (lot 11.3)
+
+*Votre brief du 25 novembre 2026. Modèle : les « Cinq principes » (lot 7.8), dont le composant, les styles et la page ne changent pas. Code : `DomainesParcours.tsx`, `DomainesMotion.tsx`, `.ac-domaines` dans `src/styles/accueil.css`.*
+
+**Repris tel quel** : classes `.principles*` et `.principle-*`, tracé du fil (`principlesFil.ts`), plugins GSAP (même fichier que Qui sommes-nous). **Recopié** : la mise en scène, pour 6 cartes, 4 hauteurs d'écran et les photos.
+
+**Écarts aux Cinq principes** :
+- titre en Jost 700 avec surtitre, comme les autres sections de /accueil ;
+- photo en haut de carte (11 rem, cadrage propre à chaque photo), ligne d'accent de 3 px, lien à la place de l'étiquette ; Santé : icône au trait, aucune photo publiable (question 197) ;
+- carte de 36 rem au plus ; sur un écran bas, les marges et le numéro se resserrent, puis la photo rétrécit, et la piste n'est réduite qu'en dernier ; le texte n'est jamais coupé ;
+- épinglage en `position: sticky` au lieu du « pin » de ScrollTrigger : Chrome compte un décalage de mise en page de 0,92 à l'entrée et à la sortie d'un « pin » (c'était le cas sur Qui sommes-nous, corrigé de la même façon au lot 11.4, animation inchangée) ; avec sticky, CLS 0 ;
+- dévoilement de la photo en 0,6 s au passage du repère (il se referme en remontant) ; au bouton pause, la photo est là d'emblée ;
+- clavier : le focus d'un lien amène sa carte à l'écran ; à la souris, la page ne bouge pas ;
+- le parcours horizontal est la mise en page de départ sur ordinateur (correctif du 25 novembre 2026), sans attendre GSAP : défilement rapide, rechargement au milieu de la page, adresse en #domaines, il est toujours là ; si le fichier du mouvement ne se charge pas, la section passe en colonne, tout visible ;
+- dès 600 px de haut (700 pour les Cinq principes) : une fenêtre d'ordinateur portable fait souvent 600 à 700 px une fois les barres retirées.
+
+**Contrastes** (texte, puis accent : numéro, rubrique, lien ; seuil 4,5:1 ; aucun échec ; mêmes couleurs en clair et en sombre) :
+
+| Carte | Fond | Texte | Accent |
+|---|---|---|---|
+| 01 Éducation | forêt | 9,15:1 | 4,99:1 (soleil) |
+| 02 Santé | sauge | 11,89:1 | 7,58:1 (forêt) |
+| 03 Entrepreneuriat des jeunes | soleil | 7,83:1 | 7,83:1 (encre) |
+| 04 Environnement | nuit | 12,15:1 | 6,63:1 (soleil) |
+| 05 Droits et inclusion | miel | 5,92:1 | 4,77:1 (blanc 85 %) |
+| 06 Mobilité & Langues | encre | 14,35:1 | 7,83:1 (soleil) |
+| Carte de fin | blanc | 14,35:1 | 9,15:1 (forêt) ; bouton 9,15:1 |
+| Compteur, consigne (clair ; sombre) | fond de page | 13,46:1, 6,84:1 ; 15,03:1, 8,72:1 | — |
+
+### 16.4 Temps de blocage au chargement (lot 11.3)
+
+Cause (profil Performance, mobile, CPU ×4) : chaque bloc animé mesurait sa position pendant le rendu, ce qui forçait la mise en page de toute la page dans la même tâche que React (256 ms) ; GSAP se chargeait sur téléphone pour des parallaxes qui n'y existent pas (50 ms) ; les sections sous l'écran étaient mises en page au chargement. Le compteur et le motif n'y étaient pour rien.
+Corrections : un seul IntersectionObserver, sans mesure ; `AccueilMotion` chargé seulement sur ordinateur à la souris ; une timeline de parallaxe par section ; souris suivie par l'Observer de ScrollTrigger (plus d'écouteur brut) ; `content-visibility: auto` sous 1 024 px. Mesures finales (Lighthouse mobile, 3 passages) : TBT 120, 150 et 100 ms, CLS 0.
+Lot 11.5 : `content-visibility: auto` retiré, téléphone compris (voir §16.6, « Rendu différé »).
+
+### 16.5 Sections « Projet phare » et « Des parcours qui inspirent » (lot 11.4)
+
+*Votre brief du 25 novembre 2026. Contenu : `docs/references/accueil/sections/` (5 et 6). Code : `ProjetPhare.tsx`, `route.ts`, `ProjetMotion.tsx`, `Parcours.tsx`, `Paquet.tsx`, `CarteTemoignage.tsx`, `CitationMotion.tsx`.*
+
+**Faits** : `src/data/accueil-projets.ts` et `src/data/accueil-temoignages.ts`. En ligne, seul ce qui porte `confirme: true` s'affiche ; sans témoignage confirmé, la section invite à raconter son parcours (trois cartes vierges, aucun nom).
+
+**Projet phare** : fond sauge, trois plans de collines (`--colline-1` à `-3`), ticket penché de 2° (perforation, deux encoches, la légende sur la souche), tampon soleil. La route est tracée d'après la taille de la scène (horizontale dès 1 024 px, verticale en dessous) ; les panneaux gardent leurs couleurs dans les deux thèmes. Le véhicule suit la route (MotionPath, scrub 0,8) ; roues et ailes tournent ou battent selon la distance, sans boucle. Mouvement réduit ou fichier absent : véhicule au bout, panneaux levés.
+
+**Parcours** : paquet de cartes en CSS (coin feuille, −4° et +5° derrière), glisser à partir de 80 px, flèches, clavier ; région « carrousel », seule la carte du dessus est lisible. Moins de trois témoignages : le paquet se complète de cartes qui invitent à raconter le sien. La citation se révèle ligne par ligne (SplitText), le reste est en CSS.
+
+**Recalculs** : pendant un `ScrollTrigger.refresh`, les timelines repassent par zéro ; `recalcul.ts` évite que les panneaux et les photos des domaines se rejouent.
+
+**Contrastes** (seuil 4,5:1 ; aucun échec) :
+
+| Usage | Ratio |
+|---|---|
+| Projet, clair : titre (encre), suite du titre et lien (forêt) sur sauge | 11,89:1, 7,58:1 |
+| Projet, clair : texte (encre douce) sur sauge | 6,04:1 |
+| Projet, sombre : titre, suite et lien (soleil), texte sur sous-bois | 13,45:1, 8,64:1, 7,80:1 |
+| Souche du ticket : clair (encre douce sur blanc), sombre (lichen sur canopée) | 7,29:1, 6,82:1 |
+| Tampon : encre sur soleil | 7,83:1 |
+| Panneaux, les deux thèmes : valeur (forêt) et libellé (encre douce) sur blanc | 9,15:1, 7,29:1 |
+| Parcours, clair : citation et nom (encre), résumé (encre douce), domaine (forêt) sur blanc | 14,35:1, 7,29:1, 9,15:1 |
+| Parcours, sombre : citation et nom, résumé, domaine (soleil) sur canopée | 11,75:1, 6,82:1, 7,55:1 |
+| Flèches et indicateur : clair sur brume, sombre sur humus | 13,46:1, 15,03:1 |
+
+### 16.6 Sections « Les 10 régions » et « Apprendre, cultiver, grandir » (lot 11.5)
+
+*Votre brief du 26 novembre 2026. Code : `Regions.tsx`, `CarteRegions.tsx` ; l'accordéon est `src/pages/home/JourneySection.tsx`, importé tel quel.*
+
+**Les 10 régions** : fond sauge (sous-bois en sombre), le fond de la carte d'origine. À gauche, l'en-tête propre à l'accueil (surtitre, titre révélé ligne par ligne, la première phrase du sous-titre de Notre impact dans chaque langue, lien vers /notre-impact) ; à droite, la carte « Présence terrain au Cameroun » de Notre impact, en variante (`CarteRegions.tsx`) : mêmes éléments, mêmes textes, lignes provisoires masquées, sans la carte de l'Europe ni la liste des pays. `PresenceSection.tsx` ne change pas. La cascade des régions reste celle de `MapMotion` ; un repère caché tient la place de la mini-carte d'Europe qu'il attend. Contrastes : les mêmes paires que le Projet phare (§16.5).
+
+**Apprendre, cultiver, grandir** : la section de `/`, inchangée (bande nuit, accordéon de 5 photos, mêmes données), dans une enveloppe `.ac-accordeon`. Tant qu'elle est la dernière de la page, le fond de la page la sépare du pied de page, nuit lui aussi. Styles calculés identiques sur `/` et `/accueil`.
+
+**Fonds, dans l'ordre** : hero et « Qui sommes-nous » brume (déjà ainsi), chiffres nuit, domaines brume, projet sauge, parcours brume, régions sauge, accordéon nuit, puis le pied de page.
+
+**Rendu différé (essayé, puis retiré)** : `content-visibility: auto` sur chaque section sous le premier écran, avec une hauteur d'attente mesurée pour chacune. Gain réel sur téléphone : Lighthouse avec un vrai ralentissement (`--throttling-method=devtools`, 3 passages) donne un TBT médian de 930 ms sans, 510 ms avec (performance 51 → 61) ; la simulation par défaut de Lighthouse ne voit aucune différence (340 et 330 ms). Mais Chrome retire de l'arbre d'accessibilité ce qu'il n'a pas encore dessiné : sans défilement, seuls le h1 et les deux premiers h2 y restaient (les autres « ignorés : notRendered », 457 nœuds au lieu de 890). Un lecteur d'écran ne pouvait ni lire les sections plus bas ni y aller par les titres. Le plancher d'accessibilité passe avant : rendu différé retiré partout sur l'accueil (il était déjà, depuis le lot 11.3, sur téléphone, avec le même défaut). À ne pas remettre sans vérifier l'arbre d'accessibilité.
+
+**Photos** : l'accordéon garde les siennes ; ce sont celles de l'accueil qui changent quand elles se répètent. En ligne, l'arche du hero passe de A30 (« Apprendre » dans l'accordéon) à A12, et la carte Entrepreneuriat de B06 (« Cultiver ») à B24. A12 et B24 : trois affichages chacune sur le site.
+
+### 16.7 Retouches du lot 11.5 et section « Événements » (lot 11.6)
+
+*Votre brief du 26 novembre 2026.*
+
+**Photos du haut de page** (en ligne) : l'arche du hero prend A07 (les participants devant l'Albatros Hotel, recadrée sur l'enseigne et le groupe de gauche) ; A12, en portrait, passe dans la feuille de « Qui sommes-nous en bref ». Comparées côte à côte à 1 440 et 390 px avec l'inverse (A12 dans l'arche, A07 dans la feuille) : A07 donne au hero le lieu et la foule de la journée, A12 remplit la feuille sans perte. La taille d'image demandée suit l'orientation de la photo (arche et feuille).
+
+**Fond de « Qui sommes-nous en bref »** : la surface claire du thème (`--surface-raised` : papier en clair, canopée en sombre) ; le hero reste brume (humus en sombre). En sombre, les pastilles des icônes et la tache passent sur filet-nuit, un cran plus clair que la section.
+
+| Usage | Ratio |
+|---|---|
+| Clair : titre et noms des points (encre), texte (encre douce), surtitre et lien (forêt) sur papier | 14,35:1, 7,30:1, 9,15:1 |
+| Clair : icône (forêt) sur pastille sauge | 7,59:1 |
+| Sombre : titre (brume voilée), texte (lichen), surtitre et lien (soleil) sur canopée | 11,76:1, 6,82:1, 7,56:1 |
+| Sombre : icône (soleil) sur pastille filet-nuit | 5,82:1 |
+
+**Événements** (`Evenements.tsx`, `CarteEvenement.tsx`) : sur brume, après la bande nuit de l'accordéon. Données : `src/data/events.ts` par `src/lib/events.ts` (rien n'est recopié). Au plus trois rendez-vous : le prochain à venir en grande carte (environ 60 %), puis les plus récents des passés en tickets (environ 40 %) ; sur téléphone, la carte puis les tickets.
+- Grande carte : photo du hero de l'événement (coin feuille en haut à droite), page d'éphéméride soleil en surimpression (bandeau nuit avec le jour, numéro en Jost, mois), titre, lieu, compte à rebours de 4 cases, « S'inscrire » et « Voir l'événement ». Date inconnue : « Date annoncée très bientôt », cases « – », éphéméride « À venir » et « ? » ; inscription inconnue : une pastille en pointillés « Inscriptions annoncées très bientôt », pas un lien. Jamais un faux chiffre.
+- Aucun événement à venir : « Le prochain rendez-vous sera annoncé très bientôt » et un lien vers Contact, sans compte à rebours.
+- Tickets (le motif du projet phare) : bord gauche perforé (masque CSS sur un pseudo-élément, pour que l'anneau de focus reste entier), date en colonne derrière un pointillé, titre, lieu, flèche, photo ronde. Nom du lien : « {titre}, voir l'événement ».
+- Mouvement (CSS, à l'entrée du bloc) : la carte se pose (fondu et 24 px), puis la page d'éphéméride se rabat (rotateX de −90° à 0 autour de son bord haut, 0,7 s) ; les tickets arrivent de la droite (fondu et 40 px, 120 ms d'écart) ; au survol, un ticket glisse de 6 px et sa flèche suit. Les chiffres tombent comme sur la fiche ; l'heure n'avance plus hors de l'écran, onglet caché et avec le bouton pause. Mouvement réduit : tout est en place, les chiffres changent sans tomber.
+- Lecteurs d'écran : éphéméride et chiffres masqués ; la date est écrite en toutes lettres sous les cases (« L'événement commence le … à … , heure de Douala ») ou « Date annoncée très bientôt ».
+- Photos : en ligne, la grande carte montre B44 (Road to Europe) : la carte Environnement des domaines passe de B44 à B41, le même lac de cratère.
+
+| Usage | Ratio |
+|---|---|
+| Éphéméride : numéro et mois (encre) sur soleil ; jour (soleil) sur bandeau nuit | 7,84:1 ; 6,64:1 |
+| Clair : titre (encre) sur papier ; chiffres (encre) et unités (encre douce) sur case sauge | 14,35:1 ; 11,90:1 et 6,05:1 |
+| Clair : lieu, phrase de date, pastille (encre douce) et icônes (forêt) sur papier | 7,30:1 ; 9,15:1 |
+| Sombre : titre (brume voilée) et lieu (lichen) sur canopée ; chiffres et unités sur case sous-bois | 11,76:1 et 6,82:1 ; 13,45:1 et 7,80:1 |
+| Sombre : icônes, flèches et lien (soleil) sur canopée et sur humus | 7,56:1 ; 9,66:1 |
+
+**Vérification finale (lot 11.6)**, quatre corrections :
+- Projet phare : son mouvement, chargé à l'approche, demandait un recalcul de toutes les positions de la page (75 à 100 ms, au moment où la scène commence). Retiré : son déclencheur calcule lui-même ses positions et la route ne change aucune hauteur (véhicule et panneaux aux mêmes endroits avant et après un recalcul forcé, à 1 440 et 390 px).
+- Photos des domaines : la copie limitée à 800 px perdait la traduction de son texte alternatif (français sur les pages anglaise et allemande). Elle est inscrite au catalogue, comme l'originale.
+- Arche du hero : plus de priorité haute. L'élément LCP est le texte du hero ; la photo (151 Ko sur téléphone) passait avant les scripts et les polices. LCP Lighthouse mobile : 5,2 à 5,4 s avec la priorité, 4,3 à 4,5 s sans.
+- Commentaires de sections « à venir » retirés.
+
+### 16.8 Section « Appel au don » (lot 11.7)
+
+*Votre brief du 26 novembre 2026. Code : `AppelDon.tsx`.*
+
+**Contenu** : seulement des faits déjà sur le site. Le titre est celui de la section « Agir » de / (`home.act.title`, dans les trois langues), les six domaines, l'affectation au choix ou « là où le besoin est le plus urgent » (la formulation de Faire un don, reprise en EN et DE ; Notre impact dit la même chose), le soutien du groupe IROKO (Qui sommes-nous). Aucun montant ni chiffre d'impact (question 206). Les pastilles ouvrent Faire un don avec le domaine choisi : la page lit déjà `?affectation=<domaine>` (ACT-02), elle n'a pas changé.
+
+**Design** : la section est sur sauge (sous-bois en sombre), puisque les événements sont sur brume. À l'intérieur, un grand bloc cœur (#C8102E, coins de 2,5 rem), la seule surface cœur de la page. À gauche : surtitre, titre en Jost sur deux lignes, texte, pastilles des domaines, boutons « Faire un don » (blanc, texte et cœur rouges) et « Devenir partenaire » (contour blanc, vers /agir#partenaire), puis le soutien d'IROKO sous un filet. À droite : A71 dans une goutte (coin pointu en haut à gauche), cerclée de blanc, penchée de −3°. Derrière : le fil dessine un grand cœur au trait blanc à 18 %, coupé par le bord droit du bloc. Sur téléphone : texte, pastilles, boutons pleine largeur, puis la photo ; le cœur est plus petit et centré.
+
+**Mouvement** (CSS) : le bloc se pose (fondu et 32 px), le cœur se trace (1,6 s), la photo glisse et pivote jusqu'à −3°, le titre monte ligne par ligne, les pastilles arrivent une à une (échelle 0,8 → 1, 60 ms d'écart) ; le cœur du bouton bat deux fois. Au survol, le bouton monte de 2 px, un reflet le traverse, son cœur bat deux fois ; rien en boucle. Bouton pause et mouvement réduit : tout est affiché directement.
+
+| Usage | Ratio |
+|---|---|
+| Tous les textes, icônes et l'anneau de focus (blanc) sur cœur | 5,88:1 |
+| Bouton « Faire un don » et pastille survolée : cœur sur blanc | 5,88:1 |
+| Contour des pastilles (blanc à 70 %) sur cœur ; contour de « Devenir partenaire » (blanc plein) | 3,42:1 ; 5,88:1 |
+
+### 16.9 Section « En images » (lot 11.8)
+
+*Votre brief du 26 novembre 2026. Code : `AccueilEnImages.tsx`, `PanneauImage.tsx`. L'accordéon de / (`JourneySection`, `ExpandingGallery`, `GalleryPanel`, règles `.xg` de `src/index.css`) ne change pas.*
+
+**Données** : celles de l'accordéon de / (`src/data/journey.ts` : cinq panneaux, photos et remplaçantes, textes, albums ; leurs traductions). En plus, dans les textes de /accueil : le surtitre et les titres courts du fil. Les photos restent celles de l'accordéon : la section compte comme reprise pour la règle des trois affichages.
+
+**Accessibilité** : celle de l'accordéon, gardée. Un bouton par panneau (nom = titre, `aria-expanded`, `aria-controls`), ouverture au survol (100 ms), au clic et au focus clavier ; flèches, Début et Fin passent d'un panneau à l'autre ; la légende d'un panneau réduit est `inert`. Le fil est un décor (`aria-hidden`, aucun arrêt de tabulation) ; ses points ouvrent leur panneau au clic et au toucher. Le compteur « 01 / 05 » est masqué aux lecteurs d'écran.
+
+**En-tête** : surtitre « En images », titre en Jost dont les trois verbes répondent aux panneaux (Apprendre, Cultiver, Grandir : surlignés en soleil, texte encre ; rien pour Chanter ensemble et S'engager) ; sur ordinateur, à droite, le sous-titre, « Voir toutes les photos » et le compteur.
+
+**Panneaux** : la géométrie de l'accordéon (positions par transform, CLS 0 ; mêmes hauteurs et coins). Sur ordinateur, chaque bande fermée a un dégradé nuit, son numéro (Barlow, soleil) et son titre lu de bas en haut (Jost, blanc). Le panneau ouvert a sa légende dans une carte coin feuille (nuit à 75 %, fond flouté, encoche du fil en haut) : numéro et lieu ou date, titre, texte, « Voir l'album » (contour soleil). Le fil relie cinq points sous les panneaux (un sommet pour Grandir) ; il est tracé en soleil jusqu'au panneau ouvert. Sur téléphone : la pile de l'accordéon, le fil à gauche avec les numéros.
+
+**Mouvement** (CSS) : les bandes montent l'une après l'autre (80 ms), puis le fil paraît ; à l'ouverture, un lent zoom unique de la photo (1 → 1,05 en 6 s), la carte monte de 16 px en fondu, le titre vertical s'efface, le fil se trace jusqu'au point ouvert (0,6 s). Aucun défilement automatique. Bouton pause et mouvement réduit : ni zoom ni tracé, changement de panneau instantané.
+
+| Usage | Ratio |
+|---|---|
+| Carte légende : textes (brume) sur nuit à 75 %, au pire sur du blanc pur | 5,32:1 |
+| Carte légende : numéro (soleil, 24 px, grand texte) et contour de « Voir l'album » | 3,09:1 |
+| Bande fermée : titre (blanc, 20 px gras) sur le dégradé, au pire sur du blanc ; numéro (soleil) | 5,23:1 ; 5,21:1 |
+| Verbe surligné : encre sur soleil ; titre (brume) et sous-titre (brume douce) sur nuit | 7,84:1 ; 11,41:1 et 7,85:1 |
+| Surtitre, lien et point ouvert (soleil) sur nuit | 6,64:1 |
+
 ## Annexe A : tableau des contrastes
 
 Calcul WCAG 2.x sur fond uni ; ratios tronqués à une décimale. Seuils : 4,5:1 pour le texte, 3:1 pour les composants et le fil.

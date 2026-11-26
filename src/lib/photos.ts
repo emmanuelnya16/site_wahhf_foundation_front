@@ -1,4 +1,4 @@
-import { PHOTOS, PHOTO_ALBUMS, type CatalogPhoto, type PhotoAlbum } from '../data/photos';
+import { PHOTOS, PHOTO_ALBUMS, PHOTO_FALLBACKS, type CatalogPhoto, type PhotoAlbum } from '../data/photos';
 import i18n from '../i18n';
 import { localizedAlbum, markCatalog } from './photoText';
 
@@ -27,9 +27,11 @@ export function photoById(id: string): CatalogPhoto {
 /**
  * La photo prévue si elle est publiable, sinon sa remplaçante (adultes ou personnes de dos), sinon rien.
  * Exemple : photoOrFallback('A27', 'A30') dans le build de production donne A30 tant que A27 attend l'accord.
+ * Si aucune des photos demandées n'est publiable, celles de la table « Remplaçantes » du catalogue prennent le relais.
  */
 export function photoOrFallback(id: string, ...fallbacks: string[]): CatalogPhoto | null {
-  for (const candidate of [id, ...fallbacks]) {
+  const asked = [id, ...fallbacks];
+  for (const candidate of [...asked, ...asked.flatMap((other) => PHOTO_FALLBACKS[other] ?? [])]) {
     const photo = photoById(candidate);
     if (isPublishable(photo)) return photo;
   }

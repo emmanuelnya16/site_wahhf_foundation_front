@@ -4,16 +4,17 @@
  * production tant que la première attend l'accord parental (« ? » au catalogue).
  * - Santé : A63, l'intervenant devant le pictogramme « Santé » des domaines de la fondation (retouches du 19/11 : une
  *   image pour chaque domaine). TODO (fondation) : une photo d'une action de santé (question 142).
- * - Éducation : A27 (salle comble), sinon A98 (un participant prend des notes).
+ * - Éducation : A27 (salle comble), sinon A98 (un participant prend des notes), sinon A77 (un intervenant au micro).
+ * - Droits et inclusion : A31, sinon A42 (règle des mineurs du 25 novembre 2026 : A98 et A31 attendent aussi l'accord).
  * - Environnement : B10 (groupe dans un champ d'ananas), sinon B40 (lac de cratère) : B06 et B24 montrent les mêmes
  *   encadrants que B23 (Entrepreneuriat), côte à côte sur l'accueil.
  * Seulement des repères : les données des photos (src/data/photos.ts) ne sont pas dans le JavaScript initial.
  */
 export const DOMAIN_PHOTO_IDS: Record<string, readonly string[]> = {
-  education: ['A27', 'A98'],
+  education: ['A27', 'A98', 'A77'],
   sante: ['A63'],
   entrepreneuriat: ['B23'],
   environnement: ['B10', 'B40'],
-  'droits-inclusion': ['A31'],
+  'droits-inclusion': ['A31', 'A42'],
   'mobilite-langues': ['A53'],
 };

@@ -235,14 +235,14 @@ const JOURNEE_2026_04_25: Event = {
     { heure: '21 h 00', titre: 'Clôture (TODO)', texte: 'Fin de la journée à 21 h (banderole) ; contenu à confirmer (TODO).' },
   ],
   // « Activités » de la banderole : titre et domaine seulement (étiquette et lien), aucune description.
-  // Photos : A17 (attend l'accord des parents ; en ligne, A30), A22, A41, A53 ; hôpitaux et subvention sans photo.
+  // Photos : A17 (attend l'accord des parents ; en ligne, A66), A22, A41, A71 ; hôpitaux et subvention sans photo.
   activites: [
-    { icon: 'education', titre: 'Formations gratuites', domaine: 'education', photo: ['A17', 'A30'] },
+    { icon: 'education', titre: 'Formations gratuites', domaine: 'education', photo: ['A17', 'A66'] },
     { icon: 'logiciel', titre: 'Logiciels gratuits', domaine: 'education', photo: ['A22'] },
     { icon: 'startup', titre: 'Accompagnement des startups', domaine: 'entrepreneurship', photo: ['A41'] },
     { icon: 'hopital', titre: 'Équipement des hôpitaux', domaine: 'health', photo: [] },
     { icon: 'subvention', titre: 'Subvention du meilleur projet', domaine: 'entrepreneurship', photo: [] },
-    { icon: 'transfert', titre: 'Transfert technologique Allemagne–Cameroun', domaine: 'mobility', photo: ['A53'] },
+    { icon: 'transfert', titre: 'Transfert technologique Allemagne–Cameroun', domaine: 'mobility', photo: ['A71'] },
   ],
   tempsForts: [
     { icon: 'presentation', titre: 'Comprendre (TODO)', texte: 'Premier temps fort de la journée : à fournir (TODO).' },
@@ -263,7 +263,8 @@ const JOURNEE_2026_04_25: Event = {
       'Des frais cachés ou payés à un intermédiaire (TODO : à faire valider)',
     ],
   },
-  photoParents: ['A88', 'A31'],
+  // A88, A34 et A31 attendent l'accord (jeunes reconnaissables)
+  photoParents: ['A88', 'A99'],
   faq: [
     { question: 'Où et quand la journée a-t-elle eu lieu ? (TODO)', reponse: 'À l’Albatros Hotel, le 25 avril 2026, de 8 h à 21 h (banderole). Ville à confirmer (TODO).' },
     { question: 'À qui s’adressait la journée ? (TODO)', reponse: 'Réponse à fournir par la fondation (TODO).' },
@@ -358,8 +359,8 @@ const ROAD_TO_EUROPE: Event = frAll({
   placesRestantes: ROAD_TO_EUROPE_FAITS.placesRestantes,
   lienInscription: ROAD_TO_EUROPE_FAITS.inscription,
   prix: ROAD_TO_EUROPE_FAITS.prix,
-  // B73 (jeune au sommet) attend l'accord des parents ; en ligne, B85
-  photoHero: ['B73', 'B85'],
+  // B73 (jeune au sommet) et B85 attendent l'accord des parents ; en ligne, B44 (membre de l'équipe devant le lac)
+  photoHero: ['B73', 'B44'],
   organisateurs: [{ nom: 'WAHHF Foundation', logo: 'wahhf' }],
   sections: {
     hero: { action: 'Réserver ma place', action2: 'Voir le programme', etiquette: 'La conférence a lieu à' },
@@ -438,7 +439,7 @@ const ROAD_TO_EUROPE: Event = frAll({
   ],
   // Liens des cartes (ronds flèche) : le guide des parcours, et l'accompagnement pour la 4e voie
   activites: [
-    { icon: 'education', titre: 'Études', texte: 'Des universités publiques reconnues dans 10 pays, avec des cursus parfois en anglais et une admission à préparer tôt.', etiquette: 'Universités publiques', photo: ['A53'], to: '/accompagnement/comprendre-les-parcours' },
+    { icon: 'education', titre: 'Études', texte: 'Des universités publiques reconnues dans 10 pays, avec des cursus parfois en anglais et une admission à préparer tôt.', etiquette: 'Universités publiques', photo: ['A74'], to: '/accompagnement/comprendre-les-parcours' },
     { icon: 'atelier', titre: 'Formation professionnelle', texte: "Apprendre un métier en alternance, comme l'Ausbildung en Allemagne, dans les soins, l'artisanat, l'hôtellerie ou l'industrie.", etiquette: 'Formation en alternance', photo: ['A22'], to: '/accompagnement/comprendre-les-parcours' },
     { icon: 'emploi', titre: 'Emploi qualifié', texte: 'Votre diplôme ou votre expérience reconnus dans le pays choisi, pour travailler dans votre métier.', etiquette: 'Diplôme reconnu', photo: ['A41'], to: '/accompagnement/comprendre-les-parcours' },
     { icon: 'boussole', titre: 'Être accompagné', texte: 'La fondation vous aide à choisir le pays, préparer la langue et monter un dossier complet, sans intermédiaire inconnu.', etiquette: 'Accompagnement WAHHF', photo: ['A12'], to: '/mobilite-langues/accompagnement' },
@@ -468,8 +469,8 @@ const ROAD_TO_EUROPE: Event = frAll({
       'Des frais cachés, ou payés à un intermédiaire inconnu',
     ],
   },
-  // A31 (parents et aînés au premier rang) ; A88 en remplacement
-  photoParents: ['A31', 'A88'],
+  // A31 (parents et aînés au premier rang) attend l'accord ; en ligne, A44
+  photoParents: ['A31', 'A44'],
   faq: [
     { question: 'Quand et où a lieu Road to Europe ?', reponse: "{{quandOu}} Le lieu exact et l'heure d'ouverture sont annoncés dès qu'ils sont confirmés." },
     { question: "À qui s'adresse l'événement ?", reponse: "Aux jeunes qui préparent un projet d'études, de formation ou de travail en Europe, et à leurs parents. Aucun niveau de langue n'est exigé pour venir." },

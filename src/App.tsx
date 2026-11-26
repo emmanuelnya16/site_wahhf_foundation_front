@@ -36,6 +36,8 @@ const GuidePage = page(() => import('./pages/accompagnement/GuidePage'));
 const ArnaquesPage = page(() => import('./pages/accompagnement/ArnaquesPage'));
 const ApplyPage = page(() => import('./pages/ApplyPage'));
 const DonatePage = page(() => import('./pages/DonatePage'));
+// Nouvelle page Accueil (lot 11.1), à côté de l'accueil actuel (/) qui ne change pas
+const AccueilPage = page(() => import('./pages/accueil/AccueilPage'));
 // Une page par fichier (src/pages/transversal/), un morceau de JS par page
 const QuiSommesNousPage = page(() => import('./pages/transversal/QuiSommesNousPage'));
 const PartenairesPage = page(() => import('./pages/transversal/PartenairesPage'));
@@ -80,6 +82,7 @@ function AppRoutes() {
             ROUTES PRINCIPALES WAHHF FOUNDATION (PROMPT 1 & PROMPT 2)
            ================================================================= */}
         <Route path="/" element={<Home />} />
+        <Route path="/accueil" element={<AccueilPage />} />
         <Route path="/qui-sommes-nous" element={<QuiSommesNousPage />} />
         <Route path="/nos-actions" element={<NosActionsPage />} />
         <Route path="/notre-impact" element={<NotreImpactPage />} />

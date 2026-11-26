@@ -46,9 +46,18 @@ const TEAM_SOURCE = teamIndex >= 0 ? args[teamIndex + 1] : null;
 function parseCatalogue(md) {
   const albums = [];
   const photos = [];
+  const fallbacks = {};
   let album = null;
+  let inFallbacks = false;
   for (const raw of md.split(/\r?\n/)) {
     const line = raw.trim();
+    // « ## Remplaçantes … » : | photo en attente | remplaçantes, dans l'ordre | où |
+    if (/^##\s/.test(line)) inFallbacks = /^##\s+Remplaçantes/.test(line);
+    if (inFallbacks) {
+      const row = line.match(/^\|\s*([A-Z]\d{2})\s*\|\s*([A-Z]\d{2}(?:\s*,\s*[A-Z]\d{2})*)\s*\|/);
+      if (row) fallbacks[row[1]] = row[2].split(',').map((c) => c.trim());
+      continue;
+    }
     const heading = line.match(/^##\s+(.+?)\s+\(`([a-z0-9-]+)`\)\s*$/);
     if (heading) {
       album = { id: heading[2], title: heading[1].trim(), note: null };
@@ -76,7 +85,12 @@ function parseCatalogue(md) {
     ids.add(p.id);
     slugs.add(p.slug);
   }
-  return { albums, photos };
+  for (const [id, list] of Object.entries(fallbacks)) {
+    for (const other of [id, ...list]) if (!ids.has(other)) throw new Error(`Remplaçantes : ${other} n'est pas au catalogue`);
+    const hidden = list.filter((other) => photos.find((p) => p.id === other).consent !== 'ok');
+    if (hidden.length) throw new Error(`Remplaçantes de ${id} : ${hidden.join(', ')} attend aussi un accord`);
+  }
+  return { albums, photos, fallbacks };
 }
 
 // --- Fichiers ---------------------------------------------------------------------------------------------------
@@ -253,7 +267,7 @@ async function removeOrphans(expected) {
 // --- Données du site --------------------------------------------------------------------------------------------
 const q = (s) => `'${String(s).replace(/\\/g, '\\\\').replace(/'/g, "\\'")}'`;
 
-function dataModule(albums, photos) {
+function dataModule(albums, photos, fallbacks) {
   const albumIds = albums.map((a) => q(a.id)).join(' | ');
   return `// Généré par scripts/optimize-photos.mjs depuis docs/photos-catalogue.md (npm run photos). Ne pas modifier à la main :
 // corriger le catalogue, puis relancer le script.
@@ -327,12 +341,17 @@ function photo(
 export const PHOTOS: CatalogPhoto[] = [
 ${photos.map((p) => `  photo(${q(p.id)}, ${q(p.album)}, ${q(p.slug)}, ${q(p.alt)}, ${p.width}, ${p.height}, ${q(p.focus)}, ${q(p.dominantColor)}, ${q(p.consent)}, [${p.widths.join(', ')}], ${p.jpegWidth}),`).join('\n')}
 ];
+
+/** Remplaçantes d'une photo en attente d'accord, quand la page n'en donne pas de publiable (table du catalogue). */
+export const PHOTO_FALLBACKS: Record<string, readonly string[]> = {
+${Object.entries(fallbacks).map(([id, list]) => `  ${id}: [${list.map(q).join(', ')}],`).join('\n')}
+};
 `;
 }
 
 // --- Programme --------------------------------------------------------------------------------------------------
 const started = Date.now();
-const { albums, photos } = parseCatalogue(await readFile(CATALOGUE, 'utf8'));
+const { albums, photos, fallbacks } = parseCatalogue(await readFile(CATALOGUE, 'utf8'));
 console.log(`Catalogue : ${photos.length} photos, ${albums.length} albums.`);
 const results = [];
 for (const photo of photos) results.push(await processPhoto(photo)); // une photo à la fois : sharp parallélise déjà
@@ -341,7 +360,7 @@ const portraits = [];
 for (const entry of team) portraits.push(await processPortrait(entry));
 const expected = new Set([...results.flatMap((r) => r.outputs), ...portraits.flatMap((p) => p.outputs)]);
 const removed = await removeOrphans(expected);
-const module = dataModule(albums, results);
+const module = dataModule(albums, results, fallbacks);
 const previous = existsSync(DATA_FILE) ? await readFile(DATA_FILE, 'utf8') : '';
 if (previous !== module) await writeFile(DATA_FILE, module);
 const teamData = teamModule(portraits);

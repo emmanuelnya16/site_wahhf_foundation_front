@@ -1,0 +1,221 @@
+{
+  "seo": {
+    "title": "Home — Empowering youth, transforming communities",
+    "description": "WAHHF Foundation supports young people and vulnerable communities in Cameroon: education, health, entrepreneurship, environment and mobility towards Europe."
+  },
+  "hero": {
+    "titre": [
+      "Empowering",
+      "<accent>youth</accent>,",
+      "transforming",
+      "communities."
+    ],
+    "intro": "WAHHF Foundation supports young people and vulnerable communities in Cameroon: education, health, entrepreneurship, environment and mobility towards Europe.",
+    "actions": "Discover our actions",
+    "rejoindre": "Join us",
+    "equipe": "A team between Cameroon and Germany",
+    "equipeSuite": "serving young people",
+    "pays": "European countries we guide young people towards",
+    "domaines": "areas of action",
+    "evenement": "Next event"
+  },
+  "qsn": {
+    "surtitre": "Who we are",
+    "titre": [
+      "A foundation committed",
+      "to a dignified future"
+    ],
+    "texte": "WAHHF Foundation is the social branch of the IROKO Group. Based in Yaoundé and Douala, with coordination in Germany, it supports young people towards autonomy: education, health, entrepreneurship, environment, rights and inclusion, and mobility towards Europe.",
+    "citation": "“Change must come from ourselves.”",
+    "points": {
+      "dignite": {
+        "titre": "Dignity and respect",
+        "texte": "Every young person shapes their own path."
+      },
+      "integrite": {
+        "titre": "Integrity and truth",
+        "texte": "Verified information, never false promises."
+      },
+      "gratuite": {
+        "titre": "Free of charge",
+        "texte": "The German and English academy, from A1 to C1, at no cost."
+      }
+    },
+    "lien": "Discover the foundation"
+  },
+  "chiffres": {
+    "surtitre": "The foundation in figures",
+    "titre": [
+      "What is",
+      "already in place"
+    ],
+    "note": "Impact figures (young people supported, activities carried out) will be published here as soon as they are dated and verified.",
+    "source": "As of {{date}}. Source: {{source}}"
+  },
+  "domaines": {
+    "surtitre": "Our areas of action",
+    "titre": "Six areas to build autonomy",
+    "compteur": "Area",
+    "rubrique": "Area {{n}}",
+    "lien": "Discover this area",
+    "lienDe": "Discover this area: {{titre}}",
+    "consigne": "Scroll to explore the 6 areas · WAHHF Foundation",
+    "fin": {
+      "rubrique": "All our areas",
+      "titre": "Six areas, one course",
+      "lien": "See all our actions"
+    }
+  },
+  "projet": {
+    "soutenir": "Support this project",
+    "enSavoirPlus": "Find out more",
+    "tampon": "Free"
+  },
+  "parcours": {
+    "surtitre": "Testimonials",
+    "titre": [
+      "Journeys",
+      "that inspire"
+    ],
+    "texte": "Young people tell, in their own words, what they have built with the foundation.",
+    "lien": "Discover more stories",
+    "raconter": "Tell my story",
+    "vierge": "And you? Your journey can encourage other young people.",
+    "citation": "“{{citation}}”",
+    "age": "aged {{age}}",
+    "role": "carousel",
+    "region": "Testimonials",
+    "position": "{{n}} of {{total}}",
+    "precedent": "Previous testimonial",
+    "suivant": "Next testimonial",
+    "annonce": "Testimonial {{n}} of {{total}}",
+    "appel": {
+      "surtitre": "Journeys that inspire",
+      "titre": [
+        "Your story can",
+        "inspire others"
+      ],
+      "texte": "Have you taken part in one of the foundation’s programmes? Tell us about your journey: with your consent, it can encourage other young people."
+    }
+  },
+  "contenu": {
+    "chiffres": {
+      "pays": {
+        "libelle": "European countries",
+        "sousTexte": "Verified country pages"
+      },
+      "domaines": {
+        "libelle": "Areas of action",
+        "sousTexte": "From education to mobility"
+      },
+      "niveaux": {
+        "libelle": "Levels of German and English",
+        "sousTexte": "From A1 to C1, free of charge"
+      },
+      "villes": {
+        "libelle": "Cities in Cameroon",
+        "sousTexte": "Our teams in Yaoundé and Douala, with coordination in Germany"
+      }
+    },
+    "projets": {
+      "wahhf-on-wheel": {
+        "surtitre": "Flagship project",
+        "accroche": "healthcare closer\nto the villages",
+        "texte": "Our mobile clinic travels through the most remote areas of Cameroon to offer free primary care: consultations, vaccinations, screenings and hygiene awareness.",
+        "jalons": [
+          {
+            "libelle": "villages visited every month"
+          },
+          {
+            "valeur": "2,000+",
+            "libelle": "patients cared for"
+          },
+          {
+            "libelle": "young people trained in community health"
+          }
+        ]
+      },
+      "academie": {
+        "surtitre": "Flagship project",
+        "titre": "The Language Academy",
+        "accroche": "where Europe begins",
+        "texte": "A free programme for learning German and English, from level A1 to level C1, with verified guidance pages for 10 European countries.",
+        "jalons": [
+          {
+            "libelle": "Discovery"
+          },
+          {
+            "libelle": "Everyday exchanges"
+          },
+          {
+            "libelle": "Autonomy"
+          },
+          {
+            "libelle": "Independence"
+          },
+          {
+            "libelle": "Mastery"
+          }
+        ]
+      }
+    },
+    "temoignages": {
+      "marie": {
+        "citation": "WAHHF’s mentoring gave me the confidence and the tools to start my food-processing business.",
+        "domaine": "Youth & entrepreneurship",
+        "resume": "From urban farming to setting up her micro-business, Marie followed the mentoring programme for 12 months.",
+        "resultat": "Business launched, 3 jobs created"
+      }
+    }
+  },
+  "regions": {
+    "surtitre": "Our presence",
+    "titre": [
+      "Based in Yaoundé",
+      "and Douala, looking",
+      "towards Europe"
+    ],
+    "lien": "See our impact"
+  },
+  "evenements": {
+    "titre": [
+      "Let’s meet"
+    ],
+    "intro": "Days to meet the foundation, its teams and partners.",
+    "lien": "All events",
+    "bientot": "The next event will be announced very soon",
+    "voir": "{{titre}}, see the event"
+  },
+  "don": {
+    "surtitre": "Support the foundation",
+    "titre": [
+      "Every gesture strengthens",
+      "a life journey"
+    ],
+    "texte": "Your donation supports our work in Cameroon across our six areas: education, health, youth entrepreneurship, environment, rights and inclusion, mobility and languages. You choose the area you want to support, or you let the foundation allocate it where the need is most urgent.",
+    "confiance": "The IROKO Group covers our running and teaching costs.",
+    "domaine": "Support this domain: {{domaine}}"
+  },
+  "images": {
+    "surtitre": "In pictures",
+    "courts": {
+      "apprendre": "Learn",
+      "chanter-ensemble": "Sing",
+      "cultiver": "Cultivate",
+      "s-engager": "Get involved",
+      "grandir": "Grow"
+    }
+  },
+  "film": {
+    "surtitre": "In video",
+    "titre": "The foundation’s film",
+    "phrase": "One minute to discover WAHHF Foundation, its young people and its work in Cameroon.",
+    "video": "Excerpt from the WAHHF Foundation film, without sound",
+    "pause": "Pause",
+    "lecture": "Play",
+    "lireExtrait": "Play the excerpt, without sound",
+    "son": "Watch with sound",
+    "film": "Watch the film",
+    "duree": "1 min 10 s"
+  }
+}

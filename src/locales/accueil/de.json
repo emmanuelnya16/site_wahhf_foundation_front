@@ -1,0 +1,229 @@
+{
+  "_relire": [
+    "hero.intro : « communautés vulnérables » rendu par « benachteiligte Gemeinschaften »",
+    "hero.pays : « pays d’Europe où nous orientons les jeunes » rendu par « Länder Europas, für die wir jungen Menschen Orientierung geben »",
+    "qsn.citation : « Le changement doit venir de nous-mêmes » rendu par « Der Wandel muss von uns selbst ausgehen » (devise à valider, question 190)",
+    "chiffres.note : « chiffres d’impact » rendu par « Wirkungszahlen », « actions menées » par « durchgeführte Aktionen »",
+    "domaines.fin.titre : « Six domaines, un même cap » rendu par « Sechs Bereiche, ein Kurs »",
+    "contenu.projets.wahhf-on-wheel.jalons : « santé communautaire » rendu par « Gemeindegesundheit » (exemple, non confirmé)"
+  ],
+  "seo": {
+    "title": "Startseite — Junge Menschen stärken, Gemeinschaften verändern",
+    "description": "Die WAHHF Foundation begleitet junge Menschen und benachteiligte Gemeinschaften in Kamerun: Bildung, Gesundheit, Unternehmertum, Umwelt und Mobilität nach Europa."
+  },
+  "hero": {
+    "titre": [
+      "<accent>Junge Menschen</accent>",
+      "stärken,",
+      "Gemeinschaften",
+      "verändern."
+    ],
+    "intro": "Die WAHHF Foundation begleitet junge Menschen und benachteiligte Gemeinschaften in Kamerun: Bildung, Gesundheit, Unternehmertum, Umwelt und Mobilität nach Europa.",
+    "actions": "Unsere Arbeit entdecken",
+    "rejoindre": "Mitmachen",
+    "equipe": "Ein Team zwischen Kamerun und Deutschland",
+    "equipeSuite": "im Dienst der Jugend",
+    "pays": "Länder Europas, für die wir jungen Menschen Orientierung geben",
+    "domaines": "Arbeitsbereiche",
+    "evenement": "Nächste Veranstaltung"
+  },
+  "qsn": {
+    "surtitre": "Über uns",
+    "titre": [
+      "Eine Stiftung für",
+      "eine Zukunft in Würde"
+    ],
+    "texte": "Die WAHHF Foundation ist der soziale Zweig der IROKO-Gruppe. Mit Sitz in Yaoundé und Douala und einer Koordination in Deutschland begleitet sie junge Menschen in die Selbstständigkeit: Bildung, Gesundheit, Unternehmertum, Umwelt, Rechte und Teilhabe sowie Mobilität nach Europa.",
+    "citation": "„Der Wandel muss von uns selbst ausgehen.“",
+    "points": {
+      "dignite": {
+        "titre": "Würde und Respekt",
+        "texte": "Jeder junge Mensch gestaltet seinen Weg selbst."
+      },
+      "integrite": {
+        "titre": "Integrität und Wahrheit",
+        "texte": "Geprüfte Informationen, niemals falsche Versprechen."
+      },
+      "gratuite": {
+        "titre": "Kostenlos",
+        "texte": "Die Deutsch- und Englischakademie, von A1 bis C1, ohne Gebühren."
+      }
+    },
+    "lien": "Die Stiftung kennenlernen"
+  },
+  "chiffres": {
+    "surtitre": "Die Stiftung in Zahlen",
+    "titre": [
+      "Was bereits",
+      "aufgebaut ist"
+    ],
+    "note": "Wirkungszahlen (begleitete junge Menschen, durchgeführte Aktionen) werden hier veröffentlicht, sobald sie datiert und geprüft sind.",
+    "source": "Stand: {{date}}. Quelle: {{source}}"
+  },
+  "domaines": {
+    "surtitre": "Unsere Arbeitsbereiche",
+    "titre": "Sechs Bereiche für mehr Selbstständigkeit",
+    "compteur": "Bereich",
+    "rubrique": "Bereich {{n}}",
+    "lien": "Bereich entdecken",
+    "lienDe": "Bereich entdecken: {{titre}}",
+    "consigne": "Scrollen Sie durch die 6 Bereiche · WAHHF Foundation",
+    "fin": {
+      "rubrique": "Alle unsere Bereiche",
+      "titre": "Sechs Bereiche, ein Kurs",
+      "lien": "Unsere gesamte Arbeit ansehen"
+    }
+  },
+  "projet": {
+    "soutenir": "Dieses Projekt unterstützen",
+    "enSavoirPlus": "Mehr erfahren",
+    "tampon": "Kostenlos"
+  },
+  "parcours": {
+    "surtitre": "Erfahrungsberichte",
+    "titre": [
+      "Wege,",
+      "die inspirieren"
+    ],
+    "texte": "Junge Menschen erzählen mit ihren eigenen Worten, was sie mit der Stiftung aufgebaut haben.",
+    "lien": "Weitere Geschichten entdecken",
+    "raconter": "Meinen Weg erzählen",
+    "vierge": "Und Sie? Ihr Weg kann andere junge Menschen ermutigen.",
+    "citation": "„{{citation}}“",
+    "age": "{{age}} Jahre",
+    "role": "Karussell",
+    "region": "Erfahrungsberichte",
+    "position": "{{n}} von {{total}}",
+    "precedent": "Vorheriger Bericht",
+    "suivant": "Nächster Bericht",
+    "annonce": "Bericht {{n}} von {{total}}",
+    "appel": {
+      "surtitre": "Wege, die inspirieren",
+      "titre": [
+        "Ihre Geschichte kann",
+        "andere inspirieren"
+      ],
+      "texte": "Haben Sie an einem Programm der Stiftung teilgenommen? Erzählen Sie uns Ihren Weg: Mit Ihrer Einwilligung kann er andere junge Menschen ermutigen."
+    }
+  },
+  "contenu": {
+    "chiffres": {
+      "pays": {
+        "libelle": "Länder Europas",
+        "sousTexte": "Geprüfte Länderseiten"
+      },
+      "domaines": {
+        "libelle": "Arbeits­bereiche",
+        "sousTexte": "Von der Bildung bis zur Mobilität"
+      },
+      "niveaux": {
+        "libelle": "Niveaus in Deutsch und Englisch",
+        "sousTexte": "Von A1 bis C1, kostenlos"
+      },
+      "villes": {
+        "libelle": "Städte in Kamerun",
+        "sousTexte": "Unsere Teams in Yaoundé und Douala, Koordination in Deutschland"
+      }
+    },
+    "projets": {
+      "wahhf-on-wheel": {
+        "surtitre": "Leuchtturmprojekt",
+        "accroche": "Gesundheit ganz nah\nan den Dörfern",
+        "texte": "Unsere mobile Klinik fährt in die entlegensten Gebiete Kameruns und bietet kostenlose Grundversorgung: Sprechstunden, Impfungen, Vorsorgeuntersuchungen und Hygieneaufklärung.",
+        "jalons": [
+          {
+            "libelle": "besuchte Dörfer pro Monat"
+          },
+          {
+            "valeur": "2.000+",
+            "libelle": "versorgte Patienten"
+          },
+          {
+            "libelle": "junge Menschen in Gemeinde­gesundheit geschult"
+          }
+        ]
+      },
+      "academie": {
+        "surtitre": "Leuchtturmprojekt",
+        "titre": "Die Sprachakademie",
+        "accroche": "der Weg nach Europa\nbeginnt hier",
+        "texte": "Ein kostenloses Programm zum Lernen von Deutsch und Englisch, von Niveau A1 bis Niveau C1, mit geprüften Länderseiten zu 10 europäischen Ländern.",
+        "jalons": [
+          {
+            "libelle": "Einstieg"
+          },
+          {
+            "libelle": "Alltags­gespräche"
+          },
+          {
+            "libelle": "Selbst­ständigkeit"
+          },
+          {
+            "libelle": "Unabhängigkeit"
+          },
+          {
+            "libelle": "Sprach­beherrschung"
+          }
+        ]
+      }
+    },
+    "temoignages": {
+      "marie": {
+        "citation": "Das Mentoring von WAHHF hat mir das Vertrauen und die Werkzeuge gegeben, um meinen Betrieb für Lebensmittelverarbeitung zu starten.",
+        "domaine": "Jugend & Unternehmertum",
+        "resume": "Von der städtischen Landwirtschaft bis zur Gründung ihres Kleinbetriebs hat Marie 12 Monate lang am Mentoring-Programm teilgenommen.",
+        "resultat": "Betrieb gegründet, 3 Arbeitsplätze geschaffen"
+      }
+    }
+  },
+  "regions": {
+    "surtitre": "Unsere Präsenz",
+    "titre": [
+      "In Yaoundé und",
+      "Douala zu Hause,",
+      "offen für Europa"
+    ],
+    "lien": "Unsere Wirkung ansehen"
+  },
+  "evenements": {
+    "titre": [
+      "Lernen wir uns kennen"
+    ],
+    "intro": "Tage, an denen Sie die Stiftung, ihre Teams und ihre Partner kennenlernen können.",
+    "lien": "Alle Veranstaltungen",
+    "bientot": "Der nächste Termin wird in Kürze bekannt gegeben",
+    "voir": "{{titre}}, zur Veranstaltung"
+  },
+  "don": {
+    "surtitre": "Die Stiftung unterstützen",
+    "titre": [
+      "Jede Geste stärkt",
+      "einen Lebensweg"
+    ],
+    "texte": "Ihre Spende unterstützt unsere Arbeit in Kamerun in unseren sechs Bereichen: Bildung, Gesundheit, Unternehmertum junger Menschen, Umwelt, Rechte und Teilhabe, Mobilität und Sprachen. Sie wählen den Bereich, den Sie unterstützen möchten, oder Sie überlassen es der Stiftung, Ihre Spende dort einzusetzen, wo der Bedarf am dringendsten ist.",
+    "confiance": "Die IROKO-Gruppe deckt unsere Betriebs- und Unterrichtskosten.",
+    "domaine": "Diesen Bereich unterstützen: {{domaine}}"
+  },
+  "images": {
+    "surtitre": "In Bildern",
+    "courts": {
+      "apprendre": "Lernen",
+      "chanter-ensemble": "Singen",
+      "cultiver": "Anbauen",
+      "s-engager": "Engagieren",
+      "grandir": "Wachsen"
+    }
+  },
+  "film": {
+    "surtitre": "Im Video",
+    "titre": "Der Film der Stiftung",
+    "phrase": "Eine Minute, um die WAHHF Foundation, ihre jungen Menschen und ihre Arbeit in Kamerun kennenzulernen.",
+    "video": "Ausschnitt aus dem Film der WAHHF Foundation, ohne Ton",
+    "pause": "Pause",
+    "lecture": "Abspielen",
+    "lireExtrait": "Ausschnitt abspielen, ohne Ton",
+    "son": "Mit Ton ansehen",
+    "film": "Film ansehen",
+    "duree": "1:10 Min."
+  }
+}

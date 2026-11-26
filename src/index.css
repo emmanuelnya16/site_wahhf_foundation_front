@@ -1984,10 +1984,15 @@ html.vt-galerie::view-transition-new(root) {
 
 /* Parcours épinglé (ordinateur, PrinciplesMotion) : la scène occupe l'écran sous l'en-tête ; la piste est une ligne
    qui glisse sous un cadre plein écran ; la carte paire descend de 4 rem. */
+/* Lot 11.4 : la section est plus haute que l'écran de la longueur du parcours (3,5 écrans) ; la scène y reste collée sous
+   l'en-tête (sticky : aucun décalage de mise en page, aucun saut à la sortie) */
 .principles.is-pinned {
+  height: calc(100svh - var(--header-height) + 350vh);
   padding-block: 0;
 }
 .principles.is-pinned .principles-pin {
+  position: sticky;
+  top: var(--header-height);
   display: flex;
   flex-direction: column;
   height: calc(100svh - var(--header-height));

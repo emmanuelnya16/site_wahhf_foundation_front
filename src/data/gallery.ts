@@ -138,12 +138,30 @@ const ITEMS: (GalleryItem | null)[] = [
   video('video-bananeraie', 'terrain', 'Extrait vidéo : des régimes de bananes dans une plantation.', 'Régimes de bananes dans une plantation (extrait vidéo, sans son).'),
 ];
 
-export const GALLERY_ITEMS: GalleryItem[] = ITEMS.filter((item): item is GalleryItem => item !== null);
+/**
+ * Règle des mineurs (25 novembre 2026, GAL-01) : jeunes reconnaissables, accord écrit des parents attendu. En production,
+ * ces photos et ces vidéos ne s'affichent pas ; la remplaçante, si elle existe, prend leur place (accueil, Candidater).
+ * L'accord reçu : retirer la ligne.
+ */
+const EN_ATTENTE: Record<string, string | null> = {
+  'open-day-jeunes': 'open-day-trophee',
+  'open-day-groupe': 'open-day-rassemblement',
+  'open-day-chorale': 'open-day-marche-slogan',
+  'open-day-accompagnement': 'open-day-trophee',
+  'video-chorale': null,
+  'video-car': null,
+};
+const publiable = (id: string) => !import.meta.env.PROD || !(id in EN_ATTENTE);
+
+export const GALLERY_ITEMS: GalleryItem[] = ITEMS.filter((item): item is GalleryItem => item !== null && publiable(item.id));
 
 /** Sélection de l'accueil (« En images ») : la première photo est mise en avant. */
 export const HOME_GALLERY_IDS = ['open-day-jeunes', 'open-day-marche', 'open-day-groupe', 'open-day-chorale', 'open-day-interview'];
 
-export const galleryItem = (id: string) => GALLERY_ITEMS.find((item) => item.id === id);
+export const galleryItem = (id: string) => {
+  const shown = publiable(id) ? id : EN_ATTENTE[id];
+  return GALLERY_ITEMS.find((item) => item.id === shown);
+};
 
 /** Photo de la galerie réutilisée ailleurs (cartes de domaines…) : URL principale + srcset. */
 export function galleryPhoto(id: string): { src: string; srcSet: string } {

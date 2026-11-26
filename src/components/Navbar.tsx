@@ -23,8 +23,9 @@ import { localized, localizedList } from '../lib/localize';
  * sombre : une bordure basse trait-nuit à la place). Lien actif : souligné et aria-current (A11Y-11), pas la couleur seule.
  */
 // Étape a (lot 7.9, 20 novembre 2026) : 1,25 rem entre deux entrées du menu (8 + 4 + 8 px), au lieu de 1,5 rem
+// Lot 11.1 : entrées à 16 px (« pas de texte sous 16 px » dans l'en-tête), 8 entrées depuis l'ajout d'Accueil
 const NAV_LINK =
-  'inline-flex items-center gap-1 min-h-11 px-2 text-meta text-text whitespace-nowrap underline-offset-[0.4em] decoration-2 transition-colors duration-(--dur-fast) hover:text-link hover:underline cursor-pointer';
+  'inline-flex items-center gap-1 min-h-11 px-2 text-base text-text whitespace-nowrap underline-offset-[0.4em] decoration-2 transition-colors duration-(--dur-fast) hover:text-link hover:underline cursor-pointer';
 const NAV_LINK_CURRENT = 'underline';
 const ICON_BUTTON =
   'w-11 h-11 shrink-0 rounded-pill inline-flex items-center justify-center text-text hover:bg-surface-section transition-colors duration-(--dur-fast) cursor-pointer';
@@ -274,10 +275,10 @@ export default function Navbar() {
               height={48}
               className="w-10 h-10 sm:w-11 sm:h-11 object-contain rounded-pill bg-white p-0.5"
             />
-            {/* Étape d (lot 7.9, votre choix du 20 novembre 2026) : en français, le menu complet ne laisse pas la place du
-                nom (le conteneur fait 1 152 px à toutes ces largeurs) : logo seul dès 1 280 px ; en anglais, le nom tient. */}
-            {/* Lot 7.10 : en allemand non plus, le nom ne tient pas à côté du menu complet (mesuré : −27 px) : logo seul */}
-            <div className={cn('flex flex-col min-w-0', currentLang !== 'en' && 'xl:hidden')}>
+            {/* Étape d (lot 7.9, votre choix du 20 novembre 2026) : le menu complet ne laisse pas la place du nom (le
+                conteneur fait 1 152 px à toutes ces largeurs) : logo seul dès 1 280 px. Lot 11.1 : en anglais aussi, avec 8
+                entrées à 16 px (mesuré : 10 px de marge avec le nom). Le lien garde son nom accessible. */}
+            <div className="flex flex-col min-w-0 xl:hidden">
               <span className="text-body font-bold leading-none text-text whitespace-nowrap">
                 WAHHF<span className="hidden min-[360px]:inline"> Foundation</span>
               </span>
@@ -287,8 +288,13 @@ export default function Navbar() {
             </div>
           </Link>
 
-          {/* Centre : Menu principal (7 entrées ; Événements ajouté au lot 7.9) */}
+          {/* Centre : Menu principal (8 entrées ; Événements ajouté au lot 7.9, Accueil au lot 11.1) */}
           <nav aria-label={t('nav.mainNav')} className="hidden xl:flex items-center gap-1">
+            {/* Lot 11.1 : nouvelle page /accueil ; le logo mène toujours à / */}
+            <Link to="/accueil" aria-current={navState('/accueil')} className={cn(NAV_LINK, navState('/accueil') && NAV_LINK_CURRENT)}>
+              {t('nav.home')}
+            </Link>
+
             <Link to="/qui-sommes-nous" aria-current={navState('/qui-sommes-nous')} className={cn(NAV_LINK, navState('/qui-sommes-nous') && NAV_LINK_CURRENT)}>
               {t('nav.about')}
             </Link>
@@ -342,7 +348,7 @@ export default function Navbar() {
                 aria-expanded={langOpen}
                 aria-controls="choix-langue"
                 aria-label={t('nav.changeLanguage', { lang: currentLang.toUpperCase() })}
-                className="inline-flex min-h-11 min-w-11 items-center justify-center gap-0.5 rounded-pill border border-border-input px-2.5 text-meta font-semibold text-text hover:text-link cursor-pointer transition-colors duration-(--dur-fast)"
+                className="inline-flex min-h-11 min-w-11 items-center justify-center gap-0.5 rounded-pill border border-border-input px-1.5 text-base font-semibold text-text hover:text-link cursor-pointer transition-colors duration-(--dur-fast)"
               >
                 <span>{currentLang.toUpperCase()}</span>
                 <ChevronDown aria-hidden="true" className={cn('w-3.5 h-3.5 transition-transform duration-(--dur-fast)', langOpen && 'rotate-180')} />
@@ -399,7 +405,7 @@ export default function Navbar() {
 
             {/* 6e entrée / Bouton « Faire un don » (token rouge) */}
             <div className="hidden sm:block">
-              <DonateButton size="sm" className="whitespace-nowrap xl:px-3.5">{t('nav.donate')}</DonateButton>
+              <DonateButton size="sm" className="whitespace-nowrap text-base xl:gap-1.5 xl:px-3">{t('nav.donate')}</DonateButton>
             </div>
 
             {/* Menu Burger (Mobile & Tablette) */}
@@ -603,6 +609,14 @@ export default function Navbar() {
             initial={reduceMotion || !withMotion ? false : { opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.15, ease: EASE_OUT } }}
           >
+            <Link
+              to="/accueil"
+              aria-current={navState('/accueil')}
+              className={cn(MOBILE_LINK, navState('/accueil') && MOBILE_LINK_CURRENT)}
+            >
+              {t('nav.home')}
+            </Link>
+
             <Link
               to="/qui-sommes-nous"
               aria-current={navState('/qui-sommes-nous')}
