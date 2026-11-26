@@ -1106,7 +1106,7 @@ Lot 11.5 : `content-visibility: auto` retiré, téléphone compris (voir §16.6,
 
 *Votre brief du 26 novembre 2026. Code : `AppelDon.tsx`.*
 
-**Contenu** : seulement des faits déjà sur le site. Le titre est celui de la section « Agir » de / (`home.act.title`, dans les trois langues), les six domaines, l'affectation au choix ou « là où le besoin est le plus grand » (Faire un don propose « Là où le besoin est le plus urgent »), le soutien du groupe IROKO (Qui sommes-nous). Aucun montant ni chiffre d'impact (question 206). Les pastilles ouvrent Faire un don avec le domaine choisi : la page lit déjà `?affectation=<domaine>` (ACT-02), elle n'a pas changé.
+**Contenu** : seulement des faits déjà sur le site. Le titre est celui de la section « Agir » de / (`home.act.title`, dans les trois langues), les six domaines, l'affectation au choix ou « là où le besoin est le plus urgent » (la formulation de Faire un don, reprise en EN et DE ; Notre impact dit la même chose), le soutien du groupe IROKO (Qui sommes-nous). Aucun montant ni chiffre d'impact (question 206). Les pastilles ouvrent Faire un don avec le domaine choisi : la page lit déjà `?affectation=<domaine>` (ACT-02), elle n'a pas changé.
 
 **Design** : la section est sur sauge (sous-bois en sombre), puisque les événements sont sur brume. À l'intérieur, un grand bloc cœur (#C8102E, coins de 2,5 rem), la seule surface cœur de la page. À gauche : surtitre, titre en Jost sur deux lignes, texte, pastilles des domaines, boutons « Faire un don » (blanc, texte et cœur rouges) et « Devenir partenaire » (contour blanc, vers /agir#partenaire), puis le soutien d'IROKO sous un filet. À droite : A71 dans une goutte (coin pointu en haut à gauche), cerclée de blanc, penchée de −3°. Derrière : le fil dessine un grand cœur au trait blanc à 18 %, coupé par le bord droit du bloc. Sur téléphone : texte, pastilles, boutons pleine largeur, puis la photo ; le cœur est plus petit et centré.
 
@@ -1116,7 +1116,7 @@ Lot 11.5 : `content-visibility: auto` retiré, téléphone compris (voir §16.6,
 |---|---|
 | Tous les textes, icônes et l'anneau de focus (blanc) sur cœur | 5,88:1 |
 | Bouton « Faire un don » et pastille survolée : cœur sur blanc | 5,88:1 |
-| Contour des pastilles (blanc à 60 %, comme demandé) sur cœur | 2,80:1 (le texte blanc plein de chaque pastille la désigne) |
+| Contour des pastilles (blanc à 70 %) sur cœur ; contour de « Devenir partenaire » (blanc plein) | 3,42:1 ; 5,88:1 |
 
 ## Annexe A : tableau des contrastes
 

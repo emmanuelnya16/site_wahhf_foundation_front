@@ -2426,6 +2426,10 @@
 .ac-don .ac-don-surtitre {
   color: var(--don-texte);
 }
+/* Sous 600 px, la première ligne du titre se coupe : les lignes restent équilibrées, à la même taille */
+.ac-don-h2 :is(.ac-ligne, .ac-ligne > span) {
+  text-wrap: balance;
+}
 .ac-don-paragraphe {
   max-width: 38rem;
   margin-top: 1.25rem;
@@ -2444,7 +2448,8 @@
   align-items: center;
   min-height: 2.75rem;
   padding: 0.375rem 1.125rem;
-  border: 1.5px solid color-mix(in srgb, var(--don-texte) 60%, transparent);
+  /* Blanc à 70 % : 3,42:1 sur cœur (lot 11.7, retouches) */
+  border: 1.5px solid color-mix(in srgb, var(--don-texte) 70%, transparent);
   border-radius: var(--radius-pill);
   font-size: 0.9375rem;
   font-weight: 600;
