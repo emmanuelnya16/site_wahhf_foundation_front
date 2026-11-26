@@ -1053,9 +1053,15 @@ Lot 11.5 : `content-visibility: auto` sur toutes les sections sous le premier é
 
 ### 16.6 Sections « Les 10 régions » et « Apprendre, cultiver, grandir » (lot 11.5)
 
-*Votre brief du 26 novembre 2026. Code : `Regions.tsx`, `CarteRegions.tsx`.*
+*Votre brief du 26 novembre 2026. Code : `Regions.tsx`, `CarteRegions.tsx` ; l'accordéon est `src/pages/home/JourneySection.tsx`, importé tel quel.*
 
 **Les 10 régions** : fond sauge (sous-bois en sombre), le fond de la carte d'origine. À gauche, l'en-tête propre à l'accueil (surtitre, titre révélé ligne par ligne, la première phrase du sous-titre de Notre impact dans chaque langue, lien vers /notre-impact) ; à droite, la carte « Présence terrain au Cameroun » de Notre impact, en variante (`CarteRegions.tsx`) : mêmes éléments, mêmes textes, lignes provisoires masquées, sans la carte de l'Europe ni la liste des pays. `PresenceSection.tsx` ne change pas. La cascade des régions reste celle de `MapMotion` ; un repère caché tient la place de la mini-carte d'Europe qu'il attend. Contrastes : les mêmes paires que le Projet phare (§16.5).
+
+**Apprendre, cultiver, grandir** : la section de `/`, inchangée (bande nuit, accordéon de 5 photos, mêmes données), dans une enveloppe `.ac-accordeon`. Tant qu'elle est la dernière de la page, le fond de la page la sépare du pied de page, nuit lui aussi. Styles calculés identiques sur `/` et `/accueil`.
+
+**Fonds, dans l'ordre** : hero et « Qui sommes-nous » brume (déjà ainsi), chiffres nuit, domaines brume, projet sauge, parcours brume, régions sauge, accordéon nuit, puis le pied de page.
+
+**Photos** : l'accordéon garde les siennes ; ce sont celles de l'accueil qui changent quand elles se répètent. En ligne, l'arche du hero passe de A30 (« Apprendre » dans l'accordéon) à A12, et la carte Entrepreneuriat de B06 (« Cultiver ») à B24. A12 et B24 : trois affichages chacune sur le site.
 
 ## Annexe A : tableau des contrastes
 

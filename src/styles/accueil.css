@@ -1011,6 +1011,9 @@
 .ac-regions {
   --ac-hauteur: 1230px;
 }
+.ac-accordeon {
+  --ac-hauteur: 1060px;
+}
 /* Le temps d'aller à une ancre : tout est dessiné (ancre.ts) */
 .ac-tout-dessine :is(.ac-qsn, .ac-chiffres, .ac-domaines, .ac-projet, .ac-parcours, .ac-regions, .ac-accordeon) {
   content-visibility: visible;
@@ -1033,6 +1036,9 @@
   }
   .ac-regions {
     --ac-hauteur: 1070px;
+  }
+  .ac-accordeon {
+    --ac-hauteur: 1040px;
   }
 }
 
@@ -2049,6 +2055,12 @@
     gap: 5rem;
     align-items: center;
   }
+}
+
+/* --- 8. Apprendre, cultiver, grandir (lot 11.5) : la section de / (JourneySection), inchangée, sur sa bande nuit.
+   Dernière de la page, elle toucherait le pied de page, nuit lui aussi : le fond de la page les sépare. --- */
+.ac-accordeon:last-child {
+  padding-bottom: clamp(3.5rem, 9vw, 6rem);
 }
 
 /* --- Sections (lot 11.2) : entrées jouées une fois, quand le bloc arrive à l'écran (Entree.tsx) --- */

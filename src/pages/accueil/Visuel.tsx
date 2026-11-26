@@ -10,9 +10,18 @@ import { COUNTRIES_DATA, DOMAINS_DATA, WAHHF_LOGO_URL } from '../../services/api
 
 /**
  * A16 : jeunes en t-shirts « Bâtir l'Afrique qui nourrit, soigne et instruit sa jeunesse » (25 avril 2026). Elle attend
- * l'accord des parents (lot 11.2) : en ligne, A30 (public de dos, devant le kakémono) la remplace.
+ * l'accord des parents (lot 11.2). En ligne, A12 la remplace (un membre de l'équipe à côté du kakémono) : A30, prévue
+ * d'abord, est la photo « Apprendre » de l'accordéon, plus bas sur la page (lot 11.5).
  */
-const PHOTO = photoOrFallback('A16', 'A30');
+const PHOTO = photoOrFallback('A16', 'A12');
+/**
+ * Largeur affichée : une photo en largeur déborde de l'arche (recadrée sur les côtés), une photo en hauteur la remplit
+ * juste. Arche : 29,4 rem dès 1 280 px, 37 vw dès 1 024 px, 26 rem au plus en dessous (90 vw).
+ */
+const SIZES =
+  PHOTO && PHOTO.height > PHOTO.width
+    ? '(min-width: 1280px) 29.4rem, (min-width: 1024px) 37vw, (min-width: 29rem) 26rem, 90vw'
+    : '(min-width: 1024px) 60rem, (min-width: 29rem) 53rem, 186vw';
 
 /** Arche de 470 × 640 : demi-cercle en haut, coins de 36 px en bas ; tracée depuis le bas à gauche */
 const ARCHE = 'M36 640 A36 36 0 0 1 0 604 V235 A235 235 0 0 1 470 235 V604 A36 36 0 0 1 434 640 Z';
@@ -38,7 +47,7 @@ export default function Visuel() {
         </svg>
         <div className="ac-arche-place" data-parallaxe="-6">
           <div className="ac-arche">
-            {PHOTO && <Photo photo={PHOTO} sizes="(min-width: 1024px) 60rem, (min-width: 29rem) 53rem, 186vw" priority fit="cover" radius="none" />}
+            {PHOTO && <Photo photo={PHOTO} sizes={SIZES} priority fit="cover" radius="none" />}
           </div>
         </div>
         <div className="ac-badge-place" data-parallaxe="5">

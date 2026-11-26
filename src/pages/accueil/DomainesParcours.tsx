@@ -40,12 +40,13 @@ const pad = (n: number) => String(n).padStart(2, '0');
 
 /**
  * La photo de chaque domaine et son cadrage dans la bande de 11 rem : les visages restent entiers. Lot 11.4 : A98 et A31
- * attendent l'accord, B23, B40 et A53 dépassaient trois affichages sur le site (réponses 195 et 196).
+ * attendent l'accord, B23, B40 et A53 dépassaient trois affichages sur le site (réponses 195 et 196). Lot 11.5 : B06 est
+ * la photo « Cultiver » de l'accordéon, plus bas sur la page ; B24 la remplace.
  * Santé : aucune photo publiable (question 197), une icône au trait à la place.
  */
 const PHOTOS: Record<string, { id: string; cadrage: string }> = {
   education: { id: 'A22', cadrage: '50% 22%' },
-  entrepreneuriat: { id: 'B06', cadrage: '50% 0%' },
+  entrepreneuriat: { id: 'B24', cadrage: '50% 15%' },
   environnement: { id: 'B44', cadrage: '50% 12%' },
   'droits-inclusion': { id: 'A45', cadrage: '50% 11%' },
   'mobilite-langues': { id: 'A46', cadrage: '50% 36%' },

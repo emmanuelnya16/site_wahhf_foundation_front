@@ -18,6 +18,7 @@ import DomainesParcours from './DomainesParcours';
 import ProjetPhare from './ProjetPhare';
 import Parcours from './Parcours';
 import Regions from './Regions';
+import JourneySection from '../home/JourneySection';
 
 /** Parallaxes et fil (GSAP), chargés après le premier affichage, seulement là où ils existent (MQ.computer, src/lib/gsap.ts) */
 const AccueilMotion = lazy(() => import('./AccueilMotion'));
@@ -54,7 +55,10 @@ export default function AccueilPage() {
       <ProjetPhare paused={loops.paused} />
       <Parcours />
       <Regions />
-      {/* 8. Apprendre, cultiver, grandir : section existante (à venir) */}
+      {/* 8. Apprendre, cultiver, grandir : la section de l'accueil actuel (/), telle quelle, avec ses données */}
+      <div className="ac-accordeon">
+        <JourneySection />
+      </div>
       {/* 9. Quelques événements (à venir) */}
       {ordinateur && (
         <AfterFirstDisplay>
