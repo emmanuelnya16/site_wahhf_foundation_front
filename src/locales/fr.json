@@ -208,9 +208,9 @@
     "colAbout": "Qui sommes-nous",
     "colActions": "Nos actions",
     "colAct": "Agir et faire un don",
-    "colContact": "Contact et adresse",
+    "colContact": "Contact",
     "legal": "Mentions légales",
-    "privacy": "Politique de confidentialité",
+    "privacy": "Confidentialité",
     "transparency": "Transparence financière",
     "backToTop": "Retour en haut",
     "rights": "Tous droits réservés.",
@@ -225,7 +225,9 @@
     "partner": "Devenir partenaire",
     "scams": "Prévention des arnaques",
     "contactForm": "Formulaire de contact",
-    "addresses": "Adresses"
+    "addresses": "Adresses",
+    "social": "Réseaux de la fondation",
+    "socialLink": "WAHHF Foundation sur {{reseau}} (nouvel onglet)"
   },
   "ui": {
     "logoAlt": "Logo WAHHF Foundation",

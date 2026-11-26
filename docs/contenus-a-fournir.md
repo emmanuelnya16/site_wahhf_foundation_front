@@ -35,6 +35,7 @@ Ces six points bloquent plusieurs pages à la fois. Ce sont les plus urgents.
 **E. Coordonnées officielles**
 - Quelles sont les adresses postales complètes de la fondation au Cameroun (Douala, Yaoundé) et de la coordination en Allemagne ?
 - Quels sont le numéro de téléphone et le numéro WhatsApp officiels à afficher ?
+- **Réponse du 26 novembre 2026 (lot 12)** : un seul numéro, +49 1521 8956743 (téléphone et WhatsApp), et deux adresses, toujours affichées ensemble : Markt 25, 39288 Burg, Germany ; Bépanda, BP 4048 Douala, Cameroon. L'adresse e-mail reste à confirmer (question 211).
 - Quelle adresse e-mail le public doit-il utiliser pour vous contacter ?
 
 **F. Mentions légales**
@@ -158,7 +159,7 @@ Pour chaque lien, la question est la même : est-ce bien le site officiel à rec
 ### Page « Mentions légales »
 
 74. Quels sont les numéros d'enregistrement officiels de la fondation (Cameroun et Allemagne) ?
-75. Quelles sont les adresses postales officielles du siège et des antennes, au Cameroun et en Allemagne ?
+75. Quelles sont les adresses postales officielles du siège et des antennes, au Cameroun et en Allemagne ? **Réponse du 26 novembre 2026** : Markt 25, 39288 Burg, Germany ; Bépanda, BP 4048 Douala, Cameroon (affichées sur Contact, dans le pied de page et dans les mentions légales). Laquelle est le siège légal ?
 
 ### Page « Mobilité & Langues »
 
@@ -498,3 +499,12 @@ Page /accueil (hero). Textes : src/locales/accueil/.
 ## Questions ajoutées avec la section « Le film » (lot 11.9, 26 novembre 2026)
 
 207. Section « Le film » de /accueil : il manque le fichier vidéo du film (celui de YouTube, e-zT1lNANC0, 1 min 10), dans sa meilleure qualité. Aucune copie n'a été trouvée dans le projet. Déposez-le dans docs/references/video/film-wahhf.mp4, puis lancez `node scripts/encode-film.mjs` (voir docs/page-accueil.md, « Mettre le film en ligne »). Le site jouera alors un extrait sans le son, tout seul, quand le cadre est plein écran. En attendant, la section montre l'affiche et « Regarder le film », qui ouvre YouTube après accord. La question 201 vaut aussi pour le film : les personnes qu'on y voit de face, les jeunes surtout, ont-elles donné leur accord ?
+
+## Questions ajoutées avec les retours de la fondation (lot 12, 26 novembre 2026)
+
+Données qui manquent pour un Impressum allemand complet (§ 5 DDG). Les mentions légales affichent aujourd'hui le nom « WAHHF Foundation », les deux adresses, le numéro officiel et l'e-mail ; rien d'autre n'a été inventé.
+
+208. Représentant légal : le nom complet et la fonction de la ou des personnes qui représentent légalement la fondation (par exemple la présidence, ou le comité directeur).
+209. Forme juridique : association déclarée (eingetragener Verein, e.V.), fondation (Stiftung), gGmbH, association de droit camerounais, autre ? Et dans quel pays la fondation est-elle enregistrée ?
+210. Registre et numéro d'inscription : le registre (par exemple le Vereinsregister du tribunal d'instance, avec son numéro VR, ou l'autorité de surveillance des fondations ; au Cameroun, le récépissé de déclaration) et le numéro. S'il existe, le numéro de TVA intracommunautaire (USt-IdNr.).
+211. E-mail officiel : contact@wahhf-foundation.org, affiché partout aujourd'hui, est-il bien l'adresse officielle, et qui la relève ?

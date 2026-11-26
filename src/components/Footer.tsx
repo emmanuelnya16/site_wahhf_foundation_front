@@ -7,6 +7,7 @@ import { TRANSPARENCY_DATA_PUBLISHED } from '../config/transparency';
 import { GOVERNANCE_PUBLISHED } from '../config/governance';
 import { scrollToTop } from '../lib/scroll';
 import { DonateButton } from './wahhf/Buttons';
+import SocialLinks from './wahhf/SocialLinks';
 import { cn } from '../lib/utils';
 
 /*
@@ -24,6 +25,8 @@ const LINK =
 const CONTROL =
   'inline-flex items-center justify-center rounded-pill border border-border-on-inverse text-text-on-inverse transition-colors duration-(--dur-fast) hover:bg-action-on-inverse hover:text-on-action-on-inverse hover:border-action-on-inverse active:bg-action-on-inverse active:text-on-action-on-inverse active:border-action-on-inverse active:transition-none [-webkit-tap-highlight-color:transparent]';
 const HEADING = 'text-meta font-bold text-text-on-inverse';
+/** Liens légaux de la barre du bas : 16 px, cible de 44 px (lot 12) */
+const LEGAL = 'inline-flex min-h-11 items-center text-base';
 const LIST = 'space-y-2.5 text-meta text-text-secondary-on-inverse';
 const ICON = 'w-4 h-4 shrink-0 text-text-secondary-on-inverse';
 
@@ -61,24 +64,8 @@ export default function Footer() {
 
             <p className="text-meta text-text-secondary-on-inverse">{t('footer.irokoBadge')}</p>
 
-            {/* Réseaux sociaux (Liens officiels à confirmer — TODO) */}
-            <div className="pt-2 flex flex-wrap items-center gap-2.5">
-              {[
-                { label: 'LinkedIn', href: '#linkedin-todo' },
-                { label: 'Facebook', href: '#facebook-todo' },
-                { label: 'Instagram', href: '#instagram-todo' },
-                { label: 'YouTube', href: '#youtube-todo' },
-              ].map((soc) => (
-                <a
-                  key={soc.label}
-                  href={soc.href}
-                  aria-label={`${soc.label} WAHHF Foundation (TODO)`}
-                  className={cn(CONTROL, 'min-h-11 px-4 text-meta')}
-                >
-                  {soc.label}
-                </a>
-              ))}
-            </div>
+            {/* Réseaux de la fondation (lot 12) : icônes, adresses dans src/config/contact.ts (SOCIAL) */}
+            <SocialLinks className="pt-2" />
           </div>
 
           {/* Qui sommes-nous */}
@@ -210,18 +197,19 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Barre du bas : © 2026, mentions légales, confidentialité, transparence, bouton rond retour en haut */}
+        {/* Barre du bas : © 2026, mentions légales, confidentialité, transparence, bouton rond retour en haut. Lot 12 :
+            les liens légaux en 16 px, sur 44 px de haut, sur toutes les pages qui ont ce pied de page */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-meta text-text-secondary-on-inverse">
-          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-6 gap-y-2">
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-6 gap-y-1">
             <span>© 2026 WAHHF Foundation. {t('footer.rights')}</span>
-            <Link to="/mentions-legales" className={LINK}>
+            <Link to="/mentions-legales" className={cn(LINK, LEGAL)}>
               {t('footer.legal')}
             </Link>
-            <Link to="/confidentialite" className={LINK}>
+            <Link to="/confidentialite" className={cn(LINK, LEGAL)}>
               {t('footer.privacy')}
             </Link>
             {TRANSPARENCY_DATA_PUBLISHED && (
-              <Link to="/transparence" className={LINK}>
+              <Link to="/transparence" className={cn(LINK, LEGAL)}>
                 {t('footer.transparency')}
               </Link>
             )}

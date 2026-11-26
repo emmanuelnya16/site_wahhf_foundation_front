@@ -2,7 +2,7 @@
 
 Généré par `npm run i18n:relire` (scripts/traductions-a-relire.mjs) le 2026-11-26. Ne pas modifier à la main : corriger les fichiers de langue, puis relancer.
 
-Chaque texte allemand du site, face à son français. **Un astérisque (\*) marque les 166 textes dont le traducteur n'était pas sûr** (sens du français ambigu, terme juridique, nom d'institution, ton) : à relire en priorité. 1863 textes allemands au total.
+Chaque texte allemand du site, face à son français. **Un astérisque (\*) marque les 166 textes dont le traducteur n'était pas sûr** (sens du français ambigu, terme juridique, nom d'institution, ton) : à relire en priorité. 1865 textes allemands au total.
 
 - Ton choisi : vouvoiement (« Sie »), simple et chaleureux, pas du mot à mot.
 - Ne sont pas traduits : les noms propres et officiels (WAHHF Foundation, IROKO, Albatros Hotel, Ausbildung, Studienkolleg…), les adresses, les liens.
@@ -12,7 +12,7 @@ Chaque texte allemand du site, face à son français. **Un astérisque (\*) marq
 
 ## Textes communs (en-tête, pied de page, accueil, composants)
 
-Fichier : `src/locales/de.json` (368 textes, dont 40 à relire).
+Fichier : `src/locales/de.json` (370 textes, dont 40 à relire).
 
 | | Clé | Français | Allemand |
 |---|---|---|---|
@@ -174,9 +174,9 @@ Fichier : `src/locales/de.json` (368 textes, dont 40 à relire).
 |  | `footer.colAbout` | Qui sommes-nous | Über uns |
 |  | `footer.colActions` | Nos actions | Unsere Arbeit |
 |  | `footer.colAct` | Agir et faire un don | Mitmachen und spenden |
-|  | `footer.colContact` | Contact et adresse | Kontakt und Adresse |
+|  | `footer.colContact` | Contact | Kontakt |
 |  | `footer.legal` | Mentions légales | Impressum |
-|  | `footer.privacy` | Politique de confidentialité | Datenschutz |
+|  | `footer.privacy` | Confidentialité | Datenschutz |
 |  | `footer.transparency` | Transparence financière | Finanzielle Transparenz |
 |  | `footer.backToTop` | Retour en haut | Nach oben |
 |  | `footer.rights` | Tous droits réservés. | Alle Rechte vorbehalten. |
@@ -192,6 +192,8 @@ Fichier : `src/locales/de.json` (368 textes, dont 40 à relire).
 |  | `footer.scams` | Prévention des arnaques | Schutz vor Betrug |
 |  | `footer.contactForm` | Formulaire de contact | Kontaktformular |
 |  | `footer.addresses` | Adresses | Adressen |
+|  | `footer.social` | Réseaux de la fondation | Die Stiftung in den sozialen Netzwerken |
+|  | `footer.socialLink` | WAHHF Foundation sur {{reseau}} (nouvel onglet) | WAHHF Foundation auf {{reseau}} (neuer Tab) |
 |  | `ui.logoAlt` | Logo WAHHF Foundation | Logo der WAHHF Foundation |
 |  | `ui.newTab` |  (nouvel onglet) |  (neuer Tab) |
 |  | `ui.skipLink` | Aller au contenu | Zum Inhalt springen |
