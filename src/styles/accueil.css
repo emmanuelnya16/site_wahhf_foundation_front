@@ -2013,7 +2013,544 @@
   }
 }
 
-/* --- 8. Apprendre, cultiver, grandir (lot 11.5) : la section de / (JourneySection), inchangée, sur sa bande nuit --- */
+/* --- 8. En images (lot 11.8) : variante de l'accordéon de / (src/index.css, « Accordéon d'images », inchangé), sur sa
+   bande nuit. Même géométrie : positions par transform (CLS 0), bandes de 4,5 rem empilées sur téléphone, rangée de
+   bandes sur ordinateur à la souris, l'ouverte vaut 7 bandes ; mêmes coins (1,5 rem) et même hauteur. En plus : numéro
+   et titre sur les bandes fermées, légende dans une carte coin feuille, le fil des cinq étapes. --- */
+.ac-images {
+  padding-block: var(--section-space);
+  background: var(--color-nuit);
+  color: var(--color-brume);
+}
+.ac-images .ac-surtitre {
+  color: var(--color-soleil);
+}
+.ac-images .ac-paragraphe {
+  margin-top: 0;
+  color: var(--color-brume-douce);
+}
+.ac-images .ac-lien {
+  margin-top: 0;
+  color: var(--color-soleil);
+}
+.ac-images .ac-lien:focus-visible {
+  outline-color: var(--color-soleil);
+}
+.ac-images-entete {
+  display: grid;
+  gap: 1.5rem;
+}
+.ac-images-liens {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  margin-top: 1rem;
+}
+.ac-images-compteur {
+  display: none;
+  font-family: var(--ac-libelle);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-brume-douce);
+}
+.ac-images-compteur b {
+  font-size: 1.5rem;
+  color: var(--color-soleil);
+}
+/* Le verbe du panneau ouvert, surligné en soleil (l'effet du hero, en pleine hauteur : texte encre dessus) */
+.ac-images-verbe {
+  margin: 0 -0.08em;
+  padding: 0 0.08em;
+  border-radius: 0.12em;
+  background: linear-gradient(var(--color-soleil), var(--color-soleil)) no-repeat 0 55% / 0% 86%;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  transition:
+    background-size 0.6s cubic-bezier(0.6, 0, 0.2, 1),
+    color 0.25s linear 0.1s;
+}
+.ac-images-verbe.is-surligne {
+  background-size: 100% 86%;
+  color: var(--color-encre);
+}
+.ac-images-corps {
+  margin-top: 2.5rem;
+}
+/* Les panneaux : géométrie de l'accordéon de /. --n : nombre de panneaux ; --k : rang du panneau ouvert. */
+.ac-img {
+  --img-radius: 1.5rem;
+  --img-duree: 650ms;
+  --img-gap: 8px;
+  --img-strip: 4.5rem;
+  --img-open: 22rem;
+  --img-fil: 3rem;
+  position: relative;
+  container-type: inline-size;
+  height: calc((var(--n) - 1) * (var(--img-strip) + var(--img-gap)) + var(--img-open));
+  margin-left: var(--img-fil);
+}
+.ac-img-panneau {
+  --h-prev: var(--img-strip);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--img-strip);
+  border-radius: var(--img-radius);
+  transform: translateY(calc(var(--i) * (var(--img-strip) + var(--img-gap)) + var(--after) * (var(--img-open) - var(--img-strip))));
+  transition:
+    transform var(--img-duree) var(--ease-reveal),
+    height var(--img-duree) var(--ease-reveal);
+}
+.ac-img-panneau[data-open] {
+  height: var(--img-open);
+}
+.ac-img-panneau[data-open] + .ac-img-panneau {
+  --h-prev: var(--img-open);
+}
+.ac-img-panneau:has(.ac-img-bouton:focus-visible) {
+  outline: 3px solid var(--color-soleil);
+  outline-offset: 3px;
+}
+.ac-img-bouton:focus-visible {
+  outline: none;
+}
+.ac-img-cadre {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  background: var(--color-filet-nuit);
+}
+.ac-img-media {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--img-open);
+  transform: translateY(calc((var(--img-strip) - var(--img-open)) * var(--fy)));
+  transition: transform var(--img-duree) var(--ease-reveal);
+}
+.ac-img-panneau[data-open] .ac-img-media {
+  transform: none;
+}
+.ac-img-bouton {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  cursor: pointer;
+}
+/* Bande fermée (téléphone) : son titre en petit, sur un dégradé nuit */
+.ac-img-bande {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  height: var(--img-strip);
+  padding: 0 1rem 0.75rem;
+  background: linear-gradient(to top, color-mix(in srgb, var(--color-nuit) 88%, transparent), transparent 80%);
+  color: var(--color-brume);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  pointer-events: none;
+  transition: opacity 120ms linear;
+}
+.ac-img-panneau[data-open] .ac-img-bande {
+  opacity: 0;
+}
+.ac-img-num {
+  display: none;
+}
+/* La légende du panneau ouvert : une carte coin feuille (grand arrondi en haut à droite, encoche du fil en haut),
+   nuit à 75 % sur la photo floutée. Textes brume : 5,32:1 même sur du blanc pur ; numéro soleil en grand (3,09:1). */
+.ac-img-texte {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  height: var(--img-open);
+  padding: 0.75rem;
+  pointer-events: none;
+}
+.ac-img-carte {
+  max-width: 27rem;
+  padding: 1.125rem 1.25rem 1.25rem;
+  border-radius: 0.75rem 3rem 0.75rem 0.75rem;
+  background: color-mix(in srgb, var(--color-nuit) 75%, transparent);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: var(--color-brume);
+  -webkit-mask: radial-gradient(circle 12px at 70px 0, transparent 11.5px, #000 12px);
+  mask: radial-gradient(circle 12px at 70px 0, transparent 11.5px, #000 12px);
+  opacity: 0;
+  translate: 0 16px;
+  transition:
+    opacity 120ms linear,
+    translate 120ms linear;
+}
+.ac-img-panneau[data-open] .ac-img-carte {
+  opacity: 1;
+  translate: 0 0;
+  transition:
+    opacity 300ms var(--ease-reveal) 350ms,
+    translate 300ms var(--ease-reveal) 350ms;
+}
+.ac-img-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.75rem;
+  font-family: var(--ac-libelle);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.ac-img-carte-num {
+  font-size: 1.5rem;
+  letter-spacing: 0.04em;
+  color: var(--color-soleil);
+}
+.ac-img-titre {
+  margin-top: 0.25rem;
+  font-family: var(--ac-titre);
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  font-weight: 700;
+  line-height: 1.1;
+}
+.ac-img-description {
+  max-width: 34ch;
+  margin-top: 0.5rem;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+.ac-img-album {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  margin-top: 1rem;
+  padding: 0.375rem 1.25rem;
+  border: 1.5px solid var(--color-soleil);
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  color: var(--color-brume);
+  pointer-events: auto;
+  transition:
+    background-color var(--dur-fast) linear,
+    color var(--dur-fast) linear;
+}
+.ac-img-album:focus-visible {
+  outline: 3px solid var(--color-soleil);
+  outline-offset: 3px;
+}
+/* Le fil (téléphone) : à gauche des bandes, un point numéroté par bande ; le trait monte vers l'étape précédente */
+.ac-img-etape {
+  position: absolute;
+  top: 0;
+  left: calc(-1 * var(--img-fil));
+  display: grid;
+  place-items: center;
+  width: var(--img-fil);
+  height: var(--img-strip);
+  cursor: pointer;
+}
+/* Le trait garde une taille fixe ; sa longueur visible est une découpe (clip-path) : rien ne se décale (CLS 0) */
+.ac-img-trait {
+  --coupe: calc(var(--img-open) - var(--h-prev));
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  width: 2px;
+  height: calc(var(--img-open) + var(--img-gap));
+  translate: -50% 0;
+  background: repeating-linear-gradient(to top, color-mix(in srgb, var(--color-brume) 40%, transparent) 0 5px, transparent 5px 10px);
+  clip-path: inset(var(--coupe) 0 0 0);
+  /* Le trait ne prend pas les clics : le point qu'il touche reste celui qu'on vise */
+  pointer-events: none;
+  transition: clip-path var(--img-duree) var(--ease-reveal);
+}
+.ac-img-panneau:first-child .ac-img-trait {
+  display: none;
+}
+.ac-img-trait-plein {
+  position: absolute;
+  inset: 0;
+  background: var(--color-soleil);
+  transform-origin: 50% var(--coupe);
+  scale: 1 0;
+  transition: scale 0.2s ease-out;
+}
+.ac-img-panneau:not([data-after]) .ac-img-trait-plein {
+  scale: 1 1;
+  transition: scale calc(0.6s / max(var(--k), 1)) linear calc((var(--i) - 1) * 0.6s / max(var(--k), 1));
+}
+.ac-img-pt {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 1.5px solid color-mix(in srgb, var(--color-brume) 45%, transparent);
+  border-radius: 50%;
+  background: var(--color-nuit);
+  font-family: var(--ac-libelle);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-brume);
+  transition:
+    background-color 0.3s linear,
+    border-color 0.3s linear,
+    color 0.3s linear,
+    scale 0.3s var(--ac-courbe);
+}
+.ac-img-panneau[data-open] .ac-img-pt {
+  border-color: var(--color-soleil);
+  background: var(--color-soleil);
+  color: var(--color-encre);
+  scale: 1.15;
+}
+.ac-img-sommet {
+  width: 0.875rem;
+  height: auto;
+  fill: currentColor;
+}
+.ac-img-panneau:last-child .ac-img-pt {
+  border: 0;
+  background: none;
+  color: color-mix(in srgb, var(--color-brume) 70%, transparent);
+}
+.ac-img-panneau:last-child .ac-img-sommet {
+  width: 1.375rem;
+}
+.ac-img-panneau:last-child[data-open] .ac-img-pt {
+  color: var(--color-soleil);
+}
+.ac-img-court {
+  display: none;
+}
+@media (hover: hover) {
+  .ac-img-album:hover {
+    background: var(--color-soleil);
+    color: var(--color-encre);
+  }
+}
+@media (min-width: 1024px) {
+  .ac-images-entete {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: end;
+    gap: 4rem;
+  }
+  .ac-images-compteur {
+    display: block;
+  }
+}
+@media (min-width: 1024px) and (pointer: fine) {
+  .ac-img {
+    /* Une bande = 1 unité, le panneau ouvert = 7 : n − 1 + 7 unités et n − 1 espaces sur la largeur */
+    --img-unit: calc((100cqw - (var(--n) - 1) * var(--img-gap)) / (var(--n) + 6));
+    height: clamp(26rem, 58vh, 34rem);
+    margin-bottom: 5.5rem;
+    margin-left: 0;
+  }
+  .ac-img-panneau {
+    --w: var(--img-unit);
+    --w-prev: var(--img-unit);
+    width: var(--img-unit);
+    height: 100%;
+    transform: translateX(calc(var(--i) * (var(--img-unit) + var(--img-gap)) + var(--after) * 6 * var(--img-unit)));
+    transition:
+      transform var(--img-duree) var(--ease-reveal),
+      width var(--img-duree) var(--ease-reveal);
+  }
+  .ac-img-panneau[data-open] {
+    --w: calc(7 * var(--img-unit));
+    width: calc(7 * var(--img-unit));
+    height: 100%;
+  }
+  .ac-img-panneau[data-open] + .ac-img-panneau {
+    --w-prev: calc(7 * var(--img-unit));
+  }
+  .ac-img-media {
+    width: calc(7 * var(--img-unit));
+    height: 100%;
+    transform: translateX(calc(-6 * var(--img-unit) * var(--fx)));
+  }
+  .ac-img-texte {
+    width: calc(7 * var(--img-unit));
+    height: 100%;
+    padding: 1.25rem;
+  }
+  /* Bande fermée : dégradé nuit en bas, titre lu de bas en haut, numéro soleil */
+  .ac-img-bande {
+    top: 0;
+    bottom: 0;
+    right: auto;
+    width: var(--img-unit);
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    padding: 0 0 1.25rem;
+    background: linear-gradient(
+      to top,
+      color-mix(in srgb, var(--color-nuit) 92%, transparent) 0,
+      color-mix(in srgb, var(--color-nuit) 72%, transparent) 16rem,
+      transparent 24rem
+    );
+  }
+  .ac-img-vertical {
+    /* Tous les caractères couchés ensemble (l'apostrophe aussi), puis retournés : lu de bas en haut */
+    writing-mode: vertical-rl;
+    text-orientation: sideways;
+    rotate: 180deg;
+    font-family: var(--ac-titre);
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+    color: var(--color-papier);
+  }
+  .ac-img-num {
+    display: block;
+    font-family: var(--ac-libelle);
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--color-soleil);
+  }
+  /* Le fil sous les panneaux : un point sous chaque panneau, le trait vient de l'étape précédente */
+  .ac-img-etape {
+    top: calc(100% + 1.5rem);
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    width: 0;
+    height: auto;
+    transform: translateX(calc(var(--w) / 2));
+    transition: transform var(--img-duree) var(--ease-reveal);
+  }
+  .ac-img-trait {
+    --coupe: calc(100cqw - (var(--w-prev) + var(--w)) / 2 - var(--img-gap));
+    top: 0.75rem;
+    right: 0;
+    bottom: auto;
+    left: auto;
+    width: 100cqw;
+    height: 2px;
+    translate: 0 -50%;
+    background: repeating-linear-gradient(to left, color-mix(in srgb, var(--color-brume) 40%, transparent) 0 5px, transparent 5px 10px);
+    clip-path: inset(0 0 0 var(--coupe));
+  }
+  .ac-img-trait-plein {
+    transform-origin: var(--coupe) 50%;
+    scale: 0 1;
+  }
+  .ac-img-panneau:not([data-after]) .ac-img-trait-plein {
+    scale: 1 1;
+  }
+  .ac-img-pt {
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 0;
+    background: none;
+  }
+  .ac-img-pt::before {
+    content: '';
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--color-brume) 70%, transparent);
+    transition:
+      background-color 0.3s linear,
+      scale 0.3s var(--ac-courbe);
+  }
+  .ac-img-panneau[data-open] .ac-img-pt {
+    background: none;
+    scale: 1;
+  }
+  .ac-img-panneau[data-open] .ac-img-pt::before {
+    background: var(--color-soleil);
+    scale: 1.6;
+  }
+  .ac-img-panneau:last-child .ac-img-pt::before {
+    display: none;
+  }
+  .ac-img-panneau:last-child[data-open] .ac-img-sommet {
+    scale: 1.3;
+  }
+  .ac-img-pt-num {
+    display: none;
+  }
+  .ac-img-court {
+    display: block;
+    font-family: var(--ac-libelle);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    color: var(--color-brume-douce);
+    transition: color 0.3s linear;
+  }
+  .ac-img-panneau[data-open] .ac-img-court {
+    color: var(--color-soleil);
+  }
+}
+/* Mouvement (lot 11.8) : les bandes montent l'une après l'autre (80 ms), puis le fil paraît ; à l'ouverture, un lent
+   zoom unique de la photo (1 → 1,05 en 6 s). Bouton pause et mouvement réduit : rien ne zoome ni ne se dessine, le
+   changement de panneau est instantané. */
+@media (prefers-reduced-motion: no-preference) {
+  .ac:not(.ev-pause) .ac-attend :is(.ac-img-cadre, .ac-img-etape) {
+    opacity: 0;
+  }
+  .ac:not(.ev-pause) .ac-vue .ac-img-cadre {
+    animation: ac-bande-monte 0.7s var(--ac-courbe) calc(var(--i) * 80ms) backwards;
+  }
+  .ac:not(.ev-pause) .ac-vue .ac-img-etape {
+    animation: ac-fondu 0.45s ease-out calc(0.5s + var(--i) * 80ms) backwards;
+  }
+  .ac:not(.ev-pause) .ac-img-panneau[data-open] .ac-img-media img {
+    animation: ac-img-zoom 6s ease-out forwards;
+  }
+}
+.ac.ev-pause .ac-images :is(.ac-img-panneau, .ac-img-media, .ac-img-bande, .ac-img-carte, .ac-img-trait, .ac-img-trait-plein, .ac-img-pt, .ac-images-verbe),
+.ac.ev-pause .ac-images .ac-img-panneau[data-open] .ac-img-carte,
+.ac.ev-pause .ac-images .ac-img-pt::before {
+  transition: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ac-images :is(.ac-img-panneau, .ac-img-media, .ac-img-bande, .ac-img-carte, .ac-img-trait, .ac-img-trait-plein, .ac-img-pt, .ac-images-verbe),
+  .ac-images .ac-img-panneau[data-open] .ac-img-carte {
+    transition: none;
+  }
+}
+@keyframes ac-bande-monte {
+  from {
+    opacity: 0;
+    translate: 0 28px;
+  }
+}
+@keyframes ac-img-zoom {
+  from {
+    scale: 1;
+  }
+  to {
+    scale: 1.05;
+  }
+}
+
 
 /* --- 9. Événements (lot 11.6) : la grande carte du prochain rendez-vous et sa page d'éphéméride, les éditions passées
    en tickets (le motif du projet phare), sur brume après la bande nuit de l'accordéon --- */

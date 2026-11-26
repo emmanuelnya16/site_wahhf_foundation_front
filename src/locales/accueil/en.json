@@ -195,5 +195,15 @@
     "texte": "Your donation supports our work in Cameroon across our six areas: education, health, youth entrepreneurship, environment, rights and inclusion, mobility and languages. You choose the area you want to support, or you let the foundation allocate it where the need is most urgent.",
     "confiance": "The IROKO Group covers our running and teaching costs.",
     "domaine": "Support this domain: {{domaine}}"
+  },
+  "images": {
+    "surtitre": "In pictures",
+    "courts": {
+      "apprendre": "Learn",
+      "chanter-ensemble": "Sing",
+      "cultiver": "Cultivate",
+      "s-engager": "Get involved",
+      "grandir": "Grow"
+    }
   }
 }

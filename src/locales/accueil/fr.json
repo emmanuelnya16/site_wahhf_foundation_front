@@ -125,5 +125,15 @@
     "texte": "Votre don soutient nos actions au Cameroun dans nos six domaines : éducation, santé, entrepreneuriat des jeunes, environnement, droits et inclusion, mobilité et langues. Vous choisissez le domaine que vous voulez soutenir, ou vous laissez la fondation l’affecter là où le besoin est le plus urgent.",
     "confiance": "Le groupe IROKO couvre nos frais de fonctionnement et d’enseignement.",
     "domaine": "Soutenir ce domaine : {{domaine}}"
+  },
+  "images": {
+    "surtitre": "En images",
+    "courts": {
+      "apprendre": "Apprendre",
+      "chanter-ensemble": "Chanter",
+      "cultiver": "Cultiver",
+      "s-engager": "S’engager",
+      "grandir": "Grandir"
+    }
   }
 }

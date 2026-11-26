@@ -203,5 +203,15 @@
     "texte": "Ihre Spende unterstützt unsere Arbeit in Kamerun in unseren sechs Bereichen: Bildung, Gesundheit, Unternehmertum junger Menschen, Umwelt, Rechte und Teilhabe, Mobilität und Sprachen. Sie wählen den Bereich, den Sie unterstützen möchten, oder Sie überlassen es der Stiftung, Ihre Spende dort einzusetzen, wo der Bedarf am dringendsten ist.",
     "confiance": "Die IROKO-Gruppe deckt unsere Betriebs- und Unterrichtskosten.",
     "domaine": "Diesen Bereich unterstützen: {{domaine}}"
+  },
+  "images": {
+    "surtitre": "In Bildern",
+    "courts": {
+      "apprendre": "Lernen",
+      "chanter-ensemble": "Singen",
+      "cultiver": "Anbauen",
+      "s-engager": "Engagieren",
+      "grandir": "Wachsen"
+    }
   }
 }
