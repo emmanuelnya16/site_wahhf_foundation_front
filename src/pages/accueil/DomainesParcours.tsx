@@ -5,6 +5,7 @@ import Photo, { type PhotoLike } from '../../components/wahhf/Photo';
 import { drawFil } from '../../components/principles/principlesFil';
 import { AfterFirstDisplay } from '../../effects/DeferredMotion';
 import { photoOrFallback } from '../../lib/photos';
+import { markCatalog } from '../../lib/photoText';
 import { useLocalize } from '../../lib/localize';
 import { useMediaQuery } from '../../lib/useMediaQuery';
 import { cn } from '../../lib/utils';
@@ -53,14 +54,19 @@ const PHOTOS: Record<string, { id: string; cadrage: string }> = {
   'mobilite-langues': { id: 'A46', cadrage: '50% 36%' },
 };
 
-/** 800 px de large au plus : la carte en fait 480 */
+/**
+ * 800 px de large au plus : la carte en fait 480. La copie est inscrite au catalogue (lot 11.6) : son texte alternatif
+ * reste traduit en anglais et en allemand, comme celui de la photo d'origine (photoAlt, src/lib/photoText.ts).
+ */
 function jusqua800(photo: PhotoLike): PhotoLike {
   const limite = (srcSet: string) =>
     srcSet
       .split(', ')
       .filter((source) => Number(source.split(' ')[1]?.replace('w', '')) <= 800)
       .join(', ');
-  return { ...photo, sources: { ...photo.sources, avif: limite(photo.sources.avif), webp: limite(photo.sources.webp) } };
+  const copie = { ...photo, sources: { ...photo.sources, avif: limite(photo.sources.avif), webp: limite(photo.sources.webp) } };
+  markCatalog([copie]);
+  return copie;
 }
 
 const VISUELS = new Map(

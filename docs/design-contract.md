@@ -1096,6 +1096,12 @@ Lot 11.5 : `content-visibility: auto` retiré, téléphone compris (voir §16.6,
 | Sombre : titre (brume voilée) et lieu (lichen) sur canopée ; chiffres et unités sur case sous-bois | 11,76:1 et 6,82:1 ; 13,45:1 et 7,80:1 |
 | Sombre : icônes, flèches et lien (soleil) sur canopée et sur humus | 7,56:1 ; 9,66:1 |
 
+**Vérification finale (lot 11.6)**, quatre corrections :
+- Projet phare : son mouvement, chargé à l'approche, demandait un recalcul de toutes les positions de la page (75 à 100 ms, au moment où la scène commence). Retiré : son déclencheur calcule lui-même ses positions et la route ne change aucune hauteur (véhicule et panneaux aux mêmes endroits avant et après un recalcul forcé, à 1 440 et 390 px).
+- Photos des domaines : la copie limitée à 800 px perdait la traduction de son texte alternatif (français sur les pages anglaise et allemande). Elle est inscrite au catalogue, comme l'originale.
+- Arche du hero : plus de priorité haute. L'élément LCP est le texte du hero ; la photo (151 Ko sur téléphone) passait avant les scripts et les polices. LCP Lighthouse mobile : 5,2 à 5,4 s avec la priorité, 4,3 à 4,5 s sans.
+- Commentaires de sections « à venir » retirés.
+
 ## Annexe A : tableau des contrastes
 
 Calcul WCAG 2.x sur fond uni ; ratios tronqués à une décimale. Seuils : 4,5:1 pour le texte, 3:1 pour les composants et le fil.

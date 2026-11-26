@@ -24,8 +24,9 @@ const AccueilMotion = lazy(() => import('./AccueilMotion'));
 const ORDINATEUR = '(min-width: 1024px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)';
 
 /**
- * Nouvelle page « Accueil » (/accueil), lot 11.1 : construite à côté de l'accueil actuel (/), qui ne change pas.
- * Elle se remplit section par section, dans l'ordre ci-dessous (lots 11.2 à 11.6).
+ * Nouvelle page « Accueil » (/accueil), lots 11.1 à 11.6 : construite à côté de l'accueil actuel (/), qui ne change pas.
+ * Neuf sections : hero, qui sommes-nous en bref, chiffres, domaines, projet phare, parcours, régions, accordéon (la
+ * section de /, telle quelle), événements. Guide : docs/page-accueil.md.
  */
 export default function AccueilPage() {
   const { t } = useTranslation();
@@ -49,7 +50,7 @@ export default function AccueilPage() {
       <ProjetPhare paused={loops.paused} />
       <Parcours />
       <Regions />
-      {/* 8. Apprendre, cultiver, grandir : la section de l'accueil actuel (/), telle quelle, avec ses données */}
+      {/* Apprendre, cultiver, grandir : la section de l'accueil actuel (/), telle quelle, avec ses données */}
       <div className="ac-accordeon">
         <JourneySection />
       </div>

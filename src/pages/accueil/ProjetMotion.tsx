@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState, type RefObject } from 'react';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
 import { gsap, MQ, useGSAP } from '../../lib/gsap';
-import { requestScrollRefresh } from '../../lib/afterFirstDisplay';
 import { suivreRecalculs } from './recalcul';
 import { tracerRoute } from './route';
 
@@ -140,7 +139,8 @@ function animer(scene: HTMLElement, pausedRef: RefObject<boolean>) {
   gsap.set(vehicule, { motionPath: { ...trajet, start: geo.depart, end: geo.depart } });
   tl.to(vehicule, { motionPath: { ...trajet, start: geo.depart, end: geo.arrivee }, duration: 1, ease: 'none' });
   tourner(geo.depart);
-  requestScrollRefresh();
+  // Pas de recalcul global ici (lot 11.6) : ce déclencheur, créé à l'approche, calcule lui-même ses positions, et la route
+  // ne change aucune hauteur. Le recalcul de toute la page coûtait 75 à 100 ms au moment où la scène commence.
 
   return () => {
     recalculs.arreter();

@@ -49,7 +49,10 @@ export default function Visuel() {
         </svg>
         <div className="ac-arche-place" data-parallaxe="-6">
           <div className="ac-arche">
-            {PHOTO && <Photo photo={PHOTO} sizes={SIZES} priority fit="cover" radius="none" style={CADRAGE} />}
+            {/* Sans priorité haute (lot 11.6) : l'élément LCP est le texte du hero ; en priorité haute, la photo (151 Ko sur
+                téléphone) passait avant les scripts et les polices (LCP 5,3 s au lieu de 4,4 s). Dans l'écran, elle se
+                charge tout de suite. */}
+            {PHOTO && <Photo photo={PHOTO} sizes={SIZES} fit="cover" radius="none" style={CADRAGE} />}
           </div>
         </div>
         <div className="ac-badge-place" data-parallaxe="5">
