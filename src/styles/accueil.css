@@ -2559,6 +2559,113 @@
   }
 }
 
+/* Appel au don, mouvement (lot 11.7). À l'arrivée : le bloc se pose (fondu et 32 px), le cœur se trace (1,6 s), la photo
+   glisse et pivote jusqu'à −3°, le titre monte ligne par ligne, les pastilles une à une ; le cœur du bouton bat deux
+   fois. Au survol du bouton : il monte de 2 px, un reflet le traverse, son cœur bat. Bouton pause ou mouvement réduit :
+   tout est affiché directement, rien ne bat ni ne brille. */
+@media (prefers-reduced-motion: no-preference) {
+  .ac:not(.ev-pause) .ac-attend.ac-don-bloc,
+  .ac:not(.ev-pause) .ac-attend :is(.ac-don-goutte, .ac-don-domaines li) {
+    opacity: 0;
+  }
+  .ac:not(.ev-pause) .ac-attend .ac-don-fil path {
+    stroke-dashoffset: 1;
+  }
+  .ac:not(.ev-pause) .ac-vue.ac-don-bloc {
+    animation: ac-pose-32 0.9s var(--ac-courbe) backwards;
+  }
+  .ac:not(.ev-pause) .ac-vue .ac-don-fil path {
+    animation: ac-trace-coeur 1.6s cubic-bezier(0.6, 0, 0.2, 1) 0.55s backwards;
+  }
+  .ac:not(.ev-pause) .ac-vue .ac-don-goutte {
+    animation: ac-goutte 1s var(--ac-courbe) 0.4s backwards;
+  }
+  .ac:not(.ev-pause) .ac-vue .ac-don-domaines li {
+    animation: ac-pastille 0.5s var(--ac-courbe) calc(0.75s + var(--rang, 0) * 60ms) backwards;
+  }
+  .ac:not(.ev-pause) .ac-vue .ac-don-coeur {
+    animation: ac-bat 0.55s ease-in-out 1.5s 2;
+  }
+  /* Pause : le titre et les textes de la section sont aussi affichés directement */
+  .ac.ev-pause .ac-don .ac-app {
+    opacity: 1;
+    animation: none;
+  }
+  .ac.ev-pause .ac-don .ac-ligne > span {
+    translate: none;
+    animation: none;
+  }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .ac-don-btn {
+    transition:
+      translate 0.25s var(--ac-courbe),
+      background-color var(--dur-fast) linear;
+  }
+  .ac-don-btn:hover {
+    translate: 0 -2px;
+  }
+  .ac-don-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(105deg, transparent 30%, color-mix(in srgb, var(--don-fond) 16%, transparent) 50%, transparent 70%);
+    translate: -120% 0;
+    pointer-events: none;
+  }
+  .ac-don-btn-contour::after {
+    background: linear-gradient(105deg, transparent 30%, color-mix(in srgb, var(--don-texte) 26%, transparent) 50%, transparent 70%);
+  }
+  .ac:not(.ev-pause) .ac-don-btn:hover::after {
+    animation: ac-reflet 0.8s ease-out;
+  }
+  .ac:not(.ev-pause) .ac-don-btn:hover .ac-don-coeur svg {
+    animation: ac-bat 0.5s ease-in-out 2;
+  }
+}
+@keyframes ac-pose-32 {
+  from {
+    opacity: 0;
+    translate: 0 32px;
+  }
+}
+@keyframes ac-trace-coeur {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+@keyframes ac-goutte {
+  from {
+    opacity: 0;
+    translate: 3rem 1.5rem;
+    rotate: 9deg;
+  }
+}
+@keyframes ac-pastille {
+  from {
+    opacity: 0;
+    scale: 0.8;
+  }
+}
+@keyframes ac-bat {
+  0%,
+  100% {
+    scale: 1;
+  }
+  40% {
+    scale: 1.18;
+  }
+}
+@keyframes ac-reflet {
+  from {
+    translate: -120% 0;
+  }
+  to {
+    translate: 120% 0;
+  }
+}
+
 /* --- Sections (lot 11.2) : entrées jouées une fois, quand le bloc arrive à l'écran (Entree.tsx) --- */
 @keyframes ac-feuille {
   from {
