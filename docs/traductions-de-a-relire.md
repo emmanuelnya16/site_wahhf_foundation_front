@@ -2,7 +2,7 @@
 
 Généré par `npm run i18n:relire` (scripts/traductions-a-relire.mjs) le 2026-11-26. Ne pas modifier à la main : corriger les fichiers de langue, puis relancer.
 
-Chaque texte allemand du site, face à son français. **Un astérisque (\*) marque les 166 textes dont le traducteur n'était pas sûr** (sens du français ambigu, terme juridique, nom d'institution, ton) : à relire en priorité. 1865 textes allemands au total.
+Chaque texte allemand du site, face à son français. **Un astérisque (\*) marque les 166 textes dont le traducteur n'était pas sûr** (sens du français ambigu, terme juridique, nom d'institution, ton) : à relire en priorité. 1864 textes allemands au total.
 
 - Ton choisi : vouvoiement (« Sie »), simple et chaleureux, pas du mot à mot.
 - Ne sont pas traduits : les noms propres et officiels (WAHHF Foundation, IROKO, Albatros Hotel, Ausbildung, Studienkolleg…), les adresses, les liens.
@@ -12,7 +12,7 @@ Chaque texte allemand du site, face à son français. **Un astérisque (\*) marq
 
 ## Textes communs (en-tête, pied de page, accueil, composants)
 
-Fichier : `src/locales/de.json` (370 textes, dont 40 à relire).
+Fichier : `src/locales/de.json` (369 textes, dont 40 à relire).
 
 | | Clé | Français | Allemand |
 |---|---|---|---|
@@ -141,7 +141,7 @@ Fichier : `src/locales/de.json` (370 textes, dont 40 à relire).
 |  | `home.gallery.title` | La fondation sur le terrain | Die Stiftung vor Ort |
 |  | `home.gallery.subtitle` | Retour en photos sur le First Open Day & Boot Camp, le 25 avril 2026 à Yaoundé. | Fotos vom First Open Day & Boot Camp am 25. April 2026 in Yaoundé. |
 |  | `home.gallery.link` | Voir toute la galerie | Ganze Galerie ansehen |
-|  | `home.gallery.expandCaption` | Yaoundé, 25 avril 2026 | Yaoundé, 25. April 2026 |
+|  | `home.gallery.expandCaption` | Yaoundé | Yaoundé |
 |  | `home.partners.kicker` | Partenaires et financeurs | Partner und Förderer |
 |  | `home.partners.title` | Soutenus par IROKO Group et un réseau engagé | Getragen von der IROKO Group und einem engagierten Netzwerk |
 |  | `home.partners.subtitle` | La gratuité de nos programmes repose sur l'engagement structurel du groupe IROKO et la générosité de nos donateurs. | Dass unsere Programme kostenlos sind, verdanken wir dem dauerhaften Engagement der IROKO-Gruppe und der Großzügigkeit unserer Spenderinnen und Spender. |
@@ -361,10 +361,9 @@ Fichier : `src/locales/de.json` (370 textes, dont 40 à relire).
 |  | `contenu.parcours.section.intro` | Des salles de formation aux champs, et jusqu’au sommet avec les jeunes. | Von den Schulungsräumen auf die Felder – und mit den jungen Menschen bis auf den Gipfel. |
 |  | `contenu.parcours.section.link` | Voir toutes les photos | Alle Fotos ansehen |
 |  | `contenu.parcours.panneaux.apprendre.title` | Apprendre | Lernen |
-|  | `contenu.parcours.panneaux.apprendre.meta` | Albatros Hotel, 25 avril 2026 | Albatros Hotel, 25. April 2026 |
+|  | `contenu.parcours.panneaux.apprendre.meta` | Albatros Hotel | Albatros Hotel |
 |  | `contenu.parcours.panneaux.apprendre.description` | Une salle comble pour découvrir les programmes de la fondation. | Ein voller Saal, um die Programme der Stiftung kennenzulernen. |
 |  | `contenu.parcours.panneaux.chanter-ensemble.title` | Chanter ensemble | Gemeinsam singen |
-|  | `contenu.parcours.panneaux.chanter-ensemble.meta` | 25 avril 2026 | 25. April 2026 |
 |  | `contenu.parcours.panneaux.chanter-ensemble.description` | Les jeunes reprennent en chœur l’hymne de la fondation. | Die jungen Menschen singen gemeinsam die Hymne der Stiftung. |
 |  | `contenu.parcours.panneaux.cultiver.title` | Cultiver | Anbauen |
 |  | `contenu.parcours.panneaux.cultiver.meta` | Visite de plantation | Besuch einer Plantage |

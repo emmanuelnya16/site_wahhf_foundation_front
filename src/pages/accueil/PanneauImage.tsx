@@ -96,7 +96,7 @@ export default function PanneauImage({ panneau, index, dernier, open, after, tex
               <b className="ac-img-carte-num" aria-hidden="true">
                 {numero}
               </b>
-              <span>{panneau.meta}</span>
+              {panneau.meta && <span>{panneau.meta}</span>}
             </p>
             <h3 className="ac-img-titre">{panneau.title}</h3>
             <p className="ac-img-description">{panneau.description}</p>

@@ -2,7 +2,7 @@ import { createContext, ReactNode, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Container from './Container';
 import { cn } from '../../lib/utils';
-import { albumPlaceDate, GALLERY_ALBUMS, galleryItem } from '../../data/gallery';
+import { albumPlace, GALLERY_ALBUMS, galleryItem } from '../../data/gallery';
 import LineReveal from '../../effects/LineReveal';
 import type { CatalogPhoto } from '../../data/photos';
 import Photo from './Photo';
@@ -72,7 +72,7 @@ export default function PageHeader({
   const hasPhoto = !!catalogPhoto || !!photo;
   const albumFr = photo ? GALLERY_ALBUMS.find((a) => a.id === photo.album) : undefined;
   const album = albumFr ? localizedGallery(albumFr) : undefined;
-  const placeDate = albumPlaceDate(album);
+  const place = albumPlace(album);
   return (
     <RevealContext.Provider value={reveal}>
     <header
@@ -114,15 +114,14 @@ export default function PageHeader({
               )}
               style={photo.focus && photoRatio !== 'source' ? { objectPosition: photo.focus } : undefined}
             />
-            {/* Légende datée : celle de la galerie, puis l'événement, le lieu et la date de l'album (sans « A · B »,
-                contrat §12) ; rien de l'album s'il est encore provisoire. Même format que la galerie, Nos actions et la
-                visionneuse (albumPlaceDate : « Yaoundé, le 25 avril 2026 », date insécable ; revue du groupe 7.3) */}
+            {/* Légende : celle de la galerie, puis l'événement et le lieu de l'album (sans « A · B », contrat §12) ; rien de
+                l'album s'il est encore provisoire. Lot 12 : plus de date sous une photo (albumPlace, le lieu seul) */}
             <figcaption className="mt-2 text-meta text-text-secondary">
               {photo.caption}
-              {album && placeDate && (
+              {album && place && (
                 <>
                   {' '}
-                  {album.title}, {placeDate}.
+                  {album.title}, {place}.
                 </>
               )}
             </figcaption>

@@ -16,7 +16,7 @@ export const JOURNEY_SECTION = {
 export interface JourneyPanel {
   id: string;
   title: string;
-  /** Période ou lieu, sous le titre */
+  /** Lieu, sous le titre ; vide : rien (lot 12 : plus de date sous une photo) */
   meta: string;
   description: string;
   photoId: string;
@@ -30,7 +30,7 @@ export const JOURNEY_PANELS: JourneyPanel[] = [
   {
     id: 'apprendre',
     title: 'Apprendre',
-    meta: `Albatros Hotel, 25${NB}avril${NB}2026`,
+    meta: 'Albatros Hotel',
     description: 'Une salle comble pour découvrir les programmes de la fondation.',
     photoId: 'A27',
     fallbackId: 'A30',
@@ -39,7 +39,7 @@ export const JOURNEY_PANELS: JourneyPanel[] = [
   {
     id: 'chanter-ensemble',
     title: 'Chanter ensemble',
-    meta: `25${NB}avril${NB}2026`,
+    meta: '',
     description: 'Les jeunes reprennent en chœur l’hymne de la fondation.',
     photoId: 'A85',
     // A16 attend aussi l'accord : l'intervenant qui s'adresse à la salle (réponse 189)

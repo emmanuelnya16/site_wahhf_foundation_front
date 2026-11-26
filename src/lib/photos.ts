@@ -43,12 +43,20 @@ const NB = '\u00a0';
 /** Album d'une photo. */
 export const albumOf = (photo: CatalogPhoto): PhotoAlbum => PHOTO_ALBUMS.find((a) => a.id === photo.album)!;
 
+/** Une date dans un titre d'album : « 25 avril 2026 », « 25 April 2026 », « 25. April 2026 ». */
+const DATE = /\d{1,2}\.?[\s\u00a0]+\p{L}+[\s\u00a0]+\d{4}/u;
+
 /**
- * Légende d'une photo placée hors de la galerie : l'album d'où elle vient, tel que le catalogue le nomme
- * (« Journée du 25 avril 2026, Albatros Hotel. ») ; jamais de lieu ni de date que le catalogue ne donne pas.
+ * Légende d'une photo placée hors de la galerie : l'album d'où elle vient, tel que le catalogue le nomme ; jamais de
+ * lieu ni de date que le catalogue ne donne pas. Lot 12 (demande de la fondation) : plus aucune date sous une photo.
+ * Un album « événement daté — lieu » donne le lieu seul (« Albatros Hotel. ») ; un album sans lieu, daté, pas de
+ * légende (chaîne vide). Le nom complet de l'album (albumLabel) reste dans les titres et les filtres de la galerie.
  */
 export function photoCaption(photo: CatalogPhoto): string {
-  return `${albumLabel(albumOf(photo))}.`;
+  const album = albumOf(photo);
+  const [evenement, lieu] = localizedAlbum(album).title.split(/\s+—\s+/);
+  if (DATE.test(evenement)) return lieu ? `${lieu}.` : '';
+  return `${albumLabel(album)}.`;
 }
 
 /** Nom d'un album pour le texte courant : « Journée du 25 avril 2026, Albatros Hotel » (date insécable, T-19). */

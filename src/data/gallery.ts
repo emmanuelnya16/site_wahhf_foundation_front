@@ -179,6 +179,12 @@ export function albumPlaceDate(album: GalleryAlbum | undefined): string | null {
   return date ? i18n.t('ui.gallery.placeDate', { place, date: date.replace(/ /g, ' ') }) : place;
 }
 
+/** Lieu d'un album sans sa date, pour une légende sous une photo (lot 12) ; null tant qu'il n'est pas confirmé. */
+export function albumPlace(album: GalleryAlbum | undefined): string | null {
+  if (!album || /TODO/.test(album.meta)) return null;
+  return localizedGallery(album).meta.split(' · ')[0];
+}
+
 /** « 13 photos et 1 vidéo » (GAL-08) : les mots du visiteur, pas « 14 éléments ». */
 export function countLabel(items: GalleryItem[]): string {
   const photos = items.filter((it) => it.kind === 'photo').length;

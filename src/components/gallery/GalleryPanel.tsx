@@ -92,7 +92,7 @@ export default function GalleryPanel({ panel, index, open, after, sizes, textId,
         </button>
         <div id={textId} className="xg-text" inert={!open} aria-hidden={open ? undefined : true}>
           <h3 className="xg-title">{panel.title}</h3>
-          <p className="xg-meta">{panel.meta}</p>
+          {panel.meta && <p className="xg-meta">{panel.meta}</p>}
           <p className="xg-description">{panel.description}</p>
           {panel.link && (
             <Link
