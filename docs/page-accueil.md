@@ -2,7 +2,7 @@
 
 La nouvelle page d'accueil, construite à côté de l'accueil actuel (/), qui ne change pas. Ce guide dit où se trouve chaque section et comment mettre à jour ce qui dépend de la fondation. Le détail du design est dans `docs/design-contract.md` (§16).
 
-## Les 9 sections
+## Les 10 sections
 
 Composants dans `src/pages/accueil/`, sauf mention contraire. Styles : `src/styles/accueil.css`. Textes en anglais et en allemand : `src/locales/accueil/en.json` et `de.json`.
 
@@ -17,8 +17,11 @@ Composants dans `src/pages/accueil/`, sauf mention contraire. Styles : `src/styl
 | 7 | Les 10 régions | `Regions.tsx`, `CarteRegions.tsx` | `src/data/regions.ts`. Textes repris de Notre impact |
 | 8 | Apprendre, cultiver, grandir | `src/pages/home/JourneySection.tsx` (la section de /, telle quelle) | `src/data/journey.ts` |
 | 9 | Événements | `Evenements.tsx`, `CarteEvenement.tsx` | `src/data/events.ts` |
+| 10 | Appel au don | `AppelDon.tsx` | Textes : `src/locales/accueil` (`don`). Domaines : `src/services/api.ts`. Chaque pastille ouvre Faire un don avec son domaine choisi (`/faire-un-don?affectation=sante`) |
 
 L'assemblage et le bouton pause sont dans `AccueilPage.tsx`. Les photos viennent du catalogue : on modifie `docs/photos-catalogue.md`, puis on lance `npm run photos`.
+
+**L'appel au don** n'affiche ni montant, ni équivalence (« X FCFA = … »), ni chiffre d'impact, tant que la fondation ne les a pas fournis (question 206).
 
 **La règle des faits.** En ligne, rien de non confirmé ne s'affiche : ni chiffre sans date ni source, ni projet ou témoignage non confirmé, ni texte marqué TODO, ni photo en attente d'accord. Ces exemples restent visibles en développement seulement, pour travailler la mise en page. Ce qui manque est masqué, et la question est notée dans `docs/contenus-a-fournir.md`.
 
@@ -101,4 +104,5 @@ Numéros de `docs/contenus-a-fournir.md` :
   - 173 : son prix ;
   - 175 : son lien d'inscription ;
   - 157 : la ville de l'Albatros Hotel, sur le ticket de la journée du 25 avril.
+- **Appel au don :** 206 : des exemples de montants, et ce qu'ils financent réellement.
 - **Mise en ligne :** 188 : laquelle des deux pages, / ou /accueil, restera l'accueil, et quand.

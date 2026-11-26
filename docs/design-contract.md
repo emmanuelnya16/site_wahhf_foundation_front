@@ -1102,6 +1102,22 @@ Lot 11.5 : `content-visibility: auto` retiré, téléphone compris (voir §16.6,
 - Arche du hero : plus de priorité haute. L'élément LCP est le texte du hero ; la photo (151 Ko sur téléphone) passait avant les scripts et les polices. LCP Lighthouse mobile : 5,2 à 5,4 s avec la priorité, 4,3 à 4,5 s sans.
 - Commentaires de sections « à venir » retirés.
 
+### 16.8 Section « Appel au don » (lot 11.7)
+
+*Votre brief du 26 novembre 2026. Code : `AppelDon.tsx`.*
+
+**Contenu** : seulement des faits déjà sur le site. Le titre est celui de la section « Agir » de / (`home.act.title`, dans les trois langues), les six domaines, l'affectation au choix ou « là où le besoin est le plus grand » (Faire un don propose « Là où le besoin est le plus urgent »), le soutien du groupe IROKO (Qui sommes-nous). Aucun montant ni chiffre d'impact (question 206). Les pastilles ouvrent Faire un don avec le domaine choisi : la page lit déjà `?affectation=<domaine>` (ACT-02), elle n'a pas changé.
+
+**Design** : la section est sur sauge (sous-bois en sombre), puisque les événements sont sur brume. À l'intérieur, un grand bloc cœur (#C8102E, coins de 2,5 rem), la seule surface cœur de la page. À gauche : surtitre, titre en Jost sur deux lignes, texte, pastilles des domaines, boutons « Faire un don » (blanc, texte et cœur rouges) et « Devenir partenaire » (contour blanc, vers /agir#partenaire), puis le soutien d'IROKO sous un filet. À droite : A71 dans une goutte (coin pointu en haut à gauche), cerclée de blanc, penchée de −3°. Derrière : le fil dessine un grand cœur au trait blanc à 18 %, coupé par le bord droit du bloc. Sur téléphone : texte, pastilles, boutons pleine largeur, puis la photo ; le cœur est plus petit et centré.
+
+**Mouvement** (CSS) : le bloc se pose (fondu et 32 px), le cœur se trace (1,6 s), la photo glisse et pivote jusqu'à −3°, le titre monte ligne par ligne, les pastilles arrivent une à une (échelle 0,8 → 1, 60 ms d'écart) ; le cœur du bouton bat deux fois. Au survol, le bouton monte de 2 px, un reflet le traverse, son cœur bat deux fois ; rien en boucle. Bouton pause et mouvement réduit : tout est affiché directement.
+
+| Usage | Ratio |
+|---|---|
+| Tous les textes, icônes et l'anneau de focus (blanc) sur cœur | 5,88:1 |
+| Bouton « Faire un don » et pastille survolée : cœur sur blanc | 5,88:1 |
+| Contour des pastilles (blanc à 60 %, comme demandé) sur cœur | 2,80:1 (le texte blanc plein de chaque pastille la désigne) |
+
 ## Annexe A : tableau des contrastes
 
 Calcul WCAG 2.x sur fond uni ; ratios tronqués à une décimale. Seuils : 4,5:1 pour le texte, 3:1 pour les composants et le fil.
