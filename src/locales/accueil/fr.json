@@ -115,5 +115,15 @@
     "lien": "Tous les événements",
     "bientot": "Le prochain rendez-vous sera annoncé très bientôt",
     "voir": "{{titre}}, voir l’événement"
+  },
+  "don": {
+    "surtitre": "Soutenir la fondation",
+    "titre": [
+      "Chaque geste renforce",
+      "un parcours de vie"
+    ],
+    "texte": "Votre don soutient nos actions au Cameroun dans nos six domaines : éducation, santé, entrepreneuriat des jeunes, environnement, droits et inclusion, mobilité et langues. Vous choisissez le domaine que vous voulez soutenir, ou vous laissez la fondation l’affecter là où le besoin est le plus grand.",
+    "confiance": "Le groupe IROKO couvre nos frais de fonctionnement et d’enseignement.",
+    "domaine": "Soutenir ce domaine : {{domaine}}"
   }
 }

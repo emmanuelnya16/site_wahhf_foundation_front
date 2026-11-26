@@ -18,6 +18,7 @@ import Parcours from './Parcours';
 import Regions from './Regions';
 import JourneySection from '../home/JourneySection';
 import Evenements from './Evenements';
+import AppelDon from './AppelDon';
 
 /** Parallaxes et fil (GSAP), chargés après le premier affichage, seulement là où ils existent (MQ.computer, src/lib/gsap.ts) */
 const AccueilMotion = lazy(() => import('./AccueilMotion'));
@@ -25,8 +26,8 @@ const ORDINATEUR = '(min-width: 1024px) and (hover: hover) and (pointer: fine) a
 
 /**
  * Nouvelle page « Accueil » (/accueil), lots 11.1 à 11.6 : construite à côté de l'accueil actuel (/), qui ne change pas.
- * Neuf sections : hero, qui sommes-nous en bref, chiffres, domaines, projet phare, parcours, régions, accordéon (la
- * section de /, telle quelle), événements. Guide : docs/page-accueil.md.
+ * Dix sections : hero, qui sommes-nous en bref, chiffres, domaines, projet phare, parcours, régions, accordéon (la
+ * section de /, telle quelle), événements, appel au don. Guide : docs/page-accueil.md.
  */
 export default function AccueilPage() {
   const { t } = useTranslation();
@@ -55,6 +56,7 @@ export default function AccueilPage() {
         <JourneySection />
       </div>
       <Evenements paused={loops.paused} />
+      <AppelDon />
       {ordinateur && (
         <AfterFirstDisplay>
           <AccueilMotion scope={root} paused={loops.paused} />
