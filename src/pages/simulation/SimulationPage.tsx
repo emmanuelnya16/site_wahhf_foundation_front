@@ -36,7 +36,7 @@ export default function SimulationPage() {
       <Offre />
       <Publics />
       <Exemples />
-      <Etapes />
+      <Etapes paused={loops.paused} />
       <Familles />
       <Engagements />
       <Jeunes />

@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { ArrowUpRight, MessageCircle } from 'lucide-react';
 import { CONTACT, IROKO_ENGINEER_URL } from '../../config/contact';
 import { Tete } from './ui';
+import Entree from '../accueil/Entree';
 
 /**
  * 11. Soumettre mon projet (forêt) : le formulaire sur une carte blanche (étape 3) ; à côté, le WhatsApp officiel et le
@@ -12,7 +13,7 @@ export default function Soumettre({ children }: { children?: ReactNode }) {
   const { t } = useTranslation();
   return (
     <section id="soumettre" className="sim-section sim-fond-foret" aria-labelledby="sim-soumettre">
-      <div className="container-page sim-soumettre">
+      <Entree className="container-page sim-soumettre">
         <div className="sim-soumettre-cote">
           <Tete id="sim-soumettre" cle="soumettre" intro />
           <div className="sim-soumettre-aide">
@@ -33,7 +34,7 @@ export default function Soumettre({ children }: { children?: ReactNode }) {
           </div>
         </div>
         {children && <div className="sim-formulaire-carte">{children}</div>}
-      </div>
+      </Entree>
     </section>
   );
 }

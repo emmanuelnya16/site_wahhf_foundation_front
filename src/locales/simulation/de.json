@@ -7,7 +7,7 @@
   "nouvelOnglet": "(neuer Tab)",
   "hero": {
     "surtitre": "Gemeinnütziges Programm · Kostenlos",
-    "titre": "Kostenlose Ingenieursimulation für Unternehmen und Projekte in Kamerun",
+    "titre": ["Kostenlose", "Ingenieursimulation", "für Unternehmen", "und Projekte", "in Kamerun"],
     "intro": "Unsere Ingenieurinnen und Ingenieure und betreute junge Talente prüfen, simulieren und beraten kostenlos die kleinen Organisationen, die die lokale Wirtschaft aufbauen.",
     "badges": ["100 % kostenlos", "Für Organisationen in Kamerun", "FR · EN · DE"],
     "soumettre": "Mein Projekt einreichen",
@@ -24,7 +24,7 @@
   },
   "pourquoi": {
     "surtitre": "Warum dieses Programm",
-    "titre": "Doppelte Wirkung: für die lokale Wirtschaft und für junge Menschen.",
+    "titre": ["Doppelte Wirkung: für", "die lokale Wirtschaft", "und für junge Menschen."],
     "cartes": {
       "economie": {
         "titre": "Die lokale Wirtschaft stärken",
@@ -44,12 +44,12 @@
   },
   "offre": {
     "surtitre": "Was wir anbieten",
-    "titre": "Vier Arten, Ihnen zu helfen.",
+    "titre": ["Vier Arten, Ihnen zu helfen."],
     "recu": "Was Sie erhalten"
   },
   "publics": {
     "surtitre": "Für wen?",
-    "titre": "Für Organisationen, die sich keine Studie leisten können.",
+    "titre": ["Für Organisationen, die sich", "keine Studie leisten können."],
     "pour": "Das Programm richtet sich an",
     "base": "Mit Sitz in Kamerun.",
     "non": "Nicht gedacht für…",
@@ -58,7 +58,7 @@
   },
   "exemples": {
     "surtitre": "Beispiele möglicher Anfragen",
-    "titre": "Womit Sie sich an uns wenden könnten.",
+    "titre": ["Womit Sie sich an", "uns wenden könnten."],
     "intro": "Beispiele, um Ihnen eine Vorstellung zu geben: Es sind keine abgeschlossenen Projekte.",
     "etiquette": "Beispiel",
     "type": "Art der Simulation",
@@ -68,31 +68,31 @@
   },
   "etapes": {
     "surtitre": "So funktioniert es",
-    "titre": "Fünf Schritte, von Ihrem Bedarf bis zum Bericht."
+    "titre": ["Fünf Schritte, von Ihrem", "Bedarf bis zum Bericht."]
   },
   "familles": {
     "surtitre": "Was wir simulieren können",
-    "titre": "Drei Simulationsbereiche.",
+    "titre": ["Drei Simulationsbereiche."],
     "analyses": "Arten der Analyse"
   },
   "engagements": {
     "surtitre": "Unsere Zusagen und unsere Grenzen",
-    "titre": "Was wir zusagen, und was wir nicht tun.",
+    "titre": ["Was wir zusagen,", "und was wir nicht tun."],
     "nos": "Unsere Zusagen"
   },
   "jeunes": {
     "surtitre": "Junge Menschen im Mittelpunkt",
-    "titre": "Studierende und junge Ingenieurinnen und Ingenieure, die an echten Fällen lernen.",
+    "titre": ["Studierende und junge", "Ingenieurinnen und", "Ingenieure, die an", "echten Fällen lernen."],
     "texte": "Unter Anleitung von Ingenieurinnen und Ingenieuren wirken Studierende und junge Ingenieurinnen und Ingenieure an den Studien mit. Sie lernen an echten Bedürfnissen: denen der Organisationen, die die lokale Wirtschaft tragen.",
     "bouton": "Beim Programm mitmachen"
   },
   "faq": {
     "surtitre": "Häufige Fragen",
-    "titre": "Bevor Sie Ihr Projekt einreichen."
+    "titre": ["Bevor Sie Ihr Projekt einreichen."]
   },
   "soumettre": {
     "surtitre": "Mein Projekt einreichen",
-    "titre": "Erzählen Sie uns von Ihrem Projekt.",
+    "titre": ["Erzählen Sie uns", "von Ihrem Projekt."],
     "intro": "Beschreiben Sie Ihren Bedarf und fügen Sie Ihre Pläne oder Fotos bei, falls Sie welche haben. Wir melden uns, sobald wir Ihre Anfrage geprüft haben.",
     "whatsappTitre": "Eine Frage vorab?",
     "whatsapp": "Auf WhatsApp schreiben: {{numero}}",

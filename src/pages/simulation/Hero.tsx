@@ -1,8 +1,9 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, type CSSProperties } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ArrowDown, Check } from 'lucide-react';
 import { PauseButton } from '../events/motion';
-import { Ancre } from './ui';
+import Lignes from '../accueil/Lignes';
+import { Ancre, useLignes } from './ui';
 
 /** Le dessin du portique : un fichier à part, chargé après le texte (le titre est l'élément LCP) */
 const Portique = lazy(() => import('./Portique'));
@@ -14,24 +15,28 @@ const Portique = lazy(() => import('./Portique'));
 export default function Hero({ paused, onTogglePause }: { paused: boolean; onTogglePause: () => void }) {
   const { t } = useTranslation();
   const badges = t('simulation.hero.badges', { returnObjects: true }) as string[];
+  const titre = useLignes('simulation.hero.titre');
   return (
     <section className="sim-section sim-fond-brume sim-hero" aria-labelledby="sim-titre">
       <div className="container-page sim-hero-grille">
         <div className="sim-hero-texte">
-          <p className="ac-surtitre">{t('simulation.hero.surtitre')}</p>
+          <p className="ac-surtitre ac-entree">{t('simulation.hero.surtitre')}</p>
           <h1 id="sim-titre" className="sim-h1">
-            {t('simulation.hero.titre')}
+            <Lignes lignes={titre} />
           </h1>
-          <p className="sim-intro">{t('simulation.hero.intro')}</p>
+          {/* L'intro monte sans fondu (ac-monte) : sur téléphone, c'est l'élément LCP (comme sur /accueil) */}
+          <p className="sim-intro ac-entree" style={{ '--delai': '0.45s' } as CSSProperties}>
+            {t('simulation.hero.intro')}
+          </p>
           <ul className="sim-badges">
-            {badges.map((badge) => (
-              <li key={badge}>
+            {badges.map((badge, i) => (
+              <li key={badge} style={{ '--rang': i } as CSSProperties}>
                 <Check aria-hidden="true" />
                 <span>{badge}</span>
               </li>
             ))}
           </ul>
-          <div className="sim-actions">
+          <div className="sim-actions ac-entree" style={{ '--delai': '0.85s' } as CSSProperties}>
             <Ancre to="soumettre" className="ac-btn ac-btn-nuit">
               <span>{t('simulation.hero.soumettre')}</span>
               <ArrowDown aria-hidden="true" className="ac-fleche" />

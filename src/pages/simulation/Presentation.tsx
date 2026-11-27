@@ -5,6 +5,7 @@ import { IROKO_ENGINEER_URL } from '../../config/contact';
 import { DOMAIN_LINKS } from '../../lib/events';
 import { useSimulation } from './donnees';
 import { BadgeAConfirmer, Tete } from './ui';
+import Entree from '../accueil/Entree';
 
 const POURQUOI: { id: 'economie' | 'jeunesse' | 'iroko'; icone: LucideIcon; lien?: string }[] = [
   { id: 'economie', icone: Store, lien: DOMAIN_LINKS.entrepreneurship },
@@ -17,7 +18,7 @@ export function Pourquoi() {
   const { t } = useTranslation();
   return (
     <section className="sim-section sim-fond-papier" aria-labelledby="sim-pourquoi">
-      <div className="container-page">
+      <Entree className="container-page">
         <Tete id="sim-pourquoi" cle="pourquoi" />
         <ul className="sim-grille-3">
           {POURQUOI.map(({ id, icone: Icone, lien }) => (
@@ -36,7 +37,7 @@ export function Pourquoi() {
             </li>
           ))}
         </ul>
-      </div>
+      </Entree>
     </section>
   );
 }
@@ -47,7 +48,7 @@ export function Offre() {
   const { offres } = useSimulation();
   return (
     <section className="sim-section sim-fond-sauge" aria-labelledby="sim-offre">
-      <div className="container-page">
+      <Entree className="container-page">
         <Tete id="sim-offre" cle="offre" />
         <ol className="sim-grille-4">
           {offres.map((offre, i) => (
@@ -69,7 +70,7 @@ export function Offre() {
             </li>
           ))}
         </ol>
-      </div>
+      </Entree>
     </section>
   );
 }
@@ -80,7 +81,7 @@ export function Publics() {
   const { publics, nonPublics } = useSimulation();
   return (
     <section id="pour-qui" className="sim-section sim-fond-papier" aria-labelledby="sim-publics">
-      <div className="container-page">
+      <Entree className="container-page">
         <Tete id="sim-publics" cle="publics" />
         <div className="sim-publics">
           <div>
@@ -119,7 +120,7 @@ export function Publics() {
             </a>
           </aside>
         </div>
-      </div>
+      </Entree>
     </section>
   );
 }

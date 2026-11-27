@@ -1,6 +1,7 @@
 import { ChevronDown } from 'lucide-react';
 import { useSimulation } from './donnees';
 import { BadgeAConfirmer, Tete } from './ui';
+import Entree from '../accueil/Entree';
 
 /**
  * 10. Questions fréquentes (papier) : accordéon sur deux colonnes, en <details> natifs (clavier et lecteurs d'écran sans
@@ -12,7 +13,7 @@ export default function Faq() {
   const colonnes = [faq.slice(0, moitie), faq.slice(moitie)];
   return (
     <section id="faq" className="sim-section sim-fond-papier" aria-labelledby="sim-faq">
-      <div className="container-page">
+      <Entree className="container-page">
         <Tete id="sim-faq" cle="faq" />
         <div className="sim-faq">
           {colonnes.map((colonne, c) => (
@@ -31,7 +32,7 @@ export default function Faq() {
             </div>
           ))}
         </div>
-      </div>
+      </Entree>
     </section>
   );
 }

@@ -517,7 +517,7 @@ export default function Formulaire() {
         </div>
 
         <div className="sim-envoi">
-          <div className="sim-actions">
+          <div className="sim-envoi-boutons">
             <button type="submit" value="whatsapp" className="ac-btn ac-btn-nuit">
               <MessageCircle aria-hidden="true" className="sim-bouton-icone" />
               <span>{f('envoyerWhatsapp')}</span>

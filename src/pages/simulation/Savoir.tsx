@@ -5,6 +5,7 @@ import Photo from '../../components/wahhf/Photo';
 import { photoOrFallback } from '../../lib/photos';
 import { useSimulation } from './donnees';
 import { BadgeAConfirmer, Tete } from './ui';
+import Entree from '../accueil/Entree';
 
 const ICONES_FAMILLES: Record<string, LucideIcon> = { structures: Waypoints, fluides: Thermometer, conception: Layers };
 
@@ -20,7 +21,7 @@ export function Familles() {
   const { familles } = useSimulation();
   return (
     <section className="sim-section sim-fond-papier" aria-labelledby="sim-familles">
-      <div className="container-page">
+      <Entree className="container-page">
         <Tete id="sim-familles" cle="familles" />
         <ul className="sim-grille-3">
           {familles.map((f) => {
@@ -43,7 +44,7 @@ export function Familles() {
             );
           })}
         </ul>
-      </div>
+      </Entree>
     </section>
   );
 }
@@ -54,7 +55,7 @@ export function Engagements() {
   const { engagements, limite } = useSimulation();
   return (
     <section className="sim-section sim-fond-sauge" aria-labelledby="sim-engagements">
-      <div className="container-page">
+      <Entree className="container-page">
         <Tete id="sim-engagements" cle="engagements" />
         <div className="sim-deux-colonnes">
           <div>
@@ -83,7 +84,7 @@ export function Engagements() {
             <p className="sim-limite-texte">{limite.texte}</p>
           </aside>
         </div>
-      </div>
+      </Entree>
     </section>
   );
 }
@@ -93,7 +94,7 @@ export function Jeunes() {
   const { t } = useTranslation();
   return (
     <section className="sim-section sim-fond-brume" aria-labelledby="sim-jeunes">
-      <div className="container-page sim-jeunes">
+      <Entree className="container-page sim-jeunes">
         {PHOTO_JEUNES && (
           <div className="sim-jeunes-photo">
             <Photo photo={PHOTO_JEUNES} sizes="(min-width: 1024px) 34rem, calc(100vw - 2.5rem)" fit="cover" radius="none" />
@@ -107,7 +108,7 @@ export function Jeunes() {
             <ArrowRight aria-hidden="true" className="ac-fleche" />
           </Link>
         </div>
-      </div>
+      </Entree>
     </section>
   );
 }

@@ -7,7 +7,7 @@
   "nouvelOnglet": "(new tab)",
   "hero": {
     "surtitre": "Community programme · Free",
-    "titre": "Free engineering simulation for businesses and projects in Cameroon",
+    "titre": ["Free engineering", "simulation", "for businesses", "and projects", "in Cameroon"],
     "intro": "Our engineers and supervised young talent check, simulate and advise, free of charge, the small organisations that build the local economy.",
     "badges": ["100% free", "For organisations in Cameroon", "FR · EN · DE"],
     "soumettre": "Submit my project",
@@ -24,7 +24,7 @@
   },
   "pourquoi": {
     "surtitre": "Why this programme",
-    "titre": "A double impact: the local economy and young people.",
+    "titre": ["A double impact:", "the local economy", "and young people."],
     "cartes": {
       "economie": {
         "titre": "Supporting the local economy",
@@ -44,12 +44,12 @@
   },
   "offre": {
     "surtitre": "What we offer",
-    "titre": "Four ways to help you.",
+    "titre": ["Four ways to help you."],
     "recu": "What you receive"
   },
   "publics": {
     "surtitre": "Who is it for?",
-    "titre": "For organisations that cannot afford a study.",
+    "titre": ["For organisations that", "cannot afford a study."],
     "pour": "The programme is for",
     "base": "Based in Cameroon.",
     "non": "This programme is not for…",
@@ -58,7 +58,7 @@
   },
   "exemples": {
     "surtitre": "Examples of possible requests",
-    "titre": "What you could ask us.",
+    "titre": ["What you could", "ask us."],
     "intro": "Examples to give you an idea: these are not completed projects.",
     "etiquette": "Example",
     "type": "Type of simulation",
@@ -68,31 +68,31 @@
   },
   "etapes": {
     "surtitre": "How it works",
-    "titre": "Five steps, from your need to the report."
+    "titre": ["Five steps, from your", "need to the report."]
   },
   "familles": {
     "surtitre": "What we can simulate",
-    "titre": "Three families of simulation.",
+    "titre": ["Three families of simulation."],
     "analyses": "Types of analysis"
   },
   "engagements": {
     "surtitre": "Our commitments and our limits",
-    "titre": "What we promise, and what we do not do.",
+    "titre": ["What we promise,", "and what we do not do."],
     "nos": "Our commitments"
   },
   "jeunes": {
     "surtitre": "Young people at the heart of the programme",
-    "titre": "Students and young engineers learning on real cases.",
+    "titre": ["Students and", "young engineers", "learning on", "real cases."],
     "texte": "Supervised by engineers, students and young engineers take part in the studies. They train on real needs: those of the organisations that keep the local economy going.",
     "bouton": "Join the programme"
   },
   "faq": {
     "surtitre": "Frequently asked questions",
-    "titre": "Before you submit your project."
+    "titre": ["Before you submit your project."]
   },
   "soumettre": {
     "surtitre": "Submit my project",
-    "titre": "Tell us about your project.",
+    "titre": ["Tell us about", "your project."],
     "intro": "Describe your need and attach your plans or photos if you have any. We will get back to you once we have studied your request.",
     "whatsappTitre": "A question before writing?",
     "whatsapp": "Write on WhatsApp to {{numero}}",

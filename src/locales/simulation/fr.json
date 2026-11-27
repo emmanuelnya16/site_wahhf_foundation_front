@@ -7,7 +7,7 @@
   "nouvelOnglet": "(nouvel onglet)",
   "hero": {
     "surtitre": "Programme solidaire · Gratuit",
-    "titre": "La simulation numérique offerte aux entreprises et aux projets du Cameroun",
+    "titre": ["La simulation", "numérique offerte", "aux entreprises", "et aux projets", "du Cameroun"],
     "intro": "Nos ingénieurs et de jeunes talents encadrés vérifient, simulent et conseillent gratuitement les petites structures qui construisent l’économie locale.",
     "badges": ["100 % gratuit", "Pour les structures du Cameroun", "FR · EN · DE"],
     "soumettre": "Soumettre mon projet",
@@ -24,7 +24,7 @@
   },
   "pourquoi": {
     "surtitre": "Pourquoi ce programme",
-    "titre": "Un double impact : l’économie locale et la jeunesse.",
+    "titre": ["Un double impact :", "l’économie locale", "et la jeunesse."],
     "cartes": {
       "economie": {
         "titre": "Aider l’économie locale",
@@ -44,12 +44,12 @@
   },
   "offre": {
     "surtitre": "Ce que nous offrons",
-    "titre": "Quatre façons de vous aider.",
+    "titre": ["Quatre façons de vous aider."],
     "recu": "Ce que vous recevez"
   },
   "publics": {
     "surtitre": "Pour qui ?",
-    "titre": "Pour les structures qui n’ont pas les moyens d’une étude.",
+    "titre": ["Pour les structures qui n’ont", "pas les moyens d’une étude."],
     "pour": "Le programme s’adresse à",
     "base": "Basées au Cameroun.",
     "non": "Ce programme n’est pas fait pour…",
@@ -58,7 +58,7 @@
   },
   "exemples": {
     "surtitre": "Exemples de demandes possibles",
-    "titre": "Ce que vous pourriez nous demander.",
+    "titre": ["Ce que vous pourriez", "nous demander."],
     "intro": "Des exemples pour vous donner une idée : ce ne sont pas des projets réalisés.",
     "etiquette": "Exemple",
     "type": "Type de simulation",
@@ -68,31 +68,31 @@
   },
   "etapes": {
     "surtitre": "Comment ça marche",
-    "titre": "Cinq étapes, de votre besoin au rapport."
+    "titre": ["Cinq étapes, de votre", "besoin au rapport."]
   },
   "familles": {
     "surtitre": "Ce que nous savons simuler",
-    "titre": "Trois familles de simulation.",
+    "titre": ["Trois familles de simulation."],
     "analyses": "Types d’analyse"
   },
   "engagements": {
     "surtitre": "Nos engagements et nos limites",
-    "titre": "Ce que nous promettons, et ce que nous ne faisons pas.",
+    "titre": ["Ce que nous promettons,", "et ce que nous ne faisons pas."],
     "nos": "Nos engagements"
   },
   "jeunes": {
     "surtitre": "Les jeunes au cœur du programme",
-    "titre": "Des étudiants et de jeunes ingénieurs qui apprennent sur des cas réels.",
+    "titre": ["Des étudiants et de", "jeunes ingénieurs", "qui apprennent", "sur des cas réels."],
     "texte": "Encadrés par des ingénieurs, des étudiants et de jeunes ingénieurs participent aux études. Ils se forment sur de vrais besoins : ceux des structures qui font vivre l’économie locale.",
     "bouton": "Rejoindre le programme"
   },
   "faq": {
     "surtitre": "Questions fréquentes",
-    "titre": "Avant de soumettre votre projet."
+    "titre": ["Avant de soumettre votre projet."]
   },
   "soumettre": {
     "surtitre": "Soumettre mon projet",
-    "titre": "Parlez-nous de votre projet.",
+    "titre": ["Parlez-nous de", "votre projet."],
     "intro": "Décrivez votre besoin et joignez vos plans ou vos photos si vous en avez. Nous revenons vers vous après avoir étudié votre demande.",
     "whatsappTitre": "Une question avant d’écrire ?",
     "whatsapp": "Écrire sur WhatsApp au {{numero}}",

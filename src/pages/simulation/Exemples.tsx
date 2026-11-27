@@ -4,6 +4,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import type { SimIcone } from '../../data/simulation';
 import { useSimulation } from './donnees';
 import { BadgeAConfirmer, Tete } from './ui';
+import Entree from '../accueil/Entree';
 
 /** Icônes dessinées pour les exemples (48 × 48, trait), jamais de photo : ce ne sont pas des projets réalisés */
 const ICONES: Record<SimIcone, string> = {
@@ -32,7 +33,7 @@ export default function Exemples() {
   };
   return (
     <section className="sim-section sim-fond-brume" aria-labelledby="sim-exemples">
-      <div className="container-page">
+      <Entree className="container-page">
         <div className="sim-tete-ligne">
           <Tete id="sim-exemples" cle="exemples" intro />
           <div className="sim-fleches">
@@ -65,7 +66,7 @@ export default function Exemples() {
             </li>
           ))}
         </ul>
-      </div>
+      </Entree>
     </section>
   );
 }
