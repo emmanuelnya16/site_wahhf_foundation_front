@@ -377,7 +377,7 @@ Pour les photos « à vérifier », il suffit de nous dire si toutes les personn
 146. Dans quel ordre hiérarchique faut-il les présenter ? Aujourd’hui : Président, Vice-président, Prof. Dr.-Ing. Christian-Toralf Weber, Secrétaire général.
 147. Qui est la 3e personne (photo « 3 eme personne ilfluente de la fondation ») : son nom et son rôle dans la fondation ? **Réponse du 20 novembre 2026** : Prof. Dr.-Ing. Christian-Toralf Weber, sans rôle (« juste son nom »). L’organigramme affiche son nom seul, avec le portrait « 3 eme personne ilfluente de la fondation » : dites-nous si ce portrait n’est pas le sien.
 148. Pouvez-vous écrire deux phrases sur chaque personne (son parcours, ce qu’elle fait pour la fondation) ? Sans elles, l’organigramme n’affiche que le nom et le rôle (le nom seul pour Prof. Dr.-Ing. Christian-Toralf Weber).
-149. Avez-vous l’accord écrit de chacun pour publier son portrait sur le site ? Tant qu’il manque, les portraits ne s’affichent pas sur le site en ligne (les noms et les rôles, si).
+149. Avez-vous l’accord écrit de chacun pour publier son portrait sur le site ? Tant qu’il manque, les portraits ne s’affichent pas sur le site en ligne (les noms et les rôles, si). **Le 27 novembre 2026** : les portraits des quatre dirigeants (dossier image_personne_influente_wahhf, les mêmes fichiers que ceux reçus le 19 novembre) sont publiés à votre demande, sur Qui sommes-nous (carrousel, organigramme) et sur /accueil (direction, visages du hero). Le nom « Marrion Watio Notesse » est celui de son profil Facebook, donné par la fondation. Gardez l’accord écrit de chacun.
 
 ---
 
@@ -408,7 +408,7 @@ Pour les photos « à vérifier », il suffit de nous dire si toutes les personn
 Seuls les faits de la banderole (photo A02) sont affichés en ligne : WAHHF Foundation, Albatros Hotel, 25 avril 2026, 8 h à 21 h, « Bâtir l’Afrique qui nourrit, soigne et instruit sa jeunesse ». Tant que les réponses manquent, les sections concernées restent masquées sur le site en ligne.
 
 156. Quel est le nom exact de la journée ? Aujourd’hui, le titre est « Journée du 25 avril 2026 à l’Albatros Hotel ».
-157. Dans quelle ville se trouve l’Albatros Hotel ? Le panneau « L’événement a eu lieu à » affiche le nom de l’hôtel faute de ville.
+157. Dans quelle ville se trouve l’Albatros Hotel ? Le panneau « L’événement a eu lieu à » affiche le nom de l’hôtel faute de ville. **Réponse du 27 novembre 2026** : Yaoundé (« Après Yaoundé en avril 2026, cap sur Douala en mars 2027 »).
 158. Qui a organisé la journée avec la fondation (partenaires, logos à nous envoyer) ?
 159. Quel était le déroulé de la journée (heures, titres, une phrase par moment) ?
 160. Quelles activités voulez-vous montrer ? **Réponse du 20 novembre 2026** : les six « Activités » de la banderole (formations gratuites, logiciels gratuits, accompagnement des startups, équipement des hôpitaux, subvention du meilleur projet, transfert technologique Allemagne–Cameroun), titre et domaine seulement ; photos A17 (en ligne, A30 la remplace tant que l’accord des parents manque), A22, A41, A53 ; hôpitaux et subvention sans photo. Une phrase par activité reste possible : elle s’afficherait sous le titre.
@@ -433,12 +433,12 @@ Seuls les faits de la banderole (photo A02) sont affichés en ligne : WAHHF Foun
 
 Fiche /evenements/road-to-europe. Les faits se remplissent en un seul endroit : `ROAD_TO_EUROPE_FAITS` en tête de src/data/events.ts. Tant qu’un fait manque, la page affiche « annoncé(e) très bientôt » à sa place (jamais un faux chiffre).
 
-171. Date de Road to Europe (samedi … 2027) et horaires (8 h – 18 h ?).
-172. Ville et nom de la salle (Yaoundé, Cameroun ?).
+171. Date de Road to Europe (samedi … 2027) et horaires (8 h – 18 h ?). **Le 27 novembre 2026** : l’événement devient « Wahhfjobs & Road to Europe Week », deuxième édition, avec le groupe IROKO, à Douala en mars 2027, sur cinq jours (programme proposé : jour 1 Santé & action sociale ; jour 2 Industrie, BTP & infrastructures ; jour 3 Informatique & économie numérique ; jour 4 Finance, banque, formation & compétences, avec les visas et l’installation ; jour 5 Skills day). La fiche affiche « Mars 2027 · dates exactes annoncées très bientôt ». Restent : les dates exactes (premier et dernier jour), les horaires, et l’orthographe du nom (« Wahhfjobs », « WAHHFjobs » ou « WAHHF Jobs » ?). Les phrases qui décrivent chaque journée sont des propositions, à valider.
+172. Ville et nom de la salle (Yaoundé, Cameroun ?). **Le 27 novembre 2026** : Douala ; le nom de la salle reste à donner.
 173. Prix : gratuit, ou montant en FCFA, écrit dans les trois langues du site (par exemple « Gratuit », « Free », « Kostenlos », ou « 5 000 FCFA », « 5,000 FCFA », « 5.000 FCFA ») : `prix` de `ROAD_TO_EUROPE_FAITS`. Une langue laissée vide affiche « annoncé très bientôt » dans cette langue.
 174. Places restantes : un nombre tenu à jour, ou ne pas l’afficher.
 175. Inscription : lien du formulaire, WhatsApp, ou la page Candidater. Tant qu’il manque, les boutons « Réserver ma place » affichent « Inscriptions annoncées très bientôt » et ne mènent nulle part.
-176. Organisateurs et partenaires (logos) : aujourd’hui, WAHHF Foundation seulement.
+176. Organisateurs et partenaires (logos) : aujourd’hui, WAHHF Foundation seulement. **Le 27 novembre 2026** : WAHHF Foundation et le groupe IROKO (son logo, reçu le 26 novembre). D’autres partenaires de la semaine ?
 177. Intervenants : la barre dit « annoncés très bientôt ».
 178. Les textes anglais de la fiche (src/locales/events/en.json, contenu) sont des propositions, à valider.
 
@@ -462,7 +462,7 @@ Page /accueil (hero). Textes : src/locales/accueil/.
 183. Seconde ligne sous « Une équipe entre le Cameroun et l'Allemagne » : « au service de la jeunesse », reprise du hero de Qui sommes-nous. À confirmer ou à remplacer.
 184. **Fermée le 25 novembre 2026.** Le slogan est bien « Sowing hope, harvesting change » : la banderole A02 l'écrit ainsi (le kakémono de A30 aussi). « Showing hope » sur le kakémono orange (photo A13) est une coquille d'impression ; le texte alternatif de A13 garde ce qui est imprimé.
 185. Photo A16 : passée en « pending » le 25 novembre 2026 (visages reconnaissables de profil, numéro de téléphone lisible sur un t-shirt). En ligne, A30 la remplace dans l'arche de /accueil. Elle sert aussi ailleurs : panneau « Chanter ensemble » de l'accueil actuel, en-tête de Faire un don, mosaïque des Actualités (voir question 189). Il faut l'accord écrit des parents pour la republier.
-186. Visages de l'équipe : en production, aucun portrait ne s'affiche aujourd'hui. Trois noms ne sont pas confirmés, et les quatre portraits attendent l'accord écrit (questions 144 à 149). Les deux lignes de texte s'affichent seules.
+186. Visages de l'équipe : **le 27 novembre 2026**, les portraits sont publiés (question 149) ; le hero de /accueil montre ceux des personnes au nom confirmé (Wilfried attend son nom de famille). Avant : en production, aucun portrait ne s'affiche aujourd'hui. Trois noms ne sont pas confirmés, et les quatre portraits attendent l'accord écrit (questions 144 à 149). Les deux lignes de texte s'affichent seules.
 187. La carte « 6 domaines d'action » mène à Nos actions. Elle mènera à la section Domaines de la page quand celle-ci existera. **Fait le 25 novembre 2026** : la carte et le chiffre « 6 » mènent à #domaines.
 188. Les deux pages / et /accueil ont presque le même titre. Laquelle restera, et quand /accueil prendra-t-elle la place de / ? **Le 26 novembre 2026** : / mène désormais à /accueil (redirection). Reste à décider quand retirer l'ancien accueil du code.
 189. A16 en « pending » a trois effets en ligne, hors de /accueil : sur l'accueil actuel (/), le panneau « Chanter ensemble » disparaît (A85, sa photo, attend aussi l'accord) ; sur Faire un don, l'en-tête n'a plus de photo ; sur Actualités, le bloc de la journée du 25 avril se masque (il lui faut trois photos). Faut-il une autre remplaçante (A30, public de dos, convient à Faire un don et à Actualités) ? Aucune photo publiable ne montre les jeunes qui chantent. **Réponse du 25 novembre 2026** : Faire un don → A31 ; accordéon → A74 ; bloc du 25 avril → A07. A07 est déjà la troisième photo de ce bloc : pour ne pas l'y montrer deux fois, la place de A16 revient à A44 (deux intervenants au pupitre, jamais affichée ailleurs). À confirmer.
@@ -498,7 +498,7 @@ Page /accueil (hero). Textes : src/locales/accueil/.
 
 ## Questions ajoutées avec la section « Le film » (lot 11.9, 26 novembre 2026)
 
-207. Section « Le film » de /accueil : il manque le fichier vidéo du film (celui de YouTube, e-zT1lNANC0, 1 min 10), dans sa meilleure qualité. Aucune copie n'a été trouvée dans le projet. Déposez-le dans docs/references/video/film-wahhf.mp4, puis lancez `node scripts/encode-film.mjs` (voir docs/page-accueil.md, « Mettre le film en ligne »). Le site jouera alors un extrait sans le son, tout seul, quand le cadre est plein écran. En attendant, la section montre l'affiche et « Regarder le film », qui ouvre YouTube après accord. La question 201 vaut aussi pour le film : les personnes qu'on y voit de face, les jeunes surtout, ont-elles donné leur accord ?
+207. **Réponse du 26 novembre 2026** : le film est fourni (Cloudinary, 1 min 10) et joue sans le son dans la section ; reste la question de l'accord des personnes qu'on y voit (question 201). Question d'origine : section « Le film » de /accueil : il manque le fichier vidéo du film (celui de YouTube, e-zT1lNANC0, 1 min 10), dans sa meilleure qualité. Aucune copie n'a été trouvée dans le projet. Déposez-le dans docs/references/video/film-wahhf.mp4, puis lancez `node scripts/encode-film.mjs` (voir docs/page-accueil.md, « Mettre le film en ligne »). Le site jouera alors un extrait sans le son, tout seul, quand le cadre est plein écran. En attendant, la section montre l'affiche et « Regarder le film », qui ouvre YouTube après accord. La question 201 vaut aussi pour le film : les personnes qu'on y voit de face, les jeunes surtout, ont-elles donné leur accord ?
 
 ## Questions ajoutées avec les retours de la fondation (lot 12, 26 novembre 2026)
 

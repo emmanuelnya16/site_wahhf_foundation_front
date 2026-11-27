@@ -1,8 +1,8 @@
 # Traductions allemandes à relire
 
-Généré par `npm run i18n:relire` (scripts/traductions-a-relire.mjs) le 2026-11-26. Ne pas modifier à la main : corriger les fichiers de langue, puis relancer.
+Généré par `npm run i18n:relire` (scripts/traductions-a-relire.mjs) le 2026-11-27. Ne pas modifier à la main : corriger les fichiers de langue, puis relancer.
 
-Chaque texte allemand du site, face à son français. **Un astérisque (\*) marque les 166 textes dont le traducteur n'était pas sûr** (sens du français ambigu, terme juridique, nom d'institution, ton) : à relire en priorité. 1872 textes allemands au total.
+Chaque texte allemand du site, face à son français. **Un astérisque (\*) marque les 166 textes dont le traducteur n'était pas sûr** (sens du français ambigu, terme juridique, nom d'institution, ton) : à relire en priorité. 1882 textes allemands au total.
 
 - Ton choisi : vouvoiement (« Sie »), simple et chaleureux, pas du mot à mot.
 - Ne sont pas traduits : les noms propres et officiels (WAHHF Foundation, IROKO, Albatros Hotel, Ausbildung, Studienkolleg…), les adresses, les liens.
@@ -32,7 +32,7 @@ Fichier : `src/locales/de.json` (369 textes, dont 40 à relire).
 |  | `nav.apply` | Candidater | Bewerben |
 |  | `nav.partners` | Partenaires | Partner |
 |  | `nav.contact` | Contact | Kontakt |
-|  | `nav.searchPlaceholder` | Rechercher un programme, un cours d'allemand /anglais, un pays... | Programm, Deutsch- oder Englischkurs, Land suchen … |
+|  | `nav.searchPlaceholder` | Rechercher un programme, un cours d'allemand /anglais /italien, un pays... | Programm, Deutsch- oder Englischkurs, Land suchen … |
 |  | `nav.themeLight` | Mode clair | Heller Modus |
 |  | `nav.themeDark` | Mode sombre | Dunkler Modus |
 |  | `nav.domains.education` | Éducation | Bildung |
@@ -55,8 +55,8 @@ Fichier : `src/locales/de.json` (369 textes, dont 40 à relire).
 |  | `nav.search.country` | Pays accompagné : {{flag}} {{name}} | Begleitetes Land: {{flag}} {{name}} |
 |  | `nav.mega.domainsTitle` | Les 6 domaines d’action de WAHHF Foundation | Die 6 Arbeitsbereiche der WAHHF Foundation |
 |  | `nav.mega.overview` | Voir la vue d’ensemble | Zur Übersicht |
-|  | `nav.mega.mobilityTitle` | Mobilité & Langues : Allemand /anglais (A1–C1) & Europe | Mobilität & Sprachen: Deutsch/Englisch (A1–C1) & Europa |
-| \* | `nav.mega.mobilityText` | Accompagnement gratuit aux cours d’allemand /anglais et orientation vérifiée vers 10 pays européens, financé par IROKO et nos donateurs. | Kostenlose Begleitung bei Deutsch- und Englischkursen und geprüfte Orientierung für 10 europäische Länder, finanziert von IROKO und unseren Spenderinnen und Spendern. <br>_Note : « nos donateurs » rendu par « unseren Spenderinnen und Spendern » (forme inclusive)_ |
+|  | `nav.mega.mobilityTitle` | Mobilité & Langues : Allemand /anglais /italien (A1–C1) & Europe | Mobilität & Sprachen: Deutsch/Englisch/Italienisch (A1–C1) & Europa |
+| \* | `nav.mega.mobilityText` | Accompagnement gratuit aux cours d’allemand /anglais /italien et orientation vérifiée vers 10 pays européens, financé par IROKO et nos donateurs. | Kostenlose Begleitung bei Deutsch-, Englisch- und Italienischkursen und geprüfte Orientierung für 10 europäische Länder, finanziert von IROKO und unseren Spenderinnen und Spendern. <br>_Note : « nos donateurs » rendu par « unseren Spenderinnen und Spendern » (forme inclusive)_ |
 |  | `nav.mega.academy` | Académie de langues (A1 à C1) | Sprachakademie (A1 bis C1) |
 |  | `nav.mega.support` | Accompagnement vers 10 pays | Begleitung in 10 Länder |
 |  | `nav.mega.scams` | Vigilance : Éviter les arnaques | Vorsicht: Betrug vermeiden |
@@ -72,7 +72,7 @@ Fichier : `src/locales/de.json` (369 textes, dont 40 à relire).
 |  | `hero.scrollHint` | Défiler pour découvrir | Zum Entdecken scrollen |
 |  | `hero.videoPause` | Mettre la vidéo en pause | Video anhalten |
 |  | `hero.videoPlay` | Lire la vidéo | Video abspielen |
-| \* | `hero.headline` | Des cours d'allemand /anglais pour préparer l'Europe en confiance | Deutsch- und Englischkurse, um Europa gut vorbereitet anzugehen <br>_Note : « préparer l'Europe en confiance » rendu par « um Europa gut vorbereitet anzugehen »_ |
+| \* | `hero.headline` | Des cours d'allemand /anglais /italien pour préparer l'Europe en confiance | Deutsch-, Englisch- und Italienischkurse, um Europa gut vorbereitet anzugehen <br>_Note : « préparer l'Europe en confiance » rendu par « um Europa gut vorbereitet anzugehen »_ |
 |  | `hero.lead` | Une fondation camerouno-allemande, à Yaoundé et Douala : niveaux A1 à C1, test en ligne et orientation vers 10 pays européens, sans intermédiaire payant. | Eine kamerunisch-deutsche Stiftung in Yaoundé und Douala: Niveaus A1 bis C1, Online-Test und Orientierung für 10 europäische Länder – ohne bezahlte Vermittler. |
 |  | `hero.ctaTest` | Passer le test d'allemand gratuit | Kostenlosen Deutschtest machen |
 |  | `hero.filmLink` | Regarder le film avec le son (1 min) | Film mit Ton ansehen (1 Min.) |
@@ -89,7 +89,7 @@ Fichier : `src/locales/de.json` (369 textes, dont 40 à relire).
 |  | `home.mission.kicker` | Qui sommes-nous | Über uns |
 |  | `home.mission.title` | Une passerelle humaine entre le Cameroun et l'Allemagne | Eine menschliche Brücke zwischen Kamerun und Deutschland |
 |  | `home.mission.p1` | Née d'une double culture camerounaise et allemande, WAHHF Foundation est la branche sociale et philanthropique du groupe IROKO. | Aus einer kamerunisch-deutschen Doppelkultur entstanden, ist die WAHHF Foundation der soziale und gemeinnützige Zweig der IROKO-Gruppe. |
-|  | `home.mission.p2` | Convaincus que la dignité passe par le savoir, la santé et l'autonomie, nous développons des programmes de terrain durables et un dispositif gratuit d'apprentissage de l'allemand /anglais et d'orientation vers l'Europe. | Wir sind überzeugt, dass Würde durch Wissen, Gesundheit und Selbstständigkeit entsteht. Darum entwickeln wir nachhaltige Programme vor Ort und ein kostenloses Angebot, um Deutsch oder Englisch zu lernen und sich in Richtung Europa zu orientieren. |
+|  | `home.mission.p2` | Convaincus que la dignité passe par le savoir, la santé et l'autonomie, nous développons des programmes de terrain durables et un dispositif gratuit d'apprentissage de l'allemand /anglais /italien et d'orientation vers l'Europe. | Wir sind überzeugt, dass Würde durch Wissen, Gesundheit und Selbstständigkeit entsteht. Darum entwickeln wir nachhaltige Programme vor Ort und ein kostenloses Angebot, um Deutsch, Englisch oder Italienisch zu lernen und sich in Richtung Europa zu orientieren. |
 |  | `home.mission.link` | En savoir plus sur notre histoire et notre gouvernance | Mehr über unsere Geschichte und unsere Organisation |
 |  | `home.stats.kicker` | Notre impact en chiffres | Unsere Wirkung in Zahlen |
 |  | `home.stats.title` | Des actions concrètes et mesurables | Konkrete und messbare Arbeit |
@@ -101,16 +101,16 @@ Fichier : `src/locales/de.json` (369 textes, dont 40 à relire).
 |  | `home.domains.kicker` | Nos 6 domaines d'action | Unsere 6 Arbeitsbereiche |
 |  | `home.domains.title` | Six piliers pour bâtir l'autonomie | Sechs Säulen für mehr Selbstständigkeit |
 |  | `home.domains.subtitle` | De l'accès à l'école primaire jusqu'à la mobilité académique et linguistique internationale. | Vom Zugang zur Grundschule bis zur internationalen Studien- und Sprachmobilität. |
-|  | `home.mobilitySpot.title` | Apprendre l'allemand /anglais, s'orienter vers l'Europe | Deutsch oder Englisch lernen, den Weg nach Europa finden |
-|  | `home.mobilitySpot.subtitle` | Cours d'allemand /anglais et orientation gratuits, sans frais d'inscription ni intermédiaire commercial. | Kostenlose Deutsch- und Englischkurse und Orientierung – ohne Anmeldegebühren und ohne kommerzielle Vermittler. |
+|  | `home.mobilitySpot.title` | Apprendre l'allemand /anglais /italien, s'orienter vers l'Europe | Deutsch, Englisch oder Italienisch lernen, den Weg nach Europa finden |
+|  | `home.mobilitySpot.subtitle` | Cours d'allemand /anglais /italien et orientation gratuits, sans frais d'inscription ni intermédiaire commercial. | Kostenlose Deutsch-, Englisch- und Italienischkurse und Orientierung – ohne Anmeldegebühren und ohne kommerzielle Vermittler. |
 |  | `home.mobilitySpot.card1Title` | Académie de langues A1 à C1 | Sprachakademie A1 bis C1 |
-|  | `home.mobilitySpot.card1Desc` | Accompagnement des cours de langue allemande /anglaise structuré du niveau débutant A1 au niveau avancé C1, avec un test de niveau en ligne. | Strukturierte Begleitung der Deutsch- und Englischkurse vom Anfängerniveau A1 bis zum fortgeschrittenen Niveau C1, mit Online-Einstufungstest. |
+|  | `home.mobilitySpot.card1Desc` | Accompagnement des cours de langue allemande /anglaise structuré du niveau débutant A1 au niveau avancé C1, avec un test de niveau en ligne. | Strukturierte Begleitung der Deutsch-, Englisch- und Italienischkurse vom Anfängerniveau A1 bis zum fortgeschrittenen Niveau C1, mit Online-Einstufungstest. |
 |  | `home.mobilitySpot.card2Title` | Accompagnement vers l'Europe | Begleitung nach Europa |
 |  | `home.mobilitySpot.card2Desc` | Information claire et vérifiée en 4 étapes : compréhension des parcours d'études, de formation ou de travail, et préparation de dossier. | Klare und geprüfte Informationen in 4 Schritten: Studien-, Ausbildungs- und Arbeitswege verstehen und die Unterlagen vorbereiten. |
 |  | `home.mobilitySpot.card3Title` | 10 pays accompagnés | 10 begleitete Länder |
 |  | `home.mobilitySpot.card3Desc` | Luxembourg, Allemagne, Slovénie, Italie, Grèce, Portugal, Espagne, Danemark, Pologne et Albanie. | Luxemburg, Deutschland, Slowenien, Italien, Griechenland, Portugal, Spanien, Dänemark, Polen und Albanien. |
 |  | `home.mobilitySpot.cta` | Découvrir le programme | Programm entdecken |
-|  | `home.mobilitySpot.filLabel` | Les cinq niveaux d'allemand /anglais, de A1 à C1, puis l'Europe | Die fünf Sprachniveaus von A1 bis C1, dann Europa |
+|  | `home.mobilitySpot.filLabel` | Les cinq niveaux d'allemand /anglais /italien, de A1 à C1, puis l'Europe | Die fünf Sprachniveaus von A1 bis C1, dann Europa |
 |  | `home.mobilitySpot.filEnd` | Europe | Europa |
 |  | `home.mobilitySpot.levels.a1` | Découverte | Einstieg |
 |  | `home.mobilitySpot.levels.a2` | Échanges courants | Alltagsgespräche |
@@ -167,7 +167,7 @@ Fichier : `src/locales/de.json` (369 textes, dont 40 à relire).
 |  | `home.newsletter.handoffTitle` | Dernière étape : envoyez votre demande d’inscription | Letzter Schritt: Senden Sie Ihre Anmeldung ab |
 |  | `home.newsletter.editAddress` | Modifier mon adresse | Meine Adresse ändern |
 |  | `home.seo.title` | Accueil — Autonomiser la jeunesse, transformer les communautés | Startseite — Junge Menschen stärken, Gemeinschaften verändern |
-|  | `home.seo.description` | WAHHF Foundation, fondation camerouno-allemande à but non lucratif et branche sociale du groupe IROKO : 6 domaines d'action et cours d'allemand /anglais gratuits. | WAHHF Foundation, gemeinnützige kamerunisch-deutsche Stiftung und sozialer Zweig der IROKO-Gruppe: 6 Arbeitsbereiche und kostenlose Deutsch- und Englischkurse. |
+|  | `home.seo.description` | WAHHF Foundation, fondation camerouno-allemande à but non lucratif et branche sociale du groupe IROKO : 6 domaines d'action et cours d'allemand /anglais /italien gratuits. | WAHHF Foundation, gemeinnützige kamerunisch-deutsche Stiftung und sozialer Zweig der IROKO-Gruppe: 6 Arbeitsbereiche und kostenlose Deutsch-, Englisch- und Italienischkurse. |
 |  | `home.journey.albumLink` | Voir l’album | Zum Album |
 |  | `footer.description` | Fondation camerouno-allemande à but non lucratif œuvrant pour l'éducation, la santé, l'autonomie des jeunes et la mobilité solidaire. | Gemeinnützige kamerunisch-deutsche Stiftung für Bildung, Gesundheit, die Selbstständigkeit junger Menschen und solidarische Mobilität. |
 |  | `footer.irokoBadge` | Branche sociale du groupe IROKO | Sozialer Zweig der IROKO-Gruppe |
@@ -185,7 +185,7 @@ Fichier : `src/locales/de.json` (369 textes, dont 40 à relire).
 |  | `footer.gallery` | Galerie photo & vidéo | Foto- & Videogalerie |
 |  | `footer.partners` | Partenaires & Groupe IROKO | Partner & IROKO-Gruppe |
 |  | `footer.news` | Actualités & Terrain | Aktuelles & Einsätze vor Ort |
-|  | `footer.academy` | Académie d’allemand /anglais A1–C1 (Gratuit) | Deutsch-/Englisch-Akademie A1–C1 (kostenlos) |
+|  | `footer.academy` | Académie d’allemand /anglais /italien A1–C1 (Gratuit) | Deutsch-/Englisch-/Italienisch-Akademie A1–C1 (kostenlos) |
 |  | `footer.apply` | Candidater à un programme | Für ein Programm bewerben |
 |  | `footer.volunteer` | Devenir bénévole | Ehrenamtlich mitmachen |
 |  | `footer.partner` | Devenir partenaire | Partner werden |
@@ -300,9 +300,9 @@ Fichier : `src/locales/de.json` (369 textes, dont 40 à relire).
 |  | `contenu.domaines.droits-inclusion.programs[1]` | Soutien à la scolarisation des jeunes en situation de handicap | Unterstützung beim Schulbesuch junger Menschen mit Behinderung |
 |  | `contenu.domaines.droits-inclusion.programs[2]` | Permanences d’écoute et d’orientation sociale | Sprechstunden für ein offenes Ohr und soziale Beratung |
 |  | `contenu.domaines.mobilite-langues.title` | Mobilité & Langues | Mobilität & Sprachen |
-|  | `contenu.domaines.mobilite-langues.shortDesc` | Académie d’allemand /anglais gratuite (A1 à C1) et accompagnement transparent vers 10 pays européens. | Kostenlose Deutsch- und Englischakademie (A1 bis C1) und transparente Begleitung in 10 europäische Länder. |
-|  | `contenu.domaines.mobilite-langues.fullDesc` | Un programme financé par nos partenaires et nos donateurs, pour apprendre l’allemand /anglais et préparer un projet d’études, de formation ou de mobilité en toute sécurité. | Ein Programm, das unsere Partner und Spender finanzieren: Deutsch oder Englisch lernen und ein Studien-, Ausbildungs- oder Mobilitätsprojekt sicher vorbereiten. |
-|  | `contenu.domaines.mobilite-langues.programs[0]` | Accompagnement des cours de langue allemande /anglaise du niveau A1 au C1 | Begleitung der Deutsch- und Englischkurse von Niveau A1 bis C1 |
+|  | `contenu.domaines.mobilite-langues.shortDesc` | Académie d’allemand /anglais /italien gratuite (A1 à C1) et accompagnement transparent vers 10 pays européens. | Kostenlose Deutsch-, Englisch- und Italienischakademie (A1 bis C1) und transparente Begleitung in 10 europäische Länder. |
+|  | `contenu.domaines.mobilite-langues.fullDesc` | Un programme financé par nos partenaires et nos donateurs, pour apprendre l’allemand /anglais /italien et préparer un projet d’études, de formation ou de mobilité en toute sécurité. | Ein Programm, das unsere Partner und Spender finanzieren: Deutsch, Englisch oder Italienisch lernen und ein Studien-, Ausbildungs- oder Mobilitätsprojekt sicher vorbereiten. |
+|  | `contenu.domaines.mobilite-langues.programs[0]` | Accompagnement des cours de langue allemande /anglaise du niveau A1 au C1 | Begleitung der Deutsch-, Englisch- und Italienischkurse von Niveau A1 bis C1 |
 |  | `contenu.domaines.mobilite-langues.programs[1]` | Orientation documentée vers 10 pays européens | Fundierte Orientierung für 10 europäische Länder |
 |  | `contenu.domaines.mobilite-langues.programs[2]` | Prévention active contre les arnaques et fausses promesses de visa | Aktiver Schutz vor Betrug und falschen Visaversprechen |
 |  | `contenu.pays.allemagne.name` | Allemagne | Deutschland |
@@ -396,7 +396,7 @@ Fichier : `src/locales/accompagnement/de.json` (309 textes, dont 19 à relire).
 |  | `commun.accompagnement` | Accompagnement vers l’Europe | Begleitung nach Europa |
 |  | `commun.etape` | Étape {{n}} sur {{total}} de l’accompagnement | Schritt {{n}} von {{total}} der Begleitung |
 | \* | `commun.etreAccompagne` | Être accompagné | Sich begleiten lassen |
-|  | `commun.formulaire` | Un seul formulaire pour l’orientation vers l’Europe et les cours d’allemand /anglais. Aucun document d’identité ni paiement ne vous est demandé. | Ein einziges Formular für die Orientierung nach Europa und für die Deutsch- und Englischkurse. Wir verlangen von Ihnen weder Ausweisdokumente noch eine Zahlung. |
+|  | `commun.formulaire` | Un seul formulaire pour l’orientation vers l’Europe et les cours d’allemand /anglais /italien. Aucun document d’identité ni paiement ne vous est demandé. | Ein einziges Formular für die Orientierung nach Europa und für die Deutsch-, Englisch- und Italienischkurse. Wir verlangen von Ihnen weder Ausweisdokumente noch eine Zahlung. |
 |  | `commun.nouvelOnglet` |  (nouvel onglet) |  (neuer Tab) |
 |  | `commun.dixPays` | Les 10 pays accompagnés | Die 10 begleiteten Länder |
 |  | `commun.langues` | Langues{{nb}}: {{liste}} | Sprachen: {{liste}} |
@@ -468,7 +468,7 @@ Fichier : `src/locales/accompagnement/de.json` (309 textes, dont 19 à relire).
 |  | `arnaques.citation` | «{{nb}}{{texte}}{{nb}}» | „{{texte}}“ |
 |  | `arnaques.avantNote` | {{nb}}:  | :  |
 |  | `arnaques.jamaisTitre` | WAHHF Foundation ne demande jamais d’argent | Die WAHHF Foundation verlangt nie Geld |
-|  | `arnaques.jamaisSousTitre` | WAHHF Foundation est une fondation à but non lucratif, financée par ses partenaires et ses donateurs. Notre accompagnement et nos cours d’allemand /anglais sont gratuits. | Die WAHHF Foundation ist eine gemeinnützige Stiftung, finanziert von ihren Partnern sowie ihren Spenderinnen und Spendern. Unsere Begleitung und unsere Deutsch- und Englischkurse sind kostenlos. |
+|  | `arnaques.jamaisSousTitre` | WAHHF Foundation est une fondation à but non lucratif, financée par ses partenaires et ses donateurs. Notre accompagnement et nos cours d’allemand /anglais /italien sont gratuits. | Die WAHHF Foundation ist eine gemeinnützige Stiftung, finanziert von ihren Partnern sowie ihren Spenderinnen und Spendern. Unsere Begleitung und unsere Deutsch-, Englisch- und Italienischkurse sind kostenlos. |
 |  | `arnaques.reflexesTitre` | Les bons réflexes | Richtig reagieren |
 |  | `arnaques.voirFiches` | Voir les fiches des 10 pays et leurs sites officiels | Die Länderseiten der 10 Länder und ihre offiziellen Websites ansehen |
 |  | `arnaques.suspectTitre` | Une offre vous semble suspecte ? | Kommt Ihnen ein Angebot verdächtig vor? |
@@ -479,7 +479,7 @@ Fichier : `src/locales/accompagnement/de.json` (309 textes, dont 19 à relire).
 |  | `contenu.etapes.preparer-son-dossier.title` | Préparer son dossier avec rigueur | Bewerbungsunterlagen vorbereiten (Lebenslauf, Anschreiben, Abschlüsse, Anerkennung) |
 |  | `contenu.etapes.preparer-son-dossier.desc` | Rassembler des pièces 100 % authentiques, comprendre les procédures d’équivalence académique et rédiger un dossier lisible aux normes européennes. | Zu 100 % echte Unterlagen zusammenstellen, die Verfahren zur Anerkennung von Abschlüssen verstehen und übersichtliche Bewerbungsunterlagen nach europäischen Standards erstellen. |
 |  | `contenu.etapes.apprendre-la-langue.title` | Apprendre la langue du pays : la clé de l’autonomie | Die Landessprache lernen |
-|  | `contenu.etapes.apprendre-la-langue.desc` | Acquérir le niveau linguistique requis (notamment l’allemand /anglais de A1 à C1 avec l’Académie WAHHF) avant d’entamer les démarches. | Das erforderliche Sprachniveau erreichen (insbesondere Deutsch/Englisch von A1 bis C1 mit der WAHHF-Akademie), bevor die Formalitäten beginnen. |
+|  | `contenu.etapes.apprendre-la-langue.desc` | Acquérir le niveau linguistique requis (notamment l’allemand /anglais /italien de A1 à C1 avec l’Académie WAHHF) avant d’entamer les démarches. | Das erforderliche Sprachniveau erreichen (insbesondere Deutsch/Englisch/Italienisch von A1 bis C1 mit der WAHHF-Akademie), bevor die Formalitäten beginnen. |
 |  | `contenu.etapes.eviter-les-arnaques.title` | Éviter les arnaques et les fausses promesses | Die offiziellen Verfahren kennen und Betrug vermeiden |
 |  | `contenu.etapes.eviter-les-arnaques.desc` | Consulter exclusivement les portails gouvernementaux et consulaires officiels, et refuser tout intermédiaire payant. | Ausschließlich die offiziellen Portale der Regierungen und Konsulate nutzen und jede kostenpflichtige Vermittlung ablehnen. |
 |  | `contenu.etapes.s-installer.title` | Préparer son arrivée et son intégration | Ankunft und Integration vorbereiten |
@@ -732,7 +732,7 @@ Fichier : `src/locales/accueil/de.json` (131 textes, dont 9 à relire).
 |  | `qsn.points.integrite.titre` | Intégrité et vérité | Integrität und Wahrheit |
 |  | `qsn.points.integrite.texte` | Une information vérifiée, jamais de fausses promesses. | Geprüfte Informationen, niemals falsche Versprechen. |
 |  | `qsn.points.gratuite.titre` | Gratuité | Kostenlos |
-|  | `qsn.points.gratuite.texte` | L’académie d’allemand et d’anglais, de A1 à C1, sans frais. | Die Deutsch- und Englischakademie, von A1 bis C1, ohne Gebühren. |
+|  | `qsn.points.gratuite.texte` | L’académie d’allemand, d’anglais et d’italien, de A1 à C1, sans frais. | Die Deutsch-, Englisch- und Italienischakademie, von A1 bis C1, ohne Gebühren. |
 |  | `qsn.lien` | Découvrir la fondation | Die Stiftung kennenlernen |
 |  | `qsn.direction.titre` | La direction | Die Leitung |
 |  | `qsn.direction.lien` | Voir toute l’équipe | Das ganze Team ansehen |
@@ -777,7 +777,7 @@ Fichier : `src/locales/accueil/de.json` (131 textes, dont 9 à relire).
 |  | `contenu.chiffres.pays.sousTexte` | Fiches d’orientation vérifiées | Geprüfte Länderseiten |
 |  | `contenu.chiffres.domaines.libelle` | Domaines d’action | Arbeits­bereiche |
 |  | `contenu.chiffres.domaines.sousTexte` | De l’éducation à la mobilité | Von der Bildung bis zur Mobilität |
-|  | `contenu.chiffres.niveaux.libelle` | Niveaux d’allemand et d’anglais | Niveaus in Deutsch und Englisch |
+|  | `contenu.chiffres.niveaux.libelle` | Niveaux d’allemand, d’anglais et d’italien | Niveaus in Deutsch, Englisch und Italienisch |
 |  | `contenu.chiffres.niveaux.sousTexte` | De A1 à C1, gratuits | Von A1 bis C1, kostenlos |
 |  | `contenu.chiffres.villes.libelle` | Villes au Cameroun | Städte in Kamerun |
 |  | `contenu.chiffres.villes.sousTexte` | Nos équipes à Yaoundé et Douala, coordination en Allemagne | Unsere Teams in Yaoundé und Douala, Koordination in Deutschland |
@@ -791,7 +791,7 @@ Fichier : `src/locales/accueil/de.json` (131 textes, dont 9 à relire).
 |  | `contenu.projets.academie.surtitre` | Projet phare | Leuchtturmprojekt |
 |  | `contenu.projets.academie.titre` | L’Académie de langues | Die Sprachakademie |
 |  | `contenu.projets.academie.accroche` | l’Europe se prépare ici | der Weg nach Europa<br>beginnt hier |
-|  | `contenu.projets.academie.texte` | Un programme gratuit d’apprentissage de l’allemand et de l’anglais, du niveau A1 au niveau C1, avec des guides d’orientation vérifiés vers 10 pays européens. | Ein kostenloses Programm zum Lernen von Deutsch und Englisch, von Niveau A1 bis Niveau C1, mit geprüften Länderseiten zu 10 europäischen Ländern. |
+|  | `contenu.projets.academie.texte` | Un programme gratuit d’apprentissage de l’allemand, de l’anglais et de l’italien, du niveau A1 au niveau C1, avec des guides d’orientation vérifiés vers 10 pays européens. | Ein kostenloses Programm zum Lernen von Deutsch, Englisch und Italienisch, von Niveau A1 bis Niveau C1, mit geprüften Länderseiten zu 10 europäischen Ländern. |
 |  | `contenu.projets.academie.jalons[0].libelle` | Découverte | Einstieg |
 |  | `contenu.projets.academie.jalons[1].libelle` | Échanges courants | Alltags­gespräche |
 |  | `contenu.projets.academie.jalons[2].libelle` | Autonomie | Selbst­ständigkeit |
@@ -897,9 +897,9 @@ Fichier : `src/locales/agir/de.json` (79 textes, dont 6 à relire).
 |  | `header.title` | Trois manières concrètes de soutenir la jeunesse | Drei konkrete Wege, junge Menschen zu unterstützen |
 |  | `header.intro` | Donner, partager vos compétences ou engager votre structure&lt;nb> &lt;/nb>: voici comment agir avec WAHHF Foundation, au Cameroun comme en Europe. | Spenden, Ihr Wissen teilen oder Ihre Organisation einbringen: So werden Sie mit der WAHHF Foundation aktiv, in Kamerun wie in Europa. |
 |  | `ways.donate.title` | Faire un don | Spenden |
-|  | `ways.donate.text` | Financez les cours d’allemand /anglais gratuits et les actions sociales de terrain. | Finanzieren Sie die kostenlosen Deutsch- und Englischkurse und unsere soziale Arbeit vor Ort. |
+|  | `ways.donate.text` | Financez les cours d’allemand /anglais /italien gratuits et les actions sociales de terrain. | Finanzieren Sie die kostenlosen Deutsch-, Englisch- und Italienischkurse und unsere soziale Arbeit vor Ort. |
 |  | `ways.volunteer.title` | Devenir bénévole | Ehrenamtlich helfen |
-| \* | `ways.volunteer.text` | Enseignants d’allemand /anglais, médecins, mentors ou coordinateurs locaux au Cameroun et en Europe. | Lehrkräfte für Deutsch und Englisch, Ärztinnen und Ärzte, Mentorinnen und Mentoren oder lokale Koordinatorinnen und Koordinatoren in Kamerun und in Europa. |
+| \* | `ways.volunteer.text` | Enseignants d’allemand /anglais /italien, médecins, mentors ou coordinateurs locaux au Cameroun et en Europe. | Lehrkräfte für Deutsch, Englisch und Italienisch, Ärztinnen und Ärzte, Mentorinnen und Mentoren oder lokale Koordinatorinnen und Koordinatoren in Kamerun und in Europa. |
 |  | `ways.volunteer.action` | Remplir le formulaire bénévole | Formular für Ehrenamtliche ausfüllen |
 |  | `ways.partner.title` | Devenir partenaire | Partner werden |
 |  | `ways.partner.text` | Écoles, universités, ONG et entreprises souhaitant co-financer ou appuyer un programme. | Schulen, Hochschulen, NGOs und Unternehmen, die ein Programm mitfinanzieren oder unterstützen möchten. |
@@ -932,7 +932,7 @@ Fichier : `src/locales/agir/de.json` (79 textes, dont 6 à relire).
 |  | `form.supportLegend` | Ce que vous envisagez (facultatif) | Was Sie sich vorstellen können (optional) |
 |  | `form.details.benevole` | Vos compétences et vos disponibilités * | Ihre Fähigkeiten und Ihre Verfügbarkeit * |
 |  | `form.details.partenaire` | Votre projet de partenariat * | Ihr Partnerschaftsprojekt * |
-|  | `form.detailsPlaceholder.benevole` | Ex. enseignante d’allemand /anglais, disponible le samedi, en ligne ou à Douala. | z. B. Lehrerin für Deutsch/Englisch, samstags verfügbar, online oder in Douala. |
+|  | `form.detailsPlaceholder.benevole` | Ex. enseignante d’allemand /anglais /italien, disponible le samedi, en ligne ou à Douala. | z. B. Lehrerin für Deutsch/Englisch/Italienisch, samstags verfügbar, online oder in Douala. |
 |  | `form.detailsPlaceholder.partenaire` | Quel programme souhaitez-vous soutenir, et comment ? | Welches Programm möchten Sie unterstützen, und wie? |
 | \* | `form.consent` | J’accepte que mes données soient traitées par WAHHF Foundation pour étudier ma proposition d’engagement, conformément à la &lt;lien>politique de confidentialité&lt;sr> (nouvel onglet)&lt;/sr>&lt;/lien>. * | Ich bin damit einverstanden, dass die WAHHF Foundation meine Daten gemäß der &lt;lien>Datenschutzerklärung&lt;sr> (neuer Tab)&lt;/sr>&lt;/lien> verarbeitet, um meinen Vorschlag für ein Engagement zu prüfen. * |
 |  | `form.submit` | Préparer l’envoi de ma proposition | Meinen Vorschlag zum Senden vorbereiten |
@@ -1000,7 +1000,7 @@ Fichier : `src/locales/contact-page/de.json` (41 textes, dont 4 à relire).
 |  | `form.message` | Votre message * | Ihre Nachricht * |
 | \* | `form.consent` | J’accepte que mes coordonnées soient traitées par WAHHF Foundation pour répondre à mon message, conformément à la &lt;lien>politique de confidentialité&lt;sr> (nouvel onglet)&lt;/sr>&lt;/lien>. * | Ich bin damit einverstanden, dass die WAHHF Foundation meine Kontaktdaten gemäß der &lt;lien>Datenschutzerklärung&lt;sr> (neuer Tab)&lt;/sr>&lt;/lien> verarbeitet, um auf meine Nachricht zu antworten. * |
 |  | `form.submit` | Préparer l’envoi de mon message | Meine Nachricht zum Senden vorbereiten |
-|  | `motifs.candidat` | Je suis candidat (cours d’allemand /anglais, accompagnement) | Ich bewerbe mich (Deutsch- und Englischkurse, Begleitung) |
+|  | `motifs.candidat` | Je suis candidat (cours d’allemand /anglais /italien, accompagnement) | Ich bewerbe mich (Deutsch-, Englisch- und Italienischkurse, Begleitung) |
 |  | `motifs.benevole` | Je souhaite devenir bénévole | Ich möchte mich ehrenamtlich engagieren |
 |  | `motifs.partenaire` | Partenaire ou institution | Partner oder Institution |
 |  | `motifs.presse` | Presse et médias | Presse und Medien |
@@ -1026,10 +1026,10 @@ Fichier : `src/locales/don/de.json` (58 textes, dont 8 à relire).
 
 | | Clé | Français | Allemand |
 |---|---|---|---|
-|  | `seo.title` | Faire un don — Soutenir les cours d’allemand /anglais et nos actions au Cameroun | Spenden — Deutsch- und Englischkurse und unsere Arbeit in Kamerun unterstützen |
-|  | `seo.description` | Soutenez WAHHF Foundation : vos dons financent les cours d'allemand /anglais (A1 à C1), l'accompagnement des jeunes vers l'Europe et nos actions d'éducation, de santé et d'environnement au Cameroun. | Unterstützen Sie die WAHHF Foundation: Ihre Spenden finanzieren Deutsch- und Englischkurse (A1 bis C1), die Begleitung junger Menschen nach Europa und unsere Arbeit in Bildung, Gesundheit und Umwelt in Kamerun. |
-|  | `header.title` | Votre don finance des cours d’allemand /anglais et nos actions au Cameroun | Ihre Spende finanziert Deutsch- und Englischkurse und unsere Arbeit in Kamerun |
-|  | `header.intro` | Les cours d’allemand /anglais (A1 à C1) et l’accompagnement vers l’Europe sont gratuits pour les jeunes&lt;nb> &lt;/nb>: ils sont financés par nos partenaires et nos donateurs. Vos dons soutiennent aussi nos actions d’éducation, de santé et d’environnement. | Die Deutsch- und Englischkurse (A1 bis C1) und die Begleitung nach Europa sind für junge Menschen kostenlos: Unsere Partner sowie unsere Spenderinnen und Spender finanzieren sie. Ihre Spenden unterstützen auch unsere Arbeit in Bildung, Gesundheit und Umwelt. |
+|  | `seo.title` | Faire un don — Soutenir les cours d’allemand /anglais /italien et nos actions au Cameroun | Spenden — Deutsch-, Englisch- und Italienischkurse und unsere Arbeit in Kamerun unterstützen |
+|  | `seo.description` | Soutenez WAHHF Foundation : vos dons financent les cours d'allemand /anglais /italien (A1 à C1), l'accompagnement des jeunes vers l'Europe et nos actions d'éducation, de santé et d'environnement au Cameroun. | Unterstützen Sie die WAHHF Foundation: Ihre Spenden finanzieren Deutsch-, Englisch- und Italienischkurse (A1 bis C1), die Begleitung junger Menschen nach Europa und unsere Arbeit in Bildung, Gesundheit und Umwelt in Kamerun. |
+|  | `header.title` | Votre don finance des cours d’allemand /anglais /italien et nos actions au Cameroun | Ihre Spende finanziert Deutsch-, Englisch- und Italienischkurse und unsere Arbeit in Kamerun |
+|  | `header.intro` | Les cours d’allemand /anglais /italien (A1 à C1) et l’accompagnement vers l’Europe sont gratuits pour les jeunes&lt;nb> &lt;/nb>: ils sont financés par nos partenaires et nos donateurs. Vos dons soutiennent aussi nos actions d’éducation, de santé et d’environnement. | Die Deutsch-, Englisch- und Italienischkurse (A1 bis C1) und die Begleitung nach Europa sind für junge Menschen kostenlos: Unsere Partner sowie unsere Spenderinnen und Spender finanzieren sie. Ihre Spenden unterstützen auch unsere Arbeit in Bildung, Gesundheit und Umwelt. |
 |  | `status.ready` | Votre message est prêt : envoyez-le par WhatsApp ou par e-mail. | Ihre Nachricht ist bereit: Senden Sie sie per WhatsApp oder per E-Mail. |
 |  | `handoff.title` | Dernière étape : envoyez votre message de don | Letzter Schritt: Senden Sie Ihre Spendennachricht |
 |  | `handoff.edit` | Modifier mon don | Meine Spende ändern |
@@ -1069,7 +1069,7 @@ Fichier : `src/locales/don/de.json` (58 textes, dont 8 à relire).
 | \* | `draft.allocation` | Affectation souhaitée | Gewünschter Verwendungszweck |
 |  | `draft.name` | Nom ou organisation | Name oder Organisation |
 |  | `contenu.impactDomaines.mobilite-langues.for` | _(français dans le fichier de données)_ | Mobilität und Sprachen |
-| \* | `contenu.impactDomaines.mobilite-langues.what` | _(français dans le fichier de données)_ | Deutsch- und Englischkurse von Niveau A1 bis C1 und Orientierung für 10 europäische Zielländer |
+| \* | `contenu.impactDomaines.mobilite-langues.what` | _(français dans le fichier de données)_ | Deutsch-, Englisch- und Italienischkurse von Niveau A1 bis C1 und Orientierung für 10 europäische Zielländer |
 |  | `contenu.impactDomaines.education.for` | _(français dans le fichier de données)_ | Bildung |
 |  | `contenu.impactDomaines.education.what` | _(français dans le fichier de données)_ | Schulsets und Lehrbücher, Gemeinschaftsbibliotheken, Mentoring und Orientierung für Schülerinnen und Schüler |
 |  | `contenu.impactDomaines.sante.for` | _(français dans le fichier de données)_ | Gesundheit |
@@ -1080,7 +1080,7 @@ Fichier : `src/locales/don/de.json` (58 textes, dont 8 à relire).
 |  | `contenu.impactDomaines.environnement.what` | _(français dans le fichier de données)_ | Baumschulen und Aufforstung, Sensibilisierung für Mülltrennung, Schulungen in Agrarökologie |
 |  | `contenu.impactDomaines.droits-inclusion.for` | _(français dans le fichier de données)_ | Rechte und Teilhabe |
 | \* | `contenu.impactDomaines.droits-inclusion.what` | _(français dans le fichier de données)_ | Selbstständigkeit junger Frauen, Schulbildung junger Menschen mit Behinderung, Zuhören und soziale Beratung |
-|  | `contenu.exemplesImpact.EUR-25.text` | _(français dans le fichier de données)_ | Finanziert Lehrbücher und Übungsmaterial für Deutsch/Englisch A1 für eine junge lernende Person (Beispiel — TODO) |
+|  | `contenu.exemplesImpact.EUR-25.text` | _(français dans le fichier de données)_ | Finanziert Lehrbücher und Übungsmaterial für Deutsch/Englisch/Italienisch A1 für eine junge lernende Person (Beispiel — TODO) |
 |  | `contenu.exemplesImpact.EUR-50.text` | _(français dans le fichier de données)_ | Unterstützt einen Monat Sprachbegleitung und digitalen Zugang für eine Studentin oder einen Studenten (Beispiel — TODO) |
 |  | `contenu.exemplesImpact.EUR-100.text` | _(français dans le fichier de données)_ | Trägt zu einem Präventionstag für die Gesundheit von Müttern und Kindern in einer ländlichen Region bei (Beispiel — TODO) |
 | \* | `contenu.exemplesImpact.EUR-250.text` | _(français dans le fichier de données)_ | Finanziert eine vollständige sprachliche Begleitung und Unterstützung bei den Unterlagen für eine Gruppe (Beispiel — TODO) |
@@ -1115,7 +1115,7 @@ Fichier : `src/locales/equipe/de.json` (21 textes, dont 6 à relire).
 
 ## events
 
-Fichier : `src/locales/events/de.json` (278 textes, dont 19 à relire).
+Fichier : `src/locales/events/de.json` (288 textes, dont 19 à relire).
 
 | | Clé | Français | Allemand |
 |---|---|---|---|
@@ -1211,18 +1211,21 @@ Fichier : `src/locales/events/de.json` (278 textes, dont 19 à relire).
 |  | `faits.prix` | {{prix}}. | {{prix}}. |
 |  | `faits.prixInconnu` | Le prix est annoncé très bientôt. | Der Preis wird in Kürze bekannt gegeben. |
 | \* | `faits.deVille` |  de {{ville}} |  aus {{ville}} <br>_Note : « repartez de {{ville}} avec un plan » rendu par « nehmen Sie aus {{ville}} einen Plan mit nach Hause »_ |
+|  | `faits.moisBientot` | {{mois}} · dates exactes annoncées très bientôt | {{mois}} · genaue Termine folgen in Kürze |
+|  | `faits.moisOu` | En {{mois}} à {{ville}}, {{pays}} ; les dates exactes sont annoncées très bientôt. | Im {{mois}} in {{ville}}, {{pays}}; die genauen Termine werden in Kürze bekannt gegeben. |
+|  | `faits.moisSansVille` | En {{mois}}, au {{pays}} ; les dates exactes et la ville sont annoncées très bientôt. | Im {{mois}} in {{pays}}; die genauen Termine und die Stadt werden in Kürze bekannt gegeben. |
 |  | `contenu.road-to-europe.bandeauLabel` | Les 10 pays de Road to Europe | Die 10 Länder von Road to Europe |
-|  | `contenu.road-to-europe.pastille.texte` | Le rendez-vous qui lance votre projet européen | Der Termin, der Ihr Europa-Projekt ins Rollen bringt |
+|  | `contenu.road-to-europe.pastille.texte` | Après Yaoundé en avril 2026, cap sur Douala en mars 2027 | Nach Yaoundé im April 2026 geht es im März 2027 nach Douala |
 |  | `contenu.road-to-europe.titre` | Votre route vers<br>l’Europe<br>commence ici. | Ihr Weg nach<br>Europa<br>beginnt hier. |
 |  | `contenu.road-to-europe.motAccent` | l’Europe | Europa |
-|  | `contenu.road-to-europe.accroche` | Études, formation, emploi qualifié : en une journée, comprenez les voies légales vers 10 pays d’Europe, rencontrez ceux qui forment et accompagnent, et repartez avec un plan clair. | Studium, Ausbildung, Arbeit als Fachkraft: Verstehen Sie an einem Tag die legalen Wege in 10 Länder Europas, treffen Sie die Menschen, die ausbilden und begleiten, und gehen Sie mit einem klaren Plan nach Hause. |
+|  | `contenu.road-to-europe.accroche` | Wahhfjobs & Road to Europe Week : cinq jours à Douala, avec le groupe IROKO, pour préparer votre départ, votre installation ou votre expatriation. Chaque jour, un secteur, ses métiers et ses formations ; le quatrième, toutes les informations sur les visas et l’installation. | Wahhfjobs & Road to Europe Week: fünf Tage in Douala, gemeinsam mit der IROKO-Gruppe, um Ihre Ausreise, Ihr Ankommen oder Ihren Umzug ins Ausland vorzubereiten. Jeden Tag ein Bereich mit seinen Berufen und Ausbildungen; am vierten Tag alle Informationen zu Visa und zum Ankommen. |
 |  | `contenu.road-to-europe.pays` | Cameroun | Kamerun |
 |  | `contenu.road-to-europe.sections.hero.action` | Réserver ma place | Meinen Platz reservieren |
 |  | `contenu.road-to-europe.sections.hero.action2` | Voir le programme | Zum Programm |
-| \* | `contenu.road-to-europe.sections.hero.etiquette` | La conférence a lieu à | Hier findet die Konferenz statt <br>_Note : « L'événement a lieu à » rendu par « Hier findet … statt » (au-dessus du nom du lieu)_ |
+| \* | `contenu.road-to-europe.sections.hero.etiquette` | La semaine a lieu à | Hier findet die Woche statt <br>_Note : « L'événement a lieu à » rendu par « Hier findet … statt » (au-dessus du nom du lieu)_ |
 |  | `contenu.road-to-europe.sections.compte.titre` | Le compte à rebours a commencé | Der Countdown läuft |
 |  | `contenu.road-to-europe.sections.pourquoi.surtitre` | Pourquoi venir | Warum Sie kommen sollten |
-|  | `contenu.road-to-europe.sections.pourquoi.titre` | Une journée pour changer de trajectoire. | Ein Tag, um den Kurs zu ändern. |
+|  | `contenu.road-to-europe.sections.pourquoi.titre` | Une semaine pour changer de trajectoire. | Eine Woche, um den Kurs zu ändern. |
 |  | `contenu.road-to-europe.sections.pourquoi.intro` | Beaucoup de jeunes perdent du temps et de l’argent faute d’informations fiables. Road to Europe vous donne les bonnes cartes, au bon moment. | Viele junge Menschen verlieren Zeit und Geld, weil ihnen verlässliche Informationen fehlen. Road to Europe gibt Ihnen die richtigen Karten in die Hand, zum richtigen Zeitpunkt. |
 |  | `contenu.road-to-europe.sections.route.surtitre` | Votre route | Ihr Weg |
 |  | `contenu.road-to-europe.sections.route.titre` | Cinq étapes jusqu’en Europe. | Fünf Schritte bis nach Europa. |
@@ -1230,9 +1233,9 @@ Fichier : `src/locales/events/de.json` (278 textes, dont 19 à relire).
 |  | `contenu.road-to-europe.sections.voies.surtitre` | Les voies vers l’Europe | Die Wege nach Europa |
 |  | `contenu.road-to-europe.sections.voies.titre` | Quatre voies légales vers l’Europe. | Vier legale Wege nach Europa. |
 |  | `contenu.road-to-europe.sections.voies.intro` | Chaque voie a ses conditions, ses délais et ses chances, et elles changent d’un pays à l’autre. Découvrez celle qui vous ressemble. | Jeder Weg hat seine Voraussetzungen, Fristen und Chancen, und sie unterscheiden sich von Land zu Land. Finden Sie den Weg, der zu Ihnen passt. |
-|  | `contenu.road-to-europe.sections.programme.surtitre` | Le programme en un coup d’œil | Das Programm auf einen Blick |
-|  | `contenu.road-to-europe.sections.programme.titre` | Une journée, quatre temps forts. | Ein Tag, vier Höhepunkte. |
-|  | `contenu.road-to-europe.sections.programme.intro` | Comprendre, échanger, pratiquer, rencontrer : vous repartez avec des réponses claires et des contacts utiles. | Verstehen, austauschen, üben, begegnen: Sie gehen mit klaren Antworten und nützlichen Kontakten nach Hause. |
+|  | `contenu.road-to-europe.sections.programme.surtitre` | Le programme de la semaine | Das Programm der Woche |
+|  | `contenu.road-to-europe.sections.programme.titre` | Une semaine, cinq journées. | Eine Woche, fünf Tage. |
+|  | `contenu.road-to-europe.sections.programme.intro` | Chaque jour, un secteur : ses métiers, ses formations, et les démarches pour partir, s’installer ou s’expatrier. | Jeden Tag ein Bereich: seine Berufe, seine Ausbildungen und die Schritte, um auszureisen, sich niederzulassen oder ins Ausland zu gehen. |
 |  | `contenu.road-to-europe.sections.programme.action` | Programme complet | Vollständiges Programm |
 | \* | `contenu.road-to-europe.sections.programme.action2` | Les intervenants | Die Referenten <br>_Note : « intervenants » au masculin générique (Referenten), comme Ausbilder, Vermittler, Partner ; forme inclusive à décider_ |
 |  | `contenu.road-to-europe.sections.partenaires.surtitre` | Sponsors et partenaires | Sponsoren und Partner |
@@ -1286,14 +1289,21 @@ Fichier : `src/locales/events/de.json` (278 textes, dont 19 à relire).
 |  | `contenu.road-to-europe.activites[3].titre` | Être accompagné | Begleitet werden |
 |  | `contenu.road-to-europe.activites[3].texte` | La fondation vous aide à choisir le pays, préparer la langue et monter un dossier complet, sans intermédiaire inconnu. | Die Stiftung hilft Ihnen, das Land zu wählen, sich sprachlich vorzubereiten und vollständige Bewerbungsunterlagen zusammenzustellen, ohne unbekannte Vermittler. |
 |  | `contenu.road-to-europe.activites[3].etiquette` | Accompagnement WAHHF | Begleitung durch WAHHF |
-|  | `contenu.road-to-europe.tempsForts[0].titre` | Comprendre | Verstehen |
-|  | `contenu.road-to-europe.tempsForts[0].texte` | Les voies légales vers les 10 pays, leurs conditions et leurs délais, expliqués simplement. | Die legalen Wege in die 10 Länder, ihre Voraussetzungen und Fristen, einfach erklärt. |
-|  | `contenu.road-to-europe.tempsForts[1].titre` | Échanger | Austauschen |
-|  | `contenu.road-to-europe.tempsForts[1].texte` | Tables rondes avec des formateurs, des établissements et des jeunes déjà partis. | Gesprächsrunden mit Ausbildern, Bildungseinrichtungen und jungen Menschen, die schon gegangen sind. |
-|  | `contenu.road-to-europe.tempsForts[2].titre` | Pratiquer | Üben |
-|  | `contenu.road-to-europe.tempsForts[2].texte` | Ateliers : dossier, CV au format européen, visa, langue. | Workshops: Bewerbungsunterlagen, Lebenslauf im europäischen Format, Visum, Sprache. |
-|  | `contenu.road-to-europe.tempsForts[3].titre` | Rencontrer | Begegnen |
-|  | `contenu.road-to-europe.tempsForts[3].texte` | Écoles, établissements et partenaires à leurs stands. | Schulen, Bildungseinrichtungen und Partner an ihren Ständen. |
+|  | `contenu.road-to-europe.tempsForts[0].etiquette` | Jour 1 | Tag 1 |
+|  | `contenu.road-to-europe.tempsForts[0].titre` | Santé & action sociale | Gesundheit & Soziales |
+|  | `contenu.road-to-europe.tempsForts[0].texte` | Les métiers du soin et de l’accompagnement social, et les voies pour s’y former ou y travailler. | Pflege- und Sozialberufe und die Wege, sich darin auszubilden oder darin zu arbeiten. |
+|  | `contenu.road-to-europe.tempsForts[1].etiquette` | Jour 2 | Tag 2 |
+|  | `contenu.road-to-europe.tempsForts[1].titre` | Industrie, BTP & infrastructures | Industrie, Bau & Infrastruktur |
+|  | `contenu.road-to-europe.tempsForts[1].texte` | Les métiers de l’industrie, du bâtiment et des travaux publics, et les voies pour s’y former ou y travailler. | Berufe in Industrie, Hoch- und Tiefbau und die Wege, sich darin auszubilden oder darin zu arbeiten. |
+|  | `contenu.road-to-europe.tempsForts[2].etiquette` | Jour 3 | Tag 3 |
+|  | `contenu.road-to-europe.tempsForts[2].titre` | Informatique & économie numérique | Informatik & digitale Wirtschaft |
+|  | `contenu.road-to-europe.tempsForts[2].texte` | Les métiers de l’informatique et du numérique, et les voies pour s’y former ou y travailler. | Berufe in Informatik und Digitalwirtschaft und die Wege, sich darin auszubilden oder darin zu arbeiten. |
+|  | `contenu.road-to-europe.tempsForts[3].etiquette` | Jour 4 | Tag 4 |
+|  | `contenu.road-to-europe.tempsForts[3].titre` | Finance, banque, formation & compétences | Finanzen, Banken, Ausbildung & Kompetenzen |
+|  | `contenu.road-to-europe.tempsForts[3].texte` | Les métiers de la finance et de la banque, la formation, et toutes les informations sur les visas et l’installation. | Berufe in Finanzwesen und Banken, Ausbildung sowie alle Informationen zu Visa und zum Ankommen. |
+|  | `contenu.road-to-europe.tempsForts[4].etiquette` | Jour 5 | Tag 5 |
+|  | `contenu.road-to-europe.tempsForts[4].titre` | Skills day | Skills Day |
+|  | `contenu.road-to-europe.tempsForts[4].texte` | La journée des compétences : faire le point sur les siennes et savoir comment les faire reconnaître. | Der Tag der Kompetenzen: die eigenen Fähigkeiten einschätzen und erfahren, wie man sie anerkennen lässt. |
 |  | `contenu.road-to-europe.soutien[0].surtitre` | Pour les entreprises | Für Unternehmen |
 |  | `contenu.road-to-europe.soutien[0].titre` | Devenir sponsor | Sponsor werden |
 |  | `contenu.road-to-europe.soutien[0].texte` | Soutenez l’événement et gagnez en visibilité auprès de jeunes motivés. | Unterstützen Sie die Veranstaltung und gewinnen Sie Sichtbarkeit bei motivierten jungen Menschen. |
@@ -1308,8 +1318,8 @@ Fichier : `src/locales/events/de.json` (278 textes, dont 19 à relire).
 |  | `contenu.road-to-europe.parents.jamais[0]` | Un visa « garanti » | Ein „garantiertes“ Visum |
 |  | `contenu.road-to-europe.parents.jamais[1]` | Une admission ou un emploi sans démarches ni niveau de langue | Eine Zulassung oder eine Stelle ohne Formalitäten und ohne Sprachniveau |
 |  | `contenu.road-to-europe.parents.jamais[2]` | Des frais cachés, ou payés à un intermédiaire inconnu | Versteckte Kosten oder Zahlungen an einen unbekannten Vermittler |
-|  | `contenu.road-to-europe.faq[0].question` | Quand et où a lieu Road to Europe ? | Wann und wo findet Road to Europe statt? |
-|  | `contenu.road-to-europe.faq[0].reponse` | {{quandOu}} Le lieu exact et l’heure d’ouverture sont annoncés dès qu’ils sont confirmés. | {{quandOu}} Der genaue Ort und die Einlasszeit werden bekannt gegeben, sobald sie feststehen. |
+|  | `contenu.road-to-europe.faq[0].question` | Quand et où a lieu la Road to Europe Week ? | Wann und wo findet die Road to Europe Week statt? |
+|  | `contenu.road-to-europe.faq[0].reponse` | {{quandOu}} La salle et le programme heure par heure sont annoncés dès qu’ils sont confirmés. | {{quandOu}} Der Veranstaltungsort und das Programm im Detail werden bekannt gegeben, sobald sie feststehen. |
 |  | `contenu.road-to-europe.faq[1].question` | À qui s’adresse l’événement ? | Für wen ist die Veranstaltung gedacht? |
 |  | `contenu.road-to-europe.faq[1].reponse` | Aux jeunes qui préparent un projet d’études, de formation ou de travail en Europe, et à leurs parents. Aucun niveau de langue n’est exigé pour venir. | Für junge Menschen, die ein Studium, eine Ausbildung oder eine Arbeit in Europa planen, und für ihre Eltern. Für die Teilnahme ist kein bestimmtes Sprachniveau erforderlich. |
 |  | `contenu.road-to-europe.faq[2].question` | Combien coûte l’entrée et comment s’inscrire ? | Was kostet der Eintritt und wie melde ich mich an? |
@@ -1383,7 +1393,7 @@ Fichier : `src/locales/events/de.json` (278 textes, dont 19 à relire).
 |  | `contenu.journee-2026-04-25.parents.jamais[1]` | Une promesse d’emploi (TODO : à faire valider) | Ein Jobversprechen (TODO: zu bestätigen) |
 |  | `contenu.journee-2026-04-25.parents.jamais[2]` | Des frais cachés ou payés à un intermédiaire (TODO : à faire valider) | Versteckte Kosten oder Zahlungen an einen Vermittler (TODO: zu bestätigen) |
 |  | `contenu.journee-2026-04-25.faq[0].question` | Où et quand la journée a-t-elle eu lieu ? (TODO) | Wo und wann fand der Aktionstag statt? (TODO) |
-|  | `contenu.journee-2026-04-25.faq[0].reponse` | À l’Albatros Hotel, le 25 avril 2026, de 8 h à 21 h (banderole). Ville à confirmer (TODO). | Im Albatros Hotel, am 25. April 2026, von 8:00 bis 21:00 Uhr (Banner). Stadt noch zu bestätigen (TODO). |
+|  | `contenu.journee-2026-04-25.faq[0].reponse` | À l’Albatros Hotel de Yaoundé, le 25 avril 2026, de 8 h à 21 h (banderole). | Im Albatros Hotel in Yaoundé, am 25. April 2026, von 8:00 bis 21:00 Uhr (Banner). |
 |  | `contenu.journee-2026-04-25.faq[1].question` | À qui s’adressait la journée ? (TODO) | Für wen war der Aktionstag gedacht? (TODO) |
 |  | `contenu.journee-2026-04-25.faq[1].reponse` | Réponse à fournir par la fondation (TODO). | Antwort der Stiftung steht noch aus (TODO). |
 |  | `contenu.journee-2026-04-25.faq[2].question` | L’entrée était-elle payante ? (TODO) | Musste man Eintritt zahlen? (TODO) |
@@ -1411,7 +1421,7 @@ Fichier : `src/locales/galerie/de.json` (9 textes, dont 4 à relire).
 |  | `filterLabel` | Filtrer par album | Nach Album filtern |
 |  | `allAlbums` | Tous les albums | Alle Alben |
 | \* | `end.title` | Participer à la suite | Die Fortsetzung mitgestalten |
-| \* | `end.subtitle` | Un don soutient les actions de la fondation. Les jeunes peuvent candidater aux cours d’allemand /anglais et à l’orientation vers l’Europe. | Eine Spende unterstützt die Arbeit der Stiftung. Junge Menschen können sich für die Deutsch- und Englischkurse und für die Orientierungsberatung in Richtung Europa bewerben. |
+| \* | `end.subtitle` | Un don soutient les actions de la fondation. Les jeunes peuvent candidater aux cours d’allemand /anglais /italien et à l’orientation vers l’Europe. | Eine Spende unterstützt die Arbeit der Stiftung. Junge Menschen können sich für die Deutsch-, Englisch- und Italienischkurse und für die Orientierungsberatung in Richtung Europa bewerben. |
 |  | `end.apply` | Candidater au programme | Für das Programm bewerben |
 
 ## mobilite
@@ -1426,7 +1436,7 @@ Fichier : `src/locales/mobilite/de.json` (315 textes, dont 17 à relire).
 |  | `commun.niveau` | Niveau {{level}} | Niveau {{level}} |
 |  | `commun.candidater` | Candidater | Bewerben |
 |  | `commun.candidaterNiveau` | Candidater au niveau {{level}} | Für Niveau {{level}} bewerben |
-|  | `commun.filAria` | Les cinq niveaux d’allemand /anglais, de A1 à C1, puis l’Europe | Die fünf Niveaus Deutsch/Englisch, von A1 bis C1, dann Europa |
+|  | `commun.filAria` | Les cinq niveaux d’allemand /anglais /italien, de A1 à C1, puis l’Europe | Die fünf Niveaus Deutsch/Englisch/Italienisch, von A1 bis C1, dann Europa |
 |  | `commun.niveauAffiche` | niveau affiché | angezeigtes Niveau |
 |  | `commun.nomNiveau` | Allemand {{level}} : {{short}} | Deutsch {{level}}: {{short}} |
 | \* | `commun.cohorte` | Rejoindre la prochaine cohorte | In die nächste Kursgruppe einsteigen |
@@ -1440,15 +1450,15 @@ Fichier : `src/locales/mobilite/de.json` (315 textes, dont 17 à relire).
 |  | `formatsChoix.douala` | Présentiel à Douala | Vor Ort in Douala |
 |  | `formatsChoix.yaounde` | Présentiel à Yaoundé | Vor Ort in Yaoundé |
 |  | `hub.seoTitle` | Mobilité & Langues — Apprendre, se préparer, s'orienter gratuitement | Mobilität & Sprachen — kostenlos lernen, sich vorbereiten und orientieren |
-|  | `hub.seoDescription` | WAHHF Foundation : Académie de langue allemande /anglaise gratuite (A1 à C1) et accompagnement transparent vers 10 pays européens, financé par nos partenaires et nos donateurs. | WAHHF Foundation: kostenlose Sprachakademie für Deutsch/Englisch (A1 bis C1) und transparente Begleitung in 10 europäische Länder, finanziert von unseren Partnern und Spendern. |
-|  | `hub.title` | Apprendre l’allemand /anglais, se préparer, s’orienter vers l’Europe | Deutsch/Englisch lernen, sich vorbereiten, den Weg nach Europa finden |
-|  | `hub.intro` | Des cours d’allemand /anglais du niveau A1 au niveau C1 et une information fiable sur les études, la formation et le travail dans 10 pays européens. | Deutsch- und Englischkurse von Niveau A1 bis Niveau C1 und verlässliche Informationen zu Studium, Ausbildung und Arbeit in 10 europäischen Ländern. |
+|  | `hub.seoDescription` | WAHHF Foundation : Académie de langue allemande /anglaise gratuite (A1 à C1) et accompagnement transparent vers 10 pays européens, financé par nos partenaires et nos donateurs. | WAHHF Foundation: kostenlose Sprachakademie für Deutsch/Englisch/Italienisch (A1 bis C1) und transparente Begleitung in 10 europäische Länder, finanziert von unseren Partnern und Spendern. |
+|  | `hub.title` | Apprendre l’allemand /anglais /italien, se préparer, s’orienter vers l’Europe | Deutsch/Englisch/Italienisch lernen, sich vorbereiten, den Weg nach Europa finden |
+|  | `hub.intro` | Des cours d’allemand /anglais /italien du niveau A1 au niveau C1 et une information fiable sur les études, la formation et le travail dans 10 pays européens. | Deutsch-, Englisch- und Italienischkurse von Niveau A1 bis Niveau C1 und verlässliche Informationen zu Studium, Ausbildung und Arbeit in 10 europäischen Ländern. |
 |  | `hub.ctaCandidater` | Candidater au programme | Für das Programm bewerben |
-|  | `hub.ctaAcademie` | Découvrir l’Académie d’allemand /anglais | Die Sprachakademie entdecken |
+|  | `hub.ctaAcademie` | Découvrir l’Académie d’allemand /anglais /italien | Die Sprachakademie entdecken |
 |  | `hub.portesTitle` | Choisissez votre porte d’entrée | Wählen Sie Ihren Einstieg |
-| \* | `hub.portesSubtitle` | Vous pouvez candidater uniquement aux cours de langue allemande /anglaise, uniquement à l’accompagnement documentaire, ou aux deux. | Sie können sich nur für die Deutsch- und Englischkurse bewerben, nur für die Begleitung bei den Unterlagen oder für beides. |
-|  | `hub.academieTitle` | Académie de langues (allemand /anglais A1 à C1) | Sprachakademie (Deutsch/Englisch A1 bis C1) |
-|  | `hub.academieText` | Apprendre l’allemand /anglais étape par étape : compréhension, expression orale et écrite, test de niveau en ligne et préparation méthodique aux certifications. | Deutsch/Englisch Schritt für Schritt lernen: Verstehen, Sprechen und Schreiben, ein Online-Einstufungstest und eine methodische Vorbereitung auf die Zertifikate. |
+| \* | `hub.portesSubtitle` | Vous pouvez candidater uniquement aux cours de langue allemande /anglaise, uniquement à l’accompagnement documentaire, ou aux deux. | Sie können sich nur für die Deutsch-, Englisch- und Italienischkurse bewerben, nur für die Begleitung bei den Unterlagen oder für beides. |
+|  | `hub.academieTitle` | Académie de langues (allemand /anglais /italien A1 à C1) | Sprachakademie (Deutsch/Englisch/Italienisch A1 bis C1) |
+|  | `hub.academieText` | Apprendre l’allemand /anglais /italien étape par étape : compréhension, expression orale et écrite, test de niveau en ligne et préparation méthodique aux certifications. | Deutsch/Englisch/Italienisch Schritt für Schritt lernen: Verstehen, Sprechen und Schreiben, ein Online-Einstufungstest und eine methodische Vorbereitung auf die Zertifikate. |
 |  | `hub.academieBouton` | Accéder à l’Académie de langues | Zur Sprachakademie |
 |  | `hub.academieTest` | Passer le test de niveau (20 questions) | Einstufungstest machen (20 Fragen) |
 |  | `hub.europeTitle` | Accompagnement vers l’Europe | Begleitung nach Europa |
@@ -1466,19 +1476,19 @@ Fichier : `src/locales/mobilite/de.json` (315 textes, dont 17 à relire).
 |  | `hub.raisons.exigence.desc` | Accompagnement progressif du niveau débutant A1 jusqu’à l’autonomie universitaire C1. | Schrittweise Begleitung vom Anfängerniveau A1 bis zur Studierfähigkeit auf Niveau C1. |
 |  | `hub.temoignagesTitle` | Ce que disent nos apprenants | Das sagen unsere Lernenden |
 |  | `hub.faqTitle` | Questions fréquentes | Häufige Fragen |
-|  | `hub.faq.gratuit.q` | Les cours d’allemand /anglais et l’accompagnement sont-ils vraiment 100 % gratuits ? | Sind die Deutsch- und Englischkurse und die Begleitung wirklich zu 100 % kostenlos? |
-|  | `hub.faq.gratuit.a` | Oui, pour tous les bénéficiaires : les cours d’allemand /anglais, du niveau A1 au niveau C1, comme les séances d’orientation vers l’Europe. Le programme est financé par nos partenaires et nos donateurs. | Ja, für alle Teilnehmenden: die Deutsch- und Englischkurse von Niveau A1 bis Niveau C1 ebenso wie die Orientierungstermine zu Europa. Das Programm wird von unseren Partnern und Spendern finanziert. |
+|  | `hub.faq.gratuit.q` | Les cours d’allemand /anglais /italien et l’accompagnement sont-ils vraiment 100 % gratuits ? | Sind die Deutsch-, Englisch- und Italienischkurse und die Begleitung wirklich zu 100 % kostenlos? |
+|  | `hub.faq.gratuit.a` | Oui, pour tous les bénéficiaires : les cours d’allemand /anglais /italien, du niveau A1 au niveau C1, comme les séances d’orientation vers l’Europe. Le programme est financé par nos partenaires et nos donateurs. | Ja, für alle Teilnehmenden: die Deutsch-, Englisch- und Italienischkurse von Niveau A1 bis Niveau C1 ebenso wie die Orientierungstermine zu Europa. Das Programm wird von unseren Partnern und Spendern finanziert. |
 |  | `hub.faq.visas.q` | WAHHF Foundation délivre-t-elle des visas ou des contrats de travail ? | Stellt die WAHHF Foundation Visa oder Arbeitsverträge aus? |
 |  | `hub.faq.visas.a` | Non, jamais. WAHHF Foundation est une fondation à but non lucratif. Nous ne vendons ni visa, ni admission universitaire, ni contrat de travail, et nous ne garantissons aucun résultat. Les décisions appartiennent exclusivement aux ambassades, consulats et établissements officiels. | Nein, niemals. Die WAHHF Foundation ist eine gemeinnützige Stiftung. Wir verkaufen weder Visa noch Studienplätze noch Arbeitsverträge, und wir garantieren kein Ergebnis. Die Entscheidungen liegen allein bei Botschaften, Konsulaten und offiziellen Einrichtungen. |
 |  | `hub.faq.identite.q` | Faut-il envoyer son passeport ou sa carte d’identité pour candidater ? | Muss ich für die Bewerbung meinen Reisepass oder Personalausweis schicken? |
 | \* | `hub.faq.identite.a` | Non. Lors de votre candidature en ligne sur ce site, aucun document d’identité (ni passeport, ni CNI) et aucune somme d’argent ne vous sont demandés. | Nein. Für Ihre Online-Bewerbung auf dieser Website verlangen wir kein Ausweisdokument (keinen Reisepass, keinen Personalausweis) und kein Geld. |
-|  | `hub.faq.niveau.q` | Comment savoir par quel niveau d’allemand /anglais commencer ? | Wie finde ich heraus, mit welchem Niveau ich in Deutsch/Englisch beginne? |
+|  | `hub.faq.niveau.q` | Comment savoir par quel niveau d’allemand /anglais /italien commencer ? | Wie finde ich heraus, mit welchem Niveau ich in Deutsch/Englisch/Italienisch beginne? |
 |  | `hub.faq.niveau.a` | Si vous débutez totalement, choisissez le niveau A1. Si vous avez déjà des bases, passez notre test d’orientation de 20 questions sur la page Académie de langues. | Wenn Sie ganz ohne Vorkenntnisse starten, wählen Sie Niveau A1. Wenn Sie schon Grundkenntnisse haben, machen Sie unseren Einstufungstest mit 20 Fragen auf der Seite der Sprachakademie. |
-|  | `hub.finSubtitle` | Un seul formulaire pour les cours d’allemand /anglais et l’orientation vers l’Europe. Il se remplit en 5 minutes environ ; aucun document d’identité ni paiement ne vous est demandé. | Ein einziges Formular für die Deutsch- und Englischkurse und die Orientierung nach Europa. Es dauert etwa 5 Minuten. Wir verlangen weder ein Ausweisdokument noch eine Zahlung. |
-|  | `academie.seoTitle` | Académie de langues — Allemand /anglais A1 à C1 gratuit | Sprachakademie — Deutsch/Englisch A1 bis C1 kostenlos |
-|  | `academie.seoDescription` | Accompagnement gratuit des cours de langue allemande /anglaise du niveau A1 au niveau C1 par WAHHF Foundation : test de niveau de 20 questions, programme par niveau et sessions. | Kostenlose Begleitung der Deutsch- und Englischkurse von Niveau A1 bis Niveau C1 durch die WAHHF Foundation: Einstufungstest mit 20 Fragen, Programm für jedes Niveau und Kurstermine. |
-|  | `academie.title` | Académie de langues : l’allemand /anglais, du niveau A1 au niveau C1 avec WAHHF Institute | Sprachakademie: Deutsch/Englisch von Niveau A1 bis Niveau C1 mit dem WAHHF Institute |
-|  | `academie.intro` | Des cours d’allemand /anglais du niveau débutant jusqu’à la maîtrise académique, en ligne ou en présentiel à Douala et à Yaoundé. Commencez par le test : il vous dit par quel niveau commencer. | Deutsch- und Englischkurse vom Anfängerniveau bis zur akademischen Sprachbeherrschung, online oder vor Ort in Douala und Yaoundé. Beginnen Sie mit dem Test: Er zeigt Ihnen, mit welchem Niveau Sie starten. |
+|  | `hub.finSubtitle` | Un seul formulaire pour les cours d’allemand /anglais /italien et l’orientation vers l’Europe. Il se remplit en 5 minutes environ ; aucun document d’identité ni paiement ne vous est demandé. | Ein einziges Formular für die Deutsch-, Englisch- und Italienischkurse und die Orientierung nach Europa. Es dauert etwa 5 Minuten. Wir verlangen weder ein Ausweisdokument noch eine Zahlung. |
+|  | `academie.seoTitle` | Académie de langues — Allemand /anglais /italien A1 à C1 gratuit | Sprachakademie — Deutsch/Englisch/Italienisch A1 bis C1 kostenlos |
+|  | `academie.seoDescription` | Accompagnement gratuit des cours de langue allemande /anglaise du niveau A1 au niveau C1 par WAHHF Foundation : test de niveau de 20 questions, programme par niveau et sessions. | Kostenlose Begleitung der Deutsch-, Englisch- und Italienischkurse von Niveau A1 bis Niveau C1 durch die WAHHF Foundation: Einstufungstest mit 20 Fragen, Programm für jedes Niveau und Kurstermine. |
+|  | `academie.title` | Académie de langues : l’allemand /anglais, du niveau A1 au niveau C1 avec WAHHF Institute | Sprachakademie: Deutsch/Englisch/Italienisch von Niveau A1 bis Niveau C1 mit dem WAHHF Institute |
+|  | `academie.intro` | Des cours d’allemand /anglais /italien du niveau débutant jusqu’à la maîtrise académique, en ligne ou en présentiel à Douala et à Yaoundé. Commencez par le test : il vous dit par quel niveau commencer. | Deutsch-, Englisch- und Italienischkurse vom Anfängerniveau bis zur akademischen Sprachbeherrschung, online oder vor Ort in Douala und Yaoundé. Beginnen Sie mit dem Test: Er zeigt Ihnen, mit welchem Niveau Sie starten. |
 |  | `academie.ctaTest` | Trouver mon niveau (5 minutes) | Mein Niveau finden (5 Minuten) |
 |  | `academie.ctaCandidater` | Candidater (choisir mon niveau) | Bewerben (Niveau selbst wählen) |
 |  | `academie.niveauxTitle` | Les 5 niveaux, de A1 à C1 | Die 5 Niveaus, von A1 bis C1 |
@@ -1528,7 +1538,7 @@ Fichier : `src/locales/mobilite/de.json` (315 textes, dont 17 à relire).
 |  | `test.voirResultat` | Voir mon niveau conseillé | Mein empfohlenes Niveau ansehen |
 |  | `test.suivante` | Question suivante | Nächste Frage |
 |  | `sessions.moisAConfirmer` | {{month}} (date à confirmer) | {{month}} (Datum noch nicht bestätigt) |
-|  | `sessions.whatsapp` | Bonjour WAHHF Foundation, je souhaite être prévenu(e) de la prochaine session de cours d’allemand /anglais. | Guten Tag, liebes Team der WAHHF Foundation, ich möchte über den nächsten Termin der Deutsch- und Englischkurse informiert werden. |
+|  | `sessions.whatsapp` | Bonjour WAHHF Foundation, je souhaite être prévenu(e) de la prochaine session de cours d’allemand /anglais /italien. | Guten Tag, liebes Team der WAHHF Foundation, ich möchte über den nächsten Termin der Deutsch-, Englisch- und Italienischkurse informiert werden. |
 |  | `sessions.titleNiveau` | Prochaines sessions de niveau {{level}} | Nächste Kurse auf Niveau {{level}} |
 | \* | `sessions.titleTout` | Calendrier des prochaines sessions | Kalender der nächsten Kurse |
 |  | `sessions.subtitle` | Toutes les sessions sont gratuites. En ligne ou en présentiel à Douala et à Yaoundé ; celles déjà commencées n’apparaissent plus. | Alle Kurse sind kostenlos. Online oder vor Ort in Douala und Yaoundé; bereits begonnene Kurse werden nicht mehr angezeigt. |
@@ -1572,12 +1582,12 @@ Fichier : `src/locales/mobilite/de.json` (315 textes, dont 17 à relire).
 |  | `apres.qui.lieu.text` | Les cours en ligne sont accessibles partout ; des cohortes en présentiel sont prévues à Douala et à Yaoundé. | Die Online-Kurse sind überall zugänglich. Kursgruppen vor Ort sind in Douala und Yaoundé geplant. |
 |  | `apres.qui.pieces.title` | Sans pièce d’identité ni paiement | Ohne Ausweis und ohne Zahlung |
 |  | `apres.qui.pieces.text` | Aucun document d’identité ni aucun paiement ne vous sont demandés pour candidater. | Für die Bewerbung verlangen wir weder ein Ausweisdokument noch eine Zahlung. |
-|  | `candidature.seoTitle` | Candidater gratuitement — Cours d'allemand /anglais & Accompagnement Europe | Kostenlos bewerben — Deutsch- und Englischkurse & Begleitung nach Europa |
-|  | `candidature.seoDescription` | Formulaire unique et 100 % gratuit de demande d'accompagnement et d'inscription aux cours d'allemand /anglais WAHHF Foundation. Aucun document d'identité ni paiement demandé. | Ein einziges, zu 100 % kostenloses Formular für die Anfrage nach Begleitung und die Anmeldung zu den Deutsch- und Englischkursen der WAHHF Foundation. Kein Ausweisdokument und keine Zahlung nötig. |
+|  | `candidature.seoTitle` | Candidater gratuitement — Cours d'allemand /anglais /italien & Accompagnement Europe | Kostenlos bewerben — Deutsch-, Englisch- und Italienischkurse & Begleitung nach Europa |
+|  | `candidature.seoDescription` | Formulaire unique et 100 % gratuit de demande d'accompagnement et d'inscription aux cours d'allemand /anglais /italien WAHHF Foundation. Aucun document d'identité ni paiement demandé. | Ein einziges, zu 100 % kostenloses Formular für die Anfrage nach Begleitung und die Anmeldung zu den Deutsch-, Englisch- und Italienischkursen der WAHHF Foundation. Kein Ausweisdokument und keine Zahlung nötig. |
 |  | `candidature.title` | Candidater à un parcours d’accompagnement | Für eine Begleitung bewerben |
-|  | `candidature.intro` | Un seul formulaire pour rejoindre l’Académie d’allemand /anglais (A1 à C1), être orienté vers l’Europe, ou les deux. Il se remplit en 5 minutes environ. | Ein einziges Formular, um an der Sprachakademie für Deutsch/Englisch (A1 bis C1) teilzunehmen, Orientierung für Europa zu erhalten oder beides. Es dauert etwa 5 Minuten. |
+|  | `candidature.intro` | Un seul formulaire pour rejoindre l’Académie d’allemand /anglais /italien (A1 à C1), être orienté vers l’Europe, ou les deux. Il se remplit en 5 minutes environ. | Ein einziges Formular, um an der Sprachakademie für Deutsch/Englisch/Italienisch (A1 bis C1) teilzunehmen, Orientierung für Europa zu erhalten oder beides. Es dauert etwa 5 Minuten. |
 |  | `candidature.avant` | Avant de commencer | Bevor Sie beginnen |
-|  | `candidature.souhaits.cours_allemand` | Cours d’allemand /anglais (A1 à C1) | Deutsch- und Englischkurse (A1 bis C1) |
+|  | `candidature.souhaits.cours_allemand` | Cours d’allemand /anglais /italien (A1 à C1) | Deutsch-, Englisch- und Italienischkurse (A1 bis C1) |
 |  | `candidature.souhaits.accompagnement_europe` | Accompagnement vers l’Europe | Begleitung nach Europa |
 |  | `candidature.souhaits.les_deux` | Les deux : cours et orientation | Beides: Kurse und Orientierung |
 |  | `candidature.etapes.1` | Vos coordonnées de contact | Ihre Kontaktdaten |
@@ -1600,7 +1610,7 @@ Fichier : `src/locales/mobilite/de.json` (315 textes, dont 17 à relire).
 |  | `candidature.message.souhait` | Souhait | Wunsch |
 |  | `candidature.message.session` | Session choisie | Gewählter Kurs |
 |  | `candidature.message.paysInteret` | Pays d’intérêt | Zielland |
-|  | `candidature.message.niveau` | Niveau d’allemand /anglais | Niveau Deutsch/Englisch |
+|  | `candidature.message.niveau` | Niveau d’allemand /anglais /italien | Niveau Deutsch/Englisch/Italienisch |
 |  | `candidature.message.format` | Format souhaité | Gewünschtes Format |
 |  | `candidature.message.message` | Message | Nachricht |
 | \* | `candidature.message.accord` | J’accepte que mes coordonnées soient traitées par WAHHF Foundation dans le seul but de répondre à ma demande d’accompagnement. | Ich bin damit einverstanden, dass die WAHHF Foundation meine Kontaktdaten ausschließlich zur Beantwortung meiner Anfrage nach Begleitung verarbeitet. |
@@ -1634,7 +1644,7 @@ Fichier : `src/locales/mobilite/de.json` (315 textes, dont 17 à relire).
 |  | `candidature.souhaitLegend` | Que souhaitez-vous ? * | Was wünschen Sie sich? * |
 |  | `candidature.paysInteretLabel` | Pays d’intérêt principal parmi les 10 pays accompagnés | Wichtigstes Zielland unter den 10 begleiteten Ländern |
 |  | `candidature.horsUE` | (hors Union européenne) | (außerhalb der Europäischen Union) |
-|  | `candidature.niveauLabel` | Niveau d’allemand /anglais actuel / visé | Aktuelles / angestrebtes Niveau Deutsch/Englisch |
+|  | `candidature.niveauLabel` | Niveau d’allemand /anglais /italien actuel / visé | Aktuelles / angestrebtes Niveau Deutsch/Englisch/Italienisch |
 |  | `candidature.niveaux.A1` | A1 — Débutant complet | A1 — Absolute Anfänger |
 |  | `candidature.niveaux.A2` | A2 — Bases élémentaires | A2 — Elementare Grundkenntnisse |
 |  | `candidature.niveaux.B1` | B1 — Niveau intermédiaire | B1 — Mittelstufe |
@@ -1782,7 +1792,7 @@ Fichier : `src/locales/partenaires/de.json` (11 textes, dont 2 à relire).
 |  | `intro` | WAHHF Foundation est soutenue par le groupe IROKO, dont elle est la branche sociale, et par ses donateurs. Aucun autre partenaire n’est nommé sans son accord écrit. | Die WAHHF Foundation wird von der IROKO-Gruppe, deren sozialer Zweig sie ist, und von ihren Spenderinnen und Spendern unterstützt. Weitere Partner nennen wir nur mit ihrer schriftlichen Zustimmung. |
 | \* | `iroko.title` | Le groupe IROKO, partenaire fondateur | Die IROKO-Gruppe, Gründungspartner |
 | \* | `iroko.p1` | IROKO est un groupe camerouno-allemand organisé autour d’une holding et de neuf pôles d’activité, en trois familles : Business (communication et événementiel, formation, ingénierie), Digital (applications, logiciels de gestion, hébergement) et Services et support (audiovisuel, cybersécurité, investissement). Son pôle de communication et d’événementiel, IROKO Event, est en activité ; les autres sont annoncés. | IROKO ist eine kamerunisch-deutsche Unternehmensgruppe aus einer Holding und neun Geschäftsbereichen in drei Familien: Business (Kommunikation und Veranstaltungen, Weiterbildung, Ingenieurwesen), Digital (Anwendungen, Verwaltungssoftware, Hosting) sowie Services und Support (Audiovisuelles, Cybersicherheit, Investitionen). Ihr Geschäftsbereich für Kommunikation und Veranstaltungen, IROKO Event, ist bereits tätig; die übrigen sind angekündigt. |
-|  | `iroko.p2` | WAHHF Foundation est sa branche sociale. Le groupe finance l’Académie de langues (allemand /anglais A1 à C1) et les supports d’orientation vérifiés vers l’Europe. | Die WAHHF Foundation ist ihr sozialer Zweig. Die Gruppe finanziert die Sprachakademie (Deutsch/Englisch A1 bis C1) und die geprüften Orientierungsmaterialien für Europa. |
+|  | `iroko.p2` | WAHHF Foundation est sa branche sociale. Le groupe finance l’Académie de langues (allemand /anglais /italien A1 à C1) et les supports d’orientation vérifiés vers l’Europe. | Die WAHHF Foundation ist ihr sozialer Zweig. Die Gruppe finanziert die Sprachakademie (Deutsch/Englisch/Italienisch A1 bis C1) und die geprüften Orientierungsmaterialien für Europa. |
 |  | `offers.title` | Ce que nous proposons | Was wir anbieten |
 |  | `cta.title` | Devenir partenaire de WAHHF Foundation | Partner der WAHHF Foundation werden |
 |  | `cta.subtitle` | Vous représentez une université, un centre de formation, une ONG, un établissement médical ou une entreprise engagée ? Construisons ensemble un programme à impact mesurable. | Sie vertreten eine Universität, ein Ausbildungszentrum, eine NGO, eine medizinische Einrichtung oder ein engagiertes Unternehmen? Lassen Sie uns gemeinsam ein Programm mit messbarer Wirkung aufbauen. |
@@ -1978,7 +1988,7 @@ Fichier : `src/locales/qui-sommes-nous/de.json` (26 textes, dont 5 à relire).
 |  | `seo.description` | Découvrez l’histoire, la mission, les valeurs et l’approche de WAHHF Foundation, et son lien avec le groupe IROKO. | Erfahren Sie mehr über Geschichte, Auftrag, Werte und Ansatz der WAHHF Foundation und über ihre Verbindung zur IROKO-Gruppe. |
 |  | `mission.title` | Bâtir l’autonomie par l’éducation, la santé et l’accès au savoir | Selbstständigkeit durch Bildung, Gesundheit und Zugang zu Wissen |
 | \* | `mission.p1` | WAHHF Foundation part d’une conviction simple : chaque jeune mérite d’accéder à l’éducation, aux soins de prévention, à l’apprentissage des langues et à une information vérifiée, sans que le manque de ressources financières ou les réseaux de désinformation ne brisent son avenir. | Die WAHHF Foundation geht von einer einfachen Überzeugung aus: Jeder junge Mensch verdient Zugang zu Bildung, Gesundheitsvorsorge, Sprachunterricht und geprüften Informationen – ohne dass fehlendes Geld oder Netzwerke der Desinformation seine Zukunft zerstören. |
-|  | `mission.p2` | Basée à Yaoundé et à Douala, avec une coordination en Allemagne, la fondation propose un programme gratuit d’apprentissage de l’allemand /anglais (A1 à C1) et d’orientation vers 10 pays européens. | Mit Sitz in Yaoundé und Douala und einer Koordination in Deutschland bietet die Stiftung ein kostenloses Programm zum Erlernen von Deutsch/Englisch (A1 bis C1) und zur Orientierung für 10 europäische Länder. |
+|  | `mission.p2` | Basée à Yaoundé et à Douala, avec une coordination en Allemagne, la fondation propose un programme gratuit d’apprentissage de l’allemand /anglais /italien (A1 à C1) et d’orientation vers 10 pays européens. | Mit Sitz in Yaoundé und Douala und einer Koordination in Deutschland bietet die Stiftung ein kostenloses Programm zum Erlernen von Deutsch/Englisch/Italienisch (A1 bis C1) und zur Orientierung für 10 europäische Länder. |
 |  | `values[0].title` | Dignité et respect | Würde und Respekt |
 | \* | `values[0].desc` | Chaque bénéficiaire est accueilli comme un acteur de son propre parcours, jamais comme un client. | Alle Begünstigten werden als Gestalter ihres eigenen Weges aufgenommen, nie als Kunden. |
 |  | `values[1].title` | Intégrité et vérité | Integrität und Wahrheit |

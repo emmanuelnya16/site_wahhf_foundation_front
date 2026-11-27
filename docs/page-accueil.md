@@ -9,7 +9,7 @@ Composants dans `src/pages/accueil/`, sauf mention contraire. Styles : `src/styl
 | # | Section | Composant | Données |
 |---|---|---|---|
 | 1 | Hero | `Hero.tsx`, `Visuel.tsx` | Textes : `src/locales/accueil` (`hero`). Carte « Prochain événement » : `src/data/events.ts` |
-| 2 | Qui sommes-nous en bref, et la direction (lot 12) | `QuiSommesNous.tsx` | Textes : `src/locales/accueil` (`qsn`). La direction : les trois premiers niveaux de `src/data/team.ts` (noms, titres, fonctions, accord des portraits), lus par `src/lib/team.ts`, comme l'organigramme de Qui sommes-nous |
+| 2 | Qui sommes-nous en bref, et la direction (lot 12) | `QuiSommesNous.tsx` | Textes : `src/locales/accueil` (`qsn`). La direction : les trois premiers niveaux de `src/data/team.ts` (noms, titres, fonctions, accord des portraits), lus par `src/lib/team.ts`, comme l'organigramme de Qui sommes-nous. Portraits publiés le 27 novembre 2026 (question 149) |
 | 3 | Les chiffres | `Chiffres.tsx`, `Compteur.tsx` | `src/data/accueil-chiffres.ts` |
 | 4 | Les 6 domaines | `DomainesParcours.tsx`, `DomainesMotion.tsx` | Domaines : `src/services/api.ts` (`DOMAINS_DATA`). Photos : `PHOTOS` dans `DomainesParcours.tsx` |
 | 5 | Projet phare | `ProjetPhare.tsx`, `ProjetMotion.tsx`, `route.ts` | `src/data/accueil-projets.ts` |
@@ -72,7 +72,7 @@ Fichier : `src/data/accueil-temoignages.ts`. Sans témoignage confirmé, la sect
 
 Fichier : `src/data/events.ts`. La section Événements se remplit seule. Elle montre le prochain événement à venir dans la grande carte, puis les deux plus récents des événements passés en tickets. Un événement « à venir » dont la fin est passée devient « passé » automatiquement.
 
-- **Road to Europe :** remplissez `ROAD_TO_EUROPE_FAITS` (date, fin, ville, salle, prix, places, inscription). Les dates s'écrivent comme `'2027-01-16T08:00:00+01:00'` (heure de Douala).
+- **Wahhfjobs & Road to Europe Week** (Douala, mars 2027 ; adresse /evenements/road-to-europe) : remplissez `ROAD_TO_EUROPE_FAITS` (date, fin, mois, ville, salle, prix, places, inscription). Les dates s'écrivent comme `'2027-03-08T08:00:00+01:00'` (heure de Douala). Tant que le jour n'est pas fixé, `mois: '2027-03'` affiche « Mars 2027 · dates exactes annoncées très bientôt », et la carte de /accueil montre un point d'interrogation avec « mars 2027 » ; le compte à rebours démarre dès que `date` est remplie. Le programme (un secteur par jour) est dans `tempsForts`, avec l'étiquette « Jour 1 » à « Jour 5 ».
 - **Nouvel événement :** copiez un objet existant, donnez-lui un `slug` et des faits, puis ajoutez-le à la liste `EVENTS`.
   - `date: null` affiche « Date annoncée très bientôt » ; `lienInscription: null` affiche « Inscriptions annoncées très bientôt » ;
   - `photoHero` : des repères du catalogue, la photo d'abord, puis ses remplaçantes ;
@@ -93,7 +93,13 @@ Moins de 6 partenaires : une grille fixe centrée. À partir de 6, les logos dé
 
 ## Mettre le film en ligne
 
-La section « Le film » attend le fichier vidéo du film (question 207). En attendant, elle montre l'affiche et le bouton « Regarder le film », qui ouvre la fenêtre YouTube de / après accord. YouTube ne se charge jamais sans un clic.
+**Depuis le 26 novembre 2026**, la section joue le film entier (1 min 10, 1 280 × 720, 15,7 Mo), hébergé par la fondation sur Cloudinary. L'adresse est dans `src/pages/accueil/filmExtrait.ts` ; `res.cloudinary.com` est autorisé pour les vidéos dans la CSP de `public/.htaccess`.
+- **Au défilement**, sans le son : le fichier se charge à un écran de la section. La lecture démarre dès que la section arrive à l'écran (son haut franchit le quart bas de l'écran), continue pendant toute l'animation de la carte, et s'arrête quand la section quitte l'écran. Elle reprend là où elle s'était arrêtée.
+- **Pauses** : quand la personne a demandé une pause, quand l'onglet est caché, quand la fenêtre YouTube est ouverte.
+- **Sans défilement** (mouvement réduit, bouton pause du site, économie de données ou réseau 2G / 3G) : rien ne se charge avant un clic sur Lecture.
+- « Regarder avec le son » ouvre toujours la fenêtre YouTube.
+
+Pour des copies plus légères hébergées sur le site, suivez les étapes ci-dessous ; le script réécrit alors `filmExtrait.ts`. YouTube ne se charge jamais sans un clic.
 
 1. Déposez le film dans sa meilleure qualité : `docs/references/video/film-wahhf.mp4`.
 2. Lancez `node scripts/encode-film.mjs`. Il faut ffmpeg et ffprobe. Le script écrit :

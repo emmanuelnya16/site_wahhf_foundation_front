@@ -72,6 +72,7 @@ Ce qu'il faut changer le jour où le site devient public. Prévu au **Lot 9**. C
 - **Nom complet officiel** : question 170. En attendant, le site écrit seulement « WAHHF Foundation » ; ne jamais remettre la forme longue retirée au lot 12.
 - **Vercel** : `vercel.json` renvoie toutes les adresses de l'application vers `index.html` (sans lui, /accueil et les autres pages répondaient 404 en accès direct). Vérifier `curl -I https://<domaine>/accueil` : statut 200.
 - **Ancien accueil** : / redirige vers /accueil. Les deux scripts de `index.html` qui ne servent qu'à l'ancien accueil (image du hero préchargée et posée avant React, quand l'adresse est /) téléchargent encore cette image et l'affichent un instant avant la redirection : à retirer quand l'ancien accueil sera abandonné (question 188).
+- **Film de /accueil sur Cloudinary** : à l'approche de la section, le navigateur du visiteur télécharge le film depuis res.cloudinary.com (15,7 Mo), donc un service tiers reçoit son adresse IP. À citer dans la politique de confidentialité (avec YouTube), ou à remplacer par des copies hébergées sur le site, plus légères (`node scripts/encode-film.mjs`, docs/page-accueil.md).
 - **Partenaires** : logos, liens et accords (question 212), dans `src/data/partners.ts`.
 - **Traductions à relire** : docs/traductions-de-a-relire.md (astérisques en priorité).
 - **Faits de Road to Europe** : date, lieu, prix dans les trois langues, inscription (`ROAD_TO_EUROPE_FAITS`, questions 171 à 178).
