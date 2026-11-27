@@ -10,13 +10,17 @@ import Entree from './Entree';
 const delai = (i: number) => ({ '--delai': `${(i * 0.06).toFixed(2)}s` }) as CSSProperties;
 
 /**
- * Une carte coin feuille : le logo en niveaux de gris (en couleur au survol), ou le nom en texte s'il n'y a pas encore de
- * logo. Un lien vers le site du partenaire seulement s'il est confirmé (nouvel onglet, dit dans le nom du lien).
+ * Une carte coin feuille : le logo en niveaux de gris (en couleur au survol) et le nom du partenaire dessous, ou le nom
+ * seul, en grand, s'il n'y a pas encore de logo. Le nom est écrit : le logo n'a pas besoin de texte alternatif.
+ * Un lien vers le site du partenaire seulement s'il est confirmé (nouvel onglet, dit dans le nom du lien).
  */
 function Carte({ partenaire, decor = false }: { partenaire: Partenaire; decor?: boolean }) {
   const { t } = useTranslation();
   const contenu = partenaire.logo ? (
-    <img src={partenaire.logo} alt={decor ? '' : partenaire.nom} height={80} loading="lazy" decoding="async" className="ac-partenaire-logo" />
+    <>
+      <img src={partenaire.logo} alt="" height={80} loading="lazy" decoding="async" className="ac-partenaire-logo" />
+      <span className="ac-partenaire-legende">{partenaire.nom}</span>
+    </>
   ) : (
     <span className="ac-partenaire-nom">{partenaire.nom}</span>
   );
