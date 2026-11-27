@@ -31,12 +31,24 @@ export const DOMAIN_LINKS: Record<EventDomain, string> = {
 
 /** Statut réel : un événement « à venir » dont la fin est passée est passé ; sans date, il reste à venir. */
 export function eventStatus(event: Event, now = Date.now()): EventStatus {
-  const end = event.fin ?? event.date;
+  const end = event.fin ?? event.date ?? finDuMois(event.mois);
   return event.statut === 'a-venir' && end && Date.parse(end) < now ? 'passe' : event.statut;
 }
 
-/** Instant de début (pour trier) ; un événement sans date passe après ceux qui en ont une. */
-const startOf = (e: Event, missing: number) => (e.date ? Date.parse(e.date) : missing);
+/** Mois seul ('2027-03') : son premier instant et son dernier, heure de Douala ; null sans mois. */
+const debutDuMois = (mois: string | null | undefined) => (mois ? `${mois}-01T00:00:00+01:00` : null);
+function finDuMois(mois: string | null | undefined): string | null {
+  if (!mois) return null;
+  const [a, m] = mois.split('-').map(Number);
+  const suivant = m === 12 ? `${a + 1}-01` : `${a}-${String(m + 1).padStart(2, '0')}`;
+  return new Date(Date.parse(`${suivant}-01T00:00:00+01:00`) - 1000).toISOString();
+}
+
+/** Instant de début (pour trier) ; sans date, le début du mois prévu ; sans mois non plus, après les autres. */
+const startOf = (e: Event, missing: number) => {
+  const debut = e.date ?? debutDuMois(e.mois);
+  return debut ? Date.parse(debut) : missing;
+};
 
 /** Tous les événements, le plus proche d'abord pour ceux à venir, le plus récent d'abord pour les passés. */
 export function upcomingEvents(now = Date.now()) {
@@ -71,6 +83,21 @@ export function eventDate(event: Event, lang: string, withWeekday = true, capita
     timeZone: event.fuseau,
   }).format(new Date(event.date));
   return (capital ? capitalize(text) : text).replace(/(\d+\.?) (\p{L}+) (\d{4})/u, `$1${NB}$2${NB}$3`);
+}
+
+/** « Mars 2027 », « March 2027 », « März 2027 » (mois prévu, sans jour), insécable ; null sans mois. */
+export function eventMonth(event: Event, lang: string, capital = true): string | null {
+  if (!event.mois) return null;
+  const text = new Intl.DateTimeFormat(locale(lang), { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${event.mois}-15T12:00:00Z`));
+  return (capital ? capitalize(text) : text).replace(/ (\d{4})$/, `${NB}$1`);
+}
+
+/** La date écrite, sinon « Mars 2027 · dates exactes annoncées très bientôt », sinon « Date annoncée très bientôt ». */
+export function eventWhen(event: Event, lang: string, t: TFunction): string {
+  const date = eventDate(event, lang);
+  if (date) return date;
+  const mois = eventMonth(event, lang);
+  return mois ? t('events.faits.moisBientot', { mois }) : t('events.faits.dateBientot');
 }
 
 /** Une heure (heure de Douala) : « 8 h », « 8 h 30 » en français, « 8:00 » en anglais et en allemand. */
@@ -119,8 +146,13 @@ export function timeLeft(event: Event, now = Date.now()) {
  */
 export function fillFacts(text: string, event: Event, t: TFunction, lang: string): string {
   const date = eventDate(event, lang, true, false);
+  const mois = date ? null : eventMonth(event, lang, false);
   const ville = event.ville && isShown(event.ville) ? event.ville : null;
-  const quandOu = date && ville
+  const quandOu = mois
+    ? ville
+      ? t('events.faits.moisOu', { mois, ville, pays: event.pays })
+      : t('events.faits.moisSansVille', { mois, pays: event.pays })
+    : date && ville
     ? t('events.faits.quandOu', { date, ville, pays: event.pays })
     : date
       ? t('events.faits.quandSansVille', { date, pays: event.pays })

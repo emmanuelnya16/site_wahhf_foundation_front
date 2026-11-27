@@ -8,7 +8,7 @@ import { ArrowUpRight, CalendarDays, MapPin, Sparkles } from 'lucide-react';
 import SEO from '../../components/wahhf/SEO';
 import Photo from '../../components/wahhf/Photo';
 import type { Event } from '../../data/events';
-import { eventDate, eventHours, eventPhoto, isShown, localizeEvent, pastEvents, timeLeft, upcomingEvents } from '../../lib/events';
+import { eventDate, eventHours, eventMonth, eventPhoto, eventWhen, isShown, localizeEvent, pastEvents, timeLeft, upcomingEvents } from '../../lib/events';
 import { cn } from '../../lib/utils';
 import { AccentTitle, HeroBackdrop } from './Hero';
 import { useNow } from './Countdown';
@@ -40,7 +40,7 @@ function UpcomingCard({ event }: { event: Event }) {
           <li>
             <CalendarDays aria-hidden="true" />
             <span>
-              {eventDate(event, i18n.language) ?? t('events.faits.dateBientot')}
+              {eventWhen(event, i18n.language, t)}
               {hours && <> · {hours}</>}
             </span>
           </li>
@@ -157,7 +157,7 @@ export default function EventsListPage() {
                       </h3>
                       <p className="ev-voie-texte">{place(e, t('events.faits.villeBientot'))}</p>
                       <div className="ev-voie-pied">
-                        <span className="ev-voie-etiquette ev-label">{eventDate(e, i18n.language, false) ?? t('events.faits.dateBientot')}</span>
+                        <span className="ev-voie-etiquette ev-label">{eventDate(e, i18n.language, false) ?? eventMonth(e, i18n.language) ?? t('events.faits.dateBientot')}</span>
                         <span className="ev-rond-fleche" aria-hidden="true">
                           <ArrowUpRight className="h-5 w-5" />
                         </span>

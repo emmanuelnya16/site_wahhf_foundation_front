@@ -124,30 +124,33 @@
     "quandOuInconnus": "The date and the city will be announced very soon; the event takes place in {{pays}}.",
     "prix": "{{prix}}.",
     "prixInconnu": "The price will be announced very soon.",
-    "deVille": " {{ville}}"
+    "deVille": " {{ville}}",
+    "moisBientot": "{{mois}} · exact dates to be announced very soon",
+    "moisOu": "In {{mois}} in {{ville}}, {{pays}}; the exact dates will be announced very soon.",
+    "moisSansVille": "In {{mois}}, in {{pays}}; the exact dates and the city will be announced very soon."
   },
   "contenu": {
     "road-to-europe": {
       "bandeauLabel": "The 10 countries of Road to Europe",
       "pastille": {
-        "texte": "The event that launches your European project"
+        "texte": "After Yaoundé in April 2026, next stop Douala in March 2027"
       },
       "titre": "Your road to\nEurope\nstarts here.",
       "motAccent": "Europe",
-      "accroche": "Studies, training, skilled work: in one day, understand the legal pathways to 10 European countries, meet those who train and support, and leave with a clear plan.",
+      "accroche": "Wahhfjobs & Road to Europe Week: five days in Douala, with the IROKO Group, to prepare your departure, your settling in or your move abroad. Each day, one sector, its jobs and its training; on the fourth, all the information on visas and settling in.",
       "pays": "Cameroon",
       "sections": {
         "hero": {
           "action": "Book my place",
           "action2": "See the programme",
-          "etiquette": "The conference takes place in"
+          "etiquette": "The week takes place in"
         },
         "compte": {
           "titre": "The countdown has started"
         },
         "pourquoi": {
           "surtitre": "Why come",
-          "titre": "A day to change course.",
+          "titre": "A week to change course.",
           "intro": "Many young people lose time and money for lack of reliable information. Road to Europe gives you the right cards, at the right time."
         },
         "route": {
@@ -161,9 +164,9 @@
           "intro": "Each pathway has its own conditions, timelines and chances, and they vary from one country to another. Find the one that suits you."
         },
         "programme": {
-          "surtitre": "The programme at a glance",
-          "titre": "One day, four highlights.",
-          "intro": "Understand, discuss, practise, meet: you leave with clear answers and useful contacts.",
+          "surtitre": "The week's programme",
+          "titre": "One week, five days.",
+          "intro": "Each day, one sector: its jobs, its training, and the steps to leave, settle in or move abroad.",
           "action": "Full programme",
           "action2": "The speakers"
         },
@@ -273,20 +276,29 @@
       ],
       "tempsForts": [
         {
-          "titre": "Understand",
-          "texte": "The legal pathways to the 10 countries, their conditions and timelines, explained simply."
+          "etiquette": "Day 1",
+          "titre": "Health & social care",
+          "texte": "Care and social-support professions, and the pathways to train or work in them."
         },
         {
-          "titre": "Discuss",
-          "texte": "Round tables with trainers, institutions and young people who have already left."
+          "etiquette": "Day 2",
+          "titre": "Industry, construction & infrastructure",
+          "texte": "Industry, building and public-works professions, and the pathways to train or work in them."
         },
         {
-          "titre": "Practise",
-          "texte": "Workshops: application, European-format CV, visa, language."
+          "etiquette": "Day 3",
+          "titre": "IT & digital economy",
+          "texte": "IT and digital professions, and the pathways to train or work in them."
         },
         {
-          "titre": "Meet",
-          "texte": "Schools, institutions and partners at their stands."
+          "etiquette": "Day 4",
+          "titre": "Finance, banking, training & skills",
+          "texte": "Finance and banking professions, training, and all the information on visas and settling in."
+        },
+        {
+          "etiquette": "Day 5",
+          "titre": "Skills day",
+          "texte": "The skills day: take stock of your skills and learn how to have them recognised."
         }
       ],
       "soutien": [
@@ -317,8 +329,8 @@
       },
       "faq": [
         {
-          "question": "When and where does Road to Europe take place?",
-          "reponse": "{{quandOu}} The exact venue and opening time will be announced as soon as they are confirmed."
+          "question": "When and where does the Road to Europe Week take place?",
+          "reponse": "{{quandOu}} The venue and the hour-by-hour programme will be announced as soon as they are confirmed."
         },
         {
           "question": "Who is the event for?",
@@ -477,7 +489,7 @@
       "faq": [
         {
           "question": "Where and when did the day take place? (TODO)",
-          "reponse": "At the Albatros Hotel, on 25 April 2026, from 8:00 to 21:00 (banner). City to be confirmed (TODO)."
+          "reponse": "At the Albatros Hotel in Yaoundé, on 25 April 2026, from 8:00 to 21:00 (banner)."
         },
         {
           "question": "Who was the day for? (TODO)",

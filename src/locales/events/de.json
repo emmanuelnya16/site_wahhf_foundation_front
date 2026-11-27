@@ -136,30 +136,33 @@
     "quandOuInconnus": "Datum und Stadt werden in Kürze bekannt gegeben; die Veranstaltung findet in {{pays}} statt.",
     "prix": "{{prix}}.",
     "prixInconnu": "Der Preis wird in Kürze bekannt gegeben.",
-    "deVille": " aus {{ville}}"
+    "deVille": " aus {{ville}}",
+    "moisBientot": "{{mois}} · genaue Termine folgen in Kürze",
+    "moisOu": "Im {{mois}} in {{ville}}, {{pays}}; die genauen Termine werden in Kürze bekannt gegeben.",
+    "moisSansVille": "Im {{mois}} in {{pays}}; die genauen Termine und die Stadt werden in Kürze bekannt gegeben."
   },
   "contenu": {
     "road-to-europe": {
       "bandeauLabel": "Die 10 Länder von Road to Europe",
       "pastille": {
-        "texte": "Der Termin, der Ihr Europa-Projekt ins Rollen bringt"
+        "texte": "Nach Yaoundé im April 2026 geht es im März 2027 nach Douala"
       },
       "titre": "Ihr Weg nach\nEuropa\nbeginnt hier.",
       "motAccent": "Europa",
-      "accroche": "Studium, Ausbildung, Arbeit als Fachkraft: Verstehen Sie an einem Tag die legalen Wege in 10 Länder Europas, treffen Sie die Menschen, die ausbilden und begleiten, und gehen Sie mit einem klaren Plan nach Hause.",
+      "accroche": "Wahhfjobs & Road to Europe Week: fünf Tage in Douala, gemeinsam mit der IROKO-Gruppe, um Ihre Ausreise, Ihr Ankommen oder Ihren Umzug ins Ausland vorzubereiten. Jeden Tag ein Bereich mit seinen Berufen und Ausbildungen; am vierten Tag alle Informationen zu Visa und zum Ankommen.",
       "pays": "Kamerun",
       "sections": {
         "hero": {
           "action": "Meinen Platz reservieren",
           "action2": "Zum Programm",
-          "etiquette": "Hier findet die Konferenz statt"
+          "etiquette": "Hier findet die Woche statt"
         },
         "compte": {
           "titre": "Der Countdown läuft"
         },
         "pourquoi": {
           "surtitre": "Warum Sie kommen sollten",
-          "titre": "Ein Tag, um den Kurs zu ändern.",
+          "titre": "Eine Woche, um den Kurs zu ändern.",
           "intro": "Viele junge Menschen verlieren Zeit und Geld, weil ihnen verlässliche Informationen fehlen. Road to Europe gibt Ihnen die richtigen Karten in die Hand, zum richtigen Zeitpunkt."
         },
         "route": {
@@ -173,9 +176,9 @@
           "intro": "Jeder Weg hat seine Voraussetzungen, Fristen und Chancen, und sie unterscheiden sich von Land zu Land. Finden Sie den Weg, der zu Ihnen passt."
         },
         "programme": {
-          "surtitre": "Das Programm auf einen Blick",
-          "titre": "Ein Tag, vier Höhepunkte.",
-          "intro": "Verstehen, austauschen, üben, begegnen: Sie gehen mit klaren Antworten und nützlichen Kontakten nach Hause.",
+          "surtitre": "Das Programm der Woche",
+          "titre": "Eine Woche, fünf Tage.",
+          "intro": "Jeden Tag ein Bereich: seine Berufe, seine Ausbildungen und die Schritte, um auszureisen, sich niederzulassen oder ins Ausland zu gehen.",
           "action": "Vollständiges Programm",
           "action2": "Die Referenten"
         },
@@ -285,20 +288,29 @@
       ],
       "tempsForts": [
         {
-          "titre": "Verstehen",
-          "texte": "Die legalen Wege in die 10 Länder, ihre Voraussetzungen und Fristen, einfach erklärt."
+          "etiquette": "Tag 1",
+          "titre": "Gesundheit & Soziales",
+          "texte": "Pflege- und Sozialberufe und die Wege, sich darin auszubilden oder darin zu arbeiten."
         },
         {
-          "titre": "Austauschen",
-          "texte": "Gesprächsrunden mit Ausbildern, Bildungseinrichtungen und jungen Menschen, die schon gegangen sind."
+          "etiquette": "Tag 2",
+          "titre": "Industrie, Bau & Infrastruktur",
+          "texte": "Berufe in Industrie, Hoch- und Tiefbau und die Wege, sich darin auszubilden oder darin zu arbeiten."
         },
         {
-          "titre": "Üben",
-          "texte": "Workshops: Bewerbungsunterlagen, Lebenslauf im europäischen Format, Visum, Sprache."
+          "etiquette": "Tag 3",
+          "titre": "Informatik & digitale Wirtschaft",
+          "texte": "Berufe in Informatik und Digitalwirtschaft und die Wege, sich darin auszubilden oder darin zu arbeiten."
         },
         {
-          "titre": "Begegnen",
-          "texte": "Schulen, Bildungseinrichtungen und Partner an ihren Ständen."
+          "etiquette": "Tag 4",
+          "titre": "Finanzen, Banken, Ausbildung & Kompetenzen",
+          "texte": "Berufe in Finanzwesen und Banken, Ausbildung sowie alle Informationen zu Visa und zum Ankommen."
+        },
+        {
+          "etiquette": "Tag 5",
+          "titre": "Skills Day",
+          "texte": "Der Tag der Kompetenzen: die eigenen Fähigkeiten einschätzen und erfahren, wie man sie anerkennen lässt."
         }
       ],
       "soutien": [
@@ -329,8 +341,8 @@
       },
       "faq": [
         {
-          "question": "Wann und wo findet Road to Europe statt?",
-          "reponse": "{{quandOu}} Der genaue Ort und die Einlasszeit werden bekannt gegeben, sobald sie feststehen."
+          "question": "Wann und wo findet die Road to Europe Week statt?",
+          "reponse": "{{quandOu}} Der Veranstaltungsort und das Programm im Detail werden bekannt gegeben, sobald sie feststehen."
         },
         {
           "question": "Für wen ist die Veranstaltung gedacht?",
@@ -489,7 +501,7 @@
       "faq": [
         {
           "question": "Wo und wann fand der Aktionstag statt? (TODO)",
-          "reponse": "Im Albatros Hotel, am 25. April 2026, von 8:00 bis 21:00 Uhr (Banner). Stadt noch zu bestätigen (TODO)."
+          "reponse": "Im Albatros Hotel in Yaoundé, am 25. April 2026, von 8:00 bis 21:00 Uhr (Banner)."
         },
         {
           "question": "Für wen war der Aktionstag gedacht? (TODO)",

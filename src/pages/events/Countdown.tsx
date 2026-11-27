@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Images } from 'lucide-react';
 import type { Event, EventStatus } from '../../data/events';
-import { eventDate, eventStartTime, timeLeft } from '../../lib/events';
+import { eventDate, eventStartTime, eventWhen, timeLeft } from '../../lib/events';
 import { EvButton, pad2 } from './ui';
 
 /**
@@ -70,7 +70,7 @@ function Live({ event }: { event: Event }) {
       <div className="grid gap-2">
         <p className="ev-compte-titre">
           <span className={left ? 'ev-point ev-ping' : 'ev-point'} aria-hidden="true" />
-          {left ? event.sections?.compte?.titre ?? t('events.countdown.label') : t('events.faits.dateBientot')}
+          {left ? event.sections?.compte?.titre ?? t('events.countdown.label') : eventWhen(event, i18n.language, t)}
         </p>
         {date && start && (
           <p className="ev-text pl-[1.625rem] text-meta">{t('events.countdown.when', { date, time: start })}</p>

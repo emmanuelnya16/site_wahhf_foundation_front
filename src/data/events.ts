@@ -48,6 +48,8 @@ export interface EventCard {
   icon: EventIcon;
   titre: string;
   texte: string;
+  /** Petit libellé à la place du numéro de la carte (« Jour 1 ») */
+  etiquette?: string;
 }
 
 /** Un temps du déroulé de la journée */
@@ -148,6 +150,8 @@ export interface Event {
   date: string | null;
   /** Fin, même format ; null si inconnue */
   fin: string | null;
+  /** Mois prévu quand le jour n'est pas encore fixé (date null) : 'AAAA-MM'. Affiché « mars 2027 », jamais un faux jour */
+  mois?: string | null;
   fuseau: 'Africa/Douala';
   /** Nom de la salle ; null : inconnu */
   lieu: string | null;
@@ -210,7 +214,8 @@ const JOURNEE_2026_04_25: Event = {
   fin: '2026-04-25T21:00:00+01:00',
   fuseau: 'Africa/Douala',
   lieu: 'Albatros Hotel',
-  ville: null, // TODO (fondation) : ville de l'Albatros Hotel
+  // Ville donnée par la fondation le 27 novembre 2026 (« Après Yaoundé en avril 2026, cap sur Douala en mars 2027 »)
+  ville: 'Yaoundé',
   pays: 'Cameroun',
   placesRestantes: null,
   lienInscription: null,
@@ -266,7 +271,7 @@ const JOURNEE_2026_04_25: Event = {
   // A88, A34 et A31 attendent l'accord (jeunes reconnaissables)
   photoParents: ['A88', 'A99'],
   faq: [
-    { question: 'Où et quand la journée a-t-elle eu lieu ? (TODO)', reponse: 'À l’Albatros Hotel, le 25 avril 2026, de 8 h à 21 h (banderole). Ville à confirmer (TODO).' },
+    { question: 'Où et quand la journée a-t-elle eu lieu ? (TODO)', reponse: 'À l’Albatros Hotel de Yaoundé, le 25 avril 2026, de 8 h à 21 h (banderole).' },
     { question: 'À qui s’adressait la journée ? (TODO)', reponse: 'Réponse à fournir par la fondation (TODO).' },
     { question: 'L’entrée était-elle payante ? (TODO)', reponse: 'Réponse à fournir par la fondation (TODO).' },
     { question: 'Les mineurs pouvaient-ils venir seuls ? (TODO)', reponse: 'Réponse à fournir par la fondation (TODO).' },
@@ -319,10 +324,12 @@ function frAll<T>(value: T): T {
 }
 
 /**
- * Faits de Road to Europe (brief du 21 novembre 2026), à remplir par la fondation. null : la page affiche « annoncé(e)
- * très bientôt » à la place, jamais un faux chiffre.
- * - date / fin : ISO 8601 avec +01:00 (heure de Douala), par exemple '2027-01-16T08:00:00+01:00'
- * - ville : 'Yaoundé' ; salle : nom de la salle
+ * Faits de Wahhfjobs & Road to Europe Week (deuxième édition, 27 novembre 2026 : « Après Yaoundé en avril 2026, cap sur
+ * Douala en mars 2027 »), à compléter par la fondation. null : la page affiche « annoncé(e) très bientôt » à la place,
+ * jamais un faux chiffre.
+ * - date / fin : ISO 8601 avec +01:00 (heure de Douala), par exemple '2027-03-08T08:00:00+01:00' ; tant qu'ils
+ *   manquent, mois ('2027-03') s'affiche « mars 2027 · dates exactes annoncées très bientôt »
+ * - ville : 'Douala' ; salle : nom de la salle
  * - prix : dans les trois langues, par exemple { fr: 'Gratuit', en: 'Free', de: 'Kostenlos' } ou
  *   { fr: '5 000 FCFA', en: '5,000 FCFA', de: '5.000 FCFA' }
  * - placesRestantes : un nombre tenu à jour, ou null pour ne pas l'afficher
@@ -331,7 +338,8 @@ function frAll<T>(value: T): T {
 export const ROAD_TO_EUROPE_FAITS = {
   date: null as string | null,
   fin: null as string | null,
-  ville: null as string | null,
+  mois: '2027-03' as string | null,
+  ville: 'Douala' as string | null,
   salle: null as string | null,
   prix: null as TexteTraduit | null,
   placesRestantes: null as number | null,
@@ -339,19 +347,22 @@ export const ROAD_TO_EUROPE_FAITS = {
 };
 
 /**
- * Road to Europe (brief du 21 novembre 2026) : le même rendez-vous que la référence, vers les 10 pays du site.
- * Textes français fournis par la fondation, mot pour mot ; anglais et allemand proposés dans src/locales/events/en.json et de.json (contenu).
+ * Wahhfjobs & Road to Europe Week (brief du 21 novembre 2026, puis 27 novembre 2026) : la deuxième édition, à Douala en
+ * mars 2027, avec le groupe IROKO, pour aider à l'immigration, à l'installation ou à l'expatriation. Une semaine, un
+ * secteur par jour (programme proposé par la fondation). L'adresse reste /evenements/road-to-europe.
+ * Textes français fournis par la fondation ; anglais et allemand proposés dans src/locales/events/en.json et de.json (contenu).
  */
 const ROAD_TO_EUROPE: Event = frAll({
   slug: 'road-to-europe',
-  nom: 'Road to Europe',
+  nom: 'Wahhfjobs & Road to Europe Week',
   statut: 'a-venir',
-  pastille: { texte: 'Le rendez-vous qui lance votre projet européen' },
+  pastille: { texte: 'Après Yaoundé en avril 2026, cap sur Douala en mars 2027' },
   titre: "Votre route vers\nl'Europe\ncommence ici.",
   motAccent: "l'Europe",
-  accroche: "Études, formation, emploi qualifié : en une journée, comprenez les voies légales vers 10 pays d'Europe, rencontrez ceux qui forment et accompagnent, et repartez avec un plan clair.",
+  accroche: "Wahhfjobs & Road to Europe Week : cinq jours à Douala, avec le groupe IROKO, pour préparer votre départ, votre installation ou votre expatriation. Chaque jour, un secteur, ses métiers et ses formations ; le quatrième, toutes les informations sur les visas et l'installation.",
   date: ROAD_TO_EUROPE_FAITS.date,
   fin: ROAD_TO_EUROPE_FAITS.fin,
+  mois: ROAD_TO_EUROPE_FAITS.mois,
   fuseau: 'Africa/Douala',
   lieu: ROAD_TO_EUROPE_FAITS.salle,
   ville: ROAD_TO_EUROPE_FAITS.ville,
@@ -361,13 +372,16 @@ const ROAD_TO_EUROPE: Event = frAll({
   prix: ROAD_TO_EUROPE_FAITS.prix,
   // B73 (jeune au sommet) et B85 attendent l'accord des parents ; en ligne, B44 (membre de l'équipe devant le lac)
   photoHero: ['B73', 'B44'],
-  organisateurs: [{ nom: 'WAHHF Foundation', logo: 'wahhf' }],
+  organisateurs: [
+    { nom: 'WAHHF Foundation', logo: 'wahhf' },
+    { nom: 'IROKO Group', logo: '/logos-partenaires/iroko.webp' },
+  ],
   sections: {
-    hero: { action: 'Réserver ma place', action2: 'Voir le programme', etiquette: 'La conférence a lieu à' },
+    hero: { action: 'Réserver ma place', action2: 'Voir le programme', etiquette: 'La semaine a lieu à' },
     compte: { titre: 'Le compte à rebours a commencé' },
     pourquoi: {
       surtitre: 'Pourquoi venir',
-      titre: 'Une journée pour changer de trajectoire.',
+      titre: 'Une semaine pour changer de trajectoire.',
       intro: "Beaucoup de jeunes perdent du temps et de l'argent faute d'informations fiables. Road to Europe vous donne les bonnes cartes, au bon moment.",
     },
     route: {
@@ -381,9 +395,9 @@ const ROAD_TO_EUROPE: Event = frAll({
       intro: "Chaque voie a ses conditions, ses délais et ses chances, et elles changent d'un pays à l'autre. Découvrez celle qui vous ressemble.",
     },
     programme: {
-      surtitre: "Le programme en un coup d'œil",
-      titre: 'Une journée, quatre temps forts.',
-      intro: 'Comprendre, échanger, pratiquer, rencontrer : vous repartez avec des réponses claires et des contacts utiles.',
+      surtitre: 'Le programme de la semaine',
+      titre: 'Une semaine, cinq journées.',
+      intro: "Chaque jour, un secteur : ses métiers, ses formations, et les démarches pour partir, s'installer ou s'expatrier.",
       action: 'Programme complet',
       action2: 'Les intervenants',
     },
@@ -444,11 +458,13 @@ const ROAD_TO_EUROPE: Event = frAll({
     { icon: 'emploi', titre: 'Emploi qualifié', texte: 'Votre diplôme ou votre expérience reconnus dans le pays choisi, pour travailler dans votre métier.', etiquette: 'Diplôme reconnu', photo: ['A41'], to: '/accompagnement/comprendre-les-parcours' },
     { icon: 'boussole', titre: 'Être accompagné', texte: 'La fondation vous aide à choisir le pays, préparer la langue et monter un dossier complet, sans intermédiaire inconnu.', etiquette: 'Accompagnement WAHHF', photo: ['A12'], to: '/mobilite-langues/accompagnement' },
   ],
+  // Programme proposé par la fondation le 27 novembre 2026 : un secteur par jour
   tempsForts: [
-    { icon: 'presentation', titre: 'Comprendre', texte: 'Les voies légales vers les 10 pays, leurs conditions et leurs délais, expliqués simplement.' },
-    { icon: 'echange', titre: 'Échanger', texte: 'Tables rondes avec des formateurs, des établissements et des jeunes déjà partis.' },
-    { icon: 'atelier', titre: 'Pratiquer', texte: 'Ateliers : dossier, CV au format européen, visa, langue.' },
-    { icon: 'partenaires', titre: 'Rencontrer', texte: 'Écoles, établissements et partenaires à leurs stands.' },
+    { icon: 'sante', etiquette: 'Jour 1', titre: 'Santé & action sociale', texte: "Les métiers du soin et de l'accompagnement social, et les voies pour s'y former ou y travailler." },
+    { icon: 'atelier', etiquette: 'Jour 2', titre: 'Industrie, BTP & infrastructures', texte: "Les métiers de l'industrie, du bâtiment et des travaux publics, et les voies pour s'y former ou y travailler." },
+    { icon: 'logiciel', etiquette: 'Jour 3', titre: 'Informatique & économie numérique', texte: "Les métiers de l'informatique et du numérique, et les voies pour s'y former ou y travailler." },
+    { icon: 'subvention', etiquette: 'Jour 4', titre: 'Finance, banque, formation & compétences', texte: "Les métiers de la finance et de la banque, la formation, et toutes les informations sur les visas et l'installation." },
+    { icon: 'education', etiquette: 'Jour 5', titre: 'Skills day', texte: 'La journée des compétences : faire le point sur les siennes et savoir comment les faire reconnaître.' },
   ],
   intervenants: [],
   soutien: [
@@ -472,7 +488,7 @@ const ROAD_TO_EUROPE: Event = frAll({
   // A31 (parents et aînés au premier rang) attend l'accord ; en ligne, A44
   photoParents: ['A31', 'A44'],
   faq: [
-    { question: 'Quand et où a lieu Road to Europe ?', reponse: "{{quandOu}} Le lieu exact et l'heure d'ouverture sont annoncés dès qu'ils sont confirmés." },
+    { question: 'Quand et où a lieu la Road to Europe Week ?', reponse: "{{quandOu}} La salle et le programme heure par heure sont annoncés dès qu'ils sont confirmés." },
     { question: "À qui s'adresse l'événement ?", reponse: "Aux jeunes qui préparent un projet d'études, de formation ou de travail en Europe, et à leurs parents. Aucun niveau de langue n'est exigé pour venir." },
     { question: "Combien coûte l'entrée et comment s'inscrire ?", reponse: "{{prix}} L'inscription se fait uniquement par les canaux officiels de la fondation. Ne payez jamais une place à un intermédiaire inconnu." },
     { question: 'Venir à Road to Europe me garantit-il un visa, une admission ou un emploi ?', reponse: 'Non. Les visas sont décidés par les ambassades, les admissions par les établissements et les embauches par les employeurs. Nous vous montrons les bonnes démarches et les bons contacts.' },

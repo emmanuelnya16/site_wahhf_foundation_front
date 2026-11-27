@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { ArrowRight, Clock, MapPin } from 'lucide-react';
 import Photo from '../../components/wahhf/Photo';
 import type { Event } from '../../data/events';
-import { eventDate, eventPhoto, eventStartTime, isShown, timeLeft } from '../../lib/events';
+import { eventDate, eventMonth, eventPhoto, eventStartTime, eventWhen, isShown, timeLeft } from '../../lib/events';
 import { INTL_LOCALE, langOf } from '../../lib/localize';
 import { pad2 } from '../events/ui';
 
@@ -65,6 +65,8 @@ export function Ephemeride({ event, lang }: { event: Event | null; lang: string 
       <span className="ac-eph-haut">{jour ?? t('events.list.upcoming')}</span>
       <span className="ac-eph-numero">{(event && partieDate(event, lang, { day: 'numeric' })) ?? '?'}</span>
       {event?.date && <span className="ac-eph-mois">{partieDate(event, lang, { month: 'long' })}</span>}
+      {/* Jour pas encore fixé : le point d'interrogation, et le mois prévu dessous (« mars 2027 ») */}
+      {event && !event.date && event.mois && <span className="ac-eph-mois">{eventMonth(event, lang, false)}</span>}
     </div>
   );
 }
@@ -121,7 +123,7 @@ export function CarteEvenement({ event, paused }: { event: Event; paused: boolea
           <span>{lieuDe(event, t('events.faits.villeBientot'))}</span>
         </p>
         <div className="ac-ev-compte">
-          <p className="ac-ev-compte-titre">{reste ? t('events.countdown.label') : t('events.faits.dateBientot')}</p>
+          <p className="ac-ev-compte-titre">{reste ? t('events.countdown.label') : eventWhen(event, lang, t)}</p>
           {/* Les chiffres changent chaque seconde : masqués aux lecteurs d'écran, qui lisent la date écrite dessous */}
           <p className="ac-ev-cases" aria-hidden="true">
             <Chiffre value={reste?.days} label={t('events.countdown.days')} />

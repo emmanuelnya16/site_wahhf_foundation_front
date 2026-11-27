@@ -4,7 +4,7 @@ import { CalendarDays, Clock, MapPin, Sparkles, Ticket } from 'lucide-react';
 import type { Event, EventStatus } from '../../data/events';
 import Photo from '../../components/wahhf/Photo';
 import { WAHHF_LOGO_URL } from '../../services/api';
-import { eventDate, eventHours, eventPhoto, isShown, splitAccent } from '../../lib/events';
+import { eventHours, eventPhoto, eventWhen, isShown, splitAccent } from '../../lib/events';
 import { CameroonFlag, EvButton, Lines } from './ui';
 import { Confetti } from './motion';
 
@@ -127,7 +127,7 @@ export default function Hero({
             <li>
               <CalendarDays aria-hidden="true" />
               <span>
-                {eventDate(event, lang) ?? t('events.faits.dateBientot')}
+                {eventWhen(event, lang, t)}
                 {hours && <> · {hours}</>}
               </span>
             </li>

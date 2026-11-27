@@ -31,7 +31,7 @@ export function Program({ event, status, scheduleShown }: { event: Event; status
           lead={head?.intro}
         />
         {items.length > 0 && (
-          <ul className="ev-grille-4">
+          <ul className={items.length === 5 ? 'ev-grille-5' : 'ev-grille-4'}>
             {items.map((c, i) => {
               const Icon = ICONS[c.icon];
               return (
@@ -40,9 +40,14 @@ export function Program({ event, status, scheduleShown }: { event: Event; status
                     <span className="ev-icone" aria-hidden="true">
                       <Icon />
                     </span>
-                    <span className="ev-carte-num" aria-hidden="true">
-                      {pad2(i + 1)}
-                    </span>
+                    {/* Le numéro de la carte, ou son libellé (« Jour 1 »), lu avant le titre */}
+                    {c.etiquette ? (
+                      <span className="ev-carte-num">{c.etiquette}</span>
+                    ) : (
+                      <span className="ev-carte-num" aria-hidden="true">
+                        {pad2(i + 1)}
+                      </span>
+                    )}
                   </div>
                   <h3 className="ev-h3">{c.titre}</h3>
                   <p className="ev-text">{c.texte}</p>
