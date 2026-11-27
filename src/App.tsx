@@ -37,6 +37,8 @@ const ApplyPage = page(() => import('./pages/ApplyPage'));
 const DonatePage = page(() => import('./pages/DonatePage'));
 // Nouvelle page Accueil (lot 11.1), à côté de l'accueil actuel (/) qui ne change pas
 const AccueilPage = page(() => import('./pages/accueil/AccueilPage'));
+// Programme de simulation numérique solidaire (lot 13)
+const SimulationPage = page(() => import('./pages/simulation/SimulationPage'));
 // Une page par fichier (src/pages/transversal/), un morceau de JS par page
 const QuiSommesNousPage = page(() => import('./pages/transversal/QuiSommesNousPage'));
 const PartenairesPage = page(() => import('./pages/transversal/PartenairesPage'));
@@ -84,6 +86,7 @@ function AppRoutes() {
         <Route path="/accueil" element={<AccueilPage />} />
         <Route path="/qui-sommes-nous" element={<QuiSommesNousPage />} />
         <Route path="/nos-actions" element={<NosActionsPage />} />
+        <Route path="/simulation" element={<SimulationPage />} />
         <Route path="/notre-impact" element={<NotreImpactPage />} />
         <Route path="/galerie" element={<GalleryPage />} />
         <Route path="/actualites" element={<ActualitesPage />} />

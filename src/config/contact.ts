@@ -30,3 +30,9 @@ export const SOCIAL = [
 ] as const;
 
 export type SocialId = (typeof SOCIAL)[number]['id'];
+
+/**
+ * IROKO Engineer, le pôle d'ingénierie (payant) du groupe IROKO : la page Simulation y oriente les besoins plus gros ou à
+ * certifier (lot 13). Adresse provisoire : à remplacer par l'adresse définitive au lancement (docs/a-faire-au-lancement.md).
+ */
+export const IROKO_ENGINEER_URL = 'https://irokoholding.vercel.app/poles/engineering';

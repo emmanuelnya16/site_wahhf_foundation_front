@@ -6,7 +6,7 @@ import { useState, useEffect, useRef, ElementType, ReactNode } from 'react';
 import { AnimatePresence, m, useReducedMotion } from 'framer-motion';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ChevronDown, Search, Sun, Moon, Menu, X } from 'lucide-react';
+import { Box, ChevronDown, Search, Sun, Moon, Menu, X } from 'lucide-react';
 import { DOMAINS_DATA, WAHHF_LOGO_URL, COUNTRIES_DATA, GERMAN_LEVELS_DATA } from '../services/api';
 import { DonateButton } from './wahhf/Buttons';
 import { useDialog } from '../lib/useDialog';
@@ -28,6 +28,8 @@ import { localized, localizedList } from '../lib/localize';
 const NAV_LINK =
   'inline-flex items-center gap-1 min-h-11 px-1.5 text-base text-text whitespace-nowrap underline-offset-[0.4em] decoration-2 transition-colors duration-(--dur-fast) hover:text-link hover:underline cursor-pointer';
 const NAV_LINK_CURRENT = 'underline';
+/** Lot 13 : l'entrée Simulation se distingue par une pastille au contour fin (forêt ; soleil en sombre : --link) */
+const NAV_PILL = 'gap-1.5 px-3 rounded-pill border border-link';
 const ICON_BUTTON =
   'w-11 h-11 shrink-0 rounded-pill inline-flex items-center justify-center text-text hover:bg-surface-section transition-colors duration-(--dur-fast) cursor-pointer';
 const PANEL = 'rounded-card bg-surface-raised shadow-overlay dark:border dark:border-border-input';
@@ -262,8 +264,11 @@ export default function Navbar() {
           scrolled && 'shadow-overlay dark:border-border-input',
         )}
       >
-        {/* Lot 12 : barre de 68 px (80 px dès 640 px) pour le logo agrandi ; --header-height suit (index.css) */}
-        <div ref={megaRef} className="container-page flex h-17 sm:h-20 items-center justify-between gap-3">
+        {/* Lot 12 : barre de 68 px (80 px dès 640 px) pour le logo agrandi ; --header-height suit (index.css).
+            Lot 13 : 9 entrées avec Simulation ; elles ne tiennent pas dans 72 rem avec le logo agrandi (mesuré : en
+            français et en allemand, le logo était écrasé). Dernier recours du brief : le menu complet seulement dès
+            1 366 px (85,375 rem), où l'en-tête s'élargit jusqu'à 80 rem ; en dessous, le menu burger. */}
+        <div ref={megaRef} className="container-page min-[85.375rem]:max-w-[80rem] flex h-17 sm:h-20 items-center justify-between gap-3">
           {/* Gauche : Logo WAHHF */}
           <Link
             to="/"
@@ -275,23 +280,23 @@ export default function Navbar() {
               alt={t('ui.logoAlt')}
               width={60}
               height={60}
-              className="w-13 h-13 sm:w-15 sm:h-15 object-contain rounded-pill bg-white p-0.5"
+              className="w-13 h-13 sm:w-15 sm:h-15 shrink-0 object-contain rounded-pill bg-white p-0.5"
             />
             {/* Étape d (lot 7.9, votre choix du 20 novembre 2026) : le menu complet ne laisse pas la place du nom (le
                 conteneur fait 1 152 px à toutes ces largeurs) : logo seul dès 1 280 px. Lot 11.1 : en anglais aussi, avec 8
                 entrées à 16 px (mesuré : 10 px de marge avec le nom). Le lien garde son nom accessible. */}
-            <div className="flex flex-col min-w-0 xl:hidden">
+            <div className="flex flex-col min-w-0 min-[85.375rem]:hidden">
               <span className="text-body font-bold leading-none text-text whitespace-nowrap">
                 WAHHF<span className="hidden min-[360px]:inline"> Foundation</span>
               </span>
-              <span className="text-meta text-text-secondary hidden lg:inline xl:hidden whitespace-nowrap">
+              <span className="text-meta text-text-secondary hidden lg:inline min-[85.375rem]:hidden whitespace-nowrap">
                 {t('brand.branch')}
               </span>
             </div>
           </Link>
 
           {/* Centre : Menu principal (8 entrées ; Événements ajouté au lot 7.9, Accueil au lot 11.1) */}
-          <nav aria-label={t('nav.mainNav')} className="hidden xl:flex items-center gap-1">
+          <nav aria-label={t('nav.mainNav')} className="hidden min-[85.375rem]:flex items-center gap-1">
             {/* Lot 11.1 : nouvelle page /accueil ; le logo mène toujours à / */}
             <Link to="/accueil" aria-current={navState('/accueil')} className={cn(NAV_LINK, navState('/accueil') && NAV_LINK_CURRENT)}>
               {t('nav.home')}
@@ -313,6 +318,12 @@ export default function Navbar() {
               <span>{t('nav.actions')}</span>
               <ChevronDown aria-hidden="true" className={cn('w-4 h-4 transition-transform duration-(--dur-fast)', megaOpen && 'rotate-180')} />
             </button>
+
+            {/* Lot 13 : le programme Simulation, juste après Nos actions, avec son cube */}
+            <Link to="/simulation" aria-current={navState('/simulation')} className={cn(NAV_LINK, NAV_PILL, navState('/simulation') && NAV_LINK_CURRENT)}>
+              <Box aria-hidden="true" className="w-4 h-4 shrink-0" />
+              <span>{t('nav.simulation')}</span>
+            </Link>
 
             <Link to="/notre-impact" aria-current={navState('/notre-impact')} className={cn(NAV_LINK, navState('/notre-impact') && NAV_LINK_CURRENT)}>
               {t('nav.impact')}
@@ -338,7 +349,7 @@ export default function Navbar() {
 
           {/* Droite : Langue (bouton compact, lot 7.9), Recherche, Thème, Bouton Faire un don (rouge), Burger */}
           {/* Étape c (lot 7.9) : groupe resserré sur ordinateur (aucun espace entre les cibles de 44 × 44 px) */}
-          <div className="flex items-center gap-1.5 sm:gap-2 xl:gap-0 shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-2 min-[85.375rem]:gap-0 shrink-0">
             {/* Langue (lot 7.9, étape b) : un bouton compact qui affiche la langue en cours (nom accessible « Changer de
                 langue (FR) » : il contient le texte visible, WCAG 2.5.3) et ouvre le choix ; chaque option porte sa
                 langue (lang) ; Échap et clic extérieur ferment, le focus revient sur le bouton */}
@@ -407,7 +418,7 @@ export default function Navbar() {
 
             {/* 6e entrée / Bouton « Faire un don » (token rouge) */}
             <div className="hidden sm:block">
-              <DonateButton size="sm" className="whitespace-nowrap text-base xl:gap-1.5 xl:px-3">{t('nav.donate')}</DonateButton>
+              <DonateButton size="sm" className="whitespace-nowrap text-base min-[85.375rem]:gap-1.5 min-[85.375rem]:px-3">{t('nav.donate')}</DonateButton>
             </div>
 
             {/* Menu Burger (Mobile & Tablette) */}
@@ -418,7 +429,7 @@ export default function Navbar() {
               aria-label={t('nav.menuOpen')}
               aria-expanded={mobileOpen}
               aria-controls="menu-mobile"
-              className="xl:hidden w-11 h-11 shrink-0 rounded-pill bg-action text-on-action hover:bg-action-hover flex items-center justify-center cursor-pointer"
+              className="min-[85.375rem]:hidden w-11 h-11 shrink-0 rounded-pill bg-action text-on-action hover:bg-action-hover flex items-center justify-center cursor-pointer"
             >
               <Menu aria-hidden="true" className="w-5 h-5" />
             </button>
@@ -650,6 +661,16 @@ export default function Navbar() {
                 ))}
               </div>
             </div>
+
+            {/* Lot 13 : Simulation, avec son cube */}
+            <Link
+              to="/simulation"
+              aria-current={navState('/simulation')}
+              className={cn(MOBILE_LINK, 'flex items-center gap-3', navState('/simulation') && MOBILE_LINK_CURRENT)}
+            >
+              <Box aria-hidden="true" className="w-6 h-6 shrink-0" />
+              <span>{t('nav.simulation')}</span>
+            </Link>
 
             <Link
               to="/notre-impact"
