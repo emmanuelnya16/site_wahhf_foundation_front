@@ -2,7 +2,7 @@
 
 Généré par `npm run i18n:relire` (scripts/traductions-a-relire.mjs) le 2026-11-27. Ne pas modifier à la main : corriger les fichiers de langue, puis relancer.
 
-Chaque texte allemand du site, face à son français. **Un astérisque (\*) marque les 166 textes dont le traducteur n'était pas sûr** (sens du français ambigu, terme juridique, nom d'institution, ton) : à relire en priorité. 1882 textes allemands au total.
+Chaque texte allemand du site, face à son français. **Un astérisque (\*) marque les 175 textes dont le traducteur n'était pas sûr** (sens du français ambigu, terme juridique, nom d'institution, ton) : à relire en priorité. 2134 textes allemands au total.
 
 - Ton choisi : vouvoiement (« Sie »), simple et chaleureux, pas du mot à mot.
 - Ne sont pas traduits : les noms propres et officiels (WAHHF Foundation, IROKO, Albatros Hotel, Ausbildung, Studienkolleg…), les adresses, les liens.
@@ -12,7 +12,7 @@ Chaque texte allemand du site, face à son français. **Un astérisque (\*) marq
 
 ## Textes communs (en-tête, pied de page, accueil, composants)
 
-Fichier : `src/locales/de.json` (369 textes, dont 40 à relire).
+Fichier : `src/locales/de.json` (370 textes, dont 40 à relire).
 
 | | Clé | Français | Allemand |
 |---|---|---|---|
@@ -25,6 +25,7 @@ Fichier : `src/locales/de.json` (369 textes, dont 40 à relire).
 |  | `nav.impact` | Notre impact | Unsere Wirkung |
 |  | `nav.news` | Actualités | Aktuelles |
 |  | `nav.events` | Événements | Veranstaltungen |
+|  | `nav.simulation` | Simulation | Simulation |
 |  | `nav.changeLanguage` | Changer de langue ({{lang}}) | Sprache ändern ({{lang}}) |
 |  | `nav.homeLink` | WAHHF Foundation, accueil | WAHHF Foundation, Startseite |
 |  | `nav.act` | Agir | Mitmachen |
@@ -2010,3 +2011,261 @@ Fichier : `src/locales/qui-sommes-nous/de.json` (26 textes, dont 5 à relire).
 |  | `contenu.etapes[2].desc` | Le groupe IROKO s’engage structurellement à financer le fonctionnement de la fondation. | Die IROKO-Gruppe verpflichtet sich dauerhaft, den Betrieb der Stiftung zu finanzieren. |
 |  | `contenu.etapes[3].title` | Environnement | Start des 6. Arbeitsbereichs: Mobilität & Sprachen |
 |  | `contenu.etapes[3].desc` | Ouverture de l’Académie d’allemand gratuite (A1 à C1) et publication des guides d’orientation vérifiés vers 10 pays européens. | Eröffnung der kostenlosen Deutschakademie (A1 bis C1) und Veröffentlichung geprüfter Orientierungsleitfäden für 10 europäische Länder. |
+
+## simulation
+
+Fichier : `src/locales/simulation/de.json` (251 textes, dont 9 à relire).
+
+| | Clé | Français | Allemand |
+|---|---|---|---|
+| \* | `seo.title` | Simulation numérique solidaire | Gemeinnützige Ingenieursimulation <br>_Note : « Simulation numérique solidaire » rendu par « Gemeinnützige Ingenieursimulation » (nom officiel du programme à confirmer, question 220)_ |
+|  | `seo.description` | WAHHF Foundation offre gratuitement des simulations numériques (structures, fluides, thermique, conseils de conception) aux petites structures du Cameroun, et forme de jeunes ingénieurs sur des cas réels. | Die WAHHF Foundation bietet kleinen Organisationen in Kamerun kostenlose Ingenieursimulationen (Tragwerke, Strömung, Wärme, Konstruktionsberatung) und bildet junge Ingenieurinnen und Ingenieure an echten Fällen aus. |
+|  | `aConfirmer` | à confirmer | zu bestätigen |
+|  | `nouvelOnglet` | (nouvel onglet) | (neuer Tab) |
+|  | `hero.surtitre` | Programme solidaire · Gratuit | Gemeinnütziges Programm · Kostenlos |
+|  | `hero.titre[0]` | La simulation | Kostenlose |
+|  | `hero.titre[1]` | numérique offerte | Ingenieursimulation |
+|  | `hero.titre[2]` | aux entreprises | für Unternehmen |
+|  | `hero.titre[3]` | et aux projets | und Projekte |
+|  | `hero.titre[4]` | du Cameroun | in Kamerun |
+| \* | `hero.intro` | Nos ingénieurs et de jeunes talents encadrés vérifient, simulent et conseillent gratuitement les petites structures qui construisent l’économie locale. | Unsere Ingenieurinnen und Ingenieure und betreute junge Talente prüfen, simulieren und beraten kostenlos die kleinen Organisationen, die die lokale Wirtschaft aufbauen. <br>_Note : « jeunes talents encadrés » rendu par « betreute junge Talente »_ |
+|  | `hero.badges[0]` | 100 % gratuit | 100 % kostenlos |
+|  | `hero.badges[1]` | Pour les structures du Cameroun | Für Organisationen in Kamerun |
+|  | `hero.badges[2]` | FR · EN · DE | FR · EN · DE |
+|  | `hero.soumettre` | Soumettre mon projet | Mein Projekt einreichen |
+|  | `hero.eligible` | Suis-je éligible ? | Komme ich infrage? |
+| \* | `hero.carte.titre` | Simulation · Portique de hangar | Simulation · Rahmen einer Halle <br>_Note : « Portique de hangar » rendu par « Rahmen einer Halle »_ |
+|  | `hero.carte.vent` | Vent | Wind |
+|  | `hero.carte.toiture` | Toiture | Dach |
+|  | `hero.carte.sollicitees` | Barres les plus sollicitées | Am stärksten beanspruchte Stäbe |
+|  | `hero.carte.autres` | Autres barres | Übrige Stäbe |
+|  | `hero.carte.legende` | Exemple illustratif, valeurs fictives | Anschauungsbeispiel, fiktive Werte |
+|  | `hero.carte.alt` | Dessin : la charpente d’un hangar agricole, deux poteaux et une ferme, sous la poussée du vent et le poids de la toiture. Elle fléchit doucement, et les barres les plus sollicitées s’allument en jaune. | Zeichnung: das Tragwerk einer landwirtschaftlichen Halle, zwei Stützen und ein Dachbinder, unter dem Druck des Windes und dem Gewicht des Dachs. Es biegt sich leicht durch, und die am stärksten beanspruchten Stäbe leuchten gelb auf. |
+|  | `pourquoi.surtitre` | Pourquoi ce programme | Warum dieses Programm |
+|  | `pourquoi.titre[0]` | Un double impact : | Doppelte Wirkung: für |
+|  | `pourquoi.titre[1]` | l’économie locale | die lokale Wirtschaft |
+|  | `pourquoi.titre[2]` | et la jeunesse. | und für junge Menschen. |
+|  | `pourquoi.cartes.economie.titre` | Aider l’économie locale | Die lokale Wirtschaft stärken |
+|  | `pourquoi.cartes.economie.texte` | Petites entreprises, artisans et startups de jeunes : une pièce ou un ouvrage vérifié avant d’être fabriqué, c’est moins de matière perdue et moins de risques. | Kleine Unternehmen, Handwerksbetriebe und Start-ups junger Menschen: Ein Bauteil oder Bauwerk, das vor der Fertigung geprüft wird, bedeutet weniger Materialverlust und weniger Risiko. |
+|  | `pourquoi.cartes.economie.lien` | Entrepreneuriat des jeunes | Unternehmertum junger Menschen |
+|  | `pourquoi.cartes.jeunesse.titre` | Former la jeunesse | Junge Menschen ausbilden |
+|  | `pourquoi.cartes.jeunesse.texte` | De jeunes ingénieurs et des étudiants, encadrés, apprennent sur des cas réels : ceux des structures qui en ont besoin. | Junge Ingenieurinnen und Ingenieure sowie Studierende lernen unter Anleitung an echten Fällen: denen der Organisationen, die sie brauchen. |
+|  | `pourquoi.cartes.jeunesse.lien` | Éducation | Bildung |
+|  | `pourquoi.cartes.iroko.titre` | Avec le groupe IROKO | Mit der IROKO-Gruppe |
+|  | `pourquoi.cartes.iroko.texte` | La fondation est la branche sociale du groupe IROKO, qui couvre ses frais de fonctionnement. | Die Stiftung ist der soziale Zweig der IROKO-Gruppe, die ihre Betriebskosten trägt. |
+|  | `offre.surtitre` | Ce que nous offrons | Was wir anbieten |
+|  | `offre.titre[0]` | Quatre façons de vous aider. | Vier Arten, Ihnen zu helfen. |
+|  | `offre.recu` | Ce que vous recevez | Was Sie erhalten |
+|  | `publics.surtitre` | Pour qui ? | Für wen? |
+|  | `publics.titre[0]` | Pour les structures qui n’ont | Für Organisationen, die sich |
+|  | `publics.titre[1]` | pas les moyens d’une étude. | keine Studie leisten können. |
+|  | `publics.pour` | Le programme s’adresse à | Das Programm richtet sich an |
+|  | `publics.base` | Basées au Cameroun. | Mit Sitz in Kamerun. |
+|  | `publics.non` | Ce programme n’est pas fait pour… | Nicht gedacht für… |
+|  | `publics.nonTexte` | Pour ces besoins, IROKO Engineer, le pôle d’ingénierie du groupe IROKO, réalise des études complètes. | Für diese Anliegen erstellt IROKO Engineer, der Ingenieurbereich der IROKO-Gruppe, vollständige Studien. |
+|  | `publics.iroko` | Découvrir IROKO Engineer | IROKO Engineer entdecken |
+|  | `exemples.surtitre` | Exemples de demandes possibles | Beispiele möglicher Anfragen |
+|  | `exemples.titre[0]` | Ce que vous pourriez | Womit Sie sich an |
+|  | `exemples.titre[1]` | nous demander. | uns wenden könnten. |
+|  | `exemples.intro` | Des exemples pour vous donner une idée : ce ne sont pas des projets réalisés. | Beispiele, um Ihnen eine Vorstellung zu geben: Es sind keine abgeschlossenen Projekte. |
+|  | `exemples.etiquette` | Exemple | Beispiel |
+|  | `exemples.type` | Type de simulation | Art der Simulation |
+|  | `exemples.liste` | Exemples de demandes, à faire défiler | Beispiele für Anfragen, zum Durchblättern |
+|  | `exemples.precedent` | Exemple précédent | Vorheriges Beispiel |
+|  | `exemples.suivant` | Exemple suivant | Nächstes Beispiel |
+|  | `etapes.surtitre` | Comment ça marche | So funktioniert es |
+|  | `etapes.titre[0]` | Cinq étapes, de votre | Fünf Schritte, von Ihrem |
+|  | `etapes.titre[1]` | besoin au rapport. | Bedarf bis zum Bericht. |
+|  | `familles.surtitre` | Ce que nous savons simuler | Was wir simulieren können |
+|  | `familles.titre[0]` | Trois familles de simulation. | Drei Simulationsbereiche. |
+|  | `familles.analyses` | Types d’analyse | Arten der Analyse |
+|  | `engagements.surtitre` | Nos engagements et nos limites | Unsere Zusagen und unsere Grenzen |
+|  | `engagements.titre[0]` | Ce que nous promettons, | Was wir zusagen, |
+|  | `engagements.titre[1]` | et ce que nous ne faisons pas. | und was wir nicht tun. |
+|  | `engagements.nos` | Nos engagements | Unsere Zusagen |
+|  | `jeunes.surtitre` | Les jeunes au cœur du programme | Junge Menschen im Mittelpunkt |
+|  | `jeunes.titre[0]` | Des étudiants et de | Studierende und junge |
+|  | `jeunes.titre[1]` | jeunes ingénieurs | Ingenieurinnen und |
+|  | `jeunes.titre[2]` | qui apprennent | Ingenieure, die an |
+|  | `jeunes.titre[3]` | sur des cas réels. | echten Fällen lernen. |
+|  | `jeunes.texte` | Encadrés par des ingénieurs, des étudiants et de jeunes ingénieurs participent aux études. Ils se forment sur de vrais besoins : ceux des structures qui font vivre l’économie locale. | Unter Anleitung von Ingenieurinnen und Ingenieuren wirken Studierende und junge Ingenieurinnen und Ingenieure an den Studien mit. Sie lernen an echten Bedürfnissen: denen der Organisationen, die die lokale Wirtschaft tragen. |
+|  | `jeunes.bouton` | Rejoindre le programme | Beim Programm mitmachen |
+|  | `faq.surtitre` | Questions fréquentes | Häufige Fragen |
+|  | `faq.titre[0]` | Avant de soumettre votre projet. | Bevor Sie Ihr Projekt einreichen. |
+|  | `soumettre.surtitre` | Soumettre mon projet | Mein Projekt einreichen |
+|  | `soumettre.titre[0]` | Parlez-nous de | Erzählen Sie uns |
+|  | `soumettre.titre[1]` | votre projet. | von Ihrem Projekt. |
+|  | `soumettre.intro` | Décrivez votre besoin et joignez vos plans ou vos photos si vous en avez. Nous revenons vers vous après avoir étudié votre demande. | Beschreiben Sie Ihren Bedarf und fügen Sie Ihre Pläne oder Fotos bei, falls Sie welche haben. Wir melden uns, sobald wir Ihre Anfrage geprüft haben. |
+|  | `soumettre.whatsappTitre` | Une question avant d’écrire ? | Eine Frage vorab? |
+|  | `soumettre.whatsapp` | Écrire sur WhatsApp au {{numero}} | Auf WhatsApp schreiben: {{numero}} |
+|  | `soumettre.irokoTitre` | Besoin d’une étude complète ou certifiée ? | Brauchen Sie eine vollständige oder zertifizierte Studie? |
+|  | `soumettre.iroko` | IROKO Engineer | IROKO Engineer |
+|  | `formulaire.titre` | Votre demande | Ihre Anfrage |
+|  | `formulaire.obligatoires` | Les champs suivis de * sont obligatoires. | Mit * markierte Felder sind Pflichtfelder. |
+|  | `formulaire.groupes.vous` | Vous et votre structure | Sie und Ihre Organisation |
+|  | `formulaire.groupes.projet` | Votre projet | Ihr Projekt |
+|  | `formulaire.groupes.contact` | Pour vous répondre | Damit wir antworten können |
+|  | `formulaire.choisir` | Choisir dans la liste | Bitte auswählen |
+|  | `formulaire.nom` | Nom et prénom * | Vor- und Nachname * |
+|  | `formulaire.structure` | Nom de la structure ou du projet * | Name der Organisation oder des Projekts * |
+| \* | `formulaire.statut` | Statut * | Art der Organisation * <br>_Note : « Statut » rendu par « Art der Organisation »_ |
+|  | `formulaire.statuts.tpe` | TPE ou PME | Kleinst-, kleines oder mittleres Unternehmen |
+|  | `formulaire.statuts.artisan` | Artisan | Handwerksbetrieb |
+|  | `formulaire.statuts.startup` | Startup ou projet de jeunes | Start-up oder Projekt junger Menschen |
+|  | `formulaire.statuts.ecole` | École ou université | Schule oder Hochschule |
+|  | `formulaire.statuts.association` | Association | Verein |
+| \* | `formulaire.statuts.collectivite` | Collectivité | Kommune <br>_Note : « Collectivité » rendu par « Kommune »_ |
+|  | `formulaire.statuts.autre` | Autre | Sonstiges |
+|  | `formulaire.region` | Région * | Region * |
+|  | `formulaire.ville` | Ville * | Ort * |
+|  | `formulaire.secteur` | Secteur d’activité (facultatif) | Branche (optional) |
+|  | `formulaire.secteurAide` | Par exemple : agroalimentaire, menuiserie, construction. | Zum Beispiel: Lebensmittelverarbeitung, Tischlerei, Bau. |
+|  | `formulaire.besoin` | Type de besoin * | Art des Bedarfs * |
+|  | `formulaire.besoins.structure` | Structure : résistance, flambage, vibrations | Tragwerke: Festigkeit, Knicken, Schwingungen |
+|  | `formulaire.besoins.fluides` | Fluides et thermique : air, eau, chaleur | Strömung und Wärme: Luft, Wasser, Wärme |
+|  | `formulaire.besoins.conception` | Conception : comparer des variantes, alléger une pièce | Konstruktion: Varianten vergleichen, ein Bauteil leichter machen |
+|  | `formulaire.besoins.inconnu` | Je ne sais pas encore | Weiß ich noch nicht |
+|  | `formulaire.description` | Décrivez votre projet et votre question * | Beschreiben Sie Ihr Projekt und Ihre Frage * |
+|  | `formulaire.descriptionAide` | Ce que vous voulez fabriquer ou vérifier, les matériaux, et les dimensions si vous les connaissez. | Was Sie bauen oder prüfen möchten, die Werkstoffe und, falls bekannt, die Maße. |
+|  | `formulaire.compteur` | Caractères : {{n}} (minimum {{min}}) | Zeichen: {{n}} (mindestens {{min}}) |
+|  | `formulaire.fichiers` | Plans, photos ou fichiers (facultatif) | Pläne, Fotos oder Dateien (optional) |
+|  | `formulaire.fichiersAide` | PDF, JPG, PNG, STEP, IGES, DWG, DXF ou ZIP, 10 Mo au total. Vous les joindrez vous-même à votre message WhatsApp ou à votre e-mail : nous les listons dans le message. | PDF, JPG, PNG, STEP, IGES, DWG, DXF oder ZIP, insgesamt 10 MB. Sie hängen sie selbst an Ihre WhatsApp-Nachricht oder E-Mail an: Wir führen sie in der Nachricht auf. |
+|  | `formulaire.fichiersTotal` | Total : {{taille}} sur 10 Mo | Gesamt: {{taille}} von 10 MB |
+|  | `formulaire.retirer` | Retirer {{nom}} | {{nom}} entfernen |
+|  | `formulaire.ko` | {{n}} Ko | {{n}} KB |
+|  | `formulaire.mo` | {{n}} Mo | {{n}} MB |
+|  | `formulaire.delai` | Délai souhaité (facultatif) | Gewünschter Zeitraum (optional) |
+|  | `formulaire.delais.aucun` | Pas de date précise | Kein fester Termin |
+|  | `formulaire.delais.trois` | Dans les 3 prochains mois | In den nächsten 3 Monaten |
+|  | `formulaire.delais.six` | Dans les 6 prochains mois | In den nächsten 6 Monaten |
+|  | `formulaire.delais.plus` | Plus tard | Später |
+|  | `formulaire.delaiAide` | Le programme ne traite pas les projets urgents. | Dringende Projekte kann das Programm nicht bearbeiten. |
+|  | `formulaire.email` | Adresse e-mail * | E-Mail-Adresse * |
+|  | `formulaire.telephone` | Téléphone ou WhatsApp (facultatif) | Telefon oder WhatsApp (optional) |
+|  | `formulaire.telephoneAide` | Avec l’indicatif, par exemple +237 6 90 00 00 00. | Mit Ländervorwahl, zum Beispiel +237 6 90 00 00 00. |
+|  | `formulaire.nda` | Je souhaite signer un accord de confidentialité avant d’envoyer mes plans. | Ich möchte vor dem Versand meiner Pläne eine Vertraulichkeitsvereinbarung unterzeichnen. |
+| \* | `formulaire.consentement` | J’accepte que mes informations soient traitées par WAHHF Foundation pour étudier ma demande et me répondre, conformément à la &lt;lien>politique de confidentialité&lt;/lien>. * | Ich bin einverstanden, dass die WAHHF Foundation meine Angaben gemäß der &lt;lien>Datenschutzerklärung&lt;/lien> verarbeitet, um meine Anfrage zu prüfen und mir zu antworten. * <br>_Note : consentement (RGPD) rendu avec « Datenschutzerklärung » ; formule à faire valider_ |
+|  | `formulaire.pot` | Laissez ce champ vide | Dieses Feld bitte leer lassen |
+|  | `formulaire.envoyerWhatsapp` | Envoyer ma demande par WhatsApp | Anfrage per WhatsApp senden |
+|  | `formulaire.envoyerEmail` | Envoyer par e-mail | Per E-Mail senden |
+|  | `formulaire.note` | Le site ne transmet pas encore les formulaires : WhatsApp ou votre messagerie s’ouvre avec votre demande déjà écrite, et c’est vous qui l’envoyez. | Die Website versendet noch keine Formulare: WhatsApp oder Ihr E-Mail-Programm öffnet sich mit Ihrer fertig geschriebenen Anfrage, und Sie senden sie selbst ab. |
+|  | `formulaire.confidentialite` | Vos plans et vos informations ne servent qu’à étudier votre demande. | Ihre Pläne und Angaben dienen nur der Prüfung Ihrer Anfrage. |
+|  | `formulaire.pret.whatsapp` | Votre demande est prête dans WhatsApp. | Ihre Anfrage ist in WhatsApp bereit. |
+|  | `formulaire.pret.email` | Votre demande est prête dans votre messagerie. | Ihre Anfrage ist in Ihrem E-Mail-Programm bereit. |
+|  | `formulaire.pret.envoyer` | Elle ne nous parvient qu’une fois que vous l’avez envoyée. | Sie erreicht uns erst, wenn Sie sie abgeschickt haben. |
+|  | `formulaire.pret.joindre` | Joignez-y vos fichiers : {{liste}}. | Hängen Sie Ihre Dateien an: {{liste}}. |
+|  | `formulaire.pret.rien` | Rien ne s’est ouvert ? &lt;whatsapp>Ouvrir WhatsApp&lt;/whatsapp> ou &lt;mail>écrire à {{email}}&lt;/mail>. | Hat sich nichts geöffnet? &lt;whatsapp>WhatsApp öffnen&lt;/whatsapp> oder &lt;mail>an {{email}} schreiben&lt;/mail>. |
+|  | `formulaire.erreurs.nom` | Indiquez votre nom et votre prénom. | Geben Sie Ihren Vor- und Nachnamen ein. |
+|  | `formulaire.erreurs.structure` | Indiquez le nom de votre structure ou de votre projet. | Geben Sie den Namen Ihrer Organisation oder Ihres Projekts ein. |
+|  | `formulaire.erreurs.statut` | Choisissez le statut de votre structure dans la liste. | Wählen Sie die Art Ihrer Organisation aus der Liste. |
+|  | `formulaire.erreurs.region` | Choisissez votre région dans la liste. | Wählen Sie Ihre Region aus der Liste. |
+|  | `formulaire.erreurs.ville` | Indiquez la ville de votre structure. | Geben Sie den Ort Ihrer Organisation ein. |
+|  | `formulaire.erreurs.besoin` | Choisissez un type de besoin, ou « Je ne sais pas encore ». | Wählen Sie eine Art des Bedarfs oder „Weiß ich noch nicht“. |
+|  | `formulaire.erreurs.descriptionVide` | Décrivez votre projet en quelques phrases. | Beschreiben Sie Ihr Projekt in ein paar Sätzen. |
+|  | `formulaire.erreurs.descriptionCourte` | Ajoutez quelques détails : au moins {{min}} caractères, il en manque {{reste}}. | Ergänzen Sie ein paar Details: mindestens {{min}} Zeichen, es fehlen noch {{reste}}. |
+|  | `formulaire.erreurs.fichierType` | Format non accepté : {{noms}}. Formats acceptés : PDF, JPG, PNG, STEP, IGES, DWG, DXF ou ZIP. | Dateiformat nicht zulässig: {{noms}}. Zulässige Formate: PDF, JPG, PNG, STEP, IGES, DWG, DXF oder ZIP. |
+|  | `formulaire.erreurs.fichiersPoids` | Vos fichiers pèsent {{total}} au total, pour une limite de 10 Mo. Retirez un fichier ou envoyez un ZIP plus léger. | Ihre Dateien sind zusammen {{total}} groß, die Grenze liegt bei 10 MB. Entfernen Sie eine Datei oder senden Sie ein kleineres ZIP. |
+|  | `formulaire.erreurs.consentement` | Cochez la case pour que nous puissions étudier votre demande. | Setzen Sie das Häkchen, damit wir Ihre Anfrage prüfen können. |
+|  | `formulaire.draft.subject` | Programme Simulation : demande de {{structure}} | Simulationsprogramm: Anfrage von {{structure}} |
+|  | `formulaire.draft.intro` | Je souhaite soumettre un projet au programme de simulation numérique solidaire. | Ich möchte ein Projekt für das gemeinnützige Simulationsprogramm einreichen. |
+|  | `formulaire.draft.nom` | Nom | Name |
+|  | `formulaire.draft.structure` | Structure ou projet | Organisation oder Projekt |
+|  | `formulaire.draft.statut` | Statut | Art der Organisation |
+|  | `formulaire.draft.region` | Région | Region |
+|  | `formulaire.draft.ville` | Ville | Ort |
+|  | `formulaire.draft.secteur` | Secteur | Branche |
+|  | `formulaire.draft.besoin` | Besoin | Bedarf |
+|  | `formulaire.draft.description` | Description | Beschreibung |
+|  | `formulaire.draft.delai` | Délai souhaité | Gewünschter Zeitraum |
+|  | `formulaire.draft.email` | E-mail | E-Mail |
+|  | `formulaire.draft.telephone` | Téléphone ou WhatsApp | Telefon oder WhatsApp |
+|  | `formulaire.draft.nda` | Accord de confidentialité | Vertraulichkeitsvereinbarung |
+|  | `formulaire.draft.ndaOui` | souhaité avant l’envoi des plans | vor dem Versand der Pläne gewünscht |
+|  | `formulaire.draft.fichiers` | Fichiers à joindre | Anzuhängende Dateien |
+| \* | `formulaire.draft.consent` | J’accepte que mes informations soient traitées par WAHHF Foundation pour étudier ma demande (RGPD). | Ich bin einverstanden, dass die WAHHF Foundation meine Angaben zur Prüfung meiner Anfrage verarbeitet (DSGVO). <br>_Note : même formule de consentement, avec « DSGVO »_ |
+| \* | `contenu.offres.prediagnostic.titre` | _(français dans le fichier de données)_ | Erstberatung <br>_Note : « Pré-diagnostic » rendu par « Erstberatung »_ |
+|  | `contenu.offres.prediagnostic.texte` | _(français dans le fichier de données)_ | Ein Gespräch, um Ihren Bedarf zu verstehen. |
+|  | `contenu.offres.prediagnostic.recu` | _(français dans le fichier de données)_ | Sie erhalten eine klare Einschätzung, was eine Simulation Ihnen bringen kann. |
+|  | `contenu.offres.etude.titre` | _(français dans le fichier de données)_ | Einfache Simulationsstudie |
+|  | `contenu.offres.etude.texte` | _(français dans le fichier de données)_ | Eine gezielte Berechnung zu der Frage, die für Sie zählt. |
+|  | `contenu.offres.etude.recu` | _(français dans le fichier de données)_ | Sie erhalten einen vereinfachten Bericht mit seinen Schlussfolgerungen. |
+|  | `contenu.offres.conseil.titre` | _(français dans le fichier de données)_ | Konstruktionsberatung |
+|  | `contenu.offres.conseil.texte` | _(français dans le fichier de données)_ | Werkstoffe, Formen, Verbesserungsmöglichkeiten. |
+|  | `contenu.offres.conseil.recu` | _(français dans le fichier de données)_ | Sie erhalten konkrete Empfehlungen für Ihr Bauteil oder Bauwerk. |
+|  | `contenu.offres.atelier.titre` | _(français dans le fichier de données)_ | Einführungsworkshop |
+|  | `contenu.offres.atelier.texte` | _(français dans le fichier de données)_ | Für Ihre Teams, Ihre Schülerinnen und Schüler oder Ihre Studierenden. |
+|  | `contenu.offres.atelier.recu` | _(français dans le fichier de données)_ | Sie erhalten eine Einheit, um die Ingenieursimulation kennenzulernen. |
+|  | `contenu.publics.tpe.texte` | _(français dans le fichier de données)_ | Kleinst-, kleine und mittlere Unternehmen |
+|  | `contenu.publics.artisans.texte` | _(français dans le fichier de données)_ | Handwerksbetriebe |
+|  | `contenu.publics.startups.texte` | _(français dans le fichier de données)_ | Start-ups und Projekte junger Menschen |
+|  | `contenu.publics.ecoles.texte` | _(français dans le fichier de données)_ | Schulen und Hochschulen |
+|  | `contenu.publics.associations.texte` | _(français dans le fichier de données)_ | Vereine und Kommunen |
+|  | `contenu.nonPublics.grandes.texte` | _(français dans le fichier de données)_ | Große Unternehmen |
+|  | `contenu.nonPublics.certifiees.texte` | _(français dans le fichier de données)_ | Studien, die von einer zugelassenen Ingenieurin oder einem zugelassenen Ingenieur zertifiziert oder unterzeichnet werden müssen |
+|  | `contenu.nonPublics.urgents.texte` | _(français dans le fichier de données)_ | Dringende Projekte |
+|  | `contenu.exemples.hangar.titre` | _(français dans le fichier de données)_ | Dachtragwerk einer landwirtschaftlichen Halle |
+|  | `contenu.exemples.hangar.besoin` | _(français dans le fichier de données)_ | Prüfen, ob ein Dachtragwerk aus Stahl oder Holz dem Wind und dem Gewicht des Dachs standhält. |
+|  | `contenu.exemples.hangar.type` | _(français dans le fichier de données)_ | Tragwerke · Statik |
+|  | `contenu.exemples.chassis.titre` | _(français dans le fichier de données)_ | Gestell einer Verarbeitungsmaschine |
+|  | `contenu.exemples.chassis.besoin` | _(français dans le fichier de données)_ | Eine Ölpresse oder eine Maniokmühle: das Gestell prüfen, das die Kräfte und Schwingungen aufnimmt. |
+|  | `contenu.exemples.chassis.type` | _(français dans le fichier de données)_ | Tragwerke · Ermüdung und Schwingungen |
+|  | `contenu.exemples.sechoir.titre` | _(français dans le fichier de données)_ | Solartrockner |
+|  | `contenu.exemples.sechoir.besoin` | _(français dans le fichier de données)_ | Warme Luft gleichmäßig führen, um Erzeugnisse zu trocknen, ohne sie zu beschädigen. |
+|  | `contenu.exemples.sechoir.type` | _(français dans le fichier de données)_ | Strömung und Wärme |
+|  | `contenu.exemples.classe.titre` | _(français dans le fichier de données)_ | Natürliche Lüftung eines Klassenraums |
+|  | `contenu.exemples.classe.besoin` | _(français dans le fichier de données)_ | Einen Raum ohne Klimaanlage kühlen, indem die Öffnungen besser platziert werden. |
+|  | `contenu.exemples.classe.type` | _(français dans le fichier de données)_ | Strömung · Lüftung |
+|  | `contenu.exemples.reservoir.titre` | _(français dans le fichier de données)_ | Hochbehälter für Wasser |
+|  | `contenu.exemples.reservoir.besoin` | _(français dans le fichier de données)_ | Das Traggerüst eines vollen Behälters prüfen, unter seinem Eigengewicht und unter Wind. |
+|  | `contenu.exemples.reservoir.type` | _(français dans le fichier de données)_ | Tragwerke · Statik und Knicken |
+|  | `contenu.etapes.besoin.titre` | _(français dans le fichier de données)_ | Sie beschreiben Ihren Bedarf |
+|  | `contenu.etapes.besoin.texte` | _(français dans le fichier de données)_ | Mit dem Formular auf dieser Seite: Ihr Projekt, und Ihre Pläne oder Fotos, falls vorhanden. |
+|  | `contenu.etapes.eligibilite.titre` | _(français dans le fichier de données)_ | Wir prüfen die Teilnahme |
+|  | `contenu.etapes.eligibilite.texte` | _(français dans le fichier de données)_ | Wir prüfen, ob Ihr Projekt in das Programm passt und ob eine Simulation Ihnen helfen kann. |
+|  | `contenu.etapes.cadrage.titre` | _(français dans le fichier de données)_ | Abstimmungsgespräch |
+|  | `contenu.etapes.cadrage.texte` | _(français dans le fichier de données)_ | Per Video, Telefon oder WhatsApp, um die Frage und die Daten zu klären. |
+|  | `contenu.etapes.simulation.titre` | _(français dans le fichier de données)_ | Simulation |
+|  | `contenu.etapes.simulation.texte` | _(français dans le fichier de données)_ | Wir modellieren Ihr Bauteil oder Bauwerk und führen die Berechnung durch. |
+|  | `contenu.etapes.restitution.titre` | _(français dans le fichier de données)_ | Ergebnisse |
+|  | `contenu.etapes.restitution.texte` | _(français dans le fichier de données)_ | Ein vereinfachter Bericht und ein Gespräch, um die Ergebnisse und die möglichen nächsten Schritte zu erklären. |
+|  | `contenu.familles.structures.titre` | _(français dans le fichier de données)_ | Tragwerke und Festigkeit |
+|  | `contenu.familles.structures.texte` | _(français dans le fichier de données)_ | Herausfinden, ob ein Bauteil oder Bauwerk hält, und wo es am stärksten beansprucht wird. |
+|  | `contenu.familles.structures.analyses[0]` | Portugal | Statik |
+|  | `contenu.familles.structures.analyses[1]` | Poland | Knicken |
+|  | `contenu.familles.structures.analyses[2]` | Denmark | Ermüdung |
+|  | `contenu.familles.structures.analyses[3]` | Greece | Schwingungen |
+|  | `contenu.familles.fluides.titre` | _(français dans le fichier de données)_ | Strömung und Wärme |
+|  | `contenu.familles.fluides.texte` | _(français dans le fichier de données)_ | Verstehen, wie Luft, Wasser oder Wärme strömen. |
+|  | `contenu.familles.fluides.analyses[0]` | Portugal | Strömungen |
+|  | `contenu.familles.fluides.analyses[1]` | Poland | Lüftung |
+|  | `contenu.familles.fluides.analyses[2]` | Denmark | Wärmeübertragung |
+|  | `contenu.familles.conception.titre` | _(français dans le fichier de données)_ | Konstruktion und Optimierung |
+|  | `contenu.familles.conception.texte` | _(français dans le fichier de données)_ | Die beste Form wählen, bevor gefertigt wird. |
+|  | `contenu.familles.conception.analyses[0]` | Portugal | Varianten vergleichen |
+|  | `contenu.familles.conception.analyses[1]` | Poland | Ein Bauteil leichter machen |
+|  | `contenu.engagements.gratuit.titre` | _(français dans le fichier de données)_ | Kostenlos und ohne Gegenleistung |
+|  | `contenu.engagements.gratuit.texte` | _(français dans le fichier de données)_ | Keine Zahlung, in keinem Schritt. Wenn jemand für dieses Programm Geld von Ihnen verlangt, zahlen Sie nicht und sagen Sie uns Bescheid. |
+|  | `contenu.engagements.confidentialite.titre` | _(français dans le fichier de données)_ | Vertraulichkeit |
+|  | `contenu.engagements.confidentialite.texte` | _(français dans le fichier de données)_ | Ihre Pläne dienen nur Ihrer Studie. Vor dem Versand kann eine Vertraulichkeitsvereinbarung unterzeichnet werden. |
+|  | `contenu.engagements.fichiers.titre` | _(français dans le fichier de données)_ | Ihre Dateien bleiben Ihre |
+|  | `contenu.engagements.fichiers.texte` | _(français dans le fichier de données)_ | Ihre Pläne, Modelle und Daten gehören Ihnen, vor und nach der Studie. |
+|  | `contenu.engagements.selection.titre` | _(français dans le fichier de données)_ | Eine begrenzte Zahl an Projekten |
+|  | `contenu.engagements.selection.texte` | _(français dans le fichier de données)_ | Die Projekte werden nach ihrem Nutzen vor Ort ausgewählt. |
+|  | `contenu.limite.titre` | _(français dans le fichier de données)_ | Unsere Grenzen |
+| \* | `contenu.limite.texte` | _(français dans le fichier de données)_ | Unsere Ergebnisse sind Richtwerte und dienen der Ausbildung. Sie ersetzen keine zertifizierte statische Berechnung: Lassen Sie sie für ein Bauwerk oder eine Anlage von einer zugelassenen Ingenieurin oder einem zugelassenen Ingenieur prüfen. <br>_Note : « note de calcul certifiée » rendu par « zertifizierte statische Berechnung », « ingénieur agréé » par « zugelassene Ingenieurin oder zugelassener Ingenieur » (phrase des limites à valider, question 217)_ |
+|  | `contenu.faq.gratuit.question` | _(français dans le fichier de données)_ | Ist es wirklich kostenlos? |
+|  | `contenu.faq.gratuit.reponse` | _(français dans le fichier de données)_ | Ja. Sie zahlen nichts, in keinem Schritt. Die Stiftung ist der soziale Zweig der IROKO-Gruppe, die ihre Betriebskosten trägt. |
+|  | `contenu.faq.qui.question` | _(français dans le fichier de données)_ | Wer führt die Simulationen durch? |
+|  | `contenu.faq.qui.reponse` | _(français dans le fichier de données)_ | Unsere Ingenieurinnen und Ingenieure, mit jungen Ingenieurinnen und Ingenieuren und Studierenden, die sie anleiten. |
+|  | `contenu.faq.beneficiaires.question` | _(français dans le fichier de données)_ | Wer kann teilnehmen? |
+|  | `contenu.faq.beneficiaires.reponse` | _(français dans le fichier de données)_ | Kleine Organisationen mit Sitz in Kamerun: Kleinst-, kleine und mittlere Unternehmen, Handwerksbetriebe, Start-ups und Projekte junger Menschen, Schulen und Hochschulen, Vereine und Kommunen. |
+|  | `contenu.faq.fichiers.question` | _(français dans le fichier de données)_ | Welche Dateien soll ich senden? |
+|  | `contenu.faq.fichiers.reponse` | _(français dans le fichier de données)_ | Was Sie haben: Pläne, Skizzen, Fotos oder CAD-Dateien (PDF, JPG, PNG, STEP, IGES, DWG, DXF oder ein ZIP), insgesamt 10 MB. Eine genaue Beschreibung genügt für den Anfang. |
+|  | `contenu.faq.confidentialite.question` | _(français dans le fichier de données)_ | Bleiben meine Pläne vertraulich? |
+|  | `contenu.faq.confidentialite.reponse` | _(français dans le fichier de données)_ | Ja. Sie dienen nur Ihrer Studie. Sie können vor dem Versand eine Vertraulichkeitsvereinbarung verlangen: Kreuzen Sie das Feld im Formular an. |
+|  | `contenu.faq.delai.question` | _(français dans le fichier de données)_ | Wie lange dauert es? |
+|  | `contenu.faq.delai.reponse` | _(français dans le fichier de données)_ | Das hängt vom Projekt und von der Zahl der laufenden Anfragen ab. Die Dauer teilen wir Ihnen nach dem Abstimmungsgespräch mit. |
+|  | `contenu.faq.certifies.question` | _(français dans le fichier de données)_ | Sind die Ergebnisse zertifiziert? |
+|  | `contenu.faq.certifies.reponse` | _(français dans le fichier de données)_ | Nein. Sie sind Richtwerte und dienen der Ausbildung; sie ersetzen keine zertifizierte statische Berechnung. Lassen Sie sie für ein Bauwerk oder eine Anlage von einer zugelassenen Ingenieurin oder einem zugelassenen Ingenieur prüfen, oder wenden Sie sich an IROKO Engineer. |
+|  | `contenu.faq.refus.question` | _(français dans le fichier de données)_ | Was, wenn mein Projekt nicht ausgewählt wird? |
+|  | `contenu.faq.refus.reponse` | _(français dans le fichier de données)_ | Wir sagen es Ihnen, wenn möglich mit einem Hinweis: eine Quelle, eine Schulung oder IROKO Engineer für eine vollständige Studie. |

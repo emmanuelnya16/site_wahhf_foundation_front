@@ -509,3 +509,35 @@ Données qui manquent pour un Impressum allemand complet (§ 5 DDG). Les mention
 210. Registre et numéro d'inscription : le registre (par exemple le Vereinsregister du tribunal d'instance, avec son numéro VR, ou l'autorité de surveillance des fondations ; au Cameroun, le récépissé de déclaration) et le numéro. S'il existe, le numéro de TVA intracommunautaire (USt-IdNr.).
 211. E-mail officiel : contact@wahhf-foundation.org, affiché partout aujourd'hui, est-il bien l'adresse officielle, et qui la relève ?
 212. Section « Nos partenaires » de /accueil : quelle est la liste complète de vos partenaires ? Pour chacun : le nom exact, un logo en bonne qualité (SVG, ou PNG d’au moins 400 px de large, fond transparent), le lien vers son site, son pays et votre accord pour l’afficher (et le sien, si besoin). **Le 26 novembre 2026** : quatre logos reçus (IROKO, CRTV, L’Eldorado Digital Academy, Wahhf bio délices), affichés en ligne. Restent à confirmer : le nom complet de chacun (CRTV : « Cameroon Radio Television » ?), leur site (la carte n’est un lien qu’avec un site confirmé ; irokogroup.com, cité sur l’ancienne carte /vkibusiness, est-il le bon ?), leur pays, et des logos plus grands pour CRTV (297 px) et L’Eldorado (192 px). À partir de six partenaires, les logos défilent sur deux rangées.
+
+## Programme Simulation (lot 13, 27 novembre 2026)
+
+La page /simulation présente le programme sans aucun chiffre, aucun délai, aucun nom de logiciel et aucun nom de personne. Deux textes portent `confirme: false` mais restent affichés, parce qu'ils protègent le visiteur : la phrase des limites, et la réponse « Les résultats sont-ils certifiés ? ». Une réponse confirmée se reporte dans `src/data/simulation.ts` (voir docs/page-simulation.md, « Confirmer un fait »).
+
+213. Qui réalise les simulations ? Ingénieurs de la fondation, d'IROKO Engineer, enseignants, étudiants encadrés ? Avec quelles qualifications, et qui relit chaque rapport ? La FAQ dit seulement « Nos ingénieurs, avec de jeunes ingénieurs et des étudiants qu’ils encadrent ».
+214. Combien de projets par mois pouvez-vous accepter ? La page dit « un nombre de projets limité », sans chiffre.
+215. Éligibilité exacte :
+   - quels statuts sont acceptés, et jusqu'à quelle taille (nombre de salariés, chiffre d'affaires) ;
+   - seulement au Cameroun, ou aussi la diaspora et les pays voisins ;
+   - les particuliers sont-ils acceptés ;
+   - que faire d'un projet commercial d'une grande entreprise passant par une petite structure ?
+216. L'offre gratuite exacte, pour chacune des quatre formes :
+   - pré-diagnostic : la durée de l'échange ;
+   - étude de simulation simple : le contenu, le nombre de variantes, la longueur du rapport ;
+   - conseil de conception ;
+   - atelier d'initiation : la durée, le nombre de participants, en ligne ou sur place, où.
+   Tout est-il gratuit, sans aucune contrepartie (la page le dit) ?
+217. Phrase des limites, affichée telle quelle : « Nos résultats sont indicatifs et pédagogiques. Ils ne remplacent pas une note de calcul certifiée : pour un ouvrage ou un équipement, faites-les valider par un ingénieur agréé. » La validez-vous, ou voulez-vous une autre formulation (avis juridique) ?
+218. Licences des logiciels de simulation :
+   - Quels logiciels seront utilisés, et sous quelle licence ?
+   - Une licence académique ou étudiante n'autorise pas, en général, un travail pour une entreprise, même gratuit. Il faut une licence commerciale, une licence pour association, ou un logiciel libre. Pouvez-vous confirmer que les licences le permettent ?
+   - Aucun nom de logiciel n'est affiché sur la page.
+219. Adresse de réception des demandes, et personne qui y répond. En attendant, le formulaire prépare un message vers contact@wahhf-foundation.org ou vers le WhatsApp +49 1521 8956743.
+220. Nom officiel du programme en français, en anglais et en allemand. La page dit « Programme Simulation », « simulation numérique solidaire », « Pro bono engineering simulation » et « Gemeinnützige Ingenieursimulation ».
+221. Délais :
+   - sous combien de jours répondez-vous à une demande ;
+   - combien de temps dure une étude simple.
+   La FAQ « Combien de temps cela prend-il ? » ne donne aucun chiffre.
+222. Accord de confidentialité : avez-vous un modèle d'accord à faire signer avant l'envoi des plans, et qui le signe pour la fondation ? Le formulaire propose de le demander.
+223. Envoi du formulaire : le site ne transmet aucun formulaire, la page Contact non plus. Acceptez-vous la solution proposée dans docs/page-simulation.md, « Envoi du formulaire » : un script PHP sur l'hébergement, avec un numéro de demande, les pièces jointes, un anti-robot et une limite d'envois ? Il faut PHP 8.1 ou plus et une boîte SMTP.
+224. Photo de la section « Les jeunes au cœur du programme » : c'est aujourd'hui A30 (participants de dos, journée du 25 avril 2026). Avez-vous une photo de jeunes au travail sur un calcul ou une maquette, avec l'accord des personnes qu'on y voit ?

@@ -1,4 +1,15 @@
 {
+  "_relire": [
+    "seo.title : « Simulation numérique solidaire » rendu par « Gemeinnützige Ingenieursimulation » (nom officiel du programme à confirmer, question 220)",
+    "hero.intro : « jeunes talents encadrés » rendu par « betreute junge Talente »",
+    "hero.carte.titre : « Portique de hangar » rendu par « Rahmen einer Halle »",
+    "contenu.offres.prediagnostic.titre : « Pré-diagnostic » rendu par « Erstberatung »",
+    "contenu.limite.texte : « note de calcul certifiée » rendu par « zertifizierte statische Berechnung », « ingénieur agréé » par « zugelassene Ingenieurin oder zugelassener Ingenieur » (phrase des limites à valider, question 217)",
+    "formulaire.statut : « Statut » rendu par « Art der Organisation »",
+    "formulaire.statuts.collectivite : « Collectivité » rendu par « Kommune »",
+    "formulaire.consentement : consentement (RGPD) rendu avec « Datenschutzerklärung » ; formule à faire valider",
+    "formulaire.draft.consent : même formule de consentement, avec « DSGVO »"
+  ],
   "seo": {
     "title": "Gemeinnützige Ingenieursimulation",
     "description": "Die WAHHF Foundation bietet kleinen Organisationen in Kamerun kostenlose Ingenieursimulationen (Tragwerke, Strömung, Wärme, Konstruktionsberatung) und bildet junge Ingenieurinnen und Ingenieure an echten Fällen aus."
