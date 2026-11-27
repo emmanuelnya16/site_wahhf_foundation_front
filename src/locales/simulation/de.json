@@ -3,7 +3,159 @@
     "title": "Gemeinnützige Ingenieursimulation",
     "description": "Die WAHHF Foundation bietet kleinen Organisationen in Kamerun kostenlose Ingenieursimulationen (Tragwerke, Strömung, Wärme, Konstruktionsberatung) und bildet junge Ingenieurinnen und Ingenieure an echten Fällen aus."
   },
+  "aConfirmer": "zu bestätigen",
+  "nouvelOnglet": "(neuer Tab)",
   "hero": {
-    "titre": "Kostenlose Ingenieursimulation für Unternehmen und Projekte in Kamerun"
+    "surtitre": "Gemeinnütziges Programm · Kostenlos",
+    "titre": "Kostenlose Ingenieursimulation für Unternehmen und Projekte in Kamerun",
+    "intro": "Unsere Ingenieurinnen und Ingenieure und betreute junge Talente prüfen, simulieren und beraten kostenlos die kleinen Organisationen, die die lokale Wirtschaft aufbauen.",
+    "badges": ["100 % kostenlos", "Für Organisationen in Kamerun", "FR · EN · DE"],
+    "soumettre": "Mein Projekt einreichen",
+    "eligible": "Komme ich infrage?",
+    "carte": {
+      "titre": "Simulation · Rahmen einer Halle",
+      "vent": "Wind",
+      "toiture": "Dach",
+      "sollicitees": "Am stärksten beanspruchte Stäbe",
+      "autres": "Übrige Stäbe",
+      "legende": "Anschauungsbeispiel, fiktive Werte",
+      "alt": "Zeichnung: das Tragwerk einer landwirtschaftlichen Halle, zwei Stützen und ein Dachbinder, unter dem Druck des Windes und dem Gewicht des Dachs. Es biegt sich leicht durch, und die am stärksten beanspruchten Stäbe leuchten gelb auf."
+    }
+  },
+  "pourquoi": {
+    "surtitre": "Warum dieses Programm",
+    "titre": "Doppelte Wirkung: für die lokale Wirtschaft und für junge Menschen.",
+    "cartes": {
+      "economie": {
+        "titre": "Die lokale Wirtschaft stärken",
+        "texte": "Kleine Unternehmen, Handwerksbetriebe und Start-ups junger Menschen: Ein Bauteil oder Bauwerk, das vor der Fertigung geprüft wird, bedeutet weniger Materialverlust und weniger Risiko.",
+        "lien": "Unternehmertum junger Menschen"
+      },
+      "jeunesse": {
+        "titre": "Junge Menschen ausbilden",
+        "texte": "Junge Ingenieurinnen und Ingenieure sowie Studierende lernen unter Anleitung an echten Fällen: denen der Organisationen, die sie brauchen.",
+        "lien": "Bildung"
+      },
+      "iroko": {
+        "titre": "Mit der IROKO-Gruppe",
+        "texte": "Die Stiftung ist der soziale Zweig der IROKO-Gruppe, die ihre Betriebskosten trägt."
+      }
+    }
+  },
+  "offre": {
+    "surtitre": "Was wir anbieten",
+    "titre": "Vier Arten, Ihnen zu helfen.",
+    "recu": "Was Sie erhalten"
+  },
+  "publics": {
+    "surtitre": "Für wen?",
+    "titre": "Für Organisationen, die sich keine Studie leisten können.",
+    "pour": "Das Programm richtet sich an",
+    "base": "Mit Sitz in Kamerun.",
+    "non": "Nicht gedacht für…",
+    "nonTexte": "Für diese Anliegen erstellt IROKO Engineer, der Ingenieurbereich der IROKO-Gruppe, vollständige Studien.",
+    "iroko": "IROKO Engineer entdecken"
+  },
+  "exemples": {
+    "surtitre": "Beispiele möglicher Anfragen",
+    "titre": "Womit Sie sich an uns wenden könnten.",
+    "intro": "Beispiele, um Ihnen eine Vorstellung zu geben: Es sind keine abgeschlossenen Projekte.",
+    "etiquette": "Beispiel",
+    "type": "Art der Simulation",
+    "liste": "Beispiele für Anfragen, zum Durchblättern",
+    "precedent": "Vorheriges Beispiel",
+    "suivant": "Nächstes Beispiel"
+  },
+  "etapes": {
+    "surtitre": "So funktioniert es",
+    "titre": "Fünf Schritte, von Ihrem Bedarf bis zum Bericht."
+  },
+  "familles": {
+    "surtitre": "Was wir simulieren können",
+    "titre": "Drei Simulationsbereiche.",
+    "analyses": "Arten der Analyse"
+  },
+  "engagements": {
+    "surtitre": "Unsere Zusagen und unsere Grenzen",
+    "titre": "Was wir zusagen, und was wir nicht tun.",
+    "nos": "Unsere Zusagen"
+  },
+  "jeunes": {
+    "surtitre": "Junge Menschen im Mittelpunkt",
+    "titre": "Studierende und junge Ingenieurinnen und Ingenieure, die an echten Fällen lernen.",
+    "texte": "Unter Anleitung von Ingenieurinnen und Ingenieuren wirken Studierende und junge Ingenieurinnen und Ingenieure an den Studien mit. Sie lernen an echten Bedürfnissen: denen der Organisationen, die die lokale Wirtschaft tragen.",
+    "bouton": "Beim Programm mitmachen"
+  },
+  "faq": {
+    "surtitre": "Häufige Fragen",
+    "titre": "Bevor Sie Ihr Projekt einreichen."
+  },
+  "soumettre": {
+    "surtitre": "Mein Projekt einreichen",
+    "titre": "Erzählen Sie uns von Ihrem Projekt.",
+    "intro": "Beschreiben Sie Ihren Bedarf und fügen Sie Ihre Pläne oder Fotos bei, falls Sie welche haben. Wir melden uns, sobald wir Ihre Anfrage geprüft haben.",
+    "whatsappTitre": "Eine Frage vorab?",
+    "whatsapp": "Auf WhatsApp schreiben: {{numero}}",
+    "irokoTitre": "Brauchen Sie eine vollständige oder zertifizierte Studie?",
+    "iroko": "IROKO Engineer"
+  },
+  "contenu": {
+    "offres": {
+      "prediagnostic": { "titre": "Erstberatung", "texte": "Ein Gespräch, um Ihren Bedarf zu verstehen.", "recu": "Sie erhalten eine klare Einschätzung, was eine Simulation Ihnen bringen kann." },
+      "etude": { "titre": "Einfache Simulationsstudie", "texte": "Eine gezielte Berechnung zu der Frage, die für Sie zählt.", "recu": "Sie erhalten einen vereinfachten Bericht mit seinen Schlussfolgerungen." },
+      "conseil": { "titre": "Konstruktionsberatung", "texte": "Werkstoffe, Formen, Verbesserungsmöglichkeiten.", "recu": "Sie erhalten konkrete Empfehlungen für Ihr Bauteil oder Bauwerk." },
+      "atelier": { "titre": "Einführungsworkshop", "texte": "Für Ihre Teams, Ihre Schülerinnen und Schüler oder Ihre Studierenden.", "recu": "Sie erhalten eine Einheit, um die Ingenieursimulation kennenzulernen." }
+    },
+    "publics": {
+      "tpe": { "texte": "Kleinst-, kleine und mittlere Unternehmen" },
+      "artisans": { "texte": "Handwerksbetriebe" },
+      "startups": { "texte": "Start-ups und Projekte junger Menschen" },
+      "ecoles": { "texte": "Schulen und Hochschulen" },
+      "associations": { "texte": "Vereine und Kommunen" }
+    },
+    "nonPublics": {
+      "grandes": { "texte": "Große Unternehmen" },
+      "certifiees": { "texte": "Studien, die von einer zugelassenen Ingenieurin oder einem zugelassenen Ingenieur zertifiziert oder unterzeichnet werden müssen" },
+      "urgents": { "texte": "Dringende Projekte" }
+    },
+    "exemples": {
+      "hangar": { "titre": "Dachtragwerk einer landwirtschaftlichen Halle", "besoin": "Prüfen, ob ein Dachtragwerk aus Stahl oder Holz dem Wind und dem Gewicht des Dachs standhält.", "type": "Tragwerke · Statik" },
+      "chassis": { "titre": "Gestell einer Verarbeitungsmaschine", "besoin": "Eine Ölpresse oder eine Maniokmühle: das Gestell prüfen, das die Kräfte und Schwingungen aufnimmt.", "type": "Tragwerke · Ermüdung und Schwingungen" },
+      "sechoir": { "titre": "Solartrockner", "besoin": "Warme Luft gleichmäßig führen, um Erzeugnisse zu trocknen, ohne sie zu beschädigen.", "type": "Strömung und Wärme" },
+      "classe": { "titre": "Natürliche Lüftung eines Klassenraums", "besoin": "Einen Raum ohne Klimaanlage kühlen, indem die Öffnungen besser platziert werden.", "type": "Strömung · Lüftung" },
+      "reservoir": { "titre": "Hochbehälter für Wasser", "besoin": "Das Traggerüst eines vollen Behälters prüfen, unter seinem Eigengewicht und unter Wind.", "type": "Tragwerke · Statik und Knicken" }
+    },
+    "etapes": {
+      "besoin": { "titre": "Sie beschreiben Ihren Bedarf", "texte": "Mit dem Formular auf dieser Seite: Ihr Projekt, und Ihre Pläne oder Fotos, falls vorhanden." },
+      "eligibilite": { "titre": "Wir prüfen die Teilnahme", "texte": "Wir prüfen, ob Ihr Projekt in das Programm passt und ob eine Simulation Ihnen helfen kann." },
+      "cadrage": { "titre": "Abstimmungsgespräch", "texte": "Per Video, Telefon oder WhatsApp, um die Frage und die Daten zu klären." },
+      "simulation": { "titre": "Simulation", "texte": "Wir modellieren Ihr Bauteil oder Bauwerk und führen die Berechnung durch." },
+      "restitution": { "titre": "Ergebnisse", "texte": "Ein vereinfachter Bericht und ein Gespräch, um die Ergebnisse und die möglichen nächsten Schritte zu erklären." }
+    },
+    "familles": {
+      "structures": { "titre": "Tragwerke und Festigkeit", "texte": "Herausfinden, ob ein Bauteil oder Bauwerk hält, und wo es am stärksten beansprucht wird.", "analyses": ["Statik", "Knicken", "Ermüdung", "Schwingungen"] },
+      "fluides": { "titre": "Strömung und Wärme", "texte": "Verstehen, wie Luft, Wasser oder Wärme strömen.", "analyses": ["Strömungen", "Lüftung", "Wärmeübertragung"] },
+      "conception": { "titre": "Konstruktion und Optimierung", "texte": "Die beste Form wählen, bevor gefertigt wird.", "analyses": ["Varianten vergleichen", "Ein Bauteil leichter machen"] }
+    },
+    "engagements": {
+      "gratuit": { "titre": "Kostenlos und ohne Gegenleistung", "texte": "Keine Zahlung, in keinem Schritt. Wenn jemand für dieses Programm Geld von Ihnen verlangt, zahlen Sie nicht und sagen Sie uns Bescheid." },
+      "confidentialite": { "titre": "Vertraulichkeit", "texte": "Ihre Pläne dienen nur Ihrer Studie. Vor dem Versand kann eine Vertraulichkeitsvereinbarung unterzeichnet werden." },
+      "fichiers": { "titre": "Ihre Dateien bleiben Ihre", "texte": "Ihre Pläne, Modelle und Daten gehören Ihnen, vor und nach der Studie." },
+      "selection": { "titre": "Eine begrenzte Zahl an Projekten", "texte": "Die Projekte werden nach ihrem Nutzen vor Ort ausgewählt." }
+    },
+    "limite": {
+      "titre": "Unsere Grenzen",
+      "texte": "Unsere Ergebnisse sind Richtwerte und dienen der Ausbildung. Sie ersetzen keine zertifizierte statische Berechnung: Lassen Sie sie für ein Bauwerk oder eine Anlage von einer zugelassenen Ingenieurin oder einem zugelassenen Ingenieur prüfen."
+    },
+    "faq": {
+      "gratuit": { "question": "Ist es wirklich kostenlos?", "reponse": "Ja. Sie zahlen nichts, in keinem Schritt. Die Stiftung ist der soziale Zweig der IROKO-Gruppe, die ihre Betriebskosten trägt." },
+      "qui": { "question": "Wer führt die Simulationen durch?", "reponse": "Unsere Ingenieurinnen und Ingenieure, mit jungen Ingenieurinnen und Ingenieuren und Studierenden, die sie anleiten." },
+      "beneficiaires": { "question": "Wer kann teilnehmen?", "reponse": "Kleine Organisationen mit Sitz in Kamerun: Kleinst-, kleine und mittlere Unternehmen, Handwerksbetriebe, Start-ups und Projekte junger Menschen, Schulen und Hochschulen, Vereine und Kommunen." },
+      "fichiers": { "question": "Welche Dateien soll ich senden?", "reponse": "Was Sie haben: Pläne, Skizzen, Fotos oder CAD-Dateien (PDF, JPG, PNG, STEP, IGES, DWG, DXF oder ein ZIP), insgesamt 10 MB. Eine genaue Beschreibung genügt für den Anfang." },
+      "confidentialite": { "question": "Bleiben meine Pläne vertraulich?", "reponse": "Ja. Sie dienen nur Ihrer Studie. Sie können vor dem Versand eine Vertraulichkeitsvereinbarung verlangen: Kreuzen Sie das Feld im Formular an." },
+      "delai": { "question": "Wie lange dauert es?", "reponse": "Das hängt vom Projekt und von der Zahl der laufenden Anfragen ab. Die Dauer teilen wir Ihnen nach dem Abstimmungsgespräch mit." },
+      "certifies": { "question": "Sind die Ergebnisse zertifiziert?", "reponse": "Nein. Sie sind Richtwerte und dienen der Ausbildung; sie ersetzen keine zertifizierte statische Berechnung. Lassen Sie sie für ein Bauwerk oder eine Anlage von einer zugelassenen Ingenieurin oder einem zugelassenen Ingenieur prüfen, oder wenden Sie sich an IROKO Engineer." },
+      "refus": { "question": "Was, wenn mein Projekt nicht ausgewählt wird?", "reponse": "Wir sagen es Ihnen, wenn möglich mit einem Hinweis: eine Quelle, eine Schulung oder IROKO Engineer für eine vollständige Studie." }
+    }
   }
 }

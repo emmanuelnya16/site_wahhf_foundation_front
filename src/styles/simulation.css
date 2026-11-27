@@ -1,0 +1,747 @@
+/* ==========================================================================
+   Lot 13 : page Simulation (/simulation, src/pages/simulation/). Elle reprend les jetons, les polices (Jost, Barlow)
+   et les éléments communs de /accueil (accueil.css, partagé) ; ici, ce qui lui est propre.
+   Fonds alternés, jamais deux sections voisines du même fond : brume, papier, sauge, papier, brume, nuit, papier, sauge,
+   brume, papier, forêt (puis le pied de page, nuit). Le cœur (rouge du don) n'apparaît pas sur cette page.
+   ========================================================================== */
+
+.sim {
+  --sim-carte: var(--surface-raised);
+  --sim-barre: var(--color-foret);
+  --sim-chaud: var(--color-soleil);
+  --sim-chaud-bord: var(--color-encre);
+  --sim-trait: var(--ac-texte-doux);
+}
+.dark .sim {
+  --sim-barre: var(--color-feuille);
+  --sim-chaud-bord: var(--color-humus);
+}
+
+/* --- Sections et fonds --- */
+.sim-section {
+  padding-block: clamp(3.5rem, 9vw, 7rem);
+  color: var(--ac-texte);
+}
+.sim-fond-brume {
+  background: var(--surface);
+  --sim-carte: var(--surface-raised);
+}
+.sim-fond-papier {
+  background: var(--surface-raised);
+  --sim-carte: var(--surface-section);
+}
+.sim-fond-sauge {
+  background: var(--surface-section);
+  --sim-carte: var(--surface-raised);
+}
+.sim-fond-nuit,
+.sim-fond-foret {
+  --ac-texte: var(--color-brume);
+  --ac-texte-doux: var(--color-brume-douce);
+  --ac-accent: var(--color-soleil);
+  --sim-carte: color-mix(in srgb, var(--color-brume) 8%, transparent);
+  color: var(--color-brume);
+}
+.sim-fond-nuit {
+  background: var(--color-nuit);
+}
+.sim-fond-foret {
+  background: var(--color-foret);
+}
+.dark .sim-fond-nuit,
+.dark .sim-fond-foret {
+  --ac-texte: var(--color-brume-voilee);
+}
+
+/* --- Titres et textes --- */
+.sim-tete {
+  max-width: 46rem;
+}
+.sim-h1 {
+  margin-top: 0.875rem;
+  font-family: var(--ac-titre);
+  font-size: clamp(2.1rem, 1.4rem + 3.4vw, 3.6rem);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+.sim-h2 {
+  text-wrap: balance;
+}
+.sim-h3 {
+  font-family: var(--ac-titre);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.sim-texte {
+  line-height: 1.6;
+  color: var(--ac-texte-doux);
+}
+.sim-intro {
+  max-width: 36rem;
+  margin-top: 1.25rem;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--ac-texte-doux);
+}
+.sim-lien {
+  margin-top: auto;
+  color: var(--ac-accent);
+}
+
+/* Badge « à confirmer » : développement seulement */
+.sim-a-confirmer {
+  display: inline-block;
+  margin-left: 0.375rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-soleil-pale);
+  color: var(--color-encre);
+  font-family: var(--font-sans, sans-serif);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  vertical-align: middle;
+}
+
+/* --- Cartes coin feuille (grand arrondi en haut à droite) --- */
+.sim-carte-feuille {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  padding: clamp(1.5rem, 3vw, 2rem);
+  border-radius: 0.75rem 3rem 0.75rem 0.75rem;
+  background: var(--sim-carte);
+}
+.sim-icone {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: var(--ac-sauge-plein);
+  color: var(--ac-accent);
+}
+.sim-fond-papier .sim-icone {
+  background: var(--surface-raised);
+}
+.sim-icone svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.sim-grille-3,
+.sim-grille-4 {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: clamp(2rem, 5vw, 3rem);
+}
+@media (min-width: 640px) {
+  .sim-grille-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 900px) {
+  .sim-grille-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1100px) {
+  .sim-grille-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* --- 1. Hero --- */
+.sim-hero {
+  padding-top: calc(var(--header-height) + clamp(2.5rem, 6vw, 4.5rem));
+}
+.sim-hero-grille {
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 4rem);
+  align-items: center;
+}
+@media (min-width: 1024px) {
+  .sim-hero-grille {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  }
+}
+.sim-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+  margin-top: 1.5rem;
+}
+.sim-badges li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  min-height: 2.25rem;
+  padding: 0.25rem 0.875rem;
+  border: 1px solid var(--ac-bord);
+  border-radius: var(--radius-pill);
+  background: var(--surface-raised);
+  font-weight: 600;
+}
+.sim-badges svg {
+  width: 1rem;
+  height: 1rem;
+  color: var(--ac-accent);
+}
+.sim-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-block: 2rem 1.25rem;
+}
+
+/* La carte du dessin */
+.sim-carte {
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+  border: 1px solid var(--ac-carte-bord);
+  border-radius: 0.75rem 3rem 0.75rem 0.75rem;
+  background: var(--surface-raised);
+  box-shadow: 0 24px 48px -36px color-mix(in srgb, var(--color-encre) 55%, transparent);
+}
+.sim-carte-tete {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 0.875rem;
+  border-bottom: 1px solid var(--ac-bord);
+  font-family: var(--ac-libelle);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ac-texte-doux);
+}
+.sim-carte-voyant {
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 50%;
+  background: var(--color-soleil);
+  box-shadow: 0 0 0 2px var(--sim-chaud-bord);
+}
+.sim-portique-cadre {
+  aspect-ratio: 400 / 290;
+  margin-top: 0.75rem;
+}
+.sim-portique {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.sim-carte-cle {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  margin-top: 0.75rem;
+  font-size: 0.9375rem;
+  color: var(--ac-texte-doux);
+}
+.sim-carte-cle li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.sim-cle {
+  width: 1.5rem;
+  height: 0.375rem;
+  border-radius: var(--radius-pill);
+}
+.sim-cle-chaude {
+  background: var(--sim-chaud);
+  box-shadow: 0 0 0 1.5px var(--sim-chaud-bord);
+}
+.sim-cle-barre {
+  background: var(--sim-barre);
+}
+.sim-carte-note {
+  margin-top: 0.5rem;
+  font-size: 0.9375rem;
+  font-style: italic;
+  color: var(--ac-texte-doux);
+}
+
+/* Le dessin : barres, nœuds, charges */
+.sim-p-sol {
+  fill: none;
+  stroke: var(--sim-trait);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 5;
+}
+.sim-p-appui {
+  fill: var(--sim-trait);
+}
+.sim-p-barre {
+  fill: none;
+  stroke: var(--sim-barre);
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+.sim-p-chaud-bord {
+  fill: none;
+  stroke: var(--sim-chaud-bord);
+  stroke-width: 9;
+  stroke-linecap: round;
+}
+.sim-p-chaud-coeur {
+  fill: none;
+  stroke: var(--sim-chaud);
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+.sim-p-noeud {
+  fill: var(--surface-raised);
+  stroke: var(--sim-barre);
+  stroke-width: 2.5;
+}
+.sim-p-charge path {
+  fill: none;
+  stroke: var(--sim-trait);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.sim-p-charge text {
+  fill: var(--sim-trait);
+  font-family: var(--ac-libelle);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+/* Position chargée (le dessin à l'arrêt) : le cadre a fléchi sous le vent, la ferme s'est tassée sous la toiture */
+.sim-p-cadre,
+.sim-p-ferme,
+.sim-p-charge {
+  transform-box: view-box;
+}
+.sim-p-cadre {
+  transform-origin: 200px 250px;
+  transform: skewX(-2.5deg);
+}
+.sim-p-ferme {
+  transform-origin: 200px 150px;
+  transform: scaleY(0.93);
+}
+
+/* --- 3. Ce que nous offrons --- */
+.sim-numero {
+  font-family: var(--ac-libelle);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--ac-accent);
+}
+.sim-recu {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 0.875rem;
+  border-top: 1px solid var(--ac-bord);
+  font-weight: 600;
+  line-height: 1.45;
+}
+.sim-recu svg {
+  flex: none;
+  width: 1.125rem;
+  height: 1.125rem;
+  margin-top: 0.125rem;
+  color: var(--ac-accent);
+}
+
+/* --- 4. Pour qui ? --- */
+.sim-publics {
+  display: grid;
+  gap: 2rem;
+  margin-top: clamp(2rem, 5vw, 3rem);
+}
+@media (min-width: 1024px) {
+  .sim-publics {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 26rem);
+    align-items: start;
+    gap: 4rem;
+  }
+}
+.sim-liste-coche,
+.sim-liste-non {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+.sim-liste-coche li,
+.sim-liste-non li {
+  display: flex;
+  gap: 0.75rem;
+  font-size: 1.0625rem;
+  line-height: 1.45;
+}
+.sim-liste-coche svg,
+.sim-liste-non svg {
+  flex: none;
+  width: 1.375rem;
+  height: 1.375rem;
+  padding: 0.1875rem;
+  border-radius: 50%;
+  background: var(--ac-sauge-plein);
+  color: var(--ac-accent);
+}
+.sim-liste-non svg {
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px var(--ac-texte-doux);
+  color: var(--ac-texte-doux);
+}
+.sim-base {
+  margin-top: 1rem;
+  font-weight: 600;
+  color: var(--ac-texte-doux);
+}
+.sim-encadre {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: clamp(1.5rem, 3vw, 2rem);
+  border-radius: 0.75rem 3rem 0.75rem 0.75rem;
+  background: var(--sim-carte);
+}
+
+/* --- 5. Exemples : une rangée qui défile (scroll-snap) --- */
+.sim-tete-ligne {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+.sim-fleches {
+  display: flex;
+  gap: 0.5rem;
+}
+.sim-rond {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1.5px solid var(--ac-contour);
+  border-radius: 50%;
+  color: var(--ac-texte);
+  cursor: pointer;
+}
+.sim-rond svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+@media (hover: hover) {
+  .sim-rond:hover {
+    background: var(--ac-contour);
+    color: var(--ac-fond);
+  }
+}
+.sim-rangee {
+  /* Positionnée : les textes .sr-only des cartes restent dans la zone qui défile (sinon la page déborde) */
+  position: relative;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: min(82%, 19rem);
+  gap: 1rem;
+  margin-top: clamp(2rem, 5vw, 3rem);
+  padding: 0.25rem 0.25rem 1.25rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 0.25rem;
+  scrollbar-width: thin;
+}
+.sim-rangee > li {
+  scroll-snap-align: start;
+}
+.sim-exemple-haut {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.sim-exemple-icone {
+  width: 3rem;
+  height: 3rem;
+  fill: none;
+  stroke: var(--ac-accent);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.sim-etiquette {
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-soleil);
+  color: var(--color-encre);
+  font-family: var(--ac-libelle);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.sim-type {
+  margin-top: auto;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--ac-bord);
+  font-weight: 600;
+  color: var(--ac-accent);
+}
+
+/* --- 6. Comment ça marche : 5 étapes reliées par le fil --- */
+.sim-etapes {
+  position: relative;
+  margin-top: clamp(2.5rem, 6vw, 3.5rem);
+}
+.sim-etapes-liste {
+  position: relative;
+  display: grid;
+  gap: 2.25rem;
+  padding-left: 3.75rem;
+}
+.sim-etape {
+  position: relative;
+  display: grid;
+  gap: 0.5rem;
+}
+.sim-point {
+  position: absolute;
+  top: -0.25rem;
+  left: -3.75rem;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: var(--color-soleil);
+  color: var(--color-encre);
+  font-family: var(--ac-titre);
+  font-size: 1.125rem;
+  font-weight: 700;
+  transition: background-color 0.3s var(--ease-reveal), color 0.3s var(--ease-reveal), box-shadow 0.3s var(--ease-reveal);
+}
+/* Le fil : entier et tous les points allumés tant que le défilement ne le pilote pas */
+.sim-fil {
+  position: absolute;
+  top: 1.125rem;
+  bottom: 1.5rem;
+  left: 1.375rem;
+  width: 2px;
+  background: color-mix(in srgb, var(--color-brume) 22%, transparent);
+}
+.sim-fil-trace {
+  position: absolute;
+  inset: 0;
+  background: var(--color-soleil);
+  transform-origin: 50% 0;
+}
+.sim-etapes.is-pilote .sim-point:not(.is-atteint) {
+  background: var(--color-nuit);
+  box-shadow: inset 0 0 0 2px var(--border-on-inverse);
+  color: var(--color-brume);
+}
+@media (min-width: 1024px) {
+  .sim-etapes-liste {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 2rem;
+    padding-left: 0;
+    padding-top: 4.25rem;
+  }
+  .sim-point {
+    top: -4.25rem;
+    left: 0;
+  }
+  .sim-fil {
+    top: 1.375rem;
+    right: calc(10% - 1.375rem);
+    bottom: auto;
+    left: 1.375rem;
+    width: auto;
+    height: 2px;
+  }
+  .sim-fil-trace {
+    transform-origin: 0 50%;
+  }
+}
+
+/* --- 7. Familles : pastilles des types d'analyse --- */
+.sim-pastilles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+.sim-pastilles li {
+  padding: 0.25rem 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--ac-accent) 45%, transparent);
+  border-radius: var(--radius-pill);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--ac-texte);
+}
+
+/* --- 8. Engagements et limites --- */
+.sim-deux-colonnes {
+  display: grid;
+  gap: 2.5rem;
+  margin-top: clamp(2rem, 5vw, 3rem);
+}
+@media (min-width: 1024px) {
+  .sim-deux-colonnes {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 28rem);
+    align-items: start;
+    gap: 4rem;
+  }
+}
+.sim-engagements {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 1.25rem;
+}
+.sim-engagements > li {
+  display: flex;
+  gap: 1rem;
+}
+.sim-coche {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background: var(--sim-carte);
+  color: var(--ac-accent);
+}
+.sim-coche svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+.sim-engagement-titre {
+  font-weight: 700;
+  line-height: 1.35;
+}
+.sim-limite {
+  display: grid;
+  gap: 0.875rem;
+  padding: clamp(1.5rem, 3vw, 2rem);
+  border-left: 4px solid var(--ac-accent);
+  border-radius: 0.75rem 3rem 0.75rem 0.75rem;
+  background: var(--sim-carte);
+}
+.sim-limite-icone {
+  width: 1.75rem;
+  height: 1.75rem;
+  color: var(--ac-accent);
+}
+.sim-limite-texte {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+/* --- 9. Les jeunes --- */
+.sim-jeunes {
+  display: grid;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+@media (min-width: 1024px) {
+  .sim-jeunes {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+.sim-jeunes-photo {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 0.75rem 3rem 0.75rem 0.75rem;
+  background: var(--ac-sauge-plein);
+}
+.sim-jeunes-bouton {
+  margin-top: 1.75rem;
+}
+
+/* --- 10. FAQ : accordéon sur deux colonnes --- */
+.sim-faq {
+  display: grid;
+  gap: 0 3rem;
+  margin-top: clamp(2rem, 5vw, 3rem);
+}
+@media (min-width: 1024px) {
+  .sim-faq {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.sim-question {
+  border-bottom: 1px solid var(--ac-bord);
+}
+.sim-question summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 2.75rem;
+  padding-block: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+  cursor: pointer;
+  list-style: none;
+}
+.sim-question summary::-webkit-details-marker {
+  display: none;
+}
+.sim-question summary:focus-visible {
+  outline: 3px solid var(--ac-accent);
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+.sim-question-chevron {
+  flex: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--ac-accent);
+  transition: rotate var(--dur-fast) var(--ease-reveal);
+}
+.sim-question[open] .sim-question-chevron {
+  rotate: 180deg;
+}
+.sim-question > p {
+  padding-bottom: 1.25rem;
+}
+
+/* --- 11. Soumettre mon projet (forêt) --- */
+.sim-soumettre {
+  display: grid;
+  gap: clamp(2rem, 5vw, 3.5rem);
+}
+@media (min-width: 1024px) {
+  .sim-soumettre {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    align-items: start;
+  }
+}
+.sim-soumettre-aide {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-on-inverse);
+}
+.sim-aide-titre {
+  font-weight: 700;
+}
+.sim-fond-foret .sim-lien {
+  color: var(--color-soleil);
+}
+.sim-formulaire-carte {
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border-radius: 0.75rem 3rem 0.75rem 0.75rem;
+  background: var(--surface-raised);
+  color: var(--color-encre);
+}
+.dark .sim-formulaire-carte {
+  color: var(--color-brume-voilee);
+}

@@ -3,7 +3,159 @@
     "title": "Pro bono engineering simulation",
     "description": "WAHHF Foundation offers free engineering simulations (structures, fluids, heat, design advice) to small organisations in Cameroon, and trains young engineers on real cases."
   },
+  "aConfirmer": "to be confirmed",
+  "nouvelOnglet": "(new tab)",
   "hero": {
-    "titre": "Free engineering simulation for businesses and projects in Cameroon"
+    "surtitre": "Community programme · Free",
+    "titre": "Free engineering simulation for businesses and projects in Cameroon",
+    "intro": "Our engineers and supervised young talent check, simulate and advise, free of charge, the small organisations that build the local economy.",
+    "badges": ["100% free", "For organisations in Cameroon", "FR · EN · DE"],
+    "soumettre": "Submit my project",
+    "eligible": "Am I eligible?",
+    "carte": {
+      "titre": "Simulation · Barn portal frame",
+      "vent": "Wind",
+      "toiture": "Roof",
+      "sollicitees": "Most stressed members",
+      "autres": "Other members",
+      "legende": "Illustrative example, fictitious values",
+      "alt": "Drawing: the frame of a farm barn, two columns and a roof truss, under the push of the wind and the weight of the roof. It bends gently, and the most stressed members light up in yellow."
+    }
+  },
+  "pourquoi": {
+    "surtitre": "Why this programme",
+    "titre": "A double impact: the local economy and young people.",
+    "cartes": {
+      "economie": {
+        "titre": "Supporting the local economy",
+        "texte": "Small businesses, craftspeople and youth start-ups: a part or a structure checked before it is built means less wasted material and fewer risks.",
+        "lien": "Youth entrepreneurship"
+      },
+      "jeunesse": {
+        "titre": "Training young people",
+        "texte": "Young engineers and students, under supervision, learn on real cases: those of the organisations that need them.",
+        "lien": "Education"
+      },
+      "iroko": {
+        "titre": "With the IROKO Group",
+        "texte": "The foundation is the social branch of the IROKO Group, which covers its running costs."
+      }
+    }
+  },
+  "offre": {
+    "surtitre": "What we offer",
+    "titre": "Four ways to help you.",
+    "recu": "What you receive"
+  },
+  "publics": {
+    "surtitre": "Who is it for?",
+    "titre": "For organisations that cannot afford a study.",
+    "pour": "The programme is for",
+    "base": "Based in Cameroon.",
+    "non": "This programme is not for…",
+    "nonTexte": "For these needs, IROKO Engineer, the engineering division of the IROKO Group, carries out complete studies.",
+    "iroko": "Discover IROKO Engineer"
+  },
+  "exemples": {
+    "surtitre": "Examples of possible requests",
+    "titre": "What you could ask us.",
+    "intro": "Examples to give you an idea: these are not completed projects.",
+    "etiquette": "Example",
+    "type": "Type of simulation",
+    "liste": "Examples of requests, scrollable",
+    "precedent": "Previous example",
+    "suivant": "Next example"
+  },
+  "etapes": {
+    "surtitre": "How it works",
+    "titre": "Five steps, from your need to the report."
+  },
+  "familles": {
+    "surtitre": "What we can simulate",
+    "titre": "Three families of simulation.",
+    "analyses": "Types of analysis"
+  },
+  "engagements": {
+    "surtitre": "Our commitments and our limits",
+    "titre": "What we promise, and what we do not do.",
+    "nos": "Our commitments"
+  },
+  "jeunes": {
+    "surtitre": "Young people at the heart of the programme",
+    "titre": "Students and young engineers learning on real cases.",
+    "texte": "Supervised by engineers, students and young engineers take part in the studies. They train on real needs: those of the organisations that keep the local economy going.",
+    "bouton": "Join the programme"
+  },
+  "faq": {
+    "surtitre": "Frequently asked questions",
+    "titre": "Before you submit your project."
+  },
+  "soumettre": {
+    "surtitre": "Submit my project",
+    "titre": "Tell us about your project.",
+    "intro": "Describe your need and attach your plans or photos if you have any. We will get back to you once we have studied your request.",
+    "whatsappTitre": "A question before writing?",
+    "whatsapp": "Write on WhatsApp to {{numero}}",
+    "irokoTitre": "Need a complete or certified study?",
+    "iroko": "IROKO Engineer"
+  },
+  "contenu": {
+    "offres": {
+      "prediagnostic": { "titre": "Pre-assessment", "texte": "A conversation to understand your need.", "recu": "You receive a clear opinion on what a simulation can do for you." },
+      "etude": { "titre": "Simple simulation study", "texte": "A targeted calculation on the question that matters to you.", "recu": "You receive a simplified report, with its conclusions." },
+      "conseil": { "titre": "Design advice", "texte": "Materials, shapes, ways to improve.", "recu": "You receive practical recommendations for your part or your structure." },
+      "atelier": { "titre": "Introductory workshop", "texte": "For your teams, your pupils or your students.", "recu": "You receive a session to discover engineering simulation." }
+    },
+    "publics": {
+      "tpe": { "texte": "Micro, small and medium-sized businesses" },
+      "artisans": { "texte": "Craftspeople" },
+      "startups": { "texte": "Start-ups and young people’s projects" },
+      "ecoles": { "texte": "Schools and universities" },
+      "associations": { "texte": "Associations and local authorities" }
+    },
+    "nonPublics": {
+      "grandes": { "texte": "Large companies" },
+      "certifiees": { "texte": "Studies that must be certified or signed by a chartered engineer" },
+      "urgents": { "texte": "Urgent projects" }
+    },
+    "exemples": {
+      "hangar": { "titre": "Roof frame of a farm barn", "besoin": "Check that a steel or timber roof frame withstands the wind and the weight of the roof.", "type": "Structures · static" },
+      "chassis": { "titre": "Frame of a processing machine", "besoin": "An oil press or a cassava grinder: check the frame that takes the loads and the vibrations.", "type": "Structures · fatigue and vibration" },
+      "sechoir": { "titre": "Solar dryer", "besoin": "Move warm air evenly, to dry produce without damaging it.", "type": "Fluids and heat" },
+      "classe": { "titre": "Natural ventilation of a classroom", "besoin": "Cool a room without air conditioning, by placing the openings better.", "type": "Fluids · ventilation" },
+      "reservoir": { "titre": "Elevated water tank", "besoin": "Check the support of a full tank, under its own weight and under the wind.", "type": "Structures · static and buckling" }
+    },
+    "etapes": {
+      "besoin": { "titre": "You describe your need", "texte": "With the form on this page: your project, and your plans or photos if you have any." },
+      "eligibilite": { "titre": "We check eligibility", "texte": "We check that your project fits the programme and that a simulation can help you." },
+      "cadrage": { "titre": "Scoping conversation", "texte": "By video call, phone or WhatsApp, to clarify the question and the data." },
+      "simulation": { "titre": "Simulation", "texte": "We model your part or your structure, then run the calculation." },
+      "restitution": { "titre": "Results", "texte": "A simplified report, and a conversation to explain the results and the possible next steps." }
+    },
+    "familles": {
+      "structures": { "titre": "Structures and strength", "texte": "Find out whether a part or a structure holds, and where it works hardest.", "analyses": ["Static", "Buckling", "Fatigue", "Vibration"] },
+      "fluides": { "titre": "Fluids and heat", "texte": "Understand how air, water or heat flows.", "analyses": ["Flows", "Ventilation", "Heat transfer"] },
+      "conception": { "titre": "Design and optimisation", "texte": "Choose the best shape before building.", "analyses": ["Compare variants", "Lighten a part"] }
+    },
+    "engagements": {
+      "gratuit": { "titre": "Free, with nothing in return", "texte": "No payment, at any step. If anyone asks you for money for this programme, do not pay and let us know." },
+      "confidentialite": { "titre": "Confidentiality", "texte": "Your plans are used only for your study. A non-disclosure agreement can be signed before you send them." },
+      "fichiers": { "titre": "Your files remain yours", "texte": "Your plans, models and data belong to you, before and after the study." },
+      "selection": { "titre": "A limited number of projects", "texte": "Projects are chosen according to their local usefulness." }
+    },
+    "limite": {
+      "titre": "Our limits",
+      "texte": "Our results are indicative and educational. They do not replace a certified calculation report: for a structure or a piece of equipment, have them validated by a chartered engineer."
+    },
+    "faq": {
+      "gratuit": { "question": "Is it really free?", "reponse": "Yes. You pay nothing, at any step. The foundation is the social branch of the IROKO Group, which covers its running costs." },
+      "qui": { "question": "Who carries out the simulations?", "reponse": "Our engineers, with young engineers and students they supervise." },
+      "beneficiaires": { "question": "Who can benefit?", "reponse": "Small organisations based in Cameroon: micro, small and medium-sized businesses, craftspeople, start-ups and young people’s projects, schools and universities, associations and local authorities." },
+      "fichiers": { "question": "Which files should I send?", "reponse": "Whatever you have: plans, sketches, photos or CAD files (PDF, JPG, PNG, STEP, IGES, DWG, DXF, or a ZIP), 10 MB in total. A precise description is enough to start." },
+      "confidentialite": { "question": "Do my plans remain confidential?", "reponse": "Yes. They are used only for your study. You can ask for a non-disclosure agreement before sending them: tick the box in the form." },
+      "delai": { "question": "How long does it take?", "reponse": "It depends on the project and on the number of requests in progress. You are told the timeframe after the scoping conversation." },
+      "certifies": { "question": "Are the results certified?", "reponse": "No. They are indicative and educational, and do not replace a certified calculation report. For a structure or a piece of equipment, have them validated by a chartered engineer, or contact IROKO Engineer." },
+      "refus": { "question": "What if my project is not selected?", "reponse": "We tell you, with a lead whenever possible: a resource, a training course, or IROKO Engineer for a complete study." }
+    }
   }
 }

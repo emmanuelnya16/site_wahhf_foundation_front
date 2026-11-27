@@ -3,7 +3,100 @@
     "title": "Simulation numérique solidaire",
     "description": "WAHHF Foundation offre gratuitement des simulations numériques (structures, fluides, thermique, conseils de conception) aux petites structures du Cameroun, et forme de jeunes ingénieurs sur des cas réels."
   },
+  "aConfirmer": "à confirmer",
+  "nouvelOnglet": "(nouvel onglet)",
   "hero": {
-    "titre": "La simulation numérique offerte aux entreprises et aux projets du Cameroun"
+    "surtitre": "Programme solidaire · Gratuit",
+    "titre": "La simulation numérique offerte aux entreprises et aux projets du Cameroun",
+    "intro": "Nos ingénieurs et de jeunes talents encadrés vérifient, simulent et conseillent gratuitement les petites structures qui construisent l’économie locale.",
+    "badges": ["100 % gratuit", "Pour les structures du Cameroun", "FR · EN · DE"],
+    "soumettre": "Soumettre mon projet",
+    "eligible": "Suis-je éligible ?",
+    "carte": {
+      "titre": "Simulation · Portique de hangar",
+      "vent": "Vent",
+      "toiture": "Toiture",
+      "sollicitees": "Barres les plus sollicitées",
+      "autres": "Autres barres",
+      "legende": "Exemple illustratif, valeurs fictives",
+      "alt": "Dessin : la charpente d’un hangar agricole, deux poteaux et une ferme, sous la poussée du vent et le poids de la toiture. Elle fléchit doucement, et les barres les plus sollicitées s’allument en jaune."
+    }
+  },
+  "pourquoi": {
+    "surtitre": "Pourquoi ce programme",
+    "titre": "Un double impact : l’économie locale et la jeunesse.",
+    "cartes": {
+      "economie": {
+        "titre": "Aider l’économie locale",
+        "texte": "Petites entreprises, artisans et startups de jeunes : une pièce ou un ouvrage vérifié avant d’être fabriqué, c’est moins de matière perdue et moins de risques.",
+        "lien": "Entrepreneuriat des jeunes"
+      },
+      "jeunesse": {
+        "titre": "Former la jeunesse",
+        "texte": "De jeunes ingénieurs et des étudiants, encadrés, apprennent sur des cas réels : ceux des structures qui en ont besoin.",
+        "lien": "Éducation"
+      },
+      "iroko": {
+        "titre": "Avec le groupe IROKO",
+        "texte": "La fondation est la branche sociale du groupe IROKO, qui couvre ses frais de fonctionnement."
+      }
+    }
+  },
+  "offre": {
+    "surtitre": "Ce que nous offrons",
+    "titre": "Quatre façons de vous aider.",
+    "recu": "Ce que vous recevez"
+  },
+  "publics": {
+    "surtitre": "Pour qui ?",
+    "titre": "Pour les structures qui n’ont pas les moyens d’une étude.",
+    "pour": "Le programme s’adresse à",
+    "base": "Basées au Cameroun.",
+    "non": "Ce programme n’est pas fait pour…",
+    "nonTexte": "Pour ces besoins, IROKO Engineer, le pôle d’ingénierie du groupe IROKO, réalise des études complètes.",
+    "iroko": "Découvrir IROKO Engineer"
+  },
+  "exemples": {
+    "surtitre": "Exemples de demandes possibles",
+    "titre": "Ce que vous pourriez nous demander.",
+    "intro": "Des exemples pour vous donner une idée : ce ne sont pas des projets réalisés.",
+    "etiquette": "Exemple",
+    "type": "Type de simulation",
+    "liste": "Exemples de demandes, à faire défiler",
+    "precedent": "Exemple précédent",
+    "suivant": "Exemple suivant"
+  },
+  "etapes": {
+    "surtitre": "Comment ça marche",
+    "titre": "Cinq étapes, de votre besoin au rapport."
+  },
+  "familles": {
+    "surtitre": "Ce que nous savons simuler",
+    "titre": "Trois familles de simulation.",
+    "analyses": "Types d’analyse"
+  },
+  "engagements": {
+    "surtitre": "Nos engagements et nos limites",
+    "titre": "Ce que nous promettons, et ce que nous ne faisons pas.",
+    "nos": "Nos engagements"
+  },
+  "jeunes": {
+    "surtitre": "Les jeunes au cœur du programme",
+    "titre": "Des étudiants et de jeunes ingénieurs qui apprennent sur des cas réels.",
+    "texte": "Encadrés par des ingénieurs, des étudiants et de jeunes ingénieurs participent aux études. Ils se forment sur de vrais besoins : ceux des structures qui font vivre l’économie locale.",
+    "bouton": "Rejoindre le programme"
+  },
+  "faq": {
+    "surtitre": "Questions fréquentes",
+    "titre": "Avant de soumettre votre projet."
+  },
+  "soumettre": {
+    "surtitre": "Soumettre mon projet",
+    "titre": "Parlez-nous de votre projet.",
+    "intro": "Décrivez votre besoin et joignez vos plans ou vos photos si vous en avez. Nous revenons vers vous après avoir étudié votre demande.",
+    "whatsappTitre": "Une question avant d’écrire ?",
+    "whatsapp": "Écrire sur WhatsApp au {{numero}}",
+    "irokoTitre": "Besoin d’une étude complète ou certifiée ?",
+    "iroko": "IROKO Engineer"
   }
 }

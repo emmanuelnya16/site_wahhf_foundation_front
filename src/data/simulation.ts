@@ -4,7 +4,7 @@
  * simulation.contenu.<liste>.<id>, mêmes champs).
  *
  * confirme : false sur tout élément qui contient une promesse chiffrée ou un fait que la fondation doit valider. En
- * ligne, un élément non confirmé ne s'affiche pas ; en développement, il s'affiche avec le badge « à confirmer ».
+ * ligne, un élément non confirmé ne s'affiche pas ; en développement, il s'affiche avec le badge « à confirmer ».
  * protection : true pour un texte qui protège le visiteur (les limites des résultats) : il s'affiche en ligne même non
  * confirmé, avec le badge en développement.
  * Questions à la fondation : docs/contenus-a-fournir.md, bloc « Programme Simulation ».
@@ -119,7 +119,7 @@ export const SIM_EXEMPLES: SimExemple[] = [
     id: 'chassis',
     icone: 'chassis',
     titre: 'Châssis d’une machine de transformation',
-    besoin: 'Une presse à huile ou un broyeur de manioc : contrôler le châssis qui reprend les efforts et les vibrations.',
+    besoin: 'Une presse à huile ou un broyeur de manioc : contrôler le châssis qui reprend les efforts et les vibrations.',
     type: 'Structures · fatigue et vibrations',
     confirme: true,
   },
@@ -150,7 +150,7 @@ export const SIM_EXEMPLES: SimExemple[] = [
 ];
 
 export const SIM_ETAPES: SimEtape[] = [
-  { id: 'besoin', titre: 'Vous décrivez votre besoin', texte: 'Avec le formulaire de cette page : votre projet, et vos plans ou vos photos si vous en avez.', confirme: true },
+  { id: 'besoin', titre: 'Vous décrivez votre besoin', texte: 'Avec le formulaire de cette page : votre projet, et vos plans ou vos photos si vous en avez.', confirme: true },
   { id: 'eligibilite', titre: 'Nous étudions l’éligibilité', texte: 'Nous vérifions que votre projet entre dans le programme et qu’une simulation peut vous aider.', confirme: true },
   { id: 'cadrage', titre: 'Échange de cadrage', texte: 'En visio, par téléphone ou sur WhatsApp, pour préciser la question et les données.', confirme: true },
   { id: 'simulation', titre: 'Simulation', texte: 'Nous modélisons votre pièce ou votre ouvrage, puis nous faisons le calcul.', confirme: true },
@@ -213,7 +213,7 @@ export const SIM_LIMITE: SimEngagement = {
   id: 'limite',
   titre: 'Nos limites',
   texte:
-    'Nos résultats sont indicatifs et pédagogiques. Ils ne remplacent pas une note de calcul certifiée : pour un ouvrage ou un équipement, faites-les valider par un ingénieur agréé.',
+    'Nos résultats sont indicatifs et pédagogiques. Ils ne remplacent pas une note de calcul certifiée : pour un ouvrage ou un équipement, faites-les valider par un ingénieur agréé.',
   confirme: false,
   protection: true,
 };
@@ -221,47 +221,47 @@ export const SIM_LIMITE: SimEngagement = {
 export const SIM_FAQ: SimQuestion[] = [
   {
     id: 'gratuit',
-    question: 'Est-ce vraiment gratuit ?',
+    question: 'Est-ce vraiment gratuit ?',
     reponse:
       'Oui. Vous ne payez rien, à aucune étape. La fondation est la branche sociale du groupe IROKO, qui couvre ses frais de fonctionnement.',
     confirme: true,
   },
   {
     id: 'qui',
-    question: 'Qui réalise les simulations ?',
+    question: 'Qui réalise les simulations ?',
     reponse: 'Nos ingénieurs, avec de jeunes ingénieurs et des étudiants qu’ils encadrent.',
     confirme: true,
   },
   {
     id: 'beneficiaires',
-    question: 'Qui peut en bénéficier ?',
+    question: 'Qui peut en bénéficier ?',
     reponse:
-      'Les petites structures basées au Cameroun : TPE et PME, artisans, startups et porteurs de projets de jeunes, écoles et universités, associations et collectivités.',
+      'Les petites structures basées au Cameroun : TPE et PME, artisans, startups et porteurs de projets de jeunes, écoles et universités, associations et collectivités.',
     confirme: true,
   },
   {
     id: 'fichiers',
-    question: 'Quels fichiers envoyer ?',
+    question: 'Quels fichiers envoyer ?',
     reponse:
-      'Ce que vous avez : plans, croquis, photos ou fichiers de CAO (PDF, JPG, PNG, STEP, IGES, DWG, DXF, ou un ZIP), 10 Mo au total. Une description précise suffit pour commencer.',
+      'Ce que vous avez : plans, croquis, photos ou fichiers de CAO (PDF, JPG, PNG, STEP, IGES, DWG, DXF, ou un ZIP), 10 Mo au total. Une description précise suffit pour commencer.',
     confirme: true,
   },
   {
     id: 'confidentialite',
-    question: 'Mes plans restent-ils confidentiels ?',
+    question: 'Mes plans restent-ils confidentiels ?',
     reponse:
-      'Oui. Ils ne servent qu’à votre étude. Vous pouvez demander un accord de confidentialité avant de les envoyer : cochez la case du formulaire.',
+      'Oui. Ils ne servent qu’à votre étude. Vous pouvez demander un accord de confidentialité avant de les envoyer : cochez la case du formulaire.',
     confirme: true,
   },
   {
     id: 'delai',
-    question: 'Combien de temps cela prend-il ?',
+    question: 'Combien de temps cela prend-il ?',
     reponse: 'Cela dépend du projet et du nombre de demandes en cours. Le délai vous est indiqué après l’échange de cadrage.',
     confirme: true,
   },
   {
     id: 'certifies',
-    question: 'Les résultats sont-ils certifiés ?',
+    question: 'Les résultats sont-ils certifiés ?',
     reponse:
       'Non. Ils sont indicatifs et pédagogiques, et ne remplacent pas une note de calcul certifiée. Pour un ouvrage ou un équipement, faites-les valider par un ingénieur agréé, ou adressez-vous à IROKO Engineer.',
     confirme: false,
@@ -269,9 +269,9 @@ export const SIM_FAQ: SimQuestion[] = [
   },
   {
     id: 'refus',
-    question: 'Que faire si mon projet n’est pas retenu ?',
+    question: 'Que faire si mon projet n’est pas retenu ?',
     reponse:
-      'Nous vous le disons, avec une piste quand c’est possible : une ressource, une formation, ou IROKO Engineer pour une étude complète.',
+      'Nous vous le disons, avec une piste quand c’est possible : une ressource, une formation, ou IROKO Engineer pour une étude complète.',
     confirme: true,
   },
 ];
