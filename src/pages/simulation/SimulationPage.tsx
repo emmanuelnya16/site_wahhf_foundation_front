@@ -16,6 +16,7 @@ import Etapes from './Etapes';
 import { Engagements, Familles, Jeunes } from './Savoir';
 import Faq from './Faq';
 import Soumettre from './Soumettre';
+import Formulaire from './Formulaire';
 
 /**
  * Programme Simulation (lot 13) : simulation numérique solidaire et gratuite. Onze sections aux fonds alternés (jamais
@@ -40,7 +41,9 @@ export default function SimulationPage() {
       <Engagements />
       <Jeunes />
       <Faq />
-      <Soumettre />
+      <Soumettre>
+        <Formulaire />
+      </Soumettre>
     </div>
   );
 }
