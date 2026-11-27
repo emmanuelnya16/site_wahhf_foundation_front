@@ -29,8 +29,10 @@ function economie() {
 /**
  * 10. Le film (lot 11.9), sur nuit, entre les événements et l'appel au don.
  * - Défilement (mouvement accepté, pas de pause, pas d'économie de données) : section haute, scène collée (sticky) ;
- *   la carte s'ouvre en plein écran, l'extrait muet y joue, puis elle se referme (FilmMotion). Lecture seulement sur le
- *   plateau ; elle reprend où elle s'était arrêtée ; plus de relance au défilement après une pause demandée.
+ *   la carte s'ouvre en plein écran, puis elle se referme (FilmMotion). Le 26 novembre 2026, à votre demande : le film,
+ *   muet, se lance tout seul dès que la section arrive à l'écran (le quart bas de l'écran franchi), joue pendant toute
+ *   l'animation et s'arrête quand la section quitte l'écran ; il reprend où il s'était arrêté ; plus de relance au
+ *   défilement après une pause demandée.
  * - Sinon : hauteur normale, cadre ouvert, affiche et gros bouton Lecture ; rien ne se charge sans clic.
  * - Le son et le film entier passent toujours par YouTube, après un clic (FilmFenetre).
  * - Sans fichier encore (FILM_EXTRAIT null) : l'affiche et « Regarder le film ».
@@ -48,6 +50,7 @@ export default function Film({ paused }: { paused: boolean }) {
 
   const sources = FILM_EXTRAIT && (telephone ? FILM_EXTRAIT.telephone : FILM_EXTRAIT.bureau);
   const [plateau, setPlateau] = useState(false);
+  const [enVue, setEnVue] = useState(false);
   const [pauseManuelle, setPauseManuelle] = useState(false);
   const [demande, setDemande] = useState(false);
   const [fenetre, setFenetre] = useState(false);
@@ -55,7 +58,16 @@ export default function Film({ paused }: { paused: boolean }) {
   const [joue, setJoue] = useState(false);
   // Le fichier : à un écran de distance au défilement ; sinon seulement après un clic sur Lecture
   const charger = !!sources && (scrub ? proche : demande);
-  const veutJouer = charger && !fenetre && !cache && !pauseManuelle && (scrub ? plateau : demande);
+  const veutJouer = charger && !fenetre && !cache && !pauseManuelle && (scrub ? enVue : demande);
+
+  // Au défilement : la section est à l'écran dès que son haut franchit le quart bas de l'écran, jusqu'à ce qu'elle sorte
+  useEffect(() => {
+    const s = section.current;
+    if (!scrub || !s || typeof IntersectionObserver === 'undefined') return;
+    const observateur = new IntersectionObserver(([entree]) => setEnVue(entree.isIntersecting), { rootMargin: '0px 0px -25% 0px' });
+    observateur.observe(s);
+    return () => observateur.disconnect();
+  }, [scrub]);
 
   useEffect(() => {
     const surVisibilite = () => setCache(document.hidden);
@@ -136,7 +148,7 @@ export default function Film({ paused }: { paused: boolean }) {
               >
                 {charger && (
                   <>
-                    <source src={sources.webm} type="video/webm" />
+                    {sources.webm && <source src={sources.webm} type="video/webm" />}
                     <source src={sources.mp4} type="video/mp4" />
                   </>
                 )}

@@ -95,8 +95,8 @@ async function donnees(extrait) {
  * « Regarder le film » (YouTube, après un clic).
  */
 export interface FilmExtrait {
-  bureau: { mp4: string; webm: string };
-  telephone: { mp4: string; webm: string };
+  bureau: { mp4: string; webm?: string };
+  telephone: { mp4: string; webm?: string };
   /** Début de l'extrait dans le film et sa durée, en secondes */
   debut: number;
   duree: number;

@@ -1,14 +1,24 @@
 /**
- * Extrait muet du film, hébergé sur le site (lot 11.9). Généré par scripts/encode-film.mjs : ne pas modifier à la main.
- * null : pas encore de fichier source (docs/references/video/film-wahhf.mp4) ; la section montre l'affiche et le bouton
- * « Regarder le film » (YouTube, après un clic).
+ * Le film joué sans le son dans la section « Le film » de /accueil.
+ * 26 novembre 2026 : le film entier (1 min 10, 1 280 × 720, 15,7 Mo), hébergé par la fondation sur Cloudinary, à
+ * l'adresse qu'elle a donnée (res.cloudinary.com est autorisé pour les vidéos dans la CSP de public/.htaccess). Un même
+ * fichier pour l'ordinateur et le téléphone, sans WebM.
+ * scripts/encode-film.mjs peut le remplacer par des copies plus légères hébergées sur le site (public/film) : il réécrit
+ * alors ce fichier.
  */
 export interface FilmExtrait {
-  bureau: { mp4: string; webm: string };
-  telephone: { mp4: string; webm: string };
+  bureau: { mp4: string; webm?: string };
+  telephone: { mp4: string; webm?: string };
   /** Début de l'extrait dans le film et sa durée, en secondes */
   debut: number;
   duree: number;
 }
 
-export const FILM_EXTRAIT: FilmExtrait | null = null;
+const FILM_CLOUDINARY = 'https://res.cloudinary.com/dtntkknaq/video/upload/v1795691237/WAHHF_720p_eoo0rc.mp4';
+
+export const FILM_EXTRAIT: FilmExtrait | null = {
+  bureau: { mp4: FILM_CLOUDINARY },
+  telephone: { mp4: FILM_CLOUDINARY },
+  debut: 0,
+  duree: 69.8,
+};
