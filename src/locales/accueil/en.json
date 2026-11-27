@@ -38,7 +38,7 @@
       },
       "gratuite": {
         "titre": "Free of charge",
-        "texte": "The German and English academy, from A1 to C1, at no cost."
+        "texte": "The German, English and Italian academy, from A1 to C1, at no cost."
       }
     },
     "lien": "Discover the foundation",
@@ -113,7 +113,7 @@
         "sousTexte": "From education to mobility"
       },
       "niveaux": {
-        "libelle": "Levels of German and English",
+        "libelle": "Levels of German, English and Italian",
         "sousTexte": "From A1 to C1, free of charge"
       },
       "villes": {
@@ -143,7 +143,7 @@
         "surtitre": "Flagship project",
         "titre": "The Language Academy",
         "accroche": "where Europe begins",
-        "texte": "A free programme for learning German and English, from level A1 to level C1, with verified guidance pages for 10 European countries.",
+        "texte": "A free programme for learning German, English and Italian, from level A1 to level C1, with verified guidance pages for 10 European countries.",
         "jalons": [
           {
             "libelle": "Discovery"

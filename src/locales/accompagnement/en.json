@@ -4,7 +4,7 @@
     "accompagnement": "Support towards Europe",
     "etape": "Step {{n}} of {{total}} of the support process",
     "etreAccompagne": "Get support",
-    "formulaire": "A single form for guidance towards Europe and for German/English courses. You will never be asked for an identity document or a payment.",
+    "formulaire": "A single form for guidance towards Europe and for German/English/Italian courses. You will never be asked for an identity document or a payment.",
     "nouvelOnglet": " (new tab)",
     "dixPays": "The 10 supported countries",
     "langues": "Languages: {{liste}}"
@@ -88,7 +88,7 @@
     "citation": "“{{texte}}”",
     "avantNote": ": ",
     "jamaisTitre": "WAHHF Foundation never asks for money",
-    "jamaisSousTitre": "WAHHF Foundation is a non-profit foundation, funded by its partners and donors. Our support and our German/English courses are free of charge.",
+    "jamaisSousTitre": "WAHHF Foundation is a non-profit foundation, funded by its partners and donors. Our support and our German/English/Italian courses are free of charge.",
     "reflexesTitre": "The right reflexes",
     "voirFiches": "See the pages for the 10 countries and their official websites",
     "suspectTitre": "Does an offer seem suspicious?",
@@ -107,7 +107,7 @@
       },
       "apprendre-la-langue": {
         "title": "Learning the language of the country",
-        "desc": "Reach the required language level (in particular German/English from A1 to C1 with the WAHHF Academy) before starting the procedures."
+        "desc": "Reach the required language level (in particular German/English/Italian from A1 to C1 with the WAHHF Academy) before starting the procedures."
       },
       "eviter-les-arnaques": {
         "title": "Knowing the official procedures and avoiding scams",

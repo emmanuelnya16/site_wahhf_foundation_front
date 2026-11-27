@@ -74,7 +74,7 @@ export const CHIFFRES: ChiffreAccueil[] = [
     id: 'niveaux',
     nature: 'en-place',
     valeur: GERMAN_LEVELS_DATA.length,
-    libelle: 'Niveaux d’allemand et d’anglais',
+    libelle: 'Niveaux d’allemand, d’anglais et d’italien',
     sousTexte: 'De A1 à C1, gratuits',
     lien: '/mobilite-langues',
     date: null,

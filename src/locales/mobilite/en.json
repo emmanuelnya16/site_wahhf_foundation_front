@@ -6,7 +6,7 @@
     "niveau": "Level {{level}}",
     "candidater": "Apply",
     "candidaterNiveau": "Apply for level {{level}}",
-    "filAria": "The five German/English levels, from A1 to C1, then Europe",
+    "filAria": "The five German/English/Italian levels, from A1 to C1, then Europe",
     "niveauAffiche": "level shown",
     "nomNiveau": "German {{level}}: {{short}}",
     "cohorte": "Join the next cohort"
@@ -28,15 +28,15 @@
   },
   "hub": {
     "seoTitle": "Mobility & Languages — Learn, prepare and find your way, free of charge",
-    "seoDescription": "WAHHF Foundation: a free German/English Language Academy (A1 to C1) and transparent support towards 10 European countries, funded by our partners and donors.",
-    "title": "Learn German/English, prepare and find your way to Europe",
-    "intro": "German/English courses from level A1 to level C1 and reliable information on studies, training and work in 10 European countries.",
+    "seoDescription": "WAHHF Foundation: a free German/English/Italian Language Academy (A1 to C1) and transparent support towards 10 European countries, funded by our partners and donors.",
+    "title": "Learn German/English/Italian, prepare and find your way to Europe",
+    "intro": "German/English/Italian courses from level A1 to level C1 and reliable information on studies, training and work in 10 European countries.",
     "ctaCandidater": "Apply to the programme",
-    "ctaAcademie": "Discover the German/English Academy",
+    "ctaAcademie": "Discover the German/English/Italian Academy",
     "portesTitle": "Choose your way in",
-    "portesSubtitle": "You can apply for the German/English language courses only, for the support with your documents only, or for both.",
-    "academieTitle": "Language Academy (German/English A1 to C1)",
-    "academieText": "Learn German/English step by step: comprehension, speaking and writing, an online placement test and methodical preparation for certificates.",
+    "portesSubtitle": "You can apply for the German/English/Italian language courses only, for the support with your documents only, or for both.",
+    "academieTitle": "Language Academy (German/English/Italian A1 to C1)",
+    "academieText": "Learn German/English/Italian step by step: comprehension, speaking and writing, an online placement test and methodical preparation for certificates.",
     "academieBouton": "Go to the Language Academy",
     "academieTest": "Take the placement test (20 questions)",
     "europeTitle": "Support towards Europe",
@@ -64,8 +64,8 @@
     "faqTitle": "Frequently asked questions",
     "faq": {
       "gratuit": {
-        "q": "Are the German/English courses and the support really 100% free?",
-        "a": "Yes, for all beneficiaries: the German/English courses, from level A1 to level C1, as well as the guidance sessions on Europe. The programme is funded by our partners and donors."
+        "q": "Are the German/English/Italian courses and the support really 100% free?",
+        "a": "Yes, for all beneficiaries: the German/English/Italian courses, from level A1 to level C1, as well as the guidance sessions on Europe. The programme is funded by our partners and donors."
       },
       "visas": {
         "q": "Does WAHHF Foundation issue visas or employment contracts?",
@@ -76,17 +76,17 @@
         "a": "No. When you apply online on this site, you are not asked for any identity document (no passport, no national ID card) or any money."
       },
       "niveau": {
-        "q": "How do I know which German/English level to start at?",
+        "q": "How do I know which German/English/Italian level to start at?",
         "a": "If you are a complete beginner, choose level A1. If you already know the basics, take our 20-question placement test on the Language Academy page."
       }
     },
-    "finSubtitle": "One form for the German/English courses and guidance towards Europe. It takes about 5 minutes; you will not be asked for any identity document or payment."
+    "finSubtitle": "One form for the German/English/Italian courses and guidance towards Europe. It takes about 5 minutes; you will not be asked for any identity document or payment."
   },
   "academie": {
-    "seoTitle": "Language Academy — German/English A1 to C1, free of charge",
-    "seoDescription": "Free support for German/English language courses from level A1 to level C1 by WAHHF Foundation: a 20-question placement test, a programme for each level and sessions.",
-    "title": "Language Academy: German/English, from level A1 to level C1 with WAHHF Institute",
-    "intro": "German/English courses from beginner level to academic mastery, online or in person in Douala and Yaoundé. Start with the test: it tells you which level to start at.",
+    "seoTitle": "Language Academy — German/English/Italian A1 to C1, free of charge",
+    "seoDescription": "Free support for German/English/Italian language courses from level A1 to level C1 by WAHHF Foundation: a 20-question placement test, a programme for each level and sessions.",
+    "title": "Language Academy: German/English/Italian, from level A1 to level C1 with WAHHF Institute",
+    "intro": "German/English/Italian courses from beginner level to academic mastery, online or in person in Douala and Yaoundé. Start with the test: it tells you which level to start at.",
     "ctaTest": "Find my level (5 minutes)",
     "ctaCandidater": "Apply (choose my level)",
     "niveauxTitle": "The 5 levels, from A1 to C1",
@@ -146,7 +146,7 @@
   },
   "sessions": {
     "moisAConfirmer": "{{month}} (date to be confirmed)",
-    "whatsapp": "Hello WAHHF Foundation, I would like to be told about the next German/English course session.",
+    "whatsapp": "Hello WAHHF Foundation, I would like to be told about the next German/English/Italian course session.",
     "titleNiveau": "Upcoming level {{level}} sessions",
     "titleTout": "Calendar of upcoming sessions",
     "subtitle": "All sessions are free of charge. Online or in person in Douala and Yaoundé; sessions that have already started are no longer shown.",
@@ -214,13 +214,13 @@
     }
   },
   "candidature": {
-    "seoTitle": "Apply free of charge — German/English courses & Support towards Europe",
-    "seoDescription": "A single, 100% free form to request support and enrol in WAHHF Foundation's German/English courses. No identity document or payment required.",
+    "seoTitle": "Apply free of charge — German/English/Italian courses & Support towards Europe",
+    "seoDescription": "A single, 100% free form to request support and enrol in WAHHF Foundation's German/English/Italian courses. No identity document or payment required.",
     "title": "Apply for a support programme",
-    "intro": "One form to join the German/English Academy (A1 to C1), get guidance towards Europe, or both. It takes about 5 minutes.",
+    "intro": "One form to join the German/English/Italian Academy (A1 to C1), get guidance towards Europe, or both. It takes about 5 minutes.",
     "avant": "Before you start",
     "souhaits": {
-      "cours_allemand": "German/English courses (A1 to C1)",
+      "cours_allemand": "German/English/Italian courses (A1 to C1)",
       "accompagnement_europe": "Support towards Europe",
       "les_deux": "Both: courses and guidance"
     },
@@ -249,7 +249,7 @@
       "souhait": "Request",
       "session": "Chosen session",
       "paysInteret": "Country of interest",
-      "niveau": "German/English level",
+      "niveau": "German/English/Italian level",
       "format": "Preferred format",
       "message": "Message",
       "accord": "I agree that my contact details may be processed by WAHHF Foundation for the sole purpose of responding to my request for support."
@@ -284,7 +284,7 @@
     "souhaitLegend": "What would you like? *",
     "paysInteretLabel": "Main country of interest among the 10 countries we cover",
     "horsUE": "(outside the European Union)",
-    "niveauLabel": "Current / target German/English level",
+    "niveauLabel": "Current / target German/English/Italian level",
     "niveaux": {
       "A1": "A1 — Complete beginner",
       "A2": "A2 — Elementary basics",

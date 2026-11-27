@@ -10,12 +10,12 @@
     "don.contenu.exemplesImpact.EUR-250.text"
   ],
   "seo": {
-    "title": "Spenden — Deutsch- und Englischkurse und unsere Arbeit in Kamerun unterstützen",
-    "description": "Unterstützen Sie die WAHHF Foundation: Ihre Spenden finanzieren Deutsch- und Englischkurse (A1 bis C1), die Begleitung junger Menschen nach Europa und unsere Arbeit in Bildung, Gesundheit und Umwelt in Kamerun."
+    "title": "Spenden — Deutsch-, Englisch- und Italienischkurse und unsere Arbeit in Kamerun unterstützen",
+    "description": "Unterstützen Sie die WAHHF Foundation: Ihre Spenden finanzieren Deutsch-, Englisch- und Italienischkurse (A1 bis C1), die Begleitung junger Menschen nach Europa und unsere Arbeit in Bildung, Gesundheit und Umwelt in Kamerun."
   },
   "header": {
-    "title": "Ihre Spende finanziert Deutsch- und Englischkurse und unsere Arbeit in Kamerun",
-    "intro": "Die Deutsch- und Englischkurse (A1 bis C1) und die Begleitung nach Europa sind für junge Menschen kostenlos: Unsere Partner sowie unsere Spenderinnen und Spender finanzieren sie. Ihre Spenden unterstützen auch unsere Arbeit in Bildung, Gesundheit und Umwelt."
+    "title": "Ihre Spende finanziert Deutsch-, Englisch- und Italienischkurse und unsere Arbeit in Kamerun",
+    "intro": "Die Deutsch-, Englisch- und Italienischkurse (A1 bis C1) und die Begleitung nach Europa sind für junge Menschen kostenlos: Unsere Partner sowie unsere Spenderinnen und Spender finanzieren sie. Ihre Spenden unterstützen auch unsere Arbeit in Bildung, Gesundheit und Umwelt."
   },
   "status": {
     "ready": "Ihre Nachricht ist bereit: Senden Sie sie per WhatsApp oder per E-Mail."
@@ -85,7 +85,7 @@
     "impactDomaines": {
       "mobilite-langues": {
         "for": "Mobilität und Sprachen",
-        "what": "Deutsch- und Englischkurse von Niveau A1 bis C1 und Orientierung für 10 europäische Zielländer"
+        "what": "Deutsch-, Englisch- und Italienischkurse von Niveau A1 bis C1 und Orientierung für 10 europäische Zielländer"
       },
       "education": {
         "for": "Bildung",
@@ -110,7 +110,7 @@
     },
     "exemplesImpact": {
       "EUR-25": {
-        "text": "Finanziert Lehrbücher und Übungsmaterial für Deutsch/Englisch A1 für eine junge lernende Person (Beispiel — TODO)"
+        "text": "Finanziert Lehrbücher und Übungsmaterial für Deutsch/Englisch/Italienisch A1 für eine junge lernende Person (Beispiel — TODO)"
       },
       "EUR-50": {
         "text": "Unterstützt einen Monat Sprachbegleitung und digitalen Zugang für eine Studentin oder einen Studenten (Beispiel — TODO)"

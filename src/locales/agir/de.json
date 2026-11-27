@@ -18,11 +18,11 @@
   "ways": {
     "donate": {
       "title": "Spenden",
-      "text": "Finanzieren Sie die kostenlosen Deutsch- und Englischkurse und unsere soziale Arbeit vor Ort."
+      "text": "Finanzieren Sie die kostenlosen Deutsch-, Englisch- und Italienischkurse und unsere soziale Arbeit vor Ort."
     },
     "volunteer": {
       "title": "Ehrenamtlich helfen",
-      "text": "Lehrkräfte für Deutsch und Englisch, Ärztinnen und Ärzte, Mentorinnen und Mentoren oder lokale Koordinatorinnen und Koordinatoren in Kamerun und in Europa.",
+      "text": "Lehrkräfte für Deutsch, Englisch und Italienisch, Ärztinnen und Ärzte, Mentorinnen und Mentoren oder lokale Koordinatorinnen und Koordinatoren in Kamerun und in Europa.",
       "action": "Formular für Ehrenamtliche ausfüllen"
     },
     "partner": {
@@ -83,7 +83,7 @@
       "partenaire": "Ihr Partnerschaftsprojekt *"
     },
     "detailsPlaceholder": {
-      "benevole": "z. B. Lehrerin für Deutsch/Englisch, samstags verfügbar, online oder in Douala.",
+      "benevole": "z. B. Lehrerin für Deutsch/Englisch/Italienisch, samstags verfügbar, online oder in Douala.",
       "partenaire": "Welches Programm möchten Sie unterstützen, und wie?"
     },
     "consent": "Ich bin damit einverstanden, dass die WAHHF Foundation meine Daten gemäß der <lien>Datenschutzerklärung<sr> (neuer Tab)</sr></lien> verarbeitet, um meinen Vorschlag für ein Engagement zu prüfen. *",

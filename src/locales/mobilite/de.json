@@ -24,7 +24,7 @@
     "niveau": "Niveau {{level}}",
     "candidater": "Bewerben",
     "candidaterNiveau": "Für Niveau {{level}} bewerben",
-    "filAria": "Die fünf Niveaus Deutsch/Englisch, von A1 bis C1, dann Europa",
+    "filAria": "Die fünf Niveaus Deutsch/Englisch/Italienisch, von A1 bis C1, dann Europa",
     "niveauAffiche": "angezeigtes Niveau",
     "nomNiveau": "Deutsch {{level}}: {{short}}",
     "cohorte": "In die nächste Kursgruppe einsteigen"
@@ -46,15 +46,15 @@
   },
   "hub": {
     "seoTitle": "Mobilität & Sprachen — kostenlos lernen, sich vorbereiten und orientieren",
-    "seoDescription": "WAHHF Foundation: kostenlose Sprachakademie für Deutsch/Englisch (A1 bis C1) und transparente Begleitung in 10 europäische Länder, finanziert von unseren Partnern und Spendern.",
-    "title": "Deutsch/Englisch lernen, sich vorbereiten, den Weg nach Europa finden",
-    "intro": "Deutsch- und Englischkurse von Niveau A1 bis Niveau C1 und verlässliche Informationen zu Studium, Ausbildung und Arbeit in 10 europäischen Ländern.",
+    "seoDescription": "WAHHF Foundation: kostenlose Sprachakademie für Deutsch/Englisch/Italienisch (A1 bis C1) und transparente Begleitung in 10 europäische Länder, finanziert von unseren Partnern und Spendern.",
+    "title": "Deutsch/Englisch/Italienisch lernen, sich vorbereiten, den Weg nach Europa finden",
+    "intro": "Deutsch-, Englisch- und Italienischkurse von Niveau A1 bis Niveau C1 und verlässliche Informationen zu Studium, Ausbildung und Arbeit in 10 europäischen Ländern.",
     "ctaCandidater": "Für das Programm bewerben",
     "ctaAcademie": "Die Sprachakademie entdecken",
     "portesTitle": "Wählen Sie Ihren Einstieg",
-    "portesSubtitle": "Sie können sich nur für die Deutsch- und Englischkurse bewerben, nur für die Begleitung bei den Unterlagen oder für beides.",
-    "academieTitle": "Sprachakademie (Deutsch/Englisch A1 bis C1)",
-    "academieText": "Deutsch/Englisch Schritt für Schritt lernen: Verstehen, Sprechen und Schreiben, ein Online-Einstufungstest und eine methodische Vorbereitung auf die Zertifikate.",
+    "portesSubtitle": "Sie können sich nur für die Deutsch-, Englisch- und Italienischkurse bewerben, nur für die Begleitung bei den Unterlagen oder für beides.",
+    "academieTitle": "Sprachakademie (Deutsch/Englisch/Italienisch A1 bis C1)",
+    "academieText": "Deutsch/Englisch/Italienisch Schritt für Schritt lernen: Verstehen, Sprechen und Schreiben, ein Online-Einstufungstest und eine methodische Vorbereitung auf die Zertifikate.",
     "academieBouton": "Zur Sprachakademie",
     "academieTest": "Einstufungstest machen (20 Fragen)",
     "europeTitle": "Begleitung nach Europa",
@@ -82,8 +82,8 @@
     "faqTitle": "Häufige Fragen",
     "faq": {
       "gratuit": {
-        "q": "Sind die Deutsch- und Englischkurse und die Begleitung wirklich zu 100 % kostenlos?",
-        "a": "Ja, für alle Teilnehmenden: die Deutsch- und Englischkurse von Niveau A1 bis Niveau C1 ebenso wie die Orientierungstermine zu Europa. Das Programm wird von unseren Partnern und Spendern finanziert."
+        "q": "Sind die Deutsch-, Englisch- und Italienischkurse und die Begleitung wirklich zu 100 % kostenlos?",
+        "a": "Ja, für alle Teilnehmenden: die Deutsch-, Englisch- und Italienischkurse von Niveau A1 bis Niveau C1 ebenso wie die Orientierungstermine zu Europa. Das Programm wird von unseren Partnern und Spendern finanziert."
       },
       "visas": {
         "q": "Stellt die WAHHF Foundation Visa oder Arbeitsverträge aus?",
@@ -94,17 +94,17 @@
         "a": "Nein. Für Ihre Online-Bewerbung auf dieser Website verlangen wir kein Ausweisdokument (keinen Reisepass, keinen Personalausweis) und kein Geld."
       },
       "niveau": {
-        "q": "Wie finde ich heraus, mit welchem Niveau ich in Deutsch/Englisch beginne?",
+        "q": "Wie finde ich heraus, mit welchem Niveau ich in Deutsch/Englisch/Italienisch beginne?",
         "a": "Wenn Sie ganz ohne Vorkenntnisse starten, wählen Sie Niveau A1. Wenn Sie schon Grundkenntnisse haben, machen Sie unseren Einstufungstest mit 20 Fragen auf der Seite der Sprachakademie."
       }
     },
-    "finSubtitle": "Ein einziges Formular für die Deutsch- und Englischkurse und die Orientierung nach Europa. Es dauert etwa 5 Minuten. Wir verlangen weder ein Ausweisdokument noch eine Zahlung."
+    "finSubtitle": "Ein einziges Formular für die Deutsch-, Englisch- und Italienischkurse und die Orientierung nach Europa. Es dauert etwa 5 Minuten. Wir verlangen weder ein Ausweisdokument noch eine Zahlung."
   },
   "academie": {
-    "seoTitle": "Sprachakademie — Deutsch/Englisch A1 bis C1 kostenlos",
-    "seoDescription": "Kostenlose Begleitung der Deutsch- und Englischkurse von Niveau A1 bis Niveau C1 durch die WAHHF Foundation: Einstufungstest mit 20 Fragen, Programm für jedes Niveau und Kurstermine.",
-    "title": "Sprachakademie: Deutsch/Englisch von Niveau A1 bis Niveau C1 mit dem WAHHF Institute",
-    "intro": "Deutsch- und Englischkurse vom Anfängerniveau bis zur akademischen Sprachbeherrschung, online oder vor Ort in Douala und Yaoundé. Beginnen Sie mit dem Test: Er zeigt Ihnen, mit welchem Niveau Sie starten.",
+    "seoTitle": "Sprachakademie — Deutsch/Englisch/Italienisch A1 bis C1 kostenlos",
+    "seoDescription": "Kostenlose Begleitung der Deutsch-, Englisch- und Italienischkurse von Niveau A1 bis Niveau C1 durch die WAHHF Foundation: Einstufungstest mit 20 Fragen, Programm für jedes Niveau und Kurstermine.",
+    "title": "Sprachakademie: Deutsch/Englisch/Italienisch von Niveau A1 bis Niveau C1 mit dem WAHHF Institute",
+    "intro": "Deutsch-, Englisch- und Italienischkurse vom Anfängerniveau bis zur akademischen Sprachbeherrschung, online oder vor Ort in Douala und Yaoundé. Beginnen Sie mit dem Test: Er zeigt Ihnen, mit welchem Niveau Sie starten.",
     "ctaTest": "Mein Niveau finden (5 Minuten)",
     "ctaCandidater": "Bewerben (Niveau selbst wählen)",
     "niveauxTitle": "Die 5 Niveaus, von A1 bis C1",
@@ -164,7 +164,7 @@
   },
   "sessions": {
     "moisAConfirmer": "{{month}} (Datum noch nicht bestätigt)",
-    "whatsapp": "Guten Tag, liebes Team der WAHHF Foundation, ich möchte über den nächsten Termin der Deutsch- und Englischkurse informiert werden.",
+    "whatsapp": "Guten Tag, liebes Team der WAHHF Foundation, ich möchte über den nächsten Termin der Deutsch-, Englisch- und Italienischkurse informiert werden.",
     "titleNiveau": "Nächste Kurse auf Niveau {{level}}",
     "titleTout": "Kalender der nächsten Kurse",
     "subtitle": "Alle Kurse sind kostenlos. Online oder vor Ort in Douala und Yaoundé; bereits begonnene Kurse werden nicht mehr angezeigt.",
@@ -232,13 +232,13 @@
     }
   },
   "candidature": {
-    "seoTitle": "Kostenlos bewerben — Deutsch- und Englischkurse & Begleitung nach Europa",
-    "seoDescription": "Ein einziges, zu 100 % kostenloses Formular für die Anfrage nach Begleitung und die Anmeldung zu den Deutsch- und Englischkursen der WAHHF Foundation. Kein Ausweisdokument und keine Zahlung nötig.",
+    "seoTitle": "Kostenlos bewerben — Deutsch-, Englisch- und Italienischkurse & Begleitung nach Europa",
+    "seoDescription": "Ein einziges, zu 100 % kostenloses Formular für die Anfrage nach Begleitung und die Anmeldung zu den Deutsch-, Englisch- und Italienischkursen der WAHHF Foundation. Kein Ausweisdokument und keine Zahlung nötig.",
     "title": "Für eine Begleitung bewerben",
-    "intro": "Ein einziges Formular, um an der Sprachakademie für Deutsch/Englisch (A1 bis C1) teilzunehmen, Orientierung für Europa zu erhalten oder beides. Es dauert etwa 5 Minuten.",
+    "intro": "Ein einziges Formular, um an der Sprachakademie für Deutsch/Englisch/Italienisch (A1 bis C1) teilzunehmen, Orientierung für Europa zu erhalten oder beides. Es dauert etwa 5 Minuten.",
     "avant": "Bevor Sie beginnen",
     "souhaits": {
-      "cours_allemand": "Deutsch- und Englischkurse (A1 bis C1)",
+      "cours_allemand": "Deutsch-, Englisch- und Italienischkurse (A1 bis C1)",
       "accompagnement_europe": "Begleitung nach Europa",
       "les_deux": "Beides: Kurse und Orientierung"
     },
@@ -267,7 +267,7 @@
       "souhait": "Wunsch",
       "session": "Gewählter Kurs",
       "paysInteret": "Zielland",
-      "niveau": "Niveau Deutsch/Englisch",
+      "niveau": "Niveau Deutsch/Englisch/Italienisch",
       "format": "Gewünschtes Format",
       "message": "Nachricht",
       "accord": "Ich bin damit einverstanden, dass die WAHHF Foundation meine Kontaktdaten ausschließlich zur Beantwortung meiner Anfrage nach Begleitung verarbeitet."
@@ -302,7 +302,7 @@
     "souhaitLegend": "Was wünschen Sie sich? *",
     "paysInteretLabel": "Wichtigstes Zielland unter den 10 begleiteten Ländern",
     "horsUE": "(außerhalb der Europäischen Union)",
-    "niveauLabel": "Aktuelles / angestrebtes Niveau Deutsch/Englisch",
+    "niveauLabel": "Aktuelles / angestrebtes Niveau Deutsch/Englisch/Italienisch",
     "niveaux": {
       "A1": "A1 — Absolute Anfänger",
       "A2": "A2 — Elementare Grundkenntnisse",

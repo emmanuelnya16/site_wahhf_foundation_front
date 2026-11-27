@@ -1,12 +1,12 @@
 {
   "_note": "Textes fixes de la page /faire-un-don (lot 7.10). <nb> garde l'espace insécable devant « : » à part, <v> une valeur (montant, devise) : même rendu qu'avant. <lien> est le lien vers la politique de confidentialité, <sr> le texte réservé aux lecteurs d'écran, <tel> et <mail> les coordonnées officielles. Les montants sont mis en forme par la page selon la langue. Les programmes des domaines et les exemples chiffrés (DOMAIN_IMPACT, DOMAIN_IMPACT_NOT_VALIDATED, EXAMPLE_IMPACTS_NOT_VALIDATED) restent en français dans la page : leurs surcouches sont sous contenu dans en.json et de.json.",
   "seo": {
-    "title": "Faire un don — Soutenir les cours d’allemand /anglais et nos actions au Cameroun",
-    "description": "Soutenez WAHHF Foundation : vos dons financent les cours d'allemand /anglais (A1 à C1), l'accompagnement des jeunes vers l'Europe et nos actions d'éducation, de santé et d'environnement au Cameroun."
+    "title": "Faire un don — Soutenir les cours d’allemand /anglais /italien et nos actions au Cameroun",
+    "description": "Soutenez WAHHF Foundation : vos dons financent les cours d'allemand /anglais /italien (A1 à C1), l'accompagnement des jeunes vers l'Europe et nos actions d'éducation, de santé et d'environnement au Cameroun."
   },
   "header": {
-    "title": "Votre don finance des cours d’allemand /anglais et nos actions au Cameroun",
-    "intro": "Les cours d’allemand /anglais (A1 à C1) et l’accompagnement vers l’Europe sont gratuits pour les jeunes<nb> </nb>: ils sont financés par nos partenaires et nos donateurs. Vos dons soutiennent aussi nos actions d’éducation, de santé et d’environnement."
+    "title": "Votre don finance des cours d’allemand /anglais /italien et nos actions au Cameroun",
+    "intro": "Les cours d’allemand /anglais /italien (A1 à C1) et l’accompagnement vers l’Europe sont gratuits pour les jeunes<nb> </nb>: ils sont financés par nos partenaires et nos donateurs. Vos dons soutiennent aussi nos actions d’éducation, de santé et d’environnement."
   },
   "status": {
     "ready": "Votre message est prêt : envoyez-le par WhatsApp ou par e-mail."

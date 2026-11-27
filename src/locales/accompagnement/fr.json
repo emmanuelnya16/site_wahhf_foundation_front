@@ -4,7 +4,7 @@
     "accompagnement": "Accompagnement vers l’Europe",
     "etape": "Étape {{n}} sur {{total}} de l’accompagnement",
     "etreAccompagne": "Être accompagné",
-    "formulaire": "Un seul formulaire pour l’orientation vers l’Europe et les cours d’allemand /anglais. Aucun document d’identité ni paiement ne vous est demandé.",
+    "formulaire": "Un seul formulaire pour l’orientation vers l’Europe et les cours d’allemand /anglais /italien. Aucun document d’identité ni paiement ne vous est demandé.",
     "nouvelOnglet": " (nouvel onglet)",
     "dixPays": "Les 10 pays accompagnés",
     "langues": "Langues{{nb}}: {{liste}}"
@@ -88,7 +88,7 @@
     "citation": "«{{nb}}{{texte}}{{nb}}»",
     "avantNote": "{{nb}}: ",
     "jamaisTitre": "WAHHF Foundation ne demande jamais d’argent",
-    "jamaisSousTitre": "WAHHF Foundation est une fondation à but non lucratif, financée par ses partenaires et ses donateurs. Notre accompagnement et nos cours d’allemand /anglais sont gratuits.",
+    "jamaisSousTitre": "WAHHF Foundation est une fondation à but non lucratif, financée par ses partenaires et ses donateurs. Notre accompagnement et nos cours d’allemand /anglais /italien sont gratuits.",
     "reflexesTitre": "Les bons réflexes",
     "voirFiches": "Voir les fiches des 10 pays et leurs sites officiels",
     "suspectTitre": "Une offre vous semble suspecte ?",

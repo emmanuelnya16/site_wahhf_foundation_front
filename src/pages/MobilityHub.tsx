@@ -45,7 +45,7 @@ const EUROPE_PHOTO = photoOrFallback('A34');
 
 /** « Pourquoi », second paragraphe : plus affiché (retouches du 19/11, il redit l'introduction et « Exigence »). */
 export const WHY_SECOND_PARAGRAPH_HIDDEN =
-  'Avec le soutien de nos partenaires et de nos donateurs, nous proposons ce que beaucoup marchandent : des cours d’allemand /anglais structurés du niveau A1 au C1 et une orientation documentée étape par étape.';
+  'Avec le soutien de nos partenaires et de nos donateurs, nous proposons ce que beaucoup marchandent : des cours d’allemand /anglais /italien structurés du niveau A1 au C1 et une orientation documentée étape par étape.';
 
 /** Photo d'une porte d'entrée : 3:2 entière, légendée par son album, à droite du texte sur ordinateur. */
 function DoorPhoto({ photo }: { photo: CatalogPhoto | null }) {

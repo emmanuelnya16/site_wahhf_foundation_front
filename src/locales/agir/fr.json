@@ -11,11 +11,11 @@
   "ways": {
     "donate": {
       "title": "Faire un don",
-      "text": "Financez les cours d’allemand /anglais gratuits et les actions sociales de terrain."
+      "text": "Financez les cours d’allemand /anglais /italien gratuits et les actions sociales de terrain."
     },
     "volunteer": {
       "title": "Devenir bénévole",
-      "text": "Enseignants d’allemand /anglais, médecins, mentors ou coordinateurs locaux au Cameroun et en Europe.",
+      "text": "Enseignants d’allemand /anglais /italien, médecins, mentors ou coordinateurs locaux au Cameroun et en Europe.",
       "action": "Remplir le formulaire bénévole"
     },
     "partner": {
@@ -76,7 +76,7 @@
       "partenaire": "Votre projet de partenariat *"
     },
     "detailsPlaceholder": {
-      "benevole": "Ex. enseignante d’allemand /anglais, disponible le samedi, en ligne ou à Douala.",
+      "benevole": "Ex. enseignante d’allemand /anglais /italien, disponible le samedi, en ligne ou à Douala.",
       "partenaire": "Quel programme souhaitez-vous soutenir, et comment ?"
     },
     "consent": "J’accepte que mes données soient traitées par WAHHF Foundation pour étudier ma proposition d’engagement, conformément à la <lien>politique de confidentialité<sr> (nouvel onglet)</sr></lien>. *",

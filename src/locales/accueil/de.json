@@ -46,7 +46,7 @@
       },
       "gratuite": {
         "titre": "Kostenlos",
-        "texte": "Die Deutsch- und Englischakademie, von A1 bis C1, ohne Gebühren."
+        "texte": "Die Deutsch-, Englisch- und Italienischakademie, von A1 bis C1, ohne Gebühren."
       }
     },
     "lien": "Die Stiftung kennenlernen",
@@ -121,7 +121,7 @@
         "sousTexte": "Von der Bildung bis zur Mobilität"
       },
       "niveaux": {
-        "libelle": "Niveaus in Deutsch und Englisch",
+        "libelle": "Niveaus in Deutsch, Englisch und Italienisch",
         "sousTexte": "Von A1 bis C1, kostenlos"
       },
       "villes": {
@@ -151,7 +151,7 @@
         "surtitre": "Leuchtturmprojekt",
         "titre": "Die Sprachakademie",
         "accroche": "der Weg nach Europa\nbeginnt hier",
-        "texte": "Ein kostenloses Programm zum Lernen von Deutsch und Englisch, von Niveau A1 bis Niveau C1, mit geprüften Länderseiten zu 10 europäischen Ländern.",
+        "texte": "Ein kostenloses Programm zum Lernen von Deutsch, Englisch und Italienisch, von Niveau A1 bis Niveau C1, mit geprüften Länderseiten zu 10 europäischen Ländern.",
         "jalons": [
           {
             "libelle": "Einstieg"

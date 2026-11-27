@@ -59,8 +59,8 @@
     "mega": {
       "domainsTitle": "Die 6 Arbeitsbereiche der WAHHF Foundation",
       "overview": "Zur Übersicht",
-      "mobilityTitle": "Mobilität & Sprachen: Deutsch/Englisch (A1–C1) & Europa",
-      "mobilityText": "Kostenlose Begleitung bei Deutsch- und Englischkursen und geprüfte Orientierung für 10 europäische Länder, finanziert von IROKO und unseren Spenderinnen und Spendern.",
+      "mobilityTitle": "Mobilität & Sprachen: Deutsch/Englisch/Italienisch (A1–C1) & Europa",
+      "mobilityText": "Kostenlose Begleitung bei Deutsch-, Englisch- und Italienischkursen und geprüfte Orientierung für 10 europäische Länder, finanziert von IROKO und unseren Spenderinnen und Spendern.",
       "academy": "Sprachakademie (A1 bis C1)",
       "support": "Begleitung in 10 Länder",
       "scams": "Vorsicht: Betrug vermeiden",
@@ -81,7 +81,7 @@
     "scrollHint": "Zum Entdecken scrollen",
     "videoPause": "Video anhalten",
     "videoPlay": "Video abspielen",
-    "headline": "Deutsch- und Englischkurse, um Europa gut vorbereitet anzugehen",
+    "headline": "Deutsch-, Englisch- und Italienischkurse, um Europa gut vorbereitet anzugehen",
     "lead": "Eine kamerunisch-deutsche Stiftung in Yaoundé und Douala: Niveaus A1 bis C1, Online-Test und Orientierung für 10 europäische Länder – ohne bezahlte Vermittler.",
     "ctaTest": "Kostenlosen Deutschtest machen",
     "filmLink": "Film mit Ton ansehen (1 Min.)",
@@ -101,7 +101,7 @@
       "kicker": "Über uns",
       "title": "Eine menschliche Brücke zwischen Kamerun und Deutschland",
       "p1": "Aus einer kamerunisch-deutschen Doppelkultur entstanden, ist die WAHHF Foundation der soziale und gemeinnützige Zweig der IROKO-Gruppe.",
-      "p2": "Wir sind überzeugt, dass Würde durch Wissen, Gesundheit und Selbstständigkeit entsteht. Darum entwickeln wir nachhaltige Programme vor Ort und ein kostenloses Angebot, um Deutsch oder Englisch zu lernen und sich in Richtung Europa zu orientieren.",
+      "p2": "Wir sind überzeugt, dass Würde durch Wissen, Gesundheit und Selbstständigkeit entsteht. Darum entwickeln wir nachhaltige Programme vor Ort und ein kostenloses Angebot, um Deutsch, Englisch oder Italienisch zu lernen und sich in Richtung Europa zu orientieren.",
       "link": "Mehr über unsere Geschichte und unsere Organisation"
     },
     "stats": {
@@ -119,10 +119,10 @@
       "subtitle": "Vom Zugang zur Grundschule bis zur internationalen Studien- und Sprachmobilität."
     },
     "mobilitySpot": {
-      "title": "Deutsch oder Englisch lernen, den Weg nach Europa finden",
-      "subtitle": "Kostenlose Deutsch- und Englischkurse und Orientierung – ohne Anmeldegebühren und ohne kommerzielle Vermittler.",
+      "title": "Deutsch, Englisch oder Italienisch lernen, den Weg nach Europa finden",
+      "subtitle": "Kostenlose Deutsch-, Englisch- und Italienischkurse und Orientierung – ohne Anmeldegebühren und ohne kommerzielle Vermittler.",
       "card1Title": "Sprachakademie A1 bis C1",
-      "card1Desc": "Strukturierte Begleitung der Deutsch- und Englischkurse vom Anfängerniveau A1 bis zum fortgeschrittenen Niveau C1, mit Online-Einstufungstest.",
+      "card1Desc": "Strukturierte Begleitung der Deutsch-, Englisch- und Italienischkurse vom Anfängerniveau A1 bis zum fortgeschrittenen Niveau C1, mit Online-Einstufungstest.",
       "card2Title": "Begleitung nach Europa",
       "card2Desc": "Klare und geprüfte Informationen in 4 Schritten: Studien-, Ausbildungs- und Arbeitswege verstehen und die Unterlagen vorbereiten.",
       "card3Title": "10 begleitete Länder",
@@ -209,7 +209,7 @@
     },
     "seo": {
       "title": "Startseite — Junge Menschen stärken, Gemeinschaften verändern",
-      "description": "WAHHF Foundation, gemeinnützige kamerunisch-deutsche Stiftung und sozialer Zweig der IROKO-Gruppe: 6 Arbeitsbereiche und kostenlose Deutsch- und Englischkurse."
+      "description": "WAHHF Foundation, gemeinnützige kamerunisch-deutsche Stiftung und sozialer Zweig der IROKO-Gruppe: 6 Arbeitsbereiche und kostenlose Deutsch-, Englisch- und Italienischkurse."
     },
     "journey": {
       "albumLink": "Zum Album"
@@ -232,7 +232,7 @@
     "gallery": "Foto- & Videogalerie",
     "partners": "Partner & IROKO-Gruppe",
     "news": "Aktuelles & Einsätze vor Ort",
-    "academy": "Deutsch-/Englisch-Akademie A1–C1 (kostenlos)",
+    "academy": "Deutsch-/Englisch-/Italienisch-Akademie A1–C1 (kostenlos)",
     "apply": "Für ein Programm bewerben",
     "volunteer": "Ehrenamtlich mitmachen",
     "partner": "Partner werden",
@@ -397,10 +397,10 @@
       },
       "mobilite-langues": {
         "title": "Mobilität & Sprachen",
-        "shortDesc": "Kostenlose Deutsch- und Englischakademie (A1 bis C1) und transparente Begleitung in 10 europäische Länder.",
-        "fullDesc": "Ein Programm, das unsere Partner und Spender finanzieren: Deutsch oder Englisch lernen und ein Studien-, Ausbildungs- oder Mobilitätsprojekt sicher vorbereiten.",
+        "shortDesc": "Kostenlose Deutsch-, Englisch- und Italienischakademie (A1 bis C1) und transparente Begleitung in 10 europäische Länder.",
+        "fullDesc": "Ein Programm, das unsere Partner und Spender finanzieren: Deutsch, Englisch oder Italienisch lernen und ein Studien-, Ausbildungs- oder Mobilitätsprojekt sicher vorbereiten.",
         "programs": [
-          "Begleitung der Deutsch- und Englischkurse von Niveau A1 bis C1",
+          "Begleitung der Deutsch-, Englisch- und Italienischkurse von Niveau A1 bis C1",
           "Fundierte Orientierung für 10 europäische Länder",
           "Aktiver Schutz vor Betrug und falschen Visaversprechen"
         ]

@@ -18,7 +18,7 @@
     "apply": "Candidater",
     "partners": "Partenaires",
     "contact": "Contact",
-    "searchPlaceholder": "Rechercher un programme, un cours d'allemand /anglais, un pays...",
+    "searchPlaceholder": "Rechercher un programme, un cours d'allemand /anglais /italien, un pays...",
     "themeLight": "Mode clair",
     "themeDark": "Mode sombre",
     "domains": {
@@ -46,8 +46,8 @@
     "mega": {
       "domainsTitle": "Les 6 domaines d’action de WAHHF Foundation",
       "overview": "Voir la vue d’ensemble",
-      "mobilityTitle": "Mobilité & Langues : Allemand /anglais (A1–C1) & Europe",
-      "mobilityText": "Accompagnement gratuit aux cours d’allemand /anglais et orientation vérifiée vers 10 pays européens, financé par IROKO et nos donateurs.",
+      "mobilityTitle": "Mobilité & Langues : Allemand /anglais /italien (A1–C1) & Europe",
+      "mobilityText": "Accompagnement gratuit aux cours d’allemand /anglais /italien et orientation vérifiée vers 10 pays européens, financé par IROKO et nos donateurs.",
       "academy": "Académie de langues (A1 à C1)",
       "support": "Accompagnement vers 10 pays",
       "scams": "Vigilance : Éviter les arnaques",
@@ -68,7 +68,7 @@
     "scrollHint": "Défiler pour découvrir",
     "videoPause": "Mettre la vidéo en pause",
     "videoPlay": "Lire la vidéo",
-    "headline": "Des cours d'allemand /anglais pour préparer l'Europe en confiance",
+    "headline": "Des cours d'allemand /anglais /italien pour préparer l'Europe en confiance",
     "lead": "Une fondation camerouno-allemande, à Yaoundé et Douala : niveaux A1 à C1, test en ligne et orientation vers 10 pays européens, sans intermédiaire payant.",
     "ctaTest": "Passer le test d'allemand gratuit",
     "filmLink": "Regarder le film avec le son (1 min)",
@@ -88,7 +88,7 @@
       "kicker": "Qui sommes-nous",
       "title": "Une passerelle humaine entre le Cameroun et l'Allemagne",
       "p1": "Née d'une double culture camerounaise et allemande, WAHHF Foundation est la branche sociale et philanthropique du groupe IROKO.",
-      "p2": "Convaincus que la dignité passe par le savoir, la santé et l'autonomie, nous développons des programmes de terrain durables et un dispositif gratuit d'apprentissage de l'allemand /anglais et d'orientation vers l'Europe.",
+      "p2": "Convaincus que la dignité passe par le savoir, la santé et l'autonomie, nous développons des programmes de terrain durables et un dispositif gratuit d'apprentissage de l'allemand /anglais /italien et d'orientation vers l'Europe.",
       "link": "En savoir plus sur notre histoire et notre gouvernance"
     },
     "stats": {
@@ -106,8 +106,8 @@
       "subtitle": "De l'accès à l'école primaire jusqu'à la mobilité académique et linguistique internationale."
     },
     "mobilitySpot": {
-      "title": "Apprendre l'allemand /anglais, s'orienter vers l'Europe",
-      "subtitle": "Cours d'allemand /anglais et orientation gratuits, sans frais d'inscription ni intermédiaire commercial.",
+      "title": "Apprendre l'allemand /anglais /italien, s'orienter vers l'Europe",
+      "subtitle": "Cours d'allemand /anglais /italien et orientation gratuits, sans frais d'inscription ni intermédiaire commercial.",
       "card1Title": "Académie de langues A1 à C1",
       "card1Desc": "Accompagnement des cours de langue allemande /anglaise structuré du niveau débutant A1 au niveau avancé C1, avec un test de niveau en ligne.",
       "card2Title": "Accompagnement vers l'Europe",
@@ -115,7 +115,7 @@
       "card3Title": "10 pays accompagnés",
       "card3Desc": "Luxembourg, Allemagne, Slovénie, Italie, Grèce, Portugal, Espagne, Danemark, Pologne et Albanie.",
       "cta": "Découvrir le programme",
-      "filLabel": "Les cinq niveaux d'allemand /anglais, de A1 à C1, puis l'Europe",
+      "filLabel": "Les cinq niveaux d'allemand /anglais /italien, de A1 à C1, puis l'Europe",
       "filEnd": "Europe",
       "levels": {
         "a1": "Découverte",
@@ -196,7 +196,7 @@
     },
     "seo": {
       "title": "Accueil — Autonomiser la jeunesse, transformer les communautés",
-      "description": "WAHHF Foundation, fondation camerouno-allemande à but non lucratif et branche sociale du groupe IROKO : 6 domaines d'action et cours d'allemand /anglais gratuits."
+      "description": "WAHHF Foundation, fondation camerouno-allemande à but non lucratif et branche sociale du groupe IROKO : 6 domaines d'action et cours d'allemand /anglais /italien gratuits."
     },
     "journey": {
       "albumLink": "Voir l’album"
@@ -219,7 +219,7 @@
     "gallery": "Galerie photo & vidéo",
     "partners": "Partenaires & Groupe IROKO",
     "news": "Actualités & Terrain",
-    "academy": "Académie d’allemand /anglais A1–C1 (Gratuit)",
+    "academy": "Académie d’allemand /anglais /italien A1–C1 (Gratuit)",
     "apply": "Candidater à un programme",
     "volunteer": "Devenir bénévole",
     "partner": "Devenir partenaire",

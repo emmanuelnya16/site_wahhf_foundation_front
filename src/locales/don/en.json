@@ -1,11 +1,11 @@
 {
   "seo": {
-    "title": "Donate — Support German/English courses and our work in Cameroon",
-    "description": "Support WAHHF Foundation: your donations fund German/English courses (A1 to C1), support for young people towards Europe and our education, health and environmental work in Cameroon."
+    "title": "Donate — Support German/English/Italian courses and our work in Cameroon",
+    "description": "Support WAHHF Foundation: your donations fund German/English/Italian courses (A1 to C1), support for young people towards Europe and our education, health and environmental work in Cameroon."
   },
   "header": {
-    "title": "Your donation funds German/English courses and our work in Cameroon",
-    "intro": "The German/English courses (A1 to C1) and the support towards Europe are free of charge for young people: they are funded by our partners and our donors. Your donations also support our education, health and environmental work."
+    "title": "Your donation funds German/English/Italian courses and our work in Cameroon",
+    "intro": "The German/English/Italian courses (A1 to C1) and the support towards Europe are free of charge for young people: they are funded by our partners and our donors. Your donations also support our education, health and environmental work."
   },
   "status": {
     "ready": "Your message is ready: send it by WhatsApp or by email."
@@ -75,7 +75,7 @@
     "impactDomaines": {
       "mobilite-langues": {
         "for": "mobility and languages",
-        "what": "German/English courses from level A1 to C1 and guidance towards 10 European countries"
+        "what": "German/English/Italian courses from level A1 to C1 and guidance towards 10 European countries"
       },
       "education": {
         "for": "education",
@@ -100,7 +100,7 @@
     },
     "exemplesImpact": {
       "EUR-25": {
-        "text": "Funds German/English A1 textbooks and exercise materials for one young learner (example — TODO)"
+        "text": "Funds German/English/Italian A1 textbooks and exercise materials for one young learner (example — TODO)"
       },
       "EUR-50": {
         "text": "Supports one month of language support and digital access for one student (example — TODO)"

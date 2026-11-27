@@ -18,7 +18,7 @@
     "apply": "Apply",
     "partners": "Partners",
     "contact": "Contact",
-    "searchPlaceholder": "Search a programme, German/English course, country...",
+    "searchPlaceholder": "Search a programme, German/English/Italian course, country...",
     "themeLight": "Light mode",
     "themeDark": "Dark mode",
     "domains": {
@@ -46,8 +46,8 @@
     "mega": {
       "domainsTitle": "The 6 areas of action of WAHHF Foundation",
       "overview": "See the overview",
-      "mobilityTitle": "Mobility & Languages: German/English (A1–C1) & Europe",
-      "mobilityText": "Free support for German/English courses and verified guidance towards 10 European countries, funded by IROKO and our donors.",
+      "mobilityTitle": "Mobility & Languages: German/English/Italian (A1–C1) & Europe",
+      "mobilityText": "Free support for German/English/Italian courses and verified guidance towards 10 European countries, funded by IROKO and our donors.",
       "academy": "Language Academy (A1 to C1)",
       "support": "Support towards 10 countries",
       "scams": "Stay alert: avoiding scams",
@@ -68,7 +68,7 @@
     "scrollHint": "Scroll to explore",
     "videoPause": "Pause the video",
     "videoPlay": "Play the video",
-    "headline": "German/English lessons to prepare for Europe with confidence",
+    "headline": "German/English/Italian lessons to prepare for Europe with confidence",
     "lead": "A Cameroonian-German foundation in Yaoundé and Douala: levels A1 to C1, an online test and guidance towards 10 European countries, with no paid intermediary.",
     "ctaTest": "Take the free German test",
     "filmLink": "Watch the film with sound (1 min)",
@@ -88,7 +88,7 @@
       "kicker": "Who we are",
       "title": "A human bridge between Cameroon and Germany",
       "p1": "Born from a dual Cameroonian and German heritage, WAHHF Foundation is the social and philanthropic branch of the IROKO Group.",
-      "p2": "Convinced that dignity comes through knowledge, health, and autonomy, we develop sustainable field programmes alongside a free German/English language and European orientation initiative.",
+      "p2": "Convinced that dignity comes through knowledge, health, and autonomy, we develop sustainable field programmes alongside a free German/English/Italian language and European orientation initiative.",
       "link": "Learn more about our history and governance"
     },
     "stats": {
@@ -106,16 +106,16 @@
       "subtitle": "From primary schooling access to international academic and language mobility."
     },
     "mobilitySpot": {
-      "title": "Learn German/English, navigate towards Europe",
-      "subtitle": "Free German/English lessons and guidance, with no registration fees and no commercial intermediaries.",
+      "title": "Learn German/English/Italian, navigate towards Europe",
+      "subtitle": "Free German/English/Italian lessons and guidance, with no registration fees and no commercial intermediaries.",
       "card1Title": "Language Academy A1 to C1",
-      "card1Desc": "Structured German/English language course support from beginner A1 to advanced C1, with an online placement test.",
+      "card1Desc": "Structured German/English/Italian language course support from beginner A1 to advanced C1, with an online placement test.",
       "card2Title": "Support towards Europe",
       "card2Desc": "Clear, verified 4-step guidance: understanding study, vocational training, or work pathways and preparing your file.",
       "card3Title": "10 supported countries",
       "card3Desc": "Luxembourg, Germany, Slovenia, Italy, Greece, Portugal, Spain, Denmark, Poland, and Albania.",
       "cta": "Discover the programme",
-      "filLabel": "The five German/English levels, from A1 to C1, then Europe",
+      "filLabel": "The five German/English/Italian levels, from A1 to C1, then Europe",
       "filEnd": "Europe",
       "levels": {
         "a1": "Discovery",
@@ -196,7 +196,7 @@
     },
     "seo": {
       "title": "Home — Empowering youth, transforming communities",
-      "description": "WAHHF Foundation, a Cameroonian-German non-profit foundation and the social branch of the IROKO Group: 6 areas of action and free German/English courses."
+      "description": "WAHHF Foundation, a Cameroonian-German non-profit foundation and the social branch of the IROKO Group: 6 areas of action and free German/English/Italian courses."
     },
     "journey": {
       "albumLink": "See the album"
@@ -219,7 +219,7 @@
     "gallery": "Photo & video gallery",
     "partners": "Partners & IROKO Group",
     "news": "News & fieldwork",
-    "academy": "German/English Academy A1–C1 (free)",
+    "academy": "German/English/Italian Academy A1–C1 (free)",
     "apply": "Apply for a programme",
     "volunteer": "Become a volunteer",
     "partner": "Become a partner",
@@ -384,10 +384,10 @@
       },
       "mobilite-langues": {
         "title": "Mobility & Languages",
-        "shortDesc": "Free German/English academy (A1 to C1) and transparent support towards 10 European countries.",
-        "fullDesc": "A programme funded by our partners and donors, to learn German/English and prepare a study, training or mobility project safely.",
+        "shortDesc": "Free German/English/Italian academy (A1 to C1) and transparent support towards 10 European countries.",
+        "fullDesc": "A programme funded by our partners and donors, to learn German/English/Italian and prepare a study, training or mobility project safely.",
         "programs": [
-          "Support for German/English language courses from level A1 to C1",
+          "Support for German/English/Italian language courses from level A1 to C1",
           "Documented guidance towards 10 European countries",
           "Active prevention of scams and false visa promises"
         ]

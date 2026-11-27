@@ -77,7 +77,7 @@ export const DOMAIN_IMPACT_NOT_VALIDATED: Record<string, { for: string; what: st
 
 /** Ce que finance un domaine dont le programme est réel et vérifiable (contrat §1 : Mobilité & Langues seulement). */
 const DOMAIN_IMPACT: Record<string, { for: string; what: string }> = {
-  'mobilite-langues': { for: 'la mobilité et les langues', what: 'cours d’allemand /anglais du niveau A1 au C1 et orientation vers 10 pays européens' },
+  'mobilite-langues': { for: 'la mobilité et les langues', what: 'cours d’allemand /anglais /italien du niveau A1 au C1 et orientation vers 10 pays européens' },
 };
 
 const GENERAL = 'general';
@@ -109,7 +109,7 @@ const CURRENCIES: Record<Currency, { presets: number[]; min: number; max: number
  * se place dans CONFIRMED_IMPACTS : la ligne d'impact l'ajoute dès que le montant choisi correspond.
  */
 export const EXAMPLE_IMPACTS_NOT_VALIDATED = [
-  { amount: 25, currency: 'EUR', text: 'Finance les manuels et supports d’exercices d’allemand /anglais A1 pour un jeune apprenant (exemple — TODO)' },
+  { amount: 25, currency: 'EUR', text: 'Finance les manuels et supports d’exercices d’allemand /anglais /italien A1 pour un jeune apprenant (exemple — TODO)' },
   { amount: 50, currency: 'EUR', text: 'Soutient un mois d’accompagnement linguistique et d’accès numérique pour un étudiant (exemple — TODO)' },
   { amount: 100, currency: 'EUR', text: 'Contribue à une journée de prévention sanitaire maternelle et infantile en zone rurale (exemple — TODO)' },
   { amount: 250, currency: 'EUR', text: 'Finance un parcours complet d’accompagnement linguistique et documentaire pour une cohorte (exemple — TODO)' },

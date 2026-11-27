@@ -10,11 +10,11 @@
   "ways": {
     "donate": {
       "title": "Donate",
-      "text": "Fund the free German/English courses and our social work on the ground."
+      "text": "Fund the free German/English/Italian courses and our social work on the ground."
     },
     "volunteer": {
       "title": "Become a volunteer",
-      "text": "German/English teachers, doctors, mentors or local coordinators in Cameroon and in Europe.",
+      "text": "German/English/Italian teachers, doctors, mentors or local coordinators in Cameroon and in Europe.",
       "action": "Fill in the volunteer form"
     },
     "partner": {
@@ -75,7 +75,7 @@
       "partenaire": "Your partnership project *"
     },
     "detailsPlaceholder": {
-      "benevole": "E.g. German/English teacher, available on Saturdays, online or in Douala.",
+      "benevole": "E.g. German/English/Italian teacher, available on Saturdays, online or in Douala.",
       "partenaire": "Which programme would you like to support, and how?"
     },
     "consent": "I agree to WAHHF Foundation processing my data to review my offer to get involved, in accordance with the <lien>privacy policy<sr> (new tab)</sr></lien>. *",

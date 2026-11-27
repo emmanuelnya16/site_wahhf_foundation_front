@@ -6,7 +6,7 @@
     "niveau": "Niveau {{level}}",
     "candidater": "Candidater",
     "candidaterNiveau": "Candidater au niveau {{level}}",
-    "filAria": "Les cinq niveaux d’allemand /anglais, de A1 à C1, puis l’Europe",
+    "filAria": "Les cinq niveaux d’allemand /anglais /italien, de A1 à C1, puis l’Europe",
     "niveauAffiche": "niveau affiché",
     "nomNiveau": "Allemand {{level}} : {{short}}",
     "cohorte": "Rejoindre la prochaine cohorte"
@@ -29,14 +29,14 @@
   "hub": {
     "seoTitle": "Mobilité & Langues — Apprendre, se préparer, s'orienter gratuitement",
     "seoDescription": "WAHHF Foundation : Académie de langue allemande /anglaise gratuite (A1 à C1) et accompagnement transparent vers 10 pays européens, financé par nos partenaires et nos donateurs.",
-    "title": "Apprendre l’allemand /anglais, se préparer, s’orienter vers l’Europe",
-    "intro": "Des cours d’allemand /anglais du niveau A1 au niveau C1 et une information fiable sur les études, la formation et le travail dans 10 pays européens.",
+    "title": "Apprendre l’allemand /anglais /italien, se préparer, s’orienter vers l’Europe",
+    "intro": "Des cours d’allemand /anglais /italien du niveau A1 au niveau C1 et une information fiable sur les études, la formation et le travail dans 10 pays européens.",
     "ctaCandidater": "Candidater au programme",
-    "ctaAcademie": "Découvrir l’Académie d’allemand /anglais",
+    "ctaAcademie": "Découvrir l’Académie d’allemand /anglais /italien",
     "portesTitle": "Choisissez votre porte d’entrée",
     "portesSubtitle": "Vous pouvez candidater uniquement aux cours de langue allemande /anglaise, uniquement à l’accompagnement documentaire, ou aux deux.",
-    "academieTitle": "Académie de langues (allemand /anglais A1 à C1)",
-    "academieText": "Apprendre l’allemand /anglais étape par étape : compréhension, expression orale et écrite, test de niveau en ligne et préparation méthodique aux certifications.",
+    "academieTitle": "Académie de langues (allemand /anglais /italien A1 à C1)",
+    "academieText": "Apprendre l’allemand /anglais /italien étape par étape : compréhension, expression orale et écrite, test de niveau en ligne et préparation méthodique aux certifications.",
     "academieBouton": "Accéder à l’Académie de langues",
     "academieTest": "Passer le test de niveau (20 questions)",
     "europeTitle": "Accompagnement vers l’Europe",
@@ -64,8 +64,8 @@
     "faqTitle": "Questions fréquentes",
     "faq": {
       "gratuit": {
-        "q": "Les cours d’allemand /anglais et l’accompagnement sont-ils vraiment 100 % gratuits ?",
-        "a": "Oui, pour tous les bénéficiaires : les cours d’allemand /anglais, du niveau A1 au niveau C1, comme les séances d’orientation vers l’Europe. Le programme est financé par nos partenaires et nos donateurs."
+        "q": "Les cours d’allemand /anglais /italien et l’accompagnement sont-ils vraiment 100 % gratuits ?",
+        "a": "Oui, pour tous les bénéficiaires : les cours d’allemand /anglais /italien, du niveau A1 au niveau C1, comme les séances d’orientation vers l’Europe. Le programme est financé par nos partenaires et nos donateurs."
       },
       "visas": {
         "q": "WAHHF Foundation délivre-t-elle des visas ou des contrats de travail ?",
@@ -76,17 +76,17 @@
         "a": "Non. Lors de votre candidature en ligne sur ce site, aucun document d’identité (ni passeport, ni CNI) et aucune somme d’argent ne vous sont demandés."
       },
       "niveau": {
-        "q": "Comment savoir par quel niveau d’allemand /anglais commencer ?",
+        "q": "Comment savoir par quel niveau d’allemand /anglais /italien commencer ?",
         "a": "Si vous débutez totalement, choisissez le niveau A1. Si vous avez déjà des bases, passez notre test d’orientation de 20 questions sur la page Académie de langues."
       }
     },
-    "finSubtitle": "Un seul formulaire pour les cours d’allemand /anglais et l’orientation vers l’Europe. Il se remplit en 5 minutes environ ; aucun document d’identité ni paiement ne vous est demandé."
+    "finSubtitle": "Un seul formulaire pour les cours d’allemand /anglais /italien et l’orientation vers l’Europe. Il se remplit en 5 minutes environ ; aucun document d’identité ni paiement ne vous est demandé."
   },
   "academie": {
-    "seoTitle": "Académie de langues — Allemand /anglais A1 à C1 gratuit",
+    "seoTitle": "Académie de langues — Allemand /anglais /italien A1 à C1 gratuit",
     "seoDescription": "Accompagnement gratuit des cours de langue allemande /anglaise du niveau A1 au niveau C1 par WAHHF Foundation : test de niveau de 20 questions, programme par niveau et sessions.",
     "title": "Académie de langues : l’allemand /anglais, du niveau A1 au niveau C1 avec WAHHF Institute",
-    "intro": "Des cours d’allemand /anglais du niveau débutant jusqu’à la maîtrise académique, en ligne ou en présentiel à Douala et à Yaoundé. Commencez par le test : il vous dit par quel niveau commencer.",
+    "intro": "Des cours d’allemand /anglais /italien du niveau débutant jusqu’à la maîtrise académique, en ligne ou en présentiel à Douala et à Yaoundé. Commencez par le test : il vous dit par quel niveau commencer.",
     "ctaTest": "Trouver mon niveau (5 minutes)",
     "ctaCandidater": "Candidater (choisir mon niveau)",
     "niveauxTitle": "Les 5 niveaux, de A1 à C1",
@@ -146,7 +146,7 @@
   },
   "sessions": {
     "moisAConfirmer": "{{month}} (date à confirmer)",
-    "whatsapp": "Bonjour WAHHF Foundation, je souhaite être prévenu(e) de la prochaine session de cours d’allemand /anglais.",
+    "whatsapp": "Bonjour WAHHF Foundation, je souhaite être prévenu(e) de la prochaine session de cours d’allemand /anglais /italien.",
     "titleNiveau": "Prochaines sessions de niveau {{level}}",
     "titleTout": "Calendrier des prochaines sessions",
     "subtitle": "Toutes les sessions sont gratuites. En ligne ou en présentiel à Douala et à Yaoundé ; celles déjà commencées n’apparaissent plus.",
@@ -214,13 +214,13 @@
     }
   },
   "candidature": {
-    "seoTitle": "Candidater gratuitement — Cours d'allemand /anglais & Accompagnement Europe",
-    "seoDescription": "Formulaire unique et 100 % gratuit de demande d'accompagnement et d'inscription aux cours d'allemand /anglais WAHHF Foundation. Aucun document d'identité ni paiement demandé.",
+    "seoTitle": "Candidater gratuitement — Cours d'allemand /anglais /italien & Accompagnement Europe",
+    "seoDescription": "Formulaire unique et 100 % gratuit de demande d'accompagnement et d'inscription aux cours d'allemand /anglais /italien WAHHF Foundation. Aucun document d'identité ni paiement demandé.",
     "title": "Candidater à un parcours d’accompagnement",
-    "intro": "Un seul formulaire pour rejoindre l’Académie d’allemand /anglais (A1 à C1), être orienté vers l’Europe, ou les deux. Il se remplit en 5 minutes environ.",
+    "intro": "Un seul formulaire pour rejoindre l’Académie d’allemand /anglais /italien (A1 à C1), être orienté vers l’Europe, ou les deux. Il se remplit en 5 minutes environ.",
     "avant": "Avant de commencer",
     "souhaits": {
-      "cours_allemand": "Cours d’allemand /anglais (A1 à C1)",
+      "cours_allemand": "Cours d’allemand /anglais /italien (A1 à C1)",
       "accompagnement_europe": "Accompagnement vers l’Europe",
       "les_deux": "Les deux : cours et orientation"
     },
@@ -249,7 +249,7 @@
       "souhait": "Souhait",
       "session": "Session choisie",
       "paysInteret": "Pays d’intérêt",
-      "niveau": "Niveau d’allemand /anglais",
+      "niveau": "Niveau d’allemand /anglais /italien",
       "format": "Format souhaité",
       "message": "Message",
       "accord": "J’accepte que mes coordonnées soient traitées par WAHHF Foundation dans le seul but de répondre à ma demande d’accompagnement."
@@ -284,7 +284,7 @@
     "souhaitLegend": "Que souhaitez-vous ? *",
     "paysInteretLabel": "Pays d’intérêt principal parmi les 10 pays accompagnés",
     "horsUE": "(hors Union européenne)",
-    "niveauLabel": "Niveau d’allemand /anglais actuel / visé",
+    "niveauLabel": "Niveau d’allemand /anglais /italien actuel / visé",
     "niveaux": {
       "A1": "A1 — Débutant complet",
       "A2": "A2 — Bases élémentaires",

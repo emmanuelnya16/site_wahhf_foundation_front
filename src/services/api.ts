@@ -235,9 +235,9 @@ export const DOMAINS_DATA: DomainItem[] = [
     number: '06',
     slug: 'mobilite-langues',
     title: 'Mobilité & Langues',
-    shortDesc: 'Académie d’allemand /anglais gratuite (A1 à C1) et accompagnement transparent vers 10 pays européens.',
+    shortDesc: 'Académie d’allemand /anglais /italien gratuite (A1 à C1) et accompagnement transparent vers 10 pays européens.',
     // Groupe 7.3 : sans « 100 % gratuit » (déjà dit juste au-dessus) ni financeur nommé, comme la FAQ de Mobilité (contrat §13)
-    fullDesc: 'Un programme financé par nos partenaires et nos donateurs, pour apprendre l’allemand /anglais et préparer un projet d’études, de formation ou de mobilité en toute sécurité.',
+    fullDesc: 'Un programme financé par nos partenaires et nos donateurs, pour apprendre l’allemand /anglais /italien et préparer un projet d’études, de formation ou de mobilité en toute sécurité.',
     image: WAHHF_IMAGES.openDayVisioconference,
     link: '/mobilite-langues',
     programs: [
@@ -591,7 +591,7 @@ export const THEMATIC_GUIDES: Record<string, {
       },
       {
         heading: 'Rappel fondamental : WAHHF ne demande jamais d’argent',
-        body: 'WAHHF Foundation est une fondation à but non lucratif financée par le groupe IROKO et ses donateurs. L’intégralité de notre accompagnement et de nos cours d’allemand /anglais est 100 % gratuite.',
+        body: 'WAHHF Foundation est une fondation à but non lucratif financée par le groupe IROKO et ses donateurs. L’intégralité de notre accompagnement et de nos cours d’allemand /anglais /italien est 100 % gratuite.',
         bullets: [
           'Aucun membre, bénévole ou partenaire de WAHHF ne vous demandera jamais de frais de dossier, d’inscription ou de caution',
           'Nous ne demandons aucun document d’identité (passeport, CNI) lors du premier contact en ligne',

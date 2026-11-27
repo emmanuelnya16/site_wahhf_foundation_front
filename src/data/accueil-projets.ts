@@ -61,7 +61,7 @@ export const PROJETS: ProjetPhare[] = [
     titre: 'L’Académie de langues',
     accroche: 'l’Europe se prépare ici',
     texte:
-      'Un programme gratuit d’apprentissage de l’allemand et de l’anglais, du niveau A1 au niveau C1, avec des guides d’orientation vérifiés vers 10 pays européens.',
+      'Un programme gratuit d’apprentissage de l’allemand, de l’anglais et de l’italien, du niveau A1 au niveau C1, avec des guides d’orientation vérifiés vers 10 pays européens.',
     // Les mêmes mots que la frise des niveaux du site (accueil, Académie)
     jalons: [
       { valeur: 'A1', libelle: 'Découverte' },

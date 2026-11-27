@@ -24,7 +24,7 @@
     "accompagnement": "Begleitung nach Europa",
     "etape": "Schritt {{n}} von {{total}} der Begleitung",
     "etreAccompagne": "Sich begleiten lassen",
-    "formulaire": "Ein einziges Formular für die Orientierung nach Europa und für die Deutsch- und Englischkurse. Wir verlangen von Ihnen weder Ausweisdokumente noch eine Zahlung.",
+    "formulaire": "Ein einziges Formular für die Orientierung nach Europa und für die Deutsch-, Englisch- und Italienischkurse. Wir verlangen von Ihnen weder Ausweisdokumente noch eine Zahlung.",
     "nouvelOnglet": " (neuer Tab)",
     "dixPays": "Die 10 begleiteten Länder",
     "langues": "Sprachen: {{liste}}"
@@ -108,7 +108,7 @@
     "citation": "„{{texte}}“",
     "avantNote": ": ",
     "jamaisTitre": "Die WAHHF Foundation verlangt nie Geld",
-    "jamaisSousTitre": "Die WAHHF Foundation ist eine gemeinnützige Stiftung, finanziert von ihren Partnern sowie ihren Spenderinnen und Spendern. Unsere Begleitung und unsere Deutsch- und Englischkurse sind kostenlos.",
+    "jamaisSousTitre": "Die WAHHF Foundation ist eine gemeinnützige Stiftung, finanziert von ihren Partnern sowie ihren Spenderinnen und Spendern. Unsere Begleitung und unsere Deutsch-, Englisch- und Italienischkurse sind kostenlos.",
     "reflexesTitre": "Richtig reagieren",
     "voirFiches": "Die Länderseiten der 10 Länder und ihre offiziellen Websites ansehen",
     "suspectTitre": "Kommt Ihnen ein Angebot verdächtig vor?",
@@ -127,7 +127,7 @@
       },
       "apprendre-la-langue": {
         "title": "Die Landessprache lernen",
-        "desc": "Das erforderliche Sprachniveau erreichen (insbesondere Deutsch/Englisch von A1 bis C1 mit der WAHHF-Akademie), bevor die Formalitäten beginnen."
+        "desc": "Das erforderliche Sprachniveau erreichen (insbesondere Deutsch/Englisch/Italienisch von A1 bis C1 mit der WAHHF-Akademie), bevor die Formalitäten beginnen."
       },
       "eviter-les-arnaques": {
         "title": "Die offiziellen Verfahren kennen und Betrug vermeiden",
