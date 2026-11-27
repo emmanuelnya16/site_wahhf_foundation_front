@@ -57,18 +57,21 @@ export const TEAM_LEVEL_TITLES: Record<number, string> = {
   6: 'Coordinateurs',
 };
 
+// 27 novembre 2026 : les portraits des dirigeants (dossier image_personne_influente_wahhf, les mêmes fichiers que
+// photos-src/equipe) sont publiés à la demande de la fondation : consent 'ok' pour les quatre.
 export const TEAM: TeamMember[] = [
-  // TODO (fondation) : orthographe du nom et ordre à confirmer ; bio et accord écrit à fournir
-  { id: 'marrion-watio-notesse', prenom: 'Marrion', nomConfirme: false, nom: 'Watio Notesse', role: 'Président', niveau: 1, ordre: 1, photo: 'marrion-watio-notesse', focus: '50% 35%', bio: null, liens: [], consent: 'pending' },
+  // Nom tel qu'il est écrit sur son profil Facebook, donné par la fondation (lot 12). TODO (fondation) : ordre à
+  // confirmer ; bio à fournir
+  { id: 'marrion-watio-notesse', prenom: 'Marrion', nomConfirme: true, nom: 'Watio Notesse', role: 'Président', niveau: 1, ordre: 1, photo: 'marrion-watio-notesse', focus: '50% 35%', bio: null, liens: [], consent: 'ok' },
   // Lot 12 (retours de la fondation, 26 novembre 2026) : « Prof. Dr.-Ing. Christian Willberg », sur le modèle de
   // Christian-Toralf Weber. L'identifiant garde l'ancienne orthographe (portrait, intervenants). TODO (fondation) : ordre
-  // à confirmer ; bio et accord écrit à fournir
-  { id: 'christian-wilberg', titre: 'Prof. Dr.-Ing.', prenom: 'Christian', nomConfirme: true, nom: 'Willberg', role: 'Vice-président', niveau: 2, ordre: 1, photo: 'christian-wilberg', focus: '50% 35%', bio: null, liens: [], consent: 'pending' },
+  // à confirmer ; bio à fournir
+  { id: 'christian-wilberg', titre: 'Prof. Dr.-Ing.', prenom: 'Christian', nomConfirme: true, nom: 'Willberg', role: 'Vice-président', niveau: 2, ordre: 1, photo: 'christian-wilberg', focus: '50% 35%', bio: null, liens: [], consent: 'ok' },
   // Nom donné par la fondation le 20 novembre 2026 (« Prof Dr ing Christian-Toralf Weber »), sans rôle : seulement
-  // son nom. TODO (fondation) : ordre à confirmer ; bio et accord écrit à fournir
-  { id: 'christian-toralf-weber', titre: 'Prof. Dr.-Ing.', prenom: 'Christian-Toralf', nomConfirme: true, nom: 'Weber', role: null, niveau: 3, ordre: 1, photo: 'personne-niveau-3', focus: '50% 25%', bio: null, liens: [], consent: 'pending' },
-  // TODO (fondation) : nom de famille à demander, ordre à confirmer ; bio et accord écrit à fournir
-  { id: 'wilfried', prenom: 'Wilfried', nomConfirme: false, nom: null, role: 'Secrétaire général', niveau: 4, ordre: 1, photo: 'wilfried', focus: '50% 35%', bio: null, liens: [], consent: 'pending' },
+  // son nom. TODO (fondation) : ordre à confirmer ; bio à fournir
+  { id: 'christian-toralf-weber', titre: 'Prof. Dr.-Ing.', prenom: 'Christian-Toralf', nomConfirme: true, nom: 'Weber', role: null, niveau: 3, ordre: 1, photo: 'personne-niveau-3', focus: '50% 25%', bio: null, liens: [], consent: 'ok' },
+  // TODO (fondation) : nom de famille à demander, ordre à confirmer ; bio à fournir
+  { id: 'wilfried', prenom: 'Wilfried', nomConfirme: false, nom: null, role: 'Secrétaire général', niveau: 4, ordre: 1, photo: 'wilfried', focus: '50% 35%', bio: null, liens: [], consent: 'ok' },
 ];
 
 /** Au moins une personne au nom connu : l'organigramme est publié (lien du footer). */
